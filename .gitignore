@@ -51,3 +51,4 @@ venv/
 
 # Project files
 private.dart
+assets/presets.db

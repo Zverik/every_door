@@ -24,6 +24,7 @@ if [ ! -d "$HERE/venv" ]; then
 fi
 PYTHON="$HERE/venv/bin/python"
 
+mkdir -p "$ASSETS"
 rm -f "$PRESETS_DB" "$PRESETS_ZIP"
 "$PYTHON" json_to_sqlite.py "$PRESETS_DB" "$GIT_PATH"
 "$PYTHON" add_taginfo.py "$PRESETS_DB" "$TAGINFO_DB"
