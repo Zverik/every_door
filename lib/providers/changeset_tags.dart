@@ -1,0 +1,144 @@
+import 'dart:io';
+import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/changes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final changesetTagsProvider = Provider.autoDispose((ref) {
+  final changes = ref.watch(changesProvider);
+
+  final comment = CommentGenerator().generateComment(changes.all());
+  print('Comment: $comment');
+
+  String platform;
+  if (Platform.isAndroid) platform = 'android';
+  else if (Platform.isIOS) platform = 'ios';
+  else platform = 'unknown';
+
+  return <String, String>{
+    'comment': comment,
+    'created_by': '$kAppTitle $platform $kAppVersion',
+  };
+});
+
+class _TypeCount {
+  final Map<String, int> created = {};
+  final Map<String, int> updated = {};
+  final Map<String, int> deleted = {};
+  final Map<String, int> confirmed = {};
+
+  _TypeCount([Iterable<OsmChange>? changes]) {
+    if (changes != null) {
+      for (final change in changes) {
+        add(change);
+      }
+    }
+  }
+
+  add(OsmChange change) {
+    String type = _getType(change);
+    if (change.isNew) created[type] = (created[type] ?? 0) + 1;
+    else if (change.deleted) deleted[type] = (deleted[type] ?? 0) + 1;
+    else if (change.isConfirmed) confirmed[type] = (confirmed[type] ?? 0) + 1;
+    else if (change.isModified) updated[type] = (updated[type] ?? 0) + 1;
+  }
+
+  String _getType(OsmChange change) {
+    final key = getMainKey(change.getFullTags());
+    if (key == null) return 'unknown object';
+    final value = change[key]!;
+    if (value == 'yes') return key;
+    if ({'shop', 'office', 'building', 'entrance'}.contains(key)) return '$value $key'; // school building
+    if (value.endsWith('s')) return value.substring(0, value.length - 1);
+    return value;
+  }
+}
+
+class TypePairCompareError extends Error {
+  final String message;
+
+  TypePairCompareError(this.message);
+
+  @override
+  String toString() => 'TypePairCompareError($message)';
+}
+
+class _TypePair implements Comparable {
+  final String type;
+  final int count;
+
+  const _TypePair(this.type, this.count);
+
+  @override
+  String toString() {
+    const kVowels = {'a', 'e', 'i', 'o', 'u'};
+    String countStr;
+    if (count == 1) {
+      countStr = kVowels.contains(type.substring(0, 1)) ? 'an' : 'a';
+    } else {
+      countStr = count.toString();
+    }
+    String typeStr = type;
+    if (count > 1) {
+      if (type.endsWith('x') || type.endsWith('sh') || type.endsWith('ch') || type.endsWith('ss')) {
+        // marsh → marshes, fox → foxes
+        typeStr = type + 'es';
+      } else if (type.endsWith('y') && !kVowels.contains(type.substring(type.length - 2, type.length-1))) {
+        // cemetery → cemeteries
+        typeStr = type.substring(0, type.length - 1) + 'ies';
+      } else {
+        typeStr = type + 's';
+      }
+    }
+    return '$countStr $typeStr';
+  }
+
+  @override
+  /// These pairs are sorted in reverse: the most occurent is the first.
+  int compareTo(other) {
+    if (other is! _TypePair) {
+      throw TypePairCompareError('Got a ${other.runtimeType} "$other"');
+    }
+    return other.count.compareTo(count);
+  }
+}
+
+class CommentGenerator {
+  static final kMaxItems = 3;
+
+  String _typeCountToString(Map<String, int> typeCount) {
+    final pairs = typeCount.entries.map((entry) => _TypePair(entry.key, entry.value)).toList();
+    pairs.sort();
+    List<_TypePair> finalPairs;
+    if (pairs.length <= kMaxItems) {
+      finalPairs = pairs;
+    } else {
+      int countRest = pairs.sublist(kMaxItems).fold(0, (prev, pair) => prev + pair.count);
+      finalPairs = pairs.sublist(0, kMaxItems) + [_TypePair('other object', countRest)];
+    }
+    final stringPairs = finalPairs.map((e) => e.toString()).toList();
+    if (stringPairs.length >= 2) {
+      stringPairs.last = 'and ${stringPairs.last}';
+    }
+    return stringPairs.join(stringPairs.length <= 2 ? ' ' : ', ');
+  }
+
+  String generateComment(Iterable<OsmChange> changes) {
+    final typeCount = _TypeCount(changes);
+    List<String> results = [];
+    if (typeCount.created.isNotEmpty) {
+      results.add('Created ${_typeCountToString(typeCount.created)}');
+    }
+    if (typeCount.updated.isNotEmpty) {
+      results.add('Updated ${_typeCountToString(typeCount.updated)}');
+    }
+    if (typeCount.deleted.isNotEmpty) {
+      results.add('Deleted ${_typeCountToString(typeCount.deleted)}');
+    }
+    if (typeCount.confirmed.isNotEmpty) {
+      results.add('Confirmed ${_typeCountToString(typeCount.confirmed)}');
+    }
+    return results.join('; ');
+  }
+}

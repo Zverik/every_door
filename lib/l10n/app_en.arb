@@ -1,0 +1,187 @@
+{
+  "tileNo": "no",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "editorSave": "Save",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorMoreFields": "More Fields",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorLoadingPreset": "Loading preset...",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMarkActive": "Mark Active",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Mark Defunct",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorRestore": "Restore",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorMissing": "Does Not Exist",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorDeleteTitle": "Delete {title}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "title": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "Delete",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "settingsTitle": "Configuration",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsApiServer": "API Server",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsDataManagement": "Data Management",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsPresentation": "Presentation",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsLoginDetails": "OSM Account",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeData": "Purge cached data",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsUploads": "Pending uploads",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsMicromapping": "Micromapping mode",
+  "@settingsMicromapping": {
+    "description": "Settings entry for toggling micromapping mode."
+  },
+  "settingsBackground": "Background imagery",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "fieldHoursButton": "Set opening hours",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursTitle": "Opening Hours",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursFullDay": "Full day",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursOpens": "Opens",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "Closes",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursBreak": "Break",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "Next",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursAddFragment": "Add a fragment",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursAddBreak": "Add a break",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursWeekdays": "Mo Tu We Th Fr Sa Su",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldWifiNo": "no",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "public",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "customers",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "yes",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "limited",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "no",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsAccepted": "accepted",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "no",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCheckboxYes": "yes",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "no",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorEmpty": "To choose a floor, set an address.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorNew": "New Floor",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorFloorDesc": "Floor as on the navigation and in elevators",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "Floor number starting from 0 for the ground level",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "messageNoData": "No data, tap here to download",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "Data is obsolete, tap here to refresh",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  }
+}
