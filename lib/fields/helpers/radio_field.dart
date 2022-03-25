@@ -24,6 +24,20 @@ class _RadioFieldState extends State<RadioField> {
         labelForValue = widget.labels![idx];
     }
 
+    final List<String?> labels = widget.options
+        .asMap()
+        .entries
+        .map((e) => widget.labels != null && e.key < widget.labels!.length
+            ? widget.labels![e.key]
+            : null)
+        .toList();
+    final merged = labels
+        .asMap()
+        .entries
+        .map((e) => e.value ?? widget.options[e.key])
+        .join();
+    bool pushFirst = merged.length >= 30;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       // TODO: Wrap instead? Only when > 5 options?
@@ -31,7 +45,7 @@ class _RadioFieldState extends State<RadioField> {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
-            if (widget.value != null)
+            if (pushFirst && widget.value != null)
               RadioPill(
                 value: widget.value!,
                 label: labelForValue,
@@ -41,16 +55,14 @@ class _RadioFieldState extends State<RadioField> {
                 },
               ),
             for (final entry in widget.options.asMap().entries)
-              if (entry.value != widget.value)
+              if (!pushFirst || entry.value != widget.value)
                 RadioPill(
                   value: entry.value,
-                  label:
-                      widget.labels != null && widget.labels!.length > entry.key
-                          ? widget.labels![entry.key]
-                          : null,
-                  selected: false,
+                  label: labels[entry.key],
+                  selected: entry.value == widget.value,
                   onTap: () {
-                    widget.onChange(entry.value);
+                    widget.onChange(
+                        entry.value == widget.value ? null : entry.value);
                   },
                 ),
           ],

@@ -41,6 +41,7 @@ class HoursFragment {
   HoursFragment(this.weekdays, this.interval, this.breaks);
 
   bool get isAllWeek => weekdays.every((open) => open);
+  bool get isEmpty => weekdays.every((open) => !open);
   bool get is24 => breaks.isEmpty && interval.isAllDay;
   bool get is24_7 => is24 && isAllWeek;
 }

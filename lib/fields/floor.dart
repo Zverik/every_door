@@ -57,7 +57,13 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
   updateFloors() async {
     final osmData = ref.read(osmDataProvider);
     final addr = StreetAddress.fromTags(widget.element.getFullTags());
-    final floors = await osmData.getFloorsAround(widget.element.location, addr);
+    List<Floor> floors;
+    try {
+      floors = await osmData.getFloorsAround(widget.element.location, addr);
+    } on Exception catch (e) {
+      print(e);
+      floors = [];
+    }
     setState(() {
       address = addr;
       this.floors = floors;

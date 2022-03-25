@@ -157,8 +157,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                   child: ListView(
                     children: [
                       if (amenity.canDelete) buildMap(context),
-                      buildTopButtons(context),
-                      SizedBox(height: 10.0),
                       if (stdFields.isNotEmpty) ...[
                         buildFields(stdFields, 50),
                         SizedBox(height: 10.0),
@@ -169,6 +167,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                         buildFields(fields),
                         SizedBox(height: 20.0),
                       ],
+                      buildTopButtons(context),
+                      SizedBox(height: 10.0),
                       if (moreFields.isNotEmpty)
                         ExpansionTile(
                           title: Text(loc.editorMoreFields),
@@ -184,8 +184,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                   width: double.infinity,
                   height: 50.0,
                   child: MaterialButton(
-                    color: canSave ? Colors.green : Colors.grey,
+                    color: Colors.green,
                     textColor: Colors.white,
+                    disabledColor: Colors.white,
+                    disabledTextColor: Colors.grey,
                     child: Text(
                       loc.editorSave,
                       style: TextStyle(fontSize: 20.0),
@@ -215,7 +217,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
               });
             },
           ),
-          if (amenity.canDelete) ...[
+          // Not displaying the deletion button for just created amenities.
+          if (widget.amenity != null && amenity.canDelete) ...[
             SizedBox(width: 10.0),
             MaterialButton(
               color: Colors.red,

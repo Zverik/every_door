@@ -67,6 +67,8 @@ def import_fields(cur, path):
         for name, row in data.items():
             if 'key' not in row or row['type'] in bad_types:
                 continue
+            if 'geometry' in row and 'point' not in row['geometry']:
+                continue
             yield (
                 name,
                 row['key'],

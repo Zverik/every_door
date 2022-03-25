@@ -55,7 +55,8 @@ class HoursInputField extends StatelessWidget {
         child: Container(
           width: double.infinity, // To align contents to the left
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(_prettifyHours(element[field.key]) ?? loc.fieldHoursButton,
+          child: Text(
+              _prettifyHours(element[field.key]) ?? loc.fieldHoursButton,
               style: kFieldTextStyle),
         ),
       ),
@@ -110,12 +111,20 @@ class _OpeningHoursPageState extends State<OpeningHoursPage> {
                         for (int wd = 0;
                             wd < hours.fragments[i].weekdays.length;
                             wd++) {
-                          if (hours.fragments[i].weekdays[wd])
+                          if (hours.fragments[i].weekdays[wd]) {
                             hours.fragments[j].weekdays[wd] = false;
+                            if (hours.fragments[j].isEmpty) {
+                              // Would not clear a fragment; reverse the change.
+                              hours.fragments[j].weekdays[wd] = true;
+                              hours.fragments[i].weekdays[wd] = false;
+                              return;
+                            }
+                          }
                         }
                       }
                     }
                   });
+                  return true;
                 },
               ),
             ),
@@ -185,6 +194,12 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
                   Checkbox(
                     value: widget.fragment.weekdays[i],
                     onChanged: (value) {
+                      // Forbid removing all checkboxes.
+                      if (widget.fragment.weekdays
+                          .asMap()
+                          .entries
+                          .every((e) => e.key == i || !e.value)) return;
+
                       setState(() {
                         widget.fragment.weekdays[i] =
                             !widget.fragment.weekdays[i];
