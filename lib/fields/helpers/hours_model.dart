@@ -2,13 +2,24 @@ class HoursInterval {
   String start;
   String end;
 
-  HoursInterval(this.start, this.end);
+  HoursInterval(this.start, this.end) {
+    if (start.length < 4 ||
+        !start.contains(':') ||
+        end.length < 4 ||
+        !end.contains(':'))
+      throw ArgumentError(
+          'Wrong start ($start) or end ($end) time for an interval.');
+
+    if (start.length == 4) start = '0' + start;
+    if (end.length == 4) end = '0' + end;
+    if (end == '00:00') end = '24:00';
+  }
+
   HoursInterval.full()
       : start = '00:00',
         end = '24:00';
 
-  bool get isAllDay =>
-      start.endsWith('0:00') && (end == '23:59' || end == '24:00');
+  bool get isAllDay => start == '00:00' && (end == '23:59' || end == '24:00');
 
   @override
   String toString() => '$start-$end';

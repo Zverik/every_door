@@ -105,7 +105,7 @@ class _TypePair implements Comparable {
 }
 
 class CommentGenerator {
-  static final kMaxItems = 3;
+  static const kMaxItems = 3;
 
   String _typeCountToString(Map<String, int> typeCount) {
     final pairs = typeCount.entries.map((entry) => _TypePair(entry.key, entry.value)).toList();
@@ -114,8 +114,8 @@ class CommentGenerator {
     if (pairs.length <= kMaxItems) {
       finalPairs = pairs;
     } else {
-      int countRest = pairs.sublist(kMaxItems).fold(0, (prev, pair) => prev + pair.count);
-      finalPairs = pairs.sublist(0, kMaxItems) + [_TypePair('other object', countRest)];
+      int countRest = pairs.sublist(kMaxItems - 1).fold(0, (prev, pair) => prev + pair.count);
+      finalPairs = pairs.sublist(0, kMaxItems - 1) + [_TypePair('other object', countRest)];
     }
     final stringPairs = finalPairs.map((e) => e.toString()).toList();
     if (stringPairs.length >= 2) {

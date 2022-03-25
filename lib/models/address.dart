@@ -3,15 +3,17 @@ import 'package:every_door/models/amenity.dart';
 class StreetAddress {
   final String? housenumber;
   final String? housename;
+  final String? unit;
   final String? street;
   final String? place;
 
-  StreetAddress({this.housenumber, this.housename, this.street, this.place});
+  StreetAddress({this.housenumber, this.housename, this.unit, this.street, this.place});
 
   factory StreetAddress.fromTags(Map<String, String> tags) {
     return StreetAddress(
       housenumber: tags['addr:housenumber'],
       housename: tags['addr:housename'],
+      unit: tags['addr:unit'],
       street: tags['addr:street'],
       place: tags['addr:place'],
     );
@@ -26,6 +28,8 @@ class StreetAddress {
       element['addr:housenumber'] = housenumber;
     else
       element['addr:housename'] = housename;
+    if (unit != null)
+      element['addr:unit'] = unit;
     if (street != null)
       element['addr:street'] = street;
     else
@@ -33,19 +37,19 @@ class StreetAddress {
   }
 
   static clearTags(OsmChange element) {
-    for (final key in ['housenumber', 'housename', 'street', 'place'])
+    for (final key in ['housenumber', 'housename', 'unit', 'street', 'place'])
       element.removeTag('addr:$key');
   }
 
   @override
   bool operator ==(Object other) {
     if (other is! StreetAddress) return false;
-    return housenumber == other.housenumber && housename == other.housename && street == other.street && place == other.place;
+    return housenumber == other.housenumber && housename == other.housename && unit == other.unit && street == other.street && place == other.place;
   }
 
   @override
-  int get hashCode => (housenumber ?? housename ?? '').hashCode + (street ?? place ?? '').hashCode;
+  int get hashCode => (housenumber ?? housename ?? '').hashCode + (street ?? place ?? '').hashCode + unit.hashCode;
 
   @override
-  String toString() => '${housenumber ?? housename}, ${street ?? place}';
+  String toString() => '${housenumber ?? housename}${unit != null ? " u.$unit" : ""}, ${street ?? place}';
 }

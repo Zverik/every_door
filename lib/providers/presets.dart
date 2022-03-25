@@ -3,6 +3,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/fields/address.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/payment.dart';
+import 'package:every_door/fields/room.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/fields/wifi.dart';
 import 'package:every_door/models/field.dart';
@@ -352,6 +353,7 @@ class PresetProvider {
       'website',
       'email',
       'operator',
+      'addr_door',
       'description',
     ];
     if (!ready) await _waitUntilReady();
@@ -386,6 +388,7 @@ class PresetProvider {
         label: await _getFieldLabel('internet_access', locale) ?? 'Wifi');
     fields['payment'] = PaymentPresetField(
         label: await _getFieldLabel('payment_multi', locale) ?? 'Accept cards');
+    fields['addr_door'] = RoomPresetField();
     return stdFields.map((e) => fields[e]).whereType<PresetField>().toList();
   }
 
