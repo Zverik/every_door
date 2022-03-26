@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:every_door/constants.dart';
 import 'package:every_door/private.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:oauth2_client/access_token_response.dart';
@@ -9,8 +8,8 @@ import 'package:oauth2_client/oauth2_client.dart';
 class OpenStreetMapOAuth2Client extends OAuth2Client {
   OpenStreetMapOAuth2Client()
       : super(
-          authorizeUrl: 'https://$kOsmEndpoint/oauth2/authorize',
-          tokenUrl: 'https://$kOsmEndpoint/oauth2/token',
+          authorizeUrl: 'https://$kOsmAuth2Endpoint/oauth2/authorize',
+          tokenUrl: 'https://$kOsmAuth2Endpoint/oauth2/token',
           redirectUri: 'everydoor:/oauth',
           customUriScheme: 'everydoor',
         );

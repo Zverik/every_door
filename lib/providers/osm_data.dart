@@ -18,6 +18,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proximity_hash/proximity_hash.dart';
+import 'package:sqflite/utils/utils.dart';
 
 final osmDataProvider = ChangeNotifierProvider((ref) => OsmDataHelper(ref));
 final downloadingDataProvider = StateProvider<bool>((ref) => false);
@@ -34,24 +35,40 @@ class OsmDataHelper extends ChangeNotifier {
   int get length => _length;
 
   /// Removes super-obsolete OSM elements from the database.
-  Future _purgeElements() async {
+  Future<int> _purgeElements() async {
     final database = await _ref.read(databaseProvider).database;
     final beforeTimestamp =
         DateTime.now().subtract(kSuperObsoleteData).millisecondsSinceEpoch;
     // Keep elements that are referenced from the changes table.
-    await database.delete(
+    int count = await database.delete(
       OsmElement.kTableName,
       where: 'downloaded is not null and downloaded < ? '
           'and osmid not in (select osmid from ${OsmChange.kTableName})',
       whereArgs: [beforeTimestamp],
     );
     await _updateLength();
+    return count;
+  }
+
+  Future<bool> hasObsoleteData() async {
+    final database = await _ref.read(databaseProvider).database;
+    final beforeTimestamp =
+        DateTime.now().subtract(kSuperObsoleteData).millisecondsSinceEpoch;
+    final result = await database.query(
+      OsmElement.kTableName,
+      columns: ['count(*)'],
+      where: 'downloaded is not null and downloaded < ? '
+          'and osmid not in (select osmid from ${OsmChange.kTableName})',
+      whereArgs: [beforeTimestamp],
+    );
+    return (firstIntValue(result) ?? 0) > 0;
   }
 
   /// Removes super-obsolete elements and areas from the database.
-  Future purgeData() async {
-    await _purgeElements();
+  Future<int> purgeData() async {
+    final count = await _purgeElements();
     await _ref.read(downloadedAreaProvider).purgeAreas();
+    return count;
   }
 
   Future _updateLength() async {
@@ -231,7 +248,8 @@ class OsmDataHelper extends ChangeNotifier {
       final api = _ref.read(osmApiProvider);
       final List<OsmElement> elements = await api.map(bounds);
       await storeElements(elements, bounds);
-      AlertController.show('Download successful', 'Downloaded ${elements.length} amenities.', TypeAlert.success);
+      AlertController.show('Download successful',
+          'Downloaded ${elements.length} amenities.', TypeAlert.success);
       return _wrapInChange(elements);
     } finally {
       _ref.read(downloadingDataProvider.notifier).state = false;

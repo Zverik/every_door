@@ -182,6 +182,15 @@ class OsmAuthController extends StateNotifier<String?> {
     if (response.statusCode != 200) {
       throw Exception('Wrong oauth access token');
     }
-    return OsmUserDetails.fromXML(response.body);
+    if (response.body.contains('<html')) {
+      final clean = response.body.replaceAll(RegExp(r'<[^>]+>'), '');
+      throw Exception('User details call returned HTML: $clean');
+    }
+    try {
+      return OsmUserDetails.fromXML(response.body);
+    } on FormatException {
+      final clean = response.body.replaceAll(RegExp(r'<[^>]+>'), '');
+      throw Exception('Wrong data: $clean');
+    }
   }
 }

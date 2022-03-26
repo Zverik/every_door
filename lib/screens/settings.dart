@@ -10,11 +10,14 @@ import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/imagery.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/alert_controller.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:intl/intl.dart';
 
 class SettingsPage extends ConsumerWidget {
   final LatLng location;
@@ -34,6 +37,9 @@ class SettingsPage extends ConsumerWidget {
       top: 6.0,
       bottom: 0.0,
     );
+    final dataLength = NumberFormat.compact(
+            locale: Localizations.localeOf(context).toLanguageTag())
+        .format(osmData.length);
 
     return Scaffold(
       appBar: AppBar(title: Text(loc.settingsTitle)),
@@ -63,12 +69,12 @@ class SettingsPage extends ConsumerWidget {
             tiles: [
               SettingsTile(
                 title: loc.settingsPurgeData,
-                trailing: osmData.length == 0
-                    ? null
-                    : Text(osmData.length.toString()),
+                trailing: osmData.length == 0 ? null : Text(dataLength),
                 enabled: osmData.length > 0,
-                onPressed: (_) {
-                  ref.read(osmDataProvider).purgeData();
+                onPressed: (_) async {
+                  final count = await ref.read(osmDataProvider).purgeData();
+                  AlertController.show('Obsolete Data',
+                      'Purged $count obsolete elements.', TypeAlert.success);
                 },
               ),
               SettingsTile(

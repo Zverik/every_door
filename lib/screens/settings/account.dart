@@ -30,7 +30,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
     });
   }
 
-  updateDetails() async {
+  Future updateDetails() async {
     final auth = ref.read(authProvider.notifier);
     final newDetails = auth.authorized ? await auth.loadUserDetails() : null;
     setState(() {
