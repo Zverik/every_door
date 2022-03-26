@@ -75,26 +75,30 @@ class GeolocationController extends StateNotifier<LatLng?> {
     if (tracking) return;
 
     final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
-    if (context != null && !isLocationEnabled) {
-      final loc = null; // TODO AppLocalizations.of(context);
-      await showOkAlertDialog(
-        title: loc?.enableGPS ?? 'Enable GPS',
-        message: loc?.enableGPSMessage ?? 'Please enable location services.',
-        context: context,
-      );
-      await Geolocator.openLocationSettings();
+    if (!isLocationEnabled) {
+      if (context != null) {
+        final loc = null; // TODO AppLocalizations.of(context);
+        await showOkAlertDialog(
+          title: loc?.enableGPS ?? 'Enable GPS',
+          message: loc?.enableGPSMessage ?? 'Please enable location services.',
+          context: context,
+        );
+        await Geolocator.openLocationSettings();
+      } else return;
     }
 
     final permission = await Geolocator.checkPermission();
-    if (context != null && permission == LocationPermission.deniedForever) {
-      final loc = null; // TODO AppLocalizations.of(context);
-      await showOkAlertDialog(
-        title: loc?.enableLocation ?? 'Enable Location',
-        message: loc?.enableLocationMessage ??
-            'Please allow location access for the app.',
-        context: context,
-      );
-      await Geolocator.openAppSettings();
+    if (permission == LocationPermission.deniedForever) {
+      if (context != null) {
+        final loc = null; // TODO AppLocalizations.of(context);
+        await showOkAlertDialog(
+          title: loc?.enableLocation ?? 'Enable Location',
+          message: loc?.enableLocationMessage ??
+              'Please allow location access for the app.',
+          context: context,
+        );
+        await Geolocator.openAppSettings();
+      } else return;
     }
 
     // Check for active GPS tracking

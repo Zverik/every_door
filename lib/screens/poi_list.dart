@@ -4,7 +4,6 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/lifecycle.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:every_door/models/filter.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
@@ -27,6 +26,7 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PoiListPage extends ConsumerStatefulWidget {
   final LatLng? location;
@@ -38,6 +38,8 @@ class PoiListPage extends ConsumerStatefulWidget {
 }
 
 class _PoiListPageState extends ConsumerState<PoiListPage> {
+  static const kSavedLocation = 'last_location';
+
   late LatLng location;
   List<OsmChange> allPOI = [];
   List<OsmChange> nearestPOI = [];
@@ -50,6 +52,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     super.initState();
     location =
         widget.location ?? LatLng(kDefaultLocation[0], kDefaultLocation[1]);
+    if (widget.location == null) restoreLocation();
 
     lifecycleObserver = LifecycleEventHandler(detached: () async {
       try {
@@ -68,6 +71,23 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
   dispose() {
     WidgetsBinding.instance?.removeObserver(lifecycleObserver);
     super.dispose();
+  }
+
+  restoreLocation() async {
+    final prefs = await SharedPreferences.getInstance();
+    final loc = prefs.getStringList(kSavedLocation);
+    if (loc != null && ref.read(geolocationProvider) == null) {
+      setState(() {
+        location = LatLng(double.parse(loc[0]), double.parse(loc[1]));
+        mapController.setLocation(location);
+      });
+    }
+  }
+
+  saveLocation() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(kSavedLocation,
+        [location.latitude.toString(), location.longitude.toString()]);
   }
 
   downloadAmenities(LatLng location) async {
@@ -228,6 +248,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
               controller: mapController,
               onDragEnd: (pos) {
                 location = pos;
+                saveLocation();
                 updateNearest();
                 updateAreaStatus();
               },

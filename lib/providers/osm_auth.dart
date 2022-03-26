@@ -86,7 +86,7 @@ class OsmAuthController extends StateNotifier<String?> {
       isOAuth = await supportsOAuthLogin();
     }
 
-    if (login != state) state = login;
+    state = login;
   }
 
   logout() async {
@@ -144,7 +144,7 @@ class OsmAuthController extends StateNotifier<String?> {
     final token = await _helper.getToken();
     if (token != null) {
       isOAuth = true;
-      final authStr = _helper.getAuthorizationValue(token);
+      final authStr = await _helper.getAuthorizationValue(token);
       if (authStr == null) throw Exception('Failed to build auth string');
       final headers = {'Authorization': authStr};
       final details = await loadUserDetails(headers);
@@ -161,7 +161,7 @@ class OsmAuthController extends StateNotifier<String?> {
 
   Future<Map<String, String>> getAuthHeaders() async {
     if (isOAuth) {
-      final authStr = _helper.getAuthorizationValue();
+      final authStr = await _helper.getAuthorizationValue();
       if (authStr == null) throw StateError('User is not logged in.');
       return {'Authorization': authStr};
     } else {

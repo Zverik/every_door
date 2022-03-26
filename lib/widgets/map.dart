@@ -43,6 +43,7 @@ class AmenityMap extends ConsumerStatefulWidget {
 class _AmenityMapState extends ConsumerState<AmenityMap> {
   late final MapController mapController;
   late final StreamSubscription<MapEvent> mapSub;
+  late LatLng mapCenter;
   bool showAttribution = true;
   String lastAmenityIds = '';
 
@@ -50,6 +51,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
   void initState() {
     super.initState();
     mapController = MapController();
+    mapCenter = widget.initialLocation;
     if (widget.controller != null) {
       widget.controller!.listener = onControllerLocation;
       // widget.controller!.mapController = mapController;
@@ -70,6 +72,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
 
   void onMapEvent(MapEvent event) {
     if (event is MapEventMove) {
+      mapCenter = event.targetCenter;
       if (event.source != MapEventSource.mapController) {
         ref.read(trackingProvider.state).state = false;
         setState(() {
@@ -170,7 +173,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             markers: [
               if (!ref.watch(trackingProvider))
                 Marker(
-                  point: mapController.center,
+                  point: mapCenter, // mapController.center throws late init exception
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
                   builder: (ctx) => Icon(Icons.location_pin),
                 ),

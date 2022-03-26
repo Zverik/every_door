@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
@@ -23,6 +24,9 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     // Start loading countries in a background thread.
     compute(CountryCoder.prepareData, null)
         .then((value) => CountryCoder.instance.load(value));
+
+    // Load login name
+    ref.read(authProvider);
 
     setState(() {
       message = 'Loading presets';

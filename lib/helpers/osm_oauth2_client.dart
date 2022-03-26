@@ -31,23 +31,22 @@ class OpenStreetMapOAuthHelper {
   final String _clientId = kOauthClient;
   final String _clientSecret = kOauthSecret;
 
-  AccessTokenResponse? cachedToken;
-
   OpenStreetMapOAuthHelper();
 
-  Future<AccessTokenResponse?> getToken() async {
+  Future<AccessTokenResponse?> getToken([bool requestAuth = true]) async {
     var token = await _loadToken();
 
     if (token != null) {
       if (token.refreshNeeded()) {
-        cachedToken = null;
         if (token.refreshToken != null) {
-          token = await _refreshToken(token.refreshToken!);
+          token = await _refreshToken(token.refreshToken!, requestAuth);
         } else {
+          if (!requestAuth) return null;
           token = await _fetchToken();
         }
       }
     } else {
+      if (!requestAuth) return null;
       token = await _fetchToken();
     }
 
@@ -60,18 +59,13 @@ class OpenStreetMapOAuthHelper {
       throw OAuthHelperError('Only Bearer tokens are supported.');
     }
 
-    cachedToken = token;
     return token;
   }
 
   Future<AccessTokenResponse?> _loadToken() async {
-    if (cachedToken != null) return cachedToken;
-
     final secure = FlutterSecureStorage();
     final data = await secure.read(key: kTokenKey);
-    cachedToken =
-        data == null ? null : AccessTokenResponse.fromMap(jsonDecode(data));
-    return cachedToken;
+    return data == null ? null : AccessTokenResponse.fromMap(jsonDecode(data));
   }
 
   _saveToken(AccessTokenResponse? token) async {
@@ -94,11 +88,12 @@ class OpenStreetMapOAuthHelper {
     return token;
   }
 
-  Future<AccessTokenResponse> _refreshToken(String refreshToken) async {
+  Future<AccessTokenResponse> _refreshToken(String refreshToken, [bool requestAuth = true]) async {
     AccessTokenResponse token;
     try {
       token = await _client.refreshToken(refreshToken, clientId: _clientId);
     } catch (e) {
+      if (!requestAuth) rethrow;
       return await _fetchToken();
     }
 
@@ -136,8 +131,16 @@ class OpenStreetMapOAuthHelper {
     }
   }
 
-  String? getAuthorizationValue([AccessTokenResponse? token]) {
-    if (token == null && cachedToken == null) return null;
-    return 'Bearer ${token?.accessToken ?? cachedToken?.accessToken}';
+  Future<String?> getAuthorizationValue([AccessTokenResponse? token]) async {
+    if (token == null) {
+      try {
+        token = await getToken(false);
+      } on Exception catch (e) {
+        print(e);
+        return null;
+      }
+      if (token == null) return null; // Not authorizing here
+    }
+    return 'Bearer ${token.accessToken}';
   }
 }
