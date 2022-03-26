@@ -141,7 +141,7 @@ class OsmElement {
   ];
 
   factory OsmElement.fromJson(Map<String, dynamic> data) {
-    List<String>? members = json.decode(data['members']);
+    List<dynamic>? members = json.decode(data['members']);
     String? nodes = data['nodes'];
     return OsmElement(
       id: OsmId.fromString(data['osmid']),
@@ -157,7 +157,7 @@ class OsmElement {
           : LatLng(data['lat'] / kCoordinatePrecision,
               data['lon'] / kCoordinatePrecision),
       nodes: nodes?.split(',').map((e) => int.parse(e)).toList(),
-      members: members?.map((e) => OsmMember.fromString(e)).toList(),
+      members: members?.whereType<String>().map((e) => OsmMember.fromString(e)).toList(),
     );
   }
 

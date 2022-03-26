@@ -3,6 +3,18 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
+  "tileNothingAround": "No amenities around you in {distance} meters.\nPlease move closer to anything, drag the map, or add a missing amenity.",
+  "@tileNothingAround": {
+    "description": "Message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
   "editorSave": "Save",
   "@editorSave": {
     "description": "Save button title in the editor"

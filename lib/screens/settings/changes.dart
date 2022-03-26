@@ -45,7 +45,9 @@ class ChangeListPage extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              String changeset = ref.read(osmApiProvider).buildOsmChange(changes.all(true), null);
+              String changeset = ref
+                  .read(osmApiProvider)
+                  .buildOsmChange(changes.all(true), null);
               final tempDir = await getTemporaryDirectory();
               File tmpFile =
                   File('${tempDir.path}/everydoor-${formatTime("YYmmdd")}.osc');
@@ -60,7 +62,7 @@ class ChangeListPage extends ConsumerWidget {
             },
             icon: Icon(Icons.share),
           ),
-          changes.haveNoErrorChanges()
+          changes.length == 0 || changes.haveNoErrorChanges()
               ? Container()
               : IconButton(
                   onPressed: () async {
@@ -103,16 +105,40 @@ class ChangeListPage extends ConsumerWidget {
       body: ListView.separated(
         itemBuilder: (context, index) {
           final change = changes[index];
-          return ListTile(
-            title: Text(change.typeAndName),
-            subtitle: Text(change.error ?? 'Pending'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => PoiEditorPage(amenity: change)),
-              );
+          return Dismissible(
+            key: Key(change.databaseId),
+            direction: DismissDirection.endToStart,
+            onDismissed: (direction) {
+              changes.deleteChange(change);
+
+              ScaffoldMessenger.of(context).removeCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Deleted ${change.typeAndName}'),
+                action: SnackBarAction(
+                  label: 'UNDO',
+                  onPressed: () {
+                    changes.saveChange(change);
+                  },
+                ),
+              ));
             },
+            background: Container(
+              color: Colors.red,
+              padding: EdgeInsets.only(right: 15.0),
+              child: Icon(Icons.delete, color: Colors.white),
+              alignment: Alignment.centerRight,
+            ),
+            child: ListTile(
+              title: Text(change.typeAndName),
+              subtitle: Text(change.error ?? 'Pending'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => PoiEditorPage(amenity: change)),
+                );
+              },
+            ),
           );
         },
         separatorBuilder: (context, index) => Divider(),

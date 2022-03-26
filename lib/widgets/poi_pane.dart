@@ -1,8 +1,10 @@
+import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'poi_tile.dart';
 
 class PoiPane extends ConsumerStatefulWidget {
@@ -16,7 +18,6 @@ class PoiPane extends ConsumerStatefulWidget {
 }
 
 class _PoiPaneState extends ConsumerState<PoiPane> {
-
   /// Reorder tiles into vertical orientation.
   List<T> reorderIntoColumns<T>(List<T> tiles) {
     final List<T> result = [];
@@ -26,11 +27,19 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     var tiles = widget.amenities.asMap().entries.toList();
     // tiles = reorderIntoColumns(tiles);
 
     return widget.amenities.isEmpty
-        ? Center(child: Text('Nothing around'))
+        ? Center(
+            child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              loc.tileNothingAround(kVisibilityRadius),
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ))
         : Container(
             color: Colors.grey.shade100,
             child: ResponsiveGridList(
