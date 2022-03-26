@@ -157,10 +157,13 @@ def import_presets(cur, path):
     cur.execute("create index preset_fields_idx on preset_fields (preset_name)")
 
     def build_terms(data):
-        for name in data:
+        for name, row in data.items():
             for term in name.replace('_', '/').split('/')[1:]:
                 if term:
                     yield None, term, name, 3
+            for k, v in row.get('tags', {}).items():
+                if v is not None and len(v) > 2 and v != 'yes':
+                    yield None, v, name, 4
 
     cur.execute(
         "create table preset_terms (lang text, term text, preset_name text, score integer);")

@@ -6,6 +6,7 @@ class Floor implements Comparable<Floor> {
   final bool duplicate;
 
   Floor({this.level, this.floor, this.duplicate = false});
+  Floor.empty() : level = null, floor = null, duplicate = false;
 
   factory Floor.fromTags(Map<String, String> tags) {
     final levelValue = tags['level'];

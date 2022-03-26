@@ -53,6 +53,11 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
     super.dispose();
   }
 
+  String cutEllipsis(String value, int maxLength) {
+    if (value.length <= maxLength) return value;
+    return value.substring(0, maxLength - 2) + '...';
+  }
+
   @override
   Widget build(BuildContext context) {
     List<WebsiteRow> websites = [];
@@ -161,30 +166,33 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
                 borderRadius: BorderRadius.all(Radius.circular(6.0)),
                 color: Colors.blueGrey.shade50,
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(website.provider.icon),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: GestureDetector(
-                      child: Text(website.provider.display(website.value), style: kFieldTextStyle),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(website.provider.icon),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: GestureDetector(
+                        child: Text(cutEllipsis(website.provider.display(website.value), 25), style: kFieldTextStyle),
+                        onTap: () {
+                          if (kFollowLinks && website.value.startsWith('http')) {
+                            launch(website.value);
+                          }
+                        },
+                      ),
+                    ),
+                    GestureDetector(
+                      child: Icon(Icons.close, size: 30.0),
                       onTap: () {
-                        if (kFollowLinks && website.value.startsWith('http')) {
-                          launch(website.value);
-                        }
+                        setState(() {
+                          website.provider.setValue(widget.element, '');
+                        });
                       },
                     ),
-                  ),
-                  GestureDetector(
-                    child: Icon(Icons.close, size: 30.0),
-                    onTap: () {
-                      setState(() {
-                        website.provider.setValue(widget.element, '');
-                      });
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

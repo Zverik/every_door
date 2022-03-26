@@ -4,6 +4,7 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/lifecycle.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/filter.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
@@ -13,9 +14,11 @@ import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
+import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/map_chooser.dart';
 import 'package:every_door/screens/settings.dart';
 import 'package:every_door/screens/settings/account.dart';
+import 'package:every_door/widgets/filter.dart';
 import 'package:every_door/widgets/map.dart';
 import 'package:every_door/widgets/poi_pane.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +80,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
   updateNearest() async {
     final provider = ref.read(osmDataProvider);
     final micromapping = ref.read(micromappingProvider);
+    final filter = ref.read(poiFilterProvider);
     final location = this.location;
     const distance = DistanceEquirectangular();
     List<OsmChange> data =
@@ -88,6 +92,9 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                 ? !(e.element?.isAmenity ?? false)
                 : (e.element?.isAmenity ?? true)))
         .toList();
+    if (filter.isNotEmpty) {
+      data = data.where((e) => filter.matches(e.getFullTags())).toList();
+    }
     data.sort((a, b) => distance(location, a.location)
         .compareTo(distance(location, b.location)));
     if (data.length > 20) data = data.sublist(0, 20);
@@ -116,7 +123,11 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     final micromapping = ref.watch(micromappingProvider);
     final downloading = ref.watch(downloadingDataProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
+    final hasFilter = ref.watch(poiFilterProvider).isNotEmpty;
     ref.listen(needMapUpdateProvider, (previous, next) {
+      updateNearest();
+    });
+    ref.listen(poiFilterProvider, (previous, next) {
       updateNearest();
     });
 
@@ -177,13 +188,33 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                 : Icons.map),
           ),
           IconButton(
-            onPressed: ref.watch(trackingProvider)
-                ? null
-                : () {
-                    ref.read(trackingProvider.state).state = true;
-                  },
-            icon: const Icon(Icons.my_location),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return Container(
+                    color: Colors.white,
+                    height: 200.0,
+                    padding: EdgeInsets.all(15.0),
+                    child: PoiFilterPane(location),
+                  );
+                },
+              );
+            },
+            icon: Icon(
+              hasFilter ? Icons.filter_alt : Icons.filter_alt_outlined,
+              color: hasFilter ? Colors.yellowAccent : null,
+            ),
           ),
+          if (!ref.watch(trackingProvider))
+            IconButton(
+              onPressed: ref.watch(trackingProvider)
+                  ? null
+                  : () {
+                      ref.read(trackingProvider.state).state = true;
+                    },
+              icon: const Icon(Icons.my_location),
+            ),
         ],
       ),
       body: Column(
