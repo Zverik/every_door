@@ -125,6 +125,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     setState(() {
       nearestPOI = data;
     });
+    mapController.zoomToFit(data.map((e) => e.location));
   }
 
   updateAreaStatus() async {

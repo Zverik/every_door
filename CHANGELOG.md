@@ -4,6 +4,7 @@
 
 _Not yet released_
 
+* Map zooms dynamically to accomodate all amenities listed.
 * Fixed OAuth error with a `FormatException`.
 * First upload after app start redirected to the login page.
 * Added address and floor filters.

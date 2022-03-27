@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:math' show min, max;
 
+import 'package:every_door/helpers/closest_points.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
@@ -10,12 +12,17 @@ import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AmenityMapController {
-  // MapController? mapController;
-
-  Function(LatLng, bool)? listener;
+  Function(LatLng, bool)? moveListener;
+  Function(Iterable<LatLng>)? zoomListener;
 
   setLocation(LatLng location, {bool emitDrag = true}) {
-    if (listener != null) listener!(location, emitDrag);
+    if (moveListener != null) moveListener!(location, emitDrag);
+  }
+
+  zoomToFit(Iterable<LatLng> locations) {
+    if (locations.isNotEmpty) {
+      if (zoomListener != null) zoomListener!(locations);
+    }
   }
 }
 
@@ -41,6 +48,8 @@ class AmenityMap extends ConsumerStatefulWidget {
 }
 
 class _AmenityMapState extends ConsumerState<AmenityMap> {
+  static const kMapZoom = 17.0;
+
   late final MapController mapController;
   late final StreamSubscription<MapEvent> mapSub;
   late LatLng mapCenter;
@@ -53,8 +62,8 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     mapController = MapController();
     mapCenter = widget.initialLocation;
     if (widget.controller != null) {
-      widget.controller!.listener = onControllerLocation;
-      // widget.controller!.mapController = mapController;
+      widget.controller!.moveListener = onControllerLocation;
+      widget.controller!.zoomListener = onControllerZoom;
     }
     mapSub = mapController.mapEventStream.listen(onMapEvent);
     // hideAttribution();
@@ -78,8 +87,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         setState(() {
           // redraw center marker
         });
-        if (widget.onDrag != null)
-          widget.onDrag!(event.targetCenter);
+        if (widget.onDrag != null) widget.onDrag!(event.targetCenter);
       }
     } else if (event is MapEventMoveEnd) {
       if (widget.onDragEnd != null &&
@@ -95,6 +103,58 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     }
   }
 
+  double _calculateZoom(Iterable<LatLng> locations, EdgeInsets padding) {
+    // Add a virtual location to keep center.
+    // Here we don't reproject, since on low zooms Mercator could be considered equirectandular.
+    // Taking first 9, for we display only 9.
+    final bounds = LatLngBounds.fromPoints(locations.take(9).toList());
+    final center = mapController.center;
+    final dlat = max(
+      (bounds.north - center.latitude).abs(),
+      (bounds.south - center.latitude).abs(),
+    );
+    final dlon = max(
+      (bounds.east - center.longitude).abs(),
+      (bounds.west - center.longitude).abs(),
+    );
+    final newBounds = LatLngBounds(
+      LatLng(center.latitude - dlat, center.longitude - dlon),
+      LatLng(center.latitude + dlat, center.longitude + dlon),
+    );
+    return mapController
+        .centerZoomFitBounds(newBounds,
+            options: FitBoundsOptions(
+              padding: padding,
+              maxZoom: kMapZoom + 1,
+              inside: false,
+            ))
+        .zoom;
+  }
+
+  onControllerZoom(Iterable<LatLng> locations) {
+    const kPadding = EdgeInsets.all(12.0);
+    const kZoomThreshold = 0.2;
+    const kTooCloseThreshold = 10.0; // meters. I know, bad.
+
+    double zoom = _calculateZoom(locations, kPadding);
+    if (zoom < kMapZoom - 1 && locations.length >= 6) {
+      // When outliers are too far, we can skip them I guess.
+      zoom = _calculateZoom(locations.take(locations.length - 2), kPadding);
+    }
+
+    final curZoom = mapController.zoom;
+    double maxZoomHere = kMapZoom;
+    if (zoom > kMapZoom && zoom > curZoom) {
+      // Overzoom only if points are too close.
+      if (closestPairDistance(locations) <= kTooCloseThreshold) maxZoomHere++;
+    }
+    if (zoom < kMapZoom - 1)
+      zoom = min(curZoom, kMapZoom - 1);
+    else if (zoom > maxZoomHere) zoom = max(curZoom, maxZoomHere);
+    if ((zoom - curZoom).abs() >= kZoomThreshold)
+      mapController.move(mapController.center, zoom);
+  }
+
   @override
   void dispose() {
     mapSub.cancel();
@@ -102,7 +162,9 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
   }
 
   trackAmenities() {
-    List<String> newAmenityIds = widget.amenities.map((e) => e.isNew ? e.typeAndName : e.id.toString()).toList();
+    List<String> newAmenityIds = widget.amenities
+        .map((e) => e.isNew ? e.typeAndName : e.id.toString())
+        .toList();
     newAmenityIds.sort();
     String amenityString = newAmenityIds.join();
     if (amenityString != lastAmenityIds) {
@@ -139,14 +201,15 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       mapController: mapController,
       options: MapOptions(
         center: widget.initialLocation, // This does not work :(
-        zoom: 17.0,
+        zoom: kMapZoom,
         minZoom: 15.0,
         maxZoom: 20.0,
         interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
       ),
       children: [
         TileLayerWidget(
-          options: buildTileLayerOptions(ref.watch(selectedImageryProvider), showAttribution),
+          options: buildTileLayerOptions(
+              ref.watch(selectedImageryProvider), showAttribution),
         ),
         if (trackLocation != null)
           CircleLayerWidget(
@@ -158,13 +221,13 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                   radius: 10.0,
                 ),
                 if (ref.watch(trackingProvider))
-                CircleMarker(
-                  point: trackLocation,
-                  borderColor: Colors.black.withOpacity(0.8),
-                  borderStrokeWidth: 1.0,
-                  color: Colors.transparent,
-                  radius: 10.0,
-                ),
+                  CircleMarker(
+                    point: trackLocation,
+                    borderColor: Colors.black.withOpacity(0.8),
+                    borderStrokeWidth: 1.0,
+                    color: Colors.transparent,
+                    radius: 10.0,
+                  ),
               ],
             ),
           ),
@@ -173,7 +236,8 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             markers: [
               if (!ref.watch(trackingProvider))
                 Marker(
-                  point: mapCenter, // mapController.center throws late init exception
+                  point:
+                      mapCenter, // mapController.center throws late init exception
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
                   builder: (ctx) => Icon(Icons.location_pin),
                 ),
