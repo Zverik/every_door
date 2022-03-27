@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
@@ -14,12 +15,21 @@ class TagEditorPage extends StatefulWidget {
 
 class _TagEditorPageState extends State<TagEditorPage> {
   late final Set<String> keys;
+  final Map<String, TextEditingController> controllers = {};
 
   @override
   void initState() {
     super.initState();
     keys = Set.of(widget.amenity.newTags.keys.toList() +
         (widget.amenity.element?.tags.keys.toList() ?? []));
+    for (final k in keys)
+      controllers[k] = TextEditingController(text: widget.amenity[k] ?? '');
+  }
+
+  @override
+  void dispose() {
+    for (final v in controllers.values) v.dispose();
+    super.dispose();
   }
 
   @override
@@ -27,6 +37,8 @@ class _TagEditorPageState extends State<TagEditorPage> {
     String title = widget.amenity.isNew
         ? 'New point'
         : '${kOsmElementTypeName[widget.amenity.id.type]} ${widget.amenity.id.id}';
+    final sortedKeys = List.of(keys);
+    sortedKeys.sort();
 
     return Scaffold(
       appBar: AppBar(
@@ -40,15 +52,21 @@ class _TagEditorPageState extends State<TagEditorPage> {
               defaultColumnWidth: IntrinsicColumnWidth(),
               defaultVerticalAlignment: TableCellVerticalAlignment.middle,
               children: [
-                for (final key in keys)
+                for (final key in sortedKeys)
                   TableRow(children: [
-                    Text(key,
-                        style: kFieldTextStyle.copyWith(
-                            fontWeight: FontWeight.bold)),
+                    Text(
+                      key,
+                      style: widget.amenity.newTags.containsKey(key) ||
+                              (widget.amenity.element?.tags.containsKey(key) ??
+                                  false)
+                          ? kFieldTextStyle.copyWith(
+                              fontWeight: FontWeight.bold)
+                          : kFieldTextStyle,
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: TextFormField(
-                        initialValue: widget.amenity[key],
+                      child: TextField(
+                        controller: controllers[key],
                         style: kFieldTextStyle,
                         decoration: InputDecoration(
                             fillColor: !widget.amenity.newTags.containsKey(key)
@@ -69,26 +87,48 @@ class _TagEditorPageState extends State<TagEditorPage> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(!widget.amenity.isNew &&
-                              widget.amenity.newTags.containsKey(key)
+                      icon: Icon(widget.amenity.newTags.containsKey(key) &&
+                              (widget.amenity.element?.tags.containsKey(key) ??
+                                  false)
                           ? Icons.undo
                           : Icons.clear),
                       padding: EdgeInsets.zero,
                       visualDensity: VisualDensity.compact,
                       iconSize: 30.0,
                       onPressed: () {
-                        setState(() {
-                          if (widget.amenity.newTags.containsKey(key))
-                            widget.amenity.newTags.remove(key);
-                          else
-                            widget.amenity.removeTag(key);
-                        });
+                        if (widget.amenity.newTags.containsKey(key))
+                          widget.amenity.undoTagChange(key);
+                        else
+                          widget.amenity.removeTag(key);
+                        controllers[key]!.text = widget.amenity[key] ?? '';
+                        setState(() {});
                       },
                     ),
                   ]),
                 TableRow(children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      // TODO: suggestions using taginfo database.
+                      final result = await showTextInputDialog(
+                        context: context,
+                        textFields: [
+                          DialogTextField(hintText: 'Key'),
+                          DialogTextField(hintText: 'Value'),
+                        ],
+                      );
+                      if (result != null &&
+                          result.length == 2 &&
+                          result
+                              .every((element) => element.trim().isNotEmpty)) {
+                        final k = result[0].trim();
+                        final v = result[1].trim();
+                        controllers[k] = TextEditingController(text: v);
+                        widget.amenity[k] = v;
+                        setState(() {
+                          keys.add(k);
+                        });
+                      }
+                    },
                     child: Text('Add a tag', style: kFieldTextStyle),
                   ),
                   Container(),

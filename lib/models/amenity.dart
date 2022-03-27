@@ -105,6 +105,14 @@ class OsmChange extends ChangeNotifier {
     notifyListeners();
   }
 
+  undoTagChange(String key) {
+    if (newTags.containsKey(key)) {
+      newTags.remove(key);
+      _updateMainKey();
+      notifyListeners();
+    }
+  }
+
   bool hasTag(String key) => this[key] != null;
 
   _updateMainKey() {

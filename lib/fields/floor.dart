@@ -66,7 +66,7 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
       floors = [];
     }
     final currentFloor = Floor.fromTags(tags);
-    if (!floors.contains(currentFloor)) {
+    if (currentFloor.isNotEmpty && !floors.contains(currentFloor)) {
       floors.add(currentFloor);
       floors.sort();
     }

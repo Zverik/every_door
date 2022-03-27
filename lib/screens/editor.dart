@@ -153,9 +153,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           IconButton(
             icon: Icon(Icons.table_rows),
             onPressed: () async {
-              await Navigator.push(context, MaterialPageRoute(builder: (context) => TagEditorPage(amenity)));
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TagEditorPage(amenity)));
               // Expect the amenity to change.
-              setState(() { });
+              setState(() {});
             },
           ),
         ],
@@ -221,7 +224,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           MaterialButton(
             color: amenity.isDisused ? Colors.brown : Colors.orange,
             textColor: Colors.white,
-            child: Text(amenity.isDisused ? loc.editorMarkActive : loc.editorMarkDefunct),
+            child: Text(amenity.isDisused
+                ? loc.editorMarkActive
+                : loc.editorMarkDefunct),
             onPressed: () {
               setState(() {
                 amenity.toggleDisused();
@@ -234,7 +239,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             MaterialButton(
               color: Colors.red,
               textColor: Colors.white,
-              child: Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
+              child:
+                  Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
               onPressed: () async {
                 if (amenity.deleted) {
                   setState(() {
