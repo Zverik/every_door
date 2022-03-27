@@ -102,9 +102,10 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     final micromapping = ref.read(micromappingProvider);
     final filter = ref.read(poiFilterProvider);
     final location = this.location;
-    const distance = DistanceEquirectangular();
+    // Query for amenities around the location.
     List<OsmChange> data =
         await provider.getElements(location, kVisibilityRadius);
+    // Filter for amenities (or not amenities).
     data = data
         .where((e) =>
             e.isModified ||
@@ -112,16 +113,23 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                 ? !(e.element?.isAmenity ?? false)
                 : (e.element?.isAmenity ?? true)))
         .toList();
+    // Apply the building filter.
     if (filter.isNotEmpty) {
       data = data.where((e) => filter.matches(e.getFullTags())).toList();
     }
-    data.sort((a, b) => distance(location, a.location)
-        .compareTo(distance(location, b.location)));
-    if (data.length > 20) data = data.sublist(0, 20);
+    // Remove points too far from the user.
+    const distance = DistanceEquirectangular();
     data = data
         .where((element) =>
             distance(location, element.location) <= kVisibilityRadius)
         .toList();
+    // Sort by distance.
+    data.sort((a, b) => distance(location, a.location)
+        .compareTo(distance(location, b.location)));
+    // Trim to 10-20 elements.
+    if (data.length > kAmenitiesInList)
+      data = data.sublist(0, kAmenitiesInList);
+    // Update the map.
     setState(() {
       nearestPOI = data;
     });

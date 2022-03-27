@@ -70,10 +70,12 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
       floors.add(currentFloor);
       floors.sort();
     }
-    setState(() {
-      address = addr;
-      this.floors = floors;
-    });
+    if (mounted) {
+      setState(() {
+        address = addr;
+        this.floors = floors;
+      });
+    }
   }
 
   addFloor(BuildContext context) async {

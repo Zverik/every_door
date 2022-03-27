@@ -138,6 +138,8 @@ class _OpeningHoursPageState extends State<OpeningHoursPage> {
               },
               child: Text(loc.fieldHoursAddFragment),
             ),
+          if (hours.fragments.length >= 2)
+            SizedBox(height: 80.0),
         ],
       ),
       floatingActionButton: FloatingActionButton(

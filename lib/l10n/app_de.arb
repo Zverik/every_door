@@ -44,5 +44,5 @@
   "messageNoData": "Keine Daten, zum Herunterladen hier klicken",
   "messageDataObsolete": "Die Daten sind veraltet, zum Aktualisieren hier klicken",
   "settingsPresentation": "Präsentation",
-  "tileNo": "nein",
+  "tileNo": "kein"
 }

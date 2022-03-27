@@ -12,6 +12,7 @@ const kGeohashPrecision = 7; // ~76 meters (6 is ~600 which is too much)
 const kCoordinatePrecision = 10000000; // For saving locations to a database
 const kObsoleteData = Duration(days: 2);
 const kSuperObsoleteData = Duration(days: 14);
+const kAmenitiesInList = 14;
 const kOldAmenityDays = 7;
 const kFieldColor = Colors.lightBlueAccent;
 const kFieldFontSize = 18.0;
