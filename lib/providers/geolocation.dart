@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:every_door/helpers/equirectangular.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,12 +14,15 @@ final geolocationProvider =
 final trackingProvider = StateProvider<bool>((ref) => false);
 
 class GeolocationController extends StateNotifier<LatLng?> {
-  StreamSubscription<Position>? locSub;
-  late final StreamSubscription<ServiceStatus> statSub;
+  StreamSubscription<Position>? _locSub;
+  late final StreamSubscription<ServiceStatus> _statSub;
   final Ref _ref;
+  LatLng? location;
+  late DateTime _stateTime;
 
   GeolocationController(this._ref) : super(null) {
-    statSub = Geolocator.getServiceStatusStream().listen((status) {
+    _stateTime = DateTime.now();
+    _statSub = Geolocator.getServiceStatusStream().listen((status) {
       if (status == ServiceStatus.enabled) {
         enableTracking();
       } else {
@@ -29,8 +33,8 @@ class GeolocationController extends StateNotifier<LatLng?> {
   }
 
   initGeolocator() async {
-    await locSub?.cancel();
-    locSub = null;
+    await _locSub?.cancel();
+    _locSub = null;
 
     if (!await Geolocator.isLocationServiceEnabled()) {
       disableTracking();
@@ -54,9 +58,9 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
 
     final pos = await Geolocator.getLastKnownPosition();
-    if (pos != null) state = _fromPosition(pos);
+    if (pos != null) _updateLocation(_fromPosition(pos));
 
-    locSub = Geolocator.getPositionStream(
+    _locSub = Geolocator.getPositionStream(
       locationSettings: const LocationSettings(
         accuracy: LocationAccuracy.best,
       ),
@@ -77,20 +81,21 @@ class GeolocationController extends StateNotifier<LatLng?> {
     final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isLocationEnabled) {
       if (context != null) {
-        final loc = null; // TODO AppLocalizations.of(context);
+        final loc = AppLocalizations.of(context);
         await showOkAlertDialog(
           title: loc?.enableGPS ?? 'Enable GPS',
           message: loc?.enableGPSMessage ?? 'Please enable location services.',
           context: context,
         );
         await Geolocator.openLocationSettings();
-      } else return;
+      } else
+        return;
     }
 
     final permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.deniedForever) {
       if (context != null) {
-        final loc = null; // TODO AppLocalizations.of(context);
+        final loc = AppLocalizations.of(context);
         await showOkAlertDialog(
           title: loc?.enableLocation ?? 'Enable Location',
           message: loc?.enableLocationMessage ??
@@ -98,15 +103,16 @@ class GeolocationController extends StateNotifier<LatLng?> {
           context: context,
         );
         await Geolocator.openAppSettings();
-      } else return;
+      } else
+        return;
     }
 
     // Check for active GPS tracking
-    if (locSub == null) {
+    if (_locSub == null) {
       await initGeolocator();
     }
 
-    if (locSub != null) {
+    if (_locSub != null) {
       _ref.read(trackingProvider.state).state = true;
     }
   }
@@ -115,21 +121,37 @@ class GeolocationController extends StateNotifier<LatLng?> {
       LatLng(pos.latitude, pos.longitude);
 
   void onLocationEvent(Position pos) {
-    state = _fromPosition(pos);
+    _updateLocation(_fromPosition(pos));
+  }
+
+  _updateLocation(LatLng newLocation) {
+    location = newLocation;
+
+    // Update state location only if it's far, time passed, or it is null.
+    const kLocationThreshold = 10; // meters
+    const kLocationInterval = Duration(seconds: 10);
+    final distance = DistanceEquirectangular();
+    final oldState = state;
+    if (oldState == null ||
+        DateTime.now().difference(_stateTime) >= kLocationInterval ||
+        distance(oldState, newLocation) > kLocationThreshold) {
+      state = location;
+      _stateTime = DateTime.now();
+    }
   }
 
   onLocationError(event) {
     print('Location error! $event');
     disableTracking();
     state = null;
-    locSub?.cancel();
-    locSub = null;
+    _locSub?.cancel();
+    _locSub = null;
   }
 
   @override
   void dispose() {
-    locSub?.cancel();
-    statSub.cancel();
+    _locSub?.cancel();
+    _statSub.cancel();
     super.dispose();
   }
 }

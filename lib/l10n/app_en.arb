@@ -195,5 +195,21 @@
   "messageDataObsolete": "Data is obsolete, tap here to refresh",
   "@messageDataObsolete": {
     "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS" : "Enable GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Please turn on the location services in the settings panel that will be shown.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocation": "Enable Location",
+  "@enableLocation":  {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "enableLocationMessage": "Please allow location access for the app in the settings panel that will be shown.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
   }
 }

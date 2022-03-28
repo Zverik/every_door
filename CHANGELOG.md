@@ -20,6 +20,7 @@ _Not yet released_
 * Types now can be found by tag values.
 * It was possible to have an opening\_hours fragment with no weekdays.
 * German translation (thanks @mfbehrens99).
+* Your location is now updated once every 10 seconds when you don't move.
 * With GPS disabled, app now restores the last location.
 * Fixed a map error when GPS is off.
 * Fixed empty floor list when adding an address to a POI with floor tags.
