@@ -66,14 +66,16 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
       floors = [];
     }
     final currentFloor = Floor.fromTags(tags);
-    if (!floors.contains(currentFloor)) {
+    if (currentFloor.isNotEmpty && !floors.contains(currentFloor)) {
       floors.add(currentFloor);
       floors.sort();
     }
-    setState(() {
-      address = addr;
-      this.floors = floors;
-    });
+    if (mounted) {
+      setState(() {
+        address = addr;
+        this.floors = floors;
+      });
+    }
   }
 
   addFloor(BuildContext context) async {

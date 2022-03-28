@@ -9,6 +9,7 @@ import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/map_chooser.dart';
 import 'package:every_door/helpers/tile_layers.dart';
+import 'package:every_door/screens/tags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -148,6 +149,19 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(preset?.name ?? amenity.name ?? 'Editor'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.table_rows),
+            onPressed: () async {
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TagEditorPage(amenity)));
+              // Expect the amenity to change.
+              setState(() {});
+            },
+          ),
+        ],
       ),
       body: preset == null
           ? Center(child: Text(loc.editorLoadingPreset))
@@ -210,7 +224,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           MaterialButton(
             color: amenity.isDisused ? Colors.brown : Colors.orange,
             textColor: Colors.white,
-            child: Text(amenity.isDisused ? loc.editorMarkActive : loc.editorMarkDefunct),
+            child: Text(amenity.isDisused
+                ? loc.editorMarkActive
+                : loc.editorMarkDefunct),
             onPressed: () {
               setState(() {
                 amenity.toggleDisused();
@@ -218,12 +234,13 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             },
           ),
           // Not displaying the deletion button for just created amenities.
-          if (widget.amenity != null && amenity.canDelete) ...[
+          if (widget.amenity != null) ...[
             SizedBox(width: 10.0),
             MaterialButton(
               color: Colors.red,
               textColor: Colors.white,
-              child: Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
+              child:
+                  Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
               onPressed: () async {
                 if (amenity.deleted) {
                   setState(() {

@@ -18,7 +18,7 @@ class OsmChange extends ChangeNotifier {
 
   Map<String, String?> newTags;
   LatLng? newLocation;
-  bool deleted;
+  bool _deleted;
   String? error;
   final String databaseId;
   String? _mainKey;
@@ -26,10 +26,11 @@ class OsmChange extends ChangeNotifier {
   OsmChange(this.element,
       {Map<String, String?>? newTags,
       this.newLocation,
-      this.deleted = false,
+      bool hardDeleted = false,
       this.error,
       String? databaseId})
       : newTags = newTags ?? {},
+        _deleted = hardDeleted,
         databaseId = databaseId ?? element?.id.toString() ?? Uuid().v1() {
     _updateMainKey();
     // For just created elements, set checked flag.
@@ -40,7 +41,7 @@ class OsmChange extends ChangeNotifier {
         element,
         newTags: Map.of(newTags),
         newLocation: newLocation,
-        deleted: deleted,
+        hardDeleted: _deleted,
         error: error,
         databaseId: databaseId,
       );
@@ -57,6 +58,8 @@ class OsmChange extends ChangeNotifier {
     return element!.id;
   }
 
+  bool get deleted => _deleted || (_mainKey?.startsWith(kDeleted) ?? false);
+  bool get hardDeleted => _deleted;
   bool get isModified => newTags.isNotEmpty || newLocation != null || deleted;
   bool get isConfirmed =>
       !deleted && (newTags.length == 1 && newTags.keys.first == kCheckedKey);
@@ -102,6 +105,14 @@ class OsmChange extends ChangeNotifier {
     notifyListeners();
   }
 
+  undoTagChange(String key) {
+    if (newTags.containsKey(key)) {
+      newTags.remove(key);
+      _updateMainKey();
+      notifyListeners();
+    }
+  }
+
   bool hasTag(String key) => this[key] != null;
 
   _updateMainKey() {
@@ -132,6 +143,15 @@ class OsmChange extends ChangeNotifier {
       check();
   }
 
+  set deleted(bool value) {
+    if (value == deleted) return;
+    if (isNew || !canDelete) {
+      togglePrefix(kDeleted);
+    } else {
+      _deleted = value;
+    }
+  }
+
   // Database export-import and converters
 
   static const kTableName = 'changes';
@@ -155,7 +175,7 @@ class OsmChange extends ChangeNotifier {
       element,
       newTags: (json.decode(data['new_tags']) as Map).cast<String, String?>(),
       newLocation: location,
-      deleted: data['deleted'] == 1,
+      hardDeleted: data['deleted'] == 1,
       error: data['error'],
       databaseId: data['id'],
     );
@@ -171,7 +191,7 @@ class OsmChange extends ChangeNotifier {
           loc == null ? null : (loc.latitude * kCoordinatePrecision).toInt(),
       'new_lon':
           loc == null ? null : (loc.longitude * kCoordinatePrecision).toInt(),
-      'deleted': deleted ? 1 : 0,
+      'deleted': _deleted ? 1 : 0,
       'error': error,
     };
   }
@@ -214,7 +234,7 @@ class OsmChange extends ChangeNotifier {
       newElement,
       newLocation: newLocation,
       newTags: newTags,
-      deleted: deleted,
+      hardDeleted: _deleted,
       error: error,
       databaseId: databaseId,
     );
@@ -226,18 +246,24 @@ class OsmChange extends ChangeNotifier {
     return _mainKey?.startsWith(kDisused) ?? false;
   }
 
-  toggleDisused() {
+  togglePrefix(String prefix) {
     final k = _mainKey;
     if (k == null) return null;
 
     String newK;
-    if (k.startsWith(kDisused))
-      newK = k.substring(kDisused.length);
-    else
-      newK = kDisused + k;
+    if (k.startsWith(prefix)) {
+      newK = k.substring(prefix.length);
+    } else {
+      // Delete another prefix if exists.
+      newK = prefix + k.substring(k.indexOf(':') + 1);
+    }
 
     this[newK] = this[k];
     removeTag(k);
+  }
+
+  toggleDisused() {
+    togglePrefix(kDisused);
   }
 
   String? get name => this['name'] ?? this['operator'] ?? this['brand'];
@@ -310,7 +336,7 @@ class OsmChange extends ChangeNotifier {
 
   @override
   String toString() {
-    return 'OsmChange(${deleted ? "delete " : ""}$element, $newLocation, ${OsmElement.tagsToString(newTags)})';
+    return 'OsmChange(${_deleted ? "delete " : ""}$element, $newLocation, ${OsmElement.tagsToString(newTags)})';
   }
 
   @override
@@ -318,7 +344,7 @@ class OsmChange extends ChangeNotifier {
     if (other is! OsmChange) return false;
     if (element != other.element) return false;
     if (databaseId != other.databaseId) return false;
-    if (deleted != other.deleted) return false;
+    if (_deleted != other._deleted) return false;
     if (newLocation != other.newLocation) return false;
     if (!mapEquals(newTags, other.newTags)) return false;
     return true;

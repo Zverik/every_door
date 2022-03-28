@@ -72,7 +72,7 @@ class OsmApiHelper {
       int nodeId = -1;
       for (final change in changes) {
         if (!change.isModified) return;
-        final action = change.deleted
+        final action = change.hardDeleted
             ? 'delete'
             : change.isNew
                 ? 'create'
@@ -83,7 +83,7 @@ class OsmApiHelper {
         );
         if (idMap != null) idMap[el.id] = el;
         builder.element(action, nest: () {
-          el.toXML(builder, changeset: changeset, visible: !change.deleted);
+          el.toXML(builder, changeset: changeset, visible: !change.hardDeleted);
         });
       }
     });
@@ -154,7 +154,7 @@ class OsmApiHelper {
         change.element?.id.id ?? 0,
         change.element?.version ?? 1,
       );
-      el.toXML(builder, changeset: changeset, visible: !change.deleted);
+      el.toXML(builder, changeset: changeset, visible: !change.hardDeleted);
     });
     return builder.buildDocument().toXmlString();
   }
@@ -185,7 +185,7 @@ class OsmApiHelper {
             newVersion: 1,
           ));
         }
-      } else if (change.deleted) {
+      } else if (change.hardDeleted) {
         String objRef =
             '${kOsmElementTypeName[change.id.type]}/${change.id.id}';
         final resp = await http.delete(

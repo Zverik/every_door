@@ -4,25 +4,29 @@ const kMainKeys = <String>[
   'leisure', 'natural', 'waterway', 'man_made', 'power', 'aeroway',
   'aerialway', 'landuse', 'military', 'barrier', 'building', 'boundary',
 ];
+final kMainKeysSet = Set.of(kMainKeys);
 
 const kDisused = 'disused:';
+const kDeleted = 'was:';
 
 String? getMainKey(Map<String, String?> tags, [bool alsoDisused = true]) {
-  try {
-    final k = kMainKeys.firstWhere((k) => tags.containsKey(k) || (alsoDisused && tags.containsKey(kDisused + k)));
-    return tags.containsKey(k) ? k : kDisused + k;
-  } on StateError {
-    return null;
+  for (final k in kMainKeys) {
+    if (tags.containsKey(k))
+      return k;
+    if (alsoDisused && tags.containsKey(kDisused + k))
+      return kDisused + k;
+    if (alsoDisused && tags.containsKey(kDeleted + k))
+      return kDeleted + k;
   }
+  return null;
 }
 
-String _clearDisused(String key) =>
-    key.startsWith(kDisused) ? key.substring(kDisused.length) : key;
+String _clearPrefix(String key) => key.substring(key.indexOf(':') + 1);
 
 bool isAmenityTags(Map<String, String?> tags) {
   final key = getMainKey(tags);
   if (key == null) return false;
-  final k = _clearDisused(key);
+  final k = _clearPrefix(key);
   
   const kAllGoodKeys = <String>{'shop', 'craft', 'office', 'healthcare'};
   if (kAllGoodKeys.contains(k)) return true;
@@ -139,7 +143,7 @@ bool isAmenityTags(Map<String, String?> tags) {
 bool isGoodTags(Map<String, String?> tags) {
   final key = getMainKey(tags);
   if (key == null) return false;
-  final k = _clearDisused(key);
+  final k = _clearPrefix(key);
 
   const kAllGoodKeys = <String>{
     'shop',

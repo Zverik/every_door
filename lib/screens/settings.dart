@@ -1,7 +1,3 @@
-import 'dart:io' show Platform;
-import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:every_door/helpers/osm_oauth2_client.dart';
-import 'package:every_door/private.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/micromapping.dart';
 import 'package:every_door/providers/osm_auth.dart';
@@ -16,7 +12,6 @@ import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:intl/intl.dart';
 
 class SettingsPage extends ConsumerWidget {

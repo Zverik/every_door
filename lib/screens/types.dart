@@ -26,7 +26,6 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {updatePresets('');});
-    // updatePresets('');
   }
 
   updatePresets(String substring) async {

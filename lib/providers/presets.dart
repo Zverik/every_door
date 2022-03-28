@@ -312,7 +312,6 @@ class PresetProvider {
     final seenFields = <String>{};
     for (final row in results) {
       if (seenFields.contains(row['name'])) continue;
-      if (row['name'] == 'shop') continue;
       if (row['name'] == 'opening_hours/covid19') continue;
       seenFields.add(row['name'] as String);
       final options = await _getComboOptions(row);

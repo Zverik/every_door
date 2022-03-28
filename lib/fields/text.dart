@@ -37,23 +37,39 @@ class TextInputField extends StatefulWidget {
 }
 
 class _TextInputFieldState extends State<TextInputField> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.element[widget.field.key] ?? '');
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final value = widget.element[widget.field.key];
+    if (value != _controller.text) {
+      // Hopefully that's not the time when we type a letter in the field.
+      _controller.text = value ?? '';
+    }
 
     return Container(
       decoration: BoxDecoration(
-        // color: value == null ? kFieldColor : Colors.greenAccent,
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
-      child: TextFormField(
-        initialValue: value,
+      child: TextField(
+        controller: _controller,
         keyboardType: widget.field.keyboardType,
         textCapitalization: widget.field.capitalize
             ? TextCapitalization.sentences
             : TextCapitalization.none,
         decoration: InputDecoration(
-          // fillColor: value == null ? kFieldColor : Colors.greenAccent,
           // hintText: widget.field.placeholder,
           labelText: widget.field.icon != null ? widget.field.label : null,
         ),
