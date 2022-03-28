@@ -7,8 +7,10 @@ const kTagEmoji = <String, String>{
   'amenity=kindergarten': '🧸',
   'amenity=university': '🎓',
   'amenity=pharmacy': '💊',
-  'amenity=cafe': '🍴',
+  'amenity=cafe': '☕',
   'amenity=restaurant': '🍴',
+  'amenity=bar': '🍻',
+  'amenity=biergarten': '🍻',
   'amenity=fast_food': '🍔',
   'amenity=casino': '🎰',
   'amenity=bank': '🏦',
@@ -24,6 +26,8 @@ const kTagEmoji = <String, String>{
   'amenity=doctors': '🩺',
   'amenity=clinic': '🩺',
   'amenity=dentist': '🦷',
+  'amenity=bus_station': '🚏',
+  'amenity=police': '🚓',
   'amenity=bureau_de_change': '💱',
 
   'shop=convenience': '🛒',
@@ -53,6 +57,8 @@ const kTagEmoji = <String, String>{
   'shop=cosmetics': '💄',
   'shop=sports': '⚽',
   'shop=optician': '👓',
+  'shop=mall': '🛍️',
+  'shop=ice_cream': '🍨',
 
   'craft=electronics_repair': '🔌',
 
