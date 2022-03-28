@@ -24,6 +24,7 @@ const kTagEmoji = <String, String>{
   'amenity=doctors': '🩺',
   'amenity=clinic': '🩺',
   'amenity=dentist': '🦷',
+  'amenity=bureau_de_change': '💱',
 
   'shop=convenience': '🛒',
   'shop=supermarket': '🛒',
@@ -42,9 +43,18 @@ const kTagEmoji = <String, String>{
   'shop=car_repair': '🚗',
   'shop=car_parts': '🚗',
   'shop=bakery': '🥨',
+  'shop=pastry': '🍰',
   'shop=butcher': '🥩',
   'shop=furniture': '🛋️',
   'shop=mobile_phone': '📱',
+  'shop=tobacco': '🚬',
+  'shop=jewelry': '💎',
+  'shop=fashion_accessories': '📿',
+  'shop=cosmetics': '💄',
+  'shop=sports': '⚽',
+  'shop=optician': '👓',
+
+  'craft=electronics_repair': '🔌',
 
   'tourism=information': 'ℹ️',
   'tourism=hotel': '🏨',

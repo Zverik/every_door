@@ -8,6 +8,7 @@ _Not yet released_
 * Fixed OAuth error with a `FormatException`.
 * First upload after app start redirected to the login page.
 * Added address and floor filters.
+* Added a raw tag editor.
 * Pending changes can be deleted from the list by swiping left.
 * Now can delete polygon amenities (using `was:` prefix).
 * Moved "disused" and "missing" buttons below the fields.

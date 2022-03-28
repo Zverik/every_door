@@ -26,7 +26,10 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
   @override
   void initState() {
     super.initState();
-    loadAddresses();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      loadAddresses();
+      updateFloors();
+    });
   }
 
   loadAddresses() async {
@@ -37,12 +40,12 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
     });
   }
 
-  updateFloors(StreetAddress addr) async {
-    // TODO: when?
+  updateFloors() async {
+    final filter = ref.watch(poiFilterProvider);
     final osmData = ref.read(osmDataProvider);
     List<Floor> floors;
     try {
-      floors = await osmData.getFloorsAround(widget.location, addr);
+      floors = await osmData.getFloorsAround(widget.location, filter.address);
     } on Exception catch (e) {
       print(e);
       floors = [];

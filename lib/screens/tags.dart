@@ -49,7 +49,12 @@ class _TagEditorPageState extends State<TagEditorPage> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Table(
-              defaultColumnWidth: IntrinsicColumnWidth(),
+              defaultColumnWidth: const IntrinsicColumnWidth(),
+              columnWidths: const {
+                0: FixedColumnWidth(130.0),
+                1: FlexColumnWidth(),
+                2: IntrinsicColumnWidth(),
+              },
               defaultVerticalAlignment: TableCellVerticalAlignment.middle,
               children: [
                 for (final key in sortedKeys)
