@@ -17,6 +17,7 @@ _Not yet released_
 * Changed app name to "Every Door" from "every\_door".
 * Radio buttons stay in place on tap when they fit the screen.
 * Removed `building_area` and `opening_hours/covid19` fields.
+* Added more emoji for types (thanks @mfbehrens99).
 * Types now can be found by tag values.
 * It was possible to have an opening\_hours fragment with no weekdays.
 * German translation (thanks @mfbehrens99).

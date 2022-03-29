@@ -54,8 +54,9 @@ class _TextInputFieldState extends State<TextInputField> {
   @override
   Widget build(BuildContext context) {
     final value = widget.element[widget.field.key];
-    if (value != _controller.text) {
+    if (value != _controller.text.trim()) {
       // Hopefully that's not the time when we type a letter in the field.
+      // TODO: only update when page is back from inactive?
       _controller.text = value ?? '';
     }
 
