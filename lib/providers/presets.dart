@@ -341,22 +341,24 @@ class PresetProvider {
     return results.isEmpty ? null : results.first['label'] as String;
   }
 
-  Future<List<PresetField>> getStandardFields(Locale locale) async {
-    const List<String> stdFields = [
-      'name',
-      'address',
-      'level',
-      'opening_hours',
-      'wheelchair',
-      'wifi',
-      'payment',
-      'phone',
-      'website',
-      'email',
-      'operator',
-      'addr_door',
-      'description',
-    ];
+  Future<List<PresetField>> getStandardFields(Locale locale, bool isPOI) async {
+    final List<String> stdFields = isPOI
+        ? [
+            'name',
+            'address',
+            'level',
+            'opening_hours',
+            'wheelchair',
+            'wifi',
+            'payment',
+            'phone',
+            'website',
+            'email',
+            'operator',
+            'addr_door',
+            'description',
+          ]
+        : ['address', 'level'];
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
     final params = List.filled(stdFields.length, '?').join(',');
