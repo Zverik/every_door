@@ -89,66 +89,92 @@ class _OpeningHoursPageState extends State<OpeningHoursPage> {
       appBar: AppBar(
         title: Text(loc.fieldHoursTitle),
       ),
-      body: ListView(
-        children: [
-          for (int i = 0; i < hours.fragments.length; i++)
-            Card(
-              child: HoursFragmentEditor(
-                fragment: hours.fragments[i],
-                autofocus: i == 0,
-                onDelete: i == 0
-                    ? null
-                    : () {
-                        setState(() {
-                          hours.fragments.removeAt(i);
-                        });
-                      },
-                onChange: () {
-                  setState(() {
-                    // Remove duplicate weekdays from other fragments
-                    for (int j = 0; j < hours.fragments.length; j++) {
-                      if (i != j) {
-                        for (int wd = 0;
-                            wd < hours.fragments[i].weekdays.length;
-                            wd++) {
-                          if (hours.fragments[i].weekdays[wd]) {
-                            hours.fragments[j].weekdays[wd] = false;
-                            if (hours.fragments[j].isEmpty) {
-                              // Would not clear a fragment; reverse the change.
-                              hours.fragments[j].weekdays[wd] = true;
-                              hours.fragments[i].weekdays[wd] = false;
-                              return;
-                            }
+      body: hours.raw
+          ? buildRawHoursEditor(context)
+          : buildFragmentsEditor(context),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.done),
+        onPressed: () {
+          Navigator.pop(context, hours.buildHours());
+        },
+      ),
+    );
+  }
+
+  Widget buildRawHoursEditor(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: TextFormField(
+        initialValue: hours.hours,
+        textCapitalization: TextCapitalization.words,
+        keyboardType: TextInputType.visiblePassword,
+        autovalidateMode: AutovalidateMode.always,
+        style: kFieldTextStyle,
+        maxLines: 5,
+        onChanged: (value) {
+          setState(() {
+            hours.updateHours(value);
+          });
+        },
+        validator: (value) =>
+            value == null || HoursData.isValid(value) ? null : 'Wrong format',
+      ),
+    );
+  }
+
+  Widget buildFragmentsEditor(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    return ListView(
+      children: [
+        for (int i = 0; i < hours.fragments.length; i++)
+          Card(
+            child: HoursFragmentEditor(
+              fragment: hours.fragments[i],
+              autofocus: i == 0,
+              onDelete: i == 0
+                  ? null
+                  : () {
+                      setState(() {
+                        hours.fragments.removeAt(i);
+                      });
+                    },
+              onChange: () {
+                setState(() {
+                  // Remove duplicate weekdays from other fragments
+                  for (int j = 0; j < hours.fragments.length; j++) {
+                    if (i != j) {
+                      for (int wd = 0;
+                          wd < hours.fragments[i].weekdays.length;
+                          wd++) {
+                        if (hours.fragments[i].weekdays[wd]) {
+                          hours.fragments[j].weekdays[wd] = false;
+                          if (hours.fragments[j].isEmpty) {
+                            // Would not clear a fragment; reverse the change.
+                            hours.fragments[j].weekdays[wd] = true;
+                            hours.fragments[i].weekdays[wd] = false;
+                            return;
                           }
                         }
                       }
                     }
-                  });
-                  return true;
-                },
-              ),
-            ),
-          if (hours.haveMissingDays)
-            MaterialButton(
-              onPressed: () {
-                setState(() {
-                  hours.fragments.add(HoursFragment(
-                      hours.getMissingDays(), HoursInterval.full(), []));
+                  }
                 });
+                return true;
               },
-              child: Text(loc.fieldHoursAddFragment),
             ),
-          if (hours.fragments.length >= 2)
-            SizedBox(height: 80.0),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.done),
-        onPressed: () {
-          // print(buildHours());
-          Navigator.pop(context, hours.buildHours());
-        },
-      ),
+          ),
+        if (hours.haveMissingDays)
+          MaterialButton(
+            onPressed: () {
+              setState(() {
+                hours.fragments.add(HoursFragment(
+                    hours.getMissingDays(), HoursInterval.full(), []));
+              });
+            },
+            child: Text(loc.fieldHoursAddFragment),
+          ),
+        if (hours.fragments.length >= 2) SizedBox(height: 80.0),
+      ],
     );
   }
 }
