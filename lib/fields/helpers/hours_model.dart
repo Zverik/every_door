@@ -48,13 +48,15 @@ class HoursFragment {
 
 class HoursData {
   String hours;
+  late bool valid;
   List<HoursFragment> fragments;
 
   HoursData(this.hours) : fragments = [] {
+    valid = isValid(hours);
     _parseHours();
   }
 
-  bool get raw => fragments.isEmpty;
+  bool get raw => hours.isNotEmpty && fragments.isEmpty;
   bool get isEmpty => hours.isEmpty;
 
   static final kReHoursPart = RegExp(
@@ -117,7 +119,7 @@ class HoursData {
 
     final result = List.filled(7, false);
     for (final part in days.toLowerCase().split(',')) {
-      final interval = part.split('-');
+      final interval = part.split('-').map((d) => d.trim()).toList();
       if (interval.isEmpty || interval.first.trim().isEmpty) continue;
       if (interval.length == 1) {
         result[weekdays[interval.first]!] = true;
@@ -153,7 +155,7 @@ class HoursData {
   }
 
   String buildHours() {
-    if (fragments.isEmpty) return '';
+    if (fragments.isEmpty) return hours;
     if (fragments.first.is24_7) return '24/7';
 
     List<String> parts = [];
@@ -174,6 +176,16 @@ class HoursData {
       parts.add([weekdays, hoursStr].whereType<String>().join(' '));
     }
     return parts.join('; ');
+  }
+
+  updateHours(String newHours) {
+    hours = newHours.trim();
+    valid = isValid(hours);
+  }
+
+  static bool isValid(String hours) {
+    // TODO
+    return true;
   }
 
   List<bool> getMissingDays() {
