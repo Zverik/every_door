@@ -35,6 +35,27 @@ class ChangeListPage extends ConsumerWidget {
     return result;
   }
 
+  uploadChanges(BuildContext context, WidgetRef ref) async {
+    if (ref.read(authProvider) == null) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => OsmAccountPage()));
+      return;
+    }
+
+    ref.read(apiStatusProvider.notifier).state = ApiStatus.uploading;
+    try {
+      int count = await ref.read(osmApiProvider).uploadChanges(true);
+      AlertController.show(
+          'Uploaded', 'Sent $count changes to API.', TypeAlert.success);
+      Navigator.pop(context);
+    } on Exception catch (e) {
+      // TODO: prettify the message?
+      AlertController.show('Upload failed', e.toString(), TypeAlert.error);
+    } finally {
+      ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final changes = ref.watch(changesProvider);
@@ -84,25 +105,8 @@ class ChangeListPage extends ConsumerWidget {
           IconButton(
             onPressed: ref.read(apiStatusProvider) != ApiStatus.idle
                 ? null
-                : () async {
-                    if (login == null) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OsmAccountPage()));
-                      return;
-                    }
-                    try {
-                      int count =
-                          await ref.read(osmApiProvider).uploadChanges(true);
-                      AlertController.show('Uploaded',
-                          'Sent $count changes to API.', TypeAlert.success);
-                      Navigator.pop(context);
-                    } on Exception catch (e) {
-                      // TODO: prettify the message?
-                      AlertController.show(
-                          'Upload failed', e.toString(), TypeAlert.error);
-                    }
+                : () {
+                    uploadChanges(context, ref);
                   },
             icon: Icon(Icons.upload),
           ),

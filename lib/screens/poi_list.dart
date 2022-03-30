@@ -148,6 +148,26 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     }
   }
 
+  uploadChanges(BuildContext context) async {
+    if (ref.read(authProvider) == null) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => OsmAccountPage()));
+      return;
+    }
+
+    ref.read(apiStatusProvider.notifier).state = ApiStatus.uploading;
+    try {
+      int count = await ref.read(osmApiProvider).uploadChanges(true);
+      AlertController.show(
+          'Uploaded', 'Sent $count changes to API.', TypeAlert.success);
+    } on Exception catch (e) {
+      // TODO: prettify the message?
+      AlertController.show('Upload failed', e.toString(), TypeAlert.error);
+    } finally {
+      ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final micromapping = ref.watch(micromappingProvider);
@@ -187,23 +207,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
           if (hasChangesToUpload)
             IconButton(
               onPressed: () async {
-                if (ref.read(authProvider) == null) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => OsmAccountPage()));
-                  return;
-                }
-                try {
-                  int count =
-                      await ref.read(osmApiProvider).uploadChanges(true);
-                  AlertController.show('Uploaded',
-                      'Sent $count changes to API.', TypeAlert.success);
-                } on Exception catch (e) {
-                  // TODO: prettify the message?
-                  AlertController.show(
-                      'Upload failed', e.toString(), TypeAlert.error);
-                }
+                uploadChanges(context);
               },
               icon: Icon(Icons.upload, color: Colors.yellowAccent),
             ),
@@ -298,18 +302,18 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
             flex: micromapping ? 1 : 3,
             child: apiStatus != ApiStatus.idle
                 ? Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 20.0),
-                    Text(
-                      getApiStatusLoc(apiStatus, loc),
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ],
-                )
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 20.0),
+                      Text(
+                        getApiStatusLoc(apiStatus, loc),
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                    ],
+                  )
                 : PoiPane(amenities: nearestPOI, updateNearest: updateNearest),
           ),
         ],

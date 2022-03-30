@@ -2,7 +2,7 @@
 
 ## 0.1.1
 
-_Not yet released_
+_Released on 2022-03-30_
 
 * Map zooms dynamically to accomodate all amenities listed.
 * Fixed OAuth error with a `FormatException`.
