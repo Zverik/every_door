@@ -36,13 +36,13 @@ class ChangesProvider extends ChangeNotifier {
     if (!loaded) throw StateError("Changes were not loaded");
   }
 
-  OsmChange changeFor(OsmElement element) {
+  OsmChange changeFor(OsmElement element, [bool storeNew = true]) {
     _ensureLoaded();
     OsmChange? change = _changes[element.id];
     if (change != null) {
       if (element.version > change.element!.version) {
         change = change.mergeNewElement(element);
-        saveChange(change);
+        if (storeNew) saveChange(change);
       }
     }
     return change ?? OsmChange(element);

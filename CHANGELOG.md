@@ -10,6 +10,8 @@ _Not yet released_
 * Added address and floor filters.
 * Added a raw tag editor.
 * Pending changes can be deleted from the list by swiping left.
+* Uploading conflicts are resolved preemptively by downloading fresh data first.
+* Better display for downloading state.
 * Now can delete polygon amenities (using `was:` prefix).
 * Moved "disused" and "missing" buttons below the fields.
 * Removed the "missing" button for freshly created amenities.

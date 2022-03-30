@@ -57,7 +57,7 @@ const kOSMImagery = Imagery(
   url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
   attribution: '© OpenStreetMap contributors',
   minZoom: 0,
-  maxZoom: 19,
+  maxZoom: 18,
 );
 
 WMSTileLayerOptions _buildWMSOptions(String url, Imagery imagery) {

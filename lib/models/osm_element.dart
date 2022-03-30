@@ -46,11 +46,11 @@ class OsmId {
   }
 
   @override
-  bool operator ==(Object other) => other is OsmId && type == other.type && id == other.id;
+  bool operator ==(Object other) =>
+      other is OsmId && type == other.type && id == other.id;
 
   @override
   int get hashCode => type.hashCode + id.hashCode;
-
 }
 
 class OsmMember {
@@ -126,6 +126,24 @@ class OsmElement {
     );
   }
 
+  /// Updates location and reference properties from `old`
+  /// (When this element was downloaded fresh, but is missing some).
+  OsmElement updateMeta(OsmElement? old) {
+    if (old == null) return this;
+    return OsmElement(
+      id: id,
+      version: version,
+      timestamp: timestamp,
+      downloaded: downloaded,
+      tags: tags,
+      center: old.center ?? center,
+      bounds: old.bounds ?? bounds,
+      nodes: old.nodes ?? nodes,
+      members: old.members ?? members,
+      isMember: old.isMember,
+    );
+  }
+
   static const kTableName = 'osm_data';
   static const kTableFields = <String>[
     'osmid text primary key',
@@ -157,7 +175,10 @@ class OsmElement {
           : LatLng(data['lat'] / kCoordinatePrecision,
               data['lon'] / kCoordinatePrecision),
       nodes: nodes?.split(',').map((e) => int.parse(e)).toList(),
-      members: members?.whereType<String>().map((e) => OsmMember.fromString(e)).toList(),
+      members: members
+          ?.whereType<String>()
+          .map((e) => OsmMember.fromString(e))
+          .toList(),
     );
   }
 
@@ -242,13 +263,16 @@ class OsmElement {
         .join('|');
   }
 
+  String get idVersion => '${id}v$version';
+
   @override
   String toString() {
     return 'OsmElement($id v$version, $center, ${nodes?.length ?? members?.length} members, ${tagsToString(tags)})';
   }
 
   @override
-  bool operator ==(Object other) => other is OsmElement && id == other.id && version == other.version;
+  bool operator ==(Object other) =>
+      other is OsmElement && id == other.id && version == other.version;
 
   @override
   int get hashCode => id.hashCode + version.hashCode;

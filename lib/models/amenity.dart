@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter/foundation.dart';
@@ -205,7 +206,8 @@ class OsmChange extends ChangeNotifier {
       timestamp: DateTime.now(),
       tags: getFullTags(),
       isMember: element?.isMember ?? false,
-      center: location,
+      // overriding location call for toXML()
+      center: newLocation ?? element?.center,
       downloaded: DateTime.now(),
       nodes: element?.nodes,
       members: element?.members,
@@ -230,9 +232,19 @@ class OsmChange extends ChangeNotifier {
         // entered here has higher priority.
       }
     }
+
+    // Reset `newLocation` if the point was moved less than 1 meter away.
+    LatLng? location = newLocation;
+    if (location != null && newElement.center != null) {
+      final distance = DistanceEquirectangular();
+      if (distance(newElement.center!, location) < 1.0) {
+        location = null;
+      }
+    }
+
     return OsmChange(
       newElement,
-      newLocation: newLocation,
+      newLocation: location,
       newTags: newTags,
       hardDeleted: _deleted,
       error: error,

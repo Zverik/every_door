@@ -4,10 +4,10 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/private.dart';
 import 'package:every_door/providers/changes.dart';
-import 'package:every_door/providers/changeset_tags.dart';
+import 'package:every_door/helpers/changeset_tags.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:http/http.dart' as http;
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/osm_api_converters.dart';
@@ -55,14 +55,49 @@ class OsmApiHelper {
           .transform(FilterAmenities())
           .flatten()
           .toList();
-      print('Downloaded ${elements.length} elements');
       return elements;
     } finally {
       client.close();
     }
   }
 
-  String buildOsmChange(Iterable<OsmChange> changes, String? changeset, [Map<OsmId, OsmElement>? idMap]) {
+  Future<List<OsmElement>> elements(Iterable<OsmId> ids) async {
+    var client = http.Client();
+    try {
+      final List<OsmElement> elements = [];
+      for (final typ in OsmElementType.values) {
+        final typeIds = ids.where((id) => id.type == typ);
+        if (typeIds.isNotEmpty) {
+          final typesName = kOsmElementTypeName[typ]! + 's';
+          final url = Uri.https(kOsmEndpoint, '/api/0.6/$typesName', {
+            typesName: typeIds.map((e) => e.id).join(','),
+          });
+          var request = http.Request('GET', url);
+          var response = await client.send(request);
+          if (response.statusCode != 200) {
+            throw Exception(
+                'Failed to query OSM API: ${response.statusCode} $url');
+          }
+          final els = await response.stream
+              .transform(utf8.decoder)
+              .toXmlEvents()
+              .selectSubtreeEvents(
+                  (event) => kOsmTypes.containsKey(event.localName))
+              .toXmlNodes()
+              .transform(XmlToOsmConverter())
+              .flatten()
+              .toList();
+          elements.addAll(els);
+        }
+      }
+      return elements;
+    } finally {
+      client.close();
+    }
+  }
+
+  String buildOsmChange(Iterable<OsmChange> changes, String? changeset,
+      [Map<OsmId, OsmElement>? idMap]) {
     // TODO: Test that changing ways and relations works: that they have their members.
     final builder = XmlBuilder();
     builder.processing('xml', 'version="1.0"');
@@ -90,8 +125,8 @@ class OsmApiHelper {
     return builder.buildDocument().toXmlString();
   }
 
-  String _buildChangeset() {
-    final tags = _ref.read(changesetTagsProvider);
+  String _buildChangeset(List<OsmChange> changes) {
+    final tags = generateChangesetTags(changes);
     final builder = XmlBuilder();
     builder.processing('xml', 'version="1.0"');
     builder.element('osm', nest: () {
@@ -132,8 +167,8 @@ class OsmApiHelper {
         .toList();
   }
 
-  Future<List<UploadedElement>> _uploadEverything(
-      Iterable<OsmChange> changes, String changeset, Map<String, String> headers) async {
+  Future<List<UploadedElement>> _uploadEverything(Iterable<OsmChange> changes,
+      String changeset, Map<String, String> headers) async {
     final idMap = <OsmId, OsmElement>{};
     final resp = await http.post(
       Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset/upload'),
@@ -159,8 +194,8 @@ class OsmApiHelper {
     return builder.buildDocument().toXmlString();
   }
 
-  Future<List<UploadedElement>> _uploadOneByOne(
-      Iterable<OsmChange> allChanges, String changeset, Map<String, String> headers) async {
+  Future<List<UploadedElement>> _uploadOneByOne(Iterable<OsmChange> allChanges,
+      String changeset, Map<String, String> headers) async {
     final changes = _ref.read(changesProvider);
     List<UploadedElement> updates = [];
     for (final change in allChanges) {
@@ -175,7 +210,8 @@ class OsmApiHelper {
             await changes.setError(change, resp.body);
             print('Failed to create a node: ${resp.body}');
           } else {
-            throw OsmApiError(resp.statusCode, 'Failed to create a node: ${resp.body}');
+            throw OsmApiError(
+                resp.statusCode, 'Failed to create a node: ${resp.body}');
           }
         } else {
           await changes.setError(change, null);
@@ -200,7 +236,8 @@ class OsmApiHelper {
             await changes.setError(change, resp.body);
             print('Failed to delete $objRef: ${resp.body}');
           } else {
-            throw OsmApiError(resp.statusCode, 'Failed to delete $objRef: ${resp.body}');
+            throw OsmApiError(
+                resp.statusCode, 'Failed to delete $objRef: ${resp.body}');
           }
         } else {
           await changes.setError(change, null);
@@ -219,7 +256,8 @@ class OsmApiHelper {
             await changes.setError(change, resp.body);
             print('Failed to update $objRef: ${resp.body}');
           } else {
-            throw OsmApiError(resp.statusCode, 'Failed to update $objRef: ${resp.body}');
+            throw OsmApiError(
+                resp.statusCode, 'Failed to update $objRef: ${resp.body}');
           }
         } else {
           await changes.setError(change, null);
@@ -234,25 +272,69 @@ class OsmApiHelper {
     return updates;
   }
 
+  Future<List<OsmChange>> _updateUnderlyingElements(
+      List<OsmChange> changes) async {
+    final changesProv = _ref.read(changesProvider);
+    final elementsToUpdate = Map.fromEntries(changes
+        .where((e) => !e.isNew)
+        .map((e) => MapEntry(e.element!.id, e.element!)));
+
+    // Query for recent version of the elements to update.
+    final updated = await elements(elementsToUpdate.keys);
+
+    // Update their missing metadata from the old elements.
+    final Iterable<OsmElement> updatedElements =
+        updated.map((e) => e.updateMeta(elementsToUpdate[e.id]));
+
+    // Save them to the database.
+    await _ref.read(osmDataProvider).storeElements(updatedElements, null);
+
+    // Wrap the new elements with OsmChange, updating the latter from the new tags.
+    final List<OsmChange> updatedChanges =
+        updatedElements.map((e) => changesProv.changeFor(e)).toList();
+
+    // Some debugging code.
+    // print('Read and stored ${updated.length} elements from API.');
+    // print('Old ids: ${elementsToUpdate.values.map((e) => e.idVersion).join(", ")}');
+    // print('New ids: ${updatedChanges.map((e) => e.element!.idVersion).join(", ")}');
+
+    // Build the new `changes` list.
+    final updatedIds = Set.of(updatedChanges.map((e) => e.id));
+    updatedChanges
+        .addAll(changes.where((e) => e.isNew || !updatedIds.contains(e.id)));
+    changes = updatedChanges.where((e) => e.isModified).toList();
+
+    return changes;
+  }
+
   Future<int> uploadChanges([bool includeErrored = false]) async {
-    final changes = _ref.read(changesProvider).all(includeErrored);
+    List<OsmChange> changes = _ref.read(changesProvider).all(includeErrored);
     if (changes.isEmpty) return 0;
 
+    // Check whether we've authorized.
     final auth = _ref.read(authProvider.notifier);
-    if (!auth.authorized)
-      throw StateError('Log in first.');
+    if (!auth.authorized) throw StateError('Log in first.');
 
+    // Download elements to update the data and avoid version errors.
+    changes = await _updateUnderlyingElements(changes);
+    if (changes.isEmpty) return 0;
+
+    // TODO!!!!!! Now changes are disconnected from ids in the database
+
+    // Open a changeset and get its id.
     final headers = await auth.getAuthHeaders();
     final resp = await http.put(
       Uri.https(kOsmEndpoint, '/api/0.6/changeset/create'),
       headers: headers,
-      body: _buildChangeset(),
+      body: _buildChangeset(changes),
     );
     if (resp.statusCode != 200) {
-      throw OsmApiError(resp.statusCode, 'Failed to create changeset: ${resp.body}');
+      throw OsmApiError(
+          resp.statusCode, 'Failed to create changeset: ${resp.body}');
     }
     final changeset = resp.body.trim();
 
+    // Upload changes.
     try {
       List<UploadedElement> updates;
       try {
@@ -270,6 +352,7 @@ class OsmApiHelper {
       _updateElementsAfterUpload(updates);
       return updates.length;
     } finally {
+      // Close the changeset.
       await http.put(
         Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset/close'),
         headers: headers,

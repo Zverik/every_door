@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_auth.dart';
@@ -81,23 +82,28 @@ class ChangeListPage extends ConsumerWidget {
                   icon: Icon(Icons.delete_forever),
                 ),
           IconButton(
-            onPressed: () async {
-              if (login == null) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => OsmAccountPage()));
-                return;
-              }
-              try {
-                int count = await ref.read(osmApiProvider).uploadChanges(true);
-                AlertController.show('Uploaded', 'Sent $count changes to API.',
-                    TypeAlert.success);
-                Navigator.pop(context);
-              } on Exception catch (e) {
-                // TODO: prettify the message?
-                AlertController.show(
-                    'Upload failed', e.toString(), TypeAlert.error);
-              }
-            },
+            onPressed: ref.read(apiStatusProvider) != ApiStatus.idle
+                ? null
+                : () async {
+                    if (login == null) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OsmAccountPage()));
+                      return;
+                    }
+                    try {
+                      int count =
+                          await ref.read(osmApiProvider).uploadChanges(true);
+                      AlertController.show('Uploaded',
+                          'Sent $count changes to API.', TypeAlert.success);
+                      Navigator.pop(context);
+                    } on Exception catch (e) {
+                      // TODO: prettify the message?
+                      AlertController.show(
+                          'Upload failed', e.toString(), TypeAlert.error);
+                    }
+                  },
             icon: Icon(Icons.upload),
           ),
         ],

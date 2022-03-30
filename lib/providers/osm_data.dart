@@ -4,6 +4,7 @@ import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/floor.dart';
 import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/database.dart';
@@ -21,7 +22,6 @@ import 'package:proximity_hash/proximity_hash.dart';
 import 'package:sqflite/utils/utils.dart';
 
 final osmDataProvider = ChangeNotifierProvider((ref) => OsmDataHelper(ref));
-final downloadingDataProvider = StateProvider<bool>((ref) => false);
 
 class OsmDataHelper extends ChangeNotifier {
   final Ref _ref;
@@ -80,15 +80,17 @@ class OsmDataHelper extends ChangeNotifier {
   }
 
   /// Saves all the downloaded elements and the bounding box to the database.
-  Future storeElements(List<OsmElement> elements, LatLngBounds bounds) async {
+  Future storeElements(Iterable<OsmElement> elements, LatLngBounds? bounds) async {
     final database = await _ref.read(databaseProvider).database;
     await database.transaction((txn) async {
       // Delete objects in the area, to account for deletions.
-      await txn.delete(
-        OsmElement.kTableName,
-        where: 'lat >= ? and lat <= ? and lon >= ? and lon <= ?',
-        whereArgs: [bounds.south, bounds.north, bounds.west, bounds.east],
-      );
+      if (bounds != null) {
+        await txn.delete(
+          OsmElement.kTableName,
+          where: 'lat >= ? and lat <= ? and lon >= ? and lon <= ?',
+          whereArgs: [bounds.south, bounds.north, bounds.west, bounds.east],
+        );
+      }
       // Yeah, 1000 inserts, but what can we do. Too many arguments.
       for (final element in elements) {
         await txn.insert(
@@ -98,7 +100,8 @@ class OsmDataHelper extends ChangeNotifier {
         );
       }
     });
-    await _ref.read(downloadedAreaProvider).addArea(bounds);
+    if (bounds != null)
+      await _ref.read(downloadedAreaProvider).addArea(bounds);
     await _updateLength();
   }
 
@@ -243,16 +246,17 @@ class OsmDataHelper extends ChangeNotifier {
   }
 
   Future<List<OsmChange>> downloadMap(LatLngBounds bounds) async {
-    _ref.read(downloadingDataProvider.notifier).state = true;
+    _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
     try {
       final api = _ref.read(osmApiProvider);
       final List<OsmElement> elements = await api.map(bounds);
+      _ref.read(apiStatusProvider.notifier).state = ApiStatus.updatingDatabase;
       await storeElements(elements, bounds);
       AlertController.show('Download successful',
           'Downloaded ${elements.length} amenities.', TypeAlert.success);
       return _wrapInChange(elements);
     } finally {
-      _ref.read(downloadingDataProvider.notifier).state = false;
+      _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
   }
 

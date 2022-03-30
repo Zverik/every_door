@@ -4,6 +4,7 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/lifecycle.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
@@ -150,7 +151,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
   @override
   Widget build(BuildContext context) {
     final micromapping = ref.watch(micromappingProvider);
-    final downloading = ref.watch(downloadingDataProvider);
+    final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
     final hasFilter = ref.watch(poiFilterProvider).isNotEmpty;
     ref.listen(needMapUpdateProvider, (previous, next) {
@@ -176,7 +177,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
         actions: [
           if (!hasChangesToUpload)
             IconButton(
-              onPressed: downloading
+              onPressed: apiStatus != ApiStatus.idle
                   ? null
                   : () {
                       downloadAmenities(location);
@@ -267,7 +268,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
               },
             ),
           ),
-          if (areaStatus != AreaStatus.fresh && !downloading)
+          if (areaStatus != AreaStatus.fresh && apiStatus == ApiStatus.idle)
             GestureDetector(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 4.0),
@@ -295,8 +296,20 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
             ),
           Expanded(
             flex: micromapping ? 1 : 3,
-            child: downloading
-                ? Center(child: CircularProgressIndicator())
+            child: apiStatus != ApiStatus.idle
+                ? Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 20.0),
+                    Text(
+                      getApiStatusLoc(apiStatus, loc),
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ],
+                )
                 : PoiPane(amenities: nearestPOI, updateNearest: updateNearest),
           ),
         ],

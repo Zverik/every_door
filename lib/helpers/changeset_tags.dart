@@ -2,13 +2,9 @@ import 'dart:io';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:every_door/providers/changes.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final changesetTagsProvider = Provider.autoDispose((ref) {
-  final changes = ref.watch(changesProvider);
-
-  final comment = CommentGenerator().generateComment(changes.all());
+Map<String, String> generateChangesetTags(List<OsmChange> changes) {
+  final comment = CommentGenerator().generateComment(changes);
   print('Comment: $comment');
 
   String platform;
@@ -20,7 +16,7 @@ final changesetTagsProvider = Provider.autoDispose((ref) {
     'comment': comment,
     'created_by': '$kAppTitle $platform $kAppVersion',
   };
-});
+}
 
 class _TypeCount {
   final Map<String, int> created = {};
@@ -55,10 +51,10 @@ class _TypeCount {
   }
 }
 
-class TypePairCompareError extends Error {
+class _TypePairCompareError extends Error {
   final String message;
 
-  TypePairCompareError(this.message);
+  _TypePairCompareError(this.message);
 
   @override
   String toString() => 'TypePairCompareError($message)';
@@ -98,7 +94,7 @@ class _TypePair implements Comparable {
   /// These pairs are sorted in reverse: the most occurent is the first.
   int compareTo(other) {
     if (other is! _TypePair) {
-      throw TypePairCompareError('Got a ${other.runtimeType} "$other"');
+      throw _TypePairCompareError('Got a ${other.runtimeType} "$other"');
     }
     return other.count.compareTo(count);
   }
