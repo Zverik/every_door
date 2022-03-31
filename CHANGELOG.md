@@ -1,5 +1,17 @@
 # Every Door App Change Log
 
+## 0.1.2
+
+_Unreleased_
+
+* Map zooms dynamically only when location tracking is enabled.
+* When far away from your geolocation, the map size is increased.
+* Invalid phone numbers are now still accepted (e.g. 4-digit short numbers).
+* Checkmark hit area is increased vertically.
+* Vending machines are displayed now.
+* Better error catching when uploading data.
+* Fixed uploading modified relations.
+
 ## 0.1.1
 
 _Released on 2022-03-30_

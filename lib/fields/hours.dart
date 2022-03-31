@@ -306,7 +306,7 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
               ),
             ],
           ),
-        if (widget.fragment.breaks.length < 2 && !widget.fragment.is24)
+        if (widget.fragment.breaks.length < 4 && !widget.fragment.is24)
           MaterialButton(
             onPressed: () async {
               final result = await ClockEditor.showIntervalEditor(

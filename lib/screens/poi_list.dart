@@ -47,6 +47,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
   final mapController = AmenityMapController();
   late LifecycleEventHandler lifecycleObserver;
   AreaStatus areaStatus = AreaStatus.fresh;
+  bool farFromUser = false;
 
   @override
   void initState() {
@@ -91,6 +92,23 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
         [location.latitude.toString(), location.longitude.toString()]);
   }
 
+  updateFarFromUser() {
+    final gpsLocation = ref.read(geolocationProvider);
+    bool newFar;
+    if (gpsLocation != null) {
+      final distance = DistanceEquirectangular();
+      newFar = distance(location, gpsLocation) >= kFarDistance;
+    } else {
+      newFar = true;
+    }
+
+    if (newFar != farFromUser) {
+      setState(() {
+        farFromUser = newFar;
+      });
+    }
+  }
+
   downloadAmenities(LatLng location) async {
     final provider = ref.read(osmDataProvider);
     await provider.downloadAround(location);
@@ -104,8 +122,8 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     final filter = ref.read(poiFilterProvider);
     final location = this.location;
     // Query for amenities around the location.
-    List<OsmChange> data =
-        await provider.getElements(location, kVisibilityRadius);
+    final radius = farFromUser ? kFarVisibilityRadius : kVisibilityRadius;
+    List<OsmChange> data = await provider.getElements(location, radius);
     // Filter for amenities (or not amenities).
     data = data
         .where((e) =>
@@ -121,8 +139,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     // Remove points too far from the user.
     const distance = DistanceEquirectangular();
     data = data
-        .where((element) =>
-            distance(location, element.location) <= kVisibilityRadius)
+        .where((element) => distance(location, element.location) <= radius)
         .toList();
     // Sort by distance.
     data.sort((a, b) => distance(location, a.location)
@@ -134,7 +151,11 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     setState(() {
       nearestPOI = data;
     });
-    mapController.zoomToFit(data.map((e) => e.location));
+
+    // Zoom automatically only when tracking location.
+    if (ref.read(trackingProvider)) {
+      mapController.zoomToFit(data.map((e) => e.location));
+    }
   }
 
   updateAreaStatus() async {
@@ -263,6 +284,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
               onDragEnd: (pos) {
                 location = pos;
                 saveLocation();
+                updateFarFromUser();
                 updateNearest();
                 updateAreaStatus();
               },
@@ -299,7 +321,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
               },
             ),
           Expanded(
-            flex: micromapping ? 1 : 3,
+            flex: micromapping || farFromUser ? 1 : 3,
             child: apiStatus != ApiStatus.idle
                 ? Column(
                     mainAxisSize: MainAxisSize.max,

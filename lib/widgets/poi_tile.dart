@@ -81,12 +81,21 @@ class PoiTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (onToggleCheck != null)
-            Center(
-              child: IconButton(
-                icon: Icon(amenity.isOld ? Icons.check : Icons.check_circle),
-                color: amenity.isOld ? Colors.black : Colors.green,
-                iconSize: 30.0,
-                onPressed: onToggleCheck,
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: onToggleCheck,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      amenity.isOld ? Icons.check : Icons.check_circle,
+                      color: amenity.isOld ? Colors.black : Colors.green,
+                      size: 30.0,
+                    ),
+                  ),
+                ],
               ),
             ),
           Expanded(
@@ -104,7 +113,12 @@ class PoiTile extends StatelessWidget {
               child: RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: title, style: !amenity.isDisused ? null : TextStyle(decoration: TextDecoration.lineThrough)),
+                    TextSpan(
+                        text: title,
+                        style: !amenity.isDisused
+                            ? null
+                            : TextStyle(
+                                decoration: TextDecoration.lineThrough)),
                     if (present.isNotEmpty) ...[
                       TextSpan(text: '\n'),
                       TextSpan(text: present),

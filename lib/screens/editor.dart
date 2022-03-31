@@ -183,7 +183,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       ],
                       buildTopButtons(context),
                       SizedBox(height: 10.0),
-                      if (moreFields.isNotEmpty)
+                      if (moreFields.isNotEmpty) ...[
                         ExpansionTile(
                           title: Text(loc.editorMoreFields),
                           initiallyExpanded: false,
@@ -191,6 +191,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                             buildFields(moreFields),
                           ],
                         ),
+                        SizedBox(height: 30.0),
+                      ],
                     ],
                   ),
                 ),

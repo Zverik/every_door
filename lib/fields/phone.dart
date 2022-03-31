@@ -63,23 +63,27 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
   }
 
   String? format(String value) {
-    if (value.length < 5) return null;
+    if (value.length < 4) return null;
     final kDigits = '0123456789'.split('');
     String digits = value.characters.where((p0) => kDigits.contains(p0)).string;
-    if (value.startsWith('+') || digits.length >= 11) {
-      final res = PhoneNumber.fromRaw('+$digits');
-      return res.validate()
-          ? '+${res.countryCode} ${res.getFormattedNsn()}'
-          : null;
+    try {
+      if (value.startsWith('+') || digits.length >= 11) {
+        final res = PhoneNumber.fromRaw('+$digits');
+        return res.validate()
+            ? '+${res.countryCode} ${res.getFormattedNsn()}'
+            : null;
+      }
+      final res = countryIso != null
+          ? PhoneNumber.fromIsoCode(countryIso!, value)
+          : PhoneNumber.fromRaw(value);
+      if (!res.validate()) return null;
+      if (!value.contains('-')) {
+        value = res.getFormattedNsn();
+      }
+      return '+${res.countryCode} ${res.getFormattedNsn()}';
+    } on PhoneNumberException {
+      return null;
     }
-    final res = countryIso != null
-        ? PhoneNumber.fromIsoCode(countryIso!, value)
-        : PhoneNumber.fromRaw(value);
-    if (!res.validate()) return null;
-    if (!value.contains('-')) {
-      value = res.getFormattedNsn();
-    }
-    return '+${res.countryCode} ${res.getFormattedNsn()}';
   }
 
   @override
@@ -99,8 +103,8 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
                   ? 'Wrong phone'
                   : null,
           onFieldSubmitted: (value) {
-            final phone = format(value.trim());
-            if (phone == null) return;
+            value = value.trim();
+            String phone = format(value) ?? value;
             _controller.clear();
             if (numbers.contains(phone)) return;
             setState(() {

@@ -232,7 +232,7 @@ class OsmElement {
         });
         members?.forEach((m) {
           builder.element('member', nest: () {
-            builder.attribute('type', kOsmElementTypeName[m.type]!);
+            builder.attribute('type', kOsmElementTypeName[m.id.type]!);
             builder.attribute('ref', m.id);
             builder.attribute('role', m.role ?? '');
           });

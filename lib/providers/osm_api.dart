@@ -17,7 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final osmApiProvider = Provider((ref) => OsmApiHelper(ref));
 
-class OsmApiError extends Error {
+class OsmApiError implements Exception {
   final int code;
   final String message;
 
