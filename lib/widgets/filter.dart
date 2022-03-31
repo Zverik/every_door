@@ -3,7 +3,6 @@ import 'package:every_door/fields/helpers/radio_field.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/filter.dart';
 import 'package:every_door/models/floor.dart';
-import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:flutter/material.dart';
@@ -69,13 +68,16 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
         children: [
           Text('Filter by address:', style: kFieldTextStyle),
           RadioField(
-            options: nearestAddresses.map((e) => e.toString()).toList(),
-            value: filter.address?.toString(),
+            options: nearestAddresses.map((e) => e.toString()).toList() + ['empty'],
+            value: (filter.address?.isEmpty ?? false) ? 'empty' : filter.address?.toString(),
             onChange: (value) {
               if (value == null) {
                 // On clear, clearing all fields.
                 ref.read(poiFilterProvider.state).state =
                     PoiFilter(includeNoData: filter.includeNoData);
+              } else if (value == 'empty') {
+                ref.read(poiFilterProvider.state).state =
+                    filter.copyWith(address: StreetAddress.empty());
               } else {
                 final addr = nearestAddresses
                     .firstWhere((element) => element.toString() == value);
@@ -115,19 +117,15 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
               }
             },
           ),
-          /*Row(
-            children: [
-              Switch(
-                value: filter.includeNoData,
-                onChanged: (value) {
-                  if (filter.isNotEmpty)
-                    ref.read(poiFilterProvider.state).state =
-                        filter.copyWith(includeNoData: value);
-                },
-              ),
-              Text('Include no data'),
-            ],
-          ),*/
+          SizedBox(height: 10.0),
+          SwitchListTile(
+            value: filter.notChecked,
+            onChanged: (value) {
+              ref.read(poiFilterProvider.state).state =
+                  filter.copyWith(notChecked: value);
+            },
+            title: Text('Only non-confirmed amenities', style: kFieldTextStyle),
+          ),
         ],
       ),
     );

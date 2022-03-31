@@ -56,16 +56,28 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
         widget.location ?? LatLng(kDefaultLocation[0], kDefaultLocation[1]);
     if (widget.location == null) restoreLocation();
 
-    lifecycleObserver = LifecycleEventHandler(detached: () async {
-      try {
-        if (kUploadOnClose) {
-          final provider = ref.read(osmApiProvider);
-          await provider.uploadChanges();
+    lifecycleObserver = LifecycleEventHandler(
+      detached: () async {
+        try {
+          if (kUploadOnClose) {
+            final provider = ref.read(osmApiProvider);
+            await provider.uploadChanges();
+          }
+        } on Exception catch (e) {
+          print(e); // No point in catching anything
         }
-      } on Exception catch (e) {
-        print(e); // No point in catching anything
-      }
-    });
+      },
+      resumed: () async {
+        // Update nearest POI.
+        if (!ref.read(trackingProvider)) return;
+        final newLocation = ref.read(geolocationProvider);
+        if (newLocation != null) {
+          location = newLocation;
+          updateNearest();
+          updateAreaStatus();
+        }
+      },
+    );
     WidgetsBinding.instance?.addObserver(lifecycleObserver);
   }
 
@@ -134,7 +146,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
         .toList();
     // Apply the building filter.
     if (filter.isNotEmpty) {
-      data = data.where((e) => filter.matches(e.getFullTags())).toList();
+      data = data.where((e) => filter.matches(e)).toList();
     }
     // Remove points too far from the user.
     const distance = DistanceEquirectangular();
@@ -249,7 +261,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                 builder: (BuildContext context) {
                   return Container(
                     color: Colors.white,
-                    height: 200.0,
+                    height: 250.0,
                     padding: EdgeInsets.all(15.0),
                     child: PoiFilterPane(location),
                   );

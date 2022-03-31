@@ -9,7 +9,6 @@ import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +29,6 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   List<OsmChange> nearestPOI = [];
   final controller = MapController();
   late final StreamSubscription<MapEvent> mapSub;
-  late final StreamSubscription<Position> locSub;
 
   @override
   void initState() {
@@ -52,7 +50,6 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   @override
   void dispose() {
     mapSub.cancel();
-    // locSub.cancel();
     super.dispose();
   }
 
@@ -65,7 +62,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
         await provider.getElements(location, kVisibilityRadius);
     // Apply the building filter.
     if (filter.isNotEmpty) {
-      data = data.where((e) => filter.matches(e.getFullTags())).toList();
+      data = data.where((e) => filter.matches(e)).toList();
     }
     // Update the map.
     setState(() {

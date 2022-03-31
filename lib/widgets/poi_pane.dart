@@ -1,6 +1,7 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/changes.dart';
+import 'package:every_door/providers/poi_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
@@ -29,6 +30,7 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     var tiles = widget.amenities.asMap().entries.toList();
+    final hasFilter = ref.watch(poiFilterProvider).isNotEmpty;
     // tiles = reorderIntoColumns(tiles);
 
     return widget.amenities.isEmpty
@@ -36,7 +38,9 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
             child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              loc.tileNothingAround(kVisibilityRadius),
+              loc.tileNothingAround(kVisibilityRadius) +
+                  '\n' +
+                  (hasFilter ? loc.tileDragOrUnfilter : loc.tileDragTheMap),
               style: TextStyle(fontSize: 18.0),
             ),
           ))

@@ -7,7 +7,15 @@ class StreetAddress {
   final String? street;
   final String? place;
 
-  StreetAddress({this.housenumber, this.housename, this.unit, this.street, this.place});
+  StreetAddress(
+      {this.housenumber, this.housename, this.unit, this.street, this.place});
+
+  StreetAddress.empty()
+      : housename = null,
+        housenumber = null,
+        unit = null,
+        street = null,
+        place = null;
 
   factory StreetAddress.fromTags(Map<String, String> tags) {
     return StreetAddress(
@@ -19,7 +27,9 @@ class StreetAddress {
     );
   }
 
-  bool get isEmpty => (housenumber == null && housename == null) || (street == null && place == null);
+  bool get isEmpty =>
+      (housenumber == null && housename == null) ||
+      (street == null && place == null);
   bool get isNotEmpty => !isEmpty;
 
   setTags(OsmChange element) {
@@ -28,8 +38,7 @@ class StreetAddress {
       element['addr:housenumber'] = housenumber;
     else
       element['addr:housename'] = housename;
-    if (unit != null)
-      element['addr:unit'] = unit;
+    if (unit != null) element['addr:unit'] = unit;
     if (street != null)
       element['addr:street'] = street;
     else
@@ -44,12 +53,21 @@ class StreetAddress {
   @override
   bool operator ==(Object other) {
     if (other is! StreetAddress) return false;
-    return housenumber == other.housenumber && housename == other.housename && unit == other.unit && street == other.street && place == other.place;
+    if (isEmpty && other.isEmpty) return true;
+    return housenumber == other.housenumber &&
+        housename == other.housename &&
+        unit == other.unit &&
+        street == other.street &&
+        place == other.place;
   }
 
   @override
-  int get hashCode => (housenumber ?? housename ?? '').hashCode + (street ?? place ?? '').hashCode + unit.hashCode;
+  int get hashCode =>
+      (housenumber ?? housename ?? '').hashCode +
+      (street ?? place ?? '').hashCode +
+      unit.hashCode;
 
   @override
-  String toString() => '${housenumber ?? housename}${unit != null ? " u.$unit" : ""}, ${street ?? place}';
+  String toString() =>
+      '${housenumber ?? housename}${unit != null ? " u.$unit" : ""}, ${street ?? place}';
 }
