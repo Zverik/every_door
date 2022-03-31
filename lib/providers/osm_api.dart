@@ -70,7 +70,7 @@ class OsmApiHelper {
         if (typeIds.isNotEmpty) {
           final typesName = kOsmElementTypeName[typ]! + 's';
           final url = Uri.https(kOsmEndpoint, '/api/0.6/$typesName', {
-            typesName: typeIds.map((e) => e.id).join(','),
+            typesName: typeIds.map((e) => e.ref).join(','),
           });
           var request = http.Request('GET', url);
           var response = await client.send(request);
@@ -113,7 +113,7 @@ class OsmApiHelper {
                 ? 'create'
                 : 'modify';
         final OsmElement el = change.toElement(
-          change.element?.id.id ?? nodeId--,
+          change.element?.id.ref ?? nodeId--,
           change.element?.version ?? 1,
         );
         if (idMap != null) idMap[el.id] = el;
@@ -186,7 +186,7 @@ class OsmApiHelper {
     builder.processing('xml', 'version="1.0"');
     builder.element('osm', nest: () {
       final OsmElement el = change.toElement(
-        change.element?.id.id ?? 0,
+        change.element?.id.ref ?? 0,
         change.element?.version ?? 1,
       );
       el.toXML(builder, changeset: changeset, visible: !change.hardDeleted);
@@ -223,7 +223,7 @@ class OsmApiHelper {
         }
       } else if (change.hardDeleted) {
         String objRef =
-            '${kOsmElementTypeName[change.id.type]}/${change.id.id}';
+            '${kOsmElementTypeName[change.id.type]}/${change.id.ref}';
         final resp = await http.delete(
           Uri.https(kOsmEndpoint, '/api/0.6/$objRef'),
           headers: headers,
@@ -245,7 +245,7 @@ class OsmApiHelper {
         }
       } else if (change.isModified) {
         String objRef =
-            '${kOsmElementTypeName[change.id.type]}/${change.id.id}';
+            '${kOsmElementTypeName[change.id.type]}/${change.id.ref}';
         final resp = await http.put(
           Uri.https(kOsmEndpoint, '/api/0.6/$objRef'),
           headers: headers,
@@ -263,7 +263,7 @@ class OsmApiHelper {
           await changes.setError(change, null);
           updates.add(UploadedElement(
             change.element!,
-            newId: change.id.id, // So it doesn't register as deleted
+            newId: change.id.ref, // So it doesn't register as deleted
             newVersion: int.parse(resp.body.trim()),
           ));
         }

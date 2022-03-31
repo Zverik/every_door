@@ -17,9 +17,9 @@ const kOsmElementTypeName = <OsmElementType, String>{
 
 class OsmId {
   final OsmElementType type;
-  final int id;
+  final int ref;
 
-  const OsmId(this.type, this.id);
+  const OsmId(this.type, this.ref);
 
   factory OsmId.fromString(String s) {
     OsmElementType typ;
@@ -42,15 +42,15 @@ class OsmId {
       typ = 'w';
     else
       typ = 'r';
-    return '$typ$id';
+    return '$typ$ref';
   }
 
   @override
   bool operator ==(Object other) =>
-      other is OsmId && type == other.type && id == other.id;
+      other is OsmId && type == other.type && ref == other.ref;
 
   @override
-  int get hashCode => type.hashCode + id.hashCode;
+  int get hashCode => type.hashCode + ref.hashCode;
 }
 
 class OsmMember {
@@ -208,7 +208,7 @@ class OsmElement {
 
   toXML(XmlBuilder builder, {String? changeset, bool visible = true}) {
     builder.element(kOsmElementTypeName[id.type]!, nest: () {
-      builder.attribute('id', id.id);
+      builder.attribute('id', id.ref);
       builder.attribute('version', version);
       builder.attribute('visible', visible ? 'true' : 'false');
       if (changeset != null) builder.attribute('changeset', changeset);
@@ -233,7 +233,7 @@ class OsmElement {
         members?.forEach((m) {
           builder.element('member', nest: () {
             builder.attribute('type', kOsmElementTypeName[m.id.type]!);
-            builder.attribute('ref', m.id.id);
+            builder.attribute('ref', m.id.ref);
             builder.attribute('role', m.role ?? '');
           });
         });

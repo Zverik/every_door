@@ -227,7 +227,7 @@ class FlattenOsmGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
     for (final el in input) {
       if (el.type == OsmElementType.node) {
         if (el.center != null) {
-          nodeLocations[el.id.id] = el.center!;
+          nodeLocations[el.id.ref] = el.center!;
           result.add(el);
         }
       } else if (el.type == OsmElementType.way) {
@@ -246,8 +246,8 @@ class FlattenOsmGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
           var bounds = LatLngBounds();
           for (final m in el.members!) {
             if (m.type == OsmElementType.node &&
-                nodeLocations.containsKey(m.id.id)) {
-              bounds.extend(nodeLocations[m.id.id]);
+                nodeLocations.containsKey(m.id.ref)) {
+              bounds.extend(nodeLocations[m.id.ref]);
             } else if (m.type == OsmElementType.way &&
                 wayBounds.containsKey(m.id)) {
               bounds.extendBounds(wayBounds[m.id]!);

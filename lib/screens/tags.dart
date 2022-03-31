@@ -36,7 +36,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
   Widget build(BuildContext context) {
     String title = widget.amenity.isNew
         ? 'New point'
-        : '${kOsmElementTypeName[widget.amenity.id.type]} ${widget.amenity.id.id}';
+        : '${kOsmElementTypeName[widget.amenity.id.type]} ${widget.amenity.id.ref}';
     final sortedKeys = List.of(keys);
     sortedKeys.sort();
 
