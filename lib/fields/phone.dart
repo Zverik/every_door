@@ -37,6 +37,7 @@ class PhoneInputField extends StatefulWidget {
 
 class _PhoneInputFieldState extends State<PhoneInputField> {
   late final TextEditingController _controller;
+  late final FocusNode _focus;
   late final List<String> numbers;
   late final String? countryIso;
 
@@ -44,6 +45,13 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
+    _focus = FocusNode();
+    _focus.addListener(() {
+      if (!_focus.hasFocus) {
+        submitPhone(_controller.text);
+      }
+    });
+    
     numbers = (widget.element.getContact('phone') ?? '')
         .split(';')
         .map((e) => e.trim())
@@ -58,6 +66,7 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
 
   @override
   void dispose() {
+    _focus.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -86,6 +95,18 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
     }
   }
 
+  submitPhone(String value) {
+    value = value.trim();
+    if (value.length < 4) return null;
+    String phone = format(value) ?? value;
+    _controller.clear();
+    if (numbers.contains(phone)) return;
+    setState(() {
+      numbers.add(phone);
+      widget.element.setContact('phone', numbers.join('; '));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -93,6 +114,7 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
       children: [
         TextFormField(
           controller: _controller,
+          focusNode: _focus,
           keyboardType: TextInputType.phone,
           decoration: InputDecoration(
             labelText: widget.field.label,
@@ -102,16 +124,7 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
               value != null && value.isNotEmpty && format(value.trim()) == null
                   ? 'Wrong phone'
                   : null,
-          onFieldSubmitted: (value) {
-            value = value.trim();
-            String phone = format(value) ?? value;
-            _controller.clear();
-            if (numbers.contains(phone)) return;
-            setState(() {
-              numbers.add(phone);
-              widget.element.setContact('phone', numbers.join('; '));
-            });
-          },
+          onFieldSubmitted: submitPhone,
         ),
         for (final number in numbers)
           Padding(

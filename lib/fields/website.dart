@@ -44,6 +44,11 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
     _controller = TextEditingController();
     _provider = websiteProviders.first;
     _fieldFocus = FocusNode();
+    _fieldFocus.addListener(() {
+      if (!_fieldFocus.hasFocus) {
+        submitWebsite(_controller.text);
+      }
+    });
   }
 
   @override
@@ -56,6 +61,15 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
   String cutEllipsis(String value, int maxLength) {
     if (value.length <= maxLength) return value;
     return value.substring(0, maxLength - 2) + '...';
+  }
+
+  submitWebsite(String value) {
+    value = value.trim();
+    if (value.isEmpty || !_provider.isValid(value)) return;
+    _controller.clear();
+    setState(() {
+      _provider.setValue(widget.element, _provider.format(value));
+    });
   }
 
   @override
@@ -145,14 +159,7 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
                 focusNode: _fieldFocus,
                 keyboardType: TextInputType.url,
                 decoration: InputDecoration(hintText: _provider.label),
-                onSubmitted: (value) {
-                  value = value.trim();
-                  if (value.isEmpty || !_provider.isValid(value)) return;
-                  _controller.clear();
-                  setState(() {
-                    _provider.setValue(widget.element, _provider.format(value));
-                  });
-                },
+                onSubmitted: submitWebsite,
               ),
             )
           ],

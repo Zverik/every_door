@@ -27,7 +27,7 @@ bool isAmenityTags(Map<String, String?> tags) {
   final key = getMainKey(tags);
   if (key == null) return false;
   final k = _clearPrefix(key);
-  
+
   const kAllGoodKeys = <String>{'shop', 'craft', 'office', 'healthcare'};
   if (kAllGoodKeys.contains(k)) return true;
 
@@ -87,6 +87,9 @@ bool isAmenityTags(Map<String, String?> tags) {
     };
     return !wrongAmenities.contains(v);
   } else if (k == 'tourism') {
+    if (v == 'information') {
+      return <String>{'office', 'visitor_centre'}.contains(tags['information']);
+    }
     const wrongTourism = <String>{'attraction', 'viewpoint', 'artwork'};
     return !wrongTourism.contains(v);
   } else if (k == 'leisure') {

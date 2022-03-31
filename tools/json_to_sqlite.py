@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import json
+import os
+import re
+import requests
 import sqlite3
 import sys
-import os
 import unicodedata
-import requests
 
 
 def open_or_download(path, filename, from_nsi=False):
@@ -224,18 +225,28 @@ def import_translations(cur, path):
 
         def build_terms(lang, data):
             for name, row in data.items():
-                terms = set([normalize(s) for s in row.get('terms', '').split(',')])
-                nameterm = normalize(row.get('name'))
-                terms.discard(nameterm)
+                terms = set([normalize(s) for s in re.split(r'\W+', row.get('terms', '')) if s])
+                nameterms = set([normalize(s) for s in re.split(r'\W+', row.get('name', '')) if s])
+                terms -= nameterms
                 for term in terms:
                     if term:
                         yield lang, term, name, 1
-                if nameterm:
-                    yield lang, nameterm, name, 2
+                for term in nameterms:
+                    if term:
+                        yield lang, term, name, 2
 
         cur.executemany(
             "insert into preset_terms (lang, term, preset_name, score) values (?, ?, ?, ?)",
             build_terms(lang, presets))
+
+    # Clean up indices
+    cur.execute(
+        "with t as (select lang, term from preset_terms group by 1, 2 having count(*) > 20) "
+        "delete from preset_terms as p "
+        "where exists (select * from t where p.lang = t.lang and p.term = t.term) "
+        "or (lang not in ('ja', 'zh-CN', 'zh-TW', 'zh-HK') and length(term) <= 2)"
+    )
+
     cur.execute("create index field_tran_idx on field_tran (field_name)")
     cur.execute("create index preset_tran_idx on preset_tran (preset_name)")
     cur.execute("create index preset_terms_idx on preset_terms (term collate nocase)")
@@ -308,5 +319,7 @@ if __name__ == '__main__':
     import_presets(cur, git_path)
     import_translations(cur, git_path)
     import_nsi(cur, git_path)
+    db.commit()
+    cur.execute('vacuum')
     db.commit()
     db.close()
