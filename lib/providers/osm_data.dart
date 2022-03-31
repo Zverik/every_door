@@ -254,7 +254,10 @@ class OsmDataHelper extends ChangeNotifier {
       await storeElements(elements, bounds);
       AlertController.show('Download successful',
           'Downloaded ${elements.length} amenities.', TypeAlert.success);
-      return _wrapInChange(elements);
+
+      // No need to wrap in changes, since we don't use the result anyway.
+      // return _wrapInChange(elements);
+      return elements.map((e) => OsmChange(e)).toList();
     } finally {
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }

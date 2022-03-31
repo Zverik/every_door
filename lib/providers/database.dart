@@ -26,7 +26,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       kDatabaseName,
-      version: 1,
+      version: 2,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,
     );
@@ -51,7 +51,7 @@ class DatabaseHelper {
   void upgradeDatabase(
       Database database, int oldVersion, int newVersion) async {
     if (newVersion >= 2 && oldVersion < 2) {
-      // Upgrade when needed.
+      await database.execute("alter table ${OsmElement.kTableName} add column is_member integer");
     }
   }
 }

@@ -37,6 +37,7 @@ bool isAmenityTags(Map<String, String?> tags) {
       'parking',
       'bench',
       'parking_space',
+      'clothes_dryer',
       'waste_basket',
       'bicycle_parking',
       'shelter',

@@ -171,6 +171,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                   child: ListView(
                     children: [
                       if (amenity.canDelete) buildMap(context),
+                      if (!amenity.canDelete) SizedBox(height: 10.0),
                       if (stdFields.isNotEmpty) ...[
                         buildFields(stdFields, 50),
                         SizedBox(height: 10.0),

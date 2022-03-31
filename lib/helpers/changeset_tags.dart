@@ -5,7 +5,6 @@ import 'package:every_door/models/amenity.dart';
 
 Map<String, String> generateChangesetTags(List<OsmChange> changes) {
   final comment = CommentGenerator().generateComment(changes);
-  print('Comment: $comment');
 
   String platform;
   if (Platform.isAndroid) platform = 'android';

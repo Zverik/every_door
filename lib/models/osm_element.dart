@@ -156,6 +156,7 @@ class OsmElement {
     'downloaded integer',
     'nodes text',
     'members text',
+    'is_member integer',
   ];
 
   factory OsmElement.fromJson(Map<String, dynamic> data) {
@@ -179,6 +180,7 @@ class OsmElement {
           ?.whereType<String>()
           .map((e) => OsmMember.fromString(e))
           .toList(),
+      isMember: data['is_member'] == 1,
     );
   }
 
@@ -203,6 +205,7 @@ class OsmElement {
       'tags': json.encode(tags),
       'nodes': nodes?.join(','),
       'members': json.encode(members?.map((e) => e.toString()).toList()),
+      'is_member': isMember ? 1 : 0,
     };
   }
 

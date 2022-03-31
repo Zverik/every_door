@@ -338,8 +338,9 @@ class OsmChange extends ChangeNotifier {
 
     if (clearDisused) {
       final mainKey = _mainKey;
-      if (mainKey != null && mainKey.startsWith(kDisused)) {
-        result[mainKey.substring(kDisused.length)] = result[mainKey]!;
+      final pos = mainKey?.indexOf(':');
+      if (mainKey != null && pos != null && pos > 0) {
+        result[mainKey.substring(pos + 1)] = result[mainKey]!;
         result.remove(mainKey);
       }
     }

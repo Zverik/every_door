@@ -34,6 +34,7 @@ class UploadedElementRef {
         int.tryParse(node.getAttribute('new_version') ?? ''),
       );
     }
+    return null;
   }
 }
 

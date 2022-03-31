@@ -2,7 +2,7 @@
 
 ## 0.1.2
 
-_Unreleased_
+_Released on 2022-03-31_
 
 * Map zooms dynamically only when location tracking is enabled.
 * When far away from your geolocation, the map size is increased.
@@ -14,6 +14,7 @@ _Unreleased_
 * Checkmark hit area is increased vertically.
 * Vending machines are displayed now, guideposts are not.
 * When restoring the app, POI are updated now.
+* App did not remember an object was referenced by another.
 * Better error catching when uploading data.
 * Fixed uploading modified relations.
 
