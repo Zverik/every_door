@@ -1,7 +1,11 @@
 import 'dart:async';
 
+import 'package:every_door/constants.dart';
+import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/osm_data.dart';
+import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -23,6 +27,7 @@ class MapChooserPage extends ConsumerStatefulWidget {
 class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   late LatLng location;
   late LatLng center;
+  List<OsmChange> nearestPOI = [];
   final controller = MapController();
   late final StreamSubscription<MapEvent> mapSub;
   late final StreamSubscription<Position> locSub;
@@ -37,8 +42,11 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
         setState(() {
           center = event.targetCenter;
         });
+      } else if (event is MapEventMoveEnd) {
+        updateNearest();
       }
     });
+    updateNearest();
   }
 
   @override
@@ -46,6 +54,23 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
     mapSub.cancel();
     // locSub.cancel();
     super.dispose();
+  }
+
+  updateNearest() async {
+    final provider = ref.read(osmDataProvider);
+    final filter = ref.read(poiFilterProvider);
+    final location = center;
+    // Query for amenities around the location.
+    List<OsmChange> data =
+        await provider.getElements(location, kVisibilityRadius);
+    // Apply the building filter.
+    if (filter.isNotEmpty) {
+      data = data.where((e) => filter.matches(e.getFullTags())).toList();
+    }
+    // Update the map.
+    setState(() {
+      nearestPOI = data;
+    });
   }
 
   @override
@@ -100,6 +125,22 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
                   builder: (ctx) => Icon(Icons.location_pin),
                 ),
+              ],
+            ),
+          ),
+          CircleLayerWidget(
+            options: CircleLayerOptions(
+              circles: [
+                for (final poi in nearestPOI)
+                  CircleMarker(
+                    point: poi.location,
+                    radius: 3.0,
+                    color: poi.isModified
+                        ? Colors.greenAccent
+                        : (poi.element?.isAmenity ?? true
+                            ? Colors.black
+                            : Colors.yellow),
+                  ),
               ],
             ),
           ),

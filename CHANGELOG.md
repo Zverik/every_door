@@ -8,6 +8,7 @@ _Unreleased_
 * When far away from your geolocation, the map size is increased.
 * Invalid phone numbers are now still accepted (e.g. 4-digit short numbers).
 * Phone and website values are stored on lost field focus as well.
+* Map for adding an amenity shows other amenities.
 * Search terms are split by words, improving type searching.
 * Checkmark hit area is increased vertically.
 * Vending machines are displayed now, guideposts are not.
