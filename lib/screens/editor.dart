@@ -146,74 +146,89 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final preset = this.preset;
     final bool canSave = widget.amenity == null || amenity != widget.amenity;
     final loc = AppLocalizations.of(context)!;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(preset?.name ?? amenity.name ?? 'Editor'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.table_rows),
-            onPressed: () async {
-              await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TagEditorPage(amenity)));
-              // Expect the amenity to change.
-              setState(() {});
-            },
-          ),
-        ],
-      ),
-      body: preset == null
-          ? Center(child: Text(loc.editorLoadingPreset))
-          : Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    children: [
-                      if (amenity.canDelete) buildMap(context),
-                      if (!amenity.canDelete) SizedBox(height: 10.0),
-                      if (stdFields.isNotEmpty) ...[
-                        buildFields(stdFields, 50),
-                        SizedBox(height: 10.0),
-                        Divider(),
-                        SizedBox(height: 10.0),
-                      ],
-                      if (fields.isNotEmpty) ...[
-                        buildFields(fields),
-                        SizedBox(height: 20.0),
-                      ],
-                      buildTopButtons(context),
-                      SizedBox(height: 10.0),
-                      if (moreFields.isNotEmpty) ...[
-                        ExpansionTile(
-                          title: Text(loc.editorMoreFields),
-                          initiallyExpanded: false,
-                          children: [
-                            buildFields(moreFields),
-                          ],
-                        ),
-                        SizedBox(height: 30.0),
-                      ],
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50.0,
-                  child: MaterialButton(
-                    color: Colors.green,
-                    textColor: Colors.white,
-                    disabledColor: Colors.white,
-                    disabledTextColor: Colors.grey,
-                    child: Text(
-                      loc.editorSave,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    onPressed: canSave ? saveAndClose : null,
-                  ),
-                ),
-              ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (!canSave)
+          return true;
+        else {
+          final result = await showOkCancelAlertDialog(
+            context: context,
+            isDestructiveAction: true,
+            title: 'Close the editor?',
+            message: 'You will lose your unsaved changes. Proceed?',
+          );
+          return result == OkCancelResult.ok;
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(preset?.name ?? amenity.name ?? 'Editor'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.table_rows),
+              onPressed: () async {
+                await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TagEditorPage(amenity)));
+                // Expect the amenity to change.
+                setState(() {});
+              },
             ),
+          ],
+        ),
+        body: preset == null
+            ? Center(child: Text(loc.editorLoadingPreset))
+            : Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        if (amenity.canDelete) buildMap(context),
+                        if (!amenity.canDelete) SizedBox(height: 10.0),
+                        if (stdFields.isNotEmpty) ...[
+                          buildFields(stdFields, 50),
+                          SizedBox(height: 10.0),
+                          Divider(),
+                          SizedBox(height: 10.0),
+                        ],
+                        if (fields.isNotEmpty) ...[
+                          buildFields(fields),
+                          SizedBox(height: 20.0),
+                        ],
+                        buildTopButtons(context),
+                        SizedBox(height: 10.0),
+                        if (moreFields.isNotEmpty) ...[
+                          ExpansionTile(
+                            title: Text(loc.editorMoreFields),
+                            initiallyExpanded: false,
+                            children: [
+                              buildFields(moreFields),
+                            ],
+                          ),
+                          SizedBox(height: 30.0),
+                        ],
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50.0,
+                    child: MaterialButton(
+                      color: Colors.green,
+                      textColor: Colors.white,
+                      disabledColor: Colors.white,
+                      disabledTextColor: Colors.grey,
+                      child: Text(
+                        loc.editorSave,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      onPressed: canSave ? saveAndClose : null,
+                    ),
+                  ),
+                ],
+              ),
+      ),
     );
   }
 

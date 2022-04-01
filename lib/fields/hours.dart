@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/helpers/interval2.dart';
 import 'package:every_door/models/amenity.dart';
@@ -75,11 +77,18 @@ class OpeningHoursPage extends StatefulWidget {
 
 class _OpeningHoursPageState extends State<OpeningHoursPage> {
   late HoursData hours;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
     super.initState();
     hours = HoursData(widget.hours);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -125,6 +134,7 @@ class _OpeningHoursPageState extends State<OpeningHoursPage> {
   Widget buildFragmentsEditor(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return ListView(
+      controller: _scrollController,
       children: [
         for (int i = 0; i < hours.fragments.length; i++)
           Card(
@@ -165,10 +175,26 @@ class _OpeningHoursPageState extends State<OpeningHoursPage> {
           ),
         if (hours.haveMissingDays)
           MaterialButton(
-            onPressed: () {
+            onPressed: () async {
+              HoursInterval interval = hours.fragments.last.interval;
+              if (!interval.isAllDay) {
+                final result =
+                    await ClockEditor.showIntervalEditor(context, interval);
+                if (result != null)
+                  interval = result;
+                else
+                  return;
+              }
               setState(() {
-                hours.fragments.add(HoursFragment(
-                    hours.getMissingDays(), HoursInterval.full(), []));
+                hours.fragments
+                    .add(HoursFragment(hours.getMissingDays(), interval, []));
+              });
+              Timer(Duration(milliseconds: 100), () {
+                _scrollController.animateTo(
+                  _scrollController.position.maxScrollExtent,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.fastOutSlowIn,
+                );
               });
             },
             child: Text(loc.fieldHoursAddFragment),

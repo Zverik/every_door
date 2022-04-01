@@ -1,5 +1,14 @@
 # Every Door App Change Log
 
+## 0.1.3
+
+_Unreleased_
+
+* Failsafe for tapping "back" button in the editor and losing changes.
+* Press "back" on the main screen to return to your location.
+* When adding a new opening hours fragment, enter the time interval.
+* Fixed certificate error and icon for Android 7.
+
 ## 0.1.2
 
 _Released on 2022-03-31_

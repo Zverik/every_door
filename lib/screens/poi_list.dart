@@ -215,157 +215,168 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     });
 
     final loc = AppLocalizations.of(context)!;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(kAppTitle),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsPage(location)),
-            );
-          },
-          icon: Icon(Icons.menu),
-        ),
-        actions: [
-          if (!hasChangesToUpload)
-            IconButton(
-              onPressed: apiStatus != ApiStatus.idle
-                  ? null
-                  : () {
-                      downloadAmenities(location);
-                    },
-              icon: Icon(Icons.download),
-            ),
-          if (hasChangesToUpload)
-            IconButton(
-              onPressed: () async {
-                uploadChanges(context);
-              },
-              icon: Icon(Icons.upload, color: Colors.yellowAccent),
-            ),
-          IconButton(
+    return WillPopScope(
+      onWillPop: () async {
+        if (ref.read(trackingProvider))
+          return true;
+        else {
+          ref.read(trackingProvider.state).state = true;
+          return false;
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(kAppTitle),
+          leading: IconButton(
             onPressed: () {
-              setState(() {
-                ref.read(selectedImageryProvider.notifier).toggle();
-              });
-            },
-            icon: Icon(ref.watch(selectedImageryProvider) == kOSMImagery
-                ? Icons.map_outlined
-                : Icons.map),
-          ),
-          IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return Container(
-                    color: Colors.white,
-                    height: 250.0,
-                    padding: EdgeInsets.all(15.0),
-                    child: PoiFilterPane(location),
-                  );
-                },
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage(location)),
               );
             },
-            icon: Icon(
-              hasFilter ? Icons.filter_alt : Icons.filter_alt_outlined,
-              color: hasFilter ? Colors.yellowAccent : null,
-            ),
+            icon: Icon(Icons.menu),
           ),
-          if (!ref.watch(trackingProvider))
+          actions: [
+            if (!hasChangesToUpload)
+              IconButton(
+                onPressed: apiStatus != ApiStatus.idle
+                    ? null
+                    : () {
+                        downloadAmenities(location);
+                      },
+                icon: Icon(Icons.download),
+              ),
+            if (hasChangesToUpload)
+              IconButton(
+                onPressed: () async {
+                  uploadChanges(context);
+                },
+                icon: Icon(Icons.upload, color: Colors.yellowAccent),
+              ),
             IconButton(
-              onPressed: ref.watch(trackingProvider)
-                  ? null
-                  : () {
-                      ref.read(trackingProvider.state).state = true;
-                    },
-              icon: const Icon(Icons.my_location),
-            ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 1,
-            child: AmenityMap(
-              initialLocation: location,
-              amenities: nearestPOI,
-              controller: mapController,
-              onDragEnd: (pos) {
-                location = pos;
-                saveLocation();
-                updateFarFromUser();
-                updateNearest();
-                updateAreaStatus();
+              onPressed: () {
+                setState(() {
+                  ref.read(selectedImageryProvider.notifier).toggle();
+                });
               },
-              onTrack: (pos) {
-                // TODO: adjust zoom level to fit half of nearby points
-                // (but restricted to 17-19 probably)
-              },
+              icon: Icon(ref.watch(selectedImageryProvider) == kOSMImagery
+                  ? Icons.map_outlined
+                  : Icons.map),
             ),
-          ),
-          if (areaStatus != AreaStatus.fresh && apiStatus == ApiStatus.idle)
-            GestureDetector(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                height: 50.0,
-                color: areaStatus == AreaStatus.missing
-                    ? Colors.redAccent
-                    : Colors.yellow,
-                child: Center(
-                  child: Text(
-                    areaStatus == AreaStatus.missing
-                        ? loc.messageNoData
-                        : loc.messageDataObsolete,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: areaStatus == AreaStatus.missing
-                          ? Colors.white
-                          : Colors.black,
+            IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      color: Colors.white,
+                      height: 250.0,
+                      padding: EdgeInsets.all(15.0),
+                      child: PoiFilterPane(location),
+                    );
+                  },
+                );
+              },
+              icon: Icon(
+                hasFilter ? Icons.filter_alt : Icons.filter_alt_outlined,
+                color: hasFilter ? Colors.yellowAccent : null,
+              ),
+            ),
+            if (!ref.watch(trackingProvider))
+              IconButton(
+                onPressed: ref.watch(trackingProvider)
+                    ? null
+                    : () {
+                        ref.read(trackingProvider.state).state = true;
+                      },
+                icon: const Icon(Icons.my_location),
+              ),
+          ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: 1,
+              child: AmenityMap(
+                initialLocation: location,
+                amenities: nearestPOI,
+                controller: mapController,
+                onDragEnd: (pos) {
+                  location = pos;
+                  saveLocation();
+                  updateFarFromUser();
+                  updateNearest();
+                  updateAreaStatus();
+                },
+                onTrack: (pos) {
+                  // TODO: adjust zoom level to fit half of nearby points
+                  // (but restricted to 17-19 probably)
+                },
+              ),
+            ),
+            if (areaStatus != AreaStatus.fresh && apiStatus == ApiStatus.idle)
+              GestureDetector(
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  height: 50.0,
+                  color: areaStatus == AreaStatus.missing
+                      ? Colors.redAccent
+                      : Colors.yellow,
+                  child: Center(
+                    child: Text(
+                      areaStatus == AreaStatus.missing
+                          ? loc.messageNoData
+                          : loc.messageDataObsolete,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: areaStatus == AreaStatus.missing
+                            ? Colors.white
+                            : Colors.black,
+                      ),
                     ),
                   ),
                 ),
+                onTap: () {
+                  downloadAmenities(location);
+                },
               ),
-              onTap: () {
-                downloadAmenities(location);
-              },
+            Expanded(
+              flex: micromapping || farFromUser ? 1 : 3,
+              child: apiStatus != ApiStatus.idle
+                  ? Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(),
+                        SizedBox(height: 20.0),
+                        Text(
+                          getApiStatusLoc(apiStatus, loc),
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      ],
+                    )
+                  : PoiPane(
+                      amenities: nearestPOI, updateNearest: updateNearest),
             ),
-          Expanded(
-            flex: micromapping || farFromUser ? 1 : 3,
-            child: apiStatus != ApiStatus.idle
-                ? Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 20.0),
-                      Text(
-                        getApiStatusLoc(apiStatus, loc),
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                    ],
-                  )
-                : PoiPane(amenities: nearestPOI, updateNearest: updateNearest),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              settings: RouteSettings(name: '/list'),
-              builder: (context) => MapChooserPage(
-                creating: true,
-                location: location,
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                settings: RouteSettings(name: '/list'),
+                builder: (context) => MapChooserPage(
+                  creating: true,
+                  location: location,
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
