@@ -51,6 +51,7 @@ flutter:
   generate: true
   assets:
     - assets/presets.db
+    - assets/lets-encrypt-r3.pem
 
 flutter_icons:
   android: "ic_launcher"
