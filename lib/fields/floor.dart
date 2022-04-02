@@ -112,11 +112,11 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    if (address.isEmpty) {
+    final current = Floor.fromTags(widget.element.getFullTags());
+    if (address.isEmpty && current.isEmpty) {
       return Text(loc.fieldFloorEmpty);
     }
 
-    final current = Floor.fromTags(widget.element.getFullTags());
     final options = floors.map((e) => e.string).toList();
     if (current.isEmpty) options.add('+');
 

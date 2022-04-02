@@ -1,4 +1,6 @@
-class HoursInterval {
+import 'package:flutter/foundation.dart';
+
+class HoursInterval implements Comparable {
   String start;
   String end;
 
@@ -31,9 +33,18 @@ class HoursInterval {
 
   @override
   int get hashCode => start.hashCode + end.hashCode;
+
+  @override
+  int compareTo(other) {
+    if (other is! HoursInterval) throw ArgumentError();
+    int value = start.compareTo(other.start);
+    if (value == 0)
+      value = end.compareTo(other.end);
+    return value;
+  }
 }
 
-class HoursFragment {
+class HoursFragment implements Comparable {
   final List<bool> weekdays;
   HoursInterval interval;
   List<HoursInterval> breaks;
@@ -44,6 +55,27 @@ class HoursFragment {
   bool get isEmpty => weekdays.every((open) => !open);
   bool get is24 => breaks.isEmpty && interval.isAllDay;
   bool get is24_7 => is24 && isAllWeek;
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! HoursFragment) return false;
+    return listEquals(weekdays, other.weekdays) && intervalsEquals(other);
+  }
+
+  bool intervalsEquals(HoursFragment other) => interval == other.interval && listEquals(breaks, other.breaks);
+
+  @override
+  int get hashCode => weekdays.hashCode + interval.hashCode + breaks.hashCode;
+
+  @override
+  int compareTo(other) {
+    if (other is! HoursFragment) throw ArgumentError();
+    for (int i = 0; i < weekdays.length; i++) {
+      if (weekdays[i] != other.weekdays[i])
+        return weekdays[i] ? 1 : -1;
+    }
+    return interval.compareTo(other.interval);
+  }
 }
 
 class HoursData {
@@ -155,8 +187,19 @@ class HoursData {
   }
 
   String buildHours() {
-    if (fragments.isEmpty) return hours;
-    if (fragments.first.is24_7) return '24/7';
+    if (this.fragments.isEmpty) return hours;
+    if (this.fragments.first.is24_7) return '24/7';
+
+    // Sort and remove duplicates.
+    final fragments = List.of(this.fragments);
+    fragments.sort();
+    for (int i = fragments.length - 1; i > 0; i--) {
+      if (fragments[i].intervalsEquals(fragments[i-1])) {
+        for (int j = 0; j < fragments[i].weekdays.length; j++)
+          fragments[i-1].weekdays[j] |= fragments[i].weekdays[j];
+        fragments.removeAt(i);
+      }
+    }
 
     List<String> parts = [];
     for (final fragment in fragments) {
