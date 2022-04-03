@@ -49,6 +49,10 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
       print(e);
       floors = [];
     }
+    if ((filter.floor?.isNotEmpty ?? false) && !floors.contains(filter.floor)) {
+      ref.read(poiFilterProvider.state).state =
+          filter.copyWith(floor: PoiFilter.nullFloor);
+    }
     setState(() {
       this.floors = floors;
     });
@@ -68,28 +72,31 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
         children: [
           Text('Filter by address:', style: kFieldTextStyle),
           RadioField(
-            options: nearestAddresses.map((e) => e.toString()).toList() + ['empty'],
-            value: (filter.address?.isEmpty ?? false) ? 'empty' : filter.address?.toString(),
+            options:
+                nearestAddresses.map((e) => e.toString()).toList() + ['empty'],
+            value: (filter.address?.isEmpty ?? false)
+                ? 'empty'
+                : filter.address?.toString(),
             onChange: (value) {
               if (value == null) {
                 // On clear, clearing all fields.
-                ref.read(poiFilterProvider.state).state =
-                    PoiFilter(includeNoData: filter.includeNoData);
+                ref.read(poiFilterProvider.state).state = filter.copyWith(
+                  address: PoiFilter.nullAddress,
+                  floor: PoiFilter.nullFloor,
+                );
               } else if (value == 'empty') {
                 ref.read(poiFilterProvider.state).state =
-                    filter.copyWith(address: StreetAddress.empty());
+                    filter.copyWith(address: StreetAddress.empty);
               } else {
                 final addr = nearestAddresses
                     .firstWhere((element) => element.toString() == value);
-                setState(() {
-                  // Clearing floors when the address has changed.
-                  ref.read(poiFilterProvider.state).state = PoiFilter(
-                    address: addr,
-                    floor: null,
-                    includeNoData: filter.includeNoData,
-                  );
-                });
+                // Clearing floors when the address has changed.
+                ref.read(poiFilterProvider.state).state = filter.copyWith(
+                  address: addr,
+                  floor: PoiFilter.nullFloor,
+                );
               }
+              updateFloors();
             },
           ),
           SizedBox(height: 10.0),
@@ -100,21 +107,16 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
                 ? 'empty'
                 : filter.floor?.string,
             onChange: (value) {
+              Floor newFloor;
               if (value == null) {
-                ref.read(poiFilterProvider.state).state = PoiFilter(
-                  address: filter.address,
-                  floor: null,
-                  includeNoData: filter.includeNoData,
-                );
+                newFloor = PoiFilter.nullFloor;
               } else if (value == 'empty') {
-                ref.read(poiFilterProvider.state).state =
-                    filter.copyWith(floor: Floor.empty());
+                newFloor = Floor.empty;
               } else {
-                final addr =
-                    floors.firstWhere((element) => element.string == value);
-                ref.read(poiFilterProvider.state).state =
-                    filter.copyWith(floor: addr);
+                newFloor = floors.firstWhere((e) => e.string == value);
               }
+              ref.read(poiFilterProvider.state).state =
+                  filter.copyWith(floor: newFloor);
             },
           ),
           SizedBox(height: 10.0),

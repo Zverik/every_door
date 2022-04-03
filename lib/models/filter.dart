@@ -1,22 +1,30 @@
-import 'package:flutter/material.dart';
-
 import 'amenity.dart';
 import 'floor.dart';
 import 'address.dart';
 
 class PoiFilter {
+  static const nullFloor = Floor(floor: 'null', level: 0.123456);
+  static const nullAddress = StreetAddress(housenumber: 'null', street: 'null');
+
   final Floor? floor;
   final StreetAddress? address;
   final bool includeNoData; // TODO: what does this even mean
   final bool notChecked;
 
-  PoiFilter({this.floor, this.address, this.includeNoData = true, this.notChecked = false});
+  PoiFilter(
+      {this.floor,
+      this.address,
+      this.includeNoData = true,
+      this.notChecked = false});
 
   PoiFilter copyWith(
-      {Floor? floor, StreetAddress? address, bool? includeNoData, bool? notChecked}) {
+      {Floor? floor,
+      StreetAddress? address,
+      bool? includeNoData,
+      bool? notChecked}) {
     return PoiFilter(
-      floor: floor ?? this.floor,
-      address: address ?? this.address,
+      floor: floor == nullFloor ? null : (floor ?? this.floor),
+      address: address == nullAddress ? null : address ?? this.address,
       includeNoData: includeNoData ?? this.includeNoData,
       notChecked: notChecked ?? this.notChecked,
     );
@@ -28,7 +36,8 @@ class PoiFilter {
   bool matches(OsmChange amenity) {
     if (notChecked && !amenity.isOld) return false;
     final tags = amenity.getFullTags();
-    bool matchesAddr = address == null || address == StreetAddress.fromTags(tags);
+    bool matchesAddr =
+        address == null || address == StreetAddress.fromTags(tags);
     bool matchesFloor = floor == null || floor == Floor.fromTags(tags);
     return matchesAddr && matchesFloor;
   }

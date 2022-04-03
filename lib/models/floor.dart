@@ -5,8 +5,9 @@ class Floor implements Comparable<Floor> {
   final String? floor;
   final bool duplicate;
 
-  Floor({this.level, this.floor, this.duplicate = false});
-  Floor.empty() : level = null, floor = null, duplicate = false;
+  const Floor({this.level, this.floor, this.duplicate = false});
+
+  static const empty = Floor(level: null, floor: null);
 
   factory Floor.fromTags(Map<String, String> tags) {
     final levelValue = tags['level'];

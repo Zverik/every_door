@@ -11,7 +11,7 @@ class StreetAddress {
   final String? place;
   final String? city;
 
-  StreetAddress(
+  const StreetAddress(
       {this.housenumber,
       this.housename,
       this.unit,
@@ -20,14 +20,7 @@ class StreetAddress {
       this.city,
       this.location});
 
-  StreetAddress.empty()
-      : housename = null,
-        housenumber = null,
-        unit = null,
-        street = null,
-        place = null,
-        city = null,
-        location = null;
+  static const empty = StreetAddress();
 
   factory StreetAddress.fromTags(Map<String, String> tags, [LatLng? location]) {
     return StreetAddress(

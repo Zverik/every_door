@@ -191,7 +191,8 @@ class OsmDataHelper extends ChangeNotifier {
     final floors = <Floor>{};
     for (final tags in elementTags) {
       final addr = StreetAddress.fromTags(tags);
-      if ((addr.isEmpty && (address == null || address.isEmpty)) ||
+      if (address == null ||
+          (addr.isEmpty && address.isEmpty) ||
           (addr == address)) {
         final floor = Floor.fromTags(tags);
         if (floor.isNotEmpty) floors.add(floor);

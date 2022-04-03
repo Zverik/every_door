@@ -12,6 +12,7 @@ _Unreleased_
 * When adding a new opening hours fragment, enter the time interval.
 * Hours fragments are sorted and de-duplicated on save.
 * Current floor is displayed in the editor even without an address.
+* Floor filter wasn't updated on address change.
 * Fixed certificate error and icon for Android 7.
 
 ## 0.1.2
