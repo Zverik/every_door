@@ -205,6 +205,36 @@ class OsmDataHelper extends ChangeNotifier {
     return results;
   }
 
+  Future<List<String>> getOpeningHoursAround(LatLng location,
+      {int limit = 10}) async {
+    final database = await _ref.read(databaseProvider).database;
+    final hashes = createGeohashes(location.latitude, location.longitude,
+        kVisibilityRadius.toDouble(), kGeohashPrecision);
+    final placeholders = List.generate(hashes.length, (index) => "?").join(",");
+    final rows = await database.query(
+      OsmElement.kTableName,
+      where: "geohash in ($placeholders) and tags like '%opening_hours%'",
+      whereArgs: hashes,
+    );
+
+    // Keep only amenities with opening_hours.
+    final elements = rows
+        .map((row) => OsmElement.fromJson(row))
+        .where((element) => element.tags.containsKey('opening_hours'))
+        .toList();
+
+    // Sort by distance and keep the few closest amenities.
+    const distance = DistanceEquirectangular();
+    elements.sort((a, b) =>
+        distance(location, a.center!).compareTo(distance(location, b.center!)));
+    if (elements.length > limit) elements.removeRange(limit, elements.length);
+
+    return elements
+        .map((e) => e.tags['opening_hours'])
+        .whereType<String>()
+        .toList();
+  }
+
   Future<Set<String>> getCardPaymentOptions(LatLng location) async {
     final database = await _ref.read(databaseProvider).database;
     final hashes = createGeohashes(location.latitude, location.longitude,

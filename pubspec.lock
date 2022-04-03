@@ -824,6 +824,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.1"
+  unorm_dart:
+    dependency: "direct main"
+    description:
+      name: unorm_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   url_launcher:
     dependency: "direct main"
     description:

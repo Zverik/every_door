@@ -10,9 +10,12 @@ _Unreleased_
 * Failsafe for tapping "back" button in the editor and losing changes.
 * Press "back" on the main screen to return to your location.
 * When adding a new opening hours fragment, enter the time interval.
+* Initial opening hours interval is the most common one around.
 * Hours fragments are sorted and de-duplicated on save.
 * Current floor is displayed in the editor even without an address.
 * Floor filter wasn't updated on address change.
+* Fixed normalization in searching ("кофейня" works now).
+* Fixed searching by tag values ("bar" works now).
 * Fixed certificate error and icon for Android 7.
 
 ## 0.1.2

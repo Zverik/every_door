@@ -21,6 +21,7 @@ import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:collection/collection.dart';
 import 'package:latlong2/latlong.dart';
+import "package:unorm_dart/unorm_dart.dart" as unorm;
 
 final presetProvider = Provider((_) => PresetProvider());
 
@@ -80,12 +81,13 @@ class PresetProvider {
   String _toSqlString(String s) => "'" + s.replaceAll("'", "''") + "'";
 
   String _localeCTE(Locale? locale) {
-    List<String> langs = [];
+    final langs = <String>[];
     if (locale != null) {
       langs.add(locale.toLanguageTag());
       langs.add(locale.languageCode);
     }
     langs.add('en');
+    langs.add('tag'); // Special marker for tag values
     final values = langs.mapIndexed(
         (index, element) => "(${_toSqlString(element)}, ${index + 1})");
     return "langs (lang, lscore) as (values ${values.join(',')})";
@@ -132,6 +134,11 @@ class PresetProvider {
     return results;
   }
 
+  String _normalize(String s) {
+    var combining = RegExp(r"[\u0300-\u036F]");
+    return unorm.nfkd(s.toLowerCase().trim()).replaceAll(combining, '');
+  }
+
   Future<List<Preset>> getPresetsAutocomplete(String query,
       {bool isArea = false,
       bool includeNSI = true,
@@ -159,10 +166,10 @@ class PresetProvider {
     order by score desc, lscore;
     ''';
     // TODO: check the query
-    final results = await _db!.rawQuery(sql, [query + '%']);
+    final results = await _db!.rawQuery(sql, [_normalize(query) + '%']);
     final presets = <Preset>[];
     if (includeNSI) {
-      List<Preset> nsiResults = await _getNSIAutocomplete(query);
+      List<Preset> nsiResults = await _getNSIAutocomplete(_normalize(query));
       if (location != null) {
         nsiResults = _filterByLocation(nsiResults, location);
       }

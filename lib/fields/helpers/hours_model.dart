@@ -72,7 +72,7 @@ class HoursFragment implements Comparable {
     if (other is! HoursFragment) throw ArgumentError();
     for (int i = 0; i < weekdays.length; i++) {
       if (weekdays[i] != other.weekdays[i])
-        return weekdays[i] ? 1 : -1;
+        return weekdays[i] ? -1 : 1;
     }
     return interval.compareTo(other.interval);
   }

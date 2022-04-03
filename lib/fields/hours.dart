@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/helpers/interval2.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'helpers/hours_model.dart';
 
@@ -49,7 +51,7 @@ class HoursInputField extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      OpeningHoursPage(element[field.key] ?? '24/7')));
+                      OpeningHoursPage(element[field.key] ?? '24/7', element)));
           if (value != null) {
             element[field.key] = value;
           }
@@ -66,29 +68,64 @@ class HoursInputField extends StatelessWidget {
   }
 }
 
-class OpeningHoursPage extends StatefulWidget {
+class OpeningHoursPage extends ConsumerStatefulWidget {
   final String hours;
+  final OsmChange? element;
 
-  const OpeningHoursPage(this.hours);
+  const OpeningHoursPage(this.hours, [this.element]);
 
   @override
-  State<StatefulWidget> createState() => _OpeningHoursPageState();
+  ConsumerState<OpeningHoursPage> createState() => _OpeningHoursPageState();
 }
 
-class _OpeningHoursPageState extends State<OpeningHoursPage> {
+class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   late HoursData hours;
+  HoursInterval? defaultInterval;
   final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
     super.initState();
     hours = HoursData(widget.hours);
+    findDefaultInterval();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  findDefaultInterval() async {
+    if (widget.element == null) return;
+    final data = ref.read(osmDataProvider);
+    final hoursList =
+        await data.getOpeningHoursAround(widget.element!.location);
+
+    // Parse opening hours and remove those with 24/7 entries.
+    final parsed = hoursList
+        .map((s) => HoursData(s))
+        .where((h) => h.fragments.isNotEmpty)
+        .where((h) => h.fragments.every((f) => !f.is24))
+        .toList();
+    if (parsed.isEmpty) return;
+
+    // For each set, take the one with the most weekdays.
+    final intervals = <HoursInterval, int>{};
+    for (final p in parsed) {
+      final fragments = List.of(p.fragments);
+      fragments.sort((a, b) => b.weekdays
+          .fold<int>(0, (v, w) => v + (w ? 1 : 0))
+          .compareTo(a.weekdays.fold<int>(0, (v, w) => v + (w ? 1 : 0))));
+      intervals[fragments.first.interval] = (intervals[fragments.first.interval] ?? 0) + 1;
+    }
+
+    // Finally sort the map by count and return the most common interval.
+    final sorted = intervals.entries.toList();
+    sorted.sort((a, b) => b.value.compareTo(a.value));
+    setState(() {
+      defaultInterval = sorted.first.key;
+    });
   }
 
   @override
@@ -140,6 +177,7 @@ class _OpeningHoursPageState extends State<OpeningHoursPage> {
           Card(
             child: HoursFragmentEditor(
               fragment: hours.fragments[i],
+              defaultInterval: defaultInterval,
               autofocus: i == 0,
               onDelete: i == 0
                   ? null
@@ -208,12 +246,14 @@ class _OpeningHoursPageState extends State<OpeningHoursPage> {
 class HoursFragmentEditor extends StatefulWidget {
   final HoursFragment fragment;
   final bool autofocus;
+  final HoursInterval? defaultInterval;
   final Function? onDelete;
   final Function? onChange;
 
   const HoursFragmentEditor(
       {required this.fragment,
       this.autofocus = false,
+      this.defaultInterval,
       this.onDelete,
       this.onChange});
 
@@ -279,8 +319,8 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
               });
             } else {
               // Ask for a value right away.
-              final result = await ClockEditor.showIntervalEditor(
-                  context, HoursInterval('09:00', '18:00'));
+              final result = await ClockEditor.showIntervalEditor(context,
+                  widget.defaultInterval ?? HoursInterval('09:00', '18:00'));
               if (result != null) {
                 setState(() {
                   widget.fragment.interval = result;

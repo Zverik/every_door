@@ -161,10 +161,10 @@ def import_presets(cur, path):
         for name, row in data.items():
             for term in name.replace('_', '/').split('/')[1:]:
                 if term:
-                    yield None, term, name, 5
+                    yield 'tag', term, name, 5
             for k, v in row.get('tags', {}).items():
                 if v is not None and len(v) > 2 and v != 'yes':
-                    yield None, v, name, 6
+                    yield 'tag', v, name, 6
 
     cur.execute(
         "create table preset_terms (lang text, term text, preset_name text, score integer);")
