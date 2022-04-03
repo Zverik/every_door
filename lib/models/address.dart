@@ -9,6 +9,7 @@ class StreetAddress {
   final String? unit;
   final String? street;
   final String? place;
+  final String? city;
 
   StreetAddress(
       {this.housenumber,
@@ -16,6 +17,7 @@ class StreetAddress {
       this.unit,
       this.street,
       this.place,
+      this.city,
       this.location});
 
   StreetAddress.empty()
@@ -24,6 +26,7 @@ class StreetAddress {
         unit = null,
         street = null,
         place = null,
+        city = null,
         location = null;
 
   factory StreetAddress.fromTags(Map<String, String> tags, [LatLng? location]) {
@@ -33,13 +36,16 @@ class StreetAddress {
       unit: tags['addr:unit'],
       street: tags['addr:street'],
       place: tags['addr:place'],
+      city: (tags['addr:street'] == null && tags['addr:place'] == null)
+          ? tags['addr:city']
+          : null,
       location: location,
     );
   }
 
   bool get isEmpty =>
       (housenumber == null && housename == null) ||
-      (street == null && place == null);
+      (street == null && place == null && city == null);
   bool get isNotEmpty => !isEmpty;
 
   setTags(OsmChange element) {
@@ -51,13 +57,21 @@ class StreetAddress {
     if (unit != null) element['addr:unit'] = unit;
     if (street != null)
       element['addr:street'] = street;
-    else
+    else if (place != null)
       element['addr:place'] = place;
+    else
+      element['addr:city'] = city;
   }
 
   static clearTags(OsmChange element) {
-    for (final key in ['housenumber', 'housename', 'unit', 'street', 'place'])
-      element.removeTag('addr:$key');
+    for (final key in [
+      'housenumber',
+      'housename',
+      'unit',
+      'street',
+      'place',
+      'city'
+    ]) element.removeTag('addr:$key');
   }
 
   @override
@@ -68,16 +82,17 @@ class StreetAddress {
         housename == other.housename &&
         unit == other.unit &&
         street == other.street &&
-        place == other.place;
+        place == other.place &&
+        city == other.city;
   }
 
   @override
   int get hashCode =>
       (housenumber ?? housename ?? '').hashCode +
-      (street ?? place ?? '').hashCode +
+      (street ?? place ?? city ?? '').hashCode +
       unit.hashCode;
 
   @override
   String toString() =>
-      '${housenumber ?? housename}${unit != null ? " u.$unit" : ""}, ${street ?? place}';
+      '${housenumber ?? housename}${unit != null ? " u.$unit" : ""}, ${street ?? place ?? city}';
 }
