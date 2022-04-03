@@ -33,7 +33,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
 
   loadAddresses() async {
     final osmData = ref.read(osmDataProvider);
-    final addr = await osmData.getAddressesAround(widget.location, 3);
+    final addr = await osmData.getAddressesAround(widget.location, limit: 3);
     setState(() {
       nearestAddresses = addr;
     });

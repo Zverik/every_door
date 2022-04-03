@@ -161,10 +161,10 @@ def import_presets(cur, path):
         for name, row in data.items():
             for term in name.replace('_', '/').split('/')[1:]:
                 if term:
-                    yield None, term, name, 3
+                    yield None, term, name, 5
             for k, v in row.get('tags', {}).items():
                 if v is not None and len(v) > 2 and v != 'yes':
-                    yield None, v, name, 4
+                    yield None, v, name, 6
 
     cur.execute(
         "create table preset_terms (lang text, term text, preset_name text, score integer);")
@@ -225,15 +225,20 @@ def import_translations(cur, path):
 
         def build_terms(lang, data):
             for name, row in data.items():
-                terms = set([normalize(s) for s in re.split(r'\W+', row.get('terms', '')) if s])
-                nameterms = set([normalize(s) for s in re.split(r'\W+', row.get('name', '')) if s])
-                terms -= nameterms
+                terms = [normalize(s) for s in re.split(r'\W+', row.get('terms', '')) if s]
+                nameterms = [normalize(s) for s in re.split(r'\W+', row.get('name', '')) if s]
+                # First words have higher priority
+                tfirst = None if not terms else terms[0]
+                ntfirst = None if not nameterms else nameterms[0]
+                # Convert to sets to deduplicate
+                nameterms = set(nameterms)
+                terms = set(terms) - nameterms
                 for term in terms:
                     if term:
-                        yield lang, term, name, 1
+                        yield lang, term, name, 1 if term == tfirst else 2
                 for term in nameterms:
                     if term:
-                        yield lang, term, name, 2
+                        yield lang, term, name, 3 if term == ntfirst else 4
 
         cur.executemany(
             "insert into preset_terms (lang, term, preset_name, score) values (?, ?, ?, ?)",

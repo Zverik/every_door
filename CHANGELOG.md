@@ -4,6 +4,8 @@
 
 _Unreleased_
 
+* You can choose an address on a map.
+* Button to add a new address if the correct one is missing.
 * Failsafe for tapping "back" button in the editor and losing changes.
 * Press "back" on the main screen to return to your location.
 * When adding a new opening hours fragment, enter the time interval.

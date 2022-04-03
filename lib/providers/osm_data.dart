@@ -80,7 +80,8 @@ class OsmDataHelper extends ChangeNotifier {
   }
 
   /// Saves all the downloaded elements and the bounding box to the database.
-  Future storeElements(Iterable<OsmElement> elements, LatLngBounds? bounds) async {
+  Future storeElements(
+      Iterable<OsmElement> elements, LatLngBounds? bounds) async {
     final database = await _ref.read(databaseProvider).database;
     await database.transaction((txn) async {
       // Delete objects in the area, to account for deletions.
@@ -100,8 +101,7 @@ class OsmDataHelper extends ChangeNotifier {
         );
       }
     });
-    if (bounds != null)
-      await _ref.read(downloadedAreaProvider).addArea(bounds);
+    if (bounds != null) await _ref.read(downloadedAreaProvider).addArea(bounds);
     await _updateLength();
   }
 
@@ -128,8 +128,15 @@ class OsmDataHelper extends ChangeNotifier {
     return _wrapInChange(rows.map((e) => OsmElement.fromJson(e)));
   }
 
+  bool isBuildingOrAddressPoint(Map<String, String> tags) {
+    if (tags.containsKey('building')) return true;
+    const kMetaTags = {'source', 'note'};
+    return tags.keys
+        .every((k) => k.startsWith('addr:') || kMetaTags.contains(k));
+  }
+
   Future<List<StreetAddress>> getAddressesAround(LatLng location,
-      [int limit = 4]) async {
+      {int limit = 4, bool includeAmenities = true}) async {
     final database = await _ref.read(databaseProvider).database;
     final hashes = createGeohashes(location.latitude, location.longitude,
         kVisibilityRadius.toDouble(), kGeohashPrecision);
@@ -140,11 +147,13 @@ class OsmDataHelper extends ChangeNotifier {
       whereArgs: hashes,
     );
     final elements = rows.map((row) => OsmElement.fromJson(row)).toList();
+    if (!includeAmenities)
+      elements.removeWhere((e) => !isBuildingOrAddressPoint(e.tags));
 
     const distance = DistanceEquirectangular();
     final Map<StreetAddress, double> addresses = {};
     for (final e in elements) {
-      final hash = StreetAddress.fromTags(e.tags);
+      final hash = StreetAddress.fromTags(e.tags, e.center);
       if (hash.isNotEmpty) {
         double dist = distance(location, e.center!);
         double? oldDist = addresses[hash];

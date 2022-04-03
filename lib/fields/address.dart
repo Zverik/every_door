@@ -3,6 +3,7 @@ import 'package:every_door/fields/helpers/radio_field.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/osm_data.dart';
+import 'package:every_door/screens/editor/addr_chooser.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -45,7 +46,8 @@ class _AddressInputState extends ConsumerState<AddressInput> {
 
   loadAddresses() async {
     final osmData = ref.read(osmDataProvider);
-    final addr = await osmData.getAddressesAround(widget.element.location, 3);
+    final addr =
+        await osmData.getAddressesAround(widget.element.location, limit: 3);
     setState(() {
       nearestAddresses = addr;
     });
@@ -64,7 +66,7 @@ class _AddressInputState extends ConsumerState<AddressInput> {
               right: 10.0,
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            child: NewAddressPane(),
+            child: NewAddressPane(widget.element.location),
           ),
         );
       },
@@ -76,15 +78,35 @@ class _AddressInputState extends ConsumerState<AddressInput> {
     });
   }
 
+  chooseAddressOnMap() async {
+    final StreetAddress? addr = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            AddrChooserPage(location: widget.element.location),
+      ),
+    );
+    if (addr != null && addr.isNotEmpty) {
+      setState(() {
+        addr.setTags(widget.element);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (nearestAddresses.isEmpty) {
-      return Text('no addresses nearby');
+      return Text('No addresses nearby');
     }
 
     final current = StreetAddress.fromTags(widget.element.getFullTags());
+    final options = nearestAddresses.map((e) => e.toString()).toList();
+    if (current.isEmpty) {
+      options.insert(0, '🗺️');
+      options.add('+');
+    }
     return RadioField(
-      options: nearestAddresses.map((e) => e.toString()).toList() + ['+'],
+      options: options,
       value: current.isEmpty ? null : current.toString(),
       onChange: (value) {
         if (value == null) {
@@ -93,6 +115,8 @@ class _AddressInputState extends ConsumerState<AddressInput> {
           });
         } else if (value == '+') {
           addAddress(context);
+        } else if (value == '🗺️') {
+          chooseAddressOnMap();
         } else {
           final addr = nearestAddresses
               .firstWhere((element) => element.toString() == value);

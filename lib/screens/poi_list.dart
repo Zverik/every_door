@@ -15,7 +15,7 @@ import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
-import 'package:every_door/screens/map_chooser.dart';
+import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/settings.dart';
 import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/widgets/filter.dart';

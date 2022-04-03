@@ -1,6 +1,9 @@
 import 'package:every_door/models/amenity.dart';
+import 'package:latlong2/latlong.dart';
 
 class StreetAddress {
+  /// Location is just informative, it doesn't participate in comparison.
+  final LatLng? location;
   final String? housenumber;
   final String? housename;
   final String? unit;
@@ -8,22 +11,29 @@ class StreetAddress {
   final String? place;
 
   StreetAddress(
-      {this.housenumber, this.housename, this.unit, this.street, this.place});
+      {this.housenumber,
+      this.housename,
+      this.unit,
+      this.street,
+      this.place,
+      this.location});
 
   StreetAddress.empty()
       : housename = null,
         housenumber = null,
         unit = null,
         street = null,
-        place = null;
+        place = null,
+        location = null;
 
-  factory StreetAddress.fromTags(Map<String, String> tags) {
+  factory StreetAddress.fromTags(Map<String, String> tags, [LatLng? location]) {
     return StreetAddress(
       housenumber: tags['addr:housenumber'],
       housename: tags['addr:housename'],
       unit: tags['addr:unit'],
       street: tags['addr:street'],
       place: tags['addr:place'],
+      location: location,
     );
   }
 
