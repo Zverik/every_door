@@ -61,6 +61,7 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
     List<Floor> floors;
     try {
       floors = await osmData.getFloorsAround(widget.element.location, addr);
+      Floor.collapseList(floors);
     } on Exception catch (e) {
       print(e);
       floors = [];

@@ -198,7 +198,7 @@ class OsmDataHelper extends ChangeNotifier {
         if (floor.isNotEmpty) floors.add(floor);
       }
     }
-    Floor.collapse(floors);
+    // Floor.collapse(floors);
 
     final results = List.of(floors);
     results.sort();

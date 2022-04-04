@@ -42,7 +42,7 @@ class Floor implements Comparable<Floor> {
   bool operator ==(Object other) => other is Floor && level == other.level && floor == other.floor;
 
   @override
-  int get hashCode => (level ?? 0.0).hashCode + (floor ?? '').hashCode;
+  int get hashCode => (level ?? -100.123).hashCode + (floor ?? '').hashCode;
 
   @override
   String toString() => 'Floor($floor/$level)';
@@ -85,5 +85,13 @@ class Floor implements Comparable<Floor> {
 
     // Complete floors can contain duplicates on levels or floors.
     // TODO: replace these floors with .makeDuplicate()
+  }
+
+  static collapseList(List<Floor> floors) {
+    final set = floors.toSet();
+    collapse(set);
+    final result = set.toList();
+    result.sort();
+    return result;
   }
 }
