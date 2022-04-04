@@ -24,9 +24,11 @@ if __name__ == '__main__':
     json_path = None if len(sys.argv) <= 2 else sys.argv[2]
     if json_path:
         if os.path.isdir(json_path):
+            if 'editor-layer-index' not in json_path:
+                json_path = os.path.join(json_path, 'editor-layer-index')
             json_path = os.path.join(json_path, 'imagery.geojson')
         if not os.path.exists(json_path):
-            print('Please specify a correct path to imagery.geojson')
+            print(f'File {json_path} does not exist: please specify a correct path.')
             sys.exit(2)
 
     conn = sqlite3.connect(sys.argv[1])

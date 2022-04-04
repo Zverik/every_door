@@ -32,7 +32,11 @@ rm -f "$PRESETS_DB" "$PRESETS_ZIP"
 # cat "$PRESETS_DB" | gzip > "$PRESETS_ZIP"
 # rm "$PRESETS_DB"
 
-curl -s 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/featureCollection.min.json' > nsi_fc.json
+if [ -n "$GIT_PATH" ]; then
+  cp "$GIT_PATH/name-suggestion-index/dist/featureCollection.min.json" nsi_fc.json
+else
+  curl -s 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/featureCollection.min.json' > nsi_fc.json
+fi
 echo "const String nsiFeaturesRaw = '''" > "$NSI_FEATURES"
 cat nsi_fc.json >> "$NSI_FEATURES"
 echo "''';" >> "$NSI_FEATURES"
