@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import sys
 import json
 import sqlite3
@@ -21,6 +22,12 @@ if __name__ == '__main__':
         sys.exit(1)
 
     json_path = None if len(sys.argv) <= 2 else sys.argv[2]
+    if json_path:
+        if os.path.isdir(json_path):
+            json_path = os.path.join(json_path, 'imagery.geojson')
+        if not os.path.exists(json_path):
+            print('Please specify a correct path to imagery.geojson')
+            sys.exit(2)
 
     conn = sqlite3.connect(sys.argv[1])
     cur = conn.cursor()

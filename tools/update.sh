@@ -20,7 +20,7 @@ fi
 
 if [ ! -d "$HERE/venv" ]; then
   python3 -m venv "$HERE/venv"
-  "$HERE/venv/pip" install -r "$HERE/requirements.txt"
+  "$HERE/venv/bin/pip" install -r "$HERE/requirements.txt"
 fi
 PYTHON="$HERE/venv/bin/python"
 
