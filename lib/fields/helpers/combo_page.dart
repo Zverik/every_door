@@ -29,7 +29,7 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.field.label),
+        title: Text('${widget.field.label} (${widget.field.key})'),
       ),
       body: widget.field.customValues
           ? buildCustom(context)

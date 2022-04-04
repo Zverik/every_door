@@ -1,8 +1,15 @@
 # Every Door App Change Log
 
-## 0.1.3
+## 0.1.4
 
 _Unreleased_
+
+* Hopefull solved absence of POI on app restore.
+* Added `club=*` to supported tags.
+
+## 0.1.3
+
+_Released on 2022-04-04_
 
 * You can choose an address on a map.
 * Button to add a new address if the correct one is missing.

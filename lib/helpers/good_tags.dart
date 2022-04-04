@@ -28,7 +28,7 @@ bool isAmenityTags(Map<String, String?> tags) {
   if (key == null) return false;
   final k = _clearPrefix(key);
 
-  const kAllGoodKeys = <String>{'shop', 'craft', 'office', 'healthcare'};
+  const kAllGoodKeys = <String>{'shop', 'craft', 'office', 'healthcare', 'club'};
   if (kAllGoodKeys.contains(k)) return true;
 
   final v = tags[key];
@@ -152,6 +152,7 @@ bool isGoodTags(Map<String, String?> tags) {
     'healthcare',
     'tourism',
     'historic',
+    'club',
     'emergency',
     'man_made',
     'power',

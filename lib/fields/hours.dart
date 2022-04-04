@@ -44,7 +44,7 @@ class HoursInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
+      padding: const EdgeInsets.only(right: 10.0),
       child: ElevatedButton(
         onPressed: () async {
           String? value = await Navigator.push(

@@ -112,19 +112,22 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          controller: _controller,
-          focusNode: _focus,
-          keyboardType: TextInputType.phone,
-          decoration: InputDecoration(
-            labelText: widget.field.label,
+        Padding(
+          padding: const EdgeInsets.only(right: 10.0),
+          child: TextFormField(
+            controller: _controller,
+            focusNode: _focus,
+            keyboardType: TextInputType.phone,
+            decoration: InputDecoration(
+              labelText: widget.field.label,
+            ),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) =>
+                value != null && value.isNotEmpty && format(value.trim()) == null
+                    ? 'Wrong phone'
+                    : null,
+            onFieldSubmitted: submitPhone,
           ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) =>
-              value != null && value.isNotEmpty && format(value.trim()) == null
-                  ? 'Wrong phone'
-                  : null,
-          onFieldSubmitted: submitPhone,
         ),
         for (final number in numbers)
           Padding(

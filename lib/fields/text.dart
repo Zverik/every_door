@@ -60,10 +60,8 @@ class _TextInputFieldState extends State<TextInputField> {
       _controller.text = value ?? '';
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      ),
+    return Padding(
+      padding: EdgeInsets.only(right: 10.0),
       child: TextField(
         controller: _controller,
         keyboardType: widget.field.keyboardType,

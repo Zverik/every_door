@@ -56,6 +56,11 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
         widget.location ?? LatLng(kDefaultLocation[0], kDefaultLocation[1]);
     if (widget.location == null) restoreLocation();
 
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      updateNearest();
+      updateAreaStatus();
+    });
+
     lifecycleObserver = LifecycleEventHandler(
       detached: () async {
         try {
@@ -65,16 +70,6 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
           }
         } on Exception catch (e) {
           print(e); // No point in catching anything
-        }
-      },
-      resumed: () async {
-        // Update nearest POI.
-        if (!ref.read(trackingProvider)) return;
-        final newLocation = ref.read(geolocationProvider);
-        if (newLocation != null) {
-          location = newLocation;
-          updateNearest();
-          updateAreaStatus();
         }
       },
     );

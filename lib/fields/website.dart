@@ -154,12 +154,15 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
             ),
             SizedBox(width: 10.0),
             Expanded(
-              child: TextField(
-                controller: _controller,
-                focusNode: _fieldFocus,
-                keyboardType: TextInputType.url,
-                decoration: InputDecoration(hintText: _provider.label),
-                onSubmitted: submitWebsite,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: TextField(
+                  controller: _controller,
+                  focusNode: _fieldFocus,
+                  keyboardType: TextInputType.url,
+                  decoration: InputDecoration(hintText: _provider.label),
+                  onSubmitted: submitWebsite,
+                ),
               ),
             )
           ],
