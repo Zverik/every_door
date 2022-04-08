@@ -117,7 +117,8 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
       fragments.sort((a, b) => b.weekdays
           .fold<int>(0, (v, w) => v + (w ? 1 : 0))
           .compareTo(a.weekdays.fold<int>(0, (v, w) => v + (w ? 1 : 0))));
-      intervals[fragments.first.interval] = (intervals[fragments.first.interval] ?? 0) + 1;
+      intervals[fragments.first.interval] =
+          (intervals[fragments.first.interval] ?? 0) + 1;
     }
 
     // Finally sort the map by count and return the most common interval.
@@ -237,6 +238,15 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
             },
             child: Text(loc.fieldHoursAddFragment),
           ),
+        SwitchListTile(
+          title: Text('Closed on public holidays'),
+          value: hours.phOff,
+          onChanged: (value) {
+            setState(() {
+              hours.phOff = !hours.phOff;
+            });
+          },
+        ),
         if (hours.fragments.length >= 2) SizedBox(height: 80.0),
       ],
     );

@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 final micromappingProvider =
     StateNotifierProvider<MicromappingController, bool>((_) => MicromappingController());
 
+final microZoomedInProvider = StateProvider<bool>((_) => false);
+
 class MicromappingController extends StateNotifier<bool> {
   static const kMicromappingKey = 'micromappingMode';
 

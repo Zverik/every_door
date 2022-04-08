@@ -158,6 +158,9 @@ bool isGoodTags(Map<String, String?> tags) {
     'power',
     'aerialway',
     'aeroway',
+    // Keep entrances and buildings, even without extra data.
+    'entrance',
+    'building',
   };
   if (kAllGoodKeys.contains(k)) return true;
 

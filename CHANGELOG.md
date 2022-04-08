@@ -4,6 +4,9 @@
 
 _Unreleased_
 
+* Amenity list is displayed top-down instead of left-right.
+* `PH off` support for opening hours.
+* Reduced distance for switching into the big map mode.
 * Hopefull solved absence of POI on app restore.
 * Added `club=*` to supported tags.
 

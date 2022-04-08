@@ -24,7 +24,6 @@ class MapChooserPage extends ConsumerStatefulWidget {
 }
 
 class _MapChooserPageState extends ConsumerState<MapChooserPage> {
-  late LatLng location;
   late LatLng center;
   List<OsmChange> nearestPOI = [];
   final controller = MapController();
@@ -33,8 +32,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   @override
   void initState() {
     super.initState();
-    location = widget.location;
-    center = location;
+    center = widget.location;
     mapSub = controller.mapEventStream.listen((event) {
       if (event is MapEventMove) {
         setState(() {
@@ -92,7 +90,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
       body: FlutterMap(
         mapController: controller,
         options: MapOptions(
-          center: location,
+          center: widget.location,
           zoom: 18.0,
           minZoom: 17.0,
           maxZoom: 20.0,

@@ -7,9 +7,12 @@ Map<String, String> generateChangesetTags(List<OsmChange> changes) {
   final comment = CommentGenerator().generateComment(changes);
 
   String platform;
-  if (Platform.isAndroid) platform = 'android';
-  else if (Platform.isIOS) platform = 'ios';
-  else platform = 'unknown';
+  if (Platform.isAndroid)
+    platform = 'android';
+  else if (Platform.isIOS)
+    platform = 'ios';
+  else
+    platform = 'unknown';
 
   return <String, String>{
     'comment': comment,
@@ -33,9 +36,12 @@ class _TypeCount {
 
   add(OsmChange change) {
     String type = _getType(change);
-    if (change.isNew) created[type] = (created[type] ?? 0) + 1;
-    else if (change.deleted) deleted[type] = (deleted[type] ?? 0) + 1;
-    else if (change.isConfirmed) confirmed[type] = (confirmed[type] ?? 0) + 1;
+    if (change.isNew)
+      created[type] = (created[type] ?? 0) + 1;
+    else if (change.deleted)
+      deleted[type] = (deleted[type] ?? 0) + 1;
+    else if (change.isConfirmed)
+      confirmed[type] = (confirmed[type] ?? 0) + 1;
     else if (change.isModified) updated[type] = (updated[type] ?? 0) + 1;
   }
 
@@ -44,7 +50,8 @@ class _TypeCount {
     if (key == null) return 'unknown object';
     final value = change[key]!;
     if (value == 'yes') return key;
-    if ({'shop', 'office', 'building', 'entrance'}.contains(key)) return '$value $key'; // school building
+    if ({'shop', 'office', 'building', 'entrance', 'club'}.contains(key))
+      return '$value $key'; // school building
     if (value.endsWith('s')) return value.substring(0, value.length - 1);
     return value;
   }
@@ -76,10 +83,14 @@ class _TypePair implements Comparable {
     }
     String typeStr = type;
     if (count > 1) {
-      if (type.endsWith('x') || type.endsWith('sh') || type.endsWith('ch') || type.endsWith('ss')) {
+      if (type.endsWith('x') ||
+          type.endsWith('sh') ||
+          type.endsWith('ch') ||
+          type.endsWith('ss')) {
         // marsh → marshes, fox → foxes
         typeStr = type + 'es';
-      } else if (type.endsWith('y') && !kVowels.contains(type.substring(type.length - 2, type.length-1))) {
+      } else if (type.endsWith('y') &&
+          !kVowels.contains(type.substring(type.length - 2, type.length - 1))) {
         // cemetery → cemeteries
         typeStr = type.substring(0, type.length - 1) + 'ies';
       } else {
@@ -90,6 +101,7 @@ class _TypePair implements Comparable {
   }
 
   @override
+
   /// These pairs are sorted in reverse: the most occurent is the first.
   int compareTo(other) {
     if (other is! _TypePair) {
@@ -103,14 +115,19 @@ class CommentGenerator {
   static const kMaxItems = 3;
 
   String _typeCountToString(Map<String, int> typeCount) {
-    final pairs = typeCount.entries.map((entry) => _TypePair(entry.key, entry.value)).toList();
+    final pairs = typeCount.entries
+        .map((entry) => _TypePair(entry.key, entry.value))
+        .toList();
     pairs.sort();
     List<_TypePair> finalPairs;
     if (pairs.length <= kMaxItems) {
       finalPairs = pairs;
     } else {
-      int countRest = pairs.sublist(kMaxItems - 1).fold(0, (prev, pair) => prev + pair.count);
-      finalPairs = pairs.sublist(0, kMaxItems - 1) + [_TypePair('other object', countRest)];
+      int countRest = pairs
+          .sublist(kMaxItems - 1)
+          .fold(0, (prev, pair) => prev + pair.count);
+      finalPairs = pairs.sublist(0, kMaxItems - 1) +
+          [_TypePair('other object', countRest)];
     }
     final stringPairs = finalPairs.map((e) => e.toString()).toList();
     if (stringPairs.length >= 2) {

@@ -25,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -196,6 +197,15 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     }
   }
 
+  micromappingTap(LatLngBounds area) async {
+    if (ref.read(microZoomedInProvider) || !ref.read(micromappingProvider)) return;
+    List<OsmChange> fixedPOI = []; // TODO
+    ref.read(microZoomedInProvider.state).state = true;
+    setState(() {
+      nearestPOI = fixedPOI;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final micromapping = ref.watch(micromappingProvider);
@@ -308,6 +318,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                   // TODO: adjust zoom level to fit half of nearby points
                   // (but restricted to 17-19 probably)
                 },
+                onTap: micromappingTap,
               ),
             ),
             if (areaStatus != AreaStatus.fresh && apiStatus == ApiStatus.idle)

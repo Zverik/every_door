@@ -38,8 +38,7 @@ class HoursInterval implements Comparable {
   int compareTo(other) {
     if (other is! HoursInterval) throw ArgumentError();
     int value = start.compareTo(other.start);
-    if (value == 0)
-      value = end.compareTo(other.end);
+    if (value == 0) value = end.compareTo(other.end);
     return value;
   }
 }
@@ -62,7 +61,8 @@ class HoursFragment implements Comparable {
     return listEquals(weekdays, other.weekdays) && intervalsEquals(other);
   }
 
-  bool intervalsEquals(HoursFragment other) => interval == other.interval && listEquals(breaks, other.breaks);
+  bool intervalsEquals(HoursFragment other) =>
+      interval == other.interval && listEquals(breaks, other.breaks);
 
   @override
   int get hashCode => weekdays.hashCode + interval.hashCode + breaks.hashCode;
@@ -71,8 +71,7 @@ class HoursFragment implements Comparable {
   int compareTo(other) {
     if (other is! HoursFragment) throw ArgumentError();
     for (int i = 0; i < weekdays.length; i++) {
-      if (weekdays[i] != other.weekdays[i])
-        return weekdays[i] ? -1 : 1;
+      if (weekdays[i] != other.weekdays[i]) return weekdays[i] ? -1 : 1;
     }
     return interval.compareTo(other.interval);
   }
@@ -82,6 +81,7 @@ class HoursData {
   String hours;
   late bool valid;
   List<HoursFragment> fragments;
+  bool phOff = false;
 
   HoursData(this.hours) : fragments = [] {
     valid = isValid(hours);
@@ -92,14 +92,15 @@ class HoursData {
   bool get isEmpty => hours.isEmpty;
 
   static final kReHoursPart = RegExp(
-    r'^[,; ]*((?:Mo|Tu|We|Th|Fr|Sa|Su)(?:[, -]+(?:Mo|Tu|We|Th|Fr|Sa|Su))*)?'
-    r'\s*((?:\d?\d:\d\d\s*-\s*\d?\d:\d\d)(?:\s*,\s*(?:\d?\d:\d\d\s*-\s*\d?\d:\d\d))*)',
-    caseSensitive: true,
+    r'^[,; ]*((?:Mo|Tu|We|Th|Fr|Sa|Su|PH)(?:[, -]+(?:Mo|Tu|We|Th|Fr|Sa|Su))*)?'
+    r'\s*((?:\d?\d:\d\d\s*-\s*\d?\d:\d\d)(?:\s*,\s*(?:\d?\d:\d\d\s*-\s*\d?\d:\d\d))*|off)',
+    caseSensitive: false,
   );
   static final kReInterval = RegExp(r'(\d?\d:\d\d)\s*-\s*(\d?\d:\d\d)');
 
   _parseHours() {
     hours = hours.trim();
+    phOff = false;
     if (hours == '24/7' || hours.isEmpty) {
       this.fragments = [
         HoursFragment(List.filled(7, true), HoursInterval.full(), [])
@@ -111,23 +112,30 @@ class HoursData {
     int lastIndex = 0;
     var match = kReHoursPart.matchAsPrefix(hours, lastIndex);
     while (match != null) {
-      List<bool> days = _parseWeekdays(match.group(1));
-      List<String> lhours = [];
-      for (final hpart in match.group(2)!.split(',')) {
-        final hmatch = kReInterval.firstMatch(hpart.trim());
-        if (hmatch != null) {
-          lhours.add(hmatch.group(1)!);
-          lhours.add(hmatch.group(2)!);
+      if (match.group(1) != null &&
+          match.group(1)!.toUpperCase() == 'PH' &&
+          match.group(2)!.toLowerCase() == 'off') {
+        // We support public holidays ONLY in form "PH off".
+        phOff = true;
+      } else {
+        List<bool> days = _parseWeekdays(match.group(1));
+        List<String> hoursList = [];
+        for (final hoursPart in match.group(2)!.split(',')) {
+          final hoursMatch = kReInterval.firstMatch(hoursPart.trim());
+          if (hoursMatch != null) {
+            hoursList.add(hoursMatch.group(1)!);
+            hoursList.add(hoursMatch.group(2)!);
+          }
         }
+        fragments.add(HoursFragment(
+          days,
+          HoursInterval(hoursList.first, hoursList.last),
+          [
+            for (int i = 1; i < hoursList.length - 1; i += 2)
+              HoursInterval(hoursList[i], hoursList[i + 1])
+          ],
+        ));
       }
-      fragments.add(HoursFragment(
-        days,
-        HoursInterval(lhours.first, lhours.last),
-        [
-          for (int i = 1; i < lhours.length - 1; i += 2)
-            HoursInterval(lhours[i], lhours[i + 1])
-        ],
-      ));
 
       lastIndex += match.end;
       match = kReHoursPart.matchAsPrefix(hours.substring(lastIndex));
@@ -145,7 +153,7 @@ class HoursData {
       'th': 3,
       'fr': 4,
       'sa': 5,
-      'su': 6
+      'su': 6,
     };
     if (days == null) return List.filled(7, true);
 
@@ -194,9 +202,9 @@ class HoursData {
     final fragments = List.of(this.fragments);
     fragments.sort();
     for (int i = fragments.length - 1; i > 0; i--) {
-      if (fragments[i].intervalsEquals(fragments[i-1])) {
+      if (fragments[i].intervalsEquals(fragments[i - 1])) {
         for (int j = 0; j < fragments[i].weekdays.length; j++)
-          fragments[i-1].weekdays[j] |= fragments[i].weekdays[j];
+          fragments[i - 1].weekdays[j] |= fragments[i].weekdays[j];
         fragments.removeAt(i);
       }
     }
@@ -218,6 +226,8 @@ class HoursData {
       String hoursStr = intervals.join(',');
       parts.add([weekdays, hoursStr].whereType<String>().join(' '));
     }
+
+    if (phOff) parts.add('PH off');
     return parts.join('; ');
   }
 

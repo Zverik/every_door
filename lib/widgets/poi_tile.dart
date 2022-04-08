@@ -18,6 +18,7 @@ class PoiIcons {
 class PoiTile extends StatelessWidget {
   final OsmChange amenity;
   final int? index;
+  final double? width;
   final VoidCallback? onToggleCheck;
   final VoidCallback? onNeedReload;
 
@@ -28,6 +29,7 @@ class PoiTile extends StatelessWidget {
   PoiTile(
       {this.index,
       required this.amenity,
+      this.width,
       this.onToggleCheck,
       this.onNeedReload}) {
     present = buildPresent();
@@ -76,9 +78,10 @@ class PoiTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(right: 8.0, top: 8.0, bottom: 8.0),
       color: !amenity.isDisused ? Colors.white : Colors.grey.shade200,
+      width: width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (onToggleCheck != null)
             GestureDetector(
@@ -86,6 +89,7 @@ class PoiTile extends StatelessWidget {
               onTap: onToggleCheck,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
                     padding: EdgeInsets.all(8.0),

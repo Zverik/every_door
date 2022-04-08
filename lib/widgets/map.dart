@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'dart:math' show min, max;
+import 'dart:math' show min, max, Point;
 
+import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/closest_points.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/geolocation.dart';
@@ -32,6 +33,7 @@ class AmenityMap extends ConsumerStatefulWidget {
   final void Function(LatLng)? onDrag;
   final void Function(LatLng)? onDragEnd;
   final void Function(LatLng)? onTrack;
+  final void Function(LatLngBounds)? onTap;
   final AmenityMapController? controller;
 
   const AmenityMap({
@@ -39,6 +41,7 @@ class AmenityMap extends ConsumerStatefulWidget {
     this.onDrag,
     this.onDragEnd,
     this.onTrack,
+    this.onTap,
     this.amenities = const [],
     this.controller,
   });
@@ -93,6 +96,10 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       if (widget.onDragEnd != null &&
           event.source != MapEventSource.mapController)
         widget.onDragEnd!(event.center);
+    } else if (event is MapEventTap) {
+      if (widget.onTap != null) {
+        widget.onTap!(_getBoundsForRadius(event.tapPosition, event.zoom, kTapRadius));
+      }
     }
   }
 
@@ -101,6 +108,14 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     if (emitDrag && widget.onDrag != null) {
       widget.onDrag!(location);
     }
+  }
+
+  LatLngBounds _getBoundsForRadius(LatLng center, double zoom, double radiusPixels) {
+    const crs = Epsg3857();
+    final point = crs.latLngToPoint(center, zoom);
+    final swPoint = crs.pointToLatLng(point - Point(radiusPixels, radiusPixels), zoom);
+    final nePoint = crs.pointToLatLng(point + Point(radiusPixels, radiusPixels), zoom);
+    return LatLngBounds(swPoint, nePoint);
   }
 
   double _calculateZoom(Iterable<LatLng> locations, EdgeInsets padding) {
