@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/models/preset.dart';
@@ -81,9 +82,13 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     // print('Detected ($detect) preset $preset');
     if (preset!.fields.isEmpty) {
       preset = await presets.getFields(preset!, locale: locale);
-      final bool needsStdFields =
-          preset!.fields.length <= 1 || needsStandardFields();
-      stdFields = await presets.getStandardFields(locale, needsStdFields);
+      if (isAmenityTags(amenity.getFullTags())) {
+        final bool needsStdFields =
+            preset!.fields.length <= 1 || needsStandardFields();
+        stdFields = await presets.getStandardFields(locale, needsStdFields);
+      } else {
+        stdFields = [];
+      }
       needRefresh = true;
     }
     if (needRefresh) {

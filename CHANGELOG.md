@@ -5,6 +5,7 @@
 _Unreleased_
 
 * Amenity list is displayed top-down instead of left-right.
+* Added a draft version of the micromapping mode (can be enabled in Settings).
 * `PH off` support for opening hours.
 * Reduced distance for switching into the big map mode.
 * Hopefull solved absence of POI on app restore.

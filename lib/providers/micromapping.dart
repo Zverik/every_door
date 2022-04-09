@@ -1,10 +1,11 @@
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final micromappingProvider =
     StateNotifierProvider<MicromappingController, bool>((_) => MicromappingController());
 
-final microZoomedInProvider = StateProvider<bool>((_) => false);
+final microZoomedInProvider = StateProvider<LatLngBounds?>((_) => null);
 
 class MicromappingController extends StateNotifier<bool> {
   static const kMicromappingKey = 'micromappingMode';

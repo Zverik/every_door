@@ -94,7 +94,7 @@ class SettingsPage extends ConsumerWidget {
               SettingsTile.switchTile(
                 title: loc.settingsMicromapping,
                 subtitle: 'Instead of shops, you add benches and trees',
-                enabled: false,
+                enabled: true,
                 onToggle: (value) {
                   ref.read(micromappingProvider.notifier).set(value);
                 },

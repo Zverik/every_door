@@ -130,12 +130,59 @@ bool isAmenityTags(Map<String, String?> tags) {
       'turkish_bath',
       'water_slide',
       'karaoke',
+      'bird_hide',
+      'wildlife_hide',
     };
     return goodLeisure.contains(v);
   } else if (k == 'emergency') {
     return v == 'ambulance_station';
   } else if (k == 'military') {
     return v == 'office';
+  }
+  return false;
+}
+
+/// Returns `true` if the object with these tags is to be displayed
+/// on the micromapping map.
+bool isMicroTags(Map<String, String?> tags) {
+  if (isAmenityTags(tags)) return false;
+
+  final key = getMainKey(tags);
+  if (key == null) return false;
+  final k = _clearPrefix(key);
+
+  // Note that it excludes values accepted by `isAmenityTags`.
+  const kAllGoodKeys = <String>{
+    'amenity', 'tourism', 'emergency', 'man_made', 'historic',
+    'playground'
+  };
+  if (kAllGoodKeys.contains(k)) return true;
+
+  final v = tags[key];
+  if (k == 'highway') {
+    const goodHighway = {
+      'street_lamp', 'speed_camera', 'emergency_access_point',
+      'bus_stop', 'platform', 'traffic_mirror', 'elevator',
+      'speed_display'
+    };
+    return goodHighway.contains(v);
+  } else if (k == 'leisure') {
+    const goodLeisure = {
+      'picnic_table', 'playground', 'fitness_station', 'firepit',
+      'fishing', 'outdoor_seating', 'dog_park', 'bathing_place',
+      'table', 'village_swing'
+    };
+    return goodLeisure.contains(v);
+  } else if (k == 'natural') {
+    const goodNatural = {
+      'tree', 'rock', 'shrub', 'spring', 'cave_entrance',
+      'stone', 'birds_nest', 'termite_mound', 'tree_stump',
+      'bush', 'razed:tree', 'geyser', 'plant', 'anthill'
+    };
+    return goodNatural.contains(v);
+  } else if (k == 'power') {
+    const goodPower = {'pole', 'tower', 'catenary_mast'};
+    return goodPower.contains(v);
   }
   return false;
 }

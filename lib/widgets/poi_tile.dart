@@ -1,7 +1,10 @@
+import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/providers/micromapping.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/screens/editor.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PoiIcons {
   static const phone = '📞';
@@ -15,7 +18,7 @@ class PoiIcons {
   static const hours = '🕑';
 }
 
-class PoiTile extends StatelessWidget {
+class PoiTile extends ConsumerWidget {
   final OsmChange amenity;
   final int? index;
   final double? width;
@@ -37,16 +40,20 @@ class PoiTile extends StatelessWidget {
   }
 
   String buildMissing() {
+    if (!isAmenityTags(amenity.getFullTags())) return '';
+
     List<String> missing = [];
     if (amenity.getContact('phone') == null) missing.add(PoiIcons.phone);
     if (!amenity.hasWebsite) missing.add(PoiIcons.url);
     if (amenity['opening_hours'] == null) missing.add(PoiIcons.hours);
     if (amenity['addr:housenumber'] == null) missing.add(PoiIcons.address);
-    // TODO
+    // TODO: add more icons?
     return missing.join();
   }
 
   String buildPresent() {
+    if (!isAmenityTags(amenity.getFullTags())) return '';
+
     List<String> present = [];
     final hours = amenity['opening_hours'];
     if (hours != null) present.add('${PoiIcons.hours}${shortHours(hours)}');
@@ -70,7 +77,7 @@ class PoiTile extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final title =
         (index == null ? '' : index.toString() + '. ') + amenity.typeAndName;
     final loc = AppLocalizations.of(context)!;
@@ -105,6 +112,7 @@ class PoiTile extends StatelessWidget {
           Expanded(
             child: GestureDetector(
               onTap: () async {
+                ref.read(microZoomedInProvider.state).state = null;
                 bool? result = await Navigator.push(
                   context,
                   MaterialPageRoute(

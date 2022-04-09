@@ -15,6 +15,7 @@ import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
+import 'package:every_door/screens/editor.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/settings.dart';
 import 'package:every_door/screens/settings/account.dart';
@@ -69,8 +70,8 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
             final provider = ref.read(osmApiProvider);
             await provider.uploadChanges();
           }
-        } on Exception catch (e) {
-          print(e); // No point in catching anything
+        } on Exception {
+          // No point in catching anything.
         }
       },
     );
@@ -124,20 +125,25 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     updateAreaStatus();
   }
 
-  updateNearest() async {
+  updateNearest({LatLng? forceLocation, int? forceRadius}) async {
+    // Disabling updates in zoomed in mode.
+    if (forceLocation == null && ref.read(microZoomedInProvider) != null)
+      return;
+
     final provider = ref.read(osmDataProvider);
     final micromapping = ref.read(micromappingProvider);
     final filter = ref.read(poiFilterProvider);
-    final location = this.location;
+    final location = forceLocation ?? this.location;
     // Query for amenities around the location.
-    final radius = farFromUser ? kFarVisibilityRadius : kVisibilityRadius;
+    final int radius =
+        forceRadius ?? (farFromUser ? kFarVisibilityRadius : kVisibilityRadius);
     List<OsmChange> data = await provider.getElements(location, radius);
     // Filter for amenities (or not amenities).
     data = data
         .where((e) =>
             e.isModified ||
             (micromapping
-                ? !(e.element?.isAmenity ?? false)
+                ? (e.element?.isMicro ?? true)
                 : (e.element?.isAmenity ?? true)))
         .toList();
     // Apply the building filter.
@@ -198,12 +204,35 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
   }
 
   micromappingTap(LatLngBounds area) async {
-    if (ref.read(microZoomedInProvider) || !ref.read(micromappingProvider)) return;
-    List<OsmChange> fixedPOI = []; // TODO
-    ref.read(microZoomedInProvider.state).state = true;
-    setState(() {
-      nearestPOI = fixedPOI;
-    });
+    if (ref.read(micromappingProvider)) {
+      // TODO: check if there is but one amenity there.
+      List<OsmChange> amenitiesAtCenter = nearestPOI
+          .where((element) => area.contains(element.location))
+          .toList();
+
+      if (amenitiesAtCenter.isEmpty) return;
+      if (amenitiesAtCenter.length == 1 ||
+          ref.read(microZoomedInProvider) != null) {
+        if (amenitiesAtCenter.length > 1) {
+          // Sort by distance.
+          const distance = DistanceEquirectangular();
+          amenitiesAtCenter.sort((a, b) => distance(area.center, a.location)
+              .compareTo(distance(area.center, b.location)));
+        }
+        // Open the editor for the first object.
+        bool? result = await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => PoiEditorPage(amenity: amenitiesAtCenter.first)),
+        );
+        // When finished, reset zoomed in state.
+        ref.read(microZoomedInProvider.state).state = null;
+        if (result == true) updateNearest();
+      } else {
+        ref.read(microZoomedInProvider.state).state = area;
+        updateNearest(forceLocation: area.center);
+      }
+    }
   }
 
   @override
@@ -222,11 +251,14 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     final loc = AppLocalizations.of(context)!;
     return WillPopScope(
       onWillPop: () async {
-        if (ref.read(trackingProvider))
-          return true;
-        else {
+        if (ref.read(microZoomedInProvider) != null) {
+          ref.read(microZoomedInProvider.state).state = null;
+          return false;
+        } else if (!ref.read(trackingProvider)) {
           ref.read(trackingProvider.state).state = true;
           return false;
+        } else {
+          return true;
         }
       },
       child: Scaffold(
@@ -371,6 +403,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
+            ref.read(microZoomedInProvider.state).state = null;
             Navigator.push(
               context,
               MaterialPageRoute(

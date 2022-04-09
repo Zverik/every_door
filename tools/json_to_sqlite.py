@@ -162,9 +162,9 @@ def import_presets(cur, path):
             for term in name.replace('_', '/').split('/')[1:]:
                 if term:
                     yield 'tag', term, name, 5
-            for k, v in row.get('tags', {}).items():
-                if v is not None and len(v) > 2 and v != 'yes':
-                    yield 'tag', v, name, 6
+            # for k, v in row.get('tags', {}).items():
+            #     if v is not None and len(v) > 2 and v != 'yes':
+            #         yield 'tag', v, name, 6
 
     cur.execute(
         "create table preset_terms (lang text, term text, preset_name text, score integer);")
@@ -244,13 +244,13 @@ def import_translations(cur, path):
             "insert into preset_terms (lang, term, preset_name, score) values (?, ?, ?, ?)",
             build_terms(lang, presets))
 
-    # Clean up indices
-    cur.execute(
-        "with t as (select lang, term from preset_terms group by 1, 2 having count(*) > 20) "
-        "delete from preset_terms as p "
-        "where exists (select * from t where p.lang = t.lang and p.term = t.term) "
-        "or (lang not in ('ja', 'zh-CN', 'zh-TW', 'zh-HK') and length(term) <= 2)"
-    )
+    # Clean up indices - commented out since it removes e.g. restaurants.
+    # cur.execute(
+    #     "with t as (select lang, term from preset_terms group by 1, 2 having count(*) > 20) "
+    #     "delete from preset_terms as p "
+    #     "where exists (select * from t where p.lang = t.lang and p.term = t.term) "
+    #     "or (lang not in ('ja', 'zh-CN', 'zh-TW', 'zh-HK') and length(term) <= 2)"
+    # )
 
     cur.execute("create index field_tran_idx on field_tran (field_name)")
     cur.execute("create index preset_tran_idx on preset_tran (preset_name)")

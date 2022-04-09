@@ -249,6 +249,7 @@ class OsmElement {
       downloaded != null &&
       DateTime.now().difference(downloaded!) > kObsoleteData;
   bool get isAmenity => isAmenityTags(tags);
+  bool get isMicro => isMicroTags(tags);
   bool get isGood => isGoodTags(tags);
 
   bool get isArea {

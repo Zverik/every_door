@@ -114,11 +114,9 @@ class OsmDataHelper extends ChangeNotifier {
         changes.getNew();
   }
 
-  /// Restores objects from the database.
-  Future<List<OsmChange>> getElements(LatLng center, int radius) async {
+  Future<List<OsmChange>> _queryElements(List<String> hashes) async {
+    if (hashes.isEmpty) return [];
     final database = await _ref.read(databaseProvider).database;
-    final hashes = createGeohashes(center.latitude, center.longitude,
-        radius.toDouble(), kGeohashPrecision);
     final placeholders = List.generate(hashes.length, (index) => "?").join(",");
     final rows = await database.query(
       OsmElement.kTableName,
@@ -126,6 +124,21 @@ class OsmDataHelper extends ChangeNotifier {
       whereArgs: hashes,
     );
     return _wrapInChange(rows.map((e) => OsmElement.fromJson(e)));
+  }
+
+  /// Restores objects from the database.
+  Future<List<OsmChange>> getElements(LatLng center, int radius) async {
+    final hashes = createGeohashes(center.latitude, center.longitude,
+        radius.toDouble(), kGeohashPrecision);
+    return await _queryElements(hashes);
+  }
+
+  /// Restores objects from the database for an area.
+  Future<List<OsmChange>> getElementsInArea(LatLngBounds area) async {
+    // TODO: make this, if a need arises.
+    // final hashes = createGeohashes(center.latitude, center.longitude,
+    //     radius.toDouble(), kGeohashPrecision);
+    return await _queryElements([]);
   }
 
   bool isBuildingOrAddressPoint(Map<String, String> tags) {

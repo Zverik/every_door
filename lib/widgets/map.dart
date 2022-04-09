@@ -6,6 +6,7 @@ import 'package:every_door/helpers/closest_points.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/micromapping.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -58,6 +59,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
   late LatLng mapCenter;
   bool showAttribution = true;
   String lastAmenityIds = '';
+  double? savedZoom;
 
   @override
   void initState() {
@@ -98,7 +100,8 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         widget.onDragEnd!(event.center);
     } else if (event is MapEventTap) {
       if (widget.onTap != null) {
-        widget.onTap!(_getBoundsForRadius(event.tapPosition, event.zoom, kTapRadius));
+        widget.onTap!(
+            _getBoundsForRadius(event.tapPosition, event.zoom, kTapRadius));
       }
     }
   }
@@ -110,11 +113,14 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     }
   }
 
-  LatLngBounds _getBoundsForRadius(LatLng center, double zoom, double radiusPixels) {
+  LatLngBounds _getBoundsForRadius(
+      LatLng center, double zoom, double radiusPixels) {
     const crs = Epsg3857();
     final point = crs.latLngToPoint(center, zoom);
-    final swPoint = crs.pointToLatLng(point - Point(radiusPixels, radiusPixels), zoom);
-    final nePoint = crs.pointToLatLng(point + Point(radiusPixels, radiusPixels), zoom);
+    final swPoint =
+        crs.pointToLatLng(point - Point(radiusPixels, radiusPixels), zoom);
+    final nePoint =
+        crs.pointToLatLng(point + Point(radiusPixels, radiusPixels), zoom);
     return LatLngBounds(swPoint, nePoint);
   }
 
@@ -210,6 +216,14 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       }
     });
 
+    // For micromapping, zoom in and out.
+    ref.listen<LatLngBounds?>(microZoomedInProvider, (_, LatLngBounds? newState) {
+      double targetZoom =
+          newState != null ? kMicromappingTapZoom : (savedZoom ?? mapController.zoom);
+      savedZoom = mapController.zoom;
+      mapController.move(newState?.center ?? mapController.center, targetZoom);
+    });
+
     trackAmenities();
 
     return FlutterMap(
@@ -219,7 +233,9 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         zoom: kMapZoom,
         minZoom: 15.0,
         maxZoom: 20.0,
-        interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+        interactiveFlags: ref.watch(microZoomedInProvider) != null
+            ? InteractiveFlag.none
+            : (InteractiveFlag.drag | InteractiveFlag.pinchZoom),
       ),
       children: [
         TileLayerWidget(
