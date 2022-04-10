@@ -1,5 +1,5 @@
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
+import 'package:latlong2/latlong.dart' show LatLng;
 import 'dart:math' as math;
 
 LatLngBounds boundsFromRadius(LatLng center, num radiusMeters) {

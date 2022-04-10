@@ -1,8 +1,8 @@
 import 'package:every_door/models/osm_element.dart';
 import 'dart:convert';
 import 'package:xml/xml.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
+import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 
 const kOsmTypes = <String, OsmElementType>{
   'node': OsmElementType.node,

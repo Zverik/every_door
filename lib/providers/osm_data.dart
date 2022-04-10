@@ -12,10 +12,10 @@ import 'package:every_door/providers/osm_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proximity_hash/proximity_hash.dart';
@@ -131,14 +131,6 @@ class OsmDataHelper extends ChangeNotifier {
     final hashes = createGeohashes(center.latitude, center.longitude,
         radius.toDouble(), kGeohashPrecision);
     return await _queryElements(hashes);
-  }
-
-  /// Restores objects from the database for an area.
-  Future<List<OsmChange>> getElementsInArea(LatLngBounds area) async {
-    // TODO: make this, if a need arises.
-    // final hashes = createGeohashes(center.latitude, center.longitude,
-    //     radius.toDouble(), kGeohashPrecision);
-    return await _queryElements([]);
   }
 
   bool isBuildingOrAddressPoint(Map<String, String> tags) {

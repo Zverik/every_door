@@ -2,6 +2,7 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/micromapping.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
+import 'package:every_door/screens/entrances.dart';
 import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/imagery.dart';
@@ -41,6 +42,32 @@ class SettingsPage extends ConsumerWidget {
       body: SettingsList(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0),
         sections: [
+          SettingsSection(
+            title: 'Editing Modes',
+            titlePadding: titlePadding,
+            tiles: [
+              SettingsTile(
+                title: 'Buildings and Entrances',
+                trailing: Icon(Icons.navigate_next),
+                onPressed: (context) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EntranceEditorPage()),
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                title: loc.settingsMicromapping,
+                subtitle: 'Benches, trees, and street lamps',
+                enabled: true,
+                onToggle: (value) {
+                  ref.read(micromappingProvider.notifier).set(value);
+                },
+                switchValue: micromapping,
+              ),
+            ],
+          ),
           SettingsSection(
             title: loc.settingsApiServer,
             titlePadding: titlePadding,
@@ -91,15 +118,6 @@ class SettingsPage extends ConsumerWidget {
             title: loc.settingsPresentation,
             titlePadding: titlePadding,
             tiles: [
-              SettingsTile.switchTile(
-                title: loc.settingsMicromapping,
-                subtitle: 'Instead of shops, you add benches and trees',
-                enabled: true,
-                onToggle: (value) {
-                  ref.read(micromappingProvider.notifier).set(value);
-                },
-                switchValue: micromapping,
-              ),
               SettingsTile(
                 title: loc.settingsBackground,
                 onPressed: (context) {

@@ -1,7 +1,7 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
+import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:proximity_hash/geohash.dart';
 import 'dart:convert';
 

@@ -1,9 +1,9 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/osm_area.dart';
 import 'package:every_door/providers/database.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
 
 final downloadedAreaProvider = Provider((ref) => AreaProvider(ref));
 

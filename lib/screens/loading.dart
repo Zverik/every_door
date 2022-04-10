@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:flutter/foundation.dart' show compute;
@@ -44,11 +45,14 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     });
     await ref.read(geolocationProvider.notifier).enableTracking(context);
     LatLng? location = ref.read(geolocationProvider);
+    if (location != null) {
+      ref.read(effectiveLocationProvider.notifier).set(location);
+    }
 
     // Finally switch to the monitor page.
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => PoiListPage(location: location)),
+      MaterialPageRoute(builder: (context) => PoiListPage()),
     );
   }
 

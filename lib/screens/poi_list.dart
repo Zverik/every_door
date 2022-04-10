@@ -9,6 +9,7 @@ import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/micromapping.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/osm_api.dart';
@@ -26,24 +27,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
 
 class PoiListPage extends ConsumerStatefulWidget {
-  final LatLng? location;
-
-  const PoiListPage({this.location});
+  const PoiListPage();
 
   @override
   _PoiListPageState createState() => _PoiListPageState();
 }
 
 class _PoiListPageState extends ConsumerState<PoiListPage> {
-  static const kSavedLocation = 'last_location';
-
-  late LatLng location;
   List<OsmChange> allPOI = [];
   List<OsmChange> nearestPOI = [];
   final mapController = AmenityMapController();
@@ -54,9 +49,6 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
   @override
   void initState() {
     super.initState();
-    location =
-        widget.location ?? LatLng(kDefaultLocation[0], kDefaultLocation[1]);
-    if (widget.location == null) restoreLocation();
 
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       updateNearest();
@@ -84,27 +76,11 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     super.dispose();
   }
 
-  restoreLocation() async {
-    final prefs = await SharedPreferences.getInstance();
-    final loc = prefs.getStringList(kSavedLocation);
-    if (loc != null && ref.read(geolocationProvider) == null) {
-      setState(() {
-        location = LatLng(double.parse(loc[0]), double.parse(loc[1]));
-        mapController.setLocation(location);
-      });
-    }
-  }
-
-  saveLocation() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(kSavedLocation,
-        [location.latitude.toString(), location.longitude.toString()]);
-  }
-
   updateFarFromUser() {
     final gpsLocation = ref.read(geolocationProvider);
     bool newFar;
     if (gpsLocation != null) {
+      final location = ref.read(effectiveLocationProvider);
       final distance = DistanceEquirectangular();
       newFar = distance(location, gpsLocation) >= kFarDistance;
     } else {
@@ -133,7 +109,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     final provider = ref.read(osmDataProvider);
     final micromapping = ref.read(micromappingProvider);
     final filter = ref.read(poiFilterProvider);
-    final location = forceLocation ?? this.location;
+    final location = forceLocation ?? ref.read(effectiveLocationProvider)!;
     // Query for amenities around the location.
     final int radius =
         forceRadius ?? (farFromUser ? kFarVisibilityRadius : kVisibilityRadius);
@@ -174,6 +150,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
 
   updateAreaStatus() async {
     final area = ref.read(downloadedAreaProvider);
+    final location = ref.read(effectiveLocationProvider);
     final bbox = boundsFromRadius(location, kVisibilityRadius);
     final status = await area.getAreaStatus(bbox);
     if (status != areaStatus) {
@@ -237,15 +214,20 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final location = ref.read(effectiveLocationProvider);
     final micromapping = ref.watch(micromappingProvider);
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
     final hasFilter = ref.watch(poiFilterProvider).isNotEmpty;
-    ref.listen(needMapUpdateProvider, (previous, next) {
+    ref.listen(needMapUpdateProvider, (_, next) {
       updateNearest();
     });
-    ref.listen(poiFilterProvider, (previous, next) {
+    ref.listen(poiFilterProvider, (_, next) {
       updateNearest();
+    });
+    ref.listen(effectiveLocationProvider, (_, LatLng next) {
+      // TODO: mapController.setLocation(next)?
+      setState(() {});
     });
 
     final loc = AppLocalizations.of(context)!;
@@ -340,8 +322,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                 amenities: nearestPOI,
                 controller: mapController,
                 onDragEnd: (pos) {
-                  location = pos;
-                  saveLocation();
+                  ref.read(effectiveLocationProvider.notifier).set(pos);
                   updateFarFromUser();
                   updateNearest();
                   updateAreaStatus();
