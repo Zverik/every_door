@@ -53,7 +53,7 @@ class HoursInputField extends StatelessWidget {
                   builder: (context) =>
                       OpeningHoursPage(element[field.key] ?? '24/7', element)));
           if (value != null) {
-            element[field.key] = value;
+            element[field.key] = value == '-' ? null : value;
           }
         },
         child: Container(
@@ -82,6 +82,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   late HoursData hours;
   HoursInterval? defaultInterval;
   final ScrollController _scrollController = ScrollController();
+  bool forceRaw = false;
 
   @override
   initState() {
@@ -135,8 +136,25 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(loc.fieldHoursTitle),
+        actions: [
+          if (!hours.raw && !forceRaw)
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  forceRaw = true;
+                });
+              },
+              icon: Icon(Icons.create),
+            ),
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context, '-');
+            },
+            icon: Icon(Icons.close),
+          ),
+        ],
       ),
-      body: hours.raw
+      body: hours.raw || forceRaw
           ? buildRawHoursEditor(context)
           : buildFragmentsEditor(context),
       floatingActionButton: FloatingActionButton(
@@ -382,14 +400,20 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
               ),
             ],
           ),
-        if (widget.fragment.breaks.length < 4 && !widget.fragment.is24)
+        if (widget.fragment.breaks.length < 4)
           MaterialButton(
             onPressed: () async {
               final result = await ClockEditor.showIntervalEditor(
                   context, HoursInterval('14:00', '15:00'));
               if (result != null) {
                 setState(() {
-                  widget.fragment.breaks.add(result);
+                  if (widget.fragment.is24) {
+                    // Split the 24 hour interval at the given points.
+                    widget.fragment.interval =
+                        HoursInterval(result.end, result.start);
+                  } else {
+                    widget.fragment.breaks.add(result);
+                  }
                 });
                 if (widget.onChange != null) widget.onChange!();
               }

@@ -74,7 +74,7 @@ const kTagEmoji = <String, String>{
   'leisure=playground': '🪜',
 };
 
-String? getEmojiForTags(Map<String, String?> tags) {
+String? getEmojiForTags(Map<String, String> tags) {
   final List<String> emoji = [];
   final mainKey = getMainKey(tags);
   if (mainKey != null) {
@@ -83,7 +83,6 @@ String? getEmojiForTags(Map<String, String?> tags) {
       emoji.add(kv);
   }
   tags.forEach((key, value) {
-    if (value == null) return;
     var kv = kTagEmoji['$key=$value'];
     if (kv != null && kv.isNotEmpty) {
       if (!emoji.contains(kv)) emoji.add(kv);

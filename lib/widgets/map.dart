@@ -58,7 +58,6 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
   late final StreamSubscription<MapEvent> mapSub;
   late LatLng mapCenter;
   bool showAttribution = true;
-  String lastAmenityIds = '';
   double? savedZoom;
 
   @override
@@ -182,18 +181,6 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     super.dispose();
   }
 
-  trackAmenities() {
-    List<String> newAmenityIds = widget.amenities
-        .map((e) => e.isNew ? e.typeAndName : e.id.toString())
-        .toList();
-    newAmenityIds.sort();
-    String amenityString = newAmenityIds.join();
-    if (amenityString != lastAmenityIds) {
-      // TODO: zoom?
-      lastAmenityIds = amenityString;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final LatLng? trackLocation = ref.watch(geolocationProvider);
@@ -223,8 +210,6 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       savedZoom = mapController.zoom;
       mapController.move(newState?.center ?? mapController.center, targetZoom);
     });
-
-    trackAmenities();
 
     return FlutterMap(
       mapController: mapController,

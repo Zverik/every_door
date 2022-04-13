@@ -191,6 +191,9 @@ class PresetProvider {
 
   Future<Preset> getPresetForTags(Map<String, String> tags,
       {bool isArea = false, Locale? locale}) async {
+    if (tags.isEmpty) {
+      return Preset.defaultPreset;
+    }
     // Accommodate for fix me preset
     if (tags['amenity'] == 'fixme') {
       return Preset.fixme(tags['fixme:type'] ?? 'unknown');

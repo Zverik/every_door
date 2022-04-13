@@ -6,7 +6,9 @@ _Unreleased_
 
 * Amenity list is displayed top-down instead of left-right.
 * Added a draft version of the micromapping mode (can be enabled in Settings).
-* `PH off` support for opening hours.
+* Added a draft version of the building & entrance editor (find it in Settings).
+* `PH off` support for opening hours and few more usability tweaks.
+* You can mark an unchanged amenity checked on the editor page.
 * Reduced distance for switching into the big map mode.
 * Hopefull solved absence of POI on app restore.
 * Added `club=*` to supported tags.

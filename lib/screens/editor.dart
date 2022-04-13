@@ -39,8 +39,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   void initState() {
     super.initState();
     amenity = widget.amenity?.copy() ??
-        OsmChange(null,
-            newLocation: widget.location, newTags: widget.preset!.addTags);
+        OsmChange.create(
+            location: widget.location!, tags: widget.preset!.addTags);
     amenity.addListener(onAmenityChange);
 
     if (widget.preset == null) {
@@ -127,7 +127,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
   saveAndClose() {
     // Setting the mark automatically.
-    amenity.check();
+    if (needsCheckDate(amenity.getFullTags())) amenity.check();
     final changes = ref.read(changesProvider);
     changes.saveChange(amenity);
     Navigator.pop(context);
@@ -216,20 +216,57 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50.0,
-                    child: MaterialButton(
-                      color: Colors.green,
-                      textColor: Colors.white,
-                      disabledColor: Colors.white,
-                      disabledTextColor: Colors.grey,
-                      child: Text(
-                        loc.editorSave,
-                        style: TextStyle(fontSize: 20.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          // width: double.infinity,
+                          height: 50.0,
+                          child: MaterialButton(
+                            color: Colors.green,
+                            textColor: Colors.white,
+                            disabledColor: Colors.white,
+                            disabledTextColor: Colors.grey,
+                            child: Text(
+                              loc.editorSave,
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                            onPressed: !canSave
+                                ? null
+                                : () async {
+                                    String oldMainKey = getMainKey(
+                                            amenity.element?.tags ?? {}) ??
+                                        '';
+                                    if (amenity.isDisused &&
+                                        oldMainKey.startsWith(kDisused)) {
+                                      final result =
+                                          await showOkCancelAlertDialog(
+                                        context: context,
+                                        title: 'Is it open?',
+                                        message:
+                                            '${amenity.typeAndName} is inactive. Do you want to mark it active?',
+                                        okLabel: loc.buttonYes,
+                                        cancelLabel: loc.buttonNo,
+                                      );
+                                      if (result == OkCancelResult.ok)
+                                        amenity.toggleDisused();
+                                    }
+                                    saveAndClose();
+                                  },
+                          ),
+                        ),
                       ),
-                      onPressed: canSave ? saveAndClose : null,
-                    ),
+                      if (!canSave && !amenity.isConfirmed)
+                        Container(
+                          color: Colors.green,
+                          child: IconButton(
+                            icon: Icon(Icons.check),
+                            color: Colors.white,
+                            iconSize: 30.0,
+                            onPressed: saveAndClose,
+                          ),
+                        ),
+                    ],
                   ),
                 ],
               ),

@@ -2,14 +2,14 @@ const kMainKeys = <String>[
   'amenity', 'shop', 'craft', 'tourism', 'historic', 'highway', 'railway',
   'emergency', 'office', 'healthcare',
   'leisure', 'natural', 'waterway', 'man_made', 'power', 'aeroway',
-  'aerialway', 'landuse', 'military', 'barrier', 'building', 'boundary',
+  'aerialway', 'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
 ];
 final kMainKeysSet = Set.of(kMainKeys);
 
 const kDisused = 'disused:';
 const kDeleted = 'was:';
 
-String? getMainKey(Map<String, String?> tags, [bool alsoDisused = true]) {
+String? getMainKey(Map<String, String> tags, [bool alsoDisused = true]) {
   for (final k in kMainKeys) {
     if (tags.containsKey(k))
       return k;
@@ -23,7 +23,7 @@ String? getMainKey(Map<String, String?> tags, [bool alsoDisused = true]) {
 
 String _clearPrefix(String key) => key.substring(key.indexOf(':') + 1);
 
-bool isAmenityTags(Map<String, String?> tags) {
+bool isAmenityTags(Map<String, String> tags) {
   final key = getMainKey(tags);
   if (key == null) return false;
   final k = _clearPrefix(key);
@@ -144,7 +144,7 @@ bool isAmenityTags(Map<String, String?> tags) {
 
 /// Returns `true` if the object with these tags is to be displayed
 /// on the micromapping map.
-bool isMicroTags(Map<String, String?> tags) {
+bool isMicroTags(Map<String, String> tags) {
   if (isAmenityTags(tags)) return false;
 
   final key = getMainKey(tags);
@@ -187,11 +187,12 @@ bool isMicroTags(Map<String, String?> tags) {
   return false;
 }
 
-bool isGoodTags(Map<String, String?> tags) {
+bool isGoodTags(Map<String, String> tags) {
   final key = getMainKey(tags);
   if (key == null) return false;
   final k = _clearPrefix(key);
 
+  // TODO: does not include micromapping?
   const kAllGoodKeys = <String>{
     'shop',
     'craft',
@@ -246,4 +247,16 @@ bool isGoodTags(Map<String, String?> tags) {
     return v == 'tree' || v == 'rock' || v == 'spring';
   }
   return false;
+}
+
+bool needsCheckDate(Map<String, String> tags) {
+  final key = getMainKey(tags);
+  if (key == null) return false;
+  final k = _clearPrefix(key);
+
+  const kAmenityKeys = <String>{
+    'amenity', 'shop', 'craft', 'tourism', 'historic', 'highway', 'railway',
+    'emergency', 'office', 'healthcare', 'leisure',
+  };
+  return kAmenityKeys.contains(k);
 }

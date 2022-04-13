@@ -4,6 +4,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
+import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/screens/editor.dart';
@@ -98,6 +99,7 @@ class ChangeListPage extends ConsumerWidget {
                     );
                     if (answer == OkCancelResult.ok) {
                       ref.read(changesProvider).clearChanges(true);
+                      ref.read(needMapUpdateProvider).trigger();
                     }
                   },
                   icon: Icon(Icons.delete_forever),
@@ -120,6 +122,7 @@ class ChangeListPage extends ConsumerWidget {
             direction: DismissDirection.endToStart,
             onDismissed: (direction) {
               changes.deleteChange(change);
+              ref.read(needMapUpdateProvider).trigger();
 
               ScaffoldMessenger.of(context).removeCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -219,5 +219,13 @@
   "enableLocationMessage": "Please allow location access for the app in the settings panel that will be shown.",
   "@enableLocationMessage": {
     "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonYes": "Yes",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "No",
+  "@buttonNo": {
+    "description": "Button for dismissal."
   }
 }

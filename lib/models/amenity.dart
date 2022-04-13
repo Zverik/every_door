@@ -38,6 +38,17 @@ class OsmChange extends ChangeNotifier {
     if (element == null && databaseId == null) check();
   }
 
+  OsmChange.create(
+      {required Map<String, String> tags, required LatLng location})
+      : newTags = Map<String, String?>.of(tags),
+        newLocation = location,
+        element = null,
+        _deleted = false,
+        databaseId = Uuid().v1() {
+    _updateMainKey();
+    check();
+  }
+
   OsmChange copy() => OsmChange(
         element,
         newTags: Map.of(newTags),
