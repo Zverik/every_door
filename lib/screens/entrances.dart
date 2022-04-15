@@ -175,9 +175,11 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
   String makeOneLineLabel(OsmChange element) {
     final k = getOurKind(element);
     if (k == ElementKind.building)
-      return 'Building ${element["addr:housenumber"] ?? element["addr:housename"]}';
+      return 'Building ${element["addr:housenumber"] ?? element["addr:housename"] ?? ""}'
+          .trimRight();
     if (k == ElementKind.entrance)
-      return 'Entrance ${element["addr:flats"] ?? element["ref"]}';
+      return 'Entrance ${element["addr:flats"] ?? element["ref"] ?? ""}'
+          .trimRight();
     return element.typeAndName;
   }
 
@@ -202,7 +204,8 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
             SimpleDialogOption(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: Text(makeOneLineLabel(e), style: TextStyle(fontSize: 20.0)),
+                child:
+                    Text(makeOneLineLabel(e), style: TextStyle(fontSize: 20.0)),
               ),
               onPressed: () {
                 Navigator.pop(context, e);

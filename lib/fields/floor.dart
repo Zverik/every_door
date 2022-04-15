@@ -15,7 +15,7 @@ class FloorPresetField extends PresetField {
       : super(
           key: "level",
           label: label,
-          icon: Icons.menu,
+          icon: Icons.stairs_outlined,
         );
 
   @override

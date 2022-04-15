@@ -163,6 +163,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                     loc.fieldWheelchairLimited,
                     loc.fieldWheelchairNo,
                   ],
+                  value: entrance['wheelchair'],
                   onChange: (value) {
                     setState(() {
                       entrance['wheelchair'] = value;
