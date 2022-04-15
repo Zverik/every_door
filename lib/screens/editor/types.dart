@@ -1,5 +1,5 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/providers/micromapping.dart';
+import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,9 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   @override
   initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {updatePresets('');});
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      updatePresets('');
+    });
   }
 
   updatePresets(String substring) async {
@@ -39,12 +41,12 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         presets = newPresets;
       });
     } else {
-      final micromapping = ref.read(micromappingProvider);
+      final editorMode = ref.read(editorModeProvider);
 
       final newPresets = await prov.getPresetsAutocomplete(substring,
           locale: locale,
           location: widget.creatingLocation,
-          includeNSI: !micromapping);
+          includeNSI: editorMode == EditorMode.poi);
 
       // Add a fix me preset for entered string.
       newPresets.add(Preset.fixme(substring.trim()));
@@ -52,7 +54,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       setState(() {
         resultsUpdated = DateTime.now();
         presets = newPresets;
-        if (!micromapping) updateNSISubtitles(context);
+        if (editorMode == EditorMode.poi) updateNSISubtitles(context);
       });
     }
   }

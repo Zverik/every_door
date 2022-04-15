@@ -1,15 +1,21 @@
 import 'dart:async';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
+import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/screens/editor/building.dart';
 import 'package:every_door/screens/editor/entrance.dart';
+import 'package:every_door/screens/editor/map_chooser.dart';
+import 'package:every_door/widgets/map_drag_create.dart';
+import 'package:every_door/widgets/multi_hit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -25,14 +31,17 @@ class EntranceEditorPage extends ConsumerStatefulWidget {
 class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
   List<OsmChange> nearestBuildings = [];
   List<OsmChange> nearestEntrances = [];
+  Map<String, GlobalKey> keys = {};
   late LatLng center;
   final controller = MapController();
   late final StreamSubscription<MapEvent> mapSub;
+  LatLng? newLocation;
+  double? savedZoom;
 
   @override
   void initState() {
     super.initState();
-    center = ref.read(effectiveLocationProvider); // TODO
+    center = ref.read(effectiveLocationProvider);
     mapSub = controller.mapEventStream.listen(onMapEvent);
     updateNearest();
   }
@@ -50,7 +59,6 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
     } else if (event is MapEventMoveEnd) {
       if (!fromController) {
         ref.read(effectiveLocationProvider.notifier).set(event.center);
-        updateNearest();
       }
     }
   }
@@ -61,6 +69,11 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
     super.dispose();
   }
 
+  ElementKind getOurKind(OsmChange change) {
+    const kAcceptedKinds = {ElementKind.building, ElementKind.entrance};
+    return detectKind(change.getFullTags(), kAcceptedKinds);
+  }
+
   updateNearest() async {
     final provider = ref.read(osmDataProvider);
     final location = ref.read(effectiveLocationProvider);
@@ -69,58 +82,79 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
     const distance = DistanceEquirectangular();
     data = data.where((e) => distance(location, e.location) <= radius).toList();
     setState(() {
-      nearestBuildings = data
-          .where((e) => e['building'] != null && e['building'] != 'entrance')
-          .toList();
-      nearestEntrances = data
-          .where((e) => e['entrance'] != null || e['building'] == 'entrance')
-          .toList();
+      nearestBuildings =
+          data.where((e) => getOurKind(e) == ElementKind.building).toList();
+      nearestEntrances =
+          data.where((e) => getOurKind(e) == ElementKind.entrance).toList();
+      for (final c in nearestEntrances + nearestBuildings) {
+        if (!keys.containsKey(c.databaseId)) {
+          keys[c.databaseId] = GlobalKey();
+        }
+      }
     });
   }
 
-  editBuilding(OsmChange building) async {
+  OsmChange? findByKey(Key key) {
+    String databaseId;
+    try {
+      databaseId =
+          keys.entries.firstWhere((element) => element.value == key).key;
+    } on Exception {
+      return null;
+    }
+    for (final e in nearestBuildings) if (e.databaseId == databaseId) return e;
+    for (final e in nearestEntrances) if (e.databaseId == databaseId) return e;
+    return null;
+  }
+
+  openEditor(Widget pane, [LatLng? location]) async {
+    if (location != null) {
+      setState(() {
+        newLocation = location;
+      });
+    }
     await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) {
         return SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
-              top: 6.0,
-              left: 10.0,
-              right: 10.0,
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: BuildingEditorPane(
-              building: building,
-              location: ref.read(effectiveLocationProvider),
-            ),
-          ),
+              padding: EdgeInsets.only(
+                top: 6.0,
+                left: 10.0,
+                right: 10.0,
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: pane),
         );
       },
     );
+    setState(() {
+      newLocation = null;
+    });
   }
 
-  editEntrance(OsmChange? entrance) async {
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: 6.0,
-              left: 10.0,
-              right: 10.0,
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: EntranceEditorPane(
-              entrance: entrance,
-              location: ref.read(effectiveLocationProvider),
-            ),
-          ),
-        );
-      },
+  editBuilding(OsmChange? building, [LatLng? location]) async {
+    openEditor(
+      BuildingEditorPane(
+        building: building,
+        location: location ??
+            building?.location ??
+            ref.read(effectiveLocationProvider),
+      ),
+      location ?? building?.location,
+    );
+  }
+
+  editEntrance(OsmChange? entrance, [LatLng? location]) async {
+    openEditor(
+      EntranceEditorPane(
+        entrance: entrance,
+        location: location ??
+            entrance?.location ??
+            ref.read(effectiveLocationProvider),
+      ),
+      location ?? entrance?.location,
     );
   }
 
@@ -138,13 +172,59 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
     return [ref, flats].whereType<String>().join(': ');
   }
 
+  String makeOneLineLabel(OsmChange element) {
+    final k = getOurKind(element);
+    if (k == ElementKind.building)
+      return 'Building ${element["addr:housenumber"] ?? element["addr:housename"]}';
+    if (k == ElementKind.entrance)
+      return 'Entrance ${element["addr:flats"] ?? element["ref"]}';
+    return element.typeAndName;
+  }
+
+  openEditorByType(OsmChange element) {
+    final k = getOurKind(element);
+    if (k == ElementKind.building)
+      editBuilding(element);
+    else if (k == ElementKind.entrance) editEntrance(element);
+  }
+
+  chooseEditorToOpen(Iterable<OsmChange> elements) async {
+    if (elements.isEmpty) return;
+    if (elements.length == 1) {
+      return openEditorByType(elements.first);
+    }
+    // Many elements: present a menu.
+    final result = await showDialog<OsmChange>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        children: [
+          for (final e in elements)
+            SimpleDialogOption(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                child: Text(makeOneLineLabel(e), style: TextStyle(fontSize: 20.0)),
+              ),
+              onPressed: () {
+                Navigator.pop(context, e);
+              },
+            ),
+        ],
+      ),
+    );
+    if (result != null) openEditorByType(result);
+  }
+
   @override
   Widget build(BuildContext context) {
     final location = ref.read(effectiveLocationProvider);
     final imagery = ref.watch(selectedImageryProvider);
     final LatLng? trackLocation = ref.watch(geolocationProvider);
 
+    ref.listen(needMapUpdateProvider, (_, next) {
+      updateNearest();
+    });
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
+      updateNearest();
       setState(() {
         center = next;
       });
@@ -176,11 +256,129 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
         mapController: controller,
         options: MapOptions(
           center: center,
-          zoom: 17.0,
-          minZoom: 15.0,
+          zoom: 18.0,
+          minZoom: 16.0,
           maxZoom: 20.0,
           interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+          plugins: [
+            MapDragCreatePlugin(),
+            MultiHitMarkerLayerPlugin(),
+          ],
         ),
+        nonRotatedLayers: [
+          MultiHitMarkerLayerOptions(
+            markers: [
+              for (final building in nearestBuildings)
+                Marker(
+                  key: keys[building.databaseId],
+                  point: building.location,
+                  width: 100.0,
+                  height: 50.0,
+                  builder: (BuildContext context) {
+                    return Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.3)),
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 5.0,
+                          horizontal: 10.0,
+                        ),
+                        child: Text(
+                          makeBuildingLabel(building),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: kFieldFontSize),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              for (final entrance in nearestEntrances)
+                Marker(
+                  key: keys[entrance.databaseId],
+                  point: entrance.location,
+                  width: 100.0,
+                  height: 50.0,
+                  builder: (BuildContext context) {
+                    return Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.3)),
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.yellow,
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 5.0,
+                          horizontal: 10.0,
+                        ),
+                        child: Text(
+                          makeEntranceLabel(entrance),
+                          style: TextStyle(fontSize: 14.0),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+            ],
+            onTap: (tapped) {
+              final objects =
+                  tapped.map((k) => findByKey(k)).whereType<OsmChange>();
+              chooseEditorToOpen(objects);
+            },
+          ),
+          MapDragCreateOptions(
+            buttons: [
+              DragButton(
+                  icon: Icons.house,
+                  bottom: 20.0,
+                  left: 20.0,
+                  onDragEnd: (pos) {
+                    editBuilding(null, pos);
+                  },
+                  onTap: () async {
+                    final pos = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            MapChooserPage(location: location),
+                      ),
+                    );
+                    if (pos != null) editBuilding(null, pos);
+                  }),
+              DragButton(
+                  icon: Icons.sensor_door,
+                  bottom: 20.0,
+                  right: 20.0,
+                  onDragStart: () {
+                    if (savedZoom == null) {
+                      savedZoom = controller.zoom;
+                      controller.move(controller.center, savedZoom! + 1);
+                    }
+                  },
+                  onDragEnd: (pos) {
+                    if (savedZoom != null) {
+                      controller.move(controller.center, savedZoom!);
+                      savedZoom = null;
+                    }
+                    editEntrance(null, pos);
+                  },
+                  onTap: () async {
+                    final pos = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            MapChooserPage(location: location),
+                      ),
+                    );
+                    if (pos != null) editEntrance(null, pos);
+                  }),
+            ],
+          ),
+        ],
         children: [
           TileLayerWidget(
             options: buildTileLayerOptions(imagery),
@@ -208,71 +406,6 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
           MarkerLayerWidget(
             options: MarkerLayerOptions(
               markers: [
-                for (final building in nearestBuildings)
-                  Marker(
-                    point: building.location,
-                    width: 100.0,
-                    height: 50.0,
-                    builder: (BuildContext context) {
-                      return GestureDetector(
-                        child: Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black.withOpacity(0.3)),
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white.withOpacity(0.7),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 5.0,
-                              horizontal: 10.0,
-                            ),
-                            child: Text(
-                              makeBuildingLabel(building),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: kFieldFontSize),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          editBuilding(building);
-                        },
-                      );
-                    },
-                  ),
-                for (final entrance in nearestEntrances)
-                  Marker(
-                    point: entrance.location,
-                    width: 100.0,
-                    height: 50.0,
-                    builder: (BuildContext context) {
-                      return GestureDetector(
-                        child: Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black.withOpacity(0.3)),
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white.withOpacity(0.7),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 5.0,
-                              horizontal: 10.0,
-                            ),
-                            child: Text(
-                              makeEntranceLabel(entrance),
-                              style: TextStyle(fontSize: 12.0),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          // TODO: on tap check underlying entrances and buildings,
-                          // and if found, open a chooser.
-                          editEntrance(entrance);
-                        },
-                      );
-                    },
-                  ),
                 if (!ref.watch(trackingProvider))
                   Marker(
                     point: center,
@@ -282,6 +415,16 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
               ],
             ),
           ),
+          if (newLocation != null)
+            CircleLayerWidget(
+              options: CircleLayerOptions(circles: [
+                CircleMarker(
+                  point: newLocation!,
+                  radius: 5.0,
+                  color: Colors.red,
+                ),
+              ]),
+            ),
         ],
       ),
     );

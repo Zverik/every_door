@@ -19,16 +19,20 @@ class OsmChange extends ChangeNotifier {
 
   Map<String, String?> newTags;
   LatLng? newLocation;
+  List<int>? newNodes; // WARNING: Not stored to the database!
   bool _deleted;
   String? error;
   final String databaseId;
   String? _mainKey;
+  bool snapToBuilding;
 
   OsmChange(this.element,
       {Map<String, String?>? newTags,
       this.newLocation,
       bool hardDeleted = false,
       this.error,
+      this.snapToBuilding = false,
+      this.newNodes,
       String? databaseId})
       : newTags = newTags ?? {},
         _deleted = hardDeleted,
@@ -44,6 +48,7 @@ class OsmChange extends ChangeNotifier {
         newLocation = location,
         element = null,
         _deleted = false,
+        snapToBuilding = false,
         databaseId = Uuid().v1() {
     _updateMainKey();
     check();
@@ -80,6 +85,7 @@ class OsmChange extends ChangeNotifier {
   bool get isPoint => element?.isPoint ?? true;
   bool get canDelete =>
       (element?.isPoint ?? true) && !(element?.isMember ?? false);
+  ElementKind get kind => detectKind(getFullTags());
 
   revert() {
     // Cannot revert a new object
@@ -175,6 +181,7 @@ class OsmChange extends ChangeNotifier {
     'new_tags text',
     'deleted integer',
     'error text',
+    'snap integer',
   ];
 
   factory OsmChange.fromJson(Map<String, dynamic> data) {
@@ -189,6 +196,7 @@ class OsmChange extends ChangeNotifier {
       newLocation: location,
       hardDeleted: data['deleted'] == 1,
       error: data['error'],
+      snapToBuilding: data['snap'] == 1,
       databaseId: data['id'],
     );
   }
@@ -204,6 +212,7 @@ class OsmChange extends ChangeNotifier {
       'new_lon':
           loc == null ? null : (loc.longitude * kCoordinatePrecision).toInt(),
       'deleted': _deleted ? 1 : 0,
+      // 'snap': snapToBuilding ? 1 : 0,
       'error': error,
     };
   }

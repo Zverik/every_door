@@ -47,14 +47,16 @@ class UploadedElement {
 
   const UploadedElement(this.oldElement, {this.newId, this.newVersion});
 
-  OsmElement get newElement => oldElement.copyWith(id: newId, version: newVersion);
+  OsmElement get newElement =>
+      oldElement.copyWith(id: newId, version: newVersion);
 
   static UploadedElement? fromXML(XmlNode node, Map<OsmId, OsmElement> idMap) {
     final ref = UploadedElementRef.fromXML(node);
     if (ref == null) return null;
     final element = idMap[ref.oldId];
     if (element == null) return null;
-    return UploadedElement(element, newId: ref.newId, newVersion: ref.newVersion);
+    return UploadedElement(element,
+        newId: ref.newId, newVersion: ref.newVersion);
   }
 }
 
@@ -156,11 +158,13 @@ class MarkReferenced extends Converter<List<OsmElement>, List<OsmElement>> {
       // Build an iterable of references
       Iterable<OsmId>? refs;
       if (element.nodes != null) {
-        refs = element.nodes?.map((nodeId) => OsmId(OsmElementType.node, nodeId));
+        refs =
+            element.nodes?.map((nodeId) => OsmId(OsmElementType.node, nodeId));
       } else if (element.members != null) {
-        refs = element.members?.map((member) => member.id);
+        // Skipping relation members, since the dependency is not geometric.
+        // refs = element.members?.map((member) => member.id);
       }
-      
+
       // Process references in this element
       if (refs != null) {
         for (final ref in refs) {
@@ -330,7 +334,8 @@ class ParseUploaded extends Converter<List<XmlNode>, List<UploadedElementRef>> {
   }
 
   @override
-  Sink<List<XmlNode>> startChunkedConversion(Sink<List<UploadedElementRef>> sink) {
+  Sink<List<XmlNode>> startChunkedConversion(
+      Sink<List<UploadedElementRef>> sink) {
     return ParseUploadedSink(sink);
   }
 }

@@ -10,7 +10,7 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
-import 'package:every_door/providers/micromapping.dart';
+import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_auth.dart';
@@ -107,7 +107,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
       return;
 
     final provider = ref.read(osmDataProvider);
-    final micromapping = ref.read(micromappingProvider);
+    final editorMode = ref.read(editorModeProvider);
     final filter = ref.read(poiFilterProvider);
     final location = forceLocation ?? ref.read(effectiveLocationProvider)!;
     // Query for amenities around the location.
@@ -118,7 +118,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     data = data
         .where((e) =>
             e.isModified ||
-            (micromapping
+            (editorMode == EditorMode.micromapping
                 ? (e.element?.isMicro ?? true)
                 : (e.element?.isAmenity ?? true)))
         .toList();
@@ -181,7 +181,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
   }
 
   micromappingTap(LatLngBounds area) async {
-    if (ref.read(micromappingProvider)) {
+    if (ref.read(editorModeProvider) == EditorMode.micromapping) {
       // TODO: check if there is but one amenity there.
       List<OsmChange> amenitiesAtCenter = nearestPOI
           .where((element) => area.contains(element.location))
@@ -215,7 +215,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
   @override
   Widget build(BuildContext context) {
     final location = ref.read(effectiveLocationProvider);
-    final micromapping = ref.watch(micromappingProvider);
+    final editorMode = ref.watch(editorModeProvider);
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
     final hasFilter = ref.watch(poiFilterProvider).isNotEmpty;
@@ -226,8 +226,10 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
       updateNearest();
     });
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
-      // TODO: mapController.setLocation(next)?
-      setState(() {});
+      mapController.setLocation(next, emitDrag: false, onlyIfFar: true);
+      updateFarFromUser();
+      updateNearest();
+      updateAreaStatus();
     });
 
     final loc = AppLocalizations.of(context)!;
@@ -323,13 +325,6 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                 controller: mapController,
                 onDragEnd: (pos) {
                   ref.read(effectiveLocationProvider.notifier).set(pos);
-                  updateFarFromUser();
-                  updateNearest();
-                  updateAreaStatus();
-                },
-                onTrack: (pos) {
-                  // TODO: adjust zoom level to fit half of nearby points
-                  // (but restricted to 17-19 probably)
                 },
                 onTap: micromappingTap,
               ),
@@ -361,7 +356,8 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                 },
               ),
             Expanded(
-              flex: micromapping || farFromUser ? 1 : 3,
+              flex:
+                  editorMode == EditorMode.micromapping || farFromUser ? 1 : 3,
               child: apiStatus != ApiStatus.idle
                   ? Column(
                       mainAxisSize: MainAxisSize.max,

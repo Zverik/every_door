@@ -1,4 +1,4 @@
-import 'package:every_door/fields/helpers/radio_field.dart';
+import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/osm_data.dart';

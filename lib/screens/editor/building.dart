@@ -1,5 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:every_door/fields/helpers/radio_field.dart';
+import 'package:every_door/models/address.dart';
+import 'package:every_door/widgets/address_form.dart';
+import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/need_update.dart';
@@ -81,13 +83,20 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     final loc = AppLocalizations.of(context)!;
     return Column(
       children: [
+        AddressForm(
+          location: widget.location,
+          initialAddress: StreetAddress.fromTags(building.getFullTags()),
+          autoFocus: building['addr:housenumber'] == null,
+          onChange: (addr) {
+            addr.setTags(building);
+          },
+        ),
         Table(
           columnWidths: const {
             0: FixedColumnWidth(100.0),
           },
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: [
-            // TODO: address
             TableRow(
               children: [
                 Padding(
@@ -149,9 +158,15 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                   child: Text('Type', style: kFieldTextStyle),
                 ),
                 RadioField(
-                  // TODO: Choose best values
                   // TODO: labels
-                  options: const ['house', 'apartments'],
+                  options: const [
+                    'house',
+                    'apartments',
+                    'retail',
+                    'commercial',
+                    'shed',
+                    'industrial'
+                  ],
                   value: building['building'] == 'yes'
                       ? null
                       : building['building'],

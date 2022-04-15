@@ -82,12 +82,13 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   late HoursData hours;
   HoursInterval? defaultInterval;
   final ScrollController _scrollController = ScrollController();
-  bool forceRaw = false;
+  bool isRaw = false;
 
   @override
   initState() {
     super.initState();
     hours = HoursData(widget.hours);
+    isRaw = hours.raw;
     findDefaultInterval();
   }
 
@@ -137,11 +138,11 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
       appBar: AppBar(
         title: Text(loc.fieldHoursTitle),
         actions: [
-          if (!hours.raw && !forceRaw)
+          if (!hours.raw && !isRaw)
             IconButton(
               onPressed: () {
                 setState(() {
-                  forceRaw = true;
+                  isRaw = true;
                 });
               },
               icon: Icon(Icons.create),
@@ -154,13 +155,14 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
           ),
         ],
       ),
-      body: hours.raw || forceRaw
+      body: isRaw
           ? buildRawHoursEditor(context)
           : buildFragmentsEditor(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.done),
         onPressed: () {
-          Navigator.pop(context, hours.buildHours());
+          final result = isRaw ? hours.hours : hours.buildHours();
+          Navigator.pop(context, result);
         },
       ),
     );

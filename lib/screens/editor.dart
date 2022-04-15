@@ -326,40 +326,55 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   Widget buildMap(BuildContext context) {
-    return SizedBox(
-      height: 100.0,
-      child: FlutterMap(
-        options: MapOptions(
-          center: amenity.location,
-          zoom: 17,
-          interactiveFlags: 0,
-          onTap: (pos, center) async {
-            final newLocation = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    MapChooserPage(location: amenity.location),
-              ),
-            );
-            if (newLocation != null) {
-              setState(() {
-                amenity.location = newLocation;
-              });
-            }
-          },
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 50.0,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.location_pin),
+          ),
         ),
-        children: [
-          TileLayerWidget(options: buildTileLayerOptions(kOSMImagery)),
-          MarkerLayerWidget(
-              options: MarkerLayerOptions(markers: [
-            Marker(
-              point: amenity.location,
-              anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
-              builder: (ctx) => Icon(Icons.location_pin),
+        Expanded(
+          child: SizedBox(
+            height: 100.0,
+            child: FlutterMap(
+              options: MapOptions(
+                center: amenity.location,
+                zoom: 17,
+                interactiveFlags: 0,
+                allowPanningOnScrollingParent: false,
+                onTap: (pos, center) async {
+                  final newLocation = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MapChooserPage(location: amenity.location),
+                    ),
+                  );
+                  if (newLocation != null) {
+                    setState(() {
+                      amenity.location = newLocation;
+                    });
+                  }
+                },
+              ),
+              children: [
+                TileLayerWidget(options: buildTileLayerOptions(kOSMImagery)),
+                MarkerLayerWidget(
+                    options: MarkerLayerOptions(markers: [
+                  Marker(
+                    point: amenity.location,
+                    anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
+                    builder: (ctx) => Icon(Icons.location_pin),
+                  ),
+                ])),
+              ],
             ),
-          ])),
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 

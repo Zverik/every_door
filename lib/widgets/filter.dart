@@ -1,5 +1,5 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/fields/helpers/radio_field.dart';
+import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/filter.dart';
 import 'package:every_door/models/floor.dart';

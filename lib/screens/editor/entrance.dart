@@ -1,6 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/fields/helpers/radio_field.dart';
+import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,16 +20,13 @@ class EntranceEditorPane extends ConsumerStatefulWidget {
 }
 
 class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
-  bool addToContour = false;
   late OsmChange entrance;
-  OsmChange? nearestBuilding;
 
   @override
   void initState() {
     super.initState();
     entrance = widget.entrance ??
         OsmChange.create(tags: {'entrance': 'yes'}, location: widget.location);
-    // TODO: find the nearest building contour
   }
 
   bool isValidFlats(String? value) {
@@ -42,9 +39,6 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     entrance.removeTag(OsmChange.kCheckedKey);
     final changes = ref.read(changesProvider);
     changes.saveChange(entrance);
-    if (addToContour && nearestBuilding != null) {
-      // TODO
-    }
     ref.read(needMapUpdateProvider).trigger();
     Navigator.pop(context);
   }
@@ -53,7 +47,6 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     final changes = ref.read(changesProvider);
     if (entrance.isNew) {
       changes.deleteChange(entrance);
-      // TODO: delete node from relevant building
     } else {
       for (final k in {
         'entrance',
@@ -106,7 +99,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                 ),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  autofocus: true,
+                  autofocus: entrance['addr:flats'] == null,
                   initialValue: entrance['addr:flats'],
                   style: kFieldTextStyle,
                   decoration: const InputDecoration(hintText: '16-29;32'),
@@ -208,35 +201,39 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
             ),
           ],
         ),
-        if (nearestBuilding != null)
+        // TODO: enable when snapping is done
+        if (entrance.isNew && false)
           SwitchListTile(
             title: Text(
               'Snap to building contour',
               style: kFieldTextStyle,
             ),
-            value: addToContour,
+            value: entrance.snapToBuilding,
             onChanged: (bool newValue) {
               setState(() {
-                addToContour = newValue;
+                entrance.snapToBuilding = newValue;
               });
             },
           ),
         Row(
           children: [
-            TextButton(
-              child: Text(loc.editorDeleteButton), // TODO: does the label fit?
-              onPressed: () async {
-                final answer = await showOkCancelAlertDialog(
-                  context: context,
-                  title: loc.editorDeleteTitle('entrance'), // TODO: better msg
-                  okLabel: loc.editorDeleteButton,
-                  isDestructiveAction: true,
-                );
-                if (answer == OkCancelResult.ok) {
-                  deleteAndClose();
-                }
-              },
-            ),
+            if (widget.entrance != null && entrance.canDelete)
+              TextButton(
+                child:
+                    Text(loc.editorDeleteButton), // TODO: does the label fit?
+                onPressed: () async {
+                  final answer = await showOkCancelAlertDialog(
+                    context: context,
+                    title:
+                        loc.editorDeleteTitle('entrance'), // TODO: better msg
+                    okLabel: loc.editorDeleteButton,
+                    isDestructiveAction: true,
+                  );
+                  if (answer == OkCancelResult.ok) {
+                    deleteAndClose();
+                  }
+                },
+              ),
             Expanded(child: Container()),
             TextButton(
               child: Text(MaterialLocalizations.of(context).cancelButtonLabel),

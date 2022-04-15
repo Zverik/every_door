@@ -1,5 +1,5 @@
 import 'package:every_door/providers/changes.dart';
-import 'package:every_door/providers/micromapping.dart';
+import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/screens/entrances.dart';
@@ -24,7 +24,7 @@ class SettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final changes = ref.watch(changesProvider);
     final osmData = ref.watch(osmDataProvider);
-    final micromapping = ref.watch(micromappingProvider);
+    final editorMode = ref.watch(editorModeProvider);
     final login = ref.watch(authProvider);
     final loc = AppLocalizations.of(context)!;
     final titlePadding = EdgeInsets.only(
@@ -62,9 +62,11 @@ class SettingsPage extends ConsumerWidget {
                 subtitle: 'Benches, trees, and street lamps',
                 enabled: true,
                 onToggle: (value) {
-                  ref.read(micromappingProvider.notifier).set(value);
+                  ref
+                      .read(editorModeProvider.notifier)
+                      .set(value ? EditorMode.micromapping : EditorMode.poi);
                 },
-                switchValue: micromapping,
+                switchValue: editorMode == EditorMode.micromapping,
               ),
             ],
           ),

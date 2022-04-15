@@ -12,6 +12,8 @@ _Unreleased_
 * Reduced distance for switching into the big map mode.
 * Hopefull solved absence of POI on app restore.
 * Added `club=*` to supported tags.
+* Allowing moving nodes that are relation members.
+* Better indication that the map in the editor is just another editable field.
 
 ## 0.1.3
 

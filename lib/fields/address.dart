@@ -1,5 +1,5 @@
 import 'package:every_door/fields/helpers/new_addr.dart';
-import 'package:every_door/fields/helpers/radio_field.dart';
+import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/osm_data.dart';

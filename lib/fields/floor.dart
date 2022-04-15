@@ -8,7 +8,7 @@ import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'helpers/radio_field.dart';
+import '../widgets/radio_field.dart';
 
 class FloorPresetField extends PresetField {
   FloorPresetField({required String label})

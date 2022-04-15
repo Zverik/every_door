@@ -6,7 +6,7 @@ import 'package:every_door/helpers/closest_points.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
-import 'package:every_door/providers/micromapping.dart';
+import 'package:every_door/providers/editor_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -14,11 +14,11 @@ import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AmenityMapController {
-  Function(LatLng, bool)? moveListener;
+  Function(LatLng, bool, bool)? moveListener;
   Function(Iterable<LatLng>)? zoomListener;
 
-  setLocation(LatLng location, {bool emitDrag = true}) {
-    if (moveListener != null) moveListener!(location, emitDrag);
+  setLocation(LatLng location, {bool emitDrag = true, bool onlyIfFar = false}) {
+    if (moveListener != null) moveListener!(location, emitDrag, onlyIfFar);
   }
 
   zoomToFit(Iterable<LatLng> locations) {
@@ -105,7 +105,14 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     }
   }
 
-  void onControllerLocation(LatLng location, bool emitDrag) {
+  void onControllerLocation(LatLng location, bool emitDrag, bool onlyIfFar) {
+    if (onlyIfFar) {
+      const maxDist = 1e-7; // degrees
+      final center = mapController.center;
+      final dist = (center.longitude - location.longitude).abs() +
+          (center.latitude - location.latitude).abs();
+      if (dist / 2 <= maxDist) return;
+    }
     mapController.move(location, mapController.zoom);
     if (emitDrag && widget.onDrag != null) {
       widget.onDrag!(location);
@@ -204,9 +211,11 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     });
 
     // For micromapping, zoom in and out.
-    ref.listen<LatLngBounds?>(microZoomedInProvider, (_, LatLngBounds? newState) {
-      double targetZoom =
-          newState != null ? kMicromappingTapZoom : (savedZoom ?? mapController.zoom);
+    ref.listen<LatLngBounds?>(microZoomedInProvider,
+        (_, LatLngBounds? newState) {
+      double targetZoom = newState != null
+          ? kMicromappingTapZoom
+          : (savedZoom ?? mapController.zoom);
       savedZoom = mapController.zoom;
       mapController.move(newState?.center ?? mapController.center, targetZoom);
     });
