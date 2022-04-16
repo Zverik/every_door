@@ -7,6 +7,6 @@ class RoomPresetField extends TextPresetField {
           key: 'addr:door',
           label: label ?? 'Room Number',
           icon: Icons.door_front_door_outlined,
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.visiblePassword,
         );
 }

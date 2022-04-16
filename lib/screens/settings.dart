@@ -1,5 +1,6 @@
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/editor_mode.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/screens/entrances.dart';
@@ -26,6 +27,7 @@ class SettingsPage extends ConsumerWidget {
     final osmData = ref.watch(osmDataProvider);
     final editorMode = ref.watch(editorModeProvider);
     final login = ref.watch(authProvider);
+    final editorSettings = ref.watch(editorSettingsProvider);
     final loc = AppLocalizations.of(context)!;
     final titlePadding = EdgeInsets.only(
       left: 15.0,
@@ -60,7 +62,6 @@ class SettingsPage extends ConsumerWidget {
               SettingsTile.switchTile(
                 title: loc.settingsMicromapping,
                 subtitle: 'Benches, trees, and street lamps',
-                enabled: true,
                 onToggle: (value) {
                   ref
                       .read(editorModeProvider.notifier)
@@ -129,6 +130,24 @@ class SettingsPage extends ConsumerWidget {
                         builder: (context) => ImageryPage(location)),
                   );
                 },
+              ),
+              SettingsTile.switchTile(
+                title: 'Prefer "contact:" prefix',
+                onToggle: (value) {
+                  ref
+                      .read(editorSettingsProvider.notifier)
+                      .setPreferContact(value);
+                },
+                switchValue: editorSettings.preferContact,
+              ),
+              SettingsTile.switchTile(
+                title: 'Fix Numeric Keyboard',
+                onToggle: (value) {
+                  ref
+                      .read(editorSettingsProvider.notifier)
+                      .setFixNumKeyboard(value);
+                },
+                switchValue: editorSettings.fixNumKeyboard,
               ),
             ],
           ),

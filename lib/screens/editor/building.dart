@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/models/address.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/address_form.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/models/amenity.dart';

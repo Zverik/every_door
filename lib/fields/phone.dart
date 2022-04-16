@@ -1,10 +1,12 @@
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PhonePresetField extends PresetField {
   PhonePresetField(
@@ -25,7 +27,7 @@ class PhonePresetField extends PresetField {
       tags.containsKey('phone') || tags.containsKey('contact:phone');
 }
 
-class PhoneInputField extends StatefulWidget {
+class PhoneInputField extends ConsumerStatefulWidget {
   final PhonePresetField field;
   final OsmChange element;
 
@@ -35,11 +37,12 @@ class PhoneInputField extends StatefulWidget {
   _PhoneInputFieldState createState() => _PhoneInputFieldState();
 }
 
-class _PhoneInputFieldState extends State<PhoneInputField> {
+class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
   late final TextEditingController _controller;
   late final FocusNode _focus;
   late final List<String> numbers;
   late final String? countryIso;
+  late final String phoneTag;
 
   @override
   void initState() {
@@ -51,7 +54,7 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
         submitPhone(_controller.text);
       }
     });
-    
+
     numbers = (widget.element.getContact('phone') ?? '')
         .split(';')
         .map((e) => e.trim())
@@ -62,6 +65,10 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
       lat: widget.element.location.latitude,
       lon: widget.element.location.longitude,
     );
+
+    phoneTag = ref.read(editorSettingsProvider).preferContact
+        ? 'contact:phone'
+        : 'phone';
   }
 
   @override
@@ -103,7 +110,7 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
     if (numbers.contains(phone)) return;
     setState(() {
       numbers.add(phone);
-      widget.element.setContact('phone', numbers.join('; '));
+      widget.element.setContact(phoneTag, numbers.join('; '));
     });
   }
 
@@ -122,10 +129,11 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
               labelText: widget.field.label,
             ),
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value) =>
-                value != null && value.isNotEmpty && format(value.trim()) == null
-                    ? 'Wrong phone'
-                    : null,
+            validator: (value) => value != null &&
+                    value.isNotEmpty &&
+                    format(value.trim()) == null
+                ? 'Wrong phone'
+                : null,
             onFieldSubmitted: submitPhone,
           ),
         ),
@@ -146,7 +154,8 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
                     child: GestureDetector(
                       child: Text(number, style: kFieldTextStyle),
                       onTap: () {
-                        if (kFollowLinks && RegExp(r'^\+?[0-9 .-]+$').hasMatch(number)) {
+                        if (kFollowLinks &&
+                            RegExp(r'^\+?[0-9 .-]+$').hasMatch(number)) {
                           launch('tel:$number');
                         }
                       },
@@ -157,7 +166,7 @@ class _PhoneInputFieldState extends State<PhoneInputField> {
                     onTap: () {
                       setState(() {
                         numbers.remove(number);
-                        widget.element.setContact('phone', numbers.join('; '));
+                        widget.element.setContact(phoneTag, numbers.join('; '));
                       });
                     },
                   ),

@@ -49,11 +49,11 @@ abstract class WebsiteProvider {
       key.startsWith('contact:') ? element[key] : element.getContact(key);
 
   /// Replaces tag value for element.
-  setValue(OsmChange element, String value) {
+  setValue(OsmChange element, String value, {bool preferContact = false}) {
     if (key.startsWith('contact:'))
       element[key] = value;
     else
-      element.setContact(key, value);
+      element.setContact(preferContact ? 'contact:$key' : key, value);
   }
 }
 
@@ -198,42 +198,47 @@ class OkProvider extends _ProviderHelper {
 }
 
 class TelegramProvider extends _ProviderHelper {
-  TelegramProvider() : super(
-    icon: LineIcons.telegram,
-    label: 'Telegram',
-    prefixes: ['tg', 'telegram'],
-    key: 'contact:telegram',
-    regexp: RegExp(r'(?://t.me/|^t.me/)?([^/ ]+)/?$'),
-    format: 'https://t.me/%s',
-  );
+  TelegramProvider()
+      : super(
+          icon: LineIcons.telegram,
+          label: 'Telegram',
+          prefixes: ['tg', 'telegram'],
+          key: 'contact:telegram',
+          regexp: RegExp(r'(?://t.me/|^t.me/)?([^/ ]+)/?$'),
+          format: 'https://t.me/%s',
+        );
 }
 
 class WhatsappProvider extends _ProviderHelper {
-  WhatsappProvider() : super(
-    icon: LineIcons.whatSApp,
-    label: 'WhatsApp',
-    key: 'contact:whatsapp',
-    regexp: RegExp(r'(\+[\d -]+\d)'),
-  );
+  WhatsappProvider()
+      : super(
+          icon: LineIcons.whatSApp,
+          label: 'WhatsApp',
+          key: 'contact:whatsapp',
+          regexp: RegExp(r'(\+[\d -]+\d)'),
+        );
 }
 
 class ViberProvider extends _ProviderHelper {
-  ViberProvider() : super(
-    icon: LineIcons.viber,
-    label: 'Viber',
-    prefixes: ['viber'],
-    key: 'contact:viber',
-    regexp: RegExp(r'(?:chats\.viber\.com/|chatURI=)?(\+[\d -]+\d|[^/ ]+)/?$'),
-  );
+  ViberProvider()
+      : super(
+          icon: LineIcons.viber,
+          label: 'Viber',
+          prefixes: ['viber'],
+          key: 'contact:viber',
+          regexp: RegExp(
+              r'(?:chats\.viber\.com/|chatURI=)?(\+[\d -]+\d|[^/ ]+)/?$'),
+        );
 }
 
 class LinkedinProvider extends _ProviderHelper {
-  LinkedinProvider() : super(
-    icon: LineIcons.linkedin,
-    label: 'LinkedIn',
-    prefixes: ['linkedin', 'li'],
-    key: 'contact:linkedin',
-    regexp: RegExp(r'(?:linkedin\.com/company/)?([^/ ]+)/?$'),
-    format: 'https://www.linkedin.com/company/%s',
-  );
+  LinkedinProvider()
+      : super(
+          icon: LineIcons.linkedin,
+          label: 'LinkedIn',
+          prefixes: ['linkedin', 'li'],
+          key: 'contact:linkedin',
+          regexp: RegExp(r'(?:linkedin\.com/company/)?([^/ ]+)/?$'),
+          format: 'https://www.linkedin.com/company/%s',
+        );
 }

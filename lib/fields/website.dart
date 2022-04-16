@@ -1,9 +1,11 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'helpers/website_fmt.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WebsiteField extends PresetField {
   WebsiteField({required String label})
@@ -23,17 +25,17 @@ class WebsiteField extends PresetField {
   }
 }
 
-class WebsiteInputField extends StatefulWidget {
+class WebsiteInputField extends ConsumerStatefulWidget {
   final OsmChange element;
   final WebsiteField field;
 
   const WebsiteInputField(this.field, this.element);
 
   @override
-  State<WebsiteInputField> createState() => _WebsiteInputFieldState();
+  ConsumerState<WebsiteInputField> createState() => _WebsiteInputFieldState();
 }
 
-class _WebsiteInputFieldState extends State<WebsiteInputField> {
+class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
   late TextEditingController _controller;
   late WebsiteProvider _provider;
   late FocusNode _fieldFocus;
@@ -68,7 +70,8 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
     if (value.isEmpty || !_provider.isValid(value)) return;
     _controller.clear();
     setState(() {
-      _provider.setValue(widget.element, _provider.format(value));
+      _provider.setValue(widget.element, _provider.format(value),
+          preferContact: ref.read(editorSettingsProvider).preferContact);
     });
   }
 
@@ -102,8 +105,7 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment:
-                        CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(
                             provider.icon,
@@ -185,9 +187,13 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: GestureDetector(
-                        child: Text(cutEllipsis(website.provider.display(website.value), 25), style: kFieldTextStyle),
+                        child: Text(
+                            cutEllipsis(
+                                website.provider.display(website.value), 25),
+                            style: kFieldTextStyle),
                         onTap: () {
-                          if (kFollowLinks && website.value.startsWith('http')) {
+                          if (kFollowLinks &&
+                              website.value.startsWith('http')) {
                             launch(website.value);
                           }
                         },
@@ -196,8 +202,11 @@ class _WebsiteInputFieldState extends State<WebsiteInputField> {
                     GestureDetector(
                       child: Icon(Icons.close, size: 30.0),
                       onTap: () {
+                        final contact =
+                            ref.read(editorSettingsProvider).preferContact;
                         setState(() {
-                          website.provider.setValue(widget.element, '');
+                          website.provider.setValue(widget.element, '',
+                              preferContact: contact);
                         });
                       },
                     ),

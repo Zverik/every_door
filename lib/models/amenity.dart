@@ -308,8 +308,14 @@ class OsmChange extends ChangeNotifier {
   String? getContact(String key) => this[key] ?? this['contact:$key'];
 
   setContact(String key, String value) {
-    if (this['contact:$key'] != null)
-      this['contact:$key'] = value;
+    String alternativeKey;
+    if (key.startsWith('contact:'))
+      alternativeKey = key.replaceFirst('contact:', '');
+    else
+      alternativeKey = 'contact:$key';
+
+    if (this[alternativeKey] != null)
+      this[alternativeKey] = value;
     else
       this[key] = value;
   }

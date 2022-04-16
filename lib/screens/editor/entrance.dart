@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/need_update.dart';
@@ -83,6 +84,8 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final editorSettings = ref.watch(editorSettingsProvider);
+
     return Column(
       children: [
         Table(
@@ -98,7 +101,9 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                   child: Text('Flats', style: kFieldTextStyle),
                 ),
                 TextFormField(
-                  keyboardType: TextInputType.number,
+                  keyboardType: editorSettings.fixNumKeyboard
+                      ? TextInputType.visiblePassword
+                      : TextInputType.number,
                   autofocus: entrance['addr:flats'] == null,
                   initialValue: entrance['addr:flats'],
                   style: kFieldTextStyle,

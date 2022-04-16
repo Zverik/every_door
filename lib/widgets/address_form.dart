@@ -1,4 +1,5 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +86,8 @@ class _AddressFormState extends ConsumerState<AddressForm> {
 
   @override
   Widget build(BuildContext context) {
+    final editorSettings = ref.watch(editorSettingsProvider);
+
     return Table(
       columnWidths: {
         0: FixedColumnWidth(widget.columnWidth),
@@ -99,7 +102,9 @@ class _AddressFormState extends ConsumerState<AddressForm> {
             ),
             TextFormField(
               controller: _houseController,
-              keyboardType: TextInputType.number,
+              keyboardType: editorSettings.fixNumKeyboard
+                  ? TextInputType.visiblePassword
+                  : TextInputType.number,
               autofocus: widget.autoFocus,
               style: kFieldTextStyle,
               decoration: const InputDecoration(hintText: '1, 89, 154A, ...'),
@@ -120,7 +125,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
             ),
             TextFormField(
               controller: _unitController,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.visiblePassword,
               style: kFieldTextStyle,
               decoration: const InputDecoration(hintText: 'optional'),
               onChanged: (value) {
@@ -155,9 +160,8 @@ class _AddressFormState extends ConsumerState<AddressForm> {
                 child: Text('Place', style: kFieldTextStyle),
               ),
               RadioField(
-                  options: nearestPlaces.isNotEmpty
-                      ? nearestPlaces
-                      : nearestCities,
+                  options:
+                      nearestPlaces.isNotEmpty ? nearestPlaces : nearestCities,
                   value: place,
                   onChange: (value) {
                     setState(() {
