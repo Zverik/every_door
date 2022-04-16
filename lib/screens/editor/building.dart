@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/widgets/address_form.dart';
 import 'package:every_door/widgets/radio_field.dart';
@@ -25,9 +26,11 @@ class BuildingEditorPane extends ConsumerStatefulWidget {
 
 class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   late final OsmChange building;
+  bool manualLevels = false;
   List<String> nearestStreets = [];
   List<String> nearestPlaces = [];
   List<String> nearestCities = [];
+  List<String> nearestLevels = [];
 
   @override
   void initState() {
@@ -35,6 +38,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     building = widget.building ??
         OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
     updateStreets();
+    updateLevels();
   }
 
   List<String> _filterDuplicates(Iterable<String?> source) {
@@ -51,6 +55,39 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
       nearestStreets = _filterDuplicates(addrs.map((e) => e.street));
       nearestPlaces = _filterDuplicates(addrs.map((e) => e.place));
       nearestCities = _filterDuplicates(addrs.map((e) => e.city));
+    });
+  }
+
+  updateLevels() async {
+    // TODO: wtf is this mess?! Simplify.
+    final provider = ref.read(osmDataProvider);
+    const radius = kVisibilityRadius;
+    List<OsmChange> data = await provider.getElements(widget.location, radius);
+    final levelCount = <int, int>{};
+    const distance = DistanceEquirectangular();
+    data
+        .where((e) =>
+            distance(widget.location, e.location) <= radius &&
+            e['building:levels'] != null)
+        .forEach((e) {
+      final levels = int.tryParse(e['building:levels']!);
+      if (levels != null) {
+        levelCount[levels] = (levelCount[levels] ?? 0) + 1;
+      }
+    });
+    levelCount.remove(1);
+    levelCount.remove(2);
+    if (levelCount.isEmpty) return;
+
+    final values = levelCount.entries.toList();
+    values.sort((a, b) => b.value.compareTo(a.value));
+
+    final nearestInt = values.map((e) => e.key).toList();
+    if (nearestInt.length > 2) nearestInt.removeRange(2, nearestInt.length);
+    nearestInt.sort();
+
+    setState(() {
+      nearestLevels = nearestInt.map((e) => e.toString()).toList();
     });
   }
 
@@ -81,6 +118,12 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+
+    const kManualLevelValue = '✍️';
+    final levelOptions = ['1', '2'] + nearestLevels;
+    if (building['building:levels'] == null)
+      levelOptions.add(kManualLevelValue);
+
     return Column(
       children: [
         AddressForm(
@@ -103,18 +146,36 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                   padding: const EdgeInsets.only(right: 10.0),
                   child: Text('Levels', style: kFieldTextStyle),
                 ),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  style: kFieldTextStyle,
-                  initialValue: building['building:levels'],
-                  validator: (value) =>
-                      validateLevels(value) ? null : 'Please enter a number',
-                  onChanged: (value) {
-                    setState(() {
-                      building['building:levels'] = value.trim();
-                    });
-                  },
-                ),
+                if (!manualLevels)
+                  RadioField(
+                    // TODO: get levels around and add two
+                    options: levelOptions,
+                    value: building['building:levels'],
+                    onChange: (value) {
+                      setState(() {
+                        if (value == kManualLevelValue) {
+                          manualLevels = true;
+                        } else {
+                          building['building:levels'] = value;
+                        }
+                      });
+                    },
+                  ),
+                if (manualLevels)
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    style: kFieldTextStyle,
+                    initialValue: building['building:levels'],
+                    autofocus: building['addr:housenumber'] != null &&
+                        building['building:levels'] == null,
+                    validator: (value) =>
+                        validateLevels(value) ? null : 'Please enter a number',
+                    onChanged: (value) {
+                      setState(() {
+                        building['building:levels'] = value.trim();
+                      });
+                    },
+                  ),
               ],
             ),
             TableRow(

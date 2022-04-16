@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
@@ -223,10 +222,27 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
     final imagery = ref.watch(selectedImageryProvider);
     final LatLng? trackLocation = ref.watch(geolocationProvider);
 
+    // When tracking location, move map and notify the poi list.
+    ref.listen<LatLng?>(geolocationProvider, (_, LatLng? location) {
+      if (location != null && ref.watch(trackingProvider)) {
+        controller.move(location, controller.zoom);
+        ref.read(effectiveLocationProvider.notifier).set(location);
+      }
+    });
+
+    // When turning the tracking on, move the map immediately.
+    ref.listen(trackingProvider, (_, bool newState) {
+      if (trackLocation != null && newState) {
+        controller.move(trackLocation, controller.zoom);
+        ref.read(effectiveLocationProvider.notifier).set(trackLocation);
+      }
+    });
+
     ref.listen(needMapUpdateProvider, (_, next) {
       updateNearest();
     });
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
+      controller.move(next, controller.zoom);
       updateNearest();
       setState(() {
         center = next;
