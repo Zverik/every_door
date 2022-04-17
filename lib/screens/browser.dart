@@ -130,7 +130,6 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
         break;
     }
 
-    final loc = AppLocalizations.of(context)!;
     return WillPopScope(
       onWillPop: () async {
         if (ref.read(microZoomedInProvider) != null) {

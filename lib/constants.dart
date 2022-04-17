@@ -37,5 +37,14 @@ const kDefaultPresets = [
   'shop/furniture', 'shop/shoes',
 ];
 
+const kDefaultMicroPresets = [
+  'amenity/waste_basket', 'amenity/recycling',
+  'amenity/post_box', 'amenity/bench',
+  'leisure/playground', 'leisure/fitness_station',
+  'amenity/drinking_water', 'amenity/bicycle_parking',
+  'highway/street_lamp', 'natural/tree',
+  'power/pole', 'power/tower',
+];
+
 const kEraseDatabase = false; // Clear all data on start — do not forget to set to false!
 const kOverwritePresets = false; // Set to false when done testing

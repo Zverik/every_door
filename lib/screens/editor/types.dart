@@ -34,8 +34,11 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     final prov = ref.read(presetProvider);
     final locale = Localizations.localeOf(context);
     if (substring.length < 2) {
-      final newPresets =
-          await prov.getPresetsById(kDefaultPresets, locale: locale);
+      final editorMode = ref.read(editorModeProvider);
+      final defaultList = editorMode == EditorMode.micromapping
+          ? kDefaultMicroPresets
+          : kDefaultPresets;
+      final newPresets = await prov.getPresetsById(defaultList, locale: locale);
       setState(() {
         resultsUpdated = DateTime.now();
         presets = newPresets;

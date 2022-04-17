@@ -5,9 +5,11 @@
 _Unreleased_
 
 * Redesiged mode buttons in Settings.
+* Refactored all mode editors, now the UI is consistent.
 * Editable preference for `payment:*` tags.
 * `ref` for an entrance can be typed manually.
 * Cancelling building or entrance editing did not work.
+* Added submitting buttons to phone and website fields.
 
 ## 0.1.4
 

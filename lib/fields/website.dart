@@ -62,17 +62,18 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
 
   String cutEllipsis(String value, int maxLength) {
     if (value.length <= maxLength) return value;
-    return value.substring(0, maxLength - 2) + '...';
+    return value.substring(0, maxLength - 2) + '…';
   }
 
-  submitWebsite(String value) {
+  bool submitWebsite(String value) {
     value = value.trim();
-    if (value.isEmpty || !_provider.isValid(value)) return;
+    if (value.isEmpty || !_provider.isValid(value)) return false;
     _controller.clear();
     setState(() {
       _provider.setValue(widget.element, _provider.format(value),
           preferContact: ref.read(editorSettingsProvider).preferContact);
     });
+    return true;
   }
 
   @override
@@ -162,7 +163,16 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
                   controller: _controller,
                   focusNode: _fieldFocus,
                   keyboardType: TextInputType.url,
-                  decoration: InputDecoration(hintText: _provider.label),
+                  decoration: InputDecoration(
+                    hintText: _provider.label,
+                    suffixIcon: GestureDetector(
+                      child: Icon(Icons.add_circle),
+                      onTap: () {
+                        if (submitWebsite(_controller.text))
+                          _fieldFocus.unfocus();
+                      },
+                    ),
+                  ),
                   onSubmitted: submitWebsite,
                 ),
               ),

@@ -102,16 +102,17 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
     }
   }
 
-  submitPhone(String value) {
+  bool submitPhone(String value) {
     value = value.trim();
-    if (value.length < 4) return null;
+    if (value.length < 4) return false;
     String phone = format(value) ?? value;
     _controller.clear();
-    if (numbers.contains(phone)) return;
+    if (numbers.contains(phone)) return true;
     setState(() {
       numbers.add(phone);
       widget.element.setContact(phoneTag, numbers.join('; '));
     });
+    return true;
   }
 
   @override
@@ -127,6 +128,12 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               labelText: widget.field.label,
+              suffixIcon: GestureDetector(
+                child: Icon(Icons.add_circle),
+                onTap: () {
+                  if (submitPhone(_controller.text)) _focus.unfocus();
+                },
+              ),
             ),
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) => value != null &&

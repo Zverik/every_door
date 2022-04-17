@@ -69,7 +69,7 @@ class UrlWebsiteProvider extends WebsiteProvider {
   String display(String full) => full;
 
   @override
-  bool isValid(String full) => RegExp(r'.\..').hasMatch(full);
+  bool isValid(String full) => RegExp(r'..\...').hasMatch(full);
 
   @override
   String format(String value) {
