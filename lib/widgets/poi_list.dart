@@ -1,3 +1,4 @@
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/constants.dart';
@@ -73,13 +74,19 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
         forceRadius ?? (farFromUser ? kFarVisibilityRadius : kVisibilityRadius);
     List<OsmChange> data = await provider.getElements(location, radius);
     // Filter for amenities (or not amenities).
-    data = data
-        .where((e) =>
-            e.isModified ||
-            (editorMode == EditorMode.micromapping
-                ? (e.element?.isMicro ?? true)
-                : (e.element?.isAmenity ?? true)))
-        .toList();
+    data = data.where((e) {
+      switch (e.kind) {
+        case ElementKind.amenity:
+          return editorMode == EditorMode.poi;
+        case ElementKind.micro:
+          return editorMode == EditorMode.micromapping;
+        case ElementKind.building:
+        case ElementKind.entrance:
+          return false;
+        default:
+          return e.isNew;
+      }
+    }).toList();
     // Apply the building filter.
     if (filter.isNotEmpty) {
       data = data.where((e) => filter.matches(e)).toList();

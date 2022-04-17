@@ -9,6 +9,7 @@ _Unreleased_
 * Editable preference for `payment:*` tags.
 * `ref` for an entrance can be typed manually.
 * Cancelling building or entrance editing did not work.
+* Editor displays modified objects only relevant to the current mode.
 * Added submitting buttons to phone and website fields.
 
 ## 0.1.4

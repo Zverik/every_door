@@ -89,6 +89,7 @@ class ChangesProvider extends ChangeNotifier {
   _addChange(OsmChange change) async {
     _ensureLoaded();
     final database = await _ref.read(databaseProvider).database;
+    change.updated = DateTime.now();
     if (change.isNew)
       _new[change.databaseId] = change;
     else

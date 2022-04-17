@@ -25,6 +25,7 @@ class OsmChange extends ChangeNotifier {
   final String databaseId;
   String? _mainKey;
   bool snapToBuilding;
+  DateTime updated;
 
   OsmChange(this.element,
       {Map<String, String?>? newTags,
@@ -32,10 +33,12 @@ class OsmChange extends ChangeNotifier {
       bool hardDeleted = false,
       this.error,
       this.snapToBuilding = false,
+      DateTime? updated,
       this.newNodes,
       String? databaseId})
       : newTags = newTags ?? {},
         _deleted = hardDeleted,
+        updated = updated ?? DateTime.now(),
         databaseId = databaseId ?? element?.id.toString() ?? Uuid().v1() {
     _updateMainKey();
     // For just created elements, set checked flag.
@@ -49,6 +52,7 @@ class OsmChange extends ChangeNotifier {
         element = null,
         _deleted = false,
         snapToBuilding = false,
+        updated = DateTime.now(),
         databaseId = Uuid().v1() {
     _updateMainKey();
     check();
@@ -60,6 +64,9 @@ class OsmChange extends ChangeNotifier {
         newLocation: newLocation,
         hardDeleted: _deleted,
         error: error,
+        snapToBuilding: snapToBuilding,
+        updated: updated,
+        newNodes: newNodes,
         databaseId: databaseId,
       );
 
@@ -182,6 +189,7 @@ class OsmChange extends ChangeNotifier {
     'deleted integer',
     'error text',
     'snap integer',
+    'updated integer',
   ];
 
   factory OsmChange.fromJson(Map<String, dynamic> data) {
@@ -190,6 +198,7 @@ class OsmChange extends ChangeNotifier {
         : LatLng((data['new_lat'] as int).toDouble() / kCoordinatePrecision,
             (data['new_lon'] as int).toDouble() / kCoordinatePrecision);
     final element = data['version'] == null ? null : OsmElement.fromJson(data);
+    final kDefaultUpdated = DateTime(2022, 1, 1);
     return OsmChange(
       element,
       newTags: (json.decode(data['new_tags']) as Map).cast<String, String?>(),
@@ -197,6 +206,9 @@ class OsmChange extends ChangeNotifier {
       hardDeleted: data['deleted'] == 1,
       error: data['error'],
       snapToBuilding: data['snap'] == 1,
+      updated: data['updated'] == null
+          ? kDefaultUpdated
+          : DateTime.fromMillisecondsSinceEpoch(data['updated']),
       databaseId: data['id'],
     );
   }
@@ -213,6 +225,7 @@ class OsmChange extends ChangeNotifier {
           loc == null ? null : (loc.longitude * kCoordinatePrecision).toInt(),
       'deleted': _deleted ? 1 : 0,
       // 'snap': snapToBuilding ? 1 : 0,
+      // 'updated': updated.millisecondsSinceEpoch,
       'error': error,
     };
   }

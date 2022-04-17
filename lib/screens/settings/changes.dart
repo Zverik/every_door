@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/need_update.dart';
@@ -57,31 +58,51 @@ class ChangeListPage extends ConsumerWidget {
     }
   }
 
+  downloadChanges(WidgetRef ref) async {
+    final changes = ref.watch(changesProvider);
+    String changeset =
+        ref.read(osmApiProvider).buildOsmChange(changes.all(), null);
+    final tempDir = await getTemporaryDirectory();
+    File tmpFile =
+        File('${tempDir.path}/everydoor-${formatTime("YYmmdd")}.osc');
+    await tmpFile.writeAsString(changeset, flush: true);
+    await Share.shareFiles(
+      [tmpFile.path],
+      mimeTypes: ['application/xml'],
+      subject: 'Changes from $kAppTitle on ${formatTime("YYYY-mm-dd HH:MM")}',
+    );
+    tmpFile.delete();
+  }
+
+  IconData getTypeIcon(ElementKind kind) {
+    switch (kind) {
+      case ElementKind.amenity:
+        return Icons.shopping_cart;
+      case ElementKind.micro:
+        return Icons.park;
+      case ElementKind.building:
+        return Icons.home;
+      case ElementKind.entrance:
+        return Icons.door_front_door;
+      default:
+        return Icons.question_mark;
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final changes = ref.watch(changesProvider);
-    final login = ref.watch(authProvider);
+    final changeList = changes.all();
+    changeList.sort((a, b) => b.updated.compareTo(a.updated));
+    final hasManyTypes = changeList.map((e) => e.kind).toSet().length > 1;
 
     return Scaffold(
       appBar: AppBar(
         title: Text('${changes.length} changes'),
         actions: [
           IconButton(
-            onPressed: () async {
-              String changeset = ref
-                  .read(osmApiProvider)
-                  .buildOsmChange(changes.all(true), null);
-              final tempDir = await getTemporaryDirectory();
-              File tmpFile =
-                  File('${tempDir.path}/everydoor-${formatTime("YYmmdd")}.osc');
-              await tmpFile.writeAsString(changeset, flush: true);
-              await Share.shareFiles(
-                [tmpFile.path],
-                mimeTypes: ['application/xml'],
-                subject:
-                    'Changes from $kAppTitle on ${formatTime("YYYY-mm-dd HH:MM")}',
-              );
-              tmpFile.delete();
+            onPressed: () {
+              downloadChanges(ref);
             },
             icon: Icon(Icons.share),
           ),
@@ -116,7 +137,7 @@ class ChangeListPage extends ConsumerWidget {
       ),
       body: ListView.separated(
         itemBuilder: (context, index) {
-          final change = changes[index];
+          final change = changeList[index];
           return Dismissible(
             key: Key(change.databaseId),
             direction: DismissDirection.endToStart,
@@ -144,6 +165,7 @@ class ChangeListPage extends ConsumerWidget {
             child: ListTile(
               title: Text(change.typeAndName),
               subtitle: Text(change.error ?? 'Pending'),
+              trailing: !hasManyTypes ? null : Icon(getTypeIcon(change.kind)),
               onTap: () {
                 Navigator.push(
                   context,
@@ -155,7 +177,7 @@ class ChangeListPage extends ConsumerWidget {
           );
         },
         separatorBuilder: (context, index) => Divider(),
-        itemCount: changes.length,
+        itemCount: changeList.length,
       ),
     );
   }

@@ -17,7 +17,7 @@ class ModeSection extends AbstractSettingsSection {
         ),
         Expanded(
           child: ModeButton(
-            icon: Icon(Icons.delete),
+            icon: Icon(Icons.park),
             title: 'Micromapping',
             mode: EditorMode.micromapping,
           ),
