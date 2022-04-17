@@ -10,7 +10,6 @@ import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:every_door/screens/poi_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:country_coder/country_coder.dart';
 
