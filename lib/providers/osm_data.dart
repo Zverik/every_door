@@ -8,6 +8,7 @@ import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/database.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
@@ -283,8 +284,15 @@ class OsmDataHelper extends ChangeNotifier {
         .map((e) => e.key)
         .toSet();
 
+    // If no results, use the default.
+    if (result.isEmpty) {
+      result.addAll(_ref
+          .read(editorSettingsProvider)
+          .defaultPayment
+          .map((e) => 'payment:$e'));
+    }
+
     // Ensure visa is listed alongside mastercard.
-    if (result.isEmpty) result.add('payment:visa');
     if (result.contains('payment:visa')) result.add('payment:mastercard');
     if (result.contains('payment:mastercard')) result.add('payment:visa');
     return result;

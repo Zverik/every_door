@@ -219,6 +219,9 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
     final hasFilter = ref.watch(poiFilterProvider).isNotEmpty;
+    ref.listen(editorModeProvider, (_, next) {
+      updateNearest();
+    });
     ref.listen(needMapUpdateProvider, (_, next) {
       updateNearest();
     });

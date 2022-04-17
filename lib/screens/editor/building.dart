@@ -36,7 +36,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   @override
   void initState() {
     super.initState();
-    building = widget.building ??
+    building = widget.building?.copy() ??
         OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
     updateStreets();
     updateLevels();
@@ -120,10 +120,9 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
 
-    const kManualLevelValue = '✍️';
     final levelOptions = ['1', '2'] + nearestLevels;
     if (building['building:levels'] == null)
-      levelOptions.add(kManualLevelValue);
+      levelOptions.add(kManualOption);
 
     return Column(
       children: [
@@ -154,7 +153,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                     value: building['building:levels'],
                     onChange: (value) {
                       setState(() {
-                        if (value == kManualLevelValue) {
+                        if (value == kManualOption) {
                           manualLevels = true;
                         } else {
                           building['building:levels'] = value;

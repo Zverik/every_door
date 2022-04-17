@@ -25,6 +25,7 @@ const kMaxNSIPresets = 3;
 const kFollowLinks = false;
 const kUploadOnClose = false;
 const kMicromappingTapZoom = 19.0;
+const kManualOption = '✍️';
 
 const kDefaultPresets = [
   'shop/convenience', 'shop/clothes',

@@ -1,8 +1,17 @@
 # Every Door App Change Log
 
-## 0.1.4
+## 0.1.5
 
 _Unreleased_
+
+* Redesiged mode buttons in Settings.
+* Editable preference for `payment:*` tags.
+* `ref` for an entrance can be typed manually.
+* Cancelling building or entrance editing did not work.
+
+## 0.1.4
+
+_Released on 2022-04-16_
 
 * Amenity list is displayed top-down instead of left-right.
 * Added a draft version of the micromapping mode (can be enabled in Settings).

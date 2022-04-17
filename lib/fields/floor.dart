@@ -1,3 +1,4 @@
+import 'package:every_door/constants.dart';
 import 'package:every_door/fields/helpers/floor_chooser.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
@@ -119,7 +120,7 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
     }
 
     final options = floors.map((e) => e.string).toList();
-    if (current.isEmpty) options.add('+');
+    if (current.isEmpty) options.add(kManualOption);
 
     return RadioField(
       options: options,
@@ -129,7 +130,7 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
           setState(() {
             Floor.clearTags(widget.element);
           });
-        } else if (value == '+') {
+        } else if (value == kManualOption) {
           addFloor(context);
         } else {
           final addr = floors.firstWhere((element) => element.string == value);

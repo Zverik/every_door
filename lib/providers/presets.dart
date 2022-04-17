@@ -351,6 +351,36 @@ class PresetProvider {
     return results.isEmpty ? null : results.first['label'] as String;
   }
 
+  Future<Map<String, PresetField>> _getFields(List<String> names, Locale? locale) async {
+    if (!ready) await _waitUntilReady();
+    final langCTE = _localeCTE(locale);
+    final params = List.filled(names.length, '?').join(',');
+    // TODO: fix row_number()
+    final sql = '''
+    with $langCTE
+    select f.*, t.label as loc_label,
+      t.placeholder as loc_placeholder,
+      t.options as loc_options,
+      lscore
+    from fields f
+    left join field_tran t on t.field_name = f.name
+    inner join langs on langs.lang = t.lang
+    where f.name in ($params)
+    order by lscore
+    ''';
+    final results = await _db!.rawQuery(sql, names);
+    Map<String, PresetField> fields = {};
+    final seenFields = <String>{};
+    for (final row in results) {
+      if (seenFields.contains(row['name'])) continue;
+      seenFields.add(row['name'] as String);
+      final options = await _getComboOptions(row);
+      final field = fieldFromJson(row, options: options);
+      fields[row['name'] as String] = field;
+    }
+    return fields;
+  }
+
   Future<List<PresetField>> getStandardFields(Locale locale, bool isPOI) async {
     final List<String> stdFields = isPOI
         ? [
@@ -369,32 +399,7 @@ class PresetProvider {
             'description',
           ]
         : ['address', 'level'];
-    if (!ready) await _waitUntilReady();
-    final langCTE = _localeCTE(locale);
-    final params = List.filled(stdFields.length, '?').join(',');
-    // TODO: fix row_number()
-    final sql = '''
-    with $langCTE
-    select f.*, t.label as loc_label,
-      t.placeholder as loc_placeholder,
-      t.options as loc_options,
-      lscore
-    from fields f
-    left join field_tran t on t.field_name = f.name
-    inner join langs on langs.lang = t.lang
-    where f.name in ($params)
-    order by lscore
-    ''';
-    final results = await _db!.rawQuery(sql, stdFields);
-    Map<String, PresetField> fields = {};
-    final seenFields = <String>{};
-    for (final row in results) {
-      if (seenFields.contains(row['name'])) continue;
-      seenFields.add(row['name'] as String);
-      final options = await _getComboOptions(row);
-      final field = fieldFromJson(row, options: options);
-      fields[row['name'] as String] = field;
-    }
+    final fields = await _getFields(stdFields, locale);
     fields['address'] = AddressField(
         label: await _getFieldLabel('address', locale) ?? 'Address');
     fields['wifi'] = WifiPresetField(
@@ -403,6 +408,14 @@ class PresetProvider {
         label: await _getFieldLabel('payment_multi', locale) ?? 'Accept cards');
     fields['addr_door'] = RoomPresetField();
     return stdFields.map((e) => fields[e]).whereType<PresetField>().toList();
+  }
+
+  Future<PresetField> getField(String fieldName, [Locale? locale]) async {
+    final fields = await _getFields([fieldName], locale);
+    final result = fields[fieldName];
+    if (result == null)
+      throw ArgumentError('Missing field $fieldName');
+    return result;
   }
 
   Future<List<Map<String, dynamic>>> imageryQuery(String geohash) async {

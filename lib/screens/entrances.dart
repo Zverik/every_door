@@ -167,7 +167,9 @@ class _EntranceEditorPageState extends ConsumerState<EntranceEditorPage> {
   String makeEntranceLabel(OsmChange entrance) {
     final flats = entrance['addr:flats'];
     final ref = entrance['ref'];
-    if (flats == null && ref == null) return '?';
+    const kNeedsData = {'staircase', 'yes'};
+    if (flats == null && ref == null)
+      return kNeedsData.contains(entrance['entrance']) ? '?' : '';
     return [ref, flats].whereType<String>().join(': ');
   }
 

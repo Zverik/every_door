@@ -22,12 +22,18 @@ class EntranceEditorPane extends ConsumerStatefulWidget {
 
 class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   late OsmChange entrance;
+  bool manualRef = false;
 
   @override
   void initState() {
     super.initState();
-    entrance = widget.entrance ??
+    entrance = widget.entrance?.copy() ??
         OsmChange.create(tags: {'entrance': 'yes'}, location: widget.location);
+
+    if (entrance['building'] == 'entrance') {
+      entrance.removeTag('building');
+      entrance['entrance'] = 'yes';
+    }
   }
 
   bool isValidFlats(String? value) {
@@ -71,20 +77,21 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
         int second = int.parse(match.group(2)!);
         int count = (second - first).abs() + 1;
         if (second < first) first = second;
-        int start = (first / count).round() + 1; // TODO: test
-        // test options: 3-4, 31-45, 30-45
-        start = start > 2 ? start - 2 : 1;
-        return [for (int r = 0; r < 5; r++) (r + start).toString()];
+        int start = (first / count).round();
+        if (start < 1) start = 1;
+        return [for (int r = 0; r < 3; r++) (r + start).toString()];
       }
     }
-    // By default return the progression.
-    return ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+    return ['1', '3', '4', '5'];
   }
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final editorSettings = ref.watch(editorSettingsProvider);
+
+    final refOptions = suggestRefs(entrance['addr:flats']);
+    if (entrance['ref'] == null) refOptions.add(kManualOption);
 
     return Column(
       children: [
@@ -104,7 +111,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                   keyboardType: editorSettings.fixNumKeyboard
                       ? TextInputType.visiblePassword
                       : TextInputType.number,
-                  autofocus: entrance['addr:flats'] == null,
+                  autofocus: !manualRef && entrance['addr:flats'] == null,
                   initialValue: entrance['addr:flats'],
                   style: kFieldTextStyle,
                   decoration: const InputDecoration(hintText: '16-29;32'),
@@ -125,16 +132,34 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                   padding: const EdgeInsets.only(right: 10.0),
                   child: Text('Ref', style: kFieldTextStyle),
                 ),
-                // TODO: option to enter a custom number?
-                RadioField(
-                  options: suggestRefs(entrance['addr:flats']),
-                  value: entrance['ref'],
-                  onChange: (value) {
-                    setState(() {
-                      entrance['ref'] = value;
-                    });
-                  },
-                ),
+                if (!manualRef)
+                  RadioField(
+                    options: refOptions,
+                    value: entrance['ref'],
+                    onChange: (value) {
+                      setState(() {
+                        if (value == kManualOption) {
+                          manualRef = true;
+                        } else {
+                          entrance['ref'] = value;
+                        }
+                      });
+                    },
+                  ),
+                if (manualRef)
+                  TextFormField(
+                    keyboardType: editorSettings.fixNumKeyboard
+                        ? TextInputType.visiblePassword
+                        : TextInputType.number,
+                    style: kFieldTextStyle,
+                    initialValue: entrance['ref'],
+                    autofocus: entrance['ref'] == null,
+                    onChanged: (value) {
+                      setState(() {
+                        entrance['ref'] = value.trim();
+                      });
+                    },
+                  ),
               ],
             ),
             TableRow(
@@ -244,6 +269,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
             TextButton(
               child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
               onPressed: () {
+                ref.read(needMapUpdateProvider).trigger();
                 Navigator.pop(context);
               },
             ),
