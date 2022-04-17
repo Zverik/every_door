@@ -73,7 +73,7 @@ class ClockEditor extends StatefulWidget {
 
   static Future<String?> _showTimePickerIntl(
       BuildContext context, String initialHours,
-      [String? confirmText]) async {
+      {String? confirmText, String? helpText}) async {
     TimeOfDay start;
     final parts = initialHours.split(':');
     if (parts.length != 2)
@@ -83,6 +83,8 @@ class ClockEditor extends StatefulWidget {
     final TimeOfDay? time = await showTimePicker(
       context: context,
       initialTime: start,
+      helpText: helpText,
+      confirmText: confirmText,
       builder: (BuildContext context, Widget? child) {
         // Force 24-hour clock.
         return MediaQuery(
@@ -99,14 +101,17 @@ class ClockEditor extends StatefulWidget {
   static Future<HoursInterval?> showIntervalEditor(
       BuildContext context, HoursInterval interval,
       [bool onlySecond = false]) async {
+    final loc = AppLocalizations.of(context)!;
     String start = interval.start;
     if (!onlySecond) {
-      final loc = AppLocalizations.of(context)!;
-      final result = await _showTimePickerIntl(context, start, loc.fieldHoursNext);
+      final result = await _showTimePickerIntl(context, start,
+          confirmText: MaterialLocalizations.of(context).continueButtonLabel,
+          helpText: loc.fieldHoursOpens);
       if (result == null) return null;
       start = result;
     }
-    final end = await _showTimePickerIntl(context, interval.end);
+    final end = await _showTimePickerIntl(context, interval.end,
+        helpText: loc.fieldHoursCloses);
     if (end == null) return null;
     return HoursInterval(start, end);
   }

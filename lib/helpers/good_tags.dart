@@ -329,6 +329,8 @@ bool isGoodTags(Map<String, String> tags) {
 }
 
 bool needsCheckDate(Map<String, String> tags) {
+  // Decided that only amenities need checking.
+  return isAmenityTags(tags);
   final key = getMainKey(tags);
   if (key == null) return false;
   final k = _clearPrefix(key);

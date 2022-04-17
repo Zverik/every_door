@@ -252,18 +252,19 @@ class PresetProvider {
       order by lscore
     ''';
     final results = await _db!.rawQuery(sql, ids);
-    final presets = <Preset>[];
+    final presets = <String, Preset>{};
     final seenFields = <String>{};
     for (final row in results) {
-      if (seenFields.contains(row['name'])) continue;
-      seenFields.add(row['name'] as String);
-      presets.add(Preset.fromJson(row));
+      final String name = row['name'] as String;
+      if (seenFields.contains(name)) continue;
+      seenFields.add(name);
+      presets[name] = Preset.fromJson(row);
     }
     if (presets.length != ids.length) {
       print(
           'getPresetsById fail: for ${ids.length} ids got ${results.length} results.');
     }
-    return presets;
+    return ids.map((e) => presets[e]).whereType<Preset>().toList();
   }
 
   Future<List<ComboOption>> _getComboOptions(Map<String, dynamic> field) async {
@@ -351,7 +352,8 @@ class PresetProvider {
     return results.isEmpty ? null : results.first['label'] as String;
   }
 
-  Future<Map<String, PresetField>> _getFields(List<String> names, Locale? locale) async {
+  Future<Map<String, PresetField>> _getFields(
+      List<String> names, Locale? locale) async {
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
     final params = List.filled(names.length, '?').join(',');
@@ -413,8 +415,7 @@ class PresetProvider {
   Future<PresetField> getField(String fieldName, [Locale? locale]) async {
     final fields = await _getFields([fieldName], locale);
     final result = fields[fieldName];
-    if (result == null)
-      throw ArgumentError('Missing field $fieldName');
+    if (result == null) throw ArgumentError('Missing field $fieldName');
     return result;
   }
 

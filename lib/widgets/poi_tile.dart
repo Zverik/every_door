@@ -82,14 +82,14 @@ class PoiTile extends ConsumerWidget {
     final loc = AppLocalizations.of(context)!;
 
     return Container(
-      padding: EdgeInsets.only(right: 8.0, top: 8.0, bottom: 8.0),
+      padding: EdgeInsets.all(8.0),
       color: !amenity.isDisused ? Colors.white : Colors.grey.shade200,
       width: width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (onToggleCheck != null)
+          if (onToggleCheck != null && needsCheckDate(amenity.getFullTags()))
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: onToggleCheck,
@@ -98,7 +98,7 @@ class PoiTile extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.only(right: 8.0),
                     child: Icon(
                       amenity.isOld ? Icons.check : Icons.check_circle,
                       color: amenity.isOld ? Colors.black : Colors.green,
