@@ -23,18 +23,17 @@ class PoiTile extends ConsumerWidget {
   final int? index;
   final double? width;
   final VoidCallback? onToggleCheck;
-  final VoidCallback? onNeedReload;
 
   late final String title;
   late final String present;
   late final String missing;
 
-  PoiTile(
-      {this.index,
-      required this.amenity,
-      this.width,
-      this.onToggleCheck,
-      this.onNeedReload}) {
+  PoiTile({
+    this.index,
+    required this.amenity,
+    this.width,
+    this.onToggleCheck,
+  }) {
     present = buildPresent();
     missing = buildMissing();
   }
@@ -111,16 +110,13 @@ class PoiTile extends ConsumerWidget {
             ),
           Expanded(
             child: GestureDetector(
-              onTap: () async {
+              onTap: () {
                 ref.read(microZoomedInProvider.state).state = null;
-                bool? result = await Navigator.push(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (_) => PoiEditorPage(amenity: amenity)),
                 );
-                if (result == true && onNeedReload != null) {
-                  onNeedReload!();
-                }
               },
               child: RichText(
                 text: TextSpan(

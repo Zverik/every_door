@@ -28,6 +28,11 @@ final kMainKeysSet = Set.of(kMainKeys);
 const kDisused = 'disused:';
 const kDeleted = 'was:';
 
+const kStreetStatusWords = {
+  'улица', 'переулок', 'проспект', 'набережная', 'проезд', 'бульвар', 'аллея',
+  // TODO: count statistics over all the streets and populate this list.
+};
+
 enum ElementKind {
   empty,
   unknown,

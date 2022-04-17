@@ -5,6 +5,7 @@ import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/presets.dart';
+import 'package:every_door/screens/browser.dart';
 import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
@@ -52,7 +53,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     // Finally switch to the monitor page.
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => PoiListPage()),
+      MaterialPageRoute(builder: (context) => BrowserPage()),
     );
   }
 

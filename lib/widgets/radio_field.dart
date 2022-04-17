@@ -45,7 +45,8 @@ class _RadioFieldState extends State<RadioField> {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
-            if (pushFirst && widget.value != null)
+            if (widget.value != null &&
+                (pushFirst || !widget.options.contains(widget.value)))
               RadioPill(
                 value: widget.value!,
                 label: labelForValue,

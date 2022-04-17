@@ -375,8 +375,7 @@ class _PoiListPageState extends ConsumerState<PoiListPage> {
                         ),
                       ],
                     )
-                  : PoiPane(
-                      amenities: nearestPOI, updateNearest: updateNearest),
+                  : PoiPane(nearestPOI),
             ),
           ],
         ),

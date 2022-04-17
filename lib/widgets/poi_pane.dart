@@ -10,9 +10,8 @@ import 'poi_tile.dart';
 
 class PoiPane extends ConsumerStatefulWidget {
   final List<OsmChange> amenities;
-  final VoidCallback updateNearest;
 
-  const PoiPane({required this.amenities, required this.updateNearest});
+  const PoiPane(this.amenities);
 
   @override
   ConsumerState<PoiPane> createState() => _PoiPaneState();
@@ -68,7 +67,6 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
                 final changes = ref.read(changesProvider);
                 changes.saveChange(entry.value);
               },
-              onNeedReload: widget.updateNearest,
             ),
         ],
       ),
@@ -95,7 +93,6 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
               final changes = ref.read(changesProvider);
               changes.saveChange(entry.value);
             },
-            onNeedReload: widget.updateNearest,
           ),
       ],
     );
@@ -115,7 +112,6 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
           final changes = ref.read(changesProvider);
           changes.saveChange(widget.amenities[index]);
         },
-        onNeedReload: widget.updateNearest,
       ),
     );
   }

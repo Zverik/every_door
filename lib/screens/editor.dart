@@ -256,7 +256,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           ),
                         ),
                       ),
-                      if (!canSave && !amenity.isConfirmed)
+                      if (!canSave && amenity.isOld)
                         Container(
                           color: Colors.green,
                           child: IconButton(

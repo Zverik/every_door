@@ -1,5 +1,4 @@
 import 'package:every_door/providers/editor_mode.dart';
-import 'package:every_door/screens/entrances.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -68,24 +67,17 @@ class ModeButton extends ConsumerWidget {
                 style: current != mode
                     ? null
                     : TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
               ),
             ],
           ),
         ),
       ),
       onTap: () {
-        if (mode == EditorMode.entrances) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => EntranceEditorPage()),
-          );
-        } else {
-          ref.read(editorModeProvider.notifier).set(mode);
-          Navigator.pop(context);
-        }
+        ref.read(editorModeProvider.notifier).set(mode);
+        Navigator.pop(context);
       },
     );
   }
