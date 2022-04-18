@@ -27,23 +27,27 @@ const kUploadOnClose = false;
 const kMicromappingTapZoom = 19.0;
 const kManualOption = '✍️';
 
+// Should be exactly 8 lines in both lists.
 const kDefaultPresets = [
-  'shop/convenience', 'shop/clothes',
+  'shop/convenience', 'amenity/atm',
   'shop/hairdresser', 'shop/beauty',
   'shop/florist', 'amenity/pharmacy',
-  'amenity/cafe', 'amenity/fast_food',
-  'amenity/atm', 'amenity/fuel',
-  'amenity/doctors', 'amenity/dentist',
-  'shop/furniture', 'shop/shoes',
+  'shop/clothes', 'shop/shoes',
+  'amenity/toilets', 'shop/bakery',
+  'amenity/restaurant', 'amenity/cafe',
+  'amenity/fast_food', 'amenity/bar',
+  'amenity/fuel', 'amenity/car_wash',
 ];
 
 const kDefaultMicroPresets = [
-  'amenity/waste_basket', 'amenity/recycling',
-  'amenity/post_box', 'amenity/bench',
-  'leisure/playground', 'leisure/fitness_station',
-  'amenity/drinking_water', 'amenity/bicycle_parking',
+  'amenity/waste_basket', 'amenity/bench',
   'highway/street_lamp', 'natural/tree',
-  'power/pole', 'power/tower',
+  'power/pole', 'man_made/utility_pole',
+  'amenity/recycling', 'amenity/waste_disposal',
+  'emergency/fire_hydrant', 'man_made/street_cabinet',
+  'leisure/playground', 'amenity/bicycle_parking',
+  'amenity/post_box', 'man_made/manhole',
+  'tourism/information/guidepost', 'tourism/information/board',
 ];
 
 const kEraseDatabase = false; // Clear all data on start — do not forget to set to false!

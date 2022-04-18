@@ -6,6 +6,7 @@ import 'package:every_door/models/field.dart';
 class TextPresetField extends PresetField {
   final TextInputType keyboardType;
   final bool capitalize;
+  final int? maxLines;
 
   const TextPresetField({
     required String key,
@@ -15,6 +16,7 @@ class TextPresetField extends PresetField {
     FieldPrerequisite? prerequisite,
     this.keyboardType = TextInputType.text,
     this.capitalize = true,
+    this.maxLines,
   }) : super(
             key: key,
             label: label,
@@ -73,6 +75,8 @@ class _TextInputFieldState extends State<TextInputField> {
           labelText: widget.field.icon != null ? widget.field.label : null,
         ),
         style: kFieldTextStyle,
+        maxLines: widget.field.maxLines ?? 1,
+        minLines: 1,
         onChanged: (value) {
           // On every keypress, since the focus can change at any minute.
           setState(() {

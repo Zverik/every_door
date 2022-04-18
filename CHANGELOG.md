@@ -10,7 +10,9 @@ _Unreleased_
 * `ref` for an entrance can be typed manually.
 * Cancelling building or entrance editing did not work.
 * Editor displays modified objects only relevant to the current mode.
+* Finalized default preset lists for both modes.
 * Added submitting buttons to phone and website fields.
+* Description, note, and some other fields are now multiline.
 
 ## 0.1.4
 

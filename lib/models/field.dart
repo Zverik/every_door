@@ -95,6 +95,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         icon: Icons.comment_outlined,
         placeholder: placeholder,
         prerequisite: prerequisite,
+        maxLines: 4,
       );
     case 'email':
       return TextPresetField(
@@ -153,6 +154,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         placeholder: placeholder,
         prerequisite: prerequisite,
+        maxLines: typ == 'textarea' ? 4 : null,
       );
     case 'number':
       return TextPresetField(
