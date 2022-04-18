@@ -70,16 +70,18 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
 
   List<String> suggestRefs(String? value) {
     if (value != null && value.trim().isNotEmpty) {
-      // Calculate from flat numbers (-2 ... +2)
+      // Calculate from flat numbers (-1 ... +1)
       final match = RegExp(r'(\d+)-(\d+)').firstMatch(value);
       if (match != null) {
         int first = int.parse(match.group(1)!);
         int second = int.parse(match.group(2)!);
         int count = (second - first).abs() + 1;
-        if (second < first) first = second;
-        int start = (first / count).round();
-        if (start < 1) start = 1;
-        return [for (int r = 0; r < 3; r++) (r + start).toString()];
+        if (count > 0) {
+          double middle = (second + first) / 2;
+          int predicted = (middle / count + 0.5).round();
+          int start = predicted > 2 ? predicted - 1 : 1;
+          return [for (int r = 0; r < 3; r++) (r + start).toString()];
+        }
       }
     }
     return ['1', '3', '4', '5'];

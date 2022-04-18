@@ -1,27 +1,10 @@
 const kMainKeys = <String>[
-  'amenity',
-  'shop',
-  'craft',
-  'tourism',
-  'historic',
-  'highway',
-  'railway',
-  'emergency',
-  'office',
-  'healthcare',
-  'leisure',
-  'natural',
-  'waterway',
-  'man_made',
-  'power',
-  'aeroway',
-  'aerialway',
-  'landuse',
-  'military',
-  'barrier',
-  'building',
-  'entrance',
-  'boundary',
+  'amenity', 'shop', 'craft', 'tourism', 'historic',
+  'highway', 'railway',
+  'emergency', 'office', 'healthcare', 'leisure', 'natural',
+  'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
+  'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
+  'advertising', 'playground',
 ];
 final kMainKeysSet = Set.of(kMainKeys);
 
@@ -205,12 +188,8 @@ bool isMicroTags(Map<String, String> tags) {
 
   // Note that it excludes values accepted by `isAmenityTags`.
   const kAllGoodKeys = <String>{
-    'amenity',
-    'tourism',
-    'emergency',
-    'man_made',
-    'historic',
-    'playground'
+    'amenity', 'tourism', 'emergency', 'man_made', 'historic',
+    'playground', 'advertising',
   };
   if (kAllGoodKeys.contains(k)) return true;
 

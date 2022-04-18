@@ -187,7 +187,16 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     const kNeedsData = {'staircase', 'yes'};
     if (flats == null && ref == null)
       return kNeedsData.contains(entrance['entrance']) ? '?' : '';
-    return [ref, flats].whereType<String>().join(': ');
+    String label = [ref, flats].whereType<String>().join(': ');
+    while (label.length > 11) {
+      // 11 is "10: 123-456".
+      if (!RegExp(r'\d').hasMatch(label)) {
+        label = label.substring(0, 10) + '…';
+        break;
+      }
+      label = label.replaceFirst(RegExp(r'\s*\d+[^\d]*$'), '…');
+    }
+    return label;
   }
 
   String makeOneLineLabel(OsmChange element) {
