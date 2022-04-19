@@ -1,8 +1,12 @@
 # Every Door App Change Log
 
-## 0.1.5
+## 0.1.6
 
 _Unreleased_
+
+## 0.1.5
+
+_Released on 2022-04-19_
 
 * Redesiged mode buttons in Settings.
 * Refactored all mode editors, now the UI is consistent.
