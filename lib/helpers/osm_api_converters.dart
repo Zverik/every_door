@@ -220,8 +220,10 @@ class MarkReferencedSink extends ChunkedConversionSink<List<OsmElement>> {
 
 class FlattenOsmGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
   final bool clearMembers;
+  final bool addNodeLocations;
 
-  FlattenOsmGeometry({this.clearMembers = false});
+  FlattenOsmGeometry(
+      {this.clearMembers = false, this.addNodeLocations = false});
 
   final Map<int, LatLng> nodeLocations = {};
   final Map<OsmId, LatLngBounds> wayBounds = {};
@@ -243,7 +245,14 @@ class FlattenOsmGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
               .toList());
           if (bounds.isValid) {
             wayBounds[el.id] = bounds;
-            result.add(el.copyWith(bounds: bounds));
+            final nodeLoc = el.nodes == null
+                ? null
+                : {
+                    for (var n in el.nodes!)
+                      if (nodeLocations.containsKey(n)) n: nodeLocations[n]
+                  };
+            result.add(el.copyWith(
+                bounds: bounds, nodeLocations: nodeLoc?.cast<int, LatLng>()));
           }
         }
       } else if (el.type == OsmElementType.relation) {

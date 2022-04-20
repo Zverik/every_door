@@ -24,51 +24,69 @@ class OsmChange extends ChangeNotifier {
   String? error;
   final String databaseId;
   String? _mainKey;
-  bool snapToBuilding;
+  bool snap;
   DateTime updated;
 
-  OsmChange(this.element,
+  OsmChange(OsmElement element,
       {Map<String, String?>? newTags,
       this.newLocation,
       bool hardDeleted = false,
       this.error,
-      this.snapToBuilding = false,
+      this.snap = false,
       DateTime? updated,
       this.newNodes,
       String? databaseId})
       : newTags = newTags ?? {},
         _deleted = hardDeleted,
         updated = updated ?? DateTime.now(),
-        databaseId = databaseId ?? element?.id.toString() ?? Uuid().v1() {
+        element = element, // Force non-null initialization
+        databaseId = databaseId ?? element.id.toString() {
     _updateMainKey();
     // For just created elements, set checked flag.
-    if (element == null && databaseId == null) check();
+    if (databaseId == null) check();
   }
 
-  OsmChange.create(
-      {required Map<String, String> tags, required LatLng location})
-      : newTags = Map<String, String?>.of(tags),
+  OsmChange.create({
+    required Map<String, String> tags,
+    required LatLng location,
+    DateTime? updated,
+    String? databaseId,
+    this.error,
+    this.snap = true,
+  })  : newTags = Map<String, String?>.of(tags),
         newLocation = location,
         element = null,
         _deleted = false,
-        snapToBuilding = false,
-        updated = DateTime.now(),
-        databaseId = Uuid().v1() {
+        updated = updated ?? DateTime.now(),
+        databaseId = databaseId ?? Uuid().v1() {
     _updateMainKey();
     check();
   }
 
-  OsmChange copy() => OsmChange(
-        element,
-        newTags: Map.of(newTags),
-        newLocation: newLocation,
-        hardDeleted: _deleted,
+  OsmChange copy() {
+    if (element == null) {
+      return OsmChange.create(
+        tags: Map.of(newTags.cast<String, String>()),
+        location: newLocation!,
         error: error,
-        snapToBuilding: snapToBuilding,
+        snap: snap,
         updated: updated,
-        newNodes: newNodes,
         databaseId: databaseId,
       );
+    }
+
+    return OsmChange(
+      element!,
+      newTags: Map.of(newTags),
+      newLocation: newLocation,
+      hardDeleted: _deleted,
+      error: error,
+      snap: snap,
+      updated: updated,
+      newNodes: newNodes,
+      databaseId: databaseId,
+    );
+  }
 
   // Location and modification
   LatLng get location => newLocation ?? element!.center!;
@@ -198,17 +216,35 @@ class OsmChange extends ChangeNotifier {
         : LatLng((data['new_lat'] as int).toDouble() / kCoordinatePrecision,
             (data['new_lon'] as int).toDouble() / kCoordinatePrecision);
     final element = data['version'] == null ? null : OsmElement.fromJson(data);
-    final kDefaultUpdated = DateTime(2022, 1, 1);
+    final tags = (json.decode(data['new_tags']) as Map).cast<String, String?>();
+    final updated = data['updated'] == null
+        ? DateTime(2022, 1, 1)
+        : DateTime.fromMillisecondsSinceEpoch(data['updated']);
+
+    if (element == null) {
+      if (location == null) {
+        throw Exception(
+            'Found a change without both element and location, id=${data["id"]}.');
+      }
+      tags.removeWhere((key, value) => value == null);
+      return OsmChange.create(
+        tags: tags.cast<String, String>(),
+        location: location,
+        error: data['error'],
+        snap: data['snap'] == 1,
+        updated: updated,
+        databaseId: data['id'],
+      );
+    }
+
     return OsmChange(
       element,
-      newTags: (json.decode(data['new_tags']) as Map).cast<String, String?>(),
+      newTags: tags,
       newLocation: location,
       hardDeleted: data['deleted'] == 1,
       error: data['error'],
-      snapToBuilding: data['snap'] == 1,
-      updated: data['updated'] == null
-          ? kDefaultUpdated
-          : DateTime.fromMillisecondsSinceEpoch(data['updated']),
+      snap: data['snap'] == 1,
+      updated: updated,
       databaseId: data['id'],
     );
   }

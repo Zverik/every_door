@@ -16,6 +16,8 @@ const kStreetStatusWords = {
   // TODO: count statistics over all the streets and populate this list.
 };
 
+enum SnapTo { nothing, building, highway, railway }
+
 enum ElementKind {
   empty,
   unknown,
@@ -189,7 +191,7 @@ bool isMicroTags(Map<String, String> tags) {
   // Note that it excludes values accepted by `isAmenityTags`.
   const kAllGoodKeys = <String>{
     'amenity', 'tourism', 'emergency', 'man_made', 'historic',
-    'playground', 'advertising',
+    'playground', 'advertising', 'power',
   };
   if (kAllGoodKeys.contains(k)) return true;
 
@@ -238,9 +240,6 @@ bool isMicroTags(Map<String, String> tags) {
       'anthill'
     };
     return goodNatural.contains(v);
-  } else if (k == 'power') {
-    const goodPower = {'pole', 'tower', 'catenary_mast'};
-    return goodPower.contains(v);
   }
   return false;
 }
@@ -264,6 +263,8 @@ bool isGoodTags(Map<String, String> tags) {
     'power',
     'aerialway',
     'aeroway',
+    'advertising',
+    'playground',
     // Keep entrances and buildings, even without extra data.
     'entrance',
     'building',
@@ -298,11 +299,20 @@ bool isGoodTags(Map<String, String> tags) {
     };
     return !kWrongLeisure.contains(v);
   } else if (k == 'highway') {
-    return v == 'bus_stop' || v == 'street_lamp' || v == 'platform';
+    const kGoodHighway = <String>{
+      'crossing', 'bus_stop', 'street_lamp', 'platform',
+      'stop', 'give_way', 'milestone', 'speed_camera',
+      'passing_place',
+    };
+    return kGoodHighway.contains(v);
   } else if (k == 'railway') {
-    return {'station', 'tram_stop', 'halt', 'platform'}.contains(v);
+    const kGoodRailway = <String>{
+      'station', 'tram_stop', 'halt', 'platform', 'stop', 'signal',
+      'crossing', 'milestone', 'tram_crossing',
+    };
+    return kGoodRailway.contains(v);
   } else if (k == 'natural') {
-    return v == 'tree' || v == 'rock' || v == 'spring';
+    return v == 'tree' || v == 'rock' || v == 'spring' || v == 'shrub' || v == 'stone';
   }
   return false;
 }
@@ -328,4 +338,23 @@ bool needsCheckDate(Map<String, String> tags) {
     'leisure',
   };
   return kAmenityKeys.contains(k);
+}
+
+SnapTo detectSnap(Map<String, String> tags) {
+  final k = getMainKey(tags);
+  if (k == null) return SnapTo.nothing;
+  if (tags.containsKey('entrance') || tags['building'] == 'entrance') return SnapTo.building;
+
+  if (k == 'highway') {
+    const kSnapHighway = <String>{
+      'crossing', 'stop', 'give_way', 'milestone', 'speed_camera', 'passing_place',
+    };
+    if (kSnapHighway.contains(tags['highway']!)) return SnapTo.highway;
+  } else if (k == 'railway') {
+    const kSnapRailway = <String>{
+      'halt', 'stop', 'signal', 'crossing', 'milestone', 'tram_stop', 'tram_crossing',
+    };
+    if (kSnapRailway.contains(tags['railway']!)) return SnapTo.railway;
+  }
+  return SnapTo.nothing;
 }

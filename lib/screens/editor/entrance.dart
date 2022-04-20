@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/changes.dart';
@@ -241,10 +242,10 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
               'Snap to building contour',
               style: kFieldTextStyle,
             ),
-            value: entrance.snapToBuilding,
+            value: entrance.snap,
             onChanged: (bool newValue) {
               setState(() {
-                entrance.snapToBuilding = newValue;
+                entrance.snap = newValue;
               });
             },
           ),

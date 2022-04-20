@@ -84,6 +84,7 @@ class OsmElement {
   final LatLng? center;
   final LatLngBounds? bounds;
   final List<int>? nodes;
+  final Map<int, LatLng>? nodeLocations; // not stored to the database
   final List<OsmMember>? members;
   final bool isMember;
 
@@ -98,6 +99,7 @@ class OsmElement {
     LatLng? center,
     this.bounds,
     this.nodes,
+    this.nodeLocations,
     this.members,
     this.isMember = false,
   }) : center =
@@ -110,6 +112,7 @@ class OsmElement {
       LatLng? center,
       LatLngBounds? bounds,
       bool? isMember,
+      Map<int, LatLng>? nodeLocations,
       bool currentTimestamp = false,
       bool clearMembers = false}) {
     return OsmElement(
@@ -121,6 +124,7 @@ class OsmElement {
       center: center ?? this.center,
       bounds: bounds ?? this.bounds,
       nodes: clearMembers ? null : nodes,
+      nodeLocations: clearMembers ? null : nodeLocations ?? this.nodeLocations,
       members: clearMembers ? null : members,
       isMember: isMember ?? this.isMember,
     );
@@ -139,6 +143,7 @@ class OsmElement {
       center: old.center ?? center,
       bounds: old.bounds ?? bounds,
       nodes: old.nodes ?? nodes,
+      nodeLocations: old.nodeLocations ?? nodeLocations,
       members: old.members ?? members,
       isMember: old.isMember,
     );
@@ -251,6 +256,7 @@ class OsmElement {
   bool get isAmenity => isAmenityTags(tags);
   bool get isMicro => isMicroTags(tags);
   bool get isGood => isGoodTags(tags);
+  bool get isGeometryValid => nodes?.every((element) => nodeLocations?.containsKey(element) ?? false) ?? false;
 
   bool get isArea {
     if (id.type == OsmElementType.way)
