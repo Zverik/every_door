@@ -364,8 +364,13 @@ SnapTo detectSnap(Map<String, String> tags) {
 }
 
 bool isSnapTargetTags(Map<String, String> tags, [SnapTo? kind]) {
-  if (tags.containsKey('highway') && (kind == null || kind == SnapTo.highway)) return true;
-  if (tags.containsKey('railway') && (kind == null || kind == SnapTo.railway)) return true;
-  if (tags.containsKey('building') && (kind == null || kind == SnapTo.building)) return true;
+  if (tags.containsKey('highway') && (kind == null || kind == SnapTo.highway))
+    return !{'steps', 'platform', 'services', 'rest_area', 'bus_stop', 'elevator'}
+      .contains(tags['highway']);
+  if (tags.containsKey('railway') && (kind == null || kind == SnapTo.railway))
+    return !{'platform', 'station', 'signal_box', 'platform_edge'}
+      .contains(tags['railway']);
+  if (tags.containsKey('building') && (kind == null || kind == SnapTo.building))
+    return tags['building'] != 'roof';
   return false;
 }

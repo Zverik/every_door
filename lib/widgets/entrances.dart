@@ -215,7 +215,10 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
         return element['building:levels'] != null &&
             element['roof:shape'] != null;
       case ElementKind.entrance:
-        return (element['addr:flats'] ?? element['addr:unit']) != null &&
+        const kNeedsData = {'staircase', 'yes'};
+        return (kNeedsData.contains(element['entrance'])
+                ? (element['addr:flats'] ?? element['addr:unit']) != null
+                : true) &&
             element['entrance'] != 'yes';
       default:
         return true;
