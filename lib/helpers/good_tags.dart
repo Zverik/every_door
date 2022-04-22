@@ -265,9 +265,7 @@ bool isGoodTags(Map<String, String> tags) {
     'aeroway',
     'advertising',
     'playground',
-    // Keep entrances and buildings, even without extra data.
     'entrance',
-    'building',
   };
   if (kAllGoodKeys.contains(k)) return true;
 
@@ -313,6 +311,8 @@ bool isGoodTags(Map<String, String> tags) {
     return kGoodRailway.contains(v);
   } else if (k == 'natural') {
     return v == 'tree' || v == 'rock' || v == 'spring' || v == 'shrub' || v == 'stone';
+  } else if (k == 'building') {
+    return v != 'roof';
   }
   return false;
 }
@@ -348,15 +348,17 @@ SnapTo detectSnap(Map<String, String> tags) {
     return SnapTo.building;
   } else if (k == 'highway') {
     const kSnapHighway = <String>{
-      'crossing', 'stop', 'give_way', 'milestone', 'speed_camera', 'passing_place',
+      'crossing', 'stop', 'give_way', 'milestone',
+      'speed_camera', 'passing_place',
     };
     if (kSnapHighway.contains(tags['highway']!)) return SnapTo.highway;
   } else if (k == 'railway') {
     const kSnapRailway = <String>{
-      'halt', 'stop', 'signal', 'crossing', 'milestone', 'tram_stop', 'tram_crossing',
+      'halt', 'stop', 'signal', 'crossing', 'milestone',
+      'tram_stop', 'tram_crossing',
     };
     if (kSnapRailway.contains(tags['railway']!)) return SnapTo.railway;
-  } else if (k == 'traffic_calming') return SnapTo.highway;
+  } else if ({'traffic_calming', 'barrier'}.contains(k)) return SnapTo.highway;
 
   return SnapTo.nothing;
 }

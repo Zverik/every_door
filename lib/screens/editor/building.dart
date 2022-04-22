@@ -120,8 +120,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     final loc = AppLocalizations.of(context)!;
 
     final levelOptions = ['1', '2'] + nearestLevels;
-    if (building['building:levels'] == null)
-      levelOptions.add(kManualOption);
+    if (building['building:levels'] == null) levelOptions.add(kManualOption);
 
     return Column(
       children: [
@@ -201,7 +200,23 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                 ),
                 RadioField(
                   // TODO: labels
-                  options: const ['flat', 'gabled', 'hipped', 'pyramidal'],
+                  options: const [
+                    'flat',
+                    'gabled',
+                    'hipped',
+                    'pyramidal',
+                    'skillion'
+                  ],
+                  widgetLabels: [
+                    for (final name in const [
+                      'flat',
+                      'gabled',
+                      'hipped',
+                      'pyramidal',
+                      'skillion'
+                    ])
+                      Image.asset('assets/roofs/$name.png', height: 40.0, width: 40.0),
+                  ],
                   value: building['roof:shape'],
                   onChange: (value) {
                     setState(() {

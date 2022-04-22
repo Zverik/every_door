@@ -1,12 +1,17 @@
 # Every Door App Change Log
 
-## 0.1.6
+## 0.1.7
 
 _Unreleased_
+
+## 0.1.6
+
+_Released on 2022-04-22_
 
 * Automatic snapping of entrances, tram stops, highway bumps, etc
   to buildings and roads on upload.
 * Fixed arrow color and positioning on new entrance drag.
+* Images instead of values for `roof:shape`.
 * Added a safeguard against changeset comments made too long.
 
 ## 0.1.5
