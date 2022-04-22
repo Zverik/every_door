@@ -93,7 +93,6 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       return;
     }
 
-    ref.read(apiStatusProvider.notifier).state = ApiStatus.uploading;
     try {
       int count = await ref.read(osmApiProvider).uploadChanges(true);
       AlertController.show(
@@ -101,8 +100,6 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     } on Exception catch (e) {
       // TODO: prettify the message?
       AlertController.show('Upload failed', e.toString(), TypeAlert.error);
-    } finally {
-      ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
   }
 
@@ -166,9 +163,11 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
               ),
             if (hasChangesToUpload)
               IconButton(
-                onPressed: () async {
-                  uploadChanges(context);
-                },
+                onPressed: apiStatus != ApiStatus.idle
+                    ? null
+                    : () async {
+                        uploadChanges(context);
+                      },
                 icon: Icon(Icons.upload, color: Colors.yellowAccent),
               ),
             IconButton(

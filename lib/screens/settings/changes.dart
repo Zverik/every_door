@@ -44,7 +44,6 @@ class ChangeListPage extends ConsumerWidget {
       return;
     }
 
-    ref.read(apiStatusProvider.notifier).state = ApiStatus.uploading;
     try {
       int count = await ref.read(osmApiProvider).uploadChanges(true);
       AlertController.show(
@@ -53,8 +52,6 @@ class ChangeListPage extends ConsumerWidget {
     } on Exception catch (e) {
       // TODO: prettify the message?
       AlertController.show('Upload failed', e.toString(), TypeAlert.error);
-    } finally {
-      ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
   }
 
@@ -126,7 +123,7 @@ class ChangeListPage extends ConsumerWidget {
                   icon: Icon(Icons.delete_forever),
                 ),
           IconButton(
-            onPressed: ref.read(apiStatusProvider) != ApiStatus.idle
+            onPressed: ref.watch(apiStatusProvider) != ApiStatus.idle
                 ? null
                 : () {
                     uploadChanges(context, ref);

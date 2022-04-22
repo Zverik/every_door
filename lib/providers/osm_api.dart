@@ -5,6 +5,7 @@ import 'package:every_door/helpers/snap_nodes.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/private.dart';
+import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/helpers/changeset_tags.dart';
 import 'package:every_door/providers/osm_auth.dart';
@@ -387,53 +388,62 @@ class OsmApiHelper {
     final auth = _ref.read(authProvider.notifier);
     if (!auth.authorized) throw StateError('Log in first.');
 
-    // Download elements to update the data and avoid version errors.
-    changes = await _updateUnderlyingElements(changes);
-    if (changes.isEmpty) return 0;
+    // Set the mutex.
+    if (_ref.read(apiStatusProvider) != ApiStatus.idle)
+      throw StateError('API is busy');
+    _ref.read(apiStatusProvider.notifier).state = ApiStatus.uploading;
 
-    // Enumerate new elements.
-    int nodeId = -1;
-    for (final c in changes) if (c.isNew) c.newId = nodeId--;
-
-    // Snap elements to ways.
-    changes.addAll(await _downloadWaysToSnap(changes));
-
-    // Open a changeset and get its id.
-    final headers = await auth.getAuthHeaders();
-    final resp = await http.put(
-      Uri.https(kOsmEndpoint, '/api/0.6/changeset/create'),
-      headers: headers,
-      body: _buildChangeset(changes),
-    );
-    if (resp.statusCode != 200) {
-      throw OsmApiError(
-          resp.statusCode, 'Failed to create changeset: ${resp.body}');
-    }
-    final changeset = resp.body.trim();
-
-    // Upload changes.
     try {
-      List<UploadedElement> updates;
-      try {
-        updates = await _uploadEverything(changes, changeset, headers);
-      } on OsmApiError catch (e) {
-        if (e.code == 409 || e.code == 404 || e.code == 412 || e.code == 410) {
-          // Try one-by-one only on conflict.
-          updates = await _uploadOneByOne(changes, changeset, headers);
-          // TODO: Update changeset comment for changes actually uploaded.
-        } else {
-          rethrow;
-        }
-      }
-      // This keeps elements with errors, so "includeErrored" doesn't apply.
-      _updateElementsAfterUpload(updates);
-      return updates.length;
-    } finally {
-      // Close the changeset.
-      await http.put(
-        Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset/close'),
+      // Download elements to update the data and avoid version errors.
+      changes = await _updateUnderlyingElements(changes);
+      if (changes.isEmpty) return 0;
+
+      // Enumerate new elements.
+      int nodeId = -1;
+      for (final c in changes) if (c.isNew) c.newId = nodeId--;
+
+      // Snap elements to ways.
+      changes.addAll(await _downloadWaysToSnap(changes));
+
+      // Open a changeset and get its id.
+      final headers = await auth.getAuthHeaders();
+      final resp = await http.put(
+        Uri.https(kOsmEndpoint, '/api/0.6/changeset/create'),
         headers: headers,
+        body: _buildChangeset(changes),
       );
+      if (resp.statusCode != 200) {
+        throw OsmApiError(
+            resp.statusCode, 'Failed to create changeset: ${resp.body}');
+      }
+      final changeset = resp.body.trim();
+
+      // Upload changes.
+      try {
+        List<UploadedElement> updates;
+        try {
+          updates = await _uploadEverything(changes, changeset, headers);
+        } on OsmApiError catch (e) {
+          if ({409, 404, 412, 410}.contains(e.code)) {
+            // Try one-by-one only on conflict.
+            updates = await _uploadOneByOne(changes, changeset, headers);
+            // TODO: Update changeset comment for changes actually uploaded.
+          } else {
+            rethrow;
+          }
+        }
+        // This keeps elements with errors, so "includeErrored" doesn't apply.
+        _updateElementsAfterUpload(updates);
+        return updates.length;
+      } finally {
+        // Close the changeset.
+        await http.put(
+          Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset/close'),
+          headers: headers,
+        );
+      }
+    } finally {
+      _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
   }
 }

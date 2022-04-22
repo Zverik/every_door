@@ -14,10 +14,11 @@ final geolocationProvider =
 final trackingProvider = StateProvider<bool>((ref) => false);
 
 class GeolocationController extends StateNotifier<LatLng?> {
+  static final _distance = DistanceEquirectangular();
+
   StreamSubscription<Position>? _locSub;
   late final StreamSubscription<ServiceStatus> _statSub;
   final Ref _ref;
-  LatLng? location;
   late DateTime _stateTime;
 
   GeolocationController(this._ref) : super(null) {
@@ -125,18 +126,15 @@ class GeolocationController extends StateNotifier<LatLng?> {
   }
 
   _updateLocation(LatLng newLocation) {
-    location = newLocation;
-
     // Update state location only if it's far, time passed, or it is null.
     const kLocationThreshold = 10; // meters
     const kLocationInterval = Duration(seconds: 10);
-    final distance = DistanceEquirectangular();
     final oldState = state;
 
     if (oldState == null ||
         DateTime.now().difference(_stateTime) >= kLocationInterval ||
-        distance(oldState, newLocation) > kLocationThreshold) {
-      state = location;
+        _distance(oldState, newLocation) > kLocationThreshold) {
+      state = newLocation;
       _stateTime = DateTime.now();
     }
   }
