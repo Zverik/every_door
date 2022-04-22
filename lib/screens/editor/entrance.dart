@@ -1,6 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/changes.dart';
@@ -235,20 +234,6 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
             ),
           ],
         ),
-        // TODO: enable when snapping is done
-        if (entrance.isNew && false)
-          SwitchListTile(
-            title: Text(
-              'Snap to building contour',
-              style: kFieldTextStyle,
-            ),
-            value: entrance.snap,
-            onChanged: (bool newValue) {
-              setState(() {
-                entrance.snap = newValue;
-              });
-            },
-          ),
         Row(
           children: [
             if (widget.entrance != null && entrance.canDelete)

@@ -9,6 +9,7 @@ class MapDragCreateOptions extends LayerOptions {
 
 class DragButton {
   final IconData icon;
+  final Color? color;
   final Function()? onDragStart;
   final Function(LatLng)? onDragEnd;
   final Function()? onTap;
@@ -19,6 +20,7 @@ class DragButton {
 
   DragButton({
     required this.icon,
+    this.color,
     this.onDragStart,
     this.onDragEnd,
     this.onTap,
@@ -56,29 +58,6 @@ class MapDragCreatePlugin implements MapPlugin {
   bool supportsLayer(LayerOptions options) => options is MapDragCreateOptions;
 }
 
-class _DragButtonTargetLayer extends StatelessWidget {
-  final MapState _mapState;
-
-  const _DragButtonTargetLayer(this._mapState);
-
-  @override
-  Widget build(BuildContext context) {
-    return DragTarget<DragButton>(
-      builder: (context, accepted, rejected) {
-        return Container(
-          color: Colors.yellow.withOpacity(0.2),
-        );
-      },
-      onAcceptWithDetails: (details) {
-        final pos = CustomPoint(details.offset.dx, details.offset.dy);
-        final origin = _mapState.getPixelOrigin();
-        final location = _mapState.layerPointToLatLng(pos + origin);
-        if (details.data.onDragEnd != null) details.data.onDragEnd!(location);
-      },
-    );
-  }
-}
-
 class DragButtonsWidget extends StatelessWidget {
   final DragButton options;
   final MapState _mapState;
@@ -99,7 +78,7 @@ class DragButtonsWidget extends StatelessWidget {
           if (options.onDragStart != null) options.onDragStart!();
         },
         onDragEnd: (details) {
-          const offset = CustomPoint(-arrowSize / 2, 87.0);
+          const offset = CustomPoint(-arrowSize / 2, 128.0);
           final pos = CustomPoint(details.offset.dx, details.offset.dy);
           final origin = _mapState.getPixelOrigin();
           final location = _mapState.layerPointToLatLng(pos - offset + origin);
@@ -109,7 +88,8 @@ class DragButtonsWidget extends StatelessWidget {
         dragAnchorStrategy: (draggable, context, position) =>
             Offset(arrowSize / 2, 70.0),
         feedback: CustomPaint(
-          painter: _ArrowUpPainter(),
+          painter:
+              _ArrowUpPainter(options.color ?? Theme.of(context).primaryColor),
           size: Size(arrowSize, 100.0),
         ),
         childWhenDragging: Container(),
@@ -136,21 +116,33 @@ class DragButtonsWidget extends StatelessWidget {
 }
 
 class _ArrowUpPainter extends CustomPainter {
+  final Color color;
+
+  _ArrowUpPainter(this.color);
+
   @override
   void paint(Canvas canvas, Size size) {
+    const kShiftDown = 8.0;
     final paint = Paint()
-      ..color = Colors.black
+      ..color = color
       ..strokeWidth = size.longestSide / 10.0
       ..strokeJoin = StrokeJoin.miter
       ..style = PaintingStyle.stroke;
-    final wingLevel = size.width / 2;
+    final wingLevel = size.width / 2 + kShiftDown;
     final path = Path()
-      ..moveTo(size.width / 2, size.height / 30)
+      ..moveTo(size.width / 2, size.height / 30 + kShiftDown)
       ..lineTo(size.width / 2, size.height)
       ..moveTo(0, wingLevel)
-      ..lineTo(size.width / 2, 0)
+      ..lineTo(size.width / 2, kShiftDown)
       ..lineTo(size.width, wingLevel);
     canvas.drawPath(path, paint);
+
+    const kRedCircleRadius = 2.0;
+    final redPaint = Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(
+        Offset(size.width / 2, kRedCircleRadius), kRedCircleRadius, redPaint);
   }
 
   @override

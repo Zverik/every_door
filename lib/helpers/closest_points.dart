@@ -30,7 +30,7 @@ List<LatLng> _closestN2(Iterable<LatLng> locations) {
       }
     }
   }
-  return points;
+  return result;
 }
 
 class _GridCell {

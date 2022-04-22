@@ -118,6 +118,7 @@ class HoursData {
         // We support public holidays ONLY in form "PH off".
         phOff = true;
       } else {
+        if (match.group(1) != null && match.group(1)!.contains('PH')) break;
         List<bool> days = _parseWeekdays(match.group(1));
         List<String> hoursList = [];
         for (final hoursPart in match.group(2)!.split(',')) {

@@ -103,11 +103,10 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     if (data.length > kAmenitiesInList)
       data = data.sublist(0, kAmenitiesInList);
     // Update the map.
-    if (mounted) {
-      setState(() {
-        nearestPOI = data;
-      });
-    }
+    if (!mounted) return;
+    setState(() {
+      nearestPOI = data;
+    });
 
     // Zoom automatically only when tracking location.
     if (ref.read(trackingProvider)) {

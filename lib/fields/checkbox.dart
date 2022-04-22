@@ -51,7 +51,6 @@ class _CheckboxInputFieldState extends State<CheckboxInputField> {
     );
   }
 
-  @override
   Widget buildCheckbox(BuildContext context) {
     // Disabled: radio field is better UX-wise.
     bool? value = widget.element[widget.field.key] == 'yes';

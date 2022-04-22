@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_map/plugin_api.dart';
 
 class MultiHitMarkerLayerOptions extends LayerOptions {

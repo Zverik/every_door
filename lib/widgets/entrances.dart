@@ -160,13 +160,18 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   }
 
   String makeBuildingLabel(OsmChange building) {
-    final streetWords = (building['addr:street'] ?? '').split(' ').where((element) => element.trim().isNotEmpty).toList();
+    final streetWords = (building['addr:street'] ?? '')
+        .split(' ')
+        .where((element) => element.trim().isNotEmpty)
+        .toList();
     int word = 0;
     if (streetWords.length > 1) {
       if (kStreetStatusWords.contains(streetWords.first.toLowerCase()))
         word += 1;
     }
-    String street = streetWords.isEmpty ? '' : streetWords[word].substring(0, 1).toLowerCase();
+    String street = streetWords.isEmpty
+        ? ''
+        : streetWords[word].substring(0, 1).toLowerCase() + '_';
 
     String number =
         building['addr:housenumber'] ?? building['addr:housename'] ?? '?';
@@ -178,7 +183,9 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     }
 
     final levels = building['building:levels'];
-    return levels == null ? '$street$number' : '$street$number\n$levels';
+    return levels == null ? number : '$number\n$levels';
+    // Disabled street prefixes, for they take too much space.
+    // return levels == null ? '$street$number' : '$street$number\n$levels';
   }
 
   String makeEntranceLabel(OsmChange entrance) {
