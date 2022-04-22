@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/snap_nodes.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/private.dart';
@@ -96,6 +98,35 @@ class OsmApiHelper {
     }
   }
 
+  Future<List<OsmElement>> snapWays(LatLngBounds bounds) async {
+    final url = Uri.https(kOsmEndpoint, '/api/0.6/map', {
+      'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
+    });
+    var client = http.Client();
+    var request = http.Request('GET', url);
+    try {
+      var response = await client.send(request);
+      if (response.statusCode != 200) {
+        throw Exception('Failed to query OSM API: ${response.statusCode} $url');
+      }
+      final elements = await response.stream
+          .transform(utf8.decoder)
+          .toXmlEvents()
+          .selectSubtreeEvents(
+              (event) => kOsmTypes.containsKey(event.localName))
+          .toXmlNodes()
+          .transform(XmlToOsmConverter())
+          .transform(
+              FlattenOsmGeometry(clearMembers: false, addNodeLocations: true))
+          .transform(FilterSnapTargets())
+          .flatten()
+          .toList();
+      return elements;
+    } finally {
+      client.close();
+    }
+  }
+
   String buildOsmChange(Iterable<OsmChange> changes, String? changeset,
       [Map<OsmId, OsmElement>? idMap]) {
     // TODO: Test that changing ways and relations works: that they have their members.
@@ -104,7 +135,6 @@ class OsmApiHelper {
     builder.element('osmChange', nest: () {
       builder.attribute('version', '0.6');
       builder.attribute('generator', '$kAppTitle $kAppVersion');
-      int nodeId = -1;
       for (final change in changes) {
         if (!change.isModified) return;
         final action = change.hardDeleted
@@ -113,8 +143,8 @@ class OsmApiHelper {
                 ? 'create'
                 : 'modify';
         final OsmElement el = change.toElement(
-          change.element?.id.ref ?? nodeId--,
-          change.element?.version ?? 1,
+          newId: change.element?.id.ref,
+          newVersion: change.element?.version,
         );
         if (idMap != null) idMap[el.id] = el;
         builder.element(action, nest: () {
@@ -186,8 +216,8 @@ class OsmApiHelper {
     builder.processing('xml', 'version="1.0"');
     builder.element('osm', nest: () {
       final OsmElement el = change.toElement(
-        change.element?.id.ref ?? 0,
-        change.element?.version ?? 1,
+        newId: change.element?.id.ref,
+        newVersion: change.element?.version,
       );
       el.toXML(builder, changeset: changeset, visible: !change.hardDeleted);
     });
@@ -216,7 +246,7 @@ class OsmApiHelper {
         } else {
           await changes.setError(change, null);
           updates.add(UploadedElement(
-            change.toElement(0, 1), // Id and version do not matter.
+            change.toElement(), // Id and version do not matter.
             newId: int.parse(resp.body.trim()),
             newVersion: 1,
           ));
@@ -229,7 +259,6 @@ class OsmApiHelper {
           headers: headers,
           body: _buildSingleChange(change, changeset),
         );
-        print('Delete $objRef: status ${resp.statusCode}');
         if (resp.statusCode != 200 && resp.statusCode != 410) {
           // 404 is for "already deleted", fine by us.
           if (resp.statusCode > 400 && resp.statusCode < 500) {
@@ -270,6 +299,49 @@ class OsmApiHelper {
       }
     }
     return updates;
+  }
+
+  /// For changes that require snapping, downloads relevant ways, snaps
+  /// the changes (altering their locations), and returns OsmChanges for ways.
+  Future<List<OsmChange>> _downloadWaysToSnap(List<OsmChange> changes) async {
+    final toSnap = changes.where((e) => e.isNew && e.snap);
+    final snapKinds = {for (final e in toSnap) e: detectSnap(e.getFullTags())};
+    snapKinds.removeWhere((_, value) => value == SnapTo.nothing);
+    if (snapKinds.isEmpty) return const [];
+
+    final snapper = Snapper();
+
+    // 1. Download all ways to snap to.
+    final bounds =
+        snapper.groupIntoSmallBounds(snapKinds.keys.map((e) => e.location));
+    final snapTargets = <OsmId, OsmElement>{};
+    for (final b in bounds) {
+      final elements = await snapWays(b);
+      for (final e in elements) snapTargets[e.id] = e;
+    }
+    if (snapTargets.isEmpty) return const [];
+
+    // 2. For each change, snap it and store the results.
+    final modifiedWays = <OsmId>{};
+    for (final e in snapKinds.entries) {
+      final snapped = snapper.snapToClosest(
+        nodeId: e.key.newId!,
+        location: e.key.location,
+        ways: snapTargets.values
+            .where((element) => isSnapTargetTags(element.tags, e.value)),
+      );
+      if (snapped != null) {
+        e.key.newLocation = snapped.newLocation;
+        snapTargets[snapped.newElement.id] = snapped.newElement;
+        modifiedWays.add(snapped.newElement.id);
+      }
+    }
+
+    // 3. Prepare OsmChanges from the modified ways
+    // Setting newNodes to trigger isModified.
+    return modifiedWays
+        .map((e) => OsmChange(snapTargets[e]!, newNodes: snapTargets[e]!.nodes))
+        .toList();
   }
 
   Future<List<OsmChange>> _updateUnderlyingElements(
@@ -319,7 +391,12 @@ class OsmApiHelper {
     changes = await _updateUnderlyingElements(changes);
     if (changes.isEmpty) return 0;
 
-    // TODO!!!!!! Now changes are disconnected from ids in the database
+    // Enumerate new elements.
+    int nodeId = -1;
+    for (final c in changes) if (c.isNew) c.newId = nodeId--;
+
+    // Snap elements to ways.
+    changes.addAll(await _downloadWaysToSnap(changes));
 
     // Open a changeset and get its id.
     final headers = await auth.getAuthHeaders();

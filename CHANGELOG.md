@@ -4,6 +4,11 @@
 
 _Unreleased_
 
+* Automatic snapping of entrances, tram stops, highway bumps, etc
+  to buildings and roads on upload.
+* Fixed arrow color and positioning on new entrance drag.
+* Added a safeguard against changeset comments made too long.
+
 ## 0.1.5
 
 _Released on 2022-04-19_

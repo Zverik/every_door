@@ -15,6 +15,6 @@ class Equirectangular extends Haversine {
 }
 
 class DistanceEquirectangular extends Distance {
-  const DistanceEquirectangular({final bool roundResult = true})
+  const DistanceEquirectangular({final bool roundResult = false})
     : super(roundResult: roundResult, calculator: const Equirectangular());
 }

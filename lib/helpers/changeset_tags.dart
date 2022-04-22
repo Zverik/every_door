@@ -4,7 +4,13 @@ import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 
 Map<String, String> generateChangesetTags(List<OsmChange> changes) {
-  final comment = CommentGenerator().generateComment(changes);
+  String comment = CommentGenerator().generateComment(changes);
+  if (comment.length > 250) {
+    comment = CommentGenerator().generateComment(changes, simple: true);
+    if (comment.length > 250) {
+      comment = 'Surveyed ${changes.length} objects';
+    }
+  }
 
   String platform;
   if (Platform.isAndroid)
@@ -29,6 +35,9 @@ class _TypeCount {
   _TypeCount([Iterable<OsmChange>? changes]) {
     if (changes != null) {
       for (final change in changes) {
+        // Skip ways we snapped nodes to.
+        if (change.isModified && change.newNodes != null)
+          continue;
         add(change);
       }
     }
@@ -114,10 +123,20 @@ class _TypePair implements Comparable {
 class CommentGenerator {
   static const kMaxItems = 3;
 
-  String _typeCountToString(Map<String, int> typeCount) {
+  String _typeCountToString(Map<String, int> typeCount, bool simple) {
     final pairs = typeCount.entries
         .map((entry) => _TypePair(entry.key, entry.value))
         .toList();
+
+    if (simple) {
+      // Just return the number of objects.
+      if (pairs.length == 1) {
+        return pairs.first.toString();
+      }
+      final int count = typeCount.values.fold(0, (p, i) => p + i);
+      return '$count objects'; // By definition more than one
+    }
+
     pairs.sort();
     List<_TypePair> finalPairs;
     if (pairs.length <= kMaxItems) {
@@ -136,20 +155,21 @@ class CommentGenerator {
     return stringPairs.join(stringPairs.length <= 2 ? ' ' : ', ');
   }
 
-  String generateComment(Iterable<OsmChange> changes) {
+  String generateComment(Iterable<OsmChange> changes, {bool simple = false}) {
     final typeCount = _TypeCount(changes);
     List<String> results = [];
     if (typeCount.created.isNotEmpty) {
-      results.add('Created ${_typeCountToString(typeCount.created)}');
+      results.add('Created ${_typeCountToString(typeCount.created, simple)}');
     }
     if (typeCount.updated.isNotEmpty) {
-      results.add('Updated ${_typeCountToString(typeCount.updated)}');
+      results.add('Updated ${_typeCountToString(typeCount.updated, simple)}');
     }
     if (typeCount.deleted.isNotEmpty) {
-      results.add('Deleted ${_typeCountToString(typeCount.deleted)}');
+      results.add('Deleted ${_typeCountToString(typeCount.deleted, simple)}');
     }
     if (typeCount.confirmed.isNotEmpty) {
-      results.add('Confirmed ${_typeCountToString(typeCount.confirmed)}');
+      results
+          .add('Confirmed ${_typeCountToString(typeCount.confirmed, simple)}');
     }
     return results.join('; ');
   }

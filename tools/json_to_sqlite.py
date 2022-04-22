@@ -105,7 +105,8 @@ def import_presets(cur, path):
 
     def build_presets(data):
         for name, row in data.items():
-            if 'geometry' not in row or 'point' not in row['geometry']:
+            if ('geometry' not in row or
+                    ('point' not in row['geometry'] and 'vertex' not in row['geometry'])):
                 continue
             if not row['tags']:
                 continue

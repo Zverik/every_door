@@ -4,7 +4,7 @@ const kMainKeys = <String>[
   'emergency', 'office', 'healthcare', 'leisure', 'natural',
   'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
   'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
-  'advertising', 'playground',
+  'advertising', 'playground', 'traffic_calming',
 ];
 final kMainKeysSet = Set.of(kMainKeys);
 
@@ -191,7 +191,7 @@ bool isMicroTags(Map<String, String> tags) {
   // Note that it excludes values accepted by `isAmenityTags`.
   const kAllGoodKeys = <String>{
     'amenity', 'tourism', 'emergency', 'man_made', 'historic',
-    'playground', 'advertising', 'power',
+    'playground', 'advertising', 'power', 'traffic_calming',
   };
   if (kAllGoodKeys.contains(k)) return true;
 
@@ -343,9 +343,10 @@ bool needsCheckDate(Map<String, String> tags) {
 SnapTo detectSnap(Map<String, String> tags) {
   final k = getMainKey(tags);
   if (k == null) return SnapTo.nothing;
-  if (tags.containsKey('entrance') || tags['building'] == 'entrance') return SnapTo.building;
 
-  if (k == 'highway') {
+  if (tags.containsKey('entrance') || tags['building'] == 'entrance') {
+    return SnapTo.building;
+  } else if (k == 'highway') {
     const kSnapHighway = <String>{
       'crossing', 'stop', 'give_way', 'milestone', 'speed_camera', 'passing_place',
     };
@@ -355,6 +356,14 @@ SnapTo detectSnap(Map<String, String> tags) {
       'halt', 'stop', 'signal', 'crossing', 'milestone', 'tram_stop', 'tram_crossing',
     };
     if (kSnapRailway.contains(tags['railway']!)) return SnapTo.railway;
-  }
+  } else if (k == 'traffic_calming') return SnapTo.highway;
+
   return SnapTo.nothing;
+}
+
+bool isSnapTargetTags(Map<String, String> tags, [SnapTo? kind]) {
+  if (tags.containsKey('highway') && (kind == null || kind == SnapTo.highway)) return true;
+  if (tags.containsKey('railway') && (kind == null || kind == SnapTo.railway)) return true;
+  if (tags.containsKey('building') && (kind == null || kind == SnapTo.building)) return true;
+  return false;
 }

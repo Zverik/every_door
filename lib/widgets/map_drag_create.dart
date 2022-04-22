@@ -78,7 +78,7 @@ class DragButtonsWidget extends StatelessWidget {
           if (options.onDragStart != null) options.onDragStart!();
         },
         onDragEnd: (details) {
-          const offset = CustomPoint(-arrowSize / 2, 128.0);
+          const offset = CustomPoint(-arrowSize / 2, 82.0); // 82 or 128?
           final pos = CustomPoint(details.offset.dx, details.offset.dy);
           final origin = _mapState.getPixelOrigin();
           final location = _mapState.layerPointToLatLng(pos - offset + origin);

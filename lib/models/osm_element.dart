@@ -112,6 +112,7 @@ class OsmElement {
       LatLng? center,
       LatLngBounds? bounds,
       bool? isMember,
+      List<int>? nodes,
       Map<int, LatLng>? nodeLocations,
       bool currentTimestamp = false,
       bool clearMembers = false}) {
@@ -123,8 +124,9 @@ class OsmElement {
       tags: tags ?? this.tags,
       center: center ?? this.center,
       bounds: bounds ?? this.bounds,
-      nodes: clearMembers ? null : nodes,
-      nodeLocations: clearMembers ? null : nodeLocations ?? this.nodeLocations,
+      nodes: clearMembers ? null : (nodes ?? this.nodes),
+      nodeLocations:
+          clearMembers ? null : (nodeLocations ?? this.nodeLocations),
       members: clearMembers ? null : members,
       isMember: isMember ?? this.isMember,
     );
@@ -256,7 +258,11 @@ class OsmElement {
   bool get isAmenity => isAmenityTags(tags);
   bool get isMicro => isMicroTags(tags);
   bool get isGood => isGoodTags(tags);
-  bool get isGeometryValid => nodes?.every((element) => nodeLocations?.containsKey(element) ?? false) ?? false;
+  bool get isSnapTarget => id.type == OsmElementType.way && isSnapTargetTags(tags);
+  bool get isGeometryValid =>
+      nodes != null &&
+      nodes!.length >= 2 &&
+      nodes!.every((element) => nodeLocations?.containsKey(element) ?? false);
 
   bool get isArea {
     if (id.type == OsmElementType.way)

@@ -26,6 +26,7 @@ class OsmChange extends ChangeNotifier {
   String? _mainKey;
   bool snap;
   DateTime updated;
+  int? newId; // Not stored: used only during uploading.
 
   OsmChange(OsmElement element,
       {Map<String, String?>? newTags,
@@ -42,8 +43,6 @@ class OsmChange extends ChangeNotifier {
         element = element, // Force non-null initialization
         databaseId = databaseId ?? element.id.toString() {
     _updateMainKey();
-    // For just created elements, set checked flag.
-    if (databaseId == null) check();
   }
 
   OsmChange.create({
@@ -53,6 +52,7 @@ class OsmChange extends ChangeNotifier {
     String? databaseId,
     this.error,
     this.snap = true,
+    this.newId,
   })  : newTags = Map<String, String?>.of(tags),
         newLocation = location,
         element = null,
@@ -72,6 +72,7 @@ class OsmChange extends ChangeNotifier {
         snap: snap,
         updated: updated,
         databaseId: databaseId,
+        newId: newId,
       );
     }
 
@@ -102,7 +103,8 @@ class OsmChange extends ChangeNotifier {
 
   bool get deleted => _deleted || (_mainKey?.startsWith(kDeleted) ?? false);
   bool get hardDeleted => _deleted;
-  bool get isModified => newTags.isNotEmpty || newLocation != null || deleted;
+  bool get isModified =>
+      newTags.isNotEmpty || newLocation != null || newNodes != null || deleted;
   bool get isConfirmed =>
       !deleted && (newTags.length == 1 && newTags.keys.first == kCheckedKey);
   bool get isNew => element == null;
@@ -231,7 +233,7 @@ class OsmChange extends ChangeNotifier {
         tags: tags.cast<String, String>(),
         location: location,
         error: data['error'],
-        snap: data['snap'] == 1,
+        snap: data['snap'] != 0, // true by default
         updated: updated,
         databaseId: data['id'],
       );
@@ -268,17 +270,19 @@ class OsmChange extends ChangeNotifier {
 
   /// Constructs a new element from this change after the object has been uploaded.
   /// Or for uploading.
-  OsmElement toElement(int newId, int newVersion) {
+  OsmElement toElement({int? newId, int? newVersion}) {
+    if (newId == null && this.newId == null)
+      throw ArgumentError('Please specify an id for the new element');
     return OsmElement(
-      id: OsmId(element?.type ?? OsmElementType.node, newId),
-      version: newVersion,
+      id: OsmId(element?.type ?? OsmElementType.node, newId ?? this.newId ?? 0),
+      version: newVersion ?? 1,
       timestamp: DateTime.now(),
       tags: getFullTags(),
       isMember: element?.isMember ?? false,
       // overriding location call for toXML()
       center: newLocation ?? element?.center,
       downloaded: DateTime.now(),
-      nodes: element?.nodes,
+      nodes: newNodes ?? element?.nodes,
       members: element?.members,
     );
   }
@@ -379,6 +383,7 @@ class OsmChange extends ChangeNotifier {
 
   String? get descriptiveTag {
     if (this['amenity'] == 'fixme') return this['fixme:type'];
+    if ({'entrance', 'building'}.contains(_mainKey)) return _mainKey;
     return _mainKey == null ? null : this[_mainKey!];
   }
 

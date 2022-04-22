@@ -160,6 +160,20 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   }
 
   String makeBuildingLabel(OsmChange building) {
+    const kMaxNumberLength = 6;
+    String number =
+        building['addr:housenumber'] ?? building['addr:housename'] ?? '?';
+    if (number.length > kMaxNumberLength) {
+      final spacePos = number.indexOf(' ');
+      if (spacePos > 0) number = number.substring(0, spacePos);
+      if (number.length > kMaxNumberLength)
+        number = number.substring(0, kMaxNumberLength - 1);
+      number = number + '…';
+    }
+
+    return number;
+
+    // Too much information.
     final streetWords = (building['addr:street'] ?? '')
         .split(' ')
         .where((element) => element.trim().isNotEmpty)
@@ -173,19 +187,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
         ? ''
         : streetWords[word].substring(0, 1).toLowerCase() + '_';
 
-    String number =
-        building['addr:housenumber'] ?? building['addr:housename'] ?? '?';
-    if (number.length > 5) {
-      final spacePos = number.indexOf(' ');
-      if (spacePos > 0) number = number.substring(0, spacePos);
-      if (number.length > 5) number = number.substring(0, 4);
-      number = number + '…';
-    }
-
     final levels = building['building:levels'];
-    return levels == null ? number : '$number\n$levels';
-    // Disabled street prefixes, for they take too much space.
-    // return levels == null ? '$street$number' : '$street$number\n$levels';
+    return levels == null ? '$street$number' : '$street$number\n$levels';
   }
 
   String makeEntranceLabel(OsmChange entrance) {
@@ -206,15 +209,45 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     return label;
   }
 
+  bool isComplete(OsmChange element) {
+    switch (getOurKind(element)) {
+      case ElementKind.building:
+        return element['building:levels'] != null &&
+            element['roof:shape'] != null;
+      case ElementKind.entrance:
+        return (element['addr:flats'] ?? element['addr:unit']) != null &&
+            element['entrance'] != 'yes';
+      default:
+        return true;
+    }
+  }
+
+  BoxDecoration makeLabelDecoration(OsmChange element) {
+    final complete = isComplete(element);
+    final opacity = getOurKind(element) == ElementKind.entrance ? 0.8 : 0.6;
+    return BoxDecoration(
+      border: Border.all(
+        color: complete ? Colors.black : Colors.black.withOpacity(0.3),
+        width: complete ? 1.0 : 1.0,
+      ),
+      borderRadius: BorderRadius.circular(13.0),
+      color: complete
+          ? Colors.yellow.withOpacity(opacity)
+          : Colors.white.withOpacity(opacity),
+    );
+  }
+
   String makeOneLineLabel(OsmChange element) {
-    final k = getOurKind(element);
-    if (k == ElementKind.building)
-      return 'Building ${element["addr:housenumber"] ?? element["addr:housename"] ?? ""}'
-          .trimRight();
-    if (k == ElementKind.entrance)
-      return 'Entrance ${element["addr:flats"] ?? element["ref"] ?? ""}'
-          .trimRight();
-    return element.typeAndName;
+    switch (getOurKind(element)) {
+      case ElementKind.building:
+        return 'Building ${element["addr:housenumber"] ?? element["addr:housename"] ?? ""}'
+            .trimRight();
+      case ElementKind.entrance:
+        return 'Entrance ${element["addr:flats"] ?? element["ref"] ?? ""}'
+            .trimRight();
+      default:
+        return element.typeAndName;
+    }
   }
 
   openEditorByType(OsmChange element) {
@@ -315,12 +348,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                       builder: (BuildContext context) {
                         return Center(
                           child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black.withOpacity(0.3)),
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white.withOpacity(0.7),
-                            ),
+                            decoration: makeLabelDecoration(building),
                             padding: EdgeInsets.symmetric(
                               vertical: 5.0,
                               horizontal: 10.0,
@@ -338,25 +366,13 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     Marker(
                       key: keys[entrance.databaseId],
                       point: entrance.location,
-                      width: 120.0,
+                      width: 30.0,
                       height: 30.0,
                       builder: (BuildContext context) {
                         return Center(
                           child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black.withOpacity(0.3)),
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.yellow,
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 5.0,
-                              horizontal: 10.0,
-                            ),
-                            child: Text(
-                              makeEntranceLabel(entrance),
-                              style: TextStyle(fontSize: 14.0),
-                            ),
+                            decoration: makeLabelDecoration(entrance),
+                            child: SizedBox(width: 20.0, height: 20.0),
                           ),
                         );
                       },

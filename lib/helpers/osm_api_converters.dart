@@ -329,6 +329,37 @@ class FilterAmenitiesSink extends ChunkedConversionSink<List<OsmElement>> {
   }
 }
 
+class FilterSnapTargets extends Converter<List<OsmElement>, List<OsmElement>> {
+  const FilterSnapTargets();
+
+  @override
+  List<OsmElement> convert(List<OsmElement> input) {
+    return input.where((el) => el.isSnapTarget && el.isGeometryValid).toList();
+  }
+
+  @override
+  Sink<List<OsmElement>> startChunkedConversion(Sink<List<OsmElement>> sink) {
+    return FilterSnapTargetsSink(sink);
+  }
+}
+
+class FilterSnapTargetsSink extends ChunkedConversionSink<List<OsmElement>> {
+  final FilterSnapTargets _converter;
+  final Sink<List<OsmElement>> _sink;
+
+  FilterSnapTargetsSink(this._sink) : _converter = const FilterSnapTargets();
+
+  @override
+  void add(List<OsmElement> chunk) {
+    _sink.add(_converter.convert(chunk));
+  }
+
+  @override
+  void close() {
+    _sink.close();
+  }
+}
+
 class ParseUploaded extends Converter<List<XmlNode>, List<UploadedElementRef>> {
   const ParseUploaded();
 
