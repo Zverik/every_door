@@ -11,7 +11,7 @@ import 'package:every_door/helpers/tag_emoji.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
-class OsmChange extends ChangeNotifier {
+class OsmChange extends ChangeNotifier implements Comparable {
   static final kDateFormat = DateFormat('yyyy-MM-dd');
   static const kCheckedKey = 'check_date';
 
@@ -60,7 +60,6 @@ class OsmChange extends ChangeNotifier {
         updated = updated ?? DateTime.now(),
         databaseId = databaseId ?? Uuid().v1() {
     _updateMainKey();
-    check();
   }
 
   OsmChange copy() {
@@ -322,6 +321,8 @@ class OsmChange extends ChangeNotifier {
       hardDeleted: _deleted,
       error: error,
       databaseId: databaseId,
+      newNodes: newElement.nodes, // New data always better
+      snap: snap,
     );
   }
 
@@ -429,7 +430,8 @@ class OsmChange extends ChangeNotifier {
 
   @override
   String toString() {
-    return 'OsmChange(${_deleted ? "delete " : ""}$element, $newLocation, ${OsmElement.tagsToString(newTags)})';
+    return 'OsmChange(${_deleted ? "delete " : ""}$element${newId != null ? "[$newId]" : ""}, '
+        '$newLocation, ${OsmElement.tagsToString(newTags)}${newNodes == null ? "" : ", nodes:$newNodes"})';
   }
 
   @override
@@ -445,4 +447,28 @@ class OsmChange extends ChangeNotifier {
 
   @override
   int get hashCode => databaseId.hashCode;
+
+  @override
+  int compareTo(other) {
+    const kTypeOrder = {
+      OsmElementType.node: 0,
+      OsmElementType.way: 1,
+      OsmElementType.relation: 2,
+    };
+
+    if (other is! OsmChange)
+      throw ArgumentError('OsmChange can be compared only to another change');
+    // Order for uploading: create (n), modify (nwr), delete(rwn).
+    if (isNew) {
+      return other.isNew ? 0 : -1;
+    } else if (isModified && !hardDeleted) {
+      if (other.isNew) return 1;
+      if (other.hardDeleted) return -1;
+      return kTypeOrder[id.type]!.compareTo(kTypeOrder[other.id.type]!);
+    } else {
+      // deleted
+      if (!other.hardDeleted) return 1;
+      return kTypeOrder[other.id.type]!.compareTo(kTypeOrder[id.type]!);
+    }
+  }
 }

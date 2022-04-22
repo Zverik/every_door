@@ -90,7 +90,12 @@ class OsmDataHelper extends ChangeNotifier {
         await txn.delete(
           OsmElement.kTableName,
           where: 'lat >= ? and lat <= ? and lon >= ? and lon <= ?',
-          whereArgs: [bounds.south, bounds.north, bounds.west, bounds.east],
+          whereArgs: [
+            bounds.south * kCoordinatePrecision,
+            bounds.north * kCoordinatePrecision,
+            bounds.west * kCoordinatePrecision,
+            bounds.east * kCoordinatePrecision,
+          ],
         );
       }
       // Yeah, 1000 inserts, but what can we do. Too many arguments.
@@ -319,12 +324,10 @@ class OsmDataHelper extends ChangeNotifier {
   Future<List<OsmChange>> downloadAround(LatLng location) async {
     try {
       return await downloadMap(boundsFromRadius(location, kBigRadius));
-    } on Exception catch (e) {
-      print(e);
+    } on Exception {
       try {
         return await downloadMap(boundsFromRadius(location, kSmallRadius));
       } on Exception catch (e) {
-        print(e);
         AlertController.show('Download failed', e.toString(), TypeAlert.error);
         return [];
       }

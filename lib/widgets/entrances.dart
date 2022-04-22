@@ -413,7 +413,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                       onDragStart: () {
                         if (savedZoom == null) {
                           savedZoom = controller.zoom;
-                          controller.move(controller.center, savedZoom! + 1);
+                          controller.move(controller.center, savedZoom! + 0.7);
                         }
                       },
                       onDragEnd: (pos) {

@@ -249,7 +249,6 @@ bool isGoodTags(Map<String, String> tags) {
   if (key == null) return false;
   final k = _clearPrefix(key);
 
-  // TODO: does not include micromapping?
   const kAllGoodKeys = <String>{
     'shop',
     'craft',
@@ -320,24 +319,6 @@ bool isGoodTags(Map<String, String> tags) {
 bool needsCheckDate(Map<String, String> tags) {
   // Decided that only amenities need checking.
   return isAmenityTags(tags);
-  final key = getMainKey(tags);
-  if (key == null) return false;
-  final k = _clearPrefix(key);
-
-  const kAmenityKeys = <String>{
-    'amenity',
-    'shop',
-    'craft',
-    'tourism',
-    'historic',
-    'highway',
-    'railway',
-    'emergency',
-    'office',
-    'healthcare',
-    'leisure',
-  };
-  return kAmenityKeys.contains(k);
 }
 
 SnapTo detectSnap(Map<String, String> tags) {

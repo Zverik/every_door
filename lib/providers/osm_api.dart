@@ -130,12 +130,12 @@ class OsmApiHelper {
 
   String buildOsmChange(Iterable<OsmChange> changes, String? changeset,
       [Map<OsmId, OsmElement>? idMap]) {
-    // TODO: Test that changing ways and relations works: that they have their members.
     final builder = XmlBuilder();
     builder.processing('xml', 'version="1.0"');
     builder.element('osmChange', nest: () {
       builder.attribute('version', '0.6');
       builder.attribute('generator', '$kAppTitle $kAppVersion');
+      int spareId = -1000;
       for (final change in changes) {
         if (!change.isModified) return;
         final action = change.hardDeleted
@@ -143,6 +143,7 @@ class OsmApiHelper {
             : change.isNew
                 ? 'create'
                 : 'modify';
+        if (change.isNew && change.newId == null) change.newId = spareId--;
         final OsmElement el = change.toElement(
           newId: change.element?.id.ref,
           newVersion: change.element?.version,
@@ -173,9 +174,10 @@ class OsmApiHelper {
     return builder.buildDocument().toXmlString();
   }
 
-  Future _updateElementsAfterUpload(List<UploadedElement> elements) async {
+  Future _updateElementsAfterUpload(
+      List<UploadedElement> elements, bool includeErrored) async {
     final changes = _ref.read(changesProvider);
-    changes.clearChanges(); // Note that it keeps changes with non-empty errors
+    changes.clearChanges(includeErrored);
 
     final data = _ref.read(osmDataProvider);
     for (final el in elements) {
@@ -237,9 +239,11 @@ class OsmApiHelper {
           body: _buildSingleChange(change, changeset),
         );
         if (resp.statusCode != 200) {
-          if (resp.statusCode > 400 && resp.statusCode < 500) {
+          print('Failed to create a node: ${resp.body}');
+          if ((resp.statusCode > 400 && resp.statusCode < 500) ||
+              updates.isNotEmpty) {
+            if (resp.statusCode < 400 || resp.statusCode > 500) return updates;
             await changes.setError(change, resp.body);
-            print('Failed to create a node: ${resp.body}');
           } else {
             throw OsmApiError(
                 resp.statusCode, 'Failed to create a node: ${resp.body}');
@@ -261,10 +265,12 @@ class OsmApiHelper {
           body: _buildSingleChange(change, changeset),
         );
         if (resp.statusCode != 200 && resp.statusCode != 410) {
-          // 404 is for "already deleted", fine by us.
-          if (resp.statusCode > 400 && resp.statusCode < 500) {
+          // 410 is for "already deleted", fine by us.
+          print('Failed to delete $objRef: ${resp.body}');
+          if ((resp.statusCode > 400 && resp.statusCode < 500) ||
+              updates.isNotEmpty) {
+            if (resp.statusCode < 400 || resp.statusCode > 500) return updates;
             await changes.setError(change, resp.body);
-            print('Failed to delete $objRef: ${resp.body}');
           } else {
             throw OsmApiError(
                 resp.statusCode, 'Failed to delete $objRef: ${resp.body}');
@@ -282,9 +288,11 @@ class OsmApiHelper {
           body: _buildSingleChange(change, changeset),
         );
         if (resp.statusCode != 200) {
-          if (resp.statusCode > 400 && resp.statusCode < 500) {
+          print('Failed to update $objRef: ${resp.body}');
+          if ((resp.statusCode > 400 && resp.statusCode < 500) ||
+              updates.isNotEmpty) {
+            if (resp.statusCode < 400 || resp.statusCode > 500) return updates;
             await changes.setError(change, resp.body);
-            print('Failed to update $objRef: ${resp.body}');
           } else {
             throw OsmApiError(
                 resp.statusCode, 'Failed to update $objRef: ${resp.body}');
@@ -292,7 +300,7 @@ class OsmApiHelper {
         } else {
           await changes.setError(change, null);
           updates.add(UploadedElement(
-            change.element!,
+            change.toElement(),
             newId: change.id.ref, // So it doesn't register as deleted
             newVersion: int.parse(resp.body.trim()),
           ));
@@ -343,6 +351,16 @@ class OsmApiHelper {
     return modifiedWays
         .map((e) => OsmChange(snapTargets[e]!, newNodes: snapTargets[e]!.nodes))
         .toList();
+  }
+
+  List<OsmChange> _mergeUpdatedElements(
+      List<OsmChange> changes, List<OsmChange> newChanges) {
+    final changeMap = {for (final c in changes) c.databaseId: c};
+    for (final c in newChanges) {
+      changeMap[c.databaseId] =
+          changeMap[c.databaseId]?.mergeNewElement(c.element!) ?? c;
+    }
+    return changeMap.values.toList();
   }
 
   Future<List<OsmChange>> _updateUnderlyingElements(
@@ -403,7 +421,11 @@ class OsmApiHelper {
       for (final c in changes) if (c.isNew) c.newId = nodeId--;
 
       // Snap elements to ways.
-      changes.addAll(await _downloadWaysToSnap(changes));
+      final updatedWays = await _downloadWaysToSnap(changes);
+      bool haveDependentWays = updatedWays.isNotEmpty;
+      // Some of these ways can be present in the changes.
+      changes = _mergeUpdatedElements(changes, updatedWays);
+      changes.sort();
 
       // Open a changeset and get its id.
       final headers = await auth.getAuthHeaders();
@@ -420,20 +442,25 @@ class OsmApiHelper {
 
       // Upload changes.
       try {
+        bool clearAllChanges;
         List<UploadedElement> updates;
         try {
           updates = await _uploadEverything(changes, changeset, headers);
+          clearAllChanges = true;
         } on OsmApiError catch (e) {
-          if ({409, 404, 412, 410}.contains(e.code)) {
+          // TODO: some element could be uploaded, with no indication from API.
+          // Not trying one by one when we have way geometry changes.
+          if (!haveDependentWays && {409, 404, 412, 410}.contains(e.code)) {
             // Try one-by-one only on conflict.
             updates = await _uploadOneByOne(changes, changeset, headers);
+            clearAllChanges = false;
             // TODO: Update changeset comment for changes actually uploaded.
           } else {
             rethrow;
           }
         }
         // This keeps elements with errors, so "includeErrored" doesn't apply.
-        _updateElementsAfterUpload(updates);
+        _updateElementsAfterUpload(updates, clearAllChanges);
         return updates.length;
       } finally {
         // Close the changeset.

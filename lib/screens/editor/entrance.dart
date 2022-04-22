@@ -236,7 +236,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
         ),
         Row(
           children: [
-            if (widget.entrance != null && entrance.canDelete)
+            if (widget.entrance != null)
               TextButton(
                 child:
                     Text(loc.editorDeleteButton), // TODO: does the label fit?

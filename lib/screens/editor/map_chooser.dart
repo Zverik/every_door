@@ -16,8 +16,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class MapChooserPage extends ConsumerStatefulWidget {
   final LatLng location;
   final bool creating;
+  final bool closer;
 
-  const MapChooserPage({required this.location, this.creating = false});
+  const MapChooserPage({
+    required this.location,
+    this.creating = false,
+    this.closer = false,
+  });
 
   @override
   _MapChooserPageState createState() => _MapChooserPageState();
@@ -91,7 +96,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
         mapController: controller,
         options: MapOptions(
           center: widget.location,
-          zoom: 18.0,
+          zoom: widget.closer ? 19.0 : 18.0,
           minZoom: 17.0,
           maxZoom: 20.0,
           interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,

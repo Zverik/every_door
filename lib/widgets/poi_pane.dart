@@ -4,7 +4,6 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'poi_tile.dart';
 
@@ -69,49 +68,6 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
               },
             ),
         ],
-      ),
-    );
-  }
-
-  Widget buildGridVertical(BuildContext context) {
-    var tiles = widget.amenities.asMap().entries.toList();
-
-    return ResponsiveGridList(
-      minItemWidth: 150.0,
-      horizontalGridSpacing: 2,
-      verticalGridSpacing: 2,
-      rowMainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        for (final entry in tiles)
-          PoiTile(
-            index: entry.key + 1,
-            amenity: entry.value,
-            onToggleCheck: () {
-              setState(() {
-                entry.value.toggleCheck();
-              });
-              final changes = ref.read(changesProvider);
-              changes.saveChange(entry.value);
-            },
-          ),
-      ],
-    );
-  }
-
-  Widget buildList(BuildContext context) {
-    return ListView.separated(
-      itemCount: widget.amenities.length,
-      separatorBuilder: (context, index) => Divider(),
-      itemBuilder: (context, index) => PoiTile(
-        index: index + 1,
-        amenity: widget.amenities[index],
-        onToggleCheck: () {
-          setState(() {
-            widget.amenities[index].toggleCheck();
-          });
-          final changes = ref.read(changesProvider);
-          changes.saveChange(widget.amenities[index]);
-        },
       ),
     );
   }

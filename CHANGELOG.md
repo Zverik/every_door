@@ -1,8 +1,21 @@
 # Every Door App Change Log
 
-## 0.1.7
+## 0.1.8
 
 _Unreleased_
+
+## 0.1.7
+
+_Released on 2022-04-22_
+
+* You could press the upload button twice and make duplicates.
+* Changing building tags and adding an entrance to it broke uploading.
+* Fixed osmChange exporting that broke in the last version.
+* Increased zoom in map chooser in the micromapping mode.
+* Not adding `check_date` for micromapping objects.
+* When renewing an area, deleted elements were not removed from the editor.
+* Disabled uploading elements one by one when there are way geometry changes.
+* Better error handling when uploading elements one by one.
 
 ## 0.1.6
 

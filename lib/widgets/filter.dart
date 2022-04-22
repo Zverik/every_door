@@ -45,8 +45,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
     List<Floor> floors;
     try {
       floors = await osmData.getFloorsAround(widget.location, filter.address);
-    } on Exception catch (e) {
-      print(e);
+    } on Exception {
       floors = [];
     }
     if ((filter.floor?.isNotEmpty ?? false) && !floors.contains(filter.floor)) {

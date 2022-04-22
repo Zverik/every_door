@@ -200,10 +200,10 @@ class OsmElement {
       'downloaded': downloaded?.millisecondsSinceEpoch,
       'lat': center == null
           ? null
-          : (center.latitude * kCoordinatePrecision).toInt(),
+          : (center.latitude * kCoordinatePrecision).round(),
       'lon': center == null
           ? null
-          : (center.longitude * kCoordinatePrecision).toInt(),
+          : (center.longitude * kCoordinatePrecision).round(),
       'geohash': center == null
           ? null
           : GeoHasher().encode(center.longitude, center.latitude,
@@ -258,7 +258,8 @@ class OsmElement {
   bool get isAmenity => isAmenityTags(tags);
   bool get isMicro => isMicroTags(tags);
   bool get isGood => isGoodTags(tags);
-  bool get isSnapTarget => id.type == OsmElementType.way && isSnapTargetTags(tags);
+  bool get isSnapTarget =>
+      id.type == OsmElementType.way && isSnapTargetTags(tags);
   bool get isGeometryValid =>
       nodes != null &&
       nodes!.length >= 2 &&
@@ -274,9 +275,11 @@ class OsmElement {
   }
 
   static String tagsToString(Map<String, String?> tags) {
-    return tags.entries
-        .map((e) => '${e.key}${e.value != null ? "=${e.value}" : " del"}')
-        .join('|');
+    return '{' +
+        tags.entries
+            .map((e) => '${e.key}${e.value != null ? "=${e.value}" : " del"}')
+            .join('|') +
+        '}';
   }
 
   String get idVersion => '${id}v$version';
