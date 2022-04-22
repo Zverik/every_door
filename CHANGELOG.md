@@ -16,6 +16,7 @@ _Released on 2022-04-22_
 * When renewing an area, deleted elements were not removed from the editor.
 * Disabled uploading elements one by one when there are way geometry changes.
 * Better error handling when uploading elements one by one.
+* After pressing the "manual ref" button in entrance editor, input focus stayed elsewhere.
 
 ## 0.1.6
 

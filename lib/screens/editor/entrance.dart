@@ -23,10 +23,12 @@ class EntranceEditorPane extends ConsumerStatefulWidget {
 class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   late OsmChange entrance;
   bool manualRef = false;
+  late final FocusNode _focus;
 
   @override
   void initState() {
     super.initState();
+    _focus = FocusNode();
     entrance = widget.entrance?.copy() ??
         OsmChange.create(tags: {'entrance': 'yes'}, location: widget.location);
 
@@ -34,6 +36,12 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
       entrance.removeTag('building');
       entrance['entrance'] = 'yes';
     }
+  }
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    super.dispose();
   }
 
   bool isValidFlats(String? value) {
@@ -142,6 +150,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                       setState(() {
                         if (value == kManualOption) {
                           manualRef = true;
+                          _focus.requestFocus();
                         } else {
                           entrance['ref'] = value;
                         }
@@ -154,8 +163,8 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                         ? TextInputType.visiblePassword
                         : TextInputType.number,
                     style: kFieldTextStyle,
+                    focusNode: _focus,
                     initialValue: entrance['ref'],
-                    autofocus: entrance['ref'] == null,
                     onChanged: (value) {
                       setState(() {
                         entrance['ref'] = value.trim();

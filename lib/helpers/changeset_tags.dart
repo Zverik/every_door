@@ -36,8 +36,7 @@ class _TypeCount {
     if (changes != null) {
       for (final change in changes) {
         // Skip ways we snapped nodes to.
-        if (change.isModified && change.newNodes != null)
-          continue;
+        if (change.newNodes != null && change.newTags.isEmpty) continue;
         add(change);
       }
     }

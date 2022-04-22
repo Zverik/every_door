@@ -27,6 +27,7 @@ class BuildingEditorPane extends ConsumerStatefulWidget {
 class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   late final OsmChange building;
   bool manualLevels = false;
+  late final FocusNode _focus;
   List<String> nearestStreets = [];
   List<String> nearestPlaces = [];
   List<String> nearestCities = [];
@@ -35,10 +36,17 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   @override
   void initState() {
     super.initState();
+    _focus = FocusNode();
     building = widget.building?.copy() ??
         OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
     updateStreets();
     updateLevels();
+  }
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    super.dispose();
   }
 
   List<String> _filterDuplicates(Iterable<String?> source) {
@@ -127,7 +135,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
         AddressForm(
           location: widget.location,
           initialAddress: StreetAddress.fromTags(building.getFullTags()),
-          autoFocus: building['addr:housenumber'] == null,
+          autoFocus: building['addr:housenumber'] == null && !manualLevels,
           onChange: (addr) {
             addr.setTags(building);
           },
@@ -146,13 +154,13 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                 ),
                 if (!manualLevels)
                   RadioField(
-                    // TODO: get levels around and add two
                     options: levelOptions,
                     value: building['building:levels'],
                     onChange: (value) {
                       setState(() {
                         if (value == kManualOption) {
                           manualLevels = true;
+                          _focus.requestFocus();
                         } else {
                           building['building:levels'] = value;
                         }
@@ -164,8 +172,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                     keyboardType: TextInputType.number,
                     style: kFieldTextStyle,
                     initialValue: building['building:levels'],
-                    autofocus: building['addr:housenumber'] != null &&
-                        building['building:levels'] == null,
+                    focusNode: _focus,
                     validator: (value) =>
                         validateLevels(value) ? null : 'Please enter a number',
                     onChanged: (value) {
