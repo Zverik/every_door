@@ -460,18 +460,6 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     ],
                   ),
                 ),
-              MarkerLayerWidget(
-                options: MarkerLayerOptions(
-                  markers: [
-                    if (!ref.watch(trackingProvider))
-                      Marker(
-                        point: center,
-                        anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
-                        builder: (ctx) => Icon(Icons.location_pin),
-                      ),
-                  ],
-                ),
-              ),
               if (newLocation != null)
                 CircleLayerWidget(
                   options: CircleLayerOptions(circles: [
