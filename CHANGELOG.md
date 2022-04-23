@@ -4,6 +4,10 @@
 
 _Unreleased_
 
+* Added app version to the settings screen.
+* Fixed location scopes in the app.
+* Made hint labels lighter.
+
 ## 0.1.7
 
 _Released on 2022-04-22_

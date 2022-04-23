@@ -1,4 +1,5 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/providers/location.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/filter.dart';
@@ -6,13 +7,10 @@ import 'package:every_door/models/floor.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PoiFilterPane extends ConsumerStatefulWidget {
-  final LatLng location;
-
-  const PoiFilterPane(this.location);
+  const PoiFilterPane();
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _PoiFilterPaneState();
@@ -33,7 +31,8 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
 
   loadAddresses() async {
     final osmData = ref.read(osmDataProvider);
-    final addr = await osmData.getAddressesAround(widget.location, limit: 3);
+    final location = ref.read(effectiveLocationProvider);
+    final addr = await osmData.getAddressesAround(location, limit: 3);
     setState(() {
       nearestAddresses = addr;
     });
@@ -42,9 +41,10 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
   updateFloors() async {
     final filter = ref.watch(poiFilterProvider);
     final osmData = ref.read(osmDataProvider);
+    final location = ref.read(effectiveLocationProvider);
     List<Floor> floors;
     try {
-      floors = await osmData.getFloorsAround(widget.location, filter.address);
+      floors = await osmData.getFloorsAround(location, filter.address);
     } on Exception {
       floors = [];
     }

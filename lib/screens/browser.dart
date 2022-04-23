@@ -105,7 +105,6 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
 
   @override
   Widget build(BuildContext context) {
-    final location = ref.read(effectiveLocationProvider);
     final editorMode = ref.watch(editorModeProvider);
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
@@ -146,7 +145,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsPage(location)),
+                MaterialPageRoute(builder: (context) => SettingsPage()),
               );
             },
             icon: Icon(Icons.menu),
@@ -157,6 +156,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
                 onPressed: apiStatus != ApiStatus.idle
                     ? null
                     : () {
+                        final location = ref.read(effectiveLocationProvider);
                         downloadAmenities(location);
                       },
                 icon: Icon(Icons.download),
@@ -190,7 +190,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
                         color: Colors.white,
                         height: 250.0,
                         padding: EdgeInsets.all(15.0),
-                        child: PoiFilterPane(location),
+                        child: PoiFilterPane(),
                       );
                     },
                   );
@@ -218,6 +218,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
                 child: Icon(Icons.add),
                 onPressed: () {
                   ref.read(microZoomedInProvider.state).state = null;
+                  final location = ref.read(effectiveLocationProvider);
                   Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -1,3 +1,4 @@
+import 'package:every_door/constants.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/helpers/combo_page.dart';
 import 'package:every_door/providers/changes.dart';
@@ -14,14 +15,11 @@ import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 class SettingsPage extends ConsumerWidget {
-  final LatLng location;
-
-  const SettingsPage(this.location);
+  const SettingsPage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -89,11 +87,12 @@ class SettingsPage extends ConsumerWidget {
             tiles: [
               SettingsTile(
                 title: Text(loc.settingsBackground),
+                trailing: Icon(Icons.navigate_next),
                 onPressed: (context) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ImageryPage(location)),
+                        builder: (context) => ImageryPage()),
                   );
                 },
               ),
@@ -121,7 +120,9 @@ class SettingsPage extends ConsumerWidget {
                 trailing: Icon(Icons.navigate_next),
                 onPressed: (context) async {
                   final locale = Localizations.localeOf(context);
-                  final combo = await ref.read(presetProvider).getField('payment_multi', locale);
+                  final combo = await ref
+                      .read(presetProvider)
+                      .getField('payment_multi', locale);
                   final List<String>? newValues = await Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -132,13 +133,33 @@ class SettingsPage extends ConsumerWidget {
                     ),
                   );
                   if (newValues != null && newValues.isNotEmpty) {
-                    ref.read(editorSettingsProvider.notifier).setDefaultPayment(newValues);
+                    ref
+                        .read(editorSettingsProvider.notifier)
+                        .setDefaultPayment(newValues);
                   }
                 },
               ),
             ],
           ),
+          VersionSection(),
         ],
+      ),
+    );
+  }
+}
+
+class VersionSection extends AbstractSettingsSection {
+  const VersionSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Center(
+        child: Text(
+          'Every Door $kAppVersion',
+          style: TextStyle(color: Colors.grey, fontSize: 12.0),
+        ),
       ),
     );
   }

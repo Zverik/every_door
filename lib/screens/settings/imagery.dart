@@ -1,18 +1,15 @@
 import 'package:every_door/providers/imagery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ImageryPage extends ConsumerWidget {
-  final LatLng center;
-
-  const ImageryPage(this.center);
+  const ImageryPage();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagery = ref.watch(imageryProvider);
-    final imageryList = ref.watch(imageryListProvider(center));
+    final imageryList = ref.watch(imageryListProvider);
     final loc = AppLocalizations.of(context)!;
 
     final imageryListWidget = imageryList.when(

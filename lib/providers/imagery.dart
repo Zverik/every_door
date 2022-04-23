@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/private.dart';
+import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/models/imagery.dart';
@@ -13,9 +14,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 final imageryProvider = StateNotifierProvider<ImageryProvider, Imagery>(
     (ref) => ImageryProvider(ref));
 
-final imageryListProvider = FutureProvider.autoDispose
-    .family<List<Imagery>, LatLng>((ref, center) =>
-        ref.read(imageryProvider.notifier).getImageryListForLocation(center));
+final imageryListProvider = FutureProvider.autoDispose<List<Imagery>>((ref) {
+  final center = ref.watch(effectiveLocationProvider);
+  return ref.read(imageryProvider.notifier).getImageryListForLocation(center);
+});
 
 final selectedImageryProvider =
     StateNotifierProvider<SelectedImageryProvider, Imagery>(

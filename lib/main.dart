@@ -15,8 +15,10 @@ void main() {
 
 installCertificate() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ByteData data = await PlatformAssetBundle().load('assets/lets-encrypt-r3.pem');
-  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+  ByteData data =
+      await PlatformAssetBundle().load('assets/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
 }
 
 class EveryDoorApp extends StatelessWidget {
@@ -28,6 +30,7 @@ class EveryDoorApp extends StatelessWidget {
       title: kAppTitle,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
