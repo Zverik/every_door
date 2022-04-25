@@ -285,7 +285,7 @@ class OsmDataHelper extends ChangeNotifier {
     // List all payment options that appear at least on 1/3 of objects.
     final minCount = (count / 3).ceil();
     final result = tagCount.entries
-        .where((e) => e.value >= minCount)
+        .where((e) => e.value >= minCount && e.value >= 2)
         .map((e) => e.key)
         .toSet();
 

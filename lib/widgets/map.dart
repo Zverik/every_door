@@ -7,6 +7,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
+import 'package:every_door/providers/legend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -36,6 +37,8 @@ class AmenityMap extends ConsumerStatefulWidget {
   final void Function(LatLng)? onTrack;
   final void Function(LatLngBounds)? onTap;
   final AmenityMapController? controller;
+  final bool colorsFromLegend;
+  final bool drawNumbers;
 
   const AmenityMap({
     required this.initialLocation,
@@ -45,6 +48,8 @@ class AmenityMap extends ConsumerStatefulWidget {
     this.onTap,
     this.amenities = const [],
     this.controller,
+    this.drawNumbers = true,
+    this.colorsFromLegend = false,
   });
 
   @override
@@ -188,6 +193,11 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     super.dispose();
   }
 
+  Color getIconColor(OsmChange amenity, LegendController legendController) {
+    if (!widget.colorsFromLegend) return Colors.white;
+    return legendController.getLegendItem(amenity)?.color ?? kLegendOtherColor;
+  }
+
   @override
   Widget build(BuildContext context) {
     final LatLng? trackLocation = ref.watch(geolocationProvider);
@@ -219,6 +229,10 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       savedZoom = mapController.zoom;
       mapController.move(newState?.center ?? mapController.center, targetZoom);
     });
+
+    final iconSize = widget.drawNumbers ? 20.0 : 13.0;
+    final anchorOffset = widget.drawNumbers ? 20.0 : 24.0;
+    final legendCon = ref.watch(legendProvider.notifier);
 
     return FlutterMap(
       mapController: mapController,
@@ -269,25 +283,27 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
               for (var i = 0; i < widget.amenities.length && i < 9; i++)
                 Marker(
                   point: widget.amenities[i].location,
-                  anchorPos: AnchorPos.exactly(Anchor(20.0, 20.0)),
+                  anchorPos: AnchorPos.exactly(Anchor(anchorOffset, anchorOffset)),
                   builder: (ctx) => Stack(
                     children: [
                       Icon(
                         Icons.circle,
-                        size: 20.0,
-                        color: Colors.white.withOpacity(0.7),
+                        size: iconSize,
+                        color: getIconColor(widget.amenities[i], legendCon)
+                            .withOpacity(0.7),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(left: 6.0, top: 1.0),
-                        child: Text(
-                          (i + 1).toString(),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.0,
+                      if (widget.drawNumbers)
+                        Container(
+                          padding: EdgeInsets.only(left: 6.0, top: 1.0),
+                          child: Text(
+                            (i + 1).toString(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: iconSize - 5.0,
+                            ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),

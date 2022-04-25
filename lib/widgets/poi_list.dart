@@ -1,4 +1,5 @@
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/providers/legend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/constants.dart';
@@ -108,6 +109,11 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       nearestPOI = data;
     });
 
+    if (editorMode == EditorMode.micromapping) {
+      final locale = Localizations.localeOf(context);
+      ref.read(legendProvider.notifier).updateLegend(data, locale: locale);
+    }
+
     // Zoom automatically only when tracking location.
     if (ref.read(trackingProvider)) {
       mapController.zoomToFit(data.map((e) => e.location));
@@ -154,7 +160,9 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
   @override
   Widget build(BuildContext context) {
     final location = ref.read(effectiveLocationProvider);
-    final editorMode = ref.watch(editorModeProvider);
+    final isMicromapping =
+        ref.watch(editorModeProvider) == EditorMode.micromapping;
+    final isZoomedIn = ref.watch(microZoomedInProvider) != null;
     final apiStatus = ref.watch(apiStatusProvider);
     ref.listen(editorModeProvider, (_, next) {
       updateNearest();
@@ -188,15 +196,20 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
               ref.read(effectiveLocationProvider.notifier).set(pos);
             },
             onTap: micromappingTap,
+            colorsFromLegend: isMicromapping,
+            drawNumbers: !isMicromapping || isZoomedIn,
           ),
         ),
         if (widget.areaStatusPanel != null) widget.areaStatusPanel!,
-        Expanded(
-          flex: editorMode == EditorMode.micromapping || farFromUser ? 1 : 3,
-          child: apiStatus != ApiStatus.idle
-              ? buildApiStatusPane(context, apiStatus)
-              : PoiPane(nearestPOI),
-        ),
+        if (!isMicromapping || isZoomedIn)
+          Expanded(
+            flex: isMicromapping || farFromUser ? 1 : 3,
+            child: apiStatus != ApiStatus.idle
+                ? buildApiStatusPane(context, apiStatus)
+                : PoiPane(nearestPOI),
+          ),
+        if (isMicromapping && !isZoomedIn)
+          LegendPane(),
       ],
     );
   }
@@ -215,6 +228,31 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
           style: TextStyle(fontSize: 20.0),
         ),
       ],
+    );
+  }
+}
+
+class LegendPane extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final legend = ref.watch(legendProvider);
+    if (legend.isEmpty) return Container();
+
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+     child: Column(
+        children: [
+          for (final item in legend)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.circle, color: item.color, size: 20.0),
+                SizedBox(width: 5.0),
+                Text(item.label, style: kFieldTextStyle),
+              ],
+            )
+        ],
+      )
     );
   }
 }

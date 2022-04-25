@@ -26,11 +26,42 @@ class HoursPresetField extends PresetField {
   Widget buildWidget(OsmChange element) => HoursInputField(this, element);
 }
 
-class HoursInputField extends StatelessWidget {
-  final OsmChange element;
-  final HoursPresetField field;
+class CollectionPresetField extends PresetField {
+  CollectionPresetField(
+      {required String key,
+      required String label,
+      FieldPrerequisite? prerequisite})
+      : super(
+            key: key,
+            label: label,
+            icon: Icons.schedule,
+            prerequisite: prerequisite);
 
-  const HoursInputField(this.field, this.element);
+  @override
+  Widget buildWidget(OsmChange element) =>
+      HoursInputField(this, element, isCollectionTimes: true);
+}
+
+class HoursInputField extends ConsumerStatefulWidget {
+  final OsmChange element;
+  final PresetField field;
+  final bool isCollectionTimes;
+
+  const HoursInputField(this.field, this.element,
+      {this.isCollectionTimes = false});
+
+  @override
+  ConsumerState<HoursInputField> createState() => _HoursInputFieldState();
+}
+
+class _HoursInputFieldState extends ConsumerState<HoursInputField> {
+  String? mostCommonHours;
+
+  @override
+  initState() {
+    super.initState();
+    findMostCommonInterval();
+  }
 
   String? _prettifyHours(String? hours) {
     if (hours == null) return null;
@@ -40,29 +71,80 @@ class HoursInputField extends StatelessWidget {
         .replaceAllMapped(RegExp(r',(\S)'), (m) => ', ${m.group(1)}');
   }
 
+  findMostCommonInterval() async {
+    final data = ref.read(osmDataProvider);
+    List<String> hoursList =
+        await data.getOpeningHoursAround(widget.element.location, limit: 20);
+
+    // Consider those with 3+ occurrences.
+    final counter = <String, int>{};
+    for (final h in hoursList) counter[h] = (counter[h] ?? 0) + 1;
+    hoursList =
+        counter.entries.where((e) => e.value >= 3).map((e) => e.key).toList();
+
+    // Parse opening hours and remove those with 24/7 entries.
+    final parsed = hoursList
+        .map((s) => HoursData(s))
+        .where((h) => h.fragments.isNotEmpty)
+        .where((h) => h.fragments.every((f) => !f.is24))
+        .map((h) => h.buildHours())
+        .toList();
+    if (parsed.isEmpty) return;
+
+    // Find the most common value.
+    counter.clear();
+    for (final h in parsed) counter[h] = (counter[h] ?? 0) + 1;
+    final counterEntries = counter.entries.toList();
+    counterEntries.sort((a, b) => b.value.compareTo(a.value));
+    setState(() {
+      mostCommonHours = counterEntries.first.key;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(right: 10.0),
-      child: ElevatedButton(
-        onPressed: () async {
-          String? value = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      OpeningHoursPage(element[field.key] ?? '24/7', element)));
-          if (value != null) {
-            element[field.key] = value == '-' ? null : value;
-          }
-        },
-        child: Container(
-          width: double.infinity, // To align contents to the left
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-              _prettifyHours(element[field.key]) ?? loc.fieldHoursButton,
-              style: kFieldTextStyle),
-        ),
+      child: Row(
+        children: [
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () async {
+                String? value = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OpeningHoursPage(
+                            widget.element[widget.field.key] ?? '24/7',
+                            element: widget.element)));
+                if (value != null) {
+                  widget.element[widget.field.key] = value == '-' ? null : value;
+                }
+              },
+              child: Container(
+                width: double.infinity, // To align contents to the left
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                    _prettifyHours(widget.element[widget.field.key]) ??
+                        loc.fieldHoursButton,
+                    style: kFieldTextStyle),
+              ),
+            ),
+          ),
+          if (widget.element[widget.field.key] == null &&
+              mostCommonHours != null)
+            Padding(
+              padding: const EdgeInsets.only(left: 4.0),
+              child: ElevatedButton(
+                child: Icon(Icons.event_repeat),
+                onPressed: () {
+                  setState(() {
+                    widget.element[widget.field.key] = mostCommonHours;
+                  });
+                },
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -71,8 +153,9 @@ class HoursInputField extends StatelessWidget {
 class OpeningHoursPage extends ConsumerStatefulWidget {
   final String hours;
   final OsmChange? element;
+  final bool isCollectionTimes;
 
-  const OpeningHoursPage(this.hours, [this.element]);
+  const OpeningHoursPage(this.hours, {this.element, this.isCollectionTimes = false});
 
   @override
   ConsumerState<OpeningHoursPage> createState() => _OpeningHoursPageState();
@@ -155,9 +238,8 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
           ),
         ],
       ),
-      body: isRaw
-          ? buildRawHoursEditor(context)
-          : buildFragmentsEditor(context),
+      body:
+          isRaw ? buildRawHoursEditor(context) : buildFragmentsEditor(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.done),
         onPressed: () {
@@ -199,7 +281,6 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
             child: HoursFragmentEditor(
               fragment: hours.fragments[i],
               defaultInterval: defaultInterval,
-              autofocus: i == 0,
               onDelete: i == 0
                   ? null
                   : () {
@@ -275,14 +356,12 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
 
 class HoursFragmentEditor extends StatefulWidget {
   final HoursFragment fragment;
-  final bool autofocus;
   final HoursInterval? defaultInterval;
   final Function? onDelete;
   final Function? onChange;
 
   const HoursFragmentEditor(
       {required this.fragment,
-      this.autofocus = false,
       this.defaultInterval,
       this.onDelete,
       this.onChange});

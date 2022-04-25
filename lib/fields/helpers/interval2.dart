@@ -6,14 +6,30 @@ class ClockIntervalField extends StatelessWidget {
   final HoursInterval interval;
   final Function(HoursInterval) onChange;
   final bool isBreak;
+  final bool isCollectionTimes;
 
-  const ClockIntervalField(
-      {required this.interval, required this.onChange, this.isBreak = false});
+  const ClockIntervalField({
+    required this.interval,
+    required this.onChange,
+    this.isBreak = false,
+    this.isCollectionTimes = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    if (!isBreak) {
+    if (isCollectionTimes) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        // TODO: actually there can be many times, so this needs to be an array... It's complicated.
+        child: ClockEditor(
+          interval: interval,
+          onChange: onChange,
+          title: 'Collection',
+          type: ClockEditorType.single,
+        ),
+      );
+    } else if (!isBreak) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 14.0),
         child: Row(
@@ -23,8 +39,7 @@ class ClockIntervalField extends StatelessWidget {
                 interval: interval,
                 onChange: onChange,
                 title: loc.fieldHoursOpens,
-                displayBoth: false,
-                isSecond: false,
+                type: ClockEditorType.first,
               ),
             ),
             Expanded(
@@ -32,8 +47,7 @@ class ClockIntervalField extends StatelessWidget {
                 interval: interval,
                 onChange: onChange,
                 title: loc.fieldHoursCloses,
-                displayBoth: false,
-                isSecond: true,
+                type: ClockEditorType.second,
               ),
             ),
           ],
@@ -46,26 +60,26 @@ class ClockIntervalField extends StatelessWidget {
           interval: interval,
           onChange: onChange,
           title: loc.fieldHoursBreak,
-          displayBoth: true,
+          type: ClockEditorType.both,
         ),
       );
     }
   }
 }
 
+enum ClockEditorType { first, second, both, single }
+
 class ClockEditor extends StatefulWidget {
   final HoursInterval interval;
   final String title;
-  final bool displayBoth;
-  final bool isSecond;
+  final ClockEditorType type;
   final Function(HoursInterval) onChange;
 
   const ClockEditor({
     required this.interval,
     required this.onChange,
     required this.title,
-    this.displayBoth = true,
-    this.isSecond = false,
+    required this.type,
   });
 
   @override
@@ -121,17 +135,19 @@ class _ClockEditorState extends State<ClockEditor> {
   @override
   Widget build(BuildContext context) {
     String time;
-    if (widget.displayBoth) {
+    if (widget.type == ClockEditorType.both) {
       time = widget.interval.toString();
     } else {
-      time = widget.isSecond ? widget.interval.end : widget.interval.start;
+      time = widget.type == ClockEditorType.second
+          ? widget.interval.end
+          : widget.interval.start;
     }
-    final double baseSize = widget.displayBoth ? 14.0 : 18.0;
+    final double baseSize = widget.type == ClockEditorType.both ? 14.0 : 18.0;
 
     return GestureDetector(
       onTap: () async {
         final result = await ClockEditor.showIntervalEditor(
-            context, widget.interval, widget.isSecond);
+            context, widget.interval, widget.type == ClockEditorType.second);
         if (result != null && result != widget.interval) {
           widget.onChange(result);
         }

@@ -57,8 +57,9 @@ class ChangeListPage extends ConsumerWidget {
 
   downloadChanges(WidgetRef ref) async {
     final changes = ref.watch(changesProvider);
+    final changeList = changes.all();
     String changeset =
-        ref.read(osmApiProvider).buildOsmChange(changes.all(), null);
+        ref.read(osmApiProvider).buildOsmChange(changeList, null);
     final tempDir = await getTemporaryDirectory();
     File tmpFile =
         File('${tempDir.path}/everydoor-${formatTime("YYmmdd")}.osc');
@@ -66,7 +67,8 @@ class ChangeListPage extends ConsumerWidget {
     await Share.shareFiles(
       [tmpFile.path],
       mimeTypes: ['application/xml'],
-      subject: 'Changes from $kAppTitle on ${formatTime("YYYY-mm-dd HH:MM")}',
+      subject:
+          '${changeList.length} changes from $kAppTitle on ${formatTime("YYYY-mm-dd HH:MM")}',
     );
     tmpFile.delete();
   }

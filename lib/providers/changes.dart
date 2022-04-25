@@ -70,6 +70,18 @@ class ChangesProvider extends ChangeNotifier {
     }
   }
 
+  List<OsmChange> fetch(Iterable<String> databaseIds) {
+    final ids = Set.of(databaseIds);
+    List<OsmChange> result = [];
+    for (final el in _new.values) {
+      if (ids.contains(el.databaseId)) result.add(el);
+    }
+    for (final el in _changes.values) {
+      if (ids.contains(el.databaseId)) result.add(el);
+    }
+    return result;
+  }
+
   saveChange(OsmChange change) async {
     print('Saving $change');
     if (change.isModified) {
