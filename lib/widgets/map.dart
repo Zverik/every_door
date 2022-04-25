@@ -236,6 +236,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     final iconSize = widget.drawNumbers ? 20.0 : 13.0;
     final anchorOffset = widget.drawNumbers ? 20.0 : 24.0;
     final legendCon = ref.watch(legendProvider.notifier);
+    final amenities = List.of(widget.amenities);
 
     return FlutterMap(
       mapController: mapController,
@@ -283,16 +284,16 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
                   builder: (ctx) => Icon(Icons.location_pin),
                 ),
-              for (var i = 0; i < widget.amenities.length && i < 9; i++)
+              for (var i = 0; i < amenities.length && i < 9; i++)
                 Marker(
-                  point: widget.amenities[i].location,
+                  point: amenities[i].location,
                   anchorPos: AnchorPos.exactly(Anchor(anchorOffset, anchorOffset)),
                   builder: (ctx) => Stack(
                     children: [
                       Icon(
                         Icons.circle,
                         size: iconSize,
-                        color: getIconColor(widget.amenities[i], legendCon)
+                        color: getIconColor(amenities[i], legendCon)
                             .withOpacity(widget.drawNumbers ? 0.7 : 1.0),
                       ),
                       if (widget.drawNumbers)
