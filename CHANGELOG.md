@@ -7,7 +7,7 @@ _Unreleased_
 * Micromapping mode now has coloured dots instead of tiles and numbers.
 * Added app version to the settings screen.
 * Fixed location scopes in the app.
-* Made hint labels lighter.
+* Made hint labels lighter in text fields.
 * Button in hours editor to use the most common value from around.
 
 ## 0.1.7

@@ -118,7 +118,8 @@ class _HoursInputFieldState extends ConsumerState<HoursInputField> {
                             widget.element[widget.field.key] ?? '24/7',
                             element: widget.element)));
                 if (value != null) {
-                  widget.element[widget.field.key] = value == '-' ? null : value;
+                  widget.element[widget.field.key] =
+                      value == '-' ? null : value;
                 }
               },
               child: Container(
@@ -131,12 +132,18 @@ class _HoursInputFieldState extends ConsumerState<HoursInputField> {
               ),
             ),
           ),
-          if (widget.element[widget.field.key] == null &&
-              mostCommonHours != null)
+          if (mostCommonHours != null &&
+              widget.element[widget.field.key] != mostCommonHours)
             Padding(
               padding: const EdgeInsets.only(left: 4.0),
               child: ElevatedButton(
                 child: Icon(Icons.event_repeat),
+                style: widget.element[widget.field.key] == null
+                    ? null
+                    : ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.grey,
+                      ),
                 onPressed: () {
                   setState(() {
                     widget.element[widget.field.key] = mostCommonHours;
@@ -155,7 +162,8 @@ class OpeningHoursPage extends ConsumerStatefulWidget {
   final OsmChange? element;
   final bool isCollectionTimes;
 
-  const OpeningHoursPage(this.hours, {this.element, this.isCollectionTimes = false});
+  const OpeningHoursPage(this.hours,
+      {this.element, this.isCollectionTimes = false});
 
   @override
   ConsumerState<OpeningHoursPage> createState() => _OpeningHoursPageState();
