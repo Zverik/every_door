@@ -239,7 +239,8 @@ class _MultiComboFieldState extends State<MultiComboField> {
           widget.element[widget.field.key] = values.first;
           break;
         case ComboType.semi:
-          widget.element[widget.field.key] = values.map((e) => e.trim()).join(';');
+          widget.element[widget.field.key] =
+              values.map((e) => e.trim()).join(';');
           break;
         default:
         // this is not called
@@ -325,9 +326,13 @@ class _MultiComboFieldState extends State<MultiComboField> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Padding(
+                    Container(
                       padding: const EdgeInsets.only(left: 6.0),
-                      child: Text(v, style: kFieldTextStyle),
+                      constraints: BoxConstraints(maxWidth: 150.0),
+                      child: Text(v,
+                          style: kFieldTextStyle,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1),
                     ),
                     Icon(Icons.close),
                   ],

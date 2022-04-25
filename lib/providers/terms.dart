@@ -28,6 +28,8 @@ class TermsProvider {
     final presetProv = _ref.read(presetProvider);
     final database = await _ref.read(databaseProvider).database;
     for (final element in elements) {
+      // Build index only for amenities.
+      if (!(element.element?.isAmenity ?? true)) continue;
       final tags = element.getFullTags();
       final preset = await presetProv.getPresetForTags(tags);
       String? presetName;

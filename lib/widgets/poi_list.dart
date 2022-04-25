@@ -1,5 +1,6 @@
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/legend.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/constants.dart';
@@ -208,8 +209,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
                 ? buildApiStatusPane(context, apiStatus)
                 : PoiPane(nearestPOI),
           ),
-        if (isMicromapping && !isZoomedIn)
-          LegendPane(),
+        if (isMicromapping && !isZoomedIn) LegendPane(),
       ],
     );
   }
@@ -238,21 +238,26 @@ class LegendPane extends ConsumerWidget {
     final legend = ref.watch(legendProvider);
     if (legend.isEmpty) return Container();
 
-    return Padding(
+    return Container(
       padding: EdgeInsets.all(10.0),
-     child: Column(
-        children: [
-          for (final item in legend)
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.circle, color: item.color, size: 20.0),
-                SizedBox(width: 5.0),
-                Text(item.label, style: kFieldTextStyle),
-              ],
-            )
-        ],
-      )
+      constraints: BoxConstraints(minHeight: 130.0),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (final item in legend)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(Icons.circle, color: item.color, size: 20.0),
+                  SizedBox(width: 5.0),
+                  Text(item.label, style: kFieldTextStyle),
+                ],
+              )
+          ],
+        ),
+      ),
     );
   }
 }

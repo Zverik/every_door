@@ -230,6 +230,9 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       mapController.move(newState?.center ?? mapController.center, targetZoom);
     });
 
+    // Update colors when the legend is ready.
+    ref.listen(legendProvider, (_, next) {setState(() {});});
+
     final iconSize = widget.drawNumbers ? 20.0 : 13.0;
     final anchorOffset = widget.drawNumbers ? 20.0 : 24.0;
     final legendCon = ref.watch(legendProvider.notifier);
@@ -290,7 +293,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                         Icons.circle,
                         size: iconSize,
                         color: getIconColor(widget.amenities[i], legendCon)
-                            .withOpacity(0.7),
+                            .withOpacity(widget.drawNumbers ? 0.7 : 1.0),
                       ),
                       if (widget.drawNumbers)
                         Container(

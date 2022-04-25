@@ -1,5 +1,7 @@
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/preset.dart';
+import 'package:every_door/providers/presets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +40,9 @@ class LegendController extends StateNotifier<List<LegendItem>> {
 
   Future updateLegend(List<OsmChange> amenities, {Locale? locale}) async {
     // TODO: run simultaneously
-    final typesMap = {for (final a in amenities) a: await _getLabel(a)};
+    final typesMap = {
+      for (final a in amenities) a: await _getLabel(a.getFullTags(), locale)
+    };
 
     // Sort by number of occurrences.
     final typesCount = <String, int>{};
@@ -74,16 +78,18 @@ class LegendController extends StateNotifier<List<LegendItem>> {
       newLegend.add(LegendItem(color: kLegendColors[color], label: t.key));
       usedColors.add(color);
     }
-    state = newLegend;
     final labelToLegend = {for (final l in newLegend) l.label: l};
     _legendMap = typesMap.map(
         (amenity, label) => MapEntry(amenity.databaseId, labelToLegend[label]));
+    state = newLegend;
   }
 
-  Future<String?> _getLabel(OsmChange amenity) async {
-    final k = getMainKey(amenity.getFullTags());
-    return k == null ? null : amenity[k];
-    // TODO: preset name
+  Future<String?> _getLabel(Map<String, String> tags, Locale? locale) async {
+    final preset =
+        await _ref.read(presetProvider).getPresetForTags(tags, locale: locale);
+    if (preset != Preset.defaultPreset) return preset.name;
+    final k = getMainKey(tags);
+    return k == null ? null : '$k = ${tags[k]}';
   }
 
   LegendItem? getLegendItem(OsmChange amenity) =>

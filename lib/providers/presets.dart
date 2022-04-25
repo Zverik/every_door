@@ -60,7 +60,6 @@ class PresetProvider {
     }
 
     if (needCopy) {
-      print('Copying new presets database');
       final data = await rootBundle.load('assets/presets.db');
       final bytes =
           data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
@@ -209,17 +208,20 @@ class PresetProvider {
     final sql = '''
     with $langCTE, $tagCTE
     ,matches as (
-      select preset_name, count(*) as tag_count, count(tkey) as match_count
+      select preset_name, count(*) as tag_count, count(tkey) as match_count,
+        count(value) as full_tag_count
       from preset_tags
       left join tags on key = tkey and (value is null or value = tvalue)
       group by preset_name
+      having match_count > 0
     ),
     found as (
       select name
       from presets
         inner join matches on name = preset_name and tag_count = match_count
       $isAreaClause
-      order by match_count desc, match_score desc, length(name) desc, name
+      order by match_count desc, full_tag_count desc, match_score desc,
+        length(name) desc, name
       limit 1
     )
     select p.*, t.name as loc_name

@@ -131,7 +131,23 @@ std_fields = [
     'payment_multi', 'website', 'wheelchair', 'internet_access', 'description'
 ]
 
-conn = sqlite3.connect(sys.argv[1])
+stop_tags1 = "('bus','yes'),('highway','bus_stop'),('public_transport','platform')"
+stop_tags2 = "('highway','bus_stop'),('public_transport','platform')"
+stop_sql = """
+with tags (tkey, tvalue) as (values {tags})
+, matches as (
+select preset_name, count(*) as tag_count, count(tkey) as match_count, count(value) as full_tag_count
+from preset_tags
+left join tags on key = tkey and (value is null or value = tvalue)
+group by preset_name
+having match_count > 0
+)
+select name, match_count, full_tag_count, match_score from presets
+inner join matches on name = preset_name and tag_count = match_count
+order by match_count desc, full_tag_count desc, match_score desc, length(name) desc, name
+"""
+
+conn = sqlite3.connect(sys.argv[1] if len(sys.argv) > 1 else '../assets/presets.db')
 cur = conn.cursor()
 print('Searching by tags:')
 cur.execute(sql)
@@ -147,4 +163,11 @@ print('Standard fields')
 cur.execute(std_sql, std_fields)
 for row in cur:
     print(row)
-conn.close()
+print()
+print('Bus stop fail')
+print('name, match_count, full_tag_count, match_score')
+for tags in (stop_tags1, stop_tags2):
+    print('--> ' + tags)
+    cur.execute(stop_sql.format(tags=stop_tags1))
+    for row in cur:
+        print(row)
