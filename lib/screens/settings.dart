@@ -28,9 +28,14 @@ class SettingsPage extends ConsumerWidget {
     final login = ref.watch(authProvider);
     final editorSettings = ref.watch(editorSettingsProvider);
     final loc = AppLocalizations.of(context)!;
+
+    final purgeAll = osmData.obsoleteLength == 0;
     final dataLength = NumberFormat.compact(
             locale: Localizations.localeOf(context).toLanguageTag())
         .format(osmData.length);
+    final obsoleteDataLength = NumberFormat.compact(
+            locale: Localizations.localeOf(context).toLanguageTag())
+        .format(osmData.obsoleteLength);
 
     return Scaffold(
       appBar: AppBar(title: Text(loc.settingsTitle)),
@@ -58,26 +63,33 @@ class SettingsPage extends ConsumerWidget {
             title: Text(loc.settingsDataManagement),
             tiles: [
               SettingsTile(
-                title: Text(loc.settingsPurgeData),
-                trailing: osmData.length == 0 ? null : Text(dataLength),
-                enabled: osmData.length > 0,
-                onPressed: (_) async {
-                  final count = await ref.read(osmDataProvider).purgeData();
-                  AlertController.show('Obsolete Data',
-                      'Purged $count obsolete elements.', TypeAlert.success);
-                },
-              ),
-              SettingsTile(
                 title: Text(loc.settingsUploads),
                 enabled: changes.length > 0,
-                trailing: changes.length == 0
-                    ? null
-                    : Text(changes.length.toString()),
+                trailing:
+                    changes.length == 0 ? null : Icon(Icons.navigate_next),
                 onPressed: (context) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChangeListPage()),
                   );
+                },
+              ),
+              SettingsTile(
+                title: Text(purgeAll
+                    ? loc.settingsPurgeAllData
+                    : loc.settingsPurgeData),
+                trailing: Text(purgeAll ? dataLength : obsoleteDataLength),
+                enabled: osmData.length > 0,
+                onPressed: (_) async {
+                  final count =
+                      await ref.read(osmDataProvider).purgeData(purgeAll);
+                  if (purgeAll) {
+                    AlertController.show('Deleted Data',
+                        'Purged $count elements.', TypeAlert.success);
+                  } else {
+                    AlertController.show('Obsolete Data',
+                        'Purged $count obsolete elements.', TypeAlert.success);
+                  }
                 },
               ),
             ],
@@ -91,11 +103,15 @@ class SettingsPage extends ConsumerWidget {
                 onPressed: (context) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => ImageryPage()),
+                    MaterialPageRoute(builder: (context) => ImageryPage()),
                   );
                 },
               ),
+            ],
+          ),
+          SettingsSection(
+            title: Text('Editor'),
+            tiles: [
               SettingsTile.switchTile(
                 title: Text('Prefer "contact:" prefix'),
                 onToggle: (value) {

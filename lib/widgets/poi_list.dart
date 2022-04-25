@@ -22,8 +22,9 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 class PoiListPane extends ConsumerStatefulWidget {
   final Widget? areaStatusPanel;
+  final bool isWide;
 
-  const PoiListPane({this.areaStatusPanel});
+  const PoiListPane({this.areaStatusPanel, this.isWide = false});
 
   @override
   _PoiListPageState createState() => _PoiListPageState();
@@ -184,7 +185,8 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       if (next == null) updateNearest();
     });
 
-    return Column(
+    return Flex(
+      direction: widget.isWide ? Axis.horizontal : Axis.vertical,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
@@ -201,7 +203,10 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
             drawNumbers: !isMicromapping || isZoomedIn,
           ),
         ),
-        if (widget.areaStatusPanel != null) widget.areaStatusPanel!,
+        if (widget.areaStatusPanel != null)
+          widget.isWide
+              ? RotatedBox(quarterTurns: 3, child: widget.areaStatusPanel!)
+              : widget.areaStatusPanel!,
         if (!isMicromapping || isZoomedIn)
           Expanded(
             flex: isMicromapping || farFromUser ? 1 : 3,
@@ -209,7 +214,9 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
                 ? buildApiStatusPane(context, apiStatus)
                 : PoiPane(nearestPOI),
           ),
-        if (isMicromapping && !isZoomedIn) LegendPane(),
+        if (isMicromapping && !isZoomedIn && !widget.isWide) LegendPane(),
+        if (isMicromapping && !isZoomedIn && widget.isWide)
+          SizedBox(child: LegendPane(), width: 200.0),
       ],
     );
   }
@@ -240,23 +247,23 @@ class LegendPane extends ConsumerWidget {
 
     return Container(
       padding: EdgeInsets.all(10.0),
-      constraints: BoxConstraints(minHeight: 130.0),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (final item in legend)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(Icons.circle, color: item.color, size: 20.0),
-                  SizedBox(width: 5.0),
-                  Text(item.label, style: kFieldTextStyle),
-                ],
-              )
-          ],
-        ),
+      constraints: BoxConstraints(minHeight: 150.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (final item in legend)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.circle, color: item.color, size: 20.0),
+                SizedBox(width: 5.0),
+                Expanded(child: Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: Text(item.label, style: kFieldTextStyle),
+                )),
+              ],
+            )
+        ],
       ),
     );
   }

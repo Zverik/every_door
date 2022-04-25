@@ -84,9 +84,13 @@
   "@settingsLoginDetails": {
     "description": "Settings entry for logging in to OSM."
   },
-  "settingsPurgeData": "Purge cached data",
+  "settingsPurgeData": "Purge obsolete cached data",
   "@settingsPurgeData": {
     "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "Purge all downloaded data",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
   },
   "settingsUploads": "Pending uploads",
   "@settingsUploads": {

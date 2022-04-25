@@ -27,6 +27,7 @@ final osmDataProvider = ChangeNotifierProvider((ref) => OsmDataHelper(ref));
 class OsmDataHelper extends ChangeNotifier {
   final Ref _ref;
   int _length = 0;
+  int _obsoleteLength = 0;
 
   OsmDataHelper(this._ref) {
     _updateLength();
@@ -34,41 +35,42 @@ class OsmDataHelper extends ChangeNotifier {
 
   /// Number of OSM elements in the database.
   int get length => _length;
+  int get obsoleteLength => _obsoleteLength;
 
   /// Removes super-obsolete OSM elements from the database.
-  Future<int> _purgeElements() async {
+  Future<int> _purgeElements(DateTime before) async {
     final database = await _ref.read(databaseProvider).database;
-    final beforeTimestamp =
-        DateTime.now().subtract(kSuperObsoleteData).millisecondsSinceEpoch;
     // Keep elements that are referenced from the changes table.
     int count = await database.delete(
       OsmElement.kTableName,
       where: 'downloaded is not null and downloaded < ? '
           'and osmid not in (select osmid from ${OsmChange.kTableName})',
-      whereArgs: [beforeTimestamp],
+      whereArgs: [before.millisecondsSinceEpoch],
     );
     await _updateLength();
     return count;
   }
 
-  Future<bool> hasObsoleteData() async {
+  Future<int> getObsoleteDataCount([DateTime? before]) async {
     final database = await _ref.read(databaseProvider).database;
     final beforeTimestamp =
-        DateTime.now().subtract(kSuperObsoleteData).millisecondsSinceEpoch;
+        before ?? DateTime.now().subtract(kSuperObsoleteData);
     final result = await database.query(
       OsmElement.kTableName,
       columns: ['count(*)'],
       where: 'downloaded is not null and downloaded < ? '
           'and osmid not in (select osmid from ${OsmChange.kTableName})',
-      whereArgs: [beforeTimestamp],
+      whereArgs: [beforeTimestamp.millisecondsSinceEpoch],
     );
-    return (firstIntValue(result) ?? 0) > 0;
+    return firstIntValue(result) ?? 0;
   }
 
   /// Removes super-obsolete elements and areas from the database.
-  Future<int> purgeData() async {
-    final count = await _purgeElements();
-    await _ref.read(downloadedAreaProvider).purgeAreas();
+  Future<int> purgeData([bool all = false]) async {
+    final beforeTimestamp =
+        all ? DateTime.now() : DateTime.now().subtract(kSuperObsoleteData);
+    final count = await _purgeElements(beforeTimestamp);
+    await _ref.read(downloadedAreaProvider).purgeAreas(beforeTimestamp);
     return count;
   }
 
@@ -76,7 +78,8 @@ class OsmDataHelper extends ChangeNotifier {
     final database = await _ref.read(databaseProvider).database;
     final result = await database
         .rawQuery("select count(*) as cnt from ${OsmElement.kTableName}");
-    _length = result.first['cnt'] as int;
+    _length = firstIntValue(result) ?? 0;
+    _obsoleteLength = await getObsoleteDataCount();
     notifyListeners();
   }
 

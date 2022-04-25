@@ -114,12 +114,17 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       updateAreaStatus();
     });
 
+    final screenSize = MediaQuery.of(context).size;
+    final isWide =
+        screenSize.width > screenSize.height && screenSize.height < 600;
+    print(screenSize.height);
+
     Widget editorPanel;
     final statusPanel = buildAreaStatusBar(context);
     switch (editorMode) {
       case EditorMode.poi:
       case EditorMode.micromapping:
-        editorPanel = PoiListPane(areaStatusPanel: statusPanel);
+        editorPanel = PoiListPane(areaStatusPanel: statusPanel, isWide: isWide);
         break;
       case EditorMode.entrances:
         editorPanel = EntrancesPane(areaStatusPanel: statusPanel);

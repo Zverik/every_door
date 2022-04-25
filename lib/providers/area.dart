@@ -1,4 +1,3 @@
-import 'package:every_door/constants.dart';
 import 'package:every_door/models/osm_area.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
@@ -24,14 +23,12 @@ class AreaProvider {
     await database.insert(OsmDownloadedArea.kTableName, area.toJson());
   }
 
-  Future purgeAreas() async {
+  Future purgeAreas(DateTime before) async {
     final database = await _ref.read(databaseProvider).database;
-    final beforeTimestamp =
-        DateTime.now().subtract(kSuperObsoleteData).millisecondsSinceEpoch;
     await database.delete(
       OsmDownloadedArea.kTableName,
       where: 'downloaded < ?',
-      whereArgs: [beforeTimestamp],
+      whereArgs: [before.millisecondsSinceEpoch],
     );
   }
 

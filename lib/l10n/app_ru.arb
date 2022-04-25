@@ -18,6 +18,7 @@
   "settingsPresentation": "Отображение",
   "settingsLoginDetails": "Аккаунт OSM",
   "settingsPurgeData": "Удалить устаревшие данные",
+  "settingsPurgeAllData": "Удалить все скачанные данные",
   "settingsUploads": "Правки для отправки",
   "settingsMicromapping": "Режим микромаппинга",
   "settingsBackground": "Спутниковые снимки",
