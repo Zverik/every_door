@@ -42,7 +42,6 @@ class SettingsPage extends ConsumerWidget {
       body: SettingsList(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0),
         sections: [
-          ModeSection(),
           SettingsSection(
             title: Text(loc.settingsApiServer),
             tiles: [

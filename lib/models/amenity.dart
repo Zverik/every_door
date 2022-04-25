@@ -24,7 +24,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
   String? error;
   final String databaseId;
   String? _mainKey;
-  bool snap;
   DateTime updated;
   int? newId; // Not stored: used only during uploading.
 
@@ -33,7 +32,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
       this.newLocation,
       bool hardDeleted = false,
       this.error,
-      this.snap = false,
       DateTime? updated,
       this.newNodes,
       String? databaseId})
@@ -51,7 +49,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
     DateTime? updated,
     String? databaseId,
     this.error,
-    this.snap = true,
     this.newId,
   })  : newTags = Map<String, String?>.of(tags),
         newLocation = location,
@@ -68,7 +65,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
         tags: Map.of(newTags.cast<String, String>()),
         location: newLocation!,
         error: error,
-        snap: snap,
         updated: updated,
         databaseId: databaseId,
         newId: newId,
@@ -81,7 +77,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
       newLocation: newLocation,
       hardDeleted: _deleted,
       error: error,
-      snap: snap,
       updated: updated,
       newNodes: newNodes,
       databaseId: databaseId,
@@ -207,7 +202,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
     'new_tags text',
     'deleted integer',
     'error text',
-    'snap integer',
     'updated integer',
   ];
 
@@ -232,7 +226,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
         tags: tags.cast<String, String>(),
         location: location,
         error: data['error'],
-        snap: data['snap'] != 0, // true by default
         updated: updated,
         databaseId: data['id'],
       );
@@ -244,7 +237,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
       newLocation: location,
       hardDeleted: data['deleted'] == 1,
       error: data['error'],
-      snap: data['snap'] == 1,
       updated: updated,
       databaseId: data['id'],
     );
@@ -322,7 +314,6 @@ class OsmChange extends ChangeNotifier implements Comparable {
       error: error,
       databaseId: databaseId,
       newNodes: newElement.nodes, // New data always better
-      snap: snap,
     );
   }
 

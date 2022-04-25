@@ -1,5 +1,9 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/editor_mode.dart';
+import 'package:every_door/providers/last_presets.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +11,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? creatingLocation;
@@ -30,6 +35,51 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     });
   }
 
+  Future<List<Preset>> _getPresetsAround(LatLng location,
+      [int count = 3]) async {
+    final editorMode = ref.read(editorModeProvider);
+    var data = await ref
+        .read(osmDataProvider)
+        .getElements(location, kVisibilityRadius);
+    data = data.where((e) {
+      switch (e.kind) {
+        case ElementKind.amenity:
+          return editorMode == EditorMode.poi;
+        case ElementKind.micro:
+          return editorMode == EditorMode.micromapping;
+        default:
+          return false;
+      }
+    }).toList();
+    if (data.isEmpty) return const [];
+
+    // Sort by distance and trim.
+    const distance = DistanceEquirectangular();
+    data = data
+        .where((element) =>
+            distance(location, element.location) <= kVisibilityRadius)
+        .toList();
+    data.sort((a, b) => distance(location, a.location)
+        .compareTo(distance(location, b.location)));
+    if (data.length > 10) data = data.sublist(0, 10);
+
+    // Get presets for all elements.
+    final presetProv = ref.read(presetProvider);
+    final locale = Localizations.localeOf(context);
+    final presets = <Preset, int>{};
+    for (final element in data) {
+      final preset = await presetProv.getPresetForTags(element.getFullTags(),
+          locale: locale);
+      if (preset != Preset.defaultPreset && !preset.isFixme)
+        presets[preset] = (presets[preset] ?? 0) + 1;
+    }
+
+    // Sort and return most common.
+    final presetsCount = presets.entries.toList();
+    presetsCount.sort((a, b) => b.value.compareTo(a.value));
+    return presetsCount.map((e) => e.key).take(count).toList();
+  }
+
   updatePresets(String substring) async {
     final prov = ref.read(presetProvider);
     final locale = Localizations.localeOf(context);
@@ -39,9 +89,25 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
           ? kDefaultMicroPresets
           : kDefaultPresets;
       final newPresets = await prov.getPresetsById(defaultList, locale: locale);
+
+      // Add last presets.
+      final presetsToAdd = <Preset>[];
+      presetsToAdd.addAll(ref.read(lastPresetsProvider).getPresets());
+      // Add presets from around.
+      if (widget.creatingLocation != null) {
+        presetsToAdd.addAll(await _getPresetsAround(widget.creatingLocation!));
+      }
+
+      // Keep 2 or 4 (or 0) added presets.
+      for (final p in presetsToAdd) newPresets.remove(p);
+      if ((presetsToAdd.length + newPresets.length) % 2 != 0)
+        presetsToAdd.removeAt(presetsToAdd.length - 1);
+      if (presetsToAdd.length + newPresets.length - defaultList.length > 4)
+        presetsToAdd.removeRange(4, presetsToAdd.length);
+
       setState(() {
         resultsUpdated = DateTime.now();
-        presets = newPresets;
+        presets = presetsToAdd + newPresets;
       });
     } else {
       final editorMode = ref.read(editorModeProvider);
@@ -76,6 +142,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -91,11 +158,11 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
             textInputAction: TextInputAction.search,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search),
-              hintText: 'Choose type...',
+              hintText: loc.chooseType + '...',
               border: InputBorder.none,
               suffixIcon: IconButton(
                 icon: Icon(Icons.clear),
-                tooltip: 'Clear',
+                tooltip: loc.chooseTypeClear,
                 onPressed: () {
                   controller.clear();
                   updatePresets('');

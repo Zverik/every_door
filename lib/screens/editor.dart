@@ -6,6 +6,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/changes.dart';
+import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
@@ -18,7 +19,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PoiEditorPage extends ConsumerStatefulWidget {
-  final OsmChange? amenity; // OsmElement???
+  final OsmChange? amenity;
   final Preset? preset;
   final LatLng? location;
 
@@ -128,6 +129,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   saveAndClose() {
     // Setting the mark automatically.
     if (needsCheckDate(amenity.getFullTags())) amenity.check();
+    // Store the preset when an object was saved, to track used ones.
+    if (widget.preset != null)
+      ref.read(lastPresetsProvider).registerPreset(widget.preset!);
     final changes = ref.read(changesProvider);
     changes.saveChange(amenity);
     Navigator.pop(context);
@@ -159,8 +163,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           final result = await showOkCancelAlertDialog(
             context: context,
             isDestructiveAction: true,
-            title: 'Close the editor?',
-            message: 'You will lose your unsaved changes. Proceed?',
+            title: loc.editorCloseTitle,
+            message: loc.editorCloseMessage,
           );
           return result == OkCancelResult.ok;
         }
@@ -242,9 +246,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                                       final result =
                                           await showOkCancelAlertDialog(
                                         context: context,
-                                        title: 'Is it open?',
-                                        message:
-                                            '${amenity.typeAndName} is inactive. Do you want to mark it active?',
+                                        title: loc.editorRestoreTitle,
+                                        message: loc.editorRestoreMessage(
+                                            amenity.typeAndName),
                                         okLabel: loc.buttonYes,
                                         cancelLabel: loc.buttonNo,
                                       );

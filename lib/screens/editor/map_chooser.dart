@@ -12,6 +12,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MapChooserPage extends ConsumerStatefulWidget {
   final LatLng location;
@@ -77,10 +78,11 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
     final LatLng? trackLocation = ref.watch(geolocationProvider);
+    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose location'),
+        title: Text(loc.chooseLocation),
         actions: [
           IconButton(
             onPressed: () {

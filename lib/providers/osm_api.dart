@@ -313,7 +313,7 @@ class OsmApiHelper {
   /// For changes that require snapping, downloads relevant ways, snaps
   /// the changes (altering their locations), and returns OsmChanges for ways.
   Future<List<OsmChange>> _downloadWaysToSnap(List<OsmChange> changes) async {
-    final toSnap = changes.where((e) => e.isNew && e.snap);
+    final toSnap = changes.where((e) => e.isNew);
     final snapKinds = {for (final e in toSnap) e: detectSnap(e.getFullTags())};
     snapKinds.removeWhere((_, value) => value == SnapTo.nothing);
     if (snapKinds.isEmpty) return const [];

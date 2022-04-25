@@ -1,17 +1,25 @@
 # Every Door App Change Log
 
-## 0.1.8
+## 0.1.9
 
 _Unreleased_
 
+## 0.1.8
+
+_Released on 2022-04-25_
+
+* Mode switching button is now on the main screen.
 * Micromapping mode now has coloured dots instead of tiles and numbers.
 * Added app version to the settings screen.
 * Fixed location scopes in the app.
 * Made hint labels lighter in text fields.
 * Button in hours editor to use the most common value from around.
+* For a list of default presets, also considering last used presets
+  and types of objects around.
 * Button to delete all downloaded data in settings.
 * Increased re-check interval to 2 weeks.
 * Support for landscape screen orientation.
+* Fixed a possible deadlock on the loading screen.
 
 ## 0.1.7
 

@@ -54,10 +54,8 @@ class DatabaseHelper {
       await database.execute("alter table ${OsmElement.kTableName} add column is_member integer");
     }
     if (newVersion >= 3 && oldVersion < 3) {
-      await database.execute("alter table ${OsmChange.kTableName} add column snap integer");
       await database.execute("alter table ${OsmChange.kTableName} add column updated integer");
       // Create new table for terms and preset names?
-      // Create new table for building contours
       // Create new table for road names + geohashes
     }
   }

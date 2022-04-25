@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +14,18 @@ enum EditorMode {
   micromapping,
   entrances,
 }
+
+const kEditorModeIcons = {
+  EditorMode.poi: Icons.shopping_cart,
+  EditorMode.micromapping: Icons.park,
+  EditorMode.entrances: Icons.home,
+};
+
+const kNextMode = {
+  EditorMode.poi: EditorMode.micromapping,
+  EditorMode.micromapping: EditorMode.entrances,
+  EditorMode.entrances: EditorMode.poi,
+};
 
 class EditorModeController extends StateNotifier<EditorMode> {
   static const kModeKey = 'micromappingMode';
@@ -33,5 +46,9 @@ class EditorModeController extends StateNotifier<EditorMode> {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(kModeKey, state.name);
     }
+  }
+
+  next() async {
+    await set(kNextMode[state]!);
   }
 }

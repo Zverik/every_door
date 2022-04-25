@@ -117,7 +117,6 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     final screenSize = MediaQuery.of(context).size;
     final isWide =
         screenSize.width > screenSize.height && screenSize.height < 600;
-    print(screenSize.height);
 
     Widget editorPanel;
     final statusPanel = buildAreaStatusBar(context);
@@ -216,7 +215,25 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
               ),
           ],
         ),
-        body: editorPanel,
+        body: Stack(children: [
+          editorPanel,
+          Positioned(
+            right: 0.0,
+            top: 10.0,
+            child: ElevatedButton(
+              child: Icon(kEditorModeIcons[kNextMode[editorMode]]!, size: 20.0),
+              style: ElevatedButton.styleFrom(
+                shape: CircleBorder(),
+                padding: EdgeInsets.all(10.0),
+                primary: Colors.grey.withOpacity(0.5),
+                shadowColor: Colors.black.withOpacity(0.5),
+              ),
+              onPressed: () {
+                ref.read(editorModeProvider.notifier).next();
+              },
+            ),
+          ),
+        ]),
         floatingActionButton: editorMode == EditorMode.poi ||
                 editorMode == EditorMode.micromapping
             ? FloatingActionButton(

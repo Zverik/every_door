@@ -159,6 +159,12 @@ class Preset {
   }
 
   @override
+  bool operator ==(Object other) => other is Preset && other.id == id;
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
   String toString() =>
       'Preset(id="$id", name="$name", can_area=$onArea, nsi=$fromNSI)';
 }

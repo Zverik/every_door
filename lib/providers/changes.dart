@@ -21,7 +21,25 @@ class ChangesProvider extends ChangeNotifier {
       select * from ${OsmChange.kTableName} c
       left join ${OsmElement.kTableName} e on c.osmid = e.osmid
     """);
-    final elements = rows.map((row) => OsmChange.fromJson(row));
+    final broken = <String>[];
+    final elements = <OsmChange>[];
+    for (final row in rows) {
+      try {
+        elements.add(OsmChange.fromJson(row));
+      } on Error catch (e) {
+        print('Failed to load osm change $row: $e');
+        broken.add(row['id'] as String);
+      } on Exception catch (e) {
+        print('Failed to load osm change $row: $e');
+        broken.add(row['id'] as String);
+      }
+    }
+    if (broken.isNotEmpty) {
+      // Delete these elements, since they are not restorable.
+      final q = broken.map((e) => '?').join(',');
+      await database.delete(OsmChange.kTableName,
+          where: 'id in $q', whereArgs: broken);
+    }
     for (final e in elements) {
       if (e.isNew)
         _new[e.databaseId] = e;

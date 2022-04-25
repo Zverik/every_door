@@ -23,9 +23,29 @@
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
+  "chooseLocation": "Choose location",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "Choose type",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Clear",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
   "editorSave": "Save",
   "@editorSave": {
     "description": "Save button title in the editor"
+  },
+  "editorCloseTitle": "Close the editor?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "You will lose your unsaved changes. Proceed?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
   },
   "editorMoreFields": "More Fields",
   "@editorMoreFields": {
@@ -51,11 +71,24 @@
   "@editorMissing": {
     "description": "Button title to delete an amenity (since it's missing)."
   },
-  "editorDeleteTitle": "Delete {title}?",
+  "editorRestoreTitle": "Is it open?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorRestoreMessage": "{amenity} is inactive. Do you want to mark it active?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteTitle": "Delete {amenity}?",
   "@editorDeleteTitle": {
     "description": "Dialog title for deleting an amenity.",
     "placeholders": {
-      "title": {
+      "amenity": {
         "description": "Amenity title"
       }
     }
