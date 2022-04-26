@@ -15,9 +15,12 @@ class LegendItem {
   final String label;
 
   LegendItem({required this.color, required this.label});
+  LegendItem.other(this.label) : color = kLegendOtherColor;
 
   @override
   String toString() => 'LegendItem($color, "$label")';
+
+  bool get isOther => color == kLegendOtherColor;
 }
 
 const kLegendOtherColor = Colors.black;
@@ -40,15 +43,27 @@ class LegendController extends StateNotifier<List<LegendItem>> {
 
   Future updateLegend(List<OsmChange> amenities, {Locale? locale}) async {
     // TODO: run simultaneously
+    // Considering amenities are listed closest to farthest
     final typesMap = {
       for (final a in amenities) a: await _getLabel(a.getFullTags(), locale)
     };
 
-    // Sort by number of occurrences.
+    // Make a map for types, limited to the number of colours.
+    bool haveExtra = false;
     final typesCount = <String, int>{};
-    for (final l in typesMap.values) {
-      if (l != null) typesCount[l] = (typesCount[l] ?? 0) + 1;
+    for (final a in amenities) {
+      final l = typesMap[a];
+      if (l != null) {
+        if (typesCount.length >= kLegendColors.length &&
+            !typesCount.containsKey(l)) {
+          haveExtra = true;
+          continue;
+        }
+        typesCount[l] = (typesCount[l] ?? 0) + 1;
+      }
     }
+
+    // Sort by number of occurrences.
     final typesCountList = typesCount.entries.toList();
     typesCountList.sort((a, b) => b.value.compareTo(a.value));
     if (typesCountList.length > kLegendColors.length)
@@ -78,6 +93,8 @@ class LegendController extends StateNotifier<List<LegendItem>> {
       newLegend.add(LegendItem(color: kLegendColors[color], label: t.key));
       usedColors.add(color);
     }
+    if (haveExtra) newLegend.add(LegendItem.other('Other'));
+
     final labelToLegend = {for (final l in newLegend) l.label: l};
     _legendMap = typesMap.map(
         (amenity, label) => MapEntry(amenity.databaseId, labelToLegend[label]));

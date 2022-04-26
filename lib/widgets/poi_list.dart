@@ -242,9 +242,10 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
 class LegendPane extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final legend = ref.watch(legendProvider);
+    final legend = List.of(ref.watch(legendProvider));
     if (legend.isEmpty) return Container();
 
+    final loc = AppLocalizations.of(context)!;
     return Container(
       padding: EdgeInsets.all(10.0),
       constraints: BoxConstraints(minHeight: 150.0),
@@ -257,10 +258,13 @@ class LegendPane extends ConsumerWidget {
               children: [
                 Icon(Icons.circle, color: item.color, size: 20.0),
                 SizedBox(width: 5.0),
-                Expanded(child: Padding(
-                  padding: const EdgeInsets.only(bottom: 5.0),
-                  child: Text(item.label, style: kFieldTextStyle),
-                )),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Text(item.isOther ? loc.legendOther : item.label,
+                        style: kFieldTextStyle),
+                  ),
+                ),
               ],
             )
         ],

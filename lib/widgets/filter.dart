@@ -8,6 +8,7 @@ import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PoiFilterPane extends ConsumerStatefulWidget {
   const PoiFilterPane();
@@ -59,22 +60,24 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final filter = ref.watch(poiFilterProvider);
     if (nearestAddresses.isEmpty) {
-      return Text('No addresses nearby');
+      return Text(loc.filterNoAddresses);
     }
 
+    String empty = loc.filterEmpty;
     return Container(
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Filter by address:', style: kFieldTextStyle),
+          Text(loc.filterByAddress, style: kFieldTextStyle),
           RadioField(
             options:
-                nearestAddresses.map((e) => e.toString()).toList() + ['empty'],
+                nearestAddresses.map((e) => e.toString()).toList() + [empty],
             value: (filter.address?.isEmpty ?? false)
-                ? 'empty'
+                ? empty
                 : filter.address?.toString(),
             onChange: (value) {
               if (value == null) {
@@ -83,7 +86,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
                   address: PoiFilter.nullAddress,
                   floor: PoiFilter.nullFloor,
                 );
-              } else if (value == 'empty') {
+              } else if (value == empty) {
                 ref.read(poiFilterProvider.state).state =
                     filter.copyWith(address: StreetAddress.empty);
               } else {
@@ -99,17 +102,17 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
             },
           ),
           SizedBox(height: 10.0),
-          Text('Filter by floor:', style: kFieldTextStyle),
+          Text(loc.filterByFloor, style: kFieldTextStyle),
           RadioField(
-            options: floors.map((e) => e.string).toList() + ['empty'],
+            options: floors.map((e) => e.string).toList() + [empty],
             value: (filter.floor?.isEmpty ?? false)
-                ? 'empty'
+                ? empty
                 : filter.floor?.string,
             onChange: (value) {
               Floor newFloor;
               if (value == null) {
                 newFloor = PoiFilter.nullFloor;
-              } else if (value == 'empty') {
+              } else if (value == empty) {
                 newFloor = Floor.empty;
               } else {
                 newFloor = floors.firstWhere((e) => e.string == value);
@@ -125,7 +128,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
               ref.read(poiFilterProvider.state).state =
                   filter.copyWith(notChecked: value);
             },
-            title: Text('Only non-confirmed amenities', style: kFieldTextStyle),
+            title: Text(loc.filterNonConfirmed, style: kFieldTextStyle),
           ),
         ],
       ),

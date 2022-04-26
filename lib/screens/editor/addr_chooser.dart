@@ -7,6 +7,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddrChooserPage extends ConsumerStatefulWidget {
   final LatLng location;
@@ -41,11 +42,12 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final imagery = ref.watch(selectedImageryProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tap an address'),
+        title: Text(loc.fieldAddressTap),
         actions: [
           IconButton(
             onPressed: () {

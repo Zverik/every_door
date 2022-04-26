@@ -1,4 +1,24 @@
 {
+  "loadingStart": "Initializing...",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingPresets": "Loading presets",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingChanges": "Loading changes",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingLocation": "Acquiring location",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingChangesFailed": "Failed to load changes",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
   "tileNo": "no",
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
@@ -22,6 +42,30 @@
   "tileDragOrUnfilter": "Please move around, add an amenity, or clear the filter.",
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "legendOther": "Other",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "filterNoAddresses": "No addresses nearby",
+  "@filterNoAddresses": {
+    "description": "Filter pane, an error message for no addresses nearby."
+  },
+  "filterByAddress": "By address",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterByFloor": "By floor",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "filterEmpty": "empty",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "filterNonConfirmed": "Only non-confirmed amenities",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
   "chooseLocation": "Choose location",
   "@chooseLocation": {
@@ -96,6 +140,22 @@
   "editorDeleteButton": "Delete",
   "@editorDeleteButton": {
     "description": "Delete"
+  },
+  "tagsNewPoint": "New Point",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsAddTag": "Add a tag",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Key",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Value",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
   },
   "settingsTitle": "Configuration",
   "@settingsTitle": {
@@ -232,6 +292,10 @@
   "fieldFloorLevelDesc": "Floor number starting from 0 for the ground level",
   "@fieldFloorLevelDesc": {
     "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldAddressTap": "Tap an address",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
   },
   "messageNoData": "No data, tap here to download",
   "@messageNoData": {

@@ -3,6 +3,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TagEditorPage extends StatefulWidget {
   final OsmChange amenity;
@@ -34,8 +35,9 @@ class _TagEditorPageState extends State<TagEditorPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     String title = widget.amenity.isNew
-        ? 'New point'
+        ? loc.tagsNewPoint
         : '${kOsmElementTypeName[widget.amenity.id.type]} ${widget.amenity.id.ref}';
     final sortedKeys = List.of(keys);
     sortedKeys.sort();
@@ -117,8 +119,8 @@ class _TagEditorPageState extends State<TagEditorPage> {
                       final result = await showTextInputDialog(
                         context: context,
                         textFields: [
-                          DialogTextField(hintText: 'Key'),
-                          DialogTextField(hintText: 'Value'),
+                          DialogTextField(hintText: loc.tagsKey),
+                          DialogTextField(hintText: loc.tagsValue),
                         ],
                       );
                       if (result != null &&
@@ -134,7 +136,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
                         });
                       }
                     },
-                    child: Text('Add a tag', style: kFieldTextStyle),
+                    child: Text(loc.tagsAddTag, style: kFieldTextStyle),
                   ),
                   Container(),
                   Container(),

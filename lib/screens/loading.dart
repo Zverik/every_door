@@ -9,9 +9,12 @@ import 'package:every_door/screens/browser.dart';
 import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
+import 'package:flutter_dropdown_alert/alert_controller.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:country_coder/country_coder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoadingPage extends ConsumerStatefulWidget {
   @override
@@ -22,6 +25,8 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
   String? message;
 
   Future doInit() async {
+    final loc = AppLocalizations.of(context)!;
+
     // Start loading countries in a background thread.
     compute(CountryCoder.prepareData, null)
         .then((value) => CountryCoder.instance.load(value));
@@ -30,18 +35,29 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     ref.read(authProvider);
 
     setState(() {
-      message = 'Loading presets';
+      message = loc.loadingPresets;
     });
     ref.read(presetProvider);
 
+    // We need extra error handling for changes.
     setState(() {
-      message = 'Loading changes';
+      message = loc.loadingChanges;
     });
-    await ref.read(changesProvider).loadChanges();
+    String? error;
+    try {
+      await ref.read(changesProvider).loadChanges();
+    } on Exception catch (e) {
+      error = e.toString();
+    } on Error catch (e) {
+      error = e.toString();
+    }
+    if (error != null) {
+      AlertController.show(loc.loadingChangesFailed, error, TypeAlert.error);
+    }
 
     // Acquire user location.
     setState(() {
-      message = 'Acquiring location';
+      message = loc.loadingLocation;
     });
     await ref.read(geolocationProvider.notifier).enableTracking(context);
     LatLng? location = ref.read(geolocationProvider);
@@ -59,11 +75,14 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
   @override
   void initState() {
     super.initState();
-    doInit();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      doInit();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(kAppTitle),
@@ -78,7 +97,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
             ),
             SizedBox(height: 40.0),
             Text(
-              message ?? 'Initializing...',
+              message ?? loc.loadingStart,
               style: TextStyle(fontSize: 20.0),
             ),
           ],

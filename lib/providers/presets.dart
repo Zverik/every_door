@@ -422,6 +422,7 @@ class PresetProvider {
   }
 
   Future<List<Map<String, dynamic>>> imageryQuery(String geohash) async {
+    if (!ready) await _waitUntilReady();
     const sql = """
     with im_ids as (
       select imagery_id from imagery_lookup
@@ -438,6 +439,7 @@ class PresetProvider {
   }
 
   Future<Map<String, dynamic>?> singleImageryQuery(String id) async {
+    if (!ready) await _waitUntilReady();
     const sql = "select * from imagery where id = ?";
     return (await _db!.rawQuery(sql, [id])).firstOrNull;
   }

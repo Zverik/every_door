@@ -1,8 +1,16 @@
 # Every Door App Change Log
 
-## 0.1.9
+## 0.1.10
 
 _Unreleased_
+
+## 0.1.9
+
+_Released on 2022-04-26_
+
+* Better sorting in the micromapping legend, and a label for "Other".
+* Exception catching on loading changes.
+* More translated strings.
 
 ## 0.1.8
 
