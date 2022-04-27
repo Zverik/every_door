@@ -3,6 +3,7 @@ import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:sqflite/sqflite.dart';
 
 final changesProvider = ChangeNotifierProvider((ref) => ChangesProvider(ref));
@@ -12,6 +13,8 @@ class ChangesProvider extends ChangeNotifier {
   final Map<OsmId, OsmChange> _changes = {};
   final Map<String, OsmChange> _new = {};
   bool loaded = false;
+
+  static final _logger = Logger('ChangesProvider');
 
   ChangesProvider(this._ref);
 
@@ -27,10 +30,10 @@ class ChangesProvider extends ChangeNotifier {
       try {
         elements.add(OsmChange.fromJson(row));
       } on Error catch (e) {
-        print('Failed to load osm change $row: $e');
+        _logger.severe('Failed to load osm change $row', e);
         broken.add(row['id'] as String);
       } on Exception catch (e) {
-        print('Failed to load osm change $row: $e');
+        _logger.severe('Failed to load osm change $row', e);
         broken.add(row['id'] as String);
       }
     }
@@ -38,7 +41,7 @@ class ChangesProvider extends ChangeNotifier {
       // Delete these elements, since they are not restorable.
       final q = broken.map((e) => '?').join(',');
       await database.delete(OsmChange.kTableName,
-          where: 'id in $q', whereArgs: broken);
+          where: 'id in ($q)', whereArgs: broken);
     }
     for (final e in elements) {
       if (e.isNew)
@@ -101,7 +104,7 @@ class ChangesProvider extends ChangeNotifier {
   }
 
   saveChange(OsmChange change) async {
-    print('Saving $change');
+    _logger.info('Saving $change');
     if (change.isModified) {
       await _addChange(change);
     } else {

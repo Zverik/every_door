@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:every_door/helpers/log_store.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/screens/loading.dart';
@@ -7,10 +10,23 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
+import 'package:logging/logging.dart';
 
 void main() {
   installCertificate();
-  runApp(ProviderScope(child: const EveryDoorApp()));
+  Logger.root.level = kDebugMode ? Level.INFO : Level.WARNING;
+  Logger.root.onRecord.listen((event) {
+    logStore.addFromLogger(event);
+  });
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    logStore.addFromFlutter(details);
+  };
+  runZonedGuarded(() {
+    runApp(ProviderScope(child: const EveryDoorApp()));
+  }, (error, stack) {
+    logStore.addFromZone(error, stack);
+  });
 }
 
 installCertificate() async {

@@ -14,6 +14,7 @@ import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:http/http.dart' as http;
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/osm_api_converters.dart';
+import 'package:logging/logging.dart';
 import 'package:xml/xml.dart';
 import 'package:xml/xml_events.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,6 +33,7 @@ class OsmApiError implements Exception {
 
 class OsmApiHelper {
   final Ref _ref;
+  static final _logger = Logger('OsmApiHelper');
 
   OsmApiHelper(this._ref);
 
@@ -239,7 +241,7 @@ class OsmApiHelper {
           body: _buildSingleChange(change, changeset),
         );
         if (resp.statusCode != 200) {
-          print('Failed to create a node: ${resp.body}');
+          _logger.warning('Failed to create a node: ${resp.body}');
           if ((resp.statusCode > 400 && resp.statusCode < 500) ||
               updates.isNotEmpty) {
             if (resp.statusCode < 400 || resp.statusCode > 500) return updates;
@@ -266,7 +268,7 @@ class OsmApiHelper {
         );
         if (resp.statusCode != 200 && resp.statusCode != 410) {
           // 410 is for "already deleted", fine by us.
-          print('Failed to delete $objRef: ${resp.body}');
+          _logger.warning('Failed to delete $objRef: ${resp.body}');
           if ((resp.statusCode > 400 && resp.statusCode < 500) ||
               updates.isNotEmpty) {
             if (resp.statusCode < 400 || resp.statusCode > 500) return updates;
@@ -288,7 +290,7 @@ class OsmApiHelper {
           body: _buildSingleChange(change, changeset),
         );
         if (resp.statusCode != 200) {
-          print('Failed to update $objRef: ${resp.body}');
+          _logger.warning('Failed to update $objRef: ${resp.body}');
           if ((resp.statusCode > 400 && resp.statusCode < 500) ||
               updates.isNotEmpty) {
             if (resp.statusCode < 400 || resp.statusCode > 500) return updates;

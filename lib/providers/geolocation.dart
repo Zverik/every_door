@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logging/logging.dart';
 
 final geolocationProvider =
     StateNotifierProvider<GeolocationController, LatLng?>(
@@ -15,6 +16,7 @@ final trackingProvider = StateProvider<bool>((ref) => false);
 
 class GeolocationController extends StateNotifier<LatLng?> {
   static final _distance = DistanceEquirectangular();
+  static final _logger = Logger('GeoLocationController');
 
   StreamSubscription<Position>? _locSub;
   late final StreamSubscription<ServiceStatus> _statSub;
@@ -46,14 +48,14 @@ class GeolocationController extends StateNotifier<LatLng?> {
     if (perm == LocationPermission.denied) {
       final perm = await Geolocator.requestPermission();
       if (perm == LocationPermission.denied) {
-        print('Geolocation denied');
+        _logger.info('Geolocation denied');
         disableTracking();
         return;
       }
     }
 
     if (perm == LocationPermission.deniedForever) {
-      print('Geolocation denied forever');
+      _logger.info('Geolocation denied forever');
       disableTracking();
       return;
     }
@@ -140,7 +142,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
   }
 
   onLocationError(event) {
-    print('Location error! $event');
+    _logger.warning('Location error! $event');
     disableTracking();
     state = null;
     _locSub?.cancel();

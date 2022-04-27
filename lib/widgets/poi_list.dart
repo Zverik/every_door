@@ -1,6 +1,5 @@
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/legend.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/constants.dart';

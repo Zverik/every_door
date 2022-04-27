@@ -4,6 +4,9 @@
 
 _Unreleased_
 
+* System logs can be sent to the author (tap the version in settings).
+* When the database is broken, the app recreates it.
+
 ## 0.1.9
 
 _Released on 2022-04-26_

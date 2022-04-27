@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:every_door/private.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:logging/logging.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
 
@@ -88,7 +89,8 @@ class OpenStreetMapOAuthHelper {
     return token;
   }
 
-  Future<AccessTokenResponse> _refreshToken(String refreshToken, [bool requestAuth = true]) async {
+  Future<AccessTokenResponse> _refreshToken(String refreshToken,
+      [bool requestAuth = true]) async {
     AccessTokenResponse token;
     try {
       token = await _client.refreshToken(refreshToken, clientId: _clientId);
@@ -120,7 +122,6 @@ class OpenStreetMapOAuthHelper {
 
   Future deleteToken() async {
     final token = await _loadToken();
-    print('Logging out: $token');
     if (token != null) {
       await _saveToken(null);
       await _client.revokeToken(
@@ -136,7 +137,8 @@ class OpenStreetMapOAuthHelper {
       try {
         token = await getToken(false);
       } on Exception catch (e) {
-        print(e);
+        Logger('OpenStreetMapOAuthHelper')
+            .warning('Failed to get token in getAuthValue', e);
         return null;
       }
       if (token == null) return null; // Not authorizing here

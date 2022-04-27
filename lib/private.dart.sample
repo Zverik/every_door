@@ -3,6 +3,7 @@ const kOsmAuth2Endpoint = 'www.openstreetmap.org';
 const kOauthClient = '';
 const kOauthSecret = '';
 const kBingMapsKey = '';
+const kSecretKey = ''; // Should be left empty
 
 // Sandbox
 // const kOsmEndpoint = 'master.apis.dev.openstreetmap.org';

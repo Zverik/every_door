@@ -1,4 +1,5 @@
 import 'package:every_door/models/osm_element.dart';
+import 'package:logging/logging.dart';
 import 'dart:convert';
 import 'package:xml/xml.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -25,7 +26,8 @@ class UploadedElementRef {
       final String? oldId = node.getAttribute('old_id');
       if (oldId == null) {
         // This should not happen, but at least log something.
-        print('Wrong XML returned after the upload: ${node.toXmlString()}');
+        Logger('UploadedElementRef').warning(
+            'Wrong XML returned after the upload: ${node.toXmlString()}');
         return null;
       }
       return UploadedElementRef(
