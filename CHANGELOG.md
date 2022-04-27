@@ -1,5 +1,14 @@
 # Every Door App Change Log
 
+## 0.1.11
+
+_Released on 2022-04-27_
+
+* German translation complete, thanks to @mfbehrens99.
+* Fixed an error when upgrading database.
+* Made labels column in the floor editor a bit wider.
+* Forgot some translations.
+
 ## 0.1.10
 
 _Released on 2022-04-27_

@@ -70,8 +70,12 @@ class DatabaseHelper {
           "alter table ${OsmElement.kTableName} add column is_member integer");
     }
     if (newVersion >= 3 && oldVersion < 3) {
-      await database.execute(
-          "alter table ${OsmChange.kTableName} add column updated integer");
+      try {
+        await database.execute(
+            "alter table ${OsmChange.kTableName} add column updated integer");
+      } on DatabaseException catch (e) {
+        _logger.warning('Looks like column "updated" was already present.', e);
+      }
     }
     // Create new table for terms and preset names?
     // Create new table for road names + geohashes

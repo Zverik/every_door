@@ -17,6 +17,7 @@ class LogDisplayPage extends ConsumerStatefulWidget {
 }
 
 class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
+  static const kMaxLogLinesToSend = 20;
   bool sentMessage = false;
 
   @override
@@ -50,7 +51,8 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
                   platform = 'unknown';
 
                 List<String> lines = logStore.lines;
-                if (lines.length > 50) lines = lines.sublist(lines.length - 50);
+                if (lines.length > kMaxLogLinesToSend)
+                  lines = lines.sublist(lines.length - kMaxLogLinesToSend);
                 http.post(
                   Uri.https('textual.ru', '/everydoor_send.php'),
                   body: <String, String>{

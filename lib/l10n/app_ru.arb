@@ -13,7 +13,7 @@
   "filterByAddress": "По адресу",
   "filterByFloor": "По этажу",
   "filterEmpty": "пусто",
-  "filterNonConfirmed": "Только неподтверждённые заведения",
+  "filterNonConfirmed": "Только неподтверждённые",
   "chooseLocation": "Выберите место",
   "chooseType": "Выберите тип",
   "chooseTypeClear": "Очистить",
@@ -149,5 +149,8 @@
   "addressUnit": "Unit",
   "addressUnitOptional": "не обязательно",
   "addressStreet": "Улица",
-  "addressPlace": "Город"
+  "addressPlace": "Город",
+  "apiStatusDownloading": "Скачиваю данные",
+  "apiStatusUpdatingDB": "Обновляю данные в базе приложения",
+  "apiStatusUploading": "Отправляю правки"
 }

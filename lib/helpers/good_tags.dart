@@ -355,3 +355,29 @@ bool isSnapTargetTags(Map<String, String> tags, [SnapTo? kind]) {
     return tags['building'] != 'roof';
   return false;
 }
+
+bool needsMoreInfo(Map<String, String> tags) {
+  if (tags['amenity'] == 'bench') return tags['backrest'] == null;
+  if (tags['amenity'] == 'bicycle_parking')
+    return tags['bicycle_parking'] == null || tags['capacity'] == null;
+  if (tags['amenity'] == 'post_box')
+    return tags['collection_times'] == null || tags['ref'] == null;
+  if (tags['amenity'] == 'recycling')
+    return tags['recycling_type'] == null || !tags.keys.any((k) => k.startsWith('recycling:'));
+
+  if (tags['emergency'] == 'fire_hydrant') return tags['fire_hydrant:type'] == null;
+  if (tags['highway'] == 'crossing') return tags['crossing'] == null;
+  if (tags['highway'] == 'street_lamp')
+    return tags['lamp_type'] == null || tags['lamp_mount'] == null;
+
+  if (tags['man_made'] == 'manhole') return tags['manhole'] == null;
+  if (tags['man_made'] == 'street_cabinet') return tags['street_cabinet'] == null;
+  if (tags['man_made'] == 'utility_pole') return tags['utility'] == null;
+
+  if (tags['natural'] == 'tree')
+    return tags['leaf_type'] == null || tags['leaf_cycle'] == null;
+
+  if (tags['power'] == 'pole') return tags['material'] == null;
+  if (tags['power'] == 'tower') return tags['ref'] == null;
+  return false;
+}

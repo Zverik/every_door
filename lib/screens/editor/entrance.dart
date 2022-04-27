@@ -123,7 +123,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
       children: [
         Table(
           columnWidths: const {
-            0: FixedColumnWidth(100.0),
+            0: FixedColumnWidth(110.0),
           },
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: [

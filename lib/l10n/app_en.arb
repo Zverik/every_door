@@ -63,7 +63,7 @@
   "@filterEmpty": {
     "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
   },
-  "filterNonConfirmed": "Only non-confirmed amenities",
+  "filterNonConfirmed": "Only non-confirmed",
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
@@ -581,5 +581,8 @@
   "addressPlace": "Place",
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
-  }
+  },
+  "apiStatusDownloading": "Downloading data",
+  "apiStatusUpdatingDB": "Saving elements to the app database",
+  "apiStatusUploading": "Uploading changes"
 }

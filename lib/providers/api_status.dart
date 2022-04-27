@@ -11,15 +11,14 @@ enum ApiStatus {
 }
 
 String getApiStatusLoc(ApiStatus status, AppLocalizations loc) {
-  // TODO: localize
   switch (status) {
     case ApiStatus.idle:
       return 'Idle';
     case ApiStatus.downloading:
-      return 'Downloading data';
+      return loc.apiStatusDownloading;
     case ApiStatus.updatingDatabase:
-      return 'Saving elements to the database';
+      return loc.apiStatusUpdatingDB;
     case ApiStatus.uploading:
-      return 'Uploading changes';
+      return loc.apiStatusUploading;
   }
 }
