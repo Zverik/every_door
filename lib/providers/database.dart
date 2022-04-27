@@ -41,7 +41,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       kDatabaseName,
-      version: 2,
+      version: 3,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,
     );
@@ -72,8 +72,8 @@ class DatabaseHelper {
     if (newVersion >= 3 && oldVersion < 3) {
       await database.execute(
           "alter table ${OsmChange.kTableName} add column updated integer");
-      // Create new table for terms and preset names?
-      // Create new table for road names + geohashes
     }
+    // Create new table for terms and preset names?
+    // Create new table for road names + geohashes
   }
 }

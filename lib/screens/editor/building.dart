@@ -150,7 +150,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Levels', style: kFieldTextStyle),
+                  child: Text(loc.buildingLevels, style: kFieldTextStyle),
                 ),
                 if (!manualLevels)
                   RadioField(
@@ -173,8 +173,9 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                     style: kFieldTextStyle,
                     initialValue: building['building:levels'],
                     focusNode: _focus,
-                    validator: (value) =>
-                        validateLevels(value) ? null : 'Please enter a number',
+                    validator: (value) => validateLevels(value)
+                        ? null
+                        : loc.fieldFloorShouldBeNumber,
                     onChanged: (value) {
                       setState(() {
                         building['building:levels'] = value.trim();
@@ -187,7 +188,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Roof levels', style: kFieldTextStyle),
+                  child: Text(loc.buildingRoofLevels, style: kFieldTextStyle),
                 ),
                 RadioField(
                     options: const ['1', '2', '3'],
@@ -203,16 +204,19 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Roof Shape', style: kFieldTextStyle),
+                  child: Text(loc.buildingRoofShape, style: kFieldTextStyle),
                 ),
                 RadioField(
-                  // TODO: labels
                   options: const [
                     'flat',
                     'gabled',
                     'hipped',
                     'pyramidal',
-                    'skillion'
+                    'skillion',
+                    'half-hipped',
+                    'round',
+                    'gambrel',
+                    'mansard',
                   ],
                   widgetLabels: [
                     for (final name in const [
@@ -220,9 +224,14 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                       'gabled',
                       'hipped',
                       'pyramidal',
-                      'skillion'
+                      'skillion',
+                      'half-hipped',
+                      'round',
+                      'gambrel',
+                      'mansard',
                     ])
-                      Image.asset('assets/roofs/$name.png', height: 40.0, width: 40.0),
+                      Image.asset('assets/roofs/$name.png',
+                          height: 40.0, width: 40.0),
                   ],
                   value: building['roof:shape'],
                   onChange: (value) {
@@ -237,17 +246,28 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Type', style: kFieldTextStyle),
+                  child: Text(loc.buildingType, style: kFieldTextStyle),
                 ),
                 RadioField(
-                  // TODO: labels
                   options: const [
                     'house',
                     'apartments',
                     'retail',
                     'commercial',
                     'shed',
-                    'industrial'
+                    'garage',
+                    'industrial',
+                    'construction',
+                  ],
+                  labels: [
+                    loc.buildingTypeHouse,
+                    loc.buildingTypeApartments,
+                    loc.buildingTypeRetail,
+                    loc.buildingTypeCommercial,
+                    loc.buildingTypeShed,
+                    loc.buildingTypeGarage,
+                    loc.buildingTypeIndustrial,
+                    loc.buildingTypeConstruction,
                   ],
                   value: building['building'] == 'yes'
                       ? null
@@ -272,12 +292,12 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                       builder: (context) => PoiEditorPage(amenity: building)),
                 );
               },
-              child: Text('MORE...'),
+              child: Text(loc.buildingMoreButton.toUpperCase() + '...'),
             ),
             if (building.isNew)
               TextButton(
                 child:
-                    Text(loc.editorDeleteButton), // TODO: does the label fit?
+                    Text(loc.editorDeleteButton.toUpperCase()),
                 onPressed: () async {
                   final answer = await showOkCancelAlertDialog(
                     context: context,

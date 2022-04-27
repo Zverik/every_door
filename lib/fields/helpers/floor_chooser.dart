@@ -72,7 +72,7 @@ class _FloorChooserPaneState extends State<FloorChooserPane> {
             validator: (value) => value != null &&
                     value.isNotEmpty &&
                     double.tryParse(value) == null
-                ? 'Should be a number'
+                ? loc.fieldFloorShouldBeNumber
                 : null,
             onEditingComplete: submit,
           ),

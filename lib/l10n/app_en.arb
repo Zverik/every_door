@@ -49,7 +49,7 @@
   },
   "filterNoAddresses": "No addresses nearby",
   "@filterNoAddresses": {
-    "description": "Filter pane, an error message for no addresses nearby."
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
   },
   "filterByAddress": "By address",
   "@filterByAddress": {
@@ -185,17 +185,163 @@
   "@settingsPurgeAllData": {
     "description": "Settings entry for purging all cached OSM data."
   },
+  "settingsPurgeDataTitle": "Delete Data?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "You will have to re-download everything. Proceed?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "Obsolete Data",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "Deleted Data",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Purged {count} element}, =few{Purged {count} elements}, =other{Purged {count} elements}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
   "settingsUploads": "Pending uploads",
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
-  "settingsMicromapping": "Micromapping mode",
-  "@settingsMicromapping": {
-    "description": "Settings entry for toggling micromapping mode."
-  },
   "settingsBackground": "Background imagery",
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsEditor": "Editor",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsPreferContact": "Prefer \"contact:\" Prefix",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsNumericKeyboard": "Extended Numeric Keyboard",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsDefaultPayment": "Default Payment Cards",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "accountTitle": "OpenStreetMap Account",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "Login with OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "OAuth Error",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountLoginPassword": "Login with Password",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "Warning",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "Your password will be stored on the device. Only choose this when OAuth fails.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "Understood",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "OSM Credentials",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountFieldLogin": "Login",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountFieldPassword": "Password",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountAuthErrorTitle": "Auth Error",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountAuthErrorMessage": "Wrong login or password.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "Log Out",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountChangesets": "Changesets",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountUnreadMail": "Unread Mail",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesCount": "{count,plural, =1{{count} change}, =few{{count} changes}, =other{{count} changes}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesUploadedTitle": "Uploaded",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadedMessage": "Sent {changes} to API.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesUploadFailedTitle": "Upload Failed",
+  "@changesUploadFailedTitle": {
+    "descripton": "Title for the notification about a failed changes upload."
+  },
+  "changesDeletedChange": "Deleted {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesDeletedUndo": "Undo",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesPending": "Pending",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesPurgeTitle": "Purge Changes?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesPurgeMessage": "Delete all recorded changes and restore the original data?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
   },
   "fieldHoursButton": "Set opening hours",
   "@fieldHoursButton": {
@@ -236,6 +382,14 @@
   "fieldHoursWeekdays": "Mo Tu We Th Fr Sa Su",
   "@fieldHoursWeekdays": {
     "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "Closed on public holidays",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldComboEmpty": "empty",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
   },
   "fieldWifiNo": "no",
   "@fieldWifiNo": {
@@ -293,9 +447,17 @@
   "@fieldFloorLevelDesc": {
     "description": "Description for the \"addr:floor\" tag."
   },
+  "fieldFloorShouldBeNumber": "Please enter a number",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
   "fieldAddressTap": "Tap an address",
   "@fieldAddressTap": {
     "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldPhoneWrong": "Wrong phone format",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
   },
   "messageNoData": "No data, tap here to download",
   "@messageNoData": {
@@ -328,5 +490,96 @@
   "buttonNo": "No",
   "@buttonNo": {
     "description": "Button for dismissal."
+  },
+  "buildingLevels": "Levels",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Roof Levels",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "Roof Shape",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "Type",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "More",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingTypeHouse": "house",
+  "buildingTypeApartments": "apartments",
+  "buildingTypeRetail": "retail",
+  "buildingTypeCommercial": "commercial",
+  "buildingTypeShed": "shed",
+  "buildingTypeIndustrial": "industrial",
+  "buildingTypeGarage": "garage",
+  "buildingTypeConstruction": "construction",
+  "entranceFlats": "Flats",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "Should be a list of numbers",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceIsUnit": "Store the flat number in addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceRef": "Ref",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "Access",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessYes": "open",
+  "entranceAccessPrivate": "private",
+  "entranceAccessNo": "no",
+  "entranceAccessDelivery": "delivery",
+  "entranceWheelchair": "Wheelchair",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceType": "Type",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeMain": "main",
+  "entranceTypeStaircase": "staircase",
+  "entranceTypeHome": "home",
+  "entranceTypeShop": "shop",
+  "entranceTypeService": "service",
+  "entranceTypeGarage": "garage",
+  "entranceTypeEmergency": "emergency",
+  "addressHouseNumber": "House",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Should not be empty",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Unit",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "optional",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressStreet": "Street",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "Place",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
   }
 }

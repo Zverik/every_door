@@ -253,8 +253,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
       'new_lon':
           loc == null ? null : (loc.longitude * kCoordinatePrecision).toInt(),
       'deleted': _deleted ? 1 : 0,
-      // 'snap': snapToBuilding ? 1 : 0,
-      // 'updated': updated.millisecondsSinceEpoch,
+      'updated': updated.millisecondsSinceEpoch,
       'error': error,
     };
   }

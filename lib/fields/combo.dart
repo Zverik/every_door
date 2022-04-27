@@ -133,27 +133,6 @@ class _SingularComboFieldState extends State<SingularComboField> {
 
   @override
   Widget build(BuildContext context) {
-    var items = widget.field.options
-        .map((e) => DropdownMenuItem<String>(
-              child: Text(e.label ?? e.value),
-              value: e.value,
-            ))
-        .toList();
-    if (widget.field.type == ComboType.regular) {
-      // Add empty option
-      items.insert(
-          0,
-          DropdownMenuItem(
-            child: Text('<empty>'),
-            value: '<empty>',
-          ));
-    }
-    if (widget.field.customValues) {
-      items.add(DropdownMenuItem(
-        child: Text('Other...'),
-        value: '',
-      ));
-    }
     return GestureDetector(
       child: SizedBox(
         height: 40.0,

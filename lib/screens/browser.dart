@@ -93,13 +93,16 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       return;
     }
 
+    final loc = AppLocalizations.of(context)!;
     try {
       int count = await ref.read(osmApiProvider).uploadChanges(true);
       AlertController.show(
-          'Uploaded', 'Sent $count changes to API.', TypeAlert.success);
+          loc.changesUploadedTitle,
+          loc.changesUploadedMessage(loc.changesCount(count)),
+          TypeAlert.success);
     } on Exception catch (e) {
-      // TODO: prettify the message?
-      AlertController.show('Upload failed', e.toString(), TypeAlert.error);
+      AlertController.show(
+          loc.changesUploadFailedTitle, e.toString(), TypeAlert.error);
     }
   }
 

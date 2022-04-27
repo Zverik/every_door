@@ -79,12 +79,10 @@ class HoursFragment implements Comparable {
 
 class HoursData {
   String hours;
-  late bool valid;
   List<HoursFragment> fragments;
   bool phOff = false;
 
   HoursData(this.hours) : fragments = [] {
-    valid = isValid(hours);
     _parseHours();
   }
 
@@ -234,12 +232,6 @@ class HoursData {
 
   updateHours(String newHours) {
     hours = newHours.trim();
-    valid = isValid(hours);
-  }
-
-  static bool isValid(String hours) {
-    // TODO
-    return true;
   }
 
   List<bool> getMissingDays() {

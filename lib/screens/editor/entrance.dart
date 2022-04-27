@@ -23,6 +23,7 @@ class EntranceEditorPane extends ConsumerStatefulWidget {
 class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   late OsmChange entrance;
   bool manualRef = false;
+  bool putFlatsInUnit = false;
   late final FocusNode _focus;
 
   @override
@@ -36,6 +37,11 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
       entrance.removeTag('building');
       entrance['entrance'] = 'yes';
     }
+    if (entrance['addr:flats'] == null && entrance['addr:unit'] != null) {
+      putFlatsInUnit = true;
+      entrance['addr:flats'] = entrance['addr:unit'];
+      entrance.removeTag('addr:unit');
+    }
   }
 
   @override
@@ -46,12 +52,22 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
 
   bool isValidFlats(String? value) {
     if ((value ?? '').trim().isEmpty) return true;
-    return RegExp(r'^(\d+(-\d+)?)(\s*;\s*(\d+(-\d+)?))*$')
+    return RegExp(
+            r'^(\d[\d\w]*(-\d[\d\w]*)?)(\s*;\s*(\d[\d\w]*(-\d[\d\w]*)?))*$')
         .hasMatch(value!.trim());
+  }
+
+  bool isSingleFlat(String? value) {
+    if ((value ?? '').trim().isEmpty) return false;
+    return RegExp(r'^\d[\d\w]*$').hasMatch(value!.trim());
   }
 
   saveAndClose() {
     entrance.removeTag(OsmChange.kCheckedKey);
+    if (putFlatsInUnit) {
+      entrance['addr:unit'] = entrance['addr:flats'];
+      entrance.removeTag('addr:flats');
+    }
     final changes = ref.read(changesProvider);
     changes.saveChange(entrance);
     ref.read(needMapUpdateProvider).trigger();
@@ -115,32 +131,51 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Flats', style: kFieldTextStyle),
+                  child: Text(loc.entranceFlats, style: kFieldTextStyle),
                 ),
-                TextFormField(
-                  keyboardType: editorSettings.fixNumKeyboard
-                      ? TextInputType.visiblePassword
-                      : TextInputType.number,
-                  autofocus: !manualRef && entrance['addr:flats'] == null,
-                  initialValue: entrance['addr:flats'],
-                  style: kFieldTextStyle,
-                  decoration: const InputDecoration(hintText: '16-29;32'),
-                  validator: (value) =>
-                      isValidFlats(value) ? null : 'Should be a number list',
-                  onChanged: (value) {
-                    setState(() {
-                      entrance['addr:flats'] = value.trim();
-                    });
-                  },
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        keyboardType: editorSettings.fixNumKeyboard
+                            ? TextInputType.visiblePassword
+                            : TextInputType.number,
+                        autofocus: !manualRef && entrance['addr:flats'] == null,
+                        initialValue: entrance['addr:flats'],
+                        style: kFieldTextStyle,
+                        decoration: const InputDecoration(hintText: '16-29;32'),
+                        validator: (value) => isValidFlats(value)
+                            ? null
+                            : loc.entranceFlatsNumberList,
+                        onChanged: (value) {
+                          setState(() {
+                            entrance['addr:flats'] = value.trim();
+                          });
+                        },
+                      ),
+                    ),
+                    if (isSingleFlat(entrance['addr:flats']) ||
+                        putFlatsInUnit) ...[
+                      Text('unit?', style: kFieldTextStyle),
+                      Switch(
+                        value: putFlatsInUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            putFlatsInUnit = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ],
                 ),
               ],
             ),
-            // TODO: addr:unit for a single flat?
             TableRow(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Ref', style: kFieldTextStyle),
+                  child: Text(loc.entranceRef, style: kFieldTextStyle),
                 ),
                 if (!manualRef)
                   RadioField(
@@ -177,11 +212,16 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Access', style: kFieldTextStyle),
+                  child: Text(loc.entranceAccess, style: kFieldTextStyle),
                 ),
                 RadioField(
-                  // TODO: labels
-                  options: const ['yes', 'private', 'delivery', 'no'],
+                  options: const ['yes', 'private', 'no', 'delivery'],
+                  labels: [
+                    loc.entranceAccessYes,
+                    loc.entranceAccessPrivate,
+                    loc.entranceAccessNo,
+                    loc.entranceAccessDelivery,
+                  ],
                   value: entrance['access'],
                   onChange: (value) {
                     setState(() {
@@ -195,7 +235,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Wheelchair', style: kFieldTextStyle),
+                  child: Text(loc.entranceWheelchair, style: kFieldTextStyle),
                 ),
                 RadioField(
                   options: const ['yes', 'limited', 'no'],
@@ -217,10 +257,9 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: Text('Type', style: kFieldTextStyle),
+                  child: Text(loc.entranceType, style: kFieldTextStyle),
                 ),
                 RadioField(
-                  // TODO: labels
                   options: const [
                     'main',
                     'staircase',
@@ -229,6 +268,15 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                     'service',
                     'garage',
                     'emergency',
+                  ],
+                  labels: [
+                    loc.entranceTypeMain,
+                    loc.entranceTypeStaircase,
+                    loc.entranceTypeHome,
+                    loc.entranceTypeShop,
+                    loc.entranceTypeService,
+                    loc.entranceTypeGarage,
+                    loc.entranceTypeEmergency,
                   ],
                   value: entrance['entrance'] == 'yes'
                       ? null
@@ -247,8 +295,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
           children: [
             if (widget.entrance != null)
               TextButton(
-                child:
-                    Text(loc.editorDeleteButton), // TODO: does the label fit?
+                child: Text(loc.editorDeleteButton.toUpperCase()),
                 onPressed: () async {
                   final answer = await showOkCancelAlertDialog(
                     context: context,

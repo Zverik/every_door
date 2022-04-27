@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:every_door/models/address.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddressForm extends ConsumerStatefulWidget {
   final LatLng location;
@@ -86,6 +87,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final editorSettings = ref.watch(editorSettingsProvider);
 
     return Table(
@@ -98,7 +100,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
-              child: Text('House Number', style: kFieldTextStyle),
+              child: Text(loc.addressHouseNumber, style: kFieldTextStyle),
             ),
             TextFormField(
               controller: _houseController,
@@ -109,7 +111,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
               style: kFieldTextStyle,
               decoration: const InputDecoration(hintText: '1, 89, 154A, ...'),
               validator: (value) => value == null || value.trim().isEmpty
-                  ? 'Should not be empty'
+                  ? loc.addressHouseNotEmpty
                   : null,
               onChanged: (value) {
                 notifyOnChange();
@@ -121,13 +123,13 @@ class _AddressFormState extends ConsumerState<AddressForm> {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
-              child: Text('Unit', style: kFieldTextStyle),
+              child: Text(loc.addressUnit, style: kFieldTextStyle),
             ),
             TextFormField(
               controller: _unitController,
               keyboardType: TextInputType.visiblePassword,
               style: kFieldTextStyle,
-              decoration: const InputDecoration(hintText: 'optional'),
+              decoration: InputDecoration(hintText: loc.addressUnitOptional),
               onChanged: (value) {
                 notifyOnChange();
               },
@@ -139,7 +141,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 10.0),
-                child: Text('Street', style: kFieldTextStyle),
+                child: Text(loc.addressStreet, style: kFieldTextStyle),
               ),
               RadioField(
                   options: nearestStreets,
@@ -157,7 +159,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 10.0),
-                child: Text('Place', style: kFieldTextStyle),
+                child: Text(loc.addressPlace, style: kFieldTextStyle),
               ),
               RadioField(
                   options:

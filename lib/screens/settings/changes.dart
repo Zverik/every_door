@@ -16,6 +16,7 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangeListPage extends ConsumerWidget {
   const ChangeListPage({Key? key}) : super(key: key);
@@ -44,14 +45,17 @@ class ChangeListPage extends ConsumerWidget {
       return;
     }
 
+    final loc = AppLocalizations.of(context)!;
     try {
       int count = await ref.read(osmApiProvider).uploadChanges(true);
       AlertController.show(
-          'Uploaded', 'Sent $count changes to API.', TypeAlert.success);
+          loc.changesUploadedTitle,
+          loc.changesUploadedMessage(loc.changesCount(count)),
+          TypeAlert.success);
       Navigator.pop(context);
     } on Exception catch (e) {
-      // TODO: prettify the message?
-      AlertController.show('Upload failed', e.toString(), TypeAlert.error);
+      AlertController.show(
+          loc.changesUploadFailedTitle, e.toString(), TypeAlert.error);
     }
   }
 
@@ -94,10 +98,11 @@ class ChangeListPage extends ConsumerWidget {
     final changeList = changes.all();
     changeList.sort((a, b) => b.updated.compareTo(a.updated));
     final hasManyTypes = changeList.map((e) => e.kind).toSet().length > 1;
+    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${changes.length} changes'),
+        title: Text(loc.changesCount(changes.length)),
         actions: [
           IconButton(
             onPressed: () {
@@ -111,11 +116,10 @@ class ChangeListPage extends ConsumerWidget {
                   onPressed: () async {
                     final answer = await showOkCancelAlertDialog(
                       context: context,
-                      title: 'Purge changes?',
-                      message:
-                          'Delete all recorded changes and restore the original data?',
-                      okLabel: 'Yes',
-                      cancelLabel: 'No',
+                      title: loc.changesPurgeTitle,
+                      message: loc.changesPurgeMessage,
+                      okLabel: loc.buttonYes,
+                      cancelLabel: loc.buttonNo,
                     );
                     if (answer == OkCancelResult.ok) {
                       ref.read(changesProvider).clearChanges(true);
@@ -146,9 +150,9 @@ class ChangeListPage extends ConsumerWidget {
 
               ScaffoldMessenger.of(context).removeCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Deleted ${change.typeAndName}'),
+                content: Text(loc.changesDeletedChange(change.typeAndName)),
                 action: SnackBarAction(
-                  label: 'UNDO',
+                  label: loc.changesDeletedUndo.toUpperCase(),
                   onPressed: () {
                     changes.saveChange(change);
                   },
@@ -163,7 +167,7 @@ class ChangeListPage extends ConsumerWidget {
             ),
             child: ListTile(
               title: Text(change.typeAndName),
-              subtitle: Text(change.error ?? 'Pending'),
+              subtitle: Text(change.error ?? loc.changesPending),
               trailing: !hasManyTypes ? null : Icon(getTypeIcon(change.kind)),
               onTap: () {
                 Navigator.push(

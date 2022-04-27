@@ -2,6 +2,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ComboChooserPage extends StatefulWidget {
   final ComboPresetField field;
@@ -71,6 +72,7 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
   }
 
   Widget buildChooser(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     var options = List.of(widget.field.options);
     // options = options.where((opt) => !widget.hideValues.contains(opt.value)).toList();
     if (filter.isNotEmpty) {
@@ -83,7 +85,7 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
         // options.insert(0, ComboOption(newValue, 'Use this new value'));
       }
     } else if (widget.allowEmpty && widget.field.isSingularValue) {
-      options.insert(0, ComboOption('', '<empty>'));
+      options.insert(0, ComboOption('', '<${loc.fieldComboEmpty}>'));
     }
 
     return ResponsiveGridList(

@@ -7,6 +7,7 @@ import 'package:every_door/models/field.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PhonePresetField extends PresetField {
   PhonePresetField(
@@ -117,6 +118,7 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -139,7 +141,7 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
             validator: (value) => value != null &&
                     value.isNotEmpty &&
                     format(value.trim()) == null
-                ? 'Wrong phone'
+                ? loc.fieldPhoneWrong
                 : null,
             onFieldSubmitted: submitPhone,
           ),

@@ -277,8 +277,6 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
             hours.updateHours(value);
           });
         },
-        validator: (value) =>
-            value == null || HoursData.isValid(value) ? null : 'Wrong format',
       ),
     );
   }
@@ -352,7 +350,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
             child: Text(loc.fieldHoursAddFragment),
           ),
         SwitchListTile(
-          title: Text('Closed on public holidays'),
+          title: Text(loc.fieldHoursClosedPH),
           value: hours.phOff,
           onChanged: (value) {
             setState(() {

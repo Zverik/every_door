@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OsmAccountPage extends ConsumerStatefulWidget {
   const OsmAccountPage({Key? key}) : super(key: key);
@@ -39,12 +40,12 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
   }
 
   showLoginDialog(BuildContext context) async {
+    final loc = AppLocalizations.of(context)!;
     final isOk = await showOkCancelAlertDialog(
       context: context,
-      title: 'Warning',
-      message:
-          'Your password will be stored on the device. Only choose this when OAuth fails.',
-      okLabel: 'Understood',
+      title: loc.accountPasswordWarningTitle,
+      message: loc.accountPasswordWarningMessage,
+      okLabel: loc.accountPasswordWarningButton,
     );
     if (isOk != OkCancelResult.ok) return;
 
@@ -53,14 +54,14 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
     while (!done) {
       result = await showTextInputDialog(
         context: context,
-        title: 'OSM Login and Password',
+        title: loc.accountPasswordTitle,
         textFields: [
           DialogTextField(
-            hintText: 'Login',
+            hintText: loc.accountFieldLogin,
             initialText: result?[0] ?? ref.watch(authProvider),
           ),
           DialogTextField(
-            hintText: 'Password',
+            hintText: loc.accountFieldPassword,
             keyboardType: TextInputType.visiblePassword,
             obscureText: true,
           ),
@@ -76,8 +77,8 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
           // Wrong login
           await showAlertDialog(
             context: context,
-            title: 'Auth Error',
-            message: 'Wrong login or password.',
+            title: loc.accountAuthErrorTitle,
+            message: loc.accountAuthErrorMessage,
           );
         }
       } else {
@@ -91,16 +92,18 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
       await ref.read(authProvider.notifier).loginWithOAuth(context);
       updateDetails();
     } on Exception catch (e) {
+      final loc = AppLocalizations.of(context)!;
       await showAlertDialog(
         context: context,
         message: e.toString(),
-        title: 'OAuth Error',
+        title: loc.accountOAuthError,
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final login = ref.watch(authProvider);
     Widget content;
     if (login == null) {
@@ -116,7 +119,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
                   horizontal: 15.0,
                 ),
                 child: Text(
-                  'Login With OAuth',
+                  loc.accountLoginOAuth,
                   style: TextStyle(fontSize: 30.0),
                 ),
               )),
@@ -127,7 +130,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
               },
               // style: ButtonStyle(backgroundColor: Colors.grey.shade100),
               child: Text(
-                'Login with password',
+                loc.accountLoginPassword,
                 style: TextStyle(fontSize: 18.0),
               )),
         ],
@@ -141,16 +144,16 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
           Text(login),
           SizedBox(height: 20.0),
           if (details != null) ...[
-            Text('Changesets: ${details!.changesets}'),
-            Text('Unread mail: ${details!.unreadMessages}'),
+            Text('${loc.accountChangesets}: ${details!.changesets}'),
+            Text('${loc.accountUnreadMail}: ${details!.unreadMessages}'),
             SizedBox(height: 20.0),
           ],
           ElevatedButton(
               onPressed: () async {
                 if (await showOkCancelAlertDialog(
                       context: context,
-                      title: 'Log out',
-                      okLabel: 'Logout',
+                      title: loc.accountLogout + '?',
+                      okLabel: loc.accountLogout.toUpperCase(),
                       isDestructiveAction: true,
                     ) ==
                     OkCancelResult.ok) {
@@ -161,14 +164,14 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
                   });
                 }
               },
-              child: Text('Log out')),
+              child: Text(loc.accountLogout)),
         ],
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('OpenStreetMap Account'),
+        title: Text(loc.accountTitle),
       ),
       body: Center(child: content),
     );

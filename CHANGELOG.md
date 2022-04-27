@@ -2,10 +2,13 @@
 
 ## 0.1.10
 
-_Unreleased_
+_Released on 2022-04-27_
 
 * System logs can be sent to the author (tap the version in settings).
 * When the database is broken, the app recreates it.
+* More roof shapes.
+* Option to store flat number for an entrance in `addr:unit`.
+* Translated everything.
 
 ## 0.1.9
 
