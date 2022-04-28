@@ -87,6 +87,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         final bool needsStdFields =
             preset!.fields.length <= 1 || needsStandardFields();
         stdFields = await presets.getStandardFields(locale, needsStdFields);
+        // Remove the field for level if the object is a building.
+        if (amenity['building'] != null) {
+          stdFields.removeWhere((e) => e.key == 'level');
+        }
       } else {
         stdFields = [];
       }

@@ -1,8 +1,8 @@
 const kMainKeys = <String>[
   'amenity', 'shop', 'craft', 'tourism', 'historic',
   'highway', 'railway',
-  'emergency', 'office', 'healthcare', 'leisure', 'natural',
-  'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
+  'office', 'healthcare', 'leisure', 'natural',
+  'emergency', 'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
   'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
   'advertising', 'playground', 'traffic_calming',
 ];
@@ -29,6 +29,7 @@ enum ElementKind {
 
 String? getMainKey(Map<String, String> tags, [bool alsoDisused = true]) {
   for (final k in kMainKeys) {
+    if (tags[k] == 'no') continue;
     if (tags.containsKey(k)) return k;
     if (alsoDisused && tags.containsKey(kDisused + k)) return kDisused + k;
     if (alsoDisused && tags.containsKey(kDeleted + k)) return kDeleted + k;
