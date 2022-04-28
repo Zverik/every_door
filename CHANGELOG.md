@@ -7,6 +7,7 @@ _Unreleased_
 * Fixed error on submitting a value in a multi-choose combobox.
 * Fixed error catching on async exceptions.
 * Disabled editing floors for POI on building contours.
+* In the location chooser for a new object, filtering objects by type.
 
 ## 0.1.11
 
