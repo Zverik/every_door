@@ -1,5 +1,12 @@
 # Every Door App Change Log
 
+## 0.1.12
+
+_Unreleased_
+
+* Fixed error on submitting a value in a multi-choose combobox.
+* Fixed error catching on async exceptions.
+
 ## 0.1.11
 
 _Released on 2022-04-27_

@@ -231,6 +231,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
         SizedBox(height: 20.0),
         Text(
           getApiStatusLoc(apiStatus, loc),
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20.0),
         ),
       ],

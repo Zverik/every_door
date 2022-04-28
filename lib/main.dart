@@ -13,24 +13,24 @@ import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 import 'package:logging/logging.dart';
 
 void main() {
-  installCertificate();
   Logger.root.level = kDebugMode ? Level.INFO : Level.WARNING;
   Logger.root.onRecord.listen((event) {
     logStore.addFromLogger(event);
   });
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.presentError(details);
-    logStore.addFromFlutter(details);
-  };
   runZonedGuarded(() {
-    runApp(ProviderScope(child: const EveryDoorApp()));
+    WidgetsFlutterBinding.ensureInitialized();
+    installCertificate();
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.presentError(details);
+      logStore.addFromFlutter(details);
+    };
+    runApp(const EveryDoorApp());
   }, (error, stack) {
     logStore.addFromZone(error, stack);
   });
 }
 
 installCertificate() async {
-  WidgetsFlutterBinding.ensureInitialized();
   ByteData data =
       await PlatformAssetBundle().load('assets/lets-encrypt-r3.pem');
   SecurityContext.defaultContext
@@ -42,19 +42,21 @@ class EveryDoorApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: kAppTitle,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+    return ProviderScope(
+      child: MaterialApp(
+        title: kAppTitle,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+        ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: LoadingPage(),
+        builder: (context, child) => Stack(children: [
+          if (child != null) child,
+          DropdownAlert(),
+        ]),
       ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: LoadingPage(),
-      builder: (context, child) => Stack(children: [
-        if (child != null) child,
-        DropdownAlert(),
-      ]),
     );
   }
 }

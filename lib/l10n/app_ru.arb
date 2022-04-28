@@ -88,6 +88,7 @@
   "fieldHoursWeekdays": "Пн Вт Ср Чт Пт Сб Вс",
   "fieldHoursClosedPH": "Закрыто в государственные праздники",
   "fieldComboEmpty": "нет",
+  "fieldComboChoose": "выберите",
   "fieldWifiNo": "нет",
   "fieldWifiPublic": "общий",
   "fieldWifiCustomers": "клиентам",

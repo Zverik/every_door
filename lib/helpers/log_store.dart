@@ -10,6 +10,9 @@ class LogStore {
     lines.clear();
   }
 
+  last(int count) =>
+      lines.length <= count ? lines : lines.sublist(lines.length - count);
+
   String _formatTime(DateTime time) {
     final hour = time.hour.toString().padLeft(2, '0');
     final minute = time.minute.toString().padLeft(2, '0');
@@ -38,6 +41,8 @@ class LogStore {
   }
 
   addFromZone(Object error, StackTrace stack) {
+    print('Async error: $error');
+    print(stack);
     _addLine('Async: $error');
     _addLine(stack.toString());
   }

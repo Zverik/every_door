@@ -391,6 +391,10 @@
   "@fieldComboEmpty": {
     "description": "Option for a combo field that sets an empty value."
   },
+  "fieldComboChoose": "choose",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
   "fieldWifiNo": "no",
   "@fieldWifiNo": {
     "description": "Wifi field label for no wifi."

@@ -34,12 +34,14 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
       body: widget.field.customValues
           ? buildCustom(context)
           : buildChooser(context),
-      floatingActionButton: widget.field.isSingularValue ? null : FloatingActionButton(
-        child: Icon(Icons.check),
-        onPressed: () {
-          Navigator.pop(context, values);
-        },
-      ),
+      floatingActionButton: widget.field.isSingularValue
+          ? null
+          : FloatingActionButton(
+              child: Icon(Icons.check),
+              onPressed: () {
+                Navigator.pop(context, values);
+              },
+            ),
     );
   }
 
@@ -63,7 +65,10 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
             filled: true,
           ),
           onSubmitted: (value) {
-            if (value.isNotEmpty) Navigator.pop(context, value);
+            final newValue = value.trim();
+            if (newValue.isEmpty) return;
+            Navigator.pop(
+                context, values.contains(value) ? values : ([value] + values));
           },
         ),
         Expanded(child: buildChooser(context)),
@@ -101,7 +106,8 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
             selectedColor: Colors.white,
             onTap: () {
               if (widget.field.isSingularValue) {
-                Navigator.pop(context, opt.value.isEmpty ? <String>[] : [opt.value]);
+                Navigator.pop(
+                    context, opt.value.isEmpty ? <String>[] : [opt.value]);
               } else {
                 setState(() {
                   if (values.contains(opt.value)) {

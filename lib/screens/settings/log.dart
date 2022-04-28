@@ -4,6 +4,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:every_door/helpers/log_store.dart';
@@ -19,14 +20,26 @@ class LogDisplayPage extends ConsumerStatefulWidget {
 class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
   static const kMaxLogLinesToSend = 20;
   bool sentMessage = false;
+  final _controller = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      _controller.jumpTo(_controller.position.maxScrollExtent);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('System Log')),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(child: Text(logStore.lines.join('\n'))),
+      body: SingleChildScrollView(
+        controller: _controller,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(logStore.last(30).join('\n')),
+        ),
       ),
       floatingActionButton: sentMessage
           ? null
@@ -50,9 +63,6 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
                 else
                   platform = 'unknown';
 
-                List<String> lines = logStore.lines;
-                if (lines.length > kMaxLogLinesToSend)
-                  lines = lines.sublist(lines.length - kMaxLogLinesToSend);
                 http.post(
                   Uri.https('textual.ru', '/everydoor_send.php'),
                   body: <String, String>{
@@ -60,7 +70,7 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
                     'version': '$kAppTitle $platform $kAppVersion',
                     'who': ref.read(authProvider) ?? 'unknown',
                     'message': message.first,
-                    'log': lines.join('\n'),
+                    'log': logStore.last(kMaxLogLinesToSend).join('\n'),
                   },
                 );
 
