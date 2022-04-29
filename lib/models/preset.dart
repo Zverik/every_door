@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/fields/name.dart';
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 
 class Preset {
@@ -143,17 +144,19 @@ class Preset {
     );
   }
 
-  doAddTags(Map<String, String?> tags) {
+  doAddTags(OsmChange change) {
+    final mainKey = getMainKey(addTags);
     addTags.forEach((key, value) {
-      tags[key] = value;
+      if (value == '*') return;
+      if (change[key] != null && mainKey != key) return;
+      change[key] = value;
     });
   }
 
-  doRemoveTags(Map<String, String?> tags) {
+  doRemoveTags(OsmChange change) {
     removeTags.forEach((key, value) {
-      if (tags[key] != null) {
-        // TODO: Amenity has two maps, and here we change which one?
-        if (value == null || value == tags[key]) tags.remove(key);
+      if (change[key] != null) {
+        if (value == '*' || value == change[key]) change.removeTag(key);
       }
     });
   }

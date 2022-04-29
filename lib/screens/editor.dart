@@ -12,6 +12,7 @@ import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/screens/editor/tags.dart';
+import 'package:every_door/screens/editor/types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -130,6 +131,29 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     }
   }
 
+  changeType() async {
+    final newPreset = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => TypeChooserPage(
+                location: amenity.location,
+                launchEditor: false,
+              )),
+    );
+    if (newPreset == null) return;
+    final oldPreset = preset;
+    setState(() {
+      preset = null;
+      fields = [];
+      moreFields = [];
+      stdFields = [];
+    });
+    oldPreset?.doRemoveTags(amenity);
+    preset = newPreset;
+    preset!.doAddTags(amenity);
+    updatePreset(context, preset!.fromNSI);
+  }
+
   saveAndClose() {
     // Setting the mark automatically.
     if (needsCheckDate(amenity.getFullTags())) amenity.check();
@@ -175,7 +199,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(preset?.name ?? amenity.name ?? 'Editor'),
+          title: GestureDetector(
+            child: Text(preset?.name ?? amenity.name ?? 'Editor'),
+            onTap: changeType,
+          ),
           actions: [
             IconButton(
               icon: Icon(Icons.table_rows),

@@ -169,7 +169,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      TypeChooserPage(creatingLocation: center)),
+                      TypeChooserPage(location: center)),
             );
           } else {
             Navigator.pop(context, center);

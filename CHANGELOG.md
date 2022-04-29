@@ -4,10 +4,12 @@
 
 _Unreleased_
 
+* Tap on the editor app bar title to change the amenity type.
 * Fixed error on submitting a value in a multi-choose combobox.
 * Fixed error catching on async exceptions.
 * Disabled editing floors for POI on building contours.
 * In the location chooser for a new object, filtering objects by type.
+* Once more reduced "big map" distance in the amenity mode.
 
 ## 0.1.11
 
