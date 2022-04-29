@@ -30,7 +30,7 @@ class PoiListPane extends ConsumerStatefulWidget {
 }
 
 class _PoiListPageState extends ConsumerState<PoiListPane> {
-  List<OsmChange> allPOI = [];
+  List<LatLng> otherPOI = [];
   List<OsmChange> nearestPOI = [];
   final mapController = AmenityMapController();
   bool farFromUser = false;
@@ -75,6 +75,27 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     final int radius =
         forceRadius ?? (farFromUser ? kFarVisibilityRadius : kVisibilityRadius);
     List<OsmChange> data = await provider.getElements(location, radius);
+
+    // Remove points too far from the user.
+    const distance = DistanceEquirectangular();
+    data = data
+        .where((element) => distance(location, element.location) <= radius)
+        .toList();
+
+    // Keep other mode objects to show.
+    final otherData = data.where((e) {
+      // Only modified objects for now.
+      if (!e.isModified) return false;
+      switch (e.kind) {
+        case ElementKind.amenity:
+          return editorMode == EditorMode.micromapping;
+        case ElementKind.micro:
+          return editorMode == EditorMode.poi;
+        default:
+          return false;
+      }
+    }).map((e) => e.location).toList();
+
     // Filter for amenities (or not amenities).
     data = data.where((e) {
       switch (e.kind) {
@@ -93,11 +114,6 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     if (filter.isNotEmpty) {
       data = data.where((e) => filter.matches(e)).toList();
     }
-    // Remove points too far from the user.
-    const distance = DistanceEquirectangular();
-    data = data
-        .where((element) => distance(location, element.location) <= radius)
-        .toList();
     // Sort by distance.
     data.sort((a, b) => distance(location, a.location)
         .compareTo(distance(location, b.location)));
@@ -108,6 +124,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     if (!mounted) return;
     setState(() {
       nearestPOI = data;
+      otherPOI = otherData;
     });
 
     if (editorMode == EditorMode.micromapping) {
@@ -193,6 +210,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
           child: AmenityMap(
             initialLocation: location,
             amenities: nearestPOI,
+            otherObjects: otherPOI,
             controller: mapController,
             onDragEnd: (pos) {
               ref.read(effectiveLocationProvider.notifier).set(pos);

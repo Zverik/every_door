@@ -32,6 +32,7 @@ class AmenityMapController {
 class AmenityMap extends ConsumerStatefulWidget {
   final LatLng initialLocation;
   final List<OsmChange> amenities;
+  final List<LatLng> otherObjects;
   final void Function(LatLng)? onDrag;
   final void Function(LatLng)? onDragEnd;
   final void Function(LatLng)? onTrack;
@@ -47,6 +48,7 @@ class AmenityMap extends ConsumerStatefulWidget {
     this.onTrack,
     this.onTap,
     this.amenities = const [],
+    this.otherObjects = const [],
     this.controller,
     this.drawNumbers = true,
     this.colorsFromLegend = false,
@@ -231,7 +233,9 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     });
 
     // Update colors when the legend is ready.
-    ref.listen(legendProvider, (_, next) {setState(() {});});
+    ref.listen(legendProvider, (_, next) {
+      setState(() {});
+    });
 
     final iconSize = widget.drawNumbers ? 20.0 : 13.0;
     final anchorOffset = widget.drawNumbers ? 20.0 : 24.0;
@@ -271,6 +275,12 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                     color: Colors.transparent,
                     radius: 10.0,
                   ),
+                for (final objLocation in widget.otherObjects)
+                  CircleMarker(
+                    point: objLocation,
+                    color: Colors.black,
+                    radius: 3.0,
+                  ),
               ],
             ),
           ),
@@ -287,7 +297,8 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
               for (var i = 0; i < amenities.length && i < 9; i++)
                 Marker(
                   point: amenities[i].location,
-                  anchorPos: AnchorPos.exactly(Anchor(anchorOffset, anchorOffset)),
+                  anchorPos:
+                      AnchorPos.exactly(Anchor(anchorOffset, anchorOffset)),
                   builder: (ctx) => Stack(
                     children: [
                       Icon(

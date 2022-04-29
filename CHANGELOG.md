@@ -10,6 +10,7 @@ _Unreleased_
 * Disabled editing floors for POI on building contours.
 * In the location chooser for a new object, filtering objects by type.
 * Once more reduced "big map" distance in the amenity mode.
+* Map shows modified objects from other modes, just in case.
 
 ## 0.1.11
 
