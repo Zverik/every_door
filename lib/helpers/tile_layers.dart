@@ -9,8 +9,10 @@ class CachedTileProvider extends TileProvider {
 
   @override
   ImageProvider getImage(Coords<num> coords, TileLayerOptions options) {
+    final url = getTileUrl(coords, options);
+    // print(url);
     return CachedNetworkImageProvider(
-      getTileUrl(coords, options),
+      url,
       // Maybe replace cacheManager later.
     );
   }
@@ -57,7 +59,7 @@ const kOSMImagery = Imagery(
   url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
   attribution: '© OpenStreetMap contributors',
   minZoom: 0,
-  maxZoom: 19,
+  maxZoom: 18,
 );
 
 WMSTileLayerOptions _buildWMSOptions(String url, Imagery imagery) {
