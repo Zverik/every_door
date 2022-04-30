@@ -193,6 +193,7 @@ bool isMicroTags(Map<String, String> tags) {
   const kAllGoodKeys = <String>{
     'amenity', 'tourism', 'emergency', 'man_made', 'historic',
     'playground', 'advertising', 'power', 'traffic_calming',
+    'barrier',
   };
   if (kAllGoodKeys.contains(k)) return true;
 

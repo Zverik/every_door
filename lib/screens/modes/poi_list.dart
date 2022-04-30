@@ -83,18 +83,21 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
         .toList();
 
     // Keep other mode objects to show.
-    final otherData = data.where((e) {
-      // Only modified objects for now.
-      if (!e.isModified) return false;
-      switch (e.kind) {
-        case ElementKind.amenity:
-          return editorMode == EditorMode.micromapping;
-        case ElementKind.micro:
-          return editorMode == EditorMode.poi;
-        default:
-          return false;
-      }
-    }).map((e) => e.location).toList();
+    final otherData = data
+        .where((e) {
+          // Only modified objects for now.
+          if (!e.isModified) return false;
+          switch (e.kind) {
+            case ElementKind.amenity:
+              return editorMode == EditorMode.micromapping;
+            case ElementKind.micro:
+              return editorMode == EditorMode.poi;
+            default:
+              return false;
+          }
+        })
+        .map((e) => e.location)
+        .toList();
 
     // Filter for amenities (or not amenities).
     data = data.where((e) {
@@ -218,6 +221,9 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
             onTap: micromappingTap,
             colorsFromLegend: isMicromapping,
             drawNumbers: !isMicromapping || isZoomedIn,
+            drawZoomButtons:
+                (isMicromapping && ref.watch(legendProvider).isNotEmpty) ||
+                    (!isMicromapping && farFromUser),
           ),
         ),
         if (widget.areaStatusPanel != null)

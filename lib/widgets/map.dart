@@ -8,6 +8,7 @@ import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/legend.dart';
+import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -40,6 +41,7 @@ class AmenityMap extends ConsumerStatefulWidget {
   final AmenityMapController? controller;
   final bool colorsFromLegend;
   final bool drawNumbers;
+  final bool drawZoomButtons;
 
   const AmenityMap({
     required this.initialLocation,
@@ -52,6 +54,7 @@ class AmenityMap extends ConsumerStatefulWidget {
     this.controller,
     this.drawNumbers = true,
     this.colorsFromLegend = false,
+    this.drawZoomButtons = false,
   });
 
   @override
@@ -252,7 +255,18 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         interactiveFlags: ref.watch(microZoomedInProvider) != null
             ? InteractiveFlag.none
             : (InteractiveFlag.drag | InteractiveFlag.pinchZoom),
+        plugins: [ZoomButtonsPlugin()],
       ),
+      nonRotatedLayers: [
+        if (widget.drawZoomButtons)
+          ZoomButtonsOptions(
+            alignment: Alignment.bottomRight,
+            padding: EdgeInsets.symmetric(
+              horizontal: 0.0,
+              vertical: 20.0,
+            ),
+          ),
+      ],
       children: [
         TileLayerWidget(
           options: buildTileLayerOptions(

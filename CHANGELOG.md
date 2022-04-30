@@ -2,15 +2,17 @@
 
 ## 0.1.12
 
-_Unreleased_
+_Released on 2022-04-30_
 
 * Tap on the editor app bar title to change the amenity type.
 * Fixed error on submitting a value in a multi-choose combobox.
 * Fixed error catching on async exceptions.
 * Disabled editing floors for POI on building contours.
 * In the location chooser for a new object, filtering objects by type.
+* Added `barrier=*` to micromapping types.
 * Once more reduced "big map" distance in the amenity mode.
 * Map shows modified objects from other modes, just in case.
+* Zoom buttons for the map.
 
 ## 0.1.11
 

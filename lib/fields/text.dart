@@ -71,7 +71,7 @@ class _TextInputFieldState extends State<TextInputField> {
             ? TextCapitalization.sentences
             : TextCapitalization.none,
         decoration: InputDecoration(
-          // hintText: widget.field.placeholder,
+          hintText: widget.field.placeholder,
           labelText: widget.field.icon != null ? widget.field.label : null,
         ),
         style: kFieldTextStyle,
