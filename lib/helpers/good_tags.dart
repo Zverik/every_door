@@ -325,7 +325,7 @@ bool needsMoreInfo(Map<String, String> tags) {
   if (tags['emergency'] == 'fire_hydrant') return tags['fire_hydrant:type'] == null;
   if (tags['highway'] == 'crossing') return tags['crossing'] == null;
   if (tags['highway'] == 'street_lamp')
-    return tags['lamp_type'] == null || tags['lamp_mount'] == null;
+    return tags['support'] == null || (tags['support'] == 'pole' && tags['lamp_mount'] == null);
 
   if (tags['man_made'] == 'manhole') return tags['manhole'] == null;
   if (tags['man_made'] == 'street_cabinet') return tags['street_cabinet'] == null;
