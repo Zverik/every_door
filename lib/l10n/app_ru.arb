@@ -22,6 +22,7 @@
   "editorCloseMessage": "Ваши изменения пропадут. Продолжить?",
   "editorMoreFields": "Ещё поля",
   "editorLoadingPreset": "Загружаю заготовку...",
+  "editorMove": "Сдвинуть",
   "editorMarkActive": "Открыто",
   "editorMarkDefunct": "Закрылось",
   "editorRestore": "Восстановить",

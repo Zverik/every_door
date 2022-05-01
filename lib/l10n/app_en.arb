@@ -99,6 +99,10 @@
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
+  "editorMove": "Move",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
   "editorMarkActive": "Mark Active",
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
@@ -587,6 +591,15 @@
     "description": "Label for addr:place or addr:city in the form. Keep it short."
   },
   "apiStatusDownloading": "Downloading data",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
   "apiStatusUpdatingDB": "Saving elements to the app database",
-  "apiStatusUploading": "Uploading changes"
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploading": "Uploading changes",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  }
 }

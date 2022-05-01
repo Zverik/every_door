@@ -267,6 +267,7 @@ bool isGoodTags(Map<String, String> tags) {
     'advertising',
     'playground',
     'entrance',
+    'barrier',
   };
   if (kAllGoodKeys.contains(k)) return true;
 

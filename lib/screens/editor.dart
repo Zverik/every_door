@@ -361,6 +361,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   Widget buildMap(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -401,8 +402,26 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                     options: MarkerLayerOptions(markers: [
                   Marker(
                     point: amenity.location,
-                    anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
-                    builder: (ctx) => Icon(Icons.location_pin),
+                    anchorPos: AnchorPos.exactly(Anchor(138.0, 5.0)),
+                    width: 150.0,
+                    height: 30.0,
+                    builder: (ctx) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.location_pin),
+                        SizedBox(width: 2.0),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5.0),
+                          child: Text(loc.editorMove),
+                        ),
+                      ],
+                    ),
                   ),
                 ])),
               ],

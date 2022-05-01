@@ -76,6 +76,57 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
     return true;
   }
 
+  showProviderChooser() async {
+    final result = await showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Wrap(
+            spacing: 10.0,
+            runSpacing: 10.0,
+            children: [
+              for (final provider in websiteProviders)
+                GestureDetector(
+                  child: Container(
+                    color: kFieldColor.withOpacity(0.2),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 4.0,
+                      horizontal: 8.0,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          provider.icon,
+                          size: 30.0,
+                        ),
+                        SizedBox(width: 5.0),
+                        Text(
+                          provider.label,
+                          style: TextStyle(fontSize: 24.0),
+                        )
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context, provider);
+                  },
+                ),
+            ],
+          ),
+        );
+      },
+    );
+    if (result != null) {
+      setState(() {
+        _provider = result;
+        _fieldFocus.requestFocus();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<WebsiteRow> websites = [];
@@ -83,57 +134,6 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
       final value = provider.getValue(widget.element);
       if (value != null) {
         websites.add(WebsiteRow(provider, value));
-      }
-    }
-
-    showProviderChooser() async {
-      final result = await showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Wrap(
-              spacing: 10.0,
-              runSpacing: 10.0,
-              children: [
-                for (final provider in websiteProviders)
-                  GestureDetector(
-                    child: Container(
-                      color: kFieldColor.withOpacity(0.2),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 4.0,
-                        horizontal: 8.0,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            provider.icon,
-                            size: 30.0,
-                          ),
-                          SizedBox(width: 5.0),
-                          Text(
-                            provider.label,
-                            style: TextStyle(fontSize: 24.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context, provider);
-                    },
-                  ),
-              ],
-            ),
-          );
-        },
-      );
-      if (result != null) {
-        setState(() {
-          _provider = result;
-          _fieldFocus.requestFocus();
-        });
       }
     }
 
