@@ -2,6 +2,7 @@ import 'package:every_door/fields/checkbox.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/floor.dart';
 import 'package:every_door/fields/hours.dart';
+import 'package:every_door/fields/name.dart';
 import 'package:every_door/fields/phone.dart';
 import 'package:every_door/fields/radio.dart';
 import 'package:every_door/fields/text.dart';
@@ -73,7 +74,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
   // from [PresetProvider.getStandardFields].
   switch (key) {
     case 'name':
-      return TextPresetField(
+      return NamePresetField(
         key: key,
         label: label,
         icon: Icons.format_quote,

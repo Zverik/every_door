@@ -33,7 +33,7 @@ German,Deutsch,de
 "Divehi, Dhivehi, Maldivian",ދިވެހި,dv
 Dzongkha,རྫོང་ཁ,dz
 Ewe,Eʋegbe,ee
-"Greek, Modern (1453–)",Ελληνικά,el
+"Greek",Ελληνικά,el
 English,English,en
 Esperanto,Esperanto,eo
 "Spanish, Castilian",Español,es
@@ -61,9 +61,9 @@ Croatian,hrvatski jezik,hr
 Hungarian,magyar,hu
 Armenian,Հայերեն,hy
 Herero,Otjiherero,hz
-Interlingua (International Auxiliary Language Association),Interlingua,ia
+Interlingua,Interlingua,ia
 Indonesian,Bahasa Indonesia,id
-"Interlingue, Occidental","(originally:) Occidental, (after WWII:) Interlingue",ie
+"Interlingue","Interlingue",ie
 Igbo,Asụsụ Igbo,ig
 "Sichuan Yi, Nuosu",ꆈꌠ꒿ Nuosuhxop,ii
 Inupiaq,"Iñupiaq, Iñupiatun",ik
@@ -71,7 +71,7 @@ Ido,Ido,io
 Icelandic,Íslenska,is
 Italian,Italiano,it
 Inuktitut,ᐃᓄᒃᑎᑐᑦ,iu
-Japanese,日本語 (にほんご),ja
+Japanese,日本語,ja
 Javanese,"ꦧꦱꦗꦮ, Basa Jawa",jv
 Georgian,ქართული,ka
 Kongo,Kikongo,kg
@@ -160,7 +160,7 @@ Tigrinya,ትግርኛ,ti
 Turkmen,"Türkmençe, Türkmen dili",tk
 Tagalog,Wikang Tagalog,tl
 Tswana,Setswana,tn
-Tonga (Tonga Islands),Faka Tonga,to
+Tonga,Faka Tonga,to
 Turkish,Türkçe,tr
 Tsonga,Xitsonga,ts
 Tatar,"татар теле, tatar tele",tt

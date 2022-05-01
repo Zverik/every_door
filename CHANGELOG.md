@@ -1,11 +1,18 @@
 # Every Door App Change Log
 
+## 0.1.13
+
+_Unreleased_
+
+* Name supports multiple languages now.
+* Added "Move" label to the map in the amenity editor.
+
 ## 0.1.12
 
 _Released on 2022-04-30_
 
 * Tap on the editor app bar title to change the amenity type.
-* Fixed error on submitting a value in a multi-choose combobox.
+* Fixed error on submitting a value in a single-value combobox.
 * Fixed error catching on async exceptions.
 * Disabled editing floors for POI on building contours.
 * In the location chooser for a new object, filtering objects by type.
