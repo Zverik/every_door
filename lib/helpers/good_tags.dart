@@ -193,56 +193,9 @@ bool isMicroTags(Map<String, String> tags) {
   const kAllGoodKeys = <String>{
     'amenity', 'tourism', 'emergency', 'man_made', 'historic',
     'playground', 'advertising', 'power', 'traffic_calming',
-    'barrier',
+    'barrier', 'highway', 'railway', 'natural', 'leisure',
   };
   if (kAllGoodKeys.contains(k)) return true;
-
-  final v = tags[key];
-  if (k == 'highway') {
-    const goodHighway = {
-      'street_lamp',
-      'speed_camera',
-      'emergency_access_point',
-      'bus_stop',
-      'platform',
-      'traffic_mirror',
-      'elevator',
-      'speed_display'
-    };
-    return goodHighway.contains(v);
-  } else if (k == 'leisure') {
-    const goodLeisure = {
-      'picnic_table',
-      'playground',
-      'fitness_station',
-      'firepit',
-      'fishing',
-      'outdoor_seating',
-      'dog_park',
-      'bathing_place',
-      'table',
-      'village_swing'
-    };
-    return goodLeisure.contains(v);
-  } else if (k == 'natural') {
-    const goodNatural = {
-      'tree',
-      'rock',
-      'shrub',
-      'spring',
-      'cave_entrance',
-      'stone',
-      'birds_nest',
-      'termite_mound',
-      'tree_stump',
-      'bush',
-      'razed:tree',
-      'geyser',
-      'plant',
-      'anthill'
-    };
-    return goodNatural.contains(v);
-  }
   return false;
 }
 
@@ -268,6 +221,7 @@ bool isGoodTags(Map<String, String> tags) {
     'playground',
     'entrance',
     'barrier',
+    'traffic_calming',
   };
   if (kAllGoodKeys.contains(k)) return true;
 
@@ -302,7 +256,7 @@ bool isGoodTags(Map<String, String> tags) {
     const kGoodHighway = <String>{
       'crossing', 'bus_stop', 'street_lamp', 'platform',
       'stop', 'give_way', 'milestone', 'speed_camera',
-      'passing_place',
+      'passing_place', 'traffic_signals',
     };
     return kGoodHighway.contains(v);
   } else if (k == 'railway') {

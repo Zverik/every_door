@@ -2,10 +2,15 @@
 
 ## 0.1.13
 
-_Unreleased_
+_Released on 2022-05-01_
 
 * Name supports multiple languages now.
 * Added "Move" label to the map in the amenity editor.
+* White dots in micromapping denote missing major attributes.
+* Fixed micromapping crossings and barriers.
+* Fixed duplicates in the types list.
+* Enlarged hit boxes for building entrances.
+* Added a yellow dot to the map chooser for better visibility over dark background.
 
 ## 0.1.12
 

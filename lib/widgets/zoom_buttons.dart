@@ -52,7 +52,11 @@ class ZoomButtonsLayer extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.add, size: 30.0),
+                child: Icon(
+                  Icons.add,
+                  size: 30.0,
+                  color: Colors.black.withOpacity(0.5),
+                ),
               ),
               style: OutlinedButton.styleFrom(
                 backgroundColor: Colors.white.withOpacity(0.5),
@@ -68,7 +72,11 @@ class ZoomButtonsLayer extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.remove, size: 30.0),
+                child: Icon(
+                  Icons.remove,
+                  size: 30.0,
+                  color: Colors.black.withOpacity(0.5),
+                ),
               ),
               style: OutlinedButton.styleFrom(
                 backgroundColor: Colors.white.withOpacity(0.5),

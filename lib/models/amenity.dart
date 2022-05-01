@@ -107,6 +107,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
   bool get canDelete =>
       (element?.isPoint ?? true) && !(element?.isMember ?? false);
   ElementKind get kind => detectKind(getFullTags());
+  bool get isIncomplete => needsMoreInfo(getFullTags());
 
   revert() {
     // Cannot revert a new object

@@ -68,7 +68,8 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       return;
 
     final provider = ref.read(osmDataProvider);
-    final editorMode = ref.read(editorModeProvider);
+    final isMicromapping =
+        ref.read(editorModeProvider) == EditorMode.micromapping;
     final filter = ref.read(poiFilterProvider);
     final location = forceLocation ?? ref.read(effectiveLocationProvider)!;
     // Query for amenities around the location.
@@ -89,9 +90,9 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
           if (!e.isModified) return false;
           switch (e.kind) {
             case ElementKind.amenity:
-              return editorMode == EditorMode.micromapping;
+              return isMicromapping;
             case ElementKind.micro:
-              return editorMode == EditorMode.poi;
+              return !isMicromapping;
             default:
               return false;
           }
@@ -103,9 +104,9 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     data = data.where((e) {
       switch (e.kind) {
         case ElementKind.amenity:
-          return editorMode == EditorMode.poi;
+          return !isMicromapping;
         case ElementKind.micro:
-          return editorMode == EditorMode.micromapping;
+          return isMicromapping;
         case ElementKind.building:
         case ElementKind.entrance:
           return false;
@@ -121,8 +122,9 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     data.sort((a, b) => distance(location, a.location)
         .compareTo(distance(location, b.location)));
     // Trim to 10-20 elements.
-    if (data.length > kAmenitiesInList)
-      data = data.sublist(0, kAmenitiesInList);
+    final maxElements = !isMicromapping ? kAmenitiesInList : kMicroStuffInList;
+    if (data.length > maxElements) data = data.sublist(0, maxElements);
+
     // Update the map.
     if (!mounted) return;
     setState(() {
@@ -130,7 +132,8 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       otherPOI = otherData;
     });
 
-    if (editorMode == EditorMode.micromapping) {
+    // Update the legend.
+    if (isMicromapping) {
       final locale = Localizations.localeOf(context);
       ref.read(legendProvider.notifier).updateLegend(data, locale: locale);
     }

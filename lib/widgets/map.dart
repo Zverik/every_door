@@ -240,8 +240,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       setState(() {});
     });
 
-    final iconSize = widget.drawNumbers ? 20.0 : 13.0;
-    final anchorOffset = widget.drawNumbers ? 20.0 : 24.0;
+    final iconSize = widget.drawNumbers ? 18.0 : 10.0;
     final legendCon = ref.watch(legendProvider.notifier);
     final amenities = List.of(widget.amenities);
 
@@ -311,25 +310,36 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
               for (var i = 0; i < amenities.length && i < 9; i++)
                 Marker(
                   point: amenities[i].location,
-                  anchorPos:
-                      AnchorPos.exactly(Anchor(anchorOffset, anchorOffset)),
                   builder: (ctx) => Stack(
+                    alignment: Alignment.center,
                     children: [
-                      Icon(
-                        Icons.circle,
-                        size: iconSize,
-                        color: getIconColor(amenities[i], legendCon)
-                            .withOpacity(widget.drawNumbers ? 0.7 : 1.0),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: getIconColor(amenities[i], legendCon)
+                              .withOpacity(widget.drawNumbers ? 0.7 : 1.0),
+                          borderRadius: BorderRadius.circular(iconSize / 2),
+                        ),
+                        width: iconSize,
+                        height: iconSize,
+                      ),
+                      if (!widget.drawNumbers && amenities[i].isIncomplete)
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(iconSize / 6),
+                        ),
+                        width: iconSize / 3,
+                        height: iconSize / 3,
                       ),
                       if (widget.drawNumbers)
                         Container(
-                          padding: EdgeInsets.only(left: 6.0, top: 1.0),
+                          padding: EdgeInsets.only(left: 5.0),
                           child: Text(
                             (i + 1).toString(),
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: iconSize - 5.0,
+                              fontSize: iconSize - 3.0,
                             ),
                           ),
                         ),

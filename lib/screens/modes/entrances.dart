@@ -173,23 +173,6 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     }
 
     return number;
-
-    // Too much information.
-    final streetWords = (building['addr:street'] ?? '')
-        .split(' ')
-        .where((element) => element.trim().isNotEmpty)
-        .toList();
-    int word = 0;
-    if (streetWords.length > 1) {
-      if (kStreetStatusWords.contains(streetWords.first.toLowerCase()))
-        word += 1;
-    }
-    String street = streetWords.isEmpty
-        ? ''
-        : streetWords[word].substring(0, 1).toLowerCase() + '_';
-
-    final levels = building['building:levels'];
-    return levels == null ? '$street$number' : '$street$number\n$levels';
   }
 
   String makeEntranceLabel(OsmChange entrance) {
@@ -371,13 +354,17 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     Marker(
                       key: keys[entrance.databaseId],
                       point: entrance.location,
-                      width: 30.0,
-                      height: 30.0,
+                      width: 50.0,
+                      height: 50.0,
                       builder: (BuildContext context) {
                         return Center(
                           child: Container(
-                            decoration: makeLabelDecoration(entrance),
-                            child: SizedBox(width: 20.0, height: 20.0),
+                            padding: EdgeInsets.all(10.0),
+                            color: Colors.transparent,
+                            child: Container(
+                              decoration: makeLabelDecoration(entrance),
+                              child: SizedBox(width: 20.0, height: 20.0),
+                            ),
                           ),
                         );
                       },

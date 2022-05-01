@@ -15,6 +15,7 @@ const kCoordinatePrecision = 10000000; // For saving locations to a database
 const kObsoleteData = Duration(days: 3); // for yellow warning
 const kSuperObsoleteData = Duration(days: 14); // for purging
 const kAmenitiesInList = 12;
+const kMicroStuffInList = 15;
 const kTapRadius = 20.0; // flutter pixels
 const kOldAmenityDays = 14;
 const kFieldColor = Colors.lightBlueAccent;

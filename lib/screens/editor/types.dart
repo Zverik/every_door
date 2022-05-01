@@ -96,7 +96,9 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       presetsToAdd.addAll(ref.read(lastPresetsProvider).getPresets());
       // Add presets from around.
       if (widget.location != null) {
-        presetsToAdd.addAll(await _getPresetsAround(widget.location!));
+        final presetsAround = await _getPresetsAround(widget.location!);
+        for (final p in presetsAround)
+          if (!presetsToAdd.contains(p)) presetsToAdd.add(p);
       }
 
       // Keep 2 or 4 (or 0) added presets.

@@ -133,6 +133,11 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                     color: Colors.blue.withOpacity(0.4),
                     radius: 10.0,
                   ),
+                  CircleMarker(
+                    point: center,
+                    radius: 2.0,
+                    color: Colors.yellowAccent,
+                  ),
                 ],
               ),
             ),
@@ -142,7 +147,8 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                 Marker(
                   point: center,
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
-                  builder: (ctx) => Icon(Icons.location_pin),
+                  builder: (ctx) =>
+                      Icon(Icons.location_pin, color: Colors.black),
                 ),
               ],
             ),
@@ -154,7 +160,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                   CircleMarker(
                     point: poi.location,
                     radius: 3.0,
-                    color: poi.isModified ? Colors.greenAccent : Colors.yellow,
+                    color: !poi.isModified ? Colors.greenAccent : Colors.yellow,
                   ),
               ],
             ),
@@ -168,8 +174,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      TypeChooserPage(location: center)),
+                  builder: (context) => TypeChooserPage(location: center)),
             );
           } else {
             Navigator.pop(context, center);
