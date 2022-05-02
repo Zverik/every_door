@@ -28,7 +28,7 @@
   "editorRestore": "Восстановить",
   "editorMissing": "Не существует",
   "editorRestoreTitle": "Открылось?",
-  "editorRestoreMessage": "Заведение {amenity} неактивно. Отметить как работающий?",
+  "editorRestoreMessage": "Заведение {amenity} неактивно. Отметить как работающее?",
   "editorDeleteTitle": "Удалить {amenity}?",
   "editorDeleteButton": "Удалить",
   "tagsNewPoint": "Новая точка",
