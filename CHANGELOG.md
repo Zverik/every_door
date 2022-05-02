@@ -6,6 +6,8 @@ _Unreleased_
 
 * First public version.
 * Patched `ref`s to be numbers.
+* Removed closed barrier ways and modified roads from the map.
+* Won't allow free-form keys that are not popular enough.
 
 ## 0.1.13
 

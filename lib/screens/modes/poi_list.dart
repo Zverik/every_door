@@ -80,6 +80,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     // Remove points too far from the user.
     const distance = DistanceEquirectangular();
     data = data
+        .where((e) => e.isPoint || e.isArea)
         .where((element) => distance(location, element.location) <= radius)
         .toList();
 

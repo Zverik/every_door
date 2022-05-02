@@ -35,6 +35,7 @@
   "tagsAddTag": "Добавить",
   "tagsKey": "Ключ",
   "tagsValue": "Значение",
+  "tagsKeyError": "Слишком редкий ключ",
   "settingsTitle": "Конфигурация",
   "settingsApiServer": "Сервер API",
   "settingsDataManagement": "Управление данными",

@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/common_keys.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +120,14 @@ class _TagEditorPageState extends State<TagEditorPage> {
                       final result = await showTextInputDialog(
                         context: context,
                         textFields: [
-                          DialogTextField(hintText: loc.tagsKey),
+                          DialogTextField(
+                            hintText: loc.tagsKey,
+                            validator: (value) => value != null &&
+                                    value.isNotEmpty &&
+                                    !kCommonKeys.contains(value.trim())
+                                ? loc.tagsKeyError
+                                : null,
+                          ),
                           DialogTextField(hintText: loc.tagsValue),
                         ],
                       );

@@ -213,14 +213,12 @@ bool isGoodTags(Map<String, String> tags) {
     'historic',
     'club',
     'emergency',
-    'man_made',
     'power',
     'aerialway',
     'aeroway',
     'advertising',
     'playground',
     'entrance',
-    'barrier',
     'traffic_calming',
   };
   if (kAllGoodKeys.contains(k)) return true;
@@ -256,7 +254,8 @@ bool isGoodTags(Map<String, String> tags) {
     const kGoodHighway = <String>{
       'crossing', 'bus_stop', 'street_lamp', 'platform',
       'stop', 'give_way', 'milestone', 'speed_camera',
-      'passing_place', 'traffic_signals',
+      'passing_place', 'traffic_signals', 'traffic_mirror',
+      'elevator', 'speed_display',
     };
     return kGoodHighway.contains(v);
   } else if (k == 'railway') {
@@ -266,9 +265,40 @@ bool isGoodTags(Map<String, String> tags) {
     };
     return kGoodRailway.contains(v);
   } else if (k == 'natural') {
-    return v == 'tree' || v == 'rock' || v == 'spring' || v == 'shrub' || v == 'stone';
+    const goodNatural = {
+      'tree',
+      'rock',
+      'shrub',
+      'spring',
+      'cave_entrance',
+      'stone',
+      'birds_nest',
+      'termite_mound',
+      'tree_stump',
+      'bush',
+      'razed:tree',
+      'geyser',
+      'plant',
+      'anthill'
+    };
+    return goodNatural.contains(v);
   } else if (k == 'building') {
     return v != 'roof';
+  } else if (k == 'barrier') {
+    const kGoodBarriers = <String>{
+      'gate', 'bollard', 'lift_gate', 'kerb', 'block',
+      'cycle_barrier', 'stile', 'entrance', 'swing_gate',
+      'cattle_grid', 'toll_booth', 'kissing_gate', 'chain',
+      'turnstile', 'height_restrictor', 'sliding_gate', 'border_control',
+    };
+    return kGoodBarriers.contains(v);
+  } else if (k == 'man_made') {
+    const kWrongManMade = <String>{
+      'bridge', 'works', 'clearcut', 'pier', 'wastewater_plant',
+      'cutline', 'pipeline', 'embankment', 'breakwater',
+      'groyne', 'reservoir_covered', 'water_works', 'courtyard', 'dyke',
+    };
+    return !kWrongManMade.contains(v);
   }
   return false;
 }
@@ -326,7 +356,7 @@ bool needsMoreInfo(Map<String, String> tags) {
   if (tags['emergency'] == 'fire_hydrant') return tags['fire_hydrant:type'] == null;
 
   if (tags['highway'] == 'crossing') return tags['crossing'] == null;
-  if (tags['highway'] == 'street_lamp') return tags['support'] == null;
+  // if (tags['highway'] == 'street_lamp') return tags['lamp_mount'] == null;
   if (tags['highway'] == 'bus_stop')
     return tags['bench'] == null || tags['shelter'] == null;
 

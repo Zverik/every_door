@@ -212,7 +212,7 @@ class _NameInputFieldState extends State<NameInputField> {
               if (widget.element[key] == null ||
                   widget.element[widget.field.key] == null)
                 IconButton(
-                  icon: Icon(Icons.copy),
+                  icon: Icon(Icons.sync_alt),
                   onPressed: widget.element[key] != null &&
                           widget.element[widget.field.key] != null
                       ? null

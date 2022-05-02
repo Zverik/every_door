@@ -161,6 +161,10 @@
   "@tagsValue": {
     "description": "Tags panel, add a new tag dialog: value label"
   },
+  "tagsKeyError": "Key too rare",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
   "settingsTitle": "Configuration",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
