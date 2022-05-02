@@ -1,5 +1,12 @@
 # Every Door App Change Log
 
+## 0.2.0
+
+_Unreleased_
+
+* First public version.
+* Patched `ref`s to be numbers.
+
 ## 0.1.13
 
 _Released on 2022-05-01_
@@ -196,4 +203,4 @@ _Released on 2022-03-30_
 
 _Released on 2022-03-25_
 
-* First public version.
+* First internal testing version.

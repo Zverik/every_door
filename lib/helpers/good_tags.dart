@@ -321,11 +321,14 @@ bool needsMoreInfo(Map<String, String> tags) {
     return tags['collection_times'] == null || tags['ref'] == null;
   if (tags['amenity'] == 'recycling')
     return tags['recycling_type'] == null || !tags.keys.any((k) => k.startsWith('recycling:'));
+  if (tags['amenity'] == 'waste_disposal') return tags['waste'] == null;
 
   if (tags['emergency'] == 'fire_hydrant') return tags['fire_hydrant:type'] == null;
+
   if (tags['highway'] == 'crossing') return tags['crossing'] == null;
-  if (tags['highway'] == 'street_lamp')
-    return tags['support'] == null || (tags['support'] == 'pole' && tags['lamp_mount'] == null);
+  if (tags['highway'] == 'street_lamp') return tags['support'] == null;
+  if (tags['highway'] == 'bus_stop')
+    return tags['bench'] == null || tags['shelter'] == null;
 
   if (tags['man_made'] == 'manhole') return tags['manhole'] == null;
   if (tags['man_made'] == 'street_cabinet') return tags['street_cabinet'] == null;

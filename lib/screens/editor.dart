@@ -291,7 +291,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           ),
                         ),
                       ),
-                      if (!canSave && amenity.isOld)
+                      if (!canSave && amenity.isOld && needsCheckDate(amenity.getFullTags()))
                         Container(
                           color: Colors.green,
                           child: IconButton(

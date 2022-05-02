@@ -307,7 +307,6 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (widget.areaStatusPanel != null) widget.areaStatusPanel!,
         Expanded(
           child: FlutterMap(
             mapController: controller,
@@ -469,6 +468,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
             ],
           ),
         ),
+        if (widget.areaStatusPanel != null) widget.areaStatusPanel!,
       ],
     );
   }
