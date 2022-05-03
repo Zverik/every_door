@@ -140,7 +140,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                       child: TextFormField(
                         keyboardType: editorSettings.fixNumKeyboard
                             ? TextInputType.visiblePassword
-                            : TextInputType.number,
+                            : TextInputType.numberWithOptions(signed: true),
                         autofocus: !manualRef && entrance['addr:flats'] == null,
                         initialValue: entrance['addr:flats'],
                         style: kFieldTextStyle,
@@ -196,7 +196,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                   TextFormField(
                     keyboardType: editorSettings.fixNumKeyboard
                         ? TextInputType.visiblePassword
-                        : TextInputType.number,
+                        : TextInputType.numberWithOptions(signed: true),
                     style: kFieldTextStyle,
                     focusNode: _focus,
                     initialValue: entrance['ref'],

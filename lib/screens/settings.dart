@@ -125,15 +125,6 @@ class SettingsPage extends ConsumerWidget {
             title: Text(loc.settingsEditor),
             tiles: [
               SettingsTile.switchTile(
-                title: Text(loc.settingsPreferContact),
-                onToggle: (value) {
-                  ref
-                      .read(editorSettingsProvider.notifier)
-                      .setPreferContact(value);
-                },
-                initialValue: editorSettings.preferContact,
-              ),
-              SettingsTile.switchTile(
                 title: Text(loc.settingsNumericKeyboard),
                 onToggle: (value) {
                   ref
@@ -141,6 +132,15 @@ class SettingsPage extends ConsumerWidget {
                       .setFixNumKeyboard(value);
                 },
                 initialValue: editorSettings.fixNumKeyboard,
+              ),
+              SettingsTile.switchTile(
+                title: Text(loc.settingsPreferContact),
+                onToggle: (value) {
+                  ref
+                      .read(editorSettingsProvider.notifier)
+                      .setPreferContact(value);
+                },
+                initialValue: editorSettings.preferContact,
               ),
               SettingsTile(
                 title: Text(loc.settingsDefaultPayment),

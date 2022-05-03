@@ -106,7 +106,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
               controller: _houseController,
               keyboardType: editorSettings.fixNumKeyboard
                   ? TextInputType.visiblePassword
-                  : TextInputType.number,
+                  : TextInputType.numberWithOptions(signed: true),
               autofocus: widget.autoFocus,
               style: kFieldTextStyle,
               decoration: const InputDecoration(hintText: '1, 89, 154A, ...'),
