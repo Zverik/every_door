@@ -128,7 +128,13 @@ class _TagEditorPageState extends State<TagEditorPage> {
                                 ? loc.tagsKeyError
                                 : null,
                           ),
-                          DialogTextField(hintText: loc.tagsValue),
+                          DialogTextField(
+                            hintText: loc.tagsValue,
+                            validator: (value) =>
+                                value != null && value.length > 255
+                                    ? loc.tagsValueLong
+                                    : null,
+                          ),
                         ],
                       );
                       if (result != null &&

@@ -226,32 +226,18 @@ class _MultiComboFieldState extends State<MultiComboField> {
           widget.element[widget.field.key] = values.first;
           break;
         case ComboType.semi:
-          widget.element[widget.field.key] =
-              values.map((e) => e.trim()).join(';');
+          String value = values.map((e) => e.trim()).join(';');
+          if (value.length > 255) {
+            // Cut at an appropriate value.
+            value = value.substring(0, 255);
+            final pos = value.lastIndexOf(';');
+            if (pos > 0) value = value.substring(0, pos);
+          }
+          widget.element[widget.field.key] = value;
           break;
         default:
         // this is not called
       }
-    }
-  }
-
-  addComboValue(String value) {
-    value = value.trim();
-    if (value.isEmpty) return;
-    switch (widget.field.type) {
-      case ComboType.regular:
-      case ComboType.type:
-        widget.element[widget.field.key] = value;
-        break;
-      case ComboType.semi:
-        final values = getComboValues();
-        if (!values.contains(value)) {
-          values.add(value);
-          widget.element[widget.field.key] = values.join(';');
-        }
-        break;
-      case ComboType.multi:
-        widget.element[widget.field.key + value] = 'yes';
     }
   }
 

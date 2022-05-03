@@ -36,6 +36,7 @@
   "tagsKey": "Ключ",
   "tagsValue": "Значение",
   "tagsKeyError": "Слишком редкий ключ",
+  "tagsValueLong": "Значение слишком длинное",
   "settingsTitle": "Конфигурация",
   "settingsApiServer": "Сервер API",
   "settingsDataManagement": "Управление данными",

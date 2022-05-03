@@ -39,6 +39,7 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
   late TextEditingController _controller;
   late WebsiteProvider _provider;
   late FocusNode _fieldFocus;
+  int currentLength = 0;
 
   @override
   void initState() {
@@ -70,6 +71,7 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
     if (value.isEmpty || !_provider.isValid(value)) return false;
     _controller.clear();
     setState(() {
+      currentLength = 0;
       _provider.setValue(widget.element, _provider.format(value),
           preferContact: ref.read(editorSettingsProvider).preferContact);
     });
@@ -163,6 +165,7 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
                   controller: _controller,
                   focusNode: _fieldFocus,
                   keyboardType: TextInputType.url,
+                  maxLength: currentLength > 200 ? 255 : null,
                   decoration: InputDecoration(
                     hintText: _provider.label,
                     suffixIcon: GestureDetector(
@@ -174,6 +177,11 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
                     ),
                   ),
                   onSubmitted: submitWebsite,
+                  onChanged: (value) {
+                    setState(() {
+                      currentLength = value.length;
+                    });
+                  },
                 ),
               ),
             )

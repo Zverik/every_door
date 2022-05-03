@@ -8,6 +8,7 @@ _Unreleased_
 * Patched `ref`s to be numbers.
 * Removed closed barrier ways and modified roads from the map.
 * Won't allow free-form keys that are not popular enough.
+* Enforced maximal value length of 255 characters.
 
 ## 0.1.13
 

@@ -44,7 +44,8 @@ class _TextInputFieldState extends State<TextInputField> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.element[widget.field.key] ?? '');
+    _controller =
+        TextEditingController(text: widget.element[widget.field.key] ?? '');
   }
 
   @override
@@ -77,6 +78,8 @@ class _TextInputFieldState extends State<TextInputField> {
         style: kFieldTextStyle,
         maxLines: widget.field.maxLines ?? 1,
         minLines: 1,
+        maxLength:
+            (widget.element[widget.field.key] ?? '').length > 200 ? 255 : null,
         onChanged: (value) {
           // On every keypress, since the focus can change at any minute.
           setState(() {

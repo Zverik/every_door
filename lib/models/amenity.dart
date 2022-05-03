@@ -127,6 +127,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
     if (v == null || v.isEmpty) {
       removeTag(k);
     } else if (element == null || element!.tags[k] != v) {
+      // Silently cut the value.
+      if (v.length > 255) v = v.substring(0, 255);
       newTags[k] = v;
     } else if (newTags.containsKey(k)) {
       newTags.remove(k);
