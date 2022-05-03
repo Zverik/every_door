@@ -4,11 +4,14 @@
 
 _Unreleased_
 
-* First public version.
+* **First public version.**
 * Patched `ref`s to be numbers.
+* Allowing floors without addresses.
 * Removed closed barrier ways and modified roads from the map.
 * Won't allow free-form keys that are not popular enough.
 * Enforced maximal value length of 255 characters.
+* Added sharing button to the raw tags panel.
+* Adding `opening_hours` field if an amenity preset doesn't have one.
 
 ## 0.1.13
 

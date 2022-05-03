@@ -259,8 +259,7 @@ class OsmApiHelper {
           ));
         }
       } else if (change.hardDeleted) {
-        String objRef =
-            '${kOsmElementTypeName[change.id.type]}/${change.id.ref}';
+        String objRef = change.id.fullRef;
         final resp = await http.delete(
           Uri.https(kOsmEndpoint, '/api/0.6/$objRef'),
           headers: headers,
@@ -282,8 +281,7 @@ class OsmApiHelper {
           updates.add(UploadedElement(change.element!));
         }
       } else if (change.isModified) {
-        String objRef =
-            '${kOsmElementTypeName[change.id.type]}/${change.id.ref}';
+        String objRef = change.id.fullRef;
         final resp = await http.put(
           Uri.https(kOsmEndpoint, '/api/0.6/$objRef'),
           headers: headers,

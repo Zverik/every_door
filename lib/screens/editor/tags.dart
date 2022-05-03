@@ -3,8 +3,10 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/common_keys.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/private.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:share_plus/share_plus.dart';
 
 class TagEditorPage extends StatefulWidget {
   final OsmChange amenity;
@@ -46,6 +48,15 @@ class _TagEditorPageState extends State<TagEditorPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        actions: [
+          if (!widget.amenity.isNew)
+          IconButton(
+            onPressed: () {
+              Share.share('https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}');
+            },
+            icon: Icon(Icons.share),
+          ),
+        ],
       ),
       body: ListView(
         children: [

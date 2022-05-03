@@ -62,9 +62,6 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final filter = ref.watch(poiFilterProvider);
-    if (nearestAddresses.isEmpty) {
-      return Text(loc.filterNoAddresses);
-    }
 
     String empty = loc.filterEmpty;
     return Container(

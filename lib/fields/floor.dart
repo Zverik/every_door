@@ -2,15 +2,13 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/fields/helpers/floor_chooser.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/field.dart';
 import 'package:every_door/models/floor.dart';
 import 'package:every_door/providers/osm_data.dart';
+import 'package:every_door/widgets/radio_field.dart';
 import 'package:flutter/material.dart';
-import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logging/logging.dart';
-
-import '../widgets/radio_field.dart';
 
 class FloorPresetField extends PresetField {
   FloorPresetField({required String label})
@@ -114,12 +112,7 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
     final current = Floor.fromTags(widget.element.getFullTags());
-    if (address.isEmpty && current.isEmpty) {
-      return Text(loc.fieldFloorEmpty);
-    }
-
     final options = floors.map((e) => e.string).toList();
     if (current.isEmpty) options.add(kManualOption);
 

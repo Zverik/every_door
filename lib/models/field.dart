@@ -142,6 +142,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
     return HoursPresetField(
       key: key,
       label: label,
+      prerequisite: prerequisite,
     );
   }
 

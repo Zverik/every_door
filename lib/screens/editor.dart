@@ -92,6 +92,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         if (amenity['building'] != null) {
           stdFields.removeWhere((e) => e.key == 'level');
         }
+        // Add opening_hours to moreFields if it's not anywhere.
+        if (!preset!.fields.any((field) => field.key == 'opening_hours') &&
+            !preset!.moreFields.any((field) => field.key == 'opening_hours')) {
+          final hoursField = await presets.getField('opening_hours', locale);
+          preset!.moreFields.insert(0, hoursField);
+        }
       } else {
         stdFields = [];
       }
@@ -291,7 +297,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           ),
                         ),
                       ),
-                      if (!canSave && amenity.isOld && needsCheckDate(amenity.getFullTags()))
+                      if (!canSave &&
+                          amenity.isOld &&
+                          needsCheckDate(amenity.getFullTags()))
                         Container(
                           color: Colors.green,
                           child: IconButton(

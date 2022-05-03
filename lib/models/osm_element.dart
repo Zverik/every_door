@@ -33,6 +33,8 @@ class OsmId {
     return OsmId(typ, int.parse(s.substring(1)));
   }
 
+  String get fullRef => '${kOsmElementTypeName[type]}/$ref';
+
   @override
   String toString() {
     String typ;
