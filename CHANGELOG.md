@@ -2,7 +2,7 @@
 
 ## 0.2.0
 
-_Unreleased_
+_Released on 2022-05-03_
 
 * **First public version.**
 * Patched `ref`s to be numbers.
