@@ -264,7 +264,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         floatingActionButton: (modified || needsCheck)
             ? FloatingActionButton(
                 child: Icon(Icons.done),
-                backgroundColor: modified ? Colors.green : null,
+                backgroundColor: modified ? null : Colors.green,
                 onPressed: () async {
                   if (modified) {
                     String oldMainKey =

@@ -28,9 +28,6 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   late final OsmChange building;
   bool manualLevels = false;
   late final FocusNode _focus;
-  List<String> nearestStreets = [];
-  List<String> nearestPlaces = [];
-  List<String> nearestCities = [];
   List<String> nearestLevels = [];
 
   @override
@@ -39,7 +36,6 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     _focus = FocusNode();
     building = widget.building?.copy() ??
         OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
-    updateStreets();
     updateLevels();
   }
 
@@ -47,23 +43,6 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   void dispose() {
     _focus.dispose();
     super.dispose();
-  }
-
-  List<String> _filterDuplicates(Iterable<String?> source) {
-    final values = <String>{};
-    final result = source.whereType<String>().toList();
-    result.retainWhere((element) => values.add(element));
-    return result;
-  }
-
-  updateStreets() async {
-    final provider = ref.read(osmDataProvider);
-    final addrs = await provider.getAddressesAround(widget.location, limit: 30);
-    setState(() {
-      nearestStreets = _filterDuplicates(addrs.map((e) => e.street));
-      nearestPlaces = _filterDuplicates(addrs.map((e) => e.place));
-      nearestCities = _filterDuplicates(addrs.map((e) => e.city));
-    });
   }
 
   updateLevels() async {
@@ -90,8 +69,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     final values = levelCount.entries.toList();
     values.sort((a, b) => b.value.compareTo(a.value));
 
-    final nearestInt = values.map((e) => e.key).toList();
-    if (nearestInt.length > 2) nearestInt.removeRange(2, nearestInt.length);
+    final List<int> nearestInt = values.map((e) => e.key).take(2).toList();
     nearestInt.sort();
 
     setState(() {

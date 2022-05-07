@@ -1,5 +1,9 @@
+import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/models/road_name.dart';
 import 'package:logging/logging.dart';
+import 'package:proximity_hash/geohash.dart';
 import 'dart:convert';
 import 'package:xml/xml.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -11,6 +15,8 @@ const kOsmTypes = <String, OsmElementType>{
   'relation': OsmElementType.relation,
 };
 
+/// Information about a single uploaded element, as returned by OSM API.
+/// Contains only an osm id and numeric values.
 class UploadedElementRef {
   final OsmId oldId;
   final int? newId;
@@ -40,6 +46,8 @@ class UploadedElementRef {
   }
 }
 
+/// Information about new id and version on an element.
+/// Used when parsing an XML returned by changeset uploading method of OSM API.
 class UploadedElement {
   final OsmElement oldElement;
   final int? newId;
@@ -62,6 +70,8 @@ class UploadedElement {
   }
 }
 
+/// Converts an XML stream from the `map` call of OSM API and returns
+/// a list of raw `OsmElement` objects.
 class XmlToOsmConverter extends Converter<List<XmlNode>, List<OsmElement>> {
   const XmlToOsmConverter();
 
@@ -149,6 +159,8 @@ class XmlToOsmSink extends ChunkedConversionSink<List<XmlNode>> {
   }
 }
 
+/// Sets `isMember` property on objects that are referenced
+/// by other objects in the stream.
 class MarkReferenced extends Converter<List<OsmElement>, List<OsmElement>> {
   final Set<OsmId> _refs = {};
   final Map<OsmId, OsmElement> _stack = {};
@@ -220,12 +232,11 @@ class MarkReferencedSink extends ChunkedConversionSink<List<OsmElement>> {
   }
 }
 
-class FlattenOsmGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
-  final bool clearMembers;
-  final bool addNodeLocations;
-
-  FlattenOsmGeometry(
-      {this.clearMembers = false, this.addNodeLocations = false});
+/// Fills `center` and `bounds` properties on all way and relation objects.
+/// It does that by caching node locations. Also fills the `nodeLocations`
+/// map on ways. See `StripMembers` for clearing that map.
+class CollectGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
+  CollectGeometry();
 
   final Map<int, LatLng> nodeLocations = {};
   final Map<OsmId, LatLngBounds> wayBounds = {};
@@ -278,16 +289,15 @@ class FlattenOsmGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
 
   @override
   Sink<List<OsmElement>> startChunkedConversion(Sink<List<OsmElement>> sink) {
-    return FlattenOsmSink(sink, clearMembers);
+    return CollectGeometrySink(sink);
   }
 }
 
-class FlattenOsmSink extends ChunkedConversionSink<List<OsmElement>> {
-  final FlattenOsmGeometry _converter;
+class CollectGeometrySink extends ChunkedConversionSink<List<OsmElement>> {
+  final CollectGeometry _converter;
   final Sink<List<OsmElement>> _sink;
 
-  FlattenOsmSink(this._sink, bool clearMembers)
-      : _converter = FlattenOsmGeometry(clearMembers: clearMembers);
+  CollectGeometrySink(this._sink) : _converter = CollectGeometry();
 
   @override
   void add(List<OsmElement> chunk) {
@@ -300,6 +310,105 @@ class FlattenOsmSink extends ChunkedConversionSink<List<OsmElement>> {
   }
 }
 
+/// A pass-through converter that builds a list of road names and
+/// their locations. Uses all node locations for highway ways if present.
+class ExtractRoadNames extends Converter<List<OsmElement>, List<OsmElement>> {
+  final Set<RoadNameRecord>? _names;
+
+  const ExtractRoadNames(this._names);
+
+  @override
+  List<OsmElement> convert(List<OsmElement> input) {
+    if (_names == null) return input;
+    for (final element in input) {
+      if (element.type == OsmElementType.way &&
+          element.center != null &&
+          element.tags['name'] != null &&
+          kHighwayRoadValues.contains(element.tags['highway'])) {
+        // This is a named road, add it to the list.
+        List<LatLng> coords;
+        if ((element.nodeLocations ?? const {}).isNotEmpty)
+          coords = element.nodeLocations!.values.toList();
+        else
+          coords = [element.center!];
+
+        // Convert to hashes and store.
+        final hashes = <String>{
+          for (final c in coords)
+            GeoHasher().encode(c.longitude, c.latitude,
+                precision: kRoadNameGeohashPrecision)
+        };
+        _names!.addAll(
+            hashes.map((h) => RoadNameRecord(element.tags['name']!, h)));
+      }
+    }
+    return input;
+  }
+
+  @override
+  Sink<List<OsmElement>> startChunkedConversion(Sink<List<OsmElement>> sink) {
+    return ExtractRoadNamesSink(sink, _names);
+  }
+}
+
+class ExtractRoadNamesSink extends ChunkedConversionSink<List<OsmElement>> {
+  final ExtractRoadNames _converter;
+  final Sink<List<OsmElement>> _sink;
+
+  ExtractRoadNamesSink(this._sink, names)
+      : _converter = ExtractRoadNames(names);
+
+  @override
+  void add(List<OsmElement> chunk) {
+    _sink.add(_converter.convert(chunk));
+  }
+
+  @override
+  void close() {
+    _sink.close();
+  }
+}
+
+/// Removes `nodeLocations` map from ways. Also removes nodes and members,
+/// if `clearMembers` is set.
+class StripMembers extends Converter<List<OsmElement>, List<OsmElement>> {
+  final bool clearMembers;
+
+  const StripMembers({this.clearMembers = false});
+
+  @override
+  List<OsmElement> convert(List<OsmElement> input) {
+    return input
+        .map((el) => el.isPoint
+            ? el
+            : el.copyWith(clearMembers: clearMembers, nodeLocations: const {}))
+        .toList();
+  }
+
+  @override
+  Sink<List<OsmElement>> startChunkedConversion(Sink<List<OsmElement>> sink) {
+    return StripMembersSink(sink, clearMembers);
+  }
+}
+
+class StripMembersSink extends ChunkedConversionSink<List<OsmElement>> {
+  final StripMembers _converter;
+  final Sink<List<OsmElement>> _sink;
+
+  StripMembersSink(this._sink, bool clearMembers) : _converter = StripMembers(clearMembers: clearMembers);
+
+  @override
+  void add(List<OsmElement> chunk) {
+    _sink.add(_converter.convert(chunk));
+  }
+
+  @override
+  void close() {
+    _sink.close();
+  }
+}
+
+/// Keeps only points and areas with "good" tags in the stream.
 class FilterAmenities extends Converter<List<OsmElement>, List<OsmElement>> {
   const FilterAmenities();
 
@@ -331,6 +440,7 @@ class FilterAmenitiesSink extends ChunkedConversionSink<List<OsmElement>> {
   }
 }
 
+/// Keeps only snap targets in the stream, for all kinds of snapping.
 class FilterSnapTargets extends Converter<List<OsmElement>, List<OsmElement>> {
   const FilterSnapTargets();
 
@@ -362,6 +472,9 @@ class FilterSnapTargetsSink extends ChunkedConversionSink<List<OsmElement>> {
   }
 }
 
+/// Parses an XML stream returned by a changeset upload OSM API method.
+/// Returns a stream of `UploadedElementRef`, from which `UploadedElement`s
+/// can be built.
 class ParseUploaded extends Converter<List<XmlNode>, List<UploadedElementRef>> {
   const ParseUploaded();
 

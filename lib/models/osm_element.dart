@@ -127,8 +127,9 @@ class OsmElement {
       center: center ?? this.center,
       bounds: bounds ?? this.bounds,
       nodes: clearMembers ? null : (nodes ?? this.nodes),
-      nodeLocations:
-          clearMembers ? null : (nodeLocations ?? this.nodeLocations),
+      nodeLocations: clearMembers || (nodeLocations?.isEmpty ?? false)
+          ? null
+          : (nodeLocations ?? this.nodeLocations),
       members: clearMembers ? null : members,
       isMember: isMember ?? this.isMember,
     );

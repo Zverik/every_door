@@ -4,12 +4,14 @@ import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/floor.dart';
 import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/models/road_name.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/osm_api.dart';
+import 'package:every_door/providers/road_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
@@ -71,6 +73,7 @@ class OsmDataHelper extends ChangeNotifier {
         all ? DateTime.now() : DateTime.now().subtract(kSuperObsoleteData);
     final count = await _purgeElements(beforeTimestamp);
     await _ref.read(downloadedAreaProvider).purgeAreas(beforeTimestamp);
+    await _ref.read(roadNameProvider).purgeNames(beforeTimestamp);
     return count;
   }
 
@@ -101,14 +104,16 @@ class OsmDataHelper extends ChangeNotifier {
           ],
         );
       }
-      // Yeah, 1000 inserts, but what can we do. Too many arguments.
+
+      final batch = txn.batch();
       for (final element in elements) {
-        await txn.insert(
+        batch.insert(
           OsmElement.kTableName,
           element.toJson(),
           conflictAlgorithm: ConflictAlgorithm.replace,
         );
       }
+      await batch.commit(noResult: true);
     });
     if (bounds != null) await _ref.read(downloadedAreaProvider).addArea(bounds);
     await _updateLength();
@@ -310,9 +315,11 @@ class OsmDataHelper extends ChangeNotifier {
     _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
     try {
       final api = _ref.read(osmApiProvider);
-      final List<OsmElement> elements = await api.map(bounds);
+      final roadNames = <RoadNameRecord>{};
+      final List<OsmElement> elements = await api.map(bounds, roadNames: roadNames);
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.updatingDatabase;
       await storeElements(elements, bounds);
+      await _ref.read(roadNameProvider).storeNames(roadNames);
       AlertController.show('Download successful',
           'Downloaded ${elements.length} amenities.', TypeAlert.success);
 

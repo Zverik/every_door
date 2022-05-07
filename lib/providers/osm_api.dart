@@ -4,6 +4,7 @@ import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/snap_nodes.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/models/road_name.dart';
 import 'package:every_door/private.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
@@ -37,7 +38,7 @@ class OsmApiHelper {
 
   OsmApiHelper(this._ref);
 
-  Future<List<OsmElement>> map(LatLngBounds bounds) async {
+  Future<List<OsmElement>> map(LatLngBounds bounds, {Set<RoadNameRecord>? roadNames}) async {
     final url = Uri.https(kOsmEndpoint, '/api/0.6/map', {
       'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
     });
@@ -56,10 +57,13 @@ class OsmApiHelper {
           .toXmlNodes()
           .transform(XmlToOsmConverter())
           .transform(MarkReferenced())
-          .transform(FlattenOsmGeometry(clearMembers: false))
+          .transform(CollectGeometry())
+          .transform(ExtractRoadNames(roadNames))
+          .transform(StripMembers(clearMembers: false))
           .transform(FilterAmenities())
           .flatten()
           .toList();
+      // TODO: what to do with road names?
       return elements;
     } finally {
       client.close();
@@ -119,8 +123,7 @@ class OsmApiHelper {
               (event) => kOsmTypes.containsKey(event.localName))
           .toXmlNodes()
           .transform(XmlToOsmConverter())
-          .transform(
-              FlattenOsmGeometry(clearMembers: false, addNodeLocations: true))
+          .transform(CollectGeometry())
           .transform(FilterSnapTargets())
           .flatten()
           .toList();

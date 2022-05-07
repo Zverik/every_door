@@ -5,9 +5,11 @@
 _Unreleased_
 
 * Made the saving button into a small floating one.
+* Road names in address forms are also taken from highways.
 * Combo options are now not limited to a preset list.
 * Removed the setting for `contact:` prefixes.
 * Added missing translations for the entrances mode.
+* Sped up storing elements to the database slightly.
 
 ## 0.2.0
 

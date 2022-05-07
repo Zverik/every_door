@@ -1,6 +1,7 @@
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_area.dart';
 import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/models/road_name.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:sqflite/sqflite.dart';
@@ -41,7 +42,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       kDatabaseName,
-      version: 3,
+      version: 4,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,
     );
@@ -52,7 +53,7 @@ class DatabaseHelper {
     await database.execute(
         "create table ${OsmElement.kTableName} (${OsmElement.kTableFields.join(', ')})");
     await database.execute(
-        "create index ${OsmElement.kTableName}_geohash on ${OsmElement.kTableName} (geohash);");
+        "create index ${OsmElement.kTableName}_geohash on ${OsmElement.kTableName} (geohash)");
 
     // Downloaded regions
     await database.execute(
@@ -61,6 +62,12 @@ class DatabaseHelper {
     // Amenities
     await database.execute(
         "create table ${OsmChange.kTableName} (${OsmChange.kTableFields.join(', ')})");
+
+    // Road names
+    await database.execute(
+        "create table ${RoadNameRecord.kTableName} (${RoadNameRecord.kTableFields.join(', ')})");
+    await database.execute(
+        "create index ${RoadNameRecord.kTableName}_geohash on ${RoadNameRecord.kTableName} (geohash)");
   }
 
   void upgradeDatabase(
@@ -77,7 +84,12 @@ class DatabaseHelper {
         _logger.warning('Looks like column "updated" was already present.', e);
       }
     }
+    if (newVersion >= 4 && oldVersion < 4) {
+      await database.execute(
+          "create table ${RoadNameRecord.kTableName} (${RoadNameRecord.kTableFields.join(', ')})");
+      await database.execute(
+          "create index ${RoadNameRecord.kTableName}_geohash on ${RoadNameRecord.kTableName} (geohash)");
+    }
     // Create new table for terms and preset names?
-    // Create new table for road names + geohashes
   }
 }

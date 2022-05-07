@@ -16,6 +16,11 @@ const kStreetStatusWords = {
   // TODO: count statistics over all the streets and populate this list.
 };
 
+const kHighwayRoadValues = <String>{
+  'service', 'residential', 'pedestrian', 'unclassified', 'tertiary',
+  'secondary', 'primary', 'trunk', 'motorway', 'living_street',
+};
+
 enum SnapTo { nothing, building, highway, railway }
 
 enum ElementKind {

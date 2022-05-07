@@ -1,5 +1,6 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/providers/road_names.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
@@ -64,9 +65,9 @@ class _AddressFormState extends ConsumerState<AddressForm> {
 
   updateStreets() async {
     final provider = ref.read(osmDataProvider);
+    nearestStreets = await ref.read(roadNameProvider).getNamesAround(widget.location);
     final addrs = await provider.getAddressesAround(widget.location, limit: 30);
     setState(() {
-      nearestStreets = _filterDuplicates(addrs.map((e) => e.street));
       nearestPlaces = _filterDuplicates(addrs.map((e) => e.place));
       nearestCities = _filterDuplicates(addrs.map((e) => e.city));
     });
