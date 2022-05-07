@@ -48,26 +48,29 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Wrap(
-        direction: Axis.vertical,
-        alignment: WrapAlignment.start,
-        runSpacing: 2.0,
-        spacing: 2.0,
-        children: [
-          for (final entry in tiles)
-            PoiTile(
-              index: entry.key + 1,
-              amenity: entry.value,
-              width: 190.0,
-              onToggleCheck: () {
-                setState(() {
-                  entry.value.toggleCheck();
-                });
-                final changes = ref.read(changesProvider);
-                changes.saveChange(entry.value);
-              },
-            ),
-        ],
+      child: SafeArea(
+        left: false,
+        child: Wrap(
+          direction: Axis.vertical,
+          alignment: WrapAlignment.start,
+          runSpacing: 2.0,
+          spacing: 2.0,
+          children: [
+            for (final entry in tiles)
+              PoiTile(
+                index: entry.key + 1,
+                amenity: entry.value,
+                width: 190.0,
+                onToggleCheck: () {
+                  setState(() {
+                    entry.value.toggleCheck();
+                  });
+                  final changes = ref.read(changesProvider);
+                  changes.saveChange(entry.value);
+                },
+              ),
+          ],
+        ),
       ),
     );
   }
