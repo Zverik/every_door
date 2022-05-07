@@ -66,7 +66,7 @@ class RoadNameProvider {
     }
 
     // Sort by distance
-    final entries = names.entries.toList();
+    final entries = names.entries.where((e) => e.value <= effRadius).toList();
     entries.sort((a, b) => a.value.compareTo(b.value));
     return entries.map((e) => e.key).take(limit).toList();
   }
