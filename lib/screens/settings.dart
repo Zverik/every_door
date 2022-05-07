@@ -133,15 +133,16 @@ class SettingsPage extends ConsumerWidget {
                 },
                 initialValue: editorSettings.fixNumKeyboard,
               ),
-              SettingsTile.switchTile(
-                title: Text(loc.settingsPreferContact),
-                onToggle: (value) {
-                  ref
-                      .read(editorSettingsProvider.notifier)
-                      .setPreferContact(value);
-                },
-                initialValue: editorSettings.preferContact,
-              ),
+              if (kShowContactSetting)
+                SettingsTile.switchTile(
+                  title: Text(loc.settingsPreferContact),
+                  onToggle: (value) {
+                    ref
+                        .read(editorSettingsProvider.notifier)
+                        .setPreferContact(value);
+                  },
+                  initialValue: editorSettings.preferContact,
+                ),
               SettingsTile(
                 title: Text(loc.settingsDefaultPayment),
                 value: Text(editorSettings.defaultPayment.join(', ')),

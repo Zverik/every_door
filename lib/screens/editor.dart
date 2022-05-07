@@ -187,11 +187,13 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   @override
   Widget build(BuildContext context) {
     final preset = this.preset;
-    final bool canSave = widget.amenity == null || amenity != widget.amenity;
+    final bool modified = widget.amenity == null || amenity != widget.amenity;
+    final bool needsCheck =
+        amenity.isOld && needsCheckDate(amenity.getFullTags());
     final loc = AppLocalizations.of(context)!;
     return WillPopScope(
       onWillPop: () async {
-        if (!canSave)
+        if (!modified)
           return true;
         else {
           final result = await showOkCancelAlertDialog(
@@ -257,62 +259,31 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       ],
                     ),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          // width: double.infinity,
-                          height: 50.0,
-                          child: MaterialButton(
-                            color: Colors.green,
-                            textColor: Colors.white,
-                            disabledColor: Colors.white,
-                            disabledTextColor: Colors.grey,
-                            child: Text(
-                              loc.editorSave,
-                              style: TextStyle(fontSize: 20.0),
-                            ),
-                            onPressed: !canSave
-                                ? null
-                                : () async {
-                                    String oldMainKey = getMainKey(
-                                            amenity.element?.tags ?? {}) ??
-                                        '';
-                                    if (amenity.isDisused &&
-                                        oldMainKey.startsWith(kDisused)) {
-                                      final result =
-                                          await showOkCancelAlertDialog(
-                                        context: context,
-                                        title: loc.editorRestoreTitle,
-                                        message: loc.editorRestoreMessage(
-                                            amenity.typeAndName),
-                                        okLabel: loc.buttonYes,
-                                        cancelLabel: loc.buttonNo,
-                                      );
-                                      if (result == OkCancelResult.ok)
-                                        amenity.toggleDisused();
-                                    }
-                                    saveAndClose();
-                                  },
-                          ),
-                        ),
-                      ),
-                      if (!canSave &&
-                          amenity.isOld &&
-                          needsCheckDate(amenity.getFullTags()))
-                        Container(
-                          color: Colors.green,
-                          child: IconButton(
-                            icon: Icon(Icons.check),
-                            color: Colors.white,
-                            iconSize: 30.0,
-                            onPressed: saveAndClose,
-                          ),
-                        ),
-                    ],
-                  ),
                 ],
               ),
+        floatingActionButton: (modified || needsCheck)
+            ? FloatingActionButton(
+                child: Icon(Icons.done),
+                backgroundColor: modified ? Colors.green : null,
+                onPressed: () async {
+                  if (modified) {
+                    String oldMainKey =
+                        getMainKey(amenity.element?.tags ?? {}) ?? '';
+                    if (amenity.isDisused && oldMainKey.startsWith(kDisused)) {
+                      final result = await showOkCancelAlertDialog(
+                        context: context,
+                        title: loc.editorRestoreTitle,
+                        message: loc.editorRestoreMessage(amenity.typeAndName),
+                        okLabel: loc.buttonYes,
+                        cancelLabel: loc.buttonNo,
+                      );
+                      if (result == OkCancelResult.ok) amenity.toggleDisused();
+                    }
+                  }
+                  saveAndClose();
+                },
+              )
+            : null,
       ),
     );
   }

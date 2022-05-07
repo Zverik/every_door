@@ -1,5 +1,14 @@
 # Every Door App Change Log
 
+## 0.3.0
+
+_Unreleased_
+
+* Made the saving button into a small floating one.
+* Combo options are now not limited to a preset list.
+* Removed the setting for `contact:` prefixes.
+* Added missing translations for the entrances mode.
+
 ## 0.2.0
 
 _Released on 2022-05-03_

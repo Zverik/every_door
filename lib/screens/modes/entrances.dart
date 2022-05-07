@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EntrancesPane extends ConsumerStatefulWidget {
   final Widget? areaStatusPanel;
@@ -224,14 +225,19 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     );
   }
 
-  String makeOneLineLabel(OsmChange element) {
+  String makeOneLineLabel(BuildContext context, OsmChange element) {
+    final loc = AppLocalizations.of(context)!;
     switch (getOurKind(element)) {
       case ElementKind.building:
-        return 'Building ${element["addr:housenumber"] ?? element["addr:housename"] ?? ""}'
+        return loc
+            .buildingX(
+                element["addr:housenumber"] ?? element["addr:housename"] ?? '')
             .trimRight();
       case ElementKind.entrance:
-        return 'Entrance ${element["addr:flats"] ?? element["ref"] ?? ""}'
-            .trimRight();
+        final label = [element['ref'], element['addr:flats']]
+            .whereType<String>()
+            .join(': ');
+        return loc.entranceX(label).trimRight();
       default:
         return element.typeAndName;
     }
@@ -258,8 +264,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
             SimpleDialogOption(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child:
-                    Text(makeOneLineLabel(e), style: TextStyle(fontSize: 20.0)),
+                child: Text(makeOneLineLabel(context, e),
+                    style: TextStyle(fontSize: 20.0)),
               ),
               onPressed: () {
                 Navigator.pop(context, e);

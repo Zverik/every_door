@@ -507,6 +507,24 @@
   "@buttonNo": {
     "description": "Button for dismissal."
   },
+  "buildingX": "Building {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "entranceX": "Entrance {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
   "buildingLevels": "Levels",
   "@buildingLevels": {
     "description": "Label for building:levels in the form. Keep it short."

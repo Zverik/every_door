@@ -279,15 +279,19 @@ class PresetProvider {
     final loc = field['loc_options'] != null
         ? jsonDecode(field['loc_options'])
         : <String, String>{};
-    List<String> options;
+    final List<String> options = [];
     if (field['options'] != null) {
-      options = (jsonDecode(field['options']) as List).cast<String>();
-    } else {
-      // Get options from taginfo
-      final results = await _db!
-          .query('combos', where: 'key = ?', whereArgs: [field['key']]);
-      if (results.isEmpty) return const []; // alas
-      options = (results.first['options'] as String).split(';');
+      options.addAll((jsonDecode(field['options']) as List).cast<String>());
+    }
+
+    // Get options from taginfo
+    final results =
+        await _db!.query('combos', where: 'key = ?', whereArgs: [field['key']]);
+    if (results.isNotEmpty) {
+      final existing = Set.of(options);
+      options.addAll((results.first['options'] as String)
+          .split(';')
+          .where((v) => !existing.contains(v)));
     }
     return options.map((e) => ComboOption(e, loc[e])).toList();
   }

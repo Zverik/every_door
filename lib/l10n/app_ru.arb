@@ -117,6 +117,8 @@
   "enableLocationMessage": "Сейчас откроем панель настроек — разрешите в ней доступ к местоположению, пожалуйста.",
   "buttonYes": "Да",
   "buttonNo": "Нет",
+  "buildingX": "Здание {n}",
+  "entranceX": "Вход {n}",
   "buildingLevels": "Этажей",
   "buildingRoofLevels": "Этажей в крыше",
   "buildingRoofShape": "Форма крыши",
