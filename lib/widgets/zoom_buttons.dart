@@ -40,54 +40,50 @@ class ZoomButtonsLayer extends StatelessWidget {
       bottom: 0.0,
       right: _options.alignment.x >= 0 ? 0.0 : null,
       left: _options.alignment.x < 0 ? 0.0 : null,
-      child: SafeArea(
-        bottom: false,
-        top: false,
-        child: Padding(
-          padding: _options.padding,
-          child: Column(
-            children: [
-              OutlinedButton(
-                onPressed: () {
-                  _map.move(_map.center, _map.zoom + 1,
-                      source: MapEventSource.custom);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.add,
-                    size: 30.0,
-                    color: Colors.black.withOpacity(0.5),
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.white.withOpacity(0.5),
-                  shape: CircleBorder(side: BorderSide()),
-                  padding: EdgeInsets.zero,
+      child: Padding(
+        padding: _options.padding,
+        child: Column(
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                _map.move(_map.center, _map.zoom + 1,
+                    source: MapEventSource.custom);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.add,
+                  size: 30.0,
+                  color: Colors.black.withOpacity(0.5),
                 ),
               ),
-              SizedBox(height: 10.0),
-              OutlinedButton(
-                onPressed: () {
-                  _map.move(_map.center, _map.zoom - 1,
-                      source: MapEventSource.custom);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.remove,
-                    size: 30.0,
-                    color: Colors.black.withOpacity(0.5),
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.white.withOpacity(0.5),
-                  shape: CircleBorder(side: BorderSide()),
-                  padding: EdgeInsets.zero,
+              style: OutlinedButton.styleFrom(
+                backgroundColor: Colors.white.withOpacity(0.5),
+                shape: CircleBorder(side: BorderSide()),
+                padding: EdgeInsets.zero,
+              ),
+            ),
+            SizedBox(height: 10.0),
+            OutlinedButton(
+              onPressed: () {
+                _map.move(_map.center, _map.zoom - 1,
+                    source: MapEventSource.custom);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.remove,
+                  size: 30.0,
+                  color: Colors.black.withOpacity(0.5),
                 ),
               ),
-            ],
-          ),
+              style: OutlinedButton.styleFrom(
+                backgroundColor: Colors.white.withOpacity(0.5),
+                shape: CircleBorder(side: BorderSide()),
+                padding: EdgeInsets.zero,
+              ),
+            ),
+          ],
         ),
       ),
     );

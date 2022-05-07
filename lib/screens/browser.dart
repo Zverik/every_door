@@ -223,17 +223,20 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
           Positioned(
             right: 0.0,
             top: 10.0,
-            child: ElevatedButton(
-              child: Icon(kEditorModeIcons[kNextMode[editorMode]]!, size: 20.0),
-              style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(10.0),
-                primary: Colors.grey.withOpacity(0.5),
-                shadowColor: Colors.black.withOpacity(0.5),
+            child: SafeArea(
+              child: ElevatedButton(
+                child:
+                    Icon(kEditorModeIcons[kNextMode[editorMode]]!, size: 20.0),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(10.0),
+                  primary: Colors.grey.withOpacity(0.5),
+                  shadowColor: Colors.black.withOpacity(0.5),
+                ),
+                onPressed: () {
+                  ref.read(editorModeProvider.notifier).next();
+                },
               ),
-              onPressed: () {
-                ref.read(editorModeProvider.notifier).next();
-              },
             ),
           ),
         ]),

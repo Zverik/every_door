@@ -121,14 +121,17 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
       isScrollControlled: true,
       builder: (context) {
         return SingleChildScrollView(
-          child: Padding(
-              padding: EdgeInsets.only(
-                top: 6.0,
-                left: 10.0,
-                right: 10.0,
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: pane),
+          child: SafeArea(
+            top: false,
+            child: Padding(
+                padding: EdgeInsets.only(
+                  top: 6.0,
+                  left: 10.0,
+                  right: 10.0,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: pane),
+          ),
         );
       },
     );
@@ -310,6 +313,9 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
       });
     });
 
+    // Safe area from the left/right side.
+    EdgeInsets safePadding = MediaQuery.of(context).padding;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -386,7 +392,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   DragButton(
                       icon: Icons.house,
                       bottom: 20.0,
-                      left: 20.0,
+                      left: 20.0 + safePadding.left,
                       onDragEnd: (pos) {
                         editBuilding(null, pos);
                       },
@@ -403,7 +409,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   DragButton(
                       icon: Icons.sensor_door,
                       bottom: 20.0,
-                      right: 20.0,
+                      right: 20.0 + safePadding.right,
                       onDragStart: () {
                         if (savedZoom == null) {
                           savedZoom = controller.zoom;
@@ -432,7 +438,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
               ZoomButtonsOptions(
                 alignment: Alignment.bottomRight,
                 padding: EdgeInsets.symmetric(
-                  horizontal: 10.0,
+                  horizontal: 10.0 + safePadding.right,
                   vertical: 100.0,
                 ),
               ),

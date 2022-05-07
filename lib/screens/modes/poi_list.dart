@@ -243,7 +243,10 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
           ),
         if (isMicromapping && !isZoomedIn && !widget.isWide) LegendPane(),
         if (isMicromapping && !isZoomedIn && widget.isWide)
-          SizedBox(child: LegendPane(), width: 200.0),
+          SizedBox(
+            child: SingleChildScrollView(child: LegendPane()),
+            width: 200.0,
+          ),
       ],
     );
   }
@@ -277,28 +280,25 @@ class LegendPane extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.all(10.0),
       constraints: BoxConstraints(minHeight: 150.0),
-      child: SafeArea(
-        left: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (final item in legend)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(Icons.circle, color: item.color, size: 20.0),
-                  SizedBox(width: 5.0),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 5.0),
-                      child: Text(item.isOther ? loc.legendOther : item.label,
-                          style: kFieldTextStyle),
-                    ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (final item in legend)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.circle, color: item.color, size: 20.0),
+                SizedBox(width: 5.0),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Text(item.isOther ? loc.legendOther : item.label,
+                        style: kFieldTextStyle),
                   ),
-                ],
-              )
-          ],
-        ),
+                ),
+              ],
+            )
+        ],
       ),
     );
   }

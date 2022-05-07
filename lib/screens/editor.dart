@@ -225,42 +225,44 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             ),
           ],
         ),
-        body: preset == null
-            ? Center(child: Text(loc.editorLoadingPreset))
-            : Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        if (amenity.canDelete) buildMap(context),
-                        if (!amenity.canDelete) SizedBox(height: 10.0),
-                        if (stdFields.isNotEmpty) ...[
-                          buildFields(stdFields, 50),
+        body: SafeArea(
+          child: preset == null
+              ? Center(child: Text(loc.editorLoadingPreset))
+              : Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          if (amenity.canDelete) buildMap(context),
+                          if (!amenity.canDelete) SizedBox(height: 10.0),
+                          if (stdFields.isNotEmpty) ...[
+                            buildFields(stdFields, 50),
+                            SizedBox(height: 10.0),
+                            Divider(),
+                            SizedBox(height: 10.0),
+                          ],
+                          if (fields.isNotEmpty) ...[
+                            buildFields(fields),
+                            SizedBox(height: 20.0),
+                          ],
+                          buildTopButtons(context),
                           SizedBox(height: 10.0),
-                          Divider(),
-                          SizedBox(height: 10.0),
+                          if (moreFields.isNotEmpty) ...[
+                            ExpansionTile(
+                              title: Text(loc.editorMoreFields),
+                              initiallyExpanded: false,
+                              children: [
+                                buildFields(moreFields),
+                              ],
+                            ),
+                            SizedBox(height: 30.0),
+                          ],
                         ],
-                        if (fields.isNotEmpty) ...[
-                          buildFields(fields),
-                          SizedBox(height: 20.0),
-                        ],
-                        buildTopButtons(context),
-                        SizedBox(height: 10.0),
-                        if (moreFields.isNotEmpty) ...[
-                          ExpansionTile(
-                            title: Text(loc.editorMoreFields),
-                            initiallyExpanded: false,
-                            children: [
-                              buildFields(moreFields),
-                            ],
-                          ),
-                          SizedBox(height: 30.0),
-                        ],
-                      ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+        ),
         floatingActionButton: (modified || needsCheck)
             ? FloatingActionButton(
                 child: Icon(Icons.done),

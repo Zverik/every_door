@@ -323,17 +323,17 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                         height: iconSize,
                       ),
                       if (!widget.drawNumbers && amenities[i].isIncomplete)
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(iconSize / 6),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(iconSize / 6),
+                          ),
+                          width: iconSize / 3,
+                          height: iconSize / 3,
                         ),
-                        width: iconSize / 3,
-                        height: iconSize / 3,
-                      ),
                       if (widget.drawNumbers)
                         Container(
-                          padding: EdgeInsets.only(left: 5.0),
+                          padding: EdgeInsets.only(left: 1.0),
                           child: Text(
                             (i + 1).toString(),
                             style: TextStyle(

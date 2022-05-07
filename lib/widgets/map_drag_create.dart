@@ -72,47 +72,43 @@ class DragButtonsWidget extends StatelessWidget {
       right: options.right,
       top: options.top,
       bottom: options.bottom,
-      child: SafeArea(
-        bottom: false,
-        top: false,
-        child: Draggable(
-          data: options,
-          onDragStarted: () {
-            if (options.onDragStart != null) options.onDragStart!();
-          },
-          onDragEnd: (details) {
-            const offset = CustomPoint(-arrowSize / 2, 82.0); // 82 or 128?
-            final pos = CustomPoint(details.offset.dx, details.offset.dy);
-            final origin = _mapState.getPixelOrigin();
-            final location = _mapState.layerPointToLatLng(pos - offset + origin);
-            if (options.onDragEnd != null) options.onDragEnd!(location);
-          },
-          feedbackOffset: Offset(arrowSize / 2, 70.0),
-          dragAnchorStrategy: (draggable, context, position) =>
-              Offset(arrowSize / 2, 70.0),
-          feedback: CustomPaint(
-            painter:
-                _ArrowUpPainter(options.color ?? Theme.of(context).primaryColor),
-            size: Size(arrowSize, 100.0),
-          ),
-          childWhenDragging: Container(),
-          child: ElevatedButton(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 0.0,
-                vertical: 15.0,
-              ),
-              child: Icon(options.icon, size: 30.0),
+      child: Draggable(
+        data: options,
+        onDragStarted: () {
+          if (options.onDragStart != null) options.onDragStart!();
+        },
+        onDragEnd: (details) {
+          const offset = CustomPoint(-arrowSize / 2, 82.0); // 82 or 128?
+          final pos = CustomPoint(details.offset.dx, details.offset.dy);
+          final origin = _mapState.getPixelOrigin();
+          final location = _mapState.layerPointToLatLng(pos - offset + origin);
+          if (options.onDragEnd != null) options.onDragEnd!(location);
+        },
+        feedbackOffset: Offset(arrowSize / 2, 70.0),
+        dragAnchorStrategy: (draggable, context, position) =>
+            Offset(arrowSize / 2, 70.0),
+        feedback: CustomPaint(
+          painter:
+              _ArrowUpPainter(options.color ?? Theme.of(context).primaryColor),
+          size: Size(arrowSize, 100.0),
+        ),
+        childWhenDragging: Container(),
+        child: ElevatedButton(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 0.0,
+              vertical: 15.0,
             ),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-            ),
-            onPressed: () {
-              if (options.onTap != null) options.onTap!();
-            },
+            child: Icon(options.icon, size: 30.0),
           ),
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+          ),
+          onPressed: () {
+            if (options.onTap != null) options.onTap!();
+          },
         ),
       ),
     );

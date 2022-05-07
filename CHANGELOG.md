@@ -10,6 +10,8 @@ _Unreleased_
 * Removed the setting for `contact:` prefixes.
 * Added missing translations for the entrances mode.
 * Sped up storing elements to the database slightly.
+* Added safe areas to layout.
+* Fixed offset numbers on the map.
 
 ## 0.2.0
 

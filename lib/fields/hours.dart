@@ -250,8 +250,10 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
           ),
         ],
       ),
-      body:
-          isRaw ? buildRawHoursEditor(context) : buildFragmentsEditor(context),
+      body: SafeArea(
+          child: isRaw
+              ? buildRawHoursEditor(context)
+              : buildFragmentsEditor(context)),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.done),
         onPressed: () {
