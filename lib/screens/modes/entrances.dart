@@ -15,6 +15,7 @@ import 'package:every_door/screens/editor/entrance.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/multi_hit.dart';
+import 'package:every_door/widgets/track_button.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -335,6 +336,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 MapDragCreatePlugin(),
                 MultiHitMarkerLayerPlugin(),
                 ZoomButtonsPlugin(),
+                TrackButtonPlugin(),
               ],
             ),
             nonRotatedLayers: [
@@ -437,6 +439,13 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                         if (pos != null) editEntrance(null, pos);
                       }),
                 ],
+              ),
+              TrackButtonOptions(
+                alignment: Alignment.topRight,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10.0 + safePadding.right,
+                  vertical: 20.0,
+                ),
               ),
               ZoomButtonsOptions(
                 alignment: Alignment.bottomRight,

@@ -20,6 +20,7 @@ import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/modes/entrances.dart';
 import 'package:every_door/widgets/filter.dart';
 import 'package:every_door/screens/modes/poi_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
@@ -147,7 +148,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(kAppTitle),
+          title: Text(kAppTitle, overflow: TextOverflow.fade),
           leading: IconButton(
             onPressed: () {
               Navigator.push(
@@ -207,39 +208,15 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
                   color: hasFilter ? Colors.yellowAccent : null,
                 ),
               ),
-            if (!ref.watch(trackingProvider))
-              IconButton(
-                onPressed: ref.watch(trackingProvider)
-                    ? null
-                    : () {
-                        ref.read(trackingProvider.state).state = true;
-                      },
-                icon: const Icon(Icons.my_location),
-              ),
+            IconButton(
+              onPressed: () {
+                ref.read(editorModeProvider.notifier).next();
+              },
+              icon: Icon(kEditorModeIcons[editorMode]!),
+            ),
           ],
         ),
-        body: Stack(children: [
-          editorPanel,
-          Positioned(
-            right: 0.0,
-            top: 10.0,
-            child: SafeArea(
-              child: ElevatedButton(
-                child:
-                    Icon(kEditorModeIcons[kNextMode[editorMode]]!, size: 20.0),
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  padding: EdgeInsets.all(10.0),
-                  primary: Colors.grey.withOpacity(0.5),
-                  shadowColor: Colors.black.withOpacity(0.5),
-                ),
-                onPressed: () {
-                  ref.read(editorModeProvider.notifier).next();
-                },
-              ),
-            ),
-          ),
-        ]),
+        body: editorPanel,
         floatingActionButton: editorMode == EditorMode.poi ||
                 editorMode == EditorMode.micromapping
             ? FloatingActionButton(

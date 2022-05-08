@@ -5,6 +5,7 @@
 _Unreleased_
 
 * Made the saving button into a small floating one.
+* Swapped tracking and mode changing buttons.
 * Road names in address forms are also taken from highways.
 * Combo options are now not limited to a preset list.
 * Removed the setting for `contact:` prefixes.

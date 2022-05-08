@@ -8,7 +8,9 @@ import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/legend.dart';
+import 'package:every_door/widgets/track_button.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -254,9 +256,19 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         interactiveFlags: ref.watch(microZoomedInProvider) != null
             ? InteractiveFlag.none
             : (InteractiveFlag.drag | InteractiveFlag.pinchZoom),
-        plugins: [ZoomButtonsPlugin()],
+        plugins: [
+          ZoomButtonsPlugin(),
+          TrackButtonPlugin(),
+        ],
       ),
       nonRotatedLayers: [
+        TrackButtonOptions(
+          alignment: Alignment.topRight,
+          padding: EdgeInsets.symmetric(
+            horizontal: 0.0,
+            vertical: 20.0,
+          ),
+        ),
         if (widget.drawZoomButtons)
           ZoomButtonsOptions(
             alignment: Alignment.bottomRight,
