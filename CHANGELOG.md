@@ -8,6 +8,8 @@ _Unreleased_
 * Road names in address forms are also taken from highways.
 * Combo options are now not limited to a preset list.
 * Removed the setting for `contact:` prefixes.
+* Enabled opening links and phone numbers from the editor.
+* Long tap on the sharing button on the tags panel to copy the link.
 * Added missing translations for the entrances mode.
 * Sped up storing elements to the database slightly.
 * Displaying all alternative points on the map, not just modified.

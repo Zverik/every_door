@@ -5,6 +5,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/private.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -36,6 +37,8 @@ class _TagEditorPageState extends State<TagEditorPage> {
     super.dispose();
   }
 
+  String _getUrl() => 'https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}';
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -50,12 +53,21 @@ class _TagEditorPageState extends State<TagEditorPage> {
         title: Text(title),
         actions: [
           if (!widget.amenity.isNew)
-          IconButton(
-            onPressed: () {
-              Share.share('https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}');
-            },
-            icon: Icon(Icons.share),
-          ),
+            GestureDetector(
+              child: IconButton(
+                // TODO: copy to clipboard?
+                // https://stackoverflow.com/questions/55885433/flutter-dart-how-to-add-copy-to-clipboard-on-tap-to-a-app
+                onPressed: () {
+                  Share.share(_getUrl());
+                },
+                icon: Icon(Icons.share),
+              ),
+              onLongPress: () {
+                Clipboard.setData(ClipboardData(text: _getUrl())).then((_){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("URL copied to clipboard")));
+                });
+              },
+            ),
         ],
       ),
       body: ListView(
