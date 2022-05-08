@@ -12,6 +12,7 @@ _Unreleased_
 * Sped up storing elements to the database slightly.
 * Displaying all alternative points on the map, not just modified.
 * Added safe areas to layout.
+* Finally caught the offset issue when dragging entrances onto the map.
 * Fixed offset numbers on the map.
 
 ## 0.2.0
