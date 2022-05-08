@@ -10,6 +10,7 @@ _Unreleased_
 * Removed the setting for `contact:` prefixes.
 * Added missing translations for the entrances mode.
 * Sped up storing elements to the database slightly.
+* Displaying all alternative points on the map, not just modified.
 * Added safe areas to layout.
 * Fixed offset numbers on the map.
 

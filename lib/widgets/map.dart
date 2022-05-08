@@ -291,8 +291,8 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                 for (final objLocation in widget.otherObjects)
                   CircleMarker(
                     point: objLocation,
-                    color: Colors.black,
-                    radius: 3.0,
+                    color: Colors.black.withOpacity(0.4),
+                    radius: 2.0,
                   ),
               ],
             ),

@@ -27,7 +27,7 @@ class LogStore {
 
   addFromLogger(LogRecord record) {
     final line =
-        '${record.level.name.substring(0, 1)} ${record.loggerName}: ${record.message}';
+        '${record.level.name.substring(0, 1)}/${record.loggerName}: ${record.message}';
     print(line);
     if (record.error != null) print(record.error);
     _addLine(line, record.time);

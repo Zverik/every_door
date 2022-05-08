@@ -35,6 +35,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   List<OsmChange> nearestBuildings = [];
   List<OsmChange> nearestEntrances = [];
   Map<String, GlobalKey> keys = {};
+  final _mapKey = GlobalKey();
   late LatLng center;
   final controller = MapController();
   late final StreamSubscription<MapEvent> mapSub;
@@ -321,6 +322,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
       children: [
         Expanded(
           child: FlutterMap(
+            key: _mapKey,
             mapController: controller,
             options: MapOptions(
               center: center,
@@ -388,6 +390,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 },
               ),
               MapDragCreateOptions(
+                mapKey: _mapKey,
                 buttons: [
                   DragButton(
                       icon: Icons.house,

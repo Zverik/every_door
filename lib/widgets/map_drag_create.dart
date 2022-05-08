@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
+import 'package:logging/logging.dart';
 
 class MapDragCreateOptions extends LayerOptions {
   List<DragButton> buttons;
-  MapDragCreateOptions({this.buttons = const []});
+  GlobalKey? mapKey;
+  MapDragCreateOptions({this.buttons = const [], this.mapKey});
 }
 
 class DragButton {
@@ -47,7 +49,8 @@ class MapDragCreatePlugin implements MapPlugin {
       return Stack(
         children: [
           // DragButtonTargetLayer(mapState),
-          for (final btn in options.buttons) DragButtonsWidget(btn, mapState),
+          for (final btn in options.buttons)
+            DragButtonsWidget(btn, mapState, options.mapKey),
         ],
       );
     }
@@ -61,8 +64,11 @@ class MapDragCreatePlugin implements MapPlugin {
 class DragButtonsWidget extends StatelessWidget {
   final DragButton options;
   final MapState _mapState;
+  final GlobalKey? _mapKey;
 
-  const DragButtonsWidget(this.options, this._mapState);
+  static final _logger = Logger('DragButtonsWidget');
+
+  const DragButtonsWidget(this.options, this._mapState, this._mapKey);
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +87,16 @@ class DragButtonsWidget extends StatelessWidget {
           const offset = CustomPoint(-arrowSize / 2, 82.0); // 82 or 128?
           final pos = CustomPoint(details.offset.dx, details.offset.dy);
           final origin = _mapState.getPixelOrigin();
+          final mapOrigin =
+              _mapKey?.currentContext!.findRenderObject()!.paintBounds.topLeft;
+          final globalMapOrigin = _mapKey?.currentContext!
+              .findRenderObject()!
+              .getTransformTo(null)
+              .getTranslation();
+          _logger.info(
+              'Map origin: $mapOrigin, global: ${globalMapOrigin?.x}, '
+              '${globalMapOrigin?.y}, drop offset: ${pos - offset}, '
+              'top: ${options.top}, bottom: ${options.bottom}.');
           final location = _mapState.layerPointToLatLng(pos - offset + origin);
           if (options.onDragEnd != null) options.onDragEnd!(location);
         },

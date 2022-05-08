@@ -40,6 +40,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     super.initState();
 
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      updateFarFromUser();
       updateNearest();
     });
   }
@@ -87,8 +88,6 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
     // Keep other mode objects to show.
     final otherData = data
         .where((e) {
-          // Only modified objects for now.
-          if (!e.isModified) return false;
           switch (e.kind) {
             case ElementKind.amenity:
               return isMicromapping;
