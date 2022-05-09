@@ -6,6 +6,7 @@ import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/editor_mode.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
@@ -134,6 +135,23 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
         break;
     }
 
+    final leftHand = ref.watch(editorSettingsProvider).leftHand;
+    final settingsButton = IconButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingsPage()),
+        );
+      },
+      icon: Icon(Icons.menu),
+    );
+    final modeButton = IconButton(
+      onPressed: () {
+        ref.read(editorModeProvider.notifier).next();
+      },
+      icon: Icon(kEditorModeIcons[editorMode]!),
+    );
+
     return WillPopScope(
       onWillPop: () async {
         if (ref.read(microZoomedInProvider) != null) {
@@ -149,15 +167,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(kAppTitle, overflow: TextOverflow.fade),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingsPage()),
-              );
-            },
-            icon: Icon(Icons.menu),
-          ),
+          leading: leftHand ? modeButton : settingsButton,
           actions: [
             if (!hasChangesToUpload)
               IconButton(
@@ -208,12 +218,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
                   color: hasFilter ? Colors.yellowAccent : null,
                 ),
               ),
-            IconButton(
-              onPressed: () {
-                ref.read(editorModeProvider.notifier).next();
-              },
-              icon: Icon(kEditorModeIcons[editorMode]!),
-            ),
+            !leftHand ? modeButton : settingsButton,
           ],
         ),
         body: editorPanel,

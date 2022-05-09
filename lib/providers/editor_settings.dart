@@ -8,22 +8,26 @@ final editorSettingsProvider =
 class EditorSettings {
   final bool preferContact;
   final bool fixNumKeyboard;
+  final bool leftHand;
   final List<String> defaultPayment;
 
   const EditorSettings({
     this.preferContact = false,
     this.fixNumKeyboard = false,
+    this.leftHand = false,
     this.defaultPayment = const ['visa', 'mastercard'],
   });
 
   EditorSettings copyWith({
     bool? preferContact,
     bool? fixNumKeyboard,
+    bool? leftHand,
     List<String>? defaultPayment,
   }) {
     return EditorSettings(
       preferContact: preferContact ?? this.preferContact,
       fixNumKeyboard: fixNumKeyboard ?? this.fixNumKeyboard,
+      leftHand: leftHand ?? this.leftHand,
       defaultPayment: defaultPayment ?? this.defaultPayment,
     );
   }
@@ -34,6 +38,7 @@ class EditorSettings {
       preferContact: data[0] == '1',
       fixNumKeyboard: data[1] == '1',
       defaultPayment: data[2].split(';').map((s) => s.trim()).toList(),
+      leftHand: data.length >= 4 && data[3] == '1',
     );
   }
 
@@ -41,6 +46,7 @@ class EditorSettings {
     return [
       preferContact ? '1' : '0',
       fixNumKeyboard ? '1' : '0',
+      leftHand ? '1' : '0',
       defaultPayment.join(';')
     ];
   }
@@ -70,6 +76,11 @@ class EditorSettingsProvider extends StateNotifier<EditorSettings> {
 
   setFixNumKeyboard(bool value) {
     state = state.copyWith(fixNumKeyboard: value);
+    store();
+  }
+
+  setLeftHand(bool value) {
+    state = state.copyWith(leftHand: value);
     store();
   }
 

@@ -4,6 +4,7 @@ import 'dart:math' show min, max, Point;
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/closest_points.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
@@ -65,6 +66,7 @@ class AmenityMap extends ConsumerStatefulWidget {
 
 class _AmenityMapState extends ConsumerState<AmenityMap> {
   static const kMapZoom = 17.0;
+  static const kMicroZoom = 18.0;
 
   late final MapController mapController;
   late final StreamSubscription<MapEvent> mapSub;
@@ -237,11 +239,20 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       mapController.move(newState?.center ?? mapController.center, targetZoom);
     });
 
+    // When switching to micromapping, increase zoom.
+    ref.listen(editorModeProvider, (_, next) {
+      if (next == EditorMode.micromapping) {
+        if (mapController.zoom < kMicroZoom)
+          mapController.move(mapController.center, kMicroZoom);
+      }
+    });
+
     // Update colors when the legend is ready.
     ref.listen(legendProvider, (_, next) {
       setState(() {});
     });
 
+    final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final iconSize = widget.drawNumbers ? 18.0 : 10.0;
     final legendCon = ref.watch(legendProvider.notifier);
     final amenities = List.of(widget.amenities);
@@ -263,7 +274,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       ),
       nonRotatedLayers: [
         TrackButtonOptions(
-          alignment: Alignment.topRight,
+          alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
           padding: EdgeInsets.symmetric(
             horizontal: 0.0,
             vertical: 20.0,
@@ -271,7 +282,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         ),
         if (widget.drawZoomButtons)
           ZoomButtonsOptions(
-            alignment: Alignment.bottomRight,
+            alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
             padding: EdgeInsets.symmetric(
               horizontal: 0.0,
               vertical: 20.0,

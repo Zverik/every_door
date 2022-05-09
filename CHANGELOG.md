@@ -2,7 +2,7 @@
 
 ## 0.3.0
 
-_Unreleased_
+_Released on 2022-05-09_
 
 * Made the saving button into a small floating one.
 * Swapped tracking and mode changing buttons.
@@ -14,9 +14,10 @@ _Unreleased_
 * Added missing translations for the entrances mode.
 * Sped up storing elements to the database slightly.
 * Displaying all alternative points on the map, not just modified.
+* Option to move buttons from right to left.
 * Added safe areas to layout.
 * Finally caught the offset issue when dragging entrances onto the map.
-* Fixed offset numbers on the map.
+* Fixed offset in numbers on the map.
 
 ## 0.2.0
 

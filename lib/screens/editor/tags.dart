@@ -64,7 +64,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
               ),
               onLongPress: () {
                 Clipboard.setData(ClipboardData(text: _getUrl())).then((_){
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("URL copied to clipboard")));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(loc.tagsUrlCopied)));
                 });
               },
             ),

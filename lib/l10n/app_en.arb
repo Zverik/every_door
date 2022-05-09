@@ -145,6 +145,10 @@
   "@editorDeleteButton": {
     "description": "Delete"
   },
+  "tagsUrlCopied": "URL copied to clipboard",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
   "tagsNewPoint": "New Point",
   "@tagsNewPoint": {
     "description": "Tag editor panel title for a new amenity."
@@ -227,6 +231,10 @@
   "settingsBackground": "Background imagery",
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsLeftHand": "Left hand controls",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
   },
   "settingsEditor": "Editor",
   "@settingsEditor": {

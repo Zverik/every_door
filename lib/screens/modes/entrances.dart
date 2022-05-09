@@ -5,6 +5,7 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
@@ -286,6 +287,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   Widget build(BuildContext context) {
     final location = ref.read(effectiveLocationProvider);
     final imagery = ref.watch(selectedImageryProvider);
+    final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final LatLng? trackLocation = ref.watch(geolocationProvider);
 
     // When tracking location, move map and notify the poi list.
@@ -397,7 +399,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   DragButton(
                       icon: Icons.house,
                       bottom: 20.0,
-                      left: 20.0 + safePadding.left,
+                      left: leftHand ? null : 20.0 + safePadding.left,
+                      right: !leftHand ? null : 20.0 + safePadding.right,
                       onDragEnd: (pos) {
                         editBuilding(null, pos);
                       },
@@ -414,7 +417,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   DragButton(
                       icon: Icons.sensor_door,
                       bottom: 20.0,
-                      right: 20.0 + safePadding.right,
+                      left: !leftHand ? null : 20.0 + safePadding.left,
+                      right: leftHand ? null : 20.0 + safePadding.right,
                       onDragStart: () {
                         if (savedZoom == null) {
                           savedZoom = controller.zoom;
@@ -441,16 +445,16 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 ],
               ),
               TrackButtonOptions(
-                alignment: Alignment.topRight,
+                alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
                 padding: EdgeInsets.symmetric(
-                  horizontal: 10.0 + safePadding.right,
+                  horizontal: 10.0 + (leftHand ? safePadding.left : safePadding.right),
                   vertical: 20.0,
                 ),
               ),
               ZoomButtonsOptions(
-                alignment: Alignment.bottomRight,
+                alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
                 padding: EdgeInsets.symmetric(
-                  horizontal: 10.0 + safePadding.right,
+                  horizontal: 10.0 + (leftHand ? safePadding.left : safePadding.right),
                   vertical: 100.0,
                 ),
               ),

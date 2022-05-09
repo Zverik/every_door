@@ -109,6 +109,15 @@ class SettingsPage extends ConsumerWidget {
           SettingsSection(
             title: Text(loc.settingsPresentation),
             tiles: [
+              SettingsTile.switchTile(
+                title: Text(loc.settingsLeftHand),
+                onToggle: (value) {
+                  ref
+                      .read(editorSettingsProvider.notifier)
+                      .setLeftHand(value);
+                },
+                initialValue: editorSettings.leftHand,
+              ),
               SettingsTile(
                 title: Text(loc.settingsBackground),
                 trailing: Icon(Icons.navigate_next),
