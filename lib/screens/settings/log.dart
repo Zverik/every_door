@@ -56,9 +56,9 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
 
                 String platform;
                 if (Platform.isAndroid)
-                  platform = 'android';
+                  platform = 'Android';
                 else if (Platform.isIOS)
-                  platform = 'ios';
+                  platform = 'iOS';
                 else
                   platform = 'unknown';
 
