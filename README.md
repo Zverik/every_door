@@ -19,7 +19,6 @@ The roadmap is in [a project](https://github.com/users/Zverik/projects/1/views/2
 <img src="https://wiki.openstreetmap.org/w/images/a/a5/Every_Door_0.3.0_Android_-_Configuration_Screen.png" width="170"/>
 <a href="https://www.youtube.com/watch?v=oQao9KgC5f8"><img src="https://img.youtube.com/vi/oQao9KgC5f8/0.jpg" width="340"/></a>
 
-
 ## Presets and Translations
 
 The editor uses [presets from iD](https://github.com/openstreetmap/id-tagging-schema):
