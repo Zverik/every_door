@@ -35,8 +35,7 @@ class EntrancesPane extends ConsumerStatefulWidget {
 }
 
 class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
-  List<OsmChange> nearestBuildings = [];
-  List<OsmChange> nearestEntrances = [];
+  List<OsmChange> nearest = [];
   Map<String, GlobalKey> keys = {};
   final _mapKey = GlobalKey();
   late LatLng center;
@@ -44,6 +43,12 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   late final StreamSubscription<MapEvent> mapSub;
   LatLng? newLocation;
   double? savedZoom;
+
+  static const kOurKinds = {
+    ElementKind.entrance,
+    ElementKind.building,
+    ElementKind.address,
+  };
 
   @override
   void initState() {
@@ -77,8 +82,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   }
 
   ElementKind getOurKind(OsmChange change) {
-    const kAcceptedKinds = {ElementKind.building, ElementKind.entrance};
-    return detectKind(change.getFullTags(), kAcceptedKinds);
+    return detectKind(change.getFullTags(), kOurKinds);
   }
 
   updateNearest() async {
@@ -89,11 +93,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     const distance = DistanceEquirectangular();
     data = data.where((e) => distance(location, e.location) <= radius).toList();
     setState(() {
-      nearestBuildings =
-          data.where((e) => getOurKind(e) == ElementKind.building).toList();
-      nearestEntrances =
-          data.where((e) => getOurKind(e) == ElementKind.entrance).toList();
-      for (final c in nearestEntrances + nearestBuildings) {
+      nearest = data.where((e) => kOurKinds.contains(getOurKind(e))).toList();
+      for (final c in nearest) {
         if (!keys.containsKey(c.databaseId)) {
           keys[c.databaseId] = GlobalKey();
         }
@@ -109,8 +110,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     } on Exception {
       return null;
     }
-    for (final e in nearestBuildings) if (e.databaseId == databaseId) return e;
-    for (final e in nearestEntrances) if (e.databaseId == databaseId) return e;
+    for (final e in nearest) if (e.databaseId == databaseId) return e;
     return null;
   }
 
@@ -198,6 +198,9 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 ? (element['addr:flats'] ?? element['addr:unit']) != null
                 : true) &&
             element['entrance'] != 'yes';
+      case ElementKind.address:
+        // Always draw white.
+        return false;
       default:
         return true;
     }
@@ -205,13 +208,15 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
 
   BoxDecoration makeLabelDecoration(OsmChange element) {
     final complete = isComplete(element);
-    final opacity = getOurKind(element) == ElementKind.entrance ? 0.8 : 0.6;
+    final kind = getOurKind(element);
+    final opacity = kind == ElementKind.entrance ? 0.8 : 0.6;
     return BoxDecoration(
       border: Border.all(
         color: complete ? Colors.black : Colors.black.withOpacity(0.3),
         width: complete ? 1.0 : 1.0,
       ),
-      borderRadius: BorderRadius.circular(13.0),
+      borderRadius:
+          BorderRadius.circular(kind == ElementKind.address ? 5.0 : 13.0),
       color: complete
           ? Colors.yellow.withOpacity(opacity)
           : Colors.white.withOpacity(opacity),
@@ -225,12 +230,17 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
         return loc
             .buildingX(
                 element["addr:housenumber"] ?? element["addr:housename"] ?? '')
-            .trimRight();
+            .trim();
+      case ElementKind.address:
+        return loc
+            .addressX(
+                element["addr:housenumber"] ?? element["addr:housename"] ?? '')
+            .trim();
       case ElementKind.entrance:
         final label = [element['ref'], element['addr:flats']]
             .whereType<String>()
             .join(': ');
-        return loc.entranceX(label).trimRight();
+        return loc.entranceX(label).trim();
       default:
         return element.typeAndName;
     }
@@ -238,7 +248,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
 
   openEditorByType(OsmChange element) {
     final k = getOurKind(element);
-    if (k == ElementKind.building)
+    if (k == ElementKind.building || k == ElementKind.address)
       editBuilding(element);
     else if (k == ElementKind.entrance) editEntrance(element);
   }
@@ -333,7 +343,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
               nonRotatedLayers: [
                 MultiHitMarkerLayerOptions(
                   markers: [
-                    for (final building in nearestBuildings)
+                    for (final building in nearest
+                        .where((el) => getOurKind(el) == ElementKind.building))
                       Marker(
                         key: keys[building.databaseId],
                         point: building.location,
@@ -356,7 +367,36 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                           );
                         },
                       ),
-                    for (final entrance in nearestEntrances)
+                    for (final address in nearest
+                        .where((el) => getOurKind(el) == ElementKind.address))
+                      Marker(
+                        key: keys[address.databaseId],
+                        point: address.location,
+                        width: 90.0,
+                        height: 50.0,
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: Container(
+                              padding: EdgeInsets.all(10.0),
+                              color: Colors.transparent,
+                              child: Container(
+                                decoration: makeLabelDecoration(address),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 3.0,
+                                  horizontal: 3.0,
+                                ),
+                                child: Text(
+                                  makeBuildingLabel(address),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    for (final entrance in nearest
+                        .where((el) => getOurKind(el) == ElementKind.entrance))
                       Marker(
                         key: keys[entrance.databaseId],
                         point: entrance.location,

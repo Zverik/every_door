@@ -104,7 +104,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-
+    final isAddress = building['building'] == null;
     final levelOptions = ['1', '2'] + nearestLevels;
     levelOptions.add(kManualOption);
 
@@ -141,84 +141,75 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                   },
                   defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                   children: [
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child:
-                              Text(loc.buildingLevels, style: kFieldTextStyle),
-                        ),
-                        if (!manualLevels)
+                    if (!isAddress)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: Text(loc.buildingLevels,
+                                style: kFieldTextStyle),
+                          ),
+                          if (!manualLevels)
+                            RadioField(
+                              options: levelOptions,
+                              value: building['building:levels'],
+                              onChange: (value) {
+                                setState(() {
+                                  if (value == kManualOption) {
+                                    building.removeTag('building:levels');
+                                    manualLevels = true;
+                                    _focus.requestFocus();
+                                  } else {
+                                    building['building:levels'] = value;
+                                  }
+                                });
+                              },
+                            ),
+                          if (manualLevels)
+                            TextFormField(
+                              keyboardType: TextInputType.number,
+                              style: kFieldTextStyle,
+                              initialValue: building['building:levels'],
+                              focusNode: _focus,
+                              validator: (value) => validateLevels(value)
+                                  ? null
+                                  : loc.fieldFloorShouldBeNumber,
+                              onChanged: (value) {
+                                setState(() {
+                                  building['building:levels'] = value.trim();
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                    if (!isAddress)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: Text(loc.buildingRoofLevels,
+                                style: kFieldTextStyle),
+                          ),
                           RadioField(
-                            options: levelOptions,
-                            value: building['building:levels'],
-                            onChange: (value) {
-                              setState(() {
-                                if (value == kManualOption) {
-                                  building.removeTag('building:levels');
-                                  manualLevels = true;
-                                  _focus.requestFocus();
-                                } else {
-                                  building['building:levels'] = value;
-                                }
-                              });
-                            },
+                              options: const ['1', '2', '3'],
+                              value: building['roof:levels'],
+                              onChange: (value) {
+                                setState(() {
+                                  building['roof:levels'] = value;
+                                });
+                              })
+                        ],
+                      ),
+                    if (!isAddress)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: Text(loc.buildingRoofShape,
+                                style: kFieldTextStyle),
                           ),
-                        if (manualLevels)
-                          TextFormField(
-                            keyboardType: TextInputType.number,
-                            style: kFieldTextStyle,
-                            initialValue: building['building:levels'],
-                            focusNode: _focus,
-                            validator: (value) => validateLevels(value)
-                                ? null
-                                : loc.fieldFloorShouldBeNumber,
-                            onChanged: (value) {
-                              setState(() {
-                                building['building:levels'] = value.trim();
-                              });
-                            },
-                          ),
-                      ],
-                    ),
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: Text(loc.buildingRoofLevels,
-                              style: kFieldTextStyle),
-                        ),
-                        RadioField(
-                            options: const ['1', '2', '3'],
-                            value: building['roof:levels'],
-                            onChange: (value) {
-                              setState(() {
-                                building['roof:levels'] = value;
-                              });
-                            })
-                      ],
-                    ),
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: Text(loc.buildingRoofShape,
-                              style: kFieldTextStyle),
-                        ),
-                        RadioField(
-                          options: const [
-                            'flat',
-                            'gabled',
-                            'hipped',
-                            'pyramidal',
-                            'skillion',
-                            'half-hipped',
-                            'round',
-                            'gambrel',
-                            'mansard',
-                          ],
-                          widgetLabels: [
-                            for (final name in const [
+                          RadioField(
+                            options: const [
                               'flat',
                               'gabled',
                               'hipped',
@@ -228,19 +219,31 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                               'round',
                               'gambrel',
                               'mansard',
-                            ])
-                              Image.asset('assets/roofs/$name.png',
-                                  height: 40.0, width: 40.0),
-                          ],
-                          value: building['roof:shape'],
-                          onChange: (value) {
-                            setState(() {
-                              building['roof:shape'] = value;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
+                            ],
+                            widgetLabels: [
+                              for (final name in const [
+                                'flat',
+                                'gabled',
+                                'hipped',
+                                'pyramidal',
+                                'skillion',
+                                'half-hipped',
+                                'round',
+                                'gambrel',
+                                'mansard',
+                              ])
+                                Image.asset('assets/roofs/$name.png',
+                                    height: 40.0, width: 40.0),
+                            ],
+                            value: building['roof:shape'],
+                            onChange: (value) {
+                              setState(() {
+                                building['roof:shape'] = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     TableRow(
                       children: [
                         Padding(
@@ -249,6 +252,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                         ),
                         RadioField(
                           options: const [
+                            'address',
                             'house',
                             'apartments',
                             'retail',
@@ -259,6 +263,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                             'construction',
                           ],
                           labels: [
+                            loc.buildingTypeAddress,
                             loc.buildingTypeHouse,
                             loc.buildingTypeApartments,
                             loc.buildingTypeRetail,
@@ -268,12 +273,17 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                             loc.buildingTypeIndustrial,
                             loc.buildingTypeConstruction,
                           ],
-                          value: building['building'] == 'yes'
-                              ? null
-                              : building['building'],
+                          value: isAddress
+                              ? 'address'
+                              : (building['building'] == 'yes'
+                                  ? null
+                                  : building['building']),
                           onChange: (value) {
                             setState(() {
-                              building['building'] = value ?? 'yes';
+                              if (value == 'address')
+                                building.removeTag('building');
+                              else
+                                building['building'] = value ?? 'yes';
                             });
                           },
                         ),

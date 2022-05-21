@@ -524,6 +524,15 @@
       }
     }
   },
+  "addressX": "Address {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
   "entranceX": "Entrance {n}",
   "@entranceX": {
     "description": "Option displayed when there's multiple entrances under a tap.",
@@ -553,6 +562,7 @@
   "@buildingMoreButton": {
     "description": "Button label for opening the building object in a full editor."
   },
+  "buildingTypeAddress": "address",
   "buildingTypeHouse": "house",
   "buildingTypeApartments": "apartments",
   "buildingTypeRetail": "retail",

@@ -14,6 +14,8 @@ _Unreleased_
 * When snapping a new point to a way failed, adding a `fixme` tag to it.
 * Added API status panel to entrances and micromapping modes.
 * Drawing much more nearest objects on the map.
+* Fixed the placeholder API error when updating a building
+  after adding an entrance to it.
 
 ### Editor
 
@@ -35,6 +37,7 @@ _Unreleased_
 * Added the address form to entrances (click on `+ADDR` button).
 * Added a button for opening an editor for an entrance.
 * Tapping away from a building / entrance form saves the edits.
+* Choose "address" building type to add a building-less address.
 
 ## 0.3.0
 

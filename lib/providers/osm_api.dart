@@ -38,7 +38,8 @@ class OsmApiHelper {
 
   OsmApiHelper(this._ref);
 
-  Future<List<OsmElement>> map(LatLngBounds bounds, {Set<RoadNameRecord>? roadNames}) async {
+  Future<List<OsmElement>> map(LatLngBounds bounds,
+      {Set<RoadNameRecord>? roadNames}) async {
     final url = Uri.https(kOsmEndpoint, '/api/0.6/map', {
       'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
     });
@@ -189,7 +190,29 @@ class OsmApiHelper {
       if (el.isDeleted) {
         await data.deleteElement(el.oldElement);
       } else {
-        // TODO: The new element could contain negative node ids!
+        if (el.newElement.nodes != null) {
+          // Update node ids from placeholders
+          for (int i = 0; i < el.newElement.nodes!.length; i++) {
+            final oldNodeId = el.newElement.nodes![i];
+            if (oldNodeId < 0) {
+              bool foundNew = false;
+              for (final nodeEl in elements) {
+                if (nodeEl.oldElement.isPoint &&
+                    nodeEl.oldElement.id.ref == oldNodeId) {
+                  el.newElement.nodes![i] = nodeEl.newElement.id.ref;
+                  _logger.info(
+                      'Replaced placeholder $oldNodeId with ${nodeEl.newElement.id} in ${el.newElement.id}.');
+                  foundNew = true;
+                  break;
+                }
+              }
+              if (!foundNew) {
+                _logger.warning(
+                    'Could not find new node id for placeholder $oldNodeId in ${el.newElement.id}.');
+              }
+            }
+          }
+        }
         await data.updateElement(el.newElement);
       }
     }

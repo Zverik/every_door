@@ -385,7 +385,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
     if (this['amenity'] == 'fixme') return this['fixme:type'];
 
     final mainKey = _mainKey;
-    if (mainKey == null) return null;
+    if (mainKey == null)
+      return this['addr:housenumber'] != null ? 'address' : null;
     if (this[mainKey] == 'yes' || {'entrance', 'building'}.contains(mainKey))
       return mainKey;
     return this[mainKey];

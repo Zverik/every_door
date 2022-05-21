@@ -29,7 +29,6 @@ class AddressForm extends ConsumerStatefulWidget {
 }
 
 class _AddressFormState extends ConsumerState<AddressForm> {
-  late StreetAddress address;
   late final TextEditingController _houseController;
   late final TextEditingController _unitController;
   List<String> nearestStreets = [];
@@ -41,7 +40,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
   @override
   void initState() {
     super.initState();
-    address = widget.initialAddress ?? StreetAddress();
+    final address = widget.initialAddress ?? StreetAddress();
     _houseController = TextEditingController(text: address.housenumber);
     _unitController = TextEditingController(text: address.unit);
     street = address.street;
@@ -79,11 +78,13 @@ class _AddressFormState extends ConsumerState<AddressForm> {
     final unit = _unitController.text.trim();
     final address = StreetAddress(
       housenumber: house.isEmpty ? null : house,
+      housename: widget.initialAddress?.housename,
       unit: unit.isEmpty ? null : unit,
       street: street,
       place: nearestPlaces.isNotEmpty ? place : null,
       city: nearestPlaces.isNotEmpty ? null : place,
     );
+    setState(() {});
     widget.onChange(address);
   }
 
@@ -104,11 +105,10 @@ class _AddressFormState extends ConsumerState<AddressForm> {
               padding: const EdgeInsets.only(right: 10.0),
               child: Text(loc.addressHouseNumber,
                   style: kFieldTextStyle.copyWith(
-                      color: (address.housenumber ?? address.housename ?? '')
-                                  .isEmpty &&
-                              street != null
-                          ? Colors.red
-                          : null)),
+                      color:
+                          _houseController.text.trim().isEmpty && street != null
+                              ? Colors.red
+                              : null)),
             ),
             TextFormField(
               controller: _houseController,
@@ -151,8 +151,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
                 padding: const EdgeInsets.only(right: 10.0),
                 child: Text(loc.addressStreet,
                     style: kFieldTextStyle.copyWith(
-                        color: (address.housenumber ?? address.housename ?? '')
-                                    .isNotEmpty &&
+                        color: _houseController.text.trim().isNotEmpty &&
                                 street == null
                             ? Colors.red
                             : null)),

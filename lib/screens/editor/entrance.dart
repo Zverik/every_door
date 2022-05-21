@@ -148,9 +148,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                         StreetAddress.fromTags(entrance.getFullTags()),
                     autoFocus: false,
                     onChange: (addr) {
-                      setState(() {
-                        addr.forceTags(entrance);
-                      });
+                      addr.forceTags(entrance);
                     },
                   ),
                 Table(
