@@ -21,7 +21,6 @@ import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/modes/entrances.dart';
 import 'package:every_door/widgets/filter.dart';
 import 'package:every_door/screens/modes/poi_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';

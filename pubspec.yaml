@@ -7,7 +7,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.4.0+18
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -32,7 +32,7 @@ dependencies:
   archive: ^3.1.6
   phone_numbers_parser: ^4.2.0
   line_icons: ^2.0.1
-  share_plus: ^3.0.4
+  share_plus: ^4.0.4
   path_provider: ^2.0.9
   responsive_grid_list: ^1.2.3
   url_launcher: ^6.0.20
@@ -44,8 +44,6 @@ dependencies:
 
 dev_dependencies:
   test: ^1.19.5
-  flutter_test:
-    sdk: flutter
   flutter_lints: ^1.0.0
   flutter_launcher_icons: ^0.9.2
 

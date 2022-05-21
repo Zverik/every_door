@@ -4,7 +4,6 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
-import 'package:flutter/physics.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
