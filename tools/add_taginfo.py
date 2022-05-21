@@ -32,7 +32,7 @@ if __name__ == '__main__':
                 values[row[0]][v] = values[row[0]].get(v, 0) + row[2]
     values = [
         (k, ';'.join(
-            i[0] for i in sorted(v.items(), key=lambda i: i[1], reverse=True)[:30]
+            i[0] for i in sorted(v.items(), key=lambda i: i[1], reverse=True)[:50]
         ))
         for k, v in values.items()
     ]

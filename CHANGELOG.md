@@ -10,10 +10,13 @@ _Unreleased_
 * Added (black) entrances to that map as well.
 * Moved `tourism=picnic_site` to the micromapping mode.
 * For `shop=yes`, displaying `shop` in a tile, not `yes`.
+* When snapping a new point to a way failed, adding a `fixme` tag to it.
+* Added API status panel to entrances and micromapping modes.
 
 ### Editor
 
 * Added current values to combo options.
+* Increased the number of options to 50 for combo panels.
 * Fixed parsing `Su off` in opening hours.
 * For the phone field, validation message is yellow, since it's informational.
 * Social media tag values are now clickable when they are not in an URL form.
@@ -27,6 +30,7 @@ _Unreleased_
 
 * Allowing addresses with no street, and fixed removing house numbers.
 * Added the address form to entrances (click on `+ADDR` button).
+* Added a button for opening an editor for an entrance.
 * Tapping away from a building / entrance form saves the edits.
 
 ## 0.3.0

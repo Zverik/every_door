@@ -2,6 +2,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/screens/editor.dart';
 import 'package:every_door/widgets/address_form.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/changes.dart';
@@ -330,6 +331,17 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                 ),
                 Row(
                   children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PoiEditorPage(amenity: entrance)),
+                        );
+                      },
+                      child: Text(loc.buildingMoreButton.toUpperCase() + '...'),
+                    ),
                     if (widget.entrance != null)
                       TextButton(
                         child: Text(loc.editorDeleteButton.toUpperCase()),

@@ -189,6 +189,7 @@ class OsmApiHelper {
       if (el.isDeleted) {
         await data.deleteElement(el.oldElement);
       } else {
+        // TODO: The new element could contain negative node ids!
         await data.updateElement(el.newElement);
       }
     }
@@ -346,6 +347,9 @@ class OsmApiHelper {
         e.key.newLocation = snapped.newLocation;
         snapTargets[snapped.newElement.id] = snapped.newElement;
         modifiedWays.add(snapped.newElement.id);
+      } else {
+        if (e.key['fixme'] == null)
+          e.key['fixme'] = 'Please merge me into a nearby ${e.value.name}';
       }
     }
 

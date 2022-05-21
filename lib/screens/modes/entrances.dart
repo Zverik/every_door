@@ -5,6 +5,7 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
@@ -274,6 +275,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     final location = ref.read(effectiveLocationProvider);
     final imagery = ref.watch(selectedImageryProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
+    final apiStatus = ref.watch(apiStatusProvider);
     final LatLng? trackLocation = ref.watch(geolocationProvider);
 
     // When tracking location, move map and notify the poi list.
@@ -310,180 +312,216 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          child: FlutterMap(
-            key: _mapKey,
-            mapController: controller,
-            options: MapOptions(
-              center: center,
-              zoom: 18.0,
-              minZoom: 16.0,
-              maxZoom: 20.0,
-              interactiveFlags:
-                  InteractiveFlag.drag | InteractiveFlag.pinchZoom,
-              plugins: [
-                MapDragCreatePlugin(),
-                MultiHitMarkerLayerPlugin(),
-                ZoomButtonsPlugin(),
-                TrackButtonPlugin(),
-              ],
-            ),
-            nonRotatedLayers: [
-              MultiHitMarkerLayerOptions(
-                markers: [
-                  for (final building in nearestBuildings)
-                    Marker(
-                      key: keys[building.databaseId],
-                      point: building.location,
-                      width: 120.0,
-                      height: 60.0,
-                      builder: (BuildContext context) {
-                        return Center(
-                          child: Container(
-                            decoration: makeLabelDecoration(building),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 5.0,
-                              horizontal: 10.0,
-                            ),
-                            child: Text(
-                              makeBuildingLabel(building),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: kFieldFontSize),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  for (final entrance in nearestEntrances)
-                    Marker(
-                      key: keys[entrance.databaseId],
-                      point: entrance.location,
-                      width: 50.0,
-                      height: 50.0,
-                      builder: (BuildContext context) {
-                        return Center(
-                          child: Container(
-                            padding: EdgeInsets.all(10.0),
-                            color: Colors.transparent,
+          child: Stack(children: [
+            FlutterMap(
+              key: _mapKey,
+              mapController: controller,
+              options: MapOptions(
+                center: center,
+                zoom: 18.0,
+                minZoom: 16.0,
+                maxZoom: 20.0,
+                interactiveFlags:
+                    InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+                plugins: [
+                  MapDragCreatePlugin(),
+                  MultiHitMarkerLayerPlugin(),
+                  ZoomButtonsPlugin(),
+                  TrackButtonPlugin(),
+                ],
+              ),
+              nonRotatedLayers: [
+                MultiHitMarkerLayerOptions(
+                  markers: [
+                    for (final building in nearestBuildings)
+                      Marker(
+                        key: keys[building.databaseId],
+                        point: building.location,
+                        width: 120.0,
+                        height: 60.0,
+                        builder: (BuildContext context) {
+                          return Center(
                             child: Container(
-                              decoration: makeLabelDecoration(entrance),
-                              child: SizedBox(width: 20.0, height: 20.0),
+                              decoration: makeLabelDecoration(building),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 5.0,
+                                horizontal: 10.0,
+                              ),
+                              child: Text(
+                                makeBuildingLabel(building),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: kFieldFontSize),
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                ],
-                onTap: (tapped) {
-                  final objects =
-                      tapped.map((k) => findByKey(k)).whereType<OsmChange>();
-                  chooseEditorToOpen(objects);
-                },
-              ),
-              MapDragCreateOptions(
-                mapKey: _mapKey,
-                buttons: [
-                  DragButton(
-                      icon: Icons.house,
-                      bottom: 20.0,
-                      left: leftHand ? null : 20.0 + safePadding.left,
-                      right: !leftHand ? null : 20.0 + safePadding.right,
-                      onDragEnd: (pos) {
-                        editBuilding(null, pos);
-                      },
-                      onTap: () async {
-                        final pos = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                MapChooserPage(location: location),
-                          ),
-                        );
-                        if (pos != null) editBuilding(null, pos);
-                      }),
-                  DragButton(
-                      icon: Icons.sensor_door,
-                      bottom: 20.0,
-                      left: !leftHand ? null : 20.0 + safePadding.left,
-                      right: leftHand ? null : 20.0 + safePadding.right,
-                      onDragStart: () {
-                        if (savedZoom == null) {
-                          savedZoom = controller.zoom;
-                          controller.move(controller.center, savedZoom! + 0.7);
-                        }
-                      },
-                      onDragEnd: (pos) {
-                        if (savedZoom != null) {
-                          controller.move(controller.center, savedZoom!);
-                          savedZoom = null;
-                        }
-                        editEntrance(null, pos);
-                      },
-                      onTap: () async {
-                        final pos = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                MapChooserPage(location: location),
-                          ),
-                        );
-                        if (pos != null) editEntrance(null, pos);
-                      }),
-                ],
-              ),
-              TrackButtonOptions(
-                alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.0 + (leftHand ? safePadding.left : safePadding.right),
-                  vertical: 20.0,
-                ),
-              ),
-              ZoomButtonsOptions(
-                alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.0 + (leftHand ? safePadding.left : safePadding.right),
-                  vertical: 100.0,
-                ),
-              ),
-            ],
-            children: [
-              TileLayerWidget(
-                options: buildTileLayerOptions(imagery),
-              ),
-              if (trackLocation != null)
-                CircleLayerWidget(
-                  options: CircleLayerOptions(
-                    circles: [
-                      CircleMarker(
-                        point: trackLocation,
-                        color: Colors.blue.withOpacity(0.4),
-                        radius: 10.0,
+                          );
+                        },
                       ),
-                      if (ref.watch(trackingProvider))
-                        CircleMarker(
-                          point: trackLocation,
-                          borderColor: Colors.black.withOpacity(0.8),
-                          borderStrokeWidth: 1.0,
-                          color: Colors.transparent,
-                          radius: 10.0,
-                        ),
-                    ],
+                    for (final entrance in nearestEntrances)
+                      Marker(
+                        key: keys[entrance.databaseId],
+                        point: entrance.location,
+                        width: 50.0,
+                        height: 50.0,
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: Container(
+                              padding: EdgeInsets.all(10.0),
+                              color: Colors.transparent,
+                              child: Container(
+                                decoration: makeLabelDecoration(entrance),
+                                child: SizedBox(width: 20.0, height: 20.0),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                  ],
+                  onTap: (tapped) {
+                    final objects =
+                        tapped.map((k) => findByKey(k)).whereType<OsmChange>();
+                    chooseEditorToOpen(objects);
+                  },
+                ),
+                MapDragCreateOptions(
+                  mapKey: _mapKey,
+                  buttons: [
+                    DragButton(
+                        icon: Icons.house,
+                        bottom: 20.0,
+                        left: leftHand ? null : 20.0 + safePadding.left,
+                        right: !leftHand ? null : 20.0 + safePadding.right,
+                        onDragEnd: (pos) {
+                          editBuilding(null, pos);
+                        },
+                        onTap: () async {
+                          final pos = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  MapChooserPage(location: location),
+                            ),
+                          );
+                          if (pos != null) editBuilding(null, pos);
+                        }),
+                    DragButton(
+                        icon: Icons.sensor_door,
+                        bottom: 20.0,
+                        left: !leftHand ? null : 20.0 + safePadding.left,
+                        right: leftHand ? null : 20.0 + safePadding.right,
+                        onDragStart: () {
+                          if (savedZoom == null) {
+                            savedZoom = controller.zoom;
+                            controller.move(
+                                controller.center, savedZoom! + 0.7);
+                          }
+                        },
+                        onDragEnd: (pos) {
+                          if (savedZoom != null) {
+                            controller.move(controller.center, savedZoom!);
+                            savedZoom = null;
+                          }
+                          editEntrance(null, pos);
+                        },
+                        onTap: () async {
+                          final pos = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  MapChooserPage(location: location),
+                            ),
+                          );
+                          if (pos != null) editEntrance(null, pos);
+                        }),
+                  ],
+                ),
+                TrackButtonOptions(
+                  alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.0 +
+                        (leftHand ? safePadding.left : safePadding.right),
+                    vertical: 20.0,
                   ),
                 ),
-              if (newLocation != null)
-                CircleLayerWidget(
-                  options: CircleLayerOptions(circles: [
-                    CircleMarker(
-                      point: newLocation!,
-                      radius: 5.0,
-                      color: Colors.red,
-                    ),
-                  ]),
+                ZoomButtonsOptions(
+                  alignment:
+                      leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.0 +
+                        (leftHand ? safePadding.left : safePadding.right),
+                    vertical: 100.0,
+                  ),
                 ),
-            ],
-          ),
+              ],
+              children: [
+                TileLayerWidget(
+                  options: buildTileLayerOptions(imagery),
+                ),
+                if (trackLocation != null)
+                  CircleLayerWidget(
+                    options: CircleLayerOptions(
+                      circles: [
+                        CircleMarker(
+                          point: trackLocation,
+                          color: Colors.blue.withOpacity(0.4),
+                          radius: 10.0,
+                        ),
+                        if (ref.watch(trackingProvider))
+                          CircleMarker(
+                            point: trackLocation,
+                            borderColor: Colors.black.withOpacity(0.8),
+                            borderStrokeWidth: 1.0,
+                            color: Colors.transparent,
+                            radius: 10.0,
+                          ),
+                      ],
+                    ),
+                  ),
+                if (newLocation != null)
+                  CircleLayerWidget(
+                    options: CircleLayerOptions(circles: [
+                      CircleMarker(
+                        point: newLocation!,
+                        radius: 5.0,
+                        color: Colors.red,
+                      ),
+                    ]),
+                  ),
+              ],
+            ),
+            if (apiStatus != ApiStatus.idle)
+              buildApiStatusPane(context, apiStatus),
+          ]),
         ),
         if (widget.areaStatusPanel != null) widget.areaStatusPanel!,
       ],
+    );
+  }
+
+  Widget buildApiStatusPane(BuildContext context, ApiStatus apiStatus) {
+    final loc = AppLocalizations.of(context)!;
+    return Center(
+      child: Container(
+        padding: EdgeInsets.all(20.0),
+        margin: EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.white.withOpacity(0.8),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: 20.0),
+            Text(
+              getApiStatusLoc(apiStatus, loc),
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

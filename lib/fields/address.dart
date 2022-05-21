@@ -8,7 +8,6 @@ import 'package:every_door/screens/editor/addr_chooser.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddressField extends PresetField {
   AddressField({required String label})
@@ -98,11 +97,6 @@ class _AddressInputState extends ConsumerState<AddressInput> {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
-    if (nearestAddresses.isEmpty) {
-      return Text(loc.filterNoAddresses);
-    }
-
     final current = StreetAddress.fromTags(widget.element.getFullTags());
     final options = nearestAddresses.map((e) => e.toString()).toList();
     if (current.isEmpty) {
