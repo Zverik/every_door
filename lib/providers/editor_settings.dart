@@ -6,6 +6,8 @@ final editorSettingsProvider =
         (_) => EditorSettingsProvider());
 
 class EditorSettings {
+  static const kDefaultPayment = ['visa', 'mastercard'];
+
   final bool preferContact;
   final bool fixNumKeyboard;
   final bool leftHand;
@@ -15,7 +17,7 @@ class EditorSettings {
     this.preferContact = false,
     this.fixNumKeyboard = false,
     this.leftHand = false,
-    this.defaultPayment = const ['visa', 'mastercard'],
+    this.defaultPayment = kDefaultPayment,
   });
 
   EditorSettings copyWith({
@@ -37,7 +39,9 @@ class EditorSettings {
     return EditorSettings(
       preferContact: data[0] == '1',
       fixNumKeyboard: data[1] == '1',
-      defaultPayment: data[2].split(';').map((s) => s.trim()).toList(),
+      defaultPayment: data[2].length < 2
+          ? kDefaultPayment
+          : data[2].split(';').map((s) => s.trim()).toList(),
       leftHand: data.length >= 4 && data[3] == '1',
     );
   }
@@ -46,8 +50,8 @@ class EditorSettings {
     return [
       preferContact ? '1' : '0',
       fixNumKeyboard ? '1' : '0',
+      defaultPayment.join(';'),
       leftHand ? '1' : '0',
-      defaultPayment.join(';')
     ];
   }
 }

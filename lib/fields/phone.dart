@@ -4,6 +4,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
+import 'package:flutter/physics.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -130,8 +131,12 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               labelText: widget.field.label,
+              errorStyle: TextStyle(color: Colors.amber.shade700),
+              focusedErrorBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Theme.of(context).primaryColor, width: 2.0)),
               suffixIcon: GestureDetector(
-                child: Icon(Icons.add_circle),
+                child: Icon(Icons.done),
                 onTap: () {
                   if (submitPhone(_controller.text)) _focus.unfocus();
                 },

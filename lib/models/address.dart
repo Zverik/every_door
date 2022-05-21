@@ -56,6 +56,15 @@ class StreetAddress {
       element['addr:city'] = city;
   }
 
+  forceTags(OsmChange element) {
+    element['addr:housenumber'] = housenumber;
+    element['addr:housename'] = housename;
+    element['addr:unit'] = unit;
+    element['addr:street'] = street;
+    element['addr:place'] = place;
+    element['addr:city'] = city;
+  }
+
   static clearTags(OsmChange element) {
     for (final key in [
       'housenumber',

@@ -65,7 +65,8 @@ class _AddressFormState extends ConsumerState<AddressForm> {
 
   updateStreets() async {
     final provider = ref.read(osmDataProvider);
-    nearestStreets = await ref.read(roadNameProvider).getNamesAround(widget.location);
+    nearestStreets =
+        await ref.read(roadNameProvider).getNamesAround(widget.location);
     final addrs = await provider.getAddressesAround(widget.location, limit: 30);
     setState(() {
       nearestPlaces = _filterDuplicates(addrs.map((e) => e.place));
@@ -101,7 +102,13 @@ class _AddressFormState extends ConsumerState<AddressForm> {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
-              child: Text(loc.addressHouseNumber, style: kFieldTextStyle),
+              child: Text(loc.addressHouseNumber,
+                  style: kFieldTextStyle.copyWith(
+                      color: (address.housenumber ?? address.housename ?? '')
+                                  .isEmpty &&
+                              street != null
+                          ? Colors.red
+                          : null)),
             ),
             TextFormField(
               controller: _houseController,
@@ -142,7 +149,13 @@ class _AddressFormState extends ConsumerState<AddressForm> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 10.0),
-                child: Text(loc.addressStreet, style: kFieldTextStyle),
+                child: Text(loc.addressStreet,
+                    style: kFieldTextStyle.copyWith(
+                        color: (address.housenumber ?? address.housename ?? '')
+                                    .isNotEmpty &&
+                                street == null
+                            ? Colors.red
+                            : null)),
               ),
               RadioField(
                   options: nearestStreets,

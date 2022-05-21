@@ -4,11 +4,13 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_mode.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/editor/types.dart';
+import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -75,8 +77,9 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
         case ElementKind.micro:
           return editorMode == EditorMode.micromapping;
         case ElementKind.building:
-        case ElementKind.entrance:
           return false;
+        case ElementKind.entrance:
+          return true;
         default:
           return e.isNew;
       }
@@ -95,6 +98,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
     final LatLng? trackLocation = ref.watch(geolocationProvider);
+    final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -119,7 +123,17 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           minZoom: 17.0,
           maxZoom: 20.0,
           interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+          plugins: [ZoomButtonsPlugin()],
         ),
+        nonRotatedLayers: [
+          ZoomButtonsOptions(
+            alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
+            padding: EdgeInsets.symmetric(
+              horizontal: 0.0,
+              vertical: 100.0,
+            ),
+          ),
+        ],
         children: [
           TileLayerWidget(
             options: buildTileLayerOptions(imagery),
@@ -160,7 +174,11 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                   CircleMarker(
                     point: poi.location,
                     radius: 3.0,
-                    color: !poi.isModified ? Colors.greenAccent : Colors.yellow,
+                    color: poi.kind == ElementKind.entrance
+                        ? Colors.black
+                        : !poi.isModified
+                            ? Colors.greenAccent
+                            : Colors.yellow,
                   ),
               ],
             ),

@@ -203,7 +203,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
                   ],
                 ),
                 color: !preset.isFixme
-                    ? kFieldColor.withOpacity(preset.fromNSI ? 0.4 : 0.2)
+                    ? (preset.fromNSI ? Colors.grey.withOpacity(0.2) : kFieldColor.withOpacity(0.2))
                     : Colors.red.withOpacity(0.2),
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
               ),

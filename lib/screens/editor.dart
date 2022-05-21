@@ -18,6 +18,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logging/logging.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 class PoiEditorPage extends ConsumerStatefulWidget {
   final OsmChange? amenity;
@@ -31,6 +33,7 @@ class PoiEditorPage extends ConsumerStatefulWidget {
 }
 
 class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
+  static final _logger = Logger('PoiEditorPage');
   late OsmChange amenity;
   Preset? preset;
   List<PresetField> fields = []; // actual fields
@@ -81,7 +84,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         needRefresh = true;
       }
     }
-    // print('Detected ($detect) preset $preset');
+
+    _logger.fine('Detected ($detect) preset $preset');
     if (preset!.fields.isEmpty) {
       preset = await presets.getFields(preset!, locale: locale);
       if (isAmenityTags(amenity.getFullTags())) {
@@ -91,6 +95,13 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         // Remove the field for level if the object is a building.
         if (amenity['building'] != null) {
           stdFields.removeWhere((e) => e.key == 'level');
+        }
+        // Move some fields to stdFields if present.
+        if (!needsStdFields) {
+          for (final f in preset!.fields) {
+            if (PresetProvider.kStandardPoiFields.contains(f.key))
+              stdFields.add(f);
+          }
         }
         // Add opening_hours to moreFields if it's not anywhere.
         if (!preset!.fields.any((field) => field.key == 'opening_hours') &&
@@ -184,6 +195,21 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     ref.read(needMapUpdateProvider).trigger();
   }
 
+  confirmDisused(BuildContext context) async {
+    String oldMainKey = getMainKey(amenity.element?.tags ?? {}) ?? '';
+    if (amenity.isDisused && oldMainKey.startsWith(kDisused)) {
+      final loc = AppLocalizations.of(context)!;
+      final result = await showOkCancelAlertDialog(
+        context: context,
+        title: loc.editorRestoreTitle,
+        message: loc.editorRestoreMessage(amenity.typeAndName),
+        okLabel: loc.buttonYes,
+        cancelLabel: loc.buttonNo,
+      );
+      if (result == OkCancelResult.ok) amenity.toggleDisused();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final preset = this.preset;
@@ -213,7 +239,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.table_rows),
+              icon: Icon(Icons.code),
               onPressed: () async {
                 await Navigator.push(
                     context,
@@ -237,14 +263,16 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           if (!amenity.canDelete) SizedBox(height: 10.0),
                           if (stdFields.isNotEmpty) ...[
                             buildFields(stdFields, 50),
-                            SizedBox(height: 10.0),
-                            Divider(),
-                            SizedBox(height: 10.0),
                           ],
                           if (fields.isNotEmpty) ...[
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Divider(),
+                            ),
                             buildFields(fields),
-                            SizedBox(height: 20.0),
                           ],
+                          SizedBox(height: 20.0),
                           buildTopButtons(context),
                           SizedBox(height: 10.0),
                           if (moreFields.isNotEmpty) ...[
@@ -260,32 +288,44 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                         ],
                       ),
                     ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 50.0,
+                            child: MaterialButton(
+                              color: Colors.green,
+                              textColor: Colors.white,
+                              disabledColor: Colors.white,
+                              disabledTextColor: Colors.grey,
+                              child: Text(
+                                loc.editorSave,
+                                style: TextStyle(fontSize: 20.0),
+                              ),
+                              onPressed: !modified
+                                  ? null
+                                  : () async {
+                                      await confirmDisused(context);
+                                      saveAndClose();
+                                    },
+                            ),
+                          ),
+                        ),
+                        if (!modified && needsCheck)
+                          Container(
+                            color: Colors.green,
+                            child: IconButton(
+                              icon: Icon(Icons.check),
+                              color: Colors.white,
+                              iconSize: 30.0,
+                              onPressed: saveAndClose,
+                            ),
+                          ),
+                      ],
+                    ),
                   ],
                 ),
         ),
-        floatingActionButton: (modified || needsCheck)
-            ? FloatingActionButton(
-                child: Icon(Icons.done),
-                backgroundColor: modified ? null : Colors.green,
-                onPressed: () async {
-                  if (modified) {
-                    String oldMainKey =
-                        getMainKey(amenity.element?.tags ?? {}) ?? '';
-                    if (amenity.isDisused && oldMainKey.startsWith(kDisused)) {
-                      final result = await showOkCancelAlertDialog(
-                        context: context,
-                        title: loc.editorRestoreTitle,
-                        message: loc.editorRestoreMessage(amenity.typeAndName),
-                        okLabel: loc.buttonYes,
-                        cancelLabel: loc.buttonNo,
-                      );
-                      if (result == OkCancelResult.ok) amenity.toggleDisused();
-                    }
-                  }
-                  saveAndClose();
-                },
-              )
-            : null,
       ),
     );
   }

@@ -165,7 +165,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         placeholder: placeholder,
         prerequisite: prerequisite,
-        keyboardType: TextInputType.numberWithOptions(signed: true),
+        keyboardType: TextInputType.number,
       );
     case 'tel':
       return TextPresetField(

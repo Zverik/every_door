@@ -138,7 +138,10 @@ bool isAmenityTags(Map<String, String> tags) {
     if (v == 'information') {
       return <String>{'office', 'visitor_centre'}.contains(tags['information']);
     }
-    const wrongTourism = <String>{'attraction', 'viewpoint', 'artwork'};
+    const wrongTourism = <String>{
+      'attraction', 'viewpoint', 'artwork', 'picnic_site', 'camp_pitch',
+      'wilderness_hut', 'cabin'
+    };
     return !wrongTourism.contains(v);
   } else if (k == 'leisure') {
     const goodLeisure = <String>{

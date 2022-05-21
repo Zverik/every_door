@@ -391,24 +391,25 @@ class PresetProvider {
     return fields;
   }
 
+  static const kStandardPoiFields = [
+    'name',
+    'address',
+    'level',
+    'opening_hours',
+    'wheelchair',
+    'wifi',
+    'payment',
+    'phone',
+    'website',
+    'email',
+    'operator',
+    'addr_door',
+    'description',
+  ];
+
   Future<List<PresetField>> getStandardFields(Locale locale, bool isPOI) async {
-    final List<String> stdFields = isPOI
-        ? [
-            'name',
-            'address',
-            'level',
-            'opening_hours',
-            'wheelchair',
-            'wifi',
-            'payment',
-            'phone',
-            'website',
-            'email',
-            'operator',
-            'addr_door',
-            'description',
-          ]
-        : ['address', 'level'];
+    final List<String> stdFields =
+        isPOI ? kStandardPoiFields : ['address', 'level'];
     final fields = await _getFields(stdFields, locale);
     fields['address'] = AddressField(
         label: await _getFieldLabel('address', locale) ?? 'Address');

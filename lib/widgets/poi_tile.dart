@@ -92,7 +92,7 @@ class PoiTile extends ConsumerWidget {
           if (onToggleCheck != null && needsCheckDate(amenity.getFullTags()))
             GestureDetector(
               behavior: HitTestBehavior.translucent,
-              onTap: onToggleCheck,
+              onTap: amenity.wasOld ? onToggleCheck : null,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,

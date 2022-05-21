@@ -1,6 +1,8 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/models/address.dart';
 import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/widgets/address_form.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/need_update.dart';
@@ -24,6 +26,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   late OsmChange entrance;
   bool manualRef = false;
   bool putFlatsInUnit = false;
+  bool showAddressForm = false;
   late final FocusNode _focus;
 
   @override
@@ -42,6 +45,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
       entrance['addr:flats'] = entrance['addr:unit'];
       entrance.removeTag('addr:unit');
     }
+    showAddressForm = StreetAddress.fromTags(entrance.getFullTags()).isNotEmpty;
   }
 
   @override
@@ -62,7 +66,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     return RegExp(r'^\d[\d\w]*$').hasMatch(value!.trim());
   }
 
-  saveAndClose() {
+  saveAndClose([bool pop = true]) {
     entrance.removeTag(OsmChange.kCheckedKey);
     if (putFlatsInUnit) {
       entrance['addr:unit'] = entrance['addr:flats'];
@@ -71,7 +75,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     final changes = ref.read(changesProvider);
     changes.saveChange(entrance);
     ref.read(needMapUpdateProvider).trigger();
-    Navigator.pop(context);
+    if (pop) Navigator.pop(context);
   }
 
   deleteAndClose() {
@@ -119,215 +123,263 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     final refOptions = suggestRefs(entrance['addr:flats']);
     if (entrance['ref'] == null) refOptions.add(kManualOption);
 
-    return Column(
-      children: [
-        Table(
-          columnWidths: const {
-            0: FixedColumnWidth(110.0),
-          },
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children: [
-            TableRow(
+    return WillPopScope(
+      onWillPop: () async {
+        if (widget.entrance != null) saveAndClose(false);
+        return true;
+      },
+      child: SingleChildScrollView(
+        child: SafeArea(
+          top: false,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 6.0,
+              left: 10.0,
+              right: 10.0,
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Text(loc.entranceFlats, style: kFieldTextStyle),
+                if (showAddressForm)
+                  AddressForm(
+                    location: widget.location,
+                    initialAddress:
+                        StreetAddress.fromTags(entrance.getFullTags()),
+                    autoFocus: false,
+                    onChange: (addr) {
+                      setState(() {
+                        addr.forceTags(entrance);
+                      });
+                    },
+                  ),
+                Table(
+                  columnWidths: const {
+                    0: FixedColumnWidth(110.0),
+                  },
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                  children: [
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child:
+                              Text(loc.entranceFlats, style: kFieldTextStyle),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                keyboardType: editorSettings.fixNumKeyboard
+                                    ? TextInputType.visiblePassword
+                                    : TextInputType.numberWithOptions(
+                                        signed: true),
+                                autofocus: !manualRef &&
+                                    entrance['addr:flats'] == null,
+                                initialValue: entrance['addr:flats'],
+                                style: kFieldTextStyle,
+                                decoration:
+                                    const InputDecoration(hintText: '16-29;32'),
+                                validator: (value) => isValidFlats(value)
+                                    ? null
+                                    : loc.entranceFlatsNumberList,
+                                onChanged: (value) {
+                                  setState(() {
+                                    entrance['addr:flats'] = value.trim();
+                                  });
+                                },
+                              ),
+                            ),
+                            if (isSingleFlat(entrance['addr:flats']) ||
+                                putFlatsInUnit) ...[
+                              Text('unit?', style: kFieldTextStyle),
+                              Switch(
+                                value: putFlatsInUnit,
+                                onChanged: (value) {
+                                  setState(() {
+                                    putFlatsInUnit = value;
+                                  });
+                                },
+                              ),
+                            ],
+                          ],
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Text(loc.entranceRef, style: kFieldTextStyle),
+                        ),
+                        if (!manualRef)
+                          RadioField(
+                            options: refOptions,
+                            value: entrance['ref'],
+                            onChange: (value) {
+                              setState(() {
+                                if (value == kManualOption) {
+                                  manualRef = true;
+                                  _focus.requestFocus();
+                                } else {
+                                  entrance['ref'] = value;
+                                }
+                              });
+                            },
+                          ),
+                        if (manualRef)
+                          TextFormField(
+                            keyboardType: editorSettings.fixNumKeyboard
+                                ? TextInputType.visiblePassword
+                                : TextInputType.numberWithOptions(signed: true),
+                            style: kFieldTextStyle,
+                            focusNode: _focus,
+                            initialValue: entrance['ref'],
+                            onChanged: (value) {
+                              setState(() {
+                                entrance['ref'] = value.trim();
+                              });
+                            },
+                          ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child:
+                              Text(loc.entranceAccess, style: kFieldTextStyle),
+                        ),
+                        RadioField(
+                          options: const ['yes', 'private', 'no', 'delivery'],
+                          labels: [
+                            loc.entranceAccessYes,
+                            loc.entranceAccessPrivate,
+                            loc.entranceAccessNo,
+                            loc.entranceAccessDelivery,
+                          ],
+                          value: entrance['access'],
+                          onChange: (value) {
+                            setState(() {
+                              entrance['access'] = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Text(loc.entranceWheelchair,
+                              style: kFieldTextStyle),
+                        ),
+                        RadioField(
+                          options: const ['yes', 'limited', 'no'],
+                          labels: [
+                            loc.fieldWheelchairYes,
+                            loc.fieldWheelchairLimited,
+                            loc.fieldWheelchairNo,
+                          ],
+                          value: entrance['wheelchair'],
+                          onChange: (value) {
+                            setState(() {
+                              entrance['wheelchair'] = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Text(loc.entranceType, style: kFieldTextStyle),
+                        ),
+                        RadioField(
+                          options: const [
+                            'main',
+                            'staircase',
+                            'home',
+                            'shop',
+                            'service',
+                            'garage',
+                            'emergency',
+                          ],
+                          labels: [
+                            loc.entranceTypeMain,
+                            loc.entranceTypeStaircase,
+                            loc.entranceTypeHome,
+                            loc.entranceTypeShop,
+                            loc.entranceTypeService,
+                            loc.entranceTypeGarage,
+                            loc.entranceTypeEmergency,
+                          ],
+                          value: entrance['entrance'] == 'yes'
+                              ? null
+                              : entrance['entrance'],
+                          onChange: (value) {
+                            setState(() {
+                              entrance['entrance'] = value ?? 'yes';
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 Row(
-                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Expanded(
-                      child: TextFormField(
-                        keyboardType: editorSettings.fixNumKeyboard
-                            ? TextInputType.visiblePassword
-                            : TextInputType.numberWithOptions(signed: true),
-                        autofocus: !manualRef && entrance['addr:flats'] == null,
-                        initialValue: entrance['addr:flats'],
-                        style: kFieldTextStyle,
-                        decoration: const InputDecoration(hintText: '16-29;32'),
-                        validator: (value) => isValidFlats(value)
-                            ? null
-                            : loc.entranceFlatsNumberList,
-                        onChanged: (value) {
+                    if (widget.entrance != null)
+                      TextButton(
+                        child: Text(loc.editorDeleteButton.toUpperCase()),
+                        onPressed: () async {
+                          final answer = await showOkCancelAlertDialog(
+                            context: context,
+                            title: loc.editorDeleteTitle(
+                                'entrance'), // TODO: better msg
+                            okLabel: loc.editorDeleteButton,
+                            isDestructiveAction: true,
+                          );
+                          if (answer == OkCancelResult.ok) {
+                            deleteAndClose();
+                          }
+                        },
+                      ),
+                    if (!showAddressForm)
+                      TextButton(
+                        child: Text('+ADDR'),
+                        onPressed: () {
                           setState(() {
-                            entrance['addr:flats'] = value.trim();
+                            showAddressForm = true;
                           });
                         },
                       ),
+                    Expanded(child: Container()),
+                    TextButton(
+                      child: Text(
+                          MaterialLocalizations.of(context).cancelButtonLabel),
+                      onPressed: () {
+                        ref.read(needMapUpdateProvider).trigger();
+                        Navigator.pop(context);
+                      },
                     ),
-                    if (isSingleFlat(entrance['addr:flats']) ||
-                        putFlatsInUnit) ...[
-                      Text('unit?', style: kFieldTextStyle),
-                      Switch(
-                        value: putFlatsInUnit,
-                        onChanged: (value) {
-                          setState(() {
-                            putFlatsInUnit = value;
-                          });
-                        },
-                      ),
-                    ],
-                  ],
-                ),
-              ],
-            ),
-            TableRow(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Text(loc.entranceRef, style: kFieldTextStyle),
-                ),
-                if (!manualRef)
-                  RadioField(
-                    options: refOptions,
-                    value: entrance['ref'],
-                    onChange: (value) {
-                      setState(() {
-                        if (value == kManualOption) {
-                          manualRef = true;
-                          _focus.requestFocus();
-                        } else {
-                          entrance['ref'] = value;
+                    TextButton(
+                      child:
+                          Text(MaterialLocalizations.of(context).okButtonLabel),
+                      onPressed: () {
+                        if (true) {
+                          saveAndClose();
                         }
-                      });
-                    },
-                  ),
-                if (manualRef)
-                  TextFormField(
-                    keyboardType: editorSettings.fixNumKeyboard
-                        ? TextInputType.visiblePassword
-                        : TextInputType.numberWithOptions(signed: true),
-                    style: kFieldTextStyle,
-                    focusNode: _focus,
-                    initialValue: entrance['ref'],
-                    onChanged: (value) {
-                      setState(() {
-                        entrance['ref'] = value.trim();
-                      });
-                    },
-                  ),
-              ],
-            ),
-            TableRow(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Text(loc.entranceAccess, style: kFieldTextStyle),
-                ),
-                RadioField(
-                  options: const ['yes', 'private', 'no', 'delivery'],
-                  labels: [
-                    loc.entranceAccessYes,
-                    loc.entranceAccessPrivate,
-                    loc.entranceAccessNo,
-                    loc.entranceAccessDelivery,
+                      },
+                    ),
                   ],
-                  value: entrance['access'],
-                  onChange: (value) {
-                    setState(() {
-                      entrance['access'] = value;
-                    });
-                  },
                 ),
               ],
             ),
-            TableRow(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Text(loc.entranceWheelchair, style: kFieldTextStyle),
-                ),
-                RadioField(
-                  options: const ['yes', 'limited', 'no'],
-                  labels: [
-                    loc.fieldWheelchairYes,
-                    loc.fieldWheelchairLimited,
-                    loc.fieldWheelchairNo,
-                  ],
-                  value: entrance['wheelchair'],
-                  onChange: (value) {
-                    setState(() {
-                      entrance['wheelchair'] = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            TableRow(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Text(loc.entranceType, style: kFieldTextStyle),
-                ),
-                RadioField(
-                  options: const [
-                    'main',
-                    'staircase',
-                    'home',
-                    'shop',
-                    'service',
-                    'garage',
-                    'emergency',
-                  ],
-                  labels: [
-                    loc.entranceTypeMain,
-                    loc.entranceTypeStaircase,
-                    loc.entranceTypeHome,
-                    loc.entranceTypeShop,
-                    loc.entranceTypeService,
-                    loc.entranceTypeGarage,
-                    loc.entranceTypeEmergency,
-                  ],
-                  value: entrance['entrance'] == 'yes'
-                      ? null
-                      : entrance['entrance'],
-                  onChange: (value) {
-                    setState(() {
-                      entrance['entrance'] = value ?? 'yes';
-                    });
-                  },
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
-        Row(
-          children: [
-            if (widget.entrance != null)
-              TextButton(
-                child: Text(loc.editorDeleteButton.toUpperCase()),
-                onPressed: () async {
-                  final answer = await showOkCancelAlertDialog(
-                    context: context,
-                    title:
-                        loc.editorDeleteTitle('entrance'), // TODO: better msg
-                    okLabel: loc.editorDeleteButton,
-                    isDestructiveAction: true,
-                  );
-                  if (answer == OkCancelResult.ok) {
-                    deleteAndClose();
-                  }
-                },
-              ),
-            Expanded(child: Container()),
-            TextButton(
-              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-              onPressed: () {
-                ref.read(needMapUpdateProvider).trigger();
-                Navigator.pop(context);
-              },
-            ),
-            TextButton(
-              child: Text(MaterialLocalizations.of(context).okButtonLabel),
-              onPressed: () {
-                if (true) {
-                  saveAndClose();
-                }
-              },
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }

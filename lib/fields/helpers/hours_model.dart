@@ -126,14 +126,16 @@ class HoursData {
             hoursList.add(hoursMatch.group(2)!);
           }
         }
-        fragments.add(HoursFragment(
-          days,
-          HoursInterval(hoursList.first, hoursList.last),
-          [
-            for (int i = 1; i < hoursList.length - 1; i += 2)
-              HoursInterval(hoursList[i], hoursList[i + 1])
-          ],
-        ));
+        if (hoursList.isNotEmpty) {
+          fragments.add(HoursFragment(
+            days,
+            HoursInterval(hoursList.first, hoursList.last),
+            [
+              for (int i = 1; i < hoursList.length - 1; i += 2)
+                HoursInterval(hoursList[i], hoursList[i + 1])
+            ],
+          ));
+        }
       }
 
       lastIndex += match.end;

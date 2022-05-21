@@ -20,8 +20,7 @@ class WebsiteField extends PresetField {
 
   @override
   bool hasRelevantKey(Map<String, String> tags) {
-    return websiteProviders.any(
-        (key) => tags.containsKey(key) || tags.containsKey('contact:$key'));
+    return websiteProviders.any((provider) => provider.hasKey(tags));
   }
 }
 
@@ -169,7 +168,7 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
                   decoration: InputDecoration(
                     hintText: _provider.label,
                     suffixIcon: GestureDetector(
-                      child: Icon(Icons.add_circle),
+                      child: Icon(Icons.done),
                       onTap: () {
                         if (submitWebsite(_controller.text))
                           _fieldFocus.unfocus();
@@ -210,9 +209,9 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
                                 website.provider.display(website.value), 25),
                             style: kFieldTextStyle),
                         onTap: () {
-                          if (kFollowLinks &&
-                              website.value.startsWith('http')) {
-                            launch(website.value);
+                          final url = website.provider.url(website.value);
+                          if (kFollowLinks && url != null) {
+                            launch(url);
                           }
                         },
                       ),

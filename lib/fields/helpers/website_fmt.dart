@@ -44,16 +44,24 @@ abstract class WebsiteProvider {
   /// Returns a short representation of the URL.
   String display(String full);
 
+  /// Returns an URL for a tag value.
+  String? url(String value);
+
   /// Gets tag value from element.
-  String? getValue(OsmChange element) =>
-      key.startsWith('contact:') ? element[key] : element.getContact(key);
+  String? getValue(OsmChange element) => element.getContact(key);
+
+  /// Checks that the list of tags is relevant to this provider.
+  bool hasKey(Map<String, String> tags) =>
+      tags.containsKey(key) ||
+      tags.containsKey(key.startsWith('contact:')
+          ? key.replaceFirst('contact:', '')
+          : 'contact:$key');
 
   /// Replaces tag value for element.
   setValue(OsmChange element, String value, {bool preferContact = false}) {
-    if (key.startsWith('contact:'))
-      element[key] = value;
-    else
-      element.setContact(preferContact ? 'contact:$key' : key, value);
+    element.setContact(
+        preferContact && !key.startsWith('contact:') ? 'contact:$key' : key,
+        value);
   }
 }
 
@@ -70,6 +78,15 @@ class UrlWebsiteProvider extends WebsiteProvider {
 
   @override
   bool isValid(String full) => RegExp(r'..\...').hasMatch(full);
+
+  @override
+  String? url(String value) {
+    try {
+      return format(value);
+    } on ArgumentError {
+      return null;
+    }
+  }
 
   @override
   String format(String value) {
@@ -111,6 +128,16 @@ class _ProviderHelper extends WebsiteProvider {
 
   @override
   bool isValid(String full) => _regexp.hasMatch(full.trim());
+
+  @override
+  String? url(String value) {
+    try {
+      final v = format(value);
+      return v.startsWith('http') ? v : null;
+    } on ArgumentError {
+      return null;
+    }
+  }
 
   @override
   String format(String value) {

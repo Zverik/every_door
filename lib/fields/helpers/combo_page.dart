@@ -18,11 +18,17 @@ class ComboChooserPage extends StatefulWidget {
 class _ComboChooserPageState extends State<ComboChooserPage> {
   String filter = '';
   late List<String> values;
+  late final List<ComboOption> missingOptions;
 
   @override
   void initState() {
     super.initState();
     values = List.of(widget.values);
+    missingOptions = widget.values
+        .where(
+            (value) => !widget.field.options.any((opt) => opt.value == value))
+        .map((e) => ComboOption(e))
+        .toList();
   }
 
   @override
@@ -78,8 +84,7 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
 
   Widget buildChooser(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    var options = List.of(widget.field.options);
-    // options = options.where((opt) => !widget.hideValues.contains(opt.value)).toList();
+    var options = missingOptions + List.of(widget.field.options);
     if (filter.isNotEmpty) {
       // Prune options
       options =

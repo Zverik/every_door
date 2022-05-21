@@ -51,6 +51,12 @@ class EveryDoorApp extends StatelessWidget {
         ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        localeListResolutionCallback: (locales, supported) {
+          for (final locale in locales ?? []) {
+            if (supported.contains(locale)) return locale;
+          }
+          return Locale('en', 'US');
+        },
         home: LoadingPage(),
         builder: (context, child) => Stack(children: [
           if (child != null) child,

@@ -6,6 +6,7 @@ import 'package:every_door/providers/database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:proximity_hash/proximity_hash.dart';
+import 'dart:math' show max;
 
 final roadNameProvider = Provider((ref) => RoadNameProvider(ref));
 
@@ -62,7 +63,9 @@ class RoadNameProvider {
     final names = await _getNamesFromAddresses(location, effRadius);
     final names2 = await _getNamesFromRoads(location, effRadius);
     for (final e in names2.entries) {
-      if ((names[e.key] ?? 10000.0) > e.value) names[e.key] = e.value;
+      // Prioritizing streets from closer addresses.
+      final dist = max(e.value, 100.0 + e.value / 1000.0);
+      if ((names[e.key] ?? 10000.0) > dist) names[e.key] = dist;
     }
 
     // Sort by distance

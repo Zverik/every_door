@@ -1,5 +1,34 @@
 # Every Door App Change Log
 
+## 0.4.0
+
+_Unreleased_
+
+* Fixed issue with storing default payment tags.
+* Default language is English now.
+* Added zooming buttons to the map when adding an object.
+* Added (black) entrances to that map as well.
+* Moved `tourism=picnic_site` to the micromapping mode.
+* For `shop=yes`, displaying `shop` in a tile, not `yes`.
+
+### Editor
+
+* Added current values to combo options.
+* Fixed parsing `Su off` in opening hours.
+* For the phone field, validation message is yellow, since it's informational.
+* Social media tag values are now clickable when they are not in an URL form.
+* Proper keyboard replacement for `ref` and other numeric fields.
+* Changed the icon for the tags panel.
+* Replaced the plus icon with a checkmark for phone and website fields.
+* Moving standard fields to the icon labels block.
+* Returned the big green "Save" button.
+
+### Entrances Mode
+
+* Allowing addresses with no street, and fixed removing house numbers.
+* Added the address form to entrances (click on `+ADDR` button).
+* Tapping away from a building / entrance form saves the edits.
+
 ## 0.3.0
 
 _Released on 2022-05-09_

@@ -161,14 +161,16 @@ class OsmChange extends ChangeNotifier implements Comparable {
     _mainKey = getMainKey(getFullTags());
   }
 
-  // Check date management.
-  int get ageDays => DateTime.now()
-      .difference(DateTime.tryParse(this[kCheckedKey] ?? '2020-01-01') ??
-          DateTime(2020, 1, 1))
+  int calculateAge(String? value) => DateTime.now()
+      .difference(
+          DateTime.tryParse(value ?? '2020-01-01') ?? DateTime(2020, 1, 1))
       .inDays;
 
-  bool get isOld => ageDays >= kOldAmenityDays;
-  bool get isCheckedToday => ageDays <= 1;
+  // Check date management.
+  bool get isOld => calculateAge(this[kCheckedKey]) >= kOldAmenityDays;
+  bool get wasOld =>
+      !isNew && calculateAge(element?.tags[kCheckedKey]) >= kOldAmenityDays;
+  bool get isCheckedToday => calculateAge(this[kCheckedKey]) <= 1;
 
   check() {
     this[kCheckedKey] = kDateFormat.format(DateTime.now());
@@ -352,7 +354,11 @@ class OsmChange extends ChangeNotifier implements Comparable {
     return this['name:${locale.languageCode}'] ?? this['name'];
   }
 
-  String? getContact(String key) => this[key] ?? this['contact:$key'];
+  String? getContact(String key) =>
+      this[key] ??
+      (key.startsWith('contact:')
+          ? this[key.replaceFirst('contact:', '')]
+          : this['contact:$key']);
 
   setContact(String key, String value) {
     String alternativeKey;
@@ -377,8 +383,12 @@ class OsmChange extends ChangeNotifier implements Comparable {
 
   String? get descriptiveTag {
     if (this['amenity'] == 'fixme') return this['fixme:type'];
-    if ({'entrance', 'building'}.contains(_mainKey)) return _mainKey;
-    return _mainKey == null ? null : this[_mainKey!];
+
+    final mainKey = _mainKey;
+    if (mainKey == null) return null;
+    if (this[mainKey] == 'yes' || {'entrance', 'building'}.contains(mainKey))
+      return mainKey;
+    return this[mainKey];
   }
 
   String get typeAndName {

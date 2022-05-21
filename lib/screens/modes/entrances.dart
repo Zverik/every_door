@@ -122,21 +122,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (context) {
-        return SingleChildScrollView(
-          child: SafeArea(
-            top: false,
-            child: Padding(
-                padding: EdgeInsets.only(
-                  top: 6.0,
-                  left: 10.0,
-                  right: 10.0,
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-                child: pane),
-          ),
-        );
-      },
+      builder: (context) => pane,
     );
     setState(() {
       newLocation = null;
