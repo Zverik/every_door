@@ -58,11 +58,11 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
 
   @override
   Widget build(BuildContext context) {
-    final value = widget.element[widget.field.key];
+    final value = widget.element[widget.field.key] ?? '';
     if (value != _controller.text.trim()) {
       // Hopefully that's not the time when we type a letter in the field.
       // TODO: only update when page is back from inactive?
-      _controller.text = value ?? '';
+      _controller.text = value;
     }
 
     // Force replace numeric keyboard with a better option.

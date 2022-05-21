@@ -1,6 +1,8 @@
+// DO NOT RE-FORMAT THIS FILE!
+
 /// List of keys to consider when looking for a single main tag, in order of preference.
 const kMainKeys = <String>[
-  'amenity', 'shop', 'craft', 'tourism', 'historic',
+  'amenity', 'shop', 'craft', 'tourism', 'historic', 'club',
   'highway', 'railway',
   'office', 'healthcare', 'leisure', 'natural',
   'emergency', 'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
@@ -30,6 +32,7 @@ enum ElementKind {
   micro,
   building,
   entrance,
+  address,
 }
 
 /// Find the single main key for an object. Also considers lifecycle prefixes.
@@ -55,6 +58,9 @@ ElementKind detectKind(Map<String, String> tags, [Set<ElementKind>? accepted]) {
       tags['building'] == 'entrance') return ElementKind.entrance;
   if ((accepted == null || accepted.contains(ElementKind.building)) &&
       tags['building'] != null) return ElementKind.building;
+  if ((accepted == null || accepted.contains(ElementKind.address)) &&
+      getMainKey(tags) == null && (tags.containsKey('addr:housenumber') ||
+      tags.containsKey('addr:housename'))) return ElementKind.address;
   if (tags.isEmpty || tags.keys.every((element) => kMetaTags.contains(element)))
     return ElementKind.empty;
   return ElementKind.unknown;

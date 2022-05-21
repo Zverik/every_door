@@ -50,13 +50,8 @@ class EveryDoorApp extends StatelessWidget {
           hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
         ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        localeListResolutionCallback: (locales, supported) {
-          for (final locale in locales ?? []) {
-            if (supported.contains(locale)) return locale;
-          }
-          return Locale('en', 'US');
-        },
+        // Adding "en" to the front so it's used by default.
+        supportedLocales: [Locale('en')] + AppLocalizations.supportedLocales,
         home: LoadingPage(),
         builder: (context, child) => Stack(children: [
           if (child != null) child,

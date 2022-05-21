@@ -330,7 +330,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
                   builder: (ctx) => Icon(Icons.location_pin),
                 ),
-              for (var i = 0; i < amenities.length && i < 9; i++)
+              for (var i = amenities.length - 1; i >= 0; i--)
                 Marker(
                   point: amenities[i].location,
                   builder: (ctx) => Stack(
@@ -354,7 +354,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                           width: iconSize / 3,
                           height: iconSize / 3,
                         ),
-                      if (widget.drawNumbers)
+                      if (widget.drawNumbers && i < 9)
                         Container(
                           padding: EdgeInsets.only(left: 1.0),
                           child: Text(

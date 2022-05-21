@@ -5,18 +5,21 @@
 _Unreleased_
 
 * Fixed issue with storing default payment tags.
-* Default language is English now.
+* Default locale is English now.
 * Added zooming buttons to the map when adding an object.
 * Added (black) entrances to that map as well.
 * Moved `tourism=picnic_site` to the micromapping mode.
 * For `shop=yes`, displaying `shop` in a tile, not `yes`.
+* Objects with `club=*` did not register and were not uploaded.
 * When snapping a new point to a way failed, adding a `fixme` tag to it.
 * Added API status panel to entrances and micromapping modes.
+* Drawing much more nearest objects on the map.
 
 ### Editor
 
 * Added current values to combo options.
 * Increased the number of options to 50 for combo panels.
+* Case-insensitive search on the combo page.
 * Fixed parsing `Su off` in opening hours.
 * For the phone field, validation message is yellow, since it's informational.
 * Social media tag values are now clickable when they are not in an URL form.

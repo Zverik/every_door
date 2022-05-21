@@ -215,6 +215,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final bool modified = widget.amenity == null || amenity != widget.amenity;
     final bool needsCheck =
         amenity.isOld && needsCheckDate(amenity.getFullTags());
+    final double bottomPadding = MediaQuery.of(context).padding.bottom;
     final loc = AppLocalizations.of(context)!;
     return WillPopScope(
       onWillPop: () async {
@@ -250,44 +251,46 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             ),
           ],
         ),
-        body: SafeArea(
-          child: preset == null
-              ? Center(child: Text(loc.editorLoadingPreset))
-              : Column(
-                  children: [
-                    Expanded(
-                      child: ListView(
-                        children: [
-                          if (amenity.canDelete) buildMap(context),
-                          if (!amenity.canDelete) SizedBox(height: 10.0),
-                          if (stdFields.isNotEmpty) ...[
-                            buildFields(stdFields, 50),
-                          ],
-                          if (fields.isNotEmpty) ...[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Divider(),
-                            ),
-                            buildFields(fields),
-                          ],
-                          SizedBox(height: 20.0),
-                          buildTopButtons(context),
-                          SizedBox(height: 10.0),
-                          if (moreFields.isNotEmpty) ...[
-                            ExpansionTile(
-                              title: Text(loc.editorMoreFields),
-                              initiallyExpanded: false,
-                              children: [
-                                buildFields(moreFields),
-                              ],
-                            ),
-                            SizedBox(height: 30.0),
-                          ],
+        body: preset == null
+            ? Center(child: Text(loc.editorLoadingPreset))
+            : Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        if (amenity.canDelete) buildMap(context),
+                        if (!amenity.canDelete) SizedBox(height: 10.0),
+                        if (stdFields.isNotEmpty) ...[
+                          buildFields(stdFields, 50),
                         ],
-                      ),
+                        if (fields.isNotEmpty) ...[
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Divider(),
+                          ),
+                          buildFields(fields),
+                        ],
+                        SizedBox(height: 20.0),
+                        buildTopButtons(context),
+                        SizedBox(height: 10.0),
+                        if (moreFields.isNotEmpty) ...[
+                          ExpansionTile(
+                            title: Text(loc.editorMoreFields),
+                            initiallyExpanded: false,
+                            children: [
+                              buildFields(moreFields),
+                            ],
+                          ),
+                          SizedBox(height: 30.0),
+                        ],
+                      ],
                     ),
-                    Row(
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(bottom: bottomPadding),
+                    color: modified ? Colors.green : Colors.white,
+                    child: Row(
                       children: [
                         Expanded(
                           child: SizedBox(
@@ -322,9 +325,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           ),
                       ],
                     ),
-                  ],
-                ),
-        ),
+                  ),
+                ],
+              ),
       ),
     );
   }
