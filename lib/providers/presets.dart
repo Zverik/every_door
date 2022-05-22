@@ -432,15 +432,19 @@ class PresetProvider {
     if (!ready) await _waitUntilReady();
     const sql = """
     with im_ids as (
-      select imagery_id from imagery_lookup
+      select imagery_id, (
+        select count(*) from imagery_lookup ll
+        where ll.imagery_id = l.imagery_id
+      ) as imagery_size
+      from imagery_lookup l
       where geohash = ?
       union all
-      select imagery_id from imagery
+      select imagery_id, 10000 as imagery_size from imagery
       where is_default = 1 or is_world = 1
     )
     select * from imagery
     inner join im_ids on im_ids.imagery_id = imagery.imagery_id
-    order by is_best desc, is_world, is_default
+    order by is_default, is_world, is_best desc, imagery_size, imagery_id
     """;
     return await _db!.rawQuery(sql, [geohash]);
   }

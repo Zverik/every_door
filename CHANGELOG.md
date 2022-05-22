@@ -18,6 +18,7 @@ _Unreleased_
 * Fixed the placeholder API error when updating a building
   after adding an entrance to it.
 * Maps can be rotated now.
+* Improved sorting in the imagery list.
 
 ### Editor
 
