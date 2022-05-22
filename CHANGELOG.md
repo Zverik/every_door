@@ -2,7 +2,7 @@
 
 ## 0.4.0
 
-_Releaed on 2022-05-22_
+_Released on 2022-05-22_
 
 * Redesigned app navigation (thanks Alexey A for ideas).
 * Default locale is English now.
@@ -14,7 +14,7 @@ _Releaed on 2022-05-22_
 * Objects with `club=*` did not register and were not uploaded.
 * When snapping a new point to a way failed, adding a `fixme` tag to it.
 * Added API status panel to entrances and micromapping modes.
-* Drawing much more nearest objects on the map.
+* Drawing much more objects on the map for micromapping.
 * Fixed the placeholder API error when updating a building
   after adding an entrance to it.
 * Maps can be rotated now.
