@@ -2,7 +2,7 @@
 
 ## 0.4.0
 
-_Unreleased_
+_Releaed on 2022-05-22_
 
 * Redesigned app navigation (thanks Alexey A for ideas).
 * Default locale is English now.
