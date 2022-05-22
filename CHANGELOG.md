@@ -17,6 +17,7 @@ _Unreleased_
 * Drawing much more nearest objects on the map.
 * Fixed the placeholder API error when updating a building
   after adding an entrance to it.
+* Maps can be rotated now.
 
 ### Editor
 

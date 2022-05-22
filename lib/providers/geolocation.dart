@@ -13,6 +13,7 @@ final geolocationProvider =
     StateNotifierProvider<GeolocationController, LatLng?>(
         (ref) => GeolocationController(ref));
 final trackingProvider = StateProvider<bool>((ref) => false);
+final rotationProvider = StateProvider<double>((ref) => 0.0);
 
 class GeolocationController extends StateNotifier<LatLng?> {
   static final _distance = DistanceEquirectangular();

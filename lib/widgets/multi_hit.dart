@@ -58,6 +58,12 @@ class _MultiHitMarkerLayer extends StatelessWidget {
           }
 
           final pos = pxPoint - _mapState.getPixelOrigin();
+          final rotatedChild = _mapState.rotation.abs() > 1.0
+              ? Transform.rotate(
+                  angle: -_mapState.rotationRad,
+                  child: marker.builder(context),
+                )
+              : marker.builder(context);
 
           markers.add(
             Positioned(
@@ -66,7 +72,7 @@ class _MultiHitMarkerLayer extends StatelessWidget {
               height: marker.height,
               left: pos.x - width,
               top: pos.y - height,
-              child: marker.builder(context),
+              child: rotatedChild,
             ),
           );
         }

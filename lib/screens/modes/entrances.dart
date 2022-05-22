@@ -73,6 +73,18 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
       if (!fromController) {
         ref.read(effectiveLocationProvider.notifier).set(event.center);
       }
+    } else if (event is MapEventRotateEnd) {
+      if (event.source != MapEventSource.mapController) {
+        double rotation = controller.rotation;
+        while (rotation > 200) rotation -= 360;
+        while (rotation < -200) rotation += 360;
+        if (rotation.abs() < kRotationThreshold) {
+          ref.read(rotationProvider.state).state = 0.0;
+          controller.rotate(0.0);
+        } else {
+          ref.read(rotationProvider.state).state = rotation;
+        }
+      }
     }
   }
 
@@ -297,6 +309,12 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
       }
     });
 
+    // Rotate the map according to the global rotation value.
+    ref.listen(rotationProvider, (_, double newValue) {
+      if ((newValue - controller.rotation).abs() >= 1.0)
+        controller.rotate(newValue);
+    });
+
     // When turning the tracking on, move the map immediately.
     ref.listen(trackingProvider, (_, bool newState) {
       if (trackLocation != null && newState) {
@@ -332,8 +350,11 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 zoom: 18.0,
                 minZoom: 16.0,
                 maxZoom: 20.0,
-                interactiveFlags:
-                    InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+                rotation: ref.watch(rotationProvider),
+                rotationThreshold: kRotationThreshold,
+                interactiveFlags: InteractiveFlag.drag |
+                    InteractiveFlag.pinchZoom |
+                    InteractiveFlag.rotate,
                 plugins: [
                   MapDragCreatePlugin(),
                   MultiHitMarkerLayerPlugin(),
@@ -341,7 +362,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   OverlayButtonPlugin(),
                 ],
               ),
-              nonRotatedLayers: [
+              layers: [
                 MultiHitMarkerLayerOptions(
                   markers: [
                     for (final building in nearest
@@ -351,6 +372,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                         point: building.location,
                         width: 120.0,
                         height: 60.0,
+                        rotate: true,
                         builder: (BuildContext context) {
                           return Center(
                             child: Container(
@@ -373,6 +395,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                       Marker(
                         key: keys[address.databaseId],
                         point: address.location,
+                        rotate: true,
                         width: 90.0,
                         height: 50.0,
                         builder: (BuildContext context) {
@@ -419,10 +442,12 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   ],
                   onTap: (tapped) {
                     final objects =
-                        tapped.map((k) => findByKey(k)).whereType<OsmChange>();
+                    tapped.map((k) => findByKey(k)).whereType<OsmChange>();
                     chooseEditorToOpen(objects);
                   },
                 ),
+              ],
+              nonRotatedLayers: [
                 MapDragCreateOptions(
                   mapKey: _mapKey,
                   buttons: [

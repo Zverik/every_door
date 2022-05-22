@@ -28,6 +28,7 @@ const kFollowLinks = true; // whether to open links and phones on tap
 const kUploadOnClose = false; // whether to trigger data upload on app deactivation
 const kShowContactSetting = false; // whether to show the "contact:" setting
 const kMicromappingTapZoom = 19.0; // how much to zoom in when tapping a bunch of elements in micromapping
+const kRotationThreshold = 15.0; // degrees
 const kManualOption = '✍️'; // Emoji icon for entering values by hand
 
 // Should be exactly 8 lines in both lists.

@@ -122,6 +122,8 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           zoom: widget.closer ? 19.0 : 18.0,
           minZoom: 17.0,
           maxZoom: 20.0,
+          rotation: ref.watch(rotationProvider),
+          rotationThreshold: kRotationThreshold,
           interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
           plugins: [ZoomButtonsPlugin()],
         ),
@@ -160,6 +162,9 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
               markers: [
                 Marker(
                   point: center,
+                  rotate: true,
+                  rotateOrigin: Offset(0.0, -5.0),
+                  rotateAlignment: Alignment.bottomCenter,
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
                   builder: (ctx) =>
                       Icon(Icons.location_pin, color: Colors.black),

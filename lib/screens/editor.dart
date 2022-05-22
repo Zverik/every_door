@@ -6,6 +6,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/changes.dart';
+import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/presets.dart';
@@ -409,6 +410,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                 center: amenity.location,
                 zoom: 17,
                 interactiveFlags: 0,
+                rotation: ref.watch(rotationProvider),
                 allowPanningOnScrollingParent: false,
                 onTap: (pos, center) async {
                   final newLocation = await Navigator.push(
@@ -431,6 +433,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                     options: MarkerLayerOptions(markers: [
                   Marker(
                     point: amenity.location,
+                    rotate: true,
+                    rotateOrigin: Offset(12.0, -5.0),
+                    rotateAlignment: Alignment.bottomLeft,
                     anchorPos: AnchorPos.exactly(Anchor(138.0, 5.0)),
                     width: 150.0,
                     height: 30.0,

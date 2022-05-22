@@ -119,6 +119,18 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         widget.onTap!(
             _getBoundsForRadius(event.tapPosition, event.zoom, kTapRadius));
       }
+    } else if (event is MapEventRotateEnd) {
+      if (event.source != MapEventSource.mapController) {
+        double rotation = mapController.rotation;
+        while (rotation > 200) rotation -= 360;
+        while (rotation < -200) rotation += 360;
+        if (rotation.abs() < kRotationThreshold) {
+          ref.read(rotationProvider.state).state = 0.0;
+          mapController.rotate(0.0);
+        } else {
+          ref.read(rotationProvider.state).state = rotation;
+        }
+      }
     }
   }
 
@@ -232,6 +244,13 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       }
     });
 
+    // Rotate the map according to the global rotation value.
+    ref.listen(rotationProvider, (_, double newValue) {
+      if ((newValue - mapController.rotation).abs() >= 1.0) {
+        mapController.rotate(newValue);
+      }
+    });
+
     // For micromapping, zoom in and out.
     ref.listen<LatLngBounds?>(microZoomedInProvider,
         (_, LatLngBounds? newState) {
@@ -264,12 +283,16 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       mapController: mapController,
       options: MapOptions(
         center: widget.initialLocation, // This does not work :(
+        rotation: ref.watch(rotationProvider),
+        rotationThreshold: kRotationThreshold,
         zoom: kMapZoom,
         minZoom: 15.0,
         maxZoom: 20.0,
         interactiveFlags: ref.watch(microZoomedInProvider) != null
             ? InteractiveFlag.none
-            : (InteractiveFlag.drag | InteractiveFlag.pinchZoom),
+            : (InteractiveFlag.drag |
+                InteractiveFlag.pinchZoom |
+                InteractiveFlag.rotate),
         plugins: [
           ZoomButtonsPlugin(),
           OverlayButtonPlugin(),
@@ -363,6 +386,9 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             markers: [
               if (!ref.watch(trackingProvider))
                 Marker(
+                  rotate: true,
+                  rotateOrigin: Offset(0.0, -5.0),
+                  rotateAlignment: Alignment.bottomCenter,
                   point:
                       mapCenter, // mapController.center throws late init exception
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
@@ -371,6 +397,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
               for (var i = amenities.length - 1; i >= 0; i--)
                 Marker(
                   point: amenities[i].location,
+                  rotate: true,
                   builder: (ctx) => Stack(
                     alignment: Alignment.center,
                     children: [

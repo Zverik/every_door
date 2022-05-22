@@ -1,5 +1,6 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/address.dart';
+import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,8 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
           zoom: 18.0,
           minZoom: 17.0,
           maxZoom: 20.0,
+          rotation: ref.watch(rotationProvider),
+          rotationThreshold: kRotationThreshold,
           interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
         ),
         children: [
@@ -76,6 +79,9 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
               markers: [
                 Marker(
                   point: widget.location,
+                  rotate: true,
+                  rotateOrigin: Offset(0.0, -5.0),
+                  rotateAlignment: Alignment.bottomCenter,
                   anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
                   builder: (ctx) => Icon(Icons.location_pin),
                 ),
@@ -88,6 +94,7 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
                 for (final addr in addresses)
                   Marker(
                     point: addr.location ?? LatLng(0.0, 0.0),
+                    rotate: true,
                     width: 100.0,
                     height: 50.0,
                     builder: (BuildContext context) {
