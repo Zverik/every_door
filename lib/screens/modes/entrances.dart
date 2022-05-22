@@ -483,6 +483,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     vertical: 10.0,
                   ),
                   icon: Icons.menu,
+                  safeRight: true,
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -498,6 +499,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     vertical: 10.0,
                   ),
                   enabled: !ref.watch(trackingProvider),
+                  safeRight: true,
                   icon: Icons.my_location,
                   onPressed: () {
                     ref.read(trackingProvider.state).state = true;

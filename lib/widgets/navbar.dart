@@ -44,6 +44,7 @@ class BrowserNavigationBar extends ConsumerWidget {
     final editorMode = ref.watch(editorModeProvider);
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
+    final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     IconButton dataButton;
     if (!hasChangesToUpload) {
@@ -85,6 +86,7 @@ class BrowserNavigationBar extends ConsumerWidget {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     return Container(
       color: Colors.black87,
+      padding: EdgeInsets.only(bottom: bottomPadding),
       child: Row(
         children: [
           Expanded(child: leftHand ? imageryButton : dataButton),

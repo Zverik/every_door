@@ -256,61 +256,67 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             : Column(
                 children: [
                   Expanded(
-                    child: ListView(
-                      children: [
-                        if (amenity.canDelete) buildMap(context),
-                        if (!amenity.canDelete) SizedBox(height: 10.0),
-                        if (stdFields.isNotEmpty) ...[
-                          buildFields(stdFields, 50),
+                    child: SafeArea(
+                      top: false,
+                      bottom: false,
+                      child: ListView(
+                        children: [
+                          if (amenity.canDelete) buildMap(context),
+                          if (!amenity.canDelete) SizedBox(height: 10.0),
+                          if (stdFields.isNotEmpty) ...[
+                            buildFields(stdFields, 50),
+                          ],
+                          if (fields.isNotEmpty) ...[
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Divider(),
+                            ),
+                            buildFields(fields),
+                          ],
+                          SizedBox(height: 20.0),
+                          buildTopButtons(context),
+                          SizedBox(height: 10.0),
+                          if (moreFields.isNotEmpty) ...[
+                            ExpansionTile(
+                              title: Text(loc.editorMoreFields),
+                              initiallyExpanded: false,
+                              children: [
+                                buildFields(moreFields),
+                              ],
+                            ),
+                            SizedBox(height: 30.0),
+                          ],
                         ],
-                        if (fields.isNotEmpty) ...[
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 10.0),
-                            child: Divider(),
-                          ),
-                          buildFields(fields),
-                        ],
-                        SizedBox(height: 20.0),
-                        buildTopButtons(context),
-                        SizedBox(height: 10.0),
-                        if (moreFields.isNotEmpty) ...[
-                          ExpansionTile(
-                            title: Text(loc.editorMoreFields),
-                            initiallyExpanded: false,
-                            children: [
-                              buildFields(moreFields),
-                            ],
-                          ),
-                          SizedBox(height: 30.0),
-                        ],
-                      ],
+                      ),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(bottom: bottomPadding),
+                    // padding: EdgeInsets.only(bottom: bottomPadding),
                     color: modified ? Colors.green : Colors.white,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: SizedBox(
-                            height: 50.0,
-                            child: MaterialButton(
-                              color: Colors.green,
-                              textColor: Colors.white,
-                              disabledColor: Colors.white,
-                              disabledTextColor: Colors.grey,
+                          child: MaterialButton(
+                            color: Colors.green,
+                            textColor: Colors.white,
+                            disabledColor: Colors.white,
+                            disabledTextColor: Colors.grey,
+                            child: Padding(
                               child: Text(
                                 loc.editorSave,
                                 style: TextStyle(fontSize: 20.0),
                               ),
-                              onPressed: !modified
-                                  ? null
-                                  : () async {
-                                      await confirmDisused(context);
-                                      saveAndClose();
-                                    },
+                              padding: EdgeInsets.only(
+                                  top: 13.0, bottom: 13.0 + bottomPadding),
                             ),
+                            onPressed: !modified
+                                ? null
+                                : () async {
+                                    await confirmDisused(context);
+                                    saveAndClose();
+                                  },
                           ),
                         ),
                         if (!modified && needsCheck)

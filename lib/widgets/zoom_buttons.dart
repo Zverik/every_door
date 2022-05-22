@@ -63,7 +63,6 @@ class ZoomButtonsLayer extends StatelessWidget {
                 padding: EdgeInsets.zero,
               ),
             ),
-            SizedBox(height: 10.0),
             OutlinedButton(
               onPressed: () {
                 _map.move(_map.center, _map.zoom - 1,

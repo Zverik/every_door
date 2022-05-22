@@ -21,6 +21,9 @@ class OverlayButtonOptions extends LayerOptions {
   /// Add safe area to the bottom padding. Enable when the map is full-screen.
   final bool safeBottom;
 
+  /// Add safe area to the right side padding.
+  final bool safeRight;
+
   OverlayButtonOptions({
     Key? key,
     Stream<Null>? rebuild,
@@ -30,6 +33,7 @@ class OverlayButtonOptions extends LayerOptions {
     required this.icon,
     this.enabled = true,
     this.safeBottom = false,
+    this.safeRight = false,
   }) : super(key: key, rebuild: rebuild);
 }
 
@@ -63,7 +67,9 @@ class OverlayButtonLayer extends ConsumerWidget {
           ? (_options.safeBottom ? safePadding.bottom : 0.0)
           : null,
       top: _options.alignment.y <= 0 ? safePadding.top : null,
-      right: _options.alignment.x >= 0 ? safePadding.right : null,
+      right: _options.alignment.x >= 0
+          ? (_options.safeRight ? safePadding.right : 0.0)
+          : null,
       left: _options.alignment.x < 0 ? safePadding.left : null,
       child: Padding(
         padding: _options.padding,
