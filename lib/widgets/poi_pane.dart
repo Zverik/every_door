@@ -50,6 +50,8 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
       scrollDirection: Axis.horizontal,
       child: SafeArea(
         left: false,
+        top: false,
+        bottom: false,
         child: Wrap(
           direction: Axis.vertical,
           alignment: WrapAlignment.start,

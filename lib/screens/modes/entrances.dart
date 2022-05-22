@@ -15,6 +15,7 @@ import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/screens/editor/building.dart';
 import 'package:every_door/screens/editor/entrance.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
+import 'package:every_door/screens/settings.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/multi_hit.dart';
 import 'package:every_door/widgets/track_button.dart';
@@ -337,7 +338,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   MapDragCreatePlugin(),
                   MultiHitMarkerLayerPlugin(),
                   ZoomButtonsPlugin(),
-                  TrackButtonPlugin(),
+                  OverlayButtonPlugin(),
                 ],
               ),
               nonRotatedLayers: [
@@ -474,13 +475,33 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                         }),
                   ],
                 ),
-                TrackButtonOptions(
+                // Settings button
+                OverlayButtonOptions(
+                  alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                    vertical: 10.0,
+                  ),
+                  icon: Icons.menu,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SettingsPage()),
+                    );
+                  },
+                ),
+                // Tracking button
+                OverlayButtonOptions(
                   alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.0 +
-                        (leftHand ? safePadding.left : safePadding.right),
-                    vertical: 20.0,
+                    horizontal: 10.0,
+                    vertical: 10.0,
                   ),
+                  enabled: !ref.watch(trackingProvider),
+                  icon: Icons.my_location,
+                  onPressed: () {
+                    ref.read(trackingProvider.state).state = true;
+                  },
                 ),
                 ZoomButtonsOptions(
                   alignment:

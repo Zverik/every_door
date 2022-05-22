@@ -16,9 +16,15 @@ enum EditorMode {
 }
 
 const kEditorModeIcons = {
-  EditorMode.poi: Icons.shopping_cart,
+  EditorMode.poi: Icons.free_breakfast, // local_cafe icon is broken
   EditorMode.micromapping: Icons.park,
   EditorMode.entrances: Icons.home,
+};
+
+const kEditorModeIconsOutlined = {
+  EditorMode.poi: Icons.free_breakfast_outlined,
+  EditorMode.micromapping: Icons.park_outlined,
+  EditorMode.entrances: Icons.home_outlined,
 };
 
 const kNextMode = {

@@ -133,7 +133,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     const kLocationInterval = Duration(seconds: 10);
     final oldState = state;
 
-    if (oldState == null ||
+    if (oldState == null || true || // TODO: remove debug when understood
         DateTime.now().difference(_stateTime) >= kLocationInterval ||
         _distance(oldState, newLocation) > kLocationThreshold) {
       state = newLocation;

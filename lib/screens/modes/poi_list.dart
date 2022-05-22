@@ -1,5 +1,7 @@
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/legend.dart';
+import 'package:every_door/widgets/filter.dart';
+import 'package:every_door/widgets/legend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/constants.dart';
@@ -212,7 +214,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          flex: 1,
+          flex: 10,
           child: AmenityMap(
             initialLocation: location,
             amenities: nearestPOI,
@@ -222,6 +224,21 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
               ref.read(effectiveLocationProvider.notifier).set(pos);
             },
             onTap: micromappingTap,
+            onFilterTap: isMicromapping
+                ? null
+                : () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                          color: Colors.white,
+                          height: 250.0,
+                          padding: EdgeInsets.all(15.0),
+                          child: PoiFilterPane(),
+                        );
+                      },
+                    );
+                  },
             colorsFromLegend: isMicromapping,
             drawNumbers: !isMicromapping || isZoomedIn,
             drawZoomButtons:
@@ -235,15 +252,28 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
               : widget.areaStatusPanel!,
         if (!isMicromapping || isZoomedIn)
           Expanded(
-            flex: isMicromapping || farFromUser ? 1 : 3,
+            flex: isMicromapping || farFromUser ? 10 : 23,
             child: apiStatus != ApiStatus.idle
                 ? buildApiStatusPane(context, apiStatus)
-                : PoiPane(nearestPOI),
+                : SafeArea(
+                    bottom: false,
+                    left: false,
+                    right: false,
+                    top: widget.isWide,
+                    child: PoiPane(nearestPOI),
+                  ),
           ),
         if (isMicromapping && !isZoomedIn && !widget.isWide) LegendPane(),
         if (isMicromapping && !isZoomedIn && widget.isWide)
           SizedBox(
-            child: SingleChildScrollView(child: LegendPane()),
+            child: SingleChildScrollView(
+              child: SafeArea(
+                left: false,
+                bottom: false,
+                right: false,
+                child: LegendPane(),
+              ),
+            ),
             width: 200.0,
           ),
       ],
@@ -265,40 +295,6 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
           style: TextStyle(fontSize: 20.0),
         ),
       ],
-    );
-  }
-}
-
-class LegendPane extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final legend = List.of(ref.watch(legendProvider));
-    if (legend.isEmpty) return Container();
-
-    final loc = AppLocalizations.of(context)!;
-    return Container(
-      padding: EdgeInsets.all(10.0),
-      constraints: BoxConstraints(minHeight: 150.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (final item in legend)
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(Icons.circle, color: item.color, size: 20.0),
-                SizedBox(width: 5.0),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
-                    child: Text(item.isOther ? loc.legendOther : item.label,
-                        style: kFieldTextStyle),
-                  ),
-                ),
-              ],
-            )
-        ],
-      ),
     );
   }
 }

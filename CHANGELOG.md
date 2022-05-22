@@ -4,6 +4,7 @@
 
 _Unreleased_
 
+* Redesigned app navigation.
 * Fixed issue with storing default payment tags.
 * Default locale is English now.
 * Added zooming buttons to the map when adding an object.

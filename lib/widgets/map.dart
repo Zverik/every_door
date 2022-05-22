@@ -9,6 +9,8 @@ import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/legend.dart';
+import 'package:every_door/providers/poi_filter.dart';
+import 'package:every_door/screens/settings.dart';
 import 'package:every_door/widgets/track_button.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +42,7 @@ class AmenityMap extends ConsumerStatefulWidget {
   final void Function(LatLng)? onDragEnd;
   final void Function(LatLng)? onTrack;
   final void Function(LatLngBounds)? onTap;
+  final VoidCallback? onFilterTap;
   final AmenityMapController? controller;
   final bool colorsFromLegend;
   final bool drawNumbers;
@@ -51,6 +54,7 @@ class AmenityMap extends ConsumerStatefulWidget {
     this.onDragEnd,
     this.onTrack,
     this.onTap,
+    this.onFilterTap,
     this.amenities = const [],
     this.otherObjects = const [],
     this.controller,
@@ -268,16 +272,51 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             : (InteractiveFlag.drag | InteractiveFlag.pinchZoom),
         plugins: [
           ZoomButtonsPlugin(),
-          TrackButtonPlugin(),
+          OverlayButtonPlugin(),
         ],
       ),
       nonRotatedLayers: [
-        TrackButtonOptions(
+        // Settings button
+        OverlayButtonOptions(
+          alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
+          padding: EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 10.0,
+          ),
+          icon: Icons.menu,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SettingsPage()),
+            );
+          },
+        ),
+        // Filter button
+        if (widget.onFilterTap != null)
+          OverlayButtonOptions(
+            alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
+            padding: EdgeInsets.symmetric(
+              horizontal: 0.0,
+              vertical: 10.0,
+            ),
+            icon: ref.watch(poiFilterProvider).isNotEmpty
+                ? Icons.filter_alt
+                : Icons.filter_alt_outlined,
+            onPressed: widget.onFilterTap!,
+          ),
+        // Tracking button
+        OverlayButtonOptions(
           alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
           padding: EdgeInsets.symmetric(
+            // horizontal: widget.onFilterTap == null ? 0.0 : 50.0,
             horizontal: 0.0,
-            vertical: 20.0,
+            vertical: widget.onFilterTap == null ? 10.0 : 60.0,
           ),
+          enabled: !ref.watch(trackingProvider),
+          icon: Icons.my_location,
+          onPressed: () {
+            ref.read(trackingProvider.state).state = true;
+          },
         ),
         if (widget.drawZoomButtons)
           ZoomButtonsOptions(

@@ -1,58 +1,78 @@
-import 'package:every_door/providers/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TrackButtonOptions extends LayerOptions {
+class OverlayButtonOptions extends LayerOptions {
+  /// Padding for the button.
   final EdgeInsets padding;
+
+  /// To which corner of the map should the button be aligned.
   final Alignment alignment;
 
-  TrackButtonOptions({
+  /// Function to call when the button is pressed.
+  final VoidCallback onPressed;
+
+  /// Icon to display.
+  final IconData icon;
+
+  /// Set to false to hide the button.
+  final bool enabled;
+
+  /// Add safe area to the bottom padding. Enable when the map is full-screen.
+  final bool safeBottom;
+
+  OverlayButtonOptions({
     Key? key,
     Stream<Null>? rebuild,
     this.alignment = Alignment.topRight,
     required this.padding,
+    required this.onPressed,
+    required this.icon,
+    this.enabled = true,
+    this.safeBottom = false,
   }) : super(key: key, rebuild: rebuild);
 }
 
-class TrackButtonPlugin implements MapPlugin {
+class OverlayButtonPlugin implements MapPlugin {
   @override
   Widget createLayer(
       LayerOptions options, MapState mapState, Stream<Null> stream) {
-    if (options is TrackButtonOptions) {
-      return TrackButtonLayer(options);
+    if (options is OverlayButtonOptions) {
+      return OverlayButtonLayer(options);
     }
     throw Exception(
         'Wrong options for TrackButtonPlugin: ${options.runtimeType}');
   }
 
   @override
-  bool supportsLayer(LayerOptions options) => options is TrackButtonOptions;
+  bool supportsLayer(LayerOptions options) => options is OverlayButtonOptions;
 }
 
-class TrackButtonLayer extends ConsumerWidget {
-  final TrackButtonOptions _options;
+class OverlayButtonLayer extends ConsumerWidget {
+  final OverlayButtonOptions _options;
 
-  const TrackButtonLayer(this._options);
+  const OverlayButtonLayer(this._options);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (ref.watch(trackingProvider)) return Container();
+    if (!_options.enabled) return Container();
 
+    EdgeInsets safePadding = MediaQuery.of(context).padding;
     return Positioned(
-      top: 0.0,
-      right: _options.alignment.x >= 0 ? 0.0 : null,
-      left: _options.alignment.x < 0 ? 0.0 : null,
+      bottom: _options.alignment.y > 0
+          ? (_options.safeBottom ? safePadding.bottom : 0.0)
+          : null,
+      top: _options.alignment.y <= 0 ? safePadding.top : null,
+      right: _options.alignment.x >= 0 ? safePadding.right : null,
+      left: _options.alignment.x < 0 ? safePadding.left : null,
       child: Padding(
         padding: _options.padding,
         child: OutlinedButton(
-          onPressed: () {
-            ref.read(trackingProvider.state).state = true;
-          },
+          onPressed: _options.onPressed,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(
-              Icons.my_location,
+              _options.icon,
               size: 30.0,
               color: Colors.black.withOpacity(0.5),
             ),
