@@ -19,6 +19,8 @@ _Released on 2022-05-22_
   after adding an entrance to it.
 * Maps can be rotated now.
 * Improved sorting in the imagery list.
+* Italian translation by @ricloy.
+* French translation by @paulhenry46.
 
 ### Editor
 
