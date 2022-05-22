@@ -4,9 +4,9 @@
 
 _Unreleased_
 
-* Redesigned app navigation.
-* Fixed issue with storing default payment tags.
+* Redesigned app navigation (thanks Alexey A for ideas).
 * Default locale is English now.
+* Fixed issue with storing default payment tags.
 * Added zooming buttons to the map when adding an object.
 * Added (black) entrances to that map as well.
 * Moved `tourism=picnic_site` to the micromapping mode.
