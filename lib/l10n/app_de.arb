@@ -48,7 +48,7 @@
     "settingsPurgedMessage": "{count,plural, =1{{count} Element gelöscht}, =few{{count} Elemente gelöscht}, =other{{count} Elemente gelöscht}}",
     "settingsUploads": "Ausstehende Uploads",
     "settingsBackground": "Hintergrund-Bildmaterial",
-    "settingsLeftHand": "Linkshändersteuerung"
+    "settingsLeftHand": "Linkshändersteuerung",
     "settingsEditor": "Editor",
     "settingsPreferContact": "\"contact:\"-Prefix bevorzugen",
     "settingsNumericKeyboard": "Numerische Tastatur erweitern",
@@ -151,7 +151,7 @@
     "addressUnitOptional": "optional",
     "addressStreet": "Straße",
     "addressPlace": "Ort",
-    "apiStatusDownloading": "Daten werden heruntergeladen"
-    "apiStatusUpdatingDB": "Elemente werden in der App-Datenbank gespeichert"
+    "apiStatusDownloading": "Daten werden heruntergeladen",
+    "apiStatusUpdatingDB": "Elemente werden in der App-Datenbank gespeichert",
     "apiStatusUploading": "Änderungen werden hochgeladen"
 }
