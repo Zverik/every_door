@@ -131,5 +131,45 @@
   "settingsApiServer": "Serwer API",
   "@settingsApiServer": {
     "description": "Section title for API server settings."
+  },
+  "fieldHoursButton": "Ustaw godziny otwarcia",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursWeekdays": "Pn Wt Śr Cz Pt So Nd",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursBreak": "Przerwa",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursFullDay": "Cały dzień",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursOpens": "Otwiera się",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursAddBreak": "Dodaj przerwę",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "changesPurgeMessage": "Usunąć wszystkie zarejestrowane zmiany i przywrócić oryginalne dane?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursTitle": "Godziny otwarcia",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursCloses": "Zamyka się",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursNext": "Dalej",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
   }
 }

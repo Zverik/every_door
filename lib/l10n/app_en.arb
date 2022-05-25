@@ -284,7 +284,7 @@
   "@accountPasswordTitle": {
     "description": "Title for the input dialog for login and password."
   },
-  "accountFieldLogin": "Log in",
+  "accountFieldLogin": "Username",
   "@accountFieldLogin": {
     "description": "Label for the OSM login."
   },
