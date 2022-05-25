@@ -165,6 +165,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       moreFields = [];
       stdFields = [];
     });
+    // if disused, remove disused: prefix before removing tags
+    // otherwise we may end up with disused:<old_mainKey>=* + <new_mainKey>=*
+    if (amenity.isDisused) amenity.toggleDisused();
     oldPreset?.doRemoveTags(amenity);
     preset = newPreset;
     preset!.doAddTags(amenity);
