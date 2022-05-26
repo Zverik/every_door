@@ -1,17 +1,17 @@
 {
-  "loadingStart": "Démarrage...",
+  "loadingStart": "Démarrage…",
   "@loadingStart": {
     "description": "Message initial pour l'écran de chargement, presque invisible."
   },
-  "loadingPresets": "Chargement des préréglages",
+  "loadingPresets": "Chargement des préréglages…",
   "@loadingPresets": {
     "description": "Message de l'écran de chargement des préréglages."
   },
-  "loadingChanges": "Chargement des modifications",
+  "loadingChanges": "Chargement des modifications…",
   "@loadingChanges": {
     "description": "Message de l'écran de chargement des modifications enregistrées."
   },
-  "loadingLocation": "Acquisition de la position",
+  "loadingLocation": "Acquisition de la position…",
   "@loadingLocation": {
     "description": "Message d'écran de chargement pour le lancement du GPS et l'attente de la localisation."
   },
@@ -39,7 +39,7 @@
   "@tileDragTheMap": {
     "description": "Message affiché quand rien n'est trouvé autour de la position."
   },
-  "tileDragOrUnfilter": "Rapprochez-vous de quoi que ce soit, ajoutez une boutique manquante ou désactivez les filtres",
+  "tileDragOrUnfilter": "Rapprochez-vous de quoi que ce soit, ajoutez une boutique manquante ou désactivez les filtres.",
   "@tileDragOrUnfilter": {
     "description": "Message affiché quand rien n'est trouvé autour de la position et qu'un filtre est activé."
   },
@@ -95,7 +95,7 @@
   "@editorMoreFields": {
     "description": "Titre d'un groupe de champs supplémentaires dans l'éditeur."
   },
-  "editorLoadingPreset": "Chargement des préréglages...",
+  "editorLoadingPreset": "Chargement des préréglages…",
   "@editorLoadingPreset": {
     "description": "Message affiché pendant le chargement des préréglages dans l'éditeur."
   },
@@ -132,7 +132,7 @@
       }
     }
   },
-  "editorDeleteTitle": "Supprimer {amenity}?",
+  "editorDeleteTitle": "Supprimer {amenity} ?",
   "@editorDeleteTitle": {
     "description": "Titre de la boite de dialogue lors de la suppression d'une boutique.",
     "placeholders": {
@@ -240,7 +240,7 @@
   "@settingsEditor": {
     "description": "Titre pour les paramètres de la section de l'éditeur"
   },
-  "settingsPreferContact": "Préférer le préfixe \"contact:\".",
+  "settingsPreferContact": "Utiliser le préfixe \"contact:\"",
   "@settingsPreferContact": {
     "description": "Paramètre pour utiliser par ex contact:phone=* à la place de phone=*."
   },
@@ -296,7 +296,7 @@
   "@accountAuthErrorTitle": {
     "descripton": "Titre de la boîte de dialogue d'alerte concernant un potentiel mot de passe incorrect."
   },
-  "accountAuthErrorMessage": "Mauvais identifiant ou mot de passe",
+  "accountAuthErrorMessage": "Mauvais identifiant ou mot de passe.",
   "@accountAuthErrorMessage": {
     "descripton": "Message pour la boîte de dialogue d'alerte concernant un mot de passe incorrect."
   },
@@ -319,11 +319,11 @@
       "count": {}
     }
   },
-  "changesUploadedTitle": "Envoyé !",
+  "changesUploadedTitle": "Envoyé",
   "@changesUploadedTitle": {
     "description": "Titre de la notification d'un envoi réussi."
   },
-  "changesUploadedMessage": " {changes} ont été envoyés à l'API.",
+  "changesUploadedMessage": "{changes} ont été envoyés à l'API.",
   "@changesUploadedMessage": {
     "description": "Message de la notification d'un envoi réussi.",
     "placeholders": {
@@ -337,7 +337,7 @@
   "@changesUploadFailedTitle": {
     "descripton": "Titre de la notification concernant l'échec de l'envoi des modifications."
   },
-  "changesDeletedChange": " {change} supprimé",
+  "changesDeletedChange": "{change} supprimé",
   "@changesDeletedChange": {
     "description": "Message après avoir fait glissé une changement pour le supprimer.",
     "placeholders": {
@@ -355,7 +355,7 @@
   "@changesPending": {
     "description": "Sous-titre d'un changement qui n'a pas encore été envoyé à l'API OSM."
   },
-  "changesPurgeTitle": "Supprimer tous les changement?",
+  "changesPurgeTitle": "Supprimer tous les changements ?",
   "@changesPurgeTitle": {
     "description": "Titre de la boîte de dialogue permettant de confirmer la suppression de toutes les modifications."
   },
@@ -491,7 +491,7 @@
   "@messageDataObsolete": {
     "description": "Message qui apparaît sur l'écran principal lorsque les données OSM sont obsolètes."
   },
-  "enableGPS" : "Activez le GPS",
+  "enableGPS": "Activez le GPS",
   "@enableGPS": {
     "description": "Titre de l'alerte pour l'activation de la localisation."
   },
@@ -500,7 +500,7 @@
     "description": "Contenu de l'alerte pour l'activation de la localisation.."
   },
   "enableLocation": "Autorisez l'acces à la position",
-  "@enableLocation":  {
+  "@enableLocation": {
     "description": "Titre de l'alerte permettant à l'application d'accéder à la localisation."
   },
   "enableLocationMessage": "Veuillez autoriser l'accès à la position à l'application dans le panneau de configuration qui s'affiche.",
@@ -554,13 +554,21 @@
     "description": "Libellé du bouton permettant d'ouvrir l'objet du bâtiment dans un éditeur complet."
   },
   "buildingTypeHouse": "maison",
+  "@buildingTypeHouse": {},
   "buildingTypeApartments": "appartement",
+  "@buildingTypeApartments": {},
   "buildingTypeRetail": "magasin",
+  "@buildingTypeRetail": {},
   "buildingTypeCommercial": "bureaux",
+  "@buildingTypeCommercial": {},
   "buildingTypeShed": "Hangar",
+  "@buildingTypeShed": {},
   "buildingTypeIndustrial": "usine",
+  "@buildingTypeIndustrial": {},
   "buildingTypeGarage": "garage",
+  "@buildingTypeGarage": {},
   "buildingTypeConstruction": "en construction",
+  "@buildingTypeConstruction": {},
   "entranceFlats": "numéros de portes",
   "@entranceFlats": {
     "description": "Étiquette pour addr:flats dans le formulaire. Garder le plus court pssible."
@@ -582,9 +590,13 @@
     "description": "Etquette pour l'accès de l'entrée dans le formulaire. Garder le plus court pssible."
   },
   "entranceAccessYes": "Oui",
+  "@entranceAccessYes": {},
   "entranceAccessPrivate": "Privé",
+  "@entranceAccessPrivate": {},
   "entranceAccessNo": "Non",
+  "@entranceAccessNo": {},
   "entranceAccessDelivery": "Livraison",
+  "@entranceAccessDelivery": {},
   "entranceWheelchair": "Chaise Roulante",
   "@entranceWheelchair": {
     "description": "Étiquette pour un entrée pour fauteuils roulants dans le formulaire. Garder le plus court pssible."
@@ -594,12 +606,19 @@
     "description": "Étiquette pour le type d'entrée (valeur de entrance=* ) dans le formulaire. Garder le plus court pssible."
   },
   "entranceTypeMain": "principale",
+  "@entranceTypeMain": {},
   "entranceTypeStaircase": "cage d'escaliers",
+  "@entranceTypeStaircase": {},
   "entranceTypeHome": "une maison",
+  "@entranceTypeHome": {},
   "entranceTypeShop": "une boutique",
+  "@entranceTypeShop": {},
   "entranceTypeService": "de service",
+  "@entranceTypeService": {},
   "entranceTypeGarage": "d'un garage",
+  "@entranceTypeGarage": {},
   "entranceTypeEmergency": "d'urgence",
+  "@entranceTypeEmergency": {},
   "addressHouseNumber": "Maison",
   "@addressHouseNumber": {
     "description": "Étiquette pour addr:housenumber dans le formulaire. Garder le plus court pssible."
@@ -624,7 +643,7 @@
   "@addressPlace": {
     "description": "Étiquette pour addr:place ou addr:city dans le formulaire. Garder le plus court pssible."
   },
-  "apiStatusDownloading": "Téléchargement des données",
+  "apiStatusDownloading": "Téléchargement des données…",
   "@apiStatusDownloading": {
     "description": "Affiché quand l'app télécharge des données depuis l'API."
   },
@@ -635,5 +654,16 @@
   "apiStatusUploading": "Envoi des objets",
   "@apiStatusUploading": {
     "description": "Texte affiché lorsque l'application envoie des données vers l'API."
-  }
+  },
+  "addressX": "Adresse {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingTypeAddress": "Adresse",
+  "@buildingTypeAddress": {}
 }
