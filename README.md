@@ -19,9 +19,8 @@ they are managed in a dedicated repository and translated on Transifex.
 
 Brands are managed in the [Name Suggestion Index](https://github.com/osmlab/name-suggestion-index).
 
-For the time being Every Door localization is contained
-[along the code](https://github.com/Zverik/every_door/tree/main/lib/l10n). You can either
-make a new ARB file, or wait until I publish the translations to Weblate.
+Help translate the app at [Weblate](https://hosted.weblate.org/projects/every-door/app/). I'm grateful
+to them for a libre hosting.
 
 ## Design
 
