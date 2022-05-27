@@ -171,5 +171,136 @@
   "fieldHoursNext": "Dalej",
   "@fieldHoursNext": {
     "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldCardsAccepted": "akceptowane",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "enableLocationMessage": "Zezwól aplikacji na dostęp do lokalizacji w panelu ustawień, który zostanie wyświetlony.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonYes": "Tak",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "Nie",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingX": "Budynek {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "addressX": "Adres {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "entranceX": "Wejście {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingLevels": "Piętra",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Piętra w dachu",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "Kształt dachu",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "Rodzaj",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Pokaż więcej",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingTypeAddress": "adres",
+  "@buildingTypeAddress": {},
+  "buildingTypeCommercial": "komercyjny",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "szopa",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "przemysłowy",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeGarage": "garaż",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "w budowie",
+  "@buildingTypeConstruction": {},
+  "entranceIsUnit": "Zapisz numer mieszkania w addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceAccess": "Dostęp",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "fieldPhoneWrong": "Nieprawidłowy format numeru telefonu",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "fieldFloorFloorDesc": "Piętro jak na nawigacji i w windach",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "entranceFlats": "Mieszkania",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "fieldCheckboxYes": "tak",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "nie",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "messageNoData": "Brak danych, dotknij tutaj, aby pobrać",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "fieldFloorLevelDesc": "Numer piętra zaczynający się od 0 dla parteru",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "messageDataObsolete": "Dane są przestarzałe, dotknij tutaj, aby odświeżyć",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "Włącz GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Włącz usługi lokalizacyjne w panelu ustawień, który zostanie wyświetlony.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocation": "Włącz lokalizację",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "entranceFlatsNumberList": "Powinna to być lista liczb",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
   }
 }
