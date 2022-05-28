@@ -1,11 +1,11 @@
 {
   "loadingStart": "Inizializzazione…",
   "@loadingStart": {},
-  "loadingPresets": "Caricamento dei preset",
+  "loadingPresets": "Caricamento dei preset…",
   "@loadingPresets": {},
-  "loadingChanges": "Caricamento delle modifiche",
+  "loadingChanges": "Caricamento delle modifiche…",
   "@loadingChanges": {},
-  "loadingLocation": "Acquisizione della posizione",
+  "loadingLocation": "Acquisizione della posizione…",
   "@loadingLocation": {},
   "loadingChangesFailed": "Caricamento delle modifiche fallito",
   "@loadingChangesFailed": {},
@@ -322,5 +322,16 @@
   "apiStatusUpdatingDB": "Salvataggio degli elementi nel database dell’app",
   "@apiStatusUpdatingDB": {},
   "apiStatusUploading": "Caricamento delle modifiche",
-  "@apiStatusUploading": {}
+  "@apiStatusUploading": {},
+  "addressX": "Indirizzo {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingTypeAddress": "Indirizzo",
+  "@buildingTypeAddress": {}
 }
