@@ -149,7 +149,7 @@
   "@changesCount": {},
   "changesUploadedTitle": "Caricato",
   "@changesUploadedTitle": {},
-  "changesUploadedMessage": "Inviato {changes} alle API.",
+  "changesUploadedMessage": "{changes} inviati all'API.",
   "@changesUploadedMessage": {},
   "changesUploadFailedTitle": "Caricamento fallito",
   "@changesUploadFailedTitle": {},
@@ -317,7 +317,7 @@
   "@addressStreet": {},
   "addressPlace": "Località",
   "@addressPlace": {},
-  "apiStatusDownloading": "Scaricamento dati…",
+  "apiStatusDownloading": "Scaricamento dei dati…",
   "@apiStatusDownloading": {},
   "apiStatusUpdatingDB": "Salvataggio degli elementi nel database dell’app",
   "@apiStatusUpdatingDB": {},
@@ -332,6 +332,6 @@
       }
     }
   },
-  "buildingTypeAddress": "Indirizzo",
+  "buildingTypeAddress": "indirizzo",
   "@buildingTypeAddress": {}
 }
