@@ -99,7 +99,7 @@
   "@settingsPurgedObsoleteTitle": {},
   "settingsPurgedAllTitle": "Dati cancellati",
   "@settingsPurgedAllTitle": {},
-  "settingsPurgedMessage": "{count,plural, =1{Liberato {count} elemento}, =few{Liberati {count} elementi}, =other{Liberati {count} elementi}}",
+  "settingsPurgedMessage": "{count,plural, =1{Pulito {count} elemento}, =few{Puliti {count} elementi}, =other{Puliti {count} elementi}}",
   "@settingsPurgedMessage": {},
   "settingsUploads": "Caricamenti in sospeso",
   "@settingsUploads": {},
