@@ -1,1 +1,238 @@
-{}
+{
+  "loadingPresets": "درحال بارگیری تنظیمات از پیش تعیین شده…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingChangesFailed": "تغییرات بارگیری نشد",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "tileNo": "نه",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "filterNonConfirmed": "فقط تایید نشده",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "editorSave": "ذخیره",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorCloseTitle": "ویرایشگر را می‌بندید؟",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "تغییرات ذخیره نشده خود را از دست خواهید داد. ادامه می‌دهید؟",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorMoreFields": "فیلدهای بیشتر",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorRestore": "بازگرداندن",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorDeleteButton": "حذف",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsKey": "کلید",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "مقدار",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "settingsPurgeDataMessage": "شما باید همه چیز را دوباره دانلود کنید. ادامه می‌دهید؟",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "accountFieldPassword": "کلمه‌عبور",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountChangesets": "تغییرات",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "changesDeletedUndo": "واگرد",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesPending": "در انتظار",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "accountPasswordWarningMessage": "رمزعبور شما در دستگاه ذخیره می‌شود. فقط زمانی این را انتخاب کنید که OAuth ناموفق باشد.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "changesPurgeMessage": "همه تغییرات ثبت شده حذف شود و داده‌های اصلی بازیابی شوند؟",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursNext": "بعدی",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldComboEmpty": "خالی",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "انتخاب کنید",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "نه",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "عمومی",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "مشتریان",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "بله",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "محدود",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "نه",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCheckboxNo": "نه",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "enableGPSMessage": "لطفاً خدمات مکان را در پنل تنظیماتی که نشان داده می‌شود روشن کنید.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "buttonYes": "بله",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "نه",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingLevels": "طبقات",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingType": "نوع",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingTypeAddress": "نشانی",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "خانه",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "آپارتمان‌ها",
+  "@buildingTypeApartments": {},
+  "buildingTypeGarage": "گاراژ",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "ساخت و ساز",
+  "@buildingTypeConstruction": {},
+  "entranceRef": "مرجع",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccessPrivate": "خصوصی",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "نه",
+  "@entranceAccessNo": {},
+  "editorMove": "حرکت",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "loadingStart": "درحال راه‌اندازی…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingChanges": "درحال بارگیری تغییرات…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "chooseLocation": "مکان را انتخاب کنید",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "نوع را انتخاب کنید",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "legendOther": "دیگر",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "filterByAddress": "با آدرس",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterEmpty": "خالی",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "changesUploadedTitle": "آپلود شد",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "settingsTitle": "پیکربندی",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "fieldCardsNo": "نه",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCardsAccepted": "پذیرفته شده",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "buildingMoreButton": "بیشتر",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingTypeCommercial": "تجاری",
+  "@buildingTypeCommercial": {},
+  "settingsPresentation": "ارائه",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "accountFieldLogin": "نام کاربری",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "buildingTypeIndustrial": "صنعتی",
+  "@buildingTypeIndustrial": {},
+  "settingsEditor": "ویرایشگر",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "accountPasswordWarningTitle": "هشدار",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "buildingTypeShed": "دهنه",
+  "@buildingTypeShed": {},
+  "fieldCheckboxYes": "بله",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "enableLocationMessage": "لطفاً در پنل تنظیماتی که نشان داده خواهد شد، به برنامه اجازه دسترسی به مکان را بدهید.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  }
+}
