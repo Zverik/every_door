@@ -1,0 +1,669 @@
+{
+  "settingsApiServer": "API-server",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "loadingChanges": "Laddar ändringar…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingChangesFailed": "Kunde inte ladda ändringar",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingStart": "Initialiserar…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingPresets": "Laddar förinställningar…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingLocation": "Hämtar plats…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "filterByAddress": "Efter adress",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterByFloor": "Efter våning",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "filterNoAddresses": "Inga adresser i närheten",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterNonConfirmed": "Endast obekräftade",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "tileDragOrUnfilter": "Vänlig gå omkring, lägg till ett ställe, eller rensa filtret.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "tileDragTheMap": "Vänligen gå närmare något, drag i kartan, eller lägg till ett ställe som saknas.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileNothingAround": "Inga ställen inom {distance} meter från dig.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "filterEmpty": "tomt",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "tileNo": "ej",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "legendOther": "Annan",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "chooseLocation": "Välj plats",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "Välj typ",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Rensa",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "editorCloseTitle": "Stäng editorn?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "Du kommer att förlora osparade ändringar. Fortsätt?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorMove": "Flytta",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorMarkActive": "Markera som aktiv",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Markera som nedlagd",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "tagsAddTag": "Lägg till etikett",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Nyckel",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Värde",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "editorRestore": "Återställ",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorDeleteButton": "Tag bort",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "editorDeleteTitle": "Tag bort {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorRestoreMessage": "{amenity} är inaktiv. Vill du markera den som aktiv?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsNewPoint": "Nytt ställe",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "editorRestoreTitle": "Är det öppet?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "tagsKeyError": "Nyckel är för sällsynt",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsValueLong": "Värdet är för långt",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "settingsTitle": "Inställningar",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsLoginDetails": "OSM-konto",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsDataManagement": "Datahantering",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsPresentation": "Presentation",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsPurgeData": "Rensa obsolet cachad data",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsUploads": "Väntande uppladdningar",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsPurgedObsoleteTitle": "Obsolet data",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "Tog bort data",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Tog bort {count} element}, =few{Tog bort {count} element}, =other{Tog bort {count} element}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsBackground": "Bakgrundsbilder",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsEditor": "Editor",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsPreferContact": "Föredra \"contact:\"-prefix",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsDefaultPayment": "Standardbetalkort",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "accountPasswordWarningTitle": "Varning",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountOAuthError": "OAuth-fel",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountPasswordTitle": "Inloggningsuppgifter OSM",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountPasswordWarningButton": "Förstått",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldLogin": "Användarnamn",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountAuthErrorTitle": "Autentiseringsfel",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountChangesets": "Ändringsuppsättningar",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountUnreadMail": "Olästa meddelanden",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesUploadedTitle": "Uppladdade",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadedMessage": "Skickade {changes} till API:t.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesUploadFailedTitle": "Uppladdning misslyckades",
+  "@changesUploadFailedTitle": {
+    "descripton": "Title for the notification about a failed changes upload."
+  },
+  "fieldHoursTitle": "Öppettider",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursCloses": "Stänger",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "changesDeletedChange": "Tog bort {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesDeletedUndo": "Ångra",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesPurgeTitle": "Rensa ändringar?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "fieldHoursButton": "Ange öppettider",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursFullDay": "Hela dagen",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursBreak": "Uppehåll",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursWeekdays": "Må Ti On To Fr Lö Sö",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "Stängd på helgdagar",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursNext": "Nästa",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursAddFragment": "Lägg till fragment",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldComboEmpty": "tom",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldWifiCustomers": "kunder",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldComboChoose": "välj",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldCardsAccepted": "accepteras",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "nej",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCheckboxYes": "ja",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldAddressTap": "Tryck på en adress",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldFloorNew": "Ny våning",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorFloorDesc": "Våning som angiven på navigationsskylt och i hissar",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "messageNoData": "Ingen data, tryck här för att ladda ned",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "enableGPS": "Slå på GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "messageDataObsolete": "Data obsolet, tryck här för att uppdatera",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "fieldPhoneWrong": "Felaktigt format på telefonnumret",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "buttonNo": "Nej",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "enableLocationMessage": "Vänligen ge appen platstillgång i inställningspanelen som kommer att visas.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "enableLocation": "Slå på plats",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "addressX": "Adress {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingType": "Typ",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Mer",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingRoofShape": "Takform",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingTypeApartments": "lägenheter",
+  "@buildingTypeApartments": {},
+  "entranceX": "Entré {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingTypeRetail": "butiksbyggnad",
+  "@buildingTypeRetail": {},
+  "buildingTypeAddress": "adress",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "villa",
+  "@buildingTypeHouse": {},
+  "entranceFlatsNumberList": "Ska vara en lista av tal",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceType": "Typ",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeStaircase": "trappa",
+  "@entranceTypeStaircase": {},
+  "entranceTypeMain": "huvudentré",
+  "@entranceTypeMain": {},
+  "entranceAccessYes": "öppen",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "privat",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "nej",
+  "@entranceAccessNo": {},
+  "entranceAccessDelivery": "leverans",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "Rullstol",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceAccess": "Åtkomst",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceFlats": "Lägenheter",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "buildingTypeGarage": "garage",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "under konstruktion",
+  "@buildingTypeConstruction": {},
+  "buildingTypeIndustrial": "industribyggnad",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeShed": "skjul",
+  "@buildingTypeShed": {},
+  "buildingTypeCommercial": "kommersiell byggnad",
+  "@buildingTypeCommercial": {},
+  "entranceRef": "Ref",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceTypeGarage": "garage",
+  "@entranceTypeGarage": {},
+  "entranceTypeService": "service",
+  "@entranceTypeService": {},
+  "entranceTypeHome": "husdörr",
+  "@entranceTypeHome": {},
+  "addressHouseNumber": "Husnummer",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Får inte vara tomt",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "entranceTypeEmergency": "nödutgång",
+  "@entranceTypeEmergency": {},
+  "addressUnit": "Enhet",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "valfritt",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressPlace": "Plats",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "apiStatusUploading": "Laddar upp ändringar",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "settingsPurgeAllData": "Rensa all nedladdad data",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataTitle": "Ta bort data?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "Du kommer att behöva ladda ned allt på nytt. Fortsätt?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "accountTitle": "OpenStreetMap-konto",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLogout": "Logga ut",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "settingsNumericKeyboard": "Utökat numeriskt tangentbord",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "accountLoginOAuth": "Logga in med OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountLoginPassword": "Logga in med lösenord",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningMessage": "Ditt lösenord kommer att lagras på denna enhet. Välj detta endast om OAuth inte fungerar.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldPassword": "Lösenord",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "fieldHoursOpens": "Öppnar",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "accountAuthErrorMessage": "Felaktigt användarnamn eller lösenord.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "buildingLevels": "Våningar",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "changesPending": "Väntande",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "buttonYes": "Ja",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "apiStatusDownloading": "Laddar ned data…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "editorMoreFields": "Fler fält",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "addressStreet": "Gata",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "editorSave": "Spara",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "changesCount": "{count,plural, =1{{count} ändring}, =few{{count} ändringar, =other{{count} ändringar}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "tagsUrlCopied": "URL kopierad till klippbordet",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "fieldWheelchairNo": "nej",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "editorLoadingPreset": "Laddar förinställning…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMissing": "Existerar inte",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "fieldWifiNo": "nej",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWheelchairLimited": "begränsad",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "settingsLeftHand": "Anpassa för vänsterhänta",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "fieldWifiPublic": "allmänhet",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWheelchairYes": "ja",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "buildingX": "Byggnad {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "apiStatusUpdatingDB": "Sparar element till appens databas",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "fieldCheckboxNo": "nej",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldHoursAddBreak": "Lägg till uppehåll",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "enableGPSMessage": "Vänligen aktivera platstjänster i den inställningspanel som kommer att visas.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "entranceIsUnit": "Lagra lägenhetsnumret i addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "fieldFloorShouldBeNumber": "Vänligen ange ett tal",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldFloorLevelDesc": "Våningsnummer med början från 0 för gatuplan",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "changesPurgeMessage": "Ta bort alla sparade ändringar och återställ originaldata?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "buildingRoofLevels": "Takvåningar",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "fieldFloorEmpty": "För att välja våning, ange en adress.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "entranceTypeShop": "butik",
+  "@entranceTypeShop": {}
+}

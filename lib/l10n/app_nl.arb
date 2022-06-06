@@ -1,0 +1,669 @@
+{
+  "legendOther": "Andere",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "loadingPresets": "Voorinstellingen aan het laden…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "tileNo": "geen",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "tileDragOrUnfilter": "Beweeg alstublieft, voeg een POI toe, of wis de filter.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "filterByAddress": "Op adres",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "chooseLocation": "Kies locatie",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "Kies soort",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Wis",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "editorMoreFields": "Meer velden",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorMove": "Verplaats",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorRestoreTitle": "Is het geopend?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorDeleteButton": "Verwijder",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsUrlCopied": "Weblink naar het klembord gekopieerd",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsNewPoint": "Nieuw punt",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsAddTag": "Tag toevoegen",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Sleutel",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Waarde",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsKeyError": "Sleutel komt te weinig voor",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsValueLong": "Waarde is te lang",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "settingsTitle": "Instellingen",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsLoginDetails": "OSM-account",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeAllData": "Alle gedownloade gegevens verwijderen",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgedObsoleteTitle": "Verouderde gegevens",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "Gegevens verwijderd",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsUploads": "In afwachting van uploads",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsLeftHand": "Besturing voor linker hand",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsEditor": "Editor",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsPreferContact": "Verkies \"contact:\" prefix",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsDefaultPayment": "Standaard betaalkaarten",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "accountLoginOAuth": "Log in met OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "OAuth fout",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountPasswordTitle": "OSM gegevens",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountAuthErrorTitle": "Authenticatiefout",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountChangesets": "Wijzigingensets",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "changesUploadedTitle": "Geüpload",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadFailedTitle": "Upload mislukt",
+  "@changesUploadFailedTitle": {
+    "descripton": "Title for the notification about a failed changes upload."
+  },
+  "changesPending": "Openstaand",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "fieldHoursButton": "Voeg openingsuren toe",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursTitle": "Openingsuren",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursFullDay": "Voortdurend geopend",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "changesDeletedChange": "{change} verwijderd",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "fieldHoursAddBreak": "Voeg een pauze toe",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursWeekdays": "Ma Di Wo Do Vr Za Zo",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursAddFragment": "Voeg een fragment toe",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldWifiPublic": "openbaar",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "klanten",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldCardsAccepted": "toegelaten",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "neen",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldFloorEmpty": "Om een verdieping te kiezen, stel een adres in.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorNew": "Nieuwe verdieping",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "enableGPS": "Activeer GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Zet alstublieft locatieservices aan in de instellingen die getoond worden.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocation": "Laat positiebepaling toe",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "buttonYes": "Ja",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buildingRoofShape": "Dakvorm",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingTypeHouse": "huis",
+  "@buildingTypeHouse": {},
+  "buildingTypeShed": "schuur",
+  "@buildingTypeShed": {},
+  "buildingTypeGarage": "garage",
+  "@buildingTypeGarage": {},
+  "entranceFlats": "Huisnummers",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceAccessYes": "open",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "privé",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "neen",
+  "@entranceAccessNo": {},
+  "entranceTypeMain": "hoofdingang",
+  "@entranceTypeMain": {},
+  "entranceTypeStaircase": "trappenhal",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "huisingang",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "winkelingang",
+  "@entranceTypeShop": {},
+  "addressHouseNumber": "Huisnummer",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "loadingStart": "Aan het initialiseren…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "addressHouseNotEmpty": "Zou niet leeg mogen zijn",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Wooneenheid",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "optioneel",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "apiStatusDownloading": "Gegevens aan het downloaden…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "Gegevens aan het opslaan in de databank van de app",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "loadingChanges": "Wijzigingen aan het laden…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingChangesFailed": "Fout: kon wijzigingen niet laden",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingLocation": "Locatie aan het bepalen…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "tileDragTheMap": "Nader alstublieft dichter tot iets, versleep de kaart, of voeg een nieuwe POI toe.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileNothingAround": "Geen POI in jouw buurt in {distance} meter.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "filterNoAddresses": "Geen adressen in de buurt",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterByFloor": "Op verdieping",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "editorCloseMessage": "Uw niet-opgeslagen wijzingen zullen verloren gaan. Wil u toch sluiten?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "filterEmpty": "leeg",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "editorSave": "Opslaan",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorCloseTitle": "De editor sluiten?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "filterNonConfirmed": "Enkel niet-bevestigde",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "editorMarkDefunct": "Duid aan als gesloten",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorMissing": "Bestaat niet",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorLoadingPreset": "Voorinstellingen aan het laden…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorRestore": "Herstel",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorMarkActive": "Duid aan als actief",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorRestoreMessage": "{amenity} is gesloten. Wil u het als actief aanduiden?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "fieldHoursNext": "Volgende",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "editorDeleteTitle": "{amenity} verwijderen?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "settingsPresentation": "Voorstelling",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsDataManagement": "Databeheer",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsApiServer": "API server",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsPurgeData": "Verouderde gegevens uit de cache verwijderen",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "accountLoginPassword": "Log in met wachtwoord",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "settingsPurgeDataMessage": "U zal alle gegevens opnieuw moeten downloaden. Wil u zeker verdergaan?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgeDataTitle": "Alle gegevens verwijderen?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Purged {count} element verwijderd}, =few{{count} elementen verwijderd}, =other{ {count} elementen verwijderd}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "accountPasswordWarningMessage": "Uw wachtwoord wordt op het apparaat opgeslagen. Kies enkel voor deze optie als OAuth niet werkt.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "settingsBackground": "Achtergrondafbeeldingen",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsNumericKeyboard": "Uitgebreide numerieke toetsenbord",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "accountTitle": "OpenStreetMap account",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountPasswordWarningTitle": "Opgelet",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "Begrepen",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldLogin": "Gebruikersnaam",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountFieldPassword": "Wachtwoord",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountLogout": "Uitloggen",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "changesCount": "{count,plural, =1{{count} wijziging}, =few{{count} wijzigingen}, =other{{count} wijzigingen}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "accountAuthErrorMessage": "Foute gebruikersnaam of wachtwoord.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "changesUploadedMessage": "{changes} naar de API gestuurd.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "accountUnreadMail": "Ongelezen berichten",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesDeletedUndo": "Ongedaan maken",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesPurgeTitle": "Alle wijzigingen verwijderen?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "fieldHoursOpens": "Opent om",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursBreak": "Pauze",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "enableLocationMessage": "Laat alstublieft locatiebepaling door de app toe in de instellingen die getoond worden.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "changesPurgeMessage": "Alle opgeslagen wijzigingen verwijderen en de oorspronkelijke gegevens herstellen?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursCloses": "Sluit om",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldComboEmpty": "leeg",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldHoursClosedPH": "Gesloten op feestdagen",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldWheelchairLimited": "beperkt",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWifiNo": "neen",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldComboChoose": "selecteer",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWheelchairNo": "neen",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldWheelchairYes": "ja",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldCheckboxYes": "ja",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldPhoneWrong": "Verkeerde notatie voor een telefoonnummer",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "entranceTypeGarage": "garage-ingang",
+  "@entranceTypeGarage": {},
+  "fieldCheckboxNo": "neen",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorShouldBeNumber": "Geef alstublieft een getal in",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "entranceX": "Ingang {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingType": "Soort",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingX": "Gebouw {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "fieldFloorFloorDesc": "Verdieping zoals op de navigatie en in liften",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "Verdieping, te beginnen bij nul voor de begane grond",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "addressX": "Adres {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingLevels": "Verdiepingen",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Verdiepingen in dak",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "messageDataObsolete": "Gegevens zijn verouderd, klik hier om te herladen",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "fieldAddressTap": "Klik op een adres",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "messageNoData": "Geen gegevens, klik hier om deze te downloaden",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "buttonNo": "Neen",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingTypeCommercial": "commercieel",
+  "@buildingTypeCommercial": {},
+  "buildingTypeConstruction": "in opbouw",
+  "@buildingTypeConstruction": {},
+  "buildingMoreButton": "Meer",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingTypeIndustrial": "industrieel",
+  "@buildingTypeIndustrial": {},
+  "entranceRef": "Ref",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "buildingTypeAddress": "adres",
+  "@buildingTypeAddress": {},
+  "entranceFlatsNumberList": "Zou een lijst getallen moeten zijn",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "buildingTypeApartments": "appartementen",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "detailhandel",
+  "@buildingTypeRetail": {},
+  "entranceWheelchair": "Rolstoel",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceIsUnit": "Sla het huisnummer op in addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceAccess": "Toegang",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessDelivery": "levering",
+  "@entranceAccessDelivery": {},
+  "entranceType": "Soort",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "apiStatusUploading": "Gegevens aan het uploaden",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "entranceTypeService": "dienstingang",
+  "@entranceTypeService": {},
+  "entranceTypeEmergency": "nooduitgang",
+  "@entranceTypeEmergency": {},
+  "addressStreet": "Straat",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "Stad",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  }
+}

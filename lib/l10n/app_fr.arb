@@ -83,11 +83,11 @@
   "@editorSave": {
     "description": "Titre du bouton Sauvegarder dans l'éditeur"
   },
-  "editorCloseTitle": "Fermer l'éditeur ?",
+  "editorCloseTitle": "Fermer l'éditeur ?",
   "@editorCloseTitle": {
     "description": "Titre pour le message sur la fermeture de l'éditeur avec des modifications pas encore enregistrées."
   },
-  "editorCloseMessage": "Vous perdrez les modifications non Sauvegardées. Continuer ?",
+  "editorCloseMessage": "Vous perdrez les modifications non sauvegardées. Continuer ?",
   "@editorCloseMessage": {
     "description": "Message sur la fermeture de l'éditeur avec des modifications pas encore enregistrées."
   },
@@ -103,7 +103,7 @@
   "@editorMove": {
     "description": "Étiquette pour la carte, une indication que vous pouvez déplacer l'objet."
   },
-  "editorMarkActive": "Marquer come Actif",
+  "editorMarkActive": "Marquer comme Actif",
   "@editorMarkActive": {
     "description": "Titre du bouton permettant de marquer un équipement actif."
   },
@@ -111,7 +111,7 @@
   "@editorMarkDefunct": {
     "description": "Titre du bouton pour marquer un équipement comme inactif (désaffecté, fermé, mais toujours présent)."
   },
-  "editorRestore": "Restorer",
+  "editorRestore": "Restaurer",
   "@editorRestore": {
     "description": "Titre du bouton pour restaurer une boutique supprimée (tant que ce n'est pas envoyé)."
   },
@@ -119,7 +119,7 @@
   "@editorMissing": {
     "description": "Titre du bouton pour supprimer une boutique (puisqu'elle n'existe pas)."
   },
-  "editorRestoreTitle": "Est-ce ouvert ?",
+  "editorRestoreTitle": "Est-ce ouvert ?",
   "@editorRestoreTitle": {
     "description": "Titre de la question sur la restauration d'un équipement inactif."
   },
@@ -153,7 +153,7 @@
   "@tagsNewPoint": {
     "description": "Titre du panneau de l'éditeur de balises pour une nouvelle boutique."
   },
-  "tagsAddTag": "Ajouter un tag",
+  "tagsAddTag": "Ajouter une étiquette",
   "@tagsAddTag": {
     "description": "Bouton du panneau Balises permettant d'ajouter un nouveau tag."
   },
@@ -165,7 +165,7 @@
   "@tagsValue": {
     "description": "Panneau Balises, ajouter une nouvelle balise : une valeur"
   },
-  "tagsKeyError": "La Clé est inhabituelle",
+  "tagsKeyError": "La clé est inhabituelle",
   "@tagsKeyError": {
     "description": "Erreur de validation lorsqu'une clé saisie n'est pas dans les 5000 premières clés de taginfo."
   },
@@ -217,7 +217,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Titre de la notification pour le nettoyage de toutes les données en cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Purged {count} element}, =few{Purged {count} elements}, =other{Purged {count} elements}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} élément purgé}, =few{{count} éléments purgés}, =other{{count} éléments purgés}}",
   "@settingsPurgedMessage": {
     "description": "Message de la notification après la suppression de certains éléments en cache.",
     "placeholders": {
@@ -236,11 +236,11 @@
   "@settingsLeftHand": {
     "description": "Commutateur permettant d'activer les commandes de la main gauche, la plupart des boutons se déplacent alors vers la gauche."
   },
-  "settingsEditor": "Editeur",
+  "settingsEditor": "Éditeur",
   "@settingsEditor": {
     "description": "Titre pour les paramètres de la section de l'éditeur"
   },
-  "settingsPreferContact": "Utiliser le préfixe \"contact:\"",
+  "settingsPreferContact": "Utiliser le préfixe « contact: »",
   "@settingsPreferContact": {
     "description": "Paramètre pour utiliser par ex contact:phone=* à la place de phone=*."
   },
@@ -256,7 +256,7 @@
   "@accountTitle": {
     "description": "Titre pour la page relative au compte OSM."
   },
-  "accountLoginOAuth": "Se loguer avec OAuth",
+  "accountLoginOAuth": "Se connecter avec OAuth",
   "@accountLoginOAuth": {
     "description": "Bouton pour se loguer à OSM via OAuth."
   },
@@ -264,7 +264,7 @@
   "@accountOAuthError": {
     "description": "Titre de l'alerte lors d'un échec de connexion via OAuth."
   },
-  "accountLoginPassword": "Se loguer avec le mot de passe",
+  "accountLoginPassword": "Se connecter avec le mot de passe",
   "@accountLoginPassword": {
     "description": "Bouton pour se loguer avec OSM via le mot de passe."
   },
@@ -304,7 +304,7 @@
   "@accountLogout": {
     "description": "Titre du bouton pour se déconnecter d'OSM."
   },
-  "accountChangesets": "Changesets",
+  "accountChangesets": "Groupes de modifications",
   "@accountChangesets": {
     "description": "Libellé pour le nombre de changesets que l'utilisateur a envoyé."
   },
@@ -312,7 +312,7 @@
   "@accountUnreadMail": {
     "description": "Étiquette pour le nombre de messages privés non lus d'un utilisateur."
   },
-  "changesCount": "{count,plural, =1{{count} change}, =few{{count} changes}, =other{{count} changes}}",
+  "changesCount": "{count,plural, =1{{count} changement}, =few{{count} changements}, =other{{count} changements}}",
   "@changesCount": {
     "description": "Nombre d'éléments modifiés à afficher ou à télécharger.",
     "placeholders": {
@@ -561,7 +561,7 @@
   "@buildingTypeRetail": {},
   "buildingTypeCommercial": "bureaux",
   "@buildingTypeCommercial": {},
-  "buildingTypeShed": "Hangar",
+  "buildingTypeShed": "hangar",
   "@buildingTypeShed": {},
   "buildingTypeIndustrial": "usine",
   "@buildingTypeIndustrial": {},
@@ -573,7 +573,7 @@
   "@entranceFlats": {
     "description": "Étiquette pour addr:flats dans le formulaire. Garder le plus court pssible."
   },
-  "entranceFlatsNumberList": "Cela devrait être une liste de nombre",
+  "entranceFlatsNumberList": "Ceci devrait être une liste de nombres",
   "@entranceFlatsNumberList": {
     "description": "Message de validation pour addr:flats."
   },
@@ -581,7 +581,7 @@
   "@entranceIsUnit": {
     "description": "Étiquette pour une option permettant d'utiliser addr:unit au lieu de addr:flats."
   },
-  "entranceRef": "Ref",
+  "entranceRef": "Réf",
   "@entranceRef": {
     "description": "Étiquette pour le tag Ref dans le formulaire. Garder le plus court pssible."
   },
@@ -591,13 +591,13 @@
   },
   "entranceAccessYes": "Oui",
   "@entranceAccessYes": {},
-  "entranceAccessPrivate": "Privé",
+  "entranceAccessPrivate": "privé",
   "@entranceAccessPrivate": {},
-  "entranceAccessNo": "Non",
+  "entranceAccessNo": "non",
   "@entranceAccessNo": {},
-  "entranceAccessDelivery": "Livraison",
+  "entranceAccessDelivery": "livraison",
   "@entranceAccessDelivery": {},
-  "entranceWheelchair": "Chaise Roulante",
+  "entranceWheelchair": "Fauteuil roulant",
   "@entranceWheelchair": {
     "description": "Étiquette pour un entrée pour fauteuils roulants dans le formulaire. Garder le plus court pssible."
   },
@@ -623,7 +623,7 @@
   "@addressHouseNumber": {
     "description": "Étiquette pour addr:housenumber dans le formulaire. Garder le plus court pssible."
   },
-  "addressHouseNotEmpty": "Cela ne devrait pas être vide",
+  "addressHouseNotEmpty": "Ceci ne devrait pas être vide",
   "@addressHouseNotEmpty": {
     "description": "Message de validation pour addr:housenumber."
   },
