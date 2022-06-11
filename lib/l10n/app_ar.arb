@@ -7,7 +7,7 @@
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
-  "tileNo": "لا",
+  "tileNo": "لا يوجد",
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
@@ -47,7 +47,7 @@
   "@filterEmpty": {
     "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
   },
-  "filterNonConfirmed": "فقط الغير مؤكد",
+  "filterNonConfirmed": "فقط الأماكن الغير مؤكدة",
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
@@ -366,7 +366,7 @@
   "@fieldWheelchairLimited": {
     "description": "Wheelchair field label for limited accessibility."
   },
-  "fieldWheelchairNo": "لا",
+  "fieldWheelchairNo": "لا يوجد",
   "@fieldWheelchairNo": {
     "description": "Wheelchair field label for no accessibility."
   },
@@ -374,7 +374,7 @@
   "@fieldCardsAccepted": {
     "description": "Payment field label for cards accepted."
   },
-  "fieldCardsNo": "لا",
+  "fieldCardsNo": "لا يوجد",
   "@fieldCardsNo": {
     "description": "Payment field label for cash only."
   },
@@ -382,7 +382,7 @@
   "@fieldCheckboxYes": {
     "description": "Checkbox name for yes."
   },
-  "fieldCheckboxNo": "لا",
+  "fieldCheckboxNo": "لا يوجد",
   "@fieldCheckboxNo": {
     "description": "Checkbox name for no."
   },
