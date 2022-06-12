@@ -1,5 +1,15 @@
 # Every Door App Change Log
 
+## 0.5.0
+
+_Unreleased_
+
+* Keeping the map big when there's enough space for POI tiles.
+* Fixed type list flicker because of defaults loading slowly.
+* Increased minimum rotation angle to 30° to make disabling it easier.
+* Quick fix for the entrances mode when the map is rotated:
+  not asking for options then.
+
 ## 0.4.0
 
 _Released on 2022-05-22_

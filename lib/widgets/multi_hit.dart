@@ -41,6 +41,7 @@ class _MultiHitMarkerLayer extends StatelessWidget {
     return StreamBuilder<int?>(
       stream: _stream, // a Stream<int> or null
       builder: (BuildContext context, AsyncSnapshot<int?> snapshot) {
+        final rotate = _mapState.rotation.abs() > 1.0;
         var markers = <Widget>[];
         for (var i = 0; i < _options.markers.length; i++) {
           var marker = _options.markers[i];
@@ -58,10 +59,16 @@ class _MultiHitMarkerLayer extends StatelessWidget {
           }
 
           final pos = pxPoint - _mapState.getPixelOrigin();
-          final rotatedChild = _mapState.rotation.abs() > 1.0
-              ? Transform.rotate(
-                  angle: -_mapState.rotationRad,
-                  child: marker.builder(context),
+          final rotatedChild = rotate
+              ? GestureDetector(
+                  child: Transform.rotate(
+                    angle: -_mapState.rotationRad,
+                    child: marker.builder(context),
+                  ),
+                  onTap: () {
+                    if (marker.key != null && _options.onTap != null)
+                      _options.onTap!([marker.key!]);
+                  },
                 )
               : marker.builder(context);
 
@@ -75,6 +82,10 @@ class _MultiHitMarkerLayer extends StatelessWidget {
               child: rotatedChild,
             ),
           );
+        }
+
+        if (rotate) {
+          return Stack(children: markers);
         }
         return GestureDetector(
           child: Stack(

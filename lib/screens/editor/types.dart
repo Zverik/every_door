@@ -27,6 +27,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   List<Preset> presets = const [];
   DateTime resultsUpdated = DateTime.now();
   final controller = TextEditingController();
+  int updateMutex = 0;
 
   @override
   initState() {
@@ -82,6 +83,9 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   }
 
   updatePresets(String substring) async {
+    final mutex = DateTime.now().millisecondsSinceEpoch;
+    updateMutex = mutex;
+
     final prov = ref.read(presetProvider);
     final locale = Localizations.localeOf(context);
     if (substring.length < 2) {
@@ -108,10 +112,12 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       if (presetsToAdd.length + newPresets.length - defaultList.length > 4)
         presetsToAdd.removeRange(4, presetsToAdd.length);
 
-      setState(() {
-        resultsUpdated = DateTime.now();
-        presets = presetsToAdd + newPresets;
-      });
+      if (mounted && updateMutex == mutex) {
+        setState(() {
+          resultsUpdated = DateTime.now();
+          presets = presetsToAdd + newPresets;
+        });
+      }
     } else {
       final editorMode = ref.read(editorModeProvider);
 
@@ -123,11 +129,13 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       // Add a fix me preset for entered string.
       newPresets.add(Preset.fixme(substring.trim()));
 
-      setState(() {
-        resultsUpdated = DateTime.now();
-        presets = newPresets;
-        if (editorMode == EditorMode.poi) updateNSISubtitles(context);
-      });
+      if (mounted && updateMutex == mutex) {
+        setState(() {
+          resultsUpdated = DateTime.now();
+          presets = newPresets;
+          if (editorMode == EditorMode.poi) updateNSISubtitles(context);
+        });
+      }
     }
   }
 

@@ -209,6 +209,49 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       if (next == null) updateNearest();
     });
 
+    final Widget bottomPane;
+    if (apiStatus != ApiStatus.idle) {
+      bottomPane = Expanded(
+        flex: isMicromapping || farFromUser ? 10 : 23,
+        child: buildApiStatusPane(context, apiStatus),
+      );
+    } else if (!isMicromapping || isZoomedIn) {
+      // We want to constraint vertical size, so that tiles
+      // don't take precious space from the map.
+      final bottomPaneChild = SafeArea(
+        bottom: false,
+        left: false,
+        right: false,
+        top: widget.isWide,
+        child: PoiPane(nearestPOI),
+      );
+      final needMaxMap = isMicromapping || farFromUser || nearestPOI.length <= 4;
+      if (widget.isWide || MediaQuery.of(context).size.height <= 600)
+        bottomPane = Expanded(
+          flex: needMaxMap ? 10 : 23,
+          child: bottomPaneChild,
+        );
+      else
+        bottomPane = SizedBox(
+          height: needMaxMap ? 300 : 400,
+          child: bottomPaneChild,
+        );
+    } else if (!widget.isWide) {
+      bottomPane = LegendPane();
+    } else {
+      bottomPane = SizedBox(
+        child: SingleChildScrollView(
+          child: SafeArea(
+            left: false,
+            bottom: false,
+            right: false,
+            child: LegendPane(),
+          ),
+        ),
+        width: 200.0,
+      );
+    }
+
     return Flex(
       direction: widget.isWide ? Axis.horizontal : Axis.vertical,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -250,32 +293,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
           widget.isWide
               ? RotatedBox(quarterTurns: 3, child: widget.areaStatusPanel!)
               : widget.areaStatusPanel!,
-        if (!isMicromapping || isZoomedIn)
-          Expanded(
-            flex: isMicromapping || farFromUser ? 10 : 23,
-            child: apiStatus != ApiStatus.idle
-                ? buildApiStatusPane(context, apiStatus)
-                : SafeArea(
-                    bottom: false,
-                    left: false,
-                    right: false,
-                    top: widget.isWide,
-                    child: PoiPane(nearestPOI),
-                  ),
-          ),
-        if (isMicromapping && !isZoomedIn && !widget.isWide) LegendPane(),
-        if (isMicromapping && !isZoomedIn && widget.isWide)
-          SizedBox(
-            child: SingleChildScrollView(
-              child: SafeArea(
-                left: false,
-                bottom: false,
-                right: false,
-                child: LegendPane(),
-              ),
-            ),
-            width: 200.0,
-          ),
+        bottomPane,
       ],
     );
   }
