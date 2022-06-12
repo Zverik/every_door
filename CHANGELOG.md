@@ -14,6 +14,7 @@ _Unreleased_
 * Not allowing the "address" option on polygonal buildings.
 * Removed the "inactive" button for new non-amenities.
 * Imagery list in Settings was refreshing constantly.
+* Many, many new translations — thanks folks, and thanks to Weblate.
 
 ## 0.4.0
 
