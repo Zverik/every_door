@@ -26,7 +26,7 @@ class OverlayButtonOptions extends LayerOptions {
 
   OverlayButtonOptions({
     Key? key,
-    Stream<Null>? rebuild,
+    Stream<void>? rebuild,
     this.alignment = Alignment.topRight,
     required this.padding,
     required this.onPressed,
@@ -40,7 +40,7 @@ class OverlayButtonOptions extends LayerOptions {
 class OverlayButtonPlugin implements MapPlugin {
   @override
   Widget createLayer(
-      LayerOptions options, MapState mapState, Stream<Null> stream) {
+      LayerOptions options, MapState mapState, Stream<void> stream) {
     if (options is OverlayButtonOptions) {
       return OverlayButtonLayer(options);
     }

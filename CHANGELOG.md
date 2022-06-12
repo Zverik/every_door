@@ -9,6 +9,11 @@ _Unreleased_
 * Increased minimum rotation angle to 30° to make disabling it easier.
 * Quick fix for the entrances mode when the map is rotated:
   not asking for options then.
+* Not asking for a roof shape if there are `building:part`s.
+* Preventing deletion of nodes that are relation members.
+* Not allowing the "address" option on polygonal buildings.
+* Removed the "inactive" button for new non-amenities.
+* Imagery list in Settings was refreshing constantly.
 
 ## 0.4.0
 

@@ -175,8 +175,8 @@ class MarkReferenced extends Converter<List<OsmElement>, List<OsmElement>> {
         refs =
             element.nodes?.map((nodeId) => OsmId(OsmElementType.node, nodeId));
       } else if (element.members != null) {
-        // Skipping relation members, since the dependency is not geometric.
-        // refs = element.members?.map((member) => member.id);
+        // TODO: allow moving relation members, since the dependency is not geometric.
+        refs = element.members?.map((member) => member.id);
       }
 
       // Process references in this element

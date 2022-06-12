@@ -9,14 +9,14 @@ class MultiHitMarkerLayerOptions extends LayerOptions {
     Key? key,
     this.markers = const [],
     this.onTap,
-    Stream<Null>? rebuild,
+    Stream<void>? rebuild,
   }) : super(key: key, rebuild: rebuild);
 }
 
 class MultiHitMarkerLayerPlugin implements MapPlugin {
   @override
   Widget createLayer(
-      LayerOptions options, MapState mapState, Stream<Null> stream) {
+      LayerOptions options, MapState mapState, Stream<void> stream) {
     if (options is MultiHitMarkerLayerOptions) {
       return _MultiHitMarkerLayer(options, mapState, stream);
     }
@@ -31,16 +31,16 @@ class MultiHitMarkerLayerPlugin implements MapPlugin {
 class _MultiHitMarkerLayer extends StatelessWidget {
   final MultiHitMarkerLayerOptions _options;
   final MapState _mapState;
-  final Stream<Null>? _stream;
+  final Stream<void>? _stream;
 
   _MultiHitMarkerLayer(this._options, this._mapState, this._stream)
       : super(key: _options.key);
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<int?>(
-      stream: _stream, // a Stream<int> or null
-      builder: (BuildContext context, AsyncSnapshot<int?> snapshot) {
+    return StreamBuilder(
+      stream: _stream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
         final rotate = _mapState.rotation.abs() > 1.0;
         var markers = <Widget>[];
         for (var i = 0; i < _options.markers.length; i++) {

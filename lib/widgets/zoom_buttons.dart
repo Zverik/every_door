@@ -7,7 +7,7 @@ class ZoomButtonsOptions extends LayerOptions {
 
   ZoomButtonsOptions({
     Key? key,
-    Stream<Null>? rebuild,
+    Stream<void>? rebuild,
     this.alignment = Alignment.bottomRight,
     required this.padding,
   }) : super(key: key, rebuild: rebuild);
@@ -16,7 +16,7 @@ class ZoomButtonsOptions extends LayerOptions {
 class ZoomButtonsPlugin implements MapPlugin {
   @override
   Widget createLayer(
-      LayerOptions options, MapState mapState, Stream<Null> stream) {
+      LayerOptions options, MapState mapState, Stream<void> stream) {
     if (options is ZoomButtonsOptions) {
       return ZoomButtonsLayer(options, mapState);
     }

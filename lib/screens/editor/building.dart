@@ -105,8 +105,11 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final isAddress = building['building'] == null;
+    final canBeAddress = building.element?.isPoint != true; // not a node or a new element
     final levelOptions = ['1', '2'] + nearestLevels;
     levelOptions.add(kManualOption);
+    final hasParts = (building.element?.isMember ?? false) ||
+        building['building:parts'] != null;
 
     return WillPopScope(
       onWillPop: () async {
@@ -200,7 +203,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                               })
                         ],
                       ),
-                    if (!isAddress)
+                    if (!isAddress && !hasParts)
                       TableRow(
                         children: [
                           Padding(
@@ -251,8 +254,8 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                           child: Text(loc.buildingType, style: kFieldTextStyle),
                         ),
                         RadioField(
-                          options: const [
-                            'address',
+                          options: [
+                            if (canBeAddress) 'address',
                             'house',
                             'apartments',
                             'retail',
@@ -263,7 +266,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                             'construction',
                           ],
                           labels: [
-                            loc.buildingTypeAddress,
+                            if (canBeAddress) loc.buildingTypeAddress,
                             loc.buildingTypeHouse,
                             loc.buildingTypeApartments,
                             loc.buildingTypeRetail,

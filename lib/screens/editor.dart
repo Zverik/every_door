@@ -278,8 +278,11 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                             ),
                             buildFields(fields),
                           ],
-                          SizedBox(height: 20.0),
-                          buildTopButtons(context),
+                          // Not displaying buttons for just created amenities.
+                          if (widget.amenity != null) ...[
+                            SizedBox(height: 20.0),
+                            buildTopButtons(context),
+                          ],
                           SizedBox(height: 10.0),
                           if (moreFields.isNotEmpty) ...[
                             ExpansionTile(
@@ -349,45 +352,44 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          MaterialButton(
-            color: amenity.isDisused ? Colors.brown : Colors.orange,
-            textColor: Colors.white,
-            child: Text(amenity.isDisused
-                ? loc.editorMarkActive
-                : loc.editorMarkDefunct),
-            onPressed: () {
-              setState(() {
-                amenity.toggleDisused();
-              });
-            },
-          ),
-          // Not displaying the deletion button for just created amenities.
-          if (widget.amenity != null) ...[
-            SizedBox(width: 10.0),
+          // Display "closed" button just for amenities.
+          if (isAmenityTags(amenity.getFullTags()))
             MaterialButton(
-              color: Colors.red,
+              color: amenity.isDisused ? Colors.brown : Colors.orange,
               textColor: Colors.white,
-              child:
-                  Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
-              onPressed: () async {
-                if (amenity.deleted) {
-                  setState(() {
-                    amenity.deleted = false;
-                  });
-                } else {
-                  final answer = await showOkCancelAlertDialog(
-                    context: context,
-                    title: loc.editorDeleteTitle(amenity.typeAndName),
-                    okLabel: loc.editorDeleteButton,
-                    isDestructiveAction: true,
-                  );
-                  if (answer == OkCancelResult.ok) {
-                    deleteAndClose();
-                  }
-                }
+              child: Text(amenity.isDisused
+                  ? loc.editorMarkActive
+                  : loc.editorMarkDefunct),
+              onPressed: () {
+                setState(() {
+                  amenity.toggleDisused();
+                });
               },
             ),
-          ]
+          SizedBox(width: 10.0),
+          MaterialButton(
+            color: Colors.red,
+            textColor: Colors.white,
+            child:
+                Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
+            onPressed: () async {
+              if (amenity.deleted) {
+                setState(() {
+                  amenity.deleted = false;
+                });
+              } else {
+                final answer = await showOkCancelAlertDialog(
+                  context: context,
+                  title: loc.editorDeleteTitle(amenity.typeAndName),
+                  okLabel: loc.editorDeleteButton,
+                  isDestructiveAction: true,
+                );
+                if (answer == OkCancelResult.ok) {
+                  deleteAndClose();
+                }
+              }
+            },
+          ),
         ],
       ),
     );

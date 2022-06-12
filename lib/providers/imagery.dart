@@ -15,7 +15,7 @@ final imageryProvider = StateNotifierProvider<ImageryProvider, Imagery>(
     (ref) => ImageryProvider(ref));
 
 final imageryListProvider = FutureProvider.autoDispose<List<Imagery>>((ref) {
-  final center = ref.watch(effectiveLocationProvider);
+  final center = ref.read(effectiveLocationProvider);
   return ref.read(imageryProvider.notifier).getImageryListForLocation(center);
 });
 
