@@ -153,7 +153,7 @@
   "@tagsNewPoint": {
     "description": "Tag editor panel title for a new amenity."
   },
-  "tagsAddTag": "Tilføj et tag",
+  "tagsAddTag": "Tilføj et tag (etikette)",
   "@tagsAddTag": {
     "description": "Tags panel button for adding a new tag."
   },
@@ -336,7 +336,7 @@
   "@fieldFloorEmpty": {
     "description": "What is written on the floor chooser if there are no floors to choose."
   },
-  "fieldFloorFloorDesc": "Etage som på navigation og i elevatorer",
+  "fieldFloorFloorDesc": "Etage som på vejvisning og i elevatorer",
   "@fieldFloorFloorDesc": {
     "descripton": "Description for the \"level\" tag."
   },
