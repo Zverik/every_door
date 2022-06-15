@@ -16,6 +16,7 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0
   geolocator: ^8.0.0
+  # location: ^4.4.0
   http: ^0.13.3
   flutter_map: ^1.0.0
   sqflite: ^2.0.0+3
@@ -41,6 +42,7 @@ dependencies:
   device_info_plus: ^3.2.2
   unorm_dart: ^0.2.0
   logging: ^1.0.2
+  encrypt: ^5.0.1
 
 dev_dependencies:
   test: ^1.19.5

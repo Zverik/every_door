@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/private.dart';
-import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/models/imagery.dart';
@@ -13,11 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final imageryProvider = StateNotifierProvider<ImageryProvider, Imagery>(
     (ref) => ImageryProvider(ref));
-
-final imageryListProvider = FutureProvider.autoDispose<List<Imagery>>((ref) {
-  final center = ref.read(effectiveLocationProvider);
-  return ref.read(imageryProvider.notifier).getImageryListForLocation(center);
-});
 
 final selectedImageryProvider =
     StateNotifierProvider<SelectedImageryProvider, Imagery>(
@@ -41,6 +35,18 @@ class ImageryProvider extends StateNotifier<Imagery> {
     maxZoom: 22,
   );
 
+  static final maxarPremiumImagery = Imagery(
+    id: 'Maxar-Premium',
+    type: ImageryType.tms,
+    name: 'Maxar Premium Imagery',
+    url: "EcKQpupFzHs7yZp0CdAT3zOWVWST2GB8eji2OtSHNANsdO7JnPHXw+riiIBA2aPDb5GFaKmySAOl/QDz57eaWI18qPwmdhpDeFLMmiDRZ4JQYGJbTzCq1On6IkNnrsnn5KvbL+1P3sAVur9nCCvaomT6i1Tv/WUFFD9zKG8gOf1TCN7mPWIhDOQteeaabxwUvkVJnngx1tjkrtdcsnbgT5jKg+5uUBB+CHlgY2bBwbFbzBpTrcTtI5t398LZP4wP",
+    encrypted: true,
+    icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png',
+    attribution: '© DigitalGlobe',
+    minZoom: 1,
+    maxZoom: 22,
+  ).decrypt();
+
   ImageryProvider(this._ref) : super(bingImagery) {
     _updateBingUrlTemplate();
     loadState();
@@ -51,7 +57,8 @@ class ImageryProvider extends StateNotifier<Imagery> {
         geoHasher.encode(location.longitude, location.latitude, precision: 4);
     final rows = await _ref.read(presetProvider).imageryQuery(geohash);
     List<Imagery> results = rows.map((row) => Imagery.fromJson(row)).toList();
-    results.add(bingImagery);
+    results.add(maxarPremiumImagery);
+    if (bingUrlTemplate != null) results.add(bingImagery);
     return results;
   }
 
@@ -61,6 +68,8 @@ class ImageryProvider extends StateNotifier<Imagery> {
     if (imageryId != null) {
       if (imageryId == bingImagery.id) {
         state = bingImagery;
+      } else if (imageryId == maxarPremiumImagery.id) {
+        state = maxarPremiumImagery;
       } else {
         final imagery =
             await _ref.read(presetProvider).singleImageryQuery(imageryId);

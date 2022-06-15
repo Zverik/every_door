@@ -10,7 +10,7 @@ class CachedTileProvider extends TileProvider {
   @override
   ImageProvider getImage(Coords<num> coords, TileLayerOptions options) {
     final url = getTileUrl(coords, options);
-    // print(url);
+    print(url);
     return CachedNetworkImageProvider(
       url,
       // Maybe replace cacheManager later.
@@ -59,7 +59,7 @@ const kOSMImagery = Imagery(
   url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
   attribution: '© OpenStreetMap contributors',
   minZoom: 0,
-  maxZoom: 18,
+  maxZoom: 19,
 );
 
 WMSTileLayerOptions _buildWMSOptions(String url, Imagery imagery) {
@@ -116,8 +116,8 @@ TileLayerOptions buildTileLayerOptions(Imagery imagery,
 
   if (imagery.type == ImageryType.bing) {
     url = ImageryProvider.bingUrlTemplate
-        ?.replaceFirst('{quadkey}', '_QUADKEY_')
-        .replaceFirst('{culture}', '_CULTURE_') ??
+            ?.replaceFirst('{quadkey}', '_QUADKEY_')
+            .replaceFirst('{culture}', '_CULTURE_') ??
         '';
   }
 
@@ -153,6 +153,7 @@ TileLayerOptions buildTileLayerOptions(Imagery imagery,
     tileProvider: tileProvider,
     minNativeZoom: imagery.minZoom.toDouble(),
     maxNativeZoom: imagery.maxZoom.toDouble(),
+    maxZoom: 22,
     tileSize: imagery.tileSize.toDouble(),
     tms: tms,
     subdomains: subdomains,

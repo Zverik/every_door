@@ -1,3 +1,5 @@
+import 'package:encrypt/encrypt.dart';
+
 enum ImageryType {
   tms,
   wms,
@@ -23,6 +25,7 @@ class Imagery {
   final bool best;
   final int tileSize;
   final bool wms4326;
+  final bool encrypted;
 
   const Imagery({
     required this.id,
@@ -37,6 +40,7 @@ class Imagery {
     this.best = false,
     this.tileSize = 256,
     this.wms4326 = false,
+    this.encrypted = false,
   })  : minZoom = minZoom ?? 0,
         maxZoom = maxZoom ?? 20;
 
@@ -60,6 +64,7 @@ class Imagery {
     return Imagery(
       id: id,
       type: type,
+      category: category,
       name: name,
       attribution: attribution ?? this.attribution,
       icon: icon,
@@ -68,6 +73,15 @@ class Imagery {
       maxZoom: maxZoom ?? this.maxZoom,
       best: best,
       tileSize: tileSize ?? this.tileSize,
+      wms4326: wms4326,
     );
+  }
+
+  Imagery decrypt() {
+    if (!encrypted) return this;
+    const kDefaultAesKey = '+p08T46G5YGKftKBHUeg0A==';
+    final encrypter = Encrypter(AES(Key.fromBase64(kDefaultAesKey), mode: AESMode.ctr));
+    final decrypted = encrypter.decrypt(Encrypted.fromBase64(url), iv: IV.fromLength(16));
+    return copyWith(url: decrypted);
   }
 }

@@ -284,9 +284,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
                   },
             colorsFromLegend: isMicromapping,
             drawNumbers: !isMicromapping || isZoomedIn,
-            drawZoomButtons:
-                (isMicromapping && ref.watch(legendProvider).isNotEmpty) ||
-                    (!isMicromapping && farFromUser),
+            drawZoomButtons: isMicromapping || farFromUser,
           ),
         ),
         if (widget.areaStatusPanel != null)

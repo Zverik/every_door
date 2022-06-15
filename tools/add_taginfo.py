@@ -30,13 +30,12 @@ if __name__ == '__main__':
         for v in row[1].split(';'):
             if ' ' not in v:
                 values[row[0]][v] = values[row[0]].get(v, 0) + row[2]
-    values = [
-        (k, ';'.join(
-            i[0] for i in sorted(v.items(), key=lambda i: i[1], reverse=True)[:50]
-        ))
-        for k, v in values.items()
-    ]
-    cur.executemany("insert into combos (key, options) values (?, ?)", values)
+
+    to_store = []
+    for k, v in values.items():
+        items = [i[0] for i in sorted(v.items(), key=lambda i: i[1], reverse=True)]
+        to_store.append((k, ';'.join(items[:50])))
+    cur.executemany("insert into combos (key, options) values (?, ?)", to_store)
 
     # 2. Key parts (e.g. currency:EUR)
     cur.execute(
@@ -44,9 +43,10 @@ if __name__ == '__main__':
     keys = [row[0] for row in cur if row[0][-1] == ':']
     for key in keys:
         # No way to do this in bulk
+        limit = 250 if key == 'payment:' else 50
         tcur.execute(
             "select key from tags where key like ? and value = 'yes' and count_all >= 10 "
-            "order by count_all desc limit 50", (key + '%',))
+            f"order by count_all desc limit {limit}", (key + '%',))
         cur.execute(
             "insert into combos (key, options) values (?, ?)",
             (key, ';'.join(r[0][len(key):] for r in tcur)))
