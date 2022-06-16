@@ -39,7 +39,7 @@
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
-  "tileDragOrUnfilter": "Bevæg dig rundt, tilføj en facilitet eller ryd filteret.",
+  "tileDragOrUnfilter": "Bevæg dig omkring, tilføj en facilitet eller ryd filteret.",
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
@@ -608,7 +608,7 @@
   "@buildingTypeCommercial": {},
   "buildingTypeGarage": "garage",
   "@buildingTypeGarage": {},
-  "messageDataObsolete": "Data er forældet, tryk her for at opdatere",
+  "messageDataObsolete": "Data er forældede, tryk her for at opdatere",
   "@messageDataObsolete": {
     "description": "Message that appears on the main screen when OSM data is outdated."
   },
