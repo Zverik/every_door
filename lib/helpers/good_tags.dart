@@ -21,7 +21,7 @@ const kHighwayRoadValues = <String>{
 };
 
 const kBuildingNeedsAddress = {
-  'yes', 'house', 'residential', 'detached', 'apartments', 'industrial',
+  'yes', 'house', 'residential', 'detached', 'apartments',
   'terrace', 'commercial', 'school', 'semidetached_house', 'retail',
   'construction', 'farm', 'church', 'office', 'civic', 'university', 'public',
   'hospital', 'hotel', 'chapel', 'kindergarten', 'mosque', 'dormitory',

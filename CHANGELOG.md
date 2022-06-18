@@ -9,6 +9,8 @@ _Unreleased_
 * Presenting 250 top values for `payment:*` keys.
 * Maxar Premium Imagery is back.
 * OpenStreetMap layer zoom 19 is back.
+* When adding multiple objects of the same type,
+  copying tags from the last one.
 * Many, many new translations — thanks folks, and thanks to Weblate.
 * Temporary (?) option in Settings to disable Google location services.
 

@@ -43,9 +43,14 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   @override
   void initState() {
     super.initState();
-    amenity = widget.amenity?.copy() ??
-        OsmChange.create(
-            location: widget.location!, tags: widget.preset!.addTags);
+    if (widget.amenity != null)
+      amenity = widget.amenity!;
+    else {
+      final tags =
+          ref.read(lastPresetsProvider).getTagsForPreset(widget.preset!) ??
+              widget.preset!.addTags;
+      amenity = OsmChange.create(location: widget.location!, tags: tags);
+    }
     amenity.addListener(onAmenityChange);
 
     if (widget.preset == null) {
@@ -179,8 +184,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     // Setting the mark automatically.
     if (needsCheckDate(amenity.getFullTags())) amenity.check();
     // Store the preset when an object was saved, to track used ones.
-    if (widget.preset != null)
-      ref.read(lastPresetsProvider).registerPreset(widget.preset!);
+    if (widget.preset != null) {
+      ref
+          .read(lastPresetsProvider)
+          .registerPreset(widget.preset!, amenity.getFullTags());
+    }
+    // Save changes and close.
     final changes = ref.read(changesProvider);
     changes.saveChange(amenity);
     Navigator.pop(context);
