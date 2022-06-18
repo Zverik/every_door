@@ -38,6 +38,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
       : newTags = newTags ?? {},
         _deleted = hardDeleted,
         updated = updated ?? DateTime.now(),
+        // ignore: prefer_initializing_formals
         element = element, // Force non-null initialization
         databaseId = databaseId ?? element.id.toString() {
     _updateMainKey();

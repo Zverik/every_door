@@ -13,7 +13,7 @@ class ComboChooserPage extends StatefulWidget {
   const ComboChooserPage(this.field, this.values, {this.allowEmpty = true});
 
   @override
-  _ComboChooserPageState createState() => _ComboChooserPageState();
+  State createState() => _ComboChooserPageState();
 }
 
 class _ComboChooserPageState extends State<ComboChooserPage> {
@@ -107,6 +107,10 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
     }
 
     return ResponsiveGridList(
+      minItemWidth: 150.0,
+      horizontalGridSpacing: 5,
+      verticalGridSpacing: 5,
+      rowMainAxisAlignment: MainAxisAlignment.start,
       children: [
         for (final opt in options)
           ListTile(
@@ -133,10 +137,6 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
             },
           ),
       ],
-      minItemWidth: 150.0,
-      horizontalGridSpacing: 5,
-      verticalGridSpacing: 5,
-      rowMainAxisAlignment: MainAxisAlignment.start,
     );
   }
 }

@@ -26,7 +26,7 @@ class CheckboxInputField extends StatefulWidget {
   const CheckboxInputField(this.field, this.element);
 
   @override
-  _CheckboxInputFieldState createState() => _CheckboxInputFieldState();
+  State createState() => _CheckboxInputFieldState();
 }
 
 class _CheckboxInputFieldState extends State<CheckboxInputField> {

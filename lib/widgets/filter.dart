@@ -24,7 +24,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       loadAddresses();
       updateFloors();
     });

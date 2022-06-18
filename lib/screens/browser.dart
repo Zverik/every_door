@@ -22,7 +22,7 @@ class BrowserPage extends ConsumerStatefulWidget {
   const BrowserPage();
 
   @override
-  _BrowserPageState createState() => _BrowserPageState();
+  ConsumerState createState() => _BrowserPageState();
 }
 
 class _BrowserPageState extends ConsumerState<BrowserPage> {
@@ -33,7 +33,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateAreaStatus();
     });
 
@@ -49,12 +49,12 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
         }
       },
     );
-    WidgetsBinding.instance?.addObserver(lifecycleObserver);
+    WidgetsBinding.instance.addObserver(lifecycleObserver);
   }
 
   @override
   dispose() {
-    WidgetsBinding.instance?.removeObserver(lifecycleObserver);
+    WidgetsBinding.instance.removeObserver(lifecycleObserver);
     super.dispose();
   }
 

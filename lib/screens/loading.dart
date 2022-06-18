@@ -18,7 +18,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoadingPage extends ConsumerStatefulWidget {
   @override
-  _LoadingPageState createState() => _LoadingPageState();
+  ConsumerState createState() => _LoadingPageState();
 }
 
 class _LoadingPageState extends ConsumerState<LoadingPage> {
@@ -75,7 +75,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       doInit();
     });
   }

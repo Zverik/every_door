@@ -279,9 +279,10 @@ class OsmApiHelper {
           }
         } else {
           await changes.setError(change, null);
+          final newId = int.parse(resp.body.trim());
           updates.add(UploadedElement(
-            change.toElement(), // Id and version do not matter.
-            newId: int.parse(resp.body.trim()),
+            change.toElement(newId: newId), // Id and version do not matter.
+            newId: newId,
             newVersion: 1,
           ));
         }

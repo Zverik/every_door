@@ -527,7 +527,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   safeRight: true,
                   icon: Icons.my_location,
                   onPressed: () {
-                    ref.read(trackingProvider.state).state = true;
+                    ref.read(geolocationProvider.notifier).enableTracking(context);
                   },
                 ),
                 ZoomButtonsOptions(
@@ -539,6 +539,9 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     vertical: 100.0,
                   ),
                 ),
+              ],
+              nonRotatedChildren: [
+                buildAttributionWidget(imagery),
               ],
               children: [
                 TileLayerWidget(

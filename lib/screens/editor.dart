@@ -29,7 +29,7 @@ class PoiEditorPage extends ConsumerStatefulWidget {
   const PoiEditorPage({this.amenity, this.preset, this.location});
 
   @override
-  _PoiEditorPageState createState() => _PoiEditorPageState();
+  ConsumerState createState() => _PoiEditorPageState();
 }
 
 class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {

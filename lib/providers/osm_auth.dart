@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:logging/logging.dart';
 
 final authProvider = StateNotifierProvider<OsmAuthController, String?>(
     (_) => OsmAuthController());
@@ -61,7 +60,6 @@ class OsmAuthController extends StateNotifier<String?> {
   static const kLoginKey = 'osmLogin';
   static const kPasswordKey = 'osmPassword';
 
-  static final _logger = Logger('OsmAuthController');
   final OpenStreetMapOAuthHelper _helper = OpenStreetMapOAuthHelper();
   bool isOAuth = false;
   bool? _supportsOAuth;

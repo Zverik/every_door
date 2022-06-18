@@ -33,7 +33,7 @@ class AddressInput extends ConsumerStatefulWidget {
   const AddressInput(this.field, this.element);
 
   @override
-  _AddressInputState createState() => _AddressInputState();
+  ConsumerState createState() => _AddressInputState();
 }
 
 class _AddressInputState extends ConsumerState<AddressInput> {

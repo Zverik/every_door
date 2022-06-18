@@ -22,7 +22,7 @@ const kHighwayRoadValues = <String>{
 
 /// Type of object to snap an element to.
 /// E.g. entrances are snapped to `SnapTo.building`.
-enum SnapTo { nothing, building, highway, railway }
+enum SnapTo { nothing, building, highway, railway, wall }
 
 /// Kind of element for sorting elements between modes.
 enum ElementKind {
@@ -86,6 +86,9 @@ bool isAmenityTags(Map<String, String> tags) {
 
   final v = tags[key];
   if (k == 'amenity') {
+    if (v == 'recycling')
+      return tags['recycling_type'] == 'centre';
+
     const wrongAmenities = <String>{
       'parking',
       'bench',
@@ -350,6 +353,8 @@ SnapTo detectSnap(Map<String, String> tags) {
     };
     if (kSnapRailway.contains(tags['railway']!)) return SnapTo.railway;
   } else if ({'traffic_calming', 'barrier'}.contains(k)) return SnapTo.highway;
+  else if (k == 'historic' && {'plaque', 'blue_plaque'}.contains(tags['memorial']))
+    return SnapTo.building;
 
   return SnapTo.nothing;
 }
@@ -364,6 +369,8 @@ bool isSnapTargetTags(Map<String, String> tags, [SnapTo? kind]) {
       .contains(tags['railway']);
   if (tags.containsKey('building') && (kind == null || kind == SnapTo.building))
     return tags['building'] != 'roof';
+  if (tags.containsKey('barrier') && (kind == null || kind == SnapTo.wall))
+    return {'wall', 'fence'}.contains(tags['barrier']);
   return false;
 }
 

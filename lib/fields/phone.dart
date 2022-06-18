@@ -35,7 +35,7 @@ class PhoneInputField extends ConsumerStatefulWidget {
   const PhoneInputField(this.field, this.element);
 
   @override
-  _PhoneInputFieldState createState() => _PhoneInputFieldState();
+  ConsumerState createState() => _PhoneInputFieldState();
 }
 
 class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {

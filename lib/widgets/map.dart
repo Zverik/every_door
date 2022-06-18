@@ -64,7 +64,7 @@ class AmenityMap extends ConsumerStatefulWidget {
   });
 
   @override
-  _AmenityMapState createState() => _AmenityMapState();
+  ConsumerState createState() => _AmenityMapState();
 }
 
 class _AmenityMapState extends ConsumerState<AmenityMap> {
@@ -274,6 +274,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       setState(() {});
     });
 
+    final imagery = ref.watch(selectedImageryProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final iconSize = widget.drawNumbers ? 18.0 : 10.0;
     final legendCon = ref.watch(legendProvider.notifier);
@@ -338,7 +339,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
           enabled: !ref.watch(trackingProvider),
           icon: Icons.my_location,
           onPressed: () {
-            ref.read(trackingProvider.state).state = true;
+            ref.read(geolocationProvider.notifier).enableTracking(context);
           },
         ),
         if (widget.drawZoomButtons)
@@ -350,10 +351,13 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             ),
           ),
       ],
+      nonRotatedChildren: [
+        if (showAttribution && imagery.attribution != null)
+          buildAttributionWidget(imagery),
+      ],
       children: [
         TileLayerWidget(
-          options: buildTileLayerOptions(
-              ref.watch(selectedImageryProvider), showAttribution),
+          options: buildTileLayerOptions(imagery),
         ),
         if (trackLocation != null)
           CircleLayerWidget(
