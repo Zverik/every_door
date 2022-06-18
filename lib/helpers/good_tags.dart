@@ -20,6 +20,15 @@ const kHighwayRoadValues = <String>{
   'secondary', 'primary', 'trunk', 'motorway', 'living_street',
 };
 
+const kBuildingNeedsAddress = {
+  'yes', 'house', 'residential', 'detached', 'apartments', 'industrial',
+  'terrace', 'commercial', 'school', 'semidetached_house', 'retail',
+  'construction', 'farm', 'church', 'office', 'civic', 'university', 'public',
+  'hospital', 'hotel', 'chapel', 'kindergarten', 'mosque', 'dormitory',
+  'train_station', 'college', 'semi', 'temple', 'government', 'supermarket',
+  'fire_station', 'sports_centre', 'shop', 'stadium', 'religious',
+};
+
 /// Type of object to snap an element to.
 /// E.g. entrances are snapped to `SnapTo.building`.
 enum SnapTo { nothing, building, highway, railway, wall }

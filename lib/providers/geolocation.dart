@@ -37,6 +37,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
         enableTracking();
       } else {
         disableTracking();
+        state = null;
       }
     });
   }
@@ -52,13 +53,14 @@ class GeolocationController extends StateNotifier<LatLng?> {
         accuracy: LocationAccuracy.best,
         activityType: ActivityType.fitness,
       );
-    } else
+    } else {
       return const LocationSettings(
         accuracy: LocationAccuracy.best,
       );
+    }
   }
 
-  _initGeolocator() async {
+  _subscribeToPositions() async {
     await _locSub?.cancel();
     _locSub = null;
 
@@ -93,6 +95,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
       onLocationEvent,
       onError: onLocationError,
     );
+    _logger.info('Subscribed to position stream');
   }
 
   reloadTracking() async {
@@ -114,12 +117,8 @@ class GeolocationController extends StateNotifier<LatLng?> {
 
     // Wait until we get forceLocation value.
     if (!_ref.read(forceLocationProvider.notifier).loaded) {
-      await Future.doWhile(() =>
-          Future.delayed(Duration(milliseconds: 50))
-              .then((_) =>
-          !_ref
-              .read(forceLocationProvider.notifier)
-              .loaded));
+      await Future.doWhile(() => Future.delayed(Duration(milliseconds: 50))
+          .then((_) => !_ref.read(forceLocationProvider.notifier).loaded));
     }
 
     final permission = await Geolocator.checkPermission();
@@ -153,7 +152,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
 
     // Check for active GPS tracking
     if (_locSub == null) {
-      await _initGeolocator();
+      await _subscribeToPositions();
     }
 
     if (_locSub != null) {

@@ -86,7 +86,6 @@ class DragButtonsWidget extends StatelessWidget {
         onDragEnd: (details) {
           const offset = CustomPoint(-arrowSize / 2, -2.0);
           final pos = CustomPoint(details.offset.dx, details.offset.dy);
-          final origin = _mapState.getPixelOrigin();
           // To adjust offset, we need to know the location of everything.
           final mapOrigin =
               _mapKey?.currentContext!.findRenderObject()!.paintBounds.topLeft;
@@ -100,8 +99,7 @@ class DragButtonsWidget extends StatelessWidget {
           _logger.info('Map origin: $mapOrigin, global: $globalMapOrigin, '
               'drop offset: ${pos - offset}, '
               'top: ${options.top}, bottom: ${options.bottom}.');
-          final location = _mapState
-              .layerPointToLatLng(pos - offset + origin - globalMapOrigin);
+          final location = _pointToLatLng(pos - offset + globalMapOrigin);
           if (options.onDragEnd != null) options.onDragEnd!(location);
         },
         feedbackOffset: Offset(arrowSize / 2, 70.0),
@@ -132,6 +130,34 @@ class DragButtonsWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  LatLng _pointToLatLng(CustomPoint localPoint) {
+    final size = _mapState.originalSize!;
+
+    final localPointCenterDistance =
+        CustomPoint(size.x / 2, size.y / 2) - localPoint;
+    final mapCenter = _mapState.project(_mapState.center);
+    var point = mapCenter - localPointCenterDistance;
+
+    if (_mapState.rotation != 0.0) {
+      point = _rotatePoint(mapCenter, point, _mapState.rotationRad);
+    }
+
+    return _mapState.unproject(point);
+  }
+
+  CustomPoint<num> _rotatePoint(
+      CustomPoint<num> mapCenter, CustomPoint<num> point, double rotationRad) {
+    final m = Matrix4.identity()
+      ..translate(mapCenter.x.toDouble(), mapCenter.y.toDouble())
+      ..rotateZ(-rotationRad)
+      ..translate(-mapCenter.x.toDouble(), -mapCenter.y.toDouble());
+
+    final tp = MatrixUtils.transformPoint(
+        m, Offset(point.x.toDouble(), point.y.toDouble()));
+
+    return CustomPoint(tp.dx, tp.dy);
   }
 }
 

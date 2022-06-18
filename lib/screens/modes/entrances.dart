@@ -169,8 +169,11 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
 
   String makeBuildingLabel(OsmChange building) {
     const kMaxNumberLength = 6;
-    String number =
-        building['addr:housenumber'] ?? building['addr:housename'] ?? '?';
+    final needsAddress = building['building'] == null ||
+        kBuildingNeedsAddress.contains(building['building']);
+    String number = building['addr:housenumber'] ??
+        building['addr:housename'] ??
+        (needsAddress ? '?' : '');
     if (number.length > kMaxNumberLength) {
       final spacePos = number.indexOf(' ');
       if (spacePos > 0) number = number.substring(0, spacePos);
@@ -381,6 +384,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                                 vertical: 5.0,
                                 horizontal: 10.0,
                               ),
+                              constraints: BoxConstraints(minWidth: 35.0),
                               child: Text(
                                 makeBuildingLabel(building),
                                 textAlign: TextAlign.center,
@@ -442,7 +446,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   ],
                   onTap: (tapped) {
                     final objects =
-                    tapped.map((k) => findByKey(k)).whereType<OsmChange>();
+                        tapped.map((k) => findByKey(k)).whereType<OsmChange>();
                     chooseEditorToOpen(objects);
                   },
                 ),
