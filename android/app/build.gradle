@@ -65,3 +65,8 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
+// Do this for an F-Droid release I guess
+//configurations.implementation {
+//    exclude group: 'com.google.android.gms'
+//}

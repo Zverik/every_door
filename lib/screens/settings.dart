@@ -4,6 +4,7 @@ import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/helpers/combo_page.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
@@ -11,6 +12,7 @@ import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/imagery.dart';
 import 'package:every_door/screens/settings/log.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
@@ -28,6 +30,7 @@ class SettingsPage extends ConsumerWidget {
     final osmData = ref.watch(osmDataProvider);
     final login = ref.watch(authProvider);
     final editorSettings = ref.watch(editorSettingsProvider);
+    final forceLocation = ref.watch(forceLocationProvider);
     final loc = AppLocalizations.of(context)!;
 
     final purgeAll = osmData.obsoleteLength == 0;
@@ -109,15 +112,6 @@ class SettingsPage extends ConsumerWidget {
           SettingsSection(
             title: Text(loc.settingsPresentation),
             tiles: [
-              SettingsTile.switchTile(
-                title: Text(loc.settingsLeftHand),
-                onToggle: (value) {
-                  ref
-                      .read(editorSettingsProvider.notifier)
-                      .setLeftHand(value);
-                },
-                initialValue: editorSettings.leftHand,
-              ),
               SettingsTile(
                 title: Text(loc.settingsBackground),
                 trailing: Icon(Icons.navigate_next),
@@ -127,6 +121,13 @@ class SettingsPage extends ConsumerWidget {
                     MaterialPageRoute(builder: (context) => ImageryPage()),
                   );
                 },
+              ),
+              SettingsTile.switchTile(
+                title: Text(loc.settingsLeftHand),
+                onToggle: (value) {
+                  ref.read(editorSettingsProvider.notifier).setLeftHand(value);
+                },
+                initialValue: editorSettings.leftHand,
               ),
             ],
           ),
@@ -179,6 +180,21 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
+          if (defaultTargetPlatform == TargetPlatform.android)
+            SettingsSection(
+              title: Text('System'),
+              tiles: [
+                SettingsTile.switchTile(
+                  title: Text('Use Google-enhanced Positioning'),
+                  initialValue: !forceLocation,
+                  onToggle: (bool value) {
+                    ref
+                        .read(forceLocationProvider.notifier)
+                        .set(!forceLocation);
+                  },
+                ),
+              ],
+            ),
           VersionSection(),
         ],
       ),

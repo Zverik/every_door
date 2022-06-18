@@ -3,16 +3,21 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/equirectangular.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logging/logging.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final geolocationProvider =
     StateNotifierProvider<GeolocationController, LatLng?>(
         (ref) => GeolocationController(ref));
+final forceLocationProvider =
+    StateNotifierProvider<ForceLocationController, bool>(
+        (ref) => ForceLocationController(ref));
 final trackingProvider = StateProvider<bool>((ref) => false);
 final rotationProvider = StateProvider<double>((ref) => 0.0);
 
@@ -34,10 +39,26 @@ class GeolocationController extends StateNotifier<LatLng?> {
         disableTracking();
       }
     });
-    // initGeolocator();
   }
 
-  initGeolocator() async {
+  LocationSettings _makeLocationSettings() {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      return AndroidSettings(
+        accuracy: LocationAccuracy.best,
+        forceLocationManager: _ref.read(forceLocationProvider),
+      );
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      return AppleSettings(
+        accuracy: LocationAccuracy.best,
+        activityType: ActivityType.fitness,
+      );
+    } else
+      return const LocationSettings(
+        accuracy: LocationAccuracy.best,
+      );
+  }
+
+  _initGeolocator() async {
     await _locSub?.cancel();
     _locSub = null;
 
@@ -62,17 +83,25 @@ class GeolocationController extends StateNotifier<LatLng?> {
       return;
     }
 
-    final pos = await Geolocator.getLastKnownPosition();
+    final pos = await Geolocator.getLastKnownPosition(
+        forceAndroidLocationManager: _ref.read(forceLocationProvider));
     if (pos != null) _updateLocation(_fromPosition(pos));
 
     _locSub = Geolocator.getPositionStream(
-      locationSettings: const LocationSettings(
-        accuracy: LocationAccuracy.best,
-      ),
+      locationSettings: _makeLocationSettings(),
     ).listen(
       onLocationEvent,
       onError: onLocationError,
     );
+  }
+
+  reloadTracking() async {
+    if (_ref.read(trackingProvider)) {
+      if (await Geolocator.isLocationServiceEnabled()) {
+        disableTracking();
+        await enableTracking();
+      }
+    }
   }
 
   disableTracking() {
@@ -83,18 +112,14 @@ class GeolocationController extends StateNotifier<LatLng?> {
     final bool tracking = _ref.read(trackingProvider);
     if (tracking) return;
 
-    final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!isLocationEnabled) {
-      if (context != null) {
-        final loc = AppLocalizations.of(context);
-        await showOkAlertDialog(
-          title: loc?.enableGPS ?? 'Enable GPS',
-          message: loc?.enableGPSMessage ?? 'Please enable location services.',
-          context: context,
-        );
-        await Geolocator.openLocationSettings();
-      } else
-        return;
+    // Wait until we get forceLocation value.
+    if (!_ref.read(forceLocationProvider.notifier).loaded) {
+      await Future.doWhile(() =>
+          Future.delayed(Duration(milliseconds: 50))
+              .then((_) =>
+          !_ref
+              .read(forceLocationProvider.notifier)
+              .loaded));
     }
 
     final permission = await Geolocator.checkPermission();
@@ -112,9 +137,23 @@ class GeolocationController extends StateNotifier<LatLng?> {
         return;
     }
 
+    final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!isLocationEnabled) {
+      if (context != null) {
+        final loc = AppLocalizations.of(context);
+        await showOkAlertDialog(
+          title: loc?.enableGPS ?? 'Enable GPS',
+          message: loc?.enableGPSMessage ?? 'Please enable location services.',
+          context: context,
+        );
+        await Geolocator.openLocationSettings();
+      } else
+        return;
+    }
+
     // Check for active GPS tracking
     if (_locSub == null) {
-      await initGeolocator();
+      await _initGeolocator();
     }
 
     if (_locSub != null) {
@@ -161,5 +200,31 @@ class GeolocationController extends StateNotifier<LatLng?> {
     _locSub?.cancel();
     _statSub.cancel();
     super.dispose();
+  }
+}
+
+class ForceLocationController extends StateNotifier<bool> {
+  static const _kForceLocationKey = 'force_location_android';
+  final Ref _ref;
+  bool loaded = false;
+
+  ForceLocationController(this._ref) : super(false) {
+    _read();
+  }
+
+  _read() async {
+    final prefs = await SharedPreferences.getInstance();
+    state = prefs.getBool(_kForceLocationKey) ?? false;
+    loaded = true;
+  }
+
+  set(bool force) async {
+    if (state == force) return;
+    state = force;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kForceLocationKey, state);
+
+    // Restart tracking if possible
+    await _ref.read(geolocationProvider.notifier).reloadTracking();
   }
 }
