@@ -8,6 +8,17 @@ import sys
 import unicodedata
 
 
+# Copied from ../lib/helpers/good_tags.dart
+MAIN_KEYS = [
+    'amenity', 'shop', 'craft', 'tourism', 'historic', 'club',
+    'highway', 'railway',
+    'office', 'healthcare', 'leisure', 'natural',
+    'emergency', 'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
+    'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
+    'advertising', 'playground', 'traffic_calming',
+]
+
+
 def open_or_download(path, filename, from_nsi=False):
     if path:
         fullname = os.path.join(path, filename)
@@ -111,13 +122,19 @@ def import_presets(cur, path):
             if not row['tags']:
                 continue
             tags = json.dumps(row['tags'])
+            name_parts = name.split('/')
+            num_steps = len(name_parts)
+            try:
+                main_index = 50 - MAIN_KEYS.index(name.split('/')[0])
+            except ValueError:
+                main_index = 90
             yield (
                 name,
                 1 if 'area' in row['geometry'] else 1,
                 tags if 'addTags' not in row else json.dumps(row['addTags']),
                 tags if 'removeTags' not in row else json.dumps(row['removeTags']),
                 row.get('icon'),
-                row.get('matchScore', 1.0) * 100,
+                int(row.get('matchScore', 1.0) * 100) * 1000 + num_steps * 100 + main_index,
                 None if 'locationSet' not in row else json.dumps(row['locationSet']),
             )
 

@@ -19,6 +19,8 @@ _Unreleased_
 * OpenStreetMap layer zoom 19 is back.
 * Many, many new translations — thanks folks, and thanks to Weblate.
 * Temporary (?) option in Settings to disable Google location services.
+* Attribution is not rotated with the map now.
+* Better ordering for choosing the best preset for an object.
 
 ## 0.4.0
 

@@ -85,7 +85,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       }
     }
 
-    _logger.fine('Detected ($detect) preset $preset');
+    _logger.info('Detected ($detect) preset $preset');
     if (preset!.fields.isEmpty) {
       preset = await presets.getFields(preset!, locale: locale);
       if (isAmenityTags(amenity.getFullTags())) {
@@ -98,9 +98,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         }
         // Move some fields to stdFields if present.
         if (!needsStdFields) {
+          final hasStdFields = stdFields.map((e) => e.key).toSet();
           for (final f in preset!.fields) {
-            if (PresetProvider.kStandardPoiFields.contains(f.key))
-              stdFields.add(f);
+            if (PresetProvider.kStandardPoiFields.contains(f.key) &&
+                !hasStdFields.contains(f.key)) stdFields.add(f);
           }
         }
         // Add opening_hours to moreFields if it's not anywhere.
