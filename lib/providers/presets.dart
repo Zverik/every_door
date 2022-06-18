@@ -20,7 +20,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:collection/collection.dart';
 import 'package:latlong2/latlong.dart';
 import "package:unorm_dart/unorm_dart.dart" as unorm;
 
@@ -89,8 +88,9 @@ class PresetProvider {
     }
     langs.add('en');
     langs.add('tag'); // Special marker for tag values
-    final values = langs.mapIndexed(
-        (index, element) => "(${_toSqlString(element)}, ${index + 1})");
+    final values = <String>[];
+    for (int i = 0; i < langs.length; i++)
+      values.add("(${_toSqlString(langs[i])}, ${i + 1})");
     return "langs (lang, lscore) as (values ${values.join(',')})";
   }
 
@@ -452,6 +452,7 @@ class PresetProvider {
   Future<Map<String, dynamic>?> singleImageryQuery(String id) async {
     if (!ready) await _waitUntilReady();
     const sql = "select * from imagery where id = ?";
-    return (await _db!.rawQuery(sql, [id])).firstOrNull;
+    final rows = await _db!.rawQuery(sql, [id]);
+    return rows.isEmpty ? null : rows.first;
   }
 }

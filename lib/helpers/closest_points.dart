@@ -65,6 +65,7 @@ class _GridCell {
 
 /// Linear algorithm as described in
 /// https://en.wikipedia.org/wiki/Closest_pair_of_points_problem#Linear-time_randomized_algorithms
+// ignore: unused_element
 List<LatLng> _closestLinear(Iterable<LatLng> locations) {
   final distance = DistanceEquirectangular();
   final points = locations.toList();

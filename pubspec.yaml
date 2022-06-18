@@ -16,11 +16,12 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0
   geolocator: ^8.0.0
-  # location: ^4.4.0
   http: ^0.13.3
   flutter_map: ^1.0.0
+  latlong2: ^0.8.1
   sqflite: ^2.0.0+3
   shared_preferences: ^2.0.7
+  flutter_secure_storage: ^5.0.2
   flutter_riverpod: ^1.0.1
   proximity_hash: ^2.0.0
   diacritic: ^0.1.3
@@ -35,6 +36,7 @@ dependencies:
   line_icons: ^2.0.1
   share_plus: ^4.0.4
   path_provider: ^2.0.9
+  path: ^1.8.1
   responsive_grid_list: ^1.2.3
   url_launcher: ^6.0.20
   flutter_dropdown_alert: ^1.0.3
