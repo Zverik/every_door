@@ -11,6 +11,7 @@ _Unreleased_
 * OpenStreetMap layer zoom 19 is back.
 * When adding multiple objects of the same type,
   copying tags from the last one.
+* Warning about a possible duplicate when adding a new amenity.
 * Many, many new translations — thanks folks, and thanks to Weblate.
 * Temporary (?) option in Settings to disable Google location services.
 
@@ -31,6 +32,7 @@ _Unreleased_
 * Better ordering for choosing the best preset for an object.
 * Removed the "inactive" button for new non-amenities.
 * Attribution is not rotated with the map now.
+* Addresses from new amenities are included in the chooser.
 
 ## 0.4.0
 

@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
@@ -9,6 +11,7 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/providers/need_update.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/helpers/tile_layers.dart';
@@ -36,6 +39,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   static final _logger = Logger('PoiEditorPage');
   late OsmChange amenity;
   Preset? preset;
+  OsmChange? possibleDuplicate;
+  Timer? duplicateTimer;
   List<PresetField> fields = []; // actual fields
   List<PresetField> moreFields = [];
   List<PresetField> stdFields = [];
@@ -50,6 +55,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           ref.read(lastPresetsProvider).getTagsForPreset(widget.preset!) ??
               widget.preset!.addTags;
       amenity = OsmChange.create(location: widget.location!, tags: tags);
+      startDuplicateSearch();
     }
     amenity.addListener(onAmenityChange);
 
@@ -70,6 +76,27 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
   onAmenityChange() {
     setState(() {});
+    startDuplicateSearch();
+  }
+
+  startDuplicateSearch() {
+    if (!amenity.isNew || !isAmenityTags(amenity.getFullTags()))
+      return;
+    possibleDuplicate = null;
+    if (duplicateTimer != null) {
+      duplicateTimer?.cancel();
+      duplicateTimer = null;
+    }
+    duplicateTimer = Timer(Duration(seconds: 1), () async {
+      final duplicate =
+          await ref.read(osmDataProvider).findPossibleDuplicate(amenity);
+      _logger.info('Found duplicate: $duplicate');
+      if (mounted) {
+        setState(() {
+          possibleDuplicate = duplicate;
+        });
+      }
+    });
   }
 
   updatePreset(BuildContext context, [bool detect = false]) async {
@@ -230,6 +257,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final bool needsCheck =
         amenity.isOld && needsCheckDate(amenity.getFullTags());
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
+
+    const distance = DistanceEquirectangular();
+    final int duplicateDistance = possibleDuplicate == null
+        ? 0
+        : distance(possibleDuplicate!.location, amenity.location).round();
+
     final loc = AppLocalizations.of(context)!;
     return WillPopScope(
       onWillPop: () async {
@@ -277,6 +310,36 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                         children: [
                           if (amenity.canDelete) buildMap(context),
                           if (!amenity.canDelete) SizedBox(height: 10.0),
+                          if (possibleDuplicate != null)
+                            GestureDetector(
+                              // TODO: prettify, and display distance.
+                              child: Container(
+                                color: Colors.yellow,
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.warning,
+                                        color: Colors.orange),
+                                    const SizedBox(width: 5.0),
+                                    Text(
+                                      loc.editorDuplicate(duplicateDistance),
+                                      style: kFieldTextStyle,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PoiEditorPage(
+                                        amenity: possibleDuplicate),
+                                  ),
+                                );
+                              },
+                            ),
                           if (stdFields.isNotEmpty) ...[
                             buildFields(stdFields, 50),
                           ],

@@ -1,4 +1,5 @@
 import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/changes.dart';
@@ -7,7 +8,6 @@ import 'package:every_door/providers/presets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
-import "package:unorm_dart/unorm_dart.dart" as unorm;
 import 'package:latlong2/latlong.dart' show LatLng;
 
 final termsProvider = Provider((ref) => TermsProvider(ref));
@@ -41,7 +41,7 @@ class TermsProvider {
         if (k.key.contains('name') || k.key == 'operator' || k.key == 'brand') {
           final words = k.value.split(RegExp(r'\W+'));
           keywords.addAll(
-              words.map((w) => _normalize(w)).where((w) => w.length >= 3));
+              words.map((w) => normalizeString(w)).where((w) => w.length >= 3));
         }
       }
       await database.insert(
@@ -54,11 +54,6 @@ class TermsProvider {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     }
-  }
-
-  String _normalize(String s) {
-    var combining = RegExp(r"[\u0300-\u036F]");
-    return unorm.nfkd(s.toLowerCase().trim()).replaceAll(combining, '');
   }
 
   Future<List<OsmChange>> findChanges(String query, LatLng location,
@@ -77,7 +72,7 @@ class TermsProvider {
     // "terms like '>first%' or terms like '>second%'".
     final words = query
         .split(' ')
-        .map((s) => _normalize(s))
+        .map((s) => normalizeString(s))
         .where((s) => s.length >= 2)
         .map((s) => '>$s%')
         .toList();

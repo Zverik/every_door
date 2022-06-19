@@ -6,6 +6,7 @@ import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/room.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/fields/wifi.dart';
+import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/helpers/nsi_features.dart';
 import 'package:flutter/foundation.dart';
@@ -21,7 +22,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:latlong2/latlong.dart';
-import "package:unorm_dart/unorm_dart.dart" as unorm;
 
 final presetProvider = Provider((_) => PresetProvider());
 
@@ -135,11 +135,6 @@ class PresetProvider {
     return results;
   }
 
-  String _normalize(String s) {
-    var combining = RegExp(r"[\u0300-\u036F]");
-    return unorm.nfkd(s.toLowerCase().trim()).replaceAll(combining, '');
-  }
-
   Future<List<Preset>> getPresetsAutocomplete(String query,
       {bool isArea = false,
       bool includeNSI = true,
@@ -166,11 +161,10 @@ class PresetProvider {
     $isAreaClause
     order by score desc, lscore;
     ''';
-    // TODO: check the query
-    final results = await _db!.rawQuery(sql, [_normalize(query) + '%']);
+    final results = await _db!.rawQuery(sql, [normalizeString(query) + '%']);
     final presets = <Preset>[];
     if (includeNSI) {
-      List<Preset> nsiResults = await _getNSIAutocomplete(_normalize(query));
+      List<Preset> nsiResults = await _getNSIAutocomplete(normalizeString(query));
       if (location != null) {
         nsiResults = _filterByLocation(nsiResults, location);
       }

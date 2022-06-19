@@ -1,5 +1,7 @@
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/circle_bounds.dart';
+import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/floor.dart';
@@ -119,13 +121,15 @@ class OsmDataHelper extends ChangeNotifier {
     await _updateLength();
   }
 
-  List<OsmChange> _wrapInChange(Iterable<OsmElement> elements) {
+  List<OsmChange> _wrapInChange(Iterable<OsmElement> elements,
+      [bool addNew = true]) {
     final changes = _ref.read(changesProvider);
-    return elements
-            .map((e) => changes.changeFor(e))
-            .where((change) => !change.deleted)
-            .toList() +
-        changes.getNew();
+    final result = elements
+        .map((e) => changes.changeFor(e))
+        .where((change) => !change.deleted)
+        .toList();
+    if (addNew) result.addAll(changes.getNew());
+    return result;
   }
 
   Future<List<OsmChange>> _queryElements(List<String> hashes) async {
@@ -166,10 +170,23 @@ class OsmDataHelper extends ChangeNotifier {
       whereArgs: hashes,
     );
     final elements = rows.map((row) => OsmElement.fromJson(row)).toList();
+
+    // Add addresses from edited objects (nvm duplicates).
+    const distance = DistanceEquirectangular();
+    final changedElements = _ref
+        .read(changesProvider)
+        .all()
+        .where((element) =>
+            distance(location, element.location) <= kVisibilityRadius &&
+            element['addr:housenumber'] != null)
+        .map((e) => e.toElement(newId: -1));
+    elements.addAll(changedElements);
+
+    // Removed non-buildings if requested.
     if (!includeAmenities)
       elements.removeWhere((e) => !isBuildingOrAddressPoint(e.tags));
 
-    const distance = DistanceEquirectangular();
+    // Hash addresses by distance.
     final Map<StreetAddress, double> addresses = {};
     for (final e in elements) {
       final hash = StreetAddress.fromTags(e.tags, e.center);
@@ -180,6 +197,7 @@ class OsmDataHelper extends ChangeNotifier {
       }
     }
 
+    // Return N closest addresses.
     final results = addresses.keys.toList();
     results.sort((a, b) => addresses[a]!.compareTo(addresses[b]!));
     if (results.length > limit) return results.sublist(0, limit);
@@ -311,12 +329,65 @@ class OsmDataHelper extends ChangeNotifier {
     return result;
   }
 
+  Future<OsmChange?> findPossibleDuplicate(OsmChange amenity) async {
+    final mainKey = getMainKey(amenity.getFullTags());
+    if (mainKey == null) return null;
+
+    final database = await _ref.read(databaseProvider).database;
+    final hashes = createGeohashes(
+        amenity.location.latitude,
+        amenity.location.longitude,
+        kDuplicateSearchRadius.toDouble(),
+        kGeohashPrecision);
+    final placeholders = List.generate(hashes.length, (index) => "?").join(",");
+    final rows = await database.query(
+      OsmElement.kTableName,
+      where: "geohash in ($placeholders) and (tags like '%$mainKey%')",
+      whereArgs: hashes,
+    );
+    final elements = _wrapInChange(rows
+        .map((row) => OsmElement.fromJson(row))
+        .where((e) => e.tags[mainKey] == amenity[mainKey]), false);
+
+    // Which names are we looking for.
+    final names = <String>{};
+    amenity.getFullTags().forEach((key, value) {
+      if (key.startsWith('name') || key == 'operator') {
+        final v = normalizeString(value);
+        if (v.length >= 3) names.add(v);
+      }
+    });
+
+    // Filter elements that have similar name tags.
+    elements.retainWhere((element) {
+      for (final key in element.getFullTags().keys) {
+        if (key.startsWith('name') || key == 'operator') {
+          final v = normalizeString(element[key]!);
+          if (v.length >= 3) {
+            for (final n in names) {
+              if (n.contains(v) || v.contains(n)) return true;
+            }
+          }
+        }
+      }
+      return false;
+    });
+    if (elements.isEmpty) return null;
+
+    // Sort by distance and return the closest.
+    const distance = DistanceEquirectangular();
+    elements.sort((a, b) => distance(amenity.location, a.location)
+        .compareTo(distance(amenity.location, b.location)));
+    return elements.first;
+  }
+
   Future<List<OsmChange>> downloadMap(LatLngBounds bounds) async {
     _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
     try {
       final api = _ref.read(osmApiProvider);
       final roadNames = <RoadNameRecord>{};
-      final List<OsmElement> elements = await api.map(bounds, roadNames: roadNames);
+      final List<OsmElement> elements =
+          await api.map(bounds, roadNames: roadNames);
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.updatingDatabase;
       await storeElements(elements, bounds);
       await _ref.read(roadNameProvider).storeNames(roadNames);

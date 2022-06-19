@@ -47,6 +47,8 @@
   "@editorLoadingPreset": {},
   "editorMove": "Сдвинуть",
   "@editorMove": {},
+  "editorDuplicate": "Возможный дубликат в {distance} м",
+  "@editorDuplicate": {},
   "editorMarkActive": "Открыто",
   "@editorMarkActive": {},
   "editorMarkDefunct": "Закрылось",
