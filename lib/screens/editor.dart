@@ -48,9 +48,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   @override
   void initState() {
     super.initState();
-    if (widget.amenity != null)
-      amenity = widget.amenity!;
-    else {
+    if (widget.amenity != null) {
+      amenity = widget.amenity!.copy();
+    } else {
       final tags =
           ref.read(lastPresetsProvider).getTagsForPreset(widget.preset!) ??
               widget.preset!.addTags;
@@ -312,7 +312,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           if (!amenity.canDelete) SizedBox(height: 10.0),
                           if (possibleDuplicate != null)
                             GestureDetector(
-                              // TODO: prettify, and display distance.
                               child: Container(
                                 color: Colors.yellow,
                                 padding: EdgeInsets.symmetric(vertical: 5.0),
