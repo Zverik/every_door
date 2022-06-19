@@ -284,7 +284,7 @@ class PresetProvider {
     if (results.isNotEmpty) {
       final existing = Set.of(options);
       options.addAll((results.first['options'] as String)
-          .split(';')
+          .split('\\')
           .where((v) => !existing.contains(v)));
     }
     return options.map((e) => ComboOption(e, loc[e])).toList();

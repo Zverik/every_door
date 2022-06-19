@@ -103,7 +103,8 @@ class _RadioFieldState extends State<RadioField> {
             onTap: () {
               final newValues = values.where((v) => v != value).toList();
               if (widget.onChange != null)
-                widget.onChange!(newValues.join(';'));
+                widget
+                    .onChange!(newValues.isEmpty ? null : newValues.join(';'));
               if (widget.onMultiChange != null)
                 widget.onMultiChange!(newValues);
             },
@@ -123,12 +124,13 @@ class _RadioFieldState extends State<RadioField> {
                   newValues.last = entry.value;
               }
               if (widget.onChange != null)
-                widget.onChange!(newValues.join(';'));
+                widget
+                    .onChange!(newValues.isEmpty ? null : newValues.join(';'));
               if (widget.onMultiChange != null)
                 widget.onMultiChange!(newValues);
               if (pushFirst) {
                 scrollController.animateTo(0.0,
-                    duration: Duration(milliseconds: 200),
+                    duration: Duration(milliseconds: 300),
                     curve: Curves.easeOut);
               }
             },

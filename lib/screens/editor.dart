@@ -80,8 +80,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   startDuplicateSearch() {
-    if (!amenity.isNew || !isAmenityTags(amenity.getFullTags()))
-      return;
+    if (!amenity.isNew || !isAmenityTags(amenity.getFullTags())) return;
     possibleDuplicate = null;
     if (duplicateTimer != null) {
       duplicateTimer?.cancel();
@@ -308,8 +307,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       bottom: false,
                       child: ListView(
                         children: [
-                          if (amenity.canDelete) buildMap(context),
-                          if (!amenity.canDelete) SizedBox(height: 10.0),
+                          buildMap(context),
                           if (possibleDuplicate != null)
                             GestureDetector(
                               child: Container(
@@ -489,51 +487,64 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                 interactiveFlags: 0,
                 rotation: ref.watch(rotationProvider),
                 allowPanningOnScrollingParent: false,
-                onTap: (pos, center) async {
-                  final newLocation = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          MapChooserPage(location: amenity.location),
-                    ),
-                  );
-                  if (newLocation != null) {
-                    setState(() {
-                      amenity.location = newLocation;
-                    });
-                  }
-                },
+                onTap: !amenity.canMove
+                    ? null
+                    : (pos, center) async {
+                        final newLocation = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                MapChooserPage(location: amenity.location),
+                          ),
+                        );
+                        if (newLocation != null) {
+                          setState(() {
+                            amenity.location = newLocation;
+                          });
+                        }
+                      },
               ),
               children: [
                 TileLayerWidget(options: buildTileLayerOptions(kOSMImagery)),
                 MarkerLayerWidget(
                     options: MarkerLayerOptions(markers: [
-                  Marker(
-                    point: amenity.location,
-                    rotate: true,
-                    rotateOrigin: Offset(12.0, -5.0),
-                    rotateAlignment: Alignment.bottomLeft,
-                    anchorPos: AnchorPos.exactly(Anchor(138.0, 5.0)),
-                    width: 150.0,
-                    height: 30.0,
-                    builder: (ctx) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(Icons.location_pin),
-                        SizedBox(width: 2.0),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(5.0),
+                  if (amenity.canMove)
+                    Marker(
+                      point: amenity.location,
+                      rotate: true,
+                      rotateOrigin: Offset(12.0, -5.0),
+                      rotateAlignment: Alignment.bottomLeft,
+                      anchorPos: AnchorPos.exactly(Anchor(138.0, 5.0)),
+                      width: 150.0,
+                      height: 30.0,
+                      builder: (ctx) => Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.location_pin),
+                          SizedBox(width: 2.0),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 5.0),
+                            child: Text(loc.editorMove),
                           ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 5.0),
-                          child: Text(loc.editorMove),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                  if (!amenity.canMove)
+                    Marker(
+                      rotate: true,
+                      rotateOrigin: Offset(0.0, -5.0),
+                      rotateAlignment: Alignment.bottomCenter,
+                      point: amenity
+                          .location, // mapController.center throws late init exception
+                      anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
+                      builder: (ctx) => Icon(Icons.location_pin, color: Colors.red.shade900),
+                    ),
                 ])),
               ],
             ),

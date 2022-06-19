@@ -120,9 +120,7 @@ class DragButtonsWidget extends StatelessWidget {
             child: Icon(options.icon, size: 30.0),
           ),
           style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
+            shape: CircleBorder(),
           ),
           onPressed: () {
             if (options.onTap != null) options.onTap!();

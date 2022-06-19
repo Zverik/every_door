@@ -458,8 +458,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     DragButton(
                         icon: Icons.house,
                         bottom: 20.0,
-                        left: leftHand ? null : 20.0 + safePadding.left,
-                        right: !leftHand ? null : 20.0 + safePadding.right,
+                        left: leftHand ? null : 10.0 + safePadding.left,
+                        right: !leftHand ? null : 10.0 + safePadding.right,
                         onDragEnd: (pos) {
                           editBuilding(null, pos);
                         },
@@ -476,8 +476,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     DragButton(
                         icon: Icons.sensor_door,
                         bottom: 20.0,
-                        left: !leftHand ? null : 20.0 + safePadding.left,
-                        right: leftHand ? null : 20.0 + safePadding.right,
+                        left: !leftHand ? null : 10.0 + safePadding.left,
+                        right: leftHand ? null : 10.0 + safePadding.right,
                         onDragStart: () {
                           if (savedZoom == null) {
                             savedZoom = controller.zoom;
@@ -508,7 +508,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 OverlayButtonOptions(
                   alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.0,
+                    horizontal: 0.0,
                     vertical: 10.0,
                   ),
                   icon: Icons.menu,
@@ -524,7 +524,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 OverlayButtonOptions(
                   alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.0,
+                    horizontal: 0.0,
                     vertical: 10.0,
                   ),
                   enabled: !ref.watch(trackingProvider),
@@ -538,7 +538,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   alignment:
                       leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.0 +
+                    horizontal: 0.0 +
                         (leftHand ? safePadding.left : safePadding.right),
                     vertical: 100.0,
                   ),

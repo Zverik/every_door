@@ -304,7 +304,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         OverlayButtonOptions(
           alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
           padding: EdgeInsets.symmetric(
-            horizontal: 10.0,
+            horizontal: 0.0,
             vertical: 10.0,
           ),
           icon: Icons.menu,
@@ -340,6 +340,14 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
           icon: Icons.my_location,
           onPressed: () {
             ref.read(geolocationProvider.notifier).enableTracking(context);
+          },
+          onLongPressed: () {
+            if (ref.read(rotationProvider) != 0.0) {
+              ref.read(rotationProvider.state).state = 0.0;
+              mapController.rotate(0.0);
+            } else {
+              ref.read(geolocationProvider.notifier).enableTracking(context);
+            }
           },
         ),
         if (widget.drawZoomButtons)

@@ -1,4 +1,5 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/geometry.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
@@ -239,7 +240,7 @@ class CollectGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
   CollectGeometry();
 
   final Map<int, LatLng> nodeLocations = {};
-  final Map<OsmId, LatLngBounds> wayBounds = {};
+  final Map<OsmId, Geometry> wayGeometries = {};
 
   @override
   List<OsmElement> convert(List<OsmElement> input) {
@@ -257,15 +258,30 @@ class CollectGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
               .whereType<LatLng>()
               .toList());
           if (bounds.isValid) {
-            wayBounds[el.id] = bounds;
             final nodeLoc = el.nodes == null
                 ? null
                 : {
                     for (var n in el.nodes!)
                       if (nodeLocations.containsKey(n)) n: nodeLocations[n]
                   };
+            Geometry geometry;
+            if (nodeLoc == null ||
+                (el.nodes?.any((n) => !nodeLoc.containsKey(n)) ?? true)) {
+              geometry = Envelope(bounds);
+            } else {
+              final nodes = el.nodes!.map((n) => nodeLoc[n]!);
+              try {
+                geometry = nodes.first == nodes.last
+                    ? Polygon(nodes)
+                    : LineString(nodes);
+              } on GeometryException {
+                geometry = Envelope(bounds);
+              }
+            }
+            wayGeometries[el.id] = geometry;
             result.add(el.copyWith(
-                bounds: bounds, nodeLocations: nodeLoc?.cast<int, LatLng>()));
+                geometry: geometry,
+                nodeLocations: nodeLoc?.cast<int, LatLng>()));
           }
         }
       } else if (el.type == OsmElementType.relation) {
@@ -276,11 +292,12 @@ class CollectGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
                 nodeLocations.containsKey(m.id.ref)) {
               bounds.extend(nodeLocations[m.id.ref]);
             } else if (m.type == OsmElementType.way &&
-                wayBounds.containsKey(m.id)) {
-              bounds.extendBounds(wayBounds[m.id]!);
+                wayGeometries.containsKey(m.id)) {
+              bounds.extendBounds(wayGeometries[m.id]!.bounds);
             }
           }
-          if (bounds.isValid) result.add(el.copyWith(bounds: bounds));
+          if (bounds.isValid)
+            result.add(el.copyWith(geometry: Envelope(bounds)));
         }
       }
     }
@@ -395,7 +412,8 @@ class StripMembersSink extends ChunkedConversionSink<List<OsmElement>> {
   final StripMembers _converter;
   final Sink<List<OsmElement>> _sink;
 
-  StripMembersSink(this._sink, bool clearMembers) : _converter = StripMembers(clearMembers: clearMembers);
+  StripMembersSink(this._sink, bool clearMembers)
+      : _converter = StripMembers(clearMembers: clearMembers);
 
   @override
   void add(List<OsmElement> chunk) {

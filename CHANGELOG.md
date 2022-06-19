@@ -5,15 +5,20 @@
 _Unreleased_
 
 * Keeping the map big when there's enough space for POI tiles.
-* Increased minimum rotation angle to 30° to make disabling it easier.
-* Presenting 250 top values for `payment:*` keys.
-* Maxar Premium Imagery is back.
-* OpenStreetMap layer zoom 19 is back.
+* Added Maxar Premium Imagery.
 * When adding multiple objects of the same type,
   copying tags from the last one.
 * Warning about a possible duplicate when adding a new amenity.
 * Many, many new translations — thanks folks, and thanks to Weblate.
-* Temporary (?) option in Settings to disable Google location services.
+
+### Editor
+
+* Preventing deletion of nodes that are relation members.
+* Editor pane now shows location even when you cannot move the POI.
+* Removed the "inactive" button for new non-amenities.
+* Addresses from new amenities are included in the chooser.
+* Keeping values with semicolons for `voltage` options.
+* Presenting 250 top values for `payment:*` and `craft` keys.
 
 ### Entrances Mode
 
@@ -26,13 +31,15 @@ _Unreleased_
 
 ### Little Things
 
+* OpenStreetMap layer zoom 19 is back.
+* Increased minimum rotation angle to 30° to make disabling it easier.
+* Long tap the crosshair button to reset rotation.
 * Fixed type list flicker because of defaults loading slowly.
-* Preventing deletion of nodes that are relation members.
-* Imagery list in Settings was refreshing constantly.
 * Better ordering for choosing the best preset for an object.
-* Removed the "inactive" button for new non-amenities.
+* Imagery list in Settings was refreshing constantly.
 * Attribution is not rotated with the map now.
-* Addresses from new amenities are included in the chooser.
+* Labels for U-shaped buildings are positioned on buildings.
+* Temporary (?) option in Settings to disable Google location services.
 
 ## 0.4.0
 

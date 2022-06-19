@@ -411,5 +411,6 @@ bool needsMoreInfo(Map<String, String> tags) {
 
   if (tags['power'] == 'pole') return tags['material'] == null;
   if (tags['power'] == 'tower') return tags['ref'] == null;
+  if (tags['power'] == 'substation') return tags['ref'] == null;
   return false;
 }
