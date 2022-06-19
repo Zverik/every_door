@@ -1,17 +1,17 @@
 {
-  "loadingStart": "初期化中...",
+  "loadingStart": "初期化中…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "loadingPresets": "プリセットを読み込んでいます",
+  "loadingPresets": "プリセットを読み込んでいます…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
-  "loadingChanges": "変更箇所を読み込んでいます",
+  "loadingChanges": "変更箇所を読み込んでいます…",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
-  "loadingLocation": "現在地を取得しています",
+  "loadingLocation": "現在地を取得しています…",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
@@ -95,7 +95,7 @@
   "@editorMoreFields": {
     "description": "Title of a additional fields group in editor."
   },
-  "editorLoadingPreset": "プリセットを読込中...",
+  "editorLoadingPreset": "プリセットを読込中…",
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
@@ -119,7 +119,7 @@
   "@editorMissing": {
     "description": "Button title to delete an amenity (since it's missing)."
   },
-  "editorRestoreTitle": "存在確認",
+  "editorRestoreTitle": "営業していますか?",
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."
   },
@@ -185,7 +185,7 @@
   "@settingsDataManagement": {
     "description": "Section title for data settings."
   },
-  "settingsPresentation": "Presentation",
+  "settingsPresentation": "表示",
   "@settingsPresentation": {
     "description": "Section title for presentation options."
   },
@@ -217,7 +217,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Purged {count} element}, =few{Purged {count} elements}, =other{Purged {count} elements}}",
+  "settingsPurgedMessage": "{count,plural, =1{ {count} 件削除しました}, =few{ {count} 件削除しました}, =other{ {count} 件削除しました}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -296,7 +296,7 @@
   "@accountAuthErrorTitle": {
     "descripton": "Title for the alert dialog about an incorrect password."
   },
-  "accountAuthErrorMessage": "ログイン名かパスワードが間違っています",
+  "accountAuthErrorMessage": "ログイン名かパスワードが間違っています.",
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
@@ -312,7 +312,7 @@
   "@accountUnreadMail": {
     "description": "Label for the number of unread private messages a user has."
   },
-  "changesCount": "{count,plural, =1{{count} change}, =few{{count} changes}, =other{{count} changes}}",
+  "changesCount": "{count,plural, =1{{count} 個変更}, =few{{count} 個変更}, =other{{count} 個変更}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -337,7 +337,7 @@
   "@changesUploadFailedTitle": {
     "descripton": "Title for the notification about a failed changes upload."
   },
-  "changesDeletedChange": "Deleted {change}",
+  "changesDeletedChange": "{change}個の変更を取り消しました",
   "@changesDeletedChange": {
     "description": "Message for the snack bar after you swipe a change away.",
     "placeholders": {
@@ -351,7 +351,7 @@
   "@changesDeletedUndo": {
     "description": "Button label for undoing a change deletion."
   },
-  "changesPending": "Pending",
+  "changesPending": "保留",
   "@changesPending": {
     "description": "Subtitle for a change that has not yet been sent to OSM API."
   },
@@ -391,7 +391,7 @@
   "@fieldHoursNext": {
     "description": "Button in the interval editor to move to the closing time."
   },
-  "fieldHoursAddFragment": "Add a fragment",
+  "fieldHoursAddFragment": "営業時間を追加する",
   "@fieldHoursAddFragment": {
     "description": "Button in opening hours editor to add a fragment for days."
   },
@@ -455,7 +455,7 @@
   "@fieldCheckboxNo": {
     "description": "Checkbox name for no."
   },
-  "fieldFloorEmpty": "フロアを指定するには先に住所を入力してください",
+  "fieldFloorEmpty": "フロアを指定するには先に住所を入力してください.",
   "@fieldFloorEmpty": {
     "description": "What is written on the floor chooser if there are no floors to choose."
   },
@@ -491,7 +491,7 @@
   "@messageDataObsolete": {
     "description": "Message that appears on the main screen when OSM data is outdated."
   },
-  "enableGPS" : "GPSを有効化",
+  "enableGPS": "GPSを有効化",
   "@enableGPS": {
     "description": "Title of the alert for enabling location services."
   },
@@ -500,7 +500,7 @@
     "description": "Contents of the alert for enabling location services."
   },
   "enableLocation": "位置情報を有効化",
-  "@enableLocation":  {
+  "@enableLocation": {
     "description": "Title of the alert for allowing app access to location."
   },
   "enableLocationMessage": "位置情報へのアクセスをアプリに許可するよう設定してください。",
@@ -554,13 +554,21 @@
     "description": "Button label for opening the building object in a full editor."
   },
   "buildingTypeHouse": "一軒家",
+  "@buildingTypeHouse": {},
   "buildingTypeApartments": "集合住宅",
+  "@buildingTypeApartments": {},
   "buildingTypeRetail": "小売店",
+  "@buildingTypeRetail": {},
   "buildingTypeCommercial": "商業空間",
-  "buildingTypeShed": "shed",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "小屋",
+  "@buildingTypeShed": {},
   "buildingTypeIndustrial": "工場",
+  "@buildingTypeIndustrial": {},
   "buildingTypeGarage": "ガレージ",
+  "@buildingTypeGarage": {},
   "buildingTypeConstruction": "建築中",
+  "@buildingTypeConstruction": {},
   "entranceFlats": "Flats",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
@@ -582,9 +590,13 @@
     "description": "Label for entrance access in the form. Keep it short."
   },
   "entranceAccessYes": "誰でも可",
+  "@entranceAccessYes": {},
   "entranceAccessPrivate": "プライベート",
+  "@entranceAccessPrivate": {},
   "entranceAccessNo": "利用不可",
+  "@entranceAccessNo": {},
   "entranceAccessDelivery": "配達専用",
+  "@entranceAccessDelivery": {},
   "entranceWheelchair": "車椅子",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
@@ -594,12 +606,19 @@
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "entranceTypeMain": "main",
+  "@entranceTypeMain": {},
   "entranceTypeStaircase": "staircase",
+  "@entranceTypeStaircase": {},
   "entranceTypeHome": "home",
+  "@entranceTypeHome": {},
   "entranceTypeShop": "shop",
+  "@entranceTypeShop": {},
   "entranceTypeService": "service",
+  "@entranceTypeService": {},
   "entranceTypeGarage": "garage",
+  "@entranceTypeGarage": {},
   "entranceTypeEmergency": "emergency",
+  "@entranceTypeEmergency": {},
   "addressHouseNumber": "House",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
@@ -635,5 +654,16 @@
   "apiStatusUploading": "変更をアップロード中",
   "@apiStatusUploading": {
     "description": "Text displayed when the app is uploading data to the API."
-  }
+  },
+  "addressX": "住所{n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingTypeAddress": "住所",
+  "@buildingTypeAddress": {}
 }
