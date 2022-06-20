@@ -1,5 +1,5 @@
 {
-  "loadingLocation": "Ustalanie położenia",
+  "loadingLocation": "Ustalanie położenia…",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
@@ -100,15 +100,15 @@
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
-  "loadingStart": "Inicjalizacja...",
+  "loadingStart": "Inicjalizacja…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "loadingPresets": "Wczytywanie szablonów",
+  "loadingPresets": "Wczytywanie szablonów…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
-  "loadingChanges": "Wczytywanie zmian",
+  "loadingChanges": "Wczytywanie zmian…",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
@@ -323,7 +323,7 @@
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
-  "editorLoadingPreset": "Wczytywanie szablonów...",
+  "editorLoadingPreset": "Wczytywanie szablonu…",
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
@@ -598,7 +598,7 @@
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
   },
-  "apiStatusDownloading": "Pobieranie danych",
+  "apiStatusDownloading": "Pobieranie danych…",
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."
   },
@@ -614,7 +614,7 @@
   "@accountFieldLogin": {
     "description": "Label for the OSM login."
   },
-  "accountAuthErrorMessage": "Błędny login lub hasło.",
+  "accountAuthErrorMessage": "Błędna nazwa użytkownika lub hasło.",
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
@@ -665,5 +665,17 @@
   "entranceType": "Rodzaj",
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "editorDuplicate": "Możliwy duplikat w odległości {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
   }
 }
