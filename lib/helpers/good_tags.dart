@@ -274,7 +274,6 @@ bool isGoodTags(Map<String, String> tags) {
     const kWrongLeisure = <String>{
       'park',
       'garden',
-      'pitch',
       'nature_reserve',
       'track',
       'common',

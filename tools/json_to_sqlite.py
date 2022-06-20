@@ -224,9 +224,12 @@ def import_translations(cur, path):
         def build_fields(lang, data):
             for name, row in data.items():
                 options = row.get('options', {})
-                for k in options:
-                    if isinstance(k, dict):
-                        options[k] = options[k]['title']
+                for k in list(options):
+                    if isinstance(options[k], dict):
+                        if 'title' not in options[k]:
+                            del options[k]
+                        else:
+                            options[k] = options[k]['title']
                 yield (
                     lang, name,
                     row.get('label'),
