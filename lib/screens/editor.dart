@@ -285,12 +285,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.history),
-              onPressed: !amenity.isNew
-                  ? () async => await amenity.element!.launchHistoryPage()
-                  : null,
-            ),
-            IconButton(
               icon: Icon(Icons.code),
               onPressed: () async {
                 await Navigator.push(

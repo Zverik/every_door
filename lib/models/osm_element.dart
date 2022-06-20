@@ -3,7 +3,6 @@ import 'package:every_door/helpers/geometry.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:proximity_hash/geohash.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 
 import 'package:xml/xml.dart';
@@ -301,8 +300,4 @@ class OsmElement {
 
   @override
   int get hashCode => id.hashCode + version.hashCode;
-
-  launchHistoryPage() async {
-    await launchUrl(Uri.https(kOsmAuth2Endpoint, '/${id.fullRef}/history'), mode: LaunchMode.externalApplication);
-  }
 }
