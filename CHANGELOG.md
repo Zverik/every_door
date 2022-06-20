@@ -2,7 +2,9 @@
 
 ## 0.5.0
 
-_Unreleased_
+_Released on 2022-06-20_
+
+### Highlights
 
 * Keeping the map big when there's enough space for POI tiles.
 * Added Maxar Premium Imagery.
@@ -29,7 +31,7 @@ _Unreleased_
 * Not allowing the "address" option on polygonal buildings.
 * Removed question mark from some types of unaddressed buildings.
 
-### Little Things
+### Other
 
 * OpenStreetMap layer zoom 19 is back.
 * Increased minimum rotation angle to 30° to make disabling it easier.
