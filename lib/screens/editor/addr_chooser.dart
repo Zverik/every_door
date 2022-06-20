@@ -17,7 +17,7 @@ class AddrChooserPage extends ConsumerStatefulWidget {
   const AddrChooserPage({required this.location, this.creating = false});
 
   @override
-  _AddrChooserPageState createState() => _AddrChooserPageState();
+  ConsumerState createState() => _AddrChooserPageState();
 }
 
 class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
@@ -33,7 +33,7 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
     final provider = ref.read(osmDataProvider);
     List<StreetAddress> data = await provider.getAddressesAround(
       widget.location,
-      limit: 5,
+      limit: 15,
       includeAmenities: false,
     );
     setState(() {
@@ -70,6 +70,9 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
           rotationThreshold: kRotationThreshold,
           interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
         ),
+        nonRotatedChildren: [
+          buildAttributionWidget(imagery),
+        ],
         children: [
           TileLayerWidget(
             options: buildTileLayerOptions(imagery),

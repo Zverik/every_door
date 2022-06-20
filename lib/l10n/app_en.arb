@@ -103,6 +103,18 @@
   "@editorMove": {
     "description": "Label for the map, a hint that you can move the object."
   },
+  "editorDuplicate": "Possible duplicate in {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
   "editorMarkActive": "Mark Active",
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."

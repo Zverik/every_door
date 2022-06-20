@@ -1,9 +1,9 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/combo.dart';
+import 'package:every_door/helpers/normalizer.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import "package:unorm_dart/unorm_dart.dart" as unorm;
 
 class ComboChooserPage extends StatefulWidget {
   final ComboPresetField field;
@@ -13,7 +13,7 @@ class ComboChooserPage extends StatefulWidget {
   const ComboChooserPage(this.field, this.values, {this.allowEmpty = true});
 
   @override
-  _ComboChooserPageState createState() => _ComboChooserPageState();
+  State createState() => _ComboChooserPageState();
 }
 
 class _ComboChooserPageState extends State<ComboChooserPage> {
@@ -83,19 +83,14 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
     );
   }
 
-  String _normalize(String s) {
-    var combining = RegExp(r"[\u0300-\u036F]");
-    return unorm.nfkd(s.toLowerCase().trim()).replaceAll(combining, '');
-  }
-
   Widget buildChooser(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     var options = missingOptions + List.of(widget.field.options);
     if (filter.isNotEmpty) {
       // Prune options
-      final nFilter = _normalize(filter);
+      final nFilter = normalizeString(filter);
       options = options
-          .where((element) => _normalize(element.value).contains(nFilter))
+          .where((element) => normalizeString(element.value).contains(nFilter))
           .toList();
       if (widget.field.customValues) {
         // Add this new value as an option
@@ -107,6 +102,10 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
     }
 
     return ResponsiveGridList(
+      minItemWidth: 150.0,
+      horizontalGridSpacing: 5,
+      verticalGridSpacing: 5,
+      rowMainAxisAlignment: MainAxisAlignment.start,
       children: [
         for (final opt in options)
           ListTile(
@@ -133,10 +132,6 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
             },
           ),
       ],
-      minItemWidth: 150.0,
-      horizontalGridSpacing: 5,
-      verticalGridSpacing: 5,
-      rowMainAxisAlignment: MainAxisAlignment.start,
     );
   }
 }

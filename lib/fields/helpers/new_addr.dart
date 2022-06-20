@@ -2,7 +2,7 @@ import 'package:every_door/widgets/address_form.dart';
 import 'package:every_door/models/address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
 
 class NewAddressPane extends ConsumerStatefulWidget {
   final LatLng location;
@@ -38,12 +38,12 @@ class _NewAddressPaneState extends ConsumerState<NewAddressPane> {
               },
             ),
             TextButton(
-              child: Text(MaterialLocalizations.of(context).okButtonLabel),
               onPressed: address.isEmpty
                   ? null
                   : () {
                       Navigator.pop(context, address);
                     },
+              child: Text(MaterialLocalizations.of(context).okButtonLabel),
             ),
           ],
         )

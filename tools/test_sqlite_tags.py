@@ -68,19 +68,10 @@ order by lscore limit 10
 sql = """
 with langs (lang, lscore) as (values ('ru', 1),('ru', 2),('en', 3)),
 tags (tkey, tvalue) as (values
-  ('addr:city','Tallinn'),
-  ('addr:housenumber','155a'),
-  ('addr:street','Õismäe tee'),
-  ('amenity','fuel'),
-  ('brand','Olerex'),
-  ('building','roof'),
-  ('building:levels','1'),
-  ('fuel:diesel','yes'),
-  ('fuel:octane_95','yes'),
-  ('fuel:octane_98','yes'),
+  ('shop', 'florist'),
+  ('entrance', 'main'),
   ('name','Olerex'),
-  ('opening_hours','24/7'),
-  ('operator','Olerex AS')
+  ('opening_hours', '24/7')
 )
 ,matches as (
   select preset_name, count(*) as tag_count, count(tkey) as match_count

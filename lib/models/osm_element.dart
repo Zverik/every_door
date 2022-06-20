@@ -1,7 +1,6 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/geometry.dart';
 import 'package:every_door/helpers/good_tags.dart';
-import 'package:every_door/private.dart';
-import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:proximity_hash/geohash.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -86,7 +85,7 @@ class OsmElement {
   final DateTime timestamp;
   final DateTime? downloaded;
   final LatLng? center;
-  final LatLngBounds? bounds;
+  final Geometry? geometry;
   final List<int>? nodes;
   final Map<int, LatLng>? nodeLocations; // not stored to the database
   final List<OsmMember>? members;
@@ -101,20 +100,22 @@ class OsmElement {
     this.downloaded,
     required this.tags,
     LatLng? center,
-    this.bounds,
+    this.geometry,
     this.nodes,
     this.nodeLocations,
     this.members,
     this.isMember = false,
-  }) : center =
-            center ?? (bounds != null && bounds.isValid ? bounds.center : null);
+  }) : center = center ??
+            (geometry is Polygon
+                ? geometry.findPointOnSurface()
+                : geometry?.center);
 
   OsmElement copyWith(
       {Map<String, String>? tags,
       int? id,
       int? version,
       LatLng? center,
-      LatLngBounds? bounds,
+      Geometry? geometry,
       bool? isMember,
       List<int>? nodes,
       Map<int, LatLng>? nodeLocations,
@@ -127,7 +128,7 @@ class OsmElement {
       downloaded: downloaded,
       tags: tags ?? this.tags,
       center: center ?? this.center,
-      bounds: bounds ?? this.bounds,
+      geometry: geometry ?? this.geometry,
       nodes: clearMembers ? null : (nodes ?? this.nodes),
       nodeLocations: clearMembers || (nodeLocations?.isEmpty ?? false)
           ? null
@@ -148,7 +149,7 @@ class OsmElement {
       downloaded: downloaded,
       tags: tags,
       center: old.center ?? center,
-      bounds: old.bounds ?? bounds,
+      geometry: old.geometry ?? geometry,
       nodes: old.nodes ?? nodes,
       nodeLocations: old.nodeLocations ?? nodeLocations,
       members: old.members ?? members,

@@ -169,8 +169,11 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
 
   String makeBuildingLabel(OsmChange building) {
     const kMaxNumberLength = 6;
-    String number =
-        building['addr:housenumber'] ?? building['addr:housename'] ?? '?';
+    final needsAddress = building['building'] == null ||
+        kBuildingNeedsAddress.contains(building['building']);
+    String number = building['addr:housenumber'] ??
+        building['addr:housename'] ??
+        (needsAddress ? '?' : '');
     if (number.length > kMaxNumberLength) {
       final spacePos = number.indexOf(' ');
       if (spacePos > 0) number = number.substring(0, spacePos);
@@ -381,6 +384,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                                 vertical: 5.0,
                                 horizontal: 10.0,
                               ),
+                              constraints: BoxConstraints(minWidth: 35.0),
                               child: Text(
                                 makeBuildingLabel(building),
                                 textAlign: TextAlign.center,
@@ -442,7 +446,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   ],
                   onTap: (tapped) {
                     final objects =
-                    tapped.map((k) => findByKey(k)).whereType<OsmChange>();
+                        tapped.map((k) => findByKey(k)).whereType<OsmChange>();
                     chooseEditorToOpen(objects);
                   },
                 ),
@@ -454,8 +458,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     DragButton(
                         icon: Icons.house,
                         bottom: 20.0,
-                        left: leftHand ? null : 20.0 + safePadding.left,
-                        right: !leftHand ? null : 20.0 + safePadding.right,
+                        left: leftHand ? null : 10.0 + safePadding.left,
+                        right: !leftHand ? null : 10.0 + safePadding.right,
                         onDragEnd: (pos) {
                           editBuilding(null, pos);
                         },
@@ -472,8 +476,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     DragButton(
                         icon: Icons.sensor_door,
                         bottom: 20.0,
-                        left: !leftHand ? null : 20.0 + safePadding.left,
-                        right: leftHand ? null : 20.0 + safePadding.right,
+                        left: !leftHand ? null : 10.0 + safePadding.left,
+                        right: leftHand ? null : 10.0 + safePadding.right,
                         onDragStart: () {
                           if (savedZoom == null) {
                             savedZoom = controller.zoom;
@@ -504,7 +508,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 OverlayButtonOptions(
                   alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.0,
+                    horizontal: 0.0,
                     vertical: 10.0,
                   ),
                   icon: Icons.menu,
@@ -520,25 +524,28 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 OverlayButtonOptions(
                   alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.0,
+                    horizontal: 0.0,
                     vertical: 10.0,
                   ),
                   enabled: !ref.watch(trackingProvider),
                   safeRight: true,
                   icon: Icons.my_location,
                   onPressed: () {
-                    ref.read(trackingProvider.state).state = true;
+                    ref.read(geolocationProvider.notifier).enableTracking(context);
                   },
                 ),
                 ZoomButtonsOptions(
                   alignment:
                       leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.0 +
+                    horizontal: 0.0 +
                         (leftHand ? safePadding.left : safePadding.right),
                     vertical: 100.0,
                   ),
                 ),
+              ],
+              nonRotatedChildren: [
+                buildAttributionWidget(imagery),
               ],
               children: [
                 TileLayerWidget(

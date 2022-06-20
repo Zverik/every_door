@@ -30,7 +30,7 @@ class MapChooserPage extends ConsumerStatefulWidget {
   });
 
   @override
-  _MapChooserPageState createState() => _MapChooserPageState();
+  ConsumerState createState() => _MapChooserPageState();
 }
 
 class _MapChooserPageState extends ConsumerState<MapChooserPage> {
@@ -135,6 +135,9 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
               vertical: 100.0,
             ),
           ),
+        ],
+        nonRotatedChildren: [
+          buildAttributionWidget(imagery),
         ],
         children: [
           TileLayerWidget(

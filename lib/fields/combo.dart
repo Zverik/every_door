@@ -169,7 +169,7 @@ class MultiComboField extends StatefulWidget {
   const MultiComboField(this.field, this.element);
 
   @override
-  _MultiComboFieldState createState() => _MultiComboFieldState();
+  State createState() => _MultiComboFieldState();
 }
 
 class _MultiComboFieldState extends State<MultiComboField> {

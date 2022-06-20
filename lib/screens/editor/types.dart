@@ -20,7 +20,7 @@ class TypeChooserPage extends ConsumerStatefulWidget {
   const TypeChooserPage({this.location, this.launchEditor = true});
 
   @override
-  _TypeChooserPageState createState() => _TypeChooserPageState();
+  ConsumerState createState() => _TypeChooserPageState();
 }
 
 class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
@@ -32,7 +32,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   @override
   initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updatePresets('');
     });
   }

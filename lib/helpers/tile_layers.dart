@@ -10,7 +10,7 @@ class CachedTileProvider extends TileProvider {
   @override
   ImageProvider getImage(Coords<num> coords, TileLayerOptions options) {
     final url = getTileUrl(coords, options);
-    print(url);
+    // print(url);
     return CachedNetworkImageProvider(
       url,
       // Maybe replace cacheManager later.
@@ -110,8 +110,7 @@ WMSTileLayerOptions _buildWMSOptions(String url, Imagery imagery) {
   );
 }
 
-TileLayerOptions buildTileLayerOptions(Imagery imagery,
-    [bool showAttribution = true]) {
+TileLayerOptions buildTileLayerOptions(Imagery imagery) {
   String url = imagery.url.replaceAll('{zoom}', '{z}');
 
   if (imagery.type == ImageryType.bing) {
@@ -158,11 +157,14 @@ TileLayerOptions buildTileLayerOptions(Imagery imagery,
     tms: tms,
     subdomains: subdomains,
     additionalOptions: {'a': 'b'},
-    attributionBuilder: !showAttribution || imagery.attribution == null
-        ? null
-        : (context) => Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Text(imagery.attribution!),
-            ),
   );
+}
+
+Widget buildAttributionWidget(Imagery imagery, [bool showAttribution = true]) {
+  if (!showAttribution || imagery.attribution == null)
+    return Container();
+  return AttributionWidget(attributionBuilder: (context) => Padding(
+    padding: const EdgeInsets.all(4.0),
+    child: Text(imagery.attribution!),
+  ));
 }

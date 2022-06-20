@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
@@ -9,6 +11,7 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/providers/need_update.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/helpers/tile_layers.dart';
@@ -29,13 +32,15 @@ class PoiEditorPage extends ConsumerStatefulWidget {
   const PoiEditorPage({this.amenity, this.preset, this.location});
 
   @override
-  _PoiEditorPageState createState() => _PoiEditorPageState();
+  ConsumerState createState() => _PoiEditorPageState();
 }
 
 class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   static final _logger = Logger('PoiEditorPage');
   late OsmChange amenity;
   Preset? preset;
+  OsmChange? possibleDuplicate;
+  Timer? duplicateTimer;
   List<PresetField> fields = []; // actual fields
   List<PresetField> moreFields = [];
   List<PresetField> stdFields = [];
@@ -43,9 +48,15 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   @override
   void initState() {
     super.initState();
-    amenity = widget.amenity?.copy() ??
-        OsmChange.create(
-            location: widget.location!, tags: widget.preset!.addTags);
+    if (widget.amenity != null) {
+      amenity = widget.amenity!.copy();
+    } else {
+      final tags =
+          ref.read(lastPresetsProvider).getTagsForPreset(widget.preset!) ??
+              widget.preset!.addTags;
+      amenity = OsmChange.create(location: widget.location!, tags: tags);
+      startDuplicateSearch();
+    }
     amenity.addListener(onAmenityChange);
 
     if (widget.preset == null) {
@@ -65,6 +76,26 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
   onAmenityChange() {
     setState(() {});
+    startDuplicateSearch();
+  }
+
+  startDuplicateSearch() {
+    if (!amenity.isNew || !isAmenityTags(amenity.getFullTags())) return;
+    possibleDuplicate = null;
+    if (duplicateTimer != null) {
+      duplicateTimer?.cancel();
+      duplicateTimer = null;
+    }
+    duplicateTimer = Timer(Duration(seconds: 1), () async {
+      final duplicate =
+          await ref.read(osmDataProvider).findPossibleDuplicate(amenity);
+      _logger.info('Found duplicate: $duplicate');
+      if (mounted) {
+        setState(() {
+          possibleDuplicate = duplicate;
+        });
+      }
+    });
   }
 
   updatePreset(BuildContext context, [bool detect = false]) async {
@@ -85,7 +116,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       }
     }
 
-    _logger.fine('Detected ($detect) preset $preset');
+    _logger.info('Detected ($detect) preset $preset');
     if (preset!.fields.isEmpty) {
       preset = await presets.getFields(preset!, locale: locale);
       if (isAmenityTags(amenity.getFullTags())) {
@@ -98,9 +129,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         }
         // Move some fields to stdFields if present.
         if (!needsStdFields) {
+          final hasStdFields = stdFields.map((e) => e.key).toSet();
           for (final f in preset!.fields) {
-            if (PresetProvider.kStandardPoiFields.contains(f.key))
-              stdFields.add(f);
+            if (PresetProvider.kStandardPoiFields.contains(f.key) &&
+                !hasStdFields.contains(f.key)) stdFields.add(f);
           }
         }
         // Add opening_hours to moreFields if it's not anywhere.
@@ -178,8 +210,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     // Setting the mark automatically.
     if (needsCheckDate(amenity.getFullTags())) amenity.check();
     // Store the preset when an object was saved, to track used ones.
-    if (widget.preset != null)
-      ref.read(lastPresetsProvider).registerPreset(widget.preset!);
+    if (widget.preset != null) {
+      ref
+          .read(lastPresetsProvider)
+          .registerPreset(widget.preset!, amenity.getFullTags());
+    }
+    // Save changes and close.
     final changes = ref.read(changesProvider);
     changes.saveChange(amenity);
     Navigator.pop(context);
@@ -220,6 +256,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final bool needsCheck =
         amenity.isOld && needsCheckDate(amenity.getFullTags());
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
+
+    const distance = DistanceEquirectangular();
+    final int duplicateDistance = possibleDuplicate == null
+        ? 0
+        : distance(possibleDuplicate!.location, amenity.location).round();
+
     final loc = AppLocalizations.of(context)!;
     return WillPopScope(
       onWillPop: () async {
@@ -271,8 +313,36 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       bottom: false,
                       child: ListView(
                         children: [
-                          if (amenity.canDelete) buildMap(context),
-                          if (!amenity.canDelete) SizedBox(height: 10.0),
+                          buildMap(context),
+                          if (possibleDuplicate != null)
+                            GestureDetector(
+                              child: Container(
+                                color: Colors.yellow,
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.warning,
+                                        color: Colors.orange),
+                                    const SizedBox(width: 5.0),
+                                    Text(
+                                      loc.editorDuplicate(duplicateDistance),
+                                      style: kFieldTextStyle,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PoiEditorPage(
+                                        amenity: possibleDuplicate),
+                                  ),
+                                );
+                              },
+                            ),
                           if (stdFields.isNotEmpty) ...[
                             buildFields(stdFields, 50),
                           ],
@@ -423,51 +493,64 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                 interactiveFlags: 0,
                 rotation: ref.watch(rotationProvider),
                 allowPanningOnScrollingParent: false,
-                onTap: (pos, center) async {
-                  final newLocation = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          MapChooserPage(location: amenity.location),
-                    ),
-                  );
-                  if (newLocation != null) {
-                    setState(() {
-                      amenity.location = newLocation;
-                    });
-                  }
-                },
+                onTap: !amenity.canMove
+                    ? null
+                    : (pos, center) async {
+                        final newLocation = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                MapChooserPage(location: amenity.location),
+                          ),
+                        );
+                        if (newLocation != null) {
+                          setState(() {
+                            amenity.location = newLocation;
+                          });
+                        }
+                      },
               ),
               children: [
                 TileLayerWidget(options: buildTileLayerOptions(kOSMImagery)),
                 MarkerLayerWidget(
                     options: MarkerLayerOptions(markers: [
-                  Marker(
-                    point: amenity.location,
-                    rotate: true,
-                    rotateOrigin: Offset(12.0, -5.0),
-                    rotateAlignment: Alignment.bottomLeft,
-                    anchorPos: AnchorPos.exactly(Anchor(138.0, 5.0)),
-                    width: 150.0,
-                    height: 30.0,
-                    builder: (ctx) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(Icons.location_pin),
-                        SizedBox(width: 2.0),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(5.0),
+                  if (amenity.canMove)
+                    Marker(
+                      point: amenity.location,
+                      rotate: true,
+                      rotateOrigin: Offset(12.0, -5.0),
+                      rotateAlignment: Alignment.bottomLeft,
+                      anchorPos: AnchorPos.exactly(Anchor(138.0, 5.0)),
+                      width: 150.0,
+                      height: 30.0,
+                      builder: (ctx) => Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.location_pin),
+                          SizedBox(width: 2.0),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 5.0),
+                            child: Text(loc.editorMove),
                           ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 5.0),
-                          child: Text(loc.editorMove),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                  if (!amenity.canMove)
+                    Marker(
+                      rotate: true,
+                      rotateOrigin: Offset(0.0, -5.0),
+                      rotateAlignment: Alignment.bottomCenter,
+                      point: amenity
+                          .location, // mapController.center throws late init exception
+                      anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
+                      builder: (ctx) => Icon(Icons.location_pin, color: Colors.red.shade900),
+                    ),
                 ])),
               ],
             ),

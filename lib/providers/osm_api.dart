@@ -279,9 +279,10 @@ class OsmApiHelper {
           }
         } else {
           await changes.setError(change, null);
+          final newId = int.parse(resp.body.trim());
           updates.add(UploadedElement(
-            change.toElement(), // Id and version do not matter.
-            newId: int.parse(resp.body.trim()),
+            change.toElement(newId: newId), // Id and version do not matter.
+            newId: newId,
             newVersion: 1,
           ));
         }
@@ -428,6 +429,68 @@ class OsmApiHelper {
     return changes;
   }
 
+  Future<int> _uploadChangesPack(List<OsmChange> changes) async {
+    // Download elements to update the data and avoid version errors.
+    changes = await _updateUnderlyingElements(changes);
+    if (changes.isEmpty) return 0;
+
+    // Enumerate new elements.
+    int nodeId = -1;
+    for (final c in changes) if (c.isNew) c.newId = nodeId--;
+
+    // Snap elements to ways.
+    final updatedWays = await _downloadWaysToSnap(changes);
+    bool haveDependentWays = updatedWays.isNotEmpty;
+    // Some of these ways can be present in the changes.
+    changes = _mergeUpdatedElements(changes, updatedWays);
+    changes.sort();
+
+    // Open a changeset and get its id.
+    final auth = _ref.read(authProvider.notifier);
+    final headers = await auth.getAuthHeaders();
+    final resp = await http.put(
+      Uri.https(kOsmEndpoint, '/api/0.6/changeset/create'),
+      headers: headers,
+      body: _buildChangeset(changes),
+    );
+    if (resp.statusCode != 200) {
+      throw OsmApiError(
+          resp.statusCode, 'Failed to create changeset: ${resp.body}');
+    }
+    final changeset = resp.body.trim();
+
+    // Upload changes.
+    try {
+      bool clearAllChanges;
+      List<UploadedElement> updates;
+      try {
+        updates = await _uploadEverything(changes, changeset, headers);
+        clearAllChanges = true;
+      } on OsmApiError catch (e) {
+        // TODO: some element could be uploaded, with no indication from API.
+        // Not trying one by one when we have way geometry changes.
+        if (!haveDependentWays && {409, 404, 412, 410}.contains(e.code)) {
+          // Try one-by-one only on conflict.
+          updates = await _uploadOneByOne(changes, changeset, headers);
+          clearAllChanges = false;
+          // TODO: Update changeset comment for changes actually uploaded.
+        } else {
+          rethrow;
+        }
+      }
+      // This keeps elements with errors, so "includeErrored" doesn't apply.
+      // TODO: not all changes uploaded!
+      _updateElementsAfterUpload(updates, clearAllChanges);
+      return updates.length;
+    } finally {
+      // Close the changeset.
+      await http.put(
+        Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset/close'),
+        headers: headers,
+      );
+    }
+  }
+
   Future<int> uploadChanges([bool includeErrored = false]) async {
     List<OsmChange> changes = _ref.read(changesProvider).all(includeErrored);
     if (changes.isEmpty) return 0;
@@ -442,63 +505,8 @@ class OsmApiHelper {
     _ref.read(apiStatusProvider.notifier).state = ApiStatus.uploading;
 
     try {
-      // Download elements to update the data and avoid version errors.
-      changes = await _updateUnderlyingElements(changes);
-      if (changes.isEmpty) return 0;
-
-      // Enumerate new elements.
-      int nodeId = -1;
-      for (final c in changes) if (c.isNew) c.newId = nodeId--;
-
-      // Snap elements to ways.
-      final updatedWays = await _downloadWaysToSnap(changes);
-      bool haveDependentWays = updatedWays.isNotEmpty;
-      // Some of these ways can be present in the changes.
-      changes = _mergeUpdatedElements(changes, updatedWays);
-      changes.sort();
-
-      // Open a changeset and get its id.
-      final headers = await auth.getAuthHeaders();
-      final resp = await http.put(
-        Uri.https(kOsmEndpoint, '/api/0.6/changeset/create'),
-        headers: headers,
-        body: _buildChangeset(changes),
-      );
-      if (resp.statusCode != 200) {
-        throw OsmApiError(
-            resp.statusCode, 'Failed to create changeset: ${resp.body}');
-      }
-      final changeset = resp.body.trim();
-
-      // Upload changes.
-      try {
-        bool clearAllChanges;
-        List<UploadedElement> updates;
-        try {
-          updates = await _uploadEverything(changes, changeset, headers);
-          clearAllChanges = true;
-        } on OsmApiError catch (e) {
-          // TODO: some element could be uploaded, with no indication from API.
-          // Not trying one by one when we have way geometry changes.
-          if (!haveDependentWays && {409, 404, 412, 410}.contains(e.code)) {
-            // Try one-by-one only on conflict.
-            updates = await _uploadOneByOne(changes, changeset, headers);
-            clearAllChanges = false;
-            // TODO: Update changeset comment for changes actually uploaded.
-          } else {
-            rethrow;
-          }
-        }
-        // This keeps elements with errors, so "includeErrored" doesn't apply.
-        _updateElementsAfterUpload(updates, clearAllChanges);
-        return updates.length;
-      } finally {
-        // Close the changeset.
-        await http.put(
-          Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset/close'),
-          headers: headers,
-        );
-      }
+      // TODO: split changes into smaller boxes.
+      return await _uploadChangesPack(changes);
     } finally {
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }

@@ -28,7 +28,7 @@ class PoiListPane extends ConsumerStatefulWidget {
   const PoiListPane({this.areaStatusPanel, this.isWide = false});
 
   @override
-  _PoiListPageState createState() => _PoiListPageState();
+  ConsumerState createState() => _PoiListPageState();
 }
 
 class _PoiListPageState extends ConsumerState<PoiListPane> {
@@ -41,7 +41,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateFarFromUser();
       updateNearest();
     });

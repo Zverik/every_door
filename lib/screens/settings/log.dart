@@ -24,7 +24,7 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _controller.jumpTo(_controller.position.maxScrollExtent);
     });
   }

@@ -2,22 +2,46 @@
 
 ## 0.5.0
 
-_Unreleased_
+_Released on 2022-06-20_
+
+### Highlights
 
 * Keeping the map big when there's enough space for POI tiles.
-* Fixed type list flicker because of defaults loading slowly.
-* Increased minimum rotation angle to 30° to make disabling it easier.
+* Added Maxar Premium Imagery.
+* When adding multiple objects of the same type,
+  copying tags from the last one.
+* Warning about a possible duplicate when adding a new amenity.
+* Many, many new translations — thanks folks, and thanks to Weblate.
+
+### Editor
+
+* Preventing deletion of nodes that are relation members.
+* Editor pane now shows location even when you cannot move the POI.
+* Removed the "inactive" button for new non-amenities.
+* Addresses from new amenities are included in the chooser.
+* Keeping values with semicolons for `voltage` options.
+* Presenting 250 top values for `payment:*` and `craft` keys.
+
+### Entrances Mode
+
 * Quick fix for the entrances mode when the map is rotated:
   not asking for options then.
+* Fixed dragging entrances onto the map when the map is rotated.
 * Not asking for a roof shape if there are `building:part`s.
-* Preventing deletion of nodes that are relation members.
 * Not allowing the "address" option on polygonal buildings.
-* Removed the "inactive" button for new non-amenities.
-* Imagery list in Settings was refreshing constantly.
-* Presenting 250 top values for `payment:*` keys.
-* Maxar Premium Imagery is back.
+* Removed question mark from some types of unaddressed buildings.
+
+### Other
+
 * OpenStreetMap layer zoom 19 is back.
-* Many, many new translations — thanks folks, and thanks to Weblate.
+* Increased minimum rotation angle to 30° to make disabling it easier.
+* Long tap the crosshair button to reset rotation.
+* Fixed type list flicker because of defaults loading slowly.
+* Better ordering for choosing the best preset for an object.
+* Imagery list in Settings was refreshing constantly.
+* Attribution is not rotated with the map now.
+* Labels for U-shaped buildings are positioned on buildings.
+* Temporary (?) option in Settings to disable Google location services.
 
 ## 0.4.0
 

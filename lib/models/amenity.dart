@@ -38,6 +38,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
       : newTags = newTags ?? {},
         _deleted = hardDeleted,
         updated = updated ?? DateTime.now(),
+        // ignore: prefer_initializing_formals
         element = element, // Force non-null initialization
         databaseId = databaseId ?? element.id.toString() {
     _updateMainKey();
@@ -106,6 +107,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
   bool get isPoint => element?.isPoint ?? true;
   bool get canDelete =>
       (element?.isPoint ?? true) && !(element?.isMember ?? false);
+  bool get canMove => canDelete;
   ElementKind get kind => detectKind(getFullTags());
   bool get isIncomplete => needsMoreInfo(getFullTags());
 

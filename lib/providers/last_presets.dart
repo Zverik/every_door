@@ -8,26 +8,41 @@ class LastPresetsProvider {
   final Ref _ref;
   // I could use queue, but it does not have .indexOf().
   final Map<EditorMode, List<Preset>> _lastPresets = {};
+  final Map<Preset, Map<String, String>> _lastTags = {};
 
   static const kMaxLastPresets = 3;
 
   LastPresetsProvider(this._ref);
 
-  registerPreset(Preset preset) {
+  registerPreset(Preset preset, Map<String, String> tags) {
     final mode = _ref.read(editorModeProvider);
     if (!_lastPresets.containsKey(mode)) _lastPresets[mode] = <Preset>[];
     final list = _lastPresets[mode]!;
 
+    // Push the preset to the top and trim the list.
     final pos = list.indexOf(preset);
     if (pos == 0) return;
     if (pos > 0) list.removeAt(pos);
     list.insert(0, preset);
-    if (list.length > kMaxLastPresets)
+    if (list.length > kMaxLastPresets) {
+      for (int i = kMaxLastPresets; i < list.length; i++)
+        _lastTags.remove(list[i]);
       list.removeRange(kMaxLastPresets, list.length);
+    }
+
+    // Store tags, removing useless things.
+    final Map<String, String> newTags = {};
+    const kDeleteKeys = {'check_date', 'source', 'note'};
+    tags.forEach((key, value) {
+      if (!kDeleteKeys.contains(key)) newTags[key] = value;
+    });
+    _lastTags[preset] = tags;
   }
 
   List<Preset> getPresets() {
     final mode = _ref.read(editorModeProvider);
     return _lastPresets[mode] ?? const [];
   }
+
+  Map<String, String>? getTagsForPreset(Preset preset) => _lastTags[preset];
 }

@@ -6,18 +6,24 @@ class RadioField extends StatefulWidget {
   final List<String>? labels;
   final List<Widget>? widgetLabels;
   final String? value;
-  final Function(String?) onChange;
+  final bool multi;
+  final bool wrap;
+  final Function(String?)? onChange;
+  final Function(List<String>)? onMultiChange;
 
   const RadioField({
     required this.options,
     this.labels,
     this.widgetLabels,
     this.value,
-    required this.onChange,
+    this.multi = false,
+    this.wrap = false,
+    this.onChange,
+    this.onMultiChange,
   });
 
   @override
-  _RadioFieldState createState() => _RadioFieldState();
+  State createState() => _RadioFieldState();
 }
 
 class _RadioFieldState extends State<RadioField> {
@@ -79,47 +85,67 @@ class _RadioFieldState extends State<RadioField> {
 
   @override
   Widget build(BuildContext context) {
-    Widget? labelForValue;
-    if (widget.value != null) {
-      int idx = widget.options.indexOf(widget.value!);
-      labelForValue = idx >= 0 ? labels[idx] : Text(widget.value!);
+    final values = widget.value?.split(';').map((s) => s.trim()) ?? [];
+    final labelsForValues = <String, Widget>{};
+    for (final value in values) {
+      int idx = widget.options.indexOf(value);
+      labelsForValues[value] = idx >= 0 ? labels[idx] : Text(value);
     }
-    bool pushFirst = getMergedLength() >= 30;
+    bool pushFirst = getMergedLength() >= 30 && !widget.wrap;
+
+    final pills = [
+      for (final value in values)
+        if (pushFirst || !widget.options.contains(value))
+          RadioPill(
+            value: value,
+            label: labelsForValues[value]!,
+            selected: true,
+            onTap: () {
+              final newValues = values.where((v) => v != value).toList();
+              if (widget.onChange != null)
+                widget
+                    .onChange!(newValues.isEmpty ? null : newValues.join(';'));
+              if (widget.onMultiChange != null)
+                widget.onMultiChange!(newValues);
+            },
+          ),
+      for (final entry in widget.options.asMap().entries)
+        if (!pushFirst || !values.contains(entry.value))
+          RadioPill(
+            value: entry.value,
+            label: labels[entry.key],
+            selected: values.contains(entry.value),
+            onTap: () {
+              final newValues = values.where((v) => v != entry.value).toList();
+              if (newValues.length == values.length) {
+                if (newValues.isEmpty || widget.multi)
+                  newValues.add(entry.value);
+                else
+                  newValues.last = entry.value;
+              }
+              if (widget.onChange != null)
+                widget
+                    .onChange!(newValues.isEmpty ? null : newValues.join(';'));
+              if (widget.onMultiChange != null)
+                widget.onMultiChange!(newValues);
+              if (pushFirst) {
+                scrollController.animateTo(0.0,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.easeOut);
+              }
+            },
+          ),
+    ];
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: SingleChildScrollView(
-        controller: scrollController,
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            if (widget.value != null &&
-                (pushFirst || !widget.options.contains(widget.value)))
-              RadioPill(
-                value: widget.value!,
-                label: labelForValue!,
-                selected: true,
-                onTap: () {
-                  widget.onChange(null);
-                },
-              ),
-            for (final entry in widget.options.asMap().entries)
-              if (!pushFirst || entry.value != widget.value)
-                RadioPill(
-                  value: entry.value,
-                  label: labels[entry.key],
-                  selected: entry.value == widget.value,
-                  onTap: () {
-                    widget.onChange(
-                        entry.value == widget.value ? null : entry.value);
-                    scrollController.animateTo(0.0,
-                        duration: Duration(milliseconds: 200),
-                        curve: Curves.easeOut);
-                  },
-                ),
-          ],
-        ),
-      ),
+      child: !widget.wrap
+          ? SingleChildScrollView(
+              controller: scrollController,
+              scrollDirection: Axis.horizontal,
+              child: Row(children: pills),
+            )
+          : Wrap(children: pills),
     );
   }
 }

@@ -12,6 +12,9 @@ class OverlayButtonOptions extends LayerOptions {
   /// Function to call when the button is pressed.
   final VoidCallback onPressed;
 
+  /// Function to call on long tap.
+  final VoidCallback? onLongPressed;
+
   /// Icon to display.
   final IconData icon;
 
@@ -30,6 +33,7 @@ class OverlayButtonOptions extends LayerOptions {
     this.alignment = Alignment.topRight,
     required this.padding,
     required this.onPressed,
+    this.onLongPressed,
     required this.icon,
     this.enabled = true,
     this.safeBottom = false,
@@ -72,21 +76,24 @@ class OverlayButtonLayer extends ConsumerWidget {
           : null,
       left: _options.alignment.x < 0 ? safePadding.left : null,
       child: Padding(
-        padding: _options.padding,
-        child: OutlinedButton(
-          onPressed: _options.onPressed,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              _options.icon,
-              size: 30.0,
-              color: Colors.black.withOpacity(0.5),
+        padding: _options.padding + EdgeInsets.symmetric(horizontal: 10.0),
+        child: GestureDetector(
+          onTap: _options.onPressed,
+          onLongPress: _options.onLongPressed,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(25.0),
+              border: Border.all(color: Colors.grey.withOpacity(0.5)),
             ),
-          ),
-          style: OutlinedButton.styleFrom(
-            backgroundColor: Colors.white.withOpacity(0.5),
-            shape: CircleBorder(side: BorderSide()),
-            padding: EdgeInsets.zero,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                _options.icon,
+                size: 30.0,
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ),
           ),
         ),
       ),

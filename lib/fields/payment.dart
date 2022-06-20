@@ -36,7 +36,7 @@ class PaymentCheckboxInputField extends ConsumerStatefulWidget {
   const PaymentCheckboxInputField(this.field, this.element);
 
   @override
-  _PaymentCheckboxInputFieldState createState() =>
+  ConsumerState createState() =>
       _PaymentCheckboxInputFieldState();
 }
 

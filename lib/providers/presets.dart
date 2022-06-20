@@ -6,6 +6,7 @@ import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/room.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/fields/wifi.dart';
+import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/helpers/nsi_features.dart';
 import 'package:flutter/foundation.dart';
@@ -20,9 +21,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:collection/collection.dart';
 import 'package:latlong2/latlong.dart';
-import "package:unorm_dart/unorm_dart.dart" as unorm;
 
 final presetProvider = Provider((_) => PresetProvider());
 
@@ -89,8 +88,9 @@ class PresetProvider {
     }
     langs.add('en');
     langs.add('tag'); // Special marker for tag values
-    final values = langs.mapIndexed(
-        (index, element) => "(${_toSqlString(element)}, ${index + 1})");
+    final values = <String>[];
+    for (int i = 0; i < langs.length; i++)
+      values.add("(${_toSqlString(langs[i])}, ${i + 1})");
     return "langs (lang, lscore) as (values ${values.join(',')})";
   }
 
@@ -135,11 +135,6 @@ class PresetProvider {
     return results;
   }
 
-  String _normalize(String s) {
-    var combining = RegExp(r"[\u0300-\u036F]");
-    return unorm.nfkd(s.toLowerCase().trim()).replaceAll(combining, '');
-  }
-
   Future<List<Preset>> getPresetsAutocomplete(String query,
       {bool isArea = false,
       bool includeNSI = true,
@@ -166,11 +161,10 @@ class PresetProvider {
     $isAreaClause
     order by score desc, lscore;
     ''';
-    // TODO: check the query
-    final results = await _db!.rawQuery(sql, [_normalize(query) + '%']);
+    final results = await _db!.rawQuery(sql, [normalizeString(query) + '%']);
     final presets = <Preset>[];
     if (includeNSI) {
-      List<Preset> nsiResults = await _getNSIAutocomplete(_normalize(query));
+      List<Preset> nsiResults = await _getNSIAutocomplete(normalizeString(query));
       if (location != null) {
         nsiResults = _filterByLocation(nsiResults, location);
       }
@@ -290,7 +284,7 @@ class PresetProvider {
     if (results.isNotEmpty) {
       final existing = Set.of(options);
       options.addAll((results.first['options'] as String)
-          .split(';')
+          .split('\\')
           .where((v) => !existing.contains(v)));
     }
     return options.map((e) => ComboOption(e, loc[e])).toList();
@@ -452,6 +446,7 @@ class PresetProvider {
   Future<Map<String, dynamic>?> singleImageryQuery(String id) async {
     if (!ready) await _waitUntilReady();
     const sql = "select * from imagery where id = ?";
-    return (await _db!.rawQuery(sql, [id])).firstOrNull;
+    final rows = await _db!.rawQuery(sql, [id]);
+    return rows.isEmpty ? null : rows.first;
   }
 }

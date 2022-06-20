@@ -64,7 +64,7 @@ class AmenityMap extends ConsumerStatefulWidget {
   });
 
   @override
-  _AmenityMapState createState() => _AmenityMapState();
+  ConsumerState createState() => _AmenityMapState();
 }
 
 class _AmenityMapState extends ConsumerState<AmenityMap> {
@@ -274,6 +274,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       setState(() {});
     });
 
+    final imagery = ref.watch(selectedImageryProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final iconSize = widget.drawNumbers ? 18.0 : 10.0;
     final legendCon = ref.watch(legendProvider.notifier);
@@ -303,7 +304,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         OverlayButtonOptions(
           alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
           padding: EdgeInsets.symmetric(
-            horizontal: 10.0,
+            horizontal: 0.0,
             vertical: 10.0,
           ),
           icon: Icons.menu,
@@ -338,7 +339,15 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
           enabled: !ref.watch(trackingProvider),
           icon: Icons.my_location,
           onPressed: () {
-            ref.read(trackingProvider.state).state = true;
+            ref.read(geolocationProvider.notifier).enableTracking(context);
+          },
+          onLongPressed: () {
+            if (ref.read(rotationProvider) != 0.0) {
+              ref.read(rotationProvider.state).state = 0.0;
+              mapController.rotate(0.0);
+            } else {
+              ref.read(geolocationProvider.notifier).enableTracking(context);
+            }
           },
         ),
         if (widget.drawZoomButtons)
@@ -350,10 +359,13 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             ),
           ),
       ],
+      nonRotatedChildren: [
+        if (showAttribution && imagery.attribution != null)
+          buildAttributionWidget(imagery),
+      ],
       children: [
         TileLayerWidget(
-          options: buildTileLayerOptions(
-              ref.watch(selectedImageryProvider), showAttribution),
+          options: buildTileLayerOptions(imagery),
         ),
         if (trackLocation != null)
           CircleLayerWidget(

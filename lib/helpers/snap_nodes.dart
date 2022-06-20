@@ -2,7 +2,6 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:meta/meta.dart';
 
 class SnapResult {
   final LatLng newLocation;
@@ -43,7 +42,6 @@ class Snapper {
     return -1;
   }
 
-  @visibleForTesting
   double testProject(LatLng p, LatLng a, LatLng b) =>
       _projectOnSegment(p, a, b);
 

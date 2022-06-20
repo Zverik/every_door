@@ -33,7 +33,7 @@ class FloorInputField extends ConsumerStatefulWidget {
   const FloorInputField(this.field, this.element);
 
   @override
-  _FloorInputFieldState createState() => _FloorInputFieldState();
+  ConsumerState createState() => _FloorInputFieldState();
 }
 
 class _FloorInputFieldState extends ConsumerState<FloorInputField> {
