@@ -56,6 +56,13 @@ class _TagEditorPageState extends State<TagEditorPage> {
         title: Text(title),
         actions: [
           if (!widget.amenity.isNew)
+            IconButton(
+              icon: Icon(Icons.history),
+              onPressed: () async => await launchUrl(
+                  Uri.parse(_getHistoryUrl()),
+                  mode: LaunchMode.externalApplication),
+            ),
+          if (!widget.amenity.isNew)
             GestureDetector(
               child: IconButton(
                 // TODO: copy to clipboard?
@@ -71,12 +78,6 @@ class _TagEditorPageState extends State<TagEditorPage> {
                       .showSnackBar(SnackBar(content: Text(loc.tagsUrlCopied)));
                 });
               },
-            ),
-          if (!widget.amenity.isNew)
-            IconButton(
-              icon: Icon(Icons.history),
-              onPressed: () async =>
-                  await launchUrl(Uri.parse(_getHistoryUrl()), mode: LaunchMode.externalApplication),
             ),
         ],
       ),
