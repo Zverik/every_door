@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TagEditorPage extends StatefulWidget {
   final OsmChange amenity;
@@ -39,6 +40,8 @@ class _TagEditorPageState extends State<TagEditorPage> {
 
   String _getUrl() => 'https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}';
 
+  String _getHistoryUrl() => '${_getUrl()}/history';
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -52,6 +55,13 @@ class _TagEditorPageState extends State<TagEditorPage> {
       appBar: AppBar(
         title: Text(title),
         actions: [
+          if (!widget.amenity.isNew)
+            IconButton(
+              icon: Icon(Icons.history),
+              onPressed: () async => await launchUrl(
+                  Uri.parse(_getHistoryUrl()),
+                  mode: LaunchMode.externalApplication),
+            ),
           if (!widget.amenity.isNew)
             GestureDetector(
               child: IconButton(
