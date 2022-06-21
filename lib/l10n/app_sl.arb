@@ -665,5 +665,17 @@
   "apiStatusUpdatingDB": "Shranjevanje elementov v zbirko podatkov aplikacije",
   "@apiStatusUpdatingDB": {
     "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "editorDuplicate": "Možno podvajanje v {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
   }
 }
