@@ -8,7 +8,7 @@ class LastPresetsProvider {
   final Ref _ref;
   // I could use queue, but it does not have .indexOf().
   final Map<EditorMode, List<Preset>> _lastPresets = {};
-  final Map<Preset, Map<String, String>> _lastTags = {};
+  final Map<String, Map<String, String>> _lastTags = {};
 
   static const kMaxLastPresets = 3;
 
@@ -26,7 +26,7 @@ class LastPresetsProvider {
     list.insert(0, preset);
     if (list.length > kMaxLastPresets) {
       for (int i = kMaxLastPresets; i < list.length; i++)
-        _lastTags.remove(list[i]);
+        _lastTags.remove(list[i].id);
       list.removeRange(kMaxLastPresets, list.length);
     }
 
@@ -34,9 +34,10 @@ class LastPresetsProvider {
     final Map<String, String> newTags = {};
     const kDeleteKeys = {'check_date', 'source', 'note'};
     tags.forEach((key, value) {
-      if (!kDeleteKeys.contains(key)) newTags[key] = value;
+      if (!kDeleteKeys.contains(key) && !key.startsWith('ref'))
+        newTags[key] = value;
     });
-    _lastTags[preset] = tags;
+    _lastTags[preset.id] = tags;
   }
 
   List<Preset> getPresets() {
@@ -44,5 +45,5 @@ class LastPresetsProvider {
     return _lastPresets[mode] ?? const [];
   }
 
-  Map<String, String>? getTagsForPreset(Preset preset) => _lastTags[preset];
+  Map<String, String>? getTagsForPreset(Preset preset) => _lastTags[preset.id];
 }

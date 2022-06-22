@@ -291,7 +291,7 @@ bool isGoodTags(Map<String, String> tags) {
   } else if (k == 'railway') {
     const kGoodRailway = <String>{
       'station', 'tram_stop', 'halt', 'platform', 'stop', 'signal',
-      'crossing', 'milestone', 'tram_crossing',
+      'crossing', 'milestone', 'tram_crossing', 'subway_entrance',
     };
     return kGoodRailway.contains(v);
   } else if (k == 'natural') {

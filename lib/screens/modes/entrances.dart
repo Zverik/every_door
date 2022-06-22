@@ -533,6 +533,14 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   onPressed: () {
                     ref.read(geolocationProvider.notifier).enableTracking(context);
                   },
+                  onLongPressed: () {
+                    if (ref.read(rotationProvider) != 0.0) {
+                      ref.read(rotationProvider.state).state = 0.0;
+                      controller.rotate(0.0);
+                    } else {
+                      ref.read(geolocationProvider.notifier).enableTracking(context);
+                    }
+                  },
                 ),
                 ZoomButtonsOptions(
                   alignment:

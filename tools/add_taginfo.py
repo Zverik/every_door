@@ -4,7 +4,7 @@ import sys
 from collections import defaultdict
 
 
-KEEP_SEMICOLON = set(['voltage', 'flashing_lights'])
+KEEP_SEMICOLON = set(['voltage'])
 MORE_VALUES = set(['payment:', 'craft'])
 JOIN_CHAR = '\\'
 

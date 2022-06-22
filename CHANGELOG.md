@@ -1,5 +1,14 @@
 # Every Door App Change Log
 
+## 0.6
+
+_Unreleased_
+
+* Supporting subway entrances.
+* Long tap on the crosshair did not work in the entrances mode.
+* Button to open an object's history (thanks @GeorgeHoneywood).
+* Non-https URLs failed to open from the editor.
+
 ## 0.5.0
 
 _Released on 2022-06-20_
