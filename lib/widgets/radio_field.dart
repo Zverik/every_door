@@ -6,8 +6,11 @@ class RadioField extends StatefulWidget {
   final List<String>? labels;
   final List<Widget>? widgetLabels;
   final String? value;
-  final bool multi;
+  final List<String>? values;
   final bool wrap;
+  final bool multi;
+  /// Keep the first options before all others. Warning: this implies the first option can never be a value.
+  final bool keepFirst;
   final Function(String?)? onChange;
   final Function(List<String>)? onMultiChange;
 
@@ -16,8 +19,10 @@ class RadioField extends StatefulWidget {
     this.labels,
     this.widgetLabels,
     this.value,
-    this.multi = false,
+    this.values,
     this.wrap = false,
+    this.multi = false,
+    this.keepFirst = false,
     this.onChange,
     this.onMultiChange,
   });
@@ -85,7 +90,8 @@ class _RadioFieldState extends State<RadioField> {
 
   @override
   Widget build(BuildContext context) {
-    final values = widget.value?.split(';').map((s) => s.trim()) ?? [];
+    final values =
+        widget.values ?? widget.value?.split(';').map((s) => s.trim()) ?? [];
     final labelsForValues = <String, Widget>{};
     for (final value in values) {
       int idx = widget.options.indexOf(value);
@@ -94,6 +100,17 @@ class _RadioFieldState extends State<RadioField> {
     bool pushFirst = getMergedLength() >= 30 && !widget.wrap;
 
     final pills = [
+      if (widget.keepFirst && widget.options.isNotEmpty)
+        RadioPill(
+          value: widget.options.first,
+          label: labels[0],
+          selected: values.contains(widget.options.first),
+          onTap: () {
+            if (widget.onChange != null) widget.onChange!(widget.options.first);
+            if (widget.onMultiChange != null)
+              widget.onMultiChange!([widget.options.first]);
+          },
+        ),
       for (final value in values)
         if (pushFirst || !widget.options.contains(value))
           RadioPill(
@@ -110,7 +127,8 @@ class _RadioFieldState extends State<RadioField> {
             },
           ),
       for (final entry in widget.options.asMap().entries)
-        if (!pushFirst || !values.contains(entry.value))
+        if ((!pushFirst || !values.contains(entry.value)) &&
+            (!widget.keepFirst || entry.key != 0))
           RadioPill(
             value: entry.value,
             label: labels[entry.key],

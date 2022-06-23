@@ -10,6 +10,7 @@ _Unreleased_
 * Non-https URLs failed to open from the editor.
 * Removed generic presets like `shop=*` from the preset chooser.
 * Combo options are sorted by popularity in downloaded data.
+* Combo fields now look the same as radio fields.
 
 ## 0.5.0
 

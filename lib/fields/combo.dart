@@ -1,8 +1,8 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/widgets/radio_field.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'helpers/combo_page.dart';
 
@@ -59,9 +59,7 @@ class ComboPresetField extends PresetField {
   }
 
   @override
-  Widget buildWidget(OsmChange element) => isSingularValue
-      ? SingularComboField(this, element)
-      : MultiComboField(this, element);
+  Widget buildWidget(OsmChange element) => RadioComboField(this, element);
 
   @override
   bool hasRelevantKey(Map<String, String> tags) {
@@ -73,106 +71,17 @@ class ComboPresetField extends PresetField {
   }
 }
 
-class SingularComboField extends StatefulWidget {
+class RadioComboField extends StatefulWidget {
   final ComboPresetField field;
   final OsmChange element;
 
-  const SingularComboField(this.field, this.element);
+  const RadioComboField(this.field, this.element);
 
   @override
-  State<SingularComboField> createState() => _SingularComboFieldState();
+  State createState() => _RadioComboFieldState();
 }
 
-class _SingularComboFieldState extends State<SingularComboField> {
-  setComboValue(String value) {
-    value = value.trim();
-    if (value.isEmpty) return;
-    switch (widget.field.type) {
-      case ComboType.regular:
-      case ComboType.type:
-        widget.element[widget.field.key] = value;
-        break;
-      default:
-        break;
-    }
-  }
-
-  removeComboValue() {
-    switch (widget.field.type) {
-      case ComboType.regular:
-        widget.element.removeTag(widget.field.key);
-        break;
-      case ComboType.type:
-        widget.element[widget.field.key] = 'yes';
-        break;
-      default:
-        // Do nothing
-        break;
-    }
-  }
-
-  openChooser() async {
-    final List<String>? newValue = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ComboChooserPage(
-          widget.field,
-          [widget.element[widget.field.key]].whereType<String>().toList(),
-          allowEmpty: true,
-        ),
-      ),
-    );
-    if (newValue != null) {
-      setState(() {
-        if (newValue.isNotEmpty)
-          setComboValue(newValue.first);
-        else
-          removeComboValue();
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
-    return GestureDetector(
-      child: SizedBox(
-        height: 40.0,
-        child: Row(
-          children: [
-            Expanded(
-                child: Text(
-              widget.element[widget.field.key] ?? loc.fieldComboChoose + '...',
-              style: widget.element[widget.field.key] != null
-                  ? kFieldTextStyle
-                  : kFieldTextStyle.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withOpacity(0.3)),
-            )),
-            Icon(Icons.arrow_drop_down),
-          ],
-        ),
-      ),
-      onTap: () {
-        openChooser();
-      },
-    );
-  }
-}
-
-class MultiComboField extends StatefulWidget {
-  final ComboPresetField field;
-  final OsmChange element;
-
-  const MultiComboField(this.field, this.element);
-
-  @override
-  State createState() => _MultiComboFieldState();
-}
-
-class _MultiComboFieldState extends State<MultiComboField> {
+class _RadioComboFieldState extends State<RadioComboField> {
   List<String> getComboValues() {
     if (widget.field.type == ComboType.multi) {
       List<String> values = [];
@@ -280,55 +189,27 @@ class _MultiComboFieldState extends State<MultiComboField> {
 
   @override
   Widget build(BuildContext context) {
-    final values = getComboValues();
-    return Padding(
-      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0, right: 5.0),
-      child: Wrap(
-        direction: Axis.horizontal,
-        spacing: 6.0,
-        runSpacing: 6.0,
-        children: [
-          for (final v in values)
-            GestureDetector(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black87),
-                  borderRadius: BorderRadius.all(Radius.circular(3.0)),
-                  color: Colors.blueGrey.shade50,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(left: 6.0),
-                      constraints: BoxConstraints(maxWidth: 150.0),
-                      child: Text(v,
-                          style: kFieldTextStyle,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1),
-                    ),
-                    Icon(Icons.close),
-                  ],
-                ),
-              ),
-              onTap: () {
-                setState(() {
-                  removeComboValue(v);
-                });
-              },
-            ),
-          GestureDetector(
-            onTap: () {
-              openChooser(values);
-            },
-            child: Container(
-              padding: EdgeInsets.all(1.0),
-              color: Colors.blueGrey.shade50,
-              child: Icon(Icons.add),
-            ),
-          ),
-        ],
-      ),
+    const kChooserOption = '...';
+    final options = [kChooserOption] +
+        widget.field.options.take(3).map((o) => o.value).toList();
+    final labels = [kChooserOption] +
+        widget.field.options
+            .take(3)
+            .map((o) => o.label?.toLowerCase() ?? o.value)
+            .toList();
+
+    return RadioField(
+      options: options,
+      labels: labels,
+      values: getComboValues(),
+      multi: !widget.field.isSingularValue,
+      keepFirst: true,
+      onMultiChange: (values) {
+        if (values.contains(kChooserOption))
+          openChooser(getComboValues());
+        else
+          setComboValues(values);
+      },
     );
   }
 }
