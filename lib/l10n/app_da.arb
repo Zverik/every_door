@@ -665,5 +665,17 @@
   "apiStatusUpdatingDB": "Gemmer elementer i appdatabasen",
   "@apiStatusUpdatingDB": {
     "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "editorDuplicate": "Mulig dublet inden for {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
   }
 }

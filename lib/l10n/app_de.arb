@@ -1,11 +1,11 @@
 {
-  "loadingStart": "Initialisierung …",
+  "loadingStart": "Initialisierung…",
   "@loadingStart": {},
-  "loadingPresets": "Vorlagen werden geladen …",
+  "loadingPresets": "Vorlagen werden geladen…",
   "@loadingPresets": {},
-  "loadingChanges": "Änderungen werden geladen …",
+  "loadingChanges": "Änderungen werden geladen…",
   "@loadingChanges": {},
-  "loadingLocation": "Standort bestimmen …",
+  "loadingLocation": "Standort bestimmen…",
   "@loadingLocation": {},
   "loadingChangesFailed": "Fehler beim Laden der Änderungen",
   "@loadingChangesFailed": {},
@@ -357,5 +357,17 @@
   "tagsValueLong": "Wert ist zu lang",
   "@tagsValueLong": {
     "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "editorDuplicate": "Mögliches Duplikat in {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
   }
 }

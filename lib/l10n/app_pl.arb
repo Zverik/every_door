@@ -1,5 +1,5 @@
 {
-  "loadingLocation": "Pozyskiwanie lokalizacji",
+  "loadingLocation": "Ustalanie położenia…",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
@@ -27,7 +27,7 @@
   "@filterByFloor": {
     "description": "Filter pane, label for choosing a floor to filter by."
   },
-  "filterEmpty": "puste",
+  "filterEmpty": "brakujące",
   "@filterEmpty": {
     "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
   },
@@ -88,7 +88,7 @@
   "@tagsNewPoint": {
     "description": "Tag editor panel title for a new amenity."
   },
-  "tagsAddTag": "Dodaj tag",
+  "tagsAddTag": "Dodaj znacznik",
   "@tagsAddTag": {
     "description": "Tags panel button for adding a new tag."
   },
@@ -100,15 +100,15 @@
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
-  "loadingStart": "Inicjalizacja...",
+  "loadingStart": "Inicjalizacja…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "loadingPresets": "Ładowanie ustawień wstępnych",
+  "loadingPresets": "Wczytywanie szablonów…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
-  "loadingChanges": "Ładowanie zmian",
+  "loadingChanges": "Wczytywanie zmian…",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
@@ -259,7 +259,7 @@
   "@fieldPhoneWrong": {
     "description": "Validation message for a non-standard phone number."
   },
-  "fieldFloorFloorDesc": "Piętro jak na nawigacji i w windach",
+  "fieldFloorFloorDesc": "Piętro jak w nawigacji i w windach",
   "@fieldFloorFloorDesc": {
     "descripton": "Description for the \"level\" tag."
   },
@@ -302,5 +302,380 @@
   "entranceFlatsNumberList": "Powinna to być lista liczb",
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
+  },
+  "tileNothingAround": "W promieniu {distance} metrów nie odnaleziono żadnych użytecznych punktów.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "tileDragTheMap": "Zbliż się do czegokolwiek, przeciągnij mapę lub dodaj brakujące udogodnienie.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Poruszaj się wokół, dodaj udogodnienie lub wyczyść filtr.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "editorLoadingPreset": "Wczytywanie szablonu…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorRestoreTitle": "Czy jest otwarty?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorRestoreMessage": "{amenity} jest nieaktywne. Czy chcesz oznaczyć je jako aktywne?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsKey": "Klucz",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Wartość",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsKeyError": "Klucz jest zbyt rzadki",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "settingsPresentation": "Prezentacja",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsLoginDetails": "Konto OSM",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeData": "Wyczyść przestarzałe dane z pamięci podręcznej",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "Wyczyść wszystkie pobrane dane",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataTitle": "Usunąć dane?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "Będziesz musiał ponownie wszystko pobrać. Kontynuować?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "Przestarzałe dane",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "Usunięte dane",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsBackground": "Obraz podkładu",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsUploads": "Oczekujące wysyłki",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Wyczyszczony {count} element}, =few{Wyczyszczone {count} elementy}, =other{Wyczyszczonych {count} elementów}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorMarkDefunct": "Oznacz jako zamknięte",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "settingsDefaultPayment": "Domyślne karty płatnicze",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "accountTitle": "Konto OpenStreetMap",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "Logowanie poprzez OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "Błąd OAuth",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountLoginPassword": "Logowanie poprzez hasło",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "changesDeletedUndo": "Wycofaj",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesPending": "Oczekujące",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesPurgeTitle": "Wyczyścić zmiany?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "accountPasswordWarningMessage": "Twoje hasło zostanie zapisane na urządzeniu. Wybierz to tylko wtedy, gdy OAuth nie powiedzie się.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "Zrozumiano",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "Dane OSM",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "changesCount": "{count,plural, =1{{count} zmiana}, =few{{count} zmiany}, =other{{count} zmian}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesUploadedTitle": "Przesłano",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadedMessage": "Przesłano {changes} do API.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesUploadFailedTitle": "Przesłanie zakończone niepowodzeniem",
+  "@changesUploadFailedTitle": {
+    "descripton": "Title for the notification about a failed changes upload."
+  },
+  "changesDeletedChange": "Usunięta {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "fieldHoursAddFragment": "Dodaj fragment",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldComboEmpty": "brakujące",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "wybierz",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "nie",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldHoursClosedPH": "Zamknięte podczas świąt",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldWifiPublic": "publiczny",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "klienci",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "tak",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "ograniczony",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "nie",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsNo": "nie",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldFloorEmpty": "Aby wybrać piętro, ustaw adres.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorNew": "Nowe piętro",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorShouldBeNumber": "Podaj numer",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldAddressTap": "Podaj adres",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "buildingTypeHouse": "dom",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "mieszkalny",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "handlowy",
+  "@buildingTypeRetail": {},
+  "entranceRef": "Numer",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccessYes": "otwarte",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "prywatne",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "nie",
+  "@entranceAccessNo": {},
+  "entranceAccessDelivery": "dostawy",
+  "@entranceAccessDelivery": {},
+  "entranceTypeMain": "główne",
+  "@entranceTypeMain": {},
+  "entranceTypeStaircase": "klatka schodowa",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "dom",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "sklep",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "usługowe",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "garaż",
+  "@entranceTypeGarage": {},
+  "entranceTypeEmergency": "ewakuacyjne",
+  "@entranceTypeEmergency": {},
+  "addressHouseNumber": "Dom",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Nie powinno być puste",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Jednostka",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "opcjonalnie",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressStreet": "Ulica",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "Miejsce",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "apiStatusDownloading": "Pobieranie danych…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "Zapisywanie elementów do bazy danych aplikacji",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploading": "Przesyłanie zmian",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "accountFieldLogin": "Nazwa użytkownika",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountAuthErrorMessage": "Błędna nazwa użytkownika lub hasło.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountChangesets": "Zestawy zmian",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "settingsPreferContact": "Preferuj przedrostek \"contact:\"",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "accountLogout": "Wyloguj",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "settingsLeftHand": "Kontrola lewą ręką",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsEditor": "Edytor",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsNumericKeyboard": "Rozszerzona klawiatura numeryczna",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "accountAuthErrorTitle": "Błąd autoryzacji",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountPasswordWarningTitle": "Ostrzeżenie",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldPassword": "Hasło",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountUnreadMail": "Nieodczytana wiadomość",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "entranceWheelchair": "Wózki inwalidzkie",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceType": "Rodzaj",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "editorDuplicate": "Możliwy duplikat w odległości {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
   }
 }
