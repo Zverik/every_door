@@ -12,6 +12,7 @@ _Released on 2022-06-23_
 * Combo options are sorted by popularity in downloaded data.
 * Combo fields now look the same as radio fields.
 * Fixed geolocation exception on the first run on iOS.
+* Complete Polish (by @strebski) and Spanish translation (by @franco999).
 
 ## 0.5
 
