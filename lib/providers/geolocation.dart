@@ -71,7 +71,12 @@ class GeolocationController extends StateNotifier<LatLng?> {
 
     LocationPermission perm = await Geolocator.checkPermission();
     if (perm == LocationPermission.denied) {
-      final perm = await Geolocator.requestPermission();
+      try {
+        perm = await Geolocator.requestPermission();
+      } on Exception catch (e) {
+        _logger.warning('Permission request failed', e);
+        return;
+      }
       if (perm == LocationPermission.denied) {
         _logger.info('Geolocation denied');
         disableTracking();

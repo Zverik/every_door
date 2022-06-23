@@ -2,7 +2,7 @@
 
 ## 0.6
 
-_Unreleased_
+_Released on 2022-06-23_
 
 * Supporting subway entrances.
 * Long tap on the crosshair did not work in the entrances mode.
@@ -11,8 +11,9 @@ _Unreleased_
 * Removed generic presets like `shop=*` from the preset chooser.
 * Combo options are sorted by popularity in downloaded data.
 * Combo fields now look the same as radio fields.
+* Fixed geolocation exception on the first run on iOS.
 
-## 0.5.0
+## 0.5
 
 _Released on 2022-06-20_
 
@@ -55,7 +56,7 @@ _Released on 2022-06-20_
 * Labels for U-shaped buildings are positioned on buildings.
 * Temporary (?) option in Settings to disable Google location services.
 
-## 0.4.0
+## 0.4
 
 _Released on 2022-05-22_
 
@@ -99,7 +100,7 @@ _Released on 2022-05-22_
 * Tapping away from a building / entrance form saves the edits.
 * Choose "address" building type to add a building-less address.
 
-## 0.3.0
+## 0.3
 
 _Released on 2022-05-09_
 
@@ -118,7 +119,7 @@ _Released on 2022-05-09_
 * Finally caught the offset issue when dragging entrances onto the map.
 * Fixed offset in numbers on the map.
 
-## 0.2.0
+## 0.2
 
 _Released on 2022-05-03_
 
