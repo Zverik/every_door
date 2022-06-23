@@ -665,5 +665,17 @@
     }
   },
   "buildingTypeAddress": "住所",
-  "@buildingTypeAddress": {}
+  "@buildingTypeAddress": {},
+  "editorDuplicate": "{distance} m内にある重複の可能性があるもの",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  }
 }
