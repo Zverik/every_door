@@ -381,6 +381,36 @@ class OsmDataHelper extends ChangeNotifier {
     return elements.first;
   }
 
+  Future<Map<String, int>> getComboOptionsCount(String key) async {
+    final database = await _ref.read(databaseProvider).database;
+    final rows = await database.query(
+      OsmElement.kTableName,
+      where: "tags like ?",
+      whereArgs: ['%"$key%'],
+    );
+
+    // Iterate over objects and count values.
+    final counter = <String, int>{};
+    for (final row in rows) {
+      final element = OsmElement.fromJson(row);
+      if (key.endsWith(':')) {
+        element.tags.forEach((k, _) {
+          if (k.startsWith(key)) {
+            final v = k.substring(key.length);
+            counter[v] = (counter[v] ?? 0) + 1;
+          }
+        });
+      } else {
+        final v = element.tags[key];
+        if (v != null)
+          counter[v] = (counter[v] ?? 0) + 1;
+      }
+    }
+
+    // This map is great for sorting over it.
+    return counter;
+  }
+
   Future<List<OsmChange>> downloadMap(LatLngBounds bounds) async {
     _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
     try {

@@ -202,6 +202,18 @@ def import_presets(cur, path):
     cur.execute("create index preset_tags_idx on preset_tags (key, value);")
 
 
+def remove_generic_terms(cur):
+    """Remove terms that address generic presets (e.g. shop=*)."""
+    cur.execute("select name, add_tags from presets where add_tags like '%\"*\"%'")
+    preset_names = set()
+    for row in cur:
+        tags = json.loads(row[1])
+        if not tags or all(v == '*' for v in tags.values()):
+            preset_names.add(row[0])
+    nq = ','.join('?' for n in preset_names)
+    cur.execute(f"delete from preset_terms where preset_name in ({nq})", list(preset_names))
+
+
 def import_translations(cur, path):
     cur.execute("""create table field_tran (
         lang text,
@@ -265,13 +277,7 @@ def import_translations(cur, path):
             "insert into preset_terms (lang, term, preset_name, score) values (?, ?, ?, ?)",
             build_terms(lang, presets))
 
-    # Clean up indices - commented out since it removes e.g. restaurants.
-    # cur.execute(
-    #     "with t as (select lang, term from preset_terms group by 1, 2 having count(*) > 20) "
-    #     "delete from preset_terms as p "
-    #     "where exists (select * from t where p.lang = t.lang and p.term = t.term) "
-    #     "or (lang not in ('ja', 'zh-CN', 'zh-TW', 'zh-HK') and length(term) <= 2)"
-    # )
+    remove_generic_terms(cur)
 
     cur.execute("create index field_tran_idx on field_tran (field_name)")
     cur.execute("create index preset_tran_idx on preset_tran (preset_name)")

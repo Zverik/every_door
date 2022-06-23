@@ -8,6 +8,8 @@ _Unreleased_
 * Long tap on the crosshair did not work in the entrances mode.
 * Button to open an object's history (thanks @GeorgeHoneywood).
 * Non-https URLs failed to open from the editor.
+* Removed generic presets like `shop=*` from the preset chooser.
+* Combo options are sorted by popularity in downloaded data.
 
 ## 0.5.0
 

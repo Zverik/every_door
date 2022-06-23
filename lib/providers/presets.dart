@@ -9,6 +9,7 @@ import 'package:every_door/fields/wifi.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/helpers/nsi_features.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,7 @@ import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:latlong2/latlong.dart';
 
-final presetProvider = Provider((_) => PresetProvider());
+final presetProvider = Provider((ref) => PresetProvider(ref));
 
 class PresetProvider {
   static const kDbVersion = "dbVersion";
@@ -32,8 +33,9 @@ class PresetProvider {
   Database? _db;
   late final LocationMatcher locationMatcher;
   bool ready = false;
+  final Ref _ref;
 
-  PresetProvider() {
+  PresetProvider(this._ref) {
     initMatcher();
     initDatabase();
   }
@@ -164,7 +166,8 @@ class PresetProvider {
     final results = await _db!.rawQuery(sql, [normalizeString(query) + '%']);
     final presets = <Preset>[];
     if (includeNSI) {
-      List<Preset> nsiResults = await _getNSIAutocomplete(normalizeString(query));
+      List<Preset> nsiResults =
+          await _getNSIAutocomplete(normalizeString(query));
       if (location != null) {
         nsiResults = _filterByLocation(nsiResults, location);
       }
@@ -286,6 +289,14 @@ class PresetProvider {
       options.addAll((results.first['options'] as String)
           .split('\\')
           .where((v) => !existing.contains(v)));
+    }
+
+    // Count values on the map.
+    final counter =
+        await _ref.read(osmDataProvider).getComboOptionsCount(field['key']);
+    if (counter.isNotEmpty) {
+      mergeSort(options,
+          compare: (a, b) => (counter[b] ?? 0).compareTo(counter[a] ?? 0));
     }
     return options.map((e) => ComboOption(e, loc[e])).toList();
   }
