@@ -255,5 +255,193 @@
   "accountLoginOAuth": "Увійти через OAuth",
   "@accountLoginOAuth": {
     "description": "Button label for logging in to OSM via OAuth."
+  },
+  "chooseTypeClear": "Очистити",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "settingsNumericKeyboard": "Розширена цифрова клавіатура",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsDefaultPayment": "Платіжні карти за замовчуванням",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "fieldHoursButton": "Вказати години роботи",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursTitle": "Години работи",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursFullDay": "Цілий день",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursOpens": "Відкривається",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "Зачиняється",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursBreak": "Перерва",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "Наступний",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursAddBreak": "Додати перерву",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursWeekdays": "Пн Вт Ср Чт Пт Сб Нд",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "Не працює в державні свята",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldWifiNo": "ні",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "для всіх",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "для клієнтів",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "так",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "обмежено",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "ні",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "enableGPSMessage": "Зараз будуть відкриті системні налаштування. Будь ласка, увікніть GPS.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "entranceFlats": "Квартири",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "Має бути перелік чисел",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceRef": "Номер",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "Доступ",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessPrivate": "мешканці",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "ні",
+  "@entranceAccessNo": {},
+  "buildingType": "Тип",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Ще",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingTypeAddress": "Адреса",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "приватний будинок",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "багатоквартирний",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "торгівельний",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "комерційний",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "сарай",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "промислова",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeGarage": "гараж",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "будівництво",
+  "@buildingTypeConstruction": {},
+  "entranceType": "Тип",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeMain": "головний",
+  "@entranceTypeMain": {},
+  "addressHouseNumber": "Будинок",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Має бути не пустим",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Корпус",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressStreet": "Вулиця",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "apiStatusDownloading": "Завантаження даних…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "Зберігаємо елементи до сховища застосунку",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploading": "Відправляємо правки",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "entranceIsUnit": "Записати номер квартири до addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceAccessDelivery": "доставка",
+  "@entranceAccessDelivery": {},
+  "entranceAccessYes": "вільний",
+  "@entranceAccessYes": {},
+  "entranceTypeStaircase": "підʼїзд",
+  "@entranceTypeStaircase": {},
+  "entranceTypeShop": "магазин",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "службовий",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "гараж",
+  "@entranceTypeGarage": {},
+  "entranceWheelchair": "Візок",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceTypeHome": "будинок",
+  "@entranceTypeHome": {},
+  "entranceTypeEmergency": "аварійний",
+  "@entranceTypeEmergency": {},
+  "enableGPS": "Увімкніть GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
   }
 }
