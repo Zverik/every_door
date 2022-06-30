@@ -500,5 +500,164 @@
   "enableLocationMessage": "请在即将显示的设置面板中允许应用程序的位置访问。",
   "@enableLocationMessage": {
     "description": "Contents of the alert for allowing app access to location."
-  }
+  },
+  "buttonYes": "同意",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "拒绝",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingX": "建筑 {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "addressX": "地址 {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "entranceX": "入口 {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingRoofLevels": "屋顶层数",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingType": "类型",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingTypeAddress": "地址",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "房屋",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "公寓",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "零售",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "商业",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "棚子",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "工业",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeGarage": "车库",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "建设中",
+  "@buildingTypeConstruction": {},
+  "entranceFlats": "单元楼",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceRef": "编号",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceIsUnit": "将单元楼编号储存在 addr:unit 中",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceAccess": "访问",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessNo": "不",
+  "@entranceAccessNo": {},
+  "entranceAccessDelivery": "送货",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "轮椅",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceTypeMain": "主要",
+  "@entranceTypeMain": {},
+  "entranceTypeHome": "家庭",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "商店",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "服务",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "车库",
+  "@entranceTypeGarage": {},
+  "entranceTypeEmergency": "紧急",
+  "@entranceTypeEmergency": {},
+  "addressHouseNotEmpty": "不应为空",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "单元",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "可选项",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressStreet": "街道",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "地方",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "apiStatusDownloading": "正在下载数据…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "将要素保存到应用数据库",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploading": "正在上传更改",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "buildingRoofShape": "屋顶形状",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingMoreButton": "更多",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingLevels": "楼层数",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "应该是一组数字列表",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceAccessPrivate": "私人",
+  "@entranceAccessPrivate": {},
+  "entranceAccessYes": "开放",
+  "@entranceAccessYes": {},
+  "addressHouseNumber": "房屋",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "entranceType": "类型",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeStaircase": "楼梯间",
+  "@entranceTypeStaircase": {}
 }
