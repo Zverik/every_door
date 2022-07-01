@@ -665,5 +665,17 @@
     "description": "What is written on the floor chooser if there are no floors to choose."
   },
   "entranceTypeShop": "butik",
-  "@entranceTypeShop": {}
+  "@entranceTypeShop": {},
+  "editorDuplicate": "Möjlig dublett inom {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  }
 }
