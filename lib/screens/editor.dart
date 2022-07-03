@@ -86,7 +86,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       duplicateTimer?.cancel();
       duplicateTimer = null;
     }
-    duplicateTimer = Timer(Duration(seconds: 1), () async {
+    duplicateTimer = Timer(Duration(seconds: 2), () async {
       final duplicate =
           await ref.read(osmDataProvider).findPossibleDuplicate(amenity);
       _logger.info('Found duplicate: $duplicate');
@@ -207,13 +207,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   saveAndClose() {
+    final fullTags = amenity.getFullTags();
     // Setting the mark automatically.
-    if (needsCheckDate(amenity.getFullTags())) amenity.check();
+    if (needsCheckDate(fullTags)) amenity.check();
     // Store the preset when an object was saved, to track used ones.
     if (widget.preset != null) {
-      ref
-          .read(lastPresetsProvider)
-          .registerPreset(widget.preset!, amenity.getFullTags());
+      ref.read(lastPresetsProvider).registerPreset(widget.preset!, fullTags);
     }
     // Save changes and close.
     final changes = ref.read(changesProvider);
@@ -543,7 +542,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       point: amenity
                           .location, // mapController.center throws late init exception
                       anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
-                      builder: (ctx) => Icon(Icons.location_pin, color: Colors.red.shade900),
+                      builder: (ctx) =>
+                          Icon(Icons.location_pin, color: Colors.red.shade900),
                     ),
                 ])),
               ],

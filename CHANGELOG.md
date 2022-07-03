@@ -1,5 +1,13 @@
 # Every Door App Change Log
 
+## 0.7
+
+_Unreleased_
+
+* Storing last used tags only for non-amenities.
+* Removed searching for entrance-related presets.
+* Rewrote both the UI and the model for the `opening_hours` editor.
+
 ## 0.6
 
 _Released on 2022-06-23_

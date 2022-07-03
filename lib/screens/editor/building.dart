@@ -64,7 +64,9 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     });
     levelCount.remove(1);
     levelCount.remove(2);
-    if (levelCount.isEmpty) return;
+    // Add two level values for defaults.
+    levelCount[3] = 0;
+    levelCount[5] = 0;
 
     final values = levelCount.entries.toList();
     values.sort((a, b) => b.value.compareTo(a.value));

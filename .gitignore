@@ -53,3 +53,5 @@ venv/
 private.dart
 assets/presets.db
 coverage/
+icon/store_logo.jpg
+lib/l10n/app_zh.arb

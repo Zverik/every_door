@@ -1,4 +1,3 @@
-import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:flutter/material.dart';

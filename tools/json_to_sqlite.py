@@ -18,6 +18,9 @@ MAIN_KEYS = [
     'advertising', 'playground', 'traffic_calming',
 ]
 
+# A global list.
+non_searchable_presets = []
+
 
 def open_or_download(path, filename, from_nsi=False):
     if path:
@@ -121,6 +124,9 @@ def import_presets(cur, path):
                 continue
             if not row['tags']:
                 continue
+
+            if not row.get('searchable', True) or name.startswith('entrance'):
+                non_searchable_presets.append(name)
             tags = json.dumps(row['tags'])
             name_parts = name.split('/')
             num_steps = len(name_parts)
@@ -204,12 +210,15 @@ def import_presets(cur, path):
 
 def remove_generic_terms(cur):
     """Remove terms that address generic presets (e.g. shop=*)."""
+    global non_searchable_presets
+
     cur.execute("select name, add_tags from presets where add_tags like '%\"*\"%'")
-    preset_names = set()
+    preset_names = set(non_searchable_presets)
     for row in cur:
         tags = json.loads(row[1])
         if not tags or all(v == '*' for v in tags.values()):
             preset_names.add(row[0])
+
     nq = ','.join('?' for n in preset_names)
     cur.execute(f"delete from preset_terms where preset_name in ({nq})", list(preset_names))
 

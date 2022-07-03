@@ -1,3 +1,4 @@
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,13 +32,18 @@ class LastPresetsProvider {
     }
 
     // Store tags, removing useless things.
-    final Map<String, String> newTags = {};
-    const kDeleteKeys = {'check_date', 'source', 'note'};
-    tags.forEach((key, value) {
-      if (!kDeleteKeys.contains(key) && !key.startsWith('ref'))
-        newTags[key] = value;
-    });
-    _lastTags[preset.id] = tags;
+    if (!isAmenityTags(tags)) {
+      final Map<String, String> newTags = {};
+      const kDeleteKeys = {'check_date', 'source', 'note', 'operator'};
+      tags.forEach((key, value) {
+        if (!kDeleteKeys.contains(key) &&
+            !key.startsWith('ref') &&
+            !key.startsWith('name')) {
+          newTags[key] = value;
+        }
+      });
+      _lastTags[preset.id] = tags;
+    }
   }
 
   List<Preset> getPresets() {
