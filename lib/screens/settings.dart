@@ -8,6 +8,7 @@ import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
+import 'package:every_door/screens/settings/about.dart';
 import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/imagery.dart';
@@ -20,7 +21,6 @@ import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage();
@@ -181,10 +181,10 @@ class SettingsPage extends ConsumerWidget {
               ),
             ],
           ),
+          if (defaultTargetPlatform == TargetPlatform.android)
           SettingsSection(
             title: Text('System'),
             tiles: [
-              if (defaultTargetPlatform == TargetPlatform.android)
                 SettingsTile.switchTile(
                   title: Text('Use Google-enhanced Positioning'),
                   initialValue: !forceLocation,
@@ -194,78 +194,19 @@ class SettingsPage extends ConsumerWidget {
                         .set(!forceLocation);
                   },
                 ),
-              SettingsTile(
-                title: Text(loc.settingsViewLog),
-                trailing: Icon(Icons.navigate_next),
-                onPressed: (context) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LogDisplayPage()),
-                  );
-                },
-              ),
             ],
           ),
           SettingsSection(
             title: Text(loc.settingsAbout),
             tiles: [
               SettingsTile(
-                title: Text(loc.settingsVersionHistory),
-                description: Text(loc.settingsInstalledVersion(kAppVersion)),
-                trailing: Icon(Icons.exit_to_app),
+                title: Text("About $kAppTitle v$kAppVersion"),
+                trailing: Icon(Icons.navigate_next),
                 onPressed: (context) {
-                  launchUrl(
-                      Uri.https("github.com", "/Zverik/every_door/releases"),
-                      mode: LaunchMode.externalApplication);
-                },
-              ),
-              SettingsTile(
-                title: Text(loc.settingsProjectWebsite),
-                trailing: Icon(Icons.exit_to_app),
-                onPressed: (context) {
-                  launchUrl(Uri.https("every-door.app", "/"),
-                      mode: LaunchMode.externalApplication);
-                },
-              ),
-              SettingsTile(
-                title: Text(loc.settingsSourceCode),
-                trailing: Icon(Icons.exit_to_app),
-                description: Text(loc.settingsOnGitHub),
-                onPressed: (context) {
-                  launchUrl(Uri.https("github.com", "/Zverik/every_door/"),
-                      mode: LaunchMode.externalApplication);
-                },
-              ),
-              SettingsTile(
-                title: Text(loc.settingsLicense),
-                trailing: Icon(Icons.exit_to_app),
-                description: Text("ISC"),
-                onPressed: (context) {
-                  launchUrl(
-                      Uri.https(
-                          "github.com", "/Zverik/every_door/blob/main/LICENSE"),
-                      mode: LaunchMode.externalApplication);
-                },
-              ),
-              SettingsTile(
-                title: Text(loc.settingsReportIssue),
-                trailing: Icon(Icons.exit_to_app),
-                description: Text(loc.settingsOnGitHub),
-                onPressed: (context) {
-                  launchUrl(
-                      Uri.https("github.com", "/Zverik/every_door/issues"),
-                      mode: LaunchMode.externalApplication);
-                },
-              ),
-              SettingsTile(
-                title: Text(loc.settingsHelpTranslate),
-                trailing: Icon(Icons.exit_to_app),
-                description: Text(loc.settingsOnWeblate),
-                onPressed: (context) {
-                  launchUrl(
-                      Uri.https(
-                          "hosted.weblate.org", "/projects/every-door/app/"),
-                      mode: LaunchMode.externalApplication);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutPage()),
+                  );
                 },
               ),
             ],
