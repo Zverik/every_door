@@ -12,7 +12,6 @@ import 'package:every_door/screens/settings/about.dart';
 import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/imagery.dart';
-import 'package:every_door/screens/settings/log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
@@ -200,6 +199,7 @@ class SettingsPage extends ConsumerWidget {
             title: Text(loc.settingsAbout),
             tiles: [
               SettingsTile(
+                // FIXME: internationalise
                 title: Text("About $kAppTitle v$kAppVersion"),
                 trailing: Icon(Icons.navigate_next),
                 onPressed: (context) {
