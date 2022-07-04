@@ -39,8 +39,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   static final _logger = Logger('PoiEditorPage');
   late OsmChange amenity;
   Preset? preset;
-  OsmChange? possibleDuplicate;
-  Timer? duplicateTimer;
   List<PresetField> fields = []; // actual fields
   List<PresetField> moreFields = [];
   List<PresetField> stdFields = [];
@@ -55,7 +53,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           ref.read(lastPresetsProvider).getTagsForPreset(widget.preset!) ??
               widget.preset!.addTags;
       amenity = OsmChange.create(location: widget.location!, tags: tags);
-      startDuplicateSearch();
     }
     amenity.addListener(onAmenityChange);
 
@@ -76,26 +73,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
   onAmenityChange() {
     setState(() {});
-    startDuplicateSearch();
-  }
-
-  startDuplicateSearch() {
-    if (!amenity.isNew || !isAmenityTags(amenity.getFullTags())) return;
-    possibleDuplicate = null;
-    if (duplicateTimer != null) {
-      duplicateTimer?.cancel();
-      duplicateTimer = null;
-    }
-    duplicateTimer = Timer(Duration(seconds: 2), () async {
-      final duplicate =
-          await ref.read(osmDataProvider).findPossibleDuplicate(amenity);
-      _logger.info('Found duplicate: $duplicate');
-      if (mounted) {
-        setState(() {
-          possibleDuplicate = duplicate;
-        });
-      }
-    });
   }
 
   updatePreset(BuildContext context, [bool detect = false]) async {
@@ -256,11 +233,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         amenity.isOld && needsCheckDate(amenity.getFullTags());
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
-    const distance = DistanceEquirectangular();
-    final int duplicateDistance = possibleDuplicate == null
-        ? 0
-        : distance(possibleDuplicate!.location, amenity.location).round();
-
     final loc = AppLocalizations.of(context)!;
     return WillPopScope(
       onWillPop: () async {
@@ -307,35 +279,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       child: ListView(
                         children: [
                           buildMap(context),
-                          if (possibleDuplicate != null)
-                            GestureDetector(
-                              child: Container(
-                                color: Colors.yellow,
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const Icon(Icons.warning,
-                                        color: Colors.orange),
-                                    const SizedBox(width: 5.0),
-                                    Text(
-                                      loc.editorDuplicate(duplicateDistance),
-                                      style: kFieldTextStyle,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PoiEditorPage(
-                                        amenity: possibleDuplicate),
-                                  ),
-                                );
-                              },
-                            ),
+                          DuplicateWarning(amenity: amenity),
                           if (stdFields.isNotEmpty) ...[
                             buildFields(stdFields, 50),
                           ],
@@ -599,5 +543,95 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     }
 
     return Column(children: rows);
+  }
+}
+
+class DuplicateWarning extends ConsumerStatefulWidget {
+  final OsmChange amenity;
+
+  const DuplicateWarning({required this.amenity, Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<DuplicateWarning> createState() => _DuplicateWarningState();
+}
+
+class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
+  static final _logger = Logger('DuplicateWarning');
+  OsmChange? possibleDuplicate;
+  Timer? duplicateTimer;
+
+  @override
+  initState() {
+    super.initState();
+    widget.amenity.addListener(onAmenityChange);
+    startDuplicateSearch();
+  }
+
+  @override
+  dispose() {
+    widget.amenity.removeListener(onAmenityChange);
+    super.dispose();
+  }
+
+  startDuplicateSearch() {
+    if (!widget.amenity.isNew || !isAmenityTags(widget.amenity.getFullTags()))
+      return;
+    possibleDuplicate = null;
+    if (duplicateTimer != null) {
+      duplicateTimer?.cancel();
+      duplicateTimer = null;
+    }
+    duplicateTimer = Timer(Duration(seconds: 2), () async {
+      final duplicate =
+          await ref.read(osmDataProvider).findPossibleDuplicate(widget.amenity);
+      _logger.info('Found duplicate: $duplicate');
+      if (mounted) {
+        setState(() {
+          possibleDuplicate = duplicate;
+        });
+      }
+    });
+  }
+
+  onAmenityChange() {
+    startDuplicateSearch();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const distance = DistanceEquirectangular();
+    final int duplicateDistance = possibleDuplicate == null
+        ? 0
+        : distance(possibleDuplicate!.location, widget.amenity.location)
+            .round();
+    final loc = AppLocalizations.of(context)!;
+
+    if (possibleDuplicate == null) return Container();
+    return GestureDetector(
+      child: Container(
+        color: Colors.yellow,
+        padding: EdgeInsets.symmetric(vertical: 5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Icon(Icons.warning, color: Colors.orange),
+            const SizedBox(width: 5.0),
+            Text(
+              loc.editorDuplicate(duplicateDistance),
+              style: kFieldTextStyle,
+            ),
+          ],
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PoiEditorPage(amenity: possibleDuplicate),
+          ),
+        );
+      },
+    );
   }
 }

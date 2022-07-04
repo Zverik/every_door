@@ -62,7 +62,8 @@ class StreetAddress {
     element['addr:unit'] = unit;
     element['addr:street'] = street;
     element['addr:place'] = place;
-    element['addr:city'] = city;
+    // TODO: decide something about the city
+    if (city != null) element['addr:city'] = city;
   }
 
   static clearTags(OsmChange element) {

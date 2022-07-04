@@ -33,6 +33,35 @@ void main() {
     expect(() => HoursInterval.parse('12:10'), throwsException);
     expect(() => HoursInterval.parse('12:10-10'), throwsException);
   });
+  
+  test('HoursInterval compares correctly', () {
+    expect(HoursInterval.str('10:00', '20:00').overMidnight, isFalse);
+    expect(HoursInterval.str('10:00', '20:00').contains(HoursInterval.str('09:00', '09:30')), isFalse);
+    expect(HoursInterval.str('10:00', '20:00').contains(HoursInterval.str('09:00', '10:30')), isFalse);
+    expect(HoursInterval.str('10:00', '20:00').contains(HoursInterval.str('19:00', '19:30')), isTrue);
+    expect(HoursInterval.str('10:00', '20:00').contains(HoursInterval.str('20:00', '20:30')), isFalse);
+    expect(HoursInterval.str('19:00', '05:00').contains(HoursInterval.str('23:00', '01:30')), isFalse);
+
+    expect(HoursInterval.str('10:00', '20:00').intersects(HoursInterval.str('09:00', '09:30')), isFalse);
+    expect(HoursInterval.str('10:00', '20:00').intersects(HoursInterval.str('09:00', '10:30')), isTrue);
+    expect(HoursInterval.str('10:00', '20:00').intersects(HoursInterval.str('19:00', '19:30')), isTrue);
+    expect(HoursInterval.str('10:00', '20:00').intersects(HoursInterval.str('20:00', '20:30')), isFalse);
+    expect(HoursInterval.str('10:00', '20:00').intersects(HoursInterval.str('19:59', '20:30')), isTrue);
+
+    expect(HoursInterval.str('19:00', '05:00').overMidnight, isTrue);
+    expect(HoursInterval.str('19:00', '05:00').contains(HoursInterval.str('09:00', '09:30')), isFalse);
+    expect(HoursInterval.str('19:00', '05:00').contains(HoursInterval.str('02:00', '03:30')), isTrue);
+    expect(HoursInterval.str('19:00', '05:00').contains(HoursInterval.str('19:00', '19:30')), isTrue);
+    expect(HoursInterval.str('19:00', '05:00').contains(HoursInterval.str('09:00', '19:30')), isFalse);
+    expect(HoursInterval.str('19:00', '05:00').contains(HoursInterval.str('23:00', '01:30')), isTrue);
+
+    expect(HoursInterval.str('19:00', '05:00').intersects(HoursInterval.str('09:00', '09:30')), isFalse);
+    expect(HoursInterval.str('19:00', '05:00').intersects(HoursInterval.str('09:00', '19:30')), isTrue);
+    expect(HoursInterval.str('19:00', '05:00').intersects(HoursInterval.str('09:00', '08:30')), isTrue);
+    expect(HoursInterval.str('19:00', '05:00').intersects(HoursInterval.str('01:00', '09:30')), isTrue);
+    expect(HoursInterval.str('19:00', '05:00').intersects(HoursInterval.str('05:00', '09:30')), isFalse);
+    expect(HoursInterval.str('19:00', '05:00').intersects(HoursInterval.str('04:59', '09:30')), isTrue);
+  });
 
   test('HoursFragment initializes and tests correctly', () {
     HoursFragment fragment = HoursFragment(

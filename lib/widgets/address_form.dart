@@ -31,18 +31,24 @@ class AddressForm extends ConsumerStatefulWidget {
 class _AddressFormState extends ConsumerState<AddressForm> {
   late final TextEditingController _houseController;
   late final TextEditingController _unitController;
+  late final FocusNode _streetFocus;
   List<String> nearestStreets = [];
   List<String> nearestPlaces = [];
   List<String> nearestCities = [];
   String? street;
   String? place;
+  bool isName = false;
+  bool editingStreet = false;
 
   @override
   void initState() {
     super.initState();
     final address = widget.initialAddress ?? StreetAddress();
-    _houseController = TextEditingController(text: address.housenumber);
+    isName = address.housename != null && address.housenumber == null;
+    _houseController =
+        TextEditingController(text: address.housenumber ?? address.housename);
     _unitController = TextEditingController(text: address.unit);
+    _streetFocus = FocusNode();
     street = address.street;
     place = address.place ?? address.city;
     updateStreets();
@@ -52,6 +58,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
   dispose() {
     _houseController.dispose();
     _unitController.dispose();
+    _streetFocus.dispose();
     super.dispose();
   }
 
@@ -73,12 +80,16 @@ class _AddressFormState extends ConsumerState<AddressForm> {
     });
   }
 
+  String? get house {
+    final value = _houseController.text.trim();
+    return value.isEmpty ? null : value;
+  }
+
   notifyOnChange() {
-    final house = _houseController.text.trim();
     final unit = _unitController.text.trim();
     final address = StreetAddress(
-      housenumber: house.isEmpty ? null : house,
-      housename: widget.initialAddress?.housename,
+      housenumber: isName ? null : house,
+      housename: isName ? house : widget.initialAddress?.housename,
       unit: unit.isEmpty ? null : unit,
       street: street,
       place: nearestPlaces.isNotEmpty ? place : null,
@@ -87,6 +98,8 @@ class _AddressFormState extends ConsumerState<AddressForm> {
     setState(() {});
     widget.onChange(address);
   }
+
+  static final kHouseName = RegExp(r'^[a-z]', caseSensitive: false);
 
   @override
   Widget build(BuildContext context) {
@@ -110,20 +123,41 @@ class _AddressFormState extends ConsumerState<AddressForm> {
                               ? Colors.red
                               : null)),
             ),
-            TextFormField(
-              controller: _houseController,
-              keyboardType: editorSettings.fixNumKeyboard
-                  ? TextInputType.visiblePassword
-                  : TextInputType.numberWithOptions(signed: true),
-              autofocus: widget.autoFocus,
-              style: kFieldTextStyle,
-              decoration: const InputDecoration(hintText: '1, 89, 154A, ...'),
-              validator: (value) => value == null || value.trim().isEmpty
-                  ? loc.addressHouseNotEmpty
-                  : null,
-              onChanged: (value) {
-                notifyOnChange();
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: _houseController,
+                    keyboardType: editorSettings.fixNumKeyboard
+                        ? TextInputType.visiblePassword
+                        : TextInputType.numberWithOptions(signed: true),
+                    autofocus: widget.autoFocus,
+                    style: kFieldTextStyle,
+                    decoration:
+                        const InputDecoration(hintText: '1, 89, 154A, ...'),
+                    validator: (value) => value == null || value.trim().isEmpty
+                        ? loc.addressHouseNotEmpty
+                        : null,
+                    onChanged: (value) {
+                      notifyOnChange();
+                    },
+                  ),
+                ),
+                if (isName ||
+                    ((house?.length ?? 0) >= 3 &&
+                        kHouseName.hasMatch(house ?? ''))) ...[
+                  Text('name?', style: kFieldTextStyle),
+                  Switch(
+                    value: isName,
+                    onChanged: (value) {
+                      setState(() {
+                        isName = value;
+                      });
+                      notifyOnChange();
+                    },
+                  ),
+                ],
+              ],
             ),
           ],
         ),
@@ -144,29 +178,47 @@ class _AddressFormState extends ConsumerState<AddressForm> {
             ),
           ],
         ),
-        if (nearestStreets.isNotEmpty)
-          TableRow(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: Text(loc.addressStreet,
-                    style: kFieldTextStyle.copyWith(
-                        color: _houseController.text.trim().isNotEmpty &&
-                                street == null
-                            ? Colors.red
-                            : null)),
-              ),
+        TableRow(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: Text(loc.addressStreet,
+                  style: kFieldTextStyle.copyWith(
+                      color: _houseController.text.trim().isNotEmpty &&
+                              street == null
+                          ? Colors.red
+                          : null)),
+            ),
+            if (!editingStreet)
               RadioField(
-                  options: nearestStreets,
+                  options: street != null
+                      ? nearestStreets
+                      : nearestStreets + [kManualOption],
                   value: street,
                   onChange: (value) {
                     setState(() {
-                      street = value;
+                      if (value == kManualOption) {
+                        street = null;
+                        editingStreet = true;
+                        _streetFocus.requestFocus();
+                      } else {
+                        street = value;
+                      }
                     });
-                    notifyOnChange();
+                    if (value != kManualOption) notifyOnChange();
                   }),
-            ],
-          ),
+            if (editingStreet)
+              TextFormField(
+                focusNode: _streetFocus,
+                style: kFieldTextStyle,
+                textCapitalization: TextCapitalization.sentences,
+                onChanged: (value) {
+                  street = value;
+                  notifyOnChange();
+                },
+              ),
+          ],
+        ),
         if (nearestPlaces.isNotEmpty || nearestCities.isNotEmpty)
           TableRow(
             children: [

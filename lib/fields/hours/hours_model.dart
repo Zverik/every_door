@@ -67,6 +67,9 @@ class HoursInterval implements Comparable {
 
   bool get isAllDay => start.is2400 && end.is2400;
   bool get crossesMidnight => start > end || end > StringTime('24:00');
+  bool get isEmpty => start == end;
+  bool get isNotEmpty => start != end;
+  bool get overMidnight => start > end;
 
   @override
   String toString() => '$start-$end';
@@ -86,6 +89,13 @@ class HoursInterval implements Comparable {
     if (value == 0) value = end.compareTo(other.end);
     return value;
   }
+
+  // TODO: 24h rollover
+  bool contains(other) => other.start >= start && other.end <= end;
+  // TODO: 24h rollover
+  bool intersects(other) =>
+      (other.start <= end && other.end >= start) ||
+      (other.end >= start && other.start <= end);
 }
 
 class HoursFragment implements Comparable {
