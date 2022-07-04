@@ -264,20 +264,44 @@
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
-  "settingsViewLog": "System log",
-  "@settingsViewLog": {
-    "description": "Button title to open the log view page."
+  "settingsSystem": "System",
+  "@settingsSystem": {
+    "description": "Settings section for System settings."
+  },
+  "settingsUseGooglePositioning": "Use Google-enhanced Positioning",
+  "@settingsUseGooglePositioning": {
+    "description": "Settings switch to enable Google enhanced geolocation."
   },
   "settingsAbout": "About",
   "@settingsAbout": {
-    "description": "Title for the About section in settings"
+    "description": "Title for the About section in settings."
   },
-  "settingsVersionHistory": "Version history",
-  "@settingsVersionHistory": {
+  "aboutVersion": "About {appTitle} v{appVersion}",
+  "@aboutVersion": {
+    "description": "Button to open about page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      },
+      "appVersion": {
+        "type": "String",
+        "description": "Installed app version.",
+        "example": "0.5.0"
+      }
+    }
+  },
+  "aboutViewLog": "System log",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "Version history",
+  "@aboutVersionHistory": {
     "description": "Button title to open GitHub releases page."
   },
-  "settingsInstalledVersion": "Installed version: {version}",
-  "@settingsInstalledVersion": {
+  "aboutInstalledVersion": "Installed version: v{version}",
+  "@aboutInstalledVersion": {
     "description": "Button description for installed app version.",
     "placeholders": {
       "version": {
@@ -287,33 +311,52 @@
       }
     }
   },
-  "settingsProjectWebsite": "Project website",
-  "@settingsProjectWebsite": {
+  "aboutProjectWebsite": "Project website",
+  "@aboutProjectWebsite": {
     "description": "Button title to open the every-door.app website."
   },
-  "settingsSourceCode": "Source code",
-  "@settingsSourceCode": {
+  "aboutSourceCode": "Source code",
+  "@aboutSourceCode": {
     "description": "Button title to open the repository on GitHub."
   },
-  "settingsOnGitHub": "on GitHub",
-  "@settingsOnGitHub": {
+  "aboutOnGitHub": "on GitHub",
+  "@aboutOnGitHub": {
     "description": "Button description to indicate a link to GitHub."
   },
-  "settingsLicense": "License",
-  "@settingsLicense": {
+  "aboutLicense": "License",
+  "@aboutLicense": {
     "description": "Button title to open the app's license on GitHub."
   },
-  "settingsReportIssue": "Report an issue",
-  "@settingsReportIssue": {
+  "aboutHelpImprove": "Help improve {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Report an issue",
+  "@aboutReportIssue": {
     "description" : "Button title to open the app's GitHub issue page."
   },
-  "settingsHelpTranslate": "Help translate",
-  "@settingsHelpTranslate": {
+  "aboutHelpTranslate": "Help translate",
+  "@aboutHelpTranslate": {
     "description": "Button title to open the app's Weblate page."
   },
-  "settingsOnWeblate": "on Weblate",
-  "@settingsOnWeblate": {
+  "aboutOnWeblate": "on Weblate",
+  "@aboutOnWeblate": {
     "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQs": "FAQs",
+  "@aboutFAQs": {
+    "description": "Title for the FAQs section on the About page."
+  },
+  "aboutLinks": "Links",
+  "@aboutLinks": {
+  "description": "Title for the links section on the About page."
   },
   "accountTitle": "OpenStreetMap Account",
   "@accountTitle": {
@@ -398,7 +441,7 @@
   },
   "changesUploadFailedTitle": "Upload Failed",
   "@changesUploadFailedTitle": {
-    "descripton": "Title for the notification about a failed changes upload."
+    "description": "Title for the notification about a failed changes upload."
   },
   "changesDeletedChange": "Deleted {change}",
   "@changesDeletedChange": {
