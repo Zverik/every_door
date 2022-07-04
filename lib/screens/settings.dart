@@ -181,9 +181,9 @@ class SettingsPage extends ConsumerWidget {
             ],
           ),
           if (defaultTargetPlatform == TargetPlatform.android)
-          SettingsSection(
-            title: Text(loc.settingsSystem),
-            tiles: [
+            SettingsSection(
+              title: Text(loc.settingsSystem),
+              tiles: [
                 SettingsTile.switchTile(
                   title: Text(loc.settingsUseGooglePositioning),
                   initialValue: !forceLocation,
@@ -193,8 +193,8 @@ class SettingsPage extends ConsumerWidget {
                         .set(!forceLocation);
                   },
                 ),
-            ],
-          ),
+              ],
+            ),
           SettingsSection(
             title: Text(loc.settingsAbout),
             tiles: [
