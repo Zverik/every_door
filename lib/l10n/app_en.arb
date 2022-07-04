@@ -264,6 +264,57 @@
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
+  "settingsViewLog": "System log",
+  "@settingsViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "settingsAbout": "About",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings"
+  },
+  "settingsVersionHistory": "Version history",
+  "@settingsVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "settingsInstalledVersion": "Installed version: {version}",
+  "@settingsInstalledVersion": {
+    "description": "Button description for installed app version.",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "description": "Installed app version.",
+        "example": "0.5.0"
+      }
+    }
+  },
+  "settingsProjectWebsite": "Project website",
+  "@settingsProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "settingsSourceCode": "Source code",
+  "@settingsSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "settingsOnGitHub": "on GitHub",
+  "@settingsOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "settingsLicense": "License",
+  "@settingsLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "settingsReportIssue": "Report an issue",
+  "@settingsReportIssue": {
+    "description" : "Button title to open the app's GitHub issue page."
+  },
+  "settingsHelpTranslate": "Help translate",
+  "@settingsHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "settingsOnWeblate": "on Weblate",
+  "@settingsOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
   "accountTitle": "OpenStreetMap Account",
   "@accountTitle": {
     "description": "Title for the account page."
