@@ -11,6 +11,20 @@ class FAQ {
   final String question;
   final String answer;
   const FAQ(this.question, this.answer);
+
+  Widget toTile() {
+    return ExpansionTile(
+      title: Text(question),
+      childrenPadding: EdgeInsets.only(bottom: 22, left: 22, right: 22),
+      tilePadding: EdgeInsets.symmetric(horizontal: 22),
+      children: <Widget>[
+        MarkdownBody(
+            onTapLink: (text, href, title) => launchUrl(Uri.parse(href!),
+                mode: LaunchMode.externalApplication),
+            data: answer)
+      ],
+    );
+  }
 }
 
 const faqs = <FAQ>[
@@ -177,26 +191,10 @@ class _AboutPageState extends ConsumerState<AboutPage> {
             tiles: [
               CustomSettingsTile(
                 child: Padding(
-                    padding: EdgeInsets.only(top: 5),
-                    child: Column(
-                      children: <Widget>[
-                        for (var faq in faqs)
-                          ExpansionTile(
-                            title: Text(faq.question),
-                            childrenPadding: EdgeInsets.only(
-                                bottom: 22, left: 22, right: 22),
-                            tilePadding: EdgeInsets.symmetric(horizontal: 22),
-                            children: <Widget>[
-                              MarkdownBody(
-                                  onTapLink: (text, href, title) {
-                                    launchUrl(Uri.parse(href!),
-                                        mode: LaunchMode.externalApplication);
-                                  },
-                                  data: faq.answer)
-                            ],
-                          ),
-                      ],
-                    ),
+                  padding: EdgeInsets.only(top: 5),
+                  child: Column(
+                    children: <Widget>[for (var faq in faqs) faq.toTile()],
+                  ),
                 ),
               ),
             ],
