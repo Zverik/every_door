@@ -443,5 +443,225 @@
   "enableGPS": "Увімкніть GPS",
   "@enableGPS": {
     "description": "Title of the alert for enabling location services."
+  },
+  "tileNothingAround": "Немає точок в радіусі {distance} метрів.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "tileDragTheMap": "Будь ласка перейдіть в інше місце, посуньте мапу, або додайте точки.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Будь ласка перейдіть в інше місце, додайте точку або змініть фільтри.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "loadingPresets": "Завантаження шаблонів…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "filterNonConfirmed": "Тільки непідтверджені",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "editorLoadingPreset": "Завантажую шаблон…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorRestoreMessage": "{amenity} не працює. Бажайте позначити як працюючий?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "settingsUploads": "Зміни для відправки",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "changesUploadedMessage": "Відправлено {changes} до API.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "settingsPreferContact": "Використовувати префікс \"contact:\"",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "accountChangesets": "Зміни",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountUnreadMail": "Непрочитаних листів",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesUploadedTitle": "Відправлено",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesPurgeTitle": "Відмінити зміни?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesPurgeMessage": "Видалити всі зміни та відновити вихідні дані?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "changesUploadFailedTitle": "Помилка відправлення",
+  "@changesUploadFailedTitle": {
+    "descripton": "Title for the notification about a failed changes upload."
+  },
+  "changesDeletedChange": "Видалено {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "fieldHoursAddFragment": "Додати розклад",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldComboChoose": "обрати",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldComboEmpty": "нема",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldCardsAccepted": "приймають",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "ніт",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldFloorNew": "Новий поверх",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldCheckboxYes": "так",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "ні",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorFloorDesc": "Поверх, як написано у вказівниках та в ліфтах",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "Номер поверху починаючи з 0 для рівня землі",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldFloorShouldBeNumber": "Введіть число",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldFloorEmpty": "Для вибору поверха вкажіть адресу.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldPhoneWrong": "Невірний формат телефону",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "messageNoData": "Натисніть для завантаження даних",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "Дані застаріні. Натисніть для оновлення",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "fieldAddressTap": "Виберіть адресу",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "buttonYes": "Так",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "enableLocation": "Увімкнути геолокацію",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "buttonNo": "Ні",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingX": "Будинок {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "enableLocationMessage": "Будь ласка дозвольте застосунку доступ до геолокації у налаштуваннях.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "addressX": "Адреса {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingLevels": "Поверхів",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Поверхів у даху",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "Форма даху",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "addressUnitOptional": "не обовʼязково",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressPlace": "Місто",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "entranceX": "Вхід {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
   }
 }
