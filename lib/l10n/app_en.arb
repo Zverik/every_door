@@ -264,33 +264,9 @@
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
-  "settingsSystem": "System",
-  "@settingsSystem": {
-    "description": "Settings section for System settings."
-  },
-  "settingsUseGooglePositioning": "Use Google-enhanced Positioning",
-  "@settingsUseGooglePositioning": {
-    "description": "Settings switch to enable Google enhanced geolocation."
-  },
   "settingsAbout": "About",
   "@settingsAbout": {
     "description": "Title for the About section in settings."
-  },
-  "aboutVersion": "About {appTitle} v{appVersion}",
-  "@aboutVersion": {
-    "description": "Button to open about page.",
-    "placeholders": {
-      "appTitle": {
-        "type": "String",
-        "description": "Name of app.",
-        "example": "Every Door"
-      },
-      "appVersion": {
-        "type": "String",
-        "description": "Installed app version.",
-        "example": "0.5.0"
-      }
-    }
   },
   "aboutViewLog": "System log",
   "@aboutViewLog": {
@@ -300,16 +276,9 @@
   "@aboutVersionHistory": {
     "description": "Button title to open GitHub releases page."
   },
-  "aboutInstalledVersion": "Installed version: v{version}",
+  "aboutInstalledVersion": "Installed version",
   "@aboutInstalledVersion": {
-    "description": "Button description for installed app version.",
-    "placeholders": {
-      "version": {
-        "type": "String",
-        "description": "Installed app version.",
-        "example": "0.5.0"
-      }
-    }
+    "description": "Button description for installed app version."
   },
   "aboutProjectWebsite": "Project website",
   "@aboutProjectWebsite": {
@@ -327,16 +296,9 @@
   "@aboutLicense": {
     "description": "Button title to open the app's license on GitHub."
   },
-  "aboutHelpImprove": "Help improve {appTitle}",
+  "aboutHelpImprove": "Help improve",
   "@aboutHelpImprove": {
-    "description": "Title for the Help improve section on the About page.",
-    "placeholders": {
-      "appTitle": {
-        "type": "String",
-        "description": "Name of app.",
-        "example": "Every Door"
-      }
-    }
+    "description": "Title for the Help improve section on the About page."
   },
   "aboutReportIssue": "Report an issue",
   "@aboutReportIssue": {
@@ -350,9 +312,9 @@
   "@aboutOnWeblate": {
     "description": "Button description to indicate a link to Weblate."
   },
-  "aboutFAQs": "FAQs",
-  "@aboutFAQs": {
-    "description": "Title for the FAQs section on the About page."
+  "aboutFAQ": "FAQ",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
   },
   "aboutLinks": "Links",
   "@aboutLinks": {

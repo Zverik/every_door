@@ -15,8 +15,8 @@ class FAQ {
   Widget toTile() {
     return ExpansionTile(
       title: Text(question),
-      childrenPadding: EdgeInsets.only(bottom: 22, left: 22, right: 22),
-      tilePadding: EdgeInsets.symmetric(horizontal: 22),
+      childrenPadding: EdgeInsets.only(bottom: 22, left: 24, right: 24),
+      tilePadding: EdgeInsets.symmetric(horizontal: 24),
       children: <Widget>[
         MarkdownBody(
             onTapLink: (text, href, title) => launchUrl(Uri.parse(href!),
@@ -102,13 +102,13 @@ class _AboutPageState extends ConsumerState<AboutPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(loc.aboutVersion(kAppTitle, kAppVersion)),
+        title: Text('${loc.settingsAbout} $kAppTitle $kAppVersion'),
       ),
       body: SettingsList(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0),
         sections: [
           SettingsSection(
-            title: Text(loc.aboutHelpImprove(kAppTitle)),
+            title: Text('${loc.aboutHelpImprove} $kAppTitle'),
             tiles: [
               SettingsTile(
                 title: Text(loc.aboutReportIssue),
@@ -148,7 +148,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
             tiles: [
               SettingsTile(
                 title: Text(loc.aboutVersionHistory),
-                description: Text(loc.aboutInstalledVersion(kAppVersion)),
+                description: Text('${loc.aboutInstalledVersion}: $kAppVersion'),
                 trailing: Icon(Icons.exit_to_app),
                 onPressed: (context) {
                   launchUrl(
@@ -187,7 +187,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
             ],
           ),
           SettingsSection(
-            title: Text(loc.aboutFAQs),
+            title: Text(loc.aboutFAQ),
             tiles: [
               CustomSettingsTile(
                 child: Padding(

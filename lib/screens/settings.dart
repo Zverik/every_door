@@ -182,10 +182,10 @@ class SettingsPage extends ConsumerWidget {
           ),
           if (defaultTargetPlatform == TargetPlatform.android)
             SettingsSection(
-              title: Text(loc.settingsSystem),
+              title: Text('System'),
               tiles: [
                 SettingsTile.switchTile(
-                  title: Text(loc.settingsUseGooglePositioning),
+                  title: Text('Use Google-enhanced Positioning'),
                   initialValue: !forceLocation,
                   onToggle: (bool value) {
                     ref
@@ -199,7 +199,7 @@ class SettingsPage extends ConsumerWidget {
             title: Text(loc.settingsAbout),
             tiles: [
               SettingsTile(
-                title: Text(loc.aboutVersion(kAppTitle, kAppVersion)),
+                title: Text('${loc.settingsAbout} $kAppTitle $kAppVersion'),
                 trailing: Icon(Icons.navigate_next),
                 onPressed: (context) {
                   Navigator.push(
