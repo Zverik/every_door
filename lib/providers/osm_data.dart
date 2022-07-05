@@ -231,8 +231,8 @@ class OsmDataHelper extends ChangeNotifier {
       if (address == null ||
           (addr.isEmpty && address.isEmpty) ||
           (addr == address)) {
-        final floor = Floor.fromTags(tags);
-        if (floor.isNotEmpty) floors.add(floor);
+        final newFloors = MultiFloor.fromTags(tags);
+        floors.addAll(newFloors.floors);
       }
     }
     // Floor.collapse(floors);

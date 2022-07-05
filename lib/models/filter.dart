@@ -38,7 +38,8 @@ class PoiFilter {
     final tags = amenity.getFullTags();
     bool matchesAddr =
         address == null || address == StreetAddress.fromTags(tags);
-    bool matchesFloor = floor == null || floor == Floor.fromTags(tags);
+    final floors = MultiFloor.fromTags(tags);
+    bool matchesFloor = floor == null || floors.floors.contains(floor);
     return matchesAddr && matchesFloor;
   }
 

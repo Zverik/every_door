@@ -11,6 +11,7 @@ _Unreleased_
 * Option to type a street name by hand.
 * House names support.
 * `addr:city` was removed when editing an address.
+* Support for multiple floors for an amenity.
 
 ## 0.6
 

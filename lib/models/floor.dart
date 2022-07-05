@@ -9,37 +9,15 @@ class Floor implements Comparable<Floor> {
 
   static const empty = Floor(level: null, floor: null);
 
-  factory Floor.fromTags(Map<String, String> tags) {
-    final levelValue = tags['level'];
-    double? level = levelValue == null ? null : double.tryParse(levelValue);
-    return Floor(level: level, floor: tags['addr:floor']);
-  }
-
   Floor makeDuplicate() => Floor(level: level, floor: floor, duplicate: true);
 
   bool get isEmpty => level == null && floor == null;
   bool get isNotEmpty => !isEmpty;
   bool get isComplete => level != null && floor != null;
 
-  String? get levelStr {
-    if (level == null) return null;
-    int intLevel = level!.truncate();
-    return intLevel == level ? intLevel.toString() : level.toString();
-  }
-
-  setTags(OsmChange element) {
-    if (isEmpty) return;
-    element['level'] = levelStr;
-    element['addr:floor'] = floor;
-  }
-
-  static clearTags(OsmChange element) {
-    element.removeTag('level');
-    element.removeTag('addr:floor');
-  }
-
   @override
-  bool operator ==(Object other) => other is Floor && level == other.level && floor == other.floor;
+  bool operator ==(Object other) =>
+      other is Floor && level == other.level && floor == other.floor;
 
   @override
   int get hashCode => (level ?? -100.123).hashCode + (floor ?? '').hashCode;
@@ -47,7 +25,17 @@ class Floor implements Comparable<Floor> {
   @override
   String toString() => 'Floor($floor/$level)';
 
-  String get string => duplicate ? '$floor/$levelStr' : (floor != null ? floor! + (level == null ? '/' : '') : '/$levelStr');
+  String get _levelStr {
+    if (level == null) return '';
+    int intLevel = level!.truncate();
+    return intLevel == level ? intLevel.toString() : level.toString();
+  }
+
+  String get string {
+    if (isEmpty) return '';
+    if (duplicate) return '${floor ?? ""}/$_levelStr';
+    return floor != null ? floor! + (level == null ? '/' : '') : '/$_levelStr';
+  }
 
   @override
   int compareTo(Floor other) {
@@ -56,8 +44,7 @@ class Floor implements Comparable<Floor> {
     if (floor != null && other.floor != null) {
       final dFloor = double.tryParse(floor!);
       final odFloor = double.tryParse(other.floor!);
-      if (dFloor != null && odFloor != null)
-        return dFloor.compareTo(odFloor);
+      if (dFloor != null && odFloor != null) return dFloor.compareTo(odFloor);
       return floor!.compareTo(other.floor!);
     }
     if (level != null) return -1;
@@ -69,8 +56,14 @@ class Floor implements Comparable<Floor> {
 
   /// Removes incomplete duplicates.
   static collapse(Set<Floor> floors) {
-    final compLevels = floors.where((element) => element.isComplete).map((e) => e.level!).toSet();
-    final compFloors = floors.where((element) => element.isComplete).map((e) => e.floor!).toSet();
+    final compLevels = floors
+        .where((element) => element.isComplete)
+        .map((e) => e.level!)
+        .toSet();
+    final compFloors = floors
+        .where((element) => element.isComplete)
+        .map((e) => e.floor!)
+        .toSet();
 
     // Remove incomplete floors where a complete alternative exists.
     floors.removeWhere((floor) {
@@ -93,5 +86,59 @@ class Floor implements Comparable<Floor> {
     final result = set.toList();
     result.sort();
     return result;
+  }
+}
+
+class MultiFloor {
+  List<Floor> floors;
+
+  MultiFloor(this.floors);
+
+  bool get isEmpty => floors.isEmpty;
+  bool get isNotEmpty => floors.isNotEmpty;
+  List<String> get strings => floors.map((f) => f.string).toList();
+
+  factory MultiFloor.fromTags(Map<String, String> tags) {
+    final levelValue = tags['level'];
+    final List<double?> levelParts = levelValue == null
+        ? []
+        : levelValue.split(';').map((s) => double.tryParse(s.trim())).toList();
+
+    final floorValue = tags['addr:floor'];
+    final List<String?> floorParts = floorValue == null
+        ? []
+        : List<String?>.from(floorValue.split(';').map((v) => v.trim()));
+    for (int i = 0; i < floorParts.length; i++)
+      if (floorParts[i]?.isEmpty ?? false) floorParts[i] = null;
+
+    final count = levelParts.isNotEmpty ? levelParts.length : floorParts.length;
+    if (count == 0) return MultiFloor([]);
+
+    return MultiFloor(Iterable.generate(
+      count,
+      (i) => Floor(
+        level: i >= levelParts.length ? null : levelParts[i],
+        floor: i >= floorParts.length ? null : floorParts[i],
+      ),
+    ).where((element) => element.isNotEmpty).toList());
+  }
+
+  static final _kTailSemicolons = RegExp(r';+$');
+
+  setTags(OsmChange element) {
+    if (floors.isEmpty) {
+      element.removeTag('level');
+      element.removeTag('addr:floor');
+    } else {
+      floors.sort();
+      element['level'] = floors
+          .map((f) => f._levelStr)
+          .join(';')
+          .replaceFirst(_kTailSemicolons, '');
+      element['addr:floor'] = floors
+          .map((f) => f.floor ?? '')
+          .join(';')
+          .replaceFirst(_kTailSemicolons, '');
+    }
   }
 }

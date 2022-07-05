@@ -66,9 +66,10 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
       Logger('FloorInputField').warning('Error getting floors', e);
       floors = [];
     }
-    final currentFloor = Floor.fromTags(tags);
-    if (currentFloor.isNotEmpty && !floors.contains(currentFloor)) {
-      floors.add(currentFloor);
+    final currentFloors = MultiFloor.fromTags(tags);
+    if (currentFloors.isNotEmpty) {
+      for (final f in currentFloors.floors)
+        if (!floors.contains(f)) floors.add(f);
       floors.sort();
     }
     if (mounted) {
@@ -100,36 +101,41 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
 
     if (result == null || result.length != 2) return;
     if (result.every((value) => value.trim().isEmpty)) return;
-    
+
     final floor = Floor(
       level: result[1].isEmpty ? null : double.parse(result[1].trim()),
       floor: result[0].isEmpty ? null : result[0].trim(),
     );
+
     setState(() {
-      floor.setTags(widget.element);
+      final current = MultiFloor.fromTags(widget.element.getFullTags());
+      if (!current.floors.contains(floor)) {
+        current.floors.add(floor);
+        current.setTags(widget.element);
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final current = Floor.fromTags(widget.element.getFullTags());
+    final current = MultiFloor.fromTags(widget.element.getFullTags());
     final options = floors.map((e) => e.string).toList();
+    final optionMap = {for (final f in floors) f.string: f};
     if (current.isEmpty) options.add(kManualOption);
 
     return RadioField(
       options: options,
-      value: current.isEmpty ? null : current.string,
-      onChange: (value) {
-        if (value == null) {
-          setState(() {
-            Floor.clearTags(widget.element);
-          });
-        } else if (value == kManualOption) {
+      values: current.strings,
+      multi: true,
+      onMultiChange: (value) {
+        if (value.contains(kManualOption)) {
           addFloor(context);
         } else {
-          final addr = floors.firstWhere((element) => element.string == value);
+          final newFloors =
+              MultiFloor(value.map((v) => optionMap[v]!).toList());
           setState(() {
-            addr.setTags(widget.element);
+            // It clears the tags if addr is empty
+            newFloors.setTags(widget.element);
           });
         }
       },

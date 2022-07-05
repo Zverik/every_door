@@ -510,30 +510,31 @@ class TimeDefaults {
     defaultStartTimes = _addFromAround(
       kInitialStartTimes.map((s) => StringTime(s)),
       starts.mostOccurentItems(cutoff: 2).map((s) => StringTime(s)),
-      8,
+      9,
     );
     defaultEndTimes = _addFromAround(
       kInitialEndTimes.map((s) => StringTime(s)),
       ends.mostOccurentItems(cutoff: 2).map((s) => StringTime(s)),
-      8,
+      9,
     );
     defaultBreaks = _addFromAround(
       kInitialBreaks.map((s) => HoursInterval.parse(s)),
       breaks.mostOccurentItems(cutoff: 2).map((s) => HoursInterval.parse(s)),
-      8,
+      4,
     );
   }
 
   List<T> _addFromAround<T>(
-      Iterable<T> base, Iterable<T> around, int baseCount) {
+      Iterable<T> base, Iterable<T> around, int targetCount, [int? aroundCount]) {
+    aroundCount ??= (targetCount / 4).ceil();
     final timesToAdd = base
-        .take(baseCount)
+        .take(targetCount - aroundCount)
         .followedBy(around)
-        .followedBy(base.skip(baseCount));
+        .followedBy(base.skip(targetCount - aroundCount));
     final resultSet = <T>{};
     for (final item in timesToAdd) {
       resultSet.add(item);
-      if (resultSet.length >= base.length) break;
+      if (resultSet.length >= targetCount) break;
     }
     final result = List.of(resultSet);
     result.sort();

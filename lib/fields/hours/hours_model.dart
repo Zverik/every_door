@@ -8,6 +8,9 @@ import 'days_range.dart';
 class StringTime implements Comparable {
   late final String _time;
 
+  static final st0000 = StringTime('00:00');
+  static final st2400 = StringTime('24:00');
+
   StringTime(String time) {
     final pos = time.indexOf(':');
     if (!((time.length == 4 && pos == 1) || (time.length == 5 && pos == 2)))
@@ -16,10 +19,14 @@ class StringTime implements Comparable {
   }
 
   bool get is2400 => _time == '23:59' || _time == '00:00' || _time == '24:00';
-  StringTime fix_2400() => is2400 ? StringTime('24:00') : this;
+  StringTime fix_2400() => is2400 ? st2400 : this;
   bool get isRound => _time.endsWith(':00');
   int get hour => int.parse(_time.substring(0, 2));
   int get minute => int.parse(_time.substring(3));
+
+  StringTime get normalize => this <= st2400
+      ? this
+      : StringTime('${(hour - 24).toString()}${_time.substring(2)}');
 
   @override
   String toString() => _time;
@@ -49,8 +56,8 @@ class HoursInterval implements Comparable {
         end = StringTime(end).fix_2400();
 
   HoursInterval.full()
-      : start = StringTime('00:00'),
-        end = StringTime('24:00');
+      : start = StringTime.st0000,
+        end = StringTime.st2400;
 
   static final kReInterval = RegExp(r'(\d?\d:\d\d)\s*-\s*(\d?\d:\d\d)');
 
@@ -66,10 +73,9 @@ class HoursInterval implements Comparable {
   }
 
   bool get isAllDay => start.is2400 && end.is2400;
-  bool get crossesMidnight => start > end || end > StringTime('24:00');
+  bool get crossesMidnight => start > end || end > StringTime.st2400;
   bool get isEmpty => start == end;
   bool get isNotEmpty => start != end;
-  bool get overMidnight => start > end;
 
   @override
   String toString() => '$start-$end';
@@ -90,12 +96,31 @@ class HoursInterval implements Comparable {
     return value;
   }
 
-  // TODO: 24h rollover
-  bool contains(other) => other.start >= start && other.end <= end;
-  // TODO: 24h rollover
-  bool intersects(other) =>
-      (other.start <= end && other.end >= start) ||
-      (other.end >= start && other.start <= end);
+  List<HoursInterval> _splitAtMidnight() {
+    if (start > end)
+      return [
+        HoursInterval(StringTime.st0000, end),
+        HoursInterval(start, StringTime.st2400),
+      ];
+    if (end > StringTime('24:00'))
+      return [
+        HoursInterval(start, StringTime.st2400),
+        HoursInterval(StringTime.st0000, end.normalize),
+      ];
+    return [this];
+  }
+
+  bool contains(HoursInterval other) {
+    final parts = _splitAtMidnight();
+    return other._splitAtMidnight().every((part) =>
+        parts.any((p2) => part.start >= p2.start && part.end <= p2.end));
+  }
+
+  bool intersects(other) {
+    final parts = _splitAtMidnight();
+    return other._splitAtMidnight().any((part) =>
+        parts.any((p2) => (part.start < p2.end && part.end > p2.start)));
+  }
 }
 
 class HoursFragment implements Comparable {
