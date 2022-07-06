@@ -8,10 +8,10 @@ import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
+import 'package:every_door/screens/settings/about.dart';
 import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/imagery.dart';
-import 'package:every_door/screens/settings/log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
@@ -195,33 +195,22 @@ class SettingsPage extends ConsumerWidget {
                 ),
               ],
             ),
-          VersionSection(),
-        ],
-      ),
-    );
-  }
-}
-
-class VersionSection extends AbstractSettingsSection {
-  const VersionSection({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: Center(
-        child: GestureDetector(
-          child: Text(
-            'Every Door $kAppVersion',
-            style: TextStyle(color: Colors.grey, fontSize: 12.0),
+          SettingsSection(
+            title: Text(loc.settingsAbout),
+            tiles: [
+              SettingsTile(
+                title: Text('${loc.settingsAbout} $kAppTitle $kAppVersion'),
+                trailing: Icon(Icons.navigate_next),
+                onPressed: (context) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutPage()),
+                  );
+                },
+              ),
+            ],
           ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LogDisplayPage()),
-            );
-          },
-        ),
+        ],
       ),
     );
   }
