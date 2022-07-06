@@ -12,6 +12,7 @@ _Unreleased_
 * House names support.
 * `addr:city` was removed when editing an address.
 * Support for multiple floors for an amenity.
+* Lowercase input fields for colours and some other tags.
 
 ## 0.6
 

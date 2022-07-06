@@ -146,6 +146,17 @@ PresetField fieldFromJson(Map<String, dynamic> data,
     );
   }
 
+  const kTextLowercase = {
+    'colour',
+    'connectivity',
+    'distance',
+    'duration',
+    'geyser:height',
+    'roof:colour',
+    'vhf',
+    'water_tank:volume',
+  };
+
   // List of types: https://github.com/ideditor/schema-builder#type
   String typ = data['typ'] ?? 'text';
   if (data['name'] == 'ref') typ = 'number'; // Patch some refs to be numbers
@@ -158,6 +169,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         placeholder: placeholder,
         prerequisite: prerequisite,
         maxLines: typ == 'textarea' ? 4 : null,
+        capitalize: !kTextLowercase.contains(key),
       );
     case 'number':
       return TextPresetField(
