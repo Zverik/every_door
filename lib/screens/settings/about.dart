@@ -108,7 +108,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
         contentPadding: EdgeInsets.symmetric(vertical: 10.0),
         sections: [
           SettingsSection(
-            title: Text('${loc.aboutHelpImprove} $kAppTitle'),
+            title: Text(loc.aboutHelpImprove(kAppTitle)),
             tiles: [
               SettingsTile(
                 title: Text(loc.aboutReportIssue),

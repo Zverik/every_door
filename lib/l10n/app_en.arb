@@ -296,9 +296,16 @@
   "@aboutLicense": {
     "description": "Button title to open the app's license on GitHub."
   },
-  "aboutHelpImprove": "Help improve",
+  "aboutHelpImprove": "Help improve {appTitle}",
   "@aboutHelpImprove": {
-    "description": "Title for the Help improve section on the About page."
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
   },
   "aboutReportIssue": "Report an issue",
   "@aboutReportIssue": {
