@@ -677,5 +677,68 @@
         "example": "71"
       }
     }
+  },
+  "aboutViewLog": "Systemlog",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutProjectWebsite": "Projektets hjemmeside",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "Kildekode",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutHelpImprove": "Hjælp med at forbedre {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Rapportér et problem",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutFAQ": "FAQ",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Links",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "aboutVersionHistory": "Versionshistorik",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "settingsAbout": "Om",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutInstalledVersion": "Installeret version",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutOnGitHub": "på GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Licens",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpTranslate": "Hjælp med at oversætte",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "på Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
   }
 }
