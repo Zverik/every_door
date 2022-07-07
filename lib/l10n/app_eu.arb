@@ -677,5 +677,68 @@
   "apiStatusUploading": "Aldaketak kargatzen",
   "@apiStatusUploading": {
     "description": "Text displayed when the app is uploading data to the API."
+  },
+  "settingsAbout": "Honi buruz",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutViewLog": "Sistemaren egunkaria",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "Bertsioen historia",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "Instalatutako bertsioa",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Proiektuaren webgunea",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutOnWeblate": "Weblate webgunean",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutSourceCode": "Iturburu kodea",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "GitHub-en",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLinks": "Loturak",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "aboutReportIssue": "Arazo baten berri eman",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpImprove": "Lagundu {appTitle} hobetzen",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutFAQ": "FAQ (Maiz Egiten diren Galderak)",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLicense": "Lizentzia",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpTranslate": "Lagundu itzultzen",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
   }
 }
