@@ -677,5 +677,68 @@
         "example": "71"
       }
     }
+  },
+  "aboutViewLog": "Dzienniki systemowe",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "Historia wersji",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "Wersja zainstalowana",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Strona projektu",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "Kod źródłowy",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "na GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Licencja",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutReportIssue": "Zgłoś problem",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutOnWeblate": "na Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "Najczęstsze pytania",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "settingsAbout": "O programie",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutHelpTranslate": "Pomóż przetłumaczyć",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutHelpImprove": "Pomóż w rozwoju {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutLinks": "Odnośniki",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
   }
 }
