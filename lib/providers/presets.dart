@@ -142,20 +142,27 @@ class PresetProvider {
       bool includeNSI = true,
       Locale? locale,
       LatLng? location}) async {
+    final terms = query
+        .split(' ')
+        .where((s) => s.length >= 2)
+        .take(3)
+        .map((s) => normalizeString(s));
+    if (terms.isEmpty) return [];
+
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
     final isAreaClause = isArea ? 'where can_area = 1' : '';
+    final termsClause = terms.map((_) => 'term like ?').join(' or ');
     final sql = '''
     with $langCTE
     , found as (
-      select preset_name, max(score) as score
+      select preset_name, max(score) as score, group_concat(term) as terms
       from preset_terms
-      where term like ?
+      where ($termsClause)
       and lang in (select lang from langs)
       group by preset_name
-      order by score desc, min(length(term))
     )
-    select p.*, t.name as loc_name, lscore
+    select p.*, t.name as loc_name, lscore, terms
     from presets p
     inner join found on found.preset_name = p.name
     left join preset_tran t on t.preset_name = p.name
@@ -163,7 +170,8 @@ class PresetProvider {
     $isAreaClause
     order by score desc, lscore;
     ''';
-    final results = await _db!.rawQuery(sql, [normalizeString(query) + '%']);
+    final results = await _db!.rawQuery(sql, terms.map((t) => '$t%').toList());
+
     final presets = <Preset>[];
     if (includeNSI) {
       List<Preset> nsiResults =
@@ -179,6 +187,12 @@ class PresetProvider {
 
     final seenPresets = <String>[];
     for (final row in results) {
+      // Check that both terms are present.
+      final foundTerms = (row['terms'] as String).split(',');
+      if (!terms.every(
+          (term) => foundTerms.any((element) => element.startsWith(term))))
+        continue;
+
       if (seenPresets.contains(row['name'])) continue;
       seenPresets.add(row['name'] as String);
       presets.add(Preset.fromJson(row));

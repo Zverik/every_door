@@ -216,7 +216,7 @@ def remove_generic_terms(cur):
     preset_names = set(non_searchable_presets)
     for row in cur:
         tags = json.loads(row[1])
-        if not tags or all(v == '*' for v in tags.values()):
+        if not tags or all(v == '*' for v in tags.values()) or tags.get('amenity') == 'parking':
             preset_names.add(row[0])
 
     nq = ','.join('?' for n in preset_names)

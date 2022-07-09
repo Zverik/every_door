@@ -13,6 +13,10 @@ _Unreleased_
 * `addr:city` was removed when editing an address.
 * Support for multiple floors for an amenity.
 * Lowercase input fields for colours and some other tags.
+* New About page (thanks @GeorgeHoneywood).
+* Buildings in relations did not have the `roof:shape` chooser.
+* You can use any tags in the tags panel, not just popular.
+* Fixed multi-word query strings when searching for a preset.
 
 ## 0.6
 

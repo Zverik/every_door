@@ -138,6 +138,25 @@ inner join matches on name = preset_name and tag_count = match_count
 order by match_count desc, full_tag_count desc, match_score desc, length(name) desc, name
 """
 
+autocomplete_sql = """
+with langs (lang, lscore) as (values ('ru', 1),('ru', 2),('en', 3),('tag', 4))
+, found as (
+  select preset_name, max(score) as score, count(*) as terms, group_concat(term) as term_list
+  from preset_terms
+  where (term like 'gas%' or term like 'stat%')
+  and lang in (select lang from langs)
+  group by preset_name
+)
+select p.*, t.name as loc_name, score, lscore, term_list
+from presets p
+inner join found on found.preset_name = p.name
+left join preset_tran t on t.preset_name = p.name
+inner join langs on langs.lang = t.lang
+where terms >= 2
+order by score desc, lscore
+limit 10;
+"""
+
 conn = sqlite3.connect(sys.argv[1] if len(sys.argv) > 1 else '../assets/presets.db')
 cur = conn.cursor()
 print('Searching by tags:')
@@ -162,3 +181,8 @@ for tags in (stop_tags1, stop_tags2):
     cur.execute(stop_sql.format(tags=stop_tags1))
     for row in cur:
         print(row)
+print()
+print('Autocomplete')
+cur.execute(autocomplete_sql)
+for row in cur:
+    print(row)

@@ -110,7 +110,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     final canBeAddress = building.element?.isPoint != true; // not a node or a new element
     final levelOptions = ['1', '2'] + nearestLevels;
     levelOptions.add(kManualOption);
-    final hasParts = (building.element?.isMember ?? false) ||
+    final hasParts = // (building.element?.isMember ?? false) ||
         building['building:parts'] != null;
 
     return WillPopScope(
