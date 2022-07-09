@@ -1,4 +1,5 @@
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/offset.dart';
 import 'package:every_door/models/osm_area.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
@@ -89,6 +90,12 @@ class DatabaseHelper {
           "create table ${RoadNameRecord.kTableName} (${RoadNameRecord.kTableFields.join(', ')})");
       await database.execute(
           "create index ${RoadNameRecord.kTableName}_geohash on ${RoadNameRecord.kTableName} (geohash)");
+    }
+    if (newVersion >= 5 && oldVersion < 5) {
+      await database.execute(
+          "create table ${ImageryOffset.kTableName} (${ImageryOffset.kTableFields.join(', ')})");
+      await database.execute(
+          "create index ${ImageryOffset.kTableName}_geohash on ${ImageryOffset.kTableName} (geohash)");
     }
     // Create new table for terms and preset names?
   }

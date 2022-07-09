@@ -17,6 +17,7 @@ _Unreleased_
 * Buildings in relations did not have the `roof:shape` chooser.
 * You can use any tags in the tags panel, not just popular.
 * Fixed multi-word query strings when searching for a preset.
+* Field definitions are cached for faster loading.
 
 ## 0.6
 
