@@ -473,6 +473,10 @@ class PresetProvider {
     return result;
   }
 
+  void clearFieldCache() {
+    _fieldCache.clear();
+  }
+
   Future<List<Map<String, dynamic>>> imageryQuery(String geohash) async {
     if (!ready) await _waitUntilReady();
     const sql = """

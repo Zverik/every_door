@@ -6,6 +6,7 @@ _Unreleased_
 
 * Rewrote both the UI and the model for the `opening_hours` editor.
 * Storing last used tags only for non-amenities.
+* Storing last used tags for entrances too.
 * Removed searching for entrance-related presets.
 * Fixed losing input focus on duplicate warning.
 * Option to type a street name by hand.

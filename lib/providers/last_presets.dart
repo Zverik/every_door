@@ -15,34 +15,45 @@ class LastPresetsProvider {
 
   LastPresetsProvider(this._ref);
 
-  registerPreset(Preset preset, Map<String, String> tags) {
+  registerPreset(Preset preset, Map<String, String> tags,
+      {bool justTags = false}) {
     final mode = _ref.read(editorModeProvider);
     if (!_lastPresets.containsKey(mode)) _lastPresets[mode] = <Preset>[];
     final list = _lastPresets[mode]!;
 
     // Push the preset to the top and trim the list.
     final pos = list.indexOf(preset);
-    if (pos == 0) return;
-    if (pos > 0) list.removeAt(pos);
-    list.insert(0, preset);
-    if (list.length > kMaxLastPresets) {
-      for (int i = kMaxLastPresets; i < list.length; i++)
-        _lastTags.remove(list[i].id);
-      list.removeRange(kMaxLastPresets, list.length);
+    if (!justTags && pos != 0) {
+      if (pos > 0) list.removeAt(pos);
+      list.insert(0, preset);
+      if (list.length > kMaxLastPresets) {
+        for (int i = kMaxLastPresets; i < list.length; i++)
+          _lastTags.remove(list[i].id);
+        list.removeRange(kMaxLastPresets, list.length);
+      }
     }
 
     // Store tags, removing useless things.
     if (!isAmenityTags(tags)) {
       final Map<String, String> newTags = {};
-      const kDeleteKeys = {'check_date', 'source', 'note', 'operator'};
+      const kDeleteKeys = {
+        'check_date',
+        'source',
+        'note',
+        'operator',
+        'phone',
+        'website',
+      };
       tags.forEach((key, value) {
         if (!kDeleteKeys.contains(key) &&
             !key.startsWith('ref') &&
-            !key.startsWith('name')) {
+            !key.startsWith('name') &&
+            !key.startsWith('contact:') &&
+            !key.startsWith('addr:')) {
           newTags[key] = value;
         }
       });
-      _lastTags[preset.id] = tags;
+      _lastTags[preset.id] = newTags;
     }
   }
 

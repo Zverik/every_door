@@ -1,7 +1,9 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/address.dart';
+import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/screens/editor.dart';
 import 'package:every_door/widgets/address_form.dart';
 import 'package:every_door/widgets/radio_field.dart';
@@ -30,12 +32,24 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   bool showAddressForm = false;
   late final FocusNode _focus;
 
+  static const kEntrancePreset = Preset(
+    id: 'entrance-ed',
+    name: 'Entrance',
+    addTags: {'entrance': 'yes'},
+  );
+
   @override
   void initState() {
     super.initState();
     _focus = FocusNode();
-    entrance = widget.entrance?.copy() ??
-        OsmChange.create(tags: {'entrance': 'yes'}, location: widget.location);
+    if (widget.entrance != null) {
+      entrance = widget.entrance!.copy();
+    } else {
+      final tags =
+          ref.read(lastPresetsProvider).getTagsForPreset(kEntrancePreset) ??
+              kEntrancePreset.addTags;
+      entrance = OsmChange.create(tags: tags, location: widget.location);
+    }
 
     if (entrance['building'] == 'entrance') {
       entrance.removeTag('building');
@@ -73,6 +87,9 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
       entrance['addr:unit'] = entrance['addr:flats'];
       entrance.removeTag('addr:flats');
     }
+    ref.read(lastPresetsProvider).registerPreset(
+        kEntrancePreset, entrance.getFullTags(),
+        justTags: true);
     final changes = ref.read(changesProvider);
     changes.saveChange(entrance);
     ref.read(needMapUpdateProvider).trigger();

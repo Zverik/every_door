@@ -355,7 +355,11 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
             padding: EdgeInsets.symmetric(
               horizontal: 0.0,
-              vertical: 20.0,
+              // colorsFromLegend is an indirect way to know it's micromapping mode.
+              vertical:
+                  !leftHand && amenities.isEmpty && widget.colorsFromLegend
+                      ? 80.0
+                      : 20.0,
             ),
           ),
       ],
