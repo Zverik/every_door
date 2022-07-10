@@ -720,5 +720,76 @@
         "example": "Every Door"
       }
     }
+  },
+  "aboutHelpTranslate": "Pomagaj prevesti",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "na Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "fieldHoursSpecificDays": "Določen datum",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "loadingTooMuchData": "Počisti prenesene podatke v Nastavitvah, da bo urejevalnik hitrejši.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchDataTitle": "Preveč podatkov",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Prenesen {count} element.}, =two{Prenesena {count} elementa.}, =few{Preneseni {count} elementi.}, =other{Preneseno {count} elementov.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "aboutReportIssue": "Prijavi težavo",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "dataDownloadFailed": "Prenos ni uspel",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Prenos uspešen",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "aboutFAQ": "Pogosta vprašanja (FAQ)",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Povezave",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "fieldHoursAsText": "Kot besedilo",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursHour": "ura",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursNumberedWeekday": "»Prejšnji ponedeljek«",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursPublicHolidays": "Državni prazniki",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursClosed": "Zaprto",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursMinute": "minuta",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
   }
 }
