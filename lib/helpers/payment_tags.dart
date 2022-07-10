@@ -18,3 +18,9 @@ const kCardPaymentOptions = <String>{
   'huawei_pay', 'interac', 'line_pay', 'mipay', 'samsung_pay',
   'satispay', 'swish', 'twint',
 };
+
+const kNotCards = {
+  'cash', 'notes', 'coins', 'cheque',
+  'bitcoin', 'cryptocurrencies', 'bitcoincash', 'litecoin',
+  'none', 'others', 'app', 'sms', 'wire_transfer', 'prepaid_ticket',
+};

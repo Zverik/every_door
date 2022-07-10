@@ -19,6 +19,9 @@ _Unreleased_
 * You can use any tags in the tags panel, not just popular.
 * Fixed multi-word query strings when searching for a preset.
 * Field definitions are cached for faster loading.
+* Added indication for payment types, missing floor, and wheelchair
+  accessibility to POI tiles.
+* Moved ATM, vending machines and parcel lockers to micromapping.
 
 ## 0.6
 

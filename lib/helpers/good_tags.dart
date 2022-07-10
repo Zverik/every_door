@@ -150,6 +150,10 @@ bool isAmenityTags(Map<String, String> tags) {
       'yes',
       'chair',
       'nameplate',
+      // Not sure about these:
+      'atm',
+      'parcel_locker',
+      'vending_machine',
     };
     return !wrongAmenities.contains(v);
   } else if (k == 'tourism') {
@@ -338,6 +342,13 @@ bool isGoodTags(Map<String, String> tags) {
 bool needsCheckDate(Map<String, String> tags) {
   // Decided that only amenities need checking.
   return isAmenityTags(tags);
+}
+
+/// Whether we should display address and floor fields in the editor.
+bool needsAddress(Map<String, String> tags) {
+  if (isAmenityTags(tags)) return true;
+  const kAmenityLoc = {'atm', 'vending_machine', 'parcel_locker'};
+  return kAmenityLoc.contains(tags['amenity']);
 }
 
 /// What kind of objects should we snap this element to?

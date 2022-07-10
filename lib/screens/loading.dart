@@ -4,6 +4,7 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/osm_auth.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/browser.dart';
 import 'package:flutter/foundation.dart' show compute;
@@ -54,6 +55,9 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     if (error != null) {
       AlertController.show(loc.loadingChangesFailed, error, TypeAlert.error);
     }
+
+    // Update floors in the background.
+    ref.read(osmDataProvider).updateAddressesWithFloors();
 
     // Acquire user location.
     setState(() {

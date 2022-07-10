@@ -32,6 +32,7 @@ class OsmDataHelper extends ChangeNotifier {
   final Ref _ref;
   int _length = 0;
   int _obsoleteLength = 0;
+  Set<StreetAddress> _addressesWithFloors = {};
 
   OsmDataHelper(this._ref) {
     _updateLength();
@@ -204,6 +205,43 @@ class OsmDataHelper extends ChangeNotifier {
     return results;
   }
 
+  Future updateAddressesWithFloors() async {
+    _addressesWithFloors.clear();
+
+    final database = await _ref.read(databaseProvider).database;
+    final rows = await database.query(OsmElement.kTableName,
+        where: "tags like '%\"addr:floor\"%' or tags like '%\"level\"%'");
+    final elements = rows.map((row) => OsmElement.fromJson(row)).toList();
+
+    final changedElements = _ref
+        .read(changesProvider)
+        .all()
+        .where((element) => element['addr:housenumber'] != null)
+        .map((e) => e.toElement(newId: -1));
+    elements.addAll(changedElements);
+
+    final floors = <StreetAddress, Set<Floor>>{};
+    for (final el in elements) {
+      final addr = StreetAddress.fromTags(el.tags);
+      if (addr.isEmpty) continue;
+      final newFloors = MultiFloor.fromTags(el.tags);
+      if (newFloors.isNotEmpty) {
+        if (floors.containsKey(addr))
+          floors[addr]!.addAll(newFloors.floors);
+        else
+          floors[addr] = Set.of(newFloors.floors);
+      }
+    }
+
+    _addressesWithFloors = floors.entries
+        .where((e) => e.value.length >= 2)
+        .map((e) => e.key)
+        .toSet();
+  }
+
+  bool hasMultipleFloors(StreetAddress address) =>
+      _addressesWithFloors.contains(address);
+
   Future<List<Floor>> getFloorsAround(LatLng location,
       [StreetAddress? address]) async {
     final database = await _ref.read(databaseProvider).database;
@@ -345,9 +383,11 @@ class OsmDataHelper extends ChangeNotifier {
       where: "geohash in ($placeholders) and (tags like '%$mainKey%')",
       whereArgs: hashes,
     );
-    final elements = _wrapInChange(rows
-        .map((row) => OsmElement.fromJson(row))
-        .where((e) => e.tags[mainKey] == amenity[mainKey]), false);
+    final elements = _wrapInChange(
+        rows
+            .map((row) => OsmElement.fromJson(row))
+            .where((e) => e.tags[mainKey] == amenity[mainKey]),
+        false);
 
     // Which names are we looking for.
     final names = <String>{};
@@ -402,8 +442,7 @@ class OsmDataHelper extends ChangeNotifier {
         });
       } else {
         final v = element.tags[key];
-        if (v != null)
-          counter[v] = (counter[v] ?? 0) + 1;
+        if (v != null) counter[v] = (counter[v] ?? 0) + 1;
       }
     }
 
@@ -421,6 +460,7 @@ class OsmDataHelper extends ChangeNotifier {
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.updatingDatabase;
       await storeElements(elements, bounds);
       await _ref.read(roadNameProvider).storeNames(roadNames);
+      updateAddressesWithFloors();
       AlertController.show('Download successful',
           'Downloaded ${elements.length} amenities.', TypeAlert.success);
 

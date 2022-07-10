@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
@@ -24,6 +25,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
   String? error;
   final String databaseId;
   String? _mainKey;
+  Map<String, String>? _fullTagsCache;
   DateTime updated;
   int? newId; // Not stored: used only during uploading.
 
@@ -160,6 +162,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
   bool hasTag(String key) => this[key] != null;
 
   _updateMainKey() {
+    _fullTagsCache = null;
     _mainKey = getMainKey(getFullTags());
   }
 
@@ -180,6 +183,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
 
   uncheck() {
     newTags.remove(kCheckedKey);
+    _updateMainKey();
+    notifyListeners();
   }
 
   toggleCheck() {
@@ -375,11 +380,33 @@ class OsmChange extends ChangeNotifier implements Comparable {
       this[key] = value;
   }
 
-  bool? get acceptsCards =>
-      this['payment:visa'] == 'yes' || this['payment:mastercard'] == 'yes';
+  Map<String, bool> _getPaymentOptions() {
+    return Map<String, bool>.fromEntries(getFullTags()
+        .entries
+        .where((element) => element.key.startsWith('payment:'))
+        .map((e) =>
+            MapEntry<String, bool>(e.key.substring(8), e.value == 'yes')));
+  }
+
+  bool get hasPayment => _getPaymentOptions().isNotEmpty;
+
+  bool get acceptsCards {
+    final options = _getPaymentOptions();
+    return options.entries
+        .where((e) => !kNotCards.contains(e.key) && e.value)
+        .isNotEmpty;
+  }
+
+  bool get cashOnly {
+    if (this['payment:cards'] == 'no') return true;
+    final options = _getPaymentOptions();
+    return options.entries
+        .where((e) => !kNotCards.contains(e.key) && !e.value)
+        .isNotEmpty;
+  }
 
   bool get hasWebsite {
-    const kWebTags = <String>['website', 'instagram', 'vk'];
+    const kWebTags = <String>['website', 'instagram', 'vk', 'facebook'];
     return kWebTags.any((k) => this[k] != null || this['contact:$k'] != null);
   }
 
@@ -414,14 +441,16 @@ class OsmChange extends ChangeNotifier implements Comparable {
   /// deleted tags are removed. Set `clearDisused` to `true` to remove
   /// the `disused:` prefix from the main tag.
   Map<String, String> getFullTags([bool clearDisused = false]) {
-    final Map<String, String> result =
-        element == null ? {} : Map.of(element!.tags);
+    if (_fullTagsCache != null && !clearDisused) return _fullTagsCache!;
+
+    Map<String, String> result = element == null ? {} : Map.of(element!.tags);
     newTags.forEach((key, value) {
       if (value == null)
         result.remove(key);
       else
         result[key] = value;
     });
+    _fullTagsCache = Map.of(result);
 
     if (clearDisused) {
       final mainKey = _mainKey;

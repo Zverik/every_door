@@ -96,7 +96,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     _logger.info('Detected ($detect) preset $preset');
     if (preset!.fields.isEmpty) {
       preset = await presets.getFields(preset!, locale: locale);
-      if (isAmenityTags(amenity.getFullTags())) {
+      if (needsAddress(amenity.getFullTags())) {
         final bool needsStdFields =
             preset!.fields.length <= 1 || needsStandardFields();
         stdFields = await presets.getStandardFields(locale, needsStdFields);

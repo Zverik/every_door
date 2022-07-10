@@ -1,5 +1,7 @@
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/models/address.dart';
 import 'package:every_door/providers/editor_mode.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/screens/editor.dart';
@@ -16,6 +18,8 @@ class PoiIcons {
   static const address = '🏠';
   static const photo = '📸';
   static const hours = '🕑';
+  static const floor = '📶'; // TODO: better emoji
+  static const wheelchair = '♿';
 }
 
 class PoiTile extends ConsumerWidget {
@@ -26,7 +30,6 @@ class PoiTile extends ConsumerWidget {
 
   late final String title;
   late final String present;
-  late final String missing;
 
   PoiTile({
     this.index,
@@ -35,18 +38,25 @@ class PoiTile extends ConsumerWidget {
     this.onToggleCheck,
   }) {
     present = buildPresent();
-    missing = buildMissing();
   }
 
-  String buildMissing() {
+  String buildMissing(WidgetRef ref) {
     if (!isAmenityTags(amenity.getFullTags())) return '';
 
     List<String> missing = [];
+    if (amenity['opening_hours'] == null) missing.add(PoiIcons.hours);
+    if (!amenity.hasPayment) missing.add(PoiIcons.cards);
+    if (amenity['wheelchair'] == null) missing.add(PoiIcons.wheelchair);
     if (amenity.getContact('phone') == null) missing.add(PoiIcons.phone);
     if (!amenity.hasWebsite) missing.add(PoiIcons.url);
-    if (amenity['opening_hours'] == null) missing.add(PoiIcons.hours);
-    if (amenity['addr:housenumber'] == null) missing.add(PoiIcons.address);
-    // TODO: add more icons?
+    if (amenity['addr:housenumber'] == null &&
+        amenity['addr:housename'] == null) missing.add(PoiIcons.address);
+    if (amenity['addr:floor'] == null &&
+        amenity['level'] == null &&
+        ref
+            .read(osmDataProvider)
+            .hasMultipleFloors(StreetAddress.fromTags(amenity.getFullTags())))
+      missing.add(PoiIcons.floor);
     return missing.join();
   }
 
@@ -54,11 +64,14 @@ class PoiTile extends ConsumerWidget {
     if (!isAmenityTags(amenity.getFullTags())) return '';
 
     List<String> present = [];
+    if (amenity.acceptsCards)
+      present.add(PoiIcons.cards);
+    else if (amenity.cashOnly) present.add(PoiIcons.cash);
+
     final hours = amenity['opening_hours'];
     if (hours != null) present.add('${PoiIcons.hours}${shortHours(hours)}');
     final phone = amenity.getContact('phone');
     if (phone != null) present.add('${PoiIcons.phone}${shortPhone(phone)}');
-    // TODO: more icons
     return present.join(' ');
   }
 
@@ -79,6 +92,7 @@ class PoiTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final title =
         (index == null ? '' : index.toString() + '. ') + amenity.typeAndName;
+    final missing = buildMissing(ref);
     final loc = AppLocalizations.of(context)!;
 
     return Container(
