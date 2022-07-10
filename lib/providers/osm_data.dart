@@ -25,6 +25,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proximity_hash/proximity_hash.dart';
 import 'package:sqflite/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final osmDataProvider = ChangeNotifierProvider((ref) => OsmDataHelper(ref));
 
@@ -450,7 +451,8 @@ class OsmDataHelper extends ChangeNotifier {
     return counter;
   }
 
-  Future<List<OsmChange>> downloadMap(LatLngBounds bounds) async {
+  Future<List<OsmChange>> downloadMap(LatLngBounds bounds,
+      {AppLocalizations? loc}) async {
     _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
     try {
       final api = _ref.read(osmApiProvider);
@@ -461,8 +463,11 @@ class OsmDataHelper extends ChangeNotifier {
       await storeElements(elements, bounds);
       await _ref.read(roadNameProvider).storeNames(roadNames);
       updateAddressesWithFloors();
-      AlertController.show('Download successful',
-          'Downloaded ${elements.length} amenities.', TypeAlert.success);
+      AlertController.show(
+          loc?.dataDownloadSuccessful ?? 'Download successful',
+          loc?.dataDownloadedCount(elements.length) ??
+              'Downloaded ${elements.length} amenities.',
+          TypeAlert.success);
 
       // No need to wrap in changes, since we don't use the result anyway.
       // return _wrapInChange(elements);
@@ -472,14 +477,18 @@ class OsmDataHelper extends ChangeNotifier {
     }
   }
 
-  Future<List<OsmChange>> downloadAround(LatLng location) async {
+  Future<List<OsmChange>> downloadAround(LatLng location,
+      {AppLocalizations? loc}) async {
     try {
-      return await downloadMap(boundsFromRadius(location, kBigRadius));
+      return await downloadMap(boundsFromRadius(location, kBigRadius),
+          loc: loc);
     } on Exception {
       try {
-        return await downloadMap(boundsFromRadius(location, kSmallRadius));
+        return await downloadMap(boundsFromRadius(location, kSmallRadius),
+            loc: loc);
       } on Exception catch (e) {
-        AlertController.show('Download failed', e.toString(), TypeAlert.error);
+        AlertController.show(loc?.dataDownloadFailed ?? 'Download failed',
+            e.toString(), TypeAlert.error);
         return [];
       }
     }

@@ -147,6 +147,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   }
 
   Widget buildFragmentsEditor(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return ListView(
       controller: _scrollController,
       children: [
@@ -154,10 +155,9 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // TODO: style
               ElevatedButton(
-                // TODO: localize
-                child: Text('As text', style: TextStyle(fontSize: 20.0)),
+                child: Text(loc.fieldHoursAsText,
+                    style: TextStyle(fontSize: 20.0)),
                 onPressed: () {
                   setState(() {
                     isRaw = true;
@@ -219,10 +219,9 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // TODO: style
               ElevatedButton(
-                // TODO: localize
-                child: Text('"Last Monday"', style: TextStyle(fontSize: 20.0)),
+                child: Text(loc.fieldHoursNumberedWeekday,
+                    style: TextStyle(fontSize: 20.0)),
                 onPressed: () {
                   final newFragment =
                       HoursFragment.inactive(NumberedWeekday(0, {}));
@@ -237,8 +236,8 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
               ),
               SizedBox(width: 10.0),
               ElevatedButton(
-                // TODO: localize
-                child: Text('Specific date', style: TextStyle(fontSize: 20.0)),
+                child: Text(loc.fieldHoursSpecificDays,
+                    style: TextStyle(fontSize: 20.0)),
                 onPressed: () async {
                   final date = await SpecificDaysPanel.pickDate(context);
                   if (date != null) {

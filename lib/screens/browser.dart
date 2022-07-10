@@ -71,10 +71,11 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     }
   }
 
-  downloadAmenities() async {
+  downloadAmenities(BuildContext context) async {
     final location = ref.read(effectiveLocationProvider);
     final provider = ref.read(osmDataProvider);
-    await provider.downloadAround(location);
+    final loc = AppLocalizations.of(context)!;
+    await provider.downloadAround(location, loc: loc);
     ref.read(presetProvider).clearFieldCache();
     updateAreaStatus();
     ref.read(needMapUpdateProvider).trigger();
@@ -176,7 +177,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
           ),
         ),
         onTap: () {
-          downloadAmenities();
+          downloadAmenities(context);
         },
       );
     return null;

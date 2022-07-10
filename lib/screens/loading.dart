@@ -78,10 +78,8 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
       final prefs = await SharedPreferences.getInstance();
       if (DateTime.now().day != prefs.getInt(kPrefLastSizeWarning)) {
         await prefs.setInt(kPrefLastSizeWarning, DateTime.now().day);
-        AlertController.show(
-            'Too much data',
-            'Purge downloaded data from Settings to make the editor faster.',
-            TypeAlert.warning);
+        AlertController.show(loc.loadingTooMuchDataTitle,
+            loc.loadingTooMuchData, TypeAlert.warning);
       }
     }
 

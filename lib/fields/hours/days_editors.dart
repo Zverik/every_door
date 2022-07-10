@@ -58,15 +58,14 @@ class PublicHolidaysPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-
-    // TODO: localize and style
     return SizedBox(
       width: double.infinity,
       child: Center(
-          child: Text(
-        'Public Holidays',
-        style: TextStyle(fontSize: 30.0),
-      )),
+        child: Text(
+          loc.fieldHoursPublicHolidays,
+          style: TextStyle(fontSize: 30.0),
+        ),
+      ),
     );
   }
 }
@@ -151,13 +150,16 @@ class SpecificDaysPanel extends StatelessWidget {
         children: [
           for (final part in parts)
             Container(
-              decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(10.0)),
+              decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(10.0)),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
-                    child: Text(days.makeDatePart(part), style: kFieldTextStyle),
+                    child:
+                        Text(days.makeDatePart(part), style: kFieldTextStyle),
                   ),
                   IconButton(
                     icon: Icon(Icons.close),
@@ -181,8 +183,8 @@ class SpecificDaysPanel extends StatelessWidget {
             onPressed: () async {
               final date1 = await SpecificDaysPanel.pickDate(context);
               if (date1 == null) return;
-              final date2 =
-                  await SpecificDaysPanel.pickDate(context, start: date1.next());
+              final date2 = await SpecificDaysPanel.pickDate(context,
+                  start: date1.next());
               if (date2 == null) return;
               onChange(days.withInterval([date1, date2]));
             },

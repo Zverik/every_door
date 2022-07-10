@@ -67,7 +67,7 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
           _callOnChange(weekdays: newDays);
         }),
         SwitchListTile(
-          title: Text('Closed'), // TODO: translate
+          title: Text(loc.fieldHoursClosed),
           value: isOff,
           onChanged: (value) {
             _callOnChange(isOff: value);

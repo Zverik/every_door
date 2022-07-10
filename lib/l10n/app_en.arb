@@ -19,6 +19,29 @@
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
+  "loadingTooMuchDataTitle": "Too much data",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Purge downloaded data from Settings to make the editor faster.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Download failed",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Download successful",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Downloaded {count} element.}, =few{Downloaded {count} elements.}, =other{Downloaded {count} elements.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
   "tileNo": "no",
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
@@ -450,6 +473,26 @@
   "@fieldHoursFullDay": {
     "description": "Switch for 24/7 opening hours."
   },
+  "fieldHoursAsText": "As Text",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "\"Last Monday\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "Specific date",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Closed",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Public Holidays",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
   "fieldHoursOpens": "Opens",
   "@fieldHoursOpens": {
     "description": "Title for the interval start."
@@ -465,6 +508,14 @@
   "fieldHoursNext": "Next",
   "@fieldHoursNext": {
     "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursHour": "Hour",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minute",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
   },
   "fieldHoursAddFragment": "Add a fragment",
   "@fieldHoursAddFragment": {

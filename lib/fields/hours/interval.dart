@@ -81,7 +81,6 @@ class _ChooserIntervalFieldState extends State<ChooserIntervalField> {
         );
       } else {
         if (!editingHours) {
-          // TODO: clock icon for switching to hours-minutes chooser.
           if (_state != _ChooserState.second) {
             result = GridChooser<StringTime>(
               title: loc.fieldHoursOpens,
@@ -185,11 +184,11 @@ class _ChooserIntervalFieldState extends State<ChooserIntervalField> {
             options: [
               for (final t in timeDefaults.defaultBreaks)
                 // TODO: what if the list is empty?
-                if (widget.breakParent!.contains(t))
-                  GridChooserItem(
-                    value: t,
-                    label: t.toString(),
-                  ),
+                // if (widget.breakParent!.contains(t))
+                GridChooserItem(
+                  value: t,
+                  label: t.toString(),
+                ),
             ],
             onChoose: (value) {
               setState(() {
@@ -330,8 +329,7 @@ class _HoursMinutesChooserState extends State<HoursMinutesChooser> {
     }
 
     final loc = AppLocalizations.of(context)!;
-    // TODO: localize
-    final localTitle = hour == null ? 'Hour' : '$hour: Minute';
+    final localTitle = hour == null ? loc.fieldHoursHour : '$hour: ${loc.fieldHoursMinute}';
     return GridChooser<String>(
       title: '${widget.title} $localTitle'.trimLeft(),
       columns: 4,
@@ -371,7 +369,6 @@ class GridChooser<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: adjust font size of items
     final rows = transpose ? columns : (options.length / columns).ceil();
     final double baseSize = !big ? 14.0 : 18.0;
     return Column(
@@ -525,7 +522,8 @@ class TimeDefaults {
   }
 
   List<T> _addFromAround<T>(
-      Iterable<T> base, Iterable<T> around, int targetCount, [int? aroundCount]) {
+      Iterable<T> base, Iterable<T> around, int targetCount,
+      [int? aroundCount]) {
     aroundCount ??= (targetCount / 4).ceil();
     final timesToAdd = base
         .take(targetCount - aroundCount)

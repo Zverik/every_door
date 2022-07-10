@@ -36,6 +36,8 @@ _Unreleased_
 * Buildings in relations did not have the `roof:shape` chooser.
 * A warning when you've downloaded too much elements.
 * Changes are split in groups for uploading if possible.
+* Complete Ukrainian (by T.H.), Chinese Simplified (by Oil\_Station),
+  and Basque (by Gari Araolaza) translations.
 
 ## 0.6
 

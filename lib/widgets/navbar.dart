@@ -14,7 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BrowserNavigationBar extends ConsumerWidget {
-  final VoidCallback downloadAmenities;
+  final Function(BuildContext) downloadAmenities;
 
   const BrowserNavigationBar({Key? key, required this.downloadAmenities})
       : super(key: key);
@@ -49,7 +49,11 @@ class BrowserNavigationBar extends ConsumerWidget {
     IconButton dataButton;
     if (!hasChangesToUpload) {
       dataButton = IconButton(
-        onPressed: apiStatus != ApiStatus.idle ? null : downloadAmenities,
+        onPressed: apiStatus != ApiStatus.idle
+            ? null
+            : () {
+                downloadAmenities(context);
+              },
         icon: Icon(Icons.download),
         color: Colors.white70,
         disabledColor: Colors.white10,
