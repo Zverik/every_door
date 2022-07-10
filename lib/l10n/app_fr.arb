@@ -677,5 +677,17 @@
         "example": "71"
       }
     }
-  }
+  },
+  "faqMapTiny": "Pourquoi la carte est si petite ?",
+  "faqMapTinyContent": "Parce que ce n’est pas le but. La carte sert uniquement à vous positionner et afficher une liste des points d’intérêts à proximité triés en fonction de leur distance par rapport à votre position.\n\nLa carte est agrandie lors de l’édition de points d’intérêts éloignés de votre position.\nBien que l’application est avant tout destinée à vous aider à éditer ce que vous voyez de vous même.",
+  "faqCheckmarks": "À quoi servent les marqueurs de validation ?",
+  "faqCheckmarksContent": "Ces marqueurs indiquent que les données ont été confirmées, ils ajoutent la clé `check_date` avec la date actuelle.\n\nL’idée de ces marqueurs est que, dans l’exemple où vous auriez répertorié la moitié de la ville sur un premier trajet, qu’il vous soit possible de revenir sur ces points quelques mois plus tard et d’indiquer que rien n’a changé. Un marqueur et c’est validé.\n\nLe marqueur reste affiché pour deux semaines, après quoi il sera de nouveau possible de les repointer.",
+  "faqEntrance": "Comment ajouter l’entrée d’un bâtiment ?",
+  "faqEntranceContent": "En haut à droite, un bouton permet de basculer entre différent modes d’édition : points d’intérêts, micromapping et entrées.\n\nDans le mode « Entrées », appuyez ou faites glisser l’icône de porte, dans le coin inférieur droit, vers la carte.",
+  "faqLetters": "Comment utiliser des lettres dans les numéros d’adresse ?",
+  "faqLettersContent": "Si votre clavier numérique ne peut pas basculer vers un clavier complet, vérifiez les paramètres de l’application. Appuyez sur le bouton du coin supérieur gauche où vous trouverez le « clavier numérique étendu ».",
+  "faqFloors": "Quelle est la différence entre les étages « 3 » et « /3 » ?",
+  "faqFloorsContent": "Le premier correspond à l’attribut `addr:floor=3`, c’est l’étage comme indiqué lors de la navigation et généralement utilisé mais dépend de la localité, tandis que le second correspond à `level=3` selon le schéma `building:level` où le rez-de-chaussée est l’étage 0.\n\nAinsi, les valeurs suivantes indiqueront :\n\n* `2` : `addr:floor=2` et `level=*` ;\n* `4/` : `addr:floor=4`, sans `level` ;\n* `/1` : `level=1`, sans `addr:floor` ;\n* `1/0` : `addr:floor=1` et `level=0`.",
+  "faqTagging": "Questions relatives aux attributs",
+  "faqTaggingContent": "Pourquoi un élément est manquant dans l’éditeur ? Quand ces points blancs sont-ils affiché en mode Micromapping ? Comment sont triés les éléments ?\n\nLes réponses à toutes ces questions sont dans [good\\_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) dont les thèmes principaux :\n\n* L’ordre des attributs : list `kMainKeys` ;\n* Les éléments sont téléchargés : function `isGoodTags` ;\n* Ce qui est considéré comme un point d’intérêt : function `isAmenityTags` ;\n* Les points qui sont aimantés : function `detectSnap` ;\n* Quand un objet micro-cartographié est incomplet : function `needsMoreInfo`."
 }
