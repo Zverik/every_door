@@ -154,20 +154,26 @@ class ChangesProvider extends ChangeNotifier {
     );
   }
 
-  clearChanges([bool includeErrored = false]) async {
+  clearChanges({bool includeErrored = false, List<String>? ids}) async {
     _ensureLoaded();
-    if (includeErrored) {
+    if (includeErrored && ids == null) {
       _new.clear();
       _changes.clear();
     } else {
-      // Keep changes with errors.
-      _new.removeWhere((key, value) => value.error == null);
-      _changes.removeWhere((key, value) => value.error == null);
+      // Keep changes with errors or not referenced.
+      final idSet = Set.of(ids ?? []);
+      _new.removeWhere((key, value) =>
+          (includeErrored || value.error == null) &&
+          (idSet.isEmpty || idSet.contains(key)));
+      _changes.removeWhere((key, value) =>
+          (includeErrored || value.error == null) &&
+          (idSet.isEmpty || idSet.contains(key.toString())));
     }
     notifyListeners();
 
     final database = await _ref.read(databaseProvider).database;
-    final keepIds = _changes.keys.map((e) => e.toString()).toList();
+    final keepIds =
+        _changes.keys.map((e) => e.toString()).followedBy(_new.keys).toList();
     if (keepIds.isEmpty) {
       await database.delete(OsmChange.kTableName);
     } else {

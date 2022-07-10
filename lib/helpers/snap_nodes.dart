@@ -1,4 +1,5 @@
 import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -158,5 +159,65 @@ class Snapper {
       if (!found) bounds.add(newRect);
     }
     return bounds;
+  }
+
+  List<List<OsmChange>> _splitSingleChangeGroup(
+      List<OsmChange> changes, double minGap) {
+    final lats = changes.map((c) => c.location.latitude).toList();
+    lats.sort();
+    double maxGap = minGap;
+    int latGapPos = -1;
+    for (int i = 1; i < lats.length; i++) {
+      if (lats[i] - lats[i - 1] > maxGap) {
+        maxGap = lats[i] - lats[i - 1];
+        latGapPos = i;
+      }
+    }
+
+    final lons = changes.map((c) => c.location.longitude).toList();
+    lons.sort();
+    int lonGapPos = -1;
+    for (int i = 1; i < lons.length; i++) {
+      if (lons[i] - lons[i - 1] > maxGap) {
+        maxGap = lons[i] - lons[i - 1];
+        lonGapPos = i;
+      }
+    }
+
+    if (lonGapPos < 0 && latGapPos < 0) return [changes];
+    const eps = 1e-8;
+    return [
+      changes
+          .where((c) => lonGapPos >= 0
+              ? c.location.longitude < lons[lonGapPos] - eps
+              : c.location.latitude < lats[latGapPos] - eps)
+          .toList(),
+      changes
+          .where((c) => lonGapPos >= 0
+              ? c.location.longitude >= lons[lonGapPos] - eps
+              : c.location.latitude >= lats[latGapPos] - eps)
+          .toList(),
+    ];
+  }
+
+  /// Split changes into boxes with a minimum gap between them.
+  List<List<OsmChange>> splitChanges(List<OsmChange> changes,
+      {double minGap = 0.05}) {
+    final result = [changes];
+    bool didSplit = true;
+    while (didSplit) {
+      didSplit = false;
+      final newParts = <List<OsmChange>>[];
+      for (int i = 0; i < result.length; i++) {
+        final split = _splitSingleChangeGroup(result[i], minGap);
+        if (split.length > 1) {
+          result[i] = split.first;
+          newParts.add(split.last);
+          didSplit = true;
+        }
+      }
+      result.addAll(newParts);
+    }
+    return result;
   }
 }

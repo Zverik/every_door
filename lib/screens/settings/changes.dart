@@ -122,7 +122,9 @@ class ChangeListPage extends ConsumerWidget {
                       cancelLabel: loc.buttonNo,
                     );
                     if (answer == OkCancelResult.ok) {
-                      ref.read(changesProvider).clearChanges(true);
+                      ref
+                          .read(changesProvider)
+                          .clearChanges(includeErrored: true);
                       ref.read(needMapUpdateProvider).trigger();
                     }
                   },

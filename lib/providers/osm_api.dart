@@ -180,28 +180,26 @@ class OsmApiHelper {
     return builder.buildDocument().toXmlString();
   }
 
-  Future _updateElementsAfterUpload(
-      List<UploadedElement> elements, bool includeErrored) async {
-    final changes = _ref.read(changesProvider);
-    changes.clearChanges(includeErrored);
-
+  Future _updateElementsAfterUpload(List<UploadedElement> elements) async {
     final data = _ref.read(osmDataProvider);
     for (final el in elements) {
       if (el.isDeleted) {
         await data.deleteElement(el.oldElement);
       } else {
-        if (el.newElement.nodes != null) {
+        final newElement = el.newElement;
+        if (newElement.nodes != null) {
           // Update node ids from placeholders
-          for (int i = 0; i < el.newElement.nodes!.length; i++) {
-            final oldNodeId = el.newElement.nodes![i];
+          for (int i = 0; i < newElement.nodes!.length; i++) {
+            final oldNodeId = newElement.nodes![i];
             if (oldNodeId < 0) {
               bool foundNew = false;
               for (final nodeEl in elements) {
                 if (nodeEl.oldElement.isPoint &&
                     nodeEl.oldElement.id.ref == oldNodeId) {
-                  el.newElement.nodes![i] = nodeEl.newElement.id.ref;
+                  newElement.nodes![i] =
+                      nodeEl.newId ?? nodeEl.oldElement.id.ref;
                   _logger.info(
-                      'Replaced placeholder $oldNodeId with ${nodeEl.newElement.id} in ${el.newElement.id}.');
+                      'Replaced placeholder $oldNodeId with ${nodeEl.newElement.id} in ${newElement.id}.');
                   foundNew = true;
                   break;
                 }
@@ -213,7 +211,7 @@ class OsmApiHelper {
             }
           }
         }
-        await data.updateElement(el.newElement);
+        await data.updateElement(newElement);
       }
     }
   }
@@ -415,11 +413,6 @@ class OsmApiHelper {
     final List<OsmChange> updatedChanges =
         updatedElements.map((e) => changesProv.changeFor(e)).toList();
 
-    // Some debugging code.
-    // print('Read and stored ${updated.length} elements from API.');
-    // print('Old ids: ${elementsToUpdate.values.map((e) => e.idVersion).join(", ")}');
-    // print('New ids: ${updatedChanges.map((e) => e.element!.idVersion).join(", ")}');
-
     // Build the new `changes` list.
     final updatedIds = Set.of(updatedChanges.map((e) => e.id));
     updatedChanges
@@ -433,6 +426,9 @@ class OsmApiHelper {
     // Download elements to update the data and avoid version errors.
     changes = await _updateUnderlyingElements(changes);
     if (changes.isEmpty) return 0;
+
+    // Keep the identifiers for clearing the changes later.
+    final changeIds = changes.map((c) => c.databaseId).toList();
 
     // Enumerate new elements.
     int nodeId = -1;
@@ -461,26 +457,27 @@ class OsmApiHelper {
 
     // Upload changes.
     try {
-      bool clearAllChanges;
+      bool clearErrored;
       List<UploadedElement> updates;
       try {
         updates = await _uploadEverything(changes, changeset, headers);
-        clearAllChanges = true;
+        clearErrored = true;
       } on OsmApiError catch (e) {
         // TODO: some element could be uploaded, with no indication from API.
         // Not trying one by one when we have way geometry changes.
         if (!haveDependentWays && {409, 404, 412, 410}.contains(e.code)) {
           // Try one-by-one only on conflict.
           updates = await _uploadOneByOne(changes, changeset, headers);
-          clearAllChanges = false;
+          clearErrored = false;
           // TODO: Update changeset comment for changes actually uploaded.
+          // TODO: filter changeIds by changes actually uploaded.
         } else {
           rethrow;
         }
       }
-      // This keeps elements with errors, so "includeErrored" doesn't apply.
-      // TODO: not all changes uploaded!
-      _updateElementsAfterUpload(updates, clearAllChanges);
+      final chProv = _ref.read(changesProvider);
+      await chProv.clearChanges(includeErrored: clearErrored, ids: changeIds);
+      _updateElementsAfterUpload(updates);
       return updates.length;
     } finally {
       // Close the changeset.
@@ -505,8 +502,12 @@ class OsmApiHelper {
     _ref.read(apiStatusProvider.notifier).state = ApiStatus.uploading;
 
     try {
-      // TODO: split changes into smaller boxes.
-      return await _uploadChangesPack(changes);
+      int count = 0;
+      for (final part
+          in Snapper().splitChanges(changes, minGap: kChangesetSplitGap)) {
+        count += await _uploadChangesPack(part);
+      }
+      return count;
     } finally {
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
