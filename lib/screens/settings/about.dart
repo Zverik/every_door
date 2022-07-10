@@ -1,7 +1,6 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/screens/settings/log.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -10,33 +9,24 @@ import 'package:url_launcher/url_launcher.dart';
 class FAQ {
   final String question;
   final String answer;
-  const FAQ(this.question, this.answer);
 
-  Widget toTile() {
-    return ExpansionTile(
-      title: Text(question),
-      childrenPadding: EdgeInsets.only(bottom: 22, left: 24, right: 24),
-      tilePadding: EdgeInsets.symmetric(horizontal: 24),
-      children: <Widget>[
-        MarkdownBody(
-            onTapLink: (text, href, title) => launchUrl(Uri.parse(href!),
-                mode: LaunchMode.externalApplication),
-            data: answer)
-      ],
-    );
-  }
+  const FAQ(this.question, this.answer);
 }
 
-const faqs = <FAQ>[
-  FAQ("Why the map is so tiny?",
-      """Because it's not the point. You only check your positioning on the map,
+class AboutPage extends StatelessWidget {
+  const AboutPage();
+
+  List<FAQ> buildFaq(AppLocalizations loc) {
+    return <FAQ>[
+      FAQ("Why the map is so tiny?",
+          """Because it's not the point. You only check your positioning on the map,
 and pan it to adjust. Watch the amenity list below, sorted by distance
 from you.
 
 The map gets bigger when you edit amenities far from your location.
 Although the app was made to edit things you see with your eyes."""),
-  FAQ("What are the checkmarks for?",
-      """These are marks that amenity data was confirmed. They add the
+      FAQ("What are the checkmarks for?",
+          """These are marks that amenity data was confirmed. They add the
 `check_date` tag with the current date.
 
 The idea behind the checkmarks is that, say, you surveyed half
@@ -47,18 +37,18 @@ you tap it and continue.
 
 The mark stays checked for two weeks. After that you may survey
 the amenities again."""),
-  FAQ("How to add a building entrance?",
-      """At the top right there's a button for switching editing modes.
+      FAQ("How to add a building entrance?",
+          """At the top right there's a button for switching editing modes.
 It changes modes between amenities, micromapping, and entrances.
 
 In the entrance mode, tap or drag the door button in the bottom
 right corner onto the map."""),
-  FAQ("Can I type letters into an apartment number?",
-      """If your numeric keyboard cannot be switched to a full one, check
+      FAQ("Can I type letters into an apartment number?",
+          """If your numeric keyboard cannot be switched to a full one, check
 the app settings. They are behind the button at the top left corner.
 Switch on the "extended numeric keyboard" there."""),
-  FAQ("Are floors '3' and '/3' the same?",
-      """No. The first one has `addr:floor=3` tag filled. That's the floor
+      FAQ("Are floors '3' and '/3' the same?",
+          """No. The first one has `addr:floor=3` tag filled. That's the floor
 as it is printed on navigation and commonly used. The second one
 does not have this tag, but has `level=3`. That number is a sequential
 floor number from zero to `building:levels - 1`. That is, in a
@@ -73,8 +63,8 @@ Here is how the notation in the editor related to these tags:
 * `1/0`: `addr:floor=1` + `level=0` (and there's an object nearby
   with the same `addr:floor`, but different `level`, or vice-versa).
 """),
-  FAQ("All tagging questions",
-      """Why an object is missing in the editor? When these white dots are
+      FAQ("All tagging questions",
+          """Why an object is missing in the editor? When these white dots are
 displayed in the micromapping mode? How objects are sorted?
 
 Answers to all these questions are in
@@ -86,16 +76,9 @@ Here's what you can look at:
 * What is considered an amenity — function `isAmenityTags`.
 * Which points are snapped to what ways — function `detectSnap`.
 * When a micromapping object is incomplete — function `needsMoreInfo`.""")
-];
+    ];
+  }
 
-class AboutPage extends ConsumerStatefulWidget {
-  const AboutPage();
-
-  @override
-  ConsumerState<AboutPage> createState() => _AboutPageState();
-}
-
-class _AboutPageState extends ConsumerState<AboutPage> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -189,14 +172,21 @@ class _AboutPageState extends ConsumerState<AboutPage> {
           SettingsSection(
             title: Text(loc.aboutFAQ),
             tiles: [
-              CustomSettingsTile(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 5),
-                  child: Column(
-                    children: <Widget>[for (var faq in faqs) faq.toTile()],
-                  ),
-                ),
-              ),
+              for (final faq in buildFaq(loc))
+                CustomSettingsTile(
+                    child: ExpansionTile(
+                  title: Text(faq.question),
+                  childrenPadding:
+                      EdgeInsets.only(bottom: 22, left: 24, right: 24),
+                  tilePadding: EdgeInsets.symmetric(horizontal: 24),
+                  children: <Widget>[
+                    MarkdownBody(
+                        onTapLink: (text, href, title) => launchUrl(
+                            Uri.parse(href!),
+                            mode: LaunchMode.externalApplication),
+                        data: faq.answer)
+                  ],
+                )),
             ],
           )
         ],
