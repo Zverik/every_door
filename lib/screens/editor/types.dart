@@ -124,7 +124,9 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       final newPresets = await prov.getPresetsAutocomplete(substring,
           locale: locale,
           location: widget.location,
-          includeNSI: editorMode == EditorMode.poi);
+          nsi: editorMode == EditorMode.poi
+              ? NsiQueryType.amenities
+              : NsiQueryType.micromapping);
 
       // Add a fix me preset for entered string.
       newPresets.add(Preset.fixme(substring.trim()));
@@ -211,7 +213,9 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
                   ],
                 ),
                 color: !preset.isFixme
-                    ? (preset.fromNSI ? Colors.grey.withOpacity(0.2) : kFieldColor.withOpacity(0.2))
+                    ? (preset.fromNSI
+                        ? Colors.grey.withOpacity(0.2)
+                        : kFieldColor.withOpacity(0.2))
                     : Colors.red.withOpacity(0.2),
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
               ),

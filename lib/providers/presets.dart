@@ -6,6 +6,7 @@ import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/room.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/fields/wifi.dart';
+import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/helpers/nsi_features.dart';
@@ -25,6 +26,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:latlong2/latlong.dart';
 
 final presetProvider = Provider((ref) => PresetProvider(ref));
+
+enum NsiQueryType { none, amenities, micromapping }
 
 class PresetProvider {
   static const kDbVersion = "dbVersion";
@@ -140,7 +143,7 @@ class PresetProvider {
 
   Future<List<Preset>> getPresetsAutocomplete(String query,
       {bool isArea = false,
-      bool includeNSI = true,
+      NsiQueryType nsi = NsiQueryType.none,
       Locale? locale,
       LatLng? location}) async {
     final terms = query
@@ -174,15 +177,25 @@ class PresetProvider {
     final results = await _db!.rawQuery(sql, terms.map((t) => '$t%').toList());
 
     final presets = <Preset>[];
-    if (includeNSI) {
+    if (nsi != NsiQueryType.none) {
+      // Query the database.
       List<Preset> nsiResults =
           await _getNSIAutocomplete(normalizeString(query));
+      // Filter by location.
       if (location != null) {
         nsiResults = _filterByLocation(nsiResults, location);
       }
+      // Filter by type.
+      if (nsi == NsiQueryType.amenities) {
+        nsiResults = nsiResults.where((p) => isAmenityTags(p.addTags)).toList();
+      } else if (nsi == NsiQueryType.micromapping) {
+        nsiResults = nsiResults.where((p) => isMicroTags(p.addTags)).toList();
+      }
+      // Remove the tail.
       if (nsiResults.length > kMaxNSIPresets) {
         nsiResults.removeRange(kMaxNSIPresets, nsiResults.length);
       }
+      // Append to the result.
       presets.addAll(nsiResults);
     }
 

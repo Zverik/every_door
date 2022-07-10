@@ -28,6 +28,12 @@ I need help with design. That includes [a new icon](https://github.com/Zverik/ev
 [the website](https://github.com/Zverik/everydoor-website), Flutter animations for everything,
 and general UX improvements. Please help.
 
+### Principles
+
+1. ED displays and edits only tagged nodes and polygons represented with their centerpoints.
+2. ED focuses on surveying: only things that you can see around you.
+3. Fewer buttons and menus: heuristic is preferable to a setting, and every button benefits the surveyor.
+
 ## How To Build
 
 You will need the [Flutter SDK](https://docs.flutter.dev/development/tools/sdk/overview) installed.

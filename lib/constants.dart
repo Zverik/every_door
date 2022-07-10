@@ -32,6 +32,7 @@ const kSlowDownGPS = false; // skip location changes that are too small to regis
 const kMicromappingTapZoom = 19.0; // how much to zoom in when tapping a bunch of elements in micromapping
 const kRotationThreshold = 30.0; // degrees, for snapping to zero rotation
 const kManualOption = '✍️'; // Emoji icon for entering values by hand
+const kMinElementsForWarning = 20000; // Alerting user when they have that many elements downloaded
 
 // Should be exactly 8 lines in both lists.
 const kDefaultPresets = [

@@ -22,6 +22,8 @@ _Unreleased_
 * Added indication for payment types, missing floor, and wheelchair
   accessibility to POI tiles.
 * Moved ATM, vending machines and parcel lockers to micromapping.
+* NSI suggestions for micromapping objects.
+* A warning when you've downloaded too much elements.
 
 ## 0.6
 

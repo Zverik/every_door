@@ -64,7 +64,7 @@ class TermsProvider {
           query,
           locale: locale,
           location: location,
-          includeNSI: false,
+          nsi: NsiQueryType.none,
         );
     final database = await _ref.read(databaseProvider).database;
 

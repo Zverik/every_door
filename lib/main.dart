@@ -55,7 +55,7 @@ class EveryDoorApp extends StatelessWidget {
         home: LoadingPage(),
         builder: (context, child) => Stack(children: [
           if (child != null) child,
-          DropdownAlert(),
+          DropdownAlert(delayDismiss: 5000),
         ]),
       ),
     );
