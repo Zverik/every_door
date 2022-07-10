@@ -432,5 +432,56 @@
   "aboutFAQ": "FAQ",
   "@aboutFAQ": {
     "description": "Title for the FAQ section on the About page."
+  },
+  "dataDownloadFailed": "Download fehlgeschlagen",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "fieldHoursSpecificDays": "Bestimmtes Datum",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Geschlossen",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursHour": "Stunde",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "loadingTooMuchDataTitle": "Zu viele Daten",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "fieldHoursAsText": "Als Text",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursMinute": "Minute",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "loadingTooMuchData": "Löschen Sie heruntergeladene Daten aus den Einstellungen, um den Editor zu beschleunigen.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "fieldHoursPublicHolidays": "Feiertage",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "dataDownloadSuccessful": "Download erfolgreich",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{{count} Element heruntergeladen.}, =few{{count} Elemente heruntergeladen.}, =other{{count} Elemente heruntergeladen.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "fieldHoursNumberedWeekday": "\"Letzten Montag\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   }
 }
