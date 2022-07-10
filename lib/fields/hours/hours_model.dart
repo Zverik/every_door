@@ -127,10 +127,10 @@ class HoursFragment implements Comparable {
   final DaysRange weekdays;
   HoursInterval? interval;
   List<HoursInterval> breaks;
-  bool active;
+  final bool _active;
 
   HoursFragment(this.weekdays, this.interval, this.breaks,
-      {this.active = true}) {
+      {bool active = true}) : _active = active {
     _fixAndSortBreaks();
   }
 
@@ -139,12 +139,12 @@ class HoursFragment implements Comparable {
       : weekdays = Weekdays.fullWeek(),
         interval = HoursInterval.full(),
         breaks = [],
-        active = true;
+        _active = true;
 
   HoursFragment.inactive(this.weekdays)
       : interval = null,
         breaks = [],
-        active = false;
+        _active = false;
 
   HoursFragment copyWith(
       {DaysRange? weekdays,
@@ -155,13 +155,13 @@ class HoursFragment implements Comparable {
       weekdays ?? this.weekdays,
       interval ?? this.interval,
       breaks ?? this.breaks,
-      active: active ?? this.active,
+      active: active ?? _active,
     );
   }
 
-  bool get isEmpty => weekdays.isEmpty;
   bool get is24h => breaks.isEmpty && (interval?.isAllDay ?? false);
   bool get is24_7 => is24h && weekdays is Weekdays && weekdays.isFull;
+  bool get active => _active && weekdays.isNotEmpty;
 
   /// Given interval and breaks, adds a new interval to maintain
   /// the breaks order. E.g. 6-14 + 15-21 = 6-21 + break 14-15.

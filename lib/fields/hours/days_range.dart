@@ -339,10 +339,85 @@ class NumberedWeekday extends DaysRange {
   }
 }
 
+class Date implements Comparable {
+  final int month;
+  final int day;
+
+  const Date(this.month, this.day);
+  Date.fromDateTime(DateTime dt)
+      : month = dt.month,
+        day = dt.day;
+
+  static const kYear = 2000;
+  DateTime toDateTime() => DateTime(kYear, month, day);
+
+  static const _kMonthDays = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  int difference(Date other) {
+    if (other.month == month) return day - other.day;
+    if (other.month < month) {
+      return Iterable.generate(month - other.month)
+          .map((i) =>
+              _kMonthDays[i + other.month - 1] + 1 - (i == 0 ? other.day : 1))
+          .fold(day - 1, (prev, cnt) => prev + cnt);
+    } else {
+      return -1 *
+          Iterable.generate(other.month - month)
+              .map((i) => _kMonthDays[i + month - 1] + 1 - (i == 0 ? day : 1))
+              .fold(other.day - 1, (prev, cnt) => prev + cnt);
+    }
+  }
+
+  Date next() {
+    int newDay = day + 1;
+    int newMonth = month;
+    while (newDay > _kMonthDays[newMonth - 1]) {
+      newDay -= _kMonthDays[newMonth - 1];
+      newMonth = newMonth == 12 ? 1 : newMonth + 1;
+    }
+    return Date(newMonth, newDay);
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is Date && month == other.month && day == other.day;
+
+  bool operator <(Object other) => compareTo(other) < 0;
+  bool operator >(Object other) => compareTo(other) > 0;
+  bool operator <=(Object other) => compareTo(other) <= 0;
+  bool operator >=(Object other) => compareTo(other) >= 0;
+
+  @override
+  int get hashCode => month.hashCode + day.hashCode;
+
+  @override
+  int compareTo(other) {
+    if (other is! Date) throw ArgumentError('Can compare only with days');
+    final mc = month.compareTo(other.month);
+    if (mc != 0) return mc;
+    return day.compareTo(other.day);
+  }
+
+  @override
+  String toString() => 'Date($month, $day)';
+}
+
 class SpecificDays extends DaysRange {
-  List<DateTime> days;
+  final Set<Date> days;
 
   SpecificDays(this.days);
+
+  SpecificDays withInterval(List<Date> interval) {
+    final newDays = Set.of(days);
+    newDays.addAll(_expandInterval(interval));
+    return SpecificDays(newDays);
+  }
+
+  SpecificDays withoutInterval(List<Date> interval) {
+    final newDays = Set.of(days);
+    newDays.removeAll(_expandInterval(interval));
+    return SpecificDays(newDays);
+  }
 
   @override
   bool get isEmpty => days.isEmpty;
@@ -356,13 +431,13 @@ class SpecificDays extends DaysRange {
   @override
   bool get isFull => false;
 
-  List<DateTime> get sorted {
+  List<Date> sorted() {
     final result = List.of(days);
     result.sort();
     return result;
   }
 
-  String _makeDatePart(DateTime first, DateTime last) {
+  String makeDatePart(List<Date> interval) {
     const kMonths = [
       'Jan',
       'Feb',
@@ -378,31 +453,41 @@ class SpecificDays extends DaysRange {
       'Dec'
     ];
 
-    final lastStr = '${kMonths[last.month - 1]} ${last.day}';
-    if (last == first)
-      return lastStr;
-    else if (last.month == first.month)
-      return '${kMonths[last.month - 1]} ${first.day}-${last.day}';
-    else
-      return '${kMonths[first.month - 1]} ${first.day}-$lastStr';
+    final firstStr =
+        '${kMonths[interval.first.month - 1]} ${interval.first.day}';
+    if (interval.last == interval.first) {
+      return firstStr;
+    } else {
+      if (interval.last.month == interval.first.month) {
+        return '$firstStr-${interval.last.day}';
+      } else {
+        final lastStr =
+            '${kMonths[interval.last.month - 1]} ${interval.last.day}';
+        return '$firstStr-$lastStr';
+      }
+    }
   }
 
-  @override
-  String makeString() {
-    final parts = <String>[];
-    DateTime? first;
-    DateTime? last;
-    for (final d in sorted) {
+  List<List<Date>> getIntervals() {
+    final parts = <List<Date>>[];
+    Date? first;
+    Date? last;
+    for (final d in sorted()) {
       if (last == null) {
         first = d;
-      } else if (d.difference(last) != Duration(days: 1)) {
-        parts.add(_makeDatePart(first!, last));
+      } else if (d.difference(last) != 1) {
+        parts.add([first!, last]);
         first = d;
       }
       last = d;
     }
-    if (last != null) parts.add(_makeDatePart(first!, last));
-    return parts.join(',');
+    if (last != null) parts.add([first!, last]);
+    return parts;
+  }
+
+  @override
+  String makeString() {
+    return getIntervals().map((i) => makeDatePart(i)).join(',');
   }
 
   static final _kDayRegexp = RegExp(
@@ -423,7 +508,14 @@ class SpecificDays extends DaysRange {
     'dec': 12,
   };
   static const _kMonthDays = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  static const kYear = 2000;
+
+  static List<Date> _expandInterval(List<Date> interval) {
+    final result = <Date>[];
+    for (var date = interval.first; date != interval.last; date = date.next())
+      result.add(date);
+    result.add(interval.last);
+    return result;
+  }
 
   static SpecificDays? parse(String days) {
     final match = _kDayRegexp.matchAsPrefix(days);
@@ -436,8 +528,7 @@ class SpecificDays extends DaysRange {
     if (month1 == null || day1 < 1 || day1 > _kMonthDays[month1 - 1])
       return null;
 
-    if (match.group(4) == null)
-      return SpecificDays([DateTime(kYear, month1, day1)]);
+    if (match.group(4) == null) return SpecificDays({Date(month1, day1)});
 
     int? month2;
     if (match.group(3) == null)
@@ -451,33 +542,13 @@ class SpecificDays extends DaysRange {
     if (month2 == null || day2 < 1 || day2 > _kMonthDays[month2 - 1])
       return null;
 
-    final result = <DateTime>[];
-    if (month1 == month2) {
-      // Just add the days.
-      for (int day = day1; day <= day2; day++)
-        result.add(DateTime(kYear, month1, day));
-    } else {
-      // First month.
-      for (int day = day1; day <= _kMonthDays[month1 - 1]; day++)
-        result.add(DateTime(kYear, month1, day));
-      // Intermediary months.
-      for (int month = month1 == 12 ? 1 : month1 + 1;
-          month != month2;
-          month = month == 12 ? 1 : month + 1) {
-        for (int day = 1; day <= _kMonthDays[month - 1]; day++)
-          result.add(DateTime(kYear, month, day));
-      }
-      // Last month.
-      for (int day = 1; day <= day2; day++)
-        result.add(DateTime(kYear, month2, day));
-    }
-    return SpecificDays(result);
+    return SpecificDays(
+        Set.of(_expandInterval([Date(month1, day1), Date(month2, day2)])));
   }
 
   @override
   SpecificDays merge(DaysRange other) {
-    return SpecificDays(
-        days.followedBy((other as SpecificDays).days).toSet().toList());
+    return SpecificDays(days.followedBy((other as SpecificDays).days).toSet());
   }
 
   @override
@@ -485,13 +556,13 @@ class SpecificDays extends DaysRange {
     if (other is! SpecificDays) throw ArgumentError();
     // This should be handled upstream, so just in case.
     if (isEmpty || other.isEmpty) return 0;
-    return sorted.first.compareTo(other.sorted.first);
+    return sorted().first.compareTo(other.sorted().first);
   }
 
   @override
   bool operator ==(Object other) {
     if (other is! SpecificDays) return false;
-    return listEquals(days, other.days);
+    return setEquals(days, other.days);
   }
 
   @override
@@ -502,6 +573,6 @@ class SpecificDays extends DaysRange {
     if (isEmpty || other.isEmpty || other is! SpecificDays) return this;
     final otherDays = Set.of(other.days);
     return SpecificDays(
-        days.where((element) => !otherDays.contains(element)).toList());
+        days.where((element) => !otherDays.contains(element)).toSet());
   }
 }

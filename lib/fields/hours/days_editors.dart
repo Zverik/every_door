@@ -1,3 +1,4 @@
+import 'package:every_door/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -59,7 +60,7 @@ class PublicHolidaysPanel extends StatelessWidget {
     final loc = AppLocalizations.of(context)!;
 
     // TODO: localize and style
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Center(
           child: Text(
@@ -88,8 +89,19 @@ class NumberedWeekdayPanel extends StatelessWidget {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: Text(weekdayTitles[weekday.weekday]),
+          padding: const EdgeInsets.only(left: 15.0, right: 10.0),
+          child: DropdownButton<int>(
+            items: Iterable.generate(7)
+                .map((i) => DropdownMenuItem<int>(
+                      child: Text(weekdayTitles[i]),
+                      value: i,
+                    ))
+                .toList(),
+            value: weekday.weekday,
+            onChanged: (value) {
+              if (value != null) onChange(NumberedWeekday(value, weekday.days));
+            },
+          ),
         ),
         for (final i in days)
           Column(
@@ -116,9 +128,67 @@ class SpecificDaysPanel extends StatelessWidget {
 
   const SpecificDaysPanel(this.days, this.onChange);
 
+  static Future<Date?> pickDate(BuildContext context, {Date? start}) async {
+    final now = DateTime.now();
+    final resp = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: start?.toDateTime() ?? DateTime(now.year, 1, 1),
+      lastDate: DateTime(now.year, 12, 31),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+    );
+    return resp == null ? null : Date.fromDateTime(resp);
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO
-    return Text(days.makeString());
+    final parts = days.getIntervals();
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Wrap(
+        spacing: 5.0,
+        runSpacing: 5.0,
+        children: [
+          for (final part in parts)
+            Container(
+              decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(10.0)),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Text(days.makeDatePart(part), style: kFieldTextStyle),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.close),
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      onChange(days.withoutInterval(part));
+                    },
+                  ),
+                ],
+              ),
+            ),
+          IconButton(
+            icon: Icon(Icons.add_circle_outline),
+            onPressed: () async {
+              final date = await SpecificDaysPanel.pickDate(context);
+              if (date != null) onChange(days.withInterval([date, date]));
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.control_point_duplicate),
+            onPressed: () async {
+              final date1 = await SpecificDaysPanel.pickDate(context);
+              if (date1 == null) return;
+              final date2 =
+                  await SpecificDaysPanel.pickDate(context, start: date1.next());
+              if (date2 == null) return;
+              onChange(days.withInterval([date1, date2]));
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

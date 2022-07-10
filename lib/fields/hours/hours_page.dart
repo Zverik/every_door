@@ -1,4 +1,5 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/fields/hours/days_editors.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
@@ -103,9 +104,16 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     );
   }
 
+  int _getInactiveCardPosition() {
+    // We don't care about inactive fragments other than weekdays and holidays.
+    return hours.fragments.indexWhere((fragment) =>
+        !fragment.active &&
+        (fragment.weekdays is Weekdays || fragment.weekdays is PublicHolidays));
+  }
+
   _updateInactiveCard() {
     if (isRaw) return;
-    int pos = hours.fragments.indexWhere((fragment) => !fragment.active);
+    int pos = _getInactiveCardPosition();
     if (hours.fragments.isEmpty) {
       // No fragments — add a new empty one.
       setState(() {
@@ -180,24 +188,12 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
                   ? null
                   : () {
                       setState(() {
-                        final rem = hours.fragments.removeAt(i);
-                        print('Removed $rem at $i');
-                        for (int k = 0; k < hours.fragments.length; k++)
-                          print('Fragment $k: ${hours.fragments[k]}');
-
-                        // TODO: this inactive card copies interval from the removed fragment.
                         _updateInactiveCard();
-                        print('After reshuffling:');
-                        for (int k = 0; k < hours.fragments.length; k++)
-                          print('Fragment $k: ${hours.fragments[k]}');
                       });
                     },
               onChange: (newFragment) {
                 setState(() {
                   hours.fragments[i] = newFragment;
-                  print('Changed at $i to $newFragment');
-                  for (int k = 0; k < hours.fragments.length; k++)
-                    print('Fragment $k: ${hours.fragments[k]}');
                   // Remove weekdays from other fragments.
                   for (int j = 0; j < hours.fragments.length; j++) {
                     if (i != j) {
@@ -214,14 +210,53 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
                     }
                   }
                   _updateInactiveCard();
-                  print('After reshuffling:');
-                  for (int k = 0; k < hours.fragments.length; k++)
-                    print('Fragment $k: ${hours.fragments[k]}');
                 });
                 return true;
               },
             ),
           ),
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // TODO: style
+              ElevatedButton(
+                // TODO: localize
+                child: Text('"Last Monday"', style: TextStyle(fontSize: 20.0)),
+                onPressed: () {
+                  final newFragment =
+                      HoursFragment.inactive(NumberedWeekday(0, {}));
+                  int inactivePos = _getInactiveCardPosition();
+                  setState(() {
+                    if (inactivePos <= 0)
+                      hours.fragments.add(newFragment);
+                    else
+                      hours.fragments.insert(inactivePos, newFragment);
+                  });
+                },
+              ),
+              SizedBox(width: 10.0),
+              ElevatedButton(
+                // TODO: localize
+                child: Text('Specific date', style: TextStyle(fontSize: 20.0)),
+                onPressed: () async {
+                  final date = await SpecificDaysPanel.pickDate(context);
+                  if (date != null) {
+                    final newFragment =
+                        HoursFragment.inactive(SpecificDays({date}));
+                    int inactivePos = _getInactiveCardPosition();
+                    setState(() {
+                      if (inactivePos <= 0)
+                        hours.fragments.add(newFragment);
+                      else
+                        hours.fragments.insert(inactivePos, newFragment);
+                    });
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
         if (hours.fragments.length >= 2) SizedBox(height: 80.0),
       ],
     );

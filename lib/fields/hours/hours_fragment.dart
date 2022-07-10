@@ -50,6 +50,7 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.onDelete != null)
           Row(
@@ -124,13 +125,16 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
                 },
               ),
             if (!addingBreak)
-              MaterialButton(
-                onPressed: () async {
-                  setState(() {
-                    addingBreak = true;
-                  });
-                },
-                child: Text(loc.fieldHoursAddBreak),
+              SizedBox(
+                width: double.infinity,
+                child: MaterialButton(
+                  onPressed: () async {
+                    setState(() {
+                      addingBreak = true;
+                    });
+                  },
+                  child: Text(loc.fieldHoursAddBreak),
+                ),
               ),
           ],
         ],

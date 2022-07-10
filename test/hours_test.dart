@@ -191,11 +191,21 @@ void main() {
     expect(data.buildHours(), equals('Mo-Su,PH 10:00-02:00'));
   });
 
+  test('Date class calculates difference correctly', () {
+    expect(Date.fromDateTime(DateTime(2010, 5, 16)), equals(Date(5, 16)));
+    expect(Date(12, 5).difference(Date(12, 3)), equals(2));
+    expect(Date(12, 1).difference(Date(11, 30)), equals(1));
+    expect(Date(3, 1).difference(Date(2, 28)), equals(2));
+    expect(Date(12, 31).difference(Date(1, 1)), equals(365));
+    expect(Date(12, 3).difference(Date(12, 5)), equals(-2));
+    expect(Date(1, 31).difference(Date(3, 1)), equals(-30));
+  });
+
   test('SpecificDays parses and formats dates correctly', () {
     expect(SpecificDays.parse(''), isNull);
     expect(SpecificDays.parse('Jan 1'), isNotNull);
     expect(SpecificDays.parse('Feb 30'), isNull);
-    expect(SpecificDays.parse('Jan 1'), equals(SpecificDays([DateTime(SpecificDays.kYear, 1, 1)])));
+    expect(SpecificDays.parse('Jan 1'), equals(SpecificDays({Date(1, 1)})));
     expect(SpecificDays.parse('Jan 1')?.makeString(), equals('Jan 1'));
     expect(SpecificDays.parse('Aug 20-23')?.makeString(), equals('Aug 20-23'));
     expect(SpecificDays.parse('Feb 27-Mar 3')?.makeString(), equals('Feb 27-Mar 3'));
