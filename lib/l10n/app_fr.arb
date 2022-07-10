@@ -665,5 +665,17 @@
     }
   },
   "buildingTypeAddress": "Adresse",
-  "@buildingTypeAddress": {}
+  "@buildingTypeAddress": {},
+  "editorDuplicate": "Possible doublon à {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  }
 }
