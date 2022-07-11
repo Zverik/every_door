@@ -103,6 +103,7 @@
   "@settingsPurgedAllTitle": {},
   "settingsPurgedMessage": "{count,plural, =1{Очистили {count} объект}, =few{Очистили {count} объекта}, =other{Очистили {count} объектов}}",
   "@settingsPurgedMessage": {},
+  "changesSwipeLeft": "Смахните влево для отмены правки",
   "settingsUploads": "Правки для отправки",
   "@settingsUploads": {},
   "settingsBackground": "Спутниковые снимки",
@@ -247,6 +248,7 @@
   "@addressX": {},
   "entranceX": "Вход {n}",
   "@entranceX": {},
+  "buildingPostCode": "Индекс",
   "buildingLevels": "Этажей",
   "@buildingLevels": {},
   "buildingRoofLevels": "Этажей в крыше",
@@ -329,6 +331,120 @@
   "@apiStatusUpdatingDB": {},
   "apiStatusUploading": "Отправляю правки",
   "@apiStatusUploading": {},
+  "aboutViewLog": "Системный журнал",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "История версий",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "Установлена",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutFAQ": "Вопросы и ответы",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Ссылки",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "aboutSourceCode": "Исходный код",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "на GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Лицензия",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "Помогите улучшить {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Сообщить о проблеме",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpTranslate": "Помогите перевести",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "на Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "dataDownloadFailed": "Скачать не удалось",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Загружен {count} объект.}, =few{Загружены {count} объекта.}, =other{Загружены {count} объектов.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "fieldHoursAsText": "Текстом",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursHour": "Час",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "loadingTooMuchDataTitle": "Данных многовато",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Почистите данные в меню настроек, чтобы ускорить редактор.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "fieldHoursNumberedWeekday": "«Вторая среда»",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursClosed": "Закрыто",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "dataDownloadSuccessful": "Скачивание завершено",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "settingsAbout": "О приложении",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutProjectWebsite": "Сайт проекта",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "fieldHoursSpecificDays": "День в году",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursPublicHolidays": "Государственные праздники",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursMinute": "Минута",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
   "faqMapTiny": "Почему карта такая маленькая?",
   "faqMapTinyContent": "Потому что не она главная. На карте нужно проверить только своё местоположение, и подвинуть, если оно не там. Смотрите на список заведений внизу, упорядоченный по расстоянию от вас.\n\nКарта становится больше, когда вы правите заведения вдали от себя. Хотя приложение сделано для правки того, что вы видите своими глазами.",
   "faqCheckmarks": "Для чего галочки в списке?",
@@ -339,8 +455,6 @@
   "faqLettersContent": "Если в вашей цифровой клавиатуре нет переключателя на полную клавиатуру с буквами, загляните в настройки приложения. Они под кнопкой слева вверху на главном экране. Включите там «заменить цифровую клавиатуру».",
   "faqFloors": "Этажи \"3\" и \"/3\" — одно и то же?",
   "faqFloorsContent": "Нет. В первом заполнен тег `addr:floor=3`. Это этаж, как он написан в навигации и используется в жизни. Во втором этот тег пуст, но есть `level=3`. Это число — номер этажа в последовательной нумерации от нуля до `building:levels - 1`. То есть, в трёхэтажном доме `addr:floor` зависит от страны, а `level` всегда 0, 1 или 2.\n\nВот как условное обозначение в редакторе зависит от этих тегов:\n\n* `2`: `addr:floor=2` и непустой `level=*`.\n* `4/`: `addr:floor=4`, тег `level` отсутствует.\n* `/1`: `level=1`, тег `addr:floor` отсутствует.\n* `1/0`: `addr:floor=1` + `level=0` (и рядом есть объект с тем же `addr:floor`, но другим `level`, или наоборот).",
-  "faqUndo": "Как отменить правку?",
-  "faqUndoContent": "В списке правок, доступном из настроек, просто смахните нужную строчку влево.",
   "faqChangeType": "Как поменять тип заведения?",
   "faqChangeTypeContent": "Нажмите на заголовок редактора, где написан этот тип.",
   "faqTagging": "Любые вопросы по тегам",

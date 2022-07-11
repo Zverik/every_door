@@ -677,5 +677,111 @@
     "placeholders": {
       "count": {}
     }
+  },
+  "aboutProjectWebsite": "Página web del proyecto",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "Código fuente",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "en GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Licencia",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "Ayuda a mejorar {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Informar de un problema",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutFAQ": "Preguntas más frecuentes",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Enlaces",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "dataDownloadFailed": "Error en la descarga",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "aboutViewLog": "Registro del sistema",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "fieldHoursClosed": "Cerrado",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursAsText": "Como texto",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "loadingTooMuchDataTitle": "Demasiados datos",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Purgar los datos descargados desde los ajustes, para acelerar el editor.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadSuccessful": "Descarga exitosa",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "aboutOnWeblate": "en Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "dataDownloadedCount": "{count,plural, =1{{count} elemento descargado.}, =few{{count} elementos descargados.}, =other{{count} elementos descargados.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "aboutHelpTranslate": "Ayuda a traducir",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutInstalledVersion": "Versión instalada",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutVersionHistory": "Historial de versiones",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "fieldHoursNumberedWeekday": "«Último lunes»",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "Fecha específica",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursPublicHolidays": "Días festivos",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursHour": "Hora",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
   }
 }

@@ -740,5 +740,56 @@
   "aboutOnWeblate": "på Weblate",
   "@aboutOnWeblate": {
     "description": "Button description to indicate a link to Weblate."
+  },
+  "loadingTooMuchDataTitle": "For mange data",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Ryd downloadede data fra Indstillinger for at gøre editoren hurtigere.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "fieldHoursAsText": "Som tekst",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursSpecificDays": "Specifik dato",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Lukket",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Helligdage",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "dataDownloadFailed": "Download mislykkedes",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "fieldHoursHour": "Time",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Downloadede {count} element.}, =few{Downloadede {count} elementer.}, =other{Downloadede {count} elementer.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "dataDownloadSuccessful": "Download lykkedes",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "fieldHoursNumberedWeekday": "\"Sidste mandag\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursMinute": "Minut",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
   }
 }
