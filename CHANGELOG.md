@@ -30,12 +30,14 @@ _Unreleased_
 * House names support.
 * `addr:city` was removed when editing an address.
 * Support for multiple floors for an amenity.
+* Added `addr:postcode` editor to buildings.
 
 ### Other
 
 * Buildings in relations did not have the `roof:shape` chooser.
 * A warning when you've downloaded too much elements.
 * Changes are split in groups for uploading if possible.
+* Added a hint on how to undo a change.
 * Complete Ukrainian (by T.H.), Chinese Simplified (by Oil\_Station),
   and Basque (by Gari Araolaza) translations.
 

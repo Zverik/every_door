@@ -89,6 +89,10 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       updateAreaStatus();
     });
 
+    ref.listen(editorModeProvider, (_, next) {
+      ref.read(microZoomedInProvider.state).state = null;
+    });
+
     final screenSize = MediaQuery.of(context).size;
     final isWide =
         screenSize.width > screenSize.height && screenSize.height < 600;

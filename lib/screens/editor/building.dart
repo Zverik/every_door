@@ -107,7 +107,8 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final isAddress = building['building'] == null;
-    final canBeAddress = building.element?.isPoint != true; // not a node or a new element
+    final canBeAddress =
+        building.element?.isPoint != true; // not a node or a new element
     final levelOptions = ['1', '2'] + nearestLevels;
     levelOptions.add(kManualOption);
     final hasParts = // (building.element?.isMember ?? false) ||
@@ -146,6 +147,26 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                   },
                   defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                   children: [
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Text(loc.buildingPostCode,
+                              style: kFieldTextStyle),
+                        ),
+                        TextFormField(
+                          style: kFieldTextStyle,
+                          textCapitalization: TextCapitalization.characters,
+                          initialValue: building['addr:postcode'],
+                          focusNode: _focus,
+                          onChanged: (value) {
+                            setState(() {
+                              building['addr:postcode'] = value.trim();
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                     if (!isAddress)
                       TableRow(
                         children: [

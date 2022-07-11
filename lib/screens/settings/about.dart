@@ -23,7 +23,6 @@ class AboutPage extends StatelessWidget {
       FAQ(loc.faqEntrance, loc.faqEntranceContent),
       FAQ(loc.faqLetters, loc.faqLettersContent),
       FAQ(loc.faqFloors, loc.faqFloorsContent),
-      FAQ(loc.faqUndo, loc.faqUndoContent),
       FAQ(loc.faqChangeType, loc.faqChangeTypeContent),
       FAQ(loc.faqTagging, loc.faqTaggingContent),
     ];

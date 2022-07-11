@@ -140,49 +140,67 @@ class ChangeListPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: ListView.separated(
-        itemBuilder: (context, index) {
-          final change = changeList[index];
-          return Dismissible(
-            key: Key(change.databaseId),
-            direction: DismissDirection.endToStart,
-            onDismissed: (direction) {
-              changes.deleteChange(change);
-              ref.read(needMapUpdateProvider).trigger();
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.separated(
+              itemBuilder: (context, index) {
+                final change = changeList[index];
+                return Dismissible(
+                  key: Key(change.databaseId),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    changes.deleteChange(change);
+                    ref.read(needMapUpdateProvider).trigger();
 
-              ScaffoldMessenger.of(context).removeCurrentSnackBar();
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(loc.changesDeletedChange(change.typeAndName)),
-                action: SnackBarAction(
-                  label: loc.changesDeletedUndo.toUpperCase(),
-                  onPressed: () {
-                    changes.saveChange(change);
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content:
+                          Text(loc.changesDeletedChange(change.typeAndName)),
+                      action: SnackBarAction(
+                        label: loc.changesDeletedUndo.toUpperCase(),
+                        onPressed: () {
+                          changes.saveChange(change);
+                        },
+                      ),
+                    ));
                   },
-                ),
-              ));
-            },
-            background: Container(
-              color: Colors.red,
-              padding: EdgeInsets.only(right: 15.0),
-              child: Icon(Icons.delete, color: Colors.white),
-              alignment: Alignment.centerRight,
-            ),
-            child: ListTile(
-              title: Text(change.typeAndName),
-              subtitle: Text(change.error ?? loc.changesPending),
-              trailing: !hasManyTypes ? null : Icon(getTypeIcon(change.kind)),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => PoiEditorPage(amenity: change)),
+                  background: Container(
+                    color: Colors.red,
+                    padding: EdgeInsets.only(right: 15.0),
+                    child: Icon(Icons.delete, color: Colors.white),
+                    alignment: Alignment.centerRight,
+                  ),
+                  child: ListTile(
+                    title: Text(change.typeAndName),
+                    subtitle: Text(change.error ?? loc.changesPending),
+                    trailing:
+                        !hasManyTypes ? null : Icon(getTypeIcon(change.kind)),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => PoiEditorPage(amenity: change)),
+                      );
+                    },
+                  ),
                 );
               },
+              separatorBuilder: (context, index) => Divider(),
+              itemCount: changeList.length,
             ),
-          );
-        },
-        separatorBuilder: (context, index) => Divider(),
-        itemCount: changeList.length,
+          ),
+          if (changeList.length <= 5)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child: Center(
+                child: Text(
+                  loc.changesSwipeLeft,
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
