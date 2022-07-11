@@ -329,9 +329,10 @@ class _HoursMinutesChooserState extends State<HoursMinutesChooser> {
     }
 
     final loc = AppLocalizations.of(context)!;
-    final localTitle = hour == null ? loc.fieldHoursHour : '$hour: ${loc.fieldHoursMinute}';
+    final localTitle =
+        hour == null ? loc.fieldHoursHour : '$hour: ${loc.fieldHoursMinute}';
     return GridChooser<String>(
-      title: '${widget.title} $localTitle'.trimLeft(),
+      title: '${widget.title ?? ""} $localTitle'.trimLeft(),
       columns: 4,
       options: options,
       transpose: hour == null,
@@ -479,11 +480,12 @@ class TimeDefaults {
   late List<StringTime> defaultEndTimes;
   late List<HoursInterval> defaultBreaks;
 
-  TimeDefaults() {
-    updateFromAround([]);
+  TimeDefaults({List<String>? around, Iterable<HoursFragment>? fragments}) {
+    updateFromAround(around ?? [], fragments);
   }
 
-  updateFromAround(List<String> hoursAround) {
+  updateFromAround(List<String> hoursAround,
+      [Iterable<HoursFragment>? fragments]) {
     final kStart = RegExp(r'(?:^|Mo|Tu|We|Th|Fr|Sa|Su|;)\s*(\d?\d:\d\d)-');
     final kEnd = RegExp(r'-(\d?\d:\d\d)(?:$|;)');
     final kBreak = RegExp(r'-(\d?\d:\d\d),\s*(\d?\d:\d\d)-');
@@ -504,19 +506,29 @@ class TimeDefaults {
       }
     }
 
+    if (fragments != null) {
+      for (final fragment in fragments) {
+        if (fragment.active) {
+          starts.add(fragment.interval!.start.toString(), 10);
+          ends.add(fragment.interval!.end.toString(), 10);
+          breaks.addAll(fragment.breaks.map((b) => b.toString()), 10);
+        }
+      }
+    }
+
     defaultStartTimes = _addFromAround(
       kInitialStartTimes.map((s) => StringTime(s)),
-      starts.mostOccurentItems(cutoff: 2).map((s) => StringTime(s)),
+      starts.mostOccurentItems(cutoff: 4).map((s) => StringTime(s)),
       9,
     );
     defaultEndTimes = _addFromAround(
       kInitialEndTimes.map((s) => StringTime(s)),
-      ends.mostOccurentItems(cutoff: 2).map((s) => StringTime(s)),
+      ends.mostOccurentItems(cutoff: 4).map((s) => StringTime(s)),
       9,
     );
     defaultBreaks = _addFromAround(
       kInitialBreaks.map((s) => HoursInterval.parse(s)),
-      breaks.mostOccurentItems(cutoff: 2).map((s) => HoursInterval.parse(s)),
+      breaks.mostOccurentItems(cutoff: 3).map((s) => HoursInterval.parse(s)),
       4,
     );
   }

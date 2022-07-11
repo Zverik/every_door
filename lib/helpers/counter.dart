@@ -27,18 +27,17 @@ class Counter<T> {
     _data[item] = value;
   }
 
-  List<CounterEntry<T>> mostOccurent([int? count]) {
+  Iterable<CounterEntry<T>> mostOccurent([int? count]) {
     final entries = _data.entries.toList();
     entries.sort((a, b) => b.value.compareTo(a.value));
     final result = entries.map((e) => CounterEntry(e.key, e.value));
-    return (count == null ? result : result.take(count)).toList();
+    return count == null ? result : result.take(count);
   }
 
-  List<T> mostOccurentItems({int? count, int? cutoff}) {
+  Iterable<T> mostOccurentItems({int? count, int? cutoff}) {
     return mostOccurent(count)
         .where((e) => cutoff == null || e.count >= cutoff)
-        .map((e) => e.item)
-        .toList();
+        .map((e) => e.item);
   }
 }
 

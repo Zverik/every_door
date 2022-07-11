@@ -27,21 +27,27 @@ class BuildingEditorPane extends ConsumerStatefulWidget {
 class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   late final OsmChange building;
   bool manualLevels = false;
-  late final FocusNode _focus;
+  bool manualPostcode = false;
+  late final FocusNode _levelsFocus;
+  late final FocusNode _postcodeFocus;
   List<String> nearestLevels = [];
+  List<String> nearestPostcodes = [];
 
   @override
   void initState() {
     super.initState();
-    _focus = FocusNode();
+    _levelsFocus = FocusNode();
+    _postcodeFocus = FocusNode();
     building = widget.building?.copy() ??
         OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
     updateLevels();
+    updatePostcodes();
   }
 
   @override
   void dispose() {
-    _focus.dispose();
+    _levelsFocus.dispose();
+    _postcodeFocus.dispose();
     super.dispose();
   }
 
@@ -76,6 +82,15 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
 
     setState(() {
       nearestLevels = nearestInt.map((e) => e.toString()).toList();
+    });
+  }
+
+  updatePostcodes() async {
+    final postcodes = await ref
+        .read(osmDataProvider)
+        .getPostcodesAround(widget.location, limit: 2);
+    setState(() {
+      nearestPostcodes = postcodes;
     });
   }
 
@@ -154,17 +169,34 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                           child: Text(loc.buildingPostCode,
                               style: kFieldTextStyle),
                         ),
-                        TextFormField(
-                          style: kFieldTextStyle,
-                          textCapitalization: TextCapitalization.characters,
-                          initialValue: building['addr:postcode'],
-                          focusNode: _focus,
-                          onChanged: (value) {
-                            setState(() {
-                              building['addr:postcode'] = value.trim();
-                            });
-                          },
-                        ),
+                        if (!manualPostcode && nearestPostcodes.isNotEmpty)
+                          RadioField(
+                            options: nearestPostcodes + [kManualOption],
+                            value: building['addr:postcode'],
+                            onChange: (value) {
+                              setState(() {
+                                if (value == kManualOption) {
+                                  building.removeTag('addr:postcode');
+                                  manualPostcode = true;
+                                  _postcodeFocus.requestFocus();
+                                } else {
+                                  building['addr:postcode'] = value;
+                                }
+                              });
+                            },
+                          ),
+                        if (manualPostcode || nearestPostcodes.isEmpty)
+                          TextFormField(
+                            style: kFieldTextStyle,
+                            textCapitalization: TextCapitalization.characters,
+                            initialValue: building['addr:postcode'],
+                            focusNode: _postcodeFocus,
+                            onChanged: (value) {
+                              setState(() {
+                                building['addr:postcode'] = value.trim();
+                              });
+                            },
+                          ),
                       ],
                     ),
                     if (!isAddress)
@@ -184,7 +216,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                                   if (value == kManualOption) {
                                     building.removeTag('building:levels');
                                     manualLevels = true;
-                                    _focus.requestFocus();
+                                    _levelsFocus.requestFocus();
                                   } else {
                                     building['building:levels'] = value;
                                   }
@@ -196,7 +228,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                               keyboardType: TextInputType.number,
                               style: kFieldTextStyle,
                               initialValue: building['building:levels'],
-                              focusNode: _focus,
+                              focusNode: _levelsFocus,
                               validator: (value) => validateLevels(value)
                                   ? null
                                   : loc.fieldFloorShouldBeNumber,

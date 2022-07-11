@@ -1,6 +1,8 @@
+import 'package:every_door/helpers/counter.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/circle_bounds.dart';
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/location_object.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/models/address.dart';
@@ -294,21 +296,43 @@ class OsmDataHelper extends ChangeNotifier {
     );
 
     // Keep only amenities with opening_hours.
-    final elements = rows
+    final elements = LocationObjectSet(rows
         .map((row) => OsmElement.fromJson(row))
         .where((element) => element.tags.containsKey('opening_hours'))
-        .toList();
+        .map((e) => LocationObject(e.center!, e.tags['opening_hours']!)));
 
-    // Sort by distance and keep the few closest amenities.
+    elements.sortByDistance(location, unique: true);
+    return elements.take(limit);
+  }
+
+  Future<List<String>> getPostcodesAround(LatLng location,
+      {int limit = 3}) async {
+    final database = await _ref.read(databaseProvider).database;
+    final hashes = createGeohashes(location.latitude, location.longitude,
+        kVisibilityRadius.toDouble(), kGeohashPrecision);
+    final placeholders = List.generate(hashes.length, (index) => "?").join(",");
+    final rows = await database.query(
+      OsmElement.kTableName,
+      where: "geohash in ($placeholders) and tags like '%addr:postcode%'",
+      whereArgs: hashes,
+    );
+
+    // Keep only amenities with opening_hours.
+    final elements = LocationObjectSet(rows
+        .map((row) => OsmElement.fromJson(row))
+        .where((element) => element.tags.containsKey('addr:postcode'))
+        .map((e) => LocationObject(e.center!, e.tags['addr:postcode']!)));
+
+    // Add all new changes with postcodes
     const distance = DistanceEquirectangular();
-    elements.sort((a, b) =>
-        distance(location, a.center!).compareTo(distance(location, b.center!)));
-    if (elements.length > limit) elements.removeRange(limit, elements.length);
+    final changedElements = _ref.read(changesProvider).all().where((element) =>
+        distance(location, element.location) <= kVisibilityRadius &&
+        element['addr:postcode'] != null);
+    elements.addAll(changedElements
+        .map((e) => LocationObject(e.location, e['addr:postcode']!)));
 
-    return elements
-        .map((e) => e.tags['opening_hours'])
-        .whereType<String>()
-        .toList();
+    elements.sortByDistance(location, unique: true);
+    return elements.take(limit);
   }
 
   Future<Set<String>> getCardPaymentOptions(LatLng location) async {
@@ -334,24 +358,20 @@ class OsmDataHelper extends ChangeNotifier {
 
     // Count all payment:XXX=yes tags.
     int count = 0;
-    final tagCount = <String, int>{};
+    final tagCount = Counter<String>();
     for (final tags in elementTags) {
       final paymentTags = tags.entries
           .where((tag) => tag.value == 'yes' && kCardOptions.contains(tag.key))
           .map((e) => e.key);
       if (paymentTags.isNotEmpty) {
         count++;
-        for (var key in paymentTags) {
-          tagCount[key] = (tagCount[key] ?? 0) + 1;
-        }
+        tagCount.addAll(paymentTags);
       }
     }
 
     // List all payment options that appear at least on 1/3 of objects.
-    final minCount = (count / 3).ceil();
-    final result = tagCount.entries
-        .where((e) => e.value >= minCount && e.value >= 2)
-        .map((e) => e.key)
+    final result = tagCount
+        .mostOccurentItems(cutoff: count < 6 ? 2 : (count / 3).ceil())
         .toSet();
 
     // If no results, use the default.

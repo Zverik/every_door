@@ -19,6 +19,7 @@ if [ -n "$GIT_PATH" ]; then
 fi
 
 if [ ! -d "$HERE/venv" ]; then
+  echo 'Building Python environment'
   python3 -m venv "$HERE/venv"
   "$HERE/venv/bin/pip" install -r "$HERE/requirements.txt"
 fi
@@ -26,12 +27,14 @@ PYTHON="$HERE/venv/bin/python"
 
 mkdir -p "$ASSETS"
 rm -f "$PRESETS_DB" "$PRESETS_ZIP"
+echo 'Processing presets and NSI'
 "$PYTHON" json_to_sqlite.py "$PRESETS_DB" "$GIT_PATH"
+echo 'Processing taginfo database'
 "$PYTHON" add_taginfo.py "$PRESETS_DB" "$TAGINFO_DB"
+echo 'Processing imagery index'
 "$PYTHON" add_imagery.py "$PRESETS_DB" "$GIT_PATH"
-# cat "$PRESETS_DB" | gzip > "$PRESETS_ZIP"
-# rm "$PRESETS_DB"
 
+echo 'Preparing NSI features'
 if [ -n "$GIT_PATH" ]; then
   cp "$GIT_PATH/name-suggestion-index/dist/featureCollection.min.json" nsi_fc.json
 else

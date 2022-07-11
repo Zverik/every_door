@@ -26,6 +26,7 @@ class OpeningHoursPage extends ConsumerStatefulWidget {
 class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   late HoursData hours;
   final timeDefaults = TimeDefaults();
+  List<String> _cachedAround = [];
   final ScrollController _scrollController = ScrollController();
   bool isRaw = false;
 
@@ -49,9 +50,14 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   _findDefaultIntervals() async {
     if (widget.element == null) return;
     final data = ref.read(osmDataProvider);
-    timeDefaults.updateFromAround(
-        await data.getOpeningHoursAround(widget.element!.location, limit: 50));
+    _cachedAround =
+        await data.getOpeningHoursAround(widget.element!.location, limit: 50);
+    _updateTimeDefaults();
     setState(() {});
+  }
+
+  _updateTimeDefaults() {
+    timeDefaults.updateFromAround(_cachedAround, hours.fragments);
   }
 
   @override
@@ -136,10 +142,9 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
         final missingDays = hours.getMissingWeekdays();
         if (inactive.weekdays != missingDays) {
           setState(() {
-            if (missingDays.isEmpty)
-              hours.fragments.removeAt(pos);
-            else
-              hours.fragments[pos] = inactive.copyWith(weekdays: missingDays);
+            if (missingDays.isEmpty) hours.fragments.removeAt(pos);
+            /*else
+              hours.fragments[pos] = inactive.copyWith(weekdays: missingDays);*/
           });
         }
       }
@@ -184,10 +189,11 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
             child: HoursFragmentEditor(
               fragment: hours.fragments[i],
               timeDefaults: timeDefaults,
-              onDelete: i == 0 || !hours.fragments[i].active
+              onDelete: i == 0
                   ? null
                   : () {
                       setState(() {
+                        hours.fragments.removeAt(i);
                         _updateInactiveCard();
                       });
                     },
@@ -209,6 +215,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
                       }
                     }
                   }
+                  _updateTimeDefaults();
                   _updateInactiveCard();
                 });
                 return true;

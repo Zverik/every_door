@@ -86,7 +86,6 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
           // Breaks
           for (int i = 0; i < widget.fragment.breaks.length; i++)
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 ChooserIntervalField(

@@ -211,12 +211,18 @@ def import_presets(cur, path):
 def remove_generic_terms(cur):
     """Remove terms that address generic presets (e.g. shop=*)."""
     global non_searchable_presets
+    preset_names = set(non_searchable_presets)
 
     cur.execute("select name, add_tags from presets where add_tags like '%\"*\"%'")
-    preset_names = set(non_searchable_presets)
     for row in cur:
         tags = json.loads(row[1])
-        if not tags or all(v == '*' for v in tags.values()) or tags.get('amenity') == 'parking':
+        if not tags or all(v == '*' for v in tags.values()):
+            preset_names.add(row[0])
+
+    cur.execute("select name, add_tags from presets where add_tags like '%\"parking\"%'")
+    for row in cur:
+        tags = json.loads(row[1])
+        if tags and tags.get('amenity') == 'parking':
             preset_names.add(row[0])
 
     nq = ','.join('?' for n in preset_names)
