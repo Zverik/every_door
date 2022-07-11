@@ -328,5 +328,119 @@
   "apiStatusUpdatingDB": "Обновляю данные в базе приложения",
   "@apiStatusUpdatingDB": {},
   "apiStatusUploading": "Отправляю правки",
-  "@apiStatusUploading": {}
+  "@apiStatusUploading": {},
+  "aboutViewLog": "Системный журнал",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "История версий",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "Установлена",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutFAQ": "Вопросы и ответы",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Ссылки",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "aboutSourceCode": "Исходный код",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "на GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Лицензия",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "Помогите улучшить {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Сообщить о проблеме",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpTranslate": "Помогите перевести",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "на Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "dataDownloadFailed": "Скачать не удалось",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Загружен {count} объект.}, =few{Загружены {count} объекта.}, =other{Загружены {count} объектов.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "fieldHoursAsText": "Текстом",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursHour": "Час",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "loadingTooMuchDataTitle": "Данных многовато",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Почистите данные в меню настроек, чтобы ускорить редактор.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "fieldHoursNumberedWeekday": "«Вторая среда»",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursClosed": "Закрыто",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "dataDownloadSuccessful": "Скачивание завершено",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "settingsAbout": "О приложении",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutProjectWebsite": "Сайт проекта",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "fieldHoursSpecificDays": "День в году",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursPublicHolidays": "Государственные праздники",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursMinute": "Минута",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  }
 }
