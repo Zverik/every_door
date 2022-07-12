@@ -483,5 +483,35 @@
   "fieldHoursNumberedWeekday": "\"Letzten Montag\"",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
-  }
+  },
+  "buildingPostCode": "Postleitzahl",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqCheckmarks": "Wozu dienen die Häkchen?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Wie kann man einen Gebäudeeingang hinzufügen?",
+  "@faqEntrance": {},
+  "faqEntranceContent": "Unten befindet sich eine Reihe mit Schaltflächen für die Modi: Mikromapping, Einrichtungen und Eingänge.\n\nTippen Sie im Modus Eingänge auf die Tür in der unteren Ecke oder ziehen Sie diese auf die Karte.",
+  "@faqEntranceContent": {},
+  "faqLetters": "Kann ich Buchstaben als Kennziffer oder Wohnungsnummer eingeben?",
+  "@faqLetters": {},
+  "faqLettersContent": "Wenn Ihre numerische Tastatur nicht auf eine vollständige Tastatur umgeschaltet werden kann, überprüfen Sie die Einstellungen der App. Sie befinden sich hinter der Schaltfläche in der oberen linken Ecke. Schalten Sie dort die \"erweiterte numerische Tastatur\" ein.",
+  "@faqLettersContent": {},
+  "faqFloors": "Sind die Geschosse \"3\" und \"/3\" gleich?",
+  "@faqFloors": {},
+  "faqChangeType": "Wie wird der Typ einer Einrichtung geändert?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Tippen Sie auf den Titel des Editors, auf dem der Typ geschrieben ist.",
+  "@faqChangeTypeContent": {},
+  "faqMapTinyContent": "Weil es nicht darum geht. Sie überprüfen nur Ihre Position auf der Karte und schwenken sie, um sie anzupassen. Sehen Sie sich die Liste der Einrichtungen unten an, sortiert nach Entfernung zu Ihnen.\n\nDie Karte wird größer, wenn Sie Einrichtungen weit entfernt von Ihrem Standort bearbeiten. Obwohl die App entwickelt wurde, um Dinge zu bearbeiten, die Sie mit Ihren Augen sehen.",
+  "@faqMapTinyContent": {},
+  "changesSwipeLeft": "Nach links wischen, um Änderung rückgängig zu machen",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "faqMapTiny": "Warum ist die Karte so klein?",
+  "@faqMapTiny": {},
+  "faqCheckmarksContent": "Dies sind Zeichen dafür, dass die Daten der Einrichtungen bestätigt wurden. Sie fügen das `check_date`-Tag mit dem aktuellen Datum hinzu.\n\nDie Idee hinter den Häkchen ist, dass Sie beispielsweise beim ersten Mal die halbe Stadt vermessen haben. Dann kamen Sie nach einem Monat zurück und gingen erneut zur Umfrage. Sie müssen irgendwie markieren, dass Sie die Einrichtungen sehen, sich aber nichts daran geändert hat. Das ist das Häkchen: Sie tippen darauf und fahren fort.\n\nDas Häkchen bleibt für zwei Wochen gesetzt. Danach können Sie die Einrichtung erneut bestätigen.",
+  "@faqCheckmarksContent": {}
 }
