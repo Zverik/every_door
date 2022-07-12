@@ -1,5 +1,15 @@
 # Every Door App Change Log
 
+## 0.8
+
+_Unreleased_
+
+### Opening Hours Editor
+
+* Could not mark an hours fragment as `off`.
+* When switching to the raw hours editor, the value was not updated.
+* An inactive `PH` interval is no longer added by default.
+
 ## 0.7
 
 _Released on 2022-07-11_

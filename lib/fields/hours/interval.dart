@@ -508,7 +508,7 @@ class TimeDefaults {
 
     if (fragments != null) {
       for (final fragment in fragments) {
-        if (fragment.active) {
+        if (fragment.active && fragment.interval != null) {
           starts.add(fragment.interval!.start.toString(), 10);
           ends.add(fragment.interval!.end.toString(), 10);
           breaks.addAll(fragment.breaks.map((b) => b.toString()), 10);

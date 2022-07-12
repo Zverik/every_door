@@ -111,10 +111,9 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   }
 
   int _getInactiveCardPosition() {
-    // We don't care about inactive fragments other than weekdays and holidays.
-    return hours.fragments.indexWhere((fragment) =>
-        !fragment.active &&
-        (fragment.weekdays is Weekdays || fragment.weekdays is PublicHolidays));
+    // We don't care about inactive fragments other than weekdays.
+    return hours.fragments.indexWhere(
+        (fragment) => !fragment.active && fragment.weekdays is Weekdays);
   }
 
   _updateInactiveCard() {
@@ -137,18 +136,26 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     } else {
       // The last one is inactive, but maybe we need to remove it or update weekdays.
       final inactive = hours.fragments[pos];
-      if (inactive.weekdays is Weekdays ||
-          inactive.weekdays is PublicHolidays) {
+      if (inactive.weekdays is Weekdays) {
         final missingDays = hours.getMissingWeekdays();
-        if (inactive.weekdays != missingDays) {
+        if (missingDays.isEmpty) {
           setState(() {
-            if (missingDays.isEmpty) hours.fragments.removeAt(pos);
-            /*else
-              hours.fragments[pos] = inactive.copyWith(weekdays: missingDays);*/
+            hours.fragments.removeAt(pos);
           });
         }
       }
     }
+  }
+
+  _addInactiveFragment(DaysRange range) {
+    final newFragment = HoursFragment.inactive(range);
+    int inactivePos = _getInactiveCardPosition();
+    setState(() {
+      if (inactivePos <= 0)
+        hours.fragments.add(newFragment);
+      else
+        hours.fragments.insert(inactivePos, newFragment);
+    });
   }
 
   Widget buildFragmentsEditor(BuildContext context) {
@@ -165,6 +172,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
                     style: TextStyle(fontSize: 20.0)),
                 onPressed: () {
                   setState(() {
+                    hours.hours = hours.buildHours();
                     isRaw = true;
                   });
                 },
@@ -223,40 +231,31 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
             ),
           ),
         Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10.0,
             children: [
               ElevatedButton(
-                child: Text(loc.fieldHoursNumberedWeekday,
-                    style: TextStyle(fontSize: 20.0)),
+                child: Text(loc.fieldHoursPublicHolidays,
+                    style: TextStyle(fontSize: 18.0)),
                 onPressed: () {
-                  final newFragment =
-                      HoursFragment.inactive(NumberedWeekday(0, {}));
-                  int inactivePos = _getInactiveCardPosition();
-                  setState(() {
-                    if (inactivePos <= 0)
-                      hours.fragments.add(newFragment);
-                    else
-                      hours.fragments.insert(inactivePos, newFragment);
-                  });
+                  _addInactiveFragment(PublicHolidays());
                 },
               ),
-              SizedBox(width: 10.0),
+              ElevatedButton(
+                child: Text(loc.fieldHoursNumberedWeekday,
+                    style: TextStyle(fontSize: 18.0)),
+                onPressed: () {
+                  _addInactiveFragment(NumberedWeekday(0, {}));
+                },
+              ),
               ElevatedButton(
                 child: Text(loc.fieldHoursSpecificDays,
-                    style: TextStyle(fontSize: 20.0)),
+                    style: TextStyle(fontSize: 18.0)),
                 onPressed: () async {
                   final date = await SpecificDaysPanel.pickDate(context);
                   if (date != null) {
-                    final newFragment =
-                        HoursFragment.inactive(SpecificDays({date}));
-                    int inactivePos = _getInactiveCardPosition();
-                    setState(() {
-                      if (inactivePos <= 0)
-                        hours.fragments.add(newFragment);
-                      else
-                        hours.fragments.insert(inactivePos, newFragment);
-                    });
+                    _addInactiveFragment(SpecificDays({date}));
                   }
                 },
               ),

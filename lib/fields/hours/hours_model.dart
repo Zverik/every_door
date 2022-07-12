@@ -129,8 +129,8 @@ class HoursFragment implements Comparable {
   List<HoursInterval> breaks;
   final bool _active;
 
-  HoursFragment(this.weekdays, this.interval, this.breaks,
-      {bool active = true}) : _active = active {
+  HoursFragment(this.weekdays, this.interval, this.breaks, {bool active = true})
+      : _active = active {
     _fixAndSortBreaks();
   }
 
@@ -442,18 +442,12 @@ class HoursData {
 
   DaysRange getMissingWeekdays() {
     List<bool> daysSet = List.filled(7, false);
-    bool seenPH = false;
     for (final f in fragments) {
-      if (f.active) {
-        if (f.weekdays is PublicHolidays) seenPH = true;
-        if (f.weekdays is Weekdays) {
-          for (int i = 0; i < daysSet.length; i++)
-            daysSet[i] = daysSet[i] || (f.weekdays as Weekdays).days[i];
-        }
+      if (f.active && f.weekdays is Weekdays) {
+        for (int i = 0; i < daysSet.length; i++)
+          daysSet[i] = daysSet[i] || (f.weekdays as Weekdays).days[i];
       }
     }
-    final result = Weekdays(daysSet.map((d) => !d).toList());
-    if (result.isEmpty && !seenPH) return PublicHolidays();
-    return result;
+    return Weekdays(daysSet.map((d) => !d).toList());
   }
 }
