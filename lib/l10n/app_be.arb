@@ -1,0 +1,81 @@
+{
+  "loadingTooMuchData": "Ачысціце спампаваныя дадзеныя ў Наладах, каб паскорыць рэдактар.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Памылка спампоўкі",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "tileNo": "не",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "filterNoAddresses": "Адрасоў паблізу няма",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterByAddress": "Па адрасе",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterByFloor": "Па паверсе",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "chooseLocation": "Выберыце месца",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "Выберыце тып",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Ачысціць",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "settingsApiServer": "Сервер API",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsLoginDetails": "Уліковы запіс OSM",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "accountTitle": "Уліковы запіс OpenStreetMap",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLogout": "Выйсці",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "apiStatusDownloading": "Спампоўка дадзеных…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Спампаваны {count} элемент.}, =few{Спампавана {count} элементаў.}, =other{Спампавана {count} элементаў.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "loadingTooMuchDataTitle": "Занадта шмат дадзеных",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "legendOther": "Іншы",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "editorSave": "Захаваць",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "settingsTitle": "Налады",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  }
+}

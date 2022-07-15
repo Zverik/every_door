@@ -783,5 +783,69 @@
   "fieldHoursHour": "Hora",
   "@fieldHoursHour": {
     "description": "Label for the hour chooser."
-  }
+  },
+  "settingsAbout": "Información",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "fieldHoursMinute": "Minuto",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "changesSwipeLeft": "Desliza el dedo hacia la izquierda para deshacer un cambio",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "buildingPostCode": "Código postal",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqMapTiny": "¿Por qué el mapa es tan pequeño?",
+  "@faqMapTiny": {},
+  "faqMapTinyContent": "Porque no es el foco de atención. Sólo debes comprobar tu ubicación en el mapa, y desplazarte por él para ajustarlo. Mira la lista de servicios a continuación, ordenada por cercanía.\n\nEl mapa se amplía al editar los servicios que están lejos de tu ubicación. Aunque la aplicación fue hecha para editar cosas que ves con tus ojos.",
+  "@faqMapTinyContent": {},
+  "faqCheckmarks": "¿Para qué sirven las marcas de verificación?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "¿Cómo añadir una entrada al edificio?",
+  "@faqEntrance": {},
+  "faqEntranceContent": "En la parte inferior hay una fila de botones de modos: micromapa, servicios y entradas.\n\nEn el modo de entradas, pulsa o desliza el botón de la puerta en la esquina inferior sobre el mapa.",
+  "@faqEntranceContent": {},
+  "faqTagging": "Todas las preguntas sobre el etiquetado",
+  "@faqTagging": {},
+  "buildingMaterial": "Fachada",
+  "@buildingMaterial": {},
+  "buildingMaterialCementBlock": "bloques de cemento",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "piedra",
+  "@buildingMaterialStone": {},
+  "faqLetters": "¿Puedo ingresar letras en un número de referencia o un número de piso?",
+  "@faqLetters": {},
+  "faqFloors": "¿Los pisos «3» y «/3» son iguales?",
+  "@faqFloors": {},
+  "faqChangeType": "¿Cómo cambiar un tipo de servicio?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Pulsa sobre el título del editor, donde se escribe el tipo.",
+  "@faqChangeTypeContent": {},
+  "buildingMaterialMetal": "metal",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialConcrete": "hormigón",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialWood": "madera",
+  "@buildingMaterialWood": {},
+  "buildingMaterialBrick": "ladrillo",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "yeso",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialPanels": "paneles",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialGlass": "vidrio",
+  "@buildingMaterialGlass": {},
+  "faqFloorsContent": "No. El primero tiene añadida la etiqueta «addr:floor=3». Ese es el piso tal y como está impreso en la navegación y se utiliza habitualmente. El segundo no tiene esta etiqueta, pero tiene «level=3». Ese número es un número de planta secuencial desde cero hasta «building:levels - 1». Es decir, en un edificio de tres plantas el valor de «addr:floor» depende de un país, pero «level» es siempre 0, 1 o 2.\n\nAsí es como la notación en el editor se relaciona con estas etiquetas:\n\n* «2»: «addr:floor=2» y «level=*» no vacío.\n* «4/»: «addr:floor=4», pero no hay etiqueta «level».\n* 1: «level=1», pero no hay etiqueta «addr:floor».\n* «1/0»: «addr:floor=1» y «level=0» (y hay un objeto cercano con la misma dirección de piso, pero diferente nivel, o viceversa).",
+  "@faqFloorsContent": {},
+  "faqCheckmarksContent": "Marcan que los datos del servicio fueron confirmados. Estas añaden la etiqueta «check_date» con la fecha actual.\n\nLa idea detrás de las marcas de verificación es que, por ejemplo, luego de encuestar la mitad de la ciudad la primera vez, al cabo de un mes, regresas y vuelves a encuestar. Necesitas marcar de alguna manera que ves el servicio, pero que nada ha cambiado en él. Esa es la marca de verificación: la tocas y continúas.\n\nLa marca permanece marcada durante dos semanas. Después puedes volver a encuestar los servicios.",
+  "@faqCheckmarksContent": {},
+  "faqLettersContent": "Si tu teclado numérico no puede cambiarse a uno completo, comprueba los ajustes de la aplicación. Están detrás del botón de la esquina superior izquierda. Activa allí el «teclado numérico ampliado».",
+  "@faqLettersContent": {},
+  "faqTaggingContent": "¿Por qué falta un objeto en el editor? ¿Cuándo se muestran estos puntos blancos en el modo de «micromapping»? ¿Cómo se ordenan los objetos?\n\nLas respuestas a todas estas preguntas están en [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Esto es lo que puedes mirar:\n\n* El orden de las claves para la etiqueta principal — lista «kMainKeys».\n* Qué objetos se descargan — función «isGoodTags».\n* Qué se considera un servicio — función «isAmenityTags».\n* Qué puntos se ajustan a qué formas — función «detectSnap».\n* Cuando un objeto de micromapping está incompleto — función «needsMoreInfo».",
+  "@faqTaggingContent": {}
 }
