@@ -2,7 +2,7 @@
 
 ## 0.8
 
-_Unreleased_
+_Released on 2022-07-15_
 
 * Removed `addr:postcode` and added `building:material` to the building properties.
 * Removed non-card options from the payment setting.
