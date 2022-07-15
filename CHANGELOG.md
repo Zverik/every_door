@@ -9,6 +9,7 @@ _Unreleased_
 * Disabled map jumping in POI mode because of the number of POI.
 * The editor did not download address points.
 * No addresses on buildings in Netherlands.
+* Removed `not:name` field.
 
 ## Opening Hours Editor
 

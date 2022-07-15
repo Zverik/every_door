@@ -329,6 +329,8 @@ class PresetProvider {
     return options.map((e) => ComboOption(e, loc[e])).toList();
   }
 
+  static const kSkipFields = {'opening_hours/covid19', 'not/name'};
+
   Future<Preset> getFields(Preset preset, {Locale? locale}) async {
     if (preset.isFixme)
       return preset.withFields(
@@ -364,7 +366,7 @@ class PresetProvider {
     final seenFields = <String>{};
     for (final row in results) {
       if (seenFields.contains(row['name'])) continue;
-      if (row['name'] == 'opening_hours/covid19') continue;
+      if (kSkipFields.contains(row['name'])) continue;
       seenFields.add(row['name'] as String);
 
       // Either build a field, or restore it from a cache.
