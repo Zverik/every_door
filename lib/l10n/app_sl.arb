@@ -791,5 +791,41 @@
   "fieldHoursMinute": "minuta",
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
-  }
+  },
+  "faqMapTiny": "Zakaj je zemljevid tako majhen?",
+  "@faqMapTiny": {},
+  "faqCheckmarks": "Kaj pomenijo kljukice?",
+  "@faqCheckmarks": {},
+  "faqLetters": "Ali lahko v referenčno številko ali številko nadstropja vnesem črke?",
+  "@faqLetters": {},
+  "faqFloors": "Ali sta nadstropji '3' in '/3' enaki?",
+  "@faqFloors": {},
+  "faqChangeType": "Kako spremeniti vrsto točke POI?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Tapni na naslov urejevalnika, kjer je napisana vrsta.",
+  "@faqChangeTypeContent": {},
+  "buildingPostCode": "Poštna številka",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "changesSwipeLeft": "Za razveljavitev spremembe podrsaj v levo",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "faqEntranceContent": "Na dnu je vrsta gumbov za načine: mikromapiranje, točke POI in vhodi.\n\nV načinu vhodov tapni ali povleci gumb za vrata v spodnjem kotu na zemljevid.",
+  "@faqEntranceContent": {},
+  "faqMapTinyContent": "Ker to ni bistvo. Na zemljevidu le preverjaš svoj položaj in ga premikaš, za prilagoditev. Oglej si spodnji seznam točk POI, razvrščen po oddaljenosti.\n\nZemljevid se poveča, ko urejaš vsebine, ki so oddaljene od tvoje lokacije. Aplikacija je pravzaprav narejena za urejanje stvari, ki jih vidiš z očmi.",
+  "@faqMapTinyContent": {},
+  "faqCheckmarksContent": "To so oznake, da so bili podatki o točkah POI potrjeni. Dodajo oznako »check_date« s trenutnim datumom.\n\nZamisel za kontrolnimi oznakami je ta, da si, recimo, prvič pregledaš polovico mesta. Nato se po enem mesecu vrneš in ponovno ogledaš stvari. Nekako moraš označiti, da si videl/a objekt, vendar se v zvezi z njim ni nič spremenilo. To je kljukica: tapneš jo in nadaljuješ.\n\nOznaka ostane označena dva tedna. Po tem času lahko ponovno opraviš ogled in potrditev.",
+  "@faqCheckmarksContent": {},
+  "faqEntrance": "Kako dodati vhod v stavbo?",
+  "@faqEntrance": {},
+  "faqLettersContent": "Če številčne tipkovnice ni mogoče preklopiti na polno tipkovnico, preveri nastavitve aplikacije. Te se nahajajo za gumbom v zgornjem levem kotu. Tam lahko vklopiš »razširjeno številčno tipkovnico«.",
+  "@faqLettersContent": {},
+  "faqTagging": "Vsa vprašanja o označevanju",
+  "@faqTagging": {},
+  "faqFloorsContent": "Ne. Prvi ima izpolnjeno oznako »addr:floor=3«. To je nadstropje, kot je natisnjeno na navigaciji in se običajno uporablja. Drugi nima te oznake, ima pa oznako »level=3«. Ta številka je zaporedna številka nadstropja od nič do »building:levels - 1«. To pomeni, da je v trinadstropni stavbi vrednost »addr:floor« odvisna od kraja, vendar je »level« vedno 0, 1 ali 2.\n\nTukaj je prikazano, kako se zapis v urejevalniku nanaš na te oznake:\n\n* `2`: `addr:floor=2` in neprazno `level=*`.\n* `4/`: `addr:floor=4`, vendar ni oznake `level`.\n* `/1`: `level=1`, vendar ni oznake `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (in v bližini je predmet z enakim `addr:floor`, vendar drugačnim `level`, ali obratno).",
+  "@faqFloorsContent": {},
+  "faqTaggingContent": "Zakaj v urejevalniku ni predmeta? Kdaj se te bele pike prikažejo v načinu mikromapiranja? Kako so razvrščeni predmeti?\n\nOdgovore na vsa ta vprašanja najdete v [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Tukaj si lahko ogledate:\n\n* Vrstni red ključev za glavno oznako — seznam `kMainKeys`.\n* Kateri predmeti so preneseni — funkcija `isGoodTags`.\n* Kaj se šteje za točko POI — funkcija `isAmenityTags`.\n* Katere točke se pripenjajo na katere poti — funkcija `detectSnap`.\n* Kdaj je objekt mikromapiranja nepopoln — funkcija `needsMoreInfo`.",
+  "@faqTaggingContent": {}
 }

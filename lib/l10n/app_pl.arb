@@ -740,5 +740,92 @@
   "aboutLinks": "Odnośniki",
   "@aboutLinks": {
     "description": "Title for the links section on the About page."
-  }
+  },
+  "loadingTooMuchDataTitle": "Za dużo danych",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Usuń pobrane dane z Ustawień, aby przyspieszyć działanie edytora.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Błąd pobierania",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Pobrano pomyślnie",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Pobrano {count} element.}, =few{Pobrano {count} elementy.}, =other{Pobrano {count} elementów.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "fieldHoursClosed": "Zamknięte",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Święta publiczne",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursHour": "Godzina",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minuty",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "faqLetters": "Czy mogę wpisywać litery do numeru ref lub numeru mieszkania?",
+  "@faqLetters": {},
+  "faqLettersContent": "Jeśli nie można przełączyć klawiatury numerycznej na pełną, sprawdź ustawienia aplikacji. Znajdują się one za przyciskiem w lewym górnym rogu. Włącz tam \"rozszerzoną klawiaturę numeryczną\".",
+  "@faqLettersContent": {},
+  "faqTagging": "Wszystkie pytania dotyczące dodawania znaczników",
+  "@faqTagging": {},
+  "faqChangeType": "Jak zmienić rodzaj udogodnienia?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Stuknij w tytuł edytora, w którym jest napisany jego rodzaj.",
+  "@faqChangeTypeContent": {},
+  "fieldHoursAsText": "Jako tekst",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "\"Ostatni poniedziałek\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "changesSwipeLeft": "Przesuń w lewo, aby cofnąć zmianę",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursSpecificDays": "Określona data",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "buildingPostCode": "Kod pocztowy",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqMapTiny": "Dlaczego mapa jest tak mała?",
+  "@faqMapTiny": {},
+  "faqMapTinyContent": "Bo nie o to chodzi. Sprawdzasz tylko swoją pozycję na mapie i przesuwasz ją, aby dostosować. Obejrzyj poniższą listę udogodnień, posortowaną według odległości od Ciebie.\n\nMapa powiększa się, gdy edytujesz udogodnienia z dala od Twojej lokalizacji. Aplikacja ta została stworzona do edycji rzeczy, które widzisz oczami.",
+  "@faqMapTinyContent": {},
+  "faqCheckmarks": "Do czego służą znaczniki wyboru?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Jak dodać wejście do budynku?",
+  "@faqEntrance": {},
+  "faqEntranceContent": "Na dole znajduje się rząd przycisków dla trybów: mikromapowanie, udogodnienia i wejścia.\n\nW trybie wejść dotknij lub przeciągnij przycisk drzwi w dolnym rogu na mapę.",
+  "@faqEntranceContent": {},
+  "faqFloors": "Czy piętra „3” i „/3” są takie same?",
+  "@faqFloors": {},
+  "faqCheckmarksContent": "Są to znaki, które potwierdziły dane dotyczące udogodnień. Dodają znacznik `check_date` z bieżącą datą.\n\nIdeą znaczników wyboru jest to, że, powiedzmy, po raz pierwszy zbadałeś połowę miasta. Potem po miesiącu wróciłeś i ponownie podszedłeś do zwiedzania. Musisz jakoś zaznaczyć, że widzisz udogodnienie, ale nic się w nim nie zmieniło. To jest znacznik wyboru: dotknij go i kontynuuj.\n\nZnak pozostaje sprawdzony przez dwa tygodnie. Następnie możesz ponownie sprawdzić udogodnienia.",
+  "@faqCheckmarksContent": {},
+  "faqTaggingContent": "Dlaczego w edytorze brakuje obiektu? Kiedy te białe kropki są wyświetlane w trybie mikromapowania? Jak sortowane są przedmioty?\n\nOdpowiedzi na wszystkie te pytania znajdują się w [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Oto, na co możesz spojrzeć:\n\n* Kolejność kluczy dla głównego znacznika — lista `kMainKeys`.\n* Jakie obiekty są pobierane — funkcja `isGoodTags`.\n* Co jest uważane za udogodnienie — funkcja `isAmenityTags`.\n* Które punkty są przyciągane do których linii — funkcja `detectSnap`.\n* Gdy obiekt mikromapowania jest niekompletny — funkcja `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "faqFloorsContent": "Nie. Pierwszy z nich ma wypełniony znacznik `addr:floor=3`. To jest piętro, które jest nadrukowane w nawigacji i powszechnie używane. Drugi nie ma tego znacznika, ale ma `level=3`. Ten numer to kolejny numer piętra od zera do `building:levels - 1`. Oznacza to, że w trzypiętrowym budynku wartość parametru `addr:floor` zależy od kraju, ale `level` to zawsze 0, 1 lub 2.\n\nOto jak notacja w edytorze odnosi się do tych znaczników:\n\n* `2`: `addr:floor=2` i niepuste `level=*`.\n* `4/`: `addr:floor=4`, ale nie ma znacznika `level`.\n* `/1`: `level=1`, ale nie ma znacznika `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (a w pobliżu znajduje się obiekt z tym samym `addr:floor`, ale innym `level` lub odwrotnie).",
+  "@faqFloorsContent": {}
 }
