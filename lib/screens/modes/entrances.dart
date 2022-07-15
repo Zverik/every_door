@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
@@ -42,6 +43,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   late LatLng center;
   final controller = MapController();
   late final StreamSubscription<MapEvent> mapSub;
+  bool buildingsNeedAddresses = true;
   LatLng? newLocation;
   double? savedZoom;
 
@@ -112,6 +114,11 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
           keys[c.databaseId] = GlobalKey();
         }
       }
+      buildingsNeedAddresses = !CountryCoder.instance.isIn(
+        lat: location.latitude,
+        lon: location.longitude,
+        inside: 'Q55', // Netherlands
+      );
     });
   }
 
@@ -169,8 +176,9 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
 
   String makeBuildingLabel(OsmChange building) {
     const kMaxNumberLength = 6;
-    final needsAddress = building['building'] == null ||
-        kBuildingNeedsAddress.contains(building['building']);
+    final needsAddress = buildingsNeedAddresses &&
+        (building['building'] == null ||
+            kBuildingNeedsAddress.contains(building['building']));
     String number = building['addr:housenumber'] ??
         building['addr:housename'] ??
         (needsAddress ? '?' : '');
@@ -531,14 +539,18 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   safeRight: true,
                   icon: Icons.my_location,
                   onPressed: () {
-                    ref.read(geolocationProvider.notifier).enableTracking(context);
+                    ref
+                        .read(geolocationProvider.notifier)
+                        .enableTracking(context);
                   },
                   onLongPressed: () {
                     if (ref.read(rotationProvider) != 0.0) {
                       ref.read(rotationProvider.state).state = 0.0;
                       controller.rotate(0.0);
                     } else {
-                      ref.read(geolocationProvider.notifier).enableTracking(context);
+                      ref
+                          .read(geolocationProvider.notifier)
+                          .enableTracking(context);
                     }
                   },
                 ),
@@ -546,8 +558,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   alignment:
                       leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 0.0 +
-                        (leftHand ? safePadding.left : safePadding.right),
+                    horizontal:
+                        0.0 + (leftHand ? safePadding.left : safePadding.right),
                     vertical: 100.0,
                   ),
                 ),

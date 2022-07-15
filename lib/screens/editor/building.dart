@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:country_coder/country_coder.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/widgets/address_form.dart';
@@ -27,6 +28,7 @@ class BuildingEditorPane extends ConsumerStatefulWidget {
 class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   late final OsmChange building;
   bool manualLevels = false;
+  bool buildingsNeedAddresses = true;
   late final FocusNode _levelsFocus;
   List<String> nearestLevels = [];
 
@@ -36,6 +38,11 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     _levelsFocus = FocusNode();
     building = widget.building?.copy() ??
         OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
+    buildingsNeedAddresses = !CountryCoder.instance.isIn(
+      lat: widget.location.latitude,
+      lon: widget.location.longitude,
+      inside: 'Q55', // Netherlands
+    );
     updateLevels();
   }
 
@@ -134,16 +141,17 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
             ),
             child: Column(
               children: [
-                AddressForm(
-                  location: widget.location,
-                  initialAddress:
-                      StreetAddress.fromTags(building.getFullTags()),
-                  autoFocus:
-                      building['addr:housenumber'] == null && !manualLevels,
-                  onChange: (addr) {
-                    addr.forceTags(building);
-                  },
-                ),
+                if (buildingsNeedAddresses || isAddress)
+                  AddressForm(
+                    location: widget.location,
+                    initialAddress:
+                        StreetAddress.fromTags(building.getFullTags()),
+                    autoFocus:
+                        building['addr:housenumber'] == null && !manualLevels,
+                    onChange: (addr) {
+                      addr.forceTags(building);
+                    },
+                  ),
                 Table(
                   columnWidths: const {
                     0: FixedColumnWidth(100.0),

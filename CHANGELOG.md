@@ -7,6 +7,8 @@ _Unreleased_
 * Removed `addr:postcode` and added `building:material` to the building properties.
 * Removed non-card options from the payment setting.
 * Disabled map jumping in POI mode because of the number of POI.
+* The editor did not download address points.
+* No addresses on buildings in Netherlands.
 
 ## Opening Hours Editor
 

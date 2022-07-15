@@ -235,6 +235,10 @@ bool isMicroTags(Map<String, String> tags) {
 
 /// Returns `true` when an object is editable in this app.
 bool isGoodTags(Map<String, String> tags) {
+  // Keep all objects with addresses.
+  if (tags.containsKey('addr:housenumber') ||
+      tags.containsKey('addr:housename')) return true;
+
   final key = getMainKey(tags);
   if (key == null) return false;
   final k = _clearPrefix(key);
@@ -257,10 +261,6 @@ bool isGoodTags(Map<String, String> tags) {
     'traffic_calming',
   };
   if (kAllGoodKeys.contains(k)) return true;
-
-  // Keep all objects with addresses.
-  if (tags.containsKey('addr:housenumber') ||
-      tags.containsKey('addr:housename')) return true;
 
   final v = tags[key];
   if (k == 'amenity') {
