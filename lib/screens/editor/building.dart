@@ -27,27 +27,21 @@ class BuildingEditorPane extends ConsumerStatefulWidget {
 class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   late final OsmChange building;
   bool manualLevels = false;
-  bool manualPostcode = false;
   late final FocusNode _levelsFocus;
-  late final FocusNode _postcodeFocus;
   List<String> nearestLevels = [];
-  List<String> nearestPostcodes = [];
 
   @override
   void initState() {
     super.initState();
     _levelsFocus = FocusNode();
-    _postcodeFocus = FocusNode();
     building = widget.building?.copy() ??
         OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
     updateLevels();
-    updatePostcodes();
   }
 
   @override
   void dispose() {
     _levelsFocus.dispose();
-    _postcodeFocus.dispose();
     super.dispose();
   }
 
@@ -85,15 +79,6 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     });
   }
 
-  updatePostcodes() async {
-    final postcodes = await ref
-        .read(osmDataProvider)
-        .getPostcodesAround(widget.location, limit: 2);
-    setState(() {
-      nearestPostcodes = postcodes;
-    });
-  }
-
   bool validateLevels(String? value) {
     if (value == null || value.trim().isEmpty) return true;
     final levels = int.tryParse(value.trim());
@@ -128,6 +113,9 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     levelOptions.add(kManualOption);
     final hasParts = // (building.element?.isMember ?? false) ||
         building['building:parts'] != null;
+    String? material = building['building:material'];
+    if (material == 'concrete' &&
+        building['building:material:concrete'] == 'panels') material = 'panels';
 
     return WillPopScope(
       onWillPop: () async {
@@ -162,43 +150,6 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                   },
                   defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                   children: [
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: Text(loc.buildingPostCode,
-                              style: kFieldTextStyle),
-                        ),
-                        if (!manualPostcode && nearestPostcodes.isNotEmpty)
-                          RadioField(
-                            options: nearestPostcodes + [kManualOption],
-                            value: building['addr:postcode'],
-                            onChange: (value) {
-                              setState(() {
-                                if (value == kManualOption) {
-                                  building.removeTag('addr:postcode');
-                                  manualPostcode = true;
-                                  _postcodeFocus.requestFocus();
-                                } else {
-                                  building['addr:postcode'] = value;
-                                }
-                              });
-                            },
-                          ),
-                        if (manualPostcode || nearestPostcodes.isEmpty)
-                          TextFormField(
-                            style: kFieldTextStyle,
-                            textCapitalization: TextCapitalization.characters,
-                            initialValue: building['addr:postcode'],
-                            focusNode: _postcodeFocus,
-                            onChanged: (value) {
-                              setState(() {
-                                building['addr:postcode'] = value.trim();
-                              });
-                            },
-                          ),
-                      ],
-                    ),
                     if (!isAddress)
                       TableRow(
                         children: [
@@ -297,6 +248,54 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                             onChange: (value) {
                               setState(() {
                                 building['roof:shape'] = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    if (!isAddress && !hasParts)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: Text(loc.buildingMaterial,
+                                style: kFieldTextStyle),
+                          ),
+                          RadioField(
+                            options: const [
+                              'brick',
+                              'plaster',
+                              'wood',
+                              'concrete',
+                              'panels',
+                              'cement_block',
+                              'stone',
+                              'metal',
+                              'glass',
+                            ],
+                            labels: [
+                              loc.buildingMaterialBrick,
+                              loc.buildingMaterialPlaster,
+                              loc.buildingMaterialWood,
+                              loc.buildingMaterialConcrete,
+                              loc.buildingMaterialPanels,
+                              loc.buildingMaterialCementBlock,
+                              loc.buildingMaterialStone,
+                              loc.buildingMaterialMetal,
+                              loc.buildingMaterialGlass,
+                            ],
+                            value: material,
+                            onChange: (value) {
+                              setState(() {
+                                if (value == 'panels') {
+                                  building['building:material'] = 'concrete';
+                                  building['building:material:concrete'] =
+                                      'panels';
+                                } else {
+                                  building['building:material'] = value;
+                                  building
+                                      .removeTag('building:material:concrete');
+                                }
                               });
                             },
                           ),

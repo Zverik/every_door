@@ -49,8 +49,9 @@ You can generate OAuth2 keys for the staging API [here](https://master.apis.dev.
 to the production API, so you may need to sign up again.
 2. Download [taginfo-db.db](https://taginfo.openstreetmap.org/download) and unpack it somewhere (it's ~9 GB).
 3. From the `tools` directory, run `./update.sh <path_to_taginfo_db>`.
-4. `flutter pub get`.
-5. `flutter run`.
+4. `echo '{}' | tee lib/l10n/app_zh.arb > lib/l10n/app_pt.arb` (fixing Dart's localization issues).
+5. `flutter pub get`.
+6. `flutter run`.
 
 ## Author and License
 

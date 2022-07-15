@@ -225,7 +225,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
         top: widget.isWide,
         child: PoiPane(nearestPOI),
       );
-      final needMaxMap = isMicromapping || farFromUser || nearestPOI.length <= 4;
+      final needMaxMap = isMicromapping || farFromUser;
       final mediaHeight = MediaQuery.of(context).size.height;
       if (widget.isWide || mediaHeight <= 600)
         bottomPane = Expanded(

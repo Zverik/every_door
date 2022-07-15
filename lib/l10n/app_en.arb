@@ -696,6 +696,16 @@
   "@buildingMoreButton": {
     "description": "Button label for opening the building object in a full editor."
   },
+  "buildingMaterial": "Facade",
+  "buildingMaterialBrick": "brick",
+  "buildingMaterialPlaster": "plaster",
+  "buildingMaterialWood": "wood",
+  "buildingMaterialConcrete": "concrete",
+  "buildingMaterialPanels": "panels",
+  "buildingMaterialCementBlock": "cement blocks",
+  "buildingMaterialStone": "stone",
+  "buildingMaterialMetal": "metal",
+  "buildingMaterialGlass": "glass",
   "buildingTypeAddress": "address",
   "@buildingTypeAddress": {},
   "buildingTypeHouse": "house",

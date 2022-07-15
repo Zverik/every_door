@@ -2,6 +2,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/helpers/combo_page.dart';
+import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
@@ -162,6 +163,10 @@ class SettingsPage extends ConsumerWidget {
                   final combo = await ref
                       .read(presetProvider)
                       .getField('payment_multi', locale);
+                  if (combo is ComboPresetField) {
+                    combo.options.removeWhere(
+                        (element) => kNotCards.contains(element.value));
+                  }
                   final List<String>? newValues = await Navigator.push(
                     context,
                     MaterialPageRoute(
