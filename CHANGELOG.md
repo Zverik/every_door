@@ -4,13 +4,17 @@
 
 _Unreleased_
 
-* Could not mark an hours fragment as `off`.
-* When switching to the raw hours editor, the value was not updated.
-* An inactive `PH` interval is no longer added by default.
-* `24/7` value was missing from the raw value editor.
 * Removed `addr:postcode` and added `building:material` to the building properties.
 * Removed non-card options from the payment setting.
 * Disabled map jumping in POI mode because of the number of POI.
+
+## Opening Hours Editor
+
+* Could not mark an hours fragment as `off`.
+* An inactive `PH` interval is no longer added by default.
+* Hour options are displayed in five columns instead of four.
+* When switching to the raw hours editor, the value was not updated.
+* `24/7` value was missing from the raw value editor.
 
 ## 0.7
 

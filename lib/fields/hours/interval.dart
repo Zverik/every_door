@@ -333,7 +333,7 @@ class _HoursMinutesChooserState extends State<HoursMinutesChooser> {
         hour == null ? loc.fieldHoursHour : '$hour: ${loc.fieldHoursMinute}';
     return GridChooser<String>(
       title: '${widget.title ?? ""} $localTitle'.trimLeft(),
-      columns: 4,
+      columns: hour == null ? 5 : 4,
       options: options,
       transpose: hour == null,
       onChoose: (value) {
@@ -372,53 +372,56 @@ class GridChooser<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final rows = transpose ? columns : (options.length / columns).ceil();
     final double baseSize = !big ? 14.0 : 18.0;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: baseSize, color: Colors.grey),
-            ),
-            if (onMoreTime != null)
-              IconButton(
-                icon: Icon(Icons.more_time),
-                onPressed: onMoreTime,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                title,
+                style: TextStyle(fontSize: baseSize, color: Colors.grey),
               ),
-          ],
-        ),
-        Flex(
-          direction: transpose ? Axis.vertical : Axis.horizontal,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (int i = 0; i < options.length; i += rows)
-              Flex(
-                direction: transpose ? Axis.horizontal : Axis.vertical,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  for (int j = 0; j < rows; j++)
-                    if (i + j < options.length)
-                      TextButton(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5.0),
-                          child: DefaultTextStyle(
-                            child: options[i + j].buildWidget(),
-                            style:
-                                TextStyle(fontSize: 30.0, color: Colors.black),
+              if (onMoreTime != null)
+                IconButton(
+                  icon: Icon(Icons.more_time),
+                  onPressed: onMoreTime,
+                ),
+            ],
+          ),
+          Flex(
+            direction: transpose ? Axis.vertical : Axis.horizontal,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (int i = 0; i < options.length; i += rows)
+                Flex(
+                  direction: transpose ? Axis.horizontal : Axis.vertical,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    for (int j = 0; j < rows; j++)
+                      if (i + j < options.length)
+                        TextButton(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.0),
+                            child: DefaultTextStyle(
+                              child: options[i + j].buildWidget(),
+                              style:
+                                  TextStyle(fontSize: 30.0, color: Colors.black),
+                            ),
                           ),
+                          onPressed: () {
+                            onChoose(options[i + j].value);
+                          },
                         ),
-                        onPressed: () {
-                          onChoose(options[i + j].value);
-                        },
-                      ),
-                ],
-              ),
-          ],
-        ),
-      ],
+                  ],
+                ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
