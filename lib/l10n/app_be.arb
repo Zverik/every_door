@@ -1,5 +1,5 @@
 {
-  "loadingTooMuchData": "Ачысціце спампаваныя дадзеныя ў Наладах, каб паскорыць рэдактар.",
+  "loadingTooMuchData": "Ачысціце спампаваныя даныя ў Наладах, каб паскорыць рэдактар.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -43,7 +43,7 @@
   "@settingsLoginDetails": {
     "description": "Settings entry for logging in to OSM."
   },
-  "accountTitle": "Уліковы запіс OpenStreetMap",
+  "accountTitle": "Уліковы запіс OSM",
   "@accountTitle": {
     "description": "Title for the account page."
   },
@@ -51,7 +51,7 @@
   "@accountLogout": {
     "description": "Button title for logging out of OSM."
   },
-  "apiStatusDownloading": "Спампоўка дадзеных…",
+  "apiStatusDownloading": "Спампоўка даных…",
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."
   },
@@ -62,7 +62,7 @@
       "count": {}
     }
   },
-  "loadingTooMuchDataTitle": "Занадта шмат дадзеных",
+  "loadingTooMuchDataTitle": "Занадта шмат даных",
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
@@ -77,5 +77,41 @@
   "settingsTitle": "Налады",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
+  },
+  "accountLoginOAuth": "Увайсці праз OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountLoginPassword": "Увайсці праз пароль",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountFieldLogin": "Імя карыстальніка",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountPasswordWarningButton": "Зразумела",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningTitle": "Увага",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "Уліковыя даныя OSM",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountFieldPassword": "Пароль",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountAuthErrorMessage": "Няправільнае імя карыстальніка або пароль.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "messageNoData": "Няма даных, націснеце тут, каб спампаваць",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
   }
 }
