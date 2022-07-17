@@ -58,7 +58,7 @@
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "tileNo": "não",
+  "tileNo": "sem",
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
@@ -822,10 +822,30 @@
   },
   "faqMapTinyContent": "Porque a questão não é essa. Você só verifica o seu posicionamento e move o mapa para ajustar. Veja a lista de serviços abaixo, ordenada por distância de você.\n\nO mapa fica maior quando você edita os serviços longe de sua localização, embora o aplicativo tenha sido feito para editar as coisas que você está vendo.",
   "@faqMapTinyContent": {},
-  "faqLettersContent": "Se o teclado numérico não puder ser alterado para um teclado completo, verifique os ajustes do aplicativo. Eles estão atrás do botão no canto superior esquerdo. Ative o \"Teclado numérico estendido\" lá.",
+  "faqLettersContent": "Se o teclado numérico não puder ser alterado para um teclado completo, verifique os ajustes do aplicativo. Eles estão localizados no botão do canto superior esquerdo. Ative o \"Teclado numérico estendido\" lá.",
   "@faqLettersContent": {},
-  "faqFloorsContent": "Não. O primeiro tem a etiqueta `addr:floor=3` preenchida. Esse é o andar que está impresso na navegação e é comumente usado. O segundo não tem essa etiqueta, mas tem `level=3`. Esse número é um número de andar sequencial que vai de zero a `building:levels - 1`. Ou seja, em um edifício de três andares, o valor de `addr:floor` depende do país, mas `level` é sempre 0, 1 ou 2.\n\nVeja como é a notação no editor relacionada a essas etiquetas:\n\n* `2`: `addr:floor=2` e `level=*` não vazio.\n* `4/`: `addr:floor=4`, mas não há etiqueta `level`.\n* `/1`: `level=1`, mas não há etiqueta `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (e existe um objeto próximo com o mesmo `addr:floor`, mas diferente `level`, ou vice-versa).",
+  "faqFloorsContent": "Não. O primeiro tem a etiqueta `addr:floor=3` preenchida. Esse é o andar que está impresso na navegação e é comumente usado. O segundo não tem essa etiqueta, mas tem `level=3`. Esse número é um número de andar sequencial que vai de zero até `building:levels - 1`. Ou seja, em um edifício de três andares, o valor de `addr:floor` depende do país, mas `level` é sempre 0, 1 ou 2.\n\nVeja como a notação no editor se relaciona com essas etiquetas:\n\n* `2`: `addr:floor=2` e `level=*` não vazio.\n* `4/`: `addr:floor=4`, mas não há etiqueta `level`.\n* `/1`: `level=1`, mas não há etiqueta `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (e existe um objeto próximo com o mesmo `addr:floor`, mas diferente `level`, ou vice-versa).",
   "@faqFloorsContent": {},
   "faqTaggingContent": "Por que um objeto está faltando no editor? Quando esses pontos brancos são exibidos no modo de micromapeamento? Como os objetos são classificados?\n\nAs respostas para todas essas perguntas estão em [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Aqui está o que você pode ver:\n\n* A ordem das chaves para a etiqueta principal — lista `kMainKeys`.\n* Quais objetos são baixados — função `isGoodTags`.\n* O que é considerado um serviço — função `isAmenityTags`.\n* Quais pontos são colados a quais caminhos — função `detectSnap`.\n* Quando um objeto de micromapeamento está incompleto — função `needsMoreInfo`.",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "buildingMaterial": "Fachada",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "tijolo",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "gesso",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "madeira",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "concreto",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "painéis",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "blocos de cimento",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "pedra",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "metal",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "vidro",
+  "@buildingMaterialGlass": {}
 }
