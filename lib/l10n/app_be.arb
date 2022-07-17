@@ -113,5 +113,25 @@
   "messageNoData": "Няма даных, націснеце тут, каб спампаваць",
   "@messageNoData": {
     "description": "Message that appears on the main screen when there's no OSM data."
-  }
+  },
+  "loadingStart": "Падрыхтоўка…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "buildingMaterialBrick": "цэгла",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialConcrete": "бетон",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "панэлі",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "цэментавыя блокі",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "камень",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "метал",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "шкло",
+  "@buildingMaterialGlass": {},
+  "buildingMaterialWood": "драўніна",
+  "@buildingMaterialWood": {}
 }
