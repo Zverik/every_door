@@ -3,22 +3,24 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/private.dart';
+import 'package:every_door/screens/editor/versions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class TagEditorPage extends StatefulWidget {
+
+class TagEditorPage extends ConsumerStatefulWidget {
   final OsmChange amenity;
 
   const TagEditorPage(this.amenity);
 
   @override
-  State<TagEditorPage> createState() => _TagEditorPageState();
+  TagEditorPageState createState() => TagEditorPageState();
 }
 
-class _TagEditorPageState extends State<TagEditorPage> {
+class TagEditorPageState extends ConsumerState<TagEditorPage> {
   late final Set<String> keys;
   final Map<String, TextEditingController> controllers = {};
 
@@ -39,7 +41,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
 
   String _getUrl() => 'https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}';
 
-  String _getHistoryUrl() => '${_getUrl()}/history';
+  Uri _getHistoryUrl() => Uri.parse('${_getUrl()}/history');
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +58,14 @@ class _TagEditorPageState extends State<TagEditorPage> {
         actions: [
           if (!widget.amenity.isNew)
             IconButton(
-              icon: Icon(Icons.history),
-              onPressed: () async => await launchUrl(
-                  Uri.parse(_getHistoryUrl()),
-                  mode: LaunchMode.externalApplication),
-            ),
+                icon: Icon(Icons.history),
+                onPressed: () async {
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VersionsPage(widget.amenity.element!.id.fullRef, _getHistoryUrl(), widget.amenity.newTags)));
+
+                }),
           if (!widget.amenity.isNew)
             GestureDetector(
               child: IconButton(

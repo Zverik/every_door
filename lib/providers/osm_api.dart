@@ -512,4 +512,55 @@ class OsmApiHelper {
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
   }
+
+  Future<List<Version>> getHistory(String fullRef) async {
+    final resp = await http.get(
+      Uri.https(kOsmEndpoint, '/api/0.6/$fullRef/history'),
+    );
+    if (resp.statusCode == 404) {
+      throw OsmApiError(
+          resp.statusCode, 'Could not find history for $fullRef: ${resp.body}');
+    }
+    if (resp.statusCode != 200) {
+      throw OsmApiError(
+          resp.statusCode, 'Failed to fetch history: ${resp.body}');
+    }
+
+    // FIXME: this may not handle large histories well
+    final doc = XmlDocument.parse(resp.body);
+    final versionNodes = doc.getElement("osm")!.children;
+
+    // FIXME: this is pretty crap. doing something like https://stackoverflow.com/a/63332937
+    // would probably be better
+    final versions = versionNodes
+        // for some reason there are various empty text nodes. maybe this can be fixed in the parser
+        .where(
+          (t) => t.nodeType == XmlNodeType.ELEMENT,
+        )
+        .map(
+          (t) => Version(
+            t.getAttribute("user")!,
+            DateTime.parse(t.getAttribute("timestamp")!),
+            t
+                .findElements("tag")
+                .map((tag) => {tag.getAttribute("k")!: tag.getAttribute("v")!})
+                .reduce(
+              (value, element) {
+                value.addAll(element);
+                return value;
+              },
+            ),
+          ),
+        );
+
+    return versions.toList();
+  }
+}
+
+class Version {
+  final String user;
+  final DateTime timestamp;
+  final Map<String, String> tags;
+
+  Version(this.user, this.timestamp, this.tags);
 }
