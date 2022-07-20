@@ -1,8 +1,11 @@
+import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:xml/xml.dart';
 
 class TagChange {
   final String oldValue;
@@ -14,6 +17,14 @@ class TagChange {
   String toString() {
     return "was: $oldValue, now: $newValue";
   }
+}
+
+class Version {
+  final String user;
+  final DateTime timestamp;
+  final Map<String, String> tags;
+
+  Version(this.user, this.timestamp, this.tags);
 }
 
 class ElementVersion {
@@ -55,9 +66,55 @@ class VersionsPage extends ConsumerStatefulWidget {
 class _VersionsPageState extends ConsumerState<VersionsPage> {
   List<ElementVersion> versions = [];
 
-  _getVersions() async {
+  Future<List<Version>> getHistory(String fullRef) async {
+    final resp = await http.get(
+        Uri.https(kOsmEndpoint, '/api/0.6/$fullRef/history'),
+        headers: {"Accept": "application/json"}
+    );
+    if (resp.statusCode == 404) {
+      throw OsmApiError(
+          resp.statusCode, 'Could not find history for $fullRef: ${resp.body}');
+    }
+    if (resp.statusCode != 200) {
+      throw OsmApiError(
+          resp.statusCode, 'Failed to fetch history: ${resp.body}');
+    }
+
+    print(resp.body);
+
+    // FIXME: this may not handle large histories well
+    final doc = XmlDocument.parse(resp.body);
+    final versionNodes = doc.getElement("osm")!.children;
+
+    // FIXME: this is pretty crap. doing something like https://stackoverflow.com/a/63332937
+    // would probably be better
+    final versions = versionNodes
+    // for some reason there are various empty text nodes. maybe this can be fixed in the parser
+        .where(
+          (t) => t.nodeType == XmlNodeType.ELEMENT,
+    )
+        .map(
+          (t) => Version(
+        t.getAttribute("user")!,
+        DateTime.parse(t.getAttribute("timestamp")!),
+        t
+            .findElements("tag")
+            .map((tag) => {tag.getAttribute("k")!: tag.getAttribute("v")!})
+            .reduce(
+              (value, element) {
+            value.addAll(element);
+            return value;
+          },
+        ),
+      ),
+    );
+
+    return versions.toList();
+  }
+
+  _doVersionsStuff() async {
     final plainVersions =
-        await ref.read(osmApiProvider).getHistory(widget.fullRef);
+        await getHistory(widget.fullRef);
 
     // merge in the local changes to the remote ones, based from the latest remote versions
     var mergedLocalVersion =
@@ -118,7 +175,7 @@ class _VersionsPageState extends ConsumerState<VersionsPage> {
   @override
   void initState() {
     super.initState();
-    _getVersions();
+    _doVersionsStuff();
   }
 
   _buildLoader() {
