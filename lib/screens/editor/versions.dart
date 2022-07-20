@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +22,41 @@ class TagChange {
 }
 
 class Version {
+  final int number;
   final String user;
   final DateTime timestamp;
+  final int changeset; // used to fetch changeset comment
   final Map<String, String> tags;
+  late String comment; // fetched separately
 
-  Version(this.user, this.timestamp, this.tags);
+  factory Version.fromJson(Map<String, dynamic> data) {
+    final number = data['version'] as int;
+    final user = data['user'] as String;
+    final timestamp = DateTime.parse(data['timestamp'] as String);
+    final changeset = data['changeset'] as int;
+    final tags = data['tags'].cast<String, String>();
+
+    return Version(
+      number: number,
+      user: user,
+      timestamp: timestamp,
+      changeset: changeset,
+      tags: tags,
+    );
+  }
+
+  @override
+  String toString() {
+    return "$number: tags: $tags";
+  }
+
+  Version({
+    required this.number,
+    required this.user,
+    required this.timestamp,
+    required this.tags,
+    required this.changeset,
+  });
 }
 
 class ElementVersion {
@@ -69,8 +101,7 @@ class _VersionsPageState extends ConsumerState<VersionsPage> {
   Future<List<Version>> getHistory(String fullRef) async {
     final resp = await http.get(
         Uri.https(kOsmEndpoint, '/api/0.6/$fullRef/history'),
-        headers: {"Accept": "application/json"}
-    );
+        headers: {"Accept": "application/json"});
     if (resp.statusCode == 404) {
       throw OsmApiError(
           resp.statusCode, 'Could not find history for $fullRef: ${resp.body}');
@@ -82,94 +113,73 @@ class _VersionsPageState extends ConsumerState<VersionsPage> {
 
     print(resp.body);
 
-    // FIXME: this may not handle large histories well
-    final doc = XmlDocument.parse(resp.body);
-    final versionNodes = doc.getElement("osm")!.children;
+    final elements = jsonDecode(resp.body)["elements"];
 
-    // FIXME: this is pretty crap. doing something like https://stackoverflow.com/a/63332937
-    // would probably be better
-    final versions = versionNodes
-    // for some reason there are various empty text nodes. maybe this can be fixed in the parser
-        .where(
-          (t) => t.nodeType == XmlNodeType.ELEMENT,
-    )
-        .map(
-          (t) => Version(
-        t.getAttribute("user")!,
-        DateTime.parse(t.getAttribute("timestamp")!),
-        t
-            .findElements("tag")
-            .map((tag) => {tag.getAttribute("k")!: tag.getAttribute("v")!})
-            .reduce(
-              (value, element) {
-            value.addAll(element);
-            return value;
-          },
-        ),
-      ),
-    );
+    final versions =
+        (elements as List).map((e) => Version.fromJson(e)).toList();
+
+    print(versions);
 
     return versions.toList();
   }
 
   _doVersionsStuff() async {
-    final plainVersions =
-        await getHistory(widget.fullRef);
+    final plainVersions = await getHistory(widget.fullRef);
 
-    // merge in the local changes to the remote ones, based from the latest remote versions
-    var mergedLocalVersion =
-        Map.from(plainVersions.last.tags).cast<String, String?>();
-    mergedLocalVersion.addAll(widget.localChanges);
-
-    for (var tag in Map.from(mergedLocalVersion).entries) {
-      // null values are removed tags
-      if (tag.value == null) {
-        mergedLocalVersion.remove(tag.key);
-      }
-    }
-    plainVersions.add(Version(
-        "you", DateTime.now(), mergedLocalVersion.cast<String, String>()));
-
-    var diffedVersions = <ElementVersion>[];
-    var previousVersion = <String, String>{};
-
-    for (var i = 0; i < plainVersions.length; i++) {
-      var currentVersion = plainVersions[i];
-      var updatedTagKeys = currentVersion.tags.keys
-          .toSet()
-          .intersection(previousVersion.keys.toSet());
-
-      var updatedTags = <String, TagChange>{};
-      for (var key in updatedTagKeys) {
-        if (previousVersion[key] != currentVersion.tags[key]) {
-          updatedTags.addAll({
-            key: TagChange(previousVersion[key]!, currentVersion.tags[key]!)
-          });
-        }
-      }
-
-      var removedTagKeys = previousVersion.keys
-          .toSet()
-          .difference(currentVersion.tags.keys.toSet());
-      var removedTags = <String, String>{};
-      for (var key in removedTagKeys) {
-        removedTags[key] = previousVersion[key]!;
-      }
-
-      diffedVersions.add(ElementVersion(
-          plainVersions.length - i,
-          currentVersion.tags,
-          currentVersion.tags.keys
-              .toSet()
-              .difference(previousVersion.keys.toSet()),
-          removedTags,
-          updatedTags,
-          currentVersion.user,
-          currentVersion.timestamp));
-      previousVersion = currentVersion.tags;
-    }
-
-    setState(() => {versions = diffedVersions});
+    // // merge in the local changes to the remote ones, based from the latest remote versions
+    // var mergedLocalVersion =
+    //     Map.from(plainVersions.last.tags).cast<String, String?>();
+    // mergedLocalVersion.addAll(widget.localChanges);
+    //
+    // for (var tag in Map.from(mergedLocalVersion).entries) {
+    //   // null values are removed tags
+    //   if (tag.value == null) {
+    //     mergedLocalVersion.remove(tag.key);
+    //   }
+    // }
+    // plainVersions.add(Version(
+    //     "you", DateTime.now(), mergedLocalVersion.cast<String, String>()));
+    //
+    // var diffedVersions = <ElementVersion>[];
+    // var previousVersion = <String, String>{};
+    //
+    // for (var i = 0; i < plainVersions.length; i++) {
+    //   var currentVersion = plainVersions[i];
+    //   var updatedTagKeys = currentVersion.tags.keys
+    //       .toSet()
+    //       .intersection(previousVersion.keys.toSet());
+    //
+    //   var updatedTags = <String, TagChange>{};
+    //   for (var key in updatedTagKeys) {
+    //     if (previousVersion[key] != currentVersion.tags[key]) {
+    //       updatedTags.addAll({
+    //         key: TagChange(previousVersion[key]!, currentVersion.tags[key]!)
+    //       });
+    //     }
+    //   }
+    //
+    //   var removedTagKeys = previousVersion.keys
+    //       .toSet()
+    //       .difference(currentVersion.tags.keys.toSet());
+    //   var removedTags = <String, String>{};
+    //   for (var key in removedTagKeys) {
+    //     removedTags[key] = previousVersion[key]!;
+    //   }
+    //
+    //   diffedVersions.add(ElementVersion(
+    //       plainVersions.length - i,
+    //       currentVersion.tags,
+    //       currentVersion.tags.keys
+    //           .toSet()
+    //           .difference(previousVersion.keys.toSet()),
+    //       removedTags,
+    //       updatedTags,
+    //       currentVersion.user,
+    //       currentVersion.timestamp));
+    //   previousVersion = currentVersion.tags;
+    // }
+    //
+    // setState(() => {versions = diffedVersions});
   }
 
   @override
