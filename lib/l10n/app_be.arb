@@ -133,5 +133,92 @@
   "buildingMaterialGlass": "шкло",
   "@buildingMaterialGlass": {},
   "buildingMaterialWood": "драўніна",
-  "@buildingMaterialWood": {}
+  "@buildingMaterialWood": {},
+  "loadingLocation": "Вызначэнне месцазнаходжання…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingChangesFailed": "Не удалося загрузіць праўкі",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingChanges": "Загрузка правак…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "editorCloseTitle": "Зачыніць рэдактар?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "Ваші праўкі прападуць. Працягнуць?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorMoreFields": "Больш палёў",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "filterEmpty": "пусты",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "aboutOnGitHub": "на GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "settingsAbout": "Аб прыкладанні",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutVersionHistory": "Гісторыя версій",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "Усталяваная версія",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Сайт праекта",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "Зыходны код",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutLicense": "Ліцэнзія",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "Дапамажыце палепшыць {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Паведаміць аб праблеме",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpTranslate": "Дапамажыце перакласці",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "на Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "FAQ",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Спасылкі",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  }
 }
