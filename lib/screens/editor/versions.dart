@@ -279,7 +279,7 @@ class _VersionsPageState extends State<VersionsPage> {
     );
   }
 
-  _buildTable(Version version) {
+  Table _buildTable(Version version) {
     return Table(
       border: TableBorder.all(
         width: 1,
@@ -320,6 +320,45 @@ class _VersionsPageState extends State<VersionsPage> {
     );
   }
 
+  Card _buildCard(Version version) {
+    return Card(
+      margin: EdgeInsets.only(top: 12, right: 12, left: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                version.isLocal
+                    ? 'Local changes'
+                    : 'Version #${version.number}',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            if (!version.isLocal)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(
+                  'by ${version.user} at ${DateFormat.yMMMMd().add_Hm().format(version.timestamp)}',
+                ),
+              ),
+            if (version.comment != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(
+                  version.comment!,
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+              ),
+            version.noTagChange ? Text("No tag changes") : _buildTable(version),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // final loc = AppLocalizations.of(context)!;
@@ -346,52 +385,9 @@ class _VersionsPageState extends State<VersionsPage> {
 
           return ListView(
             children: [
-              for (var i = history!.versions.length - 1; i >= 0; i--)
-                Builder(builder: (context) {
-                  final version = history!.versions[i];
-
-                  return Card(
-                    margin: EdgeInsets.only(top: 12, right: 12, left: 12),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Text(
-                              version.isLocal
-                                  ? 'Local changes'
-                                  : 'Version #${version.number}',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
-                          ),
-                          if (!version.isLocal)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text(
-                                'by ${version.user} at ${DateFormat.yMMMMd().add_Hm().format(version.timestamp)}',
-                              ),
-                            ),
-                          if (version.comment != null)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text(
-                                version.comment!,
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                          version.noTagChange
-                              ? Text("No tag changes")
-                              : _buildTable(version),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
-              // bottom padding
-              Container(height: 12)
+              for (var version in history!.versions.reversed)
+                _buildCard(version),
+              Container(height: 12), // bottom padding
             ],
           );
         },
