@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
@@ -43,8 +44,9 @@ class Version {
   final bool isLocal;
   String? comment; // fetched separately
 
-  // diff between tags in previous version
-  Map<String, TagChange> tagChanges = {};
+  /// stores the tags changes between previous versions and this versions.
+  /// uses a `SplayTreeMap` so that keys are sorted alphabetically
+  Map<String, TagChange> tagChanges = SplayTreeMap();
 
   // don't need to show diff when no tags have changed
   bool get noTagChange => tagChanges.entries.every((e) => e.value.noChange);
