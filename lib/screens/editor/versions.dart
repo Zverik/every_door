@@ -55,7 +55,8 @@ class Version {
     final user = data['user'] as String;
     final timestamp = DateTime.parse(data['timestamp'] as String);
     final changeset = data['changeset'] as int;
-    final tags = data['tags'].cast<String, String>();
+    final tags =
+        (data['tags'] ?? {}).cast<String, String>() as Map<String, String>;
 
     return Version(
       number: number,
@@ -84,7 +85,8 @@ class Version {
 class History {
   List<Version> versions;
 
-  /// get comments for all changesets that edited this element
+  /// get comments for changesets that edited this element
+  /// limited to 100 most recent
   Future<void> getComments() async {
     final changesetIDs = versions.map((v) => v.changeset).join(",");
     final resp = await http.get(
@@ -101,10 +103,11 @@ class History {
 
     final changesets = jsonDecode(resp.body)["changesets"];
 
-    for (var i = 0; i < changesets.length; i++) {
+    for (var changeset in changesets) {
       // some (old) changesets do not always have tags or comments
-      versions[versions.length - i - 1].comment =
-          changesets[i]?["tags"]?["comment"];
+      versions
+          .firstWhere((element) => element.changeset == changeset["id"])
+          .comment = changeset?["tags"]?["comment"];
     }
   }
 
