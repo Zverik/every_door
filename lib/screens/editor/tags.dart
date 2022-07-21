@@ -60,10 +60,15 @@ class _TagEditorPageState extends State<TagEditorPage> {
                 icon: Icon(Icons.history),
                 onPressed: () async {
                   await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => VersionsPage(widget.amenity.element!.id.fullRef, _getHistoryUrl(), widget.amenity.newTags)));
-
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VersionsPage(
+                        fullRef: widget.amenity.element!.id.fullRef,
+                        historyUrl: _getHistoryUrl(),
+                        localChanges: widget.amenity.newTags,
+                      ),
+                    ),
+                  );
                 }),
           if (!widget.amenity.isNew)
             GestureDetector(

@@ -176,7 +176,11 @@ class VersionsPage extends ConsumerStatefulWidget {
   final Uri historyUrl;
   final Map<String, String?> localChanges;
 
-  const VersionsPage(this.fullRef, this.historyUrl, this.localChanges);
+  const VersionsPage({
+    required this.fullRef,
+    required this.historyUrl,
+    required this.localChanges,
+  });
 
   @override
   ConsumerState<VersionsPage> createState() => _VersionsPageState();
