@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -171,7 +170,7 @@ class History {
   History(this.versions);
 }
 
-class VersionsPage extends ConsumerStatefulWidget {
+class VersionsPage extends StatefulWidget {
   final String fullRef;
   final Uri historyUrl;
   final Map<String, String?> localChanges;
@@ -183,10 +182,10 @@ class VersionsPage extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<VersionsPage> createState() => _VersionsPageState();
+  State<VersionsPage> createState() => _VersionsPageState();
 }
 
-class _VersionsPageState extends ConsumerState<VersionsPage> {
+class _VersionsPageState extends State<VersionsPage> {
   History? history;
   Exception? error;
 
