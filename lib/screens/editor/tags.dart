@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
 
-
 class TagEditorPage extends StatefulWidget {
   final OsmChange amenity;
 
@@ -57,19 +56,20 @@ class _TagEditorPageState extends State<TagEditorPage> {
         actions: [
           if (!widget.amenity.isNew)
             IconButton(
-                icon: Icon(Icons.history),
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VersionsPage(
-                        fullRef: widget.amenity.element!.id.fullRef,
-                        historyUrl: _getHistoryUrl(),
-                        localChanges: widget.amenity.newTags,
-                      ),
+              icon: Icon(Icons.history),
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VersionsPage(
+                      fullRef: widget.amenity.element!.id.fullRef,
+                      historyUrl: _getHistoryUrl(),
+                      localChanges: widget.amenity.newTags,
                     ),
-                  );
-                }),
+                  ),
+                );
+              },
+            ),
           if (!widget.amenity.isNew)
             GestureDetector(
               child: IconButton(
