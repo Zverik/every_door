@@ -330,6 +330,14 @@ class _VersionsPageState extends ConsumerState<VersionsPage> {
                                 'by ${version.user} at ${DateFormat.yMMMMd().add_Hm().format(version.timestamp)}',
                               ),
                             ),
+                          if (version.comment != null)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text(
+                                version.comment!,
+                                style: TextStyle(fontStyle: FontStyle.italic),
+                              ),
+                            ),
                           version.noTagChange
                               ? Text("No tag changes")
                               : _buildTable(version),
