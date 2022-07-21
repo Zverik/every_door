@@ -7,20 +7,19 @@ import 'package:every_door/screens/editor/versions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 
-class TagEditorPage extends ConsumerStatefulWidget {
+class TagEditorPage extends StatefulWidget {
   final OsmChange amenity;
 
   const TagEditorPage(this.amenity);
 
   @override
-  TagEditorPageState createState() => TagEditorPageState();
+  State<TagEditorPage> createState() => _TagEditorPageState();
 }
 
-class TagEditorPageState extends ConsumerState<TagEditorPage> {
+class _TagEditorPageState extends State<TagEditorPage> {
   late final Set<String> keys;
   final Map<String, TextEditingController> controllers = {};
 
