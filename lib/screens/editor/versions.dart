@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_api.dart';
@@ -7,13 +8,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:xml/xml.dart';
 
 class TagChange {
-  final String oldValue;
-  final String newValue;
+  final String? oldValue;
+  final String? newValue;
+  bool get noChange => oldValue == newValue;
+  bool get removed => newValue == null;
+  bool get added => oldValue == null;
+  bool get updated => !added && !removed && oldValue != newValue;
 
   const TagChange(this.oldValue, this.newValue);
+
+  Color? getColor() {
+    if (noChange) return null;
+    if (added) return Colors.green.shade100;
+    if (updated) return Colors.amber.shade200;
+    if (removed) return Colors.red.shade100;
+
+    // should never be reached
+    return null;
+  }
 
   @override
   String toString() {
@@ -27,7 +41,14 @@ class Version {
   final DateTime timestamp;
   final int changeset; // used to fetch changeset comment
   final Map<String, String> tags;
-  late String comment; // fetched separately
+  final bool isLocal;
+  String? comment; // fetched separately
+
+  // diff between tags in previous version
+  Map<String, TagChange> tagChanges = {};
+
+  // don't need to show diff when no tags have changed
+  bool get noTagChange => tagChanges.entries.every((e) => e.value.noChange);
 
   factory Version.fromJson(Map<String, dynamic> data) {
     final number = data['version'] as int;
@@ -47,7 +68,7 @@ class Version {
 
   @override
   String toString() {
-    return "$number: tags: $tags";
+    return 'v$number: user: $user, timestamp: $timestamp, changeset: $changeset, comment: $comment, tags: $tags updated: $tagChanges';
   }
 
   Version({
@@ -56,32 +77,94 @@ class Version {
     required this.timestamp,
     required this.tags,
     required this.changeset,
+    this.isLocal = false,
   });
 }
 
-class ElementVersion {
-  final int version;
-  final String user;
-  final DateTime timestamp;
-  final Map<String, String> tags;
-  // tags added since previous version
-  final Set<String> addedTags;
-  // tags removed since previous version. also store removed values to show in diff
-  final Map<String, String> removedTags;
-  // tags that have same keys but different value since previous version
-  final Map<String, TagChange> updatedTags;
+class History {
+  List<Version> versions;
 
-  // don't need to show diff when no tags have changed
-  bool get noTagChange =>
-      addedTags.isEmpty && removedTags.isEmpty && updatedTags.isEmpty;
+  /// get comments for all changesets that edited this element
+  Future<void> getComments() async {
+    final changesetIDs = versions.map((v) => v.changeset).join(",");
+    final resp = await http.get(
+        // TODO: avoid urlencoding
+        // OSM API expects something like [...]/changesets?changesets=1,2,3
+        // this sends the commas URL-encoded as %2C, but it still works
+        Uri.https(
+            kOsmEndpoint, '/api/0.6/changesets', {'changesets': changesetIDs}),
+        headers: {"Accept": "application/json"});
+    if (resp.statusCode != 200) {
+      throw OsmApiError(
+          resp.statusCode, 'Failed to fetch changeset details: ${resp.body}');
+    }
 
-  const ElementVersion(this.version, this.tags, this.addedTags,
-      this.removedTags, this.updatedTags, this.user, this.timestamp);
+    final changesets = jsonDecode(resp.body)["changesets"];
 
-  @override
-  String toString() {
-    return "$version: added: $addedTags, removed: $removedTags, changed: $updatedTags. current: $tags";
+    for (var i = 0; i < changesets.length; i++) {
+      versions[versions.length - i - 1].comment =
+          changesets[i]["tags"]["comment"];
+    }
   }
+
+  createDiffs(Map<String, String?> localChanges) {
+    // merge in the local changes to the remote ones, based from the latest remote versions
+    var mergedLocalVersion =
+        Map.from(versions.last.tags).cast<String, String?>();
+    mergedLocalVersion.addAll(localChanges);
+
+    for (var tag in Map.from(mergedLocalVersion).entries) {
+      // null values are removed tags
+      if (tag.value == null) {
+        mergedLocalVersion.remove(tag.key);
+      }
+    }
+    versions.add(Version(
+        tags: mergedLocalVersion.cast<String, String>(),
+        number: -1,
+        user: 'You',
+        changeset: -1,
+        timestamp: DateTime.now(),
+        isLocal: true));
+
+    // version 0 with no tags to diff version 1 against
+    var previousVersion = Version(
+      tags: {},
+      number: -1,
+      user: '',
+      timestamp: DateTime.now(),
+      changeset: -1,
+    );
+
+    for (var i = 0; i < versions.length; i++) {
+      var currentVersion = versions[i];
+
+      // handle added/same/updated tags
+      for (var tag in currentVersion.tags.entries) {
+        currentVersion.tagChanges[tag.key] =
+            TagChange(previousVersion.tags[tag.key], tag.value);
+      }
+
+      // handle removed tags
+      for (var key in previousVersion.tags.keys) {
+        if (currentVersion.tagChanges[key] == null) {
+          currentVersion.tagChanges[key] =
+              TagChange(previousVersion.tags[key], null);
+        }
+      }
+
+      previousVersion = currentVersion;
+    }
+  }
+
+  factory History.fromJson(Map<String, dynamic> data) {
+    final elements = data['elements'];
+    final versions = elements.map<Version>((e) => Version.fromJson(e)).toList();
+
+    return History(versions);
+  }
+
+  History(this.versions);
 }
 
 class VersionsPage extends ConsumerStatefulWidget {
@@ -96,109 +179,103 @@ class VersionsPage extends ConsumerStatefulWidget {
 }
 
 class _VersionsPageState extends ConsumerState<VersionsPage> {
-  List<ElementVersion> versions = [];
+  History? history;
+  Exception? error;
 
-  Future<List<Version>> getHistory(String fullRef) async {
+  Future<dynamic> loadHistoryJson() async {
     final resp = await http.get(
-        Uri.https(kOsmEndpoint, '/api/0.6/$fullRef/history'),
+        Uri.https(kOsmEndpoint, '/api/0.6/${widget.fullRef}/history'),
         headers: {"Accept": "application/json"});
     if (resp.statusCode == 404) {
-      throw OsmApiError(
-          resp.statusCode, 'Could not find history for $fullRef: ${resp.body}');
+      throw OsmApiError(resp.statusCode,
+          'Could not find history for ${widget.fullRef}: ${resp.body}');
     }
     if (resp.statusCode != 200) {
       throw OsmApiError(
           resp.statusCode, 'Failed to fetch history: ${resp.body}');
     }
-
-    print(resp.body);
-
-    final elements = jsonDecode(resp.body)["elements"];
-
-    final versions =
-        (elements as List).map((e) => Version.fromJson(e)).toList();
-
-    print(versions);
-
-    return versions.toList();
+    return jsonDecode(resp.body);
   }
 
-  _doVersionsStuff() async {
-    final plainVersions = await getHistory(widget.fullRef);
+  findHistory() async {
+    try {
+      var json = await loadHistoryJson();
+      final newHistory = History.fromJson(json);
 
-    // // merge in the local changes to the remote ones, based from the latest remote versions
-    // var mergedLocalVersion =
-    //     Map.from(plainVersions.last.tags).cast<String, String?>();
-    // mergedLocalVersion.addAll(widget.localChanges);
-    //
-    // for (var tag in Map.from(mergedLocalVersion).entries) {
-    //   // null values are removed tags
-    //   if (tag.value == null) {
-    //     mergedLocalVersion.remove(tag.key);
-    //   }
-    // }
-    // plainVersions.add(Version(
-    //     "you", DateTime.now(), mergedLocalVersion.cast<String, String>()));
-    //
-    // var diffedVersions = <ElementVersion>[];
-    // var previousVersion = <String, String>{};
-    //
-    // for (var i = 0; i < plainVersions.length; i++) {
-    //   var currentVersion = plainVersions[i];
-    //   var updatedTagKeys = currentVersion.tags.keys
-    //       .toSet()
-    //       .intersection(previousVersion.keys.toSet());
-    //
-    //   var updatedTags = <String, TagChange>{};
-    //   for (var key in updatedTagKeys) {
-    //     if (previousVersion[key] != currentVersion.tags[key]) {
-    //       updatedTags.addAll({
-    //         key: TagChange(previousVersion[key]!, currentVersion.tags[key]!)
-    //       });
-    //     }
-    //   }
-    //
-    //   var removedTagKeys = previousVersion.keys
-    //       .toSet()
-    //       .difference(currentVersion.tags.keys.toSet());
-    //   var removedTags = <String, String>{};
-    //   for (var key in removedTagKeys) {
-    //     removedTags[key] = previousVersion[key]!;
-    //   }
-    //
-    //   diffedVersions.add(ElementVersion(
-    //       plainVersions.length - i,
-    //       currentVersion.tags,
-    //       currentVersion.tags.keys
-    //           .toSet()
-    //           .difference(previousVersion.keys.toSet()),
-    //       removedTags,
-    //       updatedTags,
-    //       currentVersion.user,
-    //       currentVersion.timestamp));
-    //   previousVersion = currentVersion.tags;
-    // }
-    //
-    // setState(() => {versions = diffedVersions});
+      await newHistory.getComments();
+      newHistory.createDiffs(widget.localChanges);
+
+      setState(() => history = newHistory);
+    } on SocketException catch (e) {
+      setState(() => error = e);
+    } on OsmApiError catch (e) {
+      setState(() => error = e);
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    _doVersionsStuff();
+    findHistory();
   }
 
   _buildLoader() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          CircularProgressIndicator(
-            value: null,
-            color: Colors.blueGrey,
-          ),
-        ],
+    if (error != null) {
+      // FIXME: styling
+      return Text(error!.toString());
+    } else {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            CircularProgressIndicator(
+              value: null,
+              color: Colors.blueGrey,
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  _buildTable(Version version) {
+    return Table(
+      border: TableBorder.all(
+        width: 1,
+        color: Colors.grey,
+        borderRadius: BorderRadius.all(
+          Radius.circular(3),
+        ),
       ),
+      children: [
+        for (final tag in version.tagChanges.entries)
+          TableRow(
+            // TODO: these BoxDecorations slightly clip outside of the table BorderRadius
+            decoration: BoxDecoration(
+              color: tag.value.getColor(),
+            ),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(6),
+                child: Text(
+                  tag.key,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(6),
+                child:
+                    Text(!tag.value.noChange ? tag.value.oldValue ?? "" : ""),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(6),
+                child: Text(tag.value.newValue ?? ""),
+              )
+            ],
+          ),
+      ],
     );
   }
 
@@ -217,13 +294,19 @@ class _VersionsPageState extends ConsumerState<VersionsPage> {
           ),
         ],
       ),
-      body: versions.isEmpty
-          ? _buildLoader()
-          // FIXME: way too much nesting here
-          : ListView(
-              children: [
-                for (var i = versions.length - 1; i >= 0; i--)
-                  Card(
+      body: Builder(
+        builder: (BuildContext context) {
+          if (history == null) {
+            return _buildLoader();
+          }
+
+          return ListView(
+            children: [
+              for (var i = history!.versions.length - 1; i >= 0; i--)
+                Builder(builder: (context) {
+                  final version = history!.versions[i];
+
+                  return Card(
                     margin: EdgeInsets.only(top: 12, right: 12, left: 12),
                     child: Padding(
                       padding: const EdgeInsets.all(10),
@@ -233,135 +316,34 @@ class _VersionsPageState extends ConsumerState<VersionsPage> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
-                              i != versions.length - 1
-                                  ? 'Version #${(i + 1).toString()}'
-                                  : 'Local changes', // TODO: doesn't make much sense to show local changes when there aren't any
+                              version.isLocal
+                                  ? 'Local changes'
+                                  : 'Version #${version.number}',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                           ),
-                          if (i != versions.length - 1)
+                          if (!version.isLocal)
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: Text(
-                                'by ${versions[i].user} at ${DateFormat.yMMMMd().add_Hm().format(versions[i].timestamp)}',
+                                'by ${version.user} at ${DateFormat.yMMMMd().add_Hm().format(version.timestamp)}',
                               ),
                             ),
-                          // FIXME: these are pretty gross. should probably extract stuff here...
-                          if (versions[i].noTagChange) ...[
-                            Text("No tag changes")
-                          ] else ...[
-                            Table(
-                              border: TableBorder.all(
-                                width: 1,
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(3),
-                                ),
-                              ),
-                              children: [
-                                for (final tag in versions[i].tags.entries)
-                                  if (versions[i]
-                                      .addedTags
-                                      .contains(tag.key)) ...[
-                                    TableRow(
-                                      // FIXME: these BoxDecorations clip outside of the BorderRadius
-                                      decoration: BoxDecoration(
-                                        color: Colors.green.shade100,
-                                      ),
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(6),
-                                          child: Text(
-                                            tag.key,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Container(),
-                                        Padding(
-                                          padding: const EdgeInsets.all(6),
-                                          child: Text(tag.value),
-                                        )
-                                      ],
-                                    ),
-                                  ] else ...[
-                                    TableRow(
-                                      decoration: BoxDecoration(
-                                        color:
-                                            versions[i].updatedTags[tag.key] !=
-                                                    null
-                                                ? Colors.amber.shade200
-                                                : null,
-                                      ),
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(6),
-                                          child: Text(
-                                            tag.key,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(6),
-                                          child: Text(versions[i]
-                                                  .updatedTags[tag.key]
-                                                  ?.oldValue ??
-                                              ""),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(6),
-                                          child: Text(tag.value),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                // TODO: would be nice if deleted tags were interlaced alphabetically with the others
-                                for (final tag
-                                    in versions[i].removedTags.entries)
-                                  TableRow(
-                                    decoration: BoxDecoration(
-                                      color: Colors.red.shade100,
-                                    ),
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(6),
-                                        child: Text(
-                                          tag.key,
-                                          style: TextStyle(
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(6),
-                                        child: Text(
-                                          tag.value,
-                                          style: TextStyle(
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                          ),
-                                        ),
-                                      ),
-                                      Container()
-                                    ],
-                                  )
-                              ],
-                            ),
-                          ],
+                          version.noTagChange
+                              ? Text("No tag changes")
+                              : _buildTable(version),
                         ],
                       ),
                     ),
-                  ),
-                // bottom padding
-                Container(height: 10)
-              ],
-            ),
+                  );
+                }),
+              // bottom padding
+              Container(height: 12)
+            ],
+          );
+        },
+      ),
     );
   }
 }
