@@ -228,23 +228,55 @@ class _VersionsPageState extends State<VersionsPage> {
     findHistory();
   }
 
-  _buildLoader() {
-    if (error != null) {
-      // FIXME: styling
-      return Text(error!.toString());
-    } else {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CircularProgressIndicator(
-              value: null,
-              color: Colors.blueGrey,
+  Center _buildLoader() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          CircularProgressIndicator(
+            value: null,
+            color: Colors.blueGrey,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Center _buildError() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: Text(
+              error.runtimeType == SocketException
+                  ? 'Connect to the internet to fetch version history'
+                  : 'Error fetching version history: $error',
+              style: TextStyle(fontSize: 16),
             ),
-          ],
-        ),
-      );
-    }
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() => error = null);
+              findHistory();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 16.0,
+                horizontal: 12.0,
+              ),
+              child: Text(
+                "Retry",
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   _buildTable(Version version) {
@@ -305,6 +337,9 @@ class _VersionsPageState extends State<VersionsPage> {
       ),
       body: Builder(
         builder: (BuildContext context) {
+          if (error != null) {
+            return _buildError();
+          }
           if (history == null) {
             return _buildLoader();
           }
