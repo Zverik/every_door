@@ -102,8 +102,9 @@ class History {
     final changesets = jsonDecode(resp.body)["changesets"];
 
     for (var i = 0; i < changesets.length; i++) {
+      // some (old) changesets do not always have tags or comments
       versions[versions.length - i - 1].comment =
-          changesets[i]["tags"]["comment"];
+          changesets[i]?["tags"]?["comment"];
     }
   }
 
