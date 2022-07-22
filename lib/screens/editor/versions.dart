@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -127,7 +128,7 @@ class History {
     versions.add(Version(
         tags: mergedLocalVersion.cast<String, String>(),
         number: -1,
-        user: 'You',
+        user: '',
         changeset: -1,
         timestamp: DateTime.now(),
         isLocal: true));
@@ -215,9 +216,7 @@ class _VersionsPageState extends State<VersionsPage> {
       newHistory.createDiffs(widget.localChanges);
 
       setState(() => history = newHistory);
-    } on SocketException catch (e) {
-      setState(() => error = e);
-    } on OsmApiError catch (e) {
+    } on Exception catch (e) {
       setState(() => error = e);
     }
   }
@@ -242,22 +241,23 @@ class _VersionsPageState extends State<VersionsPage> {
     );
   }
 
-  Center _buildError() {
+  Center _buildError(AppLocalizations loc) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
+            padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15),
             child: Text(
               error.runtimeType == SocketException
-                  ? 'Connect to the internet to fetch version history'
-                  : 'Error fetching version history: $error',
+                  ? loc.versionsEnableInternet
+                  : '${loc.versionsFetchError}: $error',
               style: TextStyle(fontSize: 16),
             ),
           ),
           ElevatedButton(
             onPressed: () {
+              // clear out error to show loader
               setState(() => error = null);
               findHistory();
             },
@@ -267,7 +267,7 @@ class _VersionsPageState extends State<VersionsPage> {
                 horizontal: 12.0,
               ),
               child: Text(
-                "Retry",
+                loc.versionsRetryFetch,
                 style: TextStyle(
                   fontSize: 16.0,
                 ),
@@ -320,7 +320,7 @@ class _VersionsPageState extends State<VersionsPage> {
     );
   }
 
-  Card _buildCard(Version version) {
+  Card _buildCard(Version version, AppLocalizations loc) {
     return Card(
       margin: EdgeInsets.only(top: 12, right: 12, left: 12),
       child: Padding(
@@ -332,8 +332,8 @@ class _VersionsPageState extends State<VersionsPage> {
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
                 version.isLocal
-                    ? 'Local changes'
-                    : 'Version #${version.number}',
+                    ? loc.versionsLocalChanges
+                    : loc.versionsVersionNumber(version.number),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
@@ -341,7 +341,11 @@ class _VersionsPageState extends State<VersionsPage> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
-                  'by ${version.user} at ${DateFormat.yMMMMd().add_Hm().format(version.timestamp)}',
+                  loc.versionsVersionMeta(
+                    version.user,
+                    // TODO: is it possible to do this in the .arb?
+                    DateFormat.yMMMMd().add_Hm().format(version.timestamp),
+                  ),
                 ),
               ),
             if (version.comment != null)
@@ -352,7 +356,9 @@ class _VersionsPageState extends State<VersionsPage> {
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
               ),
-            version.noTagChange ? Text("No tag changes") : _buildTable(version),
+            version.noTagChange
+                ? Text(loc.versionsNoTagChanges)
+                : _buildTable(version),
           ],
         ),
       ),
@@ -361,11 +367,11 @@ class _VersionsPageState extends State<VersionsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.fullRef} history"),
+        title: Text(loc.versionsTitle(widget.fullRef)),
         actions: [
           IconButton(
             icon: Icon(Icons.open_in_browser),
@@ -377,7 +383,7 @@ class _VersionsPageState extends State<VersionsPage> {
       body: Builder(
         builder: (BuildContext context) {
           if (error != null) {
-            return _buildError();
+            return _buildError(loc);
           }
           if (history == null) {
             return _buildLoader();
@@ -386,7 +392,7 @@ class _VersionsPageState extends State<VersionsPage> {
           return ListView(
             children: [
               for (var version in history!.versions.reversed)
-                _buildCard(version),
+                _buildCard(version, loc),
               Container(height: 12), // bottom padding
             ],
           );
