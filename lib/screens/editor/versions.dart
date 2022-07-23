@@ -54,7 +54,8 @@ class Version {
 
   factory Version.fromJson(Map<String, dynamic> data) {
     final number = data['version'] as int;
-    final user = data['user'] as String;
+    // some old changesets were created anonymously
+    final user = (data['user'] ?? 'anonymous') as String;
     final timestamp = DateTime.parse(data['timestamp'] as String);
     final changeset = data['changeset'] as int;
     final tags =
