@@ -85,11 +85,31 @@ class Version {
 }
 
 class History {
-  List<Version> versions;
+  String fullRef;
+  late List<Version> versions;
+
+  /// load history for this element reference
+  /// must be called before other methods of this class
+  Future<void> loadHistory() async {
+    final resp = await http.get(
+        Uri.https(kOsmEndpoint, '/api/0.6/$fullRef/history'),
+        headers: {"Accept": "application/json"});
+    if (resp.statusCode == 404) {
+      throw OsmApiError(
+          resp.statusCode, 'Could not find history for $fullRef: ${resp.body}');
+    }
+    if (resp.statusCode != 200) {
+      throw OsmApiError(
+          resp.statusCode, 'Failed to fetch history: ${resp.body}');
+    }
+
+    final elements = jsonDecode(resp.body)['elements'];
+    versions = elements.map<Version>((e) => Version.fromJson(e)).toList();
+  }
 
   /// get comments for changesets that edited this element
   /// limited to 100 most recent
-  Future<void> getComments() async {
+  Future<void> loadComments() async {
     final changesetIDs = versions.map((v) => v.changeset).join(",");
     final resp = await http.get(
         // TODO: avoid urlencoding
@@ -114,7 +134,7 @@ class History {
   }
 
   createDiffs(Map<String, String?> localChanges) {
-    // merge in the local changes to the remote ones, based from the latest remote versions
+    // merge in local changes to the latest remote version, so we can diff local changes
     var mergedLocalVersion =
         Map.from(versions.last.tags).cast<String, String?>();
     mergedLocalVersion.addAll(localChanges);
@@ -142,35 +162,25 @@ class History {
       changeset: -1,
     );
 
-    for (var i = 0; i < versions.length; i++) {
-      var currentVersion = versions[i];
-
+    for (var version in versions) {
       // handle added/same/updated tags
-      for (var tag in currentVersion.tags.entries) {
-        currentVersion.tagChanges[tag.key] =
+      for (var tag in version.tags.entries) {
+        version.tagChanges[tag.key] =
             TagChange(previousVersion.tags[tag.key], tag.value);
       }
 
       // handle removed tags
       for (var key in previousVersion.tags.keys) {
-        if (currentVersion.tagChanges[key] == null) {
-          currentVersion.tagChanges[key] =
-              TagChange(previousVersion.tags[key], null);
+        if (version.tagChanges[key] == null) {
+          version.tagChanges[key] = TagChange(previousVersion.tags[key], null);
         }
       }
 
-      previousVersion = currentVersion;
+      previousVersion = version;
     }
   }
 
-  factory History.fromJson(Map<String, dynamic> data) {
-    final elements = data['elements'];
-    final versions = elements.map<Version>((e) => Version.fromJson(e)).toList();
-
-    return History(versions);
-  }
-
-  History(this.versions);
+  History(this.fullRef);
 }
 
 class VersionsPage extends StatefulWidget {
@@ -192,27 +202,12 @@ class _VersionsPageState extends State<VersionsPage> {
   History? history;
   Exception? error;
 
-  Future<dynamic> loadHistoryJson() async {
-    final resp = await http.get(
-        Uri.https(kOsmEndpoint, '/api/0.6/${widget.fullRef}/history'),
-        headers: {"Accept": "application/json"});
-    if (resp.statusCode == 404) {
-      throw OsmApiError(resp.statusCode,
-          'Could not find history for ${widget.fullRef}: ${resp.body}');
-    }
-    if (resp.statusCode != 200) {
-      throw OsmApiError(
-          resp.statusCode, 'Failed to fetch history: ${resp.body}');
-    }
-    return jsonDecode(resp.body);
-  }
-
-  findHistory() async {
+  getHistory() async {
     try {
-      var json = await loadHistoryJson();
-      final newHistory = History.fromJson(json);
+      var newHistory = History(widget.fullRef);
+      await newHistory.loadHistory();
+      await newHistory.loadComments();
 
-      await newHistory.getComments();
       newHistory.createDiffs(widget.localChanges);
 
       setState(() => history = newHistory);
@@ -224,7 +219,7 @@ class _VersionsPageState extends State<VersionsPage> {
   @override
   void initState() {
     super.initState();
-    findHistory();
+    getHistory();
   }
 
   Center _buildLoader() {
@@ -259,7 +254,7 @@ class _VersionsPageState extends State<VersionsPage> {
             onPressed: () {
               // clear out error to show loader
               setState(() => error = null);
-              findHistory();
+              getHistory();
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -308,11 +303,11 @@ class _VersionsPageState extends State<VersionsPage> {
               Padding(
                 padding: const EdgeInsets.all(6),
                 child:
-                    Text(!tag.value.noChange ? tag.value.oldValue ?? "" : ""),
+                    Text(!tag.value.noChange ? tag.value.oldValue ?? '' : ''),
               ),
               Padding(
                 padding: const EdgeInsets.all(6),
-                child: Text(tag.value.newValue ?? ""),
+                child: Text(tag.value.newValue ?? ''),
               )
             ],
           ),
@@ -343,7 +338,6 @@ class _VersionsPageState extends State<VersionsPage> {
                 child: Text(
                   loc.versionsVersionMeta(
                     version.user,
-                    // TODO: is it possible to do this in the .arb?
                     DateFormat.yMMMMd().add_Hm().format(version.timestamp),
                   ),
                 ),
