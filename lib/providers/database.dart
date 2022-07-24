@@ -1,4 +1,5 @@
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/note.dart';
 import 'package:every_door/models/offset.dart';
 import 'package:every_door/models/osm_area.dart';
 import 'package:every_door/models/osm_element.dart';
@@ -43,7 +44,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       kDatabaseName,
-      version: 4,
+      version: 5,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,
     );
@@ -69,6 +70,18 @@ class DatabaseHelper {
         "create table ${RoadNameRecord.kTableName} (${RoadNameRecord.kTableFields.join(', ')})");
     await database.execute(
         "create index ${RoadNameRecord.kTableName}_geohash on ${RoadNameRecord.kTableName} (geohash)");
+
+    // Imagery offsets
+    await database.execute(
+        "create table ${ImageryOffset.kTableName} (${ImageryOffset.kTableFields.join(', ')})");
+    await database.execute(
+        "create index ${ImageryOffset.kTableName}_geohash on ${ImageryOffset.kTableName} (geohash)");
+
+    // Map notes, drawings, and OSM notes
+    await database.execute(
+        "create table ${BaseNote.kTableName} (${BaseNote.kTableFields.join(', ')})");
+    await database.execute(
+        "create index ${BaseNote.kTableName}_geohash on ${BaseNote.kTableName} (geohash)");
   }
 
   void upgradeDatabase(
@@ -96,7 +109,10 @@ class DatabaseHelper {
           "create table ${ImageryOffset.kTableName} (${ImageryOffset.kTableFields.join(', ')})");
       await database.execute(
           "create index ${ImageryOffset.kTableName}_geohash on ${ImageryOffset.kTableName} (geohash)");
+      await database.execute(
+          "create table ${BaseNote.kTableName} (${BaseNote.kTableFields.join(', ')})");
+      await database.execute(
+          "create index ${BaseNote.kTableName}_geohash on ${BaseNote.kTableName} (geohash)");
     }
-    // Create new table for terms and preset names?
   }
 }
