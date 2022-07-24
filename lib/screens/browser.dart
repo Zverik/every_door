@@ -12,6 +12,7 @@ import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/modes/entrances.dart';
+import 'package:every_door/screens/modes/notes.dart';
 import 'package:every_door/screens/modes/poi_list.dart';
 import 'package:every_door/widgets/navbar.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,9 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
         break;
       case EditorMode.entrances:
         editorPanel = EntrancesPane(areaStatusPanel: statusPanel);
+        break;
+      case EditorMode.notes:
+        editorPanel = NotesPane(areaStatusPanel: statusPanel);
         break;
     }
 

@@ -84,7 +84,8 @@ class BrowserNavigationBar extends ConsumerWidget {
     const kEditorModes = [
       EditorMode.micromapping,
       EditorMode.poi,
-      EditorMode.entrances
+      EditorMode.entrances,
+      EditorMode.notes,
     ];
 
     final leftHand = ref.watch(editorSettingsProvider).leftHand;

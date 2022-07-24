@@ -13,24 +13,28 @@ enum EditorMode {
   poi,
   micromapping,
   entrances,
+  notes,
 }
 
 const kEditorModeIcons = {
   EditorMode.poi: Icons.free_breakfast, // local_cafe icon is broken
   EditorMode.micromapping: Icons.park,
   EditorMode.entrances: Icons.home,
+  EditorMode.notes: Icons.note_alt,
 };
 
 const kEditorModeIconsOutlined = {
   EditorMode.poi: Icons.free_breakfast_outlined,
   EditorMode.micromapping: Icons.park_outlined,
   EditorMode.entrances: Icons.home_outlined,
+  EditorMode.notes: Icons.note_alt_outlined,
 };
 
 const kNextMode = {
-  EditorMode.poi: EditorMode.micromapping,
-  EditorMode.micromapping: EditorMode.entrances,
-  EditorMode.entrances: EditorMode.poi,
+  EditorMode.micromapping: EditorMode.poi,
+  EditorMode.poi: EditorMode.entrances,
+  EditorMode.entrances: EditorMode.notes,
+  EditorMode.notes: EditorMode.micromapping,
 };
 
 class EditorModeController extends StateNotifier<EditorMode> {
