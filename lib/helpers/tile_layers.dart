@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 class CachedTileProvider extends TileProvider {
-  const CachedTileProvider();
+  CachedTileProvider();
 
   @override
   ImageProvider getImage(Coords<num> coords, TileLayerOptions options) {
@@ -19,7 +19,7 @@ class CachedTileProvider extends TileProvider {
 }
 
 class CachedBingTileProvider extends TileProvider {
-  const CachedBingTileProvider();
+  CachedBingTileProvider();
 
   String _tileToQuadkey(int x, int y, int z) {
     String quad = '';
@@ -143,8 +143,8 @@ TileLayerOptions buildTileLayerOptions(Imagery imagery) {
   }
 
   final TileProvider tileProvider = imagery.type == ImageryType.bing
-      ? const CachedBingTileProvider()
-      : const CachedTileProvider();
+      ? CachedBingTileProvider()
+      : CachedTileProvider();
 
   return TileLayerOptions(
     urlTemplate: url,
@@ -161,10 +161,10 @@ TileLayerOptions buildTileLayerOptions(Imagery imagery) {
 }
 
 Widget buildAttributionWidget(Imagery imagery, [bool showAttribution = true]) {
-  if (!showAttribution || imagery.attribution == null)
-    return Container();
-  return AttributionWidget(attributionBuilder: (context) => Padding(
-    padding: const EdgeInsets.all(4.0),
-    child: Text(imagery.attribution!),
-  ));
+  if (!showAttribution || imagery.attribution == null) return Container();
+  return AttributionWidget(
+      attributionBuilder: (context) => Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(imagery.attribution!),
+          ));
 }
