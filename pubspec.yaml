@@ -46,6 +46,7 @@ dependencies:
   logging: ^1.0.2
   encrypt: ^5.0.1
   flutter_markdown: ^0.6.10+2
+  path_drawing: ^1.0.0
 
 dev_dependencies:
   test: ^1.19.5
