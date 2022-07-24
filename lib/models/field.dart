@@ -1,5 +1,6 @@
 import 'package:every_door/fields/checkbox.dart';
 import 'package:every_door/fields/combo.dart';
+import 'package:every_door/fields/email.dart';
 import 'package:every_door/fields/floor.dart';
 import 'package:every_door/fields/hours.dart';
 import 'package:every_door/fields/name.dart';
@@ -99,14 +100,10 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         maxLines: 4,
       );
     case 'email':
-      return TextPresetField(
-        key: key,
+      return EmailPresetField(
         label: label,
-        icon: Icons.email_outlined,
         placeholder: placeholder,
         prerequisite: prerequisite,
-        keyboardType: TextInputType.emailAddress,
-        capitalize: false,
       );
     case 'phone':
       return PhonePresetField(

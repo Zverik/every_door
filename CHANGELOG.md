@@ -1,5 +1,14 @@
 # Every Door App Change Log
 
+## 0.9
+
+_Unreleased_
+
+* Email field now can edit `contact:email`.
+* Supporting `marker=*` for pipeline markers.
+* Fixed editor pane when in Basque locale.
+* ATMs and vending machines are back in the POI category.
+
 ## 0.8
 
 _Released on 2022-07-15_

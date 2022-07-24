@@ -85,7 +85,7 @@ class _RadioComboFieldState extends State<RadioComboField> {
     if (widget.field.type == ComboType.multi) {
       List<String> values = [];
       widget.element.getFullTags().forEach((key, value) {
-        if (key.startsWith(widget.field.key) && value == 'yes')
+        if (key.startsWith(widget.field.key) && value != 'no')
           values.add(key.substring(widget.field.key.length));
       });
       return values;
@@ -114,7 +114,7 @@ class _RadioComboFieldState extends State<RadioComboField> {
     if (widget.field.type == ComboType.multi) {
       List<String> keysToDelete = [];
       widget.element.getFullTags().forEach((key, value) {
-        if (key.startsWith(widget.field.key) && value == 'yes') {
+        if (key.startsWith(widget.field.key) && value != 'no') {
           if (!values.contains(key.substring(widget.field.key.length)))
             keysToDelete.add(key);
         }

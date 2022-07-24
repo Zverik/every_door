@@ -361,19 +361,17 @@ class OsmChange extends ChangeNotifier implements Comparable {
     return this['name:${locale.languageCode}'] ?? this['name'];
   }
 
-  String? getContact(String key) =>
-      this[key] ??
-      (key.startsWith('contact:')
-          ? this[key.replaceFirst('contact:', '')]
-          : this['contact:$key']);
+  String _getAltContactKey(String key) {
+    if (key.startsWith('contact:'))
+      return key.replaceFirst('contact:', '');
+    else
+      return 'contact:$key';
+  }
+
+  String? getContact(String key) => this[key] ?? this[_getAltContactKey(key)];
 
   setContact(String key, String value) {
-    String alternativeKey;
-    if (key.startsWith('contact:'))
-      alternativeKey = key.replaceFirst('contact:', '');
-    else
-      alternativeKey = 'contact:$key';
-
+    final alternativeKey = _getAltContactKey(key);
     if (this[alternativeKey] != null)
       this[alternativeKey] = value;
     else

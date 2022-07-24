@@ -401,7 +401,9 @@ class PresetProvider {
     limit 1
     ''';
     final results = await _db!.rawQuery(sql, [fieldName]);
-    return results.isEmpty ? null : results.first['label'] as String;
+    return results.isEmpty || results.first['label'] == null
+        ? null
+        : results.first['label'] as String;
   }
 
   Future<Map<String, PresetField>> _getFields(
