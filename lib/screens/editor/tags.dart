@@ -3,11 +3,11 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/private.dart';
+import 'package:every_door/screens/editor/versions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TagEditorPage extends StatefulWidget {
   final OsmChange amenity;
@@ -39,8 +39,6 @@ class _TagEditorPageState extends State<TagEditorPage> {
 
   String _getUrl() => 'https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}';
 
-  String _getHistoryUrl() => '${_getUrl()}/history';
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -57,9 +55,17 @@ class _TagEditorPageState extends State<TagEditorPage> {
           if (!widget.amenity.isNew)
             IconButton(
               icon: Icon(Icons.history),
-              onPressed: () async => await launchUrl(
-                  Uri.parse(_getHistoryUrl()),
-                  mode: LaunchMode.externalApplication),
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VersionsPage(
+                      fullRef: widget.amenity.element!.id.fullRef,
+                      localChanges: widget.amenity.newTags,
+                    ),
+                  ),
+                );
+              },
             ),
           if (!widget.amenity.isNew)
             GestureDetector(
