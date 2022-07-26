@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TagChange {
   final String? oldValue;
@@ -194,12 +193,10 @@ class History {
 
 class VersionsPage extends StatefulWidget {
   final String fullRef;
-  final String url;
   final Map<String, String?> localChanges;
 
   const VersionsPage({
     required this.fullRef,
-    required this.url,
     required this.localChanges,
   });
 
@@ -369,15 +366,6 @@ class _VersionsPageState extends State<VersionsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(loc.versionsTitle(widget.fullRef)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.open_in_browser),
-            onPressed: () async => await launchUrl(
-              Uri.parse('${widget.url}/history'),
-              mode: LaunchMode.externalApplication,
-            ),
-          ),
-        ],
       ),
       body: Builder(
         builder: (BuildContext context) {

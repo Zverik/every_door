@@ -61,7 +61,6 @@ class _TagEditorPageState extends State<TagEditorPage> {
                   MaterialPageRoute(
                     builder: (context) => VersionsPage(
                       fullRef: widget.amenity.element!.id.fullRef,
-                      url: _getUrl(),
                       localChanges: widget.amenity.newTags,
                     ),
                   ),
