@@ -32,7 +32,7 @@ class TagChange {
 
   @override
   String toString() {
-    return "was: $oldValue, now: $newValue";
+    return 'TagChange(oldValue: $oldValue, newValue: $newValue)';
   }
 }
 
@@ -72,7 +72,7 @@ class Version {
 
   @override
   String toString() {
-    return 'v$number: user: $user, timestamp: $timestamp, changeset: $changeset, comment: $comment, tags: $tags updated: $tagChanges';
+    return 'Version(number: $number, user: $user, timestamp: $timestamp, changeset: $changeset, tags: $tags, isLocal: $isLocal, comment: $comment, tagChanges: $tagChanges)';
   }
 
   Version({
