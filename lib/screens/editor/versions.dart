@@ -95,8 +95,9 @@ class History {
   /// must be called before other methods of this class
   Future<void> loadHistory() async {
     final resp = await http.get(
-        Uri.https(kOsmEndpoint, '/api/0.6/$fullRef/history'),
-        headers: {"Accept": "application/json"});
+      Uri.https(kOsmEndpoint, '/api/0.6/$fullRef/history'),
+      headers: {"Accept": "application/json"},
+    );
     if (resp.statusCode == 404) {
       throw OsmApiError(
           resp.statusCode, 'Could not find history for $fullRef: ${resp.body}');
@@ -115,12 +116,16 @@ class History {
   Future<void> loadComments() async {
     final changesetIDs = versions.map((v) => v.changeset).join(",");
     final resp = await http.get(
-        // TODO: avoid urlencoding
-        // OSM API expects something like [...]/changesets?changesets=1,2,3
-        // this sends the commas URL-encoded as %2C, but it still works
-        Uri.https(
-            kOsmEndpoint, '/api/0.6/changesets', {'changesets': changesetIDs}),
-        headers: {"Accept": "application/json"});
+      // TODO: avoid urlencoding
+      // OSM API expects something like [...]/changesets?changesets=1,2,3
+      // this sends the commas URL-encoded as %2C, but it still works
+      Uri.https(
+        kOsmEndpoint,
+        '/api/0.6/changesets',
+        {'changesets': changesetIDs},
+      ),
+      headers: {"Accept": "application/json"},
+    );
     if (resp.statusCode != 200) {
       throw OsmApiError(
           resp.statusCode, 'Failed to fetch changeset details: ${resp.body}');
@@ -148,13 +153,16 @@ class History {
         mergedLocalVersion.remove(tag.key);
       }
     }
-    versions.add(Version(
+    versions.add(
+      Version(
         tags: mergedLocalVersion.cast<String, String>(),
         number: -1,
         user: '',
         changeset: -1,
         timestamp: DateTime.now(),
-        isLocal: true));
+        isLocal: true,
+      ),
+    );
 
     // version 0 with no tags to diff version 1 against
     var previousVersion = Version(
@@ -264,9 +272,7 @@ class _VersionsPageState extends State<VersionsPage> {
               ),
               child: Text(
                 loc.versionsRetryFetch,
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
+                style: TextStyle(fontSize: 16.0),
               ),
             ),
           ),
@@ -280,9 +286,7 @@ class _VersionsPageState extends State<VersionsPage> {
       border: TableBorder.all(
         width: 1,
         color: Colors.grey,
-        borderRadius: BorderRadius.all(
-          Radius.circular(3),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(3)),
       ),
       children: [
         for (final tag in version.tagChanges.entries)
@@ -296,9 +300,7 @@ class _VersionsPageState extends State<VersionsPage> {
                 padding: const EdgeInsets.all(6),
                 child: Text(
                   tag.key,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
@@ -370,8 +372,10 @@ class _VersionsPageState extends State<VersionsPage> {
         actions: [
           IconButton(
             icon: Icon(Icons.open_in_browser),
-            onPressed: () async => await launchUrl(widget.historyUrl,
-                mode: LaunchMode.externalApplication),
+            onPressed: () async => await launchUrl(
+              widget.historyUrl,
+              mode: LaunchMode.externalApplication,
+            ),
           ),
         ],
       ),
