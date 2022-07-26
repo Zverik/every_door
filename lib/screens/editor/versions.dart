@@ -45,7 +45,7 @@ class Version {
   final bool isLocal;
   String? comment; // fetched separately
 
-  /// stores the tags changes between previous versions and this versions.
+  /// stores the tag changes between this version and the previous version.
   /// uses a `SplayTreeMap` so that keys are sorted alphabetically
   Map<String, TagChange> tagChanges = SplayTreeMap();
 
