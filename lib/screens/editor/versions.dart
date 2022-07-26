@@ -388,7 +388,7 @@ class _VersionsPageState extends State<VersionsPage> {
             children: [
               for (var version in history!.versions.reversed)
                 _buildCard(version, loc),
-              Container(height: 12), // bottom padding
+              SizedBox(height: 12), // bottom padding
             ],
           );
         },
