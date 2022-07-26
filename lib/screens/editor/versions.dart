@@ -52,6 +52,15 @@ class Version {
   // don't need to show diff when no tags have changed
   bool get noTagChange => tagChanges.entries.every((e) => e.value.noChange);
 
+  Version({
+    required this.number,
+    required this.user,
+    required this.timestamp,
+    required this.tags,
+    required this.changeset,
+    this.isLocal = false,
+  });
+
   factory Version.fromJson(Map<String, dynamic> data) {
     final number = data['version'] as int;
     // some old changesets were created anonymously
@@ -74,20 +83,13 @@ class Version {
   String toString() {
     return 'Version(number: $number, user: $user, timestamp: $timestamp, changeset: $changeset, tags: $tags, isLocal: $isLocal, comment: $comment, tagChanges: $tagChanges)';
   }
-
-  Version({
-    required this.number,
-    required this.user,
-    required this.timestamp,
-    required this.tags,
-    required this.changeset,
-    this.isLocal = false,
-  });
 }
 
 class History {
   String fullRef;
   late List<Version> versions;
+
+  History(this.fullRef);
 
   /// load history for this element reference
   /// must be called before other methods of this class
@@ -180,8 +182,6 @@ class History {
       previousVersion = version;
     }
   }
-
-  History(this.fullRef);
 }
 
 class VersionsPage extends StatefulWidget {
