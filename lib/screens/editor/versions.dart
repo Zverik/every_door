@@ -194,12 +194,12 @@ class History {
 
 class VersionsPage extends StatefulWidget {
   final String fullRef;
-  final Uri historyUrl;
+  final String url;
   final Map<String, String?> localChanges;
 
   const VersionsPage({
     required this.fullRef,
-    required this.historyUrl,
+    required this.url,
     required this.localChanges,
   });
 
@@ -373,7 +373,7 @@ class _VersionsPageState extends State<VersionsPage> {
           IconButton(
             icon: Icon(Icons.open_in_browser),
             onPressed: () async => await launchUrl(
-              widget.historyUrl,
+              Uri.parse('${widget.url}/history'),
               mode: LaunchMode.externalApplication,
             ),
           ),

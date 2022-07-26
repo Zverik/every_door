@@ -39,8 +39,6 @@ class _TagEditorPageState extends State<TagEditorPage> {
 
   String _getUrl() => 'https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}';
 
-  Uri _getHistoryUrl() => Uri.parse('${_getUrl()}/history');
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -63,7 +61,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
                   MaterialPageRoute(
                     builder: (context) => VersionsPage(
                       fullRef: widget.amenity.element!.id.fullRef,
-                      historyUrl: _getHistoryUrl(),
+                      url: _getUrl(),
                       localChanges: widget.amenity.newTags,
                     ),
                   ),
