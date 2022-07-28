@@ -5,9 +5,12 @@
 _Unreleased_
 
 * Email field now can edit `contact:email`.
+* Returned the setting for preferring `contact:` prefixes.
 * Supporting `marker=*` for pipeline markers.
 * Fixed editor pane when in Basque locale.
 * ATMs and vending machines are back in the POI category.
+* Added `public_transport=*` to micromapping.
+* Updated all dependencies and increased target API to Android 13.
 
 ## 0.8
 
@@ -20,7 +23,7 @@ _Released on 2022-07-15_
 * No addresses on buildings in Netherlands.
 * Removed `not:name` field.
 
-## Opening Hours Editor
+### Opening Hours Editor
 
 * Could not mark an hours fragment as `off`.
 * An inactive `PH` interval is no longer added by default.

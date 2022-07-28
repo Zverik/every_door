@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -54,6 +55,10 @@ class EditorSettings {
       leftHand ? '1' : '0',
     ];
   }
+
+  TextInputType get keyboardType => fixNumKeyboard
+      ? TextInputType.visiblePassword
+      : TextInputType.numberWithOptions(signed: true, decimal: true);
 }
 
 class EditorSettingsProvider extends StateNotifier<EditorSettings> {

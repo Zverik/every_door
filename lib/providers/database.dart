@@ -44,7 +44,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       kDatabaseName,
-      version: 5,
+      version: 4,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,
     );
@@ -65,23 +65,8 @@ class DatabaseHelper {
     await database.execute(
         "create table ${OsmChange.kTableName} (${OsmChange.kTableFields.join(', ')})");
 
-    // Road names
-    await database.execute(
-        "create table ${RoadNameRecord.kTableName} (${RoadNameRecord.kTableFields.join(', ')})");
-    await database.execute(
-        "create index ${RoadNameRecord.kTableName}_geohash on ${RoadNameRecord.kTableName} (geohash)");
-
-    // Imagery offsets
-    await database.execute(
-        "create table ${ImageryOffset.kTableName} (${ImageryOffset.kTableFields.join(', ')})");
-    await database.execute(
-        "create index ${ImageryOffset.kTableName}_geohash on ${ImageryOffset.kTableName} (geohash)");
-
-    // Map notes, drawings, and OSM notes
-    await database.execute(
-        "create table ${BaseNote.kTableName} (${BaseNote.kTableFields.join(', ')})");
-    await database.execute(
-        "create index ${BaseNote.kTableName}_geohash on ${BaseNote.kTableName} (geohash)");
+    if (version >= 4) await createTablesV4(database);
+    if (version >= 5) await createTablesV5(database);
   }
 
   void upgradeDatabase(
@@ -99,20 +84,32 @@ class DatabaseHelper {
       }
     }
     if (newVersion >= 4 && oldVersion < 4) {
-      await database.execute(
-          "create table ${RoadNameRecord.kTableName} (${RoadNameRecord.kTableFields.join(', ')})");
-      await database.execute(
-          "create index ${RoadNameRecord.kTableName}_geohash on ${RoadNameRecord.kTableName} (geohash)");
+      await createTablesV4(database);
     }
     if (newVersion >= 5 && oldVersion < 5) {
-      await database.execute(
-          "create table ${ImageryOffset.kTableName} (${ImageryOffset.kTableFields.join(', ')})");
-      await database.execute(
-          "create index ${ImageryOffset.kTableName}_geohash on ${ImageryOffset.kTableName} (geohash)");
-      await database.execute(
-          "create table ${BaseNote.kTableName} (${BaseNote.kTableFields.join(', ')})");
-      await database.execute(
-          "create index ${BaseNote.kTableName}_geohash on ${BaseNote.kTableName} (geohash)");
+      await createTablesV5(database);
     }
+  }
+
+  createTablesV4(Database database) async {
+    // Road names
+    await database.execute(
+        "create table ${RoadNameRecord.kTableName} (${RoadNameRecord.kTableFields.join(', ')})");
+    await database.execute(
+        "create index ${RoadNameRecord.kTableName}_geohash on ${RoadNameRecord.kTableName} (geohash)");
+  }
+
+  createTablesV5(Database database) async {
+    // Imagery offsets
+    await database.execute(
+        "create table ${ImageryOffset.kTableName} (${ImageryOffset.kTableFields.join(', ')})");
+    await database.execute(
+        "create index ${ImageryOffset.kTableName}_geohash on ${ImageryOffset.kTableName} (geohash)");
+
+    // Map notes, drawings, and OSM notes
+    await database.execute(
+        "create table ${BaseNote.kTableName} (${BaseNote.kTableFields.join(', ')})");
+    await database.execute(
+        "create index ${BaseNote.kTableName}_geohash on ${BaseNote.kTableName} (geohash)");
   }
 }

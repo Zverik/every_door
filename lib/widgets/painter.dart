@@ -1,18 +1,12 @@
+import 'package:every_door/helpers/draw_style.dart';
 import 'package:flutter/material.dart';
 import 'package:path_drawing/path_drawing.dart';
 
 class PainterWidget extends StatefulWidget {
   final Function(List<Offset>) onDrawn;
-  final Color color;
-  final double stroke;
-  final bool dashed;
+  final DrawingStyle style;
 
-  const PainterWidget(
-      {Key? key,
-      required this.color,
-      required this.onDrawn,
-      this.stroke = 4.0,
-      this.dashed = false})
+  const PainterWidget({Key? key, required this.style, required this.onDrawn})
       : super(key: key);
 
   @override
@@ -59,12 +53,7 @@ class _PainterWidgetState extends State<PainterWidget> {
           width: size.width,
           height: size.height,
           child: CustomPaint(
-            painter: LineDrawer(
-              _offsets,
-              color: widget.color,
-              stroke: widget.stroke,
-              dashed: widget.dashed,
-            ),
+            painter: LineDrawer(_offsets, widget.style),
           ),
         ),
       ),
@@ -74,20 +63,17 @@ class _PainterWidgetState extends State<PainterWidget> {
 
 class LineDrawer extends CustomPainter {
   final List<Offset> _offsets;
-  final Color color;
-  final double stroke;
-  final bool dashed;
+  final DrawingStyle _style;
 
-  const LineDrawer(this._offsets,
-      {required this.color, required this.stroke, this.dashed = false});
+  const LineDrawer(this._offsets, this._style);
 
   @override
   void paint(Canvas canvas, Size size) {
     if (_offsets.length < 2) return;
     final paint = Paint();
     paint.style = PaintingStyle.stroke;
-    paint.color = color;
-    paint.strokeWidth = stroke;
+    paint.color = _style.color;
+    paint.strokeWidth = _style.stroke;
     paint.strokeJoin = StrokeJoin.round;
     paint.strokeCap = StrokeCap.butt;
 
@@ -96,7 +82,7 @@ class LineDrawer extends CustomPainter {
     for (int i = 1; i < _offsets.length; i++)
       path.lineTo(_offsets[i].dx, _offsets[i].dy);
     canvas.drawPath(
-        dashed
+        _style.dashed
             ? dashPath(path, dashArray: CircularIntervalList([10.0, 6.0]))
             : path,
         paint);

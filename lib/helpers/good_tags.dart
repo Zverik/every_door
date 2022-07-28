@@ -6,7 +6,7 @@ const kMainKeys = <String>[
   'highway', 'railway',
   'office', 'healthcare', 'leisure', 'natural',
   'emergency', 'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
-  'marker',
+  'marker', 'public_transport',
   'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
   'advertising', 'playground', 'traffic_calming',
 ];
@@ -90,7 +90,7 @@ bool isAmenityTags(Map<String, String> tags) {
     'craft',
     'office',
     'healthcare',
-    'club'
+    'club',
   };
   if (kAllGoodKeys.contains(k)) return true;
 
@@ -225,7 +225,7 @@ bool isMicroTags(Map<String, String> tags) {
     'amenity', 'tourism', 'emergency', 'man_made', 'historic',
     'playground', 'advertising', 'power', 'traffic_calming',
     'barrier', 'highway', 'railway', 'natural', 'leisure',
-    'marker',
+    'marker', 'public_transport',
   };
   if (kAllGoodKeys.contains(k)) return true;
   return false;
@@ -258,6 +258,7 @@ bool isGoodTags(Map<String, String> tags) {
     'entrance',
     'traffic_calming',
     'marker',
+    'public_transport',
   };
   if (kAllGoodKeys.contains(k)) return true;
 

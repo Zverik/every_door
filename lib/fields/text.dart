@@ -69,13 +69,11 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
     final editorSettings = ref.watch(editorSettingsProvider);
     var keyboardType = widget.field.keyboardType;
     if (keyboardType == TextInputType.number) {
-      keyboardType = editorSettings.fixNumKeyboard
-          ? TextInputType.visiblePassword
-          : TextInputType.numberWithOptions(signed: true);
+      keyboardType = editorSettings.keyboardType;
     }
 
     return Padding(
-    padding: EdgeInsets.only(right: 10.0),
+      padding: EdgeInsets.only(right: 10.0),
       child: TextField(
         controller: _controller,
         keyboardType: keyboardType,

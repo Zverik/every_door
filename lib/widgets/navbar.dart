@@ -85,7 +85,7 @@ class BrowserNavigationBar extends ConsumerWidget {
       EditorMode.micromapping,
       EditorMode.poi,
       EditorMode.entrances,
-      EditorMode.notes,
+      // EditorMode.notes,
     ];
 
     final leftHand = ref.watch(editorSettingsProvider).leftHand;

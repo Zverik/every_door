@@ -80,7 +80,9 @@ class XmlToOsmConverter extends Converter<List<XmlNode>, List<OsmElement>> {
   List<OsmElement> convert(List<XmlNode> input) {
     List<OsmElement> result = [];
     for (final node in input) {
-      if (node is XmlElement && kOsmTypes.containsKey(node.name.local)) {
+      if (node is XmlElement && node.name.local == 'error') {
+        throw FormatException('API returned error: ${node.innerText.trim()}');
+      } else if (node is XmlElement && kOsmTypes.containsKey(node.name.local)) {
         final type = kOsmTypes[node.name.local]!;
         final tags = <String, String>{};
         for (final tag in node.findElements("tag")) {

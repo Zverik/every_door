@@ -128,9 +128,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
                 Expanded(
                   child: TextFormField(
                     controller: _houseController,
-                    keyboardType: editorSettings.fixNumKeyboard
-                        ? TextInputType.visiblePassword
-                        : TextInputType.numberWithOptions(signed: true),
+                    keyboardType: editorSettings.keyboardType,
                     autofocus: widget.autoFocus,
                     style: kFieldTextStyle,
                     decoration:
