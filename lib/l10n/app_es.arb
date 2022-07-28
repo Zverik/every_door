@@ -508,7 +508,7 @@
   "@editorRestore": {
     "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
   },
-  "editorMarkDefunct": "Marcar como difunto",
+  "editorMarkDefunct": "Marcar en desuso o inactivo",
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
@@ -847,5 +847,63 @@
   "faqLettersContent": "Si tu teclado numérico no puede cambiarse a uno completo, comprueba los ajustes de la aplicación. Están detrás del botón de la esquina superior izquierda. Activa allí el «teclado numérico ampliado».",
   "@faqLettersContent": {},
   "faqTaggingContent": "¿Por qué falta un objeto en el editor? ¿Cuándo se muestran estos puntos blancos en el modo de «micromapping»? ¿Cómo se ordenan los objetos?\n\nLas respuestas a todas estas preguntas están en [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Esto es lo que puedes mirar:\n\n* El orden de las claves para la etiqueta principal — lista «kMainKeys».\n* Qué objetos se descargan — función «isGoodTags».\n* Qué se considera un servicio — función «isAmenityTags».\n* Qué puntos se ajustan a qué formas — función «detectSnap».\n* Cuando un objeto de micromapping está incompleto — función «needsMoreInfo».",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "versionsEnableInternet": "Conectarse a Internet para obtener el historial de versiones",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsRetryFetch": "Reintentar",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsNoTagChanges": "Sin cambios de etiqueta",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "versionsTitle": "Historial de {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsFetchError": "Error al obtener el historial de versiones",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsVersionNumber": "Versión #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "por {user} el {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsLocalChanges": "Cambios locales",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  }
 }
