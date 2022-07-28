@@ -665,5 +665,59 @@
   "addressPlace": "Stad",
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "aboutOnWeblate": "op Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "loadingTooMuchDataTitle": "Te veel gegevens",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "settingsAbout": "Over",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutVersionHistory": "Versiegeschiedenis",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutOnGitHub": "op GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutReportIssue": "Een probleem melden",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "fieldHoursHour": "Uur",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minuut",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "buildingPostCode": "Postcode",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingMaterialBrick": "baksteen",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialWood": "hout",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "beton",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialStone": "steen",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "metaal",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "glas",
+  "@buildingMaterialGlass": {},
+  "faqMapTiny": "Waarom is de kaart zo klein?",
+  "@faqMapTiny": {},
+  "aboutInstalledVersion": "Geïnstalleerde versie",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
   }
 }

@@ -740,5 +740,102 @@
   "aboutHelpTranslate": "Lagundu itzultzen",
   "@aboutHelpTranslate": {
     "description": "Button title to open the app's Weblate page."
+  },
+  "loadingTooMuchDataTitle": "Datu gehiegi",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Deskargak huts egin du",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Deskarga ongi burutu da",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "changesSwipeLeft": "Arrastatu ezkerrera aldaketa desegiteko",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursAsText": "Testu moduan",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "\"Joan den astelehenean\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "Data jakin bat",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Itxita",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Jai egunak",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursHour": "Ordua",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minutua",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "buildingPostCode": "Posta-kodea",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqMapTiny": "Zergatik da mapa hain txikia?",
+  "@faqMapTiny": {},
+  "faqCheckmarks": "Zer esan nahi dute egiaztapen markek?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Nola gehitu eraikin baten sarrera?",
+  "@faqEntrance": {},
+  "faqCheckmarksContent": "Egiaztapen edo \"check\" marka horiek adierazten dute informazioa konfirmatu dela. `check_date` etiketa gehitzen dute, gaurko datarekin.\n\nEgiaztapen marken atzean dagoen ideia da, zuk herri guztia aztertu eta hilabete ondoren itzultzea berriz puntu horiek ziurtatzera. Nolabait marka hori behar da zerbitzua ikusi duzula baina ezer ez dela aldatu adierazteko. Horixe da egiaztapen marka: klik egin eta aurrera!\n\nEgiaztapen marka bi astez gelditzen da horrela. Gero berriz aztertu behar dira zerbitzu edo negozioak.",
+  "@faqCheckmarksContent": {},
+  "faqChangeType": "Nola aldatu zerbitzu mota?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Klik egin editorearen izenburuan, mota jartzen duen tokian.",
+  "@faqChangeTypeContent": {},
+  "buildingMaterial": "Fatxada",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "adreilua",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "eskaiola",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "egurra",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "porlana",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "panelak",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "porlanezko blokeak",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "harria",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "metala",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "beira",
+  "@buildingMaterialGlass": {},
+  "faqMapTinyContent": "Gakoa ez delako hori. Zure kokapena mapan ziurtatu eta zoom maila aldatu doitzeko. Begiratu azpian dagoen zerbitzu eta negozioen zerrenda, zugandik duten distantziaren arabera ordenatuta.\n\nMapa handiago bihurtzen da zure kokapenetik urrun dauden zerbitzuak editatzean, nahiz eta mapa horrelakoa egin den zuk begien parean dituzun zerbitzuak editatu ahal izateko.",
+  "@faqMapTinyContent": {},
+  "faqTagging": "Etiketatzeari buruzko galderak",
+  "@faqTagging": {},
+  "faqLetters": "Idatzi ditzaket letrak erreferentzia edo solairu zenbaki batean?",
+  "@faqLetters": {},
+  "loadingTooMuchData": "Editorea azkarrago ibiltzeko ezabatu deskargatutako datuak aplikazioaren ezarpenetan.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Elementu {count} deskargatu da.}, =few{{count} elementu deskargatu dira.}, =other{ {count} elementu deskargatu dira.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
   }
 }
