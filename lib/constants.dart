@@ -34,6 +34,7 @@ const kRotationThreshold = 30.0; // degrees, for snapping to zero rotation
 const kManualOption = '✍️'; // Emoji icon for entering values by hand
 const kMinElementsForWarning = 20000; // Alerting user when they have that many elements downloaded
 const kChangesetSplitGap = 0.02; // Decimal degrees, min distance between groups of changes
+const kMaxBulkDownloadZoom = 18; // Max zoom for bulk downloading tiles
 
 // Should be exactly 8 lines in both lists.
 const kDefaultPresets = [

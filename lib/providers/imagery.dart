@@ -19,6 +19,8 @@ final selectedImageryProvider =
 
 class ImageryProvider extends StateNotifier<Imagery> {
   final Ref _ref;
+  bool loaded = false;
+
   static String? bingUrlTemplate;
 
   static const kBingUrlKey = 'bing_url_template';
@@ -49,6 +51,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
 
   ImageryProvider(this._ref) : super(bingImagery) {
     _updateBingUrlTemplate();
+    loaded = false;
     loadState();
   }
 
@@ -78,6 +81,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
         }
       }
     }
+    loaded = true;
   }
 
   saveState() async {

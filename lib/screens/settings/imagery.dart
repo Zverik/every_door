@@ -1,3 +1,4 @@
+import 'package:every_door/helpers/tile_cacher.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
@@ -26,11 +27,26 @@ class ImageryPageState extends ConsumerState {
   @override
   Widget build(BuildContext context) {
     final imagery = ref.watch(imageryProvider);
+    final tileCacherState = ref.watch(tileCacheProvider);
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(loc.settingsBackground),
+        actions: [
+          IconButton(
+              onPressed: tileCacherState.idle
+                  ? () {
+                      ref.read(tileCacheProvider.notifier).cacheForAll();
+                    }
+                  : null,
+              icon: tileCacherState.idle
+                  ? Icon(Icons.download)
+                  : CircularProgressIndicator(
+                      value: tileCacherState.progress,
+                      color: Colors.white,
+                    )),
+        ],
       ),
       body: FutureBuilder(
         future: imageryList,

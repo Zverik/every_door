@@ -32,6 +32,15 @@ class AreaProvider {
     );
   }
 
+  Future<List<LatLngBounds>> getAllAreas({bool withObsolete = false}) async {
+    final database = await _ref.read(databaseProvider).database;
+    final rows = await database.query(OsmDownloadedArea.kTableName);
+    Iterable<OsmDownloadedArea> areas =
+        rows.map((r) => OsmDownloadedArea.fromJson(r));
+    if (!withObsolete) areas = areas.where((area) => !area.isObsolete);
+    return areas.map((area) => area.bounds).toList();
+  }
+
   Future<AreaStatus> getAreaStatus(LatLngBounds bounds) async {
     final database = await _ref.read(databaseProvider).database;
     final areas = await database.query(

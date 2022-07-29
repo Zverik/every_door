@@ -5,6 +5,7 @@
 _Unreleased_
 
 * Object history panel (thanks @GeorgeHoneywood).
+* Button to download tiles at the imagery list.
 * Email field now can edit `contact:email`.
 * Returned the setting for preferring `contact:` prefixes.
 * Supporting `marker=*` for pipeline markers.

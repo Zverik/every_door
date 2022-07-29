@@ -84,4 +84,7 @@ class Imagery {
     final decrypted = encrypter.decrypt(Encrypted.fromBase64(url), iv: IV.fromLength(16));
     return copyWith(url: decrypted);
   }
+
+  @override
+  String toString() => 'Imagery(id: $id, type: $type, category: $category)';
 }

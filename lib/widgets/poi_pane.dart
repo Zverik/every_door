@@ -39,6 +39,7 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
                 '\n' +
                 (hasFilter ? loc.tileDragOrUnfilter : loc.tileDragTheMap),
             style: TextStyle(fontSize: 18.0),
+            textAlign: TextAlign.center,
           ),
         ));
   }

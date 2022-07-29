@@ -1,8 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+
+class TileCacheManager {
+  static const key = 'tileCache';
+  static CacheManager instance = CacheManager(Config(
+    key,
+    maxNrOfCacheObjects: 10000,
+    stalePeriod: Duration(days: 60),
+  ));
+}
 
 class CachedTileProvider extends TileProvider {
   CachedTileProvider();
@@ -13,7 +23,8 @@ class CachedTileProvider extends TileProvider {
     // print(url);
     return CachedNetworkImageProvider(
       url,
-      // Maybe replace cacheManager later.
+      cacheManager: TileCacheManager.instance,
+      headers: headers,
     );
   }
 }
@@ -47,7 +58,8 @@ class CachedBingTileProvider extends TileProvider {
   ImageProvider getImage(Coords<num> coords, TileLayerOptions options) {
     return CachedNetworkImageProvider(
       getTileUrl(coords, options),
-      // Maybe replace cacheManager later.
+      cacheManager: TileCacheManager.instance,
+      headers: headers,
     );
   }
 }
@@ -157,6 +169,7 @@ TileLayerOptions buildTileLayerOptions(Imagery imagery) {
     tms: tms,
     subdomains: subdomains,
     additionalOptions: {'a': 'b'},
+    userAgentPackageName: 'info.zverev.ilya.every_door',
   );
 }
 
