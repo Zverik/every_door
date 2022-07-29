@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:every_door/models/amenity.dart';
 import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:flutter/material.dart';
@@ -141,27 +142,31 @@ class History {
   }
 
   createDiffs(Map<String, String?> localChanges) {
-    // merge in local changes to the latest remote version, so we can diff local changes
-    var mergedLocalVersion =
-        Map.from(versions.last.tags).cast<String, String?>();
-    mergedLocalVersion.addAll(localChanges);
+    if (localChanges.isNotEmpty) {
+      // merge in local changes to the latest remote version, so we can diff local changes
+      var mergedLocalVersion =
+      Map.from(versions.last.tags).cast<String, String?>();
+      mergedLocalVersion.addAll(localChanges);
 
-    for (var tag in Map.from(mergedLocalVersion).entries) {
-      // null values are removed tags
-      if (tag.value == null) {
-        mergedLocalVersion.remove(tag.key);
+      for (var tag in Map
+          .from(mergedLocalVersion)
+          .entries) {
+        // null values are removed tags
+        if (tag.value == null) {
+          mergedLocalVersion.remove(tag.key);
+        }
       }
+      versions.add(
+        Version(
+          tags: mergedLocalVersion.cast<String, String>(),
+          number: -1,
+          user: '',
+          changeset: -1,
+          timestamp: DateTime.now(),
+          isLocal: true,
+        ),
+      );
     }
-    versions.add(
-      Version(
-        tags: mergedLocalVersion.cast<String, String>(),
-        number: -1,
-        user: '',
-        changeset: -1,
-        timestamp: DateTime.now(),
-        isLocal: true,
-      ),
-    );
 
     // version 0 with no tags to diff version 1 against
     var previousVersion = Version(
@@ -192,13 +197,9 @@ class History {
 }
 
 class VersionsPage extends StatefulWidget {
-  final String fullRef;
-  final Map<String, String?> localChanges;
+  final OsmChange amenity;
 
-  const VersionsPage({
-    required this.fullRef,
-    required this.localChanges,
-  });
+  const VersionsPage(this.amenity);
 
   @override
   State<VersionsPage> createState() => _VersionsPageState();
@@ -210,11 +211,11 @@ class _VersionsPageState extends State<VersionsPage> {
 
   getHistory() async {
     try {
-      var newHistory = History(widget.fullRef);
+      var newHistory = History(widget.amenity.id.fullRef);
       await newHistory.loadHistory();
       await newHistory.loadComments();
 
-      newHistory.createDiffs(widget.localChanges);
+      newHistory.createDiffs(widget.amenity.newTags);
 
       setState(() => history = newHistory);
     } on Exception catch (e) {
@@ -365,7 +366,7 @@ class _VersionsPageState extends State<VersionsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(loc.versionsTitle(widget.fullRef)),
+        title: Text(loc.versionsTitle(widget.amenity.id.fullRef)),
       ),
       body: Builder(
         builder: (BuildContext context) {

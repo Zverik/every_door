@@ -14,6 +14,7 @@ import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/screens/editor/tags.dart';
 import 'package:every_door/screens/editor/types.dart';
+import 'package:every_door/screens/editor/versions.dart';
 import 'package:every_door/widgets/duplicate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -253,6 +254,18 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             onTap: changeType,
           ),
           actions: [
+            if (!amenity.isNew)
+              IconButton(
+                icon: Icon(Icons.history),
+                onPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VersionsPage(amenity),
+                    ),
+                  );
+                },
+              ),
             IconButton(
               icon: Icon(Icons.code),
               onPressed: () async {

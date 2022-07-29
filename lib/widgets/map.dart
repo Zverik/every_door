@@ -276,7 +276,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
 
     final imagery = ref.watch(selectedImageryProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
-    final iconSize = widget.drawNumbers ? 18.0 : 10.0;
+    final iconSize = widget.drawNumbers ? 18.0 : 14.0;
     final legendCon = ref.watch(legendProvider.notifier);
     final amenities = List.of(widget.amenities);
 

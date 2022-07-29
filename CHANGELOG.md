@@ -4,12 +4,15 @@
 
 _Unreleased_
 
+* Object history panel (thanks @GeorgeHoneywood).
 * Email field now can edit `contact:email`.
 * Returned the setting for preferring `contact:` prefixes.
 * Supporting `marker=*` for pipeline markers.
 * Fixed editor pane when in Basque locale.
 * ATMs and vending machines are back in the POI category.
 * Added `public_transport=*` to micromapping.
+* Autocompletion of the key in the tags pane.
+* Made dots in the micromapping mode bigger.
 * Updated all dependencies and increased target API to Android 13.
 
 ## 0.8

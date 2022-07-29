@@ -1,9 +1,8 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/common_keys.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/private.dart';
-import 'package:every_door/screens/editor/versions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -37,6 +36,28 @@ class _TagEditorPageState extends State<TagEditorPage> {
     super.dispose();
   }
 
+  Future<List<String>?> _newTagPanel(BuildContext context) async {
+    final result = await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            padding: EdgeInsets.only(
+              top: 5.0,
+              left: 15.0,
+              right: 15.0,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 6.0,
+            ),
+            child: NewTagPanel(),
+          ),
+        );
+      },
+    );
+    return result;
+  }
+
   String _getUrl() => 'https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}';
 
   @override
@@ -52,21 +73,6 @@ class _TagEditorPageState extends State<TagEditorPage> {
       appBar: AppBar(
         title: Text(title),
         actions: [
-          if (!widget.amenity.isNew)
-            IconButton(
-              icon: Icon(Icons.history),
-              onPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => VersionsPage(
-                      fullRef: widget.amenity.element!.id.fullRef,
-                      localChanges: widget.amenity.newTags,
-                    ),
-                  ),
-                );
-              },
-            ),
           if (!widget.amenity.isNew)
             GestureDetector(
               child: IconButton(
@@ -161,22 +167,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
                   TableRow(children: [
                     ElevatedButton(
                       onPressed: () async {
-                        // TODO: suggestions using taginfo database.
-                        final result = await showTextInputDialog(
-                          context: context,
-                          textFields: [
-                            DialogTextField(
-                              hintText: loc.tagsKey,
-                            ),
-                            DialogTextField(
-                              hintText: loc.tagsValue,
-                              validator: (value) =>
-                                  value != null && value.length > 255
-                                      ? loc.tagsValueLong
-                                      : null,
-                            ),
-                          ],
-                        );
+                        final result = await _newTagPanel(context);
                         if (result != null &&
                             result.length == 2 &&
                             result.every(
@@ -192,6 +183,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
                       },
                       child: Text(loc.tagsAddTag, style: kFieldTextStyle),
                     ),
+                    // Since we don't have colspan, add empty containers.
                     Container(),
                     Container(),
                   ])
@@ -201,6 +193,108 @@ class _TagEditorPageState extends State<TagEditorPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class NewTagPanel extends StatefulWidget {
+  const NewTagPanel({Key? key}) : super(key: key);
+
+  @override
+  State<NewTagPanel> createState() => _NewTagPanelState();
+}
+
+class _NewTagPanelState extends State<NewTagPanel> {
+  String _key = '';
+  String _value = '';
+  FocusNode _valueFocus = FocusNode();
+
+  @override
+  void dispose() {
+    _valueFocus.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    return Column(
+      children: [
+        Table(
+          columnWidths: const {0: IntrinsicColumnWidth()},
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          children: [
+            TableRow(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Text(loc.tagsKey, style: kFieldTextStyle),
+                ),
+                Autocomplete<String>(
+                  optionsBuilder: (value) => value.text.isEmpty
+                      ? <String>[]
+                      : kCommonKeys.where((k) => k.startsWith(value.text)),
+                  fieldViewBuilder: (context1, controller, focus, onSubmitted) {
+                    return TextFormField(
+                      controller: controller,
+                      focusNode: focus,
+                      autofocus: true,
+                      textCapitalization: TextCapitalization.none,
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (value) => onSubmitted(),
+                      onChanged: (value) {
+                        _key = value.trim();
+                      },
+                    );
+                  },
+                  onSelected: (value) {
+                    // Move focus to the next one.
+                    _key = value.trim();
+                    _valueFocus.requestFocus();
+                  },
+                ),
+              ],
+            ),
+            TableRow(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Text(loc.tagsValue, style: kFieldTextStyle),
+                ),
+                TextFormField(
+                  focusNode: _valueFocus,
+                  textCapitalization: TextCapitalization.none,
+                  textInputAction: TextInputAction.done,
+                  onChanged: (value) {
+                    _value = value.trim();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 10.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child:
+                    Text(MaterialLocalizations.of(context).cancelButtonLabel)),
+            TextButton(
+                onPressed: () {
+                  final List<String>? result =
+                      _key.isNotEmpty && _value.isNotEmpty
+                          ? [_key, _value]
+                          : null;
+                  Navigator.pop(context, result);
+                },
+                child: Text(MaterialLocalizations.of(context).okButtonLabel)),
+          ],
+        )
+      ],
     );
   }
 }
