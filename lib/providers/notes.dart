@@ -42,6 +42,15 @@ class NotesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<List<BaseNote>> fetchChanges() async {
+    final database = await _ref.read(databaseProvider).database;
+    final result = await database.query(
+      BaseNote.kTableName,
+      where: 'is_changed = 1',
+    );
+    return result.map((data) => BaseNote.fromJson(data)).toList();
+  }
+
   /// Returns notes from the database.
   Future<List<BaseNote>> fetchAllNotes(LatLng center, [double? radius]) async {
     final database = await _ref.read(databaseProvider).database;
@@ -75,13 +84,8 @@ class NotesProvider extends ChangeNotifier {
     if (!auth.authorized) throw StateError('Log in first.');
 
     // Get changed notes from the database.
-    final database = await _ref.read(databaseProvider).database;
-    final result = await database.query(
-      BaseNote.kTableName,
-      where: 'is_changed = 1',
-    );
-    if (result.isEmpty) return 0;
-    final notes = result.map((data) => BaseNote.fromJson(data));
+    final notes = await fetchChanges();
+    if (notes.isEmpty) return 0;
 
     // Upload all notes concurrently.
     _ref.read(apiStatusProvider.notifier).state = ApiStatus.uploadingNotes;
@@ -249,6 +253,15 @@ class NotesProvider extends ChangeNotifier {
       BaseNote.kTableName,
       where: 'id = ?',
       whereArgs: [note.id],
+    );
+  }
+
+  Future<void> clearChangedMapNotes() async {
+    final database = await _ref.read(databaseProvider).database;
+    await database.delete(
+      BaseNote.kTableName,
+      where: 'is_changed = 1 and (type = ? or type = ?)',
+      whereArgs: [MapNote.dbType, MapDrawing.dbType],
     );
   }
 

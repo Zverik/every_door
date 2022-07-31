@@ -98,6 +98,7 @@ class ChangeListPage extends ConsumerWidget {
     final changeList = changes.all();
     changeList.sort((a, b) => b.updated.compareTo(a.updated));
     final hasManyTypes = changeList.map((e) => e.kind).toSet().length > 1;
+    // TODO: add OSM notes to the top
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
