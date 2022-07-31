@@ -207,7 +207,7 @@ class NewTagPanel extends StatefulWidget {
 class _NewTagPanelState extends State<NewTagPanel> {
   String _key = '';
   String _value = '';
-  FocusNode _valueFocus = FocusNode();
+  final FocusNode _valueFocus = FocusNode();
 
   @override
   void dispose() {

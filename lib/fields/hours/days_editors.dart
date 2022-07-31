@@ -183,6 +183,7 @@ class SpecificDaysPanel extends StatelessWidget {
             onPressed: () async {
               final date1 = await SpecificDaysPanel.pickDate(context);
               if (date1 == null) return;
+              // ignore: use_build_context_synchronously
               final date2 = await SpecificDaysPanel.pickDate(context,
                   start: date1.next());
               if (date2 == null) return;

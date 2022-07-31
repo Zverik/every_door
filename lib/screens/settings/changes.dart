@@ -39,9 +39,9 @@ class ChangeListPage extends ConsumerWidget {
   }
 
   uploadChanges(BuildContext context, WidgetRef ref) async {
+    final navigator = Navigator.of(context);
     if (ref.read(authProvider) == null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => OsmAccountPage()));
+      navigator.push(MaterialPageRoute(builder: (context) => OsmAccountPage()));
       return;
     }
 
@@ -52,7 +52,7 @@ class ChangeListPage extends ConsumerWidget {
           loc.changesUploadedTitle,
           loc.changesUploadedMessage(loc.changesCount(count)),
           TypeAlert.success);
-      Navigator.pop(context);
+      navigator.pop();
     } on Exception catch (e) {
       AlertController.show(
           loc.changesUploadFailedTitle, e.toString(), TypeAlert.error);

@@ -55,12 +55,13 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     }
     amenity.addListener(onAmenityChange);
 
+    final locale = Localizations.localeOf(context);
     if (widget.preset == null) {
-      updatePreset(context, true);
+      updatePreset(locale, true);
     } else {
       // Preset and location should not be null
       preset = widget.preset!;
-      updatePreset(context, preset!.fromNSI);
+      updatePreset(locale, preset!.fromNSI);
     }
   }
 
@@ -74,10 +75,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     setState(() {});
   }
 
-  updatePreset(BuildContext context, [bool detect = false]) async {
+  updatePreset(Locale locale, [bool detect = false]) async {
     await Future.delayed(Duration.zero); // to disconnect from initState
     final presets = ref.read(presetProvider);
-    final locale = Localizations.localeOf(context);
     if (preset == null) detect = true;
     bool needRefresh = false;
     if (detect) {
@@ -157,6 +157,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   changeType() async {
+    final locale = Localizations.localeOf(context);
     final newPreset = await Navigator.push(
       context,
       MaterialPageRoute(
@@ -179,7 +180,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     oldPreset?.doRemoveTags(amenity);
     preset = newPreset;
     preset!.doAddTags(amenity);
-    updatePreset(context, preset!.fromNSI);
+    updatePreset(locale, preset!.fromNSI);
   }
 
   saveAndClose() {

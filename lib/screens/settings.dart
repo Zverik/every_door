@@ -160,6 +160,7 @@ class SettingsPage extends ConsumerWidget {
                 trailing: Icon(Icons.navigate_next),
                 onPressed: (context) async {
                   final locale = Localizations.localeOf(context);
+                  final navigator = Navigator.of(context);
                   final combo = await ref
                       .read(presetProvider)
                       .getField('payment_multi', locale);
@@ -167,8 +168,7 @@ class SettingsPage extends ConsumerWidget {
                     combo.options.removeWhere(
                         (element) => kNotCards.contains(element.value));
                   }
-                  final List<String>? newValues = await Navigator.push(
-                    context,
+                  final List<String>? newValues = await navigator.push(
                     MaterialPageRoute(
                       builder: (context) => ComboChooserPage(
                         combo as ComboPresetField,

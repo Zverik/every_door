@@ -39,6 +39,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
 
   Future<List<Preset>> _getPresetsAround(LatLng location,
       [int count = 3]) async {
+    final locale = Localizations.localeOf(context);
     final editorMode = ref.read(editorModeProvider);
     var data = await ref
         .read(osmDataProvider)
@@ -67,7 +68,6 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
 
     // Get presets for all elements.
     final presetProv = ref.read(presetProvider);
-    final locale = Localizations.localeOf(context);
     final presets = <Preset, int>{};
     for (final element in data) {
       final preset = await presetProv.getPresetForTags(element.getFullTags(),

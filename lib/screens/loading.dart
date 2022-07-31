@@ -65,6 +65,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     setState(() {
       message = loc.loadingLocation;
     });
+    if (!mounted) return;
     await ref.read(geolocationProvider.notifier).enableTracking(context);
     LatLng? location = ref.read(geolocationProvider);
     if (location != null) {
@@ -84,6 +85,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     }
 
     // Finally switch to the monitor page.
+    if (!mounted) return;
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => BrowserPage()),
