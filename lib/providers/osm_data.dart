@@ -17,8 +17,6 @@ import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/road_names.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dropdown_alert/alert_controller.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
@@ -27,7 +25,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proximity_hash/proximity_hash.dart';
 import 'package:sqflite/utils/utils.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final osmDataProvider = ChangeNotifierProvider((ref) => OsmDataHelper(ref));
 
@@ -471,46 +468,26 @@ class OsmDataHelper extends ChangeNotifier {
     return counter;
   }
 
-  Future<List<OsmChange>> downloadMap(LatLngBounds bounds,
-      {AppLocalizations? loc}) async {
-    _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
-    try {
-      final api = _ref.read(osmApiProvider);
-      final roadNames = <RoadNameRecord>{};
-      final List<OsmElement> elements =
-          await api.map(bounds, roadNames: roadNames);
-      _ref.read(apiStatusProvider.notifier).state = ApiStatus.updatingDatabase;
-      await storeElements(elements, bounds);
-      await _ref.read(roadNameProvider).storeNames(roadNames);
-      updateAddressesWithFloors();
-      AlertController.show(
-          loc?.dataDownloadSuccessful ?? 'Download successful',
-          loc?.dataDownloadedCount(elements.length) ??
-              'Downloaded ${elements.length} amenities.',
-          TypeAlert.success);
-
-      // No need to wrap in changes, since we don't use the result anyway.
-      // return _wrapInChange(elements);
-      return elements.map((e) => OsmChange(e)).toList();
-    } finally {
-      _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
-    }
+  Future<int> _downloadMap(LatLngBounds bounds) async {
+    final api = _ref.read(osmApiProvider);
+    final roadNames = <RoadNameRecord>{};
+    final List<OsmElement> elements =
+        await api.map(bounds, roadNames: roadNames);
+    _ref.read(apiStatusProvider.notifier).state = ApiStatus.updatingDatabase;
+    await storeElements(elements, bounds);
+    await _ref.read(roadNameProvider).storeNames(roadNames);
+    updateAddressesWithFloors();
+    return elements.length;
   }
 
-  Future<List<OsmChange>> downloadAround(LatLng location,
-      {AppLocalizations? loc}) async {
+  Future<int> downloadAround(LatLng location) async {
+    _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
     try {
-      return await downloadMap(boundsFromRadius(location, kBigRadius),
-          loc: loc);
+      return await _downloadMap(boundsFromRadius(location, kBigRadius));
     } on Exception {
-      try {
-        return await downloadMap(boundsFromRadius(location, kSmallRadius),
-            loc: loc);
-      } on Exception catch (e) {
-        AlertController.show(loc?.dataDownloadFailed ?? 'Download failed',
-            e.toString(), TypeAlert.error);
-        return [];
-      }
+      return await _downloadMap(boundsFromRadius(location, kSmallRadius));
+    } finally {
+      _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
   }
 

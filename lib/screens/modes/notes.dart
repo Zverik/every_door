@@ -1,11 +1,17 @@
+import 'dart:async';
+
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/note.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/notes.dart';
+import 'package:every_door/screens/editor/map_chooser.dart';
+import 'package:every_door/screens/editor/note.dart';
+import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -24,17 +30,35 @@ class NotesPane extends ConsumerStatefulWidget {
 class _NotesPaneState extends ConsumerState<NotesPane> {
   static const kToolEraser = "eraser";
   static const kToolNote = "note";
+  static const kToolScribble = "scribble";
 
-  String _currentTool = "scribble";
+  String _currentTool = kToolNote;
   List<BaseNote> _notes = [];
   final controller = MapController();
+  late final StreamSubscription<MapEvent> mapSub;
+  final _mapKey = GlobalKey();
+  LatLng? newLocation;
 
   @override
   initState() {
     super.initState();
+    mapSub = controller.mapEventStream.listen(onMapEvent);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateNotes();
     });
+  }
+
+  onMapEvent(MapEvent event) {
+    bool fromController = event.source == MapEventSource.mapController;
+    if (event is MapEventMoveEnd && !fromController) {
+      updateNotes();
+    }
+  }
+
+  @override
+  void dispose() {
+    mapSub.cancel();
+    super.dispose();
   }
 
   List<LatLng> _coordsFromOffsets(List<Offset> offsets) {
@@ -47,17 +71,50 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   }
 
   updateNotes() async {
-    final location = ref.read(effectiveLocationProvider);
+    final location = controller.center;
     final notes = await ref.read(notesProvider).fetchAllNotes(location);
     if (!mounted) return;
     setState(() {
-      _notes = notes;
+      _notes = notes.where((n) => !n.deleting).toList();
+    });
+  }
+
+  _openNoteEditor(OsmNote? note, [LatLng? location]) async {
+    if (location != null) {
+      setState(() {
+        newLocation = location;
+      });
+    }
+    final result = await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => NoteEditorPane(
+        note: note,
+        location:
+            location ?? note?.location ?? ref.read(effectiveLocationProvider),
+      ),
+    );
+    if (result != null) {
+      // TODO: save updated note
+    }
+    setState(() {
+      newLocation = null;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final LatLng? trackLocation = ref.watch(geolocationProvider);
+    final leftHand = ref.watch(editorSettingsProvider).leftHand;
+    EdgeInsets safePadding = MediaQuery.of(context).padding;
+
+    ref.listen(effectiveLocationProvider, (_, LatLng next) {
+      controller.move(next, controller.zoom);
+      updateNotes();
+    });
+    ref.listen(notesProvider, (_, next) {
+      updateNotes();
+    });
 
     return Column(
       children: [
@@ -65,14 +122,20 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
           child: Stack(
             children: [
               FlutterMap(
+                key: _mapKey,
                 mapController: controller,
                 options: MapOptions(
                   center: ref.read(effectiveLocationProvider),
+                  minZoom: 15.0,
+                  maxZoom: 20.0,
                   zoom: 17.0,
-                  interactiveFlags:
-                      InteractiveFlag.pinchMove | InteractiveFlag.pinchZoom,
+                  // TODO: remove drag when adding map drawing
+                  interactiveFlags: InteractiveFlag.pinchMove |
+                      InteractiveFlag.pinchZoom |
+                      InteractiveFlag.drag,
                   rotation: ref.watch(rotationProvider),
                   rotationThreshold: kRotationThreshold,
+                  plugins: [MapDragCreatePlugin()],
                 ),
                 children: [
                   TileLayerWidget(
@@ -104,6 +167,72 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         ),
                     ],
                   )),
+                  MarkerLayerWidget(
+                    options: MarkerLayerOptions(
+                      markers: [
+                        for (final osmNote in _notes.whereType<OsmNote>())
+                          Marker(
+                            point: osmNote.location,
+                            width: 50.0,
+                            height: 50.0,
+                            builder: (BuildContext context) {
+                              return Center(
+                                child: GestureDetector(
+                                  child: Container(
+                                    padding: EdgeInsets.all(10.0),
+                                    color: Colors.transparent,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        color: osmNote.isChanged
+                                            ? Colors.yellow.withOpacity(0.8)
+                                            : Colors.white.withOpacity(0.8),
+                                      ),
+                                      child:
+                                          SizedBox(width: 30.0, height: 30.0),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    _openNoteEditor(osmNote);
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+                nonRotatedLayers: [
+                  MapDragCreateOptions(
+                    mapKey: _mapKey,
+                    buttons: [
+                      DragButton(
+                        icon: Icons.add,
+                        bottom: 20.0,
+                        left: !leftHand ? null : 10.0 + safePadding.left,
+                        right: leftHand ? null : 10.0 + safePadding.right,
+                        onDragEnd: (pos) {
+                          _openNoteEditor(null, pos);
+                        },
+                        onTap: () async {
+                          final pos = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  MapChooserPage(location: controller.center),
+                            ),
+                          );
+                          if (pos != null) _openNoteEditor(null, pos);
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
               if (kTypeStyles.containsKey(_currentTool))
@@ -116,7 +245,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     setState(() {
                       _notes.add(note);
                     });
-                    ref.read(notesProvider).saveNote(note);
+                    // ref.read(notesProvider).saveNote(note);
                   },
                   style: kTypeStyles[_currentTool]!,
                 ),

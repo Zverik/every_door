@@ -4,6 +4,7 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/screens/settings/account.dart';
@@ -28,10 +29,12 @@ class BrowserNavigationBar extends ConsumerWidget {
 
     final loc = AppLocalizations.of(context)!;
     try {
-      int count = await ref.read(osmApiProvider).uploadChanges(true);
+      int dataCount = await ref.read(osmApiProvider).uploadChanges(true);
+      int noteCount = await ref.read(notesProvider).uploadNotes();
+      // TODO: separate note count in the message?
       AlertController.show(
           loc.changesUploadedTitle,
-          loc.changesUploadedMessage(loc.changesCount(count)),
+          loc.changesUploadedMessage(loc.changesCount(dataCount + noteCount)),
           TypeAlert.success);
     } on Exception catch (e) {
       AlertController.show(
@@ -44,10 +47,11 @@ class BrowserNavigationBar extends ConsumerWidget {
     final editorMode = ref.watch(editorModeProvider);
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
+    final hasNotesToUpload = ref.watch(notesProvider).haveChanges;
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     IconButton dataButton;
-    if (!hasChangesToUpload) {
+    if (!hasChangesToUpload && !hasNotesToUpload) {
       dataButton = IconButton(
         onPressed: apiStatus != ApiStatus.idle
             ? null
@@ -85,7 +89,7 @@ class BrowserNavigationBar extends ConsumerWidget {
       EditorMode.micromapping,
       EditorMode.poi,
       EditorMode.entrances,
-      // EditorMode.notes,
+      EditorMode.notes,
     ];
 
     final leftHand = ref.watch(editorSettingsProvider).leftHand;

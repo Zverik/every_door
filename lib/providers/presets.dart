@@ -10,6 +10,7 @@ import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/helpers/nsi_features.dart';
+import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +37,7 @@ class PresetProvider {
   Database? _db;
   late final LocationMatcher locationMatcher;
   bool ready = false;
+  bool processingCombos = false;
   final Ref _ref;
   final Map<String, PresetField> _fieldCache = {};
 
@@ -296,7 +298,82 @@ class PresetProvider {
     return ids.map((e) => presets[e]).whereType<Preset>().toList();
   }
 
-  Future<List<ComboOption>> _getComboOptions(Map<String, dynamic> field) async {
+  static const kCachedCombosTableName = 'cached_combos';
+
+  Future<void> _updateComboCache(String key, Iterable<String> options) async {
+    final database = await _ref.read(databaseProvider).database;
+    await database.insert(
+      kCachedCombosTableName,
+      {'key': key, 'options': options.join('\\')},
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<String>?> _fetchComboCache(String key) async {
+    final database = await _ref.read(databaseProvider).database;
+    final result = await database
+        .query(kCachedCombosTableName, where: 'key = ?', whereArgs: [key]);
+    return result.isEmpty
+        ? null
+        : (result.first['options'] as String).split('\\');
+  }
+
+  /// For each combo key, get and sort values according to downloaded data.
+  Future<void> cacheComboOptions() async {
+    if (processingCombos) return;
+    _logger.info('Starting global combo values caching');
+    final timeStart = DateTime.now().millisecondsSinceEpoch;
+    processingCombos = true;
+    // Most used fields to be processed first.
+    const kMostUsedFields = [
+      'wheelchair',
+      'level',
+      'internet_access',
+      'internet_access/fee',
+      'payment_multi',
+      'currency_multi',
+      'stroller',
+      'smoking',
+      'second_hand',
+      'access_simple',
+      'material',
+      'manufacturer',
+      'payment_multi_fee',
+      'baby_feeding',
+      'building',
+      'product',
+      'operator/type',
+      'diet/multi',
+      'cuisine',
+      'reservation',
+      'takeaway',
+    ];
+
+    // Get all fields with type like "combo".
+    final List<Map<String, dynamic>> fieldsReadOnly = await _db!.query(
+      'fields',
+      where: "typ = 'radio' or typ like '%ombo'",
+      columns: ['name', 'typ', 'key', 'options'],
+    );
+
+    // Sort by inclusion in the most used fields list.
+    final fields = List.of(fieldsReadOnly);
+    fields.sort((a, b) => (kMostUsedFields.contains(a['name']) ? 0 : 1)
+        .compareTo(kMostUsedFields.contains(b['name']) ? 0 : 1));
+
+    // For each field, refresh the cache.
+    for (final field in fields) {
+      await _getComboOptions(field, useCache: false);
+    }
+    processingCombos = false;
+
+    final timeTook =
+        ((DateTime.now().millisecondsSinceEpoch - timeStart) / 1000).round();
+    _logger.info('Finished processing combo options, took $timeTook seconds');
+  }
+
+  Future<List<ComboOption>> _getComboOptions(Map<String, dynamic> field,
+      {bool useCache = true}) async {
     final String typ = (field['typ']) as String;
     bool needed = typ.endsWith("ombo") || typ == 'radio';
     if (!needed) return const [];
@@ -304,6 +381,15 @@ class PresetProvider {
     final loc = field['loc_options'] != null
         ? jsonDecode(field['loc_options'])
         : <String, String>{};
+
+    // Check in the combo cache.
+    if (useCache) {
+      final cached = await _fetchComboCache(field['key']);
+      if (cached != null)
+        return cached.map((e) => ComboOption(e, loc[e])).toList();
+    }
+
+    // First add the options from the preset.
     final List<String> options = [];
     if (field['options'] != null) {
       options.addAll((jsonDecode(field['options']) as List).cast<String>());
@@ -326,10 +412,15 @@ class PresetProvider {
       mergeSort(options,
           compare: (a, b) => (counter[b] ?? 0).compareTo(counter[a] ?? 0));
     }
+
+    // Store the result in the cache.
+    _updateComboCache(field['key'], options);
+
+    // Return the result wrapped in a ComboOption.
     return options.map((e) => ComboOption(e, loc[e])).toList();
   }
 
-  static const kSkipFields = {'opening_hours/covid19', 'not/name'};
+  static const kSkipFields = {'opening_hours/covid19', 'not/name', 'shop'};
 
   Future<Preset> getFields(Preset preset, {Locale? locale}) async {
     if (preset.isFixme)
