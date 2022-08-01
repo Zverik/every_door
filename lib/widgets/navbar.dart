@@ -4,14 +4,10 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/imagery.dart';
-import 'package:every_door/providers/osm_api.dart';
-import 'package:every_door/providers/osm_auth.dart';
-import 'package:every_door/screens/settings/account.dart';
+import 'package:every_door/providers/notes.dart';
+import 'package:every_door/providers/uploader.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dropdown_alert/alert_controller.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BrowserNavigationBar extends ConsumerWidget {
   final Function(BuildContext) downloadAmenities;
@@ -19,35 +15,16 @@ class BrowserNavigationBar extends ConsumerWidget {
   const BrowserNavigationBar({Key? key, required this.downloadAmenities})
       : super(key: key);
 
-  uploadChanges(BuildContext context, WidgetRef ref) async {
-    if (ref.read(authProvider) == null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => OsmAccountPage()));
-      return;
-    }
-
-    final loc = AppLocalizations.of(context)!;
-    try {
-      int count = await ref.read(osmApiProvider).uploadChanges(true);
-      AlertController.show(
-          loc.changesUploadedTitle,
-          loc.changesUploadedMessage(loc.changesCount(count)),
-          TypeAlert.success);
-    } on Exception catch (e) {
-      AlertController.show(
-          loc.changesUploadFailedTitle, e.toString(), TypeAlert.error);
-    }
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final editorMode = ref.watch(editorModeProvider);
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
+    final hasNotesToUpload = ref.watch(notesProvider).haveChanges;
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     IconButton dataButton;
-    if (!hasChangesToUpload) {
+    if (!hasChangesToUpload && !hasNotesToUpload) {
       dataButton = IconButton(
         onPressed: apiStatus != ApiStatus.idle
             ? null
@@ -63,7 +40,7 @@ class BrowserNavigationBar extends ConsumerWidget {
         onPressed: apiStatus != ApiStatus.idle
             ? null
             : () async {
-                uploadChanges(context, ref);
+                ref.read(uploaderProvider).upload(context);
               },
         icon: Icon(Icons.upload),
         color: Colors.yellow,
@@ -85,7 +62,7 @@ class BrowserNavigationBar extends ConsumerWidget {
       EditorMode.micromapping,
       EditorMode.poi,
       EditorMode.entrances,
-      // EditorMode.notes,
+      EditorMode.notes,
     ];
 
     final leftHand = ref.watch(editorSettingsProvider).leftHand;

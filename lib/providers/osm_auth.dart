@@ -125,7 +125,7 @@ class OsmAuthController extends StateNotifier<String?> {
         Uri.https(kOsmEndpoint, '/api/0.6/user/details'),
         headers: headers);
     if (response.statusCode != 200) {
-      throw ArgumentError('Wrong login or password');
+      throw Exception('Wrong login or password');
     }
 
     if (isOAuth) {

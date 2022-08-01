@@ -5,7 +5,9 @@ import 'package:proximity_hash/geohash.dart';
 import 'dart:convert' show json;
 
 class BaseNote {
-  final int? id;
+  static const kNoteGeohashPrecision = 6;
+
+  int? id;
   final int? type;
   final LatLng location;
   final DateTime created;
@@ -19,16 +21,18 @@ class BaseNote {
       this.deleting = false})
       : created = created ?? DateTime.now();
 
-  bool get isChanged => id == null || deleting;
+  bool get isChanged => isNew || deleting;
+  bool get isNew => (id ?? -1) < 0;
 
   static const kTableName = 'notes';
   static const kTableFields = [
-    'id integer',
+    'id integer primary key',
     'type integer',
     'lat integer',
     'lon integer',
     'created integer',
-    'deleting integer',
+    'is_changed integer',
+    'is_deleting integer',
     'geohash text',
     'author text', // MapNote and MapDrawing
     'message text', // MapNote
@@ -54,22 +58,27 @@ class BaseNote {
       data['lat'] / kCoordinatePrecision, data['lon'] / kCoordinatePrecision);
 
   Map<String, dynamic> toJson() {
+    assert(id != null, 'BaseNote id should not be null on saving');
     return {
       'id': id,
       'type': type,
       'lat': (location.latitude * kCoordinatePrecision).round(),
       'lon': (location.longitude * kCoordinatePrecision).round(),
       'created': created.millisecondsSinceEpoch,
-      'deleting': deleting ? 1 : 0,
+      'is_changed': isChanged ? 1 : 0,
+      'is_deleting': deleting ? 1 : 0,
       'geohash': GeoHasher().encode(location.longitude, location.latitude,
-          precision: kGeohashPrecision),
+          precision: kNoteGeohashPrecision),
     };
   }
 
   @override
-  bool operator==(other) {
+  bool operator ==(other) {
     if (other is! BaseNote) return false;
-    return id == other.id && type == other.type && location == other.location && created == other.created;
+    return id == other.id &&
+        type == other.type &&
+        location == other.location &&
+        created == other.created;
   }
 
   @override
@@ -100,7 +109,7 @@ class MapNote extends BaseNote {
       author: data['author'],
       message: data['message'],
       created: DateTime.fromMillisecondsSinceEpoch(data['created']),
-      deleting: data['deleting'] == 1,
+      deleting: data['is_deleting'] == 1,
     );
   }
 
@@ -124,11 +133,11 @@ class OsmNoteComment {
   final bool isNew;
 
   OsmNoteComment({
-    required this.author,
+    this.author,
     required this.message,
-    required this.date,
+    DateTime? date,
     this.isNew = false,
-  });
+  }) : date = date ?? DateTime.now();
 
   factory OsmNoteComment.fromJson(Map<String, dynamic> data) {
     return OsmNoteComment(
@@ -157,7 +166,7 @@ class OsmNote extends BaseNote {
   final List<OsmNoteComment> comments;
 
   OsmNote({
-    required super.id,
+    super.id,
     required super.location,
     this.comments = const [],
     super.created,
@@ -170,6 +179,10 @@ class OsmNote extends BaseNote {
 
   @override
   bool get isChanged => super.isChanged || hasNewComments;
+
+  String? getNoteTitle() {
+    return (message?.length ?? 0) < 100 ? message : message?.substring(0, 100);
+  }
 
   factory OsmNote.fromJson(Map<String, dynamic> data) {
     List<OsmNoteComment> comments = [];
@@ -184,7 +197,7 @@ class OsmNote extends BaseNote {
       id: data['id'],
       location: BaseNote._parseLocation(data),
       created: DateTime.fromMillisecondsSinceEpoch(data['created']),
-      deleting: data['deleting'] == 1,
+      deleting: data['is_deleting'] == 1,
       comments: comments,
     );
   }
@@ -199,7 +212,8 @@ class OsmNote extends BaseNote {
   }
 
   @override
-  String toString() => 'OsmNote($id, $location, $comments)';
+  String toString() =>
+      'OsmNote(${deleting ? "closing " : (isChanged ? "changed " : "")}$id, $location, $comments)';
 }
 
 class MapDrawing extends BaseNote {
@@ -232,7 +246,7 @@ class MapDrawing extends BaseNote {
       author: data['author'],
       coordinates: coords,
       created: DateTime.fromMillisecondsSinceEpoch(data['created']),
-      deleting: data['deleting'] == 1,
+      deleting: data['is_deleting'] == 1,
     );
   }
 

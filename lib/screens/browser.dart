@@ -7,6 +7,7 @@ import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/need_update.dart';
+import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
@@ -16,6 +17,8 @@ import 'package:every_door/screens/modes/notes.dart';
 import 'package:every_door/screens/modes/poi_list.dart';
 import 'package:every_door/widgets/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/alert_controller.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -76,8 +79,26 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     final location = ref.read(effectiveLocationProvider);
     final provider = ref.read(osmDataProvider);
     final loc = AppLocalizations.of(context)!;
-    await provider.downloadAround(location, loc: loc);
+
+    try {
+      final count = await provider.downloadAround(location);
+      AlertController.show(loc.dataDownloadSuccessful,
+          loc.dataDownloadedCount(count), TypeAlert.success);
+    } on Exception catch (e) {
+      AlertController.show(
+          loc.dataDownloadFailed, e.toString(), TypeAlert.error);
+      return;
+    }
     ref.read(presetProvider).clearFieldCache();
+    ref.read(presetProvider).cacheComboOptions();
+
+    try {
+      await ref.read(notesProvider).downloadNotes(location);
+    } on Exception catch (e) {
+      // TODO: message about notes
+      AlertController.show(
+          loc.dataDownloadFailed, e.toString(), TypeAlert.error);
+    }
     updateAreaStatus();
     ref.read(needMapUpdateProvider).trigger();
   }

@@ -17,9 +17,9 @@ class DrawingStyle {
 }
 
 const kTypeStyles = <String, DrawingStyle>{
-  "scribble": DrawingStyle(color: Colors.white70, stroke: 4.0),
-  "road": DrawingStyle(color: Colors.white),
-  "track": DrawingStyle(color: Colors.white, dashed: true),
+  "scribble": DrawingStyle(color: Colors.white, stroke: 4.0),
+  "road": DrawingStyle(color: Colors.white70),
+  "track": DrawingStyle(color: Colors.white70, dashed: true),
   "footway": DrawingStyle(color: Colors.red),
   "path": DrawingStyle(color: Colors.red, dashed: true),
   "cycleway": DrawingStyle(color: Colors.purpleAccent),

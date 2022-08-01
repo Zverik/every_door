@@ -511,6 +511,14 @@
   "@changesPending": {
     "description": "Subtitle for a change that has not yet been sent to OSM API."
   },
+  "changesMapNotes": "Map notes and drawings",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesOsmNote": "OSM note",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
   "changesPurgeTitle": "Purge Changes?",
   "@changesPurgeTitle": {
     "description": "Dialog title for confirming deletion of all changes."
@@ -855,6 +863,18 @@
   "addressPlace": "Place",
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesAnonymous": "Anonymous",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Close",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Close the note?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
   },
   "apiStatusDownloading": "Downloading data…",
   "@apiStatusDownloading": {

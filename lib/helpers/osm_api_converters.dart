@@ -1,6 +1,7 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/geometry.dart';
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/models/note.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
 import 'package:logging/logging.dart';
@@ -150,6 +151,150 @@ class XmlToOsmSink extends ChunkedConversionSink<List<XmlNode>> {
   final Sink<List<OsmElement>> _sink;
 
   XmlToOsmSink(this._sink) : _converter = const XmlToOsmConverter();
+
+  @override
+  void add(List<XmlNode> chunk) {
+    _sink.add(_converter.convert(chunk));
+  }
+
+  @override
+  void close() {
+    _sink.close();
+  }
+}
+
+/// Converts an XML stream from the `map` call of OSM API and returns
+/// a list of raw `OsmElement` objects.
+class XmlToNotesConverter extends Converter<List<XmlNode>, List<OsmNote>> {
+  const XmlToNotesConverter();
+
+  // Sample: "2022-07-24 16:30:22 UTC".
+  static final kReDate =
+      RegExp(r'^(2\d+)-([01]\d)-(\d\d)\s+(\d\d):(\d\d):(\d\d)\s+UTC$');
+
+  static DateTime? _parseTimestamp(XmlElement node) {
+    final value = node.innerText.trim();
+    if (value.isEmpty) return null;
+    final match = kReDate.matchAsPrefix(value);
+    if (match == null) return DateTime.now();
+    return DateTime(
+      int.parse(match.group(1)!),
+      int.parse(match.group(2)!),
+      int.parse(match.group(3)!),
+      int.parse(match.group(4)!),
+      int.parse(match.group(5)!),
+      int.parse(match.group(6)!),
+    );
+  }
+
+  static OsmNote? convertNode(XmlNode node) {
+    if (node is XmlElement && node.name.local == 'error') {
+      throw FormatException('API returned error: ${node.innerText.trim()}');
+    } else if (node is XmlElement && node.name.local == 'note') {
+      // Skip closed notes.
+      final noteId = node.findElements('id');
+      final status = node.findElements('status');
+      if (noteId.isEmpty || status.isEmpty || status.first.innerText != 'open')
+        return null;
+
+      // Get location and creation date.
+      final lat = node.getAttribute("lat");
+      final lon = node.getAttribute("lon");
+      if (lat == null || lon == null) return null;
+      final location = LatLng(double.parse(lat), double.parse(lon));
+      final created = node.findElements('date_created');
+
+      // Parse comments.
+      final comments = <OsmNoteComment>[];
+      final commentsNodes = node.findElements('comments');
+      if (commentsNodes.isNotEmpty) {
+        for (final comment in commentsNodes.first.findElements('comment')) {
+          final comDate = comment.findElements('date');
+          final comUser = comment.findElements('user');
+          final comText = comment.findElements('text');
+          if (comDate.isNotEmpty && comText.isNotEmpty) {
+            comments.add(OsmNoteComment(
+              author: comUser.isEmpty ? null : comUser.first.innerText.trim(),
+              message: comText.first.innerText.trim(),
+              date: _parseTimestamp(comDate.first)!,
+            ));
+          }
+        }
+      }
+
+      // Build the resulting object.
+      return OsmNote(
+        id: int.parse(noteId.first.innerText.trim()),
+        location: location,
+        created: created.isEmpty ? null : _parseTimestamp(created.first),
+        comments: comments,
+      );
+    }
+    return null;
+  }
+
+  @override
+  List<OsmNote> convert(List<XmlNode> input) {
+    List<OsmNote> result = [];
+    for (final node in input) {
+      if (node is XmlElement && node.name.local == 'error') {
+        throw FormatException('API returned error: ${node.innerText.trim()}');
+      } else if (node is XmlElement && node.name.local == 'note') {
+        // Skip closed notes.
+        final noteId = node.findElements('id');
+        final status = node.findElements('status');
+        if (noteId.isEmpty ||
+            status.isEmpty ||
+            status.first.innerText != 'open') continue;
+
+        // Get location and creation date.
+        final lat = node.getAttribute("lat");
+        final lon = node.getAttribute("lon");
+        if (lat == null || lon == null) continue;
+        final location = LatLng(double.parse(lat), double.parse(lon));
+        final created = node.findElements('date_created');
+
+        // Parse comments.
+        final comments = <OsmNoteComment>[];
+        final commentsNodes = node.findElements('comments');
+        if (commentsNodes.isNotEmpty) {
+          for (final comment in commentsNodes.first.findElements('comment')) {
+            final comDate = comment.findElements('date');
+            final comUser = comment.findElements('user');
+            final comText = comment.findElements('text');
+            if (comDate.isNotEmpty && comText.isNotEmpty) {
+              comments.add(OsmNoteComment(
+                author: comUser.isEmpty ? null : comUser.first.innerText.trim(),
+                message: comText.first.innerText.trim(),
+                date: _parseTimestamp(comDate.first)!,
+              ));
+            }
+          }
+        }
+
+        // Build the resulting object.
+        result.add(OsmNote(
+          id: int.parse(noteId.first.innerText.trim()),
+          location: location,
+          created: created.isEmpty ? null : _parseTimestamp(created.first),
+          comments: comments,
+        ));
+      }
+    }
+    return result;
+  }
+
+  @override
+  Sink<List<XmlNode>> startChunkedConversion(Sink<List<OsmNote>> sink) {
+    return XmlToNotesSink(sink);
+  }
+}
+
+class XmlToNotesSink extends ChunkedConversionSink<List<XmlNode>> {
+  final XmlToNotesConverter _converter;
+  final Sink<List<OsmNote>> _sink;
+
+  XmlToNotesSink(this._sink) : _converter = const XmlToNotesConverter();
 
   @override
   void add(List<XmlNode> chunk) {

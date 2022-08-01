@@ -4,6 +4,7 @@ import 'package:every_door/models/offset.dart';
 import 'package:every_door/models/osm_area.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
+import 'package:every_door/providers/presets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:sqflite/sqflite.dart';
@@ -44,7 +45,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       kDatabaseName,
-      version: 4,
+      version: 5,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,
     );
@@ -111,5 +112,11 @@ class DatabaseHelper {
         "create table ${BaseNote.kTableName} (${BaseNote.kTableFields.join(', ')})");
     await database.execute(
         "create index ${BaseNote.kTableName}_geohash on ${BaseNote.kTableName} (geohash)");
+
+    // Cached combobox values
+    await database.execute(
+        "create table ${PresetProvider.kCachedCombosTableName} (key text, options text)");
+    await database.execute(
+        "create index ${PresetProvider.kCachedCombosTableName}_idx on ${PresetProvider.kCachedCombosTableName} (key)");
   }
 }

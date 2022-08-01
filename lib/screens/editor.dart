@@ -55,14 +55,16 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     }
     amenity.addListener(onAmenityChange);
 
-    final locale = Localizations.localeOf(context);
-    if (widget.preset == null) {
-      updatePreset(locale, true);
-    } else {
-      // Preset and location should not be null
-      preset = widget.preset!;
-      updatePreset(locale, preset!.fromNSI);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final locale = Localizations.localeOf(context);
+      if (widget.preset == null) {
+        updatePreset(locale, true);
+      } else {
+        // Preset and location should not be null
+        preset = widget.preset!;
+        updatePreset(locale, preset!.fromNSI);
+      }
+    });
   }
 
   @override

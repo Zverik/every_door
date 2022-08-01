@@ -8,6 +8,7 @@ enum ApiStatus {
   downloading,
   updatingDatabase,
   uploading,
+  uploadingNotes,
 }
 
 String getApiStatusLoc(ApiStatus status, AppLocalizations loc) {
@@ -20,5 +21,7 @@ String getApiStatusLoc(ApiStatus status, AppLocalizations loc) {
       return loc.apiStatusUpdatingDB;
     case ApiStatus.uploading:
       return loc.apiStatusUploading;
+    case ApiStatus.uploadingNotes:
+      return 'Uploading notes'; // TODO: localize
   }
 }
