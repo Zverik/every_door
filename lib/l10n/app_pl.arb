@@ -827,5 +827,83 @@
   "faqTaggingContent": "Dlaczego w edytorze brakuje obiektu? Kiedy te białe kropki są wyświetlane w trybie mikromapowania? Jak sortowane są przedmioty?\n\nOdpowiedzi na wszystkie te pytania znajdują się w [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Oto, na co możesz spojrzeć:\n\n* Kolejność kluczy dla głównego znacznika — lista `kMainKeys`.\n* Jakie obiekty są pobierane — funkcja `isGoodTags`.\n* Co jest uważane za udogodnienie — funkcja `isAmenityTags`.\n* Które punkty są przyciągane do których linii — funkcja `detectSnap`.\n* Gdy obiekt mikromapowania jest niekompletny — funkcja `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "faqFloorsContent": "Nie. Pierwszy z nich ma wypełniony znacznik `addr:floor=3`. To jest piętro, które jest nadrukowane w nawigacji i powszechnie używane. Drugi nie ma tego znacznika, ale ma `level=3`. Ten numer to kolejny numer piętra od zera do `building:levels - 1`. Oznacza to, że w trzypiętrowym budynku wartość parametru `addr:floor` zależy od kraju, ale `level` to zawsze 0, 1 lub 2.\n\nOto jak notacja w edytorze odnosi się do tych znaczników:\n\n* `2`: `addr:floor=2` i niepuste `level=*`.\n* `4/`: `addr:floor=4`, ale nie ma znacznika `level`.\n* `/1`: `level=1`, ale nie ma znacznika `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (a w pobliżu znajduje się obiekt z tym samym `addr:floor`, ale innym `level` lub odwrotnie).",
-  "@faqFloorsContent": {}
+  "@faqFloorsContent": {},
+  "buildingMaterial": "Fasada",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "cegła",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialWood": "drewno",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "beton",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "panele",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "bloczki cementowe",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "kamień",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "metal",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "szkło",
+  "@buildingMaterialGlass": {},
+  "buildingMaterialPlaster": "tynk",
+  "@buildingMaterialPlaster": {},
+  "versionsTitle": "Historia {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsFetchError": "Błąd pobierania historii wersji",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsNoTagChanges": "Brak zmian znacznika",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "versionsEnableInternet": "Połącz się z internetem, aby pobrać historię wersji",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsRetryFetch": "Ponów próbę",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsLocalChanges": "Zmiany lokalne",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Wersja #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "przez {user} {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  }
 }

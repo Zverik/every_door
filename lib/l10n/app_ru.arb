@@ -104,6 +104,7 @@
   "settingsPurgedMessage": "{count,plural, =1{Очистили {count} объект}, =few{Очистили {count} объекта}, =other{Очистили {count} объектов}}",
   "@settingsPurgedMessage": {},
   "changesSwipeLeft": "Смахните влево для отмены правки",
+  "@changesSwipeLeft": {},
   "settingsUploads": "Правки для отправки",
   "@settingsUploads": {},
   "settingsBackground": "Спутниковые снимки",
@@ -249,6 +250,7 @@
   "entranceX": "Вход {n}",
   "@entranceX": {},
   "buildingPostCode": "Индекс",
+  "@buildingPostCode": {},
   "buildingLevels": "Этажей",
   "@buildingLevels": {},
   "buildingRoofLevels": "Этажей в крыше",
@@ -256,15 +258,25 @@
   "buildingRoofShape": "Форма крыши",
   "@buildingRoofShape": {},
   "buildingMaterial": "Фасад",
+  "@buildingMaterial": {},
   "buildingMaterialBrick": "кирпич",
+  "@buildingMaterialBrick": {},
   "buildingMaterialPlaster": "штукатурка",
+  "@buildingMaterialPlaster": {},
   "buildingMaterialWood": "дерево",
+  "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "бетон",
+  "@buildingMaterialConcrete": {},
   "buildingMaterialPanels": "панелька",
+  "@buildingMaterialPanels": {},
   "buildingMaterialCementBlock": "шлакоблок",
+  "@buildingMaterialCementBlock": {},
   "buildingMaterialStone": "камень",
+  "@buildingMaterialStone": {},
   "buildingMaterialMetal": "металл",
+  "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "стекло",
+  "@buildingMaterialGlass": {},
   "buildingType": "Здание",
   "@buildingType": {},
   "buildingMoreButton": "Ещё",
@@ -456,17 +468,89 @@
     "description": "Label for the minute chooser."
   },
   "faqMapTiny": "Почему карта такая маленькая?",
+  "@faqMapTiny": {},
   "faqMapTinyContent": "Потому что не она главная. На карте нужно проверить только своё местоположение, и подвинуть, если оно не там. Смотрите на список заведений внизу, упорядоченный по расстоянию от вас.\n\nКарта становится больше, когда вы правите заведения вдали от себя. Хотя приложение сделано для правки того, что вы видите своими глазами.",
+  "@faqMapTinyContent": {},
   "faqCheckmarks": "Для чего галочки в списке?",
+  "@faqCheckmarks": {},
   "faqCheckmarksContent": "Это отметка, что заведение проверено. Добавляет к объекту тег `check_date` с текущей датой.\n\nСуть галочки в том, что ты, скажем, обошёл полгорода в первый раз. А потом вернулся туда через месяц, решил снова обойти. И тебе нужно как-то отметить, что ты проверил, что заведение на месте, но ничего не изменилось. Это и есть галочка: нажал — и пошёл дальше.\n\nГалочка держится две недели после проверки. Потом можно будет обойти заведения заново.",
+  "@faqCheckmarksContent": {},
   "faqEntrance": "Как добавить подъезд?",
+  "@faqEntrance": {},
   "faqEntranceContent": "Внизу экрана есть кнопки для переключения режимов: микромаппинг, заведения, подъезды.\n\nВ режиме подъездов нажмите или перетяните кнопку с дверью снизу на карту.",
+  "@faqEntranceContent": {},
   "faqLetters": "Как ввести буквы в номер квартиры?",
+  "@faqLetters": {},
   "faqLettersContent": "Если в вашей цифровой клавиатуре нет переключателя на полную клавиатуру с буквами, загляните в настройки приложения. Они под кнопкой слева вверху на главном экране. Включите там «заменить цифровую клавиатуру».",
+  "@faqLettersContent": {},
   "faqFloors": "Этажи \"3\" и \"/3\" — одно и то же?",
+  "@faqFloors": {},
   "faqFloorsContent": "Нет. В первом заполнен тег `addr:floor=3`. Это этаж, как он написан в навигации и используется в жизни. Во втором этот тег пуст, но есть `level=3`. Это число — номер этажа в последовательной нумерации от нуля до `building:levels - 1`. То есть, в трёхэтажном доме `addr:floor` зависит от страны, а `level` всегда 0, 1 или 2.\n\nВот как условное обозначение в редакторе зависит от этих тегов:\n\n* `2`: `addr:floor=2` и непустой `level=*`.\n* `4/`: `addr:floor=4`, тег `level` отсутствует.\n* `/1`: `level=1`, тег `addr:floor` отсутствует.\n* `1/0`: `addr:floor=1` + `level=0` (и рядом есть объект с тем же `addr:floor`, но другим `level`, или наоборот).",
+  "@faqFloorsContent": {},
   "faqChangeType": "Как поменять тип заведения?",
+  "@faqChangeType": {},
   "faqChangeTypeContent": "Нажмите на заголовок редактора, где написан этот тип.",
+  "@faqChangeTypeContent": {},
   "faqTagging": "Любые вопросы по тегам",
-  "faqTaggingContent": "Почему объект отсутствует в редакторе? Когда выводятся белые точки на объектах в режиме микромаппинга? Как сортируются объекты?\n\nОтветы на все эти вопросы в [good\\_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Вот на что обратить внимание:\n\n* Порядок определения главного тега — список `kMainKeys`.\n* Какие объекты загружаются — функция `isGoodTags`.\n* Что считается заведением — функция `isAmenityTags`.\n* Какие точки прилепляются к линиям, и каким — функция `detectSnap`.\n* Когда объект микромаппинга неполон — функция `needsMoreInfo`."
+  "@faqTagging": {},
+  "faqTaggingContent": "Почему объект отсутствует в редакторе? Когда выводятся белые точки на объектах в режиме микромаппинга? Как сортируются объекты?\n\nОтветы на все эти вопросы в [good\\_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Вот на что обратить внимание:\n\n* Порядок определения главного тега — список `kMainKeys`.\n* Какие объекты загружаются — функция `isGoodTags`.\n* Что считается заведением — функция `isAmenityTags`.\n* Какие точки прилепляются к линиям, и каким — функция `detectSnap`.\n* Когда объект микромаппинга неполон — функция `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "versionsRetryFetch": "Повторить",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsLocalChanges": "Ваша правка",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Версия №{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "от {user} в {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsEnableInternet": "Подключитесь к сети для просмотра истории",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsTitle": "История {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsNoTagChanges": "Нет изменений в тегах",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "versionsFetchError": "Ошибка при скачивании истории",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  }
 }

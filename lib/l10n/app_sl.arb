@@ -827,5 +827,83 @@
   "faqFloorsContent": "Ne. Prvi ima izpolnjeno oznako »addr:floor=3«. To je nadstropje, kot je natisnjeno na navigaciji in se običajno uporablja. Drugi nima te oznake, ima pa oznako »level=3«. Ta številka je zaporedna številka nadstropja od nič do »building:levels - 1«. To pomeni, da je v trinadstropni stavbi vrednost »addr:floor« odvisna od kraja, vendar je »level« vedno 0, 1 ali 2.\n\nTukaj je prikazano, kako se zapis v urejevalniku nanaš na te oznake:\n\n* `2`: `addr:floor=2` in neprazno `level=*`.\n* `4/`: `addr:floor=4`, vendar ni oznake `level`.\n* `/1`: `level=1`, vendar ni oznake `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (in v bližini je predmet z enakim `addr:floor`, vendar drugačnim `level`, ali obratno).",
   "@faqFloorsContent": {},
   "faqTaggingContent": "Zakaj v urejevalniku ni predmeta? Kdaj se te bele pike prikažejo v načinu mikromapiranja? Kako so razvrščeni predmeti?\n\nOdgovore na vsa ta vprašanja najdete v [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Tukaj si lahko ogledate:\n\n* Vrstni red ključev za glavno oznako — seznam `kMainKeys`.\n* Kateri predmeti so preneseni — funkcija `isGoodTags`.\n* Kaj se šteje za točko POI — funkcija `isAmenityTags`.\n* Katere točke se pripenjajo na katere poti — funkcija `detectSnap`.\n* Kdaj je objekt mikromapiranja nepopoln — funkcija `needsMoreInfo`.",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "buildingMaterialBrick": "opeka",
+  "@buildingMaterialBrick": {},
+  "buildingMaterial": "Fasada",
+  "@buildingMaterial": {},
+  "buildingMaterialPlaster": "omet",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "les",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "beton",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "plošče",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "cementni bloki",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "kamen",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "kovina",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "steklo",
+  "@buildingMaterialGlass": {},
+  "versionsTitle": "{elementRef} zgodovina",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsLocalChanges": "Lokalne spremembe",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsEnableInternet": "Poveži se z internetom, za pridobivanje zgodovine različic",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "Napaka pri pridobivanju zgodovine različic",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "Poskusi znova",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsVersionNumber": "Različica št. {number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "avtor {user} ob {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "Brez sprememb oznake",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  }
 }

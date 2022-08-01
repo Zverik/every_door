@@ -1,5 +1,5 @@
 {
-  "loadingStart": "初始化中……",
+  "loadingStart": "正在初始化……",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
@@ -659,5 +659,193 @@
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "entranceTypeStaircase": "楼梯间",
-  "@entranceTypeStaircase": {}
+  "@entranceTypeStaircase": {},
+  "aboutLinks": "链接",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "loadingTooMuchData": "从设置中清除已下载的数据，以使编辑器更快。",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchDataTitle": "数据太多了",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "下载失败",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "下载成功",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{已下载 {count} 要素。}, =few{已下载 {count} 个要素。}, =other{已下载 {count} 个要素。}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsPurgedMessage": "{count,plural, =1{已清除 {count} 要素}, =few{已清除 {count} 个要素}, =other{已清除 {count} 个要素}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsAbout": "关于",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutViewLog": "系统日志",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "版本历史（GitHub页面）",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "安装的版本",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutFAQ": "常见问题",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "changesCount": "{count,plural, =1{{count} 处变更}, =few{{count} 处变更}, =other{{count} 处变更}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesSwipeLeft": "向左滑动以撤消更改",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursAsText": "作为文本",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "“上周一”",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "具体日期",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursHour": "小时",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "buildingPostCode": "邮政编码",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqCheckmarks": "复选标记的用途是什么？",
+  "@faqCheckmarks": {},
+  "faqEntrance": "如何添加建筑物入口？",
+  "@faqEntrance": {},
+  "faqTaggingContent": "为什么在编辑器中缺少一个物体？在微测绘模式下，何时显示这些白点？对象是如何排序的？\n\n所有这些问题的答案都在[good_tags。dart]（https://github。com/Zverik/every_door/blob/main/lib/helpers/good_tags。dart）。下面是你可以查看的内容：\n\n* 主标签的钥匙顺序 — 列表 `kMainKeys`。\n* 哪些对象被下载 — 函数 `isGoodTags`。\n* 哪些被认为是便利设施 — 函数 `isAmenityTags`。\n* 哪些点是以何种方式捕捉的 — 函数`detectSnap`。\n* 当一个微测绘对象不完整时 — 函数 `needsMoreInfo`。",
+  "@faqTaggingContent": {},
+  "faqFloorsContent": "不。第一个是'addr:floor=3'的标签填充。即楼层数，因为它印在导航上并且常用。第二个没有这个标签，但有'level=3'。该数字是从零到'building:levels - 1'的连续楼层号。也就是说，在三层楼的建筑中，'addr:floor'值取决于哪个国家，但'level'始终都是0，1、2。\n\n以下是编辑器中的符号与这些标记的关系：\n\n* '2'： 'addr:floor=2' 和非空值 'level=*'。\n* '4/'： 'addr:floor=4'，但没有'level'标签。\n* '/1'： 'level=1'，但没有 'addr:floor' 标签。\n* '1/0'： 'addr:floor=1' + 'level=0' （附近有一个对象：具有相同的 'addr:floor'，但'level'不同，反之亦然）。",
+  "@faqFloorsContent": {},
+  "faqChangeType": "如何更改便利设施的类型？",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "点选编辑器的标题，那里写着类型。",
+  "@faqChangeTypeContent": {},
+  "faqTagging": "所有标签问题",
+  "@faqTagging": {},
+  "buildingMaterial": "外观",
+  "@buildingMaterial": {},
+  "buildingMaterialWood": "木材",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "混凝土",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "板材",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialStone": "石材",
+  "@buildingMaterialStone": {},
+  "buildingMaterialPlaster": "石膏/灰泥",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialMetal": "金属",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "玻璃",
+  "@buildingMaterialGlass": {},
+  "buildingMaterialBrick": "砖块",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialCementBlock": "水泥砌块",
+  "@buildingMaterialCementBlock": {},
+  "faqMapTiny": "为什么地图这么小？",
+  "@faqMapTiny": {},
+  "faqMapTinyContent": "因为这不是重点。你只需在地图上检查你的定位，并平移它来调整。观察下面的便利设施列表，按与你的距离排序。\n\n当你编辑离你的位置很远的设施时，地图会变大。尽管这个应用程序是为了编辑你用眼睛看到的东西。",
+  "@faqMapTinyContent": {},
+  "faqEntranceContent": "在底部有一排模式按钮：微测绘、便利设施和入口。\n\n在入口模式中，点击或拖动屏幕底部角落的门按钮到地图上。",
+  "@faqEntranceContent": {},
+  "faqLetters": "我可以在参考编号或公寓号中键入字母吗？",
+  "@faqLetters": {},
+  "faqLettersContent": "如果您的数字键盘无法切换到完整键盘，请检查应用程序设置。它们位于左上角的按钮后面。在那里打开“扩展数字键盘”。",
+  "@faqLettersContent": {},
+  "faqFloors": "楼层“3”和“/3”是否相同？",
+  "@faqFloors": {},
+  "tileNo": "无",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "aboutProjectWebsite": "项目网站",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutHelpImprove": "帮助改进 {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutHelpTranslate": "帮助翻译",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutSourceCode": "源代码",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "在 GitHub 上",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutReportIssue": "报告问题",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutOnWeblate": "在 Weblate 上",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "fieldHoursClosed": "关闭",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "aboutLicense": "许可",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "fieldHoursPublicHolidays": "公众假期",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursMinute": "分钟",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "faqCheckmarksContent": "这些是便利设施数据被确认的标志。它们添加了带有当前日期的`check_date`标签。\n\n检查标记背后的想法是，比如说，你第一次调查了半个城市。然后过了一个月，你又回来了，再次去调查。你需要以某种方式标记你看到了这个便利设施，但它没有任何变化。这就是复选标记：你点击它然后继续。\n\n这个标记会保持两个星期。此后，你可以再次调查这些设施。",
+  "@faqCheckmarksContent": {}
 }

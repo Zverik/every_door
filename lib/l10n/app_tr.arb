@@ -1,0 +1,775 @@
+{
+  "loadingLocation": "Konum alınıyor…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingChangesFailed": "Değişiklikler yüklenemedi",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingTooMuchDataTitle": "çok fazla veri",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Düzenleyiciyi daha hızlı hale getirmek için indirilen verileri Ayarlar'dan temizleyin.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Yükleme başarısız",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "tileNo": "Hayır",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "tileDragTheMap": "Lütfen herhangi bir yere yaklaşın, haritayı sürükleyin veya eksik bir tesisi ekleyin.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Lütfen dolaşın, bir tesis ekleyin veya filtreyi temizleyin.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "legendOther": "Başka",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "filterNoAddresses": "Yakınlarda adres yok",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterByFloor": "Kat tarafından",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "filterEmpty": "Boş",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "filterNonConfirmed": "Sadece onaylanmamış",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "chooseLocation": "Konum seç",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "Türü seçin",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Temizle",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "editorSave": "Kaydet",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorCloseTitle": "Düzenleyici kapatılsın mı?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "Kaydedilmemiş değişikliklerinizi kaybedeceksiniz. İlerlesinmi?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorLoadingPreset": "Ön ayar yükleniyor…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMove": "Hareket",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorMarkActive": "Etkin Olarak İşaretle",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Geçersiz Olarak İşaretle",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorRestore": "Eski haline getir",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorMissing": "Bulunmuyor",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorRestoreTitle": "Açık mı?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "tileNothingAround": "Çevrenizde hiçbir aktivite {distance} metre.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "editorDuplicate": "Olası çoğaltma{distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorDeleteButton": "Sil",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsUrlCopied": "URL panoya kopyalandı",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsAddTag": "Etiket ekle",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Anahtar",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Değer",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsValueLong": "Değer çok uzun",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "versionsEnableInternet": "Sürüm geçmişini almak için internete bağlanın",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "Sürüm geçmişi alınırken hata oluştu",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "yeniden dene",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "settingsUploads": "bekleyen yüklemeler",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsBackground": "Arka plan görüntüleri",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsLeftHand": "Sol kontroller",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsNumericKeyboard": "Genişletilmiş Sayısal Klavye",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "aboutViewLog": "Sistem günlüğü",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutSourceCode": "Kaynak kodu",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "GitHub'da",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Lisans",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutReportIssue": "Sorun bildir",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpTranslate": "çevirmeye yardım et",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "Weblate'de",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "SSS",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Bağlantılar",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountTitle": "OpenStreetMap Hesabı",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "OAuth ile giriş yapın",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "OAuth Hatası",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountLoginPassword": "Şifre ile giriş yapın",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "Uyarı",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "Anladım",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "OSM Kimlik Bilgileri",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountFieldLogin": "Kullanıcı adı",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountFieldPassword": "Şifre",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountAuthErrorTitle": "Yetkilendirme Hatası",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountAuthErrorMessage": "Yanlış kullanıcı adı ya da parola.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "Çıkış Yap",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountUnreadMail": "Okunmamış posta",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesUploadedTitle": "yüklendi",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadFailedTitle": "Yükleme başarısız",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "changesPurgeTitle": "Değişiklikler Temizlensin mi?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesSwipeLeft": "Bir değişikliği geri almak için sola kaydırın",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursFullDay": "Tam gün",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursAsText": "Metin Olarak",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursPublicHolidays": "Resmi tatil",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursOpens": "Açılır",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "kapanır",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursAddFragment": "Parça ekle",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursAddBreak": "Ara ekle",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursClosedPH": "Resmi tatillerde kapalı",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldComboEmpty": "Boş",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "Seç",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiPublic": "Halka açık",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "Müşteriler",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "Evet",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "Sınırlı",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "Hayır",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsAccepted": "Kabul edilmiş",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "Hayır",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCheckboxYes": "Evet",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "Hayır",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorEmpty": "Bir kat seçmek için bir adres belirleyin.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorNew": "Yeni Kat",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorFloorDesc": "Navigasyonda ve asansörlerde olduğu gibi zemin",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "messageDataObsolete": "Veriler eski, yenilemek için buraya dokunun",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "GPS'i etkinleştir",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Lütfen görüntülenecek ayarlar panelinde konum hizmetlerini açın.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocation": "Yeri etkinleştir",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "buttonYes": "Evet",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buildingRoofLevels": "Çatı Seviyeleri",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingType": "Tip",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMaterialConcrete": "Somut",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "paneller",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "çimento blokları",
+  "@buildingMaterialCementBlock": {},
+  "buildingTypeApartments": "Apartmanlar",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "Perakende",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "Reklam",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "Baraka",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "Sanayi",
+  "@buildingTypeIndustrial": {},
+  "entranceFlatsNumberList": "Numara listesi olmalı",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceAccessYes": "Açık",
+  "@entranceAccessYes": {},
+  "entranceAccessDelivery": "Teslimat",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "Tekerlekli sandalye",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceType": "Tip",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeStaircase": "Merdiven",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "Ev",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "Dükkan",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "Hizmet",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "Garaj",
+  "@entranceTypeGarage": {},
+  "addressHouseNotEmpty": "Boş olmamalı",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Birim",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "İsteğe bağlı",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressStreet": "Sokak",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "apiStatusDownloading": "Veri indiriliyor…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "Öğeleri uygulama veritabanına kaydetme",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploading": "Değişiklikler yükleniyor",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "faqMapTiny": "Harita neden bu kadar küçük?",
+  "@faqMapTiny": {},
+  "faqCheckmarks": "Onay işaretleri ne için?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Bina girişi nasıl eklenir?",
+  "@faqEntrance": {},
+  "faqLetters": "Harfleri bir referansa veya düz bir sayıya yazabilir miyim?",
+  "@faqLetters": {},
+  "faqChangeType": "Tesis türü nasıl değiştirilir?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Türün yazıldığı editör başlığına dokunun.",
+  "@faqChangeTypeContent": {},
+  "faqTagging": "Tüm etiketleme soruları",
+  "@faqTagging": {},
+  "loadingStart": "Başlatılıyor…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "tagsNewPoint": "Yeni Nokta",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "settingsDataManagement": "Veri yönetimi",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsPresentation": "Sunum",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsDefaultPayment": "Varsayılan Ödeme Kartları",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "loadingPresets": "Ön ayarlar yükleniyor…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "settingsPurgedObsoleteTitle": "Eski Veriler",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "loadingChanges": "Değişiklikler yükleniyor…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "settingsLoginDetails": "OSM Hesabı",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeDataTitle": "Veri Silinsin mi?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "filterByAddress": "Adrese göre",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "tagsKeyError": "Anahtar çok nadir",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "versionsLocalChanges": "Yerel değişiklikler",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "dataDownloadSuccessful": "İndirme başarılı",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{İndirilen {count} öğe.}, =few{İndirilen {count} öğe.}, =other{İndirilen {count} öğe.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorMoreFields": "Daha Fazla Alan",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "versionsNoTagChanges": "Etiket değişikliği yok",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsTitle": "Yapılandırma",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsApiServer": "API Sunucusu",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsPurgeData": "Eski önbelleğe alınmış verileri temizle",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "İndirilen tüm verileri temizle",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataMessage": "Her şeyi yeniden indirmeniz gerekecek. İlerlesinmi?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedAllTitle": "Silinen Veriler",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsEditor": "Editör",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "aboutInstalledVersion": "Yüklü sürüm",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "settingsAbout": "Hakkında",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutVersionHistory": "Sürüm geçmişi",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutProjectWebsite": "Proje web sitesi",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "accountChangesets": "Değişiklik kümeleri",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountPasswordWarningMessage": "Şifreniz cihazda saklanacaktır. Bunu yalnızca OAuth başarısız olduğunda seçin.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "changesDeletedUndo": "Geri alma",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesPending": "Askıda olması",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesPurgeMessage": "Kaydedilen tüm değişiklikler silinsin ve orijinal veriler geri yüklensin mi?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursButton": "Açılış saatlerini ayarla",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldFloorLevelDesc": "Zemin seviyesi için 0'dan başlayan kat numarası",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldHoursTitle": "Açılış saatleri",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursSpecificDays": "Belirli tarih",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursMinute": "Dakika",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursNumberedWeekday": "\"Geçen pazartesi\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursHour": "Saat",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursClosed": "Kapalı",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursBreak": "Kırmak",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "Sonraki",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldWifiNo": "Hayır",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldPhoneWrong": "Yanlış telefon formatı",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "messageNoData": "Veri yok, indirmek için buraya dokunun",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "fieldFloorShouldBeNumber": "Lütfen bir numara giriniz",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldAddressTap": "Bir adrese dokunun",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "entranceAccessPrivate": "Özel",
+  "@entranceAccessPrivate": {},
+  "entranceTypeMain": "Ana",
+  "@entranceTypeMain": {},
+  "entranceTypeEmergency": "Acil Durum",
+  "@entranceTypeEmergency": {},
+  "buildingLevels": "Seviyeler",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingMaterialStone": "Taş",
+  "@buildingMaterialStone": {},
+  "enableLocationMessage": "Lütfen gösterilecek ayarlar panelinde uygulama için konum erişimine izin verin.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonNo": "Hayır",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingX": "Bina {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "addressX": "Adres {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingRoofShape": "Çatı Şekli",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingPostCode": "Posta kodu",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingMaterialWood": "Odun",
+  "@buildingMaterialWood": {},
+  "buildingMoreButton": "Daha",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterial": "Cephe",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "tuğla",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "Alçı",
+  "@buildingMaterialPlaster": {},
+  "buildingTypeAddress": "Adres",
+  "@buildingTypeAddress": {},
+  "buildingMaterialMetal": "Metal",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "Cam",
+  "@buildingMaterialGlass": {},
+  "buildingTypeHouse": "Ev",
+  "@buildingTypeHouse": {},
+  "buildingTypeGarage": "Garaj",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "İnşaat",
+  "@buildingTypeConstruction": {},
+  "entranceFlats": "Daireler",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "addressPlace": "Yer",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "entranceRef": "Referans",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "addressHouseNumber": "Ev",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "entranceAccess": "Erişim",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessNo": "Hayır",
+  "@entranceAccessNo": {},
+  "faqLettersContent": "Sayısal klavyeniz tam klavyeye geçemiyorsa uygulama ayarlarını kontrol edin. Sol üst köşedeki düğmenin arkasındalar. Orada \"genişletilmiş sayısal klavyeyi\" açın.",
+  "@faqLettersContent": {}
+}

@@ -333,5 +333,187 @@
     }
   },
   "buildingTypeAddress": "indirizzo",
-  "@buildingTypeAddress": {}
+  "@buildingTypeAddress": {},
+  "aboutInstalledVersion": "Versione installata",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutViewLog": "Registro di sistema",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "Cronologia delle versioni",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutHelpImprove": "Aiuta a migliorare {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutHelpTranslate": "Aiuta a tradurre",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "su Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "Domande frequenti",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Collegamenti",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "faqCheckmarksContent": "Questi segni indicano che i dati dell'elemento sono stati confermati. Aggiungono il tag `check_date` con la data corrente.\n\nL'idea alla base dei segni di spunta è che, ad esempio, la prima volta si è rilevata metà della città. Poi, dopo un mese, si è tornati a fare un'altra indagine. È necessario segnare in qualche modo che si vede l'amenità, ma che non è cambiata. Questo è il segno di spunta: si tocca e si continua.\n\nIl segno rimane selezionato per due settimane. Dopodiché è possibile effettuare nuovamente il rilevamento.",
+  "@faqCheckmarksContent": {},
+  "aboutProjectWebsite": "Sito web del progetto",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "Codice sorgente",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "faqFloorsContent": "No. Il primo ha il tag `addr:floor=3`. Si tratta del piano così come è stampato sulla navigazione e comunemente usato. Il secondo non ha questo tag, ma ha `level=3`. Questo numero è un numero di piano sequenziale da zero a `building:levels - 1`. Cioè, in un edificio di tre piani il valore di `addr:floor` dipende da dallo Stato, ma `level` è sempre 0, 1, o 2.\n\nEcco come la notazione nell'editor si riferisce a questi tag:\n\n* `2`: `addr:floor=2` e `level=*` non vuoto.\n* `4/`: `addr:floor=4`, ma non c'è il tag `level`.\n* `/1`: `livello=1`, ma non c'è il tag `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (e c'è un oggetto nelle vicinanze:w con lo stesso `addr:floor`, ma diverso `level`, o viceversa).",
+  "@faqFloorsContent": {},
+  "loadingTooMuchDataTitle": "Troppi dati",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Download fallito",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Download riuscito",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "loadingTooMuchData": "Rimuovi i dati scaricati da \"Impostazioni\" per rendere l'editor più veloce.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Scaricato {count} elemento.}, =few{Scaricati {count} elementi.}, =other{Scaricati {count} elementi.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsAbout": "Informazioni",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutOnGitHub": "su GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Licenza",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutReportIssue": "Segnala un problema",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "changesSwipeLeft": "Scorri a sinistra per annullare una modifica",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursAsText": "Come testo",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "\"Ultimo lunedì\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "Data specifica",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Chiuso",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Giorni festivi",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursHour": "Ore",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minuti",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "buildingPostCode": "Codice postale",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqMapTiny": "Perché la mappa è così piccola?",
+  "@faqMapTiny": {},
+  "faqCheckmarks": "A cosa servono i segni di spunta?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Come aggiungere l'ingresso di un edificio?",
+  "@faqEntrance": {},
+  "buildingMaterial": "Facciata",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "mattoni",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "intonaco",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "legno",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "calcestruzzo",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "pannelli",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "blocchi di cemento",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "pietra",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "metallo",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "vetro",
+  "@buildingMaterialGlass": {},
+  "faqMapTinyContent": "Perché non è questo il punto. Si controlla solo la propria posizione sulla mappa e la si sposta per aggiustarla. Guardate l'elenco dei servizi qui sotto, ordinati in base alla distanza da voi.\n\nLa mappa si ingrandisce quando si modificano servizi lontani dalla propria posizione. Anche se l'app è stata creata per modificare le cose che si vedono direttamente.",
+  "@faqMapTinyContent": {},
+  "faqEntranceContent": "In basso c'è una fila di pulsanti di modalità: micromappatura, servizi e ingressi.\n\nNella modalità ingressi, tocca o trascina sulla mappa il pulsante della porta presente nell'angolo inferiore.",
+  "@faqEntranceContent": {},
+  "faqLetters": "Posso digitare lettere in un ref o un numero di appartamento?",
+  "@faqLetters": {},
+  "faqLettersContent": "Se non è possibile passare alla tastiera numerica completa, controlla le impostazioni dell'app. Clicca il pulsante nell'angolo in alto a sinistra e attiva la \"tastiera numerica estesa\".",
+  "@faqLettersContent": {},
+  "faqFloors": "I piani '3' e '/3' sono uguali?",
+  "@faqFloors": {},
+  "faqChangeType": "Come modificare la tipologia di un elemento?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Tocca il titolo dell'editor, dove è scritta la tipologia.",
+  "@faqChangeTypeContent": {},
+  "faqTagging": "Tutte le domande sui tag",
+  "@faqTagging": {},
+  "faqTaggingContent": "Perché manca un elemento nell'editor? Quando vengono visualizzati questi punti bianchi nella modalità di micromappatura? Come vengono ordinati gli oggetti?\n\nLe risposte a tutte queste domande si trovano in [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Ecco cosa puoi trovare:\n\n* L'ordine delle chiavi per il tag principale - lista `kMainKeys`.\n* Quali oggetti vengono scaricati - funzione `isGoodTags`.\n* Cosa viene considerato un'amenità - funzione `isAmenityTags`.\n* Quali punti vengono agganciati in quali modi - funzione `detectSnap`.\n* Quando un oggetto di micromappatura è incompleto - funzione `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "editorDuplicate": "Possibile duplicato entro {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  }
 }

@@ -535,5 +535,63 @@
   "buildingMaterialMetal": "Metall",
   "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "Glas",
-  "@buildingMaterialGlass": {}
+  "@buildingMaterialGlass": {},
+  "versionsLocalChanges": "Lokale Änderungen",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionMeta": "von {user} um {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsEnableInternet": "Mit Internet verbinden, um Versionsverlauf abzurufen",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsTitle": "{elementRef} Verlauf",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsFetchError": "Fehler bei Abruf des Versionsverlaufs",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsVersionNumber": "Version #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsRetryFetch": "Wiederholen",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsNoTagChanges": "Keine Tag-Änderungen",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  }
 }

@@ -814,7 +814,7 @@
   "@buildingPostCode": {
     "description": "Label for addr:postcode in the form. Keep it short."
   },
-  "faqMapTinyContent": "For det ikke er det vigtigste. Du kontrollerer blot din position på kortet og flytter på det for at justere. Se listen over faciliteter nedenfor, sorteret efter afstand fra dig.\n\nKortet bliver større, når du redigerer faciliteter langt fra din placering. Selv om appen er lavet til at redigere ting, du ser med dine egne øjne.",
+  "faqMapTinyContent": "Fordi det ikke er det vigtigste. Du kontrollerer blot din position på kortet og rykker på det for at justere. Se listen over faciliteter nedenunder, sorteret efter afstand fra dig.\n\nKortet bliver større, når du redigerer faciliteter langt fra din placering. Appen er dog lavet til at redigere ting, du ser med dine egne øjne.",
   "@faqMapTinyContent": {},
   "faqCheckmarks": "Hvad er fluebenene til?",
   "@faqCheckmarks": {},
@@ -822,9 +822,9 @@
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Hvis dit numeriske tastatur ikke kan skiftes til et fuldt tastatur, skal du kontrollere appindstillingerne. Dem finder du bag knappen i øverste venstre hjørne. Slå \"Udvidet numeriske tastatur\" til der.",
   "@faqLettersContent": {},
-  "faqEntranceContent": "Nederst er der en række indstillingsknapper: mikromapping, faciliteter og indgange.\n\nVælg indstillingen 'indgange' og tryk på eller træk dørknappen i nederste hjørne ind på kortet.",
+  "faqEntranceContent": "Nederst er der en række indstillingsknapper: mikrokortlægning, faciliteter og indgange.\n\nVælg indstillingen 'indgange' og tryk på eller træk dørknappen i nederste hjørne ind på kortet.",
   "@faqEntranceContent": {},
-  "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Hvornår vises disse hvide prikker i mikromapping-indstillingen? Hvordan sorteres objekter?\n\nSvarene på alle disse spørgsmål findes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er, hvad du kan se på:\n\n* Nøgleordenen for det primære tag - liste `kMainKeys`.\n* Hvilke objekter der downloades - funktion `isGoodTags`.\n* Hvad der betragtes som en facilitet - funktion `isAmenityTags`.\n* Hvilke punkter forbindes til hvilke veje - funktion `detectSnap`.\n* Når et mikromappingobjekt er ufuldstændigt - funktion `needsMoreInfo`.",
+  "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Hvornår vises disse hvide prikker i mikrokortlægning-indstillingen? Hvordan sorteres objekter?\n\nSvarene på alle disse spørgsmål findes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er, hvad du kan se på:\n\n* Nøgleordenen for det primære tag - liste `kMainKeys`.\n* Hvilke objekter der downloades - funktion `isGoodTags`.\n* Hvad der betragtes som en facilitet - funktion `isAmenityTags`.\n* Hvilke punkter forbindes til hvilke veje - funktion `detectSnap`.\n* Når et mikrokortlægningsobjekt er ufuldstændigt - funktion `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "faqFloorsContent": "Nej. Den første har `addr:floor=3`-tagget udfyldt. Det er etagen, som den angives ved vejvisning og i almindelighed anvendes. Den anden har ikke dette tag, men har `level=3`. Det nummer er et fortløbende etagenummer fra nul til `building:levels - 1`. Det vil sige, at i en treetagers bygning afhænger værdien af `addr:floor` af landet, men `level` er altid 0, 1 eller 2.\n\nHer er hvordan notationen i editoren er relaterede til disse tags:\n\n* `2`: `addr:floor=2` og ikke-tom `level=*`.\n* `4/`: `addr:floor=4`, men der er ikke noget `level`-tag.\n* `/1`: `level=1`, men der er ikke noget `addr:floor`-tag.\n* `1/0`: `addr:floor=1` + `level=0` (og der er et objekt i nærheden:w med samme `addr:floor`, men med et andet `level`, eller omvendt).",
   "@faqFloorsContent": {},
@@ -847,5 +847,63 @@
   "buildingMaterialMetal": "metal",
   "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "glas",
-  "@buildingMaterialGlass": {}
+  "@buildingMaterialGlass": {},
+  "versionsVersionMeta": "af {user} {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "Ingen tag-ændringer",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "versionsRetryFetch": "Prøv igen",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsTitle": "{elementRef} historik",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsFetchError": "Fejl ved hentning af versionshistorik",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsEnableInternet": "Opret forbindelse til internettet for at hente versionshistorik",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsLocalChanges": "Lokale ændringer",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Version #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  }
 }
