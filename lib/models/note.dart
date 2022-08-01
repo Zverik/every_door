@@ -180,6 +180,10 @@ class OsmNote extends BaseNote {
   @override
   bool get isChanged => super.isChanged || hasNewComments;
 
+  String? getNoteTitle() {
+    return (message?.length ?? 0) < 100 ? message : message?.substring(0, 100);
+  }
+
   factory OsmNote.fromJson(Map<String, dynamic> data) {
     List<OsmNoteComment> comments = [];
     if (data['comments'] != null) {

@@ -6,7 +6,7 @@ _Unreleased_
 
 ### Highlights
 
-* The fourth editing mode with OSM notes.
+* The fourth editing mode with OSM notes (the design is preliminary).
 * Button to download tiles at the imagery list.
 * Object history panel (thanks @GeorgeHoneywood).
 
@@ -22,6 +22,8 @@ _Unreleased_
 * Made dots in the micromapping mode bigger.
 * Removed `shop` from fields.
 * Caching combo values on downloading data.
+* Major improvements in Turkish (thanks Nesim İŞ), Portugese (thanks Matheus Gomes Correia),
+  and Korean (thanks Items Align) translations.
 * Updated all dependencies and increased target API to Android 13.
 
 ## 0.8

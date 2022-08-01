@@ -5,42 +5,15 @@ import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/notes.dart';
-import 'package:every_door/providers/osm_api.dart';
-import 'package:every_door/providers/osm_auth.dart';
-import 'package:every_door/screens/settings/account.dart';
+import 'package:every_door/providers/uploader.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dropdown_alert/alert_controller.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BrowserNavigationBar extends ConsumerWidget {
   final Function(BuildContext) downloadAmenities;
 
   const BrowserNavigationBar({Key? key, required this.downloadAmenities})
       : super(key: key);
-
-  uploadChanges(BuildContext context, WidgetRef ref) async {
-    if (ref.read(authProvider) == null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => OsmAccountPage()));
-      return;
-    }
-
-    final loc = AppLocalizations.of(context)!;
-    try {
-      int dataCount = await ref.read(osmApiProvider).uploadChanges(true);
-      int noteCount = await ref.read(notesProvider).uploadNotes();
-      // TODO: separate note count in the message?
-      AlertController.show(
-          loc.changesUploadedTitle,
-          loc.changesUploadedMessage(loc.changesCount(dataCount + noteCount)),
-          TypeAlert.success);
-    } on Exception catch (e) {
-      AlertController.show(
-          loc.changesUploadFailedTitle, e.toString(), TypeAlert.error);
-    }
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -67,7 +40,7 @@ class BrowserNavigationBar extends ConsumerWidget {
         onPressed: apiStatus != ApiStatus.idle
             ? null
             : () async {
-                uploadChanges(context, ref);
+                ref.read(uploaderProvider).upload(context);
               },
         icon: Icon(Icons.upload),
         color: Colors.yellow,

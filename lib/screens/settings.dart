@@ -6,6 +6,7 @@ import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
@@ -27,12 +28,14 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final changes = ref.watch(changesProvider);
     final osmData = ref.watch(osmDataProvider);
     final login = ref.watch(authProvider);
     final editorSettings = ref.watch(editorSettingsProvider);
     final forceLocation = ref.watch(forceLocationProvider);
     final loc = AppLocalizations.of(context)!;
+
+    final haveChanges = ref.watch(changesProvider).length > 0;
+    final haveNotes = ref.watch(notesProvider).haveChanges;
 
     final purgeAll = osmData.obsoleteLength == 0;
     final dataLength = NumberFormat.compact(
@@ -68,9 +71,9 @@ class SettingsPage extends ConsumerWidget {
             tiles: [
               SettingsTile(
                 title: Text(loc.settingsUploads),
-                enabled: changes.length > 0,
+                enabled: haveChanges || haveNotes,
                 trailing:
-                    changes.length == 0 ? null : Icon(Icons.navigate_next),
+                    haveChanges || haveNotes ? Icon(Icons.navigate_next) : null,
                 onPressed: (context) {
                   Navigator.push(
                     context,

@@ -100,13 +100,12 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // TODO: style comments
                 for (final OsmNoteComment comment
                     in widget.note?.comments ?? const []) ...[
                   Text.rich(
                     TextSpan(children: [
                       TextSpan(
-                          text: comment.author ?? 'Anonymous', // TODO: localize
+                          text: comment.author ?? loc.notesAnonymous,
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: ': ${comment.message}'),
                     ]),
@@ -129,13 +128,16 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                   children: [
                     if (widget.note != null)
                       TextButton(
-                        child: Text(loc.editorDeleteButton.toUpperCase()),
+                        child: Text(
+                          loc.notesClose.toUpperCase(),
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.error),
+                        ),
                         onPressed: () async {
                           final answer = await showOkCancelAlertDialog(
                             context: context,
-                            title: loc
-                                .editorDeleteTitle('note'), // TODO: better msg
-                            okLabel: loc.editorDeleteButton,
+                            title: loc.notesCloseMessage,
+                            okLabel: loc.notesClose,
                             isDestructiveAction: true,
                           );
                           if (answer == OkCancelResult.ok) {

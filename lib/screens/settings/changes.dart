@@ -3,23 +3,72 @@ import 'dart:io';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/need_update.dart';
+import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_api.dart';
-import 'package:every_door/providers/osm_auth.dart';
+import 'package:every_door/providers/uploader.dart';
 import 'package:every_door/screens/editor.dart';
-import 'package:every_door/screens/settings/account.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dropdown_alert/alert_controller.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ChangeListPage extends ConsumerWidget {
+class ChangeListPage extends ConsumerStatefulWidget {
   const ChangeListPage({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _ChangeListPageState();
+}
+
+class ChangeItem {
+  final OsmChange? change;
+  final OsmNote? note;
+  final bool allMapNotes;
+  final IconData icon;
+  final String title;
+
+  const ChangeItem(
+      {this.change,
+      this.note,
+      this.allMapNotes = false,
+      required this.icon,
+      required this.title});
+
+  @override
+  bool operator ==(other) =>
+      other is ChangeItem &&
+      other.change == change &&
+      other.note == note &&
+      other.allMapNotes == allMapNotes;
+
+  @override
+  int get hashCode =>
+      (change?.hashCode ?? 0) + (note?.hashCode ?? 0) + allMapNotes.hashCode;
+
+  @override
+  String toString() {
+    if (change != null) return 'ChangeItem(change: $change)';
+    if (note != null) return 'ChangeItem(note: $note)';
+    if (allMapNotes) return 'ChangeItem(allMapNotes)';
+    return 'ChangeItem($title)';
+  }
+}
+
+class _ChangeListPageState extends ConsumerState {
+  List<ChangeItem> _changeList = [];
+
+  @override
+  initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      buildChangesList();
+    });
+  }
 
   String formatTime(String format) {
     final now = DateTime.now();
@@ -36,27 +85,6 @@ class ChangeListPage extends ConsumerWidget {
       result = result.replaceFirst(key, value);
     });
     return result;
-  }
-
-  uploadChanges(BuildContext context, WidgetRef ref) async {
-    final navigator = Navigator.of(context);
-    if (ref.read(authProvider) == null) {
-      navigator.push(MaterialPageRoute(builder: (context) => OsmAccountPage()));
-      return;
-    }
-
-    final loc = AppLocalizations.of(context)!;
-    try {
-      int count = await ref.read(osmApiProvider).uploadChanges(true);
-      AlertController.show(
-          loc.changesUploadedTitle,
-          loc.changesUploadedMessage(loc.changesCount(count)),
-          TypeAlert.success);
-      navigator.pop();
-    } on Exception catch (e) {
-      AlertController.show(
-          loc.changesUploadFailedTitle, e.toString(), TypeAlert.error);
-    }
   }
 
   downloadChanges(WidgetRef ref) async {
@@ -92,18 +120,45 @@ class ChangeListPage extends ConsumerWidget {
     }
   }
 
+  buildChangesList() async {
+    final loc = AppLocalizations.of(context)!;
+    final changes = ref.read(changesProvider);
+    final changesList = changes.all();
+    changesList.sort((a, b) => b.updated.compareTo(a.updated));
+
+    final items = changesList.map((c) =>
+        ChangeItem(change: c, icon: getTypeIcon(c.kind), title: c.typeAndName));
+
+    final notes = ref.read(notesProvider);
+    final noteList = await notes.fetchChanges();
+    final noteItems = <ChangeItem>[];
+    if (noteList.whereType<MapNote>().isNotEmpty ||
+        noteList.whereType<MapDrawing>().isNotEmpty) {
+      noteItems.add(ChangeItem(
+          allMapNotes: true, icon: Icons.draw, title: loc.changesMapNotes));
+    }
+    noteItems.addAll(noteList.whereType<OsmNote>().map((n) => ChangeItem(
+        note: n,
+        icon: n.deleting
+            ? Icons.speaker_notes_off_outlined
+            : Icons.speaker_notes_outlined,
+        title: loc.changesOsmNote +
+            (n.message != null ? ': ' + n.getNoteTitle()! : ''))));
+
+    setState(() {
+      _changeList = noteItems + items.toList();
+    });
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final changes = ref.watch(changesProvider);
-    final changeList = changes.all();
-    changeList.sort((a, b) => b.updated.compareTo(a.updated));
-    final hasManyTypes = changeList.map((e) => e.kind).toSet().length > 1;
-    // TODO: add OSM notes to the top
+    final hasManyTypes = _changeList.map((e) => e.icon).toSet().length > 1;
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(loc.changesCount(changes.length)),
+        title: Text(loc.changesCount(_changeList.length)),
         actions: [
           IconButton(
             onPressed: () {
@@ -135,7 +190,7 @@ class ChangeListPage extends ConsumerWidget {
             onPressed: ref.watch(apiStatusProvider) != ApiStatus.idle
                 ? null
                 : () {
-                    uploadChanges(context, ref);
+                    ref.read(uploaderProvider).upload(context);
                   },
             icon: Icon(Icons.upload),
           ),
@@ -146,24 +201,37 @@ class ChangeListPage extends ConsumerWidget {
           Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) {
-                final change = changeList[index];
+                final change = _changeList[index];
                 return Dismissible(
-                  key: Key(change.databaseId),
+                  key: Key(change.hashCode.toString()),
                   direction: DismissDirection.endToStart,
                   onDismissed: (direction) {
-                    changes.deleteChange(change);
-                    ref.read(needMapUpdateProvider).trigger();
+                    final chProvider = ref.read(changesProvider);
+                    final nProvider = ref.read(notesProvider);
+                    if (change.change != null) {
+                      chProvider.deleteChange(change.change!);
+                      ref.read(needMapUpdateProvider).trigger();
+                    } else if (change.note != null) {
+                      nProvider.deleteNote(change.note!);
+                    } else if (change.allMapNotes) {
+                      nProvider.clearChangedMapNotes();
+                    }
 
                     ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content:
-                          Text(loc.changesDeletedChange(change.typeAndName)),
-                      action: SnackBarAction(
-                        label: loc.changesDeletedUndo.toUpperCase(),
-                        onPressed: () {
-                          changes.saveChange(change);
-                        },
-                      ),
+                      content: Text(loc.changesDeletedChange(change.title)),
+                      action: change.change == null && change.note == null
+                          ? null
+                          : SnackBarAction(
+                              label: loc.changesDeletedUndo.toUpperCase(),
+                              onPressed: () {
+                                if (change.change != null) {
+                                  chProvider.saveChange(change.change!);
+                                } else if (change.note != null) {
+                                  nProvider.saveNote(change.note!);
+                                }
+                              },
+                            ),
                     ));
                   },
                   background: Container(
@@ -173,25 +241,27 @@ class ChangeListPage extends ConsumerWidget {
                     alignment: Alignment.centerRight,
                   ),
                   child: ListTile(
-                    title: Text(change.typeAndName),
-                    subtitle: Text(change.error ?? loc.changesPending),
-                    trailing:
-                        !hasManyTypes ? null : Icon(getTypeIcon(change.kind)),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => PoiEditorPage(amenity: change)),
-                      );
-                    },
+                    title: Text(change.title),
+                    subtitle: Text(change.change?.error ?? loc.changesPending),
+                    trailing: !hasManyTypes ? null : Icon(change.icon),
+                    onTap: change.change == null
+                        ? null
+                        : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      PoiEditorPage(amenity: change.change!)),
+                            );
+                          },
                   ),
                 );
               },
               separatorBuilder: (context, index) => Divider(),
-              itemCount: changeList.length,
+              itemCount: _changeList.length,
             ),
           ),
-          if (changeList.length <= 5)
+          if (_changeList.length <= 5)
             Padding(
               padding: const EdgeInsets.only(bottom: 5.0),
               child: Center(

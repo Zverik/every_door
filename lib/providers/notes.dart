@@ -25,7 +25,9 @@ class NotesProvider extends ChangeNotifier {
   static final _logger = Logger('NotesProvider');
 
   final Ref _ref;
-  bool haveChanges = false;
+  int length = 0;
+
+  bool get haveChanges => length > 0;
 
   NotesProvider(this._ref) {
     _checkHaveChangesAndNotify();
@@ -38,7 +40,7 @@ class NotesProvider extends ChangeNotifier {
       columns: ['count(*)'],
       where: 'is_changed = 1',
     ));
-    haveChanges = (count ?? 0) > 0;
+    length = count ?? 0;
     notifyListeners();
   }
 
@@ -185,8 +187,6 @@ class NotesProvider extends ChangeNotifier {
       int? noteId = note.id;
       if (noteId == null) continue;
       if (note.isNew && note.deleting) continue;
-      // TODO: decide what to do on error, because there will be
-      // an unclearable note, preventing map data from being downloaded.
       if (note.isNew) {
         // Create a note and update its id.
         final url = Uri.https(kOsmEndpoint, '/api/0.6/notes', {
@@ -202,7 +202,7 @@ class NotesProvider extends ChangeNotifier {
         }
         final newNote = _parseNoteXML(resp.body);
         if (newNote != null) await saveNote(newNote, notify: false);
-        _deleteNote(note);
+        deleteNote(note, notify: false);
       } else {
         for (final comment in note.comments) {
           if (comment.isNew) {
@@ -230,7 +230,7 @@ class NotesProvider extends ChangeNotifier {
               .severe('Error uploading note: ${resp.statusCode} ${resp.body}');
           continue;
         }
-        _deleteNote(note);
+        deleteNote(note, notify: false);
       }
     }
   }
@@ -247,13 +247,14 @@ class NotesProvider extends ChangeNotifier {
     if (notify) _checkHaveChangesAndNotify();
   }
 
-  Future<void> _deleteNote(BaseNote note) async {
+  Future<void> deleteNote(BaseNote note, {bool notify = true}) async {
     final database = await _ref.read(databaseProvider).database;
     await database.delete(
       BaseNote.kTableName,
       where: 'id = ?',
       whereArgs: [note.id],
     );
+    if (notify) _checkHaveChangesAndNotify();
   }
 
   Future<void> clearChangedMapNotes() async {
@@ -263,6 +264,7 @@ class NotesProvider extends ChangeNotifier {
       where: 'is_changed = 1 and (type = ? or type = ?)',
       whereArgs: [MapNote.dbType, MapDrawing.dbType],
     );
+    _checkHaveChangesAndNotify();
   }
 
   Future<int> getNewNoteId() async {

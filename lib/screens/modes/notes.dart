@@ -85,7 +85,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
         newLocation = location;
       });
     }
-    final result = await showModalBottomSheet(
+    await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) => NoteEditorPane(
@@ -94,9 +94,6 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
             location ?? note?.location ?? ref.read(effectiveLocationProvider),
       ),
     );
-    if (result != null) {
-      // TODO: save updated note
-    }
     setState(() {
       newLocation = null;
     });
