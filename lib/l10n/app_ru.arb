@@ -552,5 +552,25 @@
   "versionsFetchError": "Ошибка при скачивании истории",
   "@versionsFetchError": {
     "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "changesMapNotes": "Рисунки и надписи",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesOsmNote": "Заметка OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "notesAnonymous": "Аноним",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Закрыть",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Закрыть заметку?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
   }
 }
