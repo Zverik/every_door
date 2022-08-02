@@ -32,7 +32,7 @@ class TileCacherState {
 class TileCacher extends StateNotifier<TileCacherState> {
   static final _logger = Logger('TileCacher');
   static const kMinZoom = 15;
-  static const kMaxDownloadTiles = 2000;
+  static const kMaxDownloadTiles = 6000;
 
   final Ref _ref;
 

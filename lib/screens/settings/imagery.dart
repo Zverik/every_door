@@ -1,7 +1,7 @@
-import 'package:every_door/helpers/tile_cacher.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
+import 'package:every_door/providers/tile_cacher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
