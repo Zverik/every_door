@@ -35,8 +35,8 @@ and general UX improvements. Please help.
 
 ### Principles
 
-1. ED displays and edits only tagged nodes and polygons represented with their centerpoints.
-2. ED focuses on surveying: only things that you can see around you.
+1. ED displays and edits only tagged nodes and polygons represented with their centerpoints. No roads.
+2. ED focuses on surveying: adding and detailing things that you can see around you. Not map maintenance.
 3. Fewer buttons and menus: heuristic is preferable to a setting, and every button benefits the surveyor.
 
 ## How To Build
