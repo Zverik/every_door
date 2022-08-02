@@ -220,5 +220,245 @@
   "aboutLinks": "Спасылкі",
   "@aboutLinks": {
     "description": "Title for the links section on the About page."
-  }
+  },
+  "versionsFetchError": "Памылка атрымання гісторыі",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsEnableInternet": "Каб атрымаць гісторыю, падключыцеся да Інтэрнэту",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsTitle": "Гісторыя {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionNumber": "Версія #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsLocalChanges": "Лакальныя змены",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsRetryFetch": "Паўтарыць",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsNoTagChanges": "Няма змен у тэгах",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsPresentation": "Адлюстраванне",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "buildingLevels": "Паверхаў",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "entranceTypeEmergency": "запасны",
+  "@entranceTypeEmergency": {},
+  "changesOsmNote": "Нататкі OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "buildingRoofLevels": "Паверхаў у даху",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "entranceTypeGarage": "гараж",
+  "@entranceTypeGarage": {},
+  "notesClose": "Закрыць нататку",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "addressHouseNotEmpty": "Не павінен быць пустым",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "notesAnonymous": "Ананімны",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "versionsVersionMeta": "ад {user} у {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "notesCloseMessage": "Закрыць нататку?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "buildingMaterialPlaster": "тынкоўка",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterial": "Фасад",
+  "@buildingMaterial": {},
+  "buildingRoofShape": "Форма даху",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "loadingPresets": "Загрузка нарыхтовак…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "dataDownloadSuccessful": "Спампоўка паспяховая",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "tileNothingAround": "Ніякіх устаноў вакол вас у {distance} метрах.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "filterNonConfirmed": "Толькі не пацверджаныя",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "editorLoadingPreset": "Загрузка нарыхтоўкі…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMove": "Зрушыць",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorDuplicate": "Магчымы дублікат у {distance} метрах",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorMarkActive": "Пазначыць актыўным",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Пазначыць неактыўным",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "tagsKeyError": "Занадта рэдкі ключ",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsValueLong": "Занадта доўгае значэнне",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "editorRestore": "Аднавіць",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorMissing": "Не існуе",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorRestoreMessage": "Установа {amenity} неактыўна. Адзначыць як працуючую?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteTitle": "Выдаліць {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "Выдаліць",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsUrlCopied": "Спасылка скапіравана ў буфер абмену",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsNewPoint": "Новая кропка",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsAddTag": "Дадаць тэг",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Ключ",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Значэнне",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "settingsDataManagement": "Кіраванне данымі",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "buildingType": "Тып",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingTypeAddress": "адрас",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "прыватны дом",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "шматкватэрны дом",
+  "@buildingTypeApartments": {},
+  "entranceTypeStaircase": "пад'езд",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "прыватны дом",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "крама",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "службовы",
+  "@entranceTypeService": {},
+  "entranceType": "Тып",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeMain": "галоўны",
+  "@entranceTypeMain": {}
 }
