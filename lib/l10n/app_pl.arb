@@ -905,5 +905,25 @@
         "example": "July 21, 2022 12:30"
       }
     }
+  },
+  "changesMapNotes": "Notatki mapy i rysunki",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesOsmNote": "Notatka OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "notesAnonymous": "Anonimowy",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Zamknij",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Zamknąć notatkę?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
   }
 }
