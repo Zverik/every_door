@@ -101,7 +101,8 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 for (final OsmNoteComment comment
-                    in widget.note?.comments ?? const []) ...[
+                    in widget.note?.comments.where((c) => !c.isNew) ??
+                        const []) ...[
                   Text.rich(
                     TextSpan(children: [
                       TextSpan(

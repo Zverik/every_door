@@ -56,3 +56,4 @@ coverage/
 icon/store_logo.jpg
 lib/l10n/app_zh.arb
 lib/l10n/app_pt.arb
+*.apk
