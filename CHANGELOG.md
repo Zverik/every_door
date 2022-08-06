@@ -6,6 +6,7 @@ _Unreleased_
 
 * Tooltips for all icon buttons.
 * Fixed font size on amenity tiles to be more accessible.
+* Language chooser in settings.
 
 ## 0.9
 

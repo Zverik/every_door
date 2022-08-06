@@ -136,7 +136,10 @@ class SettingsPage extends ConsumerWidget {
               ),
               SettingsTile(
                 title: Text(loc.settingsLanguage),
-                trailing: Icon(Icons.navigate_next),
+                trailing: Row(children: const [
+                  Icon(Icons.translate),
+                  Icon(Icons.navigate_next),
+                ]),
                 onPressed: (context) {
                   Navigator.push(
                     context,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:every_door/helpers/log_store.dart';
+import 'package:every_door/providers/language.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
@@ -24,7 +25,7 @@ void main() {
       FlutterError.presentError(details);
       logStore.addFromFlutter(details);
     };
-    runApp(const EveryDoorApp());
+    runApp(ProviderScope(child: const EveryDoorApp()));
   }, (error, stack) {
     logStore.addFromZone(error, stack);
   });
@@ -37,13 +38,12 @@ installCertificate() async {
       .setTrustedCertificatesBytes(data.buffer.asUint8List());
 }
 
-class EveryDoorApp extends StatelessWidget {
+class EveryDoorApp extends ConsumerWidget {
   const EveryDoorApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ProviderScope(
-      child: MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp(
         title: kAppTitle,
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -52,12 +52,12 @@ class EveryDoorApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         // Adding "en" to the front so it's used by default.
         supportedLocales: [Locale('en')] + AppLocalizations.supportedLocales,
+        locale: ref.watch(languageProvider),
         home: LoadingPage(),
         builder: (context, child) => Stack(children: [
           if (child != null) child,
           DropdownAlert(delayDismiss: 5000),
         ]),
-      ),
     );
   }
 }
