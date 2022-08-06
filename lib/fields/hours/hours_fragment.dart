@@ -57,10 +57,12 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                  onPressed: () {
-                    widget.onDelete!();
-                  },
-                  icon: Icon(Icons.close)),
+                onPressed: () {
+                  widget.onDelete!();
+                },
+                icon: Icon(Icons.close),
+                tooltip: loc.fieldHoursRemoveFragment,
+              ),
             ],
           ),
         buildEditorForDaysRange(widget.fragment.weekdays, (newDays) {
@@ -101,6 +103,7 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
                     _callOnChange(breaks: breaks);
                   },
                   icon: Icon(Icons.close),
+                  tooltip: loc.fieldHoursRemoveBreak,
                   color: Colors.grey,
                 ),
               ],

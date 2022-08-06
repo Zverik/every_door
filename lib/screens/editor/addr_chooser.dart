@@ -57,6 +57,7 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
               });
             },
             icon: Icon(imagery == kOSMImagery ? Icons.map_outlined : Icons.map),
+            tooltip: loc.navImagery,
           ),
         ],
       ),

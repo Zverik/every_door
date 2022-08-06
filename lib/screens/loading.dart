@@ -105,7 +105,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(kAppTitle),
+        title: Text('$kAppTitle $kAppVersion'),
       ),
       body: Center(
         child: Column(

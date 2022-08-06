@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ZoomButtonsOptions extends LayerOptions {
   final Alignment alignment;
@@ -36,6 +37,7 @@ class ZoomButtonsLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Positioned(
       bottom: 0.0,
       right: _options.alignment.x >= 0 ? 0.0 : null,
@@ -44,42 +46,48 @@ class ZoomButtonsLayer extends StatelessWidget {
         padding: _options.padding,
         child: Column(
           children: [
-            OutlinedButton(
-              onPressed: () {
-                _map.move(_map.center, _map.zoom + 1,
-                    source: MapEventSource.custom);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.add,
-                  size: 30.0,
-                  color: Colors.black.withOpacity(0.5),
+            Tooltip(
+              message: loc.mapZoomIn,
+              child: OutlinedButton(
+                onPressed: () {
+                  _map.move(_map.center, _map.zoom + 1,
+                      source: MapEventSource.custom);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.add,
+                    size: 30.0,
+                    color: Colors.black.withOpacity(0.5),
+                  ),
                 ),
-              ),
-              style: OutlinedButton.styleFrom(
-                backgroundColor: Colors.white.withOpacity(0.5),
-                shape: CircleBorder(side: BorderSide()),
-                padding: EdgeInsets.zero,
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.white.withOpacity(0.5),
+                  shape: CircleBorder(side: BorderSide()),
+                  padding: EdgeInsets.zero,
+                ),
               ),
             ),
-            OutlinedButton(
-              onPressed: () {
-                _map.move(_map.center, _map.zoom - 1,
-                    source: MapEventSource.custom);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.remove,
-                  size: 30.0,
-                  color: Colors.black.withOpacity(0.5),
+            Tooltip(
+              message: loc.mapZoomOut,
+              child: OutlinedButton(
+                onPressed: () {
+                  _map.move(_map.center, _map.zoom - 1,
+                      source: MapEventSource.custom);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.remove,
+                    size: 30.0,
+                    color: Colors.black.withOpacity(0.5),
+                  ),
                 ),
-              ),
-              style: OutlinedButton.styleFrom(
-                backgroundColor: Colors.white.withOpacity(0.5),
-                shape: CircleBorder(side: BorderSide()),
-                padding: EdgeInsets.zero,
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.white.withOpacity(0.5),
+                  shape: CircleBorder(side: BorderSide()),
+                  padding: EdgeInsets.zero,
+                ),
               ),
             ),
           ],

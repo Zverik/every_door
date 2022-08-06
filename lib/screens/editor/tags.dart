@@ -82,6 +82,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
                   Share.share(_getUrl());
                 },
                 icon: Icon(Icons.share),
+                tooltip: loc.tagsShare,
               ),
               onLongPress: () {
                 Clipboard.setData(ClipboardData(text: _getUrl())).then((_) {
@@ -146,11 +147,17 @@ class _TagEditorPageState extends State<TagEditorPage> {
                       ),
                       IconButton(
                         icon: Icon(widget.amenity.newTags.containsKey(key) &&
+                            (widget.amenity.element?.tags
+                                .containsKey(key) ??
+                                false)
+                            ? Icons.undo
+                            : Icons.clear),
+                        tooltip: widget.amenity.newTags.containsKey(key) &&
                                 (widget.amenity.element?.tags
                                         .containsKey(key) ??
                                     false)
-                            ? Icons.undo
-                            : Icons.clear),
+                            ? loc.tagsRestore
+                            : loc.tagsDelete,
                         padding: EdgeInsets.zero,
                         visualDensity: VisualDensity.compact,
                         iconSize: 30.0,

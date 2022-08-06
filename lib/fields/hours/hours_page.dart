@@ -72,6 +72,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
               Navigator.pop(context, '-');
             },
             icon: Icon(Icons.delete),
+            tooltip: loc.fieldHoursClear,
           ),
         ],
       ),
@@ -82,6 +83,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
               : buildFragmentsEditor(context)),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.done),
+        tooltip: loc.fieldHoursSave,
         onPressed: () {
           final result = isRaw ? hours.hours : hours.buildHours();
           Navigator.pop(context, result);

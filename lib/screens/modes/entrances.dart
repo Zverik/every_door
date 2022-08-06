@@ -311,6 +311,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final apiStatus = ref.watch(apiStatusProvider);
     final LatLng? trackLocation = ref.watch(geolocationProvider);
+    final loc = AppLocalizations.of(context)!;
 
     // When tracking location, move map and notify the poi list.
     ref.listen<LatLng?>(geolocationProvider, (_, LatLng? location) {
@@ -465,6 +466,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   buttons: [
                     DragButton(
                         icon: Icons.house,
+                        tooltip: loc.entrancesAddBuilding,
                         bottom: 20.0,
                         left: leftHand ? null : 10.0 + safePadding.left,
                         right: !leftHand ? null : 10.0 + safePadding.right,
@@ -483,6 +485,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                         }),
                     DragButton(
                         icon: Icons.sensor_door,
+                        tooltip: loc.entrancesAddEntrance,
                         bottom: 20.0,
                         left: !leftHand ? null : 10.0 + safePadding.left,
                         right: leftHand ? null : 10.0 + safePadding.right,
@@ -520,6 +523,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     vertical: 10.0,
                   ),
                   icon: Icons.menu,
+                  tooltip: loc.mapSettings,
                   safeRight: true,
                   onPressed: () {
                     Navigator.push(
@@ -538,6 +542,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   enabled: !ref.watch(trackingProvider),
                   safeRight: true,
                   icon: Icons.my_location,
+                  tooltip: loc.mapLocate,
                   onPressed: () {
                     ref
                         .read(geolocationProvider.notifier)

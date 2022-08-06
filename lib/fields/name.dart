@@ -5,6 +5,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Language-aware field editor. E.g. name + name:en + ...
 class NamePresetField extends PresetField {
@@ -141,6 +142,7 @@ class _NameInputFieldState extends State<NameInputField> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     // TODO: only update when page is back from inactive?
     updateFromTags();
 
@@ -172,6 +174,7 @@ class _NameInputFieldState extends State<NameInputField> {
             IconButton(
               onPressed: openLanguageChooser,
               icon: Icon(Icons.language),
+              tooltip: loc.fieldNameLanguages,
             ),
           ],
         ),
@@ -213,6 +216,7 @@ class _NameInputFieldState extends State<NameInputField> {
                   widget.element[widget.field.key] == null)
                 IconButton(
                   icon: Icon(Icons.sync_alt),
+                  tooltip: loc.fieldNameCopy,
                   onPressed: widget.element[key] != null &&
                           widget.element[widget.field.key] != null
                       ? null

@@ -260,6 +260,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             if (!amenity.isNew)
               IconButton(
                 icon: Icon(Icons.history),
+                tooltip: loc.editorHistory,
                 onPressed: () async {
                   await Navigator.push(
                     context,
@@ -271,6 +272,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
               ),
             IconButton(
               icon: Icon(Icons.code),
+              tooltip: loc.editorTags,
               onPressed: () async {
                 await Navigator.push(
                     context,
@@ -358,6 +360,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                             color: Colors.green,
                             child: IconButton(
                               icon: Icon(Icons.check),
+                              tooltip: loc.editorMarkChecked,
                               color: Colors.white,
                               iconSize: 30.0,
                               onPressed: saveAndClose,

@@ -35,17 +35,19 @@ class ImageryPageState extends ConsumerState {
         title: Text(loc.settingsBackground),
         actions: [
           IconButton(
-              onPressed: tileCacherState.idle
-                  ? () {
-                      ref.read(tileCacheProvider.notifier).cacheForAll();
-                    }
-                  : null,
-              icon: tileCacherState.idle
-                  ? Icon(Icons.download)
-                  : CircularProgressIndicator(
-                      value: tileCacherState.progress,
-                      color: Colors.white,
-                    )),
+            onPressed: tileCacherState.idle
+                ? () {
+                    ref.read(tileCacheProvider.notifier).cacheForAll();
+                  }
+                : null,
+            icon: tileCacherState.idle
+                ? Icon(Icons.download)
+                : CircularProgressIndicator(
+                    value: tileCacherState.progress,
+                    color: Colors.white,
+                  ),
+            tooltip: loc.settingsCacheTiles,
+          ),
         ],
       ),
       body: FutureBuilder(

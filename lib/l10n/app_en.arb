@@ -70,6 +70,34 @@
   "@legendOther": {
     "description": "Legend item for all other types."
   },
+  "navUpload": "Upload",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navDownload": "Download",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navImagery": "Switch imagery",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navPoiMode": "Amenity mode",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Micromapping mode",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "Entrances mode",
+  "@navEntranceMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "navNotesMode": "Notes mode",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
   "filterNoAddresses": "No addresses nearby",
   "@filterNoAddresses": {
     "description": "An error message for no addresses nearby, used on filter pane and in address editor."
@@ -90,6 +118,26 @@
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
+  "mapSettings": "Settings",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "Filter",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "Back to me",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Zoom in",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Zoom out",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
   "chooseLocation": "Choose location",
   "@chooseLocation": {
     "description": "Title for the screen for choosing a location on a map."
@@ -105,6 +153,18 @@
   "editorSave": "Save",
   "@editorSave": {
     "description": "Save button title in the editor"
+  },
+  "editorMarkChecked": "Mark checked",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "History",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Raw tags",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
   },
   "editorCloseTitle": "Close the editor?",
   "@editorCloseTitle": {
@@ -180,6 +240,10 @@
   "@editorDeleteButton": {
     "description": "Delete"
   },
+  "tagsShare": "Share",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
   "tagsUrlCopied": "URL copied to clipboard",
   "@tagsUrlCopied": {
     "description": "Popup message when the link to the object was copied to the clipboard."
@@ -187,6 +251,14 @@
   "tagsNewPoint": "New Point",
   "@tagsNewPoint": {
     "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsRestore": "Restore",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "Clear",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
   },
   "tagsAddTag": "Add a tag",
   "@tagsAddTag": {
@@ -325,9 +397,17 @@
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
+  "settingsCacheTiles": "Download tiles",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
   "settingsLeftHand": "Left hand controls",
   "@settingsLeftHand": {
     "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
   },
   "settingsEditor": "Editor",
   "@settingsEditor": {
@@ -344,6 +424,14 @@
   "settingsDefaultPayment": "Default Payment Cards",
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsSystem": "System",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "Use Google-enhanced Positioning",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
   },
   "settingsAbout": "About",
   "@settingsAbout": {
@@ -519,6 +607,10 @@
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
+  "changesPurge": "Purge changes",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
   "changesPurgeTitle": "Purge Changes?",
   "@changesPurgeTitle": {
     "description": "Dialog title for confirming deletion of all changes."
@@ -587,13 +679,33 @@
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
   },
+  "fieldHoursChooseTime": "Hour and minute",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Clear",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Save",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
   "fieldHoursAddFragment": "Add a fragment",
   "@fieldHoursAddFragment": {
     "description": "Button in opening hours editor to add a fragment for days."
   },
+  "fieldHoursRemoveFragment": "Remove fragment",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
   "fieldHoursAddBreak": "Add a break",
   "@fieldHoursAddBreak": {
     "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursRemoveBreak": "Remove break",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
   },
   "fieldHoursWeekdays": "Mo Tu We Th Fr Sa Su",
   "@fieldHoursWeekdays": {
@@ -602,6 +714,26 @@
   "fieldHoursClosedPH": "Closed on public holidays",
   "@fieldHoursClosedPH": {
     "description": "Switch label for PH off."
+  },
+  "fieldHoursSDRemove": "Remove",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "Add date",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Add range",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Another language",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Copy value",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
   },
   "fieldComboEmpty": "empty",
   "@fieldComboEmpty": {
@@ -710,6 +842,14 @@
   "buttonNo": "No",
   "@buttonNo": {
     "description": "Button for dismissal."
+  },
+  "entrancesAddEntrance": "Add entrance",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "Add building",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
   },
   "buildingX": "Building {n}",
   "@buildingX": {
@@ -863,6 +1003,10 @@
   "addressPlace": "Place",
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesAddNote": "Add note",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
   },
   "notesAnonymous": "Anonymous",
   "@notesAnonymous": {

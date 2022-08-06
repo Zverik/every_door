@@ -165,6 +165,7 @@ class _ChangeListPageState extends ConsumerState {
               downloadChanges(ref);
             },
             icon: Icon(Icons.share),
+            tooltip: loc.tagsShare,
           ),
           changes.length == 0 || changes.haveNoErrorChanges()
               ? Container()
@@ -185,6 +186,7 @@ class _ChangeListPageState extends ConsumerState {
                     }
                   },
                   icon: Icon(Icons.delete_forever),
+                  tooltip: loc.changesPurge,
                 ),
           IconButton(
             onPressed: ref.watch(apiStatusProvider) != ApiStatus.idle
@@ -193,6 +195,7 @@ class _ChangeListPageState extends ConsumerState {
                     ref.read(uploaderProvider).upload(context);
                   },
             icon: Icon(Icons.upload),
+            tooltip: loc.navUpload,
           ),
         ],
       ),

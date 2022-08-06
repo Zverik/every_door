@@ -14,6 +14,7 @@ import 'package:every_door/screens/settings/about.dart';
 import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/imagery.dart';
+import 'package:every_door/screens/settings/language.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
@@ -133,6 +134,16 @@ class SettingsPage extends ConsumerWidget {
                 },
                 initialValue: editorSettings.leftHand,
               ),
+              SettingsTile(
+                title: Text(loc.settingsLanguage),
+                trailing: Icon(Icons.navigate_next),
+                onPressed: (context) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LanguagePage()),
+                  );
+                },
+              ),
             ],
           ),
           SettingsSection(
@@ -190,10 +201,10 @@ class SettingsPage extends ConsumerWidget {
           ),
           if (defaultTargetPlatform == TargetPlatform.android)
             SettingsSection(
-              title: Text('System'),
+              title: Text(loc.settingsSystem),
               tiles: [
                 SettingsTile.switchTile(
-                  title: Text('Use Google-enhanced Positioning'),
+                  title: Text(loc.settingsGoogle),
                   initialValue: !forceLocation,
                   onToggle: (bool value) {
                     ref

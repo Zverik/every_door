@@ -15,6 +15,7 @@ class DragButton {
   final Function()? onDragStart;
   final Function(LatLng)? onDragEnd;
   final Function()? onTap;
+  final String? tooltip;
   final double? top;
   final double? bottom;
   final double? left;
@@ -26,6 +27,7 @@ class DragButton {
     this.onDragStart,
     this.onDragEnd,
     this.onTap,
+    this.tooltip,
     this.top,
     this.bottom,
     this.left,
@@ -73,6 +75,22 @@ class DragButtonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const arrowSize = 60.0;
+    final button = ElevatedButton(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 0.0,
+          vertical: 15.0,
+        ),
+        child: Icon(options.icon, size: 30.0),
+      ),
+      style: ElevatedButton.styleFrom(
+        shape: CircleBorder(),
+      ),
+      onPressed: () {
+        if (options.onTap != null) options.onTap!();
+      },
+    );
+
     return Positioned(
       left: options.left,
       right: options.right,
@@ -111,21 +129,12 @@ class DragButtonsWidget extends StatelessWidget {
           size: Size(arrowSize, 100.0),
         ),
         childWhenDragging: Container(),
-        child: ElevatedButton(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 0.0,
-              vertical: 15.0,
-            ),
-            child: Icon(options.icon, size: 30.0),
-          ),
-          style: ElevatedButton.styleFrom(
-            shape: CircleBorder(),
-          ),
-          onPressed: () {
-            if (options.onTap != null) options.onTap!();
-          },
-        ),
+        child: options.tooltip == null
+            ? button
+            : Tooltip(
+                message: options.tooltip,
+                child: button,
+              ),
       ),
     );
   }

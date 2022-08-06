@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotesPane extends ConsumerStatefulWidget {
   final Widget? areaStatusPanel;
@@ -103,6 +104,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   Widget build(BuildContext context) {
     final LatLng? trackLocation = ref.watch(geolocationProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
+    final loc = AppLocalizations.of(context)!;
     EdgeInsets safePadding = MediaQuery.of(context).padding;
 
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
@@ -211,6 +213,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     buttons: [
                       DragButton(
                         icon: Icons.add,
+                        tooltip: loc.notesAddNote,
                         bottom: 20.0,
                         left: !leftHand ? null : 10.0 + safePadding.left,
                         right: leftHand ? null : 10.0 + safePadding.right,

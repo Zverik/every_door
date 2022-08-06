@@ -132,8 +132,8 @@ class PoiTile extends ConsumerWidget {
                       builder: (_) => PoiEditorPage(amenity: amenity)),
                 );
               },
-              child: RichText(
-                text: TextSpan(
+              child: Text.rich(
+                TextSpan(
                   children: [
                     TextSpan(
                         text: title,
@@ -153,10 +153,8 @@ class PoiTile extends ConsumerWidget {
                       ),
                     ],
                   ],
-                  style: DefaultTextStyle.of(context).style.copyWith(
-                        fontSize: 16.0,
-                      ),
                 ),
+                style: TextStyle(fontSize: 16.0),
               ),
             ),
           ),

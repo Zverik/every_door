@@ -370,6 +370,7 @@ class GridChooser<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final rows = transpose ? columns : (options.length / columns).ceil();
     final double baseSize = !big ? 14.0 : 18.0;
     return SingleChildScrollView(
@@ -387,6 +388,7 @@ class GridChooser<T> extends StatelessWidget {
               if (onMoreTime != null)
                 IconButton(
                   icon: Icon(Icons.more_time),
+                  tooltip: loc.fieldHoursChooseTime,
                   onPressed: onMoreTime,
                 ),
             ],

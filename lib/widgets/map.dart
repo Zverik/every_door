@@ -18,6 +18,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AmenityMapController {
   Function(LatLng, bool, bool)? moveListener;
@@ -278,6 +279,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final iconSize = widget.drawNumbers ? 18.0 : 14.0;
     final legendCon = ref.watch(legendProvider.notifier);
+    final loc = AppLocalizations.of(context)!;
     final amenities = List.of(widget.amenities);
 
     return FlutterMap(
@@ -308,6 +310,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             vertical: 10.0,
           ),
           icon: Icons.menu,
+          tooltip: loc.mapSettings,
           onPressed: () {
             Navigator.push(
               context,
@@ -326,6 +329,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             icon: ref.watch(poiFilterProvider).isNotEmpty
                 ? Icons.filter_alt
                 : Icons.filter_alt_outlined,
+            tooltip: loc.mapFilter,
             onPressed: widget.onFilterTap!,
           ),
         // Tracking button
@@ -338,6 +342,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
           ),
           enabled: !ref.watch(trackingProvider),
           icon: Icons.my_location,
+          tooltip: loc.mapLocate,
           onPressed: () {
             ref.read(geolocationProvider.notifier).enableTracking(context);
           },

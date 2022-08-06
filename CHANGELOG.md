@@ -1,5 +1,12 @@
 # Every Door App Change Log
 
+## 0.10
+
+_Unreleased_
+
+* Tooltips for all icon buttons.
+* Fixed font size on amenity tiles to be more accessible.
+
 ## 0.9
 
 _Released on 2022-08-02_

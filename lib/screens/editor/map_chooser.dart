@@ -112,6 +112,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
               });
             },
             icon: Icon(imagery == kOSMImagery ? Icons.map_outlined : Icons.map),
+            tooltip: loc.navImagery,
           ),
         ],
       ),

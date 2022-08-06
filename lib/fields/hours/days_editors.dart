@@ -141,6 +141,7 @@ class SpecificDaysPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final parts = days.getIntervals();
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
@@ -163,6 +164,7 @@ class SpecificDaysPanel extends StatelessWidget {
                   ),
                   IconButton(
                     icon: Icon(Icons.close),
+                    tooltip: loc.fieldHoursSDRemove,
                     padding: EdgeInsets.zero,
                     onPressed: () {
                       onChange(days.withoutInterval(part));
@@ -173,6 +175,7 @@ class SpecificDaysPanel extends StatelessWidget {
             ),
           IconButton(
             icon: Icon(Icons.add_circle_outline),
+            tooltip: loc.fieldHoursSDAddOne,
             onPressed: () async {
               final date = await SpecificDaysPanel.pickDate(context);
               if (date != null) onChange(days.withInterval([date, date]));
@@ -180,6 +183,7 @@ class SpecificDaysPanel extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.control_point_duplicate),
+            tooltip: loc.fieldHoursSDAddRange,
             onPressed: () async {
               final date1 = await SpecificDaysPanel.pickDate(context);
               if (date1 == null) return;
