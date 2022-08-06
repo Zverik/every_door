@@ -460,5 +460,61 @@
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "entranceTypeMain": "галоўны",
-  "@entranceTypeMain": {}
+  "@entranceTypeMain": {},
+  "settingsPurgeAllData": "Ачысціць усе загружаныя даныя",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataTitle": "Выдаліць даныя?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "Вам прыйдзецца спампоўваць усё зноў. Працягнуць?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedAllTitle": "Выдаліць даныя",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsLeftHand": "Кіраванне левай рукой",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsPreferContact": "Аддайце перавагу прэфіксу \"contact:\"",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "editorRestoreTitle": "Адкрылася?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "settingsDefaultPayment": "Плацежныя карты па змаўчанні",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "accountOAuthError": "Памылка OAuth",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "settingsPurgedObsoleteTitle": "Састарэлыя даныя",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgeData": "Ачысціць састарэлыя кэшаваныя даныя",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsBackground": "Спадарожнікавыя здымкі",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsEditor": "Рэдактар",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "accountAuthErrorTitle": "Памылка аўтарызацыі",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  }
 }
