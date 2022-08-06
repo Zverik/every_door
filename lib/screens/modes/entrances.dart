@@ -17,6 +17,7 @@ import 'package:every_door/screens/editor/building.dart';
 import 'package:every_door/screens/editor/entrance.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/settings.dart';
+import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/multi_hit.dart';
 import 'package:every_door/widgets/track_button.dart';
@@ -576,26 +577,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 TileLayerWidget(
                   options: buildTileLayerOptions(imagery),
                 ),
-                if (trackLocation != null)
-                  CircleLayerWidget(
-                    options: CircleLayerOptions(
-                      circles: [
-                        CircleMarker(
-                          point: trackLocation,
-                          color: Colors.blue.withOpacity(0.4),
-                          radius: 10.0,
-                        ),
-                        if (ref.watch(trackingProvider))
-                          CircleMarker(
-                            point: trackLocation,
-                            borderColor: Colors.black.withOpacity(0.8),
-                            borderStrokeWidth: 1.0,
-                            color: Colors.transparent,
-                            radius: 10.0,
-                          ),
-                      ],
-                    ),
-                  ),
+                LocationMarkerWidget(),
                 if (newLocation != null)
                   CircleLayerWidget(
                     options: CircleLayerOptions(circles: [

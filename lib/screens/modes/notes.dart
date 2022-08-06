@@ -11,6 +11,7 @@ import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/editor/note.dart';
+import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/painter.dart';
 import 'package:flutter/material.dart';
@@ -141,18 +142,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     options: buildTileLayerOptions(
                         ref.watch(selectedImageryProvider)),
                   ),
-                  if (trackLocation != null)
-                    CircleLayerWidget(
-                      options: CircleLayerOptions(
-                        circles: [
-                          CircleMarker(
-                            point: trackLocation,
-                            color: Colors.blue.withOpacity(0.4),
-                            radius: 10.0,
-                          ),
-                        ],
-                      ),
-                    ),
+                  LocationMarkerWidget(tracking: false),
                   PolylineLayerWidget(
                       options: PolylineLayerOptions(
                     polylines: [

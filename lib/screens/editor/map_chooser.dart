@@ -10,6 +10,7 @@ import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/editor/types.dart';
+import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -144,15 +145,11 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           TileLayerWidget(
             options: buildTileLayerOptions(imagery),
           ),
+          LocationMarkerWidget(tracking: false),
           if (trackLocation != null)
             CircleLayerWidget(
               options: CircleLayerOptions(
                 circles: [
-                  CircleMarker(
-                    point: trackLocation,
-                    color: Colors.blue.withOpacity(0.4),
-                    radius: 10.0,
-                  ),
                   CircleMarker(
                     point: center,
                     radius: 2.0,

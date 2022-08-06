@@ -11,6 +11,7 @@ import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/legend.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/settings.dart';
+import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/track_button.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
@@ -376,23 +377,11 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         TileLayerWidget(
           options: buildTileLayerOptions(imagery),
         ),
+        LocationMarkerWidget(),
         if (trackLocation != null)
           CircleLayerWidget(
             options: CircleLayerOptions(
               circles: [
-                CircleMarker(
-                  point: trackLocation,
-                  color: Colors.blue.withOpacity(0.4),
-                  radius: 10.0,
-                ),
-                if (ref.watch(trackingProvider))
-                  CircleMarker(
-                    point: trackLocation,
-                    borderColor: Colors.black.withOpacity(0.8),
-                    borderStrokeWidth: 1.0,
-                    color: Colors.transparent,
-                    radius: 10.0,
-                  ),
                 for (final objLocation in widget.otherObjects)
                   CircleMarker(
                     point: objLocation,

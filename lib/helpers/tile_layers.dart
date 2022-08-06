@@ -10,7 +10,7 @@ class TileCacheManager {
   static CacheManager instance = CacheManager(Config(
     key,
     maxNrOfCacheObjects: 10000,
-    stalePeriod: Duration(days: 60),
+    stalePeriod: Duration(days: 120),
   ));
 }
 
