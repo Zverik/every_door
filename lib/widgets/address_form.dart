@@ -1,5 +1,4 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/road_names.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -104,7 +103,6 @@ class _AddressFormState extends ConsumerState<AddressForm> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    final editorSettings = ref.watch(editorSettingsProvider);
 
     return Table(
       columnWidths: {

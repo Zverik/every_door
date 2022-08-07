@@ -1,8 +1,10 @@
+import 'package:every_door/providers/compass.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
+import 'dart:math' show pi;
 
 class LocationMarkerOptions extends LayerOptions {
   final bool tracking;
@@ -53,25 +55,24 @@ class _LocationMarkerLayer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final LatLng? trackLocation = ref.watch(geolocationProvider);
+    final CompassData? compass = null; // ref.watch(compassProvider);
     final bool tracking = _options.tracking && ref.watch(trackingProvider);
 
     return LayoutBuilder(
       builder: (context, constraints) => StreamBuilder<void>(
-        stream: _stream,
-        builder: (context, _) {
-          if (trackLocation == null) return Container();
+          stream: _stream,
+          builder: (context, _) {
+            if (trackLocation == null) return Container();
 
-          final circle = CustomPaint(
-            painter: _LocationMarkerPainter(
-              border: tracking,
-              offset: _mapState.getOffsetFromOrigin(trackLocation),
-            ),
-            size: Size(constraints.maxWidth, constraints.maxHeight),
-          );
-
-          return circle;
-        },
-      ),
+            return CustomPaint(
+              painter: _LocationMarkerPainter(
+                border: tracking,
+                offset: _mapState.getOffsetFromOrigin(trackLocation),
+                heading: compass?.heading,
+              ),
+              size: Size(constraints.maxWidth, constraints.maxHeight),
+            );
+          }),
     );
   }
 }
@@ -84,8 +85,11 @@ class _LocationMarkerPainter extends CustomPainter {
   static final kMarkerColor = Colors.blue.withOpacity(0.4);
   static final kBorderColor = Colors.black.withOpacity(0.8);
   static const kCircleRadius = 10.0;
+  static const kHeadingRadius = 20.0;
+  static const kHeadingAngleWidth = 30.0 * pi / 180.0; // 30°
 
-  _LocationMarkerPainter({required this.border, required this.offset, this.heading});
+  _LocationMarkerPainter(
+      {required this.border, required this.offset, this.heading});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -98,8 +102,20 @@ class _LocationMarkerPainter extends CustomPainter {
     canvas.drawCircle(offset, kCircleRadius, paint);
 
     if (heading != null) {
-      // TODO: draw heading
-
+      final headingRect =
+          Rect.fromCircle(center: offset, radius: kHeadingRadius);
+      final headingPaint = Paint()
+        ..shader = RadialGradient(colors: [
+          kMarkerColor.withOpacity(1.0),
+          kMarkerColor.withOpacity(0.0)
+        ]).createShader(headingRect);
+      canvas.drawArc(
+        headingRect,
+        heading! - kHeadingAngleWidth / 2,
+        kHeadingAngleWidth,
+        true,
+        headingPaint,
+      );
     }
 
     if (border) {

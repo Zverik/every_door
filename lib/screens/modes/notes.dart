@@ -103,7 +103,6 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
 
   @override
   Widget build(BuildContext context) {
-    final LatLng? trackLocation = ref.watch(geolocationProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
     EdgeInsets safePadding = MediaQuery.of(context).padding;
