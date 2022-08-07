@@ -677,5 +677,309 @@
         "example": "71"
       }
     }
+  },
+  "versionsTitle": "Historik för {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsEnableInternet": "Anslut till internet för att hämta historik",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "Fel vid hämtning av historik",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "Försök igen",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "loadingTooMuchDataTitle": "För mycket data",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Rensa nedladdad data från Inställningar för att göra editorn snabbare.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Nedladdning misslyckades",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Laddade ned {count} element.}, =few{Laddade ned {count} element.}, =other{Laddande {count} element.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsAbout": "Om",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutViewLog": "Systemlogg",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "Versionshistorik",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "Installerad version",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Projektets webbplats",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "buildingPostCode": "Postnummer",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqEntrance": "Hur lägger man till en entré?",
+  "@faqEntrance": {},
+  "faqMapTiny": "Varför är kartan så liten?",
+  "@faqMapTiny": {},
+  "faqFloors": "Är våning '3' och '/3' samma våning?",
+  "@faqFloors": {},
+  "buildingMaterial": "Fasad",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "tegel",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialWood": "trä",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "betong",
+  "@buildingMaterialConcrete": {},
+  "navImagery": "Byt bakgrundsbild",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "mapSettings": "Inställningar",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapLocate": "Tillbaka till mig",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Zooma in",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "editorHistory": "Historik",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "tagsShare": "Dela",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsRestore": "Återställ",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "Rensa",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "settingsLanguage": "Språk",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsSystem": "System",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "aboutOnGitHub": "på GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "navEntrancesMode": "Entréläge",
+  "@navEntrancesMode": {},
+  "navNotesMode": "Anteckningsläge",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "versionsLocalChanges": "Lokala förändringar",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Version #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "av {user} den {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsGoogle": "Använd Google-förstärkt positionering",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "settingsCacheTiles": "Ladda ned kartbitar",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "aboutHelpTranslate": "Hjälp till att översätta",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "på Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutReportIssue": "Rapportera ett problem",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "changesPurge": "Rensa ändringar",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursHour": "Timme",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minut",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursRemoveFragment": "Tag bort fragment",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursSDRemove": "Ta bort",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursRemoveBreak": "Ta bort uppehåll",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldNameLanguages": "Annat språk",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldHoursSDAddOne": "Lägg till datum",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldNameCopy": "Kopiera värde",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "changesOsmNote": "OSM-anteckning",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "buildingMaterialCementBlock": "cementblock",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "sten",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "metall",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "glas",
+  "@buildingMaterialGlass": {},
+  "notesAddNote": "Lägg till anteckning",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "Anonym",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "fieldHoursChooseTime": "Timme och minut",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "navDownload": "Ladda ned",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "mapFilter": "Filtrera",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "dataDownloadSuccessful": "Nedladdning lyckades",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "navUpload": "Ladda upp",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "mapZoomOut": "Zooma ut",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "aboutSourceCode": "Källkod",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutLicense": "Licens",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutLinks": "Länkar",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "aboutHelpImprove": "Hjälp till att förbättra {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutFAQ": "FAQ",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "entrancesAddEntrance": "Lägg till entré",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "fieldHoursClear": "Rensa",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Spara",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "entrancesAddBuilding": "Lägg till byggnad",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
   }
 }
