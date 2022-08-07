@@ -516,5 +516,147 @@
   "accountAuthErrorTitle": "Памылка аўтарызацыі",
   "@accountAuthErrorTitle": {
     "descripton": "Title for the alert dialog about an incorrect password."
-  }
+  },
+  "navMicromappingMode": "Рэжым мікракартавання",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navImagery": "Падкладка",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navDownload": "Спампаваць",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navUpload": "Запампаваць",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "tagsDelete": "Ачысціць",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "tagsShare": "Абагуліць",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "editorTags": "Тэгі",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "settingsLanguage": "Мова",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsCacheTiles": "Спампаваць тайлы",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsGoogle": "Выкарыстоўваць пазіцыянаванне Google",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "settingsSystem": "Сістэма",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "changesPurge": "Ачысціць змены",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldNameLanguages": "Іншая мова",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldHoursSDRemove": "Выдаліць",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "notesAddNote": "Дадаць нататку",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "fieldHoursSDAddRange": "Дадаць дыяпазон",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "navPoiMode": "Рэжым устаноў",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "entrancesAddBuilding": "Дадаць будынак",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "fieldHoursSave": "Захаваць",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "entrancesAddEntrance": "Дадаць уваход",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "fieldNameCopy": "Скапіяваць значэнне",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldHoursSDAddOne": "Дадаць дату",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursRemoveFragment": "Выдаліць фрагмент",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursRemoveBreak": "Выдаліць перапынак",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursClear": "Ачысціць",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursChooseTime": "Гадзіна і хвіліна",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "tagsRestore": "Аднавіць",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "navNotesMode": "Рэжым нататак",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapLocate": "Вярнуцца да мяне",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Наблізіць",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapSettings": "Налады",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "editorHistory": "Гісторыя",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorMarkChecked": "Адзначыць правераным",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "mapZoomOut": "Аддаліць",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "mapFilter": "Фільтр",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "navEntrancesMode": "Рэжым уваходаў",
+  "@navEntrancesMode": {}
 }
