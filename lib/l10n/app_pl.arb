@@ -925,5 +925,147 @@
   "notesCloseMessage": "Zamknąć notatkę?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
+  },
+  "navImagery": "Przełącz podkład",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navPoiMode": "Tryb udogodnień",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navEntrancesMode": "Tryb wejść",
+  "@navEntrancesMode": {},
+  "navNotesMode": "Tryb notatek",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapSettings": "Ustawienia",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapLocate": "Wróć do mnie",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Przybliż",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Oddal",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "editorMarkChecked": "Oznacz jako sprawdzone",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Historia",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Surowe znaczniki",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "tagsShare": "Udostępnij",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsDelete": "Wyczyść",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "settingsCacheTiles": "Pobierz kafelki",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLanguage": "Język",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsGoogle": "Użyj pozycjonowania wspomaganego przez Google",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "entrancesAddEntrance": "Dodaj wejście",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "navUpload": "Prześlij",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navMicromappingMode": "Tryb mikromapowania",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navDownload": "Pobierz",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "tagsRestore": "Przywróć",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "mapFilter": "Filtry",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "settingsSystem": "System",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "fieldHoursSDAddOne": "Dodaj datę",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "changesPurge": "Wyczyść zmiany",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursChooseTime": "Godziny i minuty",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Wyczyść",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Zapisz",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursRemoveFragment": "Usuń fragment",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursRemoveBreak": "Usuń przerwę",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursSDRemove": "Usuń",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldNameLanguages": "Inny język",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldHoursSDAddRange": "Dodaj zakres",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameCopy": "Kopiuj wartość",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "entrancesAddBuilding": "Dodaj budynek",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "notesAddNote": "Dodaj uwagę",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
   }
 }
