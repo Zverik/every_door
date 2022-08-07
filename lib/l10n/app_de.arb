@@ -613,5 +613,143 @@
   "notesClose": "Schließen",
   "@notesClose": {
     "description": "Button title for closing a note."
+  },
+  "navUpload": "Hochladen",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navImagery": "Hintergrund wechseln",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navPoiMode": "Amenity-Modus",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Micromapping-Modus",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "Eingänge-Modus",
+  "@navEntrancesMode": {},
+  "navNotesMode": "Notizen-Modus",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapZoomOut": "Rauszoomen",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "mapZoomIn": "Reinzoomen",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "editorMarkChecked": "Markiert als geprüft",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Verlauf",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "tagsShare": "Teilen",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsRestore": "Wiederherstellen",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "Löschen",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "settingsCacheTiles": "Kacheln herunterladen",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLanguage": "Sprache",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "changesPurge": "Änderungen bereinigen",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursChooseTime": "Stunde und Minute",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursRemoveBreak": "Unterbrechung entfernen",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursSDAddRange": "Zeiten hinzufügen",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Andere Sprache",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Wert kopieren",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "notesAddNote": "Notiz hinzufügen",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "mapSettings": "Einstellungen",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "settingsGoogle": "Erweiterte Positionierung von Google verwenden",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "navDownload": "Herunterladen",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "fieldHoursSave": "Speichern",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursRemoveFragment": "Fragment entfernen",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursSDAddOne": "Datum hinzufügen",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "entrancesAddBuilding": "Gebäude hinzufügen",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "mapFilter": "Filter",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "fieldHoursClear": "Löschen",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSDRemove": "Entfernen",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "entrancesAddEntrance": "Eingang hinzufügen",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "mapLocate": "Zurück zu mir",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "settingsSystem": "System",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
   }
 }
