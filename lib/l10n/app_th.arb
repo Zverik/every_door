@@ -1,1 +1,1067 @@
-{}
+{
+  "loadingLocation": "กำลังระบุตำแหน่ง…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingChangesFailed": "การโหลดการเปลี่ยนแปลงล้มเหลว",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "dataDownloadFailed": "ดาวน์โหลดล้มเหลว",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "ดาวน์โหลดสำเร็จ",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "tileNo": "ไม่",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "tileNothingAround": "ไม่พบสถานที่รอบตัวคุณในระยะ {distance} เมตร",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "tileDragTheMap": "กรุณาเข้าใกล้วัตถุใดก็ได้ ลากแผนที่ หรือเพิ่มสถานที่ที่ขาดหายไป",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "dataDownloadedCount": "{count,plural, =1{ดาวน์โหลดแล้ว {count} element.}, =few{ดาวน์โหลดแล้ว {count} elements.}, =other{ดาวน์โหลดแล้ว {count} elements.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorSave": "บันทึก",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorMarkActive": "ทำเครื่องหมายว่ายังใช้งานอยู่",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorDeleteButton": "ลบ",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsNewPoint": "Point ใหม่",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "versionsLocalChanges": "การเปลี่ยนแปลงในเครื่อง",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsRetryFetch": "ลองใหม่",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsNoTagChanges": "ไม่มีการเปลี่ยนแปลงแท็ก",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsTitle": "การตั้งค่า",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsLoginDetails": "บัญชี OSM",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeData": "ล้างข้อมูลแคชเก่า",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "ล้างข้อมูลที่ดาวน์โหลดทั้งหมด",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataTitle": "ลบข้อมูล?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsUploads": "การอัปโหลดที่อยู่ในแถวคอย",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsLeftHand": "การควบคุมด้วยมือซ้าย",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsEditor": "Editor",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "aboutSourceCode": "ซอร์สโค้ด",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutHelpImprove": "ช่วยพัฒนา {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "รายงานปัญหา",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "accountAuthErrorTitle": "ยืนยันตัวตนผิดพลาด",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "changesOsmNote": "โน้ต OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "fieldHoursTitle": "เวลาทำการ",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursPublicHolidays": "วันหยุดสาธารณะ",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursOpens": "เปิด",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "ปิด",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursBreak": "พักเบรก",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "ต่อไป",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursHour": "ชั่วโมง",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "นาที",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldCardsNo": "ไม่รับ",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "messageNoData": "ไม่มีข้อมูล แตะที่นี่เพื่อดาวน์โหลด",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "faqEntrance": "จะเพิ่มทางเข้าอาคารได้อย่างไร?",
+  "@faqEntrance": {},
+  "faqEntranceContent": "ด้านล่างจะมีแถบสำหรับปุ่มโหมดต่าง ๆ: Micromapping, สถานที่ และทางเข้า\n\nในโหมดทางเข้า แตะหรือลากปุ่มประตูในมุมด้านล่างขึ้นไปบนแผนที่",
+  "@faqEntranceContent": {},
+  "faqChangeType": "จะเปลี่ยนประเภทของสถานที่ได้อย่างไร?",
+  "@faqChangeType": {},
+  "faqTagging": "คำถามเกี่ยวกับการแท็กทั้งหมด",
+  "@faqTagging": {},
+  "faqChangeTypeContent": "แตะบนชื่อของ Editor ที่จะมีเขียนประเภทไว้อยู่",
+  "@faqChangeTypeContent": {},
+  "navUpload": "อัปโหลด",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navDownload": "ดาวน์โหลด",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navImagery": "เปลี่ยน Imagery",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navPoiMode": "โหมดสถานที่",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "filterNoAddresses": "ไม่พบที่อยู่ในพื้นที่ใกล้เคียง",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "mapFilter": "ตัวกรอง",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "กลับไปหาฉัน",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "chooseLocation": "เลือกตำแหน่ง",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "เลือกประเภท",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "ล้าง",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "editorMarkChecked": "ทำเครื่องหมายว่าตรวจสอบแล้ว",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "ประวัติ",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorMoreFields": "ฟิลด์เพิ่มเติม",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorLoadingPreset": "กำลังโหลด Preset…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMove": "ย้าย",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorDuplicate": "อาจมีซ้ำกันในระยะ {distance} เมตร",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorRestore": "กู้คืน",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorMissing": "ไม่มีอยู่",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorRestoreTitle": "มันเปิดอยู่หรือไม่?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorRestoreMessage": "{amenity} ไม่ได้ถูกใช้งาน ต้องการทำเครื่องหมายว่าถูกใช้งานหรือไม่?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteTitle": "ลบ {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsShare": "แชร์",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsUrlCopied": "URL ถูกคัดลอกไปยังคลิปบอร์ดแล้ว",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsRestore": "กู้คืน",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsValueLong": "ค่ายาวเกินไป",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "versionsEnableInternet": "เชื่อมต่ออินเทอร์เน็ตเพื่อเรียกดูประวัติเวอร์ชัน",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "ข้อผิดพลาดในการเรียกดูประวัติเวอร์ชัน",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsVersionNumber": "เวอร์ชัน #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "โดย {user} เมื่อ {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsApiServer": "เซิร์ฟเวอร์ API",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsDefaultPayment": "บัตรจ่ายเงินเริ่มต้น",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsSystem": "ระบบ",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "aboutVersionHistory": "ประวัติเวอร์ชัน",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "เวอร์ชันที่ติดตั้ง",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "เว็บไซต์ของโปรเจกต์",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{ล้างแล้ว {count} element}, =few{ล้างแล้ว {count} elements}, =other{ล้างแล้ว {count} elements}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "aboutOnGitHub": "บน GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "สัญญาอนุญาต",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpTranslate": "ช่วยแปลภาษา",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "บน Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "accountPasswordWarningButton": "ฉันเข้าใจ",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountChangesets": "Changesets",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "changesUploadedTitle": "อัปโหลดแล้ว",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesCount": "{count,plural, =1{{count} การเปลี่ยนแปลง}, =few{{count} การเปลี่ยนแปลง}, =other{{count} การเปลี่ยนแปลง}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesMapNotes": "โน้ตในแผนที่และภาพวาด",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesPurge": "ล้างการเปลี่ยนแปลง",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "changesPurgeMessage": "ลบการเปลี่ยนแปลงที่บันทึกไว้ทั้งหมดและกู้คืนข้อมูลดั้งเดิม?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursButton": "เลือกเวลาทำการ",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursFullDay": "ทั้งวัน",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursAsText": "ใส่เป็นแบบ Text",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursSpecificDays": "วันที่กำหนด",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "ปิด",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursRemoveBreak": "ลบเวลาพักเบรก",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursWeekdays": "จ. อ. พ. พฤ. ศ. ส. อา.",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "ปิดในวันหยุดสาธารณะ",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursAddFragment": "เพิ่ม Fragment",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursRemoveFragment": "ลบ Fragment",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldNameCopy": "คัดลอกค่า",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldHoursSDAddRange": "เพิ่มช่วงวัน",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldWifiPublic": "สาธารณะ",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWheelchairLimited": "ถูกจำกัด",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "ไม่",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCheckboxYes": "ใช่",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldFloorFloorDesc": "ชั้น โดยยึดตามผังอาคารและลิฟต์",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "เลขชั้นที่เริ่มจาก 0 สำหรับชั้น G",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldPhoneWrong": "รูปแบบหมายเลขโทรศัพท์ผิด",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "messageDataObsolete": "ข้อมูลเก่า แตะที่นี่เพื่อรีเฟรช",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "เปิดใช้ GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableLocation": "เปิดใช้การระบุตำแหน่ง",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "entrancesAddEntrance": "เพิ่มทางเข้า",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "เพิ่มอาคาร",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "addressX": "ที่อยู่ {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingLevels": "ชั้น",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "ชั้นในหลังคา",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "รูปทรงหลังคา",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "ประเภท",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMaterialBrick": "อิฐ",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialWood": "ไม้",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "คอนกรีต",
+  "@buildingMaterialConcrete": {},
+  "enableGPSMessage": "กรุณาเปิดใช้บริการระบุตำแหน่งในการตั้งค่าต่อไปนี้",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocationMessage": "กรุณาให้สิทธิ์เข้าถึงตำแหน่งกับแอปพลิเคชันในหน้าการตั้งค่าต่อไปนี้",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buildingMoreButton": "เพื่มเติม",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterialPlaster": "พลาสเตอร์",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterial": "วัสดุภายนอกอาคาร",
+  "@buildingMaterial": {},
+  "buildingMaterialCementBlock": "บล็อคปูนซีเมนต์",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialPanels": "แผ่น",
+  "@buildingMaterialPanels": {},
+  "buildingTypeRetail": "ร้านค้าปลีก",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "พื้นที่ค้าขาย",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "ห้องเก็บของ",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "อุตสาหกรรม",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeGarage": "โรงรถ",
+  "@buildingTypeGarage": {},
+  "entranceAccessPrivate": "ส่วนบุคคล",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "ไม่",
+  "@entranceAccessNo": {},
+  "entranceFlatsNumberList": "ควรจะเป็นรายชื่อที่ประกอบด้วยตัวเลข",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceIsUnit": "ใส่เลขแฟลตใน addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceRef": "อ้างอิง",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "เข้าถึงได้",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceTypeHome": "บ้าน",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "ร้านค้า",
+  "@entranceTypeShop": {},
+  "entranceTypeStaircase": "บันได",
+  "@entranceTypeStaircase": {},
+  "entranceTypeGarage": "โรงรถ",
+  "@entranceTypeGarage": {},
+  "entranceTypeEmergency": "ฉุกเฉิน",
+  "@entranceTypeEmergency": {},
+  "addressPlace": "สถานที่",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesCloseMessage": "ปิดโน้ต?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "apiStatusDownloading": "กำลังดาวน์โหลดข้อมูล…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "entranceTypeService": "บริการ",
+  "@entranceTypeService": {},
+  "addressUnit": "ยูนิต",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "ไม่บังคับ",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "apiStatusUpdatingDB": "กำลังบันทึก Elements ลงในฐานข้อมูลแอปพลิเคชัน",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "faqCheckmarks": "เครื่องหมายถูกมีไว้ทำอะไร?",
+  "@faqCheckmarks": {},
+  "faqLetters": "สามารถพิมพ์ตัวอักษรลงไปในช่องอ้างอิงหรือหมายเลขแฟลตได้หรือไม่?",
+  "@faqLetters": {},
+  "faqLettersContent": "หากแป้นพิมพ์หมายเลขไม่สามารถเปลี่ยนเป็นแบบเต็มได้ ให้ตรวจสอบการตั้งค่าของแอป โดยจะอยู่หลังปุ่มที่มุมบนซ้าย เปิดแป้นพิมพ์เลขแบบขยายที่นั่น",
+  "@faqLettersContent": {},
+  "loadingPresets": "กำลังโหลด Presets…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingTooMuchDataTitle": "ข้อมูลมากเกินไป",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "legendOther": "อื่น ๆ",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "navEntrancesMode": "โหมดทางเข้า",
+  "@navEntrancesMode": {},
+  "filterByFloor": "จากชั้น",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "loadingChanges": "กำลังโหลดการเปลี่ยนแปลง…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "editorCloseTitle": "ปิด Editor?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "loadingStart": "กำลังโหลด…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingTooMuchData": "ล้างข้อมูลที่ดาวน์โหลดแล้วจากหน้าการตั้งค่าเพื่อให้ Editor ทำงานเร็วขึ้น",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "mapZoomIn": "ซูมเข้า",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "editorMarkDefunct": "ทำเครื่องหมายว่าถูกทิ้งร้าง",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "aboutFAQ": "คำถามที่พบบ่อย",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "navMicromappingMode": "โหมด Micromapping",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navNotesMode": "โหมดโน้ต",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "filterByAddress": "จากที่อยู่",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterEmpty": "ว่างเปล่า",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "editorTags": "แท็กดิบ",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorCloseMessage": "คุณจะสูญเสียการแก้ไขที่ไม่ได้บันทึก ดำเนินการต่อ?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "filterNonConfirmed": "เฉพาะที่ยังไม่ได้ยืนยัน",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "mapSettings": "การตั้งค่า",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "tileDragOrUnfilter": "กรุณาขยับไปรอบ ๆ เพิ่มสถานที่ หรือล้างตัวกรอง",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "mapZoomOut": "ซูมออก",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "tagsDelete": "ล้าง",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "settingsPresentation": "การนำเสนอ",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "tagsAddTag": "เพิ่มแท็ก",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "คีย์",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "versionsTitle": "ประวัติของ {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "settingsDataManagement": "การจัดการข้อมูล",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "tagsValue": "ค่า",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "settingsPurgedObsoleteTitle": "ข้อมูลเก่า",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "ข้อมูลที่ถูกลบ",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "tagsKeyError": "คีย์หายากเกินไป",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "aboutLinks": "ลิงก์",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "settingsPurgeDataMessage": "คุณจะต้องดาวน์โหลดทุกอย่างใหม่ ดำเนินการต่อ?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsCacheTiles": "ดาวน์โหลด Tiles",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsBackground": "Imagery พื้นหลัง",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsPreferContact": "ใช้ Prefix \"contact:\"",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "aboutViewLog": "Log ระบบ",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "accountTitle": "บัญชี OpenStreetMap",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginPassword": "ลงชื่อเข้าใช้ด้วยรหัสผ่าน",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "คำเตือน",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldLogin": "ชื่อผู้ใช้",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "settingsNumericKeyboard": "แป้นพิมพ์ตัวเลขแบบขยาย",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsLanguage": "ภาษา",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsGoogle": "ใช้การระบุตำแหน่งที่ปรับปรุงโดย Google",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "accountFieldPassword": "รหัสผ่าน",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "settingsAbout": "เกี่ยวกับ",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "accountLoginOAuth": "ลงชื่อเข้าใช้ด้วย OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "ข้อผิดพลาดใน OAuth",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountPasswordWarningMessage": "รหัสผ่านจะถูกจัดเก็บในอุปกรณ์ ใช้วิธีนี้เมื่อไม่สามารถใช้ OAuth ได้เท่านั้น",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountLogout": "ลงชื่อออก",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountUnreadMail": "จดหมายที่ยังไม่ได้อ่าน",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesUploadedMessage": "ส่ง{changes} ไปยัง API แล้ว",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesDeletedUndo": "เลิกทำ",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "buildingMaterialMetal": "โลหะ",
+  "@buildingMaterialMetal": {},
+  "entranceWheelchair": "วีลแชร์",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "notesAnonymous": "นิรนาม",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "fieldHoursSDAddOne": "เพิ่มวันที่",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "accountPasswordTitle": "ข้อมูลบัญชี OSM",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountAuthErrorMessage": "ชื่อผู้ใช้หรือรหัสผ่านผิด",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "changesDeletedChange": "ลบแล้ว {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesSwipeLeft": "เลื่อนไปทางซ้ายเพื่อเลิกทำการเปลี่ยนแปลง",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursClear": "ล้าง",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "บันทึก",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "buttonYes": "ใช่",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "entranceTypeMain": "ทางหลัก",
+  "@entranceTypeMain": {},
+  "faqMapTiny": "ทำไมแผนที่เล็กจัง?",
+  "@faqMapTiny": {},
+  "faqFloors": "ชั้น '3' และ '/3' เหมือนกันหรือไม่?",
+  "@faqFloors": {},
+  "changesUploadFailedTitle": "อัปโหลดล้มเหลว",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "changesPending": "อยู่ในแถวคอย",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesPurgeTitle": "ล้างการเปลี่ยนแปลง?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "fieldHoursNumberedWeekday": "\"วันจันทร์ที่ผ่านมา\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldComboChoose": "เลือก",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldFloorEmpty": "ในการเลือกชั้น กรุณาใส่ที่อยู่",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorNew": "ชั้นใหม่",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "entranceAccessYes": "เปิด",
+  "@entranceAccessYes": {},
+  "fieldHoursChooseTime": "ชั่วโมง และ นาที",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursAddBreak": "เพิ่มเวลาพักเบรก",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursSDRemove": "นำออก",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "entranceX": "ทางเข้า {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingPostCode": "รหัสไปรษณีย์",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingMaterialStone": "หิน",
+  "@buildingMaterialStone": {},
+  "buildingTypeAddress": "ที่อยู่",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "บ้าน",
+  "@buildingTypeHouse": {},
+  "entranceFlats": "แฟลต",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceAccessDelivery": "เดลิเวอรี",
+  "@entranceAccessDelivery": {},
+  "addressHouseNumber": "บ้าน",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "ไม่ควรว่างเปล่า",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressStreet": "ถนน",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "fieldNameLanguages": "ภาษาอื่น",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldComboEmpty": "ว่างเปล่า",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldWheelchairYes": "ใช่",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldFloorShouldBeNumber": "กรุณาใส่เลข",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "buttonNo": "ไม่",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingX": "อาคาร {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "notesAddNote": "เพิ่มโน้ต",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesClose": "ปิด",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "apiStatusUploading": "กำลังอัปโหลดการเปลี่ยนแปลง",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "fieldWifiNo": "ไม่มี",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiCustomers": "ลูกค้าเท่านั้น",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldCardsAccepted": "รับ",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCheckboxNo": "ไม่",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldAddressTap": "แตะที่ที่อยู่",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "buildingMaterialGlass": "กระจก",
+  "@buildingMaterialGlass": {},
+  "buildingTypeApartments": "อพาร์ตเมนต์",
+  "@buildingTypeApartments": {},
+  "buildingTypeConstruction": "พื้นที่ก่อสร้าง",
+  "@buildingTypeConstruction": {},
+  "entranceType": "ประเภท",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "faqMapTinyContent": "เพราะว่านั่นไม่ใช่สาระสำคัญ คุณตรวจสอบตำแหน่งของคุณบนแผนที่ ลากเพื่อปรับ ดูรายชื่อสถานที่ด้านล่างที่เรียงตามระยะห่างจากคุณ\n\nแผนที่จะขยายใหญ่ขึ้นเมื่อคุณแก้ไขสถานที่ที่อยู่ไกลจากคุณ ถึงแม้ว่าแอปนี้ถูกออกแบบมาสำหรับการแก้ไขสิ่งที่เห็นได้ด้วยตาเปล่าก็ตาม",
+  "@faqMapTinyContent": {},
+  "faqCheckmarksContent": "เป็นเครื่องหมายว่าข้อมูลสถานที่ได้รับการยืนยันแล้ว มันจะเพิ่มแท็ก `check_date` ด้วยวันที่ในปัจจุบัน\n\nคอนเซปต์ของเครื่องหมายถูกนั้นคือ สมมุติว่าคุณสำรวจไปแล้วครึ่งเมืองในครั้งแรก และผ่านไปหนึ่งเดือนคุณกลับมาสำรวจอีกครั้ง คุณอาจจะต้องทำเครื่องหมายว่าคุณเห็นสถานที่แล้ว แต่ไม่มีอะไรเปลี่ยนแปลง นั่นคือเครื่องหมายถูกที่คุณจะแตะและดำเนินการต่อ\n\nเครื่องหมายถูกจะแสดงผลอยู่สองสัปดาห์ หลังจากนั้นคุณอาจจะกลับมาสำรวจสถานที่อีกครั้ง",
+  "@faqCheckmarksContent": {}
+}
