@@ -665,5 +665,407 @@
   "addressUnit": "الوحدة",
   "@addressUnit": {
     "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "versionsTitle": "السجل التاريخي لـ{elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "loadingTooMuchData": "قم بإزالة البيانات التي تم تنزيلها من الإعدادات لتسريع عمل المحرر.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadSuccessful": "تم التنزيل بنجاح",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{{count} عنصر تم تحميله.}, =few{{count} عنصر تم تحميله.}, =other{{count} عنصر تم تحميله.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "loadingTooMuchDataTitle": "الكثير من البيانات",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "aboutViewLog": "سجل النظام",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "سجل الإصدارات",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "النسخة المثبتة",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "changesSwipeLeft": "اسحب لليسار للتراجع عن تغيير",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursAsText": "كنص",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "\"الاثنين الماضي\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "buildingPostCode": "الرمز البريدي",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqEntrance": "كيف تضيف مدخل المبنى؟",
+  "@faqEntrance": {},
+  "faqLetters": "هل يمكنني كتابة الحروف في مرجع أو رقم ثابت؟",
+  "@faqLetters": {},
+  "changesOsmNote": "ملاحظة OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "fieldHoursSpecificDays": "تاريخ محدد",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "faqChangeTypeContent": "اضغط على عنوان المحرر ، حيث يتم كتابة النوع.",
+  "@faqChangeTypeContent": {},
+  "buildingMaterial": "الواجهة",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "طوب",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "جص",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "خشب",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "خرسانة",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "ألواح",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "كتل خرسانية",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "حجر",
+  "@buildingMaterialStone": {},
+  "faqMapTiny": "لماذا الخريطة صغيرة جدًا؟",
+  "@faqMapTiny": {},
+  "faqMapTinyContent": "لأن هذا ليس هو المقصود وإنما هي فقط للتحقق من تحديد موقعك على الخريطة ولضبطه عبر التحريك، شاهد قائمة المنشآت أدناه، مرتبة بعدها منك.\n\nكما أن الخريطة تصبح أكبر عندما تقوم بتعديل المنشآت البعيدة عن موقعك، على الرغم من أن التطبيق تم تصميمه لتعديل الأشياء التي تراها بعينيك.",
+  "@faqMapTinyContent": {},
+  "faqCheckmarks": "ما هي علامات الاختيار لـ؟",
+  "@faqCheckmarks": {},
+  "faqEntranceContent": "يوجد في الجزء السفلي صف من الأزرار لتغيير الوضع: منها وضع الرسم الدقيق وتحرير المنشآت والمداخل.\n\nفي وضع المداخل ، اضغط أو اسحب زر الباب في الزاوية السفلية على الخريطة.",
+  "@faqEntranceContent": {},
+  "navDownload": "تنزيل",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navPoiMode": "وضع إضافة المنشآت",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "وضع الرسم الدقيق",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navNotesMode": "وضع تحرير الملاحظات",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapSettings": "الإعدادات",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapZoomIn": "تكبير",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "تصغير",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "editorMarkChecked": "تم فحص العلامة",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "tagsDelete": "مسح",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "versionsEnableInternet": "اتصل بالإنترنت لجلب سجل الإصدارات السابقة",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "حصل خطأ في جلب سجلات الاصدارات",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "settingsCacheTiles": "تنزيل صور الخريطة",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsGoogle": "استخدام تحديد المواقع المحسن من قوقل",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "aboutProjectWebsite": "موقع المشروع",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "شفرة المصدر",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "على GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "fieldHoursClosed": "مغلق",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "العطلات الرسمية",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursChooseTime": "ساعات ودقائق",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "مسح",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSDAddOne": "إضافة تاريخ",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldNameLanguages": "لغة أخرى",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "نسخ القيمة",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "entrancesAddEntrance": "إضافة مدخل",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "buildingMaterialMetal": "معدن",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "زجاج",
+  "@buildingMaterialGlass": {},
+  "notesCloseMessage": "إغلاق هذه الملاحظة؟",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "faqFloors": "هل الطابقان '3' و '/3' متماثلان؟",
+  "@faqFloors": {},
+  "faqTagging": "جميع أسئلة وضع الوسوم",
+  "@faqTagging": {},
+  "versionsLocalChanges": "التغييرات المحلية",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "navEntrancesMode": "وضع المداخل",
+  "@navEntrancesMode": {},
+  "versionsVersionNumber": "الإصدار #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "aboutLicense": "الترخيص",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "mapFilter": "تصفية",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "الرجوع إلى موقعك",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "versionsNoTagChanges": "لا توجد تغييرات على الوسوم",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "aboutHelpImprove": "ساعد في تحسين {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutHelpTranslate": "المساعدة في الترجمة",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "fieldHoursSave": "حفظ",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursSDRemove": "إزالة",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "aboutFAQ": "الأسئلة المتداولة",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "dataDownloadFailed": "فشل التنزيل",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "navUpload": "رفع",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navImagery": "تبديل الصورة الخلفية",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "editorHistory": "السجل التاريخي",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "الوسوم الأصلية",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "tagsShare": "مشاركة",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsRestore": "استعادة",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "versionsRetryFetch": "إعادة المحاولة",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsVersionMeta": "بواسطة {user} في {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsSystem": "النظام",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "aboutLinks": "الروابط",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "changesMapNotes": "ملاحظات الخريطة والرسومات",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "settingsLanguage": "اللغة",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsAbout": "حول",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutReportIssue": "الإبلاغ عن مشكلة",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "fieldHoursRemoveFragment": "إزالة الجزء",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "notesAddNote": "إضافة ملاحظة",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesClose": "إغلاق",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "aboutOnWeblate": "على Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "changesPurge": "مسح التغييرات",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursMinute": "دقائق",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursHour": "ساعات",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursRemoveBreak": "إزالة الفاصل",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursSDAddRange": "إضافة نطاق",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "entrancesAddBuilding": "إضافة مبنى",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "notesAnonymous": "مجهول",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "faqCheckmarksContent": "هذه علامات على أنه تم تأكيد بيانات المنشآت، يتم إضافة وسم `check_date` تاريخ التحقق مع التاريخ الحالي.\n\nالفكرة من وراء الوسوم هي ، على سبيل المثال ، أنك إذا قمت بمسح نصف المدينة في المرة الأولى، ثم بعد شهر عدت وقمت بالمسح مرة أخرى، تحتاج إلى وضع وسم بطريقة ما على أنك ترى المنشآة، لكن لم يتغير شيء حيال ذلك. هذه هي علامة الاختيار: يمكنك النقر عليها والمتابعة.\n\nيبقى الوسم مفحوصاً لمدة أسبوعين. بعد ذلك يمكنك مسح المنشآت مرة أخرى.",
+  "@faqCheckmarksContent": {},
+  "faqLettersContent": "إذا تعذر تحويل لوحة المفاتيح الرقمية إلى لوحة مفاتيح كاملة ، فتحقق من إعدادات التطبيق. هم خلف الزر في الزاوية اليسرى العليا. قم بتشغيل \"لوحة المفاتيح الرقمية الموسعة\" هناك.",
+  "@faqLettersContent": {},
+  "faqChangeType": "كيف تغير نوع المنشآة؟",
+  "@faqChangeType": {},
+  "faqFloorsContent": "لا ، تم ملء الوسم الأول بالوسم `addr:floor=3` ، وهذه هي الأرضية لأنها مطبوعة على نظام الملاحة وشائعة الاستخدام، والثاني لا يحتوي على هذا الوسم ، ولكن به `level=3`، وهذا الرقم هو رقم طابق تسلسلي من صفر إلى `building:levels - 1`، أي أنه في مبنى مكون من ثلاثة طوابق ، تعتمد قيمة `addr:floor` على البلد ، ولكن المستوى `level` دائمًا ما يكون 0 أو 1 أو 2.\n\nإليك كيفية ارتباط الترميز في المحرر بهذه الوسوم:\n\n* `2`: `addr:floor=2` وغير فارغ `level=*`.\n* `4/`: `addr:floor=4`, لكن لا يوجد وسم `level` .\n* `/1`: `level=1`, لكن لا يوجد وسم `addr:floor` .\n* `1/0`: `addr:floor=1` + `level=0` (وهناك كائن قريب: مع نفس الـ `addr:floor`, ولكن بمستوى مختلف`level`, أو العكس).",
+  "@faqFloorsContent": {},
+  "faqTaggingContent": "لماذا يوجد كائن مفقود في المحرر؟ عندما يتم عرض هذه النقاط البيضاء في وضع الرسم الدقيق؟ كيف يتم فرز الأشياء؟\n\nالإجابات على كل هذه الأسئلة موجودة في [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). إليك ما يمكنك إلقاء نظرة عليه:\n\n* ترتيب المفتاح للوسم الرئيسي - القائمة `kMainKeys`.\n* الأشياء التي يتم تنزيلها - وظيفة`isGoodTags`.\n* ما يعتبر من المنشآت - وظيفة `isAmenityTags`.\n*ما هي النقاط التي يتم الصاقها إلى أية طريق - وظيفة `detectSnap`.\n* عندما يكون كائن الخرائط الدقيقة غير مكتمل - الوظيفة `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "editorDuplicate": "احتمال تكرار في {distance} م",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
   }
 }
