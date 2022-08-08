@@ -394,7 +394,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Como adicionar uma entrada de edifício?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Na parte inferior há uma fileira de botões de modo: Micromapeamento, Serviços e Entradas.\n\nNo modo Entradas, toque ou arraste o botão da porta, localizada no canto inferior, para o mapa.",
+  "faqEntranceContent": "Na parte inferior há uma fileira de botões de modo: Micromapeamento, Serviços, Entradas e Notas.\n\nNo modo Entradas, toque ou arraste o botão da porta, localizada no canto inferior, para o mapa.",
   "@faqEntranceContent": {},
   "faqChangeType": "Como alterar um tipo de serviço?",
   "@faqChangeType": {},
