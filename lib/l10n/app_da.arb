@@ -822,7 +822,7 @@
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Hvis dit numeriske tastatur ikke kan skiftes til et fuldt tastatur, skal du kontrollere appindstillingerne. Dem finder du bag knappen i øverste venstre hjørne. Slå \"Udvidet numeriske tastatur\" til der.",
   "@faqLettersContent": {},
-  "faqEntranceContent": "Nederst er der en række indstillingsknapper: mikro-kortlægning, faciliteter og indgange.\n\nVælg indstillingen 'indgange' og tryk på eller træk dørknappen i nederste hjørne ind på kortet.",
+  "faqEntranceContent": "Nederst er der en række knapper til valg af korttilstand: mikro-kortlægning, faciliteter, indgange og noter.\n\nI tilstanden 'indgange' kan du trykke på eller trække dørknappen i nederste hjørne ind på kortet.",
   "@faqEntranceContent": {},
   "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Hvornår vises disse hvide prikker i mikro-kortlægning-indstillingen? Hvordan sorteres objekter?\n\nSvarene på alle disse spørgsmål findes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er, hvad du kan se på:\n\n* Nøgleordenen for det primære tag - liste `kMainKeys`.\n* Hvilke objekter der downloades - funktion `isGoodTags`.\n* Hvad der betragtes som en facilitet - funktion `isAmenityTags`.\n* Hvilke punkter forbindes til hvilke veje - funktion `detectSnap`.\n* Når et mikrokortlægningsobjekt er ufuldstændigt - funktion `needsMoreInfo`.",
   "@faqTaggingContent": {},
