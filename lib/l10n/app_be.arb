@@ -150,7 +150,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Ваші праўкі прападуць. Працягнуць?",
+  "editorCloseMessage": "Ваші змены прападуць. Працягнуць?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -754,5 +754,248 @@
   "accountPasswordWarningMessage": "Ваш пароль будзе захаваны на прыладзе. Выбірайце гэта толькі ў выпадку збою OAuth.",
   "@accountPasswordWarningMessage": {
     "description": "Message for the warning dialog about keeping passwords on the device."
-  }
+  },
+  "fieldHoursAddBreak": "Дадаць перапынак",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursClosedPH": "Зачынена ў дзяржаныя святы",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldWifiNo": "адсутнічае",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "агульны",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "buildingX": "Будынак {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingTypeGarage": "гараж",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "будуецца",
+  "@buildingTypeConstruction": {},
+  "fieldHoursHour": "Гадзіна",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldAddressTap": "Націсніце на адрас",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "buttonYes": "Так",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "Не",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingTypeShed": "хлеў",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "прамысловы",
+  "@buildingTypeIndustrial": {},
+  "entranceFlats": "Квартэры",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceWheelchair": "♿",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "addressPlace": "Горад",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "fieldCheckboxYes": "ёсць",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "адсутнічае",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorEmpty": "Каб выбраць паверх, задайце адрас.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorShouldBeNumber": "Калі ласка, увядзіце лічбу",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "buildingMoreButton": "Болей",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingTypeRetail": "рознічны гандаль",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "камерцыйны",
+  "@buildingTypeCommercial": {},
+  "entranceRef": "Нумар",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "Доступ",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessYes": "агульны",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "прыватны",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "няма",
+  "@entranceAccessNo": {},
+  "apiStatusUploading": "Запампоўка змяненняў",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "fieldHoursClosed": "Зачынена",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Дзяржаўныя святы",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursOpens": "Адчыняецца",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "Зачыняецца",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursBreak": "Перапынак",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "Далей",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursMinute": "Хвіліна",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursWeekdays": "Пн Аў Ср Чц Пт Сб Нд",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldWifiCustomers": "для кліентаў",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "так",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "абмежавана",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "не",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsAccepted": "прымаюць",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "не",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldFloorNew": "Новы паверх",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorLevelDesc": "Нумар паверха, пачынаючы з 0 для ўзроўню зямлі",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldPhoneWrong": "Няправільны фармат нумара",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "enableGPS": "Уключыце GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Калі ласка, уключыце службы вызначэння месцазнаходжання ў панэлі налад, якая будзе паказаная.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocation": "Дазвольце GPS",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "addressX": "Адрас {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "entranceX": "Уваход {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "entranceFlatsNumberList": "Павінен быць спіс лічбаў",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceIsUnit": "Захоўвайць нумар кватэры ў addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceAccessDelivery": "дастаўка",
+  "@entranceAccessDelivery": {},
+  "addressHouseNumber": "Нумар",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressUnitOptional": "неабавязкова",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressStreet": "Вуліца",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "apiStatusUpdatingDB": "Захаванне элементаў у базе даных",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "faqMapTiny": "Чаму мапа такая маленькая?",
+  "@faqMapTiny": {},
+  "messageDataObsolete": "Даныя састарэлі, націсніце тут, каб абнавіць",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableLocationMessage": "Калі ласка, дазвольце праграме доступ да месцазнаходжання ў панэлі налад, якая будзе паказаная.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buildingPostCode": "Паштовы індэкс",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "faqCheckmarks": "Для чаго патрэбны галачкі?",
+  "@faqCheckmarks": {}
 }
