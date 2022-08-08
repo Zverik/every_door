@@ -108,6 +108,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     List<OsmChange> data = await provider.getElements(location, radius);
     const distance = DistanceEquirectangular();
     data = data.where((e) => distance(location, e.location) <= radius).toList();
+    if (!mounted) return;
     setState(() {
       nearest = data.where((e) => kOurKinds.contains(getOurKind(e))).toList();
       for (final c in nearest) {

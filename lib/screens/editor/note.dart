@@ -2,10 +2,12 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/notes.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NoteEditorPane extends ConsumerStatefulWidget {
   final OsmNote? note;
@@ -79,6 +81,39 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     Navigator.pop(context);
   }
 
+  static final kReLink = RegExp(
+      r"(https?://|www\.)[a-z0-9.-]+\.\w{2,8}(:\d+)?(/[a-z0-9.,;?'+&%$/\#=~_-]+)?",
+      caseSensitive: false);
+
+  List<TextSpan> _parseLinks(String message) {
+    final result = <TextSpan>[];
+    RegExpMatch? match = kReLink.firstMatch(message);
+    while (match != null) {
+      if (match.start > 0)
+        result.add(TextSpan(text: message.substring(0, match.start)));
+      try {
+        String url = match.group(0)!;
+        if (!url.startsWith('http')) url = 'https://' + url;
+        final uri = Uri.parse(url);
+        result.add(TextSpan(
+          text: url,
+          style: TextStyle(color: Colors.blue),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              launchUrl(uri, mode: LaunchMode.externalApplication);
+            },
+        ));
+      } on FormatException {
+        result.add(TextSpan(text: match.group(0)!));
+      }
+      message = message.substring(match.end);
+      match = kReLink.firstMatch(message);
+    }
+    if (message.isNotEmpty)
+      result.add(TextSpan(text: message));
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -103,12 +138,13 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                 for (final OsmNoteComment comment
                     in widget.note?.comments.where((c) => !c.isNew) ??
                         const []) ...[
-                  Text.rich(
+                  SelectableText.rich(
                     TextSpan(children: [
                       TextSpan(
                           text: comment.author ?? loc.notesAnonymous,
                           style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: ': ${comment.message}'),
+                      TextSpan(text: ': '),
+                      ..._parseLinks(comment.message),
                     ]),
                     style: kFieldTextStyle,
                   ),

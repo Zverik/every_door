@@ -53,6 +53,9 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   onMapEvent(MapEvent event) {
     bool fromController = event.source == MapEventSource.mapController;
     if (event is MapEventMoveEnd && !fromController) {
+      // Move the effective location for downloading to work properly.
+      ref.read(trackingProvider.state).state = false;
+      ref.read(effectiveLocationProvider.notifier).set(event.center);
       updateNotes();
     }
   }

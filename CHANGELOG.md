@@ -2,11 +2,15 @@
 
 ## 0.10
 
-_Unreleased_
+_Released on 2022-08-08_
 
+* Selectable notes content with tappable links.
 * Tooltips for all icon buttons.
 * Fixed font size on amenity tiles to be more accessible.
 * Language chooser in settings.
+* New Thai translation (thanks VRSasha) and major improvements in
+  Arabic (thanks Abdullah Abdulrhman), Belorussian (thanks Jaŭhien),
+  and Swedish (thanks Dennis Öberg) translations.
 
 ## 0.9
 
