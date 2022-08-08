@@ -905,5 +905,25 @@
         "example": "node/1234567"
       }
     }
+  },
+  "changesOsmNote": "Note OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "changesMapNotes": "Notes et dessins de la carte",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "notesAnonymous": "Anonyme",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesCloseMessage": "Fermer cette note ?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "notesClose": "Fermer",
+  "@notesClose": {
+    "description": "Button title for closing a note."
   }
 }

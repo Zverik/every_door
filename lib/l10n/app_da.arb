@@ -822,9 +822,9 @@
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Hvis dit numeriske tastatur ikke kan skiftes til et fuldt tastatur, skal du kontrollere appindstillingerne. Dem finder du bag knappen i øverste venstre hjørne. Slå \"Udvidet numeriske tastatur\" til der.",
   "@faqLettersContent": {},
-  "faqEntranceContent": "Nederst er der en række indstillingsknapper: mikrokortlægning, faciliteter og indgange.\n\nVælg indstillingen 'indgange' og tryk på eller træk dørknappen i nederste hjørne ind på kortet.",
+  "faqEntranceContent": "Nederst er der en række indstillingsknapper: mikro-kortlægning, faciliteter og indgange.\n\nVælg indstillingen 'indgange' og tryk på eller træk dørknappen i nederste hjørne ind på kortet.",
   "@faqEntranceContent": {},
-  "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Hvornår vises disse hvide prikker i mikrokortlægning-indstillingen? Hvordan sorteres objekter?\n\nSvarene på alle disse spørgsmål findes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er, hvad du kan se på:\n\n* Nøgleordenen for det primære tag - liste `kMainKeys`.\n* Hvilke objekter der downloades - funktion `isGoodTags`.\n* Hvad der betragtes som en facilitet - funktion `isAmenityTags`.\n* Hvilke punkter forbindes til hvilke veje - funktion `detectSnap`.\n* Når et mikrokortlægningsobjekt er ufuldstændigt - funktion `needsMoreInfo`.",
+  "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Hvornår vises disse hvide prikker i mikro-kortlægning-indstillingen? Hvordan sorteres objekter?\n\nSvarene på alle disse spørgsmål findes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er, hvad du kan se på:\n\n* Nøgleordenen for det primære tag - liste `kMainKeys`.\n* Hvilke objekter der downloades - funktion `isGoodTags`.\n* Hvad der betragtes som en facilitet - funktion `isAmenityTags`.\n* Hvilke punkter forbindes til hvilke veje - funktion `detectSnap`.\n* Når et mikrokortlægningsobjekt er ufuldstændigt - funktion `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "faqFloorsContent": "Nej. Den første har `addr:floor=3`-tagget udfyldt. Det er etagen, som den angives ved vejvisning og i almindelighed anvendes. Den anden har ikke dette tag, men har `level=3`. Det nummer er et fortløbende etagenummer fra nul til `building:levels - 1`. Det vil sige, at i en treetagers bygning afhænger værdien af `addr:floor` af landet, men `level` er altid 0, 1 eller 2.\n\nHer er hvordan notationen i editoren er relaterede til disse tags:\n\n* `2`: `addr:floor=2` og ikke-tom `level=*`.\n* `4/`: `addr:floor=4`, men der er ikke noget `level`-tag.\n* `/1`: `level=1`, men der er ikke noget `addr:floor`-tag.\n* `1/0`: `addr:floor=1` + `level=0` (og der er et objekt i nærheden:w med samme `addr:floor`, men med et andet `level`, eller omvendt).",
   "@faqFloorsContent": {},
@@ -925,5 +925,147 @@
   "notesClose": "Luk",
   "@notesClose": {
     "description": "Button title for closing a note."
+  },
+  "navDownload": "Download",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "mapSettings": "Indstillinger",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapZoomIn": "Zoom ind",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Zoom ud",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "editorMarkChecked": "Markér tjekket",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Historik",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "navImagery": "Skift baggrundsbillede",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "editorTags": "Rå tags",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "navPoiMode": "Faciliteter-tilstand",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Mikrokortlægning-tilstand",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "Indgange-tilstand",
+  "@navEntrancesMode": {},
+  "tagsRestore": "Gendan",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "settingsCacheTiles": "Download fliser",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLanguage": "Sprog",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsSystem": "System",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "Brug Google-forbedret placering",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "changesPurge": "Slet ændringer",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursChooseTime": "Time og minut",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursSDAddOne": "Tilføj dato",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Tilføj interval",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Andre sprog",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "entrancesAddEntrance": "Tilføj indgang",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "Tilføj bygning",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "fieldHoursSave": "Gem",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursSDRemove": "Fjern",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "navUpload": "Upload",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "mapFilter": "Filter",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "fieldHoursRemoveFragment": "Fjern fragment",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "mapLocate": "Tilbage til mig",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "tagsShare": "Del",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsDelete": "Ryd",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "fieldNameCopy": "Kopiér værdi",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldHoursClear": "Ryd",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursRemoveBreak": "Fjern pause",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "notesAddNote": "Tilføj note",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "navNotesMode": "Noter-tilstand",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
   }
 }
