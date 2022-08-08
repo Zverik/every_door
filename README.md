@@ -8,7 +8,7 @@ Help test it for [iOS](https://testflight.apple.com/join/5138nQCq) and
 The roadmap is in [a project](https://github.com/users/Zverik/projects/1/views/2).
 
 ## Screenshots
-<img src="https://wiki.openstreetmap.org/w/images/4/4c/Every_Door_0.3.0_Android_-_Main_Screen.png" width="170"/> <img src="https://wiki.openstreetmap.org/w/images/a/a3/Every_Door_0.3.0_Android_-_Main_Screen_Library.png" width="170"/> <img src="https://wiki.openstreetmap.org/w/images/f/f7/Every_Door_0.3.0_Android_-_Mode_Features_Near_You.png" width="170"/>
+<img src="https://user-images.githubusercontent.com/25514836/183449814-38caa70f-9fb3-4ccb-b188-d13251b86352.jpg" width="170" alt="Amenity mode"/> <img src="https://user-images.githubusercontent.com/25514836/183450365-fc21e680-168f-479b-9195-0dd77297e47c.jpg" width="170" alt="Editing a library"/> <img src="https://user-images.githubusercontent.com/25514836/183449966-995ad572-b8f4-472b-b958-584f552e8a46.jpg" width="170" alt="Micromapping mode"/>
 
 [More screenshots](https://wiki.openstreetmap.org/wiki/Every_Door)
 
