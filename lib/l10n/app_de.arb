@@ -492,7 +492,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Wie kann man einen Gebäudeeingang hinzufügen?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Unten befindet sich eine Reihe mit Schaltflächen für die Modi: Mikromapping, Einrichtungen und Eingänge.\n\nTippen Sie im Modus Eingänge auf die Tür in der unteren Ecke oder ziehen Sie diese auf die Karte.",
+  "faqEntranceContent": "Unten befindet sich eine Reihe mit Schaltflächen für die Modi: Mikromapping, Einrichtungen, Eingänge und Notizen.\n\nTippen Sie im Modus Eingänge auf die Tür in der unteren Ecke oder ziehen Sie diese auf die Karte.",
   "@faqEntranceContent": {},
   "faqLetters": "Kann ich Buchstaben als Kennziffer oder Wohnungsnummer eingeben?",
   "@faqLetters": {},
