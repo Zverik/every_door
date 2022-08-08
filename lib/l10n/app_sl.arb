@@ -812,7 +812,7 @@
   "@changesSwipeLeft": {
     "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
   },
-  "faqEntranceContent": "Na dnu je vrsta gumbov za načine: mikromapiranje, točke POI in vhodi.\n\nV načinu vhodov tapni ali povleci gumb za vrata v spodnjem kotu na zemljevid.",
+  "faqEntranceContent": "Na dnu je vrsta gumbov za načine: mikromapiranje, točke POI, vhodi in opombe.\n\nV načinu vhodov tapni ali povleci gumb za vrata v spodnjem kotu na zemljevid.",
   "@faqEntranceContent": {},
   "faqMapTinyContent": "Ker to ni bistvo. Na zemljevidu le preverjaš svoj položaj in ga premikaš, za prilagoditev. Oglej si spodnji seznam točk POI, razvrščen po oddaljenosti.\n\nZemljevid se poveča, ko urejaš vsebine, ki so oddaljene od tvoje lokacije. Aplikacija je pravzaprav narejena za urejanje stvari, ki jih vidiš z očmi.",
   "@faqMapTinyContent": {},
