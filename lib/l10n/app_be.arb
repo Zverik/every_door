@@ -658,5 +658,101 @@
     "description": "Tooltip for the amenity filter button on a map."
   },
   "navEntrancesMode": "Рэжым уваходаў",
-  "@navEntrancesMode": {}
+  "@navEntrancesMode": {},
+  "changesDeletedUndo": "Адмяніць",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "fieldHoursFullDay": "Увесь дзень",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursButton": "Усталяваць гадзіны працы",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "tileDragTheMap": "Калі ласка, падыдзіце да іх бліжэй, перацягніце мапу або дадайце адсутную ўстанову.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "accountChangesets": "Набораў змен",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountUnreadMail": "Непрачытаных паведамленняў",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesUploadFailedTitle": "Запампоўка неудалася",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "changesUploadedTitle": "Запампавана",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "settingsUploads": "Запампоўкі ў чаканні",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsNumericKeyboard": "Замяніць лічбавую клавіятуру",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "aboutViewLog": "Сістэмны лог",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "changesDeletedChange": "Выдалена {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesPending": "У чаканні",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesPurgeTitle": "Ачысціць змены?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesSwipeLeft": "Правядзіце ўлева для адмены змены",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursAsText": "Тэкстам",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursSpecificDays": "Канкрэтная дата",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "changesUploadedMessage": "Адпраўлена {changes} у API.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesPurgeMessage": "Выдаліць усе запісаныя змены і аднавіць зыходныя даныя?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursTitle": "Гадзіны працы",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "accountPasswordWarningMessage": "Ваш пароль будзе захаваны на прыладзе. Выбірайце гэта толькі ў выпадку збою OAuth.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  }
 }
