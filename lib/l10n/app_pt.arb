@@ -1,1 +1,1071 @@
-{}
+{
+  "navUpload": "Subir",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "filterByAddress": "Por morada",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterByFloor": "Por andar",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "mapSettings": "Ajustes",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapZoomOut": "Afastar",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "editorHistory": "Histórico",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Etiquetas brutas",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorMoreFields": "Mais campos",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorMissing": "Não existe",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorDeleteButton": "Apagar",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsShare": "Partilhar",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsUrlCopied": "URL copiado para a área de transferência",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsKeyError": "Chave incomum",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "versionsRetryFetch": "Tentar novamente",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsLocalChanges": "Mudanças locais",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Versão #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "por {user} em {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsPurgeData": "Limpar dados em cache obsoletos",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "Limpar todos os dados descarregados",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataTitle": "Apagar Dados?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "Terás que descarregar tudo novamente. Continuar?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedAllTitle": "Dados Apagados",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{{count} elemento limpado}, =few{{count} elementos limpados}, =other{{count} elementos limpados}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsBackground": "Imagens de fundo",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsLeftHand": "Controles para mão esquerda",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsNumericKeyboard": "Teclado numérico estendido",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsSystem": "Sistema",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "Usar posicionamento melhorado do Google",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "aboutVersionHistory": "Histórico de versões",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutProjectWebsite": "Site do projeto",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutHelpTranslate": "Ajuda a traduzir",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "no Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "Perguntas frequentes",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Ligações",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountTitle": "Conta OpenStreetMap",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "Iniciar sessão com OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountLoginPassword": "Iniciar sessão com palavra-chave",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "Aviso",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "Tua palavra-chave será armazenada no dispositivo. Somente escolhe esta opção quando houver erro com OAuth.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldLogin": "Utilizador",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountLogout": "Terminar sessão",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountUnreadMail": "Mensagem não lida",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "fieldHoursButton": "Definir horário de funcionamento",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursSpecificDays": "Data específica",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursHour": "Hora",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minuto",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursChooseTime": "Hora e minuto",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Limpar",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Salvar",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursAddFragment": "Adicionar um dia",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursRemoveFragment": "Retirar dia",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursAddBreak": "Adicionar um intervalo",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursRemoveBreak": "Retirar intervalo",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursSDAddOne": "Adicionar data",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Adicionar intervalo",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Outro idioma",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Copiar valor",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldComboEmpty": "vazio",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "escolher",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "não",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "público",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "clientes",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "sim",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldFloorNew": "Novo Andar",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "entrancesAddBuilding": "Adicionar edifício",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingLevels": "Andares",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingType": "Tipo",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Mais",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterialPanels": "painéis",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialStone": "pedra",
+  "@buildingMaterialStone": {},
+  "buildingMaterialGlass": "vidro",
+  "@buildingMaterialGlass": {},
+  "buildingTypeHouse": "casa",
+  "@buildingTypeHouse": {},
+  "buildingTypeRetail": "varejo",
+  "@buildingTypeRetail": {},
+  "entranceIsUnit": "Salvar o número do apartamento em \"addr:unit\"",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceTypeShop": "loja",
+  "@entranceTypeShop": {},
+  "entranceTypeEmergency": "emergência",
+  "@entranceTypeEmergency": {},
+  "notesClose": "Fechar",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesAddNote": "Adicionar nota",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "Anónimo",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "faqChangeType": "Como alterar um tipo de serviço?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Toca no título do editor, onde o tipo está escrito.",
+  "@faqChangeTypeContent": {},
+  "loadingChanges": "A carregar alterações…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingLocation": "A adquirir localização…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "dataDownloadFailed": "Erro ao descarregar",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Descarga bem-sucedida",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{{count} elemento descarregado.}, =few{{count} elementos descarregados.}, =other{{count} elementos descarregados.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "legendOther": "Outros",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "navEntrancesMode": "Modo de entradas",
+  "@navEntrancesMode": {},
+  "loadingPresets": "A carregar modelos de etiquetas…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingStart": "Inicializando…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingChangesFailed": "Erro ao carregar alterações",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingTooMuchDataTitle": "Muitos dados",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "settingsLoginDetails": "Conta OSM",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "tileNo": "sem",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "tileNothingAround": "Não há serviços ao teu redor em {distance} metros.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "tileDragTheMap": "Aproxima-te de qualquer coisa, arrasta o mapa ou adiciona um serviço ausente.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "navNotesMode": "Modo de notas",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "tileDragOrUnfilter": "Move-te, adiciona um serviço ou limpa o filtro.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "navMicromappingMode": "Modo de micromapeamento",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "filterEmpty": "vazio",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "mapFilter": "Filtro",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "chooseLocation": "Escolhe a localização",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "editorSave": "Salvar",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "navDownload": "Descarregar",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navPoiMode": "Modo de serviço",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "filterNonConfirmed": "Somente os não confirmados",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "editorMarkChecked": "Marcar como comprovado",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "filterNoAddresses": "Nenhuma morada próxima",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "chooseType": "Escolhe o tipo",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "navImagery": "Trocar imagem de fundo",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "chooseTypeClear": "Limpar",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "mapLocate": "Voltar a minha localização",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Aproximar",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "editorCloseTitle": "Fechar o editor?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorRestoreTitle": "Está aberto?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "tagsNewPoint": "Novo ponto",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "settingsApiServer": "Servidor de API",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "editorMove": "Mover",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorMarkActive": "Marcar como ativo",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "settingsPresentation": "Apresentação",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsEditor": "Editor",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "editorDuplicate": "Possível duplicata em {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "tagsDelete": "Limpar",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "editorCloseMessage": "Perderás tuas alterações não salvas. Continuar?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "versionsTitle": "Histórico de {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "settingsLanguage": "Idioma",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "editorRestoreMessage": "{amenity} está inativo. Desejas marcar como ativo?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "settingsDataManagement": "Gestão de Dados",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "aboutSourceCode": "Código fonte",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "editorLoadingPreset": "A carregar modelo de etiqueta…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMarkDefunct": "Marcar como inativo",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorRestore": "Restaurar",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorDeleteTitle": "Apagar {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsKey": "Chave",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValueLong": "Valor muito longo",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "tagsAddTag": "Adicionar uma etiqueta",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsValue": "Valor",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsRestore": "Restaurar",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "versionsEnableInternet": "Conecta à Internet para obter o histórico de versões",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "Erro ao obter o histórico de versões",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "settingsTitle": "Ajustes",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsUploads": "Envios pendentes",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsPreferContact": "Preferir o prefixo \"contact:\"",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "versionsNoTagChanges": "Sem mudanças de etiqueta",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsPurgedObsoleteTitle": "Dados Obsoletos",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsCacheTiles": "Descarregar e fazer cache das imagens",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsDefaultPayment": "Tipos de cartão padrão",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsAbout": "Sobre",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutViewLog": "Registo do sistema",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutInstalledVersion": "Versão instalada",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutOnGitHub": "no GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Licença",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutReportIssue": "Informar um problema",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpImprove": "Ajuda a melhorar {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "accountOAuthError": "Erro de OAuth",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountPasswordWarningButton": "Entendido",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "entranceWheelchair": "Cadeira de rodas",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Não deve estar vazio",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnitOptional": "opcional",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressStreet": "Rua",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "apiStatusDownloading": "A descarregar dados…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "faqMapTiny": "Por que o mapa é tão pequeno?",
+  "@faqMapTiny": {},
+  "entranceAccessYes": "aberto",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "privado",
+  "@entranceAccessPrivate": {},
+  "entranceTypeMain": "principal",
+  "@entranceTypeMain": {},
+  "entranceTypeService": "serviço",
+  "@entranceTypeService": {},
+  "entranceAccessNo": "não",
+  "@entranceAccessNo": {},
+  "entranceAccessDelivery": "entregas",
+  "@entranceAccessDelivery": {},
+  "entranceTypeGarage": "garagem",
+  "@entranceTypeGarage": {},
+  "addressUnit": "Unidade",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "entranceType": "Tipo",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "addressHouseNumber": "Casa",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "entranceTypeStaircase": "escadaria",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "casa",
+  "@entranceTypeHome": {},
+  "faqEntrance": "Como adicionar uma entrada de edifício?",
+  "@faqEntrance": {},
+  "addressPlace": "Lugar",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "apiStatusUploading": "A enviar alterações",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "faqEntranceContent": "Na parte inferior há uma fileira de botões de modo: Micromapeamento, Serviços, Entradas e Notas.\n\nNo modo Entradas, toca ou arrasta o botão da porta, localizada no canto inferior, para o mapa.",
+  "@faqEntranceContent": {},
+  "notesCloseMessage": "Fechar a nota?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "apiStatusUpdatingDB": "A salvar elementos na base de dados da aplicação",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "faqLetters": "Posso digitar letras em uma referência ou número de apartamento?",
+  "@faqLetters": {},
+  "enableLocationMessage": "Permite o acesso à localização para a aplicação no painel de ajustes que será exibido.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonYes": "Sim",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "addressX": "Morada {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "fieldHoursWeekdays": "Seg Ter Qua Qui Sex Sáb Dom",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "Fechado nos feriados",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "faqMapTinyContent": "Porque a questão não é essa. Só verificas o teu posicionamento e moves o mapa para ajustar. Vê a lista de serviços abaixo, ordenada por distância de ti.\n\nO mapa fica maior quando editas os serviços longe de tua localização, embora o aplicativo tenha sido feito para editar as coisas que estás a ver.",
+  "@faqMapTinyContent": {},
+  "faqTagging": "Todas as perguntas sobre etiquetagem",
+  "@faqTagging": {},
+  "faqCheckmarks": "Para que servem os sinais de visto?",
+  "@faqCheckmarks": {},
+  "faqCheckmarksContent": "Os sinais de visto indicam que os dados de serviços foram confirmados. Eles adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás do sinal de visto é que, digamos, mapeaste metade da cidade na primeira vez. Então, depois de um mês, foste mapear ali novamente. Precisas marcar de alguma forma que vês que o serviço está ali, mas não houve nenhuma alteração. Isso é o sinal de visto: tocas nele e continuas.\n\nO sinal de visto fica ativo por duas semanas. Depois disso, podes mapear os serviços novamente.",
+  "@faqCheckmarksContent": {},
+  "faqLettersContent": "Se o teclado numérico não puder ser alterado para um teclado completo, verifica os ajustes da aplicação. Eles estão localizados no botão do canto superior esquerdo. Ativa o \"Teclado numérico estendido\" lá.",
+  "@faqLettersContent": {},
+  "faqFloors": "Os andares '3' e '/3' são iguais?",
+  "@faqFloors": {},
+  "changesPending": "Pendente",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesOsmNote": "Nota OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "faqFloorsContent": "Não. O primeiro tem a etiqueta `addr:floor=3` preenchida. Esse é o andar que está impresso na navegação e é comumente usado. O segundo não tem essa etiqueta, mas tem `level=3`. Esse número é um número de andar sequencial que vai de zero até `building:levels - 1`. Ou seja, em um edifício de três andares, o valor de `addr:floor` depende do país, mas `level` é sempre 0, 1 ou 2.\n\nVê como a notação no editor se relaciona com essas etiquetas:\n\n* `2`: `addr:floor=2` e `level=*` não vazio.\n* `4/`: `addr:floor=4`, mas não há etiqueta `level`.\n* `/1`: `level=1`, mas não há etiqueta `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (e existe um objeto próximo com o mesmo `addr:floor`, mas diferente `level`, ou vice-versa).",
+  "@faqFloorsContent": {},
+  "changesDeletedChange": "{change} excluído",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesPurge": "Limpar mudanças",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "changesSwipeLeft": "Desliza para a esquerda para desfazer uma alteração",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "accountFieldPassword": "Palavra-chave",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "changesCount": "{count,plural, =1{{count} alteração}, =few{{count} alterações}, =other{{count} alterações}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesUploadFailedTitle": "Falha ao enviar",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "accountAuthErrorMessage": "Utilizador ou palavra-chave incorretos.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "changesUploadedMessage": "Enviado {changes} a API.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesDeletedUndo": "Desfazer",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "fieldHoursTitle": "Horário de Funcionamento",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "accountPasswordTitle": "Credenciais do OSM",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountAuthErrorTitle": "Error de autenticação",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountChangesets": "Conjuntos de alterações",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "changesUploadedTitle": "Enviado",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "fieldHoursFullDay": "Dia inteiro",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursNumberedWeekday": "\"Última segunda\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursBreak": "Intervalo",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "changesMapNotes": "Notas do mapa e desenhos",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesPurgeTitle": "Cancelar as alterações?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesPurgeMessage": "Apagar todas as alterações realizadas e restaurar os dados originais?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursAsText": "Como texto",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursOpens": "Abre",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "Fecha",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursClosed": "Fechado",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Feriados",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursNext": "Próximo",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "buildingMaterialBrick": "tijolo",
+  "@buildingMaterialBrick": {},
+  "buildingPostCode": "Código Postal",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingRoofShape": "Forma do telhado",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "fieldFloorShouldBeNumber": "Por favor, insere um número",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "faqTaggingContent": "Por que um objeto está faltando no editor? Quando esses pontos brancos são exibidos no modo de micromapeamento? Como os objetos são classificados?\n\nAs respostas para todas essas perguntas estão em [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Aqui está o que podes ver:\n\n* A ordem das chaves para a etiqueta principal — lista `kMainKeys`.\n* Quais objetos são descarregados — função `isGoodTags`.\n* O que é considerado um serviço — função `isAmenityTags`.\n* Quais pontos são colados a quais caminhos — função `detectSnap`.\n* Quando um objeto de micromapeamento está incompleto — função `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "buildingRoofLevels": "Andares do telhado",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingMaterial": "Fachada",
+  "@buildingMaterial": {},
+  "buildingMaterialPlaster": "gesso",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "madeira",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "betão",
+  "@buildingMaterialConcrete": {},
+  "fieldCardsAccepted": "aceito",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "loadingTooMuchData": "Limpa os dados descarregados nos Ajustes para tornar o editor mais rápido.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "fieldHoursSDRemove": "Retirar",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldWheelchairLimited": "limitado",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "não",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCheckboxNo": "não",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldCardsNo": "não",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldFloorFloorDesc": "O andar como indicado na navegação e em elevadores",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorEmpty": "Para escolher um andar, define uma morada.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorLevelDesc": "Número do andar, começando em 0 para o rés-do-chão",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "enableGPSMessage": "Ativa os serviços de localização no painel de ajustes que será exibido.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "entrancesAddEntrance": "Adicionar entrada",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "fieldAddressTap": "Toca em uma morada",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "enableLocation": "Habilitar localização",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "fieldPhoneWrong": "Formato de telefone incorreto",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "buttonNo": "Não",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "entranceX": "Entrada {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingMaterialMetal": "metal",
+  "@buildingMaterialMetal": {},
+  "buildingTypeAddress": "morada",
+  "@buildingTypeAddress": {},
+  "buildingMaterialCementBlock": "blocos de cimento",
+  "@buildingMaterialCementBlock": {},
+  "buildingTypeShed": "cabana",
+  "@buildingTypeShed": {},
+  "buildingTypeConstruction": "construção",
+  "@buildingTypeConstruction": {},
+  "buildingTypeApartments": "apartamentos",
+  "@buildingTypeApartments": {},
+  "buildingTypeCommercial": "comercial",
+  "@buildingTypeCommercial": {},
+  "buildingTypeIndustrial": "industrial",
+  "@buildingTypeIndustrial": {},
+  "entranceFlatsNumberList": "Devia ser uma lista numérica",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "buildingTypeGarage": "garagem",
+  "@buildingTypeGarage": {},
+  "entranceFlats": "Apartamentos",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceRef": "Referência",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "Acesso",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "fieldCheckboxYes": "sim",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "messageNoData": "Sem dados, toca aqui para descarregar",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "Os dados estão obsoletos, toca aqui para atualizar",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "Ativar GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "buildingX": "Edifício {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  }
+}
