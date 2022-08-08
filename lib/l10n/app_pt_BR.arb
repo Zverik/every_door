@@ -964,7 +964,7 @@
   "@tagsShare": {
     "description": "Tooltip for the sharing button on the tags panel."
   },
-  "settingsCacheTiles": "Baixar e fazer cachê das imagens",
+  "settingsCacheTiles": "Baixar e fazer cache das imagens",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
