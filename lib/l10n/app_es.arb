@@ -808,7 +808,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "¿Cómo añadir una entrada al edificio?",
   "@faqEntrance": {},
-  "faqEntranceContent": "En la parte inferior hay una fila de botones de modos: micromapa, servicios y entradas.\n\nEn el modo de entradas, pulsa o desliza el botón de la puerta en la esquina inferior sobre el mapa.",
+  "faqEntranceContent": "En la parte inferior hay una fila de botones de modos: micromapeo, servicios, entradas y notas.\n\nEn el modo de entradas, pulsa o desliza el botón de la puerta en la esquina inferior sobre el mapa.",
   "@faqEntranceContent": {},
   "faqTagging": "Todas las preguntas sobre el etiquetado",
   "@faqTagging": {},
