@@ -818,7 +818,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Jak dodać wejście do budynku?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Na dole znajduje się rząd przycisków dla trybów: mikromapowanie, udogodnienia i wejścia.\n\nW trybie wejść dotknij lub przeciągnij przycisk drzwi w dolnym rogu na mapę.",
+  "faqEntranceContent": "Na dole znajduje się rząd przycisków dla trybów: mikromapowanie, udogodnienia, wejścia i uwagi.\n\nW trybie wejść dotknij lub przeciągnij przycisk drzwi w dolnym rogu na mapę.",
   "@faqEntranceContent": {},
   "faqFloors": "Czy piętra „3” i „/3” są takie same?",
   "@faqFloors": {},
