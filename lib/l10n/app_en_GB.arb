@@ -92,7 +92,7 @@
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
   },
-  "loadingTooMuchData": "Purge downloaded data from Settings to make the editor faster.",
+  "loadingTooMuchData": "Purge downloaded data in Settings to make the editor faster.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
