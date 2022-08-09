@@ -801,5 +801,237 @@
   "aboutLinks": "リンク",
   "@aboutLinks": {
     "description": "Title for the links section on the About page."
+  },
+  "versionsTitle": "{elementRef} 履歴",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsEnableInternet": "インターネットに接続して改版履歴を取得",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "改版履歴取得エラー",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "再試行",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsVersionNumber": "バージョン #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "利用者: {user} 日時: {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "faqEntrance": "建物の出入口の追加方法は？",
+  "@faqEntrance": {},
+  "faqChangeTypeContent": "その種別が記載されているエディタのタイトルをタップします。",
+  "@faqChangeTypeContent": {},
+  "changesOsmNote": "OSMのメモ",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "buildingMaterialConcrete": "コンクリート",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "パネル",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "セメントブロック",
+  "@buildingMaterialCementBlock": {},
+  "faqTagging": "すべてのタグ付けの質問",
+  "@faqTagging": {},
+  "faqLetters": "refや部屋番号には文字を入力できますか？",
+  "@faqLetters": {},
+  "faqChangeType": "アメニティの種別を変える方法は？",
+  "@faqChangeType": {},
+  "navImagery": "背景画像切替",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navPoiMode": "アメニティモード",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navEntrancesMode": "出入口モード",
+  "@navEntrancesMode": {},
+  "navNotesMode": "メモモード",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapSettings": "設定",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "フィルタ",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "fieldHoursRemoveFragment": "断片を除去",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursSDRemove": "除去",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "buildingMaterialPlaster": "石膏",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "木材",
+  "@buildingMaterialWood": {},
+  "buildingMaterialStone": "石",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "金属",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "ガラス",
+  "@buildingMaterialGlass": {},
+  "notesAnonymous": "匿名",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "faqCheckmarks": "チェックマークの用途は？",
+  "@faqCheckmarks": {},
+  "fieldNameLanguages": "別の言語",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "entrancesAddEntrance": "出入口を追加",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "fieldNameCopy": "値をコピー",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "entrancesAddBuilding": "建物を追加",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingMaterial": "玄関",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "レンガ",
+  "@buildingMaterialBrick": {},
+  "notesClose": "閉じる",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesAddNote": "メモを追加",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "editorHistory": "履歴",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "navDownload": "ダウンロード",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "mapZoomOut": "ズームアウト",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "navUpload": "アップロード",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "editorTags": "生のタグ",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "navMicromappingMode": "マイクロマッピングモード",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "tagsRestore": "復元",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "クリア",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "fieldHoursChooseTime": "時分",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "クリア",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "mapZoomIn": "ズームイン",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "editorMarkChecked": "チェック済とマーク",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "tagsShare": "共有",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "versionsNoTagChanges": "タグの変更はありません",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsCacheTiles": "タイルをダウンロード",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "fieldHoursSDAddOne": "日付を追加",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "settingsLanguage": "言語",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsSystem": "システム",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "changesPurge": "変更をパージ",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursSave": "保存",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursSDAddRange": "範囲を追加",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "notesCloseMessage": "メモを閉じますか？",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
   }
 }
