@@ -914,7 +914,7 @@
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
-  "notesCloseMessage": "Luk noten?",
+  "notesCloseMessage": "Vil du markere noten som løst?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -922,7 +922,7 @@
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
-  "notesClose": "Luk",
+  "notesClose": "Løs",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
