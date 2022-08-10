@@ -1020,11 +1020,11 @@
   "@notesAnonymous": {
     "description": "Name for anonymous note submitters."
   },
-  "notesClose": "Close",
+  "notesClose": "Resolve",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
-  "notesCloseMessage": "Close the note?",
+  "notesCloseMessage": "Mark the note resolved?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
