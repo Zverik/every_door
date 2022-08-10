@@ -910,11 +910,11 @@
   "@notesAnonymous": {
     "description": "Name for anonymous note submitters."
   },
-  "notesClose": "Zapri",
+  "notesClose": "Razreši",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
-  "notesCloseMessage": "Zapreti opombo?",
+  "notesCloseMessage": "Označiti opombo kot rešeno?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
