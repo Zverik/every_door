@@ -1026,7 +1026,7 @@
   "@addressUnitOptional": {
     "description": "Hint for addr:unit that it's optional."
   },
-  "notesClose": "Close",
+  "notesClose": "Resolve",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
