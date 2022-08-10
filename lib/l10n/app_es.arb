@@ -918,11 +918,11 @@
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
-  "notesClose": "Cerrar",
+  "notesClose": "Resolver",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
-  "notesCloseMessage": "¿Cerrar la nota?",
+  "notesCloseMessage": "¿Marcar la nota como resuelta?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
