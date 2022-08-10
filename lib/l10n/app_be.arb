@@ -55,7 +55,7 @@
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."
   },
-  "dataDownloadedCount": "{count,plural, =1{Спампаваны {count} элемент.}, =few{Спампавана {count} элементаў.}, =other{Спампавана {count} элементаў.}}",
+  "dataDownloadedCount": "{count,plural, =1{Спампаваны {count} аб'ект.}, =few{Спампавана {count} аб'екта.}, =other{Спампавана {count} аб'ектаў.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -158,7 +158,7 @@
   "@editorMoreFields": {
     "description": "Title of a additional fields group in editor."
   },
-  "filterEmpty": "пусты",
+  "filterEmpty": "пуста",
   "@filterEmpty": {
     "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
   },
@@ -331,7 +331,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "tileNothingAround": "Ніякіх устаноў вакол вас у {distance} метрах.",
+  "tileNothingAround": "Няма устаноў вакол вас у {distance} метрах.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -978,7 +978,7 @@
   "@addressStreet": {
     "description": "Label for addr:street in the form. Keep it short."
   },
-  "apiStatusUpdatingDB": "Захаванне элементаў у базе даных",
+  "apiStatusUpdatingDB": "Захаванне аб'ектаў у базе даных",
   "@apiStatusUpdatingDB": {
     "description": "Text displayed when the app is updating the database with downloaded objects."
   },
@@ -997,5 +997,51 @@
     "description": "Label for addr:postcode in the form. Keep it short."
   },
   "faqCheckmarks": "Для чаго патрэбны галачкі?",
-  "@faqCheckmarks": {}
+  "@faqCheckmarks": {},
+  "fieldHoursAddFragment": "Дадаць расклад",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "tileDragOrUnfilter": "Калі ласка, падыдзіце да іх бліжэй, дадайце адсутную ўстанову, або ачысціце фільтр.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "changesCount": "{count,plural, =1{{count} змена}, =few{{count} змены}, =other{{count} змен}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "faqFloors": "Паверхі \"3\" і \"/3\" — адно і тое ж?",
+  "@faqFloors": {},
+  "faqLetters": "Ці магу я ўвесці літары ў нумар кватэры або ўваходу?",
+  "@faqLetters": {},
+  "faqChangeType": "Як змяніць тып установы?",
+  "@faqChangeType": {},
+  "faqTagging": "Усе пытанні па тэгах",
+  "@faqTagging": {},
+  "faqChangeTypeContent": "Націсніце на загаловак рэдактара, дзе напісаны гэты тып.",
+  "@faqChangeTypeContent": {},
+  "faqEntrance": "Як дадаць уваход у будынак?",
+  "@faqEntrance": {},
+  "fieldHoursNumberedWeekday": "Санітарны дзень",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldComboEmpty": "няма",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldFloorFloorDesc": "Паверх як пазначана на навігацыі і ў ліфтах",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Ачышчаны {count} аб'ект}, =few{Ачышчана {count} аб'екта}, =other{Ачышчана {count} аб'ектаў}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  }
 }
