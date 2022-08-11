@@ -6,7 +6,7 @@ const kMainKeys = <String>[
   'highway', 'railway',
   'office', 'healthcare', 'leisure', 'natural',
   'emergency', 'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
-  'marker', 'public_transport',
+  'marker', 'public_transport', 'traffic_sign', 'hazard', 'telecom',
   'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
   'advertising', 'playground', 'traffic_calming',
 ];
@@ -226,7 +226,8 @@ bool isMicroTags(Map<String, String> tags) {
     'amenity', 'tourism', 'emergency', 'man_made', 'historic',
     'playground', 'advertising', 'power', 'traffic_calming',
     'barrier', 'highway', 'railway', 'natural', 'leisure',
-    'marker', 'public_transport',
+    'marker', 'public_transport', 'hazard', 'traffic_sign',
+    'telecom',
   };
   if (kAllGoodKeys.contains(k)) return true;
   return false;
@@ -243,23 +244,10 @@ bool isGoodTags(Map<String, String> tags) {
   final k = _clearPrefix(key);
 
   const kAllGoodKeys = <String>{
-    'shop',
-    'craft',
-    'office',
-    'healthcare',
-    'tourism',
-    'historic',
-    'club',
-    'emergency',
-    'power',
-    'aerialway',
-    'aeroway',
-    'advertising',
-    'playground',
-    'entrance',
-    'traffic_calming',
-    'marker',
-    'public_transport',
+    'shop', 'craft', 'office', 'healthcare', 'tourism', 'historic',
+    'club', 'emergency', 'power', 'aerialway', 'aeroway', 'advertising',
+    'playground', 'entrance', 'traffic_calming', 'marker',
+    'public_transport', 'hazard', 'traffic_sign', 'telecom',
   };
   if (kAllGoodKeys.contains(k)) return true;
 

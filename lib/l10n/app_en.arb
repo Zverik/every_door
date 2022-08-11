@@ -91,7 +91,9 @@
     "description": "Tooltip for the micromapping mode button on the nav panel."
   },
   "navEntrancesMode": "Entrances mode",
-  "@navEntrancesMode": {},
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
   "navNotesMode": "Notes mode",
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."

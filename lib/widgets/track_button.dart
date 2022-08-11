@@ -69,24 +69,21 @@ class OverlayButtonLayer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     if (!_options.enabled) return Container();
 
-    final button = Padding(
-      padding: _options.padding + EdgeInsets.symmetric(horizontal: 10.0),
-      child: GestureDetector(
-        onTap: _options.onPressed,
-        onLongPress: _options.onLongPressed,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(25.0),
-            border: Border.all(color: Colors.grey.withOpacity(0.5)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              _options.icon,
-              size: 30.0,
-              color: Colors.black.withOpacity(0.5),
-            ),
+    final button = GestureDetector(
+      onTap: _options.onPressed,
+      onLongPress: _options.onLongPressed,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(25.0),
+          border: Border.all(color: Colors.grey.withOpacity(0.5)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            _options.icon,
+            size: 30.0,
+            color: Colors.black.withOpacity(0.5),
           ),
         ),
       ),
@@ -102,12 +99,15 @@ class OverlayButtonLayer extends ConsumerWidget {
           ? (_options.safeRight ? safePadding.right : 0.0)
           : null,
       left: _options.alignment.x < 0 ? safePadding.left : null,
-      child: _options.tooltip == null
-          ? button
-          : Tooltip(
-              message: _options.tooltip,
-              child: button,
-            ),
+      child: Padding(
+        padding: _options.padding + EdgeInsets.symmetric(horizontal: 10.0),
+        child: _options.tooltip == null
+            ? button
+            : Tooltip(
+                message: _options.tooltip,
+                child: button,
+              ),
+      ),
     );
   }
 }

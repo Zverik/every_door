@@ -1,5 +1,13 @@
 # Every Door App Change Log
 
+## 1.0
+
+_Unreleased_
+
+* Moved `amenity=lounger` to micromapping (thanks @starsep).
+* Added support for `hazard=*`, `telecom=*`, and `traffic_sign=*`.
+* Fixed filtering panel when the map was moved.
+
 ## 0.10
 
 _Released on 2022-08-08_
