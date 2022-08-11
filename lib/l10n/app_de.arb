@@ -461,7 +461,7 @@
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
   },
-  "loadingTooMuchData": "Löschen Sie heruntergeladene Daten aus den Einstellungen, um den Editor zu beschleunigen.",
+  "loadingTooMuchData": "Löschen Sie heruntergeladene Daten in den Einstellungen, um den Editor zu beschleunigen.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -492,7 +492,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Wie kann man einen Gebäudeeingang hinzufügen?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Unten befindet sich eine Reihe mit Schaltflächen für die Modi: Mikromapping, Einrichtungen und Eingänge.\n\nTippen Sie im Modus Eingänge auf die Tür in der unteren Ecke oder ziehen Sie diese auf die Karte.",
+  "faqEntranceContent": "Unten befindet sich eine Reihe mit Schaltflächen für die Modi: Mikromapping, Einrichtungen, Eingänge und Notizen.\n\nTippen Sie im Modus Eingänge auf die Tür in der unteren Ecke oder ziehen Sie diese auf die Karte.",
   "@faqEntranceContent": {},
   "faqLetters": "Kann ich Buchstaben als Kennziffer oder Wohnungsnummer eingeben?",
   "@faqLetters": {},

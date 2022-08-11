@@ -663,5 +663,332 @@
         "example": "1-15"
       }
     }
-  }
+  },
+  "aboutFAQ": "Часті питання",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "versionsRetryFetch": "Повторити",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsTitle": "{elementRef} історія",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsEnableInternet": "Підключіться до інтернету щоб завантажити історію",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "Не вдалося завантажити історію",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "buildingMaterialPanels": "панелі",
+  "@buildingMaterialPanels": {},
+  "loadingTooMuchDataTitle": "Забагато даних",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Не вдалося завантажити",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Успішно завантажено",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "aboutViewLog": "Системний журнал",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "changesMapNotes": "Нотатки та малювання",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesOsmNote": "Нотатки OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "fieldHoursHour": "Години",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "buildingMaterialConcrete": "бетон",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialWood": "деревина",
+  "@buildingMaterialWood": {},
+  "notesCloseMessage": "Закрити нотатку?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "buildingMaterial": "Фасад",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "цегла",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "штукатурка",
+  "@buildingMaterialPlaster": {},
+  "navPoiMode": "Режим закладів",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navNotesMode": "Режим нотатків",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapSettings": "Налаштування",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapZoomIn": "Наблизити",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Віддалити",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "tagsShare": "Поділитися",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsDelete": "Очистити",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "tagsRestore": "Відновити",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "versionsLocalChanges": "Локальні зміни",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Версія #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsNoTagChanges": "Тегі не змінювались",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsCacheTiles": "Завантажити тайли",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLanguage": "Мова",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsAbout": "Про застосунок",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutVersionHistory": "Історія змін",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutSourceCode": "Вихідний код",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "на Github",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Ліцензія",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "Допоможіть покращити {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Повідомити про проблему",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutOnWeblate": "на Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutLinks": "Посилання",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "changesPurge": "Очистити зміни",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursRemoveBreak": "Прибрати перерву",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursSDAddRange": "Новий діапазон",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Іншою мовою",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Копіювати значення",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "buildingMaterialCementBlock": "цементні блоки",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "каміння",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "метал",
+  "@buildingMaterialMetal": {},
+  "notesAddNote": "Додати нотатку",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "loadingTooMuchData": "В налаштуваннях можна очистити дані щоб редактор працював швидше.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "mapFilter": "Фільтри",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "navImagery": "Перемкнути знімки",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navDownload": "Завантажити",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navMicromappingMode": "Режим мікромапінгу",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navUpload": "Відправити",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navEntrancesMode": "Режим входів",
+  "@navEntrancesMode": {},
+  "mapLocate": "Де я",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "versionsVersionMeta": "від {user} в {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "aboutInstalledVersion": "Встановлена версія",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutHelpTranslate": "Допомогти з перекладом",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "settingsSystem": "Система",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "Точність геолокації Google",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "fieldHoursChooseTime": "Години та хвилини",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursSDRemove": "Прибрати",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "aboutProjectWebsite": "Перейти на сайт",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "fieldHoursMinute": "Хвилини",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursClear": "Очистити",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Зберегти",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursRemoveFragment": "Прибрати розклад",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursSDAddOne": "Нова дата",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "entrancesAddBuilding": "Додати будинок",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingPostCode": "Поштовий індекс",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "entrancesAddEntrance": "Додати вхід",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "notesAnonymous": "Анонімно",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "buildingMaterialGlass": "скло",
+  "@buildingMaterialGlass": {},
+  "notesClose": "Закрити",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "faqEntrance": "Як створити вхід до будівлі?",
+  "@faqEntrance": {},
+  "faqMapTiny": "Чому мапа така маленька?",
+  "@faqMapTiny": {},
+  "faqMapTinyContent": "Тому що мапа - це не головне. Вона потрібна щом знайти себе та посунути до якогось місця. Головне - перелік точок під мапою, впорядковані від найближчої до найдальшої.\n\nМапа збільшується коли редагуєте точки далекі від вашої геолокації. А ще в цому застосунку краще редагувати місця, які ви бачите наживо.",
+  "@faqMapTinyContent": {},
+  "faqEntranceContent": "Нижній рядок кнопок перемикає режими: мікромапінг, точки, входи, нотатки.\n\nВ режимі входів перетягніть кнопку із дверима з нижнього куту на мапу.",
+  "@faqEntranceContent": {}
 }

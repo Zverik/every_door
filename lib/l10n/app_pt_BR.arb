@@ -394,7 +394,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Como adicionar uma entrada de edifício?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Na parte inferior há uma fileira de botões de modo: Micromapeamento, Serviços e Entradas.\n\nNo modo Entradas, toque ou arraste o botão da porta, localizada no canto inferior, para o mapa.",
+  "faqEntranceContent": "Na parte inferior há uma fileira de botões de modo: Micromapeamento, Serviços, Entradas e Notas.\n\nNo modo Entradas, toque ou arraste o botão da porta, localizada no canto inferior, para o mapa.",
   "@faqEntranceContent": {},
   "faqChangeType": "Como alterar um tipo de serviço?",
   "@faqChangeType": {},
@@ -964,7 +964,7 @@
   "@tagsShare": {
     "description": "Tooltip for the sharing button on the tags panel."
   },
-  "settingsCacheTiles": "Baixar e fazer cachê das imagens",
+  "settingsCacheTiles": "Baixar e fazer cache das imagens",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
