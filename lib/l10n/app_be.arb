@@ -66,7 +66,7 @@
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "legendOther": "Іншы",
+  "legendOther": "Іншае",
   "@legendOther": {
     "description": "Legend item for all other types."
   },
@@ -166,7 +166,7 @@
   "@aboutOnGitHub": {
     "description": "Button description to indicate a link to GitHub."
   },
-  "settingsAbout": "Аб прыкладанні",
+  "settingsAbout": "Аб праграме",
   "@settingsAbout": {
     "description": "Title for the About section in settings."
   },
@@ -311,7 +311,7 @@
       }
     }
   },
-  "notesCloseMessage": "Закрыць нататку?",
+  "notesCloseMessage": "Пазначыць нататку вырашанай?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -343,7 +343,7 @@
       }
     }
   },
-  "filterNonConfirmed": "Толькі не пацверджаныя",
+  "filterNonConfirmed": "Толькі неправераныя",
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
@@ -481,7 +481,7 @@
   "@settingsLeftHand": {
     "description": "Switch for enabling left hand controls, when most buttons move to the left."
   },
-  "settingsPreferContact": "Аддайце перавагу прэфіксу \"contact:\"",
+  "settingsPreferContact": "Аддаваць перавагу прэфіксу \"contact:\"",
   "@settingsPreferContact": {
     "description": "Settings switch for using e.g. contact:phone=* over phone=*."
   },
@@ -489,7 +489,7 @@
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."
   },
-  "settingsDefaultPayment": "Плацежныя карты па змаўчанні",
+  "settingsDefaultPayment": "Плацежныя карткі па змаўчанні",
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
@@ -517,7 +517,7 @@
   "@accountAuthErrorTitle": {
     "descripton": "Title for the alert dialog about an incorrect password."
   },
-  "navMicromappingMode": "Рэжым мікракартавання",
+  "navMicromappingMode": "Рэжым мікрамапінга",
   "@navMicromappingMode": {
     "description": "Tooltip for the micromapping mode button on the nav panel."
   },
@@ -695,7 +695,7 @@
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
-  "settingsNumericKeyboard": "Замяніць лічбавую клавіятуру",
+  "settingsNumericKeyboard": "Пашыраная лічбавая клавіятура",
   "@settingsNumericKeyboard": {
     "description": "Settings switch for using the full keyboard for numeric fields."
   },
@@ -996,7 +996,7 @@
   "@buildingPostCode": {
     "description": "Label for addr:postcode in the form. Keep it short."
   },
-  "faqCheckmarks": "Для чаго патрэбны галачкі?",
+  "faqCheckmarks": "Навошта патрэбна птушка?",
   "@faqCheckmarks": {},
   "fieldHoursAddFragment": "Дадаць расклад",
   "@fieldHoursAddFragment": {
@@ -1043,5 +1043,29 @@
     "placeholders": {
       "count": {}
     }
-  }
+  },
+  "fieldComboChoose": "выбраць",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "addressUnit": "Блок",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "changesMapNotes": "Нататкі і малюнкі",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "faqLettersContent": "Калі вашу лічбавую клавіятуру нельга пераключыць на поўную клавіятуру з літарамі, праверце налады праграмы. Уключыце там \"Пашыраная лічбавая клавіятура\".",
+  "@faqLettersContent": {},
+  "faqTaggingContent": "Чаму аб'ект адсутнічае ў рэдактары? Калі белыя кропкі адлюстроўваюцца ў рэжыме мікрпамапінга? Як сартуюцца аб'екты?\n\nАдказы на ўсе гэтыя пытанні знаходзяцца ў файле [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Вось на што трэба звярнуць увагу:\n\n* Парадак вызначэння галоўнага тэга — спіс `kMainKeys`.\n* Якія аб'екты спампоўваюцца — функцыя `isGoodTags`.\n* Што лічыцца ўстановай — функцыя `isAmenityTags`.\n* Якія кропкі прывязваюцца да ліній, і да якіх ліній — функцыя `detectSnap`.\n* Калі аб'ект мікрамапінга няпоўны — функцыя `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "faqEntranceContent": "Унізе экрана ёсць кнопкі для пераключэння рэжымаў: мікрамапінг, установы, уваходы і нататкі.\n\nУ рэжыме ўваходаў націсніце або перацягніце кнопку дзвярэй у ніжнім куце на мапу.",
+  "@faqEntranceContent": {},
+  "faqMapTinyContent": "Бо не яна галоўная. Вы толькі правяраеце сваё месцазнаходжанне на мапе. Глядзіце спіс ўстаноў ніжэй, які адсартаваны па адлегласці ад вас.\n\nМапа павялічваецца, калі вы рэдагуеце ўстановы, размешчаныя далёка ад вашага месцазнаходжання. Хаця праграма створана для рэдагавання аб'ектаў, якія вы бачыце сваімі вачыма.",
+  "@faqMapTinyContent": {},
+  "faqFloorsContent": "Не. У першым выпадку запоўнены тэг `addr:floor=3. Гэта паверх, як ён надрукаваны ў навігацыі і звычайна выкарыстоўваецца. У другім выпадку гэты тэг пусты, але запоўнены тэг `level=3`. Гэтая лічба — нумар паверха ў паслядоўнай нумарацыі ад нуля да `building:levels - 1`. Гэта значыць, што ў трохпавярховым будынку `addr:floor` залежыць ад краіны, а `level`заўсёды 0, 1 ці 2.\n\nВось як умоўнае абазначэнне ў рэдактары залежыць ад гэтых тэгаў:\n\n* `2`: `addr:floor=2` і непусты `level=*`.\n* `4/`: `addr:floor=4`, тэг `level` адсутнічае.\n* `/1`: `level=1`, тэг `addr:floor` адсутнічае.\n* `1/0`: `addr:floor=1` + `level=0` (і побач ёсць аб'ект з тым жа `addr:floor`, але іншым `level`, ці наадварот).",
+  "@faqFloorsContent": {},
+  "faqCheckmarksContent": "Гэта адзнака кажа аб тым, што ўстанова праверана. Дадае да аб'екту тэг `check_date` з бягучай датай.\n\nІдэя птушкі заключаецца ў тым, што, скажам, вы абследавалі палову горада з першага разу. Потым, праз месяц, вы вярнуліся і зноў пайшлі абследаваць. І вам трэба неяк адзначыць, што вы праверылі, што ўстанова на месцы, але нічога не змянілася. Гэта і ёсць птушка: націснуў і пайшоў далей.\n\nАдзнака трымаецца два тыдні пасля праверкі. Потым можна будзе агледзець установу зноў.",
+  "@faqCheckmarksContent": {}
 }
