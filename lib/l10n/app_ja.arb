@@ -533,15 +533,15 @@
       }
     }
   },
-  "buildingLevels": "階数",
+  "buildingLevels": "建物階数",
   "@buildingLevels": {
     "description": "Label for building:levels in the form. Keep it short."
   },
-  "buildingRoofLevels": "屋根の階層",
+  "buildingRoofLevels": "屋根裏階数",
   "@buildingRoofLevels": {
     "description": "Label for roof:levels in the form. Keep it short."
   },
-  "buildingRoofShape": "屋根の形状",
+  "buildingRoofShape": "屋根形状",
   "@buildingRoofShape": {
     "description": "Label for roof:shape in the form. Keep it short."
   },
@@ -635,7 +635,7 @@
   "@addressUnitOptional": {
     "description": "Hint for addr:unit that it's optional."
   },
-  "addressStreet": "ストリート",
+  "addressStreet": "街路",
   "@addressStreet": {
     "description": "Label for addr:street in the form. Keep it short."
   },
@@ -870,13 +870,13 @@
   "@faqTagging": {},
   "faqLetters": "refや部屋番号には文字を入力できますか？",
   "@faqLetters": {},
-  "faqChangeType": "アメニティの種別を変える方法は？",
+  "faqChangeType": "施設の種別を変える方法は？",
   "@faqChangeType": {},
   "navImagery": "背景画像切替",
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
-  "navPoiMode": "アメニティモード",
+  "navPoiMode": "施設モード",
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
@@ -934,7 +934,7 @@
   "@entrancesAddBuilding": {
     "description": "Tooltip for the button to add a building node."
   },
-  "buildingMaterial": "玄関",
+  "buildingMaterial": "外壁",
   "@buildingMaterial": {},
   "buildingMaterialBrick": "レンガ",
   "@buildingMaterialBrick": {},
@@ -1033,5 +1033,27 @@
   "notesCloseMessage": "メモを閉じますか？",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
-  }
+  },
+  "versionsLocalChanges": "ローカル編集",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "faqMapTinyContent": "そこはあまり重要では無いからです。マップ上では自分の位置を確認するだけで、パンして調整します。現在地に近い順にソートされた施設の一覧を見てください。\n\n現在地から離れた施設を編集する際にはマップは大きくなります。アプリは自分の目で見たものを編集するように作られていますが。",
+  "@faqMapTinyContent": {},
+  "faqEntranceContent": "画面最下部にはマイクロマッピング、施設、出入口、メモといったモードボタンが並んでいます。\n\n出入口モードでは、マップの下部隅にあるドアボタンをタップまたはドラッグします。",
+  "@faqEntranceContent": {},
+  "settingsGoogle": "Google拡張ポジショニングを使用",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "faqLettersContent": "数字キーボードがフルキーボードに切り替わらない場合はアプリの設定を見直してください。画面左上隅のボタンで操作します。「数字キーボードを拡張」を切り替えてください。",
+  "@faqLettersContent": {},
+  "faqFloors": "階数の '3' と '/3' は同じですか？",
+  "@faqFloors": {},
+  "faqCheckmarksContent": "これらは施設のデータが確認済であることを示すマークです。当日の日付で `check_date` タグを追加します。\n\nチェックマークの背後にあるアイデアは、例えば、初回に街の半分をサーベイし、1ヶ月後に戻ってきて再度サーベイをして、その施設を見たことを何らかマークする必要があるが何も変更が無いような場合にチェックマークを使います。タップして続けます。\n\nマークは2週間付いたままとなります。その後、施設をサーベイし直すことができます。",
+  "@faqCheckmarksContent": {},
+  "faqFloorsContent": "いいえ。前者には `addr:floor=3` タグが入力されています。That's the floor as it is printed on navigation and commonly used. 後者にはこのタグが無く単に `level=3`タグだけです。数字はゼロから `building:levels - 1`までの連続したフロア番号です。つまり、3階建ての建物において、That is, in a three-storey building `addr:floor` の値は国により異なりますが、 `level` は常に 0, 1, または 2です。\n\nこれらのタグに関連するエディタ内の記法は以下の通り:\n\n* `2`: `addr:floor=2` 及び空で無い `level=*`.\n* `4/`: `addr:floor=4`, しかし `level` タグは無し.\n* `/1`: `level=1`, しかし `addr:floor` タグは無し.\n* `1/0`: `addr:floor=1` + `level=0` (and there's an object nearby:w with the same `addr:floor`, but different `level`, or vice-versa).",
+  "@faqFloorsContent": {},
+  "faqTaggingContent": "エディタ内になぜオブジェクトが無いのでしょうか？マイクロマッピングモードではこれらの白いドットはいつ表示されるのでしょうか？オーブジェクトのソート順は？\n\nこれらの質問への回答は全て[good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) にあります。以下のような内容です:\n\n* メインタグのキー順 — list `kMainKeys`.\n* どのオブジェクトがダウンロード対象か — function `isGoodTags`.\n* どれが施設に該当するのか — function `isAmenityTags`.\n* どのポイントがどのウェイにくっつくのか — function `detectSnap`.\n* マイクロマッピングのオブジェクトが不完全な時 — function `needsMoreInfo`.",
+  "@faqTaggingContent": {}
 }
