@@ -425,6 +425,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     );
   }
 
+  final MapController mapController = MapController();
+
   Widget buildMap(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Row(
@@ -441,6 +443,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           child: SizedBox(
             height: 100.0,
             child: FlutterMap(
+              mapController: mapController,
               options: MapOptions(
                 center: amenity.location,
                 zoom: 17,
@@ -461,6 +464,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           setState(() {
                             amenity.location = newLocation;
                           });
+                          mapController.move(newLocation, mapController.zoom);
                         }
                       },
               ),

@@ -7,6 +7,8 @@ _Unreleased_
 * Moved `amenity=lounger` to micromapping (thanks @starsep).
 * Added support for `hazard=*`, `telecom=*`, and `traffic_sign=*`.
 * Fixed filtering panel when the map was moved.
+* Fixed partial uploading in case of an error.
+* Fixed wrong map in the editor pane after moving the object.
 
 ## 0.10
 

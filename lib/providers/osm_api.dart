@@ -163,7 +163,7 @@ class OsmApiHelper {
     return builder.buildDocument().toXmlString();
   }
 
-  String _buildChangeset(List<OsmChange> changes) {
+  String _buildChangeset(Iterable<OsmChange> changes) {
     final tags = generateChangesetTags(changes);
     final builder = XmlBuilder();
     builder.processing('xml', 'version="1.0"');
@@ -326,7 +326,7 @@ class OsmApiHelper {
         } else {
           await changes.setError(change, null);
           updates.add(UploadedElement(
-            change.toElement(),
+            change.toElement(newId: change.id.ref),
             newId: change.id.ref, // So it doesn't register as deleted
             newVersion: int.parse(resp.body.trim()),
           ));
@@ -422,6 +422,20 @@ class OsmApiHelper {
     return changes;
   }
 
+  Future<String> _openChangeset(
+      List<OsmChange> changes, Map<String, String> headers) async {
+    final resp = await http.put(
+      Uri.https(kOsmEndpoint, '/api/0.6/changeset/create'),
+      headers: headers,
+      body: _buildChangeset(changes),
+    );
+    if (resp.statusCode != 200) {
+      throw OsmApiError(
+          resp.statusCode, 'Failed to create changeset: ${resp.body}');
+    }
+    return resp.body.trim();
+  }
+
   Future<int> _uploadChangesPack(List<OsmChange> changes) async {
     // Download elements to update the data and avoid version errors.
     changes = await _updateUnderlyingElements(changes);
@@ -441,19 +455,12 @@ class OsmApiHelper {
     changes = _mergeUpdatedElements(changes, updatedWays);
     changes.sort();
 
-    // Open a changeset and get its id.
+    // Prepare authentication headers.
     final auth = _ref.read(authProvider.notifier);
     final headers = await auth.getAuthHeaders();
-    final resp = await http.put(
-      Uri.https(kOsmEndpoint, '/api/0.6/changeset/create'),
-      headers: headers,
-      body: _buildChangeset(changes),
-    );
-    if (resp.statusCode != 200) {
-      throw OsmApiError(
-          resp.statusCode, 'Failed to create changeset: ${resp.body}');
-    }
-    final changeset = resp.body.trim();
+
+    // Open a changeset and get its id.
+    final changeset = await _openChangeset(changes, headers);
 
     // Upload changes.
     try {
@@ -469,7 +476,12 @@ class OsmApiHelper {
           // Try one-by-one only on conflict.
           updates = await _uploadOneByOne(changes, changeset, headers);
           clearErrored = false;
-          // TODO: Update changeset comment for changes actually uploaded.
+          // Update changeset comment for changes actually uploaded.
+          await http.put(
+            Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset'),
+            headers: headers,
+            body: _buildChangeset(changes.where((c) => c.error == null)),
+          );
           // TODO: filter changeIds by changes actually uploaded.
         } else {
           rethrow;

@@ -3,7 +3,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 
-Map<String, String> generateChangesetTags(List<OsmChange> changes) {
+Map<String, String> generateChangesetTags(Iterable<OsmChange> changes) {
   String comment = CommentGenerator().generateComment(changes);
   if (comment.length > 250) {
     comment = CommentGenerator().generateComment(changes, simple: true);
