@@ -151,6 +151,7 @@ bool isAmenityTags(Map<String, String> tags) {
       'yes',
       'chair',
       'nameplate',
+      'lounger',
     };
     return !wrongAmenities.contains(v);
   } else if (k == 'tourism') {
