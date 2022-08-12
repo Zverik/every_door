@@ -2,14 +2,17 @@
 
 ## 1.0
 
-_Unreleased_
+_Released on 2022-08-13_
 
+* **First public release.**
 * Imagery by default is now Maxar Premium.
 * Moved `amenity=lounger` to micromapping (thanks @starsep).
 * Added support for `hazard=*`, `telecom=*`, and `traffic_sign=*`.
 * Fixed filtering panel when the map was moved.
 * Fixed partial uploading in case of an error.
 * Fixed wrong map in the editor pane after moving the object.
+* Translations into Czech (thanks Fjuro), Portuguese (thanks Matheus Gomes Correia),
+  Chinese Traditional (thanks Supaplex).
 
 ## 0.10
 
