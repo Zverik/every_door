@@ -906,11 +906,11 @@
       }
     }
   },
-  "changesMapNotes": "Notatki mapy i rysunki",
+  "changesMapNotes": "Uwagi do mapy i rysunki",
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
-  "changesOsmNote": "Notatka OSM",
+  "changesOsmNote": "Uwaga OSM",
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
@@ -918,11 +918,11 @@
   "@notesAnonymous": {
     "description": "Name for anonymous note submitters."
   },
-  "notesClose": "Zamknij",
+  "notesClose": "Rozwiąż",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
-  "notesCloseMessage": "Zamknąć notatkę?",
+  "notesCloseMessage": "Oznaczyć problem z tej uwagi jako rozwiązany?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -936,7 +936,7 @@
   },
   "navEntrancesMode": "Tryb wejść",
   "@navEntrancesMode": {},
-  "navNotesMode": "Tryb notatek",
+  "navNotesMode": "Tryb uwag",
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."
   },
