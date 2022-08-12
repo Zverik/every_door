@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 final effectiveLocationProvider =
     StateNotifierProvider<EffectiveLocationController, LatLng>(
         (ref) => EffectiveLocationController(ref));
+final zoomProvider = StateProvider<double>((ref) => kInitialZoom);
 
 class EffectiveLocationController extends StateNotifier<LatLng> {
   static const kSavedLocation = 'last_location';

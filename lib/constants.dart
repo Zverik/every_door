@@ -29,6 +29,7 @@ const kFollowLinks = true; // whether to open links and phones on tap
 const kUploadOnClose = false; // whether to trigger data upload on app deactivation
 const kShowContactSetting = true; // whether to show the "contact:" setting
 const kSlowDownGPS = false; // skip location changes that are too small to register
+const kInitialZoom = 17.0; // For POI list screen
 const kMicromappingTapZoom = 19.0; // how much to zoom in when tapping a bunch of elements in micromapping
 const kRotationThreshold = 30.0; // degrees, for snapping to zero rotation
 const kManualOption = '✍️'; // Emoji icon for entering values by hand

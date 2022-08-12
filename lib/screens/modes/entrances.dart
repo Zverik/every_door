@@ -20,6 +20,7 @@ import 'package:every_door/screens/settings.dart';
 import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/multi_hit.dart';
+import 'package:every_door/widgets/status_pane.dart';
 import 'package:every_door/widgets/track_button.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
@@ -311,7 +312,6 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     final location = ref.read(effectiveLocationProvider);
     final imagery = ref.watch(selectedImageryProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
-    final apiStatus = ref.watch(apiStatusProvider);
     final LatLng? trackLocation = ref.watch(geolocationProvider);
     final loc = AppLocalizations.of(context)!;
 
@@ -591,40 +591,11 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   ),
               ],
             ),
-            if (apiStatus != ApiStatus.idle)
-              buildApiStatusPane(context, apiStatus),
+            ApiStatusPane(),
           ]),
         ),
         if (widget.areaStatusPanel != null) widget.areaStatusPanel!,
       ],
-    );
-  }
-
-  Widget buildApiStatusPane(BuildContext context, ApiStatus apiStatus) {
-    final loc = AppLocalizations.of(context)!;
-    return Center(
-      child: Container(
-        padding: EdgeInsets.all(20.0),
-        margin: EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.white.withOpacity(0.8),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 20.0),
-            Text(
-              getApiStatusLoc(apiStatus, loc),
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -14,6 +14,7 @@ import 'package:every_door/screens/editor/note.dart';
 import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/painter.dart';
+import 'package:every_door/widgets/status_pane.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -241,6 +242,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   },
                   style: kTypeStyles[_currentTool]!,
                 ),
+              ApiStatusPane(),
             ],
           ),
         ),
