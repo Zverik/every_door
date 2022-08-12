@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:every_door/helpers/tile_layers.dart';
-import 'package:every_door/private.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:logging/logging.dart';
 import 'package:proximity_hash/proximity_hash.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +18,7 @@ final selectedImageryProvider =
         (ref) => SelectedImageryProvider(ref));
 
 class ImageryProvider extends StateNotifier<Imagery> {
+  static final _logger = Logger('ImageryProvider');
   final Ref _ref;
   bool loaded = false;
 
@@ -26,22 +27,25 @@ class ImageryProvider extends StateNotifier<Imagery> {
   static const kBingUrlKey = 'bing_url_template';
   static const kImageryKey = 'imagery_id';
 
-  static const bingImagery = Imagery(
+  static final bingImagery = Imagery(
     id: 'bing',
     type: ImageryType.bing,
     name: 'Bing Aerial Imagery',
-    url: 'https://www.bing.com/maps',
+    url:
+        'OMe8mqtOsgEax6JwKslCwSnfdUmUnnJ9djGBbfrgDh9lM+Lmp82Gh+3/rYFA6cHWZaGKWpq5CDrH0DfqjsPbILNcl6hfAWMnCS6b5l+jEqg=',
+    encrypted: true,
     icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Bing.png',
     attribution: '© Microsoft Bing',
     minZoom: 1,
     maxZoom: 22,
-  );
+  ).decrypt();
 
   static final maxarPremiumImagery = Imagery(
     id: 'Maxar-Premium',
     type: ImageryType.tms,
     name: 'Maxar Premium Imagery',
-    url: "EcKQpupFzHs7yZp0CdAT3zOWVWST2GB8eji2OtSHNANsdO7JnPHXw+riiIBA2aPDb5GFaKmySAOl/QDz57eaWI18qPwmdhpDeFLMmiDRZ4JQYGJbTzCq1On6IkNnrsnn5KvbL+1P3sAVur9nCCvaomT6i1Tv/WUFFD9zKG8gOf1TCN7mPWIhDOQteeaabxwUvkVJnngx1tjkrtdcsnbgT5jKg+5uUBB+CHlgY2bBwbFbzBpTrcTtI5t398LZP4wP",
+    url:
+        "EcKQpupFzHs7yZp0CdAT3zOWVWST2GB8eji2OtSHNANsdO7JnPHXw+riiIBA2aPDb5GFaKmySAOl/QDz57eaWI18qPwmdhpDeFLMmiDRZ4JQYGJbTzCq1On6IkNnrsnn5KvbL+1P3sAVur9nCCvaomT6i1Tv/WUFFD9zKG8gOf1TCN7mPWIhDOQteeaabxwUvkVJnngx1tjkrtdcsnbgT5jKg+5uUBB+CHlgY2bBwbFbzBpTrcTtI5t398LZP4wP",
     encrypted: true,
     icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png',
     attribution: '© DigitalGlobe',
@@ -49,7 +53,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
     maxZoom: 22,
   ).decrypt();
 
-  ImageryProvider(this._ref) : super(bingImagery) {
+  ImageryProvider(this._ref) : super(maxarPremiumImagery) {
     _updateBingUrlTemplate();
     loaded = false;
     loadState();
@@ -99,10 +103,12 @@ class ImageryProvider extends StateNotifier<Imagery> {
     final metaUrl = Uri.https(
       'dev.virtualearth.net',
       '/REST/V1/Imagery/Metadata/Aerial',
-      {'output': 'json', 'include': 'ImageryProviders', 'key': kBingMapsKey},
+      {'output': 'json', 'include': 'ImageryProviders', 'key': bingImagery.url},
     );
     final resp = await http.get(metaUrl);
     if (resp.statusCode != 200) {
+      _logger.warning(
+          'Failed to get Bing imagery metadata: ${resp.statusCode} ${resp.body}, url: $metaUrl');
       final oldUrl = prefs.getString(kBingUrlKey);
       if (oldUrl != null) return oldUrl;
       throw StateError(

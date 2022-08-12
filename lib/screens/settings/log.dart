@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -65,7 +64,7 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
                 http.post(
                   Uri.https('textual.ru', '/everydoor_send.php'),
                   body: <String, String>{
-                    'code': kSecretKey,
+                    'code': 'rfJ7gnvut4%uHY6',
                     'version': '$kAppTitle $platform $kAppVersion',
                     'who': ref.read(authProvider) ?? 'unknown',
                     'message': message.first,

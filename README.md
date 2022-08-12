@@ -43,15 +43,11 @@ and general UX improvements. Please help.
 
 You will need the [Flutter SDK](https://docs.flutter.dev/development/tools/sdk/overview) installed.
 
-1. Copy `lib/private.dart.sample` to `lib/private.dart` and put your OAuth2 and Bing keys there.
-You can generate OAuth2 keys for the staging API [here](https://master.apis.dev.openstreetmap.org/oauth2/applications/new)
-— use `everydoor:/oauth` as the Redirect URI. Note that the staging API uses a different database
-to the production API, so you may need to sign up again.
-2. Download [taginfo-db.db](https://taginfo.openstreetmap.org/download) and unpack it somewhere (it's ~9 GB).
-3. From the `tools` directory, run `./update.sh <path_to_taginfo_db>`.
-4. `echo '{}' | tee lib/l10n/app_zh.arb > lib/l10n/app_pt.arb` (fixing Dart's localization issues).
-5. `flutter pub get`.
-6. `flutter run`.
+1. Download [taginfo-db.db](https://taginfo.openstreetmap.org/download) and unpack it somewhere (it's ~9 GB).
+2. From the `tools` directory, run `./update.sh <path_to_taginfo_db>`.
+3. `echo '{}' > lib/l10n/app_zh.arb (fixing Dart's localization issues).
+4. `flutter pub get`.
+5. `flutter run`.
 
 ## Author and License
 

@@ -2,8 +2,8 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:every_door/private.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

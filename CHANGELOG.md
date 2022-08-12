@@ -4,6 +4,7 @@
 
 _Unreleased_
 
+* Imagery by default is now Maxar Premium.
 * Moved `amenity=lounger` to micromapping (thanks @starsep).
 * Added support for `hazard=*`, `telecom=*`, and `traffic_sign=*`.
 * Fixed filtering panel when the map was moved.

@@ -5,7 +5,6 @@ import 'package:every_door/helpers/snap_nodes.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
-import 'package:every_door/private.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/helpers/changeset_tags.dart';

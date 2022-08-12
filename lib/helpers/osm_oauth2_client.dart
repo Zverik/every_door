@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:every_door/private.dart';
+import 'package:every_door/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logging/logging.dart';
 import 'package:oauth2_client/access_token_response.dart';
@@ -29,8 +29,12 @@ class OpenStreetMapOAuthHelper {
   static const kTokenKey = 'osmToken';
 
   final OAuth2Client _client = OpenStreetMapOAuth2Client();
-  final String _clientId = kOauthClient;
-  final String _clientSecret = kOauthSecret;
+  final String _clientId = 'r_ZDi6JezDDBHj8WSU286d5A7FntAJSMpkB2FGEcaG8';
+  final String _clientSecret = 'DRFc8pDeGt4D2E3j-WdfdTq02o_fnek-WQeWgvXfvTg';
+
+  // Sandbox
+  // final String _clientId = 'fyj-AZcCntFDStKti_62R8rNeeSbfsfaZA7hilpIgFw';
+  // final String _clientSecret = 'FPnRw1h5c7qzcgJdpui5mI0oT0maPPO4jW_kCRed-5Q';
 
   OpenStreetMapOAuthHelper();
 

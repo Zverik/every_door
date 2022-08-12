@@ -2,7 +2,6 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/common_keys.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
-import 'package:every_door/private.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

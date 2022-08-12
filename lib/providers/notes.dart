@@ -3,7 +3,6 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/circle_bounds.dart';
 import 'package:every_door/helpers/osm_api_converters.dart';
 import 'package:every_door/models/note.dart';
-import 'package:every_door/private.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/osm_auth.dart';

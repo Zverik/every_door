@@ -2,8 +2,8 @@ import 'dart:io' show Platform;
 import 'dart:convert' show base64, utf8;
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/osm_oauth2_client.dart';
-import 'package:every_door/private.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';

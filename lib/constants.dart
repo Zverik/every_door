@@ -60,5 +60,10 @@ const kDefaultMicroPresets = [
   'tourism/information/guidepost', 'tourism/information/board',
 ];
 
+const kOsmEndpoint = 'api.openstreetmap.org';
+const kOsmAuth2Endpoint = 'www.openstreetmap.org';
+// const kOsmEndpoint = 'master.apis.dev.openstreetmap.org';
+// const kOsmAuth2Endpoint = 'master.apis.dev.openstreetmap.org';
+
 const kEraseDatabase = false; // Clear all data on start — do not forget to set to false!
 const kOverwritePresets = false; // Set to false when done testing
