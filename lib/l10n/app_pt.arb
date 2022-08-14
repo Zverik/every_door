@@ -311,7 +311,7 @@
   "@entranceTypeShop": {},
   "entranceTypeEmergency": "emergência",
   "@entranceTypeEmergency": {},
-  "notesClose": "Fechar",
+  "notesClose": "Resolver",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
@@ -732,7 +732,7 @@
   },
   "faqEntranceContent": "Na parte inferior há uma fileira de botões de modo: Micromapeamento, Serviços, Entradas e Notas.\n\nNo modo Entradas, toca ou arrasta o botão da porta, localizada no canto inferior, para o mapa.",
   "@faqEntranceContent": {},
-  "notesCloseMessage": "Fechar a nota?",
+  "notesCloseMessage": "Marcar a nota como resolvida?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
