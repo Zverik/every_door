@@ -397,7 +397,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "loadingTooMuchData": "Rimuovi i dati scaricati da \"Impostazioni\" per rendere l'editor più veloce.",
+  "loadingTooMuchData": "Rimuovi i dati scaricati in \"Impostazioni\" per rendere l'editor più veloce.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
