@@ -488,7 +488,7 @@
   "@buildingMaterialGlass": {},
   "faqMapTinyContent": "Perché non è questo il punto. Si controlla solo la propria posizione sulla mappa e la si sposta per aggiustarla. Guardate l'elenco dei servizi qui sotto, ordinati in base alla distanza da voi.\n\nLa mappa si ingrandisce quando si modificano servizi lontani dalla propria posizione. Anche se l'app è stata creata per modificare le cose che si vedono direttamente.",
   "@faqMapTinyContent": {},
-  "faqEntranceContent": "In basso c'è una fila di pulsanti di modalità: micromappatura, servizi e ingressi.\n\nNella modalità ingressi, tocca o trascina sulla mappa il pulsante della porta presente nell'angolo inferiore.",
+  "faqEntranceContent": "In basso c'è una fila di pulsanti di modalità: micromappatura, servizi, ingressi e note.\n\nNella modalità ingressi, tocca o trascina sulla mappa il pulsante della porta presente nell'angolo inferiore.",
   "@faqEntranceContent": {},
   "faqLetters": "Posso digitare lettere in un ref o un numero di appartamento?",
   "@faqLetters": {},
@@ -680,11 +680,11 @@
   "@entrancesAddBuilding": {
     "description": "Tooltip for the button to add a building node."
   },
-  "notesClose": "Chiudi",
+  "notesClose": "Risolvi",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
-  "notesCloseMessage": "Chiudere questa nota?",
+  "notesCloseMessage": "Segnare la nota come risolta?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -727,5 +727,13 @@
   "notesAddNote": "Aggiungi nota",
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."
+  },
+  "navPoiMode": "Modalità servizi",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "tagsDelete": "Cancella",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
   }
 }
