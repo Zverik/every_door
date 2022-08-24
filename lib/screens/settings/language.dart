@@ -28,7 +28,8 @@ class LanguagePage extends ConsumerWidget {
     Locale('sv'): 'Svenska',
     Locale('tr'): 'Türkçe',
     Locale('uk'): 'Українська мова',
-    Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'): '汉语',
+    Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'): '汉语（简体）',
+    Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'): '漢語（繁體）',
   };
 
   static const kSkipLocales = [
