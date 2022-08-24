@@ -719,5 +719,355 @@
   "aboutInstalledVersion": "Geïnstalleerde versie",
   "@aboutInstalledVersion": {
     "description": "Button description for installed app version."
+  },
+  "navPoiMode": "Voorziening-modus",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navDownload": "Download",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navNotesMode": "Notitie-modus",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapZoomIn": "Inzoomen",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapFilter": "Filter",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "Terug naar mij",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomOut": "Uitzoomen",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "versionsNoTagChanges": "Geen tagwijzigingen",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "aboutProjectWebsite": "Projectwebsite",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "settingsCacheTiles": "Download tegels",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "fieldHoursRemoveFragment": "Fragment verwijderen",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "settingsSystem": "Systeem",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "aboutSourceCode": "Broncode",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "settingsGoogle": "Gebruik Google-versterkte positionering",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "fieldHoursRemoveBreak": "Pauze verwijderen",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "versionsTitle": "{elementRef} geschiedenis",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "aboutFAQ": "Veelgestelde vragen",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Links",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "loadingTooMuchData": "Vernietig gedownloade data in Instellingen om de bewerker sneller te maken.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Download mislukt",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Download geslaagd",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadedCount": "{count,plural,=1{{count} element gedownload.},=few{{count} elementen gedownload.},=other{{count} elementen gedownload.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "aboutLicense": "Licentie",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "Help {appTitle} te verbeteren",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutHelpTranslate": "Help vertalen",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "changesSwipeLeft": "Sleep naar links om een wijziging ongedaan te maken",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursAsText": "Als tekst",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "faqCheckmarksContent": "Dit zijn merktekens dat een voorziening is bevestigd. Ze voegen de `check_date`-tag toe met de huidige datum.\n\nHet idee achter de vinkjes is dat, stel, je hebt de helft van de stad voor de eerste keer hebt onderzocht. Na een maand kom je weer terug en ben je weer gaan onderzoeken. Je moet op een of andere manier bijhouden dat je de voorziening ziet, maar dat er niets aan is gewijzigd. Dat is het vinkje: je raakt hem aan en gaat door.\n\nHet vinkje blijft twee weken aan staan. Daarna kan je de voorzieningen opnieuw onderzoeken.",
+  "@faqCheckmarksContent": {},
+  "changesMapNotes": "Kaartnotities en tekeningen",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesOsmNote": "OSM-notitie",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "fieldHoursSpecificDays": "Specifieke datum",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Gesloten",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Landelijke feestdagen",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "buildingMaterial": "Voorgevel",
+  "@buildingMaterial": {},
+  "buildingMaterialPlaster": "pleister",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialPanels": "panelen",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "cementblokken",
+  "@buildingMaterialCementBlock": {},
+  "faqMapTinyContent": "Want dat is niet het punt. Je controleert alleen je positie op de kaart, en beweegt hem om aan te passen. Bekijk de lijst met voorzieningen eronder, op afstand van jou gesorteerd.\n\nDe kaart wordt groter als je voorzieningen bewerkt die ver van je af zijn. Echter is de app gemaakt om dingen te bewerken die je met je ogen kan zien.",
+  "@faqMapTinyContent": {},
+  "faqTagging": "Alle tagging-vragen",
+  "@faqTagging": {},
+  "faqTaggingContent": "Waarom mist er een object in de bewerker? Wanneer worden deze witte puntjes weergegeven in micromapping-modus? Hoe worden objecten gesorteerd?\n\nAntwoorden op al deze vragen staan in [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Hier is waar je naar kan kijken:\n\n* De sleutelsortering voor de hoofdtag — lijst `kMainKeys`.\n* Welke objecten worden gedownload — functie `isGoodTags`.\n* Wat als voorziening wordt beschouwd — functie `isAmenityTags`.\n* Welke punten in lijn worden gezet met welke wegen — functie `detectSnap`.\n* Wanneer een micromapping-object incompleet is — functie `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "faqCheckmarks": "Waar zijn de vinkjes voor?",
+  "@faqCheckmarks": {},
+  "faqLettersContent": "Als je numerieke toetsenbord niet omgewisseld kan worden naar een volledig toetsenbord, kijk dan in de app-instellingen. Die zijn te vinden achter een knop in de linkerbovenhoek. Zet daar \"uitgebreide numerieke toetsenbord\" aan.",
+  "@faqLettersContent": {},
+  "faqFloors": "Zijn verdiepingen '3' en '/3' hetzelfde?",
+  "@faqFloors": {},
+  "navUpload": "Upload",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navImagery": "Achtergrond wijzigen",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navMicromappingMode": "Micromapping-modus",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "mapSettings": "Instellingen",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "editorMarkChecked": "Markeer als gecontroleerd",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Geschiedenis",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Rauwe tags",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorDuplicate": "Mogelijk duplicaat in {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "tagsShare": "Deel",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsRestore": "Herstel",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "Leegmaken",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "versionsEnableInternet": "Verbind met het internet om versiehistorie op te halen",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "Fout bij het ophalen van versiehistorie",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "Probeer opnieuw",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsLocalChanges": "Lokale wijzigingen",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Versie #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "door {user} op {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsLanguage": "Taal",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "aboutViewLog": "Systeemlog",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "changesPurge": "Wijzigingen vernietigen",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursNumberedWeekday": "\"Afgelopen maandag\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursChooseTime": "Uur en minuut",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Leegmaken",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Opslaan",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursSDRemove": "Verwijder",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "Datum toevoegen",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Reeks toevoegen",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Andere taal",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Kopieer waarde",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "entrancesAddEntrance": "Voeg ingang toe",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "Voeg gebouw toe",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "notesAddNote": "Voeg notitie toe",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "Anoniem",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Oplossen",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Markeer de notitie als opgelost?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "faqEntrance": "Hoe voeg ik een ingang van een gebouw toe?",
+  "@faqEntrance": {},
+  "faqLetters": "Kan ik letters typen in een ref- of flatnummer?",
+  "@faqLetters": {},
+  "faqFloorsContent": "Nee. De eerste heeft een `addr:floor=3`-tag. Dat is de verdieping zoals afgedrukt op navigatie en veelvuldig gebruikt. De tweede heeft niet deze tag, maar heeft `level=3`. Dat getal is een doorlopend verdiepingsnummer van nul tot `building:levels - 1`. Dat wil zeggen, in een gebouw van drie verdiepingen verschilt `addr:floor` per land, maar `level` is altijd 0, 1, of 2.\n\nHier is hoe de notatie in de bewerker aan deze tags relateert:\n\n* `2`: `addr:floor=2` en `level=*` die niet leeg is.\n* `4/`: `addr:floor=4`, maar er is geen `level` tag.\n* `/1`: `level=1`, maar er is geen `addr:floor` tag.\n* `1/0`: `addr:floor=1` + `level=0` (en er is een object in de buurt met dezelfde `addr:floor`, maar ander `level`, of vice versa).",
+  "@faqFloorsContent": {},
+  "faqChangeType": "Hoe wijzig ik een voorzieningstype?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Klik op de titel van de bewerker, waar het type geschreven staat.",
+  "@faqChangeTypeContent": {},
+  "faqEntranceContent": "Aan de onderkant is een rij van modus-knoppen: micromapping, voorzieningen, toegangen, en notities.\n\nIn de toegangen-modus klik of sleep je de deur-knop in de onderste hoek de kaart op.",
+  "@faqEntranceContent": {},
+  "navEntrancesMode": "Toegang-modus",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
   }
 }

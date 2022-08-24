@@ -1016,7 +1016,7 @@
   "@notesAnonymous": {
     "description": "Name for anonymous note submitters."
   },
-  "notesClose": "Fechar",
+  "notesClose": "Resolver",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
@@ -1064,7 +1064,7 @@
   "@fieldNameLanguages": {
     "description": "Tooltip for a button to add a name in another language."
   },
-  "notesCloseMessage": "Fechar a nota?",
+  "notesCloseMessage": "Marcar a nota como resolvida?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   }

@@ -862,7 +862,7 @@
   "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "زجاج",
   "@buildingMaterialGlass": {},
-  "notesCloseMessage": "إغلاق هذه الملاحظة؟",
+  "notesCloseMessage": "هل تم حل هذه الملاحظة؟",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -1010,7 +1010,7 @@
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."
   },
-  "notesClose": "إغلاق",
+  "notesClose": "حل",
   "@notesClose": {
     "description": "Button title for closing a note."
   },

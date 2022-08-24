@@ -1063,5 +1063,9 @@
   "settingsGoogle": "Utiliser la position améliorée par Google",
   "@settingsGoogle": {
     "description": "Settings switch for disabling Google services for location."
+  },
+  "navPoiMode": "Mode commodités",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
   }
 }

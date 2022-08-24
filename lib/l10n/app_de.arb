@@ -261,7 +261,7 @@
   "@entranceFlatsNumberList": {},
   "entranceIsUnit": "Speichere die Wohnungsnummer in addr:unit",
   "@entranceIsUnit": {},
-  "entranceRef": "Ref",
+  "entranceRef": "Referenznummer",
   "@entranceRef": {},
   "entranceAccess": "Zugang",
   "@entranceAccess": {},
@@ -504,7 +504,7 @@
   "@faqChangeType": {},
   "faqChangeTypeContent": "Tippen Sie auf den Titel des Editors, auf dem der Typ geschrieben ist.",
   "@faqChangeTypeContent": {},
-  "faqMapTinyContent": "Weil es nicht darum geht. Sie überprüfen nur Ihre Position auf der Karte und schwenken sie, um sie anzupassen. Sehen Sie sich die Liste der Einrichtungen unten an, sortiert nach Entfernung zu Ihnen.\n\nDie Karte wird größer, wenn Sie Einrichtungen weit entfernt von Ihrem Standort bearbeiten. Obwohl die App entwickelt wurde, um Dinge zu bearbeiten, die Sie mit Ihren Augen sehen.",
+  "faqMapTinyContent": "Weil die Karte nur zur Überprüfung der gegenwärtigen Position dient. Der Kartenausschnitt kann verschoben werden um die Liste der Einrichtungen unten anzupassen. Diese sind nach Entfernung sortiert.\n\nDie Karte wird größer, wenn Sie Einrichtungen weit entfernt von Ihrem Standort bearbeiten. Obwohl die App entwickelt wurde, um Dinge zu bearbeiten, die in Ihrer unmittelbaren Umgebung sind.",
   "@faqMapTinyContent": {},
   "changesSwipeLeft": "Nach links wischen, um Änderung rückgängig zu machen",
   "@changesSwipeLeft": {
@@ -606,11 +606,11 @@
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
-  "notesCloseMessage": "Notiz schließen?",
+  "notesCloseMessage": "Kartenhinweis als gelöst markieren?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
-  "notesClose": "Schließen",
+  "notesClose": "Kartenhinweis lösen",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
@@ -751,5 +751,13 @@
   "settingsSystem": "System",
   "@settingsSystem": {
     "description": "Title for the settings section for system-related switches."
+  },
+  "faqFloorsContent": "Nein, das erste Geschoss hat das Attribut `addr:floor=3`. Das ist die Etage, die im Gebäude, beispielsweise in Aufzügen vermerkt ist. Das zweite Geschoss hat ein anderes Attribut, nämlich `level=3`. Diese Zahl ist einfach eine fortlaufende Geschossnummer von Null bis `building:levels` − 1. D.h, in einem dreistöckigen Gebäude variiert der Wert für `addr:floor` je nach Land, aber `level` ist immer 0, 1 oder 2.\n\nIm Folgenden sieht man, wie diese Attribute in Every Door dargestellt werden:\n\n* `2`: `addr:floor=2` und irgendein `level=*`.\n* `4/`: `addr:floor=4`, aber ohne `level`-Attribut.\n* `/1`: `level=1`, aber ohne `addr:floor`-Attribut.\n* `1/0`: `addr:floor=1` + `level=0` (und es gibt in der Nähe ein Objekt mit dem selben Wert für `addr:floor`, aber unterschiedlichem `level`-Wert, oder umgekehrt).",
+  "@faqFloorsContent": {},
+  "faqTaggingContent": "Wieso fehlt ein Objekt im Editor? Wann werden im Mikromapping-Modus weiße Punkte angezeigt? Wie werden die Objekte sortiert?\n\nAntworten dazu sind in [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) zu finden. Hier sind Dinge, die du anschauen kannst:\n\n* Die Sortierreihenfolge für den Hauptwert — Liste `kMainKeys`.\n* Welche Objekte heruntergeladen werden — Funktion `isGoodTags`.\n* Was als Einrichtung (`amenity`) eingeordnet wird — Funktion `isAmenityTags`.\n* Welche Knoten mit welche Linien verbunden werden — Funktion `detectSnap`.\n* Wann ein Mikromapping-Objekt als unvollständig angesehen wird — Funktion `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "editorTags": "Alle Attribute",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
   }
 }
