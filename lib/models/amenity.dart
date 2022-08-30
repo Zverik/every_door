@@ -172,10 +172,11 @@ class OsmChange extends ChangeNotifier implements Comparable {
       .inDays;
 
   // Check date management.
-  bool get isOld => calculateAge(this[kCheckedKey]) >= kOldAmenityDays;
+  int get age => calculateAge(this[kCheckedKey]);
+  bool get isOld => age >= kOldAmenityDays;
   bool get wasOld =>
       !isNew && calculateAge(element?.tags[kCheckedKey]) >= kOldAmenityDays;
-  bool get isCheckedToday => calculateAge(this[kCheckedKey]) <= 1;
+  bool get isCheckedToday => age <= 1;
 
   check() {
     this[kCheckedKey] = kDateFormat.format(DateTime.now());
@@ -354,7 +355,16 @@ class OsmChange extends ChangeNotifier implements Comparable {
     togglePrefix(kDisused);
   }
 
-  String? get name => this['name'] ?? this['operator'] ?? this['brand'];
+  String? get name => getAnyName() ?? this['operator'] ?? this['brand'];
+
+  String? getAnyName() {
+    String? result = this['name'] ?? this['name:en'] ?? this['int_name'];
+    if (result != null) return result;
+    for (final e in getFullTags().entries) {
+      if (e.key.startsWith('name:')) return e.value;
+    }
+    return null;
+  }
 
   String? getLocalName(Locale locale) {
     // TODO: take the country language into account, like in maps.me?
@@ -420,6 +430,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
   }
 
   String get typeAndName {
+    final name = this.name;
     if (name == null) return descriptiveTag ?? '?';
     final emoji = getEmojiForTags(getFullTags(true));
     return '${emoji ?? descriptiveTag ?? ""} «$name»'.trimLeft();

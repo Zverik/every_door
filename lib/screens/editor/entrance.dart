@@ -82,7 +82,9 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   }
 
   saveAndClose([bool pop = true]) {
-    entrance.removeTag(OsmChange.kCheckedKey);
+    // Only remove check_date when the original did not have it.
+    if (entrance.element?.tags[OsmChange.kCheckedKey] == null)
+      entrance.removeTag(OsmChange.kCheckedKey);
     if (putFlatsInUnit) {
       entrance['addr:unit'] = entrance['addr:flats'];
       entrance.removeTag('addr:flats');

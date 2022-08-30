@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
@@ -231,8 +232,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   Widget build(BuildContext context) {
     final preset = this.preset;
     final bool modified = widget.amenity == null || amenity != widget.amenity;
-    final bool needsCheck =
-        amenity.isOld && needsCheckDate(amenity.getFullTags());
+    final bool needsCheck = amenity.age >= kOldAmenityDaysEditor &&
+        needsCheckDate(amenity.getFullTags());
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     final loc = AppLocalizations.of(context)!;
@@ -271,7 +272,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                 },
               ),
             IconButton(
-              icon: Icon(Icons.code),
+              icon: Icon(Icons.view_list),
               tooltip: loc.editorTags,
               onPressed: () async {
                 await Navigator.push(

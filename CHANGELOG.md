@@ -1,5 +1,20 @@
 # Every Door App Change Log
 
+## 2.0
+
+_Unreleased_
+
+### Highlights
+
+* Increased confirmation interval to 2 months.
+
+### Other
+
+* Show `name:en` etc on a tile when `name` is not set.
+* Editing a building that's also a POI removed `check_date` from it.
+* Increased warning threshold for too many elements to 60k.
+* Changed the icon for raw tags.
+
 ## 1.0
 
 _Released on 2022-08-13_

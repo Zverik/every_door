@@ -94,7 +94,9 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   }
 
   saveAndClose([bool pop = true]) {
-    building.removeTag(OsmChange.kCheckedKey);
+    // Only remove check_date when the original did not have it.
+    if (building.element?.tags[OsmChange.kCheckedKey] == null)
+      building.removeTag(OsmChange.kCheckedKey);
     final changes = ref.read(changesProvider);
     changes.saveChange(building);
     ref.read(needMapUpdateProvider).trigger();
