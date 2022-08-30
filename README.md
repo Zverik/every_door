@@ -2,7 +2,7 @@
 
 The best mobile editor for adding shops and amenities to OpenStreetMap.
 
-Help test it for [iOS](https://testflight.apple.com/join/5138nQCq) and
+Help test it for [iOS](https://apps.apple.com/app/every-door/id1621945342) and
 [Android](https://play.google.com/store/apps/details?id=info.zverev.ilya.every_door).
 
 The roadmap is in [a project](https://github.com/users/Zverik/projects/1/views/2).
