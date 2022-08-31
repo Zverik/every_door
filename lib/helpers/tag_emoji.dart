@@ -59,7 +59,8 @@ const kTagEmoji = <String, String>{
   'shop=optician': '👓',
   'shop=mall': '🛍️',
   'shop=ice_cream': '🍨',
-
+  'shop=bicycle': '🚲',
+  
   'craft=electronics_repair': '🔌',
 
   'tourism=information': 'ℹ️',
