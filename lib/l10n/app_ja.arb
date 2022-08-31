@@ -619,7 +619,7 @@
   "@entranceTypeGarage": {},
   "entranceTypeEmergency": "emergency",
   "@entranceTypeEmergency": {},
-  "addressHouseNumber": "House",
+  "addressHouseNumber": "住居番号",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
   },
