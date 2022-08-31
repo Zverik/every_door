@@ -39,7 +39,10 @@ class PoiFilter {
     bool matchesAddr =
         address == null || address == StreetAddress.fromTags(tags);
     final floors = MultiFloor.fromTags(tags);
-    bool matchesFloor = floor == null || floors.floors.contains(floor);
+    bool matchesFloor = floor == null ||
+        ((floor?.isEmpty ?? true)
+            ? floors.isEmpty
+            : floors.floors.contains(floor));
     return matchesAddr && matchesFloor;
   }
 

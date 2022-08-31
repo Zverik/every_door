@@ -9,9 +9,11 @@ class LanguagePage extends ConsumerWidget {
   static final kLanguageNames = {
     Locale('ar'): 'اَلْعَرَبِيَّةُ',
     Locale('be'): 'Беларуская мова',
+    Locale('cs'): 'Čeština',
     Locale('da'): 'Dansk',
     Locale('de'): 'Deutsch',
     Locale('en'): 'English',
+    Locale('en', 'GB'): 'English (Great Britain)',
     Locale('es'): 'Español',
     Locale('eu'): 'Euskara',
     Locale('fa'): 'فارسی',
@@ -22,10 +24,12 @@ class LanguagePage extends ConsumerWidget {
     Locale('nb'): 'Bokmål',
     Locale('nl'): 'Nederlands',
     Locale('pl'): 'Polski',
+    Locale('pt'): 'Português',
     Locale('pt', 'BR'): 'Português do Brasil',
     Locale('ru'): 'Русский',
     Locale('sl'): 'Slovenščina',
     Locale('sv'): 'Svenska',
+    Locale('th'): 'ภาษาไทย',
     Locale('tr'): 'Türkçe',
     Locale('uk'): 'Українська мова',
     Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'): '汉语（简体）',
@@ -33,7 +37,6 @@ class LanguagePage extends ConsumerWidget {
   };
 
   static const kSkipLocales = [
-    Locale('pt'),
     Locale('zh'),
   ];
 

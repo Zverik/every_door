@@ -10,12 +10,14 @@ _Unreleased_
 
 ### Other
 
+* Fixed filtering for empty floor values.
 * Show `name:en` etc on a tile when `name` is not set.
 * Editing a building that's also a POI removed `check_date` from it.
 * Removed the requirement for a roof shape to get a yellow building label.
 * Added a FAQ entry about yellow labels and white dots.
 * Increased warning threshold for too many elements to 60k.
 * Changed the icon for raw tags.
+* Added missing language names for the chooser.
 
 ## 1.0
 

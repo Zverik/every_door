@@ -21,6 +21,7 @@ class AboutPage extends StatelessWidget {
       FAQ(loc.faqMapTiny, loc.faqMapTinyContent),
       FAQ(loc.faqCheckmarks, loc.faqCheckmarksContent),
       FAQ(loc.faqEntrance, loc.faqEntranceContent),
+      FAQ(loc.faqYellow, loc.faqYellowContent),
       FAQ(loc.faqLetters, loc.faqLettersContent),
       FAQ(loc.faqFloors, loc.faqFloorsContent),
       FAQ(loc.faqChangeType, loc.faqChangeTypeContent),
