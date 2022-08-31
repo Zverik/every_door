@@ -1,15 +1,18 @@
+import 'package:every_door/providers/presets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final languageProvider = StateNotifierProvider<LanguageController, Locale?>(
-    (ref) => LanguageController());
+    (ref) => LanguageController(ref));
 
 class LanguageController extends StateNotifier<Locale?> {
   static const kLocaleKey = 'stored_locale';
   static const kNull = '-';
 
-  LanguageController() : super(null) {
+  final Ref _ref;
+
+  LanguageController(this._ref) : super(null) {
     loadState();
   }
 
@@ -38,6 +41,8 @@ class LanguageController extends StateNotifier<Locale?> {
           newValue.scriptCode ?? kNull,
         ]);
       }
+      // Clear caches.
+      _ref.read(presetProvider).clearFieldCache();
     }
   }
 }

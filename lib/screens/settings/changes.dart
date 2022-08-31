@@ -156,6 +156,10 @@ class _ChangeListPageState extends ConsumerState {
     final hasManyTypes = _changeList.map((e) => e.icon).toSet().length > 1;
     final loc = AppLocalizations.of(context)!;
 
+    ref.listen(changesProvider, (previous, next) {
+      buildChangesList();
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text(loc.changesCount(_changeList.length)),
@@ -219,6 +223,7 @@ class _ChangeListPageState extends ConsumerState {
                     } else if (change.allMapNotes) {
                       nProvider.clearChangedMapNotes();
                     }
+                    _changeList.removeAt(index);
 
                     ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -227,12 +232,13 @@ class _ChangeListPageState extends ConsumerState {
                           ? null
                           : SnackBarAction(
                               label: loc.changesDeletedUndo.toUpperCase(),
-                              onPressed: () {
+                              onPressed: () async {
                                 if (change.change != null) {
-                                  chProvider.saveChange(change.change!);
+                                  await chProvider.saveChange(change.change!);
                                 } else if (change.note != null) {
-                                  nProvider.saveNote(change.note!);
+                                  await nProvider.saveNote(change.note!);
                                 }
+                                buildChangesList();
                               },
                             ),
                     ));

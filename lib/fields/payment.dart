@@ -36,8 +36,7 @@ class PaymentCheckboxInputField extends ConsumerStatefulWidget {
   const PaymentCheckboxInputField(this.field, this.element);
 
   @override
-  ConsumerState createState() =>
-      _PaymentCheckboxInputFieldState();
+  ConsumerState createState() => _PaymentCheckboxInputFieldState();
 }
 
 class _PaymentCheckboxInputFieldState
@@ -63,6 +62,10 @@ class _PaymentCheckboxInputFieldState
       widget.element['payment:$key'] = remove ? null : 'no';
   }
 
+  cashNo(bool remove) {
+    widget.element['payment:cash'] = remove ? null : 'no';
+  }
+
   paymentYes(bool remove) {
     if (remove) {
       for (final key in kCardPaymentOptions) {
@@ -80,31 +83,41 @@ class _PaymentCheckboxInputFieldState
     final loc = AppLocalizations.of(context)!;
     final vAccepted = loc.fieldCardsAccepted;
     final vNo = loc.fieldCardsNo;
+    final vOnly = loc.fieldCardsOnly;
 
     String? value;
     final tags = widget.element.getFullTags();
-    if (widget.field.haveGenericNo(tags))
+    if (widget.field.haveGenericNo(tags)) {
       value = 'no';
-    else if (widget.field.haveCardYes(tags)) value = 'accepted';
+    } else if (widget.field.haveCardYes(tags)) {
+      value = tags['payment:cash'] == 'no' ? 'only' : 'accepted';
+    }
 
     return RadioField(
-      options: const ['accepted', 'no'],
-      labels: [vAccepted, vNo],
+      options: const ['accepted', 'no', 'only'],
+      labels: [vAccepted, vNo, vOnly],
       value: value,
       onChange: (newValue) {
         if (newValue == 'accepted') {
           // Remove "no" generic values and set commonly used
           genericNo(true);
           paymentYes(false);
+          cashNo(true);
         } else if (newValue == 'no') {
           // Remove cards "yes" values and set generic cards=no
           paymentYes(true);
           genericNo(false);
+          cashNo(true);
+        } else if (newValue == 'only') {
+          genericNo(true);
+          paymentYes(false);
+          cashNo(false);
         } else {
           // null
           // Remove cards "yes" and generic "no"
           genericNo(true);
           paymentYes(true);
+          cashNo(true);
         }
       },
     );

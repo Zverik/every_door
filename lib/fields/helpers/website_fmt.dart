@@ -77,9 +77,6 @@ class UrlWebsiteProvider extends WebsiteProvider {
   String display(String full) => full;
 
   @override
-  bool isValid(String full) => RegExp(r'..\...').hasMatch(full);
-
-  @override
   String? url(String value) {
     try {
       return format(value);
@@ -87,26 +84,37 @@ class UrlWebsiteProvider extends WebsiteProvider {
       return null;
     }
   }
+  static const kValidWebsiteUrlSchemes = ["http", "https"];
+
+  @override
+  bool isValid(String full) {
+    try {
+      final uri = Uri.parse(full.replaceAll(' ', '').trim());
+      if (uri.hasScheme && !kValidWebsiteUrlSchemes.contains(uri.scheme)) {
+        return false;
+      }
+      return true;
+    } on FormatException {
+      return false;
+    }
+  }
 
   @override
   String format(String value) {
-    if (!isValid(value))
+    if (!isValid(value)) {
       throw ArgumentError('Please call isValid() before formatting');
-    value = value.replaceAll(' ', '');
-    int qPos = value.indexOf('?');
-    if (qPos > 0) {
-      // Keep case of query parameters.
-      value = value.substring(0, qPos).toLowerCase() + value.substring(qPos);
-    } else {
-      value = value.toLowerCase();
     }
-    if (!value.contains(':/')) {
-      value = 'https://' + value;
-    } else if (!value.contains('://')) {
-      value = value.replaceFirst(':/', '://');
+    Uri parsedUri = Uri.parse(value.replaceAll(' ', '').trim());
+    if (!parsedUri.hasScheme) {
+      // In Dart 2.17.6, just doing
+      // parsedUri = parsedUri.replace(scheme: "https")
+      // doesn't work. It changes www.google.com to http:www.google.com,
+      // missing the slashes after the colon
+
+      parsedUri = Uri.parse("https://${parsedUri.toString()}");
     }
-    if (!value.endsWith('/')) value = value + '/';
-    return value;
+
+    return parsedUri.toString();
   }
 }
 

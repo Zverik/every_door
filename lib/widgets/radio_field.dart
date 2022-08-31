@@ -97,7 +97,7 @@ class _RadioFieldState extends State<RadioField> {
       int idx = widget.options.indexOf(value);
       labelsForValues[value] = idx >= 0 ? labels[idx] : Text(value);
     }
-    bool pushFirst = getMergedLength() >= 30 && !widget.wrap;
+    bool pushFirst = getMergedLength() >= 35 && !widget.wrap;
 
     final pills = [
       if (widget.keepFirst && widget.options.isNotEmpty)

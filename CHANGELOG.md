@@ -16,8 +16,12 @@ _Unreleased_
 * Removed the requirement for a roof shape to get a yellow building label.
 * Added a FAQ entry about yellow labels and white dots.
 * Increased warning threshold for too many elements to 60k.
+* "Cards only" option for payment fields.
 * Changed the icon for raw tags.
 * Added missing language names for the chooser.
+* Streamlined URL parsing, thanks to @mitchellmebane.
+* Fixed updating the pending uploads list after changing an object from within it.
+* Field labels were not translated after switching language from inside the app.
 
 ## 1.0
 
