@@ -226,8 +226,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   bool isComplete(OsmChange element) {
     switch (getOurKind(element)) {
       case ElementKind.building:
-        return element['building:levels'] != null &&
-            element['roof:shape'] != null;
+        return element['building:levels'] != null;
       case ElementKind.entrance:
         const kNeedsData = {'staircase', 'yes'};
         return (kNeedsData.contains(element['entrance'])

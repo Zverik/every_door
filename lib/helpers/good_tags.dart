@@ -385,7 +385,8 @@ bool isSnapTargetTags(Map<String, String> tags, [SnapTo? kind]) {
 /// Checks whether some selected secondary tags are empty. We display this
 /// information in the micromapping mode.
 bool needsMoreInfo(Map<String, String> tags) {
-  if (tags['amenity'] == 'bench') return tags['backrest'] == null;
+  if (tags['amenity'] == 'bench')
+    return tags['backrest'] == null || tags['material'] == null;
   if (tags['amenity'] == 'bicycle_parking')
     return tags['bicycle_parking'] == null || tags['capacity'] == null;
   if (tags['amenity'] == 'post_box')
