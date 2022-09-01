@@ -720,5 +720,7 @@
   "fieldCardsOnly": "только картой",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
-  }
+  },
+  "faqYellow": "Почему некоторые дома жёлтые?",
+  "@faqYellow": {}
 }
