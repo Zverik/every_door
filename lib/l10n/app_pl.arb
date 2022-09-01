@@ -1067,5 +1067,13 @@
   "notesAddNote": "Dodaj uwagę",
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."
-  }
+  },
+  "fieldCardsOnly": "tylko karty",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "faqYellow": "Czemu niektóre numery budynków są żółte?",
+  "@faqYellow": {},
+  "faqYellowContent": "Nieżółte etykiety w trybie wejść i białe kropki w trybie mikromapowania oznaczają, że elementom brakuje jakichś ważnych atrybutów. Na przykład:\n\n* Od budynków oczekuje się, że będą miały podana liczbę poziomów.\n* Wejścia powinny mieć typ, a dla klatek schodowych powinien być podany zakres mieszkań.\n* Ławki powinny mieć podane materiał i oparcie.\n* Drzewa powinny mieć typ i cykl liści.",
+  "@faqYellowContent": {}
 }
