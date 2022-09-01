@@ -1058,7 +1058,7 @@
   "@faqEntrance": {},
   "faqEntranceContent": "At the bottom there is a row of mode buttons: micromapping, amenities, entrances, and notes.\n\nIn the entrances mode, tap or drag the door button in the bottom corner onto the map.",
   "@faqEntranceContent": {},
-  "faqYellow": "Why some housenumbers are yellow?",
+  "faqYellow": "Why are some housenumbers yellow?",
   "@faqYellow": {},
   "faqYellowContent": "Non-yellow labels in the entrances mode and white dots in the micromapping mode mean the elements lack some important attributes. For example:\n\n* Buildings are expected to have number of levels.\n* Entrances should have type and, for staircases, flat range.\n* Benches should have material and backrest.\n* Trees should have leaf type and cycle.",
   "@faqYellowContent": {},
