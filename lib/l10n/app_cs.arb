@@ -1073,5 +1073,7 @@
     "description": "Payment field label for cards only."
   },
   "faqYellowContent": "Nežluté popisky v režimu vstupů a bílé tečky v režimu mikromapování znamenají, že prvky postrádají některé důležité atributy. Například:\n\n* Očekává se, že budovy budou mít počet úrovní.\n* Vchody by měly mít typ a u schodišť plošný rozsah.\n* Lavičky by měly mít materiál a opěradlo.\n* Stromy by měly mít typ a cyklus listů.",
-  "@faqYellowContent": {}
+  "@faqYellowContent": {},
+  "faqYellow": "Proč jsou některá čísla popisná žlutá?",
+  "@faqYellow": {}
 }
