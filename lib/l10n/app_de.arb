@@ -759,5 +759,13 @@
   "editorTags": "Alle Attribute",
   "@editorTags": {
     "description": "Tooltip for a button to open tags pane."
-  }
+  },
+  "fieldCardsOnly": "Nur Kartenzahlung",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "faqYellow": "Warum sind einige Hausnummern gelb?",
+  "@faqYellow": {},
+  "faqYellowContent": "Nicht-gelbe Beschriftungen im Modus Eingänge und weiße Punkte im Modus Mikromapping bedeuten, dass den Elementen einige wichtige Attribute fehlen. Zum Beispiel:\n\n* Gebäude sollten eine Anzahl von Ebenen haben.\n* Eingänge sollten eine Angabe zum Typ und, bei Treppen, eine Angabe der zugänglichen Wohnungen haben.\n* Bänke sollten eine Angabe zu Material und Rückenlehne haben.\n* Bäume sollten eine Angaben zu Blattart und -zyklus haben.",
+  "@faqYellowContent": {}
 }
