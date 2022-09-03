@@ -684,7 +684,7 @@
   "@faqMapTinyContent": {},
   "faqCheckmarks": "À quoi servent les marqueurs de validation ?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "Ces marqueurs indiquent que les données ont été confirmées, ils ajoutent la clé `check_date` avec la date actuelle.\n\nL’idée de ces marqueurs est que, dans l’exemple où vous auriez répertorié la moitié de la ville sur un premier trajet, qu’il vous soit possible de revenir sur ces points quelques mois plus tard et d’indiquer que rien n’a changé. Un marqueur et c’est validé.\n\nLe marqueur reste affiché pour deux semaines, après quoi il sera de nouveau possible de les repointer.",
+  "faqCheckmarksContent": "Ces marqueurs indiquent que les données ont été confirmées, ils ajoutent la clé `check_date` avec la date actuelle.\n\nL’idée de ces marqueurs est que, dans l’exemple où vous auriez répertorié la moitié de la ville sur un premier trajet, qu’il vous soit possible de revenir sur ces points quelques mois plus tard et d’indiquer que rien n’a changé. Un marqueur et c’est validé.\n\nLe marqueur reste affiché pour 50 jours, après quoi il sera de nouveau possible de les repointer.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "Comment ajouter l’entrée d’un bâtiment ?",
   "@faqEntrance": {},
@@ -1067,5 +1067,13 @@
   "navPoiMode": "Mode commodités",
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
-  }
+  },
+  "fieldCardsOnly": "CB uniquement",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "faqYellowContent": "Les marqueurs non jaunes dans le mode entrée, et les points blancs dans le mode micromapping, signifient que ces éléments manquent certains attributs importants. Par exemple :\n\n* Les bâtiments devraient avoir un nombre d'étages.\n* Les entrées devraient avoir un type et, pour les escaliers, une rampe.\n* Les bancs devraient avoir un matériau et une précision sur le dossier.\n* Les arbres devraient avoir un type de feuille et un cycle.",
+  "@faqYellowContent": {},
+  "faqYellow": "Pourquoi certains numéros d'adresse sont jaunes ?",
+  "@faqYellow": {}
 }

@@ -512,7 +512,7 @@
   },
   "faqMapTiny": "Warum ist die Karte so klein?",
   "@faqMapTiny": {},
-  "faqCheckmarksContent": "Dies sind Zeichen dafür, dass die Daten der Einrichtungen bestätigt wurden. Sie fügen das `check_date`-Tag mit dem aktuellen Datum hinzu.\n\nDie Idee hinter den Häkchen ist, dass Sie beispielsweise beim ersten Mal die halbe Stadt vermessen haben. Dann kamen Sie nach einem Monat zurück und gingen erneut zur Umfrage. Sie müssen irgendwie markieren, dass Sie die Einrichtungen sehen, sich aber nichts daran geändert hat. Das ist das Häkchen: Sie tippen darauf und fahren fort.\n\nDas Häkchen bleibt für zwei Wochen gesetzt. Danach können Sie die Einrichtung erneut bestätigen.",
+  "faqCheckmarksContent": "Dies sind Zeichen dafür, dass die Daten der Einrichtungen bestätigt wurden. Sie fügen das `check_date`-Tag mit dem aktuellen Datum hinzu.\n\nDie Idee hinter den Häkchen ist, dass Sie beispielsweise beim ersten Mal die halbe Stadt vermessen haben. Dann kamen Sie nach einem Monat zurück und gingen erneut zur Umfrage. Sie müssen irgendwie markieren, dass Sie die Einrichtungen sehen, sich aber nichts daran geändert hat. Das ist das Häkchen: Sie tippen darauf und fahren fort.\n\nDas Häkchen bleibt für 50 Tage gesetzt. Danach können Sie die Einrichtung erneut bestätigen.",
   "@faqCheckmarksContent": {},
   "faqTagging": "Alle Tagging-Fragen",
   "@faqTagging": {},
@@ -759,5 +759,13 @@
   "editorTags": "Alle Attribute",
   "@editorTags": {
     "description": "Tooltip for a button to open tags pane."
-  }
+  },
+  "fieldCardsOnly": "Nur Kartenzahlung",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "faqYellow": "Warum sind einige Hausnummern gelb?",
+  "@faqYellow": {},
+  "faqYellowContent": "Nicht-gelbe Beschriftungen im Modus Eingänge und weiße Punkte im Modus Mikromapping bedeuten, dass den Elementen einige wichtige Attribute fehlen. Zum Beispiel:\n\n* Gebäude sollten eine Anzahl von Ebenen haben.\n* Eingänge sollten eine Angabe zum Typ und, bei Treppen, eine Angabe der zugänglichen Wohnungen haben.\n* Bänke sollten eine Angabe zu Material und Rückenlehne haben.\n* Bäume sollten eine Angaben zu Blattart und -zyklus haben.",
+  "@faqYellowContent": {}
 }

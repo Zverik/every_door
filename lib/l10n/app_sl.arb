@@ -328,7 +328,7 @@
   "@fieldAddressTap": {
     "description": "Title for the pane when a user can tap an address to choose it."
   },
-  "fieldPhoneWrong": "Napačna oblika telefonske št.",
+  "fieldPhoneWrong": "Napačna oblika telefonske številke",
   "@fieldPhoneWrong": {
     "description": "Validation message for a non-standard phone number."
   },

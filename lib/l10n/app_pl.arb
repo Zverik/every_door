@@ -822,7 +822,7 @@
   "@faqEntranceContent": {},
   "faqFloors": "Czy piętra „3” i „/3” są takie same?",
   "@faqFloors": {},
-  "faqCheckmarksContent": "Są to znaki, które potwierdziły dane dotyczące udogodnień. Dodają znacznik `check_date` z bieżącą datą.\n\nIdeą znaczników wyboru jest to, że, powiedzmy, po raz pierwszy zbadałeś połowę miasta. Potem po miesiącu wróciłeś i ponownie podszedłeś do zwiedzania. Musisz jakoś zaznaczyć, że widzisz udogodnienie, ale nic się w nim nie zmieniło. To jest znacznik wyboru: dotknij go i kontynuuj.\n\nZnak pozostaje sprawdzony przez dwa tygodnie. Następnie możesz ponownie sprawdzić udogodnienia.",
+  "faqCheckmarksContent": "Są to znaki, które potwierdziły dane dotyczące udogodnień. Dodają znacznik `check_date` z bieżącą datą.\n\nIdeą znaczników wyboru jest to, że, powiedzmy, po raz pierwszy zbadałeś połowę miasta. Potem po miesiącu wróciłeś i ponownie podszedłeś do zwiedzania. Musisz jakoś zaznaczyć, że widzisz udogodnienie, ale nic się w nim nie zmieniło. To jest znacznik wyboru: dotknij go i kontynuuj.\n\nZnak sprawdzenia jest aktualny przez 50 dni. Następnie możesz ponownie sprawdzić udogodnienia.",
   "@faqCheckmarksContent": {},
   "faqTaggingContent": "Dlaczego w edytorze brakuje obiektu? Kiedy te białe kropki są wyświetlane w trybie mikromapowania? Jak sortowane są przedmioty?\n\nOdpowiedzi na wszystkie te pytania znajdują się w [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Oto, na co możesz spojrzeć:\n\n* Kolejność kluczy dla głównego znacznika — lista `kMainKeys`.\n* Jakie obiekty są pobierane — funkcja `isGoodTags`.\n* Co jest uważane za udogodnienie — funkcja `isAmenityTags`.\n* Które punkty są przyciągane do których linii — funkcja `detectSnap`.\n* Gdy obiekt mikromapowania jest niekompletny — funkcja `needsMoreInfo`.",
   "@faqTaggingContent": {},
@@ -1067,5 +1067,13 @@
   "notesAddNote": "Dodaj uwagę",
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."
-  }
+  },
+  "fieldCardsOnly": "tylko karty",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "faqYellow": "Czemu niektóre numery budynków są żółte?",
+  "@faqYellow": {},
+  "faqYellowContent": "Nieżółte etykiety w trybie wejść i białe kropki w trybie mikromapowania oznaczają, że elementom brakuje jakichś ważnych atrybutów. Na przykład:\n\n* Od budynków oczekuje się, że będą miały podana liczbę poziomów.\n* Wejścia powinny mieć typ, a dla klatek schodowych powinien być podany zakres mieszkań.\n* Ławki powinny mieć podane materiał i oparcie.\n* Drzewa powinny mieć typ i cykl liści.",
+  "@faqYellowContent": {}
 }
