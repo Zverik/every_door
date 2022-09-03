@@ -1052,7 +1052,7 @@
   "@faqMapTinyContent": {},
   "faqCheckmarks": "What are the checkmarks for?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "These are marks that amenity data was confirmed. They add the `check_date` tag with the current date.\n\nThe idea behind the checkmarks is that, say, you surveyed half the city the first time. Then after a month you came back and went to survey again. You need to somehow mark that you see the amenity, but nothing has changed about it. That's the checkmark: you tap it and continue.\n\nThe mark stays checked for 50 days. After that you may survey the amenities again.",
+  "faqCheckmarksContent": "These are marks that amenity data was confirmed. They add the `check_date` tag with the current date.\n\nThe idea behind the checkmarks is that, say, you surveyed half the city the first time. Then after a month you came back and went to survey again. You need to somehow mark that you see the amenity, but nothing has changed about it. That's the checkmark: you tap it and continue.\n\nThe mark stays checked for two months. After that you may survey the amenities again.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "How to add a building entrance?",
   "@faqEntrance": {},
