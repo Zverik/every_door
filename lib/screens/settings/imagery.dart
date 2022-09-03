@@ -35,11 +35,13 @@ class ImageryPageState extends ConsumerState {
         title: Text(loc.settingsBackground),
         actions: [
           IconButton(
-            onPressed: tileCacherState.idle
-                ? () {
-                    ref.read(tileCacheProvider.notifier).cacheForAll();
-                  }
-                : null,
+            onPressed: () {
+              final prov = ref.read(tileCacheProvider.notifier);
+              if (tileCacherState.idle)
+                prov.cacheForAll();
+              else
+                prov.stop();
+            },
             icon: tileCacherState.idle
                 ? Icon(Icons.download)
                 : CircularProgressIndicator(

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/fields/payment.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
@@ -111,7 +112,13 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           final hasStdFields = stdFields.map((e) => e.key).toSet();
           for (final f in preset!.fields) {
             if (PresetProvider.kStandardPoiFields.contains(f.key) &&
-                !hasStdFields.contains(f.key)) stdFields.add(f);
+                !hasStdFields.contains(f.key)) {
+              stdFields.add(f);
+            }
+            // Also move payment_multi.
+            if (f.key == 'payment:' && !hasStdFields.contains('payment')) {
+              stdFields.add(PaymentPresetField(label: 'Accept cards'));
+            }
           }
         }
         // Add opening_hours to moreFields if it's not anywhere.

@@ -6,7 +6,7 @@ _Unreleased_
 
 ### Highlights
 
-* Increased confirmation interval to slightly under 2 months.
+* Increased confirmation interval to 2 months.
 
 ### Other
 
@@ -22,6 +22,9 @@ _Unreleased_
 * Streamlined URL parsing, thanks to @mitchellmebane.
 * Fixed updating the pending uploads list after changing an object from within it.
 * Field labels were not translated after switching language from inside the app.
+* Bing imagery was not immediately visible in the list.
+* Checking for stale authentication before uploading.
+* Tap on the tile downloading button the second time to abort downloading.
 
 ## 1.0
 

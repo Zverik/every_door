@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -34,8 +35,11 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     compute(CountryCoder.prepareData, null)
         .then((value) => CountryCoder.instance.load(value));
 
-    // Load login name
+    // Load login name.
     ref.read(authProvider);
+
+    // Initialize Bing imagery.
+    ref.read(imageryProvider);
 
     setState(() {
       message = loc.loadingPresets;

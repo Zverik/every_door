@@ -109,8 +109,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
       message = message.substring(match.end);
       match = kReLink.firstMatch(message);
     }
-    if (message.isNotEmpty)
-      result.add(TextSpan(text: message));
+    if (message.isNotEmpty) result.add(TextSpan(text: message));
     return result;
   }
 
@@ -186,8 +185,18 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                     TextButton(
                       child: Text(
                           MaterialLocalizations.of(context).cancelButtonLabel),
-                      onPressed: () {
-                        Navigator.pop(context);
+                      onPressed: () async {
+                        final navigator = Navigator.of(context);
+                        if (message.trim().isNotEmpty) {
+                          final answer = await showOkCancelAlertDialog(
+                            context: context,
+                            title: MaterialLocalizations.of(context).cancelButtonLabel,
+                            message: loc.notesCancelMessage,
+                            isDestructiveAction: true,
+                          );
+                          if (answer != OkCancelResult.ok) return;
+                        }
+                        navigator.pop();
                       },
                     ),
                     TextButton(

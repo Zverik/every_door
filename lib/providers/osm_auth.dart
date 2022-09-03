@@ -6,6 +6,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/osm_oauth2_client.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
@@ -56,9 +57,19 @@ class OsmUserDetails {
   }
 }
 
+class OsmAuthException implements Exception {
+  final String message;
+
+  OsmAuthException(this.message);
+
+  @override
+  String toString() => 'OsmAuthException($message)';
+}
+
 class OsmAuthController extends StateNotifier<String?> {
   static const kLoginKey = 'osmLogin';
   static const kPasswordKey = 'osmPassword';
+  static final _logger = Logger('OsmAuthController');
 
   final OpenStreetMapOAuthHelper _helper = OpenStreetMapOAuthHelper();
   bool isOAuth = false;
@@ -72,7 +83,7 @@ class OsmAuthController extends StateNotifier<String?> {
 
   loadData() async {
     final prefs = await SharedPreferences.getInstance();
-    final login = prefs.getString(kLoginKey);
+    String? login = prefs.getString(kLoginKey);
 
     String? pwd;
     if (login != null) {
@@ -84,6 +95,7 @@ class OsmAuthController extends StateNotifier<String?> {
       isOAuth = false;
     } else {
       isOAuth = await supportsOAuthLogin();
+      if (!isOAuth) login = null;
     }
 
     state = login;
@@ -125,7 +137,7 @@ class OsmAuthController extends StateNotifier<String?> {
         Uri.https(kOsmEndpoint, '/api/0.6/user/details'),
         headers: headers);
     if (response.statusCode != 200) {
-      throw Exception('Wrong login or password');
+      throw OsmAuthException('Wrong login or password');
     }
 
     if (isOAuth) {
@@ -145,7 +157,8 @@ class OsmAuthController extends StateNotifier<String?> {
     if (token != null) {
       isOAuth = true;
       final authStr = await _helper.getAuthorizationValue(token);
-      if (authStr == null) throw Exception('Failed to build auth string');
+      if (authStr == null)
+        throw OsmAuthException('Failed to build auth string');
       final headers = {'Authorization': authStr};
       final details = await loadUserDetails(headers);
       final prefs = await SharedPreferences.getInstance();
@@ -159,11 +172,29 @@ class OsmAuthController extends StateNotifier<String?> {
     return {'Authorization': 'Basic $authStr'};
   }
 
+  Future<bool> _testAuthHeaders(Map<String, String> headers) async {
+    final response = await http.get(
+        Uri.https(kOsmEndpoint, '/api/0.6/user/details'),
+        headers: headers);
+    if (response.statusCode != 200) return false;
+    if (response.body.contains('<html')) return false;
+    return true;
+  }
+
   Future<Map<String, String>> getAuthHeaders() async {
     if (isOAuth) {
       final authStr = await _helper.getAuthorizationValue();
-      if (authStr == null) throw StateError('User is not logged in.');
-      return {'Authorization': authStr};
+      if (authStr == null) {
+        state = null;
+        throw OsmAuthException('User is not logged in.');
+      }
+      final headers = {'Authorization': authStr};
+      if (!await _testAuthHeaders(headers)) {
+        state = null;
+        throw OsmAuthException(
+            'Could not use the saved OAuth token, please re-login.');
+      }
+      return headers;
     } else {
       final prefs = await SharedPreferences.getInstance();
       final login = prefs.getString(kLoginKey);
@@ -180,17 +211,17 @@ class OsmAuthController extends StateNotifier<String?> {
         Uri.https(kOsmEndpoint, '/api/0.6/user/details'),
         headers: headers ?? await getAuthHeaders());
     if (response.statusCode != 200) {
-      throw Exception('Wrong oauth access token');
+      throw OsmAuthException('Wrong oauth access token');
     }
     if (response.body.contains('<html')) {
       final clean = response.body.replaceAll(RegExp(r'<[^>]+>'), '');
-      throw Exception('User details call returned HTML: $clean');
+      throw OsmAuthException('User details call returned HTML: $clean');
     }
     try {
       return OsmUserDetails.fromXML(response.body);
     } on FormatException {
       final clean = response.body.replaceAll(RegExp(r'<[^>]+>'), '');
-      throw Exception('Wrong data: $clean');
+      throw OsmAuthException('Wrong data: $clean');
     }
   }
 }

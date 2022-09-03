@@ -165,9 +165,11 @@ class _ChangeListPageState extends ConsumerState {
         title: Text(loc.changesCount(_changeList.length)),
         actions: [
           IconButton(
-            onPressed: () {
-              downloadChanges(ref);
-            },
+            onPressed: changes.length == 0
+                ? null
+                : () {
+                    downloadChanges(ref);
+                  },
             icon: Icon(Icons.share),
             tooltip: loc.tagsShare,
           ),

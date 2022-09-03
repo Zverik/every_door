@@ -35,6 +35,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
   static const kMaxDownloadTiles = 6000;
 
   final Ref _ref;
+  bool _needStop = false;
 
   TileCacher(this._ref) : super(TileCacherState.idle());
 
@@ -89,6 +90,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
     await _waitUntilImageryLoaded();
     final imagery = _ref.read(imageryProvider);
     final areas = await _ref.read(downloadedAreaProvider).getAllAreas();
+    _needStop = false;
 
     // First count how many tiles we need to get.
     int total = 0;
@@ -120,6 +122,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
         _logger.info(
             'Downloading $img for area [${area.southWest}, ${area.northEast}]');
         for (int zoom = kMinZoom; zoom <= layerMaxZoom; zoom++) {
+          if (_needStop) break;
           try {
             downloaded += await cacheTiles(options, area, zoom);
           } on Exception catch (e) {
@@ -138,5 +141,9 @@ class TileCacher extends StateNotifier<TileCacherState> {
     }
     state = TileCacherState.idle();
     return true;
+  }
+
+  stop() {
+    _needStop = true;
   }
 }

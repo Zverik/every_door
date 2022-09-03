@@ -410,8 +410,8 @@ class GridChooser<T> extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 5.0),
                             child: DefaultTextStyle(
                               child: options[i + j].buildWidget(),
-                              style:
-                                  TextStyle(fontSize: 30.0, color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: 30.0, color: Colors.black),
                             ),
                           ),
                           onPressed: () {
@@ -473,6 +473,22 @@ class TimeDefaults {
     '24:00',
     '15:00',
     '18:30',
+  ];
+  static final kInitialBreakStarts = [
+    '12:00',
+    '12:30',
+    '13:00',
+    '14:00',
+    '14:30',
+    '15:00',
+  ];
+  static final kInitialBreakEnds = [
+    '13:00',
+    '13:30',
+    '14:00',
+    '14:30',
+    '15:00',
+    '17:00',
   ];
   static final kInitialBreaks = [
     '12:00-13:00',
