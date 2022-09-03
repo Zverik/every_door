@@ -684,7 +684,7 @@
   "@faqMapTinyContent": {},
   "faqCheckmarks": "À quoi servent les marqueurs de validation ?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "Ces marqueurs indiquent que les données ont été confirmées, ils ajoutent la clé `check_date` avec la date actuelle.\n\nL’idée de ces marqueurs est que, dans l’exemple où vous auriez répertorié la moitié de la ville sur un premier trajet, qu’il vous soit possible de revenir sur ces points quelques mois plus tard et d’indiquer que rien n’a changé. Un marqueur et c’est validé.\n\nLe marqueur reste affiché pour deux semaines, après quoi il sera de nouveau possible de les repointer.",
+  "faqCheckmarksContent": "Ces marqueurs indiquent que les données ont été confirmées, ils ajoutent la clé `check_date` avec la date actuelle.\n\nL’idée de ces marqueurs est que, dans l’exemple où vous auriez répertorié la moitié de la ville sur un premier trajet, qu’il vous soit possible de revenir sur ces points quelques mois plus tard et d’indiquer que rien n’a changé. Un marqueur et c’est validé.\n\nLe marqueur reste affiché pour 50 jours, après quoi il sera de nouveau possible de les repointer.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "Comment ajouter l’entrée d’un bâtiment ?",
   "@faqEntrance": {},
