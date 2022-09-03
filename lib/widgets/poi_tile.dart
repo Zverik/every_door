@@ -1,4 +1,5 @@
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/poi_warnings.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -20,6 +21,7 @@ class PoiIcons {
   static const hours = '🕑';
   static const floor = '📶'; // TODO: better emoji
   static const wheelchair = '♿';
+  static const warning = '⚠';
 }
 
 class PoiTile extends ConsumerWidget {
@@ -90,14 +92,21 @@ class PoiTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final title =
-        (index == null ? '' : index.toString() + '. ') + amenity.typeAndName;
-    final missing = buildMissing(ref);
     final loc = AppLocalizations.of(context)!;
+    bool showWarning = getWarningForAmenity(amenity, loc) != null;
+    final title = (index == null ? '' : index.toString() + '. ') +
+        (showWarning ? PoiIcons.warning : '') +
+        amenity.typeAndName;
+    final missing = buildMissing(ref);
 
     return Container(
       padding: EdgeInsets.all(8.0),
-      color: !amenity.isDisused ? Colors.white : Colors.grey.shade200,
+      decoration: BoxDecoration(
+        color: !amenity.isDisused ? Colors.white : Colors.grey.shade200,
+        border: showWarning
+            ? Border.all(color: Colors.yellowAccent, width: 3.0)
+            : null,
+      ),
       width: width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,

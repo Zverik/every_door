@@ -7,6 +7,7 @@ _Unreleased_
 ### Highlights
 
 * Increased confirmation interval to 2 months.
+* Warnings for amenities that have a `fixme` tag or that are too old.
 
 ### Other
 
@@ -25,6 +26,7 @@ _Unreleased_
 * Bing imagery was not immediately visible in the list.
 * Checking for stale authentication before uploading.
 * Tap on the tile downloading button the second time to abort downloading.
+* Split buttons on the entrance card in two lines.
 
 ## 1.0
 

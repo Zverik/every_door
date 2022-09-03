@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/poi_warnings.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/screens/editor.dart';
@@ -48,7 +49,7 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
     }
     duplicateTimer = Timer(Duration(seconds: 2), () async {
       final duplicate =
-      await ref.read(osmDataProvider).findPossibleDuplicate(widget.amenity);
+          await ref.read(osmDataProvider).findPossibleDuplicate(widget.amenity);
       _logger.info('Found duplicate: $duplicate');
       if (mounted) {
         setState(() {
@@ -68,10 +69,11 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
     final int duplicateDistance = possibleDuplicate == null
         ? 0
         : distance(possibleDuplicate!.location, widget.amenity.location)
-        .round();
+            .round();
     final loc = AppLocalizations.of(context)!;
+    final warning = getWarningForAmenity(widget.amenity, loc);
+    if (possibleDuplicate == null && warning == null) return Container();
 
-    if (possibleDuplicate == null) return Container();
     return GestureDetector(
       child: Container(
         color: Colors.yellow,
@@ -83,20 +85,23 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
             const Icon(Icons.warning, color: Colors.orange),
             const SizedBox(width: 5.0),
             Text(
-              loc.editorDuplicate(duplicateDistance),
+              warning ?? loc.editorDuplicate(duplicateDistance),
               style: kFieldTextStyle,
             ),
           ],
         ),
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PoiEditorPage(amenity: possibleDuplicate),
-          ),
-        );
-      },
+      onTap: possibleDuplicate == null
+          ? null
+          : () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PoiEditorPage(amenity: possibleDuplicate),
+                ),
+              );
+            },
     );
   }
 }

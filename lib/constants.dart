@@ -21,6 +21,7 @@ const kMicroStuffInList = 24; // same, but for micromapping mode
 const kTapRadius = 20.0; // flutter pixels
 const kOldAmenityDays = 60; // check_date expiration rate
 const kOldAmenityDaysEditor = 3; // check_date expiration rate for the editor
+const kOldAmenityWarning = 365 * 5; // When warn about an old amenity
 const kFieldColor = Colors.lightBlueAccent;
 const kFieldFontSize = 18.0; // font size in fields
 const kFieldTextStyle = TextStyle(fontSize: kFieldFontSize);

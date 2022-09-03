@@ -342,6 +342,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextButton(
                       onPressed: () {
@@ -379,7 +380,11 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                           });
                         },
                       ),
-                    Expanded(child: Container()),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
                     TextButton(
                       child: Text(
                           MaterialLocalizations.of(context).cancelButtonLabel),
@@ -390,7 +395,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                     ),
                     TextButton(
                       child:
-                          Text(MaterialLocalizations.of(context).okButtonLabel),
+                      Text(MaterialLocalizations.of(context).okButtonLabel),
                       onPressed: () {
                         if (true) {
                           saveAndClose();
