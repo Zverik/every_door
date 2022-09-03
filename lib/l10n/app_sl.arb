@@ -816,7 +816,7 @@
   "@faqEntranceContent": {},
   "faqMapTinyContent": "Ker to ni bistvo. Na zemljevidu le preverjaš svoj položaj in ga premikaš, za prilagoditev. Oglej si spodnji seznam točk POI, razvrščen po oddaljenosti.\n\nZemljevid se poveča, ko urejaš vsebine, ki so oddaljene od tvoje lokacije. Aplikacija je pravzaprav narejena za urejanje stvari, ki jih vidiš z očmi.",
   "@faqMapTinyContent": {},
-  "faqCheckmarksContent": "To so oznake, da so bili podatki o točkah POI potrjeni. Dodajo oznako »check_date« s trenutnim datumom.\n\nZamisel za kontrolnimi oznakami je ta, da si, recimo, prvič pregledaš polovico mesta. Nato se po enem mesecu vrneš in ponovno ogledaš stvari. Nekako moraš označiti, da si videl/a objekt, vendar se v zvezi z njim ni nič spremenilo. To je kljukica: tapneš jo in nadaljuješ.\n\nOznaka ostane označena dva tedna. Po tem času lahko ponovno opraviš ogled in potrditev.",
+  "faqCheckmarksContent": "To so oznake, da so bili podatki o točkah POI potrjeni. Dodajo oznako »check_date« s trenutnim datumom.\n\nZamisel za kontrolnimi oznakami je ta, da si, recimo, prvič pregledaš polovico mesta. Nato se po enem mesecu vrneš in ponovno ogledaš stvari. Nekako moraš označiti, da si videl/a objekt, vendar se v zvezi z njim ni nič spremenilo. To je kljukica: tapneš jo in nadaljuješ.\n\nOznaka ostane označena 50 dni. Po tem času lahko ponovno opraviš ogled in potrditev.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "Kako dodati vhod v stavbo?",
   "@faqEntrance": {},
@@ -1067,5 +1067,13 @@
   "notesAddNote": "Dodaj opombo",
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."
-  }
+  },
+  "faqYellow": "Zakaj so nekatere hišne številke rumene?",
+  "@faqYellow": {},
+  "fieldCardsOnly": "samo kartice",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "faqYellowContent": "Ne rumene oznake v načinu vhodov in bele pike v načinu mikromapiranja pomenijo, da elementi nimajo nekaterih pomembnih atributov. Na primer:\n\n* Stavbe naj bi imele več nadstropij.\n* Vhodi bi morali imeti vrsto in, za stopnišča, razpon nadstropij.\n* Klopi morajo imeti material in naslonjalo.\n* Drevesa morajo imeti vrsto in cikel listov.",
+  "@faqYellowContent": {}
 }
