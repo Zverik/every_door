@@ -473,7 +473,7 @@
   "@faqMapTinyContent": {},
   "faqCheckmarks": "Для чего галочки в списке?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "Это отметка, что заведение проверено. Добавляет к объекту тег `check_date` с текущей датой.\n\nСуть галочки в том, что ты, скажем, обошёл полгорода в первый раз. А потом вернулся туда через месяц, решил снова обойти. И тебе нужно как-то отметить, что ты проверил, что заведение на месте, но ничего не изменилось. Это и есть галочка: нажал — и пошёл дальше.\n\nГалочка держится два месяца после проверки. Потом можно будет обойти заведения заново.",
+  "faqCheckmarksContent": "Это отметка о том, что заведение проверено. Добавляет к объекту тег `check_date` с текущей датой.\n\nСуть галочки в том, что ты, скажем, обошёл полгорода в первый раз. А потом вернулся туда через месяц, решил снова обойти. И тебе нужно как-то отметить, что ты проверил, что заведение на месте, но ничего не изменилось. Это и есть галочка: нажал — и пошёл дальше.\n\nГалочка держится два месяца после проверки. Потом можно будет обойти заведения заново.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "Как добавить подъезд?",
   "@faqEntrance": {},
@@ -722,5 +722,57 @@
     "description": "Payment field label for cards only."
   },
   "faqYellow": "Почему некоторые дома жёлтые?",
-  "@faqYellow": {}
+  "@faqYellow": {},
+  "warningFixme": "Значение fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} год}, =few{{count} года}, =other{{count} лет}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "warningWrongTag": "Ошибочный тег: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "Заведению {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "settingsHashtags": "Хэштеги пакетов правок",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "Слова для хэштегов",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Подтверждать теги перед загрузкой",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "notesCancelMessage": "Отменить ввод заметки?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  }
 }
