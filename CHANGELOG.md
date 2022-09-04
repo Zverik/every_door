@@ -29,6 +29,7 @@ _Unreleased_
 * Checking for stale authentication before uploading.
 * Tap on the tile downloading button the second time to abort downloading.
 * Split buttons on the entrance card in two lines.
+* Editing breaks in opening hours in two taps, not four.
 
 ## 1.0
 
