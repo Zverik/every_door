@@ -1075,5 +1075,57 @@
     "description": "Payment field label for cards only."
   },
   "faqYellowContent": "Ne rumene oznake v načinu vhodov in bele pike v načinu mikromapiranja pomenijo, da elementi nimajo nekaterih pomembnih atributov. Na primer:\n\n* Stavbe naj bi imele več nadstropij.\n* Vhodi bi morali imeti vrsto in, za stopnišča, razpon nadstropij.\n* Klopi morajo imeti material in naslonjalo.\n* Drevesa morajo imeti vrsto in cikel listov.",
-  "@faqYellowContent": {}
+  "@faqYellowContent": {},
+  "warningWrongTag": "Napačna oznaka: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "Točka POI je stara {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "settingsHashtags": "Ključniki nabora sprememb",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "Besede za ključnike",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "notesCancelMessage": "Želiš preklicati svojo opombo OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "warningFixme": "Fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} leto}, =2{{count} leti}, =few{{count} leta}, =other{{count} let}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "hashtagsConfirm": "Potrdi oznake pri nalaganju",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  }
 }
