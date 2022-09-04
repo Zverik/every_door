@@ -1073,5 +1073,36 @@
     "description": "Payment field label for cards only."
   },
   "faqYellow": "Чаму некаторыя нумары дамоў жоўтыя?",
-  "@faqYellow": {}
+  "@faqYellow": {},
+  "warningTooOld": "Установе {years} гадоў",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "warningFixme": "Значэнне fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Памылковы тэг: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "faqYellowContent": "Белыя пазнакі ў рэжыме ўваходаў і белыя кропкі ў рэжыме мікрамапінгу азначаюць, што ў элементаў адсутнічаюць некаторыя важныя атрыбуты. Напрыклад:\n\n* будынкам трэба прапісаць колькасць паверхаў;\n* уваходам трэба пазначыць тып і нумары кватэр (для пад'ездаў);\n* лаўкі павінны мець матэрыял і спінку;\n* дрэвы павінны мець тып лісця і цыкл лістапада.",
+  "@faqYellowContent": {}
 }
