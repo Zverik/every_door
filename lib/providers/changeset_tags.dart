@@ -2,28 +2,75 @@ import 'dart:io';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Map<String, String> generateChangesetTags(Iterable<OsmChange> changes) {
-  String comment = CommentGenerator().generateComment(changes);
-  if (comment.length > 250) {
-    comment = CommentGenerator().generateComment(changes, simple: true);
-    if (comment.length > 250) {
-      comment = 'Surveyed ${changes.length} objects';
-    }
+final changesetTagsProvider = ChangeNotifierProvider((ref) => ChangesetTagsProvider());
+
+class ChangesetTagsProvider extends ChangeNotifier {
+  static const _kHashtagsKey = 'hashtags';
+  static final _generator = CommentGenerator();
+  String? _hashtags;
+
+  ChangesetTagsProvider() {
+    loadHashtags();
   }
 
-  String platform;
-  if (Platform.isAndroid)
-    platform = 'Android';
-  else if (Platform.isIOS)
-    platform = 'iOS';
-  else
-    platform = 'unknown';
+  Map<String, String> generateChangesetTags(Iterable<OsmChange> changes) {
+    final hashtags = getHashtags();
+    final maxCommentLength = 250 - hashtags.length;
 
-  return <String, String>{
-    'comment': comment,
-    'created_by': '$kAppTitle $platform $kAppVersion',
-  };
+    String comment = _generator.generateComment(changes);
+    if (comment.length > maxCommentLength) {
+      comment = _generator.generateComment(changes, simple: true);
+      if (comment.length > maxCommentLength) {
+        comment = 'Surveyed ${changes.length} objects';
+      }
+    }
+    if (hashtags.isNotEmpty) comment += ' $hashtags';
+
+    String platform;
+    if (Platform.isAndroid)
+      platform = 'Android';
+    else if (Platform.isIOS)
+      platform = 'iOS';
+    else
+      platform = 'unknown';
+
+    return <String, String>{
+      'comment': comment,
+      'created_by': '$kAppTitle $platform $kAppVersion',
+    };
+  }
+
+  Future<void> loadHashtags() async {
+    final prefs = await SharedPreferences.getInstance();
+    _hashtags = prefs.getString(_kHashtagsKey) ?? '';
+    notifyListeners();
+  }
+
+  String getHashtags({bool clearHashes = false}) {
+    String hashtags = _hashtags ?? '';
+    if (clearHashes) {
+      hashtags = hashtags.replaceAll('#', '');
+    }
+    return hashtags;
+  }
+
+  saveHashtags(String value) async {
+    final tags = value
+        .split(RegExp(r'\s+|#'))
+        .map((s) => s.replaceAll('#', ''))
+        .where((s) => s.length > 1)
+        .map((s) => '#' + s)
+        .join(' ');
+    print('New hashtags: $tags');
+    _hashtags = tags;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kHashtagsKey, tags);
+  }
 }
 
 class _TypeCount {

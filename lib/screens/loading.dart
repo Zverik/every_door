@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:every_door/providers/changes.dart';
+import 'package:every_door/providers/changeset_tags.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
@@ -37,6 +38,9 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
 
     // Load login name.
     ref.read(authProvider);
+
+    // Load changeset hashtags.
+    ref.read(changesetTagsProvider);
 
     // Initialize Bing imagery.
     ref.read(imageryProvider);

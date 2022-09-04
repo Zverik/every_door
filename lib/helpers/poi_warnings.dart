@@ -37,7 +37,7 @@ const _kTagsWithoutYesValue = {
 
 String? getWarningForAmenity(OsmChange amenity, AppLocalizations loc) {
   String? fixmeValue = amenity['fixme'];
-  if (fixmeValue != null && !amenity.isNew) {
+  if (fixmeValue != null && !amenity.isNew && amenity['amenity'] != 'fixme') {
     if (fixmeValue.length > 50) {
       fixmeValue = fixmeValue.substring(0, 50) + '…';
     }
@@ -54,7 +54,7 @@ String? getWarningForAmenity(OsmChange amenity, AppLocalizations loc) {
   final int ageInDays = DateTime.now()
       .difference(amenity.element?.timestamp ?? DateTime.now())
       .inDays;
-  if (ageInDays >= kOldAmenityWarning) {
+  if (ageInDays >= kOldAmenityWarning && amenity.isOld) {
     return loc.warningTooOld(loc.years((ageInDays / 365).round()));
   }
 

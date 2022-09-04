@@ -110,15 +110,15 @@ class _NameInputFieldState extends State<NameInputField> {
               minItemWidth: 130.0,
               children: [
                 for (final lang in _langData.languages)
-                ListTile(
-                  visualDensity: VisualDensity.compact,
-                  title: Text(lang.nameLoc, style: kFieldTextStyle),
-                  subtitle: Text(lang.nameEn),
-                  tileColor: kFieldColor.withOpacity(0.2),
-                  onTap: () {
-                    Navigator.pop(context, lang.key);
-                  },
-                ),
+                  ListTile(
+                    visualDensity: VisualDensity.compact,
+                    title: Text(lang.nameLoc, style: kFieldTextStyle),
+                    subtitle: Text(lang.nameEn),
+                    tileColor: kFieldColor.withOpacity(0.2),
+                    onTap: () {
+                      Navigator.pop(context, lang.key);
+                    },
+                  ),
               ],
             ),
           );
@@ -133,7 +133,7 @@ class _NameInputFieldState extends State<NameInputField> {
   updateFromTags() {
     for (final kv in _controllers.entries) {
       final value = widget.element[kv.key.isEmpty ? widget.field.key : kv.key];
-      if (value != kv.value.text.trim()) {
+      if (value != kv.value.text.trim().replaceAll('  ', ' ')) {
         // Hopefully that's not the time when we type a letter in the field.
         kv.value.text = value ?? '';
       }
@@ -146,6 +146,12 @@ class _NameInputFieldState extends State<NameInputField> {
     // TODO: only update when page is back from inactive?
     updateFromTags();
 
+    // This is a hack to auto-focus on the name when the element was just created.
+    bool needFocus = widget.element.isNew &&
+        widget.element['name'] == null &&
+        DateTime.now().difference(widget.element.updated) <
+            Duration(seconds: 3);
+
     return Column(
       children: [
         // Main suffix-less field.
@@ -154,6 +160,7 @@ class _NameInputFieldState extends State<NameInputField> {
             Expanded(
               child: TextField(
                 controller: _controllers[''],
+                autofocus: needFocus,
                 textCapitalization: widget.field.capitalize
                     ? TextCapitalization.sentences
                     : TextCapitalization.none,
@@ -166,7 +173,8 @@ class _NameInputFieldState extends State<NameInputField> {
                 onChanged: (value) {
                   // On every keypress, since the focus can change at any minute.
                   setState(() {
-                    widget.element[widget.field.key] = value.trim();
+                    widget.element[widget.field.key] =
+                        value.trim().replaceAll('  ', ' ');
                   });
                 },
               ),
@@ -206,7 +214,8 @@ class _NameInputFieldState extends State<NameInputField> {
                     onChanged: (value) {
                       // On every keypress, since the focus can change at any minute.
                       setState(() {
-                        widget.element[key] = value.trim();
+                        widget.element[key] =
+                            value.trim().replaceAll('  ', ' ');
                       });
                     },
                   ),

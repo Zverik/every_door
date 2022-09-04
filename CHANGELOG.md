@@ -6,7 +6,9 @@ _Unreleased_
 
 ### Highlights
 
+* Changeset hashtags.
 * Increased confirmation interval to 2 months.
+* Name field is focused when creating a new POI.
 * Warnings for amenities that have a `fixme` tag or that are too old.
 
 ### Other

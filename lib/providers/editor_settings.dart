@@ -6,6 +6,8 @@ final editorSettingsProvider =
     StateNotifierProvider<EditorSettingsProvider, EditorSettings>(
         (_) => EditorSettingsProvider());
 
+enum ChangesetReview { never, withTags, always }
+
 class EditorSettings {
   static const kDefaultPayment = ['visa', 'mastercard'];
 
@@ -13,12 +15,14 @@ class EditorSettings {
   final bool fixNumKeyboard;
   final bool leftHand;
   final List<String> defaultPayment;
+  final ChangesetReview changesetReview;
 
   const EditorSettings({
     this.preferContact = false,
-    this.fixNumKeyboard = false,
+    this.fixNumKeyboard = true,
     this.leftHand = false,
     this.defaultPayment = kDefaultPayment,
+    this.changesetReview = ChangesetReview.never,
   });
 
   EditorSettings copyWith({
@@ -26,12 +30,14 @@ class EditorSettings {
     bool? fixNumKeyboard,
     bool? leftHand,
     List<String>? defaultPayment,
+    ChangesetReview? changesetReview,
   }) {
     return EditorSettings(
       preferContact: preferContact ?? this.preferContact,
       fixNumKeyboard: fixNumKeyboard ?? this.fixNumKeyboard,
       leftHand: leftHand ?? this.leftHand,
       defaultPayment: defaultPayment ?? this.defaultPayment,
+      changesetReview: changesetReview ?? this.changesetReview,
     );
   }
 
@@ -44,6 +50,7 @@ class EditorSettings {
           ? kDefaultPayment
           : data[2].split(';').map((s) => s.trim()).toList(),
       leftHand: data.length >= 4 && data[3] == '1',
+      changesetReview: data.length < 5 ? ChangesetReview.never : ChangesetReview.values[int.parse(data[4])],
     );
   }
 
@@ -53,6 +60,7 @@ class EditorSettings {
       fixNumKeyboard ? '1' : '0',
       defaultPayment.join(';'),
       leftHand ? '1' : '0',
+      ChangesetReview.values.indexOf(changesetReview).toString(),
     ];
   }
 
@@ -98,5 +106,10 @@ class EditorSettingsProvider extends StateNotifier<EditorSettings> {
       state = state.copyWith(defaultPayment: values);
       store();
     }
+  }
+
+  setChangesetReview(ChangesetReview value) {
+    state = state.copyWith(changesetReview: value);
+    store();
   }
 }

@@ -48,6 +48,7 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
       duplicateTimer = null;
     }
     duplicateTimer = Timer(Duration(seconds: 2), () async {
+      if (!mounted) return;
       final duplicate =
           await ref.read(osmDataProvider).findPossibleDuplicate(widget.amenity);
       _logger.info('Found duplicate: $duplicate');

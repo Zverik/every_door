@@ -394,6 +394,10 @@
   "@settingsLoginDetails": {
     "description": "Settings entry for logging in to OSM."
   },
+  "settingsHashtags": "Changeset Hashtags",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
   "settingsPurgeData": "Purge obsolete cached data",
   "@settingsPurgeData": {
     "description": "Settings entry for purging obsolete OSM data."
@@ -591,6 +595,14 @@
   "accountUnreadMail": "Unread Mail",
   "@accountUnreadMail": {
     "description": "Label for the number of unread private messages a user has."
+  },
+  "hashtagsLabel": "Words for hashtags",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Confirm tags on upload",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
   "changesCount": "{count,plural, =1{{count} change}, =few{{count} changes}, =other{{count} changes}}",
   "@changesCount": {

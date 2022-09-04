@@ -7,7 +7,7 @@ import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
-import 'package:every_door/helpers/changeset_tags.dart';
+import 'package:every_door/providers/changeset_tags.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
@@ -163,7 +163,8 @@ class OsmApiHelper {
   }
 
   String _buildChangeset(Iterable<OsmChange> changes) {
-    final tags = generateChangesetTags(changes);
+    final tags =
+        _ref.read(changesetTagsProvider).generateChangesetTags(changes);
     final builder = XmlBuilder();
     builder.processing('xml', 'version="1.0"');
     builder.element('osm', nest: () {
