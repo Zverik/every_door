@@ -1118,7 +1118,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "fieldCardsOnly": "card only",
+  "fieldCardsOnly": "cards only",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
