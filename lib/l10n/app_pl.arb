@@ -822,7 +822,7 @@
   "@faqEntranceContent": {},
   "faqFloors": "Czy piętra „3” i „/3” są takie same?",
   "@faqFloors": {},
-  "faqCheckmarksContent": "Są to znaki, które potwierdziły dane dotyczące udogodnień. Dodają znacznik `check_date` z bieżącą datą.\n\nIdeą znaczników wyboru jest to, że, powiedzmy, po raz pierwszy zbadałeś połowę miasta. Potem po miesiącu wróciłeś i ponownie podszedłeś do zwiedzania. Musisz jakoś zaznaczyć, że widzisz udogodnienie, ale nic się w nim nie zmieniło. To jest znacznik wyboru: dotknij go i kontynuuj.\n\nZnak sprawdzenia jest aktualny przez 50 dni. Następnie możesz ponownie sprawdzić udogodnienia.",
+  "faqCheckmarksContent": "Są to znaki, które potwierdziły dane dotyczące udogodnień. Dodają znacznik `check_date` z bieżącą datą.\n\nIdeą znaczników wyboru jest to, że, powiedzmy, po raz pierwszy zbadałeś połowę miasta. Potem po miesiącu wróciłeś i ponownie podszedłeś do zwiedzania. Musisz jakoś zaznaczyć, że widzisz udogodnienie, ale nic się w nim nie zmieniło. To jest znacznik wyboru: dotknij go i kontynuuj.\n\nZnak sprawdzenia jest aktualny przez dwa miesiące. Następnie możesz ponownie sprawdzić udogodnienia.",
   "@faqCheckmarksContent": {},
   "faqTaggingContent": "Dlaczego w edytorze brakuje obiektu? Kiedy te białe kropki są wyświetlane w trybie mikromapowania? Jak sortowane są przedmioty?\n\nOdpowiedzi na wszystkie te pytania znajdują się w [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Oto, na co możesz spojrzeć:\n\n* Kolejność kluczy dla głównego znacznika — lista `kMainKeys`.\n* Jakie obiekty są pobierane — funkcja `isGoodTags`.\n* Co jest uważane za udogodnienie — funkcja `isAmenityTags`.\n* Które punkty są przyciągane do których linii — funkcja `detectSnap`.\n* Gdy obiekt mikromapowania jest niekompletny — funkcja `needsMoreInfo`.",
   "@faqTaggingContent": {},
@@ -1075,5 +1075,57 @@
   "faqYellow": "Czemu niektóre numery budynków są żółte?",
   "@faqYellow": {},
   "faqYellowContent": "Nieżółte etykiety w trybie wejść i białe kropki w trybie mikromapowania oznaczają, że elementom brakuje jakichś ważnych atrybutów. Na przykład:\n\n* Od budynków oczekuje się, że będą miały podana liczbę poziomów.\n* Wejścia powinny mieć typ, a dla klatek schodowych powinien być podany zakres mieszkań.\n* Ławki powinny mieć podane materiał i oparcie.\n* Drzewa powinny mieć typ i cykl liści.",
-  "@faqYellowContent": {}
+  "@faqYellowContent": {},
+  "warningFixme": "Napraw mnie: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Zły znacznik: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "Oznaczenie udogodnienia jest stare: {years} lata",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} rok}, =few{{count} lata}, =other{{count} lat}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsHashtags": "Hasztagi zestawu zmian",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsConfirm": "Zatwierdź znaczniki przy przesyłaniu",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "notesCancelMessage": "Czy anulować Twoją uwagę OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "hashtagsLabel": "Słowa do hasztagów",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  }
 }
