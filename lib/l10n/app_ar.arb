@@ -1046,7 +1046,7 @@
   "@notesAnonymous": {
     "description": "Name for anonymous note submitters."
   },
-  "faqCheckmarksContent": "هذه علامات على أنه تم تأكيد بيانات المنشآت، يتم إضافة وسم `check_date` تاريخ التحقق مع التاريخ الحالي.\n\nالفكرة من وراء الوسوم هي ، على سبيل المثال ، أنك إذا قمت بمسح نصف المدينة في المرة الأولى، ثم بعد شهر عدت وقمت بالمسح مرة أخرى، تحتاج إلى وضع وسم بطريقة ما على أنك ترى المنشآة، لكن لم يتغير شيء حيال ذلك. هذه هي علامة الاختيار: يمكنك النقر عليها والمتابعة.\n\nيبقى الوسم مفحوصاً لمدة أسبوعين. بعد ذلك يمكنك مسح المنشآت مرة أخرى.",
+  "faqCheckmarksContent": "هذه علامات على أنه تم تأكيد بيانات المنشآت، يتم إضافة وسم `check_date` تاريخ التحقق مع التاريخ الحالي.\n\nالفكرة من وراء الوسوم هي ، على سبيل المثال ، أنك إذا قمت بمسح نصف المدينة في المرة الأولى، ثم بعد شهر عدت وقمت بالمسح مرة أخرى، تحتاج إلى وضع وسم بطريقة ما على أنك ترى المنشآة، لكن لم يتغير شيء حيال ذلك. هذه هي علامة الاختيار: يمكنك النقر عليها والمتابعة.\n\nيبقى الوسم مفحوصاً لمدة شهرين، بعد ذلك يمكنك مسح المنشآت مرة أخرى.",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "إذا تعذر تحويل لوحة المفاتيح الرقمية إلى لوحة مفاتيح كاملة ، فتحقق من إعدادات التطبيق. هم خلف الزر في الزاوية اليسرى العليا. قم بتشغيل \"لوحة المفاتيح الرقمية الموسعة\" هناك.",
   "@faqLettersContent": {},
@@ -1067,5 +1067,65 @@
         "example": "71"
       }
     }
+  },
+  "warningFixme": "أصلحني: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "وسم خاطئ: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "المنشأة عمرها {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} سنة}, =few{{count} سنوات}, =other{{count} سنوات}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsHashtags": "وسوم التغييرات",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "faqYellow": "لماذا بعض أرقام المساكن صفراء؟",
+  "@faqYellow": {},
+  "faqYellowContent": "التسميات الغير صفراء في وضع تحرير المداخل و النقاط البيضاء في وضع التحرير الدقيق تعني أن العناصر تفتقر إلى بعض الإدخالات المهمة. فمثلا:\n\n* أن المباني يتوقع أنه تحتوي على عدد من الطوابق.\n* أن المداخل لابد أن تكون محددة النوع، وبالنسبة للسلالم ، يجب أن تكون ذات نطاق مسطح.\n* أن المقاعد يتوقع أن لها مواد ومسند ظهر لم تدخل.\n* أن الأشجار لم يدخل نوعها و نوع دورة أوراقها.",
+  "@faqYellowContent": {},
+  "hashtagsLabel": "الكلمات المفتاحية",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "التأكد من الوسوم قبل الرفع",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "notesCancelMessage": "إلغاء ملاحة OSM الخاصة بك؟",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "fieldCardsOnly": "البطاقات فقط",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
   }
 }

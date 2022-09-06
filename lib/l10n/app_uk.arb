@@ -725,7 +725,7 @@
   "@buildingMaterialConcrete": {},
   "buildingMaterialWood": "деревина",
   "@buildingMaterialWood": {},
-  "notesCloseMessage": "Закрити нотатку?",
+  "notesCloseMessage": "Позначити нотатку як опрацьовану?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -979,7 +979,7 @@
   },
   "buildingMaterialGlass": "скло",
   "@buildingMaterialGlass": {},
-  "notesClose": "Закрити",
+  "notesClose": "Опрацьовано",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
@@ -990,5 +990,109 @@
   "faqMapTinyContent": "Тому що мапа - це не головне. Вона потрібна щом знайти себе та посунути до якогось місця. Головне - перелік точок під мапою, впорядковані від найближчої до найдальшої.\n\nМапа збільшується коли редагуєте точки далекі від вашої геолокації. А ще в цому застосунку краще редагувати місця, які ви бачите наживо.",
   "@faqMapTinyContent": {},
   "faqEntranceContent": "Нижній рядок кнопок перемикає режими: мікромапінг, точки, входи, нотатки.\n\nВ режимі входів перетягніть кнопку із дверима з нижнього куту на мапу.",
-  "@faqEntranceContent": {}
+  "@faqEntranceContent": {},
+  "dataDownloadedCount": "{count,plural, =1{Завантажен {count} обʼєкт.}, =few{Заватнажено {count} обʼєкти.}, =other{Завантажено {count} обʼєктів.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesSwipeLeft": "Протягніть ліворуч щоб скасувати зміни",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursNumberedWeekday": "\"Останній понеділок\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "Конкретна дата",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "hashtagsConfirm": "Підтверджувати теги при відвантажені",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "fieldHoursAsText": "Текстом",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursClosed": "Зачинено",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Святкові дні",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "notesCancelMessage": "Скасувати вашу OSM нотатку?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "hashtagsLabel": "Хештеги",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "settingsHashtags": "Хештеги для змін",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "warningWrongTag": "Невірний тег: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} рік}, =few{{count} роки}, =other{{count} років}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "warningTooOld": "Закладу {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Видалив {count} елемент}, =few{Видалив {count} елементи}, =other{Видалив {count} елементів}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesCount": "{count,plural, =1{{count} зміна}, =few{{count} зміни}, =other{{count} змін}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorMarkChecked": "Позначити перевіреним",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Історія",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Теги",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "fieldCardsOnly": "тільки карткою",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  }
 }

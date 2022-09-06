@@ -845,7 +845,7 @@
   "@fieldHoursAsText": {
     "description": "Button title to open the raw opening hours editor."
   },
-  "faqCheckmarksContent": "Dit zijn merktekens dat een voorziening is bevestigd. Ze voegen de `check_date`-tag toe met de huidige datum.\n\nHet idee achter de vinkjes is dat, stel, je hebt de helft van de stad voor de eerste keer hebt onderzocht. Na een maand kom je weer terug en ben je weer gaan onderzoeken. Je moet op een of andere manier bijhouden dat je de voorziening ziet, maar dat er niets aan is gewijzigd. Dat is het vinkje: je raakt hem aan en gaat door.\n\nHet vinkje blijft twee weken aan staan. Daarna kan je de voorzieningen opnieuw onderzoeken.",
+  "faqCheckmarksContent": "Dit zijn merktekens dat een voorziening is bevestigd. Ze voegen de `check_date`-tag toe met de huidige datum.\n\nHet idee achter de vinkjes is dat, stel, je hebt de helft van de stad voor de eerste keer hebt onderzocht. Na een maand kom je weer terug en ben je weer gaan onderzoeken. Je moet op een of andere manier bijhouden dat je de voorziening ziet, maar dat er niets aan is gewijzigd. Dat is het vinkje: je raakt hem aan en gaat door.\n\nHet vinkje blijft twee maanden aan staan. Daarna kan je de voorzieningen opnieuw onderzoeken.",
   "@faqCheckmarksContent": {},
   "changesMapNotes": "Kaartnotities en tekeningen",
   "@changesMapNotes": {
@@ -1069,5 +1069,65 @@
   "navEntrancesMode": "Toegang-modus",
   "@navEntrancesMode": {
     "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "warningFixme": "Fixmij: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Verkeerde tag: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "years": "jaar",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "hashtagsLabel": "Woorden voor hashtags",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Tags bevestigen bij upload",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "notesCancelMessage": "Je OSM-notitie annuleren?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "faqYellow": "Waarom zijn sommige huisnummers geel?",
+  "@faqYellow": {},
+  "faqYellowContent": "Niet-gele labels in de toegangen-modus en witte punten in de micromapping modus betekenen dat de elementen een aantal belangrijke attributen missen. Bijvoorbeeld:\n\n* Van gebouwen wordt verwacht dat het een aantal verdiepingen heeft.\n* Ingangen zouden een type en, voor trappen, flatbereik moeten hebben.\n* Banken zouden een materiaal en een rugleuning moeten hebben.\n* Bomen zouden een bladsoort en cyclus moeten hebben.",
+  "@faqYellowContent": {},
+  "warningTooOld": "Voorziening is {years} oud",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "settingsHashtags": "Wijzigingsset hashtags",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "fieldCardsOnly": "alleen kaarten",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
   }
 }

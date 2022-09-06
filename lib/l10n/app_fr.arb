@@ -1075,5 +1075,41 @@
   "faqYellowContent": "Les marqueurs non jaunes dans le mode entrée, et les points blancs dans le mode micromapping, signifient que ces éléments manquent certains attributs importants. Par exemple :\n\n* Les bâtiments devraient avoir un nombre d'étages.\n* Les entrées devraient avoir un type et, pour les escaliers, une rampe.\n* Les bancs devraient avoir un matériau et une précision sur le dossier.\n* Les arbres devraient avoir un type de feuille et un cycle.",
   "@faqYellowContent": {},
   "faqYellow": "Pourquoi certains numéros d'adresse sont jaunes ?",
-  "@faqYellow": {}
+  "@faqYellow": {},
+  "warningWrongTag": "Mauvaise étiquette : {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "La boutique est présente depuis {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "warningFixme": "À corriger : {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "years": "{count,plural, one{{count} an} other{{count} ans}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  }
 }

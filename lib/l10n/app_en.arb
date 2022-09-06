@@ -823,7 +823,7 @@
   "@fieldCardsNo": {
     "description": "Payment field label for cash only."
   },
-  "fieldCardsOnly": "cards only",
+  "fieldCardsOnly": "card only",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },

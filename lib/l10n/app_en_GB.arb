@@ -778,7 +778,7 @@
   "@faqMapTinyContent": {},
   "faqCheckmarks": "What are the checkmarks for?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "These are marks that amenity data was confirmed. They add the `check_date` tag with the current date.\n\nThe idea behind the checkmarks is that, say, you surveyed half the city the first time. Then after a month you came back and went to survey again. You need to somehow mark that you see the amenity, but nothing has changed about it. That's the checkmark: you tap it and continue.\n\nThe mark stays checked for two weeks. After that you may survey the amenities again.",
+  "faqCheckmarksContent": "These are marks that amenity data was confirmed. They add the `check_date` tag with the current date.\n\nThe idea behind the checkmarks is that, say, you surveyed half the city the first time. Then after a month you came back and went to survey again. You need to somehow mark that you see the amenity, but nothing has changed about it. That's the checkmark: you tap it and continue.\n\nThe mark stays checked for two months. After that you may survey the amenities again.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "How to add a building entrance?",
   "@faqEntrance": {},
@@ -1067,5 +1067,65 @@
   "notesCloseMessage": "Mark the note resolved?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
-  }
+  },
+  "notesCancelMessage": "Cancel your OSM note?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "faqYellow": "Why are some housenumbers yellow?",
+  "@faqYellow": {},
+  "hashtagsLabel": "Words for hashtags",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "warningFixme": "Fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Wrong tag: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "Amenity is {years} old",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} year}, =few{{count} years}, =other{{count} years}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "hashtagsConfirm": "Confirm tags on upload",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "fieldCardsOnly": "cards only",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "settingsHashtags": "Changeset Hashtags",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "faqYellowContent": "Non-yellow labels in the entrances mode and white dots in the micromapping mode mean the elements lack some important attributes. For example:\n\n* Buildings are expected to have number of levels.\n* Entrances should have type and, for staircases, flat range.\n* Benches should have material and backrest.\n* Trees should have leaf type and cycle.",
+  "@faqYellowContent": {}
 }

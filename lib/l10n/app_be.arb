@@ -1074,7 +1074,7 @@
   },
   "faqYellow": "Чаму некаторыя нумары дамоў жоўтыя?",
   "@faqYellow": {},
-  "warningTooOld": "Установе {years} гадоў",
+  "warningTooOld": "Установе {years}",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -1104,5 +1104,12 @@
     }
   },
   "faqYellowContent": "Белыя пазнакі ў рэжыме ўваходаў і белыя кропкі ў рэжыме мікрамапінгу азначаюць, што ў элементаў адсутнічаюць некаторыя важныя атрыбуты. Напрыклад:\n\n* будынкам трэба прапісаць колькасць паверхаў;\n* уваходам трэба пазначыць тып і нумары кватэр (для пад'ездаў);\n* лаўкі павінны мець матэрыял і спінку;\n* дрэвы павінны мець тып лісця і цыкл лістапада.",
-  "@faqYellowContent": {}
+  "@faqYellowContent": {},
+  "years": "{count,plural, =1{{count} год}, =few{{count} гады}, =other{{count} гадоў}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  }
 }

@@ -767,5 +767,50 @@
   "faqYellow": "Warum sind einige Hausnummern gelb?",
   "@faqYellow": {},
   "faqYellowContent": "Nicht-gelbe Beschriftungen im Modus Eingänge und weiße Punkte im Modus Mikromapping bedeuten, dass den Elementen einige wichtige Attribute fehlen. Zum Beispiel:\n\n* Gebäude sollten eine Anzahl von Ebenen haben.\n* Eingänge sollten eine Angabe zum Typ und, bei Treppen, eine Angabe der zugänglichen Wohnungen haben.\n* Bänke sollten eine Angabe zu Material und Rückenlehne haben.\n* Bäume sollten eine Angaben zu Blattart und -zyklus haben.",
-  "@faqYellowContent": {}
+  "@faqYellowContent": {},
+  "warningWrongTag": "Falsches Attribut: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "Die Einrichtung ist {years} alt",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "notesCancelMessage": "OSM Notiz abbrechen?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "warningFixme": "Fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "settingsHashtags": "Hashtags des Änderungssatzes",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "Wörter für Hashtags",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Tags beim Hochladen bestätigen",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  }
 }

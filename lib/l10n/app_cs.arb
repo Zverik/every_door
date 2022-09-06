@@ -1062,7 +1062,7 @@
   "@faqCheckmarks": {},
   "faqLettersContent": "Pokud nelze numerickou klávesnici přepnout na plnohodnotnou, zkontrolujte nastavení aplikace. Nachází se za tlačítkem v levém horním rohu. Tam zapněte \"rozšířenou numerickou klávesnici\".",
   "@faqLettersContent": {},
-  "faqCheckmarksContent": "Jedná se o značky, které potvrzují údaje o občanské vybavenosti. Přidávají značku `check_date` s aktuálním datem.\n\nMyšlenka kontrolních značek spočívá v tom, že jste, řekněme, poprvé zkoumali polovinu města. Pak jste se po měsíci vrátili a šli jste provést průzkum znovu. Potřebujete nějak označit, že danou vybavenost vidíte, ale nic se na ní nezměnilo. To je ta kontrolní značka: klepnete na ni a pokračujete.\n\nZnačka zůstane zaškrtnutá po dobu 50 dnů. Poté můžete provést průzkum vybavenosti znovu.",
+  "faqCheckmarksContent": "Jedná se o značky, které potvrzují údaje o občanské vybavenosti. Přidávají značku `check_date` s aktuálním datem.\n\nMyšlenka kontrolních značek spočívá v tom, že jste, řekněme, poprvé zkoumali polovinu města. Pak jste se po měsíci vrátili a šli jste provést průzkum znovu. Potřebujete nějak označit, že danou vybavenost vidíte, ale nic se na ní nezměnilo. To je ta kontrolní značka: klepnete na ni a pokračujete.\n\nZnačka zůstane zaškrtnutá po dobu dvou měsíců. Poté můžete provést průzkum vybavenosti znovu.",
   "@faqCheckmarksContent": {},
   "faqEntranceContent": "Ve spodní části je řada tlačítek režimů: mikromapování, vybavení, vchody a poznámky.\n\nV režimu vstupů klepněte na tlačítko dveří v dolním rohu nebo je přetáhněte na mapu.",
   "@faqEntranceContent": {},
@@ -1075,5 +1075,57 @@
   "faqYellowContent": "Nežluté popisky v režimu vstupů a bílé tečky v režimu mikromapování znamenají, že prvky postrádají některé důležité atributy. Například:\n\n* Očekává se, že budovy budou mít počet úrovní.\n* Vchody by měly mít typ a u schodišť plošný rozsah.\n* Lavičky by měly mít materiál a opěradlo.\n* Stromy by měly mít typ a cyklus listů.",
   "@faqYellowContent": {},
   "faqYellow": "Proč jsou některá čísla popisná žlutá?",
-  "@faqYellow": {}
+  "@faqYellow": {},
+  "warningWrongTag": "Nesprávný štítek: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "settingsHashtags": "Hashtagy changesetu",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "Slova pro hashtagy",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "notesCancelMessage": "Zrušit poznámku OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "warningFixme": "Fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "hashtagsConfirm": "Potvrzení štítků při nahrávání",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "warningTooOld": "Bod je starý {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} rok}, =few{{count} roky}, =other{{count} let}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  }
 }

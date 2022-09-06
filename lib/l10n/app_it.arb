@@ -373,7 +373,7 @@
   "@aboutLinks": {
     "description": "Title for the links section on the About page."
   },
-  "faqCheckmarksContent": "Questi segni indicano che i dati dell'elemento sono stati confermati. Aggiungono il tag `check_date` con la data corrente.\n\nL'idea alla base dei segni di spunta è che, ad esempio, la prima volta si è rilevata metà della città. Poi, dopo un mese, si è tornati a fare un'altra indagine. È necessario segnare in qualche modo che si vede l'amenità, ma che non è cambiata. Questo è il segno di spunta: si tocca e si continua.\n\nIl segno rimane selezionato per due settimane. Dopodiché è possibile effettuare nuovamente il rilevamento.",
+  "faqCheckmarksContent": "Questi segni indicano che i dati dell'elemento sono stati confermati. Aggiungono il tag `check_date` con la data corrente.\n\nL'idea alla base dei segni di spunta è che, ad esempio, la prima volta si è rilevata metà della città. Poi, dopo un mese, si è tornati a fare un'altra indagine. È necessario segnare in qualche modo che si vede l'amenità, ma che non è cambiata. Questo è il segno di spunta: si tocca e si continua.\n\nIl segno rimane selezionato per due mesi. Dopodiché è possibile effettuare nuovamente il rilevamento.",
   "@faqCheckmarksContent": {},
   "aboutProjectWebsite": "Sito web del progetto",
   "@aboutProjectWebsite": {
@@ -735,5 +735,65 @@
   "tagsDelete": "Cancella",
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "warningFixme": "Da correggere: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "faqYellow": "Perché i tuoi numeri civici sono gialli?",
+  "@faqYellow": {},
+  "faqYellowContent": "Le etichette non in giallo nella modalità ingressi e i punti bianchi nella modalità micromapping indicano la mancanza di un qualche attributo importante. Ad esempio:\n\n* Gli edifici dovrebbero avere un numero di piani.\n* Gli ingressi dovrebbero avere un tipo e, per le scalinate, un intervallo dello scalino.\n* Le panchine dovrebbero avere il materiale e lo schienale.\n* Gli alberi dovrebbero avere il tipo di foglie e il loro ciclo.",
+  "@faqYellowContent": {},
+  "settingsHashtags": "Hashtag nel gruppo di modifiche",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "Parole per hashtag",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Conferma le etichette e carica",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "notesCancelMessage": "Cancella la tua nota OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "warningTooOld": "Il POI esiste da {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "warningWrongTag": "Etichetta sbagliata: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "years": "{count,plural,one {{count} anno} other {{count} anni}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "fieldCardsOnly": "solo carte",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
   }
 }
