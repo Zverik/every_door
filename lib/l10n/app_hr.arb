@@ -903,5 +903,231 @@
   "versionsLocalChanges": "Lokalne izmjene",
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
-  }
+  },
+  "messageDataObsolete": "Podaci su zastarjeli, dotaknite ovdje da biste ih osvježili",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "Uključi GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Uključite lokacijske usluge na ploči sa postavkama koja će se prikazati.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocation": "Omogući lokaciju",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "enableLocationMessage": "Dopustite aplikaciji pristup lokaciji na ploči sa postavkama koja će se prikazati.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonYes": "Da",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "Ne",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingX": "Zgrada {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "entranceX": "Ulaz {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingPostCode": "Poštanski broj",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingLevels": "Katova",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Krovnih katova",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "Oblik krova",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "Vrsta",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Dodatno",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterial": "Fasada",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "cigla",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "žbuka",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "drvo",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "beton",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "paneli",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "cementni blokovi",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "kamen",
+  "@buildingMaterialStone": {},
+  "buildingTypeHouse": "kuća",
+  "@buildingTypeHouse": {},
+  "buildingTypeRetail": "trgovina",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "komercijalno",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "šupa",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "industrijska",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeGarage": "garaža",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "u izgradnji",
+  "@buildingTypeConstruction": {},
+  "entranceFlats": "Stanovi",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "Trebali bi biti lista brojeva",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceIsUnit": "Spremiti broj stana u addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceAccessYes": "javan",
+  "@entranceAccessYes": {},
+  "entranceAccessDelivery": "dostava",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "Invalidi",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceTypeMain": "glavni",
+  "@entranceTypeMain": {},
+  "entranceTypeStaircase": "stubište",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "kućni",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "trgovački",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "servisni",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "garažni",
+  "@entranceTypeGarage": {},
+  "entranceRef": "Referenca",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceTypeEmergency": "za slučaj opasnosti",
+  "@entranceTypeEmergency": {},
+  "addressHouseNotEmpty": "Ne bi smio biti prazan",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Jedinica",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressStreet": "Ulica",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "Mjesto",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesClose": "Riješi",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Označiti bilješku riješenom?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "notesCancelMessage": "Otkazati svoju OSM bilješku?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "apiStatusDownloading": "Preuzimanje podataka…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "Spremanje elemenata u aplikacijsku bazu podataka",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploading": "Slanje izmjena",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "faqMapTiny": "Zašto je karta tako mala?",
+  "@faqMapTiny": {},
+  "faqCheckmarks": "Čemu služe kvačice?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Kako dodati ulaz u zgradu?",
+  "@faqEntrance": {},
+  "faqEntranceContent": "Na dnu se nalazi niz gumba za način rada: Mikromapiranje, Sadržaji, Ulazi i Bilješke.\n\nU načinu Ulaza dotaknite ili povucite gumb vrata sa donjeg kuta na kartu.",
+  "@faqEntranceContent": {},
+  "faqYellow": "Zašto su neki kućni brojevi žuti?",
+  "@faqYellow": {},
+  "faqYellowContent": "Oznake koje nisu žute u načinu Ulaza i bijele točkice u načinu Mikromapiranja znače da elementima nedostaju neki važni atributi. Na primjer:\n\n* Od zgrada se očekuje da imaju označen broj katova.\n* Ulazi trebaju imati vrstu, a za stubišta raspon stanova.\n* Klupe trebaju imati materijal i naslon.\n* Drveće treba imati vrstu lista i ciklus.",
+  "@faqYellowContent": {},
+  "faqLetters": "Mogu li upisivati slova u ref ili broj stana?",
+  "@faqLetters": {},
+  "faqChangeType": "Kako promijeniti vrstu sadržaja?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Dotaknite naslov uređivača, gdje je napisana vrsta.",
+  "@faqChangeTypeContent": {},
+  "buildingMaterialMetal": "metal",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "staklo",
+  "@buildingMaterialGlass": {},
+  "entranceAccessPrivate": "privatan",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "ne",
+  "@entranceAccessNo": {},
+  "entranceType": "Ulaz",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "addressHouseNumber": "Broj",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressUnitOptional": "neobavezno",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "faqMapTinyContent": "Jer nije poanta u njoj. Vi samo provjeravate svoj položaj na karti, te je pomičete radi poravnanja. Pogledajte listu sadržaja ispod, poredanu prema udaljenosti od vas.\n\nKarta postaje veća kada uređujete sadržaje daleko od vaše lokacije. Ali, aplikacija je primarno napravljena za uređivanje stvari koje vidite svojim očima.",
+  "@faqMapTinyContent": {},
+  "faqCheckmarksContent": "To su oznake da su podaci o sadržajima provjereni. Dodaju oznaku `check_date` s trenutnim datumom.\n\nIdeja iza kvačica je da ste, recimo, prvi put pregledali pola grada. Zatim ste se nakon mjesec dana vratili i ponovno otišli kartirati. Morate nekako označiti da vidite sadržaje, ali ništa se nije promijenilo u vezi s njima. Tome služi kvačica: dotaknite je i nastavite dalje.\n\nOznaka ostaje provjerena dva mjeseca. Nakon toga možete ponovno provjeriti sadržaje.",
+  "@faqCheckmarksContent": {},
+  "faqLettersContent": "Ako se vaša brojčana tipkovnica ne može prebaciti na punu tipkovnicu, provjerite postavke aplikacije. Nalaze se iza gumba u gornjem lijevom kutu. Tamo uključite \"proširenu brojčanu tipkovnicu\".",
+  "@faqLettersContent": {},
+  "faqFloorsContent": "Ne. Prvi ima popunjenu oznaku `addr:floor=3`. To je kat kako je prikazan na navigaciji i liftu i koji se uobičajeno koristi. Drugi nema ovu oznaku, ali ima `level=3`. Taj je broj sekvencijalni broj kata od nula do `building:levels - 1`. To jest, u trokatnoj zgradi vrijednost `addr:floor` ovisi o državi, ali `level` je uvijek 0, 1 ili 2.\n\nEvo kako se prikaz u uređivaču odnosi na ove oznake:\n\n* `2`: `addr:floor=2` i `level=*` koji nije prazan.\n* `4/`: `addr:floor=4`, ali ne postoji oznaka `level`.\n* `/1`: `level=1`, ali ne postoji oznaka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i postoji objekt u blizini s istim `addr:floor`, ali različitim `level`, ili obrnuto).",
+  "@faqFloorsContent": {},
+  "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u načinu mikromapiranja? Kako se sortiraju objekti?\n\nOdgovori na sva ova pitanja nalaze se u [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Evo što možete pogledati:\n\n* Redoslijed ključeva za glavnu oznaku — popis `kMainKeys`.\n* Koji se objekti preuzimaju — funkcija `isGoodTags`.\n* Što se smatra sadržajem — funkcija `isAmenityTags`.\n* Koje se točke na koje načine spajaju na puteve — funkcija `detectSnap`.\n* Kada je objekt u mikromapiranju nepotpun — funkcija `needsMoreInfo`.",
+  "@faqTaggingContent": {}
 }
