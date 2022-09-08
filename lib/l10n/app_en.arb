@@ -1120,7 +1120,7 @@
   "@faqLettersContent": {},
   "faqFloors": "Are floors '3' and '/3' the same?",
   "@faqFloors": {},
-  "faqFloorsContent": "No. The first one has `addr:floor=3` tag filled. That's the floor as it is printed on navigation and commonly used. The second one does not have this tag, but has `level=3`. That number is a sequential floor number from zero to `building:levels - 1`. That is, in a three-storey building `addr:floor` value depends on a country, but `level` is always 0, 1, or 2.\n\nHere is how the notation in the editor related to these tags:\n\n* `2`: `addr:floor=2` and non-empty `level=*`.\n* `4/`: `addr:floor=4`, but there's no `level` tag.\n* `/1`: `level=1`, but there's no `addr:floor` tag.\n* `1/0`: `addr:floor=1` + `level=0` (and there's an object nearby:w with the same `addr:floor`, but different `level`, or vice-versa).",
+  "faqFloorsContent": "No. The first one has `addr:floor=3` tag filled. That's the floor as it is printed on navigation and commonly used. The second one does not have this tag, but has `level=3`. That number is a sequential floor number from zero to `building:levels - 1`. That is, in a three-storey building `addr:floor` value depends on a country, but `level` is always 0, 1, or 2.\n\nHere is how the notation in the editor related to these tags:\n\n* `2`: `addr:floor=2` and non-empty `level=*`.\n* `4/`: `addr:floor=4`, but there's no `level` tag.\n* `/1`: `level=1`, but there's no `addr:floor` tag.\n* `1/0`: `addr:floor=1` + `level=0` (and there's an object nearby: with the same `addr:floor`, but different `level`, or vice-versa).",
   "@faqFloorsContent": {},
   "faqChangeType": "How to change an amenity type?",
   "@faqChangeType": {},
