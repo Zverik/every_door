@@ -1,5 +1,5 @@
 {
-  "navUpload": "Subir",
+  "navUpload": "Enviar",
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
   },
@@ -368,7 +368,7 @@
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "loadingTooMuchDataTitle": "Muitos dados",
+  "loadingTooMuchDataTitle": "Demasiados dados",
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
@@ -392,7 +392,7 @@
       }
     }
   },
-  "tileDragTheMap": "Aproxima-te de qualquer coisa, arrasta o mapa ou adiciona um serviço ausente.",
+  "tileDragTheMap": "Aproxima-te de qualquer coisa, arrasta o mapa ou adiciona um serviço que falta.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
@@ -432,7 +432,7 @@
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
-  "filterNonConfirmed": "Somente os não confirmados",
+  "filterNonConfirmed": "Apenas os não confirmados",
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
@@ -456,7 +456,7 @@
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
   },
-  "mapLocate": "Voltar a minha localização",
+  "mapLocate": "Voltar à minha localização",
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
   },
