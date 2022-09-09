@@ -1111,5 +1111,21 @@
     "placeholders": {
       "count": {}
     }
+  },
+  "settingsHashtags": "Хэштэгі набораў змен",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "Словы для хэштэгаў",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "notesCancelMessage": "Скасаваць нататку OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "hashtagsConfirm": "Пацвярджаць тэгі перад запампоўкай",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   }
 }
