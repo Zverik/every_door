@@ -2,7 +2,7 @@
 
 ## 2.0
 
-_Unreleased_
+_Released on 2022-09-10_
 
 ### Highlights
 
