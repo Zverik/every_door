@@ -649,7 +649,7 @@
   "@fieldHoursAsText": {
     "description": "Button title to open the raw opening hours editor."
   },
-  "faqCheckmarksContent": "Os sinais de visto indicam que os dados de serviços foram confirmados. Eles adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás do sinal de visto é que, digamos, você mapeou metade da cidade na primeira vez. Então, depois de um mês, você voltou e foi mapear novamente. Você precisa marcar de alguma forma que você vê que o serviço está ali, mas não houve nenhuma alteração. Isso é o sinal de visto: você toca nele e continua.\n\nO sinal de visto fica ativo por duas semanas. Depois disso, você pode mapear os serviços novamente.",
+  "faqCheckmarksContent": "Os sinais de visto indicam que os dados de serviços foram confirmados. Eles adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás do sinal de visto é que, digamos, você mapeou metade da cidade na primeira vez. Então, depois de um mês, você voltou e foi mapear novamente. Você precisa marcar de alguma forma que você vê que o serviço está ali, mas não houve nenhuma alteração. Isso é o sinal de visto: você toca nele e continua.\n\nO sinal de visto fica ativo por dois meses. Depois disso, você pode mapear os serviços novamente.",
   "@faqCheckmarksContent": {},
   "fieldHoursOpens": "Abre",
   "@fieldHoursOpens": {
@@ -1067,5 +1067,65 @@
   "notesCloseMessage": "Marcar a nota como resolvida?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
-  }
+  },
+  "warningTooOld": "Serviço tem {years} de idade",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "settingsHashtags": "Hashtags do conjunto de alterações",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "Palavras para hashtags",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Confirme etiquetas ao enviar",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "warningFixme": "Corrija-me: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "notesCancelMessage": "Cancelar sua nota OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "fieldCardsOnly": "somente cartão",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "warningWrongTag": "Etiqueta incorreta: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} ano}, =few{{count} anos}, =other{{count} anos}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "faqYellowContent": "Rótulos não amarelos no modo de Entradas e pontos brancos no modo de Micromapeamento significam que os elementos carecem de alguns atributos importantes. Por exemplo:\n\n* Espera-se que os edifícios tenham o número de andares.\n* As entradas devem ter um tipo e, para escadas, intervalo dos apartamentos.\n* Os assentos devem ter informação sobre material e encosto.\n* As árvores devem ter tipo e ciclo de folhagem.",
+  "@faqYellowContent": {},
+  "faqYellow": "Por que há alguns endereços em amarelo?",
+  "@faqYellow": {}
 }

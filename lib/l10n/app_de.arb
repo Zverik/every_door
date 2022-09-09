@@ -812,5 +812,12 @@
   "hashtagsConfirm": "Tags beim Hochladen bestätigen",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "years": "{count,plural, =1{{count} Jahr}, =few{{count} Jahre}, =other{{count} Jahre}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
   }
 }

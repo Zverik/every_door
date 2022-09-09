@@ -1,5 +1,5 @@
 {
-  "navUpload": "Subir",
+  "navUpload": "Enviar",
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
   },
@@ -11,7 +11,7 @@
   "@filterByFloor": {
     "description": "Filter pane, label for choosing a floor to filter by."
   },
-  "mapSettings": "Ajustes",
+  "mapSettings": "Configurações",
   "@mapSettings": {
     "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
   },
@@ -23,7 +23,7 @@
   "@editorHistory": {
     "description": "Tooltip for a button to open version history pane."
   },
-  "editorTags": "Etiquetas brutas",
+  "editorTags": "Etiquetas em bruto",
   "@editorTags": {
     "description": "Tooltip for a button to open tags pane."
   },
@@ -35,7 +35,7 @@
   "@editorMissing": {
     "description": "Button title to delete an amenity (since it's missing)."
   },
-  "editorDeleteButton": "Apagar",
+  "editorDeleteButton": "Eliminar",
   "@editorDeleteButton": {
     "description": "Delete"
   },
@@ -86,15 +86,15 @@
       }
     }
   },
-  "settingsPurgeData": "Limpar dados em cache obsoletos",
+  "settingsPurgeData": "Eliminar dados em cache obsoletos",
   "@settingsPurgeData": {
     "description": "Settings entry for purging obsolete OSM data."
   },
-  "settingsPurgeAllData": "Limpar todos os dados descarregados",
+  "settingsPurgeAllData": "Eliminar todos os dados descarregados",
   "@settingsPurgeAllData": {
     "description": "Settings entry for purging all cached OSM data."
   },
-  "settingsPurgeDataTitle": "Apagar Dados?",
+  "settingsPurgeDataTitle": "Eliminar dados?",
   "@settingsPurgeDataTitle": {
     "description": "Confirmation dialog title for when purging all downloaded data."
   },
@@ -102,11 +102,11 @@
   "@settingsPurgeDataMessage": {
     "description": "Confirmation dialog message for when purging all downloaded data."
   },
-  "settingsPurgedAllTitle": "Dados Apagados",
+  "settingsPurgedAllTitle": "Dados eliminados",
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{{count} elemento limpado}, =few{{count} elementos limpados}, =other{{count} elementos limpados}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} elemento eliminado}, =few{{count} elementos eliminados}, =other{{count} elementos eliminados}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -117,11 +117,11 @@
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
-  "settingsLeftHand": "Controles para mão esquerda",
+  "settingsLeftHand": "Controlos para mão esquerda",
   "@settingsLeftHand": {
     "description": "Switch for enabling left hand controls, when most buttons move to the left."
   },
-  "settingsNumericKeyboard": "Teclado numérico estendido",
+  "settingsNumericKeyboard": "Teclado numérico alargado",
   "@settingsNumericKeyboard": {
     "description": "Settings switch for using the full keyboard for numeric fields."
   },
@@ -153,7 +153,7 @@
   "@aboutFAQ": {
     "description": "Title for the FAQ section on the About page."
   },
-  "aboutLinks": "Ligações",
+  "aboutLinks": "Hiperligações",
   "@aboutLinks": {
     "description": "Title for the links section on the About page."
   },
@@ -173,7 +173,7 @@
   "@accountPasswordWarningTitle": {
     "description": "Title for the warning dialog about keeping passwords on the device."
   },
-  "accountPasswordWarningMessage": "Tua palavra-chave será armazenada no dispositivo. Somente escolhe esta opção quando houver erro com OAuth.",
+  "accountPasswordWarningMessage": "A palavra-chave será armazenada no dispositivo. Escolhe esta opção só quando houver um erro com o OAuth.",
   "@accountPasswordWarningMessage": {
     "description": "Message for the warning dialog about keeping passwords on the device."
   },
@@ -213,7 +213,7 @@
   "@fieldHoursClear": {
     "description": "Tooltip for a button to clear the opening_hours value."
   },
-  "fieldHoursSave": "Salvar",
+  "fieldHoursSave": "Guardar",
   "@fieldHoursSave": {
     "description": "Tooltip for a button to save opening_hours value."
   },
@@ -273,7 +273,7 @@
   "@fieldWheelchairYes": {
     "description": "Wheelchair field label for full accessibility."
   },
-  "fieldFloorNew": "Novo Andar",
+  "fieldFloorNew": "Novo andar",
   "@fieldFloorNew": {
     "description": "Title for the floor creation pane."
   },
@@ -301,9 +301,9 @@
   "@buildingMaterialGlass": {},
   "buildingTypeHouse": "casa",
   "@buildingTypeHouse": {},
-  "buildingTypeRetail": "varejo",
+  "buildingTypeRetail": "retalho",
   "@buildingTypeRetail": {},
-  "entranceIsUnit": "Salvar o número do apartamento em \"addr:unit\"",
+  "entranceIsUnit": "Guardar o número do apartamento em \"addr:unit\"",
   "@entranceIsUnit": {
     "description": "Label for a switch to use addr:unit instead of addr:flats."
   },
@@ -325,7 +325,7 @@
   },
   "faqChangeType": "Como alterar um tipo de serviço?",
   "@faqChangeType": {},
-  "faqChangeTypeContent": "Toca no título do editor, onde o tipo está escrito.",
+  "faqChangeTypeContent": "Toca no título do editor, onde o tipo aparece.",
   "@faqChangeTypeContent": {},
   "loadingChanges": "A carregar alterações…",
   "@loadingChanges": {
@@ -368,11 +368,11 @@
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "loadingTooMuchDataTitle": "Muitos dados",
+  "loadingTooMuchDataTitle": "Demasiados dados",
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "settingsLoginDetails": "Conta OSM",
+  "settingsLoginDetails": "Conta OpenStreetMap",
   "@settingsLoginDetails": {
     "description": "Settings entry for logging in to OSM."
   },
@@ -380,7 +380,7 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
-  "tileNothingAround": "Não há serviços ao teu redor em {distance} metros.",
+  "tileNothingAround": "Sem serviços num raio de {distance} metros.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -392,7 +392,7 @@
       }
     }
   },
-  "tileDragTheMap": "Aproxima-te de qualquer coisa, arrasta o mapa ou adiciona um serviço ausente.",
+  "tileDragTheMap": "Aproxima-te de qualquer coisa, arrasta o mapa ou adiciona um serviço que falta.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
@@ -420,7 +420,7 @@
   "@chooseLocation": {
     "description": "Title for the screen for choosing a location on a map."
   },
-  "editorSave": "Salvar",
+  "editorSave": "Guardar",
   "@editorSave": {
     "description": "Save button title in the editor"
   },
@@ -432,11 +432,11 @@
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
-  "filterNonConfirmed": "Somente os não confirmados",
+  "filterNonConfirmed": "Apenas os não confirmados",
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
-  "editorMarkChecked": "Marcar como comprovado",
+  "editorMarkChecked": "Marcar como verificado",
   "@editorMarkChecked": {
     "description": "Tooltip for a button to mark the amenity checked without changing properties."
   },
@@ -456,7 +456,7 @@
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
   },
-  "mapLocate": "Voltar a minha localização",
+  "mapLocate": "Voltar à minha localização",
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
   },
@@ -496,7 +496,7 @@
   "@settingsEditor": {
     "description": "Title for the settings section for editor presets."
   },
-  "editorDuplicate": "Possível duplicata em {distance} m",
+  "editorDuplicate": "Possível duplicado a {distance} m",
   "@editorDuplicate": {
     "description": "Message about a possible duplicate",
     "placeholders": {
@@ -512,7 +512,7 @@
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
   },
-  "editorCloseMessage": "Perderás tuas alterações não salvas. Continuar?",
+  "editorCloseMessage": "As alterações por guardar serão perdidas. Continuar?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -531,7 +531,7 @@
   "@settingsLanguage": {
     "description": "Settings entry for changing the app language."
   },
-  "editorRestoreMessage": "{amenity} está inativo. Desejas marcar como ativo?",
+  "editorRestoreMessage": "{amenity} está marcado como encerrado. Marcar como reaberto?",
   "@editorRestoreMessage": {
     "description": "Question on restoring an edited defunct amenity.",
     "placeholders": {
@@ -540,11 +540,11 @@
       }
     }
   },
-  "settingsDataManagement": "Gestão de Dados",
+  "settingsDataManagement": "Gestão de dados",
   "@settingsDataManagement": {
     "description": "Section title for data settings."
   },
-  "aboutSourceCode": "Código fonte",
+  "aboutSourceCode": "Código-fonte",
   "@aboutSourceCode": {
     "description": "Button title to open the repository on GitHub."
   },
@@ -552,7 +552,7 @@
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
-  "editorMarkDefunct": "Marcar como inativo",
+  "editorMarkDefunct": "Marcar como encerrado",
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
@@ -560,7 +560,7 @@
   "@editorRestore": {
     "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
   },
-  "editorDeleteTitle": "Apagar {amenity}?",
+  "editorDeleteTitle": "Eliminar {amenity}?",
   "@editorDeleteTitle": {
     "description": "Dialog title for deleting an amenity.",
     "placeholders": {
@@ -577,7 +577,7 @@
   "@tagsValueLong": {
     "description": "Validation error for when the value length exceeds 255 characters."
   },
-  "tagsAddTag": "Adicionar uma etiqueta",
+  "tagsAddTag": "Adicionar etiqueta",
   "@tagsAddTag": {
     "description": "Tags panel button for adding a new tag."
   },
@@ -597,7 +597,7 @@
   "@versionsFetchError": {
     "description": "Message for when fetching element history fails due to unknown error."
   },
-  "settingsTitle": "Ajustes",
+  "settingsTitle": "Configuração",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
@@ -609,19 +609,19 @@
   "@settingsPreferContact": {
     "description": "Settings switch for using e.g. contact:phone=* over phone=*."
   },
-  "versionsNoTagChanges": "Sem mudanças de etiqueta",
+  "versionsNoTagChanges": "Sem alterações em etiquetas",
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
-  "settingsPurgedObsoleteTitle": "Dados Obsoletos",
+  "settingsPurgedObsoleteTitle": "Dados obsoletos",
   "@settingsPurgedObsoleteTitle": {
     "description": "Notification title for cleaning obsolete data from the cache."
   },
-  "settingsCacheTiles": "Descarregar e fazer cache das imagens",
+  "settingsCacheTiles": "Descarregar mosaicos",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
-  "settingsDefaultPayment": "Tipos de cartão padrão",
+  "settingsDefaultPayment": "Cartões de pagamento predefinidos",
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
@@ -645,7 +645,7 @@
   "@aboutLicense": {
     "description": "Button title to open the app's license on GitHub."
   },
-  "aboutReportIssue": "Informar um problema",
+  "aboutReportIssue": "Reportar um problema",
   "@aboutReportIssue": {
     "description": "Button title to open the app's GitHub issue page."
   },
@@ -664,7 +664,7 @@
   "@accountOAuthError": {
     "description": "Alert title for when OAuth login failed."
   },
-  "accountPasswordWarningButton": "Entendido",
+  "accountPasswordWarningButton": "Entendi",
   "@accountPasswordWarningButton": {
     "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
   },
@@ -688,7 +688,7 @@
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."
   },
-  "faqMapTiny": "Por que o mapa é tão pequeno?",
+  "faqMapTiny": "Porque é que o mapa é tão pequeno?",
   "@faqMapTiny": {},
   "entranceAccessYes": "aberto",
   "@entranceAccessYes": {},
@@ -720,29 +720,29 @@
   "@entranceTypeStaircase": {},
   "entranceTypeHome": "casa",
   "@entranceTypeHome": {},
-  "faqEntrance": "Como adicionar uma entrada de edifício?",
+  "faqEntrance": "Como adicionar uma entrada a um edifício?",
   "@faqEntrance": {},
   "addressPlace": "Lugar",
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
   },
-  "apiStatusUploading": "A enviar alterações",
+  "apiStatusUploading": "A enviar as alterações",
   "@apiStatusUploading": {
     "description": "Text displayed when the app is uploading data to the API."
   },
-  "faqEntranceContent": "Na parte inferior há uma fileira de botões de modo: Micromapeamento, Serviços, Entradas e Notas.\n\nNo modo Entradas, toca ou arrasta o botão da porta, localizada no canto inferior, para o mapa.",
+  "faqEntranceContent": "Na parte inferior há uma fila de botões de modo: Micromapeamento, Serviços, Entradas e Notas.\n\nNo modo Entradas, toca ou arrasta o botão da porta, localizada no canto inferior, para o mapa.",
   "@faqEntranceContent": {},
   "notesCloseMessage": "Marcar a nota como resolvida?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
-  "apiStatusUpdatingDB": "A salvar elementos na base de dados da aplicação",
+  "apiStatusUpdatingDB": "A guardar elementos na base de dados da aplicação",
   "@apiStatusUpdatingDB": {
     "description": "Text displayed when the app is updating the database with downloaded objects."
   },
-  "faqLetters": "Posso digitar letras em uma referência ou número de apartamento?",
+  "faqLetters": "Posso usar letras numa referência ou número de apartamento?",
   "@faqLetters": {},
-  "enableLocationMessage": "Permite o acesso à localização para a aplicação no painel de ajustes que será exibido.",
+  "enableLocationMessage": "Concede o acesso à localização para a aplicação no painel de configurações que será mostrado.",
   "@enableLocationMessage": {
     "description": "Contents of the alert for allowing app access to location."
   },
@@ -767,15 +767,15 @@
   "@fieldHoursClosedPH": {
     "description": "Switch label for PH off."
   },
-  "faqMapTinyContent": "Porque a questão não é essa. Só verificas o teu posicionamento e moves o mapa para ajustar. Vê a lista de serviços abaixo, ordenada por distância de ti.\n\nO mapa fica maior quando editas os serviços longe de tua localização, embora o aplicativo tenha sido feito para editar as coisas que estás a ver.",
+  "faqMapTinyContent": "Porque a questão não é essa. Só verificas o teu posicionamento e moves o mapa para ajustar. Vê a lista de serviços abaixo, ordenada pela distância a que ficam ti.\n\nO mapa fica maior quando editas os serviços longe da tua localização, embora a aplicação tenha sido feita para editar as coisas que estás a ver.",
   "@faqMapTinyContent": {},
   "faqTagging": "Todas as perguntas sobre etiquetagem",
   "@faqTagging": {},
-  "faqCheckmarks": "Para que servem os sinais de visto?",
+  "faqCheckmarks": "Para que servem as marcas de verificado?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "Os sinais de visto indicam que os dados de serviços foram confirmados. Eles adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás do sinal de visto é que, digamos, mapeaste metade da cidade na primeira vez. Então, depois de um mês, foste mapear ali novamente. Precisas marcar de alguma forma que vês que o serviço está ali, mas não houve nenhuma alteração. Isso é o sinal de visto: tocas nele e continuas.\n\nO sinal de visto fica ativo por duas semanas. Depois disso, podes mapear os serviços novamente.",
+  "faqCheckmarksContent": "As marcas de verificado indicam que os dados do serviços foram confirmados. Eles adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás da marca de verificado é que, digamos, mapeaste metade da cidade na primeira vez. Então, um mês depois, foste mapear novamente nos mesmos sítios. É preciso marcar de alguma forma que o serviço continua a existir no mesmo local e não houve nenhuma alteração. Isso é a marca de verificado: tocas nele e continuas.\n\nA marca de verificação fica ativa por dois meses. Depois disso, podes mapear os serviços novamente.",
   "@faqCheckmarksContent": {},
-  "faqLettersContent": "Se o teclado numérico não puder ser alterado para um teclado completo, verifica os ajustes da aplicação. Eles estão localizados no botão do canto superior esquerdo. Ativa o \"Teclado numérico estendido\" lá.",
+  "faqLettersContent": "Se o teclado numérico não puder ser alterado para um teclado completo, verifica as configurações da aplicação. Eles estão localizados no botão do canto superior esquerdo. Ativa o \"Teclado numérico alargado\" lá.",
   "@faqLettersContent": {},
   "faqFloors": "Os andares '3' e '/3' são iguais?",
   "@faqFloors": {},
@@ -787,9 +787,9 @@
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
-  "faqFloorsContent": "Não. O primeiro tem a etiqueta `addr:floor=3` preenchida. Esse é o andar que está impresso na navegação e é comumente usado. O segundo não tem essa etiqueta, mas tem `level=3`. Esse número é um número de andar sequencial que vai de zero até `building:levels - 1`. Ou seja, em um edifício de três andares, o valor de `addr:floor` depende do país, mas `level` é sempre 0, 1 ou 2.\n\nVê como a notação no editor se relaciona com essas etiquetas:\n\n* `2`: `addr:floor=2` e `level=*` não vazio.\n* `4/`: `addr:floor=4`, mas não há etiqueta `level`.\n* `/1`: `level=1`, mas não há etiqueta `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (e existe um objeto próximo com o mesmo `addr:floor`, mas diferente `level`, ou vice-versa).",
+  "faqFloorsContent": "Não. O primeiro tem a etiqueta `addr:floor=3` preenchida. Esse é o andar que está impresso na navegação e é normalmente usado. O segundo não tem essa etiqueta, mas tem `level=3`. Esse número é um número de andar sequencial que vai de zero até `building:levels - 1`. Ou seja, em um edifício de três andares, o valor de `addr:floor` depende do país, mas `level` é sempre 0, 1 ou 2.\n\nVê como a notação no editor se relaciona com essas etiquetas:\n\n* `2`: `addr:floor=2` e `level=*` não vazio.\n* `4/`: `addr:floor=4`, mas não há etiqueta `level`.\n* `/1`: `level=1`, mas não há etiqueta `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (e existe um objeto próximo com o mesmo `addr:floor`, mas diferente `level`, ou vice-versa).",
   "@faqFloorsContent": {},
-  "changesDeletedChange": "{change} excluído",
+  "changesDeletedChange": "{change} eliminada",
   "@changesDeletedChange": {
     "description": "Message for the snack bar after you swipe a change away.",
     "placeholders": {
@@ -799,7 +799,7 @@
       }
     }
   },
-  "changesPurge": "Limpar mudanças",
+  "changesPurge": "Eliminar alterações",
   "@changesPurge": {
     "description": "Purge all changes"
   },
@@ -826,7 +826,7 @@
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
-  "changesUploadedMessage": "Enviado {changes} a API.",
+  "changesUploadedMessage": "Foram enviadas {changes} para a API.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -840,7 +840,7 @@
   "@changesDeletedUndo": {
     "description": "Button label for undoing a change deletion."
   },
-  "fieldHoursTitle": "Horário de Funcionamento",
+  "fieldHoursTitle": "Horário de funcionamento",
   "@fieldHoursTitle": {
     "description": "Title for the opening hours editor pane."
   },
@@ -864,7 +864,7 @@
   "@fieldHoursFullDay": {
     "description": "Switch for 24/7 opening hours."
   },
-  "fieldHoursNumberedWeekday": "\"Última segunda\"",
+  "fieldHoursNumberedWeekday": "\"Última 2ª-feira\"",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
@@ -880,7 +880,7 @@
   "@changesPurgeTitle": {
     "description": "Dialog title for confirming deletion of all changes."
   },
-  "changesPurgeMessage": "Apagar todas as alterações realizadas e restaurar os dados originais?",
+  "changesPurgeMessage": "Eliminar todas as alterações feitas e restaurar os dados originais?",
   "@changesPurgeMessage": {
     "description": "Dialog message for confirming deletion of all changes."
   },
@@ -910,7 +910,7 @@
   },
   "buildingMaterialBrick": "tijolo",
   "@buildingMaterialBrick": {},
-  "buildingPostCode": "Código Postal",
+  "buildingPostCode": "Código postal",
   "@buildingPostCode": {
     "description": "Label for addr:postcode in the form. Keep it short."
   },
@@ -922,7 +922,7 @@
   "@fieldFloorShouldBeNumber": {
     "description": "Validation message for a levels tag, also used in building levels form."
   },
-  "faqTaggingContent": "Por que um objeto está faltando no editor? Quando esses pontos brancos são exibidos no modo de micromapeamento? Como os objetos são classificados?\n\nAs respostas para todas essas perguntas estão em [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Aqui está o que podes ver:\n\n* A ordem das chaves para a etiqueta principal — lista `kMainKeys`.\n* Quais objetos são descarregados — função `isGoodTags`.\n* O que é considerado um serviço — função `isAmenityTags`.\n* Quais pontos são colados a quais caminhos — função `detectSnap`.\n* Quando um objeto de micromapeamento está incompleto — função `needsMoreInfo`.",
+  "faqTaggingContent": "Porque falta um objeto no editor? Quando estes pontos brancos são mostrados no modo de micromapeamento? Como é que os objetos são classificados?\n\nAs respostas para todas essas perguntas estão em [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Aqui está o que podes ver:\n\n* A ordem das chaves para a etiqueta principal — lista `kMainKeys`.\n* Quais objetos são descarregados — função `isGoodTags`.\n* O que é considerado um serviço — função `isAmenityTags`.\n* Quais pontos são colados a quais caminhos — função `detectSnap`.\n* Quando um objeto de micromapeamento está incompleto — função `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "buildingRoofLevels": "Andares do telhado",
   "@buildingRoofLevels": {
@@ -936,11 +936,11 @@
   "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "betão",
   "@buildingMaterialConcrete": {},
-  "fieldCardsAccepted": "aceito",
+  "fieldCardsAccepted": "aceite",
   "@fieldCardsAccepted": {
     "description": "Payment field label for cards accepted."
   },
-  "loadingTooMuchData": "Limpa os dados descarregados nos Ajustes para tornar o editor mais rápido.",
+  "loadingTooMuchData": "Limpar os dados descarregados nas Configurações tornar o editor mais rápido.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -972,11 +972,11 @@
   "@fieldFloorEmpty": {
     "description": "What is written on the floor chooser if there are no floors to choose."
   },
-  "fieldFloorLevelDesc": "Número do andar, começando em 0 para o rés-do-chão",
+  "fieldFloorLevelDesc": "Número do andar, a partir do 0 que indica o rés-do-chão",
   "@fieldFloorLevelDesc": {
     "description": "Description for the \"addr:floor\" tag."
   },
-  "enableGPSMessage": "Ativa os serviços de localização no painel de ajustes que será exibido.",
+  "enableGPSMessage": "Ativa os serviços de localização no painel de configurações que será mostrado.",
   "@enableGPSMessage": {
     "description": "Contents of the alert for enabling location services."
   },
@@ -988,7 +988,7 @@
   "@fieldAddressTap": {
     "description": "Title for the pane when a user can tap an address to choose it."
   },
-  "enableLocation": "Habilitar localização",
+  "enableLocation": "Ativar localização",
   "@enableLocation": {
     "description": "Title of the alert for allowing app access to location."
   },
@@ -1015,7 +1015,7 @@
   "@buildingTypeAddress": {},
   "buildingMaterialCementBlock": "blocos de cimento",
   "@buildingMaterialCementBlock": {},
-  "buildingTypeShed": "cabana",
+  "buildingTypeShed": "barraco",
   "@buildingTypeShed": {},
   "buildingTypeConstruction": "construção",
   "@buildingTypeConstruction": {},
@@ -1067,5 +1067,65 @@
         "example": "12A"
       }
     }
+  },
+  "warningFixme": "Corrige-me: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Etiqueta incorreta: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "Serviço tem {years} anos",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} ano}, =few{{count} anos}, =other{{count} anos}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "notesCancelMessage": "Cancelar a tua nota OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "hashtagsConfirm": "Confirma etiquetas ao enviar",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "faqYellow": "Porque é que alguns números de porta estão a amarelo?",
+  "@faqYellow": {},
+  "faqYellowContent": "Os rótulos não amarelos no modo de Entradas e pontos brancos no modo de Micromapeamento significam que faltam alguns atributos importantes. Por exemplo:\n\n* Os edifícios devem ter o número de andares.\n* As entradas devem ter um tipo e, para escadas, intervalo dos apartamentos.\n* Os assentos devem ter informação sobre o material e se têm encosto.\n* As árvores devem ter o tipo e ciclo de folhagem.",
+  "@faqYellowContent": {},
+  "hashtagsLabel": "Palavras para hashtags",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "settingsHashtags": "Hashtags do conjunto de alterações",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "fieldCardsOnly": "apenas cartões",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
   }
 }
