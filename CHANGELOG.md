@@ -30,6 +30,8 @@ _Released on 2022-09-10_
 * Tap on the tile downloading button the second time to abort downloading.
 * Split buttons on the entrance card in two lines.
 * Editing breaks in opening hours in two taps, not four.
+* Translations into Catalan (thanks raf) and Croatian (thanks @mnalis),
+  major improvements to Dutch (thanks invalidCards).
 
 ## 1.0
 
