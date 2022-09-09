@@ -785,7 +785,7 @@
       }
     }
   },
-  "years": "{count,plural,one {{count} anno} other {{count} anni}}",
+  "years": "{count,plural,=1{{count} anno} =few{{count} anni}, =other{{count} anni}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
