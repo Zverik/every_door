@@ -1089,7 +1089,7 @@
       }
     }
   },
-  "years": "jaar",
+  "years": "{count,plural, =1{{count} jaar}, =few{{count} jaar}, =other{{count} jaar}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
