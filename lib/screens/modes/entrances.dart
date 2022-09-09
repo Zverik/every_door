@@ -6,7 +6,6 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';

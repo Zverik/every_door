@@ -65,7 +65,6 @@ class ChangesetTagsProvider extends ChangeNotifier {
         .where((s) => s.length > 1)
         .map((s) => '#' + s)
         .join(' ');
-    print('New hashtags: $tags');
     _hashtags = tags;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();

@@ -9,6 +9,7 @@ class LanguagePage extends ConsumerWidget {
   static final kLanguageNames = {
     Locale('ar'): 'اَلْعَرَبِيَّةُ',
     Locale('be'): 'Беларуская мова',
+    Locale('ca'): 'Català',
     Locale('cs'): 'Čeština',
     Locale('da'): 'Dansk',
     Locale('de'): 'Deutsch',
@@ -18,6 +19,7 @@ class LanguagePage extends ConsumerWidget {
     Locale('eu'): 'Euskara',
     Locale('fa'): 'فارسی',
     Locale('fr'): 'Français',
+    Locale('hr'): 'Hrvatski',
     Locale('it'): 'Italiano',
     Locale('ja'): '日本語',
     Locale('ko'): '한국어',
