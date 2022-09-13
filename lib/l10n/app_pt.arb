@@ -1108,7 +1108,7 @@
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
-  "hashtagsConfirm": "Confirma etiquetas ao enviar",
+  "hashtagsConfirm": "Confirmar etiquetas ao enviar",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
