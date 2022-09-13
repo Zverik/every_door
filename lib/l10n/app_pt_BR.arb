@@ -1086,7 +1086,7 @@
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
   },
-  "hashtagsConfirm": "Confirme etiquetas ao enviar",
+  "hashtagsConfirm": "Confirmar etiquetas ao enviar",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
