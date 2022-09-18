@@ -206,7 +206,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "You will lose your unsaved changes. Proceed?",
+  "editorCloseMessage": "Discard changes without saving?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
