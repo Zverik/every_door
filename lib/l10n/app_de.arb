@@ -39,7 +39,7 @@
   "@editorSave": {},
   "editorCloseTitle": "Möchtest du den Editor schließen?",
   "@editorCloseTitle": {},
-  "editorCloseMessage": "Die Änderungen wurden noch nicht gespeichert. Willst du den Editor wirklich verlassen?",
+  "editorCloseMessage": "Änderungen ohne Speichern verwerfen?",
   "@editorCloseMessage": {},
   "editorMoreFields": "Mehr Felder",
   "@editorMoreFields": {},
