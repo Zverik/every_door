@@ -512,7 +512,7 @@
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
   },
-  "editorCloseMessage": "As alterações por guardar serão perdidas. Continuar?",
+  "editorCloseMessage": "Não guardar as alterações?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
