@@ -186,7 +186,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Perdreu els canvis no desats. Continuar?",
+  "editorCloseMessage": "Voleu descartar els canvis sense desar-los?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
