@@ -172,7 +172,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Ztratíte všechny neuložené změny. Pokračovat?",
+  "editorCloseMessage": "Zrušit změny bez uložení?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
