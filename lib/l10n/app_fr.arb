@@ -87,7 +87,7 @@
   "@editorCloseTitle": {
     "description": "Titre pour le message sur la fermeture de l'éditeur avec des modifications pas encore enregistrées."
   },
-  "editorCloseMessage": "Vous perdrez les modifications non sauvegardées. Continuer ?",
+  "editorCloseMessage": "Perdre toutes les modifications sans sauvegarder ?",
   "@editorCloseMessage": {
     "description": "Message sur la fermeture de l'éditeur avec des modifications pas encore enregistrées."
   },
@@ -696,7 +696,7 @@
   "@faqLettersContent": {},
   "faqFloors": "Quelle est la différence entre les étages « 3 » et « /3 » ?",
   "@faqFloors": {},
-  "faqFloorsContent": "Le premier correspond à l’attribut `addr:floor=3`, c’est l’étage comme indiqué lors de la navigation et généralement utilisé mais dépend de la localité, tandis que le second correspond à `level=3` selon le schéma `building:level` où le rez-de-chaussée est l’étage 0.\n\nAinsi, les valeurs suivantes indiqueront :\n\n* `2` : `addr:floor=2` et `level=*` ;\n* `4/` : `addr:floor=4`, sans `level` ;\n* `/1` : `level=1`, sans `addr:floor` ;\n* `1/0` : `addr:floor=1` et `level=0`.",
+  "faqFloorsContent": "Le premier correspond à l’attribut `addr:floor=3`, c’est l’étage comme indiqué lors de la navigation et généralement utilisé mais dépend de la localité, tandis que le second correspond à `level=3` selon le schéma `building:level` où le rez-de-chaussée est l’étage 0.\n\nAinsi, les valeurs suivantes indiqueront :\n\n* `2` : `addr:floor=2` et `level=*` ;\n* `4/` : `addr:floor=4`, sans `level` ;\n* `/1` : `level=1`, sans `addr:floor` ;\n* `1/0` : `addr:floor=1` et `level=0` (et il y a un objet proche : avec le même `addr:floor`, mais un différent `level`, ou l'inverse).",
   "@faqFloorsContent": {},
   "faqTagging": "Questions relatives aux attributs",
   "@faqTagging": {},
