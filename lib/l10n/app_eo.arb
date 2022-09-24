@@ -1077,5 +1077,41 @@
   "faqYellowContent": "Ne-flavaj etikedoj en la enirejo-reĝimo kaj blankaj punktoj en la mikromapa reĝimo signifas ke la elementoj malhavas kelkajn gravajn atributojn. Ekzemple:\n\n* Konstruaĵoj estas atenditaj havi nombron da niveloj.\n* Enirejoj havu tipon kaj, por ŝtuparoj, apartamenta gamo.\n* Benkoj havu materialon kaj apogilon.\n* Arboj devus havi foliospecon kaj ciklon.",
   "@faqYellowContent": {},
   "faqFloors": "Ĉu etaĝoj '3' kaj '/3' estas la samaj?",
-  "@faqFloors": {}
+  "@faqFloors": {},
+  "dataDownloadedCount": "{count,plural, =1{Elŝutiĝis {count} elemento.}, =few{Elŝutiĝis {count} elementoj.}, =other{Elŝutiĝis {count} elementoj.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "years": "{count,plural, =1{{count} jaro}, =few{{count} jaroj}, =other{{count} jaroj}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Forviŝiĝis {count} element}, =few{Forviŝiĝis {count} elementoj}, =other{Forviŝiĝis {count} elementoj}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesCount": "{count,plural, =1{{count} ŝanĝo}, =few{{count} ŝanĝoj}, =other{{count} ŝanĝoj}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "fieldHoursWeekdays": "Lu Ma Me Ĵa Ve Sa Di",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "addressUnit": "Unuo",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  }
 }
