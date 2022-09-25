@@ -63,7 +63,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Izgubil/a boš neshranjene spremembe. Nadaljujem?",
+  "editorCloseMessage": "Zavreči spremembe brez shranjevanja?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },

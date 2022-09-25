@@ -211,7 +211,7 @@
   "@settingsSystem": {
     "description": "Title for the settings section for system-related switches."
   },
-  "settingsGoogle": "Koristi Google-nadograđeno pozicioniranje",
+  "settingsGoogle": "Koristi Google-izmijenjeno pozicioniranje",
   "@settingsGoogle": {
     "description": "Settings switch for disabling Google services for location."
   },
@@ -932,7 +932,7 @@
   "@buttonNo": {
     "description": "Button for dismissal."
   },
-  "buildingX": "Zgrada {n}",
+  "buildingX": "Zgrada br. {n}",
   "@buildingX": {
     "description": "Option displayed when there's multiple buildings under a tap.",
     "placeholders": {
@@ -1112,7 +1112,7 @@
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
-  "addressHouseNumber": "Broj",
+  "addressHouseNumber": "Kućni br.",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
   },

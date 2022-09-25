@@ -3,7 +3,7 @@
   "@legendOther": {
     "description": "Legend item for all other types."
   },
-  "loadingPresets": "Voorinstellingen aan het laden…",
+  "loadingPresets": "Voorkeuzen laden…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
@@ -253,7 +253,7 @@
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
   },
-  "loadingStart": "Aan het initialiseren…",
+  "loadingStart": "Initialiseren…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
@@ -269,7 +269,7 @@
   "@addressUnitOptional": {
     "description": "Hint for addr:unit that it's optional."
   },
-  "apiStatusDownloading": "Gegevens aan het downloaden…",
+  "apiStatusDownloading": "Gegevens downloaden…",
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."
   },
@@ -277,7 +277,7 @@
   "@apiStatusUpdatingDB": {
     "description": "Text displayed when the app is updating the database with downloaded objects."
   },
-  "loadingChanges": "Wijzigingen aan het laden…",
+  "loadingChanges": "Wijzigingen laden…",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
@@ -285,7 +285,7 @@
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "loadingLocation": "Locatie aan het bepalen…",
+  "loadingLocation": "Locatie bepalen…",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
@@ -341,7 +341,7 @@
   "@editorMissing": {
     "description": "Button title to delete an amenity (since it's missing)."
   },
-  "editorLoadingPreset": "Voorinstellingen aan het laden…",
+  "editorLoadingPreset": "Voorkeuze laden…",
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
@@ -353,7 +353,7 @@
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
   },
-  "editorRestoreMessage": "{amenity} is gesloten. Wil u het als actief aanduiden?",
+  "editorRestoreMessage": "{amenity} is gesloten. Wilt u het als actief aanduiden?",
   "@editorRestoreMessage": {
     "description": "Question on restoring an edited defunct amenity.",
     "placeholders": {

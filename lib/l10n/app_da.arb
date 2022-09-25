@@ -23,7 +23,7 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
-  "tileNothingAround": "Ingen faciliteter omkring dig i {distance} meters afstand.",
+  "tileNothingAround": "Ingen faciliteter omkring dig inden for {distance} meter.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -87,7 +87,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Du mister dine ikke-gemte ændringer. Fortsæt?",
+  "editorCloseMessage": "Kassér ændringer uden at gemme?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -818,7 +818,7 @@
   "@faqMapTinyContent": {},
   "faqCheckmarks": "Hvad er fluebenene til?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "Disse er markeringer af, at data om faciliteter er blevet bekræftet. De tilføjer tagget `check_date` med den aktuelle dato.\n\nIdéen bag markeringerne er, at hvis du f.eks. har undersøgt halvdelen af byen i første omgang og efter en måned kommer tilbage for at besigtige den igen. Du skal på en eller anden måde markere, at du kan se faciliteten, men at intet er ændret ved den. Det er formålet med fluebenet: du trykker på det og fortsætter.\n\nMarkeringen holder i to uger. Derefter kan du besigtige faciliteterne igen.",
+  "faqCheckmarksContent": "Disse er markeringer af, at data om faciliteter er blevet bekræftet. De tilføjer tagget `check_date` med den aktuelle dato.\n\nIdéen bag markeringerne er, at hvis du f.eks. har undersøgt halvdelen af byen i første omgang og efter en måned kommer tilbage for at besigtige den igen. Du skal på en eller anden måde markere, at du kan se faciliteten, men at intet er ændret ved den. Det er formålet med fluebenet: du trykker på det og fortsætter.\n\nMarkeringen holder i to måneder. Derefter kan du besigtige faciliteterne igen.",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Hvis dit numeriske tastatur ikke kan skiftes til et fuldt tastatur, skal du kontrollere appindstillingerne. Dem finder du bag knappen i øverste venstre hjørne. Slå \"Udvidet numeriske tastatur\" til der.",
   "@faqLettersContent": {},
@@ -826,7 +826,7 @@
   "@faqEntranceContent": {},
   "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Hvornår vises disse hvide prikker i mikro-kortlægning-indstillingen? Hvordan sorteres objekter?\n\nSvarene på alle disse spørgsmål findes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er, hvad du kan se på:\n\n* Nøgleordenen for det primære tag - liste `kMainKeys`.\n* Hvilke objekter der downloades - funktion `isGoodTags`.\n* Hvad der betragtes som en facilitet - funktion `isAmenityTags`.\n* Hvilke punkter forbindes til hvilke veje - funktion `detectSnap`.\n* Når et mikrokortlægningsobjekt er ufuldstændigt - funktion `needsMoreInfo`.",
   "@faqTaggingContent": {},
-  "faqFloorsContent": "Nej. Den første har `addr:floor=3`-tagget udfyldt. Det er etagen, som den angives ved vejvisning og i almindelighed anvendes. Den anden har ikke dette tag, men har `level=3`. Det nummer er et fortløbende etagenummer fra nul til `building:levels - 1`. Det vil sige, at i en treetagers bygning afhænger værdien af `addr:floor` af landet, men `level` er altid 0, 1 eller 2.\n\nHer er hvordan notationen i editoren er relaterede til disse tags:\n\n* `2`: `addr:floor=2` og ikke-tom `level=*`.\n* `4/`: `addr:floor=4`, men der er ikke noget `level`-tag.\n* `/1`: `level=1`, men der er ikke noget `addr:floor`-tag.\n* `1/0`: `addr:floor=1` + `level=0` (og der er et objekt i nærheden:w med samme `addr:floor`, men med et andet `level`, eller omvendt).",
+  "faqFloorsContent": "Nej. Den første har `addr:floor=3`-tagget udfyldt. Det er etagen, som den angives ved vejvisning og i almindelighed anvendes. Den anden har ikke dette tag, men har `level=3`. Det nummer er et fortløbende etagenummer fra nul til `building:levels - 1`. Det vil sige, at i en treetagers bygning afhænger værdien af `addr:floor` af landet, men `level` er altid 0, 1 eller 2.\n\nHer er hvordan notationen i editoren er relaterede til disse tags:\n\n* `2`: `addr:floor=2` og ikke-tom `level=*`.\n* `4/`: `addr:floor=4`, men der er ikke noget `level`-tag.\n* `/1`: `level=1`, men der er ikke noget `addr:floor`-tag.\n* `1/0`: `addr:floor=1` + `level=0` (og der er et objekt i nærheden: med samme `addr:floor`, men med et andet `level`, eller omvendt).",
   "@faqFloorsContent": {},
   "buildingMaterial": "Facade",
   "@buildingMaterial": {},
@@ -1126,6 +1126,6 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "faqYellowContent": "Ikke-gule tags i indgangstilstanden og hvide prikker i mikromappingtilstanden betyder, at elementerne mangler nogle vigtige egenskaber. For eksempel: \n\n* Bygninger forventes at have et antal niveauer. \n* Indgange skal have type og, for trapper, lejlighedsrækkevidde. \n* Bænke skal have materiale og ryglæn. \n* Træer skal have bladtype og cyklus.",
+  "faqYellowContent": "Ikke-gule tags i indgangstilstanden og hvide prikker i mikromappingtilstanden betyder, at elementerne mangler nogle vigtige egenskaber. For eksempel: \n\n* Bygninger forventes at have et antal niveauer. \n* Indgange skal have type og, for trapper, lejlighedsserie. \n* Bænke skal have materiale og ryglæn. \n* Træer skal have bladtype og cyklus.",
   "@faqYellowContent": {}
 }

@@ -116,7 +116,7 @@
   "@chooseLocation": {
     "description": "Title for the screen for choosing a location on a map."
   },
-  "editorCloseMessage": "Utracisz niezapisane zmiany. Kontynuować?",
+  "editorCloseMessage": "Porzucić zmiany bez ich zapisywania?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },

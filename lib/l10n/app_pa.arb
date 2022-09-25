@@ -1,0 +1,17 @@
+{
+  "tileNo": "ਨਹੀਂ",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "versionsVersionNumber": "ਵਰਜ਼ਨ ਨੰਬਰ {number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  }
+}

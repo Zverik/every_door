@@ -1,0 +1,1117 @@
+{
+  "faqFloorsContent": "Ne. La unua havas etikedon `addr:floor=3` plenigita. Tio estas la planko kiel ĝi estas presita sur navigado kaj ofte uzata. La dua ne havas ĉi tiun etikedon, sed havas `nivelo=3`. Tiu nombro estas sinsekva etaĝa nombro de nul ĝis `building:levels - 1`. Tio estas, en trietaĝa konstruaĵo `addr:floor` valoro dependas de lando, sed `nivelo` ĉiam estas 0, 1 aŭ 2.\n\nJen kiel la notacio en la redaktilo rilatis al ĉi tiuj etikedoj:\n\n* `2`: `addr:floor=2` kaj nemalplena `level=*`.\n* `4/`: `addr:floor=4`, sed ne ekzistas etikedo `level`.\n* `/1`: `level=1`, sed ne ekzistas etikedo `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (kaj estas objekto apude: kun sama `addr:floor`, sed malsama `nivelo`, aŭ inverse).",
+  "@faqFloorsContent": {},
+  "faqTagging": "Ĉiuj demandoj pri etikedoj",
+  "@faqTagging": {},
+  "tileNo": "ne",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "tileDragOrUnfilter": "Bonvolu movi ĉirkaŭen, aldoni agrablaĵon aŭ forigi la filtrilon.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "legendOther": "Alia",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "navUpload": "Alŝuti",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navDownload": "Elŝuti",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navImagery": "Ŝanĝi bildojn",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navPoiMode": "Agrabla reĝimo",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Mikromapa reĝimo",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "Reĝimo de eniroj",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "navNotesMode": "Nota reĝimo",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "filterNoAddresses": "Neniuj adresoj proksime",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterByAddress": "Laŭ adreso",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterByFloor": "Laŭ etaĝo",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "filterEmpty": "malplena",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "filterNonConfirmed": "Nur nekonfirmita",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "mapSettings": "Agordoj",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "Filtrilo",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "Reen al mi",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Zomi",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Malzomi",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "chooseLocation": "Elekti lokon",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "Elekti tipon",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Klari",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "warningFixme": "Riparu min: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "editorSave": "Savi",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorMarkChecked": "Marki kontrolita",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Historio",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Krudaj etikedoj",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorCloseTitle": "Ĉu fermi la redaktilon?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "Ĉu forĵeti ŝanĝojn sen konservi?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorMoreFields": "Pli da Kampoj",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorMove": "Movi",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorDuplicate": "Ebla duplikato en {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorMarkActive": "Marki kiel Aktiva",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Marki kiel Malfunkcia",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorRestore": "Restaŭri",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorMissing": "Ne Ekzistas",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorRestoreTitle": "Ĉu ĝi estas malfermita?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorDeleteTitle": "Ĉu forigi {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "Forigi",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsUrlCopied": "URL kopiita al tondujo",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsNewPoint": "Nova Punkto",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsAddTag": "Aldonu etikedon",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Ŝlosilo",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Valoro",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsKeyError": "Ŝlosilo estas tro malofta",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsValueLong": "Valoro estas tro longa",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "versionsRetryFetch": "Reprovi",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsLocalChanges": "Lokaj ŝanĝoj",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Versio #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "de {user} je {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "Neniuj etikedŝanĝoj",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsTitle": "Agordo",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsApiServer": "API-Servilo",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsDataManagement": "Administrado de Datumoj",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsPresentation": "Prezento",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsLoginDetails": "OSM-konto",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeData": "Purigu malnoviĝintajn konservitajn datumojn",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "Purigu ĉiujn elŝutitajn datumojn",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataTitle": "Ĉu forigi datumojn?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "Vi devos re-elŝuti ĉion. Ĉu daŭrigi?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "Malnoviĝintaj Datumoj",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "Forigitaj Datumoj",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsCacheTiles": "Elŝuti kahelojn",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLanguage": "Lingvo",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsPreferContact": "Preferi \"contact:\"-Prefikson",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsNumericKeyboard": "Plilongigita Nombra Klavaro",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsDefaultPayment": "Defaŭltaj Pagaj Kartoj",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsGoogle": "Uzi Guglo-plibonigitan Pozicion",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "settingsAbout": "Pri",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutHelpImprove": "Helpi plibonigi {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Raportu problemon",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpTranslate": "Helpi traduki",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "sur Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "Oftaj Demandoj",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Ligiloj",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountTitle": "OpenStreetMap-konto",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "Ensalutu per OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "OAuth Eraro",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountLoginPassword": "Ensaluti per Pasvorto",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "Averto",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "Via pasvorto estos konservita en la aparato. Elektu ĉi tion nur kiam OAuth malsukcesas.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "Komprenita",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldLogin": "Uzantnomo",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountAuthErrorTitle": "Aŭtentiga Eraro",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountAuthErrorMessage": "Malĝusta uzantnomo aŭ pasvorto.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "Elsaluti",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountChangesets": "Ŝanĝaroj",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "changesDeletedChange": "Forigita {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesMapNotes": "Mapaj notoj kaj desegnaĵoj",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesOsmNote": "OSM-noto",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "changesPurge": "Purigi ŝanĝojn",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "changesPurgeTitle": "Ĉu Purigi Ŝanĝojn?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesPurgeMessage": "Ĉu forigi ĉiujn registritajn ŝanĝojn kaj restarigi la originajn datumojn?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "changesSwipeLeft": "Glitu maldekstren por malfari ŝanĝon",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursButton": "Agordu malfermajn horojn",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursTitle": "Malfermaj Horoj",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursFullDay": "Tuttage",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursAsText": "Kiel Teksto",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "\"Lasta Lundo\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursHour": "Horo",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minuto",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursChooseTime": "Horo kaj minuto",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Klari",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Savi",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursAddFragment": "Aldonu fragmenton",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursRemoveFragment": "Forigi fragmenton",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursAddBreak": "Aldoni paŭzon",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursRemoveBreak": "Forigi paŭzon",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursClosedPH": "Fermita dum festotagoj",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursSDRemove": "Forigi",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "Aldoni daton",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Aldoni gamon",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameCopy": "Kopii valoron",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldComboEmpty": "malplena",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "elekti",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "ne",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "publika",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "klientoj",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "jes",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "limigita",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "ne",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsAccepted": "akceptita",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "ne",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCardsOnly": "nur karto",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldCheckboxYes": "jes",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "ne",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorNew": "Nova Etaĝo",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldAddressTap": "Frapi adreson",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldPhoneWrong": "Malĝusta telefonformato",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "messageDataObsolete": "Datumoj estas malnoviĝintaj, alklaku ĉi tie por refreŝigi",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableLocationMessage": "Bonvolu permesi lokan aliron por la aplikaĵo en la agorda panelo, kiu estos montrita.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonYes": "Jes",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "Ne",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "entrancesAddEntrance": "Aldoni enirejon",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "Aldoni konstruaĵon",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingX": "Konstruaĵo {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "addressX": "Adreso {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingTypeHouse": "domo",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "apartamentoj",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "podetala",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "komerca",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "ŝedo",
+  "@buildingTypeShed": {},
+  "buildingTypeGarage": "garaĝo",
+  "@buildingTypeGarage": {},
+  "entranceIsUnit": "Konservi la loĝejan numeron en addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceRef": "Ref",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "Aliro",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessYes": "malfermita",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "privata",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "ne",
+  "@entranceAccessNo": {},
+  "entranceAccessDelivery": "livero",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "Rulseĝo",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceType": "Tajpi",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeHome": "hejma",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "butiko",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "servo",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "garaĝo",
+  "@entranceTypeGarage": {},
+  "notesAddNote": "Aldoni noton",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "Anonima",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Solvi",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Ĉu marki la noton solvita?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "notesCancelMessage": "Ĉu nuligi vian OSM-noton?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "apiStatusDownloading": "Elŝutante datumojn…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "faqCheckmarks": "Por kio estas la markomarkoj?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Kiel aldoni konstruan enirejon?",
+  "@faqEntrance": {},
+  "faqChangeType": "Kiel ŝanĝi agrablan tipon?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Frapu la titolon de la redaktilo, kie la tipo estas skribita.",
+  "@faqChangeTypeContent": {},
+  "loadingPresets": "Ŝargante antaŭgordojn…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "tileDragTheMap": "Bonvolu proksimiĝi al io ajn, treni la mapon aŭ aldoni mankantan agrablaĵon.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "loadingStart": "Komencante…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "dataDownloadFailed": "Elŝuto malsukcesis",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "loadingChanges": "Ŝargante ŝanĝojn…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingLocation": "Akirante lokon…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingChangesFailed": "Malsukcesis ŝargi ŝanĝojn",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingTooMuchDataTitle": "Tro da datumoj",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "loadingTooMuchData": "Purigu elŝutitajn datumojn en Agordoj por plirapidigi la redaktilon.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadSuccessful": "Elŝuto sukcesa",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "tileNothingAround": "Neniuj agrablaĵoj ĉirkaŭ vi en {distance} metroj.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "warningWrongTag": "Malĝusta etikedo: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "tagsRestore": "Restaŭri",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "warningTooOld": "Agrableco aĝas {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "tagsDelete": "Klari",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "versionsEnableInternet": "Konekti al la interreto por preni version-historion",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "editorRestoreMessage": "{amenity} estas neaktiva. Ĉu vi volas marki ĝin aktiva?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsShare": "Kunhavigi",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "versionsTitle": "{elementRef} historio",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "settingsBackground": "Fona bildoj",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "versionsFetchError": "Eraro alportante versiohistorion",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "settingsUploads": "Atendantaj alŝutoj",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsLeftHand": "Maldekstramanaj kontroloj",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsEditor": "Redaktoro",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsSystem": "Sistemo",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "aboutViewLog": "Sistema protokolo",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "Versiohistorio",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutSourceCode": "Fontkodo",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "sur GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Permesilo",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "accountFieldPassword": "Pasvorto",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountUnreadMail": "Nelegita Poŝto",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesUploadFailedTitle": "Alŝuto Malsukcesis",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "aboutInstalledVersion": "Instalita versio",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Projekto retejo",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "accountPasswordTitle": "Akreditaĵoj de OSM",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "buildingMoreButton": "Pli",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "hashtagsConfirm": "Konfirmi etikedojn dum alŝuto",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesUploadedTitle": "Alŝutita",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadedMessage": "Sendis {changes} al la API.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesDeletedUndo": "Malfari",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "fieldHoursPublicHolidays": "Publikaj Ferioj",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursOpens": "Malfermas",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "Fermiĝas",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldFloorFloorDesc": "Etaĝo kiel sur la navigacio kaj en liftoj",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "enableGPS": "Ebligi GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "buildingType": "Tajpi",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMaterialBrick": "briko",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialWood": "ligno",
+  "@buildingMaterialWood": {},
+  "buildingMaterialGlass": "vitro",
+  "@buildingMaterialGlass": {},
+  "changesPending": "Decidota",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "fieldNameLanguages": "Alia lingvo",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldFloorEmpty": "Por elekti etaĝon, agordu adreson.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "enableLocation": "Ebligi Lokon",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "entranceTypeMain": "ĉefa",
+  "@entranceTypeMain": {},
+  "fieldHoursSpecificDays": "Specifa dato",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "messageNoData": "Neniuj datumoj, alklaku ĉi tie por elŝuti",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "enableGPSMessage": "Bonvolu ŝalti la lokservojn en la agorda panelo, kiu estos montrita.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "fieldHoursClosed": "Fermita",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursBreak": "Rompo",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "Sekva",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "buildingMaterialConcrete": "betono",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialMetal": "metalo",
+  "@buildingMaterialMetal": {},
+  "fieldFloorLevelDesc": "Etaĝnumero komencanta de 0 por la grundnivelo",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldFloorShouldBeNumber": "Bonvolu enigi numeron",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "buildingMaterial": "Fasado",
+  "@buildingMaterial": {},
+  "buildingMaterialPanels": "paneloj",
+  "@buildingMaterialPanels": {},
+  "entranceX": "Enirejo {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingPostCode": "Poŝtkodo",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingLevels": "Niveloj",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Tegmentaj Niveloj",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "Formo de Tegmento",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingMaterialPlaster": "gipso",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialCementBlock": "cementaj blokoj",
+  "@buildingMaterialCementBlock": {},
+  "buildingTypeAddress": "adreso",
+  "@buildingTypeAddress": {},
+  "buildingMaterialStone": "ŝtono",
+  "@buildingMaterialStone": {},
+  "buildingTypeIndustrial": "industria",
+  "@buildingTypeIndustrial": {},
+  "entranceTypeStaircase": "ŝtuparo",
+  "@entranceTypeStaircase": {},
+  "buildingTypeConstruction": "konstruejo",
+  "@buildingTypeConstruction": {},
+  "entranceFlatsNumberList": "Devus esti listo de nombroj",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceFlats": "Apartamentoj",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "addressStreet": "Strato",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "Loko",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "addressHouseNumber": "Doma",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Ne devus esti malplena",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "entranceTypeEmergency": "kriza",
+  "@entranceTypeEmergency": {},
+  "apiStatusUploading": "Alŝutante ŝanĝojn",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "addressUnitOptional": "nedeviga",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "apiStatusUpdatingDB": "Konservante de elementoj al la aplika datumbazo",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "faqMapTiny": "Kial la mapo estas tiel eta?",
+  "@faqMapTiny": {},
+  "faqMapTinyContent": "Ĉar ne estas la pli grava afero. Vi nur kontrolas vian poziciigon sur la mapo, kaj pani ĝin por ĝustigi. Rigardu la liston de agrablaĵoj sube, ordigita laŭ distanco de vi.\n\nLa mapo pligrandiĝas kiam vi redaktas agrablaĵojn malproksime de via loko. Kvankam la programo estis farita por redakti aferojn, kiujn vi vidas per viaj okuloj.",
+  "@faqMapTinyContent": {},
+  "faqLettersContent": "Se via numera klavaro ne povas esti ŝanĝita al plena, kontrolu la agordojn de la aplikaĵo. Ili estas malantaŭ la butono ĉe la supra maldekstra angulo. Ŝaltu la \"plilongigitan numeran klavaron\" tie.",
+  "@faqLettersContent": {},
+  "faqEntranceContent": "Malsupre estas vico de reĝimbutonoj: mikromapado, agrablaĵoj, enirejoj kaj notoj.\n\nEn la enireja reĝimo, frapetu aŭ trenu la pordan butonon en la malsupra angulo sur la mapon.",
+  "@faqEntranceContent": {},
+  "faqYellow": "Kial kelkaj domnumeroj estas flavaj?",
+  "@faqYellow": {},
+  "faqLetters": "Ĉu mi povas tajpi literojn en ref aŭ apartamenta nombro?",
+  "@faqLetters": {},
+  "faqYellowContent": "Ne-flavaj etikedoj en la enirejo-reĝimo kaj blankaj punktoj en la mikromapa reĝimo signifas ke la elementoj malhavas kelkajn gravajn atributojn. Ekzemple:\n\n* Konstruaĵoj estas atenditaj havi nombron da niveloj.\n* Enirejoj havu tipon kaj, por ŝtuparoj, apartamenta gamo.\n* Benkoj havu materialon kaj apogilon.\n* Arboj devus havi foliospecon kaj ciklon.",
+  "@faqYellowContent": {},
+  "faqFloors": "Ĉu etaĝoj '3' kaj '/3' estas la samaj?",
+  "@faqFloors": {},
+  "dataDownloadedCount": "{count,plural, =1{Elŝutiĝis {count} elemento.}, =few{Elŝutiĝis {count} elementoj.}, =other{Elŝutiĝis {count} elementoj.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "years": "{count,plural, =1{{count} jaro}, =few{{count} jaroj}, =other{{count} jaroj}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Forviŝiĝis {count} element}, =few{Forviŝiĝis {count} elementoj}, =other{Forviŝiĝis {count} elementoj}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesCount": "{count,plural, =1{{count} ŝanĝo}, =few{{count} ŝanĝoj}, =other{{count} ŝanĝoj}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "fieldHoursWeekdays": "Lu Ma Me Ĵa Ve Sa Di",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "addressUnit": "Unuo",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  }
+}

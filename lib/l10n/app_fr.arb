@@ -87,7 +87,7 @@
   "@editorCloseTitle": {
     "description": "Titre pour le message sur la fermeture de l'éditeur avec des modifications pas encore enregistrées."
   },
-  "editorCloseMessage": "Vous perdrez les modifications non sauvegardées. Continuer ?",
+  "editorCloseMessage": "Perdre toutes les modifications sans sauvegarder ?",
   "@editorCloseMessage": {
     "description": "Message sur la fermeture de l'éditeur avec des modifications pas encore enregistrées."
   },
@@ -684,7 +684,7 @@
   "@faqMapTinyContent": {},
   "faqCheckmarks": "À quoi servent les marqueurs de validation ?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "Ces marqueurs indiquent que les données ont été confirmées, ils ajoutent la clé `check_date` avec la date actuelle.\n\nL’idée de ces marqueurs est que, dans l’exemple où vous auriez répertorié la moitié de la ville sur un premier trajet, qu’il vous soit possible de revenir sur ces points quelques mois plus tard et d’indiquer que rien n’a changé. Un marqueur et c’est validé.\n\nLe marqueur reste affiché pour 50 jours, après quoi il sera de nouveau possible de les repointer.",
+  "faqCheckmarksContent": "Ces marqueurs indiquent que les données ont été confirmées, ils ajoutent la clé `check_date` avec la date actuelle.\n\nL’idée de ces marqueurs est que, dans l’exemple où vous auriez répertorié la moitié de la ville sur un premier trajet, qu’il vous soit possible de revenir sur ces points quelques mois plus tard et d’indiquer que rien n’a changé. Un marqueur et c’est validé.\n\nLe marqueur restera affiché durant deux mois, après quoi il sera de nouveau possible de les repointer.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "Comment ajouter l’entrée d’un bâtiment ?",
   "@faqEntrance": {},
@@ -696,7 +696,7 @@
   "@faqLettersContent": {},
   "faqFloors": "Quelle est la différence entre les étages « 3 » et « /3 » ?",
   "@faqFloors": {},
-  "faqFloorsContent": "Le premier correspond à l’attribut `addr:floor=3`, c’est l’étage comme indiqué lors de la navigation et généralement utilisé mais dépend de la localité, tandis que le second correspond à `level=3` selon le schéma `building:level` où le rez-de-chaussée est l’étage 0.\n\nAinsi, les valeurs suivantes indiqueront :\n\n* `2` : `addr:floor=2` et `level=*` ;\n* `4/` : `addr:floor=4`, sans `level` ;\n* `/1` : `level=1`, sans `addr:floor` ;\n* `1/0` : `addr:floor=1` et `level=0`.",
+  "faqFloorsContent": "Le premier correspond à l’attribut `addr:floor=3`, c’est l’étage comme indiqué lors de la navigation et généralement utilisé mais dépend de la localité, tandis que le second correspond à `level=3` selon le schéma `building:level` où le rez-de-chaussée est l’étage 0.\n\nAinsi, les valeurs suivantes indiqueront :\n\n* `2` : `addr:floor=2` et `level=*` ;\n* `4/` : `addr:floor=4`, sans `level` ;\n* `/1` : `level=1`, sans `addr:floor` ;\n* `1/0` : `addr:floor=1` et `level=0` (et il y a un objet proche : avec le même `addr:floor`, mais un différent `level`, ou l'inverse).",
   "@faqFloorsContent": {},
   "faqTagging": "Questions relatives aux attributs",
   "@faqTagging": {},
@@ -1111,5 +1111,21 @@
     "placeholders": {
       "count": {}
     }
+  },
+  "notesCancelMessage": "Annuler votre note OSM ?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "hashtagsLabel": "Mots pour les mots-dièse",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "settingsHashtags": "Mots-dièse des jeux de modification",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsConfirm": "Confirmer les étiquettes au téléversage",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   }
 }
