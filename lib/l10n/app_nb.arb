@@ -43,7 +43,7 @@
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "editorCloseMessage": "Lukk uten å lagre endringer?",
+  "editorCloseMessage": "Vil du forkaste endringer uten å lagre?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -165,7 +165,7 @@
   "@accountFieldLogin": {
     "description": "Label for the OSM login."
   },
-  "accountAuthErrorMessage": "Feil brukernavn eller passord",
+  "accountAuthErrorMessage": "Feil brukernavn eller passord.",
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
@@ -446,5 +446,148 @@
   "buildingTypeHouse": "hus",
   "@buildingTypeHouse": {},
   "buildingTypeApartments": "leiligheter",
-  "@buildingTypeApartments": {}
+  "@buildingTypeApartments": {},
+  "loadingTooMuchDataTitle": "For mye data",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadSuccessful": "Nedlasting ferdig",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadFailed": "Nedlasting mislyktes",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "loadingTooMuchData": "Tøm nedlastede data under innstillinger for å gjøre editoren raskere.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "notesClose": "Løs",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Vil du merke notatet som løst?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "warningTooOld": "Stedet er {years} gammelt",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "fieldCardsOnly": "Kun kort",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "tileDragTheMap": "Vennligst gå nærmere noe, flytt kartet, eller legg til et sted som mangler.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Beveg deg rundt, legg til et sted eller tøm filteret.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Nedlastede {count} element.}, =few{Nedlastede {count} elementer.}, =other{Nedlastede {count} elementer.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "warningFixme": "Korriger: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} år}, =few{{count} år}, =other{{count} år}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "warningWrongTag": "Feil etikett: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "navDownload": "Last ned",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navUpload": "Last opp",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navImagery": "Bytt bakgrunnsbilde",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "editorHistory": "Historikk",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "navPoiMode": "Sted-modus",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Mikrokartlegging-modus",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "Inngang-modus",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "navNotesMode": "Notater-modus",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "editorTags": "Etiketter",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "mapSettings": "Innstillinger",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "Filter",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "Tilbake til meg",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Zoom inn",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Zoom ut",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "editorMarkChecked": "Markering verifisert",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "faqEntranceContent": "Nederst er det en rad med modus-knapper: mikrokartlegging, steder, innganger og notater.\n\nI inngang-modus, trykk eller dra dør-knappen i nederste hjørne inn på kartet.",
+  "@faqEntranceContent": {},
+  "faqYellow": "Hvorfor er noen husnummer gule?",
+  "@faqYellow": {}
 }
