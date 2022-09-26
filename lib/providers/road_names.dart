@@ -57,7 +57,7 @@ class RoadNameProvider {
 
   Future<List<String>> getNamesAround(LatLng location,
       {double? radius, int limit = 3}) async {
-    final effRadius = radius ?? kVisibilityRadius.toDouble();
+    final effRadius = max(radius ?? kFarVisibilityRadius.toDouble(), 101.0);
 
     // Merge two sources for road names.
     final names = await _getNamesFromAddresses(location, effRadius);

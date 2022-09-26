@@ -1,5 +1,11 @@
 # Every Door App Change Log
 
+## 2.1
+
+_Unreleased_
+
+* Street names from streets were missing.
+
 ## 2.0
 
 _Released on 2022-09-10_
