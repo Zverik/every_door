@@ -5,6 +5,7 @@
 _Unreleased_
 
 * Street names from streets were missing.
+* Added `attraction=*` to supported keys.
 
 ## 2.0
 
