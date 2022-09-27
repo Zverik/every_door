@@ -22,6 +22,7 @@ class PoiIcons {
   static const floor = '📶'; // TODO: better emoji
   static const wheelchair = '♿';
   static const warning = '⚠';
+  static const door = '🚪';
 }
 
 class PoiTile extends ConsumerWidget {
@@ -70,10 +71,12 @@ class PoiTile extends ConsumerWidget {
       present.add(PoiIcons.cards);
     else if (amenity.cashOnly) present.add(PoiIcons.cash);
 
-    final hours = amenity['opening_hours'];
-    if (hours != null) present.add('${PoiIcons.hours}${shortHours(hours)}');
+    final room = amenity['addr:door'];
+    if (room != null) present.add('${PoiIcons.door}$room');
     final phone = amenity.getContact('phone');
     if (phone != null) present.add('${PoiIcons.phone}${shortPhone(phone)}');
+    final hours = amenity['opening_hours'];
+    if (hours != null) present.add('${PoiIcons.hours}${shortHours(hours)}');
     return present.join(' ');
   }
 
