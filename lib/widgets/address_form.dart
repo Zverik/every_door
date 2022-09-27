@@ -209,7 +209,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
                 style: kFieldTextStyle,
                 textCapitalization: TextCapitalization.sentences,
                 onChanged: (value) {
-                  street = value;
+                  street = value.trim().isEmpty ? null : value.trim();
                   notifyOnChange();
                 },
               ),
