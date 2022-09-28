@@ -39,7 +39,7 @@
   "@editorSave": {},
   "editorCloseTitle": "Chiudere l'editor?",
   "@editorCloseTitle": {},
-  "editorCloseMessage": "Il lavoro non salvato andrà perduto. Procedere?",
+  "editorCloseMessage": "Vuoi perdere le modifiche senza salvare?",
   "@editorCloseMessage": {},
   "editorMoreFields": "Più campi",
   "@editorMoreFields": {},
@@ -792,7 +792,7 @@
       "count": {}
     }
   },
-  "fieldCardsOnly": "solo carte",
+  "fieldCardsOnly": "solo carta di pagamento",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   }
