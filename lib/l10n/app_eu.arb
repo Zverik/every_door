@@ -427,7 +427,7 @@
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
-  "editorCloseMessage": "Gorde gabeko aldaketak galduko dituzu. Aurrera?",
+  "editorCloseMessage": "Gorde gabeko aldaketak baztertu?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -795,7 +795,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Nola gehitu eraikin baten sarrera?",
   "@faqEntrance": {},
-  "faqCheckmarksContent": "Egiaztapen edo \"check\" marka horiek adierazten dute informazioa konfirmatu dela. `check_date` etiketa gehitzen dute, gaurko datarekin.\n\nEgiaztapen marken atzean dagoen ideia da, zuk herri guztia aztertu eta hilabete ondoren itzultzea berriz puntu horiek ziurtatzera. Nolabait marka hori behar da zerbitzua ikusi duzula baina ezer ez dela aldatu adierazteko. Horixe da egiaztapen marka: klik egin eta aurrera!\n\nEgiaztapen marka bi astez gelditzen da horrela. Gero berriz aztertu behar dira zerbitzu edo negozioak.",
+  "faqCheckmarksContent": "Egiaztapen edo \"check\" marka horiek adierazten dute informazioa konfirmatu dela. `check_date` etiketa gehitzen dute, gaurko datarekin.\n\nEgiaztapen marken atzean dagoen ideia da, zuk herri guztia aztertu eta hilabete ondoren itzultzea berriz puntu horiek ziurtatzera. Nolabait marka hori behar da zerbitzua ikusi duzula baina ezer ez dela aldatu adierazteko. Horixe da egiaztapen marka: klik egin eta aurrera!\n\nEgiaztapen marka bi hilabetez gelditzen da horrela. Gero berriz aztertu behar dira zerbitzu edo negozioak.",
   "@faqCheckmarksContent": {},
   "faqChangeType": "Nola aldatu zerbitzu mota?",
   "@faqChangeType": {},
@@ -837,5 +837,293 @@
     "placeholders": {
       "count": {}
     }
+  },
+  "faqYellow": "Zergatik daude etxe-zenbaki batzuk horiz?",
+  "@faqYellow": {},
+  "versionsLocalChanges": "Aldaketa lokalak",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "#{number} bertsioa",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "{user} erabiltzaileak {datetime}-ean",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "faqEntranceContent": "Azpian dituzu edizio moduen botoiak: mikromapatzea, zerbitzuak, sarrerak eta oharrak.\n\nSarrera moduan, ukitu edo eraman atearen botoia behetik mapa barrura.",
+  "@faqEntranceContent": {},
+  "warningFixme": "Konpondu: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Etiketa okerra: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "Zerbitzu hau duela {years} urtekoa da",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "years": "{count,plural, =1{urte {count}}, =few{{count} urte}, =other{{count} urte}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "versionsTitle": "{elementRef} historia",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsEnableInternet": "Internetera konektatu bertsioen historia eskuratzeko",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsNoTagChanges": "Ez dago etiketa aldaketarik",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "hashtagsConfirm": "Kargatzerakoan etiketak konfirmatu",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "fieldHoursChooseTime": "Ordua eta minutua",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Garbitu",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Gorde",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursRemoveBreak": "Ezabatu etena",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursSDRemove": "Ezabatu",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "Eguna gehitu",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Egun sorta gehitu",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Beste hizkuntza bat",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Balioa kopiatu",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "entrancesAddEntrance": "Sarrera gehitu",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "faqYellowContent": "Horiak ez diren etiketak sarrera moduan eta puntu beltzak mikromapeatze moduan ikusten badituzu, horrek esan nahi du atributu garrantzitsuak falta direla. Adibidez:\n\n* Eraikinek solairu kopuruak izatea espero da.\n* Sarrerek mota izan behar dute, eta eskailerek apartamentuen sorta.\n* Kaleko bankuen kasuan, materiala eta bizkarra duten zehaztuta egon behar da.\n* Zuhaitzek hosto mota eta zikloa izan behar dute.",
+  "@faqYellowContent": {},
+  "faqLettersContent": "Zure zenbakizko teklatua ezin bada zabaldu teklatu hedatura, begiratu aplikazioaren hobespenak. Goiko ezkerreko botoiaren azpian daude. Han ezarri \"zenbakizko teklatu hedatua\" aukera.",
+  "@faqLettersContent": {},
+  "faqFloors": "'3' eta '/3' solairuak berdinak dira?",
+  "@faqFloors": {},
+  "navUpload": "Gora kargatu",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navDownload": "Jaitsi",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navPoiMode": "Zerbitzu modua",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Mikromapeatze modua",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "Sarreren modua",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "mapLocate": "Nire kokapenera",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Zoom barrura",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "editorMarkChecked": "Markatu ikuskatuta",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Historia",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "settingsCacheTiles": "Lauzak deskargatu",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLanguage": "Hizkuntza",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "notesAddNote": "Oharra gehitu",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "Anonimoa",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Konpondu",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Oharra konpondutzat eman?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "navImagery": "Iruditeria aldatu",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "mapSettings": "Ezarpenak",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "navNotesMode": "Oharren modua",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapZoomOut": "Zoom kanpora",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "tagsShare": "Elkarbanatu",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "versionsFetchError": "Bertsioen historia berreskuratzean akatsa",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "mapFilter": "Iragazkia",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "editorTags": "Etiketa gordinak",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "tagsRestore": "Berrezarri",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "changesMapNotes": "Mapen ohar eta marrazkiak",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "tagsDelete": "Garbitu",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "settingsHashtags": "Aldaketaren hashtag-ak",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "versionsRetryFetch": "Berriz saiatu",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "settingsSystem": "Sistema",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "Erabili Googlek hobetutako kokapena",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "hashtagsLabel": "Hashtag-etarako izenak",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "changesOsmNote": "OSM oharra",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "changesPurge": "Garbitu aldaketak",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursRemoveFragment": "Ezabatu zatia",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "entrancesAddBuilding": "Eraikina gehitu",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "notesCancelMessage": "Zure OSM oharra ezabatu?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "fieldCardsOnly": "txartelaz bakarrik",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
   }
 }
