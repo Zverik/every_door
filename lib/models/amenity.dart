@@ -388,6 +388,15 @@ class OsmChange extends ChangeNotifier implements Comparable {
       this[key] = value;
   }
 
+  removeOpeningHoursSigned() {
+    const kSigned = 'opening_hours:signed';
+    if (this[kSigned] == 'no' &&
+        this['opening_hours'] != null &&
+        element?.tags['opening_hours'] == null) {
+      removeTag(kSigned);
+    }
+  }
+
   Map<String, bool> _getPaymentOptions() {
     return Map<String, bool>.fromEntries(getFullTags()
         .entries

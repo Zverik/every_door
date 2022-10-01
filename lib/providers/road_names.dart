@@ -2,6 +2,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
+import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -87,7 +88,18 @@ class RoadNameProvider {
     );
     final elements = rows.map((row) => OsmElement.fromJson(row)).toList();
 
+    // Add addresses from edited objects.
     const distance = DistanceEquirectangular();
+    final changedElements = _ref
+        .read(changesProvider)
+        .all()
+        .where((element) =>
+            distance(location, element.location) <= radius &&
+            element['addr:street'] != null)
+        .map((e) => e.toElement(newId: -1));
+    elements.addAll(changedElements);
+
+    // Find the minimal distance for each road name.
     final nameDistance = <String, double>{};
     for (final el in elements) {
       final name = el.tags['addr:street'];

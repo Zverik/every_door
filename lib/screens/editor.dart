@@ -197,6 +197,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final fullTags = amenity.getFullTags();
     // Setting the mark automatically.
     if (needsCheckDate(fullTags)) amenity.check();
+    // Remove opening_hours:signed if needed.
+    amenity.removeOpeningHoursSigned();
     // Store the preset when an object was saved, to track used ones.
     if (widget.preset != null) {
       ref.read(lastPresetsProvider).registerPreset(widget.preset!, fullTags);

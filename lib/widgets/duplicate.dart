@@ -85,9 +85,12 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
           children: [
             const Icon(Icons.warning, color: Colors.orange),
             const SizedBox(width: 5.0),
-            Text(
-              warning ?? loc.editorDuplicate(duplicateDistance),
-              style: kFieldTextStyle,
+            Flexible(
+              child: Text(
+                warning ?? loc.editorDuplicate(duplicateDistance),
+                style: kFieldTextStyle,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),

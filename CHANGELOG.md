@@ -4,8 +4,10 @@
 
 _Unreleased_
 
-* Street names from streets were missing.
+* Street names from streets and manually entered values were missing.
 * Added `attraction=*` to supported keys.
+* Displaying room number in POI tiles.
+* Tag `opening_hours:signed=no` is removed after adding opening hours.
 
 ## 2.0
 
