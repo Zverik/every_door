@@ -259,6 +259,8 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       double targetZoom = newState != null
           ? kMicromappingTapZoom
           : (savedZoom ?? mapController.zoom);
+      if (newState != null && targetZoom < mapController.zoom)
+        targetZoom = mapController.zoom;
       savedZoom = mapController.zoom;
       mapController.move(newState?.center ?? mapController.center, targetZoom);
     });

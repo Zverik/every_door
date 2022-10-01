@@ -8,6 +8,7 @@ _Unreleased_
 * Added `attraction=*` to supported keys.
 * Displaying room number in POI tiles.
 * Tag `opening_hours:signed=no` is removed after adding opening hours.
+* Changeset hashtags box was hidden behind the keyboard.
 
 ## 2.0
 
