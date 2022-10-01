@@ -87,7 +87,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Du kommer att förlora osparade ändringar. Fortsätt?",
+  "editorCloseMessage": "Släng ändringar utan att spara?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
