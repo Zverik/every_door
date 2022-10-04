@@ -26,7 +26,7 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
-  "tileNothingAround": "Nema sadržaja oko vas na udaljenosti od {distance} metara.",
+  "tileNothingAround": "Nema sadržaja oko vas unutar {distance} metara.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -149,7 +149,7 @@
       }
     }
   },
-  "warningTooOld": "Sadržaj je star {years} godina",
+  "warningTooOld": "Sadržaj je star {years}",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -178,7 +178,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Izgubiti ćete nespremljene izmjene. Nastaviti?",
+  "editorCloseMessage": "Odbaciti izmjene bez snimanja?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -295,7 +295,7 @@
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
   },
-  "hashtagsConfirm": "Potvrditi hashtagove prilikom slanja",
+  "hashtagsConfirm": "Potvrdi hashtagove prilikom slanja",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
@@ -335,7 +335,7 @@
   "@changesPending": {
     "description": "Subtitle for a change that has not yet been sent to OSM API."
   },
-  "changesMapNotes": "Crteži i bilješke na karti",
+  "changesMapNotes": "Crteži i zabilješke na karti",
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
@@ -739,7 +739,7 @@
   "@tagsRestore": {
     "description": "Tooltip for a button next to a tag value to restore the value to the original."
   },
-  "tagsDelete": "Poništi",
+  "tagsDelete": "Obriši",
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
   },
@@ -868,7 +868,7 @@
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
-  "settingsCacheTiles": "Preuzmi slike pozadine",
+  "settingsCacheTiles": "Preuzmi pozadinu",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
@@ -916,7 +916,7 @@
   "@enableGPSMessage": {
     "description": "Contents of the alert for enabling location services."
   },
-  "enableLocation": "Omogući lokaciju",
+  "enableLocation": "Omogući lociranje",
   "@enableLocation": {
     "description": "Title of the alert for allowing app access to location."
   },
@@ -994,7 +994,7 @@
   "@buildingTypeHouse": {},
   "buildingTypeRetail": "trgovina",
   "@buildingTypeRetail": {},
-  "buildingTypeCommercial": "komercijalno",
+  "buildingTypeCommercial": "komercijalna",
   "@buildingTypeCommercial": {},
   "buildingTypeShed": "šupa",
   "@buildingTypeShed": {},
