@@ -65,7 +65,7 @@ class _FloorChooserPaneState extends State<FloorChooserPane> {
           ),
           TextFormField(
             controller: _controller2,
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.numberWithOptions(signed: true),
             textInputAction: TextInputAction.done,
             autovalidateMode: _autovalidateMode,
             decoration: InputDecoration(hintText: '0, 1, 2.5, ...'),
