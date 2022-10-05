@@ -10,7 +10,6 @@ _Unreleased_
 * Tag `opening_hours:signed=no` is removed after adding opening hours.
 * Changeset hashtags box was hidden behind the keyboard.
 * Extended numeric keyboard for `level` supporting negative values.
-* Moved post boxes to amenities.
 
 ## 2.0
 
