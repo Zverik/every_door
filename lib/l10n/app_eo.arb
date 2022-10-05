@@ -1,5 +1,5 @@
 {
-  "faqFloorsContent": "Ne. La unua havas etikedon `addr:floor=3` plenigita. Tio estas la planko kiel ĝi estas presita sur navigado kaj ofte uzata. La dua ne havas ĉi tiun etikedon, sed havas `nivelo=3`. Tiu nombro estas sinsekva etaĝa nombro de nul ĝis `building:levels - 1`. Tio estas, en trietaĝa konstruaĵo `addr:floor` valoro dependas de lando, sed `nivelo` ĉiam estas 0, 1 aŭ 2.\n\nJen kiel la notacio en la redaktilo rilatis al ĉi tiuj etikedoj:\n\n* `2`: `addr:floor=2` kaj nemalplena `level=*`.\n* `4/`: `addr:floor=4`, sed ne ekzistas etikedo `level`.\n* `/1`: `level=1`, sed ne ekzistas etikedo `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (kaj estas objekto apude: kun sama `addr:floor`, sed malsama `nivelo`, aŭ inverse).",
+  "faqFloorsContent": "Ne. La unua havas etikedon `addr:floor=3` plenigita. Tio estas la planko kiel ĝi estas presita sur navigado kaj ofte uzata. La dua ne havas ĉi tiun etikedon, sed havas `level=3`. Tiu nombro estas sinsekva etaĝa nombro de nul ĝis `building:levels - 1`. Tio estas, en trietaĝa konstruaĵo `addr:floor` valoro dependas de lando, sed `level` ĉiam estas 0, 1 aŭ 2.\n\nJen kiel la notacio en la redaktilo rilatis al ĉi tiuj etikedoj:\n\n* `2`: `addr:floor=2` kaj nemalplena `level=*`.\n* `4/`: `addr:floor=4`, sed ne ekzistas etikedo `level`.\n* `/1`: `level=1`, sed ne ekzistas etikedo `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (kaj estas objekto apude: kun sama `addr:floor`, sed malsama `nivelo`, aŭ inverse).",
   "@faqFloorsContent": {},
   "faqTagging": "Ĉiuj demandoj pri etikedoj",
   "@faqTagging": {},
@@ -1113,5 +1113,21 @@
   "addressUnit": "Unuo",
   "@addressUnit": {
     "description": "Label for addr:unit in the form. Keep it short."
-  }
+  },
+  "editorLoadingPreset": "Ŝarĝante antaŭagordojn …",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "settingsHashtags": "Ŝangara Krad-etikedoj",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "Vortoj por krad-etikedoj",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "faqCheckmarksContent": "Ĉi tiuj estas markoj, kiujn oni konfirmis datumojn pri agrablaĵoj. Ili aldonas la etikedon `check_date` kun la aktuala dato.\n\nLa ideo de la kontrolaj markoj estas, ke, ekzemple, vi enketis la duonon de la urbo unuafoje. Tiam post unu monato vi revenis kaj denove enketis. Vi devas iel marki, ke vi vidas la agrablaĵon, sed nenio ŝanĝiĝis pri ĝi. Jen la markilo: vi frapetas ĝin kaj daŭrigas.\n\nLa marko restas kontrolita dum du monatoj. Post tio vi eble esploros la agrablaĵojn denove.",
+  "@faqCheckmarksContent": {},
+  "faqTaggingContent": "Kial objekto mankas en la redaktoro? Kiam ĉi tiuj blankaj punktoj estas montritaj en la mikromapanta reĝimo? Kiel objektoj estas ordigitaj?\n\nRespondoj al ĉiuj ĉi tiuj demandoj estas en [good_tags.dart](https://github.com/zverik/every_door/blob/main/lib/helpers/good_tags.dart). Jen kion vi povas rigardi:\n\n* La ŝlosila ordo por la ĉefa etikedo - Listo `kMainKeys`.\n* Kiuj objektoj estas elŝutitaj - funkcio `isGoodTags`.\n* Kio estas konsiderata agrablaĵo - funkcio `isAmenityTags`.\n* Kiuj punktoj estas alkroĉitaj al kiaj manieroj - funkcio `detectSnap`.\n* Kiam mikromapanta objekto estas nekompleta - funkcio `needsMoreInfo`.",
+  "@faqTaggingContent": {}
 }
