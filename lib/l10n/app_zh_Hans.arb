@@ -846,6 +846,266 @@
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
   },
-  "faqCheckmarksContent": "这些是便利设施数据被确认的标志。它们添加了带有当前日期的`check_date`标签。\n\n检查标记背后的想法是，比如说，你第一次调查了半个城市。然后过了一个月，你又回来了，再次去调查。你需要以某种方式标记你看到了这个便利设施，但它没有任何变化。这就是复选标记：你点击它然后继续。\n\n这个标记会保持两个星期。此后，你可以再次调查这些设施。",
-  "@faqCheckmarksContent": {}
+  "faqCheckmarksContent": "这些是便利设施数据被确认的标志。它们添加了带有当前日期的`check_date`标签。\n\n检查标记背后的想法是，比如说，你第一次调查了半个城市。然后过了一个月，你又回来了，再次去调查。你需要以某种方式标记你看到了这个便利设施，但它没有任何变化。这就是复选标记：你点击它然后继续。\n\n这个标记会保持两个月。此后，你可以再次调查这些设施。",
+  "@faqCheckmarksContent": {},
+  "versionsTitle": "{elementRef} 历史",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsEnableInternet": "连接网络以获取版本历史",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsRetryFetch": "重试",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "fieldHoursSDRemove": "删除",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "添加日期",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "添加范围",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameCopy": "复制值",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "notesCloseMessage": "将笔记标记为已解决？",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "changesOsmNote": "OSM注记",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "warningTooOld": "便利设施是{years}年之前的",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "versionsFetchError": "获取版本历史记录时出错",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "settingsHashtags": "变更集Hashtags",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "主题标签文字",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "changesPurge": "清除更改",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "entrancesAddEntrance": "添加入口",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "添加建筑",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "notesCancelMessage": "取消你的OSM标记？",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "faqYellow": "为什么有些门牌号是黄色的？",
+  "@faqYellow": {},
+  "fieldCardsOnly": "仅限卡片",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "navUpload": "上传",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navDownload": "下载",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navEntrancesMode": "出入口模式",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "navPoiMode": "便利设施模式",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navNotesMode": "注记模式",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapSettings": "设置",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "过滤器",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "回到我的位置",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomOut": "缩小",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "editorHistory": "历史",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "tagsRestore": "恢复",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsShare": "共享",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "versionsLocalChanges": "本地更改",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "版本 #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "settingsLanguage": "语言",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsCacheTiles": "下载瓦片",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsSystem": "系统",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "使用谷歌增强的定位功能",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "fieldHoursChooseTime": "小时和分钟",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursRemoveBreak": "删除破损",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldNameLanguages": "其他语言",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "navMicromappingMode": "精细绘图模式",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "versionsVersionMeta": "由{user}在{datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "没有标签变化",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "tagsDelete": "清除",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "warningWrongTag": "错误标签: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "navImagery": "切换图像",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "editorTags": "原始标签",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "fieldHoursSave": "保存",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursRemoveFragment": "删除片段",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "notesAddNote": "添加注记",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "匿名",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "解决",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "mapZoomIn": "放大",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "editorMarkChecked": "标记已核对",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "fieldHoursClear": "清除",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "hashtagsConfirm": "上传时确认标签",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  }
 }
