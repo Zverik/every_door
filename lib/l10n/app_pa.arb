@@ -403,5 +403,67 @@
     "description": "Title for the settings section for editor presets."
   },
   "entranceTypeHome": "ਘਰ",
-  "@entranceTypeHome": {}
+  "@entranceTypeHome": {},
+  "chooseLocation": "ਸਥਿਤੀ ਚੁਣੋ",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "warningWrongTag": "ਇਹ ਟੇਗ ਨਹੀਂ ਚੰਗਾ: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "editorTags": "ਟੇਗਾਂ ਦੀ ਲਿਖਤ",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorMoreFields": "ਹੋਰ ਇਨਪੁਟ",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorLoadingPreset": "ਪ੍ਰੀਸੇਟ ਲੋਡ ਕਰਦੀ…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMove": "ਚਲਾਉ",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "versionsLocalChanges": "ਆਫ਼ਲਾਈਨ ਤਬਦੀਲੀਆਂ",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsNoTagChanges": "ਟੈਗਾਂ ਲਈ ਤਬਦੀਲੀਆਂ ਨਹੀਂ ਹੈ",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsDataManagement": "ਡਾਟਾ ਸੈਟਿੰਗਾਂ",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsHashtags": "ਤਬਦੀਲੀਆਂ ਦੇ ਹੈਸ਼ਟੈਗ",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "aboutReportIssue": "ਕੁਝ ਮਸਅਲਾ ਰਿਪੋਰਟ",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpTranslate": "ਅਨੁਵਾਦ ਕਰੀਓ",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "fieldHoursTitle": "ਖੁਲ੍ਹੇ ਘੰਟੇ",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "loadingLocation": "ਸਥਿਤੀ ਲਭਦੀ…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  }
 }
