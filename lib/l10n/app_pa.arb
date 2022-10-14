@@ -26,7 +26,7 @@
   "@mapSettings": {
     "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
   },
-  "mapFilter": "ਫਿਲਟਰ",
+  "mapFilter": "ਫ਼ਿਲਟਰ",
   "@mapFilter": {
     "description": "Tooltip for the amenity filter button on a map."
   },
@@ -131,7 +131,7 @@
   "@settingsSystem": {
     "description": "Title for the settings section for system-related switches."
   },
-  "settingsAbout": "ਬਾਰ",
+  "settingsAbout": "ਬਾਰੇ",
   "@settingsAbout": {
     "description": "Title for the About section in settings."
   },
@@ -465,5 +465,49 @@
   "loadingLocation": "ਸਥਿਤੀ ਲਭਦੀ…",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "aboutLicense": "ਲਾਈਸੰਸ",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutOnGitHub": "ਗਿਟ ਹਬ ’ਤੇ",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutInstalledVersion": "ਇਹ ਵਰਜ਼ਨ",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "ਮੁੱਖ ਵੇਬਸਾਇਟ",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutOnWeblate": "ਵੇਬਲੇਟ ’ਤੇ",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "accountFieldLogin": "ਵਰਤੋਂਕਾਰ ਦਾ ਨਾਂ",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountTitle": "ਓਪਨ ਸਟਰੀਟ ਮੈਪ ’ਤੇ ਖਾਤਾ",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "ਓ-ਆਥ ਨਾਲ ਲੌਗ ਇਨ ਕਰੋ",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountFieldPassword": "ਪਾਸਵਰਡ",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "addressPlace": "ਥਾਂ",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "aboutSourceCode": "ਸਰੋਤ ਦਾ ਕੋਡ",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
   }
 }
