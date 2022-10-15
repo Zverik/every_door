@@ -1,16 +1,11 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/equirectangular.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:location/location.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,78 +22,44 @@ class GeolocationController extends StateNotifier<LatLng?> {
   static final _distance = DistanceEquirectangular();
   static final _logger = Logger('GeoLocationController');
 
-  StreamSubscription<Position>? _locSub;
-  late final StreamSubscription<ServiceStatus> _statSub;
   final Ref _ref;
   late DateTime _stateTime;
+  StreamSubscription<LocationData>? _locSub;
 
   GeolocationController(this._ref) : super(null) {
     _stateTime = DateTime.now();
-    _statSub = Geolocator.getServiceStatusStream().listen((status) {
-      if (status == ServiceStatus.enabled) {
-        enableTracking();
-      } else {
-        disableTracking();
-        state = null;
-      }
-    });
-  }
-
-  LocationSettings _makeLocationSettings() {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return AndroidSettings(
-        accuracy: LocationAccuracy.best,
-        forceLocationManager: _ref.read(forceLocationProvider),
-      );
-    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return AppleSettings(
-        accuracy: LocationAccuracy.best,
-        activityType: ActivityType.fitness,
-      );
-    } else {
-      return const LocationSettings(
-        accuracy: LocationAccuracy.best,
-      );
-    }
   }
 
   _subscribeToPositions() async {
     await _locSub?.cancel();
     _locSub = null;
 
-    if (!await Geolocator.isLocationServiceEnabled()) {
+    if (!await Location.instance.serviceEnabled()) {
       disableTracking();
       return;
     }
 
-    LocationPermission perm = await Geolocator.checkPermission();
-    if (perm == LocationPermission.denied) {
+    PermissionStatus perm = await Location.instance.hasPermission();
+    if (perm == PermissionStatus.denied) {
       try {
-        perm = await Geolocator.requestPermission();
+        perm = await Location.instance.requestPermission();
       } on Exception catch (e) {
         _logger.warning('Permission request failed', e);
         return;
       }
-      if (perm == LocationPermission.denied) {
-        _logger.info('Geolocation denied');
-        disableTracking();
-        return;
-      }
     }
 
-    if (perm == LocationPermission.deniedForever) {
-      _logger.info('Geolocation denied forever');
+    if (perm == PermissionStatus.denied ||
+        perm == PermissionStatus.deniedForever) {
+      _logger.info('Geolocation denied');
       disableTracking();
       return;
     }
 
-    final pos = await Geolocator.getLastKnownPosition(
-        forceAndroidLocationManager: _ref.read(forceLocationProvider));
-    if (pos != null) _updateLocation(_fromPosition(pos));
+    // final pos = _fromPosition(await Location.instance.getLocation());
+    // if (pos != null) _updateLocation(pos);
 
-    _locSub = Geolocator.getPositionStream(
-      locationSettings: _makeLocationSettings(),
-    ).listen(
+    _locSub = Location.instance.onLocationChanged.listen(
       onLocationEvent,
       onError: onLocationError,
     );
@@ -107,7 +68,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
 
   reloadTracking() async {
     if (_ref.read(trackingProvider)) {
-      if (await Geolocator.isLocationServiceEnabled()) {
+      if (await Location.instance.serviceEnabled()) {
         disableTracking();
         await enableTracking();
       }
@@ -128,33 +89,16 @@ class GeolocationController extends StateNotifier<LatLng?> {
           .then((_) => !_ref.read(forceLocationProvider.notifier).loaded));
     }
 
-    final permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.deniedForever) {
-      if (context != null) {
-        final loc = AppLocalizations.of(context);
-        await showOkAlertDialog(
-          title: loc?.enableLocation ?? 'Enable Location',
-          message: loc?.enableLocationMessage ??
-              'Please allow location access for the app.',
-          context: context,
-        );
-        await Geolocator.openAppSettings();
-      } else
-        return;
+    final permission = await Location.instance.hasPermission();
+    if (permission == PermissionStatus.deniedForever) {
+      return;
+    } else if (permission == PermissionStatus.denied) {
+      await Location.instance.requestPermission();
     }
 
-    final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+    final isLocationEnabled = await Location.instance.serviceEnabled();
     if (!isLocationEnabled) {
-      if (context != null) {
-        final loc = AppLocalizations.of(context);
-        await showOkAlertDialog(
-          title: loc?.enableGPS ?? 'Enable GPS',
-          message: loc?.enableGPSMessage ?? 'Please enable location services.',
-          context: context,
-        );
-        await Geolocator.openLocationSettings();
-      } else
-        return;
+      await Location.instance.requestService();
     }
 
     // Check for active GPS tracking
@@ -167,12 +111,23 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
   }
 
-  static LatLng _fromPosition(Position pos) =>
-      LatLng(pos.latitude, pos.longitude);
-
-  void onLocationEvent(Position pos) {
-    _updateLocation(_fromPosition(pos));
+  void onLocationEvent(LocationData pos) {
+    final loc = _fromPosition(pos);
+    if (loc != null) _updateLocation(loc);
   }
+
+  onLocationError(event) {
+    _logger.warning('Location error! $event');
+    disableTracking();
+    state = null;
+    _locSub?.cancel();
+    _locSub = null;
+  }
+
+  static LatLng? _fromPosition(LocationData pos) =>
+      pos.latitude == null || pos.longitude == null
+          ? null
+          : LatLng(pos.latitude!, pos.longitude!);
 
   _updateLocation(LatLng newLocation) {
     if (!kSlowDownGPS) {
@@ -191,21 +146,6 @@ class GeolocationController extends StateNotifier<LatLng?> {
       state = newLocation;
       _stateTime = DateTime.now();
     }
-  }
-
-  onLocationError(event) {
-    _logger.warning('Location error! $event');
-    disableTracking();
-    state = null;
-    _locSub?.cancel();
-    _locSub = null;
-  }
-
-  @override
-  void dispose() {
-    _locSub?.cancel();
-    _statSub.cancel();
-    super.dispose();
   }
 }
 
