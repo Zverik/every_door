@@ -8,6 +8,7 @@ final editorModeProvider =
         (_) => EditorModeController());
 
 final microZoomedInProvider = StateProvider<LatLngBounds?>((_) => null);
+final navigationModeProvider = StateProvider<bool>((ref) => false);
 
 enum EditorMode {
   poi,

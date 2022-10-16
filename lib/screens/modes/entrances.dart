@@ -6,6 +6,7 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
@@ -64,10 +65,15 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
 
   onMapEvent(MapEvent event) {
     bool fromController = event.source == MapEventSource.mapController;
-    if (event is MapEventMove) {
+    if (event is MapEventWithMove) {
       center = event.center;
       if (!fromController) {
         ref.read(trackingProvider.state).state = false;
+        ref.read(zoomProvider.state).state = event.zoom;
+        if (event.zoom < kEditMinZoom) {
+          // Switch navigation mode on
+          ref.read(navigationModeProvider.state).state = true;
+        }
         setState(() {
           // redraw center marker
         });
@@ -104,17 +110,15 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   updateNearest() async {
     final provider = ref.read(osmDataProvider);
     final location = ref.read(effectiveLocationProvider);
-    const radius = kVisibilityRadius;
+    const radius = kFarVisibilityRadius;
     List<OsmChange> data = await provider.getElements(location, radius);
     const distance = DistanceEquirectangular();
     data = data.where((e) => distance(location, e.location) <= radius).toList();
 
     // Wait for country coder
     if (!CountryCoder.instance.ready) {
-      await Future.doWhile(
-              () =>
-              Future.delayed(Duration(milliseconds: 100)).then((
-                  _) => !CountryCoder.instance.ready));
+      await Future.doWhile(() => Future.delayed(Duration(milliseconds: 100))
+          .then((_) => !CountryCoder.instance.ready));
     }
 
     if (!mounted) return;
@@ -368,13 +372,14 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
               mapController: controller,
               options: MapOptions(
                 center: center,
-                zoom: 18.0,
-                minZoom: 16.0,
+                zoom: ref.watch(zoomProvider),
+                minZoom: kEditMinZoom - 0.1,
                 maxZoom: 20.0,
                 rotation: ref.watch(rotationProvider),
                 rotationThreshold: kRotationThreshold,
                 interactiveFlags: InteractiveFlag.drag |
                     InteractiveFlag.pinchZoom |
+                    InteractiveFlag.pinchMove |
                     InteractiveFlag.rotate,
                 plugins: [
                   MapDragCreatePlugin(),

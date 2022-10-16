@@ -9,6 +9,7 @@ import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/legend.dart';
+import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/settings.dart';
 import 'package:every_door/widgets/loc_marker.dart';
@@ -103,10 +104,15 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
   }
 
   void onMapEvent(MapEvent event) {
-    if (event is MapEventMove) {
+    if (event is MapEventWithMove) {
       mapCenter = event.targetCenter;
       if (event.source != MapEventSource.mapController) {
         ref.read(trackingProvider.state).state = false;
+        ref.read(zoomProvider.state).state = event.zoom;
+        if (event.zoom < kEditMinZoom) {
+          // Switch navigation mode on
+          ref.read(navigationModeProvider.state).state = true;
+        }
         setState(() {
           // redraw center marker
         });
@@ -209,8 +215,10 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     if (zoom < kMapZoom - 1)
       zoom = min(curZoom, kMapZoom - 1);
     else if (zoom > maxZoomHere) zoom = max(curZoom, maxZoomHere);
-    if ((zoom - curZoom).abs() >= kZoomThreshold)
+    if ((zoom - curZoom).abs() >= kZoomThreshold) {
       mapController.move(mapController.center, zoom);
+      ref.read(zoomProvider.state).state = zoom;
+    }
   }
 
   @override
@@ -268,8 +276,10 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     // When switching to micromapping, increase zoom.
     ref.listen(editorModeProvider, (_, next) {
       if (next == EditorMode.micromapping) {
-        if (mapController.zoom < kMicroZoom)
+        if (mapController.zoom < kMicroZoom) {
           mapController.move(mapController.center, kMicroZoom);
+          ref.read(zoomProvider.state).state = kMicroZoom;
+        }
       }
     });
 
@@ -291,13 +301,16 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         center: widget.initialLocation, // This does not work :(
         rotation: ref.watch(rotationProvider),
         rotationThreshold: kRotationThreshold,
-        zoom: kMapZoom,
-        minZoom: 15.0,
+        // zoom: kMapZoom,
+        // colorsFromLegend is an indirect way to know it's micromapping mode.
+        zoom: ref.watch(zoomProvider),
+        minZoom: kEditMinZoom - 0.1,
         maxZoom: 20.0,
         interactiveFlags: ref.watch(microZoomedInProvider) != null
             ? InteractiveFlag.none
             : (InteractiveFlag.drag |
                 InteractiveFlag.pinchZoom |
+                InteractiveFlag.pinchMove |
                 InteractiveFlag.rotate),
         plugins: [
           ZoomButtonsPlugin(),

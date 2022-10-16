@@ -4,6 +4,13 @@
 
 _Unreleased_
 
+### Highlights
+
+* You can zoom out to the max to navigate wherever you want.
+* Zoom levels are preserved between modes.
+
+### Other
+
 * Street names from streets and manually entered values were missing.
 * Added `attraction=*` to supported keys.
 * Displaying room number in POI tiles.

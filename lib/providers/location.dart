@@ -8,6 +8,7 @@ final effectiveLocationProvider =
     StateNotifierProvider<EffectiveLocationController, LatLng>(
         (ref) => EffectiveLocationController(ref));
 final zoomProvider = StateProvider<double>((ref) => kInitialZoom);
+final rotationProvider = StateProvider<double>((ref) => 0.0);
 
 class EffectiveLocationController extends StateNotifier<LatLng> {
   static const kSavedLocation = 'last_location';

@@ -21,7 +21,6 @@ final forceLocationProvider =
     StateNotifierProvider<ForceLocationController, bool>(
         (ref) => ForceLocationController(ref));
 final trackingProvider = StateProvider<bool>((ref) => false);
-final rotationProvider = StateProvider<double>((ref) => 0.0);
 
 class GeolocationController extends StateNotifier<LatLng?> {
   static final _distance = DistanceEquirectangular();

@@ -51,6 +51,14 @@ dependencies:
   flutter_markdown: ^0.6.10+2
   path_drawing: ^1.0.0
 
+# Uncomment this for publishing on F-Droid
+#dependency_overrides:
+#  geolocator_android:
+#    git:
+#      url: https://github.com/Zverik/flutter-geolocator.git
+#      ref: floss
+#      path: geolocator_android
+
 dev_dependencies:
   test: ^1.19.5
   flutter_lints: ^2.0.1

@@ -4,6 +4,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/note.dart';
+import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
@@ -34,6 +35,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   static const kToolEraser = "eraser";
   static const kToolNote = "note";
   static const kToolScribble = "scribble";
+  static const kZoomOffset = -1.0;
 
   String _currentTool = kToolNote;
   List<BaseNote> _notes = [];
@@ -53,7 +55,13 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
 
   onMapEvent(MapEvent event) {
     bool fromController = event.source == MapEventSource.mapController;
-    if (event is MapEventMoveEnd && !fromController) {
+    if (event is MapEventWithMove && !fromController) {
+      ref.read(zoomProvider.state).state = event.zoom - kZoomOffset;
+      if (event.zoom - kZoomOffset < kEditMinZoom) {
+        // Switch navigation mode on
+        ref.read(navigationModeProvider.state).state = true;
+      }
+    } else if (event is MapEventMoveEnd && !fromController) {
       // Move the effective location for downloading to work properly.
       ref.read(trackingProvider.state).state = false;
       ref.read(effectiveLocationProvider.notifier).set(event.center);
@@ -111,6 +119,12 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     final loc = AppLocalizations.of(context)!;
     EdgeInsets safePadding = MediaQuery.of(context).padding;
 
+    // Rotate the map according to the global rotation value.
+    ref.listen(rotationProvider, (_, double newValue) {
+      if ((newValue - controller.rotation).abs() >= 1.0)
+        controller.rotate(newValue);
+    });
+
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
       controller.move(next, controller.zoom);
       updateNotes();
@@ -129,9 +143,9 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                 mapController: controller,
                 options: MapOptions(
                   center: ref.read(effectiveLocationProvider),
-                  minZoom: 15.0,
+                  minZoom: kEditMinZoom + kZoomOffset - 0.1,
                   maxZoom: 20.0,
-                  zoom: 17.0,
+                  zoom: ref.watch(zoomProvider) + kZoomOffset,
                   // TODO: remove drag when adding map drawing
                   interactiveFlags: InteractiveFlag.pinchMove |
                       InteractiveFlag.pinchZoom |

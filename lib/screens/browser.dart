@@ -13,6 +13,7 @@ import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/modes/entrances.dart';
+import 'package:every_door/screens/modes/navigate.dart';
 import 'package:every_door/screens/modes/notes.dart';
 import 'package:every_door/screens/modes/poi_list.dart';
 import 'package:every_door/widgets/navbar.dart';
@@ -106,6 +107,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
   @override
   Widget build(BuildContext context) {
     final editorMode = ref.watch(editorModeProvider);
+    final isNavigation = ref.watch(navigationModeProvider);
 
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
       updateAreaStatus();
@@ -121,17 +123,22 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
 
     Widget editorPanel;
     final statusPanel = buildAreaStatusBar(context);
-    switch (editorMode) {
-      case EditorMode.poi:
-      case EditorMode.micromapping:
-        editorPanel = PoiListPane(areaStatusPanel: statusPanel, isWide: isWide);
-        break;
-      case EditorMode.entrances:
-        editorPanel = EntrancesPane(areaStatusPanel: statusPanel);
-        break;
-      case EditorMode.notes:
-        editorPanel = NotesPane(areaStatusPanel: statusPanel);
-        break;
+    if (isNavigation) {
+      editorPanel = NavigationPane();
+    } else {
+      switch (editorMode) {
+        case EditorMode.poi:
+        case EditorMode.micromapping:
+          editorPanel =
+              PoiListPane(areaStatusPanel: statusPanel, isWide: isWide);
+          break;
+        case EditorMode.entrances:
+          editorPanel = EntrancesPane(areaStatusPanel: statusPanel);
+          break;
+        case EditorMode.notes:
+          editorPanel = NotesPane(areaStatusPanel: statusPanel);
+          break;
+      }
     }
 
     return WillPopScope(
@@ -153,8 +160,9 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
             BrowserNavigationBar(downloadAmenities: downloadAmenities),
           ],
         ),
-        floatingActionButton: editorMode == EditorMode.poi ||
-                editorMode == EditorMode.micromapping
+        floatingActionButton: !isNavigation &&
+                (editorMode == EditorMode.poi ||
+                    editorMode == EditorMode.micromapping)
             ? Padding(
                 padding: const EdgeInsets.only(bottom: 50.0),
                 child: FloatingActionButton(

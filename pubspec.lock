@@ -386,14 +386,12 @@ packages:
     source: hosted
     version: "9.0.2"
   geolocator_android:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: geolocator_android
-      ref: floss
-      resolved-ref: "156b6b19dd6191c7c19c80e6858dc89a6a4298be"
-      url: "https://github.com/Zverik/flutter-geolocator.git"
-    source: git
-    version: "4.1.3"
+      name: geolocator_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.4"
   geolocator_apple:
     dependency: transitive
     description:

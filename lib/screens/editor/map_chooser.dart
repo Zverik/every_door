@@ -6,6 +6,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';

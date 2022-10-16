@@ -8,7 +8,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/changes.dart';
-import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/presets.dart';
