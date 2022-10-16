@@ -868,5 +868,62 @@
   "fieldHoursRemoveBreak": "دپھیر مٹاؤ",
   "@fieldHoursRemoveBreak": {
     "description": "Tooltip for a button to remove a break in an opening hours fragment."
-  }
+  },
+  "fieldFloorEmpty": "سطر چݨ لئی، پتہ چݨیو۔",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "messageNoData": "ڈیٹا کوئی نہیں، ہور ڈاؤن‌لوڈ لئی ایہہ بتن چݨیو",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "ایہہ ڈیٹا پراݨا اے، نویں کرن لئی ایہہ بٹن چݨیو",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "entrancesAddEntrance": "دروازہ پایو",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "buildingMaterialMetal": "لوہا",
+  "@buildingMaterialMetal": {},
+  "buildingTypeShed": "شیڈ",
+  "@buildingTypeShed": {},
+  "entranceFlatsNumberList": "نمبر دی لِسٹ چاہیدی اے",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "addressUnitOptional": "نا لوڑھدا",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "notesCloseMessage": "پکے، بند کرو؟",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "fieldPhoneWrong": "فون دی فارمیٹ درست نہیں اے",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "enableGPSMessage": "سیٹنگاں تے ستھتی سروِس چالو کریو۔",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "entranceX": "دروازہ {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingTypeRetail": "دکان، ہٹی، بزار وغیرہ",
+  "@buildingTypeRetail": {},
+  "apiStatusUploading": "ایہہ تبدیکیاں چڑھادیاں جاندیاں",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "buildingTypeCommercial": "ہور کجھ مارکیٹ یا دکان جیہے ورتوں",
+  "@buildingTypeCommercial": {}
 }
