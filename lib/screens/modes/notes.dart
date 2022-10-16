@@ -102,6 +102,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      enableDrag: false,
       builder: (context) => NoteEditorPane(
         note: note,
         location:

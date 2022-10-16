@@ -100,7 +100,7 @@ class _TypeCount {
   }
 
   String _getType(OsmChange change) {
-    final key = getMainKey(change.getFullTags());
+    final key = getMainKey(change.getFullTags(true));
     if (key == null) return 'unknown object';
     final value = change[key]!;
     if (value == 'yes') return key;

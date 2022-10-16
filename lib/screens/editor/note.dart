@@ -74,8 +74,12 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     if (widget.note != null) {
       final note = _buildEditedNote();
       if (note != null) {
-        note.deleting = true;
-        ref.read(notesProvider).saveNote(note);
+        if (note.isNew) {
+          ref.read(notesProvider).deleteNote(note);
+        } else {
+          note.deleting = true;
+          ref.read(notesProvider).saveNote(note);
+        }
       }
     }
     Navigator.pop(context);

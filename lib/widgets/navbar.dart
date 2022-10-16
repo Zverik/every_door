@@ -22,6 +22,7 @@ class BrowserNavigationBar extends ConsumerWidget {
     final result = await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      enableDrag: false,
       builder: (context) => ChangesetSheetPane(),
     );
     return result != false;

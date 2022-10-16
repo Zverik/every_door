@@ -17,6 +17,8 @@ _Unreleased_
 * Tag `opening_hours:signed=no` is removed after adding opening hours.
 * Changeset hashtags box was hidden behind the keyboard.
 * Extended numeric keyboard for `level` supporting negative values.
+* Resolving a non-uploaded note now deletes it.
+* Fixed processing `disused:*` keys for changeset comments.
 
 ## 2.0
 
