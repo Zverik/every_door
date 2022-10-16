@@ -305,7 +305,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         // colorsFromLegend is an indirect way to know it's micromapping mode.
         zoom: ref.watch(zoomProvider),
         minZoom: kEditMinZoom - 0.1,
-        maxZoom: 20.0,
+        maxZoom: kEditMaxZoom,
         interactiveFlags: ref.watch(microZoomedInProvider) != null
             ? InteractiveFlag.none
             : (InteractiveFlag.drag |

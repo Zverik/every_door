@@ -211,15 +211,18 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   deleteAndClose() {
-    final changes = ref.read(changesProvider);
-    if (amenity.isNew) {
-      changes.deleteChange(amenity);
-    } else {
-      amenity.deleted = true;
-      changes.saveChange(amenity);
+    if (widget.amenity != null) {
+      // No use deleting an amenity that just've been created.
+      final changes = ref.read(changesProvider);
+      if (amenity.isNew) {
+        changes.deleteChange(amenity);
+      } else {
+        amenity.deleted = true;
+        changes.saveChange(amenity);
+      }
+      ref.read(needMapUpdateProvider).trigger();
     }
     Navigator.pop(context);
-    ref.read(needMapUpdateProvider).trigger();
   }
 
   confirmDisused(BuildContext context) async {
@@ -317,11 +320,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                             ),
                             buildFields(fields),
                           ],
-                          // Not displaying buttons for just created amenities.
-                          if (widget.amenity != null) ...[
-                            SizedBox(height: 20.0),
-                            buildTopButtons(context),
-                          ],
+                          SizedBox(height: 20.0),
+                          buildTopButtons(context),
                           SizedBox(height: 10.0),
                           if (moreFields.isNotEmpty) ...[
                             ExpansionTile(

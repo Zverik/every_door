@@ -145,7 +145,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                 options: MapOptions(
                   center: ref.read(effectiveLocationProvider),
                   minZoom: kEditMinZoom + kZoomOffset - 0.1,
-                  maxZoom: 20.0,
+                  maxZoom: kEditMaxZoom,
                   zoom: ref.watch(zoomProvider) + kZoomOffset,
                   // TODO: remove drag when adding map drawing
                   interactiveFlags: InteractiveFlag.pinchMove |

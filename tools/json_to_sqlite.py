@@ -126,7 +126,8 @@ def import_presets(cur, path):
                 continue
 
             if not row.get('searchable', True) or name.startswith('entrance'):
-                non_searchable_presets.append(name)
+                if name != 'shop/vacant':
+                    non_searchable_presets.append(name)
             tags = json.dumps(row['tags'])
             name_parts = name.split('/')
             num_steps = len(name_parts)

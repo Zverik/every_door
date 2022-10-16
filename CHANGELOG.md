@@ -19,6 +19,9 @@ _Unreleased_
 * Extended numeric keyboard for `level` supporting negative values.
 * Resolving a non-uploaded note now deletes it.
 * Fixed processing `disused:*` keys for changeset comments.
+* Increased max zoom to 21.
+* Option to mark a newly created amenity disused (or delete it).
+* Added `shop=vacant` to preset searching results.
 
 ## 2.0
 

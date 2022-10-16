@@ -374,7 +374,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 center: center,
                 zoom: ref.watch(zoomProvider),
                 minZoom: kEditMinZoom - 0.1,
-                maxZoom: 20.0,
+                maxZoom: kEditMaxZoom,
                 rotation: ref.watch(rotationProvider),
                 rotationThreshold: kRotationThreshold,
                 interactiveFlags: InteractiveFlag.drag |
