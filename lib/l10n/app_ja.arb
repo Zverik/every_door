@@ -87,7 +87,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "保存されていない変更は破棄されます。よろしいですか？",
+  "editorCloseMessage": "変更を保存せずに破棄しますか？",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -107,7 +107,7 @@
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
   },
-  "editorMarkDefunct": "閉鎖済み",
+  "editorMarkDefunct": "閉鎖済みとマーク",
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
@@ -605,19 +605,19 @@
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
-  "entranceTypeMain": "main",
+  "entranceTypeMain": "玄関",
   "@entranceTypeMain": {},
-  "entranceTypeStaircase": "staircase",
+  "entranceTypeStaircase": "階段",
   "@entranceTypeStaircase": {},
   "entranceTypeHome": "home",
   "@entranceTypeHome": {},
-  "entranceTypeShop": "shop",
+  "entranceTypeShop": "店舗",
   "@entranceTypeShop": {},
   "entranceTypeService": "service",
   "@entranceTypeService": {},
-  "entranceTypeGarage": "garage",
+  "entranceTypeGarage": "ガレージ",
   "@entranceTypeGarage": {},
-  "entranceTypeEmergency": "emergency",
+  "entranceTypeEmergency": "非常口",
   "@entranceTypeEmergency": {},
   "addressHouseNumber": "住居番号",
   "@addressHouseNumber": {
@@ -643,7 +643,7 @@
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
   },
-  "apiStatusDownloading": "データダウンロード",
+  "apiStatusDownloading": "データダウンロード中…",
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."
   },
@@ -779,7 +779,7 @@
   },
   "faqMapTiny": "マップが小さいのは？",
   "@faqMapTiny": {},
-  "loadingTooMuchData": "設定からダウンロードしたデータを消去してエディタを高速化します。",
+  "loadingTooMuchData": "設定内のダウンロード済データを消去してエディタを高速化します。",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -938,7 +938,7 @@
   "@buildingMaterial": {},
   "buildingMaterialBrick": "レンガ",
   "@buildingMaterialBrick": {},
-  "notesClose": "閉じる",
+  "notesClose": "解決",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
@@ -1030,7 +1030,7 @@
   "@fieldHoursSDAddRange": {
     "description": "Tooltip for button on the specific days interval to add a range of dates."
   },
-  "notesCloseMessage": "メモを閉じますか？",
+  "notesCloseMessage": "メモを解決済にしますか？",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -1050,10 +1050,82 @@
   "@faqLettersContent": {},
   "faqFloors": "階数の '3' と '/3' は同じですか？",
   "@faqFloors": {},
-  "faqCheckmarksContent": "これらは施設のデータが確認済であることを示すマークです。当日の日付で `check_date` タグを追加します。\n\nチェックマークの背後にあるアイデアは、例えば、初回に街の半分をサーベイし、1ヶ月後に戻ってきて再度サーベイをして、その施設を見たことを何らかマークする必要があるが何も変更が無いような場合にチェックマークを使います。タップして続けます。\n\nマークは2週間付いたままとなります。その後、施設をサーベイし直すことができます。",
+  "faqCheckmarksContent": "これらは施設のデータが確認済であることを示すマークです。当日の日付で `check_date` タグを追加します。\n\nチェックマークの背後にあるアイデアは、例えば、初回に街の半分をサーベイし、1ヶ月後に戻ってきて再度サーベイをして、その施設を見たことを何らかマークする必要があるが何も変更が無いような場合にチェックマークを使います。タップして続けます。\n\nマークは2ヶ月間チェックされたままとなります。その後、施設をサーベイし直すことができます。",
   "@faqCheckmarksContent": {},
-  "faqFloorsContent": "いいえ。前者には `addr:floor=3` タグが入力されています。That's the floor as it is printed on navigation and commonly used. 後者にはこのタグが無く単に `level=3`タグだけです。数字はゼロから `building:levels - 1`までの連続したフロア番号です。つまり、3階建ての建物において、That is, in a three-storey building `addr:floor` の値は国により異なりますが、 `level` は常に 0, 1, または 2です。\n\nこれらのタグに関連するエディタ内の記法は以下の通り:\n\n* `2`: `addr:floor=2` 及び空で無い `level=*`.\n* `4/`: `addr:floor=4`, しかし `level` タグは無し.\n* `/1`: `level=1`, しかし `addr:floor` タグは無し.\n* `1/0`: `addr:floor=1` + `level=0` (and there's an object nearby:w with the same `addr:floor`, but different `level`, or vice-versa).",
+  "faqFloorsContent": "いいえ。前者には `addr:floor=3` タグが入力されています。これによりフロアがナビゲーションに表示され、広く使われています。（訳注：日本での事情は異なると思われる）後者にはこのタグが無く単に `level=3`タグだけです。数字はゼロから `building:levels - 1`までの連続したフロア番号です。つまり、3階建ての建物において、 `addr:floor` の値は国により異なりますが、 `level` は常に 0, 1, または 2です。\n\nこれらのタグに関連するエディタ内の記法は以下の通り:\n\n* `2`: `addr:floor=2` 及び空で無い `level=*`.\n* `4/`: `addr:floor=4`, しかし `level` タグは無し.\n* `/1`: `level=1`, しかし `addr:floor` タグは無し.\n* `1/0`: `addr:floor=1` + `level=0` (and there's an object nearby:w with the same `addr:floor`, but different `level`, or vice-versa).",
   "@faqFloorsContent": {},
   "faqTaggingContent": "エディタ内になぜオブジェクトが無いのでしょうか？マイクロマッピングモードではこれらの白いドットはいつ表示されるのでしょうか？オーブジェクトのソート順は？\n\nこれらの質問への回答は全て[good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) にあります。以下のような内容です:\n\n* メインタグのキー順 — list `kMainKeys`.\n* どのオブジェクトがダウンロード対象か — function `isGoodTags`.\n* どれが施設に該当するのか — function `isAmenityTags`.\n* どのポイントがどのウェイにくっつくのか — function `detectSnap`.\n* マイクロマッピングのオブジェクトが不完全な時 — function `needsMoreInfo`.",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "mapLocate": "元に戻る",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "hashtagsConfirm": "アップロード時にタグを確認する",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "faqYellowContent": "出入口モード時の黄色でないラベルやマイクロマッピングモード時の白いドットは、そのエレメントに重要な属性が欠けていることを示します。例えば以下のようなものです:\n\n* 建物には総階数の記入が期待されています。\n* 出入口には種別、階段には平らな範囲があるべきです。\n* ベンチには素材と背もたれのタグがあるべきです。\n* 樹木には leaf type と cycle があるべきです。",
+  "@faqYellowContent": {},
+  "changesMapNotes": "マップのメモと編集",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "warningWrongTag": "誤ったタグ: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "settingsHashtags": "変更セット用ハッシュタグ",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "faqYellow": "住居番号が黄色いのはなぜ？",
+  "@faqYellow": {},
+  "hashtagsLabel": "ハッシュタグ用の単語",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "fieldHoursRemoveBreak": "分断を除去",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "notesCancelMessage": "OSMメモを破棄しますか？",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "warningFixme": "Fixmeによる修正依頼: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningTooOld": "施設は {years} 年経っています",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "fieldCardsOnly": "カードのみ",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "years": "{count,plural, =1{{count} 年}, =few{{count} 年}, =other{{count} 年}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  }
 }

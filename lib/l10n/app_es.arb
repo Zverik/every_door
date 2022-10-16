@@ -31,7 +31,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Se perderán los cambios no guardados. ¿Continuar?",
+  "editorCloseMessage": "¿Descartar los cambios no guardados?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -840,9 +840,9 @@
   "@buildingMaterialPanels": {},
   "buildingMaterialGlass": "vidrio",
   "@buildingMaterialGlass": {},
-  "faqFloorsContent": "No. El primero tiene añadida la etiqueta «addr:floor=3». Ese es el piso tal y como está impreso en la navegación y se utiliza habitualmente. El segundo no tiene esta etiqueta, pero tiene «level=3». Ese número es un número de planta secuencial desde cero hasta «building:levels - 1». Es decir, en un edificio de tres plantas el valor de «addr:floor» depende de un país, pero «level» es siempre 0, 1 o 2.\n\nAsí es como la notación en el editor se relaciona con estas etiquetas:\n\n* «2»: «addr:floor=2» y «level=*» no vacío.\n* «4/»: «addr:floor=4», pero no hay etiqueta «level».\n* 1: «level=1», pero no hay etiqueta «addr:floor».\n* «1/0»: «addr:floor=1» y «level=0» (y hay un objeto cercano con la misma dirección de piso, pero diferente nivel, o viceversa).",
+  "faqFloorsContent": "No. El primero tiene añadida la etiqueta «addr:floor=3». Ese es el piso tal y como está impreso en la navegación y se utiliza habitualmente. El segundo no tiene esta etiqueta, pero tiene «level=3». Ese número es un número de planta secuencial desde cero hasta «building:levels - 1». Es decir, en un edificio de tres plantas el valor de «addr:floor» depende de un país, pero «level» es siempre 0, 1 o 2.\n\nAsí es como la notación en el editor se relaciona con estas etiquetas:\n\n* «2»: «addr:floor=2» y «level=*» no vacío.\n* «4/»: «addr:floor=4», pero no hay etiqueta «level».\n* 1: «level=1», pero no hay etiqueta «addr:floor».\n* «1/0»: «addr:floor=1» y «level=0» (y hay un objeto cercano con la misma dirección de piso «addr:floor», pero diferente nivel «level», o viceversa).",
   "@faqFloorsContent": {},
-  "faqCheckmarksContent": "Marcan que los datos del servicio fueron confirmados. Estas añaden la etiqueta «check_date» con la fecha actual.\n\nLa idea detrás de las marcas de verificación es que, por ejemplo, luego de encuestar la mitad de la ciudad la primera vez, al cabo de un mes, regresas y vuelves a encuestar. Necesitas marcar de alguna manera que ves el servicio, pero que nada ha cambiado en él. Esa es la marca de verificación: la tocas y continúas.\n\nLa marca permanece marcada durante dos semanas. Después puedes volver a encuestar los servicios.",
+  "faqCheckmarksContent": "Marcan que los datos del servicio fueron confirmados. Estas añaden la etiqueta «check_date» con la fecha actual.\n\nLa idea detrás de las marcas de verificación es que, por ejemplo, luego de encuestar la mitad de la ciudad la primera vez, al cabo de un mes, regresas y vuelves a encuestar. Necesitas marcar de alguna manera que ves el servicio, pero que nada ha cambiado en él. Esa es la marca de verificación: la tocas y continúas.\n\nLa marca permanece marcada durante dos meses. Después puedes volver a encuestar los servicios.",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Si tu teclado numérico no puede cambiarse a uno completo, comprueba los ajustes de la aplicación. Están detrás del botón de la esquina superior izquierda. Activa allí el «teclado numérico ampliado».",
   "@faqLettersContent": {},
@@ -1067,5 +1067,65 @@
   "entrancesAddEntrance": "Añadir entrada",
   "@entrancesAddEntrance": {
     "description": "Tooltip for the button to add an entrance node."
+  },
+  "hashtagsLabel": "Palabras para hashtags",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Confirmar etiquetas al cargar",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "warningTooOld": "El servicio tiene {years} años de antigüedad",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "notesCancelMessage": "¿Cancelar la nota de OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "warningFixme": "Arreglarme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Etiqueta incorrecta: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} año}, =few{{count} años}, =other{{count} años}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsHashtags": "Hashtags del conjunto de cambios",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "faqYellow": "¿Por qué hay números de casa amarillos?",
+  "@faqYellow": {},
+  "faqYellowContent": "Las etiquetas no amarillas en el modo de entradas y los puntos blancos en el modo de micromapeo, significan que los elementos carecen de algunos atributos importantes. Por ejemplo:\n\n* Los edificios deben tener el número de niveles.\n* Las entradas deben tener el tipo y, en el caso de las escaleras, rango de pisos.\n* Los bancos deben tener el material y respaldo.\n* Los árboles deben tener el tipo y ciclo de hoja.",
+  "@faqYellowContent": {},
+  "fieldCardsOnly": "sólo tarjeta",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
   }
 }

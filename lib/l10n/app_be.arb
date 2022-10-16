@@ -150,7 +150,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Ваші змены прападуць. Працягнуць?",
+  "editorCloseMessage": "Адхіліць змены без захавання?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },

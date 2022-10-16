@@ -39,11 +39,11 @@
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
-  "loadingStart": "Igangsetter …",
+  "loadingStart": "Starter opp…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "editorCloseMessage": "Lukk uten å lagre endringer?",
+  "editorCloseMessage": "Vil du forkaste endringer uten å lagre?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -161,11 +161,11 @@
   "@accountLoginOAuth": {
     "description": "Button label for logging in to OSM via OAuth."
   },
-  "accountFieldLogin": "Logg inn",
+  "accountFieldLogin": "Brukernavn",
   "@accountFieldLogin": {
     "description": "Label for the OSM login."
   },
-  "accountAuthErrorMessage": "Feil brukernavn eller passord",
+  "accountAuthErrorMessage": "Feil brukernavn eller passord.",
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
@@ -254,7 +254,7 @@
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
-  "entranceTypeService": "tjeneste",
+  "entranceTypeService": "personalinngang",
   "@entranceTypeService": {},
   "entranceTypeGarage": "garasje",
   "@entranceTypeGarage": {},
@@ -381,7 +381,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsDefaultPayment": "Forvalgte betalingskort",
+  "settingsDefaultPayment": "Standard betalingskort",
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
@@ -446,5 +446,688 @@
   "buildingTypeHouse": "hus",
   "@buildingTypeHouse": {},
   "buildingTypeApartments": "leiligheter",
-  "@buildingTypeApartments": {}
+  "@buildingTypeApartments": {},
+  "loadingTooMuchDataTitle": "For mye data",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadSuccessful": "Nedlasting ferdig",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "dataDownloadFailed": "Nedlasting mislyktes",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "loadingTooMuchData": "Tøm nedlastede data under innstillinger for å gjøre editoren raskere.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "notesClose": "Løs",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Vil du merke notatet som løst?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "warningTooOld": "Fasilitet er {years} gammel",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "fieldCardsOnly": "Kun kort",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "tileDragTheMap": "Vennligst gå nærmere noe, flytt kartet, eller legg til en manglende fasilitet.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Beveg deg rundt, legg til en fasilitet eller tøm filteret.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Nedlastede {count} element.}, =few{Nedlastede {count} elementer.}, =other{Nedlastede {count} elementer.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "warningFixme": "Korriger: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} år}, =few{{count} år}, =other{{count} år}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "warningWrongTag": "Feil etikett: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "navDownload": "Last ned",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navUpload": "Last opp",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navImagery": "Bytt bakgrunnsbilde",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "editorHistory": "Historikk",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "navPoiMode": "Fasilitet-modus",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Mikrokartlegging-modus",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "Inngang-modus",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "navNotesMode": "Notater-modus",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "editorTags": "Etiketter",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "mapSettings": "Innstillinger",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "Filter",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "Tilbake til meg",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Zoom inn",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Zoom ut",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "editorMarkChecked": "Merk som kontrollert",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "faqEntranceContent": "Nederst er det en rad med modus-knapper: mikrokartlegging, steder, innganger og notater.\n\nI inngang-modus, trykk eller dra dør-knappen i nederste hjørne inn på kartet.",
+  "@faqEntranceContent": {},
+  "faqYellow": "Hvorfor er noen husnummer gule?",
+  "@faqYellow": {},
+  "versionsEnableInternet": "Koble til internett for å hente versjonshistorikk",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsTitle": "{elementRef}-historie",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsRetryFetch": "Prøv på nytt",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsFetchError": "Feil under henting av versjonshistorikk",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsLocalChanges": "Lokale endringer",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionMeta": "av {user} den {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "Ingen etiketter endret",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "aboutHelpTranslate": "Hjelp med å oversette",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutFAQ": "Ofte stilte spørsmål",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "accountPasswordWarningButton": "Forstått",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountUnreadMail": "Ulest e-post",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesUploadFailedTitle": "Opplasting mislyktes",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "changesPurgeMessage": "Slett alle registrerte endringer og gjenopprett de opprinnelige dataene?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursHour": "Time",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minutt",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "buildingLevels": "Etasjer",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingPostCode": "Postnummer",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingMaterialPanels": "paneler",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "sementblokker",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialConcrete": "betong",
+  "@buildingMaterialConcrete": {},
+  "faqLetters": "Kan jeg skrive bokstaver i et referanse- eller leilighetsnummer?",
+  "@faqLetters": {},
+  "aboutLicense": "Lisens",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "Bidra til å forbedre {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "fieldHoursAsText": "Som tekst",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "changesSwipeLeft": "Sveip til venstre for å angre en endring",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursNumberedWeekday": "\"Siste mandag\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "entranceFlatsNumberList": "Skal være en liste med tall",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceRef": "Ref",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "Adkomst",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceIsUnit": "Lagre leilighetsnummeret i addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "faqMapTiny": "Hvorfor er kartet så lite?",
+  "@faqMapTiny": {},
+  "faqCheckmarks": "Hva er hakene til for?",
+  "@faqCheckmarks": {},
+  "faqChangeType": "Hvordan endre type fasilitet?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Trykk på tittelen i editoren, der typen er skrevet.",
+  "@faqChangeTypeContent": {},
+  "changesMapNotes": "Kartnotater og tegninger",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "fieldHoursPublicHolidays": "Helligdager",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "changesOsmNote": "OSM-notat",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "fieldHoursSpecificDays": "Spesifikk dato",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursAddFragment": "Legg til et fragment",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursClosed": "Stengt",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursWeekdays": "Ma Ti On To Fr Lø Sø",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldCardsAccepted": "aksepteres",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "buildingRoofLevels": "Taketasjer",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingMaterialStone": "stein",
+  "@buildingMaterialStone": {},
+  "buildingMaterialGlass": "glass",
+  "@buildingMaterialGlass": {},
+  "buildingMaterialBrick": "murstein",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "puss",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "tre",
+  "@buildingMaterialWood": {},
+  "entranceTypeShop": "butikk",
+  "@entranceTypeShop": {},
+  "notesAnonymous": "Anonym",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "tagsDelete": "Tøm",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "tagsKeyError": "Nøkkel er for sjelden",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "versionsVersionNumber": "Versjon #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "settingsHashtags": "Emneknagger for endringssett",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "settingsPurgeAllData": "Fjern alle nedlastede data",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsUploads": "Ventende opplastinger",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsBackground": "Bakgrunnsbilder",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "hashtagsLabel": "Ord til emneknagger",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Bekreft emneknagger ved opplasting",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesPurgeTitle": "Fjern endringer?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "fieldHoursChooseTime": "Time og minutt",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Tøm",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Lagre",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursRemoveFragment": "Fjern fragment",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursRemoveBreak": "Fjern pause",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursSDRemove": "Fjern",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "Legg til dato",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Legg til intervall",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Annet språk",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Kopier verdi",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "entranceFlats": "Leiligheter",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceTypeStaircase": "trapp",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "hjem",
+  "@entranceTypeHome": {},
+  "notesCancelMessage": "Avbryt OSM-notatet ditt?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "tileNothingAround": "Ingen fasiliteter innen {distance} meter fra deg.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "editorMarkDefunct": "Merk som nedlagt",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "tagsKey": "Nøkkel",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "settingsNumericKeyboard": "Utvidet numerisk tastatur",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "fieldComboEmpty": "Tom",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "settingsPreferContact": "Foretrekk \"contact:\" Prefiks",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "buildingTypeCommercial": "kommersiell",
+  "@buildingTypeCommercial": {},
+  "buildingTypeIndustrial": "industriell",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeConstruction": "bygg under oppføring",
+  "@buildingTypeConstruction": {},
+  "entranceAccessYes": "åpen",
+  "@entranceAccessYes": {},
+  "addressHouseNotEmpty": "Bør ikke være tom",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressPlace": "Sted",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "buildingMaterialMetal": "metall",
+  "@buildingMaterialMetal": {},
+  "buildingTypeRetail": "detaljhandel",
+  "@buildingTypeRetail": {},
+  "entranceAccessPrivate": "privat",
+  "@entranceAccessPrivate": {},
+  "faqEntrance": "Hvordan legge til en inngang?",
+  "@faqEntrance": {},
+  "faqMapTinyContent": "For det er ikke poenget. Du bruker kartet for å finne din posisjonen og panorerer for å justere den. Se listen med fasiliteter nedenfor, sortert etter avstand fra deg.\n\nKartet blir større når du redigerer fasiliteter langt fra din plassering. Appen ble laget for å redigere ting du ser med øynene dine.",
+  "@faqMapTinyContent": {},
+  "faqFloors": "Er etasje '3' og '/3' det samme?",
+  "@faqFloors": {},
+  "faqLettersContent": "Hvis det numeriske tastaturet ikke kan bytte til et fullstendig tastatur, kontrollerer du appinnstillingene. Dem finner du bak knappen øverst til venstre. Slå på \"utvidede numeriske tastatur\" der.",
+  "@faqLettersContent": {},
+  "editorRestoreMessage": "{amenity} er inaktiv. Vil du markere den som aktiv?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsShare": "Del",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsRestore": "Gjenopprett",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "settingsLanguage": "Språk",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsGoogle": "Bruk Google-forbedret posisjonering",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "settingsAbout": "Om",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Fjernet {count} element}, =few{Fjernet {count} elementer}, =other{Fjernet {count} elementer}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsCacheTiles": "Last ned fliser",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsSystem": "System",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "aboutViewLog": "Systemlogg",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutInstalledVersion": "Installert versjon",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Prosjektets nettside",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "Kildekode",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutReportIssue": "Rapporter et problem",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutOnWeblate": "på Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutLinks": "Linker",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountPasswordWarningMessage": "Passordet ditt vil bli lagret på enheten. Velg bare dette når OAuth ikke fungerer.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "changesPending": "Ventende",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesPurge": "Fjern endringer",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "aboutVersionHistory": "Versjonshistorikk",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "fieldFloorFloorDesc": "Etasje som på infotavler og i heiser",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorEmpty": "Angi en adresse for å velge en etasje.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "enableGPSMessage": "Vennligst slå på stedstjenester i innstillingspanelet som blir vist.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocationMessage": "Vennligst tillat posisjonstilgang for appen i innstillingspanelet som blir vist.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "entrancesAddEntrance": "Legg til inngang",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "fieldFloorLevelDesc": "Etasjenummer starter med 0 for bakkenivå",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "messageNoData": "Ingen data, trykk her for å laste ned",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "faqTagging": "Alle spørsmål om etiketter",
+  "@faqTagging": {},
+  "settingsPurgeDataMessage": "Du må laste ned alt på nytt. Fortsett?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgeData": "Fjern foreldede bufrede data",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgedObsoleteTitle": "Foreldede data",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "aboutOnGitHub": "på GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "buildingRoofShape": "Takform",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "messageDataObsolete": "Data er foreldet, trykk her for å oppdatere",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "entrancesAddBuilding": "Legg til bygning",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingMaterial": "Fasade",
+  "@buildingMaterial": {},
+  "changesCount": "{count,plural, =1{{count} endring}, =few{{count} endringer}, =other{{count} endringer}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "entranceTypeMain": "hovedinngang",
+  "@entranceTypeMain": {},
+  "editorDuplicate": "Mulig duplikat innen {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "notesAddNote": "Legg til notat",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "faqCheckmarksContent": "Dette er markeringer av at data om fasiliteter er kontrollert. De legger til etiketten «check_date» med dagens dato.\n\nTanken bak hakene er at du for eksempel undersøker halve byen i første omgang. En måned senere kommer du tilbake og fortsetter. Du må på en eller annen måte markere at du ser fasiliteten, men ingenting har endret seg. Det er formålet med haken: du trykker på den og fortsetter.\n\nHaken forblir avkrysset i to måneder. Etter det kan du undersøke fasilitetene igjen.",
+  "@faqCheckmarksContent": {},
+  "faqYellowContent": "Ikke-gule etiketter i inngangsmodus og hvite prikker i mikrokartleggingsmodus betyr at elementene mangler viktige egenskaper. For eksempel:\n\n* Bygninger forventes å ha antall etasjer.\n* Innganger bør ha type, og for trappeoppganger angis hvilke leiligheter oppgangen har.\n* Benker skal ha materiale og ryggstøtte.\n* Trær skal ha bladtype og syklus.",
+  "@faqYellowContent": {},
+  "faqFloorsContent": "Nei. Den første har 'addr: floor = 3'-taggen fylt ut. Det er etasjen slik det er trykt på navigasjon og ofte brukt. Den andre har ikke denne taggen, men har 'level=3'. Dette tallet er et sekvensielt etasjenummer fra null til 'building:levels - 1'. Det vil si at i en treetasjes bygning avhenger 'addr:floor'-verdien av landet, men 'level' er alltid 0, 1 eller 2.\n\nSlik er notasjonen i redigeringsprogrammet relatert til disse tagger:\n\n* `2`: `addr:floor=2` og ikke-tom 'level = *'.\n* `4/`: `addr:floor=4`, men det er ingen 'level'-tag.\n* `/1`: `level=1`, men det er ingen 'addr:floor'-tag.\n* `1/0`: `addr:floor=1` + `level=0` (og det er et objekt i nærheten med samme `addr:floor` , men forskjellig 'level', eller omvendt).",
+  "@faqFloorsContent": {},
+  "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Når vises de hvite prikkene i mikrokartleggingsmodus? Hvordan sorteres objekter?\n\nSvar på alle disse spørsmålene finnes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er hva du kan se på:\n\n* Rekkefølgen for hovedetiketten – listen 'kMainKeys'.\n* Hvilke objekter lastes ned – funksjonen 'isGoodTags'.\n* Hva regnes som en fasilitet – funksjonen 'isAmenityTags'.\n* Hvilke punkter er forbundet til hvilke veier – funksjon \"detectSnap\".\n* Når et mikrokartleggingsobjekt er ufullstendig – funksjonen \"needsMoreInfo\".",
+  "@faqTaggingContent": {}
 }
