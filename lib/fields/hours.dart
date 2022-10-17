@@ -143,8 +143,8 @@ class _HoursInputFieldState extends ConsumerState<HoursInputField> {
                 style: widget.element[widget.field.key] == null
                     ? null
                     : ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        onPrimary: Colors.grey,
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.grey,
                       ),
                 onPressed: () {
                   setState(() {

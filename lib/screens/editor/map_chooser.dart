@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/editor/types.dart';
@@ -38,6 +40,7 @@ class MapChooserPage extends ConsumerStatefulWidget {
 class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   late LatLng center;
   List<OsmChange> nearestPOI = [];
+  List<OsmNote> nearestNotes = [];
   final controller = MapController();
   late final StreamSubscription<MapEvent> mapSub;
 
@@ -90,9 +93,14 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
     if (filter.isNotEmpty) {
       data = data.where((e) => filter.matches(e)).toList();
     }
+    // Fetch OSM notes as well.
+    final notes = await ref
+        .read(notesProvider)
+        .fetchOsmNotes(location, kFarVisibilityRadius);
     // Update the map.
     setState(() {
       nearestPOI = data;
+      nearestNotes = notes;
     });
   }
 
@@ -177,6 +185,12 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           CircleLayerWidget(
             options: CircleLayerOptions(
               circles: [
+                for (final note in nearestNotes)
+                  CircleMarker(
+                    point: note.location,
+                    radius: 9.0,
+                    color: Colors.grey,
+                  ),
                 for (final poi in nearestPOI)
                   CircleMarker(
                     point: poi.location,

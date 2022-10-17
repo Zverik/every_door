@@ -68,6 +68,25 @@ class NotesProvider extends ChangeNotifier {
     return mapNoteData.map((data) => BaseNote.fromJson(data)).toList();
   }
 
+  /// Returns only OSM notes from the database.
+  Future<List<OsmNote>> fetchOsmNotes(LatLng center, [int? radius]) async {
+    final database = await _ref.read(databaseProvider).database;
+    radius ??= 1000; // meters
+    final hashes = createGeohashes(center.latitude, center.longitude,
+        radius.toDouble(), BaseNote.kNoteGeohashPrecision);
+    final placeholders = List.generate(hashes.length, (index) => "?").join(",");
+
+    final mapNoteData = await database.query(
+      BaseNote.kTableName,
+      where: 'geohash in ($placeholders) and type = ${OsmNote.dbType}',
+      whereArgs: hashes,
+    );
+    return mapNoteData
+        .map((data) => BaseNote.fromJson(data))
+        .whereType<OsmNote>()
+        .toList();
+  }
+
   /// Downloads OSM notes and drawings from servers.
   downloadNotes(LatLng center) async {
     final bounds = boundsFromRadius(center, kBigRadius);

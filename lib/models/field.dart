@@ -159,6 +159,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
   if (data['name'] == 'ref') typ = 'number'; // Patch some refs to be numbers
   switch (typ) {
     case 'text':
+    case 'colour': // TODO: remove when we have a colour picker
     case 'textarea':
       return TextPresetField(
         key: key,

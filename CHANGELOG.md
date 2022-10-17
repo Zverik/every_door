@@ -1,6 +1,6 @@
 # Every Door App Change Log
 
-## 2.1
+## 3.0
 
 _Unreleased_
 
@@ -22,6 +22,7 @@ _Unreleased_
 * Increased max zoom to 21.
 * Option to mark a newly created amenity disused (or delete it).
 * Added `shop=vacant` to preset searching results.
+* Added OSM notes to the map chooser.
 
 ## 2.0
 
