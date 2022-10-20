@@ -1,1 +1,1133 @@
-{}
+{
+  "buildingMaterialPlaster": "پوچا",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "لکڑ",
+  "@buildingMaterialWood": {},
+  "buildingMaterialPanels": "چوکھٹے",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "سیمنٹ بلاک",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialGlass": "شیشہ",
+  "@buildingMaterialGlass": {},
+  "buildingTypeIndustrial": "اُدیوگک",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeConstruction": "اُساری",
+  "@buildingTypeConstruction": {},
+  "entranceIsUnit": "فلیٹ دا نمبر نوں «addr:unit» وچ پایو",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceAccess": "پہنچ",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessPrivate": "نِجی",
+  "@entranceAccessPrivate": {},
+  "entranceAccessDelivery": "چھڈاؤݨی",
+  "@entranceAccessDelivery": {},
+  "entranceTypeStaircase": "پوڑیاں",
+  "@entranceTypeStaircase": {},
+  "entranceTypeEmergency": "ایمرجنسی",
+  "@entranceTypeEmergency": {},
+  "addressStreet": "سٹریٹ",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "faqYellow": "کجھ گھر دا نمبر پیلے کیوں ہندے ہن؟",
+  "@faqYellow": {},
+  "faqLetters": "کیہ میں شناختی یا فلیٹ دا نمبر وچ اکھر پا سکدا ہاں؟",
+  "@faqLetters": {},
+  "faqEntrance": "عمارت دے پرویش دوار نوں کیویں پایا جاوے؟",
+  "@faqEntrance": {},
+  "faqEntranceContent": "ہیٹاں بٹن دی اِکّ کتار اے: ویروے، دکاناں، دروازے تے نوٹ۔\n\nدروازے دا چوݨ لئی ہیٹھلے کینے توں نقشے تے دروازے دے بٹن نوں گھسیٹو۔",
+  "@faqEntranceContent": {},
+  "filterNoAddresses": "نیڑے تیڑے تے پتے نہیں اے",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "faqChangeType": "دکان دی قسم نوں کیویں بدلݨا اے؟",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "ایڈیٹر سرلیکھ چݨیو، جتھے قسم لکھی گئی اے۔",
+  "@faqChangeTypeContent": {},
+  "faqTaggingContent": "اہڈیٹر وچ کجھ چیزاں کیوں گُم اے؟ جدوں ویروے سودھدے، چِٹیاں بندیاں کیہ ترک اے؟ چیزاں لئی ذخیرہ ورتدا؟\n\nایہہ سوال دے جواب لبھ سکیو — [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart)۔ اُتھے:\n\n* مکھ ٹیگ لئی کنجی لئی لڑی — `kMainKeys`۔\n* کہڑیاں چیزاں ڈاؤن‌لوڈ کیتیاں جاندہاں ہن — `isGoodTags`۔\n* اِتھے کیہ تت دکان اے — `isAmenityTag`۔\n* کہڑے نوڈ تے کہڑے راہ موڑے جاندے ہن — `detectSnap`۔\n* جدوں چیز دا ویروا نہیں پورا اے — `needsMoreInfo`۔",
+  "@faqTaggingContent": {},
+  "loadingStart": "شروع کردے…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingChanges": "تبدیلیاں لوڈ کرڈے…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "editorSave": "سامبھو",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "navImagery": "تصویراں چݨو",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "years": "{count,plural, =1{{count} سال}, =few{{count} سال}, =other{{count} سال}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorLoadingPreset": "پرسیٹ لوڈ کردی…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMove": "چلاؤ",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "tagsValueLong": "بہت وڈا مُل",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "settingsPurgedObsoleteTitle": "پراݨا ڈیٹا",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "filterEmpty": "پتہ کوئی نہیں",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "mapZoomIn": "وڈا کرو",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "چھوٹا کرو",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "chooseLocation": "ستھتی چݨو",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseTypeClear": "ہٹاؤ",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "editorTags": "ٹیگاں دی لکھت",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorCloseTitle": "ایڈیٹر بند کرو؟",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorMissing": "نہیں ہندے",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "fieldHoursAsText": "لکھت ورتوں",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldNameCopy": "مُل کاپی کریو",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldComboEmpty": "مُل کوئی نہیں",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "enableGPS": "گی‌پی‌ایس چالو کرو",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "tagsShare": "سانجھ کرو",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "versionsRetryFetch": "فیر کرو",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "settingsDataManagement": "ڈیٹے دیاں سیٹنگاں",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsHashtags": "تبدیلیاں دے ہیش‌ٹیگ",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "settingsPurgedAllTitle": "مٹاؤݨ ڈیٹا",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "aboutHelpTranslate": "ترجمہ کریو",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "fieldHoursSDRemove": "کجھ ہٹاؤ",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "messageDataObsolete": "ایہہ ڈیٹا پراݨا اے، نویں کرن لئی ایہہ بٹن چݨیو",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "buildingRoofLevels": "چھت وچ سطر",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "accountFieldPassword": "پاس‌ورڈ",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountLoginPassword": "پاس‌ورڈ نال لوگ‌این کرو",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountLogout": "لوگ‌آؤٹ کرو",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "fieldHoursAddFragment": "اِک حصہ پایو",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursWeekdays": "مـ مـ بـ جـ جـ ہـ ٰتـ",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursSDAddOne": "تریخ پایو",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursNumberedWeekday": "”پچھلا جمعہ“",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldWheelchairYes": "ہاں",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldCardsOnly": "ایہی کارڈ لیݨدے",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldHoursSave": "سامبھو",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursSpecificDays": "اِک تریخ",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "بند کرن",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "buildingMaterialMetal": "لوہا",
+  "@buildingMaterialMetal": {},
+  "buildingTypeAddress": "پتہ",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "گھر",
+  "@buildingTypeHouse": {},
+  "fieldHoursCloses": "بند کرن دا سماں",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursAddBreak": "دپھیر پایو",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldComboChoose": "چݨو",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldHoursRemoveFragment": "حصہ مٹاؤ",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldNameLanguages": "ہور بولی",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldWifiPublic": "عاوم",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWheelchairNo": "نہیں",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldFloorNew": "نواں سطر",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldAddressTap": "اِکّ پتہ چݨیو",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "notesCloseMessage": "پکے، بند کرو؟",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "fieldCheckboxYes": "ہاں",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldFloorEmpty": "سطر چݨ لئی، پتہ چݨیو۔",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorShouldBeNumber": "نمبر پایو",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "enableLocation": "ستھتی چالو کرو",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "buildingMaterialConcrete": "کنکریٹ",
+  "@buildingMaterialConcrete": {},
+  "buttonNo": "نہیں",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "entrancesAddBuilding": "عمارت پایو",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingX": "عمارت {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingType": "قسم",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "addressX": "پتہ {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingMaterialStone": "پتھر",
+  "@buildingMaterialStone": {},
+  "buildingTypeApartments": "فلیٹ",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "دکان، ہٹی، بزار وغیرہ",
+  "@buildingTypeRetail": {},
+  "buildingTypeShed": "شیڈ",
+  "@buildingTypeShed": {},
+  "entranceTypeShop": "دکان",
+  "@entranceTypeShop": {},
+  "addressHouseNotEmpty": "اِتھے کھر دا نمبر چاہیدا",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "notesClose": "حل کھنڈو",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "entranceX": "دروازہ {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingLevels": "سطر",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingMoreButton": "ہور",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "entranceAccessYes": "کھُلھا",
+  "@entranceAccessYes": {},
+  "entranceType": "قسم",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeHome": "گھر",
+  "@entranceTypeHome": {},
+  "addressHouseNumber": "گھر",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "buildingTypeCommercial": "ہور کجھ مارکیٹ یا دکان جیہے ورتوں",
+  "@buildingTypeCommercial": {},
+  "entranceRef": "نمبر",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccessNo": "نہیں",
+  "@entranceAccessNo": {},
+  "entranceTypeMain": "مکھ",
+  "@entranceTypeMain": {},
+  "entranceTypeService": "سروِس",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "گارج",
+  "@entranceTypeGarage": {},
+  "addressPlace": "تھاں",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesAddNote": "نوٹ پایو",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "apiStatusUploading": "ایہہ تبدیکیاں چڑھادیاں جاندیاں",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "buildingTypeGarage": "گارج",
+  "@buildingTypeGarage": {},
+  "entranceFlats": "فلیٹ دے نمبر",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "نمبر دی لِسٹ چاہیدی اے",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceWheelchair": "ویل‌چیر",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "addressUnit": "یونِٹ",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "notesAnonymous": "انام",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "addressUnitOptional": "نا لوڑھدا",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "notesCancelMessage": "تہاڈے نوٹ رد کرو؟",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "apiStatusDownloading": "ڈیٹا ڈاؤن‌لوڈ کردے…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "ڈیٹابیس تے چیزاں سامبھدیاں",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "faqTagging": "سارے ٹیگ دے سوال",
+  "@faqTagging": {},
+  "filterByAddress": "پتے نال",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "chooseType": "قسم چݨو",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "warningFixme": "حل چاہندا: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "tagsValue": "مُل",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "accountOAuthError": "لوگ‌این کر نہیں سکیا",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "changesCount": "{count,plural, =1{{count} تبدیلی}, =few{{count} تبدیلیاں}, =other{{count} تبدیلیاں}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesDeletedChange": "{change} مٹائیاں",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesPurge": "تبدیلیاں ہٹاؤ",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "fieldHoursRemoveBreak": "دپھیر مٹاؤ",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldCheckboxNo": "نہیں",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "loadingPresets": "پریسیٹ لوڈ کردے…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingLocation": "ستھتی لبھدی…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "dataDownloadFailed": "ڈاؤن‌لوڈ کر نہیں سکیا",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "tileNothingAround": "{distance} میٹراں نال نیڑے تیڑے تے نشان نہیں لبھے سی۔",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "filterByFloor": "سطر نال",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "loadingTooMuchData": "جلدی سودھ کرن سیٹنگاں تے ڈیتا ہٹاؤ۔",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadSuccessful": "ڈاؤن‌لوڈ کر سکیا",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "tileDragTheMap": "ہور کجھ تھاں نوں چلیو یا نواں نشان پایو۔",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "legendOther": "ہور",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "navUpload": "چڑھاؤ",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navNotesMode": "نوٹ حل کردے",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "mapSettings": "سیٹنگاں",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "فِلٹر",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "editorMoreFields": "ہور اینپُٹ",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "loadingChangesFailed": "تبدیلیاں لوڈ نہیں سکدیاں",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "dataDownloadedCount": "{count,plural, =1{{count} چیز ڈاؤن‌لوڈ کیتی۔}, =few{Downloaded {count} چیزاں ڈاؤن‌لوڈ کیتیاں۔}, =other{{count} چیزاں ڈاؤن‌لوڈ کیتیاں۔}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "tileNo": "نہیں",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "navMicromappingMode": "ویروے سودھدے",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "editorHistory": "اتیت",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorRestoreTitle": "ایہہ کھُلھݨ؟",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "versionsVersionNumber": "ورژن نمبر {number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "settingsPresentation": "ویکھادے",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsPurgeAllData": "سارے ڈاؤن‌لوڈ ڈیٹا ہٹاؤ",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "aboutInstalledVersion": "ایہہ ورژن",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "tileDragOrUnfilter": "ہور کجھ تھاں نوں چلیو، نواں نشان پایو یا فِلٹر ہٹایو۔",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "navEntrancesMode": "دروازے سودھدے",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "warningWrongTag": "ایہہ ٹیگ نہیں چنگا: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "{years} پہلاں ایہہ نقش پایا گیا سی",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "accountChangesets": "چڑھاؤݨ",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "hashtagsLabel": "ہیش‌ٹیگاں دے لفظ",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "changesPending": "حالیہ سودھدے",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "fieldHoursTitle": "کھُلھے گھنٹے",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "tagsNewPoint": "نواں پوئینٹ",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "settingsUploads": "حالیہ سودھدے",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "aboutFAQ": "سوالاں تے جواب",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "changesUploadedTitle": "چڑھائیاں گیاں",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesDeletedUndo": "موڑو",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesOsmNote": "نوٹ",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "changesPurgeTitle": "تبدیلیاں ہٹاؤ؟",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesPurgeMessage": "ایہہ ساریاں تبدیلیاں مٹاؤ تے پہلا ڈیٹا مُڑ منگویو؟",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursMinute": "منٹ",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursChooseTime": "گھنٹہ تے منٹ",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "editorDeleteTitle": "{amenity} مٹاؤ؟",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "مٹاؤ",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsUrlCopied": "کڑی کاپی کیتی",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsDelete": "ہٹاؤ",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "tagsAddTag": "ٹیگ پایو",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "کنخی",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsKeyError": "ایہہ کنجی نہیں عام ورتدی اے",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "versionsLocalChanges": "آفلائین تبدیلیاں",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionMeta": "{datetime} {user} چڑھائیے گئے سی",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "ٹیگاں لئی تبدیلیاں نہیں اے",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsApiServer": "اےپی‌آئی سروَر",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsLoginDetails": "اوایس‌ایم کھاتہ",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeDataTitle": "ڈیٹا مٹاؤ؟",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "versionsTitle": "چیز نمبر {elementRef} دا اتیت",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "settingsTitle": "سیٹنگاں",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsPurgeData": "کیش وچ پراݨے ڈیٹا ہٹاؤ",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "aboutProjectWebsite": "مکھ ویب‌سائیٹ",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutLicense": "لائیسنس",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutReportIssue": "کجھ مسئلہ رپورٹ کریو",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "accountPasswordTitle": "کھاتے دے ویروے",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountUnreadMail": "نہیں پڑھائے",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "changesUploadFailedTitle": "چڑھا نہیں سکیاں",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "settingsPurgeDataMessage": "تسیں فیر ڈاؤن‌لوڈ کراں‌گے اے، پکے؟",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{{count} چیز ہٹائی}, =few{{count} چیزاں ہٹائیاں}, =other{{count} چیزاں ہٹائیاں}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsBackground": "نقشے دیاں تصویراں",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsCacheTiles": "ٹائیلاں ڈاؤن‌لوڈ کرو",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLanguage": "بولی",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsEditor": "ایڈیٹر",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsPreferContact": "ٹیگاں نال «contact:» ورتو",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsNumericKeyboard": "ہور نمبراں دی کیبورڈ",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsDefaultPayment": "تہاڈے کارڈاں دیاں قسماں",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsSystem": "سِسٹم",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsAbout": "بارے",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutVersionHistory": "ورژن دا اتیت",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutSourceCode": "سروٹ دا کوڈ",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "گِٹ‌ہب تے",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLinks": "کڑیاں",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountTitle": "اوپن‌سٹریٹ‌میپ تے کھاتہ",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "اوآتھ نال لوگ‌این کرو",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountPasswordWarningButton": "ٹھیک اے",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "hashtagsConfirm": "چڑھاؤݨ لئی تیگ پکے کرو",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesUploadedMessage": "{changes} چڑھایاں گیاں۔",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesMapNotes": "نقشے دے نوٹ",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "fieldHoursButton": "کھُلھے کھنٹے چݨیو",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "aboutOnWeblate": "ویب‌لیٹ تے",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "accountFieldLogin": "ورتنوالے دا ناں",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountAuthErrorMessage": "ناں یا پاسورڈ نامعلوم اے۔",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "fieldHoursFullDay": "سارا دن",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursOpens": "کھُلھݨ دا سماں",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursBreak": "دپھیر",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "اگے",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursHour": "گھنٹہ",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursClear": "ہٹاؤ",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "navDownload": "ڈاؤن‌لوڈ کرو",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navPoiMode": "دکاناں سودھدیاں",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "fieldPhoneWrong": "فون دی فارمیٹ درست نہیں اے",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "messageNoData": "ڈیٹا کوئی نہیں، ہور ڈاؤن‌لوڈ لئی ایہہ بتن چݨیو",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "enableGPSMessage": "سیٹنگاں تے ستھتی سروِس چالو کریو۔",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "buttonYes": "ہاں",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "loadingTooMuchDataTitle": "بہت ڈیٹا",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "filterNonConfirmed": "اݨ پکے صرف",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "mapLocate": "میرے ول واپس",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "editorMarkChecked": "دکھاؤݨ نشان لگ جاؤ",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorCloseMessage": "ایہہ تبدیکیاں نہیں سامبھیاں، ہٹاؤ؟",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorDuplicate": "{distance} میٹر وچ سمبھاوت ہور کاپی اے",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorMarkActive": "ہݨ ایہہ سرگرم، بند نہیں اے",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "ایہہ بند اے، نا نکمہ",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorRestore": "موڑو، فیر پایو",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorRestoreMessage": "{amenity} اکریا شیل اے۔ کیہ تسیں ایسنوں ہݨ سرگرم وجوں نشان لگ جاݨا چاہیدے او؟",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsRestore": "موڑو",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "versionsEnableInternet": "ورژناں دے اتیت لئی اینٹرنیٹ کنیکٹ کرن ضرورت اے",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "ورژناں دا اتیت لبھ نہیں سکیا",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "settingsLeftHand": "کبے ہتھاں لئی کنٹرول",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsGoogle": "گوگل ستھتی ورتو",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "aboutViewLog": "سسٹم ریکارڈ",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutHelpImprove": "{appTitle} نوں ٹھیک کرن وچ مدد کریو",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "accountPasswordWarningTitle": "چیتاونی",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "تہاڈے پاس‌ورڈ ڈیوائیس تے رکھیا جاوےگا۔ اوآتھ اسپھل ہوݨ تے ہی ایسنوں چݨو۔",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountAuthErrorTitle": "اِجازت گلتیی",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "changesSwipeLeft": "تبدیلی نوں موڑن لئی کھبے پاسے سوائیپ کر سکیو",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursPublicHolidays": "سرکاری چھٹیں",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldWifiNo": "نہیں",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldHoursClosedPH": "سرکاری چھٹیاں تے بند اے",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursSDAddRange": "دناں دا سیمہ پایو",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldWifiCustomers": "گاہک",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairLimited": "محدود",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldCardsAccepted": "لیݨدے",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "نہیں",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldFloorFloorDesc": "آواگوݨ تے ایلیویٹراں وچ سطر ویکھدے",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "سطر دا نمبر، زمینی پدھر لئی 0 توں شروع ہندا اے",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "enableLocationMessage": "کرپا کرکے دکھاۓ جاݨ والے سیٹنگاں وچ جا کے ایپ لئی ستھتی دی اِجازت دیو۔",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "entrancesAddEntrance": "دروازہ پایو",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "buildingPostCode": "پوسٹ‌کوڈ",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingRoofShape": "چھت دی شکل",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingMaterialBrick": "اِٹ",
+  "@buildingMaterialBrick": {},
+  "buildingMaterial": "سامہݨا",
+  "@buildingMaterial": {},
+  "faqMapTiny": "نقشہ اینا چھوٹا چھوٹا کیوں اے؟",
+  "@faqMapTiny": {},
+  "faqCheckmarks": "چیک چِنھ کس لئی ہن؟",
+  "@faqCheckmarks": {},
+  "faqMapTinyContent": "ایہہ ترک نہیں اے۔ تسیں ستھتی ہی ویکھ سکو تے نقشہ چل سکیو۔ دکاناں دی لسٹ دکھیو، تہاڈے توں دوری انُسار کرمبند اے۔\n\nجدوں تسیں آپݨے ٹکاݨے توں بہت دور سہولتاں دا سودھدے او تاں نقشہ وڈا ہو جاندا اے۔ حالانکہ، ایہہ ایپ اوہناں چیزاں نوں سودھݨ لئی بݨایاں گیاں سی جو تسیں آپݨیں اکھیں نال دکھدیاں او۔",
+  "@faqMapTinyContent": {},
+  "faqFloors": "کیہ سطر دے نمبر ”3“ تے ”/3“ اِکو جہے ہن؟",
+  "@faqFloors": {},
+  "faqCheckmarksContent": "ایہہ نسان دکاناں دا ڈیٹا پکا ویکھدا۔ «check_date» ٹیگ وچ ایہہ اج دی تریخ جوڑدی اے۔\n\nمثال لئی، تسیں پنڈ دا اِکّ حصہ سروے کیتے گئے۔ فیر اِکّ مہینے بعد تسیں ہور حصے سروے کیتے گئے۔ کجھ دکاناں نہیں بدلیاں، پر تسیں ناواں دکھݨ لئی نشان لگݨا چاہیدے۔ ایہہ چیک چِنھ دا ترک اے؛ تسیں چݨ سکیو تے رِہ جاؤ۔\n\nچیک چِنھ دو مہینیاں لئی جانچیا رہندا اے۔ اوس توں بغد تسیں ہور سروے کر سکدے۔",
+  "@faqCheckmarksContent": {},
+  "faqLettersContent": "جے تہاڈے سنکھیاک کیبورڈ نوں پورا کیبورڈ بدل نہیں سکدے، سیٹنگاں وچ دکھایو۔ اُپرلے کھبے کینے تے تسیں بٹن لبھ سکیو۔ اُتھے پورا کیبورڈ چوݨ نوں چالو کرو۔",
+  "@faqLettersContent": {},
+  "faqYellowContent": "جدوں تسیں ویروے سودھدے، تت گم جاݨکاری لئی چیپیاں نہیں پیلیاں تے چٹیاں بندیاں دِکھاۓ گئے ہن۔ مثلاً:\n\n* عمارت لئی سطر دی گݨتی۔\n* دروازہ دی قسم؛ جیکر قدم ہن، فلیٹ دا سلسلہ۔\n* بینچ لئی پٹھ تے سمگری۔\n* رُکھاں لئی پتے دیاں قسم تے عمر۔",
+  "@faqYellowContent": {},
+  "faqFloorsContent": "نہیں۔ اوہ پہلا مثال لئی ٹیگ `addr:floor=3` اے۔ ایہہ ڈائیریکٹری تے پرنٹ کیتا۔ دوجا مثال ٹیگ `level=3` اے۔ `level` کنجی لئی صفر توں `building:levels - 1` نوں نمبر ورتدا۔ ہر دیش عمارت دے سطر وکھرے اے، پر `level` صرف 0، 1، 2 وغیرہ۔\n\nاِتھے ایڈیٹر ٹیگاں دے نچان ورتوں:\n\n* `2`: `addr:floor=2` تے کوئی نمبر نال `level=*`۔\n* `4/`: `addr:floor=4` پر `level` ٹیگ نہیں اے۔\n* `1:`: `level=1` پر `addr:floor` ٹیگ نہیں اے۔\n* `1/10`: `addr:floor=1` تے `level=0`؛ ایہہ کول ہور دکان وی ٹیگ `addr:floor` یا `level`سمان اے۔",
+  "@faqFloorsContent": {}
+}
