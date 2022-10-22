@@ -28,21 +28,30 @@ const kMaxLegendItems = 6;
 class LegendController extends StateNotifier<List<LegendItem>> {
   final Ref _ref;
   Map<String, LegendItem?> _legendMap = {};
+  final Map<String, int> _prevColors = {};
+  final Map<String, int> _maxSeen = {};
 
   static const kLegendColors = [
-    Color(0xff1b9e77),
-    Color(0xffd95f02),
-    Color(0xff7570b3),
-    Color(0xffe7298a),
-    Color(0xff66a61e),
-    Color(0xffe6ab02),
+    Color(0xfffd0f0b),
+    Color(0xff1dd798),
+    Color(0xfffbc74e),
+    Color(0xfff807e7),
+    Color(0xffc5bb0c),
+    Color(0xffb9fb77),
+    Color(0xfff76492),
+    Color(0xff15f5ed),
+    Color(0xffab3ded),
+    Color(0xfffd7d0b),
+    Color(0xff3eef24),
+    Color(0xff4e5aef),
+    Color(0xff9b7716),
   ];
 
   LegendController(this._ref) : super([]);
 
   Future updateLegend(List<OsmChange> amenities, {Locale? locale}) async {
-    // TODO: run simultaneously
     // Considering amenities are listed closest to farthest
+    // TODO: run simultaneously to speed this up
     final typesMap = {
       for (final a in amenities) a: await _getLabel(a.getFullTags(), locale)
     };
@@ -53,7 +62,7 @@ class LegendController extends StateNotifier<List<LegendItem>> {
     for (final a in amenities) {
       final l = typesMap[a];
       if (l != null) {
-        if (typesCount.length >= kLegendColors.length &&
+        if (typesCount.length >= kMaxLegendItems &&
             !typesCount.containsKey(l)) {
           haveExtra = true;
           continue;
@@ -62,35 +71,44 @@ class LegendController extends StateNotifier<List<LegendItem>> {
       }
     }
 
+    // Update number in maxSeen.
+    typesCount.forEach((key, count) {
+      if (count > (_maxSeen[key] ?? 0)) _maxSeen[key] = count;
+    });
+
     // Sort by number of occurrences.
     final typesCountList = typesCount.entries.toList();
     typesCountList.sort((a, b) => b.value.compareTo(a.value));
-    if (typesCountList.length > kLegendColors.length)
-      typesCountList.removeRange(kLegendColors.length, typesCountList.length);
 
-    final currentColors = {
-      for (final l in state) l.label: kLegendColors.indexOf(l.color)
-    };
-    final typesToShow = typesCountList.map((e) => e.key).toSet();
-    final missingColors = List.generate(kLegendColors.length, (i) => i)
-        .where((i) => typesToShow.every((label) => currentColors[label] != i))
-        .toList();
-    // TODO: keep old colors which were used at some time
-
-    final newLegend = <LegendItem>[];
+    // First pass: set colors from previous used colors.
     final usedColors = <int>{};
+    final typeToColor = <String, int>{};
+    for (final t in typesCountList) {
+      if (_prevColors.containsKey(t.key)) {
+        final color = _prevColors[t.key]!;
+        // It can happen that there are two legend items with the same color.
+        if (!usedColors.contains(color)) {
+          typeToColor[t.key] = _prevColors[t.key]!;
+          usedColors.add(color);
+        }
+      }
+    }
+
+    // Second pass: set missing colors and build legend.
+    final colorsPool = _makeColorsPool();
+    colorsPool.removeWhere((color) => usedColors.contains(color));
+    final newLegend = <LegendItem>[];
     for (final t in typesCountList) {
       int color;
-      if (currentColors.containsKey(t.key)) {
-        color = currentColors[t.key]!;
-      } else if (missingColors.isNotEmpty) {
-        color = missingColors.first;
-        missingColors.removeAt(0);
+      if (typeToColor.containsKey(t.key)) {
+        color = typeToColor[t.key]!;
       } else {
-        color = 0; // In theory should not happen
+        // Choose a color that's not been used or used by a type
+        // not in current list and with minimum uses.
+        color = colorsPool.isEmpty ? 0 : colorsPool.removeLast();
       }
       newLegend.add(LegendItem(color: kLegendColors[color], label: t.key));
-      usedColors.add(color);
+      _prevColors[t.key] = color;
     }
     if (haveExtra) newLegend.add(LegendItem.other('Other'));
 
@@ -98,6 +116,24 @@ class LegendController extends StateNotifier<List<LegendItem>> {
     _legendMap = typesMap.map(
         (amenity, label) => MapEntry(amenity.databaseId, labelToLegend[label]));
     state = newLegend;
+  }
+
+  /// Prepares a list of colors. Reversed, so that one could use `removeLast()`.
+  List<int> _makeColorsPool() {
+    // Find number of usages for every color.
+    final usedColorsCount = <int, int>{};
+    _prevColors.forEach((key, color) {
+      usedColorsCount[color] =
+          (usedColorsCount[color] ?? 0) + (_maxSeen[key] ?? 1);
+    });
+    // Prepare list of colors never used.
+    final neverUsedColors =
+        List.generate(kLegendColors.length, (i) => kLegendColors.length - i - 1)
+            .where((color) => !usedColorsCount.containsKey(color));
+    // Return colors sorted in reversed order by number of usages.
+    final usedList = usedColorsCount.entries.toList();
+    usedList.sort((a, b) => b.value.compareTo(a.value));
+    return usedList.map((e) => e.key).followedBy(neverUsedColors).toList();
   }
 
   Future<String?> _getLabel(Map<String, String> tags, Locale? locale) async {

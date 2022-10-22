@@ -8,6 +8,7 @@ _Unreleased_
 
 * You can zoom out to the max to navigate wherever you want.
 * Zoom levels are preserved between modes.
+* Changed colors in the micromapping mode and made them more stable.
 
 ### Other
 
@@ -23,6 +24,7 @@ _Unreleased_
 * Option to mark a newly created amenity disused (or delete it).
 * Added `shop=vacant` to preset searching results.
 * Added OSM notes to the map chooser.
+* Translations into Urdu language (thanks @bgo-eiu).
 
 ## 2.0
 
