@@ -509,5 +509,9 @@
   "aboutSourceCode": "ਸਰੋਤ ਦਾ ਕੋਡ",
   "@aboutSourceCode": {
     "description": "Button title to open the repository on GitHub."
+  },
+  "fieldDirectionSet": "ਟੇਕੋ",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
