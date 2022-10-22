@@ -27,6 +27,7 @@ class LanguagePage extends ConsumerWidget {
     Locale('nb'): 'Bokmål',
     Locale('nl'): 'Nederlands',
     Locale('pa'): 'ਪੰਜਾਬੀ',
+    Locale('pa', 'PK'): 'ਪੰਜਾਬੀ (ਪਾਕਿਸਤਾਨ)',
     Locale('pl'): 'Polski',
     Locale('pt'): 'Português',
     Locale('pt', 'BR'): 'Português do Brasil',
