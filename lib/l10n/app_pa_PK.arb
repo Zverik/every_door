@@ -1129,5 +1129,9 @@
   "faqYellowContent": "جدوں تسیں ویروے سودھدے، تت گم جاݨکاری لئی چیپیاں نہیں پیلیاں تے چٹیاں بندیاں دِکھاۓ گئے ہن۔ مثلاً:\n\n* عمارت لئی سطر دی گݨتی۔\n* دروازہ دی قسم؛ جیکر قدم ہن، فلیٹ دا سلسلہ۔\n* بینچ لئی پٹھ تے سمگری۔\n* رُکھاں لئی پتے دیاں قسم تے عمر۔",
   "@faqYellowContent": {},
   "faqFloorsContent": "نہیں۔ اوہ پہلا مثال لئی ٹیگ `addr:floor=3` اے۔ ایہہ ڈائیریکٹری تے پرنٹ کیتا۔ دوجا مثال ٹیگ `level=3` اے۔ `level` کنجی لئی صفر توں `building:levels - 1` نوں نمبر ورتدا۔ ہر دیش عمارت دے سطر وکھرے اے، پر `level` صرف 0، 1، 2 وغیرہ۔\n\nاِتھے ایڈیٹر ٹیگاں دے نچان ورتوں:\n\n* `2`: `addr:floor=2` تے کوئی نمبر نال `level=*`۔\n* `4/`: `addr:floor=4` پر `level` ٹیگ نہیں اے۔\n* `1:`: `level=1` پر `addr:floor` ٹیگ نہیں اے۔\n* `1/10`: `addr:floor=1` تے `level=0`؛ ایہہ کول ہور دکان وی ٹیگ `addr:floor` یا `level`سمان اے۔",
-  "@faqFloorsContent": {}
+  "@faqFloorsContent": {},
+  "fieldDirectionSet": "ٹیکو",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  }
 }
