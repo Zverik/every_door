@@ -1127,5 +1127,9 @@
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
   "faqYellowContent": "Ikke-gule tags i indgangstilstanden og hvide prikker i mikromappingtilstanden betyder, at elementerne mangler nogle vigtige egenskaber. For eksempel: \n\n* Bygninger forventes at have et antal niveauer. \n* Indgange skal have type og, for trapper, lejlighedsserie. \n* Bænke skal have materiale og ryglæn. \n* Træer skal have bladtype og cyklus.",
-  "@faqYellowContent": {}
+  "@faqYellowContent": {},
+  "fieldDirectionSet": "Indstil",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  }
 }
