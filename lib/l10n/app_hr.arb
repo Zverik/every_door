@@ -1129,5 +1129,9 @@
   "faqFloorsContent": "Ne. Prvi ima popunjenu oznaku `addr:floor=3`. To je kat kako je prikazan na navigaciji i liftu i koji se uobičajeno koristi. Drugi nema ovu oznaku, ali ima `level=3`. Taj je broj sekvencijalni broj kata od nula do `building:levels - 1`. To jest, u trokatnoj zgradi vrijednost `addr:floor` ovisi o državi, ali `level` je uvijek 0, 1 ili 2.\n\nEvo kako se prikaz u uređivaču odnosi na ove oznake:\n\n* `2`: `addr:floor=2` i `level=*` koji nije prazan.\n* `4/`: `addr:floor=4`, ali ne postoji oznaka `level`.\n* `/1`: `level=1`, ali ne postoji oznaka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i postoji objekt u blizini s istim `addr:floor`, ali različitim `level`, ili obrnuto).",
   "@faqFloorsContent": {},
   "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u načinu mikromapiranja? Kako se sortiraju objekti?\n\nOdgovori na sva ova pitanja nalaze se u [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Evo što možete pogledati:\n\n* Redoslijed ključeva za glavnu oznaku — popis `kMainKeys`.\n* Koji se objekti preuzimaju — funkcija `isGoodTags`.\n* Što se smatra sadržajem — funkcija `isAmenityTags`.\n* Koje se točke na koje načine spajaju na puteve — funkcija `detectSnap`.\n* Kada je objekt u mikromapiranju nepotpun — funkcija `needsMoreInfo`.",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "fieldDirectionSet": "Postavi",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  }
 }
