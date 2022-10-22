@@ -1,5 +1,6 @@
 import 'package:every_door/fields/checkbox.dart';
 import 'package:every_door/fields/combo.dart';
+import 'package:every_door/fields/direction.dart';
 import 'package:every_door/fields/email.dart';
 import 'package:every_door/fields/floor.dart';
 import 'package:every_door/fields/hours.dart';
@@ -153,6 +154,13 @@ PresetField fieldFromJson(Map<String, dynamic> data,
     'vhf',
     'water_tank:volume',
   };
+
+  // Patching the direction field.
+  if ({'camera/direction', 'direction_point', 'direction'}
+      .contains(data['name'])) {
+    return DirectionPresetField(
+        label: label, key: key, prerequisite: prerequisite);
+  }
 
   // List of types: https://github.com/ideditor/schema-builder#type
   String typ = data['typ'] ?? 'text';

@@ -8,6 +8,7 @@ _Unreleased_
 
 * You can zoom out to the max to navigate wherever you want.
 * Zoom levels are preserved between modes.
+* Direction editor (for degrees 0-360 clockwise).
 * Changed colors in the micromapping mode and made them more stable.
 
 ### Other

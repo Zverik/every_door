@@ -2,8 +2,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'helpers/direction_page.dart';
 
@@ -26,6 +25,7 @@ class DirectionField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.only(right: 10.0),
       child: ElevatedButton(
@@ -39,7 +39,10 @@ class DirectionField extends StatelessWidget {
             element[field.key] = value == '-' ? null : value;
           }
         },
-        child: Text(element[field.key] ?? 'Set...', style: kFieldTextStyle),
+        child: Text(
+          element[field.key] ?? '${loc.fieldDirectionSet}...',
+          style: kFieldTextStyle,
+        ),
       ),
     );
   }

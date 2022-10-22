@@ -775,6 +775,10 @@
   "@fieldHoursSDAddRange": {
     "description": "Tooltip for button on the specific days interval to add a range of dates."
   },
+  "fieldDirectionSet": "Set",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
   "fieldNameLanguages": "Another language",
   "@fieldNameLanguages": {
     "description": "Tooltip for a button to add a name in another language."
