@@ -46,12 +46,12 @@ enum ElementKind {
 }
 
 /// Find the single main key for an object. Also considers lifecycle prefixes.
-String? getMainKey(Map<String, String> tags) {
+String? getMainKey(Map<String, String> tags, [bool noPrefix = false]) {
   for (final k in kMainKeys) {
     if (tags[k] == 'no') continue;
     if (tags.containsKey(k)) return k;
-    if (tags.containsKey(kDisused + k)) return kDisused + k;
-    if (tags.containsKey(kDeleted + k)) return kDeleted + k;
+    if (tags.containsKey(kDisused + k)) return noPrefix ? k : kDisused + k;
+    if (tags.containsKey(kDeleted + k)) return noPrefix ? k : kDeleted + k;
   }
   return null;
 }

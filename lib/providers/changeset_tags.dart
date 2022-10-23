@@ -100,9 +100,11 @@ class _TypeCount {
   }
 
   String _getType(OsmChange change) {
-    final key = getMainKey(change.getFullTags(true));
-    if (key == null) return 'unknown object';
-    final value = change[key]!;
+    final rawKey = getMainKey(change.getFullTags());
+    if (rawKey == null) return 'unknown object';
+    final value = change[rawKey]!;
+    // No use having "disused:shop" in a comment.
+    final key = rawKey.substring(rawKey.indexOf(':') + 1);
     if (value == 'yes') return key;
     if ({'shop', 'office', 'building', 'entrance', 'club'}.contains(key))
       return '$value $key'; // school building
