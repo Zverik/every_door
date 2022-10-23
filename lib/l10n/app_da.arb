@@ -745,7 +745,7 @@
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "loadingTooMuchData": "Ryd downloadede data fra Indstillinger for at gøre editoren hurtigere.",
+  "loadingTooMuchData": "Ryd downloadede data i Indstillinger for at gøre editoren hurtigere.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
