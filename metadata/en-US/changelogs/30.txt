@@ -1,0 +1,4 @@
+* You can zoom out to the max.
+* Zoom levels are preserved between modes.
+* Direction editor for benches and cameras.
+* Stabilized colors in the micromapping mode.
