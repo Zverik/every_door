@@ -774,5 +774,9 @@
   "notesCancelMessage": "Отменить ввод заметки?",
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "fieldDirectionSet": "Выбрать",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
