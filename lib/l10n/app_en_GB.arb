@@ -453,7 +453,7 @@
   "@editorMarkChecked": {
     "description": "Tooltip for a button to mark the amenity checked without changing properties."
   },
-  "editorCloseMessage": "You will lose your unsaved changes. Proceed?",
+  "editorCloseMessage": "Discard changes without saving?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -1127,5 +1127,9 @@
     "description": "Settings entry for editing changeset hashtags."
   },
   "faqYellowContent": "Non-yellow labels in the entrances mode and white dots in the micromapping mode mean the elements lack some important attributes. For example:\n\n* Buildings are expected to have number of levels.\n* Entrances should have type and, for staircases, flat range.\n* Benches should have material and backrest.\n* Trees should have leaf type and cycle.",
-  "@faqYellowContent": {}
+  "@faqYellowContent": {},
+  "fieldDirectionSet": "Set",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  }
 }
