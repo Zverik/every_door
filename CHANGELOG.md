@@ -25,7 +25,8 @@ _Unreleased_
 * Option to mark a newly created amenity disused (or delete it).
 * Added `shop=vacant` to preset searching results.
 * Added OSM notes to the map chooser.
-* Translations into Punjabi (Pakistan) language (thanks @bgo-eiu).
+* Translation into Punjabi (Pakistan) language (thanks @bgo-eiu)
+  and major updates to Norwegian (thanks Nikolaj Fyhn) and Esperanto (thanks jolesh).
 
 ## 2.0
 
