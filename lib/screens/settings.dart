@@ -7,6 +7,7 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -124,6 +125,7 @@ class SettingsPage extends ConsumerWidget {
                     AlertController.show(loc.settingsPurgedObsoleteTitle,
                         loc.settingsPurgedMessage(count), TypeAlert.success);
                   }
+                  ref.read(needMapUpdateProvider).trigger();
                 },
               ),
             ],
