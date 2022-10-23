@@ -146,7 +146,8 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
         if (ref.read(microZoomedInProvider) != null) {
           ref.read(microZoomedInProvider.state).state = null;
           return false;
-        } else if (!ref.read(trackingProvider)) {
+        } else if (!ref.read(trackingProvider) &&
+            ref.read(geolocationProvider) != null) {
           ref.read(trackingProvider.state).state = true;
           return false;
         } else {

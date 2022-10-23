@@ -553,7 +553,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     horizontal: 0.0,
                     vertical: 10.0,
                   ),
-                  enabled: !ref.watch(trackingProvider),
+                  enabled:
+                      !ref.watch(trackingProvider) && trackLocation != null,
                   safeRight: true,
                   icon: Icons.my_location,
                   tooltip: loc.mapLocate,

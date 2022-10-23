@@ -356,7 +356,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
             horizontal: 0.0,
             vertical: widget.onFilterTap == null ? 10.0 : 60.0,
           ),
-          enabled: !ref.watch(trackingProvider),
+          enabled: !ref.watch(trackingProvider) && trackLocation != null,
           icon: Icons.my_location,
           tooltip: loc.mapLocate,
           onPressed: () {
@@ -409,7 +409,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         MarkerLayerWidget(
           options: MarkerLayerOptions(
             markers: [
-              if (!ref.watch(trackingProvider))
+              if (!ref.watch(trackingProvider) || trackLocation == null)
                 Marker(
                   rotate: true,
                   rotateOrigin: Offset(0.0, -5.0),

@@ -45,7 +45,11 @@ class _ChooserIntervalFieldState extends State<ChooserIntervalField> {
 
   @override
   void didUpdateWidget(covariant ChooserIntervalField oldWidget) {
-    if (_state == _ChooserState.complete) {
+    if (widget.interval == null) {
+      _state = _ChooserState.first;
+      start = null;
+      end = null;
+    } else if (_state == _ChooserState.complete) {
       start = widget.interval?.start;
       end = widget.interval?.end;
     }
