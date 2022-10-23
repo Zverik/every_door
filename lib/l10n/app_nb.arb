@@ -1129,5 +1129,9 @@
   "faqFloorsContent": "Nei. Den første har 'addr: floor = 3'-taggen fylt ut. Det er etasjen slik det er trykt på navigasjon og ofte brukt. Den andre har ikke denne taggen, men har 'level=3'. Dette tallet er et sekvensielt etasjenummer fra null til 'building:levels - 1'. Det vil si at i en treetasjes bygning avhenger 'addr:floor'-verdien av landet, men 'level' er alltid 0, 1 eller 2.\n\nSlik er notasjonen i redigeringsprogrammet relatert til disse tagger:\n\n* `2`: `addr:floor=2` og ikke-tom 'level = *'.\n* `4/`: `addr:floor=4`, men det er ingen 'level'-tag.\n* `/1`: `level=1`, men det er ingen 'addr:floor'-tag.\n* `1/0`: `addr:floor=1` + `level=0` (og det er et objekt i nærheten med samme `addr:floor` , men forskjellig 'level', eller omvendt).",
   "@faqFloorsContent": {},
   "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Når vises de hvite prikkene i mikrokartleggingsmodus? Hvordan sorteres objekter?\n\nSvar på alle disse spørsmålene finnes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er hva du kan se på:\n\n* Rekkefølgen for hovedetiketten – listen 'kMainKeys'.\n* Hvilke objekter lastes ned – funksjonen 'isGoodTags'.\n* Hva regnes som en fasilitet – funksjonen 'isAmenityTags'.\n* Hvilke punkter er forbundet til hvilke veier – funksjon \"detectSnap\".\n* Når et mikrokartleggingsobjekt er ufullstendig – funksjonen \"needsMoreInfo\".",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "fieldDirectionSet": "Sett",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  }
 }
