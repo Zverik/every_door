@@ -819,5 +819,9 @@
     "placeholders": {
       "count": {}
     }
+  },
+  "fieldDirectionSet": "Festlegen",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
