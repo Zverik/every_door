@@ -1127,5 +1127,9 @@
   "hashtagsLabel": "Słowa do hasztagów",
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
+  },
+  "fieldDirectionSet": "Ustaw",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
