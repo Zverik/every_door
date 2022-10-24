@@ -1127,5 +1127,9 @@
     "placeholders": {
       "count": {}
     }
+  },
+  "fieldDirectionSet": "Nastavit",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
