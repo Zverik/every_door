@@ -35,7 +35,7 @@
   },
   "faqYellow": "کجھ گھر دا نمبر پیلے کیوں ہندے ہن؟",
   "@faqYellow": {},
-  "faqLetters": "کیہ میں شناختی یا فلیٹ دا نمبر وچ اکھر پا سکدا ہاں؟",
+  "faqLetters": "کیہ میں فلیٹ دا نمبر وچ اکھر پا سکدا ہاں؟",
   "@faqLetters": {},
   "faqEntrance": "عمارت دے پرویش دوار نوں کیویں پایا جاوے؟",
   "@faqEntrance": {},
@@ -49,9 +49,9 @@
   "@faqChangeType": {},
   "faqChangeTypeContent": "ایڈیٹر سرلیکھ چݨیو، جتھے قسم لکھی گئی اے۔",
   "@faqChangeTypeContent": {},
-  "faqTaggingContent": "اہڈیٹر وچ کجھ چیزاں کیوں گُم اے؟ جدوں ویروے سودھدے، چِٹیاں بندیاں کیہ ترک اے؟ چیزاں لئی ذخیرہ ورتدا؟\n\nایہہ سوال دے جواب لبھ سکیو — [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart)۔ اُتھے:\n\n* مکھ ٹیگ لئی کنجی لئی لڑی — `kMainKeys`۔\n* کہڑیاں چیزاں ڈاؤن‌لوڈ کیتیاں جاندہاں ہن — `isGoodTags`۔\n* اِتھے کیہ تت دکان اے — `isAmenityTag`۔\n* کہڑے نوڈ تے کہڑے راہ موڑے جاندے ہن — `detectSnap`۔\n* جدوں چیز دا ویروا نہیں پورا اے — `needsMoreInfo`۔",
+  "faqTaggingContent": "اہڈیٹر وچ کجھ چیزاں کیوں گُم اے؟ جدوں ویروے سودھدے، چِٹیاں بندیاں کیہ ترک اے؟ چیزاں لئی ذخیرہ ورتدا؟\n\nایس سوال دے جواب لبھݨ لئی [چنگیا ٹیگاں دا صفحہ](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) ویکھو۔ اُتھے؛\n\n‪٭؜ ؜‪مکھ ٹیگ لئی کنجی لئی لڑی ‪‫`kMainKeys`⁩؜‪۔\n۬ کہڑیاں چیزاں ڈاؤن‌لوڈ کیتیاں جاندہاں ہن — `isGoodTags`۔\n۬ اِتھے کیہ تت دکان اے — `isAmenityTag`۔\n۬ کہڑے نوڈ تے کہڑے راہ موڑے جاندے ہن — `detectSnap`۔\n۬ جدوں چیز دا ویروا نہیں پورا اے — `needsMoreInfo`۔",
   "@faqTaggingContent": {},
-  "loadingStart": "شروع کردے…",
+  "loadingStart": "شروع کردے۔ ۔ ۔",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
@@ -483,7 +483,7 @@
   "@fieldCheckboxNo": {
     "description": "Checkbox name for no."
   },
-  "loadingPresets": "پریسیٹ لوڈ کردے…",
+  "loadingPresets": "پریسیٹ لوڈ کردے۔ ۔ ۔",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
@@ -574,7 +574,7 @@
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."
   },
-  "versionsVersionNumber": "ورژن نمبر {number}",
+  "versionsVersionNumber": "⁩ورژن نمبر ‫{number}",
   "@versionsVersionNumber": {
     "description": "Card header for the diff for this element version.",
     "placeholders": {
@@ -593,7 +593,7 @@
   "@settingsPurgeAllData": {
     "description": "Settings entry for purging all cached OSM data."
   },
-  "aboutInstalledVersion": "ایہہ ورژن",
+  "aboutInstalledVersion": "ایہہ ورژن‫",
   "@aboutInstalledVersion": {
     "description": "Button description for installed app version."
   },
@@ -820,7 +820,7 @@
   "@settingsEditor": {
     "description": "Title for the settings section for editor presets."
   },
-  "settingsPreferContact": "ٹیگاں نال «contact:» ورتو",
+  "settingsPreferContact": "‫`contact:‎`‬ ؜دیاں کنجیاں ورتو",
   "@settingsPreferContact": {
     "description": "Settings switch for using e.g. contact:phone=* over phone=*."
   },
@@ -840,11 +840,11 @@
   "@settingsAbout": {
     "description": "Title for the About section in settings."
   },
-  "aboutVersionHistory": "ورژن دا اتیت",
+  "aboutVersionHistory": "ورژن دی تریخ",
   "@aboutVersionHistory": {
     "description": "Button title to open GitHub releases page."
   },
-  "aboutSourceCode": "سروٹ دا کوڈ",
+  "aboutSourceCode": "سروت دا کوڈ",
   "@aboutSourceCode": {
     "description": "Button title to open the repository on GitHub."
   },
@@ -938,7 +938,7 @@
   "@fieldPhoneWrong": {
     "description": "Validation message for a non-standard phone number."
   },
-  "messageNoData": "ڈیٹا کوئی نہیں، ہور ڈاؤن‌لوڈ لئی ایہہ بتن چݨیو",
+  "messageNoData": "کوئی ڈیٹا نہیں، ہور لئی اِتھے چھوہوو",
   "@messageNoData": {
     "description": "Message that appears on the main screen when there's no OSM data."
   },
@@ -1027,7 +1027,7 @@
   "@aboutViewLog": {
     "description": "Button title to open the log view page."
   },
-  "aboutHelpImprove": "{appTitle} نوں ٹھیک کرن وچ مدد کریو",
+  "aboutHelpImprove": "‫{appTitle}⁩ ؜نوں ٹھیک کرن وچ مدد کریو",
   "@aboutHelpImprove": {
     "description": "Title for the Help improve section on the About page.",
     "placeholders": {
@@ -1118,7 +1118,7 @@
   "@faqMapTiny": {},
   "faqCheckmarks": "چیک چِنھ کس لئی ہن؟",
   "@faqCheckmarks": {},
-  "faqMapTinyContent": "ایہہ ترک نہیں اے۔ تسیں ستھتی ہی ویکھ سکو تے نقشہ چل سکیو۔ دکاناں دی لسٹ دکھیو، تہاڈے توں دوری انُسار کرمبند اے۔\n\nجدوں تسیں آپݨے ٹکاݨے توں بہت دور سہولتاں دا سودھدے او تاں نقشہ وڈا ہو جاندا اے۔ حالانکہ، ایہہ ایپ اوہناں چیزاں نوں سودھݨ لئی بݨایاں گیاں سی جو تسیں آپݨیں اکھیں نال دکھدیاں او۔",
+  "faqMapTinyContent": "<div dir=\"rtl\" style=\"text-align: right\">\nایہدا ترک وام نقشہ ویکھݨ نہیں اے۔ تسیں ستھتی ہی ویکھ سکدے تے نقشہ چل سکدے۔ دکاناں دی لسٹ دکھیو، تہاڈے توں دوری انُسار کرمبند اے۔\n\nجدوں تسیں آپݨے ٹکاݨے توں بہت دور سہولتاں دا سودھدے او تاں نقشہ وڈا ہو جاندا اے۔ حالانکہ، ایہہ ایپ اوہناں چیزاں نوں سودھݨ لئی بݨایاں گیاں سی جو تسیں آپݨیں اکھیں نال دکھدیاں او۔\n</div>",
   "@faqMapTinyContent": {},
   "faqFloors": "کیہ سطر دے نمبر ”3“ تے ”/3“ اِکو جہے ہن؟",
   "@faqFloors": {},
@@ -1126,9 +1126,9 @@
   "@faqCheckmarksContent": {},
   "faqLettersContent": "جے تہاڈے سنکھیاک کیبورڈ نوں پورا کیبورڈ بدل نہیں سکدے، سیٹنگاں وچ دکھایو۔ اُپرلے کھبے کینے تے تسیں بٹن لبھ سکیو۔ اُتھے پورا کیبورڈ چوݨ نوں چالو کرو۔",
   "@faqLettersContent": {},
-  "faqYellowContent": "جدوں تسیں ویروے سودھدے، تت گم جاݨکاری لئی چیپیاں نہیں پیلیاں تے چٹیاں بندیاں دِکھاۓ گئے ہن۔ مثلاً:\n\n* عمارت لئی سطر دی گݨتی۔\n* دروازہ دی قسم؛ جیکر قدم ہن، فلیٹ دا سلسلہ۔\n* بینچ لئی پٹھ تے سمگری۔\n* رُکھاں لئی پتے دیاں قسم تے عمر۔",
+  "faqYellowContent": "<div dir=\"rtl\" style=\"text-align: right\">\nجدوں تسیں ویروے سودھدے، تت گم جاݨکاری لئی چیپیاں نہیں پیلیاں تے چٹیاں بندیاں دِکھاۓ گئے ہن۔ مثلاً:؜\n\n٭ عمارت لئی سطر دی گݨتی۔\n٭ دروازہ دی قسم؛ جیکر قدم ہن، فلیٹ دا سلسلہ۔\n٭ بینچ لئی پٹھ تے سمگری۔\n٭ رُکھاں لئی پتے دیاں قسم تے عمر۔\n</div>",
   "@faqYellowContent": {},
-  "faqFloorsContent": "نہیں۔ اوہ پہلا مثال لئی ٹیگ `addr:floor=3` اے۔ ایہہ ڈائیریکٹری تے پرنٹ کیتا۔ دوجا مثال ٹیگ `level=3` اے۔ `level` کنجی لئی صفر توں `building:levels - 1` نوں نمبر ورتدا۔ ہر دیش عمارت دے سطر وکھرے اے، پر `level` صرف 0، 1، 2 وغیرہ۔\n\nاِتھے ایڈیٹر ٹیگاں دے نچان ورتوں:\n\n* `2`: `addr:floor=2` تے کوئی نمبر نال `level=*`۔\n* `4/`: `addr:floor=4` پر `level` ٹیگ نہیں اے۔\n* `1:`: `level=1` پر `addr:floor` ٹیگ نہیں اے۔\n* `1/10`: `addr:floor=1` تے `level=0`؛ ایہہ کول ہور دکان وی ٹیگ `addr:floor` یا `level`سمان اے۔",
+  "faqFloorsContent": "نہیں۔ اوہ پہلا مثال لئی ٹیگ `addr:floor=3` اے۔ ایہہ ڈائیریکٹری تے پرنٹ کیتا۔ دوجا مثال ٹیگ `level=3` اے۔ `level` کنجی لئی صفر توں `building:levels - 1` نوں نمبر ورتدا۔ ہر دیش عمارت دے سطر وکھرے اے، پر `level` صرف 0، 1، 2 وغیرہ۔\n\nاِتھے ایڈیٹر ٹیگاں دے نچان ورتوں:؜\n٭ ‫`2`⁩: ⁩‫`addr:floor=2`⁩ ؜تے کوئی نمبر نال `level=*`۔\n* `4/`: `addr:floor=4` پر `level` ٹیگ نہیں اے۔\n* `1:`: `level=1` پر `addr:floor` ٹیگ نہیں اے۔\n* `1/10`: `addr:floor=1` تے `level=0`؛ ایہہ کول ہور دکان وی ٹیگ `addr:floor` یا `level`سمان اے۔",
   "@faqFloorsContent": {},
   "fieldDirectionSet": "ٹیکو",
   "@fieldDirectionSet": {
