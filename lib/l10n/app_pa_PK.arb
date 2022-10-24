@@ -13,7 +13,7 @@
   "@buildingTypeIndustrial": {},
   "buildingTypeConstruction": "اُساری",
   "@buildingTypeConstruction": {},
-  "entranceIsUnit": "فلیٹ دا نمبر نوں «addr:unit» وچ پایو",
+  "entranceIsUnit": "فلیٹ دا نمبر نوں ‫`addr:unit`‬ وچ پایو",
   "@entranceIsUnit": {
     "description": "Label for a switch to use addr:unit instead of addr:flats."
   },
@@ -39,7 +39,7 @@
   "@faqLetters": {},
   "faqEntrance": "عمارت دے پرویش دوار نوں کیویں پایا جاوے؟",
   "@faqEntrance": {},
-  "faqEntranceContent": "ہیٹاں بٹن دی اِکّ کتار اے: ویروے، دکاناں، دروازے تے نوٹ۔\n\nدروازے دا چوݨ لئی ہیٹھلے کینے توں نقشے تے دروازے دے بٹن نوں گھسیٹو۔",
+  "faqEntranceContent": "<div dir=\"rtl\" lang=\"pa-Aran-PK\" style=\"text-align: right\">\nہیٹاں بٹن دی اِکّ کتار اے: ویروے، دکاناں، دروازے تے نوٹ۔\n\nدروازے دا چوݨ لئی ہیٹھلے کینے توں نقشے تے دروازے دے بٹن نوں گھسیٹو۔\n</div>",
   "@faqEntranceContent": {},
   "filterNoAddresses": "نیڑے تیڑے تے پتے نہیں اے",
   "@filterNoAddresses": {
@@ -49,13 +49,13 @@
   "@faqChangeType": {},
   "faqChangeTypeContent": "ایڈیٹر سرلیکھ چݨیو، جتھے قسم لکھی گئی اے۔",
   "@faqChangeTypeContent": {},
-  "faqTaggingContent": "اہڈیٹر وچ کجھ چیزاں کیوں گُم اے؟ جدوں ویروے سودھدے، چِٹیاں بندیاں کیہ ترک اے؟ چیزاں لئی ذخیرہ ورتدا؟\n\nایس سوال دے جواب لبھݨ لئی [چنگیا ٹیگاں دا صفحہ](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) ویکھو۔ اُتھے؛\n\n‪٭؜ ؜‪مکھ ٹیگ لئی کنجی لئی لڑی ‪‫`kMainKeys`⁩؜‪۔\n۬ کہڑیاں چیزاں ڈاؤن‌لوڈ کیتیاں جاندہاں ہن — `isGoodTags`۔\n۬ اِتھے کیہ تت دکان اے — `isAmenityTag`۔\n۬ کہڑے نوڈ تے کہڑے راہ موڑے جاندے ہن — `detectSnap`۔\n۬ جدوں چیز دا ویروا نہیں پورا اے — `needsMoreInfo`۔",
+  "faqTaggingContent": "<div dir=\"rtl\" lang=\"pa-Aran-PK\" style=\"text-align: right;\">\nاہڈیٹر وچ کجھ چیزاں کیوں گُم اے؟ جدوں ویروے سودھدے، چِٹیاں بندیاں کیہ ترک اے؟ چیزاں لئی ذخیرہ ورتدا؟\n\nایس سوال دے جواب لبھݨ لئی [چنگیا ٹیگاں دا صفحہ](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) ویکھو۔ اُتھے؛\n\n‪٭؜ ؜‪مکھ ٹیگ لئی کنجی لئی لڑی ‫— ‪‫`kMainKeys`‬⁩؜‪۔\n٭ کہڑیاں چیزاں ڈاؤن‌لوڈ کیتیاں جاندہاں ہن ‫— `isGoodTags`‬۔\n٭ اِتھے کیہ تت دکان اے ‫— `isAmenityTag`‬۔\n٭ کہڑے نوڈ تے کہڑے راہ موڑے جاندے ہن ‫— `detectSnap`‬۔\n٭ جدوں چیز دا ویروا نہیں پورا اے ‫— `needsMoreInfo`‬۔\n</div>",
   "@faqTaggingContent": {},
   "loadingStart": "شروع کردے۔ ۔ ۔",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "loadingChanges": "تبدیلیاں لوڈ کرڈے…",
+  "loadingChanges": "تبدیلیاں لوڈ کرڈے۔ ۔ ۔",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
@@ -437,7 +437,7 @@
   "@chooseType": {
     "description": "Search field hint on the type choosing screen."
   },
-  "warningFixme": "حل چاہندا: {value}",
+  "warningFixme": "حل چاہندا: ‫{value}‬",
   "@warningFixme": {
     "description": "Warning message for when an object has a non-empty fixme value.",
     "placeholders": {
@@ -487,7 +487,7 @@
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
-  "loadingLocation": "ستھتی لبھدی…",
+  "loadingLocation": "ستھتی لبھدی۔ ۔ ۔",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
@@ -495,7 +495,7 @@
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
-  "tileNothingAround": "{distance} میٹراں نال نیڑے تیڑے تے نشان نہیں لبھے سی۔",
+  "tileNothingAround": "‫{distance}‬ میٹراں نال نیڑے تیڑے تے نشان نہیں لبھے سی۔",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -515,7 +515,7 @@
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
-  "dataDownloadSuccessful": "ڈاؤن‌لوڈ کر سکیا",
+  "dataDownloadSuccessful": "ڈاؤن‌لوڈ کیتا گیا",
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
@@ -574,7 +574,7 @@
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."
   },
-  "versionsVersionNumber": "⁩ورژن نمبر ‫{number}",
+  "versionsVersionNumber": "⁩ورژن نمبر ‫‫{number}‬",
   "@versionsVersionNumber": {
     "description": "Card header for the diff for this element version.",
     "placeholders": {
@@ -605,7 +605,7 @@
   "@navEntrancesMode": {
     "description": "Tooltip for the entrances mode button on the nav panel."
   },
-  "warningWrongTag": "ایہہ ٹیگ نہیں چنگا: {tag}",
+  "warningWrongTag": "ایہہ ٹیگ نہیں چنگا: ‫{tag}‬",
   "@warningWrongTag": {
     "description": "Warning message for tags like shop=yes and amenity=no.",
     "placeholders": {
@@ -681,7 +681,7 @@
   "@fieldHoursChooseTime": {
     "description": "Tooltip for a button to open hours and minutes chooser."
   },
-  "editorDeleteTitle": "{amenity} مٹاؤ؟",
+  "editorDeleteTitle": "‫{amenity}‬ مٹاؤ؟",
   "@editorDeleteTitle": {
     "description": "Dialog title for deleting an amenity.",
     "placeholders": {
@@ -718,7 +718,7 @@
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
   },
-  "versionsVersionMeta": "{datetime} {user} چڑھائیے گئے سی",
+  "versionsVersionMeta": "‫{datetime}‬ ⁩‫{user}‬⁩ چڑھائیے گئے سی",
   "@versionsVersionMeta": {
     "description": "Card body to show metadata about the element version.",
     "placeholders": {
@@ -750,7 +750,7 @@
   "@settingsPurgeDataTitle": {
     "description": "Confirmation dialog title for when purging all downloaded data."
   },
-  "versionsTitle": "چیز نمبر {elementRef} دا اتیت",
+  "versionsTitle": "چیز ‫{elementRef}‬ دا اتیت",
   "@versionsTitle": {
     "description": "Title for the element versions page.",
     "placeholders": {
@@ -872,7 +872,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesUploadedMessage": "{changes} چڑھایاں گیاں۔",
+  "changesUploadedMessage": "‫{changes}‬ چڑھایاں گیاں۔",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -950,7 +950,7 @@
   "@buttonYes": {
     "description": "Button for approval."
   },
-  "loadingTooMuchDataTitle": "بہت ڈیٹا",
+  "loadingTooMuchDataTitle": "بہت ڈیٹے",
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
@@ -970,7 +970,7 @@
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
-  "editorDuplicate": "{distance} میٹر وچ سمبھاوت ہور کاپی اے",
+  "editorDuplicate": "‫{distance}‬ میٹر وچ سمبھاوت ہور کاپی اے",
   "@editorDuplicate": {
     "description": "Message about a possible duplicate",
     "placeholders": {
@@ -1027,7 +1027,7 @@
   "@aboutViewLog": {
     "description": "Button title to open the log view page."
   },
-  "aboutHelpImprove": "‫{appTitle}⁩ ؜نوں ٹھیک کرن وچ مدد کریو",
+  "aboutHelpImprove": "‫‫{appTitle}⁩‬ ؜نوں ٹھیک کرن وچ مدد کریو",
   "@aboutHelpImprove": {
     "description": "Title for the Help improve section on the About page.",
     "placeholders": {
@@ -1118,17 +1118,17 @@
   "@faqMapTiny": {},
   "faqCheckmarks": "چیک چِنھ کس لئی ہن؟",
   "@faqCheckmarks": {},
-  "faqMapTinyContent": "<div dir=\"rtl\" style=\"text-align: right\">\nایہدا ترک وام نقشہ ویکھݨ نہیں اے۔ تسیں ستھتی ہی ویکھ سکدے تے نقشہ چل سکدے۔ دکاناں دی لسٹ دکھیو، تہاڈے توں دوری انُسار کرمبند اے۔\n\nجدوں تسیں آپݨے ٹکاݨے توں بہت دور سہولتاں دا سودھدے او تاں نقشہ وڈا ہو جاندا اے۔ حالانکہ، ایہہ ایپ اوہناں چیزاں نوں سودھݨ لئی بݨایاں گیاں سی جو تسیں آپݨیں اکھیں نال دکھدیاں او۔\n</div>",
+  "faqMapTinyContent": "<div dir=\"rtl\" style=\"text-align: right\" lang=\"pa-Aran-PK\">\nایہدا ترک وام نقشہ ویکھݨ نہیں اے۔ تسیں ستھتی ہی ویکھ سکدے تے نقشہ چل سکدے۔ دکاناں دی لسٹ دکھیو، تہاڈے توں دوری انُسار کرمبند اے۔\n\nجدوں تسیں آپݨے ٹکاݨے توں بہت دور سہولتاں دا سودھدے او تاں نقشہ وڈا ہو جاندا اے۔ حالانکہ، ایہہ ایپ اوہناں چیزاں نوں سودھݨ لئی بݨایاں گیاں سی جو تسیں آپݨیں اکھیں نال دکھدیاں او۔\n</div>",
   "@faqMapTinyContent": {},
-  "faqFloors": "کیہ سطر دے نمبر ”3“ تے ”/3“ اِکو جہے ہن؟",
+  "faqFloors": "کیہ سطر دے نمبر ”‫‎/3‬“ تے ”3“ اِکو جہے ہن؟",
   "@faqFloors": {},
-  "faqCheckmarksContent": "ایہہ نسان دکاناں دا ڈیٹا پکا ویکھدا۔ «check_date» ٹیگ وچ ایہہ اج دی تریخ جوڑدی اے۔\n\nمثال لئی، تسیں پنڈ دا اِکّ حصہ سروے کیتے گئے۔ فیر اِکّ مہینے بعد تسیں ہور حصے سروے کیتے گئے۔ کجھ دکاناں نہیں بدلیاں، پر تسیں ناواں دکھݨ لئی نشان لگݨا چاہیدے۔ ایہہ چیک چِنھ دا ترک اے؛ تسیں چݨ سکیو تے رِہ جاؤ۔\n\nچیک چِنھ دو مہینیاں لئی جانچیا رہندا اے۔ اوس توں بغد تسیں ہور سروے کر سکدے۔",
+  "faqCheckmarksContent": "<div dir=\"rtl\" lang=\"pa-Aran-PK\" style=\"text-align: right\">\nایہہ نسان دکاناں دا ڈیٹا پکا ویکھدا۔ ‫«⁠check_date⁠»‬‫ ٹیگ وچ ایہہ اج دی تریخ جوڑدی اے۔\n\nمثال لئی، تسیں پنڈ دا اِکّ حصہ سروے کیتے گئے۔ فیر اِکّ مہینے بعد تسیں ہور حصے سروے کیتے گئے۔ کجھ دکاناں نہیں بدلیاں، پر تسیں ناواں دکھݨ لئی نشان لگݨا چاہیدے۔ ایہہ چیک چِنھ دا ترک اے؛ تسیں چݨ سکیو تے رہ جاؤ۔\n\nچیک چِنھ دو مہینیاں لئی جانچیا رہندا اے۔ اوس توں بغد تسیں ہور سروے کر سکدے۔\n</div>",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "جے تہاڈے سنکھیاک کیبورڈ نوں پورا کیبورڈ بدل نہیں سکدے، سیٹنگاں وچ دکھایو۔ اُپرلے کھبے کینے تے تسیں بٹن لبھ سکیو۔ اُتھے پورا کیبورڈ چوݨ نوں چالو کرو۔",
   "@faqLettersContent": {},
-  "faqYellowContent": "<div dir=\"rtl\" style=\"text-align: right\">\nجدوں تسیں ویروے سودھدے، تت گم جاݨکاری لئی چیپیاں نہیں پیلیاں تے چٹیاں بندیاں دِکھاۓ گئے ہن۔ مثلاً:؜\n\n٭ عمارت لئی سطر دی گݨتی۔\n٭ دروازہ دی قسم؛ جیکر قدم ہن، فلیٹ دا سلسلہ۔\n٭ بینچ لئی پٹھ تے سمگری۔\n٭ رُکھاں لئی پتے دیاں قسم تے عمر۔\n</div>",
+  "faqYellowContent": "<div dir=\"rtl\" style=\"text-align: right\" lang=\"pa-Aran-PK\">\nجدوں تسیں ویروے سودھدے، تت گم جاݨکاری لئی چیپیاں نہیں پیلیاں تے چٹیاں بندیاں دِکھاۓ گئے ہن۔ مثلاً:؜\n\n٭ عمارت لئی سطر دی گݨتی۔\n٭ دروازہ دی قسم؛ جیکر قدم ہن، فلیٹ دا سلسلہ۔\n٭ بینچ لئی پٹھ تے سمگری۔\n٭ رُکھاں لئی پتے دیاں قسم تے عمر۔\n</div>",
   "@faqYellowContent": {},
-  "faqFloorsContent": "نہیں۔ اوہ پہلا مثال لئی ٹیگ `addr:floor=3` اے۔ ایہہ ڈائیریکٹری تے پرنٹ کیتا۔ دوجا مثال ٹیگ `level=3` اے۔ `level` کنجی لئی صفر توں `building:levels - 1` نوں نمبر ورتدا۔ ہر دیش عمارت دے سطر وکھرے اے، پر `level` صرف 0، 1، 2 وغیرہ۔\n\nاِتھے ایڈیٹر ٹیگاں دے نچان ورتوں:؜\n٭ ‫`2`⁩: ⁩‫`addr:floor=2`⁩ ؜تے کوئی نمبر نال `level=*`۔\n* `4/`: `addr:floor=4` پر `level` ٹیگ نہیں اے۔\n* `1:`: `level=1` پر `addr:floor` ٹیگ نہیں اے۔\n* `1/10`: `addr:floor=1` تے `level=0`؛ ایہہ کول ہور دکان وی ٹیگ `addr:floor` یا `level`سمان اے۔",
+  "faqFloorsContent": "<div style=\"text-align: right\" dir=\"rtl\" lang=\"pa-Aran-PK\">\nنہیں۔ اوہ پہلا مثال لئی ٹیگ ‫`addr:floor=3`‬ اے۔ ڈائیریکٹری تے ایہہ پرنٹ کیتا۔ دوجا مثال ٹیگ ‫`level=3`‬ اے۔ ‫`level`‬ کنجی لئی صفر توں ‫`building:levels - 1`‬ نوں نمبر ورتدا۔ ہر دیش لئی عمارت دے سطر وکھرے اے، پر ‫`level`‬ صرف 0، 1، 2 وغیرہ۔\n\nاِتھے ایڈیٹر ٹیگاں دے مُل ورتوں:؜\n٭ ‫`2`⁩: ⁩‫`addr:floor=2`⁩ ؜تے کوئی نمبر نال ‫`level‪=*‬`‬۔\n٭ ‫`4‪/‬‎`:؜ ‫`addr:floor=4`‬ پر ‫`level`‬ ٹیگ نہیں اے۔\n٭ ‫؜`‎1:‎`‬؜:؜ ‫`level=1`‬ پر ‫`addr:floor`‬ ٹیگ نہیں اے۔\n٭ ‫`1/0`‬:؜ ‫`addr:floor=1`‬ تے ‫`level=0`‬؛ ایہہ کول ہور دکان وی ٹیگ ‫`addr:floor`‬ یا ‫`level`‬ سمان اے۔\n</div>",
   "@faqFloorsContent": {},
   "fieldDirectionSet": "ٹیکو",
   "@fieldDirectionSet": {
