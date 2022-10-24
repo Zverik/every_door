@@ -1128,6 +1128,10 @@
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
   },
-  "faqFloorsContent": "No. El primer té l'etiqueta `addr:floor=3` emplenada. Aquest és el pis ja que està imprès a la navegació i s'utilitza habitualment. El segon no té aquesta etiqueta, però té `level=3`. Aquest número és un número de planta seqüencial de zero a \"building:levels- 1\". És a dir, en un edifici de tres plantes el valor de l'addr:floor varia segons el país, però el \"nivell\" sempre és 0, 1 o 2.\n\nA continuació es mostra com la notació de l'editor es relaciona amb aquestes etiquetes:\n\n* `2`: `addr:floor=2` i `level=*` no buit.\n* `4/`: `addr:floor=4`, però no hi ha cap etiqueta `level`.\n* `/1`: `level=1`, però no hi ha cap etiqueta `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i hi ha un objecte a nearby:w amb el mateix `addr:floor`, però diferent `nivell`, o viceversa).",
-  "@faqFloorsContent": {}
+  "faqFloorsContent": "No. El primer té l'etiqueta `addr:floor=3` emplenada. Aquest és el pis ja que està imprès a la navegació i s'utilitza habitualment. El segon no té aquesta etiqueta, però té `level=3`. Aquest número és un número de planta seqüencial de zero a \"building:levels- 1\". És a dir, en un edifici de tres plantes el valor de l'addr:floor varia segons el país, però el \"nivell\" sempre és 0, 1 o 2.\n\nA continuació es mostra com la notació de l'editor es relaciona amb aquestes etiquetes:\n\n* `2`: `addr:floor=2` i `level=*` no buit.\n* `4/`: `addr:floor=4`, però no hi ha cap etiqueta `level`.\n* `/1`: `level=1`, però no hi ha cap etiqueta `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i hi ha un objecte a nearby: amb el mateix `addr:floor`, però diferent `nivell`, o viceversa).",
+  "@faqFloorsContent": {},
+  "fieldDirectionSet": "Defineix",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  }
 }
