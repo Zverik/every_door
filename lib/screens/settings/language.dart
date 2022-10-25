@@ -21,6 +21,7 @@ class LanguagePage extends ConsumerWidget {
     Locale('fa'): 'فارسی',
     Locale('fr'): 'Français',
     Locale('hr'): 'Hrvatski',
+    Locale('hu'): 'Magyar nyelv',
     Locale('it'): 'Italiano',
     Locale('ja'): '日本語',
     Locale('ko'): '한국어',
