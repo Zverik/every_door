@@ -4,7 +4,6 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
-import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/screens/settings.dart';
 import 'package:every_door/widgets/loc_marker.dart';
@@ -68,7 +67,6 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
 
   @override
   Widget build(BuildContext context) {
-    final imagery = ref.watch(selectedImageryProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
     EdgeInsets safePadding = MediaQuery.of(context).padding;
@@ -132,11 +130,11 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
             ),
           ],
           nonRotatedChildren: [
-            buildAttributionWidget(imagery),
+            buildAttributionWidget(kOSMImagery),
           ],
           children: [
             TileLayerWidget(
-              options: buildTileLayerOptions(imagery),
+              options: buildTileLayerOptions(kOSMImagery),
             ),
             LocationMarkerWidget(),
           ],
