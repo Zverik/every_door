@@ -121,27 +121,17 @@ class GeolocationController extends StateNotifier<LatLng?> {
     final bool tracking = _ref.read(trackingProvider);
     if (tracking) return;
 
+    // If tracking is denied forever, do nothing.
+    final permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) return;
+
     // Wait until we get forceLocation value.
     if (!_ref.read(forceLocationProvider.notifier).loaded) {
       await Future.doWhile(() => Future.delayed(Duration(milliseconds: 50))
           .then((_) => !_ref.read(forceLocationProvider.notifier).loaded));
     }
 
-    final permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.deniedForever) {
-      if (context != null) {
-        final loc = AppLocalizations.of(context);
-        await showOkAlertDialog(
-          title: loc?.enableLocation ?? 'Enable Location',
-          message: loc?.enableLocationMessage ??
-              'Please allow location access for the app.',
-          context: context,
-        );
-        await Geolocator.openAppSettings();
-      } else
-        return;
-    }
-
+    // Request for location service if needed.
     final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isLocationEnabled) {
       if (context != null) {
