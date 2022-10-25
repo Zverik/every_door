@@ -43,6 +43,8 @@ class LastPresetsProvider {
         'operator',
         'phone',
         'website',
+        'camera:direction',
+        'direction',
       };
       tags.forEach((key, value) {
         if (!kDeleteKeys.contains(key) &&
