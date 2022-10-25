@@ -149,7 +149,7 @@
   "@changesCount": {},
   "changesUploadedTitle": "Caricato",
   "@changesUploadedTitle": {},
-  "changesUploadedMessage": "{changes} inviati all'API.",
+  "changesUploadedMessage": "{changes} inviate all'API.",
   "@changesUploadedMessage": {},
   "changesUploadFailedTitle": "Caricamento fallito",
   "@changesUploadFailedTitle": {},
@@ -319,7 +319,7 @@
   "@addressPlace": {},
   "apiStatusDownloading": "Scaricamento dei dati…",
   "@apiStatusDownloading": {},
-  "apiStatusUpdatingDB": "Salvataggio degli elementi nel database dell’app",
+  "apiStatusUpdatingDB": "Salvataggio degli elementi nel database dell'app",
   "@apiStatusUpdatingDB": {},
   "apiStatusUploading": "Caricamento delle modifiche",
   "@apiStatusUploading": {},
@@ -795,5 +795,9 @@
   "fieldCardsOnly": "solo carte elettroniche",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
+  },
+  "fieldDirectionSet": "Imposta",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
