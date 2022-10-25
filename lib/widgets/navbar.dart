@@ -86,10 +86,13 @@ class BrowserNavigationBar extends ConsumerWidget {
       );
     }
 
+    final isNavigation = ref.watch(navigationModeProvider);
     IconButton imageryButton = IconButton(
-      onPressed: () {
-        ref.read(selectedImageryProvider.notifier).toggle();
-      },
+      onPressed: isNavigation
+          ? null
+          : () {
+              ref.read(selectedImageryProvider.notifier).toggle();
+            },
       icon: Icon(ref.watch(selectedImageryProvider) == kOSMImagery
           ? Icons.map_outlined
           : Icons.map),
