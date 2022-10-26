@@ -1,1 +1,1137 @@
-{}
+{
+  "loadingStart": "Előkészítés…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingTooMuchDataTitle": "Túl sok adat",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadSuccessful": "A letöltés sikeres",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "tileNo": "nem",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "mapLocate": "Vissza hozzám",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "Nagyítás",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Kicsinyítés",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "chooseLocation": "Válasszon helyet",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "warningTooOld": "A szolgáltatás {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "editorSave": "Mentés",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorRestore": "Visszaállítás",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorDeleteTitle": "Törli a(z) {amenity} szolgáltatást?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "Törlés",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsAddTag": "Címke hozzáadása",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Kulcs",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Érték",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "settingsPurgedAllTitle": "Törölt adatok",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "aboutHelpTranslate": "Segítsen a fordításban",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "a Weblate-en",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "GYIK",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Hivatkozások",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountLoginOAuth": "Bejelentkezés OAuth használatával",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "OAuth hiba",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "changesDeletedChange": "{change} törölve",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "fieldHoursOpens": "Nyit",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursRemoveBreak": "Szünet eltávolítása",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldCardsOnly": "csak kártya",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldCheckboxYes": "igen",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "nincs",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "enableLocation": "Hely engedélyezése",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "buildingMaterialPanels": "panelek",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "betontéglák",
+  "@buildingMaterialCementBlock": {},
+  "buildingTypeCommercial": "kereskedelmi",
+  "@buildingTypeCommercial": {},
+  "entranceAccessNo": "nem",
+  "@entranceAccessNo": {},
+  "addressUnitOptional": "elhagyható",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "notesCancelMessage": "Megszakítja az OSM-jegyzetét?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "apiStatusDownloading": "Adatok letöltése…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "faqMapTiny": "Miért ilyen kicsi a térkép?",
+  "@faqMapTiny": {},
+  "faqYellow": "Miért sárga néhány házszám?",
+  "@faqYellow": {},
+  "faqFloors": "A „3” és a „/3” emelet ugyanaz?",
+  "@faqFloors": {},
+  "loadingPresets": "Előbeállítások betöltése…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingChanges": "Módosítások betöltése…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingLocation": "Hely megszerzése…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingChangesFailed": "A módosítások betöltése sikertelen",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingTooMuchData": "Törölje a letöltött adatokat a Beállításokban, hogy gyorsabbá tegye a szerkesztőt.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "A letöltés sikertelen",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadedCount": "{count,plural, =1{{count} elem letöltve.}, =few{{count} elem letöltve.}, =other{{count} elem letöltve.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "tileNothingAround": "Nincsenek szolgáltatások Ön körül {distance} méteren belül.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "tileDragTheMap": "Menjen közelebb valamihez, húzza a térképet, vagy adjon hozzá egy hiányzó szolgáltatást.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Menjen egy kört, adjon hozzá egy szolgáltatást, vagy törölje a szűrőt.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "legendOther": "Egyéb",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "navUpload": "Feltöltés",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navDownload": "Letöltés",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navImagery": "Légi felvétel váltása",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navPoiMode": "Szolgáltatás mód",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Mikrotérképezési mód",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "Bejáratok mód",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "navNotesMode": "Jegyzetek mód",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "filterNoAddresses": "Nincsenek címek a közelben",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterByAddress": "Cím szerint",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterByFloor": "Emelet szerint",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "filterEmpty": "üres",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "filterNonConfirmed": "Csak meg nem erősített",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "mapSettings": "Beállítások",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "Szűrő",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "chooseType": "Válasszon típust",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Törlés",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "warningFixme": "Javítsa ki: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Hibás címke: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} éves}, =few{{count} éves}, =other{{count} éves}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorMarkChecked": "Megjelölés ellenőrzöttként",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Előzmények",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Nyers címkék",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorCloseTitle": "Bezárja a szerkesztőt?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "Elveti a módosításokat mentés nélkül?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorMoreFields": "További mezők",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorLoadingPreset": "Előbeállítás betöltése…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMove": "Mozgatás",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorDuplicate": "Lehetséges kettőzés {distance} méteren belül",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorMarkActive": "Megjelölés aktívként",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Megjelölés nem működőként",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorMissing": "Nem létezik",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorRestoreTitle": "Nyitva van?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorRestoreMessage": "A(z) {amenity} nem akítív. Szeretné aktívként megjelölni?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsShare": "Megosztás",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsUrlCopied": "Az URL a vágólapra másolva",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsNewPoint": "Új pont",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsRestore": "Visszaállítás",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "Törlés",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "versionsEnableInternet": "Kapcsolódás az internetre a verzióelőzmények lekéréséhez",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "Hiba a verzióelőzmények lekérésekor",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "tagsKeyError": "A kulcs túl ritka",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsValueLong": "Az érték túl hosszú",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "versionsTitle": "{elementRef} előzményei",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsRetryFetch": "Újrapróbálás",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsLocalChanges": "Helyi módosítások",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "{number}. verzió",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "– {user} {datetime}-kor",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "Nincsenek címkemódosítások",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsPresentation": "Bemutató",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsTitle": "Beállítás",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsApiServer": "API-kiszolgáló",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsDataManagement": "Adatkezelés",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsLoginDetails": "OSM-fiók",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsHashtags": "Módosításcsomag kettős keresztes címkéi",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "settingsPurgeData": "Elavult gyorsítótárazott adatok törlése",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "Az összes letöltött adat törlése",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataTitle": "Törli az adatokat?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "Újra le kell majd töltenie mindent. Folytatja?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "Elavult adatok",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{{count} elem törölve}, =few{{count} elem törölve}, =other{{count} elem törölve}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsBackground": "Háttér légi felvétel",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsUploads": "Függőben lévő feltöltések",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsCacheTiles": "Csempék letöltése",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLeftHand": "Balkezes vezérlők",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsLanguage": "Nyelv",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsEditor": "Szerkesztő",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsPreferContact": "A „contact:” előtag előnyben részesítése",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsNumericKeyboard": "Kiterjesztett numerikus billentyűzet",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsDefaultPayment": "Alapértelmezett fizetési kártyák",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsSystem": "Rendszer",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "Google által javított pozicionálás használata",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "settingsAbout": "Névjegy",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutViewLog": "Rendszernapló",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "Verzióelőzmények",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "Telepített verzió",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Projekt weboldala",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "Forráskód",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "a GitHubon",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "Licenc",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "Segítsen a(z) {appTitle} továbbfejlesztésében",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "Hiba jelentése",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "accountTitle": "OpenStreetMap-fiók",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginPassword": "Bejelentkezés jelszóval",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "Figyelmeztetés",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "A jelszava eltárolásra kerül az eszközön. Csak akkor válassza ezt, ha az OAuth nem sikerül.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "Megértettem",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "OSM hitelesítési adatok",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountFieldLogin": "Felhasználónév",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountFieldPassword": "Jelszó",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountAuthErrorTitle": "Hitelesítési hiba",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountAuthErrorMessage": "Hibás felhasználónév vagy jelszó.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "Kijelentkezés",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountChangesets": "Módosításcsomagok",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountUnreadMail": "Olvasatlan levél",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "hashtagsLabel": "Szavak a kettős keresztes címkékhez",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Címkék megerősítése feltöltéskor",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesCount": "{count,plural, =1{{count} módosítás}, =few{{count} módosítás}, =other{{count} módosítás}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesUploadedTitle": "Feltöltve",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadedMessage": "{changes} elküldve az API-nak.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesUploadFailedTitle": "A feltöltés sikertelen",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "changesDeletedUndo": "Visszavonás",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesPending": "Függőben",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesMapNotes": "Térképjegyzetek és rajzok",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesOsmNote": "OSM-jegyzet",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "changesPurge": "Módosítások törlése",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "changesPurgeTitle": "Törli a módosításokat?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesPurgeMessage": "Törli az összes rögzített módosítást és visszaállítja az eredeti adatokat?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "changesSwipeLeft": "Pöccintsen balra egy módosítás visszavonásához",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursButton": "Nyitva tartás beállítása",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursTitle": "Nyitva tartás",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursFullDay": "Egész nap",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursAsText": "Szövegként",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "„Utolsó hétfő”",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "Adott dátum",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Zárva",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Munkaszüneti napok",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursCloses": "Zár",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursBreak": "Szünet",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "Következő",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursHour": "Óra",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Perc",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursChooseTime": "Óra és perc",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Törlés",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Mentés",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursAddFragment": "Töredék hozzáadása",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursRemoveFragment": "Töredék eltávolítása",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursAddBreak": "Szünet hozzáadása",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursWeekdays": "Hé Ke Sze Cs Pé Szo Va",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "Munkaszüneti napokon zárva",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursSDRemove": "Eltávolítás",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "Dátum hozzáadása",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Tartomány hozzáadása",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldDirectionSet": "Beállítás",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldNameLanguages": "Másik nyelv",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Érték másolása",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldComboEmpty": "üres",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "válasszon",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "nincs",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "nyilvános",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "ügyfeleknek",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "igen",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "korlátozott",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "nem",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsAccepted": "elfogadott",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "nem",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldFloorEmpty": "Emelet kiválasztásához állítson be egy címet.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorNew": "Új emelet",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorFloorDesc": "A navigációnál és a liftekben lévő emelet",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "Az emelet száma 0-tól kezdődik a földszintnél",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldFloorShouldBeNumber": "Adjon meg egy számot",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldAddressTap": "Koppintson egy címre",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldPhoneWrong": "Hibás telefonformátum",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "messageNoData": "Nincsenek adatok, koppintson ide a letöltéshez",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "Az adatok elavultak, koppintson ide a frissítéshez",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "GPS engedélyezése",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Kapcsolja be a helymeghatározási szolgáltatásokat a hamarosan megjelenő beállítások panelen.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocationMessage": "Engedélyezze a helyhozzáférést az alkalmazás számára a hamarosan megjelenő beállítások panelen.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonYes": "Igen",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "Nem",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "entrancesAddEntrance": "Bejárat hozzáadása",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "Épület hozzáadása",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "entranceX": "{n}. bejárat",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingX": "{n}. épület",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "addressX": "{n}. cím",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingPostCode": "Irányítószám",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingLevels": "Szintek",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Tető szintjei",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "Tető alakja",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "Típus",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Több",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterial": "Homlokzat",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "tégla",
+  "@buildingMaterialBrick": {},
+  "entranceTypeMain": "fő",
+  "@entranceTypeMain": {},
+  "buildingMaterialPlaster": "vakolat",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "fa",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "beton",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialStone": "kő",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "fém",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "üveg",
+  "@buildingMaterialGlass": {},
+  "buildingTypeAddress": "cím",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "ház",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "társasház",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "kiskereskedelem",
+  "@buildingTypeRetail": {},
+  "buildingTypeShed": "fészer",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "ipari",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeGarage": "garázs",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "építkezés",
+  "@buildingTypeConstruction": {},
+  "entranceFlats": "Lakások",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "Számok listájának kell lennie",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceIsUnit": "A lakások számának tárolása az addr:unit címkében",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceRef": "Hivatkozás",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "Hozzáférés",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessYes": "nyitott",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "személyes",
+  "@entranceAccessPrivate": {},
+  "entranceAccessDelivery": "kiszállítás",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "Kerekesszék",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceType": "Típus",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeStaircase": "lépcsőház",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "otthon",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "üzlet",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "szolgáltatás",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "garázs",
+  "@entranceTypeGarage": {},
+  "entranceTypeEmergency": "vészkijárat",
+  "@entranceTypeEmergency": {},
+  "addressHouseNumber": "Ház",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Nem lehet üres",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Egység",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressStreet": "Utca",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "Település",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesAddNote": "Jegyzet hozzáadása",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "Névtelen",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Megoldás",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "faqLetters": "Írhatok betűket egy ref címkébe vagy egy lakásszámba?",
+  "@faqLetters": {},
+  "notesCloseMessage": "Megjelöli a jegyzetet megoldottként?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "apiStatusUpdatingDB": "Elemek mentése az alkalmazás adatbázisába",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploading": "Módosítások feltöltése",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "faqMapTinyContent": "Mert nem ez a lényeg. Csak ellenőrizze a helyzetét a térképen, és rögzítse a beállításhoz. Nézze meg az alábbi szolgáltatáslistát, amely az Öntől való távolság szerint van rendezve.\n\nA térkép nagyobb lesz, ha a helyzetétől távol eső szolgáltatásokat szerkeszt. Bár az alkalmazás a szemmel látható dolgok szerkesztéséhez készült.",
+  "@faqMapTinyContent": {},
+  "faqCheckmarks": "Mire valók az ellenőrzőjelek?",
+  "@faqCheckmarks": {},
+  "faqCheckmarksContent": "Ezek a jelek a szolgáltatás adatainak megerősítését jelentik. Hozzáadják a „check_date” címkét az aktuális dátummal.\n\nAz ellenőrzőjelek mögött az alábbi ötlet áll: tegyük fel, hogy első alkalommal felmérte a fél várost. Aztán egy hónap múlva visszajött, és újra elment felmérni. Valahogyan meg kell jelölnie, hogy látja a szolgáltatást, de semmi sem változott rajta. Ez az ellenőrzőjel: koppintson rá és folytassa.\n\nA jel két hónapig marad ellenőrzött állapotban. Ezt követően újra felmérheti a szolgáltatásokat.",
+  "@faqCheckmarksContent": {},
+  "faqEntrance": "Hogyan lehet hozzáadni egy épület bejáratát?",
+  "@faqEntrance": {},
+  "faqEntranceContent": "Alul található a módgombok sora: mikrotérképezés, szolgáltatások, bejáratok és jegyzetek.\n\nA bejáratok módban koppintson vagy húzza az alsó sarokban lévő ajtógombot a térképre.",
+  "@faqEntranceContent": {},
+  "faqYellowContent": "A nem sárga címkék a bejáratok módban és a fehér pontok a mikrotérképezési módban azt jelentik, hogy az elemekből hiányzik néhány fontos attribútum. Például:\n\n* Az épületeknél elvárható, hogy meg legyen adva a szintek száma.\n* A bejáratoknak rendelkezniük kell típussal, lépcsőházak esetén lakástartománnyal.\n* A padoknak anyaga és kartámasza kell legyen.\n* A fáknak levéltípusuk és lombhullatási ciklusuk van.",
+  "@faqYellowContent": {},
+  "faqLettersContent": "Ha a numerikus billentyűzetét nem lehet teljes billentyűzetre váltani, akkor ellenőrizze az alkalmazás beállításait. Ezek a bal felső sarokban lévő gomb mögött találhatók. Kapcsolja be ott a „kiterjesztett numerikus billentyűzet” beállítást.",
+  "@faqLettersContent": {},
+  "faqFloorsContent": "Nem. Az elsőben az „addr:floor=3” címke van kitöltve. Ez az emelet, ahogy a navigációnál ki van írva és általánosan használt. A másodikban nem ez a címke, hanem „level=3” van megadva. Ez a szám egy folyamatos emeletszám nullától a „building:levels − 1”-ig. Vagyis egy háromemeletes épületben az „addr:floor” értéke egy adott országtól függ, de a „level” mindig 0, 1 vagy 2.\n\nLássuk, hogyan kapcsolódik a szerkesztőben lévő jelölés ezekhez a címkékhez:\n\n* „2”: „addr:floor=2” és nem üres „level=*”.\n* „4/”: „addr:floor=4”, de nincs „level” címke.\n* „/1”: „level=1”, de nincs „addr:floor” címke.\n* „1/0”: „addr:floor=1” + „level=0” (és van egy objektum a közelben: ugyanolyan „addr:floor”, de eltérő „level” értékkel, vagy fordítva).",
+  "@faqFloorsContent": {},
+  "faqChangeType": "Hogyan lehet megváltoztatni egy szolgáltatás típusát?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "Koppintson a szerkesztő címére, ahol a típus ki van írva.",
+  "@faqChangeTypeContent": {},
+  "faqTagging": "Az összes címkézési kérdés",
+  "@faqTagging": {},
+  "faqTaggingContent": "Miért hiányzik egy objektum a szerkesztőben? Mikor jelennek meg ezek a fehér pontok a mikrotérképezési módban? Hogyan vannak az objektumok rendezve?\n\nAz összes ilyen kérdésre választ kaphat a [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) fájlból. Itt van, hogy miket nézhet meg:\n\n* A fő címke kulcssorrendje — `kMainKeys` lista.\n* Mely objektumok vannak letöltve — `isGoodTags` függvény.\n* Mi számít szolgáltatásnak — `isAmenityTags` függvény.\n* Mely pontok vannak mely utakhoz illesztve — `detectSnap` függvény.\n* Mikor befejezetlen egy mikrotérképezési objektum — `needsMoreInfo` függvény.",
+  "@faqTaggingContent": {}
+}
