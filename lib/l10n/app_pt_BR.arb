@@ -1127,5 +1127,9 @@
   "faqYellowContent": "Rótulos não amarelos no modo de Entradas e pontos brancos no modo de Micromapeamento significam que os elementos carecem de alguns atributos importantes. Por exemplo:\n\n* Espera-se que os edifícios tenham o número de andares.\n* As entradas devem ter um tipo e, para escadas, intervalo dos apartamentos.\n* Os assentos devem ter informação sobre material e encosto.\n* As árvores devem ter tipo e ciclo de folhagem.",
   "@faqYellowContent": {},
   "faqYellow": "Por que há alguns endereços em amarelo?",
-  "@faqYellow": {}
+  "@faqYellow": {},
+  "fieldDirectionSet": "Configurar",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  }
 }
