@@ -246,7 +246,7 @@
   "@tagsShare": {
     "description": "Tooltip for the sharing button on the tags panel."
   },
-  "tagsUrlCopied": "Adresa URL zkopírována do schránky",
+  "tagsUrlCopied": "URL adresa zkopírována do schránky",
   "@tagsUrlCopied": {
     "description": "Popup message when the link to the object was copied to the clipboard."
   },
@@ -899,7 +899,7 @@
   "@settingsEditor": {
     "description": "Title for the settings section for editor presets."
   },
-  "settingsPreferContact": "Upřednostňovat prefix \"contact:\"",
+  "settingsPreferContact": "Upřednostňovat prefix „contact:“",
   "@settingsPreferContact": {
     "description": "Settings switch for using e.g. contact:phone=* over phone=*."
   },
@@ -1060,7 +1060,7 @@
   },
   "faqCheckmarks": "K čemu jsou značky?",
   "@faqCheckmarks": {},
-  "faqLettersContent": "Pokud nelze numerickou klávesnici přepnout na plnohodnotnou, zkontrolujte nastavení aplikace. Nachází se za tlačítkem v levém horním rohu. Tam zapněte \"rozšířenou numerickou klávesnici\".",
+  "faqLettersContent": "Pokud nelze numerickou klávesnici přepnout na plnohodnotnou, zkontrolujte nastavení aplikace. Nachází se za tlačítkem v levém horním rohu. Tam zapněte „rozšířenou numerickou klávesnici“.",
   "@faqLettersContent": {},
   "faqCheckmarksContent": "Jedná se o značky, které potvrzují údaje o občanské vybavenosti. Přidávají značku `check_date` s aktuálním datem.\n\nMyšlenka kontrolních značek spočívá v tom, že jste, řekněme, poprvé zkoumali polovinu města. Pak jste se po měsíci vrátili a šli jste provést průzkum znovu. Potřebujete nějak označit, že danou vybavenost vidíte, ale nic se na ní nezměnilo. To je ta kontrolní značka: klepnete na ni a pokračujete.\n\nZnačka zůstane zaškrtnutá po dobu dvou měsíců. Poté můžete provést průzkum vybavenosti znovu.",
   "@faqCheckmarksContent": {},
@@ -1086,7 +1086,7 @@
       }
     }
   },
-  "settingsHashtags": "Hashtagy changesetu",
+  "settingsHashtags": "Hashtagy sady změn",
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
   },
