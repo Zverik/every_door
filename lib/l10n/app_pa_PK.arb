@@ -738,7 +738,7 @@
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
-  "settingsApiServer": "اےپی‌آئی سروَر",
+  "settingsApiServer": "کھاتہ جوڑن",
   "@settingsApiServer": {
     "description": "Section title for API server settings."
   },
@@ -954,7 +954,7 @@
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "filterNonConfirmed": "اݨ پکے صرف",
+  "filterNonConfirmed": "صرف پکے نہیں",
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
