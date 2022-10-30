@@ -1127,5 +1127,9 @@
   "hashtagsConfirm": "Potrdi oznake pri nalaganju",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "fieldDirectionSet": "Nastaviti",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
