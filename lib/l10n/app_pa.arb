@@ -115,7 +115,7 @@
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
-  "settingsApiServer": "ਐ. ਪੀ. ਆਈ. ਸਰਵਰ",
+  "settingsApiServer": "ਖਾਤਾ ਜੋੜਨ",
   "@settingsApiServer": {
     "description": "Section title for API server settings."
   },
