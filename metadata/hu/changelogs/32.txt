@@ -1,0 +1,4 @@
+* Kicsinyíthet a legnagyobbig.
+* A nagyítási szintek megőrzésre kerülnek a módok között.
+* Irányszerkesztő a padoknál és kameráknál.
+* Stabilizált színek a mikrotérképezési módban.

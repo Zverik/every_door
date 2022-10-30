@@ -1,0 +1,5 @@
+Ez a szerkesztő nem készteti Önt gondolkodásra. Csak menjen el egy bevásárlóközpontba, és indítsa el az Every Door alkalmazást. Látni fogja a feltérképezett üzleteket Ön körül: koppintson az ellenőrzőjelre bármely üzletnél, amely még mindig ott található, és adja hozzá azokat az üzleteket, amelyek nincsenek a térképen. Ennyi a teljes folyamat: az egész várost naprakészen tarthatja ennek az egyszerű szerkesztőnek köszönhetően.
+
+Van egy mikrotérképezési mód is a padok és utcai lámpák ellenőrzéséhez és hozzáadásához. És egy bejáratok mód az épületek attribútumainak és bejáratainak hozzáadásához – amelyek automatikusan egyesítve lesznek az épületek körvonalaiba.
+
+Az Every Door alkalmazás az iD-szerkesztőből származó előbeállításokat és egyéb adatokat használja.
