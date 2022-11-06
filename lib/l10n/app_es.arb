@@ -1127,5 +1127,9 @@
   "fieldCardsOnly": "sólo tarjeta",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
+  },
+  "fieldDirectionSet": "Establecer",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
