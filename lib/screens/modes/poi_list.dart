@@ -67,17 +67,14 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
 
   updateNearest({LatLng? forceLocation, int? forceRadius}) async {
     // Disabling updates in zoomed in mode.
-    if (forceLocation == null && ref.read(microZoomedInProvider) != null)
-      return;
+    if (forceLocation == null && ref.read(microZoomedInProvider) != null) return;
 
     final provider = ref.read(osmDataProvider);
-    final isMicromapping =
-        ref.read(editorModeProvider) == EditorMode.micromapping;
+    final isMicromapping = ref.read(editorModeProvider) == EditorMode.micromapping;
     final filter = ref.read(poiFilterProvider);
     final location = forceLocation ?? ref.read(effectiveLocationProvider)!;
     // Query for amenities around the location.
-    final int radius =
-        forceRadius ?? (farFromUser ? kFarVisibilityRadius : kVisibilityRadius);
+    final int radius = forceRadius ?? (farFromUser ? kFarVisibilityRadius : kVisibilityRadius);
     List<OsmChange> data = await provider.getElements(location, radius);
 
     // Remove points too far from the user.
@@ -121,8 +118,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       data = data.where((e) => filter.matches(e)).toList();
     }
     // Sort by distance.
-    data.sort((a, b) => distance(location, a.location)
-        .compareTo(distance(location, b.location)));
+    data.sort((a, b) => distance(location, a.location).compareTo(distance(location, b.location)));
     // Trim to 10-20 elements.
     final maxElements = !isMicromapping ? kAmenitiesInList : kMicroStuffInList;
     if (data.length > maxElements) data = data.sublist(0, maxElements);
@@ -148,24 +144,20 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
 
   micromappingTap(LatLngBounds area) async {
     if (ref.read(editorModeProvider) == EditorMode.micromapping) {
-      List<OsmChange> amenitiesAtCenter = nearestPOI
-          .where((element) => area.contains(element.location))
-          .toList();
+      List<OsmChange> amenitiesAtCenter = nearestPOI.where((element) => area.contains(element.location)).toList();
 
       if (amenitiesAtCenter.isEmpty) return;
-      if (amenitiesAtCenter.length == 1 ||
-          ref.read(microZoomedInProvider) != null) {
+      if (amenitiesAtCenter.length == 1 || ref.read(microZoomedInProvider) != null) {
         if (amenitiesAtCenter.length > 1) {
           // Sort by distance.
           const distance = DistanceEquirectangular();
-          amenitiesAtCenter.sort((a, b) => distance(area.center, a.location)
-              .compareTo(distance(area.center, b.location)));
+          amenitiesAtCenter
+              .sort((a, b) => distance(area.center, a.location).compareTo(distance(area.center, b.location)));
         }
         // Open the editor for the first object.
         await Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (_) => PoiEditorPage(amenity: amenitiesAtCenter.first)),
+          MaterialPageRoute(builder: (_) => PoiEditorPage(amenity: amenitiesAtCenter.first)),
         );
         // When finished, reset zoomed in state.
         ref.read(microZoomedInProvider.state).state = null;
@@ -175,9 +167,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
         ref.read(microZoomedInProvider.state).state = area;
         // updateNearest(forceLocation: area.center);
         setState(() {
-          nearestPOI = nearestPOI
-              .where((element) => area.contains(element.location))
-              .toList();
+          nearestPOI = nearestPOI.where((element) => area.contains(element.location)).toList();
         });
       }
     }
@@ -186,8 +176,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
   @override
   Widget build(BuildContext context) {
     final location = ref.read(effectiveLocationProvider);
-    final isMicromapping =
-        ref.watch(editorModeProvider) == EditorMode.micromapping;
+    final isMicromapping = ref.watch(editorModeProvider) == EditorMode.micromapping;
     final isZoomedIn = ref.watch(microZoomedInProvider) != null;
     final apiStatus = ref.watch(apiStatusProvider);
     ref.listen(editorModeProvider, (_, next) {
@@ -228,8 +217,8 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       final needMaxMap = isMicromapping || farFromUser;
       final mediaHeight = MediaQuery.of(context).size.height;
       if (widget.isWide || mediaHeight <= 600)
-        bottomPane = Expanded(
-          flex: needMaxMap ? 10 : 23,
+        bottomPane = SizedBox(
+          width: MediaQuery.of(context).size.width * 0.5,
           child: bottomPaneChild,
         );
       else
@@ -289,9 +278,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
           ),
         ),
         if (widget.areaStatusPanel != null)
-          widget.isWide
-              ? RotatedBox(quarterTurns: 3, child: widget.areaStatusPanel!)
-              : widget.areaStatusPanel!,
+          widget.isWide ? RotatedBox(quarterTurns: 3, child: widget.areaStatusPanel!) : widget.areaStatusPanel!,
         bottomPane,
       ],
     );

@@ -83,11 +83,9 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
 
     try {
       final count = await provider.downloadAround(location);
-      AlertController.show(loc.dataDownloadSuccessful,
-          loc.dataDownloadedCount(count), TypeAlert.success);
+      AlertController.show(loc.dataDownloadSuccessful, loc.dataDownloadedCount(count), TypeAlert.success);
     } on Exception catch (e) {
-      AlertController.show(
-          loc.dataDownloadFailed, e.toString(), TypeAlert.error);
+      AlertController.show(loc.dataDownloadFailed, e.toString(), TypeAlert.error);
       return;
     }
     ref.read(presetProvider).clearFieldCache();
@@ -97,8 +95,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       await ref.read(notesProvider).downloadNotes(location);
     } on Exception catch (e) {
       // TODO: message about notes
-      AlertController.show(
-          loc.dataDownloadFailed, e.toString(), TypeAlert.error);
+      AlertController.show(loc.dataDownloadFailed, e.toString(), TypeAlert.error);
     }
     updateAreaStatus();
     ref.read(needMapUpdateProvider).trigger();
@@ -118,8 +115,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     });
 
     final screenSize = MediaQuery.of(context).size;
-    final isWide =
-        screenSize.width > screenSize.height && screenSize.height < 600;
+    final isWide = screenSize.width > 600;
 
     Widget editorPanel;
     final statusPanel = buildAreaStatusBar(context);
@@ -129,8 +125,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       switch (editorMode) {
         case EditorMode.poi:
         case EditorMode.micromapping:
-          editorPanel =
-              PoiListPane(areaStatusPanel: statusPanel, isWide: isWide);
+          editorPanel = PoiListPane(areaStatusPanel: statusPanel, isWide: isWide);
           break;
         case EditorMode.entrances:
           editorPanel = EntrancesPane(areaStatusPanel: statusPanel);
@@ -146,8 +141,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
         if (ref.read(microZoomedInProvider) != null) {
           ref.read(microZoomedInProvider.state).state = null;
           return false;
-        } else if (!ref.read(trackingProvider) &&
-            ref.read(geolocationProvider) != null) {
+        } else if (!ref.read(trackingProvider) && ref.read(geolocationProvider) != null) {
           ref.read(trackingProvider.state).state = true;
           return false;
         } else {
@@ -161,9 +155,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
             BrowserNavigationBar(downloadAmenities: downloadAmenities),
           ],
         ),
-        floatingActionButton: !isNavigation &&
-                (editorMode == EditorMode.poi ||
-                    editorMode == EditorMode.micromapping)
+        floatingActionButton: !isNavigation && (editorMode == EditorMode.poi || editorMode == EditorMode.micromapping)
             ? Padding(
                 padding: const EdgeInsets.only(bottom: 50.0),
                 child: FloatingActionButton(
@@ -197,19 +189,13 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 4.0),
           height: 50.0,
-          color: areaStatus == AreaStatus.missing
-              ? Colors.redAccent
-              : Colors.yellow,
+          color: areaStatus == AreaStatus.missing ? Colors.redAccent : Colors.yellow,
           child: Center(
             child: Text(
-              areaStatus == AreaStatus.missing
-                  ? loc.messageNoData
-                  : loc.messageDataObsolete,
+              areaStatus == AreaStatus.missing ? loc.messageNoData : loc.messageDataObsolete,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: areaStatus == AreaStatus.missing
-                    ? Colors.white
-                    : Colors.black,
+                color: areaStatus == AreaStatus.missing ? Colors.white : Colors.black,
               ),
             ),
           ),
