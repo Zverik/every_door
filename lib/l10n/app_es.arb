@@ -842,7 +842,7 @@
   "@buildingMaterialGlass": {},
   "faqFloorsContent": "No. El primero tiene añadida la etiqueta «addr:floor=3». Ese es el piso tal y como está impreso en la navegación y se utiliza habitualmente. El segundo no tiene esta etiqueta, pero tiene «level=3». Ese número es un número de planta secuencial desde cero hasta «building:levels - 1». Es decir, en un edificio de tres plantas el valor de «addr:floor» depende de un país, pero «level» es siempre 0, 1 o 2.\n\nAsí es como la notación en el editor se relaciona con estas etiquetas:\n\n* «2»: «addr:floor=2» y «level=*» no vacío.\n* «4/»: «addr:floor=4», pero no hay etiqueta «level».\n* 1: «level=1», pero no hay etiqueta «addr:floor».\n* «1/0»: «addr:floor=1» y «level=0» (y hay un objeto cercano con la misma dirección de piso «addr:floor», pero diferente nivel «level», o viceversa).",
   "@faqFloorsContent": {},
-  "faqCheckmarksContent": "Marcan que los datos del servicio fueron confirmados. Estas añaden la etiqueta «check_date» con la fecha actual.\n\nLa idea detrás de las marcas de verificación es que, por ejemplo, luego de encuestar la mitad de la ciudad la primera vez, al cabo de un mes, regresas y vuelves a encuestar. Necesitas marcar de alguna manera que ves el servicio, pero que nada ha cambiado en él. Esa es la marca de verificación: la tocas y continúas.\n\nLa marca permanece marcada durante dos meses. Después puedes volver a encuestar los servicios.",
+  "faqCheckmarksContent": "Marcan que los datos del elemento fueron confirmados. Estas añaden la etiqueta «check_date» con la fecha actual.\n\nLa idea detrás de las marcas de verificación es que, por ejemplo, luego de sondear la mitad de la ciudad por primera vez, al cabo de un mes regresas y vuelves a sondear. Debes marcar de alguna manera que ves el elemento, pero que nada ha cambiado en él. Esa es la marca de verificación: la pulsas y continúas.\n\nLa marca permanece así durante dos meses. Después, puedes volver a sondear los elementos.",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Si tu teclado numérico no puede cambiarse a uno completo, comprueba los ajustes de la aplicación. Están detrás del botón de la esquina superior izquierda. Activa allí el «teclado numérico ampliado».",
   "@faqLettersContent": {},
@@ -1128,7 +1128,7 @@
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
-  "fieldDirectionSet": "Establecer",
+  "fieldDirectionSet": "Definir",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
   }
