@@ -195,7 +195,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "你會失去你未儲存的變動，要繼續嗎？",
+  "editorCloseMessage": "喪失變動並且不儲存？",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -1062,10 +1062,74 @@
   "@faqChangeTypeContent": {},
   "faqTagging": "所有標籤問題",
   "@faqTagging": {},
-  "faqCheckmarksContent": "這些標示表示便利設施已經確認，他們加上 `check_date` 標籤來表示目前日期。\n\n背後標記的意思為，你第一次踏查半座城市，之後過了一個月你回來再次踏查。你必須有某種方式標記你看到便利設施，但是並沒有變動，這就是標記：你點一下然後繼續。\n\n這個標記會持續兩週，之後你可以再次踏查便利便施。",
+  "faqCheckmarksContent": "這些標示表示便利設施已經確認，他們加上 `check_date` 標籤來表示目前日期。\n\n背後標記的意思為，你第一次踏查半座城市，之後過了一個月你回來再次踏查。你必須有某種方式標記你看到便利設施，但是並沒有變動，這就是標記：你點一下然後繼續。\n\n這個標記會持續兩個月，之後你可以再次踏查便利便施。",
   "@faqCheckmarksContent": {},
   "faqFloorsContent": "不是，第一個欄位已經填入 `addr:floor=3` 標籤，這是在導航與平常用途會說到的樓層。第一個的確有這個標籤，但是有 `level=3`，這個數字是從零開始到 `building:levels -1` 的連續樓層數字。這就意味三層樓的建築 `addr:floor` 值依照國家有不同定議，但是 `level` 總是 0、1 或是 2。\n\n這邊是編輯器相關的標籤標示方式：\n\n* `2`：`addr:floor=2` 與非空白 `level=*。\n* `4`：`addr:floor=4，但沒有`level`標籤。\n*`/1`：`level=1`，但是沒有`addr:floor`標籤。\n*`1/0`：`addr:floor=1` + `level=0` (然後那邊附近有相同 `addr:floor` 的物件，但不同 `level`，或是相反狀況)。",
   "@faqFloorsContent": {},
   "faqTaggingContent": "為什麼編輯器內有遺漏物件呢？什麼時候小白點會在在微細畫地圖模式顯示？物件會如果排列？\n\n這些問題的解答都在 [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart)。這邊是你可以閱讀的：\n\n* 主要標籤的鍵順序 — `kMainKeys`清單。\n* 那些物件會下載下來 — 功能 `isGoodTags`。\n* 那些被視為便利設施 — 功能 `isAmenityTags`。\n* 那些節點切斷路徑 — 功能 `detectSnap`。\n* 當微細畫地圖物件不完整 — 功能 `needsMoreInfo`。",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "fieldDirectionSet": "設置",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "warningFixme": "修正我：{value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "錯誤標籤：{tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "便利設施是 {years} 年之前的",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "years": "{count,plural, =1{{count} 年}, =few{{count} 年}, =other{{count} 年}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsHashtags": "變動主題標籤",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "hashtagsLabel": "主題標籤文字",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "上傳時確認標籤",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "notesCancelMessage": "取消你的 OSM 註解？",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "faqYellow": "為什麼有些門牌號碼是黃色的？",
+  "@faqYellow": {},
+  "faqYellowContent": "入 口模式時的非黃色標籤，以及微畫地圖模式的白色點表示元素欠缺一些重要屬性，譬如說：\n\n* 建築應該有樓層數。\n* 入口應該有類別，譬如樓梯、平台範圍。\n* 長椅應該有材質與背靠資訊。\n* 樹林應當有葉子型式與是否落葉。",
+  "@faqYellowContent": {},
+  "fieldCardsOnly": "僅限卡片",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  }
 }
