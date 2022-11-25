@@ -584,5 +584,13 @@
   "editorMarkChecked": "بررسی شد",
   "@editorMarkChecked": {
     "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "loadingLocation": "در حال یافتن مکان…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "chooseTypeClear": "پاک کردن",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
   }
 }
