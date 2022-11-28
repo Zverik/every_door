@@ -1124,8 +1124,12 @@
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
   },
-  "hashtagsConfirm": "Confirmer les étiquettes au téléversage",
+  "hashtagsConfirm": "Confirmer les étiquettes au téléversement",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "fieldDirectionSet": "Choisir",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
   }
 }
