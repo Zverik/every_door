@@ -83,7 +83,7 @@
   "@editorSave": {
     "description": "Save button title in the editor"
   },
-  "editorCloseTitle": "アプリを停止しますか？",
+  "editorCloseTitle": "エディタを閉じますか？",
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
