@@ -1130,7 +1130,7 @@
   "@faqFloorsContent": {},
   "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Når vises de hvite prikkene i mikrokartleggingsmodus? Hvordan sorteres objekter?\n\nSvar på alle disse spørsmålene finnes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er hva du kan se på:\n\n* Rekkefølgen for hovedetiketten – listen 'kMainKeys'.\n* Hvilke objekter lastes ned – funksjonen 'isGoodTags'.\n* Hva regnes som en fasilitet – funksjonen 'isAmenityTags'.\n* Hvilke punkter er forbundet til hvilke veier – funksjon \"detectSnap\".\n* Når et mikrokartleggingsobjekt er ufullstendig – funksjonen \"needsMoreInfo\".",
   "@faqTaggingContent": {},
-  "fieldDirectionSet": "Sett",
+  "fieldDirectionSet": "Angi",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
   }
