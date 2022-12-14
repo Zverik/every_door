@@ -23,7 +23,7 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
-  "tileNothingAround": "周囲 {distance} 以内に施設がありません。",
+  "tileNothingAround": "周囲 {distance}m以内に施設がありません。",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -107,7 +107,7 @@
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
   },
-  "editorMarkDefunct": "閉鎖済みとマーク",
+  "editorMarkDefunct": "閉鎖とマーク",
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
@@ -248,7 +248,7 @@
   "@settingsNumericKeyboard": {
     "description": "Settings switch for using the full keyboard for numeric fields."
   },
-  "settingsDefaultPayment": "デフォルトのクレジットカード",
+  "settingsDefaultPayment": "デフォルトの支払カード",
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
@@ -359,7 +359,7 @@
   "@changesPurgeTitle": {
     "description": "Dialog title for confirming deletion of all changes."
   },
-  "changesPurgeMessage": "すべての変更を破棄して、元のデータを復帰させますか？",
+  "changesPurgeMessage": "すべての変更を破棄して、元のデータに復元しますか？",
   "@changesPurgeMessage": {
     "description": "Dialog message for confirming deletion of all changes."
   },
@@ -431,7 +431,7 @@
   "@fieldWheelchairYes": {
     "description": "Wheelchair field label for full accessibility."
   },
-  "fieldWheelchairLimited": "限定的",
+  "fieldWheelchairLimited": "一部可",
   "@fieldWheelchairLimited": {
     "description": "Wheelchair field label for limited accessibility."
   },
@@ -565,7 +565,7 @@
   "@buildingTypeShed": {},
   "buildingTypeIndustrial": "工場",
   "@buildingTypeIndustrial": {},
-  "buildingTypeGarage": "ガレージ",
+  "buildingTypeGarage": "車庫",
   "@buildingTypeGarage": {},
   "buildingTypeConstruction": "建築中",
   "@buildingTypeConstruction": {},
@@ -605,17 +605,17 @@
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
-  "entranceTypeMain": "玄関",
+  "entranceTypeMain": "正面玄関",
   "@entranceTypeMain": {},
   "entranceTypeStaircase": "階段",
   "@entranceTypeStaircase": {},
-  "entranceTypeHome": "home",
+  "entranceTypeHome": "住居",
   "@entranceTypeHome": {},
   "entranceTypeShop": "店舗",
   "@entranceTypeShop": {},
-  "entranceTypeService": "service",
+  "entranceTypeService": "通用口",
   "@entranceTypeService": {},
-  "entranceTypeGarage": "ガレージ",
+  "entranceTypeGarage": "車庫",
   "@entranceTypeGarage": {},
   "entranceTypeEmergency": "非常口",
   "@entranceTypeEmergency": {},
@@ -1090,7 +1090,7 @@
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
   },
-  "fieldHoursRemoveBreak": "分断を除去",
+  "fieldHoursRemoveBreak": "休憩時間を除去",
   "@fieldHoursRemoveBreak": {
     "description": "Tooltip for a button to remove a break in an opening hours fragment."
   },
@@ -1107,7 +1107,7 @@
       }
     }
   },
-  "warningTooOld": "施設は {years} 年経っています",
+  "warningTooOld": "施設は {years} 経過しています",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
