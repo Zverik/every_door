@@ -197,7 +197,7 @@
   "@settingsPurgeData": {
     "description": "Settings entry for purging obsolete OSM data."
   },
-  "settingsPurgeAllData": "すべてのダウンロード済データを削除",
+  "settingsPurgeAllData": "全てのダウンロード済データを削除",
   "@settingsPurgeAllData": {
     "description": "Settings entry for purging all cached OSM data."
   },
@@ -224,7 +224,7 @@
       "count": {}
     }
   },
-  "settingsUploads": "アップロードを停止",
+  "settingsUploads": "アップロード待ちデータ一覧",
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
@@ -581,7 +581,7 @@
   "@entranceIsUnit": {
     "description": "Label for a switch to use addr:unit instead of addr:flats."
   },
-  "entranceRef": "参照番号",
+  "entranceRef": "参照コード",
   "@entranceRef": {
     "description": "Label for entrance ref in the form. Keep it short."
   },
@@ -591,11 +591,11 @@
   },
   "entranceAccessYes": "誰でも可",
   "@entranceAccessYes": {},
-  "entranceAccessPrivate": "プライベート",
+  "entranceAccessPrivate": "私有",
   "@entranceAccessPrivate": {},
-  "entranceAccessNo": "利用不可",
+  "entranceAccessNo": "アクセス不可",
   "@entranceAccessNo": {},
-  "entranceAccessDelivery": "配達専用",
+  "entranceAccessDelivery": "配達用",
   "@entranceAccessDelivery": {},
   "entranceWheelchair": "車椅子",
   "@entranceWheelchair": {
