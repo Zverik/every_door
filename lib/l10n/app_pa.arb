@@ -285,11 +285,11 @@
   },
   "faqTagging": "ਸਾਰੇ ਟੈਗ ਦੇ ਸਵਾਲ",
   "@faqTagging": {},
-  "loadingPresets": "ਪ੍ਰੀਸੇਟ ਲੋਡ ਕਰਦੇ…",
+  "loadingPresets": "ਪ੍ਰੀਸੈੱਟ ਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
-  "loadingChangesFailed": "ਤਬਦੀਲੀਆਂ ਲੋਡ ਨਹੀਂ ਸਕਦੀਆਂ",
+  "loadingChangesFailed": "ਤਬਦੀਲੀਆਂ ਨੂੰ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
@@ -336,7 +336,7 @@
   "@filterNoAddresses": {
     "description": "An error message for no addresses nearby, used on filter pane and in address editor."
   },
-  "loadingChanges": "ਤਬਦੀਲੀਆਂ ਲੋਡ ਕਰਦੇ…",
+  "loadingChanges": "ਤਬਦੀਲੀਆਂ ਲੋਡ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ…",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
@@ -365,7 +365,7 @@
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
   },
-  "faqTaggingContent": "ਐਡੀਟਰ ’ਤੇ ਚੀਜ਼ ਨਹੀਂ ਲਭਦਾ?",
+  "faqTaggingContent": "ਸੰਪਾਦਕ ਵਿੱਚ ਇੱਕ ਵਸਤੂ ਕਿਉਂ ਗੁੰਮ ਹੈ? ਜਦੋਂ ਇਹ ਚਿੱਟੇ ਬਿੰਦੀਆਂ ਮਾਈਕ੍ਰੋਮੈਪਿੰਗ ਮੋਡ ਵਿੱਚ ਪ੍ਰਦਰਸ਼ਿਤ ਹੁੰਦੀਆਂ ਹਨ? ਵਸਤੂਆਂ ਨੂੰ ਕਿਵੇਂ ਕ੍ਰਮਬੱਧ ਕੀਤਾ ਜਾਂਦਾ ਹੈ? ਇਹਨਾਂ ਸਾਰੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) ਵਿੱਚ ਹਨ। ਇੱਥੇ ਤੁਸੀਂ ਕੀ ਦੇਖ ਸਕਦੇ ਹੋ: * ਮੁੱਖ ਟੈਗ ਲਈ ਮੁੱਖ ਕ੍ਰਮ — ਸੂਚੀ `kMainKeys`। * ਕਿਹੜੀਆਂ ਵਸਤੂਆਂ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ — ਫੰਕਸ਼ਨ `isGoodTags`। * ਕੀ ਇੱਕ ਸਹੂਲਤ ਮੰਨਿਆ ਜਾਂਦਾ ਹੈ — ਫੰਕਸ਼ਨ `isAmenityTags`। * ਕਿਹੜੇ ਬਿੰਦੂ ਕਿਸ ਤਰੀਕਿਆਂ ਨਾਲ ਸਨੈਪ ਕੀਤੇ ਜਾਂਦੇ ਹਨ — ਫੰਕਸ਼ਨ `ਡਿਟੈਕਟਸਨੈਪ`। * ਜਦੋਂ ਇੱਕ ਮਾਈਕ੍ਰੋਮੈਪਿੰਗ ਆਬਜੈਕਟ ਅਧੂਰਾ ਹੁੰਦਾ ਹੈ — ਫੰਕਸ਼ਨ `NedsMoreInfo`।",
   "@faqTaggingContent": {},
   "notesCancelMessage": "ਤੁਹਾਡੇ ਨੋਟ ਰੱਦ ਕਰੋ?",
   "@notesCancelMessage": {
@@ -462,7 +462,7 @@
   "@fieldHoursTitle": {
     "description": "Title for the opening hours editor pane."
   },
-  "loadingLocation": "ਸਥਿਤੀ ਲਭਦੀ…",
+  "loadingLocation": "ਟਿਕਾਣਾ ਪ੍ਰਾਪਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
