@@ -403,7 +403,7 @@
   "@fieldHoursWeekdays": {
     "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
   },
-  "fieldHoursClosedPH": "祝日営業なし",
+  "fieldHoursClosedPH": "祝日定休",
   "@fieldHoursClosedPH": {
     "description": "Switch label for PH off."
   },
@@ -761,7 +761,7 @@
   "@fieldHoursClosed": {
     "description": "Switch tile label for making a schedule closed, e.g. for PH off."
   },
-  "fieldHoursPublicHolidays": "祝休日",
+  "fieldHoursPublicHolidays": "祝日",
   "@fieldHoursPublicHolidays": {
     "description": "Card title for the PH (public holidays) selector."
   },
@@ -769,7 +769,7 @@
   "@fieldHoursSpecificDays": {
     "description": "Button title for selectors like Dec 31."
   },
-  "fieldHoursNumberedWeekday": "曜日指定",
+  "fieldHoursNumberedWeekday": "特定曜日指定",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
@@ -1070,7 +1070,7 @@
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
-  "warningWrongTag": "誤ったタグ: {tag}",
+  "warningWrongTag": "修正が必要なタグ: {tag}",
   "@warningWrongTag": {
     "description": "Warning message for tags like shop=yes and amenity=no.",
     "placeholders": {
