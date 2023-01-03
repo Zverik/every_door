@@ -843,7 +843,7 @@
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
-  "settingsPresentation": "Prezentace",
+  "settingsPresentation": "Vzhled",
   "@settingsPresentation": {
     "description": "Section title for presentation options."
   },
