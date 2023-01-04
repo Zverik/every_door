@@ -659,7 +659,7 @@
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "loadingTooMuchData": "ล้างข้อมูลที่ดาวน์โหลดแล้วจากหน้าการตั้งค่าเพื่อให้ Editor ทำงานเร็วขึ้น",
+  "loadingTooMuchData": "ล้างข้อมูลที่ดาวน์โหลดแล้วในหน้าการตั้งค่าเพื่อให้ Editor ทำงานเร็วขึ้น",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
