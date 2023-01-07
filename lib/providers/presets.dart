@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/address.dart';
