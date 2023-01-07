@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/address.dart';
@@ -148,11 +150,20 @@ class PresetProvider {
       NsiQueryType nsi = NsiQueryType.none,
       Locale? locale,
       LatLng? location}) async {
-    final terms = query
+    final Iterable<String> terms;
+    if(locale?.languageCode == "ja"){
+    terms = query
+        .split(' ')
+        .where((s) => s.isNotEmpty)
+        .take(3)
+        .map((s) => normalizeString(s));
+    } else {
+    terms = query
         .split(' ')
         .where((s) => s.length >= 2)
         .take(3)
         .map((s) => normalizeString(s));
+    }
     if (terms.isEmpty) return [];
 
     if (!ready) await _waitUntilReady();
