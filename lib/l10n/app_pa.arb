@@ -100,7 +100,7 @@
   "@tagsValue": {
     "description": "Tags panel, add a new tag dialog: value label"
   },
-  "versionsTitle": "ਚੀਜ਼ ਨੰਬਰ {elementRef} ਦਾ ਅਤੀਤ",
+  "versionsTitle": "{elementRef} ਦਾ ਅਤੀਤ",
   "@versionsTitle": {
     "description": "Title for the element versions page.",
     "placeholders": {
@@ -624,5 +624,270 @@
   "navEntrancesMode": "ਪ੍ਰਵੇਸ਼ ਮੋਡ",
   "@navEntrancesMode": {
     "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "versionsFetchError": "ਸੰਸਕਰਣ ਇਤਿਹਾਸ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਤਰੁੱਟੀ",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsVersionMeta": "{datetime} ਵਜੇ {user} ਦੁਆਰਾ",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsPresentation": "ਪੇਸ਼ਕਾਰੀ",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsPurgeData": "ਪੁਰਾਣੇ ਕੈਸ਼ ਕੀਤੇ ਡੇਟਾ ਨੂੰ ਸਾਫ਼ ਕਰੋ",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeDataTitle": "ਕੀ ਡਾਟਾ ਮਿਟਾਉਣਾ ਹੈ?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "ਤੁਹਾਨੂੰ ਸਭ ਕੁਝ ਦੁਬਾਰਾ ਡਾਊਨਲੋਡ ਕਰਨਾ ਹੋਵੇਗਾ। ਅੱਗੇ ਵਧਣਾ?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "ਪੁਰਾਣਾ ਡਾਟਾ",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "ਮਿਟਾਇਆ ਗਿਆ ਡੇਟਾ",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsPurgedMessage": "{count, plural, =1{purged {count} element}, =few{purged {count} ਐਲੀਮੈਂਟਸ}, =other{Purged {count} ਐਲੀਮੈਂਟਸ}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsDefaultPayment": "ਡਿਫ਼ਾਲਟ ਭੁਗਤਾਨ ਕਾਰਡ",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsGoogle": "ਗੂਗਲ-ਇਨਹਾਂਸਡ ਪੋਜੀਸ਼ਨਿੰਗ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "aboutViewLog": "ਸਿਸਟਮ ਲੌਗ",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutHelpImprove": "{appTitle} ਨੂੰ ਬਿਹਤਰ ਬਣਾਉਣ ਵਿੱਚ ਮਦਦ ਕਰੋ",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "accountOAuthError": "OAuth ਤਰੁੱਟੀ",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountLoginPassword": "ਪਾਸਵਰਡ ਨਾਲ ਲੌਗ ਇਨ ਕਰੋ",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "ਚੇਤਾਵਨੀ",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਡਿਵਾਈਸ 'ਤੇ ਸਟੋਰ ਕੀਤਾ ਜਾਵੇਗਾ। OAuth ਫੇਲ ਹੋਣ 'ਤੇ ਹੀ ਇਸਨੂੰ ਚੁਣੋ।",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountAuthErrorTitle": "ਪ੍ਰਮਾਣੀਕਰਨ ਤਰੁੱਟੀ",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountAuthErrorMessage": "ਗਲਤ ਵਰਤੋਂਕਾਰ ਨਾਮ ਜਾਂ ਪਾਸਵਰਡ।",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountUnreadMail": "ਨਾ-ਪੜ੍ਹੀ ਮੇਲ",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "hashtagsLabel": "ਹੈਸ਼ਟੈਗ ਲਈ ਸ਼ਬਦ",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "ਅੱਪਲੋਡ 'ਤੇ ਟੈਗਾਂ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesCount": "{count, plural, =1{{count} change}, =few{{count} change}, =other{{count} ਬਦਲਾਅ}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesUploadedTitle": "ਅੱਪਲੋਡ ਕੀਤਾ",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadedMessage": "API ਨੂੰ {ਬਦਲਾਅ} ਭੇਜੇ।",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesUploadFailedTitle": "ਅੱਪਲੋਡ ਅਸਫਲ ਰਿਹਾ",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "changesDeletedChange": "ਮਿਟਾਇਆ ਗਿਆ {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesPurge": "ਤਬਦੀਲੀਆਂ ਨੂੰ ਸਾਫ਼ ਕਰੋ",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "changesPurgeTitle": "ਕੀ ਤਬਦੀਲੀਆਂ ਨੂੰ ਸਾਫ਼ ਕਰਨਾ ਹੈ?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesSwipeLeft": "ਕਿਸੇ ਬਦਲਾਅ ਨੂੰ ਅਨਡੂ ਕਰਨ ਲਈ ਖੱਬੇ ਪਾਸੇ ਸਵਾਈਪ ਕਰੋ",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursNumberedWeekday": "\"ਪਿਛਲੇ ਸੋਮਵਾਰ\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "ਖਾਸ ਮਿਤੀ",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursPublicHolidays": "ਸਰਵਜਿਨਕ ਛੁੱਟੀਆਂ",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursOpens": "ਖੁੱਲ੍ਹਦਾ ਹੈ",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursAddFragment": "ਫਰੈਗਮੈਂਟ ਜੋੜ੍ਹੋ",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursRemoveFragment": "ਫਰੈਗਮੈਂਟ ਹਟਾਓ",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursAddBreak": "ਇੱਕ ਬ੍ਰੇਕ ਜੋੜੋ",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "settingsPurgeAllData": "ਸਾਰੇ ਡਾਊਨਲੋਡ ਕੀਤੇ ਡੇਟਾ ਨੂੰ ਸਾਫ਼ ਕਰੋ",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsUploads": "ਬਕਾਇਆ ਅੱਪਲੋਡ",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsBackground": "ਬੈਕਗ੍ਰਾਊਂਡ ਇਮੇਜਰੀ",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "changesPending": "ਬਕਾਇਆ",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "fieldHoursBreak": "ਬ੍ਰੇਕ",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "settingsCacheTiles": "ਟਾਈਲਾਂ ਡਾਊਨਲੋਡ ਕਰੋ",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLeftHand": "ਖੱਬੇ ਹੱਥ ਦੇ ਨਿਯੰਤਰਣ",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsPreferContact": "\"ਸੰਪਰਕ:\" ਅਗੇਤਰ ਨੂੰ ਤਰਜੀਹ ਦਿਓ",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsNumericKeyboard": "ਵਿਸਤ੍ਰਿਤ ਸੰਖਿਆਤਮਕ ਕੀਬੋਰਡ",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "accountPasswordWarningButton": "ਸਮਝਿਆ",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "aboutFAQ": "ਆਮ ਸਵਾਲ",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "accountPasswordTitle": "OSM ਪ੍ਰਮਾਣ ਪੱਤਰ",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "fieldHoursAsText": "ਟੈਕਸਟ ਦੇ ਰੂਪ ਵਿੱਚ",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "changesMapNotes": "ਨਕਸ਼ਾ ਨੋਟਸ ਅਤੇ ਡਰਾਇੰਗ",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesPurgeMessage": "ਕੀ ਸਾਰੀਆਂ ਰਿਕਾਰਡ ਕੀਤੀਆਂ ਤਬਦੀਲੀਆਂ ਨੂੰ ਮਿਟਾਉਣਾ ਹੈ ਅਤੇ ਅਸਲ ਡੇਟਾ ਨੂੰ ਰੀਸਟੋਰ ਕਰਨਾ ਹੈ?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursButton": "ਖੁੱਲਣ ਦਾ ਸਮਾਂ ਸੈੱਟ ਕਰੋ",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursFullDay": "ਪੂਰਾ ਦਿਨ",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursCloses": "ਬੰਦ ਹੁੰਦਾ ਹੈ",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursRemoveBreak": "ਬਰੇਕ ਹਟਾਓ",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
   }
 }
