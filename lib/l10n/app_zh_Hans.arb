@@ -1002,7 +1002,7 @@
   "@settingsLanguage": {
     "description": "Settings entry for changing the app language."
   },
-  "settingsCacheTiles": "下载瓦片",
+  "settingsCacheTiles": "下载地图瓦片",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
@@ -1064,7 +1064,7 @@
       }
     }
   },
-  "navImagery": "切换图像",
+  "navImagery": "切换背景影像",
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
