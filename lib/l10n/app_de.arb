@@ -213,9 +213,9 @@
   "@fieldAddressTap": {},
   "fieldPhoneWrong": "Falsches Telefonnummernformat",
   "@fieldPhoneWrong": {},
-  "messageNoData": "Keine Daten, zum Herunterladen hier klicken",
+  "messageNoData": "Keine Daten, zum Herunterladen hier tippen",
   "@messageNoData": {},
-  "messageDataObsolete": "Die Daten sind veraltet, zum Aktualisieren hier klicken",
+  "messageDataObsolete": "Die Daten sind veraltet, zum Aktualisieren hier tippen",
   "@messageDataObsolete": {},
   "enableGPS": "Aktiviere GPS",
   "@enableGPS": {},
@@ -378,7 +378,7 @@
   "@aboutViewLog": {
     "description": "Button title to open the log view page."
   },
-  "aboutHelpImprove": "Helfen Sie mit, {appTitle} zu verbessern",
+  "aboutHelpImprove": "Hilf mit, {appTitle} zu verbessern",
   "@aboutHelpImprove": {
     "description": "Title for the Help improve section on the About page.",
     "placeholders": {
@@ -393,7 +393,7 @@
   "@aboutReportIssue": {
     "description": "Button title to open the app's GitHub issue page."
   },
-  "aboutHelpTranslate": "Helfen Sie beim Übersetzen",
+  "aboutHelpTranslate": "Hilf beim Übersetzen",
   "@aboutHelpTranslate": {
     "description": "Button title to open the app's Weblate page."
   },
@@ -461,7 +461,7 @@
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
   },
-  "loadingTooMuchData": "Löschen Sie heruntergeladene Daten in den Einstellungen, um den Editor zu beschleunigen.",
+  "loadingTooMuchData": "Lösche heruntergeladene Daten in den Einstellungen, um den Editor zu beschleunigen.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -480,7 +480,7 @@
       "count": {}
     }
   },
-  "fieldHoursNumberedWeekday": "\"Letzten Montag\"",
+  "fieldHoursNumberedWeekday": "„Letzter Montag“",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
@@ -492,19 +492,19 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Wie kann man einen Gebäudeeingang hinzufügen?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Unten befindet sich eine Reihe mit Schaltflächen für die Modi: Mikromapping, Einrichtungen, Eingänge und Hinweise.\n\nTippen Sie im Modus Eingänge auf die Tür in der unteren Ecke oder ziehen Sie diese auf die Karte.",
+  "faqEntranceContent": "Unten befindet sich eine Reihe mit Schaltflächen für die Modi: Micromapping, Einrichtungen, Eingänge und Hinweise.\n\nTippe im Eingänge-Modus auf die Tür in der unteren Ecke oder zieh diese auf die Karte.",
   "@faqEntranceContent": {},
   "faqLetters": "Kann ich Buchstaben als Kennziffer oder Wohnungsnummer eingeben?",
   "@faqLetters": {},
-  "faqLettersContent": "Wenn Ihre numerische Tastatur nicht auf eine vollständige Tastatur umgeschaltet werden kann, überprüfen Sie die Einstellungen der App. Sie befinden sich hinter der Schaltfläche in der oberen linken Ecke. Schalten Sie dort die \"erweiterte numerische Tastatur\" ein.",
+  "faqLettersContent": "Wenn deine numerische Tastatur nicht auf eine vollständige Tastatur umgeschaltet werden kann, überprüfe die Einstellungen der App. Sie befinden sich hinter der Schaltfläche in der oberen linken Ecke. Schalte dort die „erweiterte numerische Tastatur“ ein.",
   "@faqLettersContent": {},
-  "faqFloors": "Sind die Geschosse \"3\" und \"/3\" gleich?",
+  "faqFloors": "Sind die Geschosse „3“ und „/3“ gleich?",
   "@faqFloors": {},
   "faqChangeType": "Wie wird der Typ einer Einrichtung geändert?",
   "@faqChangeType": {},
-  "faqChangeTypeContent": "Tippen Sie auf den Titel des Editors, auf dem der Typ geschrieben ist.",
+  "faqChangeTypeContent": "Tippe auf den Titel des Editors, wo der Typ angezeigt wird.",
   "@faqChangeTypeContent": {},
-  "faqMapTinyContent": "Weil die Karte nur zur Überprüfung der gegenwärtigen Position dient. Der Kartenausschnitt kann verschoben werden um die Liste der Einrichtungen unten anzupassen. Diese sind nach Entfernung sortiert.\n\nDie Karte wird größer, wenn Sie Einrichtungen weit entfernt von Ihrem Standort bearbeiten. Obwohl die App entwickelt wurde, um Dinge zu bearbeiten, die in Ihrer unmittelbaren Umgebung sind.",
+  "faqMapTinyContent": "Weil die Karte nur zur Überprüfung der gegenwärtigen Position dient. Der Kartenausschnitt kann verschoben werden, um die Liste der Einrichtungen unten anzupassen. Diese sind nach Entfernung sortiert.\n\nDie Karte wird größer, wenn du Einrichtungen weit entfernt von deinem Standort bearbeitest. Obwohl die App entwickelt wurde, um Dinge zu bearbeiten, die in Ihrer unmittelbaren Umgebung sind.",
   "@faqMapTinyContent": {},
   "changesSwipeLeft": "Nach links wischen, um Änderung rückgängig zu machen",
   "@changesSwipeLeft": {
@@ -512,7 +512,7 @@
   },
   "faqMapTiny": "Warum ist die Karte so klein?",
   "@faqMapTiny": {},
-  "faqCheckmarksContent": "Dies sind Zeichen dafür, dass die Daten der Einrichtungen bestätigt wurden. Sie fügen das `check_date`-Tag mit dem aktuellen Datum hinzu.\n\nDie Idee hinter den Häkchen ist, dass Sie beispielsweise beim ersten Mal die halbe Stadt vermessen haben. Dann kamen Sie nach einem Monat zurück und gingen erneut zur Umfrage. Sie müssen irgendwie markieren, dass Sie die Einrichtungen sehen, sich aber nichts daran geändert hat. Das ist das Häkchen: Sie tippen darauf und fahren fort.\n\nDas Häkchen bleibt für zwei Monate gesetzt. Danach können Sie die Einrichtung erneut bestätigen.",
+  "faqCheckmarksContent": "Diese Markierungen zeigen an, dass die Daten einer Einrichtung bestätigt wurden. Sie fügen das `check_date`-Tag mit dem aktuellen Datum hinzu.\n\nDie Idee hinter den Markierungen ist folgende: Angenommen, du hast beim ersten Mal die halbe Stadt erfasst. Nach einem Monat kommst du zurück und machst erneut eine Erhebung. Du musst irgendwie markieren, dass du die Einrichtung siehst, aber dass sich daran nichts geändert hat. Das ist das Häkchen: Du tippst es an und machst weiter.\n\nDas Häkchen bleibt zwei Monate lang gesetzt. Danach kannst du die Einrichtungen erneut erfassen.",
   "@faqCheckmarksContent": {},
   "faqTagging": "Alle Tagging-Fragen",
   "@faqTagging": {},
@@ -540,7 +540,7 @@
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
   },
-  "versionsVersionMeta": "von {user} um {datetime}",
+  "versionsVersionMeta": "von {user} am {datetime}",
   "@versionsVersionMeta": {
     "description": "Card body to show metadata about the element version.",
     "placeholders": {
@@ -606,7 +606,7 @@
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
-  "notesCloseMessage": "Kartenhinweis als gelöst markieren?",
+  "notesCloseMessage": "Kartenhinweis als erledigt markieren?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -752,7 +752,7 @@
   "@settingsSystem": {
     "description": "Title for the settings section for system-related switches."
   },
-  "faqFloorsContent": "Nein, das erste Geschoss hat das Attribut `addr:floor=3`. Das ist die Etage, die im Gebäude, beispielsweise in Aufzügen vermerkt ist. Das zweite Geschoss hat ein anderes Attribut, nämlich `level=3`. Diese Zahl ist einfach eine fortlaufende Geschossnummer von Null bis `building:levels` − 1. D.h, in einem dreistöckigen Gebäude variiert der Wert für `addr:floor` je nach Land, aber `level` ist immer 0, 1 oder 2.\n\nIm Folgenden sieht man, wie diese Attribute in Every Door dargestellt werden:\n\n* `2`: `addr:floor=2` und irgendein `level=*`.\n* `4/`: `addr:floor=4`, aber ohne `level`-Attribut.\n* `/1`: `level=1`, aber ohne `addr:floor`-Attribut.\n* `1/0`: `addr:floor=1` + `level=0` (und es gibt in der Nähe ein Objekt mit dem selben Wert für `addr:floor`, aber unterschiedlichem `level`-Wert, oder umgekehrt).",
+  "faqFloorsContent": "Nein, das erste Geschoss hat das Attribut `addr:floor=3`. Das ist die Etage, die im Gebäude, beispielsweise in Aufzügen vermerkt ist. Das zweite Geschoss hat ein anderes Attribut, nämlich `level=3`. Diese Zahl ist einfach eine fortlaufende Geschossnummer von Null bis `building:levels` − 1. D.h., in einem dreistöckigen Gebäude variiert der Wert für `addr:floor` je nach Land, aber `level` ist immer 0, 1 oder 2.\n\nIm Folgenden sieht man, wie diese Attribute in Every Door dargestellt werden:\n\n* `2`: `addr:floor=2` und irgendein `level=*`.\n* `4/`: `addr:floor=4`, aber ohne `level`-Attribut.\n* `/1`: `level=1`, aber ohne `addr:floor`-Attribut.\n* `1/0`: `addr:floor=1` + `level=0` (und es gibt in der Nähe ein Objekt mit dem selben Wert für `addr:floor`, aber unterschiedlichem `level`-Wert, oder umgekehrt).",
   "@faqFloorsContent": {},
   "faqTaggingContent": "Wieso fehlt ein Objekt im Editor? Wann werden im Mikromapping-Modus weiße Punkte angezeigt? Wie werden die Objekte sortiert?\n\nAntworten dazu sind in [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) zu finden. Hier sind Dinge, die du anschauen kannst:\n\n* Die Sortierreihenfolge für den Hauptwert — Liste `kMainKeys`.\n* Welche Objekte heruntergeladen werden — Funktion `isGoodTags`.\n* Was als Einrichtung (`amenity`) eingeordnet wird — Funktion `isAmenityTags`.\n* Welche Knoten mit welche Linien verbunden werden — Funktion `detectSnap`.\n* Wann ein Mikromapping-Objekt als unvollständig angesehen wird — Funktion `needsMoreInfo`.",
   "@faqTaggingContent": {},
@@ -760,13 +760,13 @@
   "@editorTags": {
     "description": "Tooltip for a button to open tags pane."
   },
-  "fieldCardsOnly": "Nur Kartenzahlung",
+  "fieldCardsOnly": "nur Kartenzahlung",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
   "faqYellow": "Warum sind einige Hausnummern gelb?",
   "@faqYellow": {},
-  "faqYellowContent": "Nicht-gelbe Beschriftungen im Modus Eingänge und weiße Punkte im Modus Mikromapping bedeuten, dass den Elementen einige wichtige Attribute fehlen. Zum Beispiel:\n\n* Gebäude sollten eine Anzahl von Ebenen haben.\n* Eingänge sollten eine Angabe zum Typ und, bei Treppen, eine Angabe der zugänglichen Wohnungen haben.\n* Bänke sollten eine Angabe zu Material und Rückenlehne haben.\n* Bäume sollten eine Angaben zu Blattart und -zyklus haben.",
+  "faqYellowContent": "Nicht-gelbe Beschriftungen im Eingänge-Modus und weiße Punkte im Micromapping-Modus bedeuten, dass den Elementen einige wichtige Attribute fehlen. Zum Beispiel:\n\n* Gebäude sollten eine Anzahl von Stockwerken haben.\n* Eingänge sollten eine Angabe zum Typ und, bei Treppen, eine Angabe der zugänglichen Wohnungen haben.\n* Bänke sollten eine Angabe zu Material und Rückenlehne haben.\n* Bäume sollten eine Angaben zu Blattart und -zyklus haben.",
   "@faqYellowContent": {},
   "warningWrongTag": "Falsches Attribut: {tag}",
   "@warningWrongTag": {
