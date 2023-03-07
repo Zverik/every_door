@@ -1,9 +1,9 @@
 {
-  "loadingTooMuchData": "Ачысціце спампаваныя даныя ў Наладах, каб паскорыць рэдактар.",
+  "loadingTooMuchData": "Ачысціце загружаныя даныя ў Наладах, каб паскорыць рэдактар.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
-  "dataDownloadFailed": "Памылка спампоўкі",
+  "dataDownloadFailed": "Памылка загрузкі",
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
@@ -55,7 +55,7 @@
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."
   },
-  "dataDownloadedCount": "{count,plural, =1{Спампаваны {count} аб'ект.}, =few{Спампавана {count} аб'екта.}, =other{Спампавана {count} аб'ектаў.}}",
+  "dataDownloadedCount": "{count,plural, =1{Загружаны {count} аб'ект.}, =few{Загружана {count} аб'екта.}, =other{Загружана {count} аб'ектаў.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -221,11 +221,11 @@
   "@aboutLinks": {
     "description": "Title for the links section on the About page."
   },
-  "versionsFetchError": "Памылка атрымання гісторыі",
+  "versionsFetchError": "Памылка атрымання гісторыі версій",
   "@versionsFetchError": {
     "description": "Message for when fetching element history fails due to unknown error."
   },
-  "versionsEnableInternet": "Каб атрымаць гісторыю, падключыцеся да Інтэрнэту",
+  "versionsEnableInternet": "Каб атрымаць гісторыю версій, падключыцеся да Інтэрнэту",
   "@versionsEnableInternet": {
     "description": "Message for when fetching element history fails due to lack of network connection."
   },
@@ -327,11 +327,11 @@
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
-  "dataDownloadSuccessful": "Спампоўка паспяховая",
+  "dataDownloadSuccessful": "Паспяхова загружана",
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "tileNothingAround": "Няма устаноў вакол вас у {distance} метрах.",
+  "tileNothingAround": "Няма карысных кропак вакол вас у {distance} метрах.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -343,7 +343,7 @@
       }
     }
   },
-  "filterNonConfirmed": "Толькі неправераныя",
+  "filterNonConfirmed": "Толькі непацверджаныя",
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
@@ -367,11 +367,11 @@
       }
     }
   },
-  "editorMarkActive": "Пазначыць актыўным",
+  "editorMarkActive": "Адзначыць актыўным",
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
   },
-  "editorMarkDefunct": "Пазначыць неактыўным",
+  "editorMarkDefunct": "Адзначыць неактыўным",
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
@@ -469,11 +469,11 @@
   "@settingsPurgeDataTitle": {
     "description": "Confirmation dialog title for when purging all downloaded data."
   },
-  "settingsPurgeDataMessage": "Вам прыйдзецца спампоўваць усё зноў. Працягнуць?",
+  "settingsPurgeDataMessage": "Вам прыйдзецца нанава ўсё загрузіць. Працягнуць?",
   "@settingsPurgeDataMessage": {
     "description": "Confirmation dialog message for when purging all downloaded data."
   },
-  "settingsPurgedAllTitle": "Выдаліць даныя",
+  "settingsPurgedAllTitle": "Выдалілі даныя",
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
@@ -521,15 +521,15 @@
   "@navMicromappingMode": {
     "description": "Tooltip for the micromapping mode button on the nav panel."
   },
-  "navImagery": "Падкладка",
+  "navImagery": "Пераключыць здымкі падкладкі",
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
-  "navDownload": "Спампаваць",
+  "navDownload": "Загрузіць",
   "@navDownload": {
     "description": "Tooltip for the download data button on the nav panel."
   },
-  "navUpload": "Запампаваць",
+  "navUpload": "Выгрузіць",
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
   },
@@ -537,7 +537,7 @@
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
   },
-  "tagsShare": "Абагуліць",
+  "tagsShare": "Падзяліцца",
   "@tagsShare": {
     "description": "Tooltip for the sharing button on the tags panel."
   },
@@ -549,7 +549,7 @@
   "@settingsLanguage": {
     "description": "Settings entry for changing the app language."
   },
-  "settingsCacheTiles": "Спампаваць тайлы",
+  "settingsCacheTiles": "Загрузіць тайлы",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
@@ -581,7 +581,7 @@
   "@fieldHoursSDAddRange": {
     "description": "Tooltip for button on the specific days interval to add a range of dates."
   },
-  "navPoiMode": "Рэжым устаноў",
+  "navPoiMode": "Рэжым устаноў / карысных кропак",
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
@@ -605,7 +605,7 @@
   "@fieldHoursSDAddOne": {
     "description": "Tooltip for button on the specific days interval to add one specific date."
   },
-  "fieldHoursRemoveFragment": "Выдаліць фрагмент",
+  "fieldHoursRemoveFragment": "Выдаліць расклад",
   "@fieldHoursRemoveFragment": {
     "description": "Tooltip for a button to remove a fragment in the hours editor."
   },
@@ -617,7 +617,7 @@
   "@fieldHoursClear": {
     "description": "Tooltip for a button to clear the opening_hours value."
   },
-  "fieldHoursChooseTime": "Гадзіна і хвіліна",
+  "fieldHoursChooseTime": "Гадзіны і хвіліны",
   "@fieldHoursChooseTime": {
     "description": "Tooltip for a button to open hours and minutes chooser."
   },
@@ -663,7 +663,7 @@
   "@changesDeletedUndo": {
     "description": "Button label for undoing a change deletion."
   },
-  "fieldHoursFullDay": "Увесь дзень",
+  "fieldHoursFullDay": "Цэлы дзень",
   "@fieldHoursFullDay": {
     "description": "Switch for 24/7 opening hours."
   },
@@ -671,7 +671,7 @@
   "@fieldHoursButton": {
     "description": "Text on the hours button when there's no value."
   },
-  "tileDragTheMap": "Калі ласка, падыдзіце да іх бліжэй, перацягніце мапу або дадайце адсутную ўстанову.",
+  "tileDragTheMap": "Калі ласка, падыдзіце да чаго-небудзь бліжэй, перацягніце мапу або дадайце адсутную карысную кропку.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
@@ -683,15 +683,15 @@
   "@accountUnreadMail": {
     "description": "Label for the number of unread private messages a user has."
   },
-  "changesUploadFailedTitle": "Запампоўка неудалася",
+  "changesUploadFailedTitle": "Памылка адпраўкі правак",
   "@changesUploadFailedTitle": {
     "description": "Title for the notification about a failed changes upload."
   },
-  "changesUploadedTitle": "Запампавана",
+  "changesUploadedTitle": "Праўкі адпраўлены",
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "settingsUploads": "Запампоўкі ў чаканні",
+  "settingsUploads": "Змены для адпраўкі",
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
@@ -784,7 +784,7 @@
   "@buildingTypeGarage": {},
   "buildingTypeConstruction": "будуецца",
   "@buildingTypeConstruction": {},
-  "fieldHoursHour": "Гадзіна",
+  "fieldHoursHour": "Гадзіны",
   "@fieldHoursHour": {
     "description": "Label for the hour chooser."
   },
@@ -882,7 +882,7 @@
   "@fieldHoursNext": {
     "description": "Button in the interval editor to move to the closing time."
   },
-  "fieldHoursMinute": "Хвіліна",
+  "fieldHoursMinute": "Хвіліны",
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
   },
@@ -1002,7 +1002,7 @@
   "@fieldHoursAddFragment": {
     "description": "Button in opening hours editor to add a fragment for days."
   },
-  "tileDragOrUnfilter": "Калі ласка, падыдзіце да іх бліжэй, дадайце адсутную ўстанову, або ачысціце фільтр.",
+  "tileDragOrUnfilter": "Калі ласка перасуньцеся, дадайце карысную кропку, або ачысціце фільтр.",
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
@@ -1025,7 +1025,7 @@
   "@faqChangeTypeContent": {},
   "faqEntrance": "Як дадаць уваход у будынак?",
   "@faqEntrance": {},
-  "fieldHoursNumberedWeekday": "Санітарны дзень",
+  "fieldHoursNumberedWeekday": "\"Апошні панядзелак\"",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
@@ -1074,7 +1074,7 @@
   },
   "faqYellow": "Чаму некаторыя нумары дамоў жоўтыя?",
   "@faqYellow": {},
-  "warningTooOld": "Установе {years}",
+  "warningTooOld": "Установе / кропке карыснасці {years}",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -1124,7 +1124,7 @@
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
-  "hashtagsConfirm": "Пацвярджаць тэгі перад запампоўкай",
+  "hashtagsConfirm": "Пацвярджаць тэгі пры адпраўцы правак",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
