@@ -45,7 +45,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
     type: ImageryType.tms,
     name: 'Maxar Premium Imagery',
     url:
-        "EcKQpupFzHs7yZp0CdAT3zOWVWST2GB8eji2OtSHNANsdO7JnPHXw+riiIBA2aPDb5GFaKmySAOl/QDz57eaWI18qPwmdhpDeFLMmiDRZ4JQYGJbTzCq1On6IkNnrsnn5KvbL+1P3sAVur9nCCvaomT6i1Tv/WUFFD9zKG8gOf1TCN7mPWIhDOQteeaabxwUvkVJnngx1tjkrtdcsnbgT5jKg+5uUBB+CHlgY2bBwbFbzBpTrcTtI5t398LZP4wP",
+        "EcKQpupFzHs7yZp0CdAT3zOWVWST2GB8eji2OtSHNANsdO7JnPHXw+riiIBA2aPDb5GFaKmySAOl/QDz57eaWI18qPwmdhpDeFLMmiDRZ4JQYGJbTzCq1On6IkNnrsnn5KvbL+1P3sAVur9nCCvaomT6i1Tv/WUFFD9zKG8gOf1TCN7mPWIhDOQteebNP0dP6UceyXhj0ti1rtdcs3HgT83Ihe5lXhR7BXdlY2jBz+BbzBpTrcTtI5t398LZP4wP",
     encrypted: true,
     icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png',
     attribution: '© DigitalGlobe',
