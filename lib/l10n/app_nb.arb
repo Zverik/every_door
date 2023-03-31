@@ -39,7 +39,7 @@
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
-  "loadingStart": "Starter opp…",
+  "loadingStart": "Starter opp …",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
@@ -459,7 +459,7 @@
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
-  "loadingTooMuchData": "Tøm nedlastede data under innstillinger for å gjøre editoren raskere.",
+  "loadingTooMuchData": "Tøm nedlastede data under innstillinger for å gjøre endringsverktøyet raskere.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
