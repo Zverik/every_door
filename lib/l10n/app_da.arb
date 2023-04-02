@@ -165,7 +165,7 @@
   "@tagsValue": {
     "description": "Tags panel, add a new tag dialog: value label"
   },
-  "settingsTitle": "Konfiguration",
+  "settingsTitle": "Indstillinger",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
