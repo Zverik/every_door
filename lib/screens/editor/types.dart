@@ -88,7 +88,13 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
 
     final prov = ref.read(presetProvider);
     final locale = Localizations.localeOf(context);
-    if (substring.length < 2) {
+    final bool terms;
+    if(locale.languageCode == "ja"){
+      terms = substring.isEmpty;
+    } else {
+      terms = substring.length < 2;
+    }
+    if (terms) {
       final editorMode = ref.read(editorModeProvider);
       final defaultList = editorMode == EditorMode.micromapping
           ? kDefaultMicroPresets
