@@ -615,7 +615,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Sent {changes} to the API.",
+  "changesUploadedMessage": "Sent {changes}.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
