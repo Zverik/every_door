@@ -1,1 +1,306 @@
-{}
+{
+  "loadingStart": "Käynnistyy…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingPresets": "Lataa esivalintoja…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingChanges": "Lataa muutoksia…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingChangesFailed": "Muutosten lataaminen epäonnistui",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingTooMuchData": "Tyhjennä ladattu data asetuksista, jotta editori toimii nopeammin.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadedCount": "{count,plural, =1{{count} elementti ladattiin.}, =few{{count} elementtiä ladattiin.}, =other{{count} elementtiä ladattiin.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "tileNo": "ei",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "legendOther": "Muu",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "navDownload": "Lataa palvelimelta",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navImagery": "Vaihda kuvatasoa",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navNotesMode": "Karttailmoitukset-tila",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "chooseType": "Valitse tyyppi",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Tyhjennä",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "warningFixme": "Virheenkorjauspyyntö: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Väärä ominaisuustieto: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "editorCloseTitle": "Suljetaanko editori?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "Hylätäänkö muutokset tallentamatta?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorTags": "Raa’at ominaisuustiedot",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorMove": "Siirrä",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorDuplicate": "Mahdollinen kaksoiskappale {distance} m:n säteellä",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorMissing": "Ei ole olemassa",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorRestoreMessage": "{amenity} ei ole aktiivinen. Haluatko merkitä sen aktiiviseksi?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "Poista",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsNewPoint": "Uusi piste",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsRestore": "Palauta",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "Tyhjennä",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "tagsAddTag": "Lisää ominaisuustieto",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Avain",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Arvo",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "versionsTitle": "{elementRef}: historia",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "dataDownloadFailed": "Lataus epäonnistui",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Lataus onnistui",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "navUpload": "Lähetä palvelimelle",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "loadingLocation": "Hakee sijaintia…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingTooMuchDataTitle": "Liikaa dataa",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "editorHistory": "Historia",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorMoreFields": "Lisää kenttiä",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "years": "{count,plural, =1{{count} vuosi}, =few{{count} vuotta}, =other{{count} vuotta}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorMarkChecked": "Merkitse tarkastetuksi",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorSave": "Tallenna",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorLoadingPreset": "Lataa esivalintaa…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "warningTooOld": "Palvelu on {years} vanha",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "editorRestore": "Palauta",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorRestoreTitle": "Onko se avoinna?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorMarkActive": "Merkitse aktiiviseksi",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Merkitse lakkautetuksi",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorDeleteTitle": "Poistetaanko {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "tagsShare": "Jaa",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsUrlCopied": "URL-osoite kopioitu leikepöydälle",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsKeyError": "Avain on liian harvinainen",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsValueLong": "Arvo on liian pitkä",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "filterByFloor": "Kerroksen perusteella",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "navEntrancesMode": "Sisäänkäynnit-tila",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "filterByAddress": "Osoitteen perusteella",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "navMicromappingMode": "Mikrokartoitus-tila",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "filterNoAddresses": "Ei osoitteita lähistöllä",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterEmpty": "tyhjä",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "filterNonConfirmed": "Vain vahvistamattomat",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "mapSettings": "Asetukset",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "Suodatin",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapZoomIn": "Lähennä",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Loitonna",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "chooseLocation": "Valitse sijainti",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "mapLocate": "Takaisin luokseni",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  }
+}
