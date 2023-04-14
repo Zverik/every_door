@@ -302,5 +302,386 @@
   "mapLocate": "Takaisin luokseni",
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "tileNothingAround": "Ei palveluita {distance} metrin säteellä.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "tileDragTheMap": "Siirry lähemmäs mitä tahansa, vedä karttaa tai lisää puuttuva palvelu.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Liiku lähistöllä, lisää palvelu tai tyhjennä suodatin.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "navPoiMode": "Palvelu-tila",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "versionsFetchError": "Versiohistorian haku epäonnistui",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "Yritä uudelleen",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsEnableInternet": "Yhdistä internetiin versiohistorian hakemista varten",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsLocalChanges": "Paikalliset muutokset",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "Versio #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "tehnyt {user} {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsTitle": "Asetukset",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsApiServer": "API-palvelin",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsDataManagement": "Datanhallinta",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsPresentation": "Esitystapa",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsLoginDetails": "OSM-tili",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsHashtags": "Muutoskokoelmien aihetunnisteet",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "settingsPurgeData": "Tyhjennä vanhentunut välimuistidata",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "Tyhjennä kaikki ladattu data",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataMessage": "Kaikki tarvitsee ladata uudelleen. Jatketaanko?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "Vanhentunut data",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "Data poistettu",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsUploads": "Odottavat lähetykset",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsBackground": "Taustakuva-aineisto",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsCacheTiles": "Lataa karttatiilet",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLanguage": "Kieli",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsEditor": "Editori",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsNumericKeyboard": "Laajennettu numeronäppäimistö",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsDefaultPayment": "Oletusmaksukortit",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsSystem": "Järjestelmä",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "Käytä Googlen parantamaa paikannusta",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "aboutViewLog": "Järjestelmäloki",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "Versiohistoria",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "Asennettu versio",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Projektin verkkosivu",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutOnGitHub": "GitHubissa",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutHelpImprove": "Auta parantamaan {appTitle}ia",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutHelpTranslate": "Auta kääntämisessä",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "Weblatella",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "UKK",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Linkit",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountTitle": "OpenStreetMap-tili",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountOAuthError": "OAuth-virhe",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountPasswordWarningMessage": "Salasana tallennetaan laitteelle. Valitse tämä vain, jos OAuth ei toimi.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "Selvä",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "OSM-kirjautumistiedot",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountFieldLogin": "Käyttäjätunnus",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountAuthErrorTitle": "Kirjautumisvirhe",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountAuthErrorMessage": "Väärä käyttäjätunnus tai salasana.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "Kirjaudu ulos",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountUnreadMail": "Lukematonta postia",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "hashtagsLabel": "Aihetunnisteiden sanat",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "Vahvista aihetunnisteet lähetyksen yhteydessä",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesCount": "{count,plural, =1{{count} muutos}, =few{{count} muutosta}, =other{{count} muutosta}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesUploadedMessage": "{changes} lähetettiin API:lle.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "aboutLicense": "Lisenssi",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "versionsNoTagChanges": "Ei muutoksia ominaisuustietoihin",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsPurgeDataTitle": "Poistetaanko data?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Tyhjennetiin {count} elementti}, =few{Tyhjennettiin {count} elementtiä}, =other{Tyhjennettiin {count} elementtiä}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsAbout": "Tietoa",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "settingsLeftHand": "Vasemman käden ohjaimet",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsPreferContact": "Suosi ”contact:”-etuliitettä",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "aboutSourceCode": "Lähdekoodi",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutReportIssue": "Ilmoita ongelmasta",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "accountLoginOAuth": "Kirjaudu OAuthilla",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountLoginPassword": "Kirjaudu salasanalla",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "Varoitus",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldPassword": "Salasana",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountChangesets": "Muutoskokoelmat",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "buildingX": "Rakennus {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "changesUploadedTitle": "Lähetetty",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadFailedTitle": "Lähetys epäonnistui",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "entrancesAddBuilding": "Lisää rakennus",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "addressX": "Osoite {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "entranceX": "Sisäänkäynti {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingPostCode": "Postinumero",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingLevels": "Kerrokset",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Kattokerrokset",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "Katon muoto",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "Tyyppi",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Lisää",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
   }
 }
