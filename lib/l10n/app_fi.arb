@@ -793,5 +793,187 @@
   "fieldHoursClosed": "Suljettu",
   "@fieldHoursClosed": {
     "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldCardsAccepted": "käy",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "ei",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCheckboxYes": "kyllä",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "buttonYes": "Kyllä",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "entrancesAddEntrance": "Lisää sisäänkäynti",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "buttonNo": "Ei",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "fieldCheckboxNo": "ei",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "entranceFlatsNumberList": "Tulee olla lista numeroita",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "fieldFloorNew": "Uusi kerros",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorLevelDesc": "Kerrosnumero, jossa 0 tarkoittaa pohjakerrosta",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldFloorEmpty": "Aseta osoite ennen kerroksen valitsemista.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorFloorDesc": "Opasteissa ja hississä näkyvä kerros",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorShouldBeNumber": "Kirjoita luku",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "messageNoData": "Ei dataa – lataa napauttamalla",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "Data on vanhentunutta – päivitä napauttamalla",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "fieldAddressTap": "Napauta osoitetta",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldPhoneWrong": "Puhelinnumero virheellisessä muodossa",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "enableGPSMessage": "Ota käyttöön sijaintipalvelut asetuspaneelista, joka näytetään seuraavaksi.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableGPS": "Käytä GPS:ää",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableLocationMessage": "Salli sovellukselle oikeus käyttää sijaintia asetuspaneelista, joka näytetään seuraavaksi.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "entranceFlats": "Asunnot",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "enableLocation": "Käytä sijaintia",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "buildingMaterial": "Julkisivu",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "tiili",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialGlass": "lasi",
+  "@buildingMaterialGlass": {},
+  "buildingMaterialMetal": "metalli",
+  "@buildingMaterialMetal": {},
+  "buildingTypeAddress": "osoite",
+  "@buildingTypeAddress": {},
+  "buildingMaterialWood": "puu",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "betoni",
+  "@buildingMaterialConcrete": {},
+  "fieldHoursAddFragment": "Lisää osanen",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursRemoveFragment": "Poista osanen",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursAddBreak": "Lisää tauko",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursRemoveBreak": "Poista tauko",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursWeekdays": "ma ti ke to pe la su",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "Suljettu juhlapäivinä",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursSDRemove": "Poista",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "Lisää päivämäärä",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Lisää päivämääräväli",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldDirectionSet": "Aseta",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldNameLanguages": "Muu kieli",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameCopy": "Kopioi arvo",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldComboEmpty": "tyhjä",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "valitse",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "ei",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "julkinen",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "asiakkaat",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "kyllä",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairNo": "ei",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsOnly": "vain korttimaksu",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
   }
 }
