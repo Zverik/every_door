@@ -305,7 +305,7 @@
   "@entranceTypeGarage": {},
   "entranceTypeEmergency": "emergenza",
   "@entranceTypeEmergency": {},
-  "addressHouseNumber": "Casa",
+  "addressHouseNumber": "Civico",
   "@addressHouseNumber": {},
   "addressHouseNotEmpty": "Non dovrebbe essere vuoto",
   "@addressHouseNotEmpty": {},
