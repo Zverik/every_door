@@ -975,5 +975,145 @@
   "fieldCardsOnly": "vain korttimaksu",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
-  }
+  },
+  "buildingMaterialPlaster": "rappaus",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialPanels": "paneelit",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialStone": "kivi",
+  "@buildingMaterialStone": {},
+  "buildingTypeRetail": "vähittäismyynti",
+  "@buildingTypeRetail": {},
+  "buildingTypeGarage": "autotalli",
+  "@buildingTypeGarage": {},
+  "entranceAccess": "Pääsy",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessPrivate": "yksityinen",
+  "@entranceAccessPrivate": {},
+  "entranceAccessDelivery": "kuljetus",
+  "@entranceAccessDelivery": {},
+  "addressUnit": "Yksikkö",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "faqMapTiny": "Miksi kartta on niin pieni?",
+  "@faqMapTiny": {},
+  "faqYellow": "Miksi jotkin talonumerot ovat keltaisia?",
+  "@faqYellow": {},
+  "entranceTypeService": "huolto",
+  "@entranceTypeService": {},
+  "addressHouseNotEmpty": "Ei saa olla tyhjä",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "entranceTypeGarage": "sisäänajo",
+  "@entranceTypeGarage": {},
+  "addressStreet": "Katu",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "entranceTypeEmergency": "hätäuloskäynti",
+  "@entranceTypeEmergency": {},
+  "addressHouseNumber": "Talo",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressUnitOptional": "valinnainen",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "notesClose": "Ratkaise",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesAddNote": "Lisää karttailmoitus",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "addressPlace": "Alue",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesAnonymous": "Anonyymi",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesCloseMessage": "Merkitäänkö karttailmoitus ratkaistuksi?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "apiStatusDownloading": "Lataa dataa…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "Tallentaa elementtejä sovelluksen tietokantaan",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "notesCancelMessage": "Perutaanko karttailmoitus?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "apiStatusUploading": "Lähettää muutoksia",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "faqMapTinyContent": "Siksi, että se ei ole pääasia. Sitä käytetään vain sijainnin tarkistamiseen ja säätämiseen karttaa liikuttamalla. Seuraa sen alla olevaa palvelulistaa, joka on järjestetty etäisyyden mukaan.\n\nKartta suurenee, kun muokkaat itsestäsi kaukana olevia palveluita. Sovellus on kuitenkin tehty muokkaamaan kohteita, jotka näet omin silmin.",
+  "@faqMapTinyContent": {},
+  "fieldWheelchairLimited": "osittain",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "buildingMaterialCementBlock": "betoniharkot",
+  "@buildingMaterialCementBlock": {},
+  "buildingTypeConstruction": "rakenteilla",
+  "@buildingTypeConstruction": {},
+  "buildingTypeHouse": "pientalo",
+  "@buildingTypeHouse": {},
+  "buildingTypeIndustrial": "teollisuusrakennus",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeApartments": "kerrostalo",
+  "@buildingTypeApartments": {},
+  "buildingTypeShed": "vaja",
+  "@buildingTypeShed": {},
+  "entranceIsUnit": "Tallenna asunnon numero addr:unit-ominaisuuteen",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceRef": "Ref",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceWheelchair": "Esteetön",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceTypeStaircase": "porraskäytävä",
+  "@entranceTypeStaircase": {},
+  "entranceAccessYes": "avoin",
+  "@entranceAccessYes": {},
+  "entranceAccessNo": "ei",
+  "@entranceAccessNo": {},
+  "entranceType": "Tyyppi",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeMain": "pääsisäänkäynti",
+  "@entranceTypeMain": {},
+  "entranceTypeHome": "asunto",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "kauppa",
+  "@entranceTypeShop": {},
+  "buildingTypeCommercial": "liikerakennus",
+  "@buildingTypeCommercial": {},
+  "faqCheckmarks": "Mitä varten ✓-merkit ovat?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Miten rakennukseen lisätään sisäänkäynti?",
+  "@faqEntrance": {},
+  "faqEntranceContent": "Alalaidassa on rivi tilapainikkeita: mikrokartoitus, palvelut, sisäänkäynnit ja karttailmoitukset.\n\nKun Sisäänkäynnit-tila on valittuna, paina alakulmassa olevaa ovipainiketta tai vedä se kartalle.",
+  "@faqEntranceContent": {},
+  "faqCheckmarksContent": "Ne ovat merkkejä palvelutietojen vahvistamisesta. Niiden painaminen lisää `check_date`-ominaisuustiedon nykyisellä päivämäärällä.\n\nNiiden idea on, että sanotaanko, puolet kaupungista on kartoitettu ensimmäisen kerran. Sitten kuukauden kuluttua kartoittaja palaa paikalle ja haluaa kartoittaa uudelleen. Hän tarvitsee keinon merkitä, että palvelu on edelleen olemassa mutta mikään siinä ei ole muuttunut. Sitä varten ✓-merkki on: hän painaa sitä ja jatkaa eteenpäin.\n\nMerkki säilyy kaksi kuukautta. Sen jälkeen palvelut voi kartoittaa uudelleen.",
+  "@faqCheckmarksContent": {}
 }
