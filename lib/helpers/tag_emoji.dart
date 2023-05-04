@@ -28,6 +28,11 @@ const kTagEmoji = <String, String>{
   'amenity=dentist': '🦷',
   'amenity=bus_station': '🚏',
   'amenity=police': '🚓',
+  'amenity=ice_cream': '🍨',
+  'amenity=toilets': '🚻',
+  'amenity=gambling': '🎰',
+  'amenity=cinema': '🍿',
+  'amenity=bicycle_rental': '🚲',
   'amenity=bureau_de_change': '💱',
 
   'shop=convenience': '🛒',
@@ -59,9 +64,16 @@ const kTagEmoji = <String, String>{
   'shop=optician': '👓',
   'shop=mall': '🛍️',
   'shop=ice_cream': '🍨',
+  'shop=books': '📚',
+  'shop=stationery': '✏️',
+  'shop=coffee': '☕️',
+  'shop=wine': '🍷',
+  'shop=greengrocer': '🥦',
+  'shop=vacant': '🚫',
   'shop=bicycle': '🚲',
   
   'craft=electronics_repair': '🔌',
+  'craft=watchmaker': '⌚️',
 
   'tourism=information': 'ℹ️',
   'tourism=hotel': '🏨',
@@ -73,6 +85,7 @@ const kTagEmoji = <String, String>{
   'tourism=gallery': '🖼️',
 
   'leisure=playground': '🪜',
+  'leisure=adult_gaming_centre': '🎰',
 };
 
 String? getEmojiForTags(Map<String, String> tags) {
