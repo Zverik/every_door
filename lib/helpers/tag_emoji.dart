@@ -29,7 +29,6 @@ const kTagEmoji = <String, String>{
   'amenity=bus_station': '🚏',
   'amenity=police': '🚓',
   'amenity=ice_cream': '🍨',
-  'amenity=toilets': '🚻',
   'amenity=gambling': '🎰',
   'amenity=cinema': '🍿',
   'amenity=bicycle_rental': '🚲',
