@@ -63,7 +63,7 @@
       }
     }
   },
-  "warningWrongTag": "Väärä ominaisuustieto: {tag}",
+  "warningWrongTag": "Virheellinen ominaisuus: {tag}",
   "@warningWrongTag": {
     "description": "Warning message for tags like shop=yes and amenity=no.",
     "placeholders": {
@@ -81,7 +81,7 @@
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
-  "editorTags": "Raa’at ominaisuustiedot",
+  "editorTags": "Kaikki ominaisuudet",
   "@editorTags": {
     "description": "Tooltip for a button to open tags pane."
   },
@@ -130,7 +130,7 @@
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
   },
-  "tagsAddTag": "Lisää ominaisuustieto",
+  "tagsAddTag": "Lisää ominaisuus",
   "@tagsAddTag": {
     "description": "Tags panel button for adding a new tag."
   },
@@ -566,7 +566,7 @@
   "@aboutLicense": {
     "description": "Button title to open the app's license on GitHub."
   },
-  "versionsNoTagChanges": "Ei muutoksia ominaisuustietoihin",
+  "versionsNoTagChanges": "Ei muutoksia ominaisuuksiin",
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
@@ -1114,6 +1114,24 @@
   "@faqEntrance": {},
   "faqEntranceContent": "Alalaidassa on rivi tilapainikkeita: mikrokartoitus, palvelut, sisäänkäynnit ja karttailmoitukset.\n\nKun Sisäänkäynnit-tila on valittuna, paina alakulmassa olevaa ovipainiketta tai vedä se kartalle.",
   "@faqEntranceContent": {},
-  "faqCheckmarksContent": "Ne ovat merkkejä palvelutietojen vahvistamisesta. Niiden painaminen lisää `check_date`-ominaisuustiedon nykyisellä päivämäärällä.\n\nNiiden idea on, että sanotaanko, puolet kaupungista on kartoitettu ensimmäisen kerran. Sitten kuukauden kuluttua kartoittaja palaa paikalle ja haluaa kartoittaa uudelleen. Hän tarvitsee keinon merkitä, että palvelu on edelleen olemassa mutta mikään siinä ei ole muuttunut. Sitä varten ✓-merkki on: hän painaa sitä ja jatkaa eteenpäin.\n\nMerkki säilyy kaksi kuukautta. Sen jälkeen palvelut voi kartoittaa uudelleen.",
-  "@faqCheckmarksContent": {}
+  "faqCheckmarksContent": "Ne ovat merkkejä palvelutietojen vahvistamisesta. Niiden painaminen lisää `check_date`-ominaisuuden nykyisellä päivämäärällä.\n\nNiiden idea on, että sanotaanko, puolet kaupungista on kartoitettu ensimmäisen kerran. Sitten kuukauden kuluttua kartoittaja palaa paikalle ja haluaa kartoittaa uudelleen. Hän tarvitsee keinon merkitä, että palvelu on edelleen olemassa mutta mikään siinä ei ole muuttunut. Sitä varten ✓-merkki on: hän painaa sitä ja jatkaa eteenpäin.\n\nMerkki säilyy kaksi kuukautta. Sen jälkeen palvelut voi kartoittaa uudelleen.",
+  "@faqCheckmarksContent": {},
+  "faqChangeType": "Miten palvelun tyypin voi vaihtaa?",
+  "@faqChangeType": {},
+  "faqLetters": "Voiko ref-kenttään tai asunnon numeroon kirjoittaa muutakin kuin numeroita?",
+  "@faqLetters": {},
+  "faqLettersContent": "Jos käyttämääsi numeronäppäimistöä ei voi vaihtaa täyteen näppäimistöön, tarkista sovelluksen asetukset. Niihin pääsee painikkeesta, joka on vasemmassa yläkulmassa. Vaihda sieltä käyttöön ”Laajennettu numeronäppäimistö”.",
+  "@faqLettersContent": {},
+  "faqYellowContent": "Valkoiset selitteet Sisäänkäynnit-tilassa tai valkoiset pisteet Mikrokartoitus-tilassa tarkoittavat, että elementeiltä puuttuu tärkeitä ominaisuuksia. Esimerkiksi:\n\n* Rakennuksilla tulee olla kerrosten määrä.\n* Sisäänkäynneillä tulee olla tyyppi ja porraskäytäviin johtavilla asuntojen lukuväli.\n* Penkeillä tulee olla materiaali ja tieto selkänojasta.\n* Puilla tulee olla lehtien tyyppi ja pudotuskierto.",
+  "@faqYellowContent": {},
+  "faqFloors": "Tarkoittavatko ”3” ja ”/3” samaa?",
+  "@faqFloors": {},
+  "faqChangeTypeContent": "Paina editorin otsikkoa, jossa tyyppi on kirjoitettuna.",
+  "@faqChangeTypeContent": {},
+  "faqTaggingContent": "Miksi kohde puuttuu editorista? Milloin valkoiset pisteet näytetään Mikrokartoitus-tilassa? Miten kohteet järjestetään?\n\nVastaukset kaikkiin näihin kysymyksiin on löydettävissä tiedostosta [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Voit tutkia seuraavia:\n\n* Avainjärjestys pääominaisuudelle – lista `kMainKeys`.\n* Mitkä kohteet ladataan – funktio `isGoodTags`.\n* Mikä lasketaan palveluksi – funktio `isAmenityTags`.\n* Mitkä pisteet kohdistetaan automaattisesti ja millaisiin väyliin – funktio `detectSnap`.\n* Milloin mikrokartoituksen kohde on puutteellinen – funktio `needsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "faqTagging": "Kaikki kysymykset ominaisuuksista",
+  "@faqTagging": {},
+  "faqFloorsContent": "Eivät. Edeltävässä tapauksessa on ominaisuus `addr:floor=3`. Tämä tarkoittaa kerrosnumeroa, jota käytetään yleisesti esim. rakennuksen opasteissa. Jälkimmäisessä tapauksessa on ei ole tätä ominaisuutta, mutta on sen sijaan `level=3`. Tämä numero on kerros laskettuna nollasta alkaen ja suurin arvo on `building:levels - 1`. Täten kolmikerroksisen rakennuksen `addr:floor`-arvo riippuu maasta, mutta `level` on aina 0, 1, tai 2.\n\nNäin editori merkitsee nämä ominaisuudet:\n\n* `2`: `addr:floor=2` ja `level=*` ei ole tyhjä.\n* `4/`: `addr:floor=4`, mutta `level`-ominaisuutta ei ole.\n* `/1`: `level=1`, mutta `addr:floor`-ominaisuutta ei ole.\n* `1/0`: `addr:floor=1` + `level=0` (ja lähistöllä on kohde, jolla on sama `addr:floor`-arvo mutta eri `level`-arvo tai toisin päin).",
+  "@faqFloorsContent": {}
 }
