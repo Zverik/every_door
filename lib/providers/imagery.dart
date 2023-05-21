@@ -58,7 +58,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
     type: ImageryType.tms,
     name: 'Mapbox Satellite',
     url:
-        "EcKQpupFzHsz359rFNAelnzeXi+ZgGVtMyCwNNTaeQFgK+nHlqvc3+K/iN0M0e3HYI2cJbm2TxXm5QT0ranPEswj6sVgagtKNkXyi2HZct8mbGBfTzGg3/T5LHVs4c/lqaviIIxV85VP4LkSJCPEi3vinH+s4lpJUycdGGFHPshdeNTDOW4DPfkFcImOPE0jrTt74mFM1N785qsJ5Ey3Hsic4ZUvLx99H3khcB2iprx66W4u/oycV8xKlpyjH+se",
+        "EcKQpupFzHsz359rFNAelnzeXi+ZgGVtMyCwNNTaeQFgK+nHlqvc3+K/iN0M0e3HYI2cJbm2TxXm5QT0ranPEswj6sVgagtKNkXyi2HZct8mbGBfTzGg3/T5LHVs4c/lqaviIIxV85VP4LkSJCPEi3vinH+s4lpJUycdGGFHPshdeNTDOW4DB6QHSbDKBzsRrRIdxCRM1If92rsopU+JPMud2IUmLx99Hw85cCGEj9Qopkdzi7OfUaYQpauIfd0e",
     encrypted: true,
     icon: 'https://osmlab.github.io/editor-layer-index/sources/world/MapBoxSatellite.png',
     attribution: '© Mapbox',
