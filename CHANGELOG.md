@@ -14,7 +14,7 @@ _Unreleased_
 * Purge non-modifies notes when purging all data.
 * Fixed long press on the sharing icon at the raw tags panel.
 * Snack bar when removing a change does not time out for some reason.
-  Added a button to close it.
+  Forcibly closing it when leaving the changes list.
 * Translations into Finnish (thanks Lasse Liehu), Marathi (thanks संकेत गराडे),
   and Hungarian (thanks Balázs Úr) languages, and major updates to Punjabi
   (both variants) and Persian.

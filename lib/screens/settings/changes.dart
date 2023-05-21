@@ -96,9 +96,8 @@ class _ChangeListPageState extends ConsumerState {
     File tmpFile =
         File('${tempDir.path}/everydoor-${formatTime("YYmmdd")}.osc');
     await tmpFile.writeAsString(changeset, flush: true);
-    await Share.shareFiles(
-      [tmpFile.path],
-      mimeTypes: ['application/xml'],
+    await Share.shareXFiles(
+      [XFile(tmpFile.path, mimeType: 'application/xml')],
       subject:
           '${changeList.length} changes from $kAppTitle on ${formatTime("YYYY-mm-dd HH:MM")}',
     );
@@ -160,131 +159,136 @@ class _ChangeListPageState extends ConsumerState {
       buildChangesList();
     });
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(loc.changesCount(_changeList.length)),
-        actions: [
-          IconButton(
-            onPressed: changes.length == 0
-                ? null
-                : () {
-                    downloadChanges(ref);
-                  },
-            icon: Icon(Icons.share),
-            tooltip: loc.tagsShare,
-          ),
-          changes.length == 0 || changes.haveNoErrorChanges()
-              ? Container()
-              : IconButton(
-                  onPressed: () async {
-                    final answer = await showOkCancelAlertDialog(
-                      context: context,
-                      title: loc.changesPurgeTitle,
-                      message: loc.changesPurgeMessage,
-                      okLabel: loc.buttonYes,
-                      cancelLabel: loc.buttonNo,
-                    );
-                    if (answer == OkCancelResult.ok) {
-                      ref
-                          .read(changesProvider)
-                          .clearChanges(includeErrored: true);
-                      ref.read(needMapUpdateProvider).trigger();
-                    }
-                  },
-                  icon: Icon(Icons.delete_forever),
-                  tooltip: loc.changesPurge,
-                ),
-          IconButton(
-            onPressed: ref.watch(apiStatusProvider) != ApiStatus.idle
-                ? null
-                : () {
-                    ref.read(uploaderProvider).upload(context);
-                  },
-            icon: Icon(Icons.upload),
-            tooltip: loc.navUpload,
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                final change = _changeList[index];
-                return Dismissible(
-                  key: Key(change.hashCode.toString()),
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (direction) {
-                    final chProvider = ref.read(changesProvider);
-                    final nProvider = ref.read(notesProvider);
-                    if (change.change != null) {
-                      chProvider.deleteChange(change.change!);
-                      ref.read(needMapUpdateProvider).trigger();
-                    } else if (change.note != null) {
-                      nProvider.deleteNote(change.note!);
-                    } else if (change.allMapNotes) {
-                      nProvider.clearChangedMapNotes();
-                    }
-                    _changeList.removeAt(index);
-
-                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(loc.changesDeletedChange(change.title)),
-                      showCloseIcon: true,
-                      closeIconColor: Colors.white,
-                      action: change.change == null && change.note == null
-                          ? null
-                          : SnackBarAction(
-                              label: loc.changesDeletedUndo.toUpperCase(),
-                              onPressed: () async {
-                                if (change.change != null) {
-                                  await chProvider.saveChange(change.change!);
-                                } else if (change.note != null) {
-                                  await nProvider.saveNote(change.note!);
-                                }
-                                buildChangesList();
-                              },
-                            ),
-                    ));
-                  },
-                  background: Container(
-                    color: Colors.red,
-                    padding: EdgeInsets.only(right: 15.0),
-                    child: Icon(Icons.delete, color: Colors.white),
-                    alignment: Alignment.centerRight,
-                  ),
-                  child: ListTile(
-                    title: Text(change.title),
-                    subtitle: Text(change.change?.error ?? loc.changesPending),
-                    trailing: !hasManyTypes ? null : Icon(change.icon),
-                    onTap: change.change == null
-                        ? null
-                        : () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      PoiEditorPage(amenity: change.change!)),
-                            );
-                          },
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: _changeList.length,
+    return WillPopScope(
+      onWillPop: () async {
+        // Fix for cases when the snack bar does not time out.
+        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(loc.changesCount(_changeList.length)),
+          actions: [
+            IconButton(
+              onPressed: changes.length == 0
+                  ? null
+                  : () {
+                      downloadChanges(ref);
+                    },
+              icon: Icon(Icons.share),
+              tooltip: loc.tagsShare,
             ),
-          ),
-          if (_changeList.length <= 5)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5.0),
-              child: Center(
-                child: Text(
-                  loc.changesSwipeLeft,
-                  style: TextStyle(fontSize: 16.0),
-                ),
+            changes.length == 0 || changes.haveNoErrorChanges()
+                ? Container()
+                : IconButton(
+                    onPressed: () async {
+                      final answer = await showOkCancelAlertDialog(
+                        context: context,
+                        title: loc.changesPurgeTitle,
+                        message: loc.changesPurgeMessage,
+                        okLabel: loc.buttonYes,
+                        cancelLabel: loc.buttonNo,
+                      );
+                      if (answer == OkCancelResult.ok) {
+                        ref
+                            .read(changesProvider)
+                            .clearChanges(includeErrored: true);
+                        ref.read(needMapUpdateProvider).trigger();
+                      }
+                    },
+                    icon: Icon(Icons.delete_forever),
+                    tooltip: loc.changesPurge,
+                  ),
+            IconButton(
+              onPressed: ref.watch(apiStatusProvider) != ApiStatus.idle
+                  ? null
+                  : () {
+                      ref.read(uploaderProvider).upload(context);
+                    },
+              icon: Icon(Icons.upload),
+              tooltip: loc.navUpload,
+            ),
+          ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  final change = _changeList[index];
+                  return Dismissible(
+                    key: Key(change.hashCode.toString()),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      final chProvider = ref.read(changesProvider);
+                      final nProvider = ref.read(notesProvider);
+                      if (change.change != null) {
+                        chProvider.deleteChange(change.change!);
+                        ref.read(needMapUpdateProvider).trigger();
+                      } else if (change.note != null) {
+                        nProvider.deleteNote(change.note!);
+                      } else if (change.allMapNotes) {
+                        nProvider.clearChangedMapNotes();
+                      }
+                      _changeList.removeAt(index);
+
+                      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(loc.changesDeletedChange(change.title)),
+                        action: change.change == null && change.note == null
+                            ? null
+                            : SnackBarAction(
+                                label: loc.changesDeletedUndo.toUpperCase(),
+                                onPressed: () async {
+                                  if (change.change != null) {
+                                    await chProvider.saveChange(change.change!);
+                                  } else if (change.note != null) {
+                                    await nProvider.saveNote(change.note!);
+                                  }
+                                  buildChangesList();
+                                },
+                              ),
+                      ));
+                    },
+                    background: Container(
+                      color: Colors.red,
+                      padding: EdgeInsets.only(right: 15.0),
+                      child: Icon(Icons.delete, color: Colors.white),
+                      alignment: Alignment.centerRight,
+                    ),
+                    child: ListTile(
+                      title: Text(change.title),
+                      subtitle: Text(change.change?.error ?? loc.changesPending),
+                      trailing: !hasManyTypes ? null : Icon(change.icon),
+                      onTap: change.change == null
+                          ? null
+                          : () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) =>
+                                        PoiEditorPage(amenity: change.change!)),
+                              );
+                            },
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: _changeList.length,
               ),
             ),
-        ],
+            if (_changeList.length <= 5)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Center(
+                  child: Text(
+                    loc.changesSwipeLeft,
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
