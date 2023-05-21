@@ -40,10 +40,10 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
     if (event is MapEventWithMove) {
       center = event.center;
       if (!fromController) {
-        ref.read(zoomProvider.state).state = event.zoom;
+        ref.read(zoomProvider.notifier).state = event.zoom;
         if (event.zoom > kEditMinZoom) {
           // Switch navigation mode off
-          ref.read(navigationModeProvider.state).state = false;
+          ref.read(navigationModeProvider.notifier).state = false;
         }
       }
     } else if (event is MapEventMoveEnd) {
@@ -56,10 +56,10 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
         while (rotation > 200) rotation -= 360;
         while (rotation < -200) rotation += 360;
         if (rotation.abs() < kRotationThreshold) {
-          ref.read(rotationProvider.state).state = 0.0;
+          ref.read(rotationProvider.notifier).state = 0.0;
           controller.rotate(0.0);
         } else {
-          ref.read(rotationProvider.state).state = rotation;
+          ref.read(rotationProvider.notifier).state = rotation;
         }
       }
     }

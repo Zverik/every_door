@@ -56,14 +56,14 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   onMapEvent(MapEvent event) {
     bool fromController = event.source == MapEventSource.mapController;
     if (event is MapEventWithMove && !fromController) {
-      ref.read(zoomProvider.state).state = event.zoom - kZoomOffset;
+      ref.read(zoomProvider.notifier).state = event.zoom - kZoomOffset;
       if (event.zoom - kZoomOffset < kEditMinZoom) {
         // Switch navigation mode on
-        ref.read(navigationModeProvider.state).state = true;
+        ref.read(navigationModeProvider.notifier).state = true;
       }
     } else if (event is MapEventMoveEnd && !fromController) {
       // Move the effective location for downloading to work properly.
-      ref.read(trackingProvider.state).state = false;
+      ref.read(trackingProvider.notifier).state = false;
       ref.read(effectiveLocationProvider.notifier).set(event.center);
       updateNotes();
     }

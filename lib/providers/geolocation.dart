@@ -114,7 +114,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
   }
 
   disableTracking() {
-    _ref.read(trackingProvider.state).state = false;
+    _ref.read(trackingProvider.notifier).state = false;
   }
 
   enableTracking([BuildContext? context]) async {
@@ -152,7 +152,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
 
     if (_locSub != null) {
-      _ref.read(trackingProvider.state).state = true;
+      _ref.read(trackingProvider.notifier).state = true;
     }
   }
 

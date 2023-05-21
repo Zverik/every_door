@@ -114,7 +114,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     });
 
     ref.listen(editorModeProvider, (_, next) {
-      ref.read(microZoomedInProvider.state).state = null;
+      ref.read(microZoomedInProvider.notifier).state = null;
     });
 
     final screenSize = MediaQuery.of(context).size;
@@ -144,11 +144,11 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     return WillPopScope(
       onWillPop: () async {
         if (ref.read(microZoomedInProvider) != null) {
-          ref.read(microZoomedInProvider.state).state = null;
+          ref.read(microZoomedInProvider.notifier).state = null;
           return false;
         } else if (!ref.read(trackingProvider) &&
             ref.read(geolocationProvider) != null) {
-          ref.read(trackingProvider.state).state = true;
+          ref.read(trackingProvider.notifier).state = true;
           return false;
         } else {
           return true;
@@ -169,7 +169,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
                 child: FloatingActionButton(
                   child: Icon(Icons.add),
                   onPressed: () {
-                    ref.read(microZoomedInProvider.state).state = null;
+                    ref.read(microZoomedInProvider.notifier).state = null;
                     final location = ref.read(effectiveLocationProvider);
                     Navigator.push(
                       context,

@@ -107,11 +107,11 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     if (event is MapEventWithMove) {
       mapCenter = event.targetCenter;
       if (event.source != MapEventSource.mapController) {
-        ref.read(trackingProvider.state).state = false;
-        ref.read(zoomProvider.state).state = event.zoom;
+        ref.read(trackingProvider.notifier).state = false;
+        ref.read(zoomProvider.notifier).state = event.zoom;
         if (event.zoom < kEditMinZoom) {
           // Switch navigation mode on
-          ref.read(navigationModeProvider.state).state = true;
+          ref.read(navigationModeProvider.notifier).state = true;
         }
         setState(() {
           // redraw center marker
@@ -133,10 +133,10 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         while (rotation > 200) rotation -= 360;
         while (rotation < -200) rotation += 360;
         if (rotation.abs() < kRotationThreshold) {
-          ref.read(rotationProvider.state).state = 0.0;
+          ref.read(rotationProvider.notifier).state = 0.0;
           mapController.rotate(0.0);
         } else {
-          ref.read(rotationProvider.state).state = rotation;
+          ref.read(rotationProvider.notifier).state = rotation;
         }
       }
     }
@@ -217,7 +217,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     else if (zoom > maxZoomHere) zoom = max(curZoom, maxZoomHere);
     if ((zoom - curZoom).abs() >= kZoomThreshold) {
       mapController.move(mapController.center, zoom);
-      ref.read(zoomProvider.state).state = zoom;
+      ref.read(zoomProvider.notifier).state = zoom;
     }
   }
 
@@ -278,7 +278,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       if (next == EditorMode.micromapping) {
         if (mapController.zoom < kMicroZoom) {
           mapController.move(mapController.center, kMicroZoom);
-          ref.read(zoomProvider.state).state = kMicroZoom;
+          ref.read(zoomProvider.notifier).state = kMicroZoom;
         }
       }
     });
@@ -364,7 +364,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
           },
           onLongPressed: () {
             if (ref.read(rotationProvider) != 0.0) {
-              ref.read(rotationProvider.state).state = 0.0;
+              ref.read(rotationProvider.notifier).state = 0.0;
               mapController.rotate(0.0);
             } else {
               ref.read(geolocationProvider.notifier).enableTracking(context);

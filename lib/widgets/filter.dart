@@ -50,7 +50,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
       floors = [];
     }
     if ((filter.floor?.isNotEmpty ?? false) && !floors.contains(filter.floor)) {
-      ref.read(poiFilterProvider.state).state =
+      ref.read(poiFilterProvider.notifier).state =
           filter.copyWith(floor: PoiFilter.nullFloor);
     }
     setState(() {
@@ -79,18 +79,18 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
             onChange: (value) {
               if (value == null) {
                 // On clear, clearing all fields.
-                ref.read(poiFilterProvider.state).state = filter.copyWith(
+                ref.read(poiFilterProvider.notifier).state = filter.copyWith(
                   address: PoiFilter.nullAddress,
                   floor: PoiFilter.nullFloor,
                 );
               } else if (value == empty) {
-                ref.read(poiFilterProvider.state).state =
+                ref.read(poiFilterProvider.notifier).state =
                     filter.copyWith(address: StreetAddress.empty);
               } else {
                 final addr = nearestAddresses
                     .firstWhere((element) => element.toString() == value);
                 // Clearing floors when the address has changed.
-                ref.read(poiFilterProvider.state).state = filter.copyWith(
+                ref.read(poiFilterProvider.notifier).state = filter.copyWith(
                   address: addr,
                   floor: PoiFilter.nullFloor,
                 );
@@ -114,7 +114,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
               } else {
                 newFloor = floors.firstWhere((e) => e.string == value);
               }
-              ref.read(poiFilterProvider.state).state =
+              ref.read(poiFilterProvider.notifier).state =
                   filter.copyWith(floor: newFloor);
             },
           ),
@@ -122,7 +122,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
           SwitchListTile(
             value: filter.notChecked,
             onChanged: (value) {
-              ref.read(poiFilterProvider.state).state =
+              ref.read(poiFilterProvider.notifier).state =
                   filter.copyWith(notChecked: value);
             },
             title: Text(loc.filterNonConfirmed, style: kFieldTextStyle),

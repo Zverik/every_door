@@ -137,7 +137,7 @@ class PoiTile extends ConsumerWidget {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                ref.read(microZoomedInProvider.state).state = null;
+                ref.read(microZoomedInProvider.notifier).state = null;
                 Navigator.push(
                   context,
                   MaterialPageRoute(

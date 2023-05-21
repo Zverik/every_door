@@ -68,11 +68,11 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     if (event is MapEventWithMove) {
       center = event.center;
       if (!fromController) {
-        ref.read(trackingProvider.state).state = false;
-        ref.read(zoomProvider.state).state = event.zoom;
+        ref.read(trackingProvider.notifier).state = false;
+        ref.read(zoomProvider.notifier).state = event.zoom;
         if (event.zoom < kEditMinZoom) {
           // Switch navigation mode on
-          ref.read(navigationModeProvider.state).state = true;
+          ref.read(navigationModeProvider.notifier).state = true;
         }
         setState(() {
           // redraw center marker
@@ -88,10 +88,10 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
         while (rotation > 200) rotation -= 360;
         while (rotation < -200) rotation += 360;
         if (rotation.abs() < kRotationThreshold) {
-          ref.read(rotationProvider.state).state = 0.0;
+          ref.read(rotationProvider.notifier).state = 0.0;
           controller.rotate(0.0);
         } else {
-          ref.read(rotationProvider.state).state = rotation;
+          ref.read(rotationProvider.notifier).state = rotation;
         }
       }
     }
@@ -565,7 +565,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   },
                   onLongPressed: () {
                     if (ref.read(rotationProvider) != 0.0) {
-                      ref.read(rotationProvider.state).state = 0.0;
+                      ref.read(rotationProvider.notifier).state = 0.0;
                       controller.rotate(0.0);
                     } else {
                       ref
