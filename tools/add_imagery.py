@@ -64,7 +64,11 @@ if __name__ == '__main__':
         imagery = feature['properties']
         if imagery.get('overlay'):
             continue
+        # We skip Bing imagery and few others.
         if imagery['type'] not in ('tms', 'wms'):
+            continue
+        # We substitute Mapbox imagery with a built-in one.
+        if imagery['id'] == 'Mapbox':
             continue
         if imagery.get('category') not in (None, 'photo', 'map'):
             continue

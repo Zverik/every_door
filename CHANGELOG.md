@@ -1,5 +1,13 @@
 # Every Door App Change Log
 
+## 3.1
+
+_Unreleased_
+
+* Updated Maxar and Mapbox imagery keys.
+* Supporting tagging schema v6, added hundred new presets.
+* Some POI like churches and libraries have reduced obsoletion rate (1 year).
+
 ## 3.0
 
 _Released on 2022-10-25_

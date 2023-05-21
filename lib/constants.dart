@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Colors, TextStyle;
 
 const kAppTitle = 'Every Door';
-const kAppVersion = '3.0'; // Also used for presets.db versioning
+const kAppVersion = '3.1-beta1'; // Also used for presets.db versioning
 
 const kDefaultLocation = <double>[59.42, 24.71];
 const kDatabaseName = 'every_door.db';
@@ -20,6 +20,7 @@ const kAmenitiesInList = 12; // for shops & amenities mode
 const kMicroStuffInList = 24; // same, but for micromapping mode
 const kTapRadius = 20.0; // flutter pixels
 const kOldAmenityDays = 60; // check_date expiration rate
+const kOldStructureDays = 360; // check_date expiration rate for churches and schools
 const kOldAmenityDaysEditor = 3; // check_date expiration rate for the editor
 const kOldAmenityWarning = 365 * 5; // When warn about an old amenity
 const kFieldColor = Colors.lightBlueAccent;

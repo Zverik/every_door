@@ -342,6 +342,31 @@ bool needsCheckDate(Map<String, String> tags) {
   return isAmenityTags(tags);
 }
 
+/// Whether this is a long-term amenity that doesn't need a regular check.
+bool isStructureTag(String k, String? v) {
+  if (v == null) return false;
+
+  if (k == 'amenity') {
+    const kAmenityStructures = <String>{
+      'kindergarten', 'college', 'library', 'research_institute',
+      'school', 'university', 'ferry_terminal', 'hospital',
+      'cinema', 'theatre', 'arts_centre', 'conference_centre',
+      'events_venue', 'courthouse', 'fire_station', 'police',
+      'prison', 'townhall', 'crematorium', 'funeral_hall',
+      'grave_yard', 'marketplace', 'monastery', 'place_of_worship',
+    };
+    return kAmenityStructures.contains(v);
+  } else if (k == 'leisure') {
+    return {'stadium', 'golf_course', 'resort'}.contains(v);
+  }
+  return false;
+}
+
+bool isStructure(Map<String, String> tags) {
+  final mainKey = getMainKey(tags);
+  return mainKey == null ? false : isStructureTag(mainKey, tags[mainKey]);
+}
+
 /// Whether we should display address and floor fields in the editor.
 bool needsAddress(Map<String, String> tags) {
   if (isAmenityTags(tags)) return true;

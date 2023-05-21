@@ -53,6 +53,19 @@ class ImageryProvider extends StateNotifier<Imagery> {
     maxZoom: 22,
   ).decrypt();
 
+  static final mapboxImagery = Imagery(
+    id: 'Mapbox',
+    type: ImageryType.tms,
+    name: 'Mapbox Satellite',
+    url:
+        "EcKQpupFzHsz359rFNAelnzeXi+ZgGVtMyCwNNTaeQFgK+nHlqvc3+K/iN0M0e3HYI2cJbm2TxXm5QT0ranPEswj6sVgagtKNkXyi2HZct8mbGBfTzGg3/T5LHVs4c/lqaviIIxV85VP4LkSJCPEi3vinH+s4lpJUycdGGFHPshdeNTDOW4DPfkFcImOPE0jrTt74mFM1N785qsJ5Ey3Hsic4ZUvLx99H3khcB2iprx66W4u/oycV8xKlpyjH+se",
+    encrypted: true,
+    icon: 'https://osmlab.github.io/editor-layer-index/sources/world/MapBoxSatellite.png',
+    attribution: '© Mapbox',
+    minZoom: 1,
+    maxZoom: 22,
+  ).decrypt();
+
   ImageryProvider(this._ref) : super(maxarPremiumImagery) {
     _updateBingUrlTemplate();
     loaded = false;
@@ -64,6 +77,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
         geoHasher.encode(location.longitude, location.latitude, precision: 4);
     final rows = await _ref.read(presetProvider).imageryQuery(geohash);
     List<Imagery> results = rows.map((row) => Imagery.fromJson(row)).toList();
+    results.add(mapboxImagery);
     results.add(maxarPremiumImagery);
     if (bingUrlTemplate != null) results.add(bingImagery);
     return results;
@@ -77,6 +91,8 @@ class ImageryProvider extends StateNotifier<Imagery> {
         state = bingImagery;
       } else if (imageryId == maxarPremiumImagery.id) {
         state = maxarPremiumImagery;
+      } else if (imageryId == mapboxImagery.id) {
+        state = mapboxImagery;
       } else {
         final imagery =
             await _ref.read(presetProvider).singleImageryQuery(imageryId);
