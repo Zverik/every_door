@@ -109,6 +109,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
   bool get isPoint => element?.isPoint ?? true;
   bool get canDelete =>
       (element?.isPoint ?? true) && !(element?.isMember ?? false);
+  bool get isBuilding =>
+      detectKind(getFullTags(), {ElementKind.building}) == ElementKind.building;
   bool get canMove => canDelete && (isNew || kind != ElementKind.entrance);
   ElementKind get kind => detectKind(getFullTags());
   bool get isIncomplete => needsMoreInfo(getFullTags());

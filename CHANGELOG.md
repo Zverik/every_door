@@ -7,6 +7,11 @@ _Unreleased_
 * Updated Maxar and Mapbox imagery keys.
 * Supporting tagging schema v6, added hundred new presets.
 * Some POI like churches and libraries have reduced obsoletion rate (1 year).
+* Deleting buildings via lifecycle prefixes is forbidden now.
+* `name:signed` is not a language suffix.
+* Translations into Finnish (thanks Lasse Liehu), Marathi (thanks संकेत गराडे),
+  and Hungarian (thanks Balázs Úr) languages, and major updates to Punjabi
+  (both variants) and Persian.
 
 ## 3.0
 

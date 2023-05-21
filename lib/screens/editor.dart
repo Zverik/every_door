@@ -407,29 +407,30 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
               },
             ),
           SizedBox(width: 10.0),
-          MaterialButton(
-            color: Colors.red,
-            textColor: Colors.white,
-            child:
-                Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
-            onPressed: () async {
-              if (amenity.deleted) {
-                setState(() {
-                  amenity.deleted = false;
-                });
-              } else {
-                final answer = await showOkCancelAlertDialog(
-                  context: context,
-                  title: loc.editorDeleteTitle(amenity.typeAndName),
-                  okLabel: loc.editorDeleteButton,
-                  isDestructiveAction: true,
-                );
-                if (answer == OkCancelResult.ok) {
-                  deleteAndClose();
+          if (amenity.canDelete || !amenity.isBuilding)
+            MaterialButton(
+              color: Colors.red,
+              textColor: Colors.white,
+              child:
+                  Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
+              onPressed: () async {
+                if (amenity.deleted) {
+                  setState(() {
+                    amenity.deleted = false;
+                  });
+                } else {
+                  final answer = await showOkCancelAlertDialog(
+                    context: context,
+                    title: loc.editorDeleteTitle(amenity.typeAndName),
+                    okLabel: loc.editorDeleteButton,
+                    isDestructiveAction: true,
+                  );
+                  if (answer == OkCancelResult.ok) {
+                    deleteAndClose();
+                  }
                 }
-              }
-            },
-          ),
+              },
+            ),
         ],
       ),
     );

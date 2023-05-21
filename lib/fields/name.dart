@@ -80,6 +80,7 @@ class _NameInputFieldState extends State<NameInputField> {
 
   addLanguage(String key) {
     if (_controllers.containsKey(key)) return;
+    if (key.endsWith(':signed')) return;
     _controllers[key] = TextEditingController(text: widget.element[key] ?? '');
     _languages.add(key);
   }
@@ -148,7 +149,8 @@ class _NameInputFieldState extends State<NameInputField> {
 
     // This is a hack to auto-focus on the name when the element was just created.
     bool needFocus = widget.element.isNew &&
-        widget.element['name'] == null &&
+        widget.field.key == 'name' &&
+        widget.element[widget.field.key] == null &&
         DateTime.now().difference(widget.element.updated) <
             Duration(seconds: 3);
 

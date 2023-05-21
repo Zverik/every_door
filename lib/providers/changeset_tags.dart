@@ -6,7 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final changesetTagsProvider = ChangeNotifierProvider((ref) => ChangesetTagsProvider());
+final changesetTagsProvider =
+    ChangeNotifierProvider((ref) => ChangesetTagsProvider());
 
 class ChangesetTagsProvider extends ChangeNotifier {
   static const _kHashtagsKey = 'hashtags';
@@ -108,7 +109,9 @@ class _TypeCount {
     if (value == 'yes') return key;
     if ({'shop', 'office', 'building', 'entrance', 'club'}.contains(key))
       return '$value $key'; // school building
-    if (value.endsWith('s')) return value.substring(0, value.length - 1);
+    // Trim "services" and "lights", but not "cross".
+    if (value.endsWith('s') && !value.endsWith('ss'))
+      return value.substring(0, value.length - 1);
     return value;
   }
 }
