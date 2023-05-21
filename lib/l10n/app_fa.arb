@@ -272,7 +272,7 @@
   "@settingsDataManagement": {
     "description": "Section title for data settings."
   },
-  "settingsPurgedMessage": "{count,plural, =1{ {count} مورد پاکسازی شد}, =few{ {count} مورد پاکسازی شد}, =other{ {count} مورد پاکسازی شد}}",
+  "settingsPurgedMessage": "{count,plural, =1{ {count} مورد پاکسازی شد} few{ {count} مورد پاکسازی شد} other{ {count} مورد پاکسازی شد}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -287,7 +287,7 @@
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{دانلود شد {count} element.}, =few{دانلود شد {count} elements.}, =other{دانلود شد {count} elements.}}",
+  "dataDownloadedCount": "{count,plural, =1{دانلود شد {count} element.} few{دانلود شد {count} elements.} other{دانلود شد {count} elements.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -371,7 +371,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} سال}, =few{{count} سال}, =other{{count} سال}}",
+  "years": "{count,plural, =1{{count} سال} few{{count} سال} other{{count} سال}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

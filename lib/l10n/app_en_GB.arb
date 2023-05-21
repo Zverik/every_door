@@ -7,7 +7,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{Downloaded {count} element.}, =few{Downloaded {count} elements.}, =other{Downloaded {count} elements.}}",
+  "dataDownloadedCount": "{count,plural, =1{Downloaded {count} element.} few{Downloaded {count} elements.} other{Downloaded {count} elements.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -501,7 +501,7 @@
   "@settingsPurgedObsoleteTitle": {
     "description": "Notification title for cleaning obsolete data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Purged {count} element}, =few{Purged {count} elements}, =other{Purged {count} elements}}",
+  "settingsPurgedMessage": "{count,plural, =1{Purged {count} element} few{Purged {count} elements} other{Purged {count} elements}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -586,7 +586,7 @@
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
-  "changesCount": "{count,plural, =1{{count} change}, =few{{count} changes}, =other{{count} changes}}",
+  "changesCount": "{count,plural, =1{{count} change} few{{count} changes} other{{count} changes}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -1107,7 +1107,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} year}, =few{{count} years}, =other{{count} years}}",
+  "years": "{count,plural, =1{{count} year} few{{count} years} other{{count} years}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

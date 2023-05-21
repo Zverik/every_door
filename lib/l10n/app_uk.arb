@@ -991,7 +991,7 @@
   "@faqMapTinyContent": {},
   "faqEntranceContent": "Нижній рядок кнопок перемикає режими: мікромапінг, точки, входи, нотатки.\n\nВ режимі входів перетягніть кнопку із дверима з нижнього куту на мапу.",
   "@faqEntranceContent": {},
-  "dataDownloadedCount": "{count,plural, =1{Завантажен {count} обʼєкт.}, =few{Заватнажено {count} обʼєкти.}, =other{Завантажено {count} обʼєктів.}}",
+  "dataDownloadedCount": "{count,plural, =1{Завантажен {count} обʼєкт.} few{Заватнажено {count} обʼєкти.} other{Завантажено {count} обʼєктів.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1048,7 +1048,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} рік}, =few{{count} роки}, =other{{count} років}}",
+  "years": "{count,plural, =1{{count} рік} few{{count} роки} other{{count} років}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -1065,14 +1065,14 @@
       }
     }
   },
-  "settingsPurgedMessage": "{count,plural, =1{Видалив {count} елемент}, =few{Видалив {count} елементи}, =other{Видалив {count} елементів}}",
+  "settingsPurgedMessage": "{count,plural, =1{Видалив {count} елемент} few{Видалив {count} елементи} other{Видалив {count} елементів}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
       "count": {}
     }
   },
-  "changesCount": "{count,plural, =1{{count} зміна}, =few{{count} зміни}, =other{{count} змін}}",
+  "changesCount": "{count,plural, =1{{count} зміна} few{{count} зміни} other{{count} змін}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {

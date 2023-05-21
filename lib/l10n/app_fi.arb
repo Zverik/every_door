@@ -19,7 +19,7 @@
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} elementti ladattiin.}, =few{{count} elementtiä ladattiin.}, =other{{count} elementtiä ladattiin.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} elementti ladattiin.} few{{count} elementtiä ladattiin.} other{{count} elementtiä ladattiin.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -181,7 +181,7 @@
   "@editorMoreFields": {
     "description": "Title of a additional fields group in editor."
   },
-  "years": "{count,plural, =1{{count} vuosi}, =few{{count} vuotta}, =other{{count} vuotta}}",
+  "years": "{count,plural, =1{{count} vuosi} few{{count} vuotta} other{{count} vuotta}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -545,7 +545,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesCount": "{count,plural, =1{{count} muutos}, =few{{count} muutosta}, =other{{count} muutosta}}",
+  "changesCount": "{count,plural, =1{{count} muutos} few{{count} muutosta} other{{count} muutosta}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -574,7 +574,7 @@
   "@settingsPurgeDataTitle": {
     "description": "Confirmation dialog title for when purging all downloaded data."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Tyhjennetiin {count} elementti}, =few{Tyhjennettiin {count} elementtiä}, =other{Tyhjennettiin {count} elementtiä}}",
+  "settingsPurgedMessage": "{count,plural, =1{Tyhjennetiin {count} elementti} few{Tyhjennettiin {count} elementtiä} other{Tyhjennettiin {count} elementtiä}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {

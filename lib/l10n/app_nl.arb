@@ -403,7 +403,7 @@
   "@settingsPurgeDataTitle": {
     "description": "Confirmation dialog title for when purging all downloaded data."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Purged {count} element verwijderd}, =few{{count} elementen verwijderd}, =other{ {count} elementen verwijderd}}",
+  "settingsPurgedMessage": "{count,plural, =1{Purged {count} element verwijderd} few{{count} elementen verwijderd} other{ {count} elementen verwijderd}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -446,7 +446,7 @@
   "@accountLogout": {
     "description": "Button title for logging out of OSM."
   },
-  "changesCount": "{count,plural, =1{{count} wijziging}, =few{{count} wijzigingen}, =other{{count} wijzigingen}}",
+  "changesCount": "{count,plural, =1{{count} wijziging} few{{count} wijzigingen} other{{count} wijzigingen}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -811,7 +811,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural,=1{{count} element gedownload.},=few{{count} elementen gedownload.},=other{{count} elementen gedownload.}}",
+  "dataDownloadedCount": "{count,plural,=1{{count} element gedownload.} few{{count} elementen gedownload.} other{{count} elementen gedownload.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1089,7 +1089,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} jaar}, =few{{count} jaar}, =other{{count} jaar}}",
+  "years": "{count,plural, =1{{count} jaar} few{{count} jaar} other{{count} jaar}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

@@ -451,7 +451,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesCount": "{count,plural, =1{{count} बदल}, =few{{count} बदल}, =other{{count} बदल}}",
+  "changesCount": "{count,plural, =1{{count} बदल} few{{count} बदल} other{{count} बदल}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -896,7 +896,7 @@
   "@faqChangeTypeContent": {},
   "faqTagging": "सर्व टॅगिंग प्रश्न",
   "@faqTagging": {},
-  "dataDownloadedCount": "{count,plural, =1{{count} वस्तू डाऊनलोड केले.}, =few{{count} वस्तू डाऊनलोड केले.}, =other{{count} वस्तू डाऊनलोड केले.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} वस्तू डाऊनलोड केले.} few{{count} वस्तू डाऊनलोड केले.} other{{count} वस्तू डाऊनलोड केले.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -915,7 +915,7 @@
   "@settingsPurgeAllData": {
     "description": "Settings entry for purging all cached OSM data."
   },
-  "settingsPurgedMessage": "{count,plural, =1{ {count} पुसून टाकले}, =few{ {count} पुसून टाकले}, =other{ {count} पुसून टाकले}}",
+  "settingsPurgedMessage": "{count,plural, =1{ {count} पुसून टाकले} few{ {count} पुसून टाकले} other{ {count} पुसून टाकले}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -995,7 +995,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} वर्ष}, =few{{count} वर्ष}, =other{{count} वर्ष}}",
+  "years": "{count,plural, =1{{count} वर्ष} few{{count} वर्ष} other{{count} वर्ष}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

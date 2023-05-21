@@ -1078,28 +1078,28 @@
   "@faqYellowContent": {},
   "faqFloors": "Ĉu etaĝoj '3' kaj '/3' estas la samaj?",
   "@faqFloors": {},
-  "dataDownloadedCount": "{count,plural, =1{Elŝutiĝis {count} elemento.}, =few{Elŝutiĝis {count} elementoj.}, =other{Elŝutiĝis {count} elementoj.}}",
+  "dataDownloadedCount": "{count,plural, =1{Elŝutiĝis {count} elemento.} few{Elŝutiĝis {count} elementoj.} other{Elŝutiĝis {count} elementoj.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
       "count": {}
     }
   },
-  "years": "{count,plural, =1{{count} jaro}, =few{{count} jaroj}, =other{{count} jaroj}}",
+  "years": "{count,plural, =1{{count} jaro} few{{count} jaroj} other{{count} jaroj}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
       "count": {}
     }
   },
-  "settingsPurgedMessage": "{count,plural, =1{Forviŝiĝis {count} element}, =few{Forviŝiĝis {count} elementoj}, =other{Forviŝiĝis {count} elementoj}}",
+  "settingsPurgedMessage": "{count,plural, =1{Forviŝiĝis {count} element} few{Forviŝiĝis {count} elementoj} other{Forviŝiĝis {count} elementoj}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
       "count": {}
     }
   },
-  "changesCount": "{count,plural, =1{{count} ŝanĝo}, =few{{count} ŝanĝoj}, =other{{count} ŝanĝoj}}",
+  "changesCount": "{count,plural, =1{{count} ŝanĝo} few{{count} ŝanĝoj} other{{count} ŝanĝoj}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {

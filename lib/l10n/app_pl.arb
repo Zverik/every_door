@@ -392,7 +392,7 @@
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Wyczyszczony {count} element}, =few{Wyczyszczone {count} elementy}, =other{Wyczyszczonych {count} elementów}}",
+  "settingsPurgedMessage": "{count,plural, =1{Wyczyszczony {count} element} few{Wyczyszczone {count} elementy} other{Wyczyszczonych {count} elementów}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -447,7 +447,7 @@
   "@accountPasswordTitle": {
     "description": "Title for the input dialog for login and password."
   },
-  "changesCount": "{count,plural, =1{{count} zmiana}, =few{{count} zmiany}, =other{{count} zmian}}",
+  "changesCount": "{count,plural, =1{{count} zmiana} few{{count} zmiany} other{{count} zmian}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -757,7 +757,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{Pobrano {count} element.}, =few{Pobrano {count} elementy.}, =other{Pobrano {count} elementów.}}",
+  "dataDownloadedCount": "{count,plural, =1{Pobrano {count} element.} few{Pobrano {count} elementy.} other{Pobrano {count} elementów.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1105,7 +1105,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} rok}, =few{{count} lata}, =other{{count} lat}}",
+  "years": "{count,plural, =1{{count} rok} few{{count} lata} other{{count} lat}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

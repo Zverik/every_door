@@ -186,7 +186,7 @@
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} elem letöltve.}, =few{{count} elem letöltve.}, =other{{count} elem letöltve.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} elem letöltve.} few{{count} elem letöltve.} other{{count} elem letöltve.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -300,7 +300,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} éves}, =few{{count} éves}, =other{{count} éves}}",
+  "years": "{count,plural, =1{{count} éves} few{{count} éves} other{{count} éves}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -506,7 +506,7 @@
   "@settingsPurgedObsoleteTitle": {
     "description": "Notification title for cleaning obsolete data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{{count} elem törölve}, =few{{count} elem törölve}, =other{{count} elem törölve}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} elem törölve} few{{count} elem törölve} other{{count} elem törölve}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -664,7 +664,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesCount": "{count,plural, =1{{count} módosítás}, =few{{count} módosítás}, =other{{count} módosítás}}",
+  "changesCount": "{count,plural, =1{{count} módosítás} few{{count} módosítás} other{{count} módosítás}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {

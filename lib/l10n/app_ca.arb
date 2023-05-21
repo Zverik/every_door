@@ -31,7 +31,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} element descarregat.}, =few{{count} elements descarregats.}, =other{{count} elements descarregats.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} element descarregat.} few{{count} elements descarregats.} other{{count} elements descarregats.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -159,7 +159,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} any}, =few{{count} anys}, =other{{count} anys}}",
+  "years": "{count,plural, =1{{count} any} few{{count} anys} other{{count} anys}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -339,7 +339,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{{count} element purgat}, =few{{count} elements purgats}, =other{{count} elements purgats}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} element purgat} few{{count} elements purgats} other{{count} elements purgats}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -1061,7 +1061,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesCount": "{count,plural, =1{{count} canvi}, =few{{count} canvis}, =other{{count} canvis}}",
+  "changesCount": "{count,plural, =1{{count} canvi} few{{count} canvis} other{{count} canvis}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {

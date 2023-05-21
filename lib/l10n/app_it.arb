@@ -99,7 +99,7 @@
   "@settingsPurgedObsoleteTitle": {},
   "settingsPurgedAllTitle": "Dati cancellati",
   "@settingsPurgedAllTitle": {},
-  "settingsPurgedMessage": "{count,plural, =1{Pulito {count} elemento}, =few{Puliti {count} elementi}, =other{Puliti {count} elementi}}",
+  "settingsPurgedMessage": "{count,plural, =1{Pulito {count} elemento} few{Puliti {count} elementi} other{Puliti {count} elementi}}",
   "@settingsPurgedMessage": {},
   "settingsUploads": "Caricamenti in sospeso",
   "@settingsUploads": {},
@@ -145,7 +145,7 @@
   "@accountChangesets": {},
   "accountUnreadMail": "Posta non letta",
   "@accountUnreadMail": {},
-  "changesCount": "{count,plural, =1{{count} modifica}, =few{{count} modifiche}, =other{{count} modifiche}}",
+  "changesCount": "{count,plural, =1{{count} modifica} few{{count} modifiche} other{{count} modifiche}}",
   "@changesCount": {},
   "changesUploadedTitle": "Caricato",
   "@changesUploadedTitle": {},
@@ -401,7 +401,7 @@
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{Scaricato {count} elemento.}, =few{Scaricati {count} elementi.}, =other{Scaricati {count} elementi.}}",
+  "dataDownloadedCount": "{count,plural, =1{Scaricato {count} elemento.} few{Scaricati {count} elementi.} other{Scaricati {count} elementi.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -785,7 +785,7 @@
       }
     }
   },
-  "years": "{count,plural,=1{{count} anno} =few{{count} anni}, =other{{count} anni}}",
+  "years": "{count,plural,=1{{count} anno} few{{count} anni} other{{count} anni}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

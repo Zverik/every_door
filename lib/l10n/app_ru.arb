@@ -101,7 +101,7 @@
   "@settingsPurgedObsoleteTitle": {},
   "settingsPurgedAllTitle": "Удалили данные",
   "@settingsPurgedAllTitle": {},
-  "settingsPurgedMessage": "{count,plural, =1{Очистили {count} объект}, =few{Очистили {count} объекта}, =other{Очистили {count} объектов}}",
+  "settingsPurgedMessage": "{count,plural, =1{Очистили {count} объект} few{Очистили {count} объекта} other{Очистили {count} объектов}}",
   "@settingsPurgedMessage": {},
   "changesSwipeLeft": "Смахните влево для отмены правки",
   "@changesSwipeLeft": {},
@@ -149,7 +149,7 @@
   "@accountChangesets": {},
   "accountUnreadMail": "Непрочитанной почты",
   "@accountUnreadMail": {},
-  "changesCount": "{count,plural, =1{{count} правка}, =few{{count} правки}, =other{{count} правок}}",
+  "changesCount": "{count,plural, =1{{count} правка} few{{count} правки} other{{count} правок}}",
   "@changesCount": {},
   "changesUploadedTitle": "Отправлено",
   "@changesUploadedTitle": {},
@@ -412,7 +412,7 @@
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
-  "dataDownloadedCount": "{count,plural, =1{Загружен {count} объект.}, =few{Загружены {count} объекта.}, =other{Загружены {count} объектов.}}",
+  "dataDownloadedCount": "{count,plural, =1{Загружен {count} объект.} few{Загружены {count} объекта.} other{Загружены {count} объектов.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -732,7 +732,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} год}, =few{{count} года}, =other{{count} лет}}",
+  "years": "{count,plural, =1{{count} год} few{{count} года} other{{count} лет}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

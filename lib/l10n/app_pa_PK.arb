@@ -67,7 +67,7 @@
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
-  "years": "{count,plural, =1{{count} سال}, =few{{count} سال}, =other{{count} سال}}",
+  "years": "{count,plural, =1{{count} سال} few{{count} سال} other{{count} سال}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -454,7 +454,7 @@
   "@accountOAuthError": {
     "description": "Alert title for when OAuth login failed."
   },
-  "changesCount": "{count,plural, =1{{count} تبدیلی}, =few{{count} تبدیلیاں}, =other{{count} تبدیلیاں}}",
+  "changesCount": "{count,plural, =1{{count} تبدیلی} few{{count} تبدیلیاں} other{{count} تبدیلیاں}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -551,7 +551,7 @@
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} چیز ڈاؤن‌لوڈ کیتی۔}, =few{Downloaded {count} چیزاں ڈاؤن‌لوڈ کیتیاں۔}, =other{{count} چیزاں ڈاؤن‌لوڈ کیتیاں۔}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} چیز ڈاؤن‌لوڈ کیتی۔} few{Downloaded {count} چیزاں ڈاؤن‌لوڈ کیتیاں۔} other{{count} چیزاں ڈاؤن‌لوڈ کیتیاں۔}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -797,7 +797,7 @@
   "@settingsPurgeDataMessage": {
     "description": "Confirmation dialog message for when purging all downloaded data."
   },
-  "settingsPurgedMessage": "{count,plural, =1{{count} چیز ہٹائی}, =few{{count} چیزاں ہٹائیاں}, =other{{count} چیزاں ہٹائیاں}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} چیز ہٹائی} few{{count} چیزاں ہٹائیاں} other{{count} چیزاں ہٹائیاں}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {

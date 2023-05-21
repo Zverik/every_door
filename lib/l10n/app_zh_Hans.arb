@@ -680,14 +680,14 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{已下载 {count} 要素。}, =few{已下载 {count} 个要素。}, =other{已下载 {count} 个要素。}}",
+  "dataDownloadedCount": "{count,plural, =1{已下载 {count} 要素。} few{已下载 {count} 个要素。} other{已下载 {count} 个要素。}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
       "count": {}
     }
   },
-  "settingsPurgedMessage": "{count,plural, =1{已清除 {count} 要素}, =few{已清除 {count} 个要素}, =other{已清除 {count} 个要素}}",
+  "settingsPurgedMessage": "{count,plural, =1{已清除 {count} 要素} few{已清除 {count} 个要素} other{已清除 {count} 个要素}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -714,7 +714,7 @@
   "@aboutFAQ": {
     "description": "Title for the FAQ section on the About page."
   },
-  "changesCount": "{count,plural, =1{{count} 处变更}, =few{{count} 处变更}, =other{{count} 处变更}}",
+  "changesCount": "{count,plural, =1{{count} 处变更} few{{count} 处变更} other{{count} 处变更}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -1121,7 +1121,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count}年}, =few{{count}年}, =other{{count}年}}",
+  "years": "{count,plural, =1{{count}年} few{{count}年} other{{count}年}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

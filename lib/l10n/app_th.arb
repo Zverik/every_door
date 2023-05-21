@@ -35,7 +35,7 @@
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
-  "dataDownloadedCount": "{count,plural, =1{ดาวน์โหลดแล้ว {count} element.}, =few{ดาวน์โหลดแล้ว {count} elements.}, =other{ดาวน์โหลดแล้ว {count} elements.}}",
+  "dataDownloadedCount": "{count,plural, =1{ดาวน์โหลดแล้ว {count} element.} few{ดาวน์โหลดแล้ว {count} elements.} other{ดาวน์โหลดแล้ว {count} elements.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -356,7 +356,7 @@
   "@aboutProjectWebsite": {
     "description": "Button title to open the every-door.app website."
   },
-  "settingsPurgedMessage": "{count,plural, =1{ล้างแล้ว {count} element}, =few{ล้างแล้ว {count} elements}, =other{ล้างแล้ว {count} elements}}",
+  "settingsPurgedMessage": "{count,plural, =1{ล้างแล้ว {count} element} few{ล้างแล้ว {count} elements} other{ล้างแล้ว {count} elements}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -391,7 +391,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesCount": "{count,plural, =1{{count} การเปลี่ยนแปลง}, =few{{count} การเปลี่ยนแปลง}, =other{{count} การเปลี่ยนแปลง}}",
+  "changesCount": "{count,plural, =1{{count} การเปลี่ยนแปลง} few{{count} การเปลี่ยนแปลง} other{{count} การเปลี่ยนแปลง}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {

@@ -664,14 +664,14 @@
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
   },
-  "settingsPurgedMessage": "{count,plural, =1{{count} elemento purgado}, =few{{count} elementos purgados}, =other{{count} elementos purgados}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} elemento purgado} few{{count} elementos purgados} other{{count} elementos purgados}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
       "count": {}
     }
   },
-  "changesCount": "{count,plural, =1{{count} cambio}, =few{{count} cambios}, =other{{count} cambios}}",
+  "changesCount": "{count,plural, =1{{count} cambio} few{{count} cambios} other{{count} cambios}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -749,7 +749,7 @@
   "@aboutOnWeblate": {
     "description": "Button description to indicate a link to Weblate."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} elemento descargado.}, =few{{count} elementos descargados.}, =other{{count} elementos descargados.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} elemento descargado.} few{{count} elementos descargados.} other{{count} elementos descargados.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1109,7 +1109,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} año}, =few{{count} años}, =other{{count} años}}",
+  "years": "{count,plural, =1{{count} año} few{{count} años} other{{count} años}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

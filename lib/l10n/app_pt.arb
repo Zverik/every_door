@@ -106,7 +106,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{{count} elemento eliminado}, =few{{count} elementos eliminados}, =other{{count} elementos eliminados}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} elemento eliminado} few{{count} elementos eliminados} other{{count} elementos eliminados}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -343,7 +343,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} elemento descarregado.}, =few{{count} elementos descarregados.}, =other{{count} elementos descarregados.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} elemento descarregado.} few{{count} elementos descarregados.} other{{count} elementos descarregados.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -811,7 +811,7 @@
   "@accountFieldPassword": {
     "description": "Label for the OSM password."
   },
-  "changesCount": "{count,plural, =1{{count} alteração}, =few{{count} alterações}, =other{{count} alterações}}",
+  "changesCount": "{count,plural, =1{{count} alteração} few{{count} alterações} other{{count} alterações}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -1097,7 +1097,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} ano}, =few{{count} anos}, =other{{count} anos}}",
+  "years": "{count,plural, =1{{count} ano} few{{count} anos} other{{count} anos}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

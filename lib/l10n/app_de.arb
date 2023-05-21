@@ -91,7 +91,7 @@
   "@settingsPurgedObsoleteTitle": {},
   "settingsPurgedAllTitle": "Daten gelöscht",
   "@settingsPurgedAllTitle": {},
-  "settingsPurgedMessage": "{count,plural, =1{{count} Element gelöscht}, =few{{count} Elemente gelöscht}, =other{{count} Elemente gelöscht}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} Element gelöscht} few{{count} Elemente gelöscht} other{{count} Elemente gelöscht}}",
   "@settingsPurgedMessage": {},
   "settingsUploads": "Ausstehende Uploads",
   "@settingsUploads": {},
@@ -137,7 +137,7 @@
   "@accountChangesets": {},
   "accountUnreadMail": "Ungelesene Nachrichten",
   "@accountUnreadMail": {},
-  "changesCount": "{count,plural, =1{{count} Änderung}, =few{{count} Änderungen}, =other{{count} Änderungen}}",
+  "changesCount": "{count,plural, =1{{count} Änderung} few{{count} Änderungen} other{{count} Änderungen}}",
   "@changesCount": {},
   "changesUploadedTitle": "Hochgeladen",
   "@changesUploadedTitle": {},
@@ -473,7 +473,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} Element heruntergeladen.}, =few{{count} Elemente heruntergeladen.}, =other{{count} Elemente heruntergeladen.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} Element heruntergeladen.} few{{count} Elemente heruntergeladen.} other{{count} Elemente heruntergeladen.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -813,7 +813,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "years": "{count,plural, =1{{count} Jahr}, =few{{count} Jahre}, =other{{count} Jahre}}",
+  "years": "{count,plural, =1{{count} Jahr} few{{count} Jahre} other{{count} Jahre}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

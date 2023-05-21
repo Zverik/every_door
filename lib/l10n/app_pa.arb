@@ -301,7 +301,7 @@
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} ਡਾਉਨਲੋਡ ਕੀਤੀ।}, =few{Downloaded {count} ਡਾਉਨਲੋਡ ਕੀਤੀਆਂ।}, =other{{count} ਡਾਉਨਲੋਡ ਕੀਤੀਆਂ।}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} ਡਾਉਨਲੋਡ ਕੀਤੀ।} few{Downloaded {count} ਡਾਉਨਲੋਡ ਕੀਤੀਆਂ।} other{{count} ਡਾਉਨਲੋਡ ਕੀਤੀਆਂ।}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -383,7 +383,7 @@
   "@editorHistory": {
     "description": "Tooltip for a button to open version history pane."
   },
-  "years": "{count,plural, =1{{count} ਸਾਲ}, =few{{count} ਸਾਲ}, =other{{count} ਸਾਲ}}",
+  "years": "{count,plural, =1{{count} ਸਾਲ} few{{count} ਸਾਲ} other{{count} ਸਾਲ}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -530,7 +530,7 @@
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
   },
-  "warningTooOld": "ਸੁਵਿਧਾ {ਸਾਲ} ਪੁਰਾਣੀ ਹੈ",
+  "warningTooOld": "ਸੁਵਿਧਾ {years} ਪੁਰਾਣੀ ਹੈ",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -673,7 +673,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{count, plural, =1{purged {count} element}, =few{purged {count} ਐਲੀਮੈਂਟਸ}, =other{Purged {count} ਐਲੀਮੈਂਟਸ}}",
+  "settingsPurgedMessage": "{count, plural, =1{purged {count} element} few{purged {count} ਐਲੀਮੈਂਟਸ} other{Purged {count} ਐਲੀਮੈਂਟਸ}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -739,7 +739,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesCount": "{count, plural, =1{{count} change}, =few{{count} change}, =other{{count} ਬਦਲਾਅ}}",
+  "changesCount": "{count, plural, =1{{count} change} few{{count} change} other{{count} ਬਦਲਾਅ}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -750,7 +750,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "API ਨੂੰ {ਬਦਲਾਅ} ਭੇਜੇ।",
+  "changesUploadedMessage": "API ਨੂੰ {changes} ਭੇਜੇ।",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {

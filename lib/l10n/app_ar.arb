@@ -185,7 +185,7 @@
   "@settingsPurgeDataMessage": {
     "description": "Confirmation dialog message for when purging all downloaded data."
   },
-  "settingsPurgedMessage": "{count,plural, =1{تم حذف عنصر واحد {count}}, =few{تم حذف {count} عنصر}, =other{تم حذف {count} عنصراً}}",
+  "settingsPurgedMessage": "{count,plural, =1{تم حذف عنصر واحد {count}} few{تم حذف {count} عنصر} other{تم حذف {count} عنصراً}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -570,7 +570,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "changesCount": "{count,plural, =1{ تغيير واحد {count}}, =few{{count} تغيير}, =other{{count} تغيير}}",
+  "changesCount": "{count,plural, =1{ تغيير واحد {count}} few{{count} تغيير} other{{count} تغيير}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -685,7 +685,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{{count} عنصر تم تحميله.}, =few{{count} عنصر تم تحميله.}, =other{{count} عنصر تم تحميله.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} عنصر تم تحميله.} few{{count} عنصر تم تحميله.} other{{count} عنصر تم تحميله.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1097,7 +1097,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} سنة}, =few{{count} سنوات}, =other{{count} سنوات}}",
+  "years": "{count,plural, =1{{count} سنة} few{{count} سنوات} other{{count} سنوات}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

@@ -217,7 +217,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Titre de la notification pour le nettoyage de toutes les données en cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{{count} élément purgé}, =few{{count} éléments purgés}, =other{{count} éléments purgés}}",
+  "settingsPurgedMessage": "{count,plural, =1{{count} élément purgé} few{{count} éléments purgés} other{{count} éléments purgés}}",
   "@settingsPurgedMessage": {
     "description": "Message de la notification après la suppression de certains éléments en cache.",
     "placeholders": {
@@ -312,7 +312,7 @@
   "@accountUnreadMail": {
     "description": "Étiquette pour le nombre de messages privés non lus d'un utilisateur."
   },
-  "changesCount": "{count,plural, =1{{count} changement}, =few{{count} changements}, =other{{count} changements}}",
+  "changesCount": "{count,plural, =1{{count} changement} few{{count} changements} other{{count} changements}}",
   "@changesCount": {
     "description": "Nombre d'éléments modifiés à afficher ou à télécharger.",
     "placeholders": {
@@ -841,7 +841,7 @@
   "@buildingMaterialCementBlock": {},
   "faqChangeTypeContent": "Tapez sur le titre de l'éditeur, où le type est affiché.",
   "@faqChangeTypeContent": {},
-  "dataDownloadedCount": "{count,plural, =1{{count} élément téléchargé.}, =few{{count} éléments téléchargés.}, =other{{count} éléments téléchargés.}}",
+  "dataDownloadedCount": "{count,plural, =1{{count} élément téléchargé.} few{{count} éléments téléchargés.} other{{count} éléments téléchargés.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1105,7 +1105,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} an}, =few{{count} ans}, =other{{count} ans}}",
+  "years": "{count,plural, =1{{count} an} few{{count} ans} other{{count} ans}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

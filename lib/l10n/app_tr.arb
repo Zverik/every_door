@@ -539,7 +539,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{İndirilen {count} öğe.}, =few{İndirilen {count} öğe.}, =other{İndirilen {count} öğe.}}",
+  "dataDownloadedCount": "{count,plural, =1{İndirilen {count} öğe.} few{İndirilen {count} öğe.} other{İndirilen {count} öğe.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {

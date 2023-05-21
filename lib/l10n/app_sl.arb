@@ -205,7 +205,7 @@
   "@accountUnreadMail": {
     "description": "Label for the number of unread private messages a user has."
   },
-  "changesCount": "{count,plural, =1{{count} sprememba}, =2{{count} spremembi}, =few{{count} spremembe}, =other{{count} sprememb}}",
+  "changesCount": "{count,plural, =1{{count} sprememba} =2{{count} spremembi} few{{count} spremembe} other{{count} sprememb}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -525,7 +525,7 @@
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Očiščen {count} element}, =2{Očiščena {count} elementa}, =few{Očiščeni {count} elementi}, =other{Očiščeno {count} elementov}}",
+  "settingsPurgedMessage": "{count,plural, =1{Očiščen {count} element} =2{Očiščena {count} elementa} few{Očiščeni {count} elementi} other{Očiščeno {count} elementov}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -741,7 +741,7 @@
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{Prenesen {count} element.}, =two{Prenesena {count} elementa.}, =few{Preneseni {count} elementi.}, =other{Preneseno {count} elementov.}}",
+  "dataDownloadedCount": "{count,plural, =1{Prenesen {count} element.} =2{Prenesena {count} elementa.} few{Preneseni {count} elementi.} other{Preneseno {count} elementov.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1117,7 +1117,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} leto}, =2{{count} leti}, =few{{count} leta}, =other{{count} let}}",
+  "years": "{count,plural, =1{{count} leto} =2{{count} leti} few{{count} leta} other{{count} let}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

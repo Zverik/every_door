@@ -163,7 +163,7 @@
   "@accountUnreadMail": {
     "description": "Label for the number of unread private messages a user has."
   },
-  "changesCount": "{count,plural, =1{Aldaketa {count}}, =few{{count} aldaketa}, =other{{count} aldaketa}}",
+  "changesCount": "{count,plural, =1{Aldaketa {count}} few{{count} aldaketa} other{{count} aldaketa}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -561,7 +561,7 @@
   "@settingsApiServer": {
     "description": "Section title for API server settings."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Elementu {count} ezabatuta}, =few{{count} elementu ezabatuta}, =other{{count} elementu ezabatuta}}",
+  "settingsPurgedMessage": "{count,plural, =1{Elementu {count} ezabatuta} few{{count} elementu ezabatuta} other{{count} elementu ezabatuta}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -831,7 +831,7 @@
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{Elementu {count} deskargatu da.}, =few{{count} elementu deskargatu dira.}, =other{ {count} elementu deskargatu dira.}}",
+  "dataDownloadedCount": "{count,plural, =1{Elementu {count} deskargatu da.} few{{count} elementu deskargatu dira.} other{ {count} elementu deskargatu dira.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -902,7 +902,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{urte {count}}, =few{{count} urte}, =other{{count} urte}}",
+  "years": "{count,plural, =1{urte {count}} few{{count} urte} other{{count} urte}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

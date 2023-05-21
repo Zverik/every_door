@@ -55,7 +55,7 @@
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."
   },
-  "dataDownloadedCount": "{count,plural, =1{Загружаны {count} аб'ект.}, =few{Загружана {count} аб'екта.}, =other{Загружана {count} аб'ектаў.}}",
+  "dataDownloadedCount": "{count,plural, =1{Загружаны {count} аб'ект.} few{Загружана {count} аб'екта.} other{Загружана {count} аб'ектаў.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1006,7 +1006,7 @@
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
-  "changesCount": "{count,plural, =1{{count} змена}, =few{{count} змены}, =other{{count} змен}}",
+  "changesCount": "{count,plural, =1{{count} змена} few{{count} змены} other{{count} змен}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -1037,7 +1037,7 @@
   "@fieldFloorFloorDesc": {
     "descripton": "Description for the \"level\" tag."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Ачышчаны {count} аб'ект}, =few{Ачышчана {count} аб'екта}, =other{Ачышчана {count} аб'ектаў}}",
+  "settingsPurgedMessage": "{count,plural, =1{Ачышчаны {count} аб'ект} few{Ачышчана {count} аб'екта} other{Ачышчана {count} аб'ектаў}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -1105,7 +1105,7 @@
   },
   "faqYellowContent": "Белыя пазнакі ў рэжыме ўваходаў і белыя кропкі ў рэжыме мікрамапінгу азначаюць, што ў элементаў адсутнічаюць некаторыя важныя атрыбуты. Напрыклад:\n\n* будынкам трэба прапісаць колькасць паверхаў;\n* уваходам трэба пазначыць тып і нумары кватэр (для пад'ездаў);\n* лаўкі павінны мець матэрыял і спінку;\n* дрэвы павінны мець тып лісця і цыкл лістапада.",
   "@faqYellowContent": {},
-  "years": "{count,plural, =1{{count} год}, =few{{count} гады}, =other{{count} гадоў}}",
+  "years": "{count,plural, =1{{count} год} few{{count} гады} other{{count} гадоў}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {

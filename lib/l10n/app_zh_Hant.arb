@@ -98,7 +98,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{已下載 {count} 物件。}, =few{已下載 {count} 物件。}, =other{已下載 {count} 物件。}}",
+  "dataDownloadedCount": "{count,plural, =1{已下載 {count} 物件。} few{已下載 {count} 物件。} other{已下載 {count} 物件。}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -407,7 +407,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{已清除 {count} 物件}, =few{已清除 {count} 物件}, =other{已清除 {count} 物件}}",
+  "settingsPurgedMessage": "{count,plural, =1{已清除 {count} 物件} few{已清除 {count} 物件} other{已清除 {count} 物件}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -514,7 +514,7 @@
   "@accountUnreadMail": {
     "description": "Label for the number of unread private messages a user has."
   },
-  "changesCount": "{count,plural, =1{{count} 個變更}, =few{{count} 個變更}, =other{{count} 個變更}}",
+  "changesCount": "{count,plural, =1{{count} 個變更} few{{count} 個變更} other{{count} 個變更}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -1101,7 +1101,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} 年}, =few{{count} 年}, =other{{count} 年}}",
+  "years": "{count,plural, =1{{count} 年} few{{count} 年} other{{count} 年}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
