@@ -168,6 +168,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
   switch (typ) {
     case 'text':
     case 'colour': // TODO: remove when we have a colour picker
+    case 'date':
     case 'textarea':
       return TextPresetField(
         key: key,
