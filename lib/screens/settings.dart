@@ -116,9 +116,13 @@ class SettingsPage extends ConsumerWidget {
                     if (answer != OkCancelResult.ok) return;
                   }
 
-                  final count =
+                  int count =
                       await ref.read(osmDataProvider).purgeData(purgeAll);
                   if (purgeAll) {
+                    // Also delete unmodified notes.
+                    count += await ref
+                        .read(notesProvider)
+                        .purgeNotes(DateTime.now());
                     AlertController.show(loc.settingsPurgedAllTitle,
                         loc.settingsPurgedMessage(count), TypeAlert.success);
                   } else {

@@ -230,6 +230,8 @@ class _ChangeListPageState extends ConsumerState {
                     ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(loc.changesDeletedChange(change.title)),
+                      showCloseIcon: true,
+                      closeIconColor: Colors.white,
                       action: change.change == null && change.note == null
                           ? null
                           : SnackBarAction(

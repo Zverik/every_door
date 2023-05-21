@@ -165,7 +165,7 @@ class NotesProvider extends ChangeNotifier {
       // Clear OSM notes for the area.
       await txn.delete(
         BaseNote.kTableName,
-        where: 'type = ? and lat >= ? and lat <= ? and lon >= ? and lon <= ?',
+        where: 'type = ? and id >= 0 and lat >= ? and lat <= ? and lon >= ? and lon <= ?',
         whereArgs: [
           OsmNote.dbType,
           bounds.south * kCoordinatePrecision,
@@ -273,6 +273,16 @@ class NotesProvider extends ChangeNotifier {
       whereArgs: [note.id],
     );
     if (notify) _checkHaveChangesAndNotify();
+  }
+
+  Future<int> purgeNotes(DateTime before) async {
+    final database = await _ref.read(databaseProvider).database;
+    int count = await database.delete(
+      BaseNote.kTableName,
+      where: 'is_changed = 0 and id >= 0',
+    );
+    _checkHaveChangesAndNotify();
+    return count;
   }
 
   Future<void> clearChangedMapNotes() async {

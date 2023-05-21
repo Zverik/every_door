@@ -74,14 +74,15 @@ class _TagEditorPageState extends State<TagEditorPage> {
         actions: [
           if (!widget.amenity.isNew)
             GestureDetector(
-              child: IconButton(
-                // TODO: copy to clipboard?
-                // https://stackoverflow.com/questions/55885433/flutter-dart-how-to-add-copy-to-clipboard-on-tap-to-a-app
-                onPressed: () {
-                  Share.share(_getUrl());
-                },
-                icon: Icon(Icons.share),
+              child: Semantics(
+                // We need to handle long press ourselves, but keep the semantics.
                 tooltip: loc.tagsShare,
+                child: IconButton(
+                  onPressed: () {
+                    Share.share(_getUrl());
+                  },
+                  icon: Icon(Icons.share),
+                ),
               ),
               onLongPress: () {
                 Clipboard.setData(ClipboardData(text: _getUrl())).then((_) {
@@ -146,9 +147,9 @@ class _TagEditorPageState extends State<TagEditorPage> {
                       ),
                       IconButton(
                         icon: Icon(widget.amenity.newTags.containsKey(key) &&
-                            (widget.amenity.element?.tags
-                                .containsKey(key) ??
-                                false)
+                                (widget.amenity.element?.tags
+                                        .containsKey(key) ??
+                                    false)
                             ? Icons.undo
                             : Icons.clear),
                         tooltip: widget.amenity.newTags.containsKey(key) &&

@@ -9,6 +9,12 @@ _Unreleased_
 * Some POI like churches and libraries have reduced obsoletion rate (1 year).
 * Deleting buildings via lifecycle prefixes is forbidden now.
 * `name:signed` is not a language suffix.
+* When downloading data for an area, do not delete new notes (but changes
+  to existing notes would be lost though).
+* Purge non-modifies notes when purging all data.
+* Fixed long press on the sharing icon at the raw tags panel.
+* Snack bar when removing a change does not time out for some reason.
+  Added a button to close it.
 * Translations into Finnish (thanks Lasse Liehu), Marathi (thanks संकेत गराडे),
   and Hungarian (thanks Balázs Úr) languages, and major updates to Punjabi
   (both variants) and Persian.
