@@ -205,16 +205,22 @@ def import_presets(cur, path: str):
         locations text
         )""")
 
+    def is_point_geometry(row: dict) -> bool:
+        return ('geometry' in row and
+                ('point' in row['geometry'] or 'vertex' in row['geometry']))
+
     def skip_preset(name: str, row: dict) -> bool:
         # Skip templates.
         if name[0] == '@':
             return True
-        # Note that we keep presets both for points and vertices (in a line).
-        if ('geometry' not in row or
-                ('point' not in row['geometry'] and 'vertex' not in row['geometry'])):
-            return True
         # There are super-generic presets like "relation" with no tags.
         if not row['tags']:
+            return True
+        # Override geometry check for buildings
+        if name.startswith('building'):
+            return False
+        # Note that we keep presets both for points and vertices (in a line).
+        if not is_point_geometry(row):
             return True
         return False
 
@@ -227,6 +233,10 @@ def import_presets(cur, path: str):
             if not row.get('searchable', True) or name.startswith('entrance'):
                 if name != 'shop/vacant':
                     non_searchable_presets.append(name)
+            # Just in case, if we allowed an area preset, at least forbid searching.
+            if not is_point_geometry(row):
+                non_searchable_presets.append(name)
+
             references.add(references.presets_name, row.get('name'), name)
             tags = json.dumps(row['tags'])
 
