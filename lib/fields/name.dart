@@ -80,7 +80,7 @@ class _NameInputFieldState extends State<NameInputField> {
 
   addLanguage(String key) {
     if (_controllers.containsKey(key)) return;
-    if (key.endsWith(':signed')) return;
+    if (key.endsWith(':signed') || key.contains('19')) return;
     _controllers[key] = TextEditingController(text: widget.element[key] ?? '');
     _languages.add(key);
   }
