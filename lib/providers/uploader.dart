@@ -1,3 +1,4 @@
+import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/osm_auth.dart';
@@ -26,6 +27,7 @@ class UploaderProvider {
     try {
       int dataCount = await _ref.read(osmApiProvider).uploadChanges(true);
       int noteCount = await _ref.read(notesProvider).uploadNotes();
+      _ref.read(needMapUpdateProvider).trigger();
       // TODO: separate note count in the message?
       AlertController.show(
           loc.changesUploadedTitle,

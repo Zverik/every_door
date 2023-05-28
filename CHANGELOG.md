@@ -13,6 +13,8 @@ _Unreleased_
   to existing notes would be lost though).
 * Purge non-modified notes when purging all data.
 * Update all secondary tags when changing a type for an amenity.
+* Fixed error when after uploading new amenities and editing them, duplicates
+  might have appeared.
 * Fixed long press on the sharing icon at the raw tags panel.
 * Snack bar when removing a change does not time out for some reason.
   Forcibly closing it when leaving the changes list.
