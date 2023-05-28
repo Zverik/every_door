@@ -39,6 +39,12 @@ class Counter<T> {
         .where((e) => cutoff == null || e.count >= cutoff)
         .map((e) => e.item);
   }
+
+  @override
+  String toString() {
+    final data = _data.entries.map((e) => '${e.key}:${e.value}').join(';');
+    return 'Counter($data)';
+  }
 }
 
 class CounterEntry<T> {

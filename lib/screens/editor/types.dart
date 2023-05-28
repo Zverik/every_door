@@ -82,13 +82,17 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     return presetsCount.map((e) => e.key).take(count).toList();
   }
 
+  /// Regular expression to match Japanese and Chinese hieroglyphs, to allow 1-char search strings for these.
+  /// Taken from https://stackoverflow.com/a/43419070
+  final reCJK = RegExp('^[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]');
+
   updatePresets(String substring) async {
     final mutex = DateTime.now().millisecondsSinceEpoch;
     updateMutex = mutex;
 
     final prov = ref.read(presetProvider);
     final locale = Localizations.localeOf(context);
-    if (substring.length < 2) {
+    if (substring.length < 2 && !reCJK.hasMatch(substring)) {
       final editorMode = ref.read(editorModeProvider);
       final defaultList = editorMode == EditorMode.micromapping
           ? kDefaultMicroPresets

@@ -133,7 +133,7 @@ class SpecificDaysPanel extends StatelessWidget {
       context: context,
       initialDate: now,
       firstDate: start?.toDateTime() ?? DateTime(now.year, 1, 1),
-      lastDate: DateTime(now.year, 12, 31),
+      lastDate: DateTime(now.year, 12, 31).add(Duration(days: 30)),
       initialEntryMode: DatePickerEntryMode.calendarOnly,
     );
     return resp == null ? null : Date.fromDateTime(resp);
