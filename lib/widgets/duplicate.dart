@@ -103,6 +103,7 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
                 MaterialPageRoute(
                   builder: (context) =>
                       PoiEditorPage(amenity: possibleDuplicate),
+                  fullscreenDialog: true,
                 ),
               );
             },

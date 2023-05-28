@@ -19,8 +19,10 @@ _Unreleased_
 * Fixed long press on the sharing icon at the raw tags panel.
 * Snack bar when removing a change does not time out for some reason.
   Forcibly closing it when leaving the changes list.
+* Switched the editing page to a full screen dialog for better UX on iOS.
 * Allow 1-character Japanese or Chinese search queries.
 * Allow January dates on specific days opening\_hours editor.
+* More emoji for POI types (thanks @ivanbranco and @neuschaefer).
 * Translations into Finnish (thanks Lasse Liehu), Marathi (thanks संकेत गराडे),
   and Hungarian (thanks Balázs Úr) languages, and major updates to Punjabi
   (both variants) and Persian.

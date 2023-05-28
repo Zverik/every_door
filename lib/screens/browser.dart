@@ -179,6 +179,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
                           location: location,
                           closer: editorMode == EditorMode.micromapping,
                         ),
+                        fullscreenDialog: true,
                       ),
                     );
                   },

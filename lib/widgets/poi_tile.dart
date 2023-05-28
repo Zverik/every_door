@@ -141,7 +141,9 @@ class PoiTile extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => PoiEditorPage(amenity: amenity)),
+                      builder: (_) => PoiEditorPage(amenity: amenity),
+                      fullscreenDialog: true,
+                  ),
                 );
               },
               child: Text.rich(

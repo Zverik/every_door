@@ -349,8 +349,10 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  PoiEditorPage(amenity: entrance)),
+                            builder: (context) =>
+                                PoiEditorPage(amenity: entrance),
+                            fullscreenDialog: true,
+                          ),
                         );
                       },
                       child: Text(loc.buildingMoreButton.toUpperCase() + '...'),
@@ -395,7 +397,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                     ),
                     TextButton(
                       child:
-                      Text(MaterialLocalizations.of(context).okButtonLabel),
+                          Text(MaterialLocalizations.of(context).okButtonLabel),
                       onPressed: () {
                         if (true) {
                           saveAndClose();

@@ -365,8 +365,10 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  PoiEditorPage(amenity: building)),
+                            builder: (context) =>
+                                PoiEditorPage(amenity: building),
+                            fullscreenDialog: true,
+                          ),
                         );
                       },
                       child: Text(loc.buildingMoreButton.toUpperCase() + '...'),

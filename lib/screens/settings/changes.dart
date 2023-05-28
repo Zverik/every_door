@@ -258,7 +258,8 @@ class _ChangeListPageState extends ConsumerState {
                     ),
                     child: ListTile(
                       title: Text(change.title),
-                      subtitle: Text(change.change?.error ?? loc.changesPending),
+                      subtitle:
+                          Text(change.change?.error ?? loc.changesPending),
                       trailing: !hasManyTypes ? null : Icon(change.icon),
                       onTap: change.change == null
                           ? null
@@ -266,8 +267,10 @@ class _ChangeListPageState extends ConsumerState {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) =>
-                                        PoiEditorPage(amenity: change.change!)),
+                                  builder: (_) =>
+                                      PoiEditorPage(amenity: change.change!),
+                                  fullscreenDialog: true,
+                                ),
                               );
                             },
                     ),
