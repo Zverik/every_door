@@ -162,6 +162,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
   }
 
   bool hasTag(String key) => this[key] != null;
+  bool changedTag(String key) => newTags.containsKey(key);
 
   _updateMainKey() {
     _fullTagsCache = null;

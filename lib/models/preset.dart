@@ -148,7 +148,11 @@ class Preset {
     final mainKey = getMainKey(addTags);
     addTags.forEach((key, value) {
       if (value == '*') return;
-      if (change[key] != null && mainKey != key) return;
+      // Prevent changing tag values that have been entered by hand.
+      // We don't know that for sure for old objects though.
+      if (change[key] != null &&
+          (!change.isNew && change.changedTag(key)) &&
+          mainKey != key) return;
       change[key] = value;
     });
   }

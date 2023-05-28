@@ -11,7 +11,8 @@ _Unreleased_
 * `name:signed` is not a language suffix.
 * When downloading data for an area, do not delete new notes (but changes
   to existing notes would be lost though).
-* Purge non-modifies notes when purging all data.
+* Purge non-modified notes when purging all data.
+* Update all secondary tags when changing a type for an amenity.
 * Fixed long press on the sharing icon at the raw tags panel.
 * Snack bar when removing a change does not time out for some reason.
   Forcibly closing it when leaving the changes list.
