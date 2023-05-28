@@ -157,7 +157,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                   autofocus: true,
                   initialValue: message,
                   decoration: InputDecoration(
-                    labelText: 'Your comment',
+                    labelText: loc.notesComment,
                   ),
                   style: kFieldTextStyle,
                   onChanged: (value) {

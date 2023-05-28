@@ -8,6 +8,7 @@ _Unreleased_
 * Supporting tagging schema v6, added hundred new presets.
 * Some POI like churches and libraries have reduced obsoletion rate (1 year).
 * Deleting buildings via lifecycle prefixes is forbidden now.
+* Added `block_number` field for japanese addresses.
 * `name:signed` is not a language suffix.
 * When downloading data for an area, do not delete new notes (but changes
   to existing notes would be lost though).

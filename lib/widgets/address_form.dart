@@ -1,4 +1,6 @@
+import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/road_names.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -30,14 +32,17 @@ class AddressForm extends ConsumerStatefulWidget {
 class _AddressFormState extends ConsumerState<AddressForm> {
   late final TextEditingController _houseController;
   late final TextEditingController _unitController;
+  late final TextEditingController _blockController;
   late final FocusNode _streetFocus;
   List<String> nearestStreets = [];
+  List<String> nearestBlocks = [];
   List<String> nearestPlaces = [];
   List<String> nearestCities = [];
   String? street;
   String? place;
   bool isName = false;
   bool editingStreet = false;
+  bool needBlockNumber = false;
 
   @override
   void initState() {
@@ -47,9 +52,16 @@ class _AddressFormState extends ConsumerState<AddressForm> {
     _houseController =
         TextEditingController(text: address.housenumber ?? address.housename);
     _unitController = TextEditingController(text: address.unit);
+    _blockController =
+        TextEditingController(text: address.blockNumber ?? address.block);
     _streetFocus = FocusNode();
     street = address.street;
     place = address.place ?? address.city;
+    needBlockNumber = CountryCoder.instance.isIn(
+      lat: widget.location.latitude,
+      lon: widget.location.longitude,
+      inside: 'Q17', // Japan
+    );
     updateStreets();
   }
 
@@ -57,6 +69,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
   dispose() {
     _houseController.dispose();
     _unitController.dispose();
+    _blockController.dispose();
     _streetFocus.dispose();
     super.dispose();
   }
@@ -74,6 +87,8 @@ class _AddressFormState extends ConsumerState<AddressForm> {
         await ref.read(roadNameProvider).getNamesAround(widget.location);
     final addrs = await provider.getAddressesAround(widget.location, limit: 30);
     setState(() {
+      nearestBlocks = _filterDuplicates(
+          addrs.map((e) => needBlockNumber ? e.blockNumber : e.block));
       nearestPlaces = _filterDuplicates(addrs.map((e) => e.place));
       nearestCities = _filterDuplicates(addrs.map((e) => e.city));
     });
@@ -86,10 +101,13 @@ class _AddressFormState extends ConsumerState<AddressForm> {
 
   notifyOnChange() {
     final unit = _unitController.text.trim();
+    final block = _blockController.text.trim();
     final address = StreetAddress(
       housenumber: isName ? null : house,
       housename: isName ? house : widget.initialAddress?.housename,
       unit: unit.isEmpty ? null : unit,
+      block: needBlockNumber || block.isEmpty ? null : block,
+      blockNumber: !needBlockNumber || block.isEmpty ? null : block,
       street: street,
       place: nearestPlaces.isNotEmpty ? place : null,
       city: nearestPlaces.isNotEmpty ? null : place,
@@ -103,6 +121,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final numericKeyboardType = ref.watch(editorSettingsProvider).keyboardType;
 
     return Table(
       columnWidths: {
@@ -116,10 +135,11 @@ class _AddressFormState extends ConsumerState<AddressForm> {
               padding: const EdgeInsets.only(right: 10.0),
               child: Text(loc.addressHouseNumber,
                   style: kFieldTextStyle.copyWith(
-                      color:
-                          _houseController.text.trim().isEmpty && street != null
-                              ? Colors.red
-                              : null)),
+                      color: _houseController.text.trim().isEmpty &&
+                              (street != null ||
+                                  _blockController.text.trim().isNotEmpty)
+                          ? Colors.red
+                          : null)),
             ),
             Row(
               children: [
@@ -174,16 +194,44 @@ class _AddressFormState extends ConsumerState<AddressForm> {
             ),
           ],
         ),
+        if (needBlockNumber)
+          TableRow(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Text(
+                  loc.addressBlock,
+                  style: kFieldTextStyle.copyWith(
+                      color: _houseController.text.trim().isNotEmpty &&
+                          (street == null &&
+                              _blockController.text.trim().isEmpty)
+                          ? Colors.red
+                          : null),
+                ),
+              ),
+              TextFormField(
+                controller: _blockController,
+                keyboardType: numericKeyboardType,
+                style: kFieldTextStyle,
+                onChanged: (value) {
+                  notifyOnChange();
+                },
+              ),
+            ],
+          ),
         TableRow(
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
-              child: Text(loc.addressStreet,
-                  style: kFieldTextStyle.copyWith(
-                      color: _houseController.text.trim().isNotEmpty &&
-                              street == null
-                          ? Colors.red
-                          : null)),
+              child: Text(
+                loc.addressStreet,
+                style: kFieldTextStyle.copyWith(
+                    color: _houseController.text.trim().isNotEmpty &&
+                            (street == null &&
+                                _blockController.text.trim().isEmpty)
+                        ? Colors.red
+                        : null),
+              ),
             ),
             if (!editingStreet)
               RadioField(

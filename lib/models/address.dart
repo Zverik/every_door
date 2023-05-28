@@ -8,6 +8,8 @@ class StreetAddress {
   final String? housename;
   final String? unit;
   final String? street;
+  final String? block;
+  final String? blockNumber;
   final String? place;
   final String? city;
 
@@ -16,6 +18,8 @@ class StreetAddress {
       this.housename,
       this.unit,
       this.street,
+      this.block,
+      this.blockNumber,
       this.place,
       this.city,
       this.location});
@@ -28,6 +32,8 @@ class StreetAddress {
       housename: tags['addr:housename'],
       unit: tags['addr:unit'],
       street: tags['addr:street'],
+      block: tags['addr:block'],
+      blockNumber: tags['addr:block_number'],
       place: tags['addr:place'],
       city: (tags['addr:street'] == null && tags['addr:place'] == null)
           ? tags['addr:city']
@@ -38,7 +44,11 @@ class StreetAddress {
 
   bool get isEmpty =>
       (housenumber == null && housename == null) ||
-      (street == null && place == null && city == null);
+      (street == null &&
+          place == null &&
+          city == null &&
+          block == null &&
+          blockNumber == null);
   bool get isNotEmpty => !isEmpty;
 
   setTags(OsmChange element) {
@@ -48,6 +58,8 @@ class StreetAddress {
     else
       element['addr:housename'] = housename;
     if (unit != null) element['addr:unit'] = unit;
+    if (block != null) element['addr:block'] = block;
+    if (blockNumber != null) element['addr:block_number'] = blockNumber;
     if (street != null)
       element['addr:street'] = street;
     else if (place != null)
@@ -60,6 +72,8 @@ class StreetAddress {
     element['addr:housenumber'] = housenumber;
     element['addr:housename'] = housename;
     element['addr:unit'] = unit;
+    element['addr:block'] = block;
+    element['addr:block_number'] = blockNumber;
     element['addr:street'] = street;
     element['addr:place'] = place;
     // TODO: decide something about the city
@@ -71,6 +85,8 @@ class StreetAddress {
       'housenumber',
       'housename',
       'unit',
+      'block',
+      'block_number',
       'street',
       'place',
       'city'
@@ -84,6 +100,8 @@ class StreetAddress {
     return housenumber == other.housenumber &&
         housename == other.housename &&
         unit == other.unit &&
+        block == other.block &&
+        blockNumber == other.blockNumber &&
         street == other.street &&
         place == other.place &&
         city == other.city;
@@ -92,10 +110,16 @@ class StreetAddress {
   @override
   int get hashCode =>
       (housenumber ?? housename ?? '').hashCode +
+      (block ?? blockNumber ?? '').hashCode +
       (street ?? place ?? city ?? '').hashCode +
       unit.hashCode;
 
   @override
-  String toString() =>
-      '${housenumber ?? housename}${unit != null ? " u.$unit" : ""}, ${street ?? place ?? city}';
+  String toString() {
+    final unitPart = unit != null ? " u.$unit" : "";
+    final firstPart = '${housenumber ?? housename}$unitPart';
+    final blockPart = blockNumber ?? block;
+    final lastPart = street ?? place ?? city;
+    return [firstPart, blockPart, lastPart].whereType<String>().join(', ');
+  }
 }

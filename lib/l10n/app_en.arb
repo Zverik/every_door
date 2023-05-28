@@ -1062,6 +1062,10 @@
   "@addressUnitOptional": {
     "description": "Hint for addr:unit that it's optional."
   },
+  "addressBlock": "Block",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
   "addressStreet": "Street",
   "@addressStreet": {
     "description": "Label for addr:street in the form. Keep it short."
@@ -1073,6 +1077,10 @@
   "notesAddNote": "Add note",
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."
+  },
+  "notesComment": "Your comment",
+  "@notesComment": {
+    "description": "Label for the note comment field."
   },
   "notesAnonymous": "Anonymous",
   "@notesAnonymous": {
