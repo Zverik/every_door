@@ -315,7 +315,7 @@
       }
     }
   },
-  "tileDragTheMap": "Siirry lähemmäs mitä tahansa, vedä karttaa tai lisää puuttuva palvelu.",
+  "tileDragTheMap": "Siirry lähemmäs kohdetta, vedä karttaa tai lisää puuttuva palvelu.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
@@ -1133,5 +1133,13 @@
   "faqTagging": "Kaikki kysymykset ominaisuuksista",
   "@faqTagging": {},
   "faqFloorsContent": "Eivät. Edeltävässä tapauksessa on ominaisuus `addr:floor=3`. Tämä tarkoittaa kerrosnumeroa, jota käytetään yleisesti esim. rakennuksen opasteissa. Jälkimmäisessä tapauksessa on ei ole tätä ominaisuutta, mutta on sen sijaan `level=3`. Tämä numero on kerros laskettuna nollasta alkaen ja suurin arvo on `building:levels - 1`. Täten kolmikerroksisen rakennuksen `addr:floor`-arvo riippuu maasta, mutta `level` on aina 0, 1, tai 2.\n\nNäin editori merkitsee nämä ominaisuudet:\n\n* `2`: `addr:floor=2` ja `level=*` ei ole tyhjä.\n* `4/`: `addr:floor=4`, mutta `level`-ominaisuutta ei ole.\n* `/1`: `level=1`, mutta `addr:floor`-ominaisuutta ei ole.\n* `1/0`: `addr:floor=1` + `level=0` (ja lähistöllä on kohde, jolla on sama `addr:floor`-arvo mutta eri `level`-arvo tai toisin päin).",
-  "@faqFloorsContent": {}
+  "@faqFloorsContent": {},
+  "addressBlock": "Kortteli",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesComment": "Kommenttisi",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  }
 }
