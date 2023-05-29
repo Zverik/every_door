@@ -1131,5 +1131,13 @@
   "fieldDirectionSet": "Nastavit",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "addressBlock": "Blok",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesComment": "Váš komentář",
+  "@notesComment": {
+    "description": "Label for the note comment field."
   }
 }
