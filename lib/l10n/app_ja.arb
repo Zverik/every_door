@@ -1131,5 +1131,13 @@
   "fieldDirectionSet": "セット",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "addressBlock": "街区符号/番/番地/地番",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesComment": "あなたのコメント",
+  "@notesComment": {
+    "description": "Label for the note comment field."
   }
 }
