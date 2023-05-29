@@ -1131,5 +1131,13 @@
   "fieldDirectionSet": "Ustaw",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "notesComment": "Twój komentarz",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "addressBlock": "Blok",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
   }
 }
