@@ -2,7 +2,7 @@
 
 ## 3.1
 
-_Unreleased_
+_Released on 2023-06-03_
 
 * Updated Maxar and Mapbox imagery keys.
 * Supporting tagging schema v6, added hundred new presets.
@@ -16,6 +16,7 @@ _Unreleased_
 * Update all secondary tags when changing a type for an amenity.
 * Fixed error when after uploading new amenities and editing them, duplicates
   might have appeared.
+* Pasting a `wikimedia_commons` value strips it of wiki formatting.
 * Fixed long press on the sharing icon at the raw tags panel.
 * Snack bar when removing a change does not time out for some reason.
   Forcibly closing it when leaving the changes list.
