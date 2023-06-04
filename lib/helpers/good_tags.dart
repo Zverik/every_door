@@ -285,7 +285,7 @@ bool isGoodTags(Map<String, String> tags) {
       'crossing', 'bus_stop', 'street_lamp', 'platform',
       'stop', 'give_way', 'milestone', 'speed_camera',
       'passing_place', 'traffic_signals', 'traffic_mirror',
-      'elevator', 'speed_display',
+      'elevator', 'speed_display', 'emergency_access_point',
     };
     return kGoodHighway.contains(v);
   } else if (k == 'railway') {
