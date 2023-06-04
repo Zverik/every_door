@@ -1131,5 +1131,13 @@
   "fieldCardsOnly": "僅限卡片",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
+  },
+  "addressBlock": "封鎖",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesComment": "你的評論",
+  "@notesComment": {
+    "description": "Label for the note comment field."
   }
 }
