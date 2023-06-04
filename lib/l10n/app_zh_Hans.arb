@@ -1133,5 +1133,13 @@
     "description": "Title for a grouped change tile for map notes and drawings."
   },
   "faqYellowContent": "入口模式中的非黄色标签和微映射模式中的白点意味着这些元素缺乏一些重要的属性。比如：\n\n* 建筑物应该有层数。\n* 入口应该有类型，对于楼梯，应该有平面范围。\n* 长椅应该有材料和靠背。\n* 树木应该有叶子的类型和周期。",
-  "@faqYellowContent": {}
+  "@faqYellowContent": {},
+  "addressBlock": "封锁",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesComment": "你的评论",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  }
 }
