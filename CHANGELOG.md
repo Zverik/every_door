@@ -1,5 +1,11 @@
 # Every Door App Change Log
 
+## 3.2
+
+_Unreleased_
+
+* Removed the `check_date` field from the editor.
+
 ## 3.1
 
 _Released on 2023-06-03_

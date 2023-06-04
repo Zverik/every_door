@@ -162,6 +162,9 @@ def import_fields(cur, path: str):
             # That rules out natural features (e.g. forests), but not buildings.
             if 'geometry' in row and 'point' not in row['geometry']:
                 continue
+            # check_date is managed manually in the app.
+            if name == 'check_date':
+                continue
 
             # The referenced label is often empty, but we need to store the reference
             # for translations. Same for the placeholder.
