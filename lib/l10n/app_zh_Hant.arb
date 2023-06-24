@@ -868,7 +868,7 @@
   },
   "entranceTypeEmergency": "緊急",
   "@entranceTypeEmergency": {},
-  "addressHouseNumber": "房屋",
+  "addressHouseNumber": "房屋號碼",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
   },
@@ -876,7 +876,7 @@
   "@addressHouseNotEmpty": {
     "description": "Validator message for addr:housenumber."
   },
-  "addressUnit": "套房",
+  "addressUnit": "套房號碼",
   "@addressUnit": {
     "description": "Label for addr:unit in the form. Keep it short."
   },
