@@ -96,7 +96,7 @@
   "@tagsValueLong": {
     "description": "Validation error for when the value length exceeds 255 characters."
   },
-  "settingsTitle": "Ustawienia",
+  "settingsTitle": "Konfiguracja",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
