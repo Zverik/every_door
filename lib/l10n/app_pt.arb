@@ -303,7 +303,7 @@
   "@buildingTypeHouse": {},
   "buildingTypeRetail": "retalho",
   "@buildingTypeRetail": {},
-  "entranceIsUnit": "Guardar o número do apartamento em \"addr:unit\"",
+  "entranceIsUnit": "Guardar o número do andar em \"addr:unit\"",
   "@entranceIsUnit": {
     "description": "Label for a switch to use addr:unit instead of addr:flats."
   },
@@ -360,11 +360,11 @@
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
-  "loadingStart": "Inicializando…",
+  "loadingStart": "A inicializar…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "loadingChangesFailed": "Erro ao carregar alterações",
+  "loadingChangesFailed": "Erro ao carregar as alterações",
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
@@ -440,7 +440,7 @@
   "@editorMarkChecked": {
     "description": "Tooltip for a button to mark the amenity checked without changing properties."
   },
-  "filterNoAddresses": "Nenhuma morada próxima",
+  "filterNoAddresses": "Nenhuma morada nas proximidades",
   "@filterNoAddresses": {
     "description": "An error message for no addresses nearby, used on filter pane and in address editor."
   },
@@ -649,7 +649,7 @@
   "@aboutReportIssue": {
     "description": "Button title to open the app's GitHub issue page."
   },
-  "aboutHelpImprove": "Ajuda a melhorar {appTitle}",
+  "aboutHelpImprove": "Ajuda a melhorar o {appTitle}",
   "@aboutHelpImprove": {
     "description": "Title for the Help improve section on the About page.",
     "placeholders": {
@@ -718,7 +718,7 @@
   },
   "entranceTypeStaircase": "escadaria",
   "@entranceTypeStaircase": {},
-  "entranceTypeHome": "casa",
+  "entranceTypeHome": "nº porta",
   "@entranceTypeHome": {},
   "faqEntrance": "Como adicionar uma entrada a um edifício?",
   "@faqEntrance": {},
@@ -740,7 +740,7 @@
   "@apiStatusUpdatingDB": {
     "description": "Text displayed when the app is updating the database with downloaded objects."
   },
-  "faqLetters": "Posso usar letras numa referência ou número de apartamento?",
+  "faqLetters": "Posso usar letras numa referência ou número de andar?",
   "@faqLetters": {},
   "enableLocationMessage": "Concede o acesso à localização para a aplicação no painel de configurações que será mostrado.",
   "@enableLocationMessage": {
@@ -767,13 +767,13 @@
   "@fieldHoursClosedPH": {
     "description": "Switch label for PH off."
   },
-  "faqMapTinyContent": "Porque a questão não é essa. Só verificas o teu posicionamento e moves o mapa para ajustar. Vê a lista de serviços abaixo, ordenada pela distância a que ficam ti.\n\nO mapa fica maior quando editas os serviços longe da tua localização, embora a aplicação tenha sido feita para editar as coisas que estás a ver.",
+  "faqMapTinyContent": "Porque o objetivo não é esse. Só verificas o teu posicionamento e moves o mapa para ajustar. Vê a lista de serviços abaixo, ordenada pela distância a que ficam da tua localização.\n\nO mapa fica maior quando editas os serviços longe da tua localização, embora a aplicação tenha sido feita para editar as coisas que estás a ver.",
   "@faqMapTinyContent": {},
   "faqTagging": "Todas as perguntas sobre etiquetagem",
   "@faqTagging": {},
   "faqCheckmarks": "Para que servem as marcas de verificado?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "As marcas de verificado indicam que os dados do serviços foram confirmados. Eles adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás da marca de verificado é que, digamos, mapeaste metade da cidade na primeira vez. Então, um mês depois, foste mapear novamente nos mesmos sítios. É preciso marcar de alguma forma que o serviço continua a existir no mesmo local e não houve nenhuma alteração. Isso é a marca de verificado: tocas nele e continuas.\n\nA marca de verificação fica ativa por dois meses. Depois disso, podes mapear os serviços novamente.",
+  "faqCheckmarksContent": "As marcas de verificado indicam que os dados do serviços foram confirmados. Estas adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás da marca de verificado é que, digamos, mapeaste metade da cidade na primeira vez. Então, um mês depois, foste mapear novamente nos mesmos sítios. É preciso marcar de alguma forma que o serviço continua a existir no mesmo local e não houve nenhuma alteração. Isso é a marca de verificado: tocas nele e continuas.\n\nA marca de verificação fica ativa por dois meses. Depois disso, podes mapear os serviços novamente.",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Se o teclado numérico não puder ser alterado para um teclado completo, verifica as configurações da aplicação. Eles estão localizados no botão do canto superior esquerdo. Ativa o \"Teclado numérico alargado\" lá.",
   "@faqLettersContent": {},
@@ -940,7 +940,7 @@
   "@fieldCardsAccepted": {
     "description": "Payment field label for cards accepted."
   },
-  "loadingTooMuchData": "Limpar os dados descarregados nas Configurações tornar o editor mais rápido.",
+  "loadingTooMuchData": "Limpar os dados descarregados nas Configurações torna o editor mais rápido.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -984,7 +984,7 @@
   "@entrancesAddEntrance": {
     "description": "Tooltip for the button to add an entrance node."
   },
-  "fieldAddressTap": "Toca em uma morada",
+  "fieldAddressTap": "Toca numa morada",
   "@fieldAddressTap": {
     "description": "Title for the pane when a user can tap an address to choose it."
   },
@@ -1031,7 +1031,7 @@
   },
   "buildingTypeGarage": "garagem",
   "@buildingTypeGarage": {},
-  "entranceFlats": "Apartamentos",
+  "entranceFlats": "Andares",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
   },
@@ -1087,7 +1087,7 @@
       }
     }
   },
-  "warningTooOld": "Serviço tem {years} anos",
+  "warningTooOld": "O serviço tem {years} anos",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -1114,7 +1114,7 @@
   },
   "faqYellow": "Porque é que alguns números de porta estão a amarelo?",
   "@faqYellow": {},
-  "faqYellowContent": "Os rótulos não amarelos no modo de Entradas e pontos brancos no modo de Micromapeamento significam que faltam alguns atributos importantes. Por exemplo:\n\n* Os edifícios devem ter o número de andares.\n* As entradas devem ter um tipo e, para escadas, intervalo dos apartamentos.\n* Os assentos devem ter informação sobre o material e se têm encosto.\n* As árvores devem ter o tipo e ciclo de folhagem.",
+  "faqYellowContent": "Os rótulos não amarelos no modo de Entradas e pontos brancos no modo de Micromapeamento significam que faltam alguns atributos importantes. Por exemplo:\n\n* Os edifícios devem ter o número de pisos.\n* As entradas devem ter um tipo e, para escadas, intervalo dos andares.\n* Os bancos devem ter informação sobre o material e se têm encosto.\n* As árvores devem ter o tipo e ciclo de folhagem.",
   "@faqYellowContent": {},
   "hashtagsLabel": "Palavras para hashtags",
   "@hashtagsLabel": {
@@ -1136,7 +1136,7 @@
   "@addressBlock": {
     "description": "Label for addr:block_number or addr_block. Keep it short."
   },
-  "notesComment": "Teu comentário",
+  "notesComment": "Nota para outros editores",
   "@notesComment": {
     "description": "Label for the note comment field."
   }
