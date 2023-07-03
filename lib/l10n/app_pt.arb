@@ -1087,7 +1087,7 @@
       }
     }
   },
-  "warningTooOld": "O serviço tem {years} anos",
+  "warningTooOld": "O serviço tem {years}",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
