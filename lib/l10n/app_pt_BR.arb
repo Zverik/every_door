@@ -54,7 +54,7 @@
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
-  "loadingChangesFailed": "Erro ao carregar alterações",
+  "loadingChangesFailed": "Erro ao carregar as alterações",
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
@@ -362,7 +362,7 @@
   },
   "entranceTypeStaircase": "escadaria",
   "@entranceTypeStaircase": {},
-  "entranceTypeHome": "casa",
+  "entranceTypeHome": "número",
   "@entranceTypeHome": {},
   "entranceTypeShop": "loja",
   "@entranceTypeShop": {},
@@ -390,9 +390,9 @@
   },
   "faqMapTiny": "Por que o mapa é tão pequeno?",
   "@faqMapTiny": {},
-  "faqCheckmarks": "Para que servem os sinais de visto?",
+  "faqCheckmarks": "Para que servem as marcas de verificado?",
   "@faqCheckmarks": {},
-  "faqEntrance": "Como adicionar uma entrada de edifício?",
+  "faqEntrance": "Como adicionar uma entrada a um edifício?",
   "@faqEntrance": {},
   "faqEntranceContent": "Na parte inferior há uma fileira de botões de modo: Micromapeamento, Serviços, Entradas e Notas.\n\nNo modo Entradas, toque ou arraste o botão da porta, localizada no canto inferior, para o mapa.",
   "@faqEntranceContent": {},
@@ -414,7 +414,7 @@
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
-  "loadingTooMuchData": "Limpe os dados baixados nos Ajustes para tornar o editor mais rápido.",
+  "loadingTooMuchData": "Limpar os dados baixados nos Ajustes torna o editor mais rápido.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -462,7 +462,7 @@
       }
     }
   },
-  "filterNoAddresses": "Nenhum endereço próximo",
+  "filterNoAddresses": "Nenhum endereço nas redondezas",
   "@filterNoAddresses": {
     "description": "An error message for no addresses nearby, used on filter pane and in address editor."
   },
@@ -586,7 +586,7 @@
   "@aboutInstalledVersion": {
     "description": "Button description for installed app version."
   },
-  "aboutHelpImprove": "Ajude a melhorar {appTitle}",
+  "aboutHelpImprove": "Ajude a melhorar o {appTitle}",
   "@aboutHelpImprove": {
     "description": "Title for the Help improve section on the About page.",
     "placeholders": {
@@ -649,7 +649,7 @@
   "@fieldHoursAsText": {
     "description": "Button title to open the raw opening hours editor."
   },
-  "faqCheckmarksContent": "Os sinais de visto indicam que os dados de serviços foram confirmados. Eles adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás do sinal de visto é que, digamos, você mapeou metade da cidade na primeira vez. Então, depois de um mês, você voltou e foi mapear novamente. Você precisa marcar de alguma forma que você vê que o serviço está ali, mas não houve nenhuma alteração. Isso é o sinal de visto: você toca nele e continua.\n\nO sinal de visto fica ativo por dois meses. Depois disso, você pode mapear os serviços novamente.",
+  "faqCheckmarksContent": "As marcas de verificado indicam que os dados de serviços foram confirmados. Elas adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás da marca de verificado é que, digamos, você mapeou metade da cidade na primeira vez. Então, depois de um mês, você voltou e foi mapear novamente. Você precisa marcar de alguma forma que você vê que o serviço está ali, mas não houve nenhuma alteração. Isso é a marca de verificado: você toca nela e continua.\n\nA marca de verificação fica ativa por dois meses. Depois disso, você pode mapear os serviços novamente.",
   "@faqCheckmarksContent": {},
   "fieldHoursOpens": "Abre",
   "@fieldHoursOpens": {
@@ -820,7 +820,7 @@
   "@addressStreet": {
     "description": "Label for addr:street in the form. Keep it short."
   },
-  "faqMapTinyContent": "Porque a questão não é essa. Você só verifica o seu posicionamento e move o mapa para ajustar. Veja a lista de serviços abaixo, ordenada por distância de você.\n\nO mapa fica maior quando você edita os serviços longe de sua localização, embora o aplicativo tenha sido feito para editar as coisas que você está vendo.",
+  "faqMapTinyContent": "Porque o objetivo não é esse. Você só verifica o seu posicionamento e move o mapa para ajustar. Veja a lista de serviços abaixo, ordenada pela distância da sua localização.\n\nO mapa fica maior quando você edita os serviços longe de sua localização, embora o aplicativo tenha sido feito para editar as coisas que você está vendo.",
   "@faqMapTinyContent": {},
   "faqLettersContent": "Se o teclado numérico não puder ser alterado para um teclado completo, verifique os ajustes do aplicativo. Eles estão localizados no botão do canto superior esquerdo. Ative o \"Teclado numérico estendido\" lá.",
   "@faqLettersContent": {},
@@ -1068,7 +1068,7 @@
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
-  "warningTooOld": "Serviço tem {years} de idade",
+  "warningTooOld": "O serviço tem {years} de idade",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -1132,7 +1132,7 @@
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
   },
-  "notesComment": "Seu comentário",
+  "notesComment": "Nota para outros editores",
   "@notesComment": {
     "description": "Label for the note comment field."
   },
