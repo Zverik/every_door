@@ -211,7 +211,7 @@
   "@settingsSystem": {
     "description": "Title for the settings section for system-related switches."
   },
-  "settingsGoogle": "Koristi Google-izmijenjeno pozicioniranje",
+  "settingsGoogle": "Koristi Googleove izmjene za pozicioniranje",
   "@settingsGoogle": {
     "description": "Settings switch for disabling Google services for location."
   },
@@ -864,7 +864,7 @@
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
-  "settingsBackground": "Pozadinska slika",
+  "settingsBackground": "Pozadinska karta",
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
