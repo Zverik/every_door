@@ -459,7 +459,7 @@
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
-  "loadingTooMuchData": "Tøm nedlastede data under innstillinger for å gjøre endringsverktøyet raskere.",
+  "loadingTooMuchData": "Tøm nedlastede data under Innstillinger for å gjøre verktøyet raskere.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -1133,5 +1133,9 @@
   "fieldDirectionSet": "Angi",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "addressBlock": "Blokk",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
   }
 }
