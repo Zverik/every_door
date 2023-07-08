@@ -1137,5 +1137,9 @@
   "addressBlock": "Blokk",
   "@addressBlock": {
     "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesComment": "Din kommentar",
+  "@notesComment": {
+    "description": "Label for the note comment field."
   }
 }
