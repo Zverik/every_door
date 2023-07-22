@@ -122,10 +122,16 @@ class _RadioComboFieldState extends State<RadioComboField> {
       for (final k in keysToDelete) widget.element.removeTag(k);
       for (final k in values) widget.element[widget.field.key + k] = 'yes';
     } else if (values.isEmpty) {
-      if (widget.field.type == ComboType.type)
-        widget.element[widget.field.key] = 'yes';
-      else
+      if (widget.field.type == ComboType.type) {
+        var splitKey = widget.field.key.split('=');
+        if (splitKey.length == 2) {
+          widget.element[splitKey[0]] = splitKey[1];
+        } else {
+          widget.element[widget.field.key] = 'yes';
+        }
+      } else {
         widget.element.removeTag(widget.field.key);
+      }
       return;
     } else {
       switch (widget.field.type) {
