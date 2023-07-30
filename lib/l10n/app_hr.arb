@@ -126,7 +126,7 @@
   "@chooseType": {
     "description": "Search field hint on the type choosing screen."
   },
-  "chooseTypeClear": "Poništi",
+  "chooseTypeClear": "Izbriši",
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
   },
@@ -403,7 +403,7 @@
   "@fieldHoursSave": {
     "description": "Tooltip for a button to save opening_hours value."
   },
-  "fieldHoursClear": "Obriši",
+  "fieldHoursClear": "Izbriši",
   "@fieldHoursClear": {
     "description": "Tooltip for a button to clear the opening_hours value."
   },
@@ -710,7 +710,7 @@
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."
   },
-  "editorDeleteTitle": "Obriši {amenity}?",
+  "editorDeleteTitle": "Izbrisati {amenity}?",
   "@editorDeleteTitle": {
     "description": "Dialog title for deleting an amenity.",
     "placeholders": {
@@ -719,7 +719,7 @@
       }
     }
   },
-  "editorDeleteButton": "Obriši",
+  "editorDeleteButton": "Izbriši",
   "@editorDeleteButton": {
     "description": "Delete"
   },
@@ -739,7 +739,7 @@
   "@tagsRestore": {
     "description": "Tooltip for a button next to a tag value to restore the value to the original."
   },
-  "tagsDelete": "Obriši",
+  "tagsDelete": "Izbriši",
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
   },
@@ -809,7 +809,7 @@
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
-  "settingsTitle": "Postavke",
+  "settingsTitle": "Konfiguracija",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
