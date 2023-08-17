@@ -210,7 +210,7 @@ class NotesProvider extends ChangeNotifier {
         final url = Uri.https(kOsmEndpoint, '/api/0.6/notes', {
           'lat': note.location.latitude.toString(),
           'lon': note.location.longitude.toString(),
-          'text': note.message,
+          'text': (note.message ?? "") + "\n\n#EveryDoor",
         });
         final resp = await http.post(url, headers: headers);
         if (resp.statusCode != 200) {
