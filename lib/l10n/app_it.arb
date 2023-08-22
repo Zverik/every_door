@@ -61,7 +61,7 @@
   "@editorRestoreMessage": {},
   "editorDeleteTitle": "Cancellare {amenity}?",
   "@editorDeleteTitle": {},
-  "editorDeleteButton": "Cancella",
+  "editorDeleteButton": "Elimina",
   "@editorDeleteButton": {},
   "tagsUrlCopied": "URL copiato negli appunti",
   "@tagsUrlCopied": {},
@@ -799,5 +799,13 @@
   "fieldDirectionSet": "Imposta",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "addressBlock": "Blocck",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesComment": "Il tuo commento",
+  "@notesComment": {
+    "description": "Label for the note comment field."
   }
 }
