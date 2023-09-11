@@ -36,7 +36,7 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
         controller: _controller,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(logStore.last(30).join('\n')),
+          child: SelectableText(logStore.last(30).join('\n')),
         ),
       ),
       floatingActionButton: sentMessage
