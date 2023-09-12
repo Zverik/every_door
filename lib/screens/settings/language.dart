@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:every_door/providers/language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -56,6 +58,13 @@ class LanguagePage extends ConsumerWidget {
         .where((l) => !kSkipLocales.contains(l)));
     supported.sort((a, b) => (a.languageCode == 'en' ? 0 : 1)
         .compareTo(b.languageCode == 'en' ? 0 : 1));
+
+    final deviceLocale = Platform.localeName;
+    final deviceLanguageCode = deviceLocale.split('_').first;
+    final isSameLanguage = locale!.languageCode == deviceLanguageCode;
+
+    if (!isSameLanguage && supported.contains(Locale(deviceLanguageCode)))
+      supported.insert(0, Locale(deviceLanguageCode));
 
     return Scaffold(
       appBar: AppBar(title: Text(loc.settingsLanguage)),
