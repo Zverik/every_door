@@ -132,7 +132,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           center: widget.location,
           zoom: widget.closer ? 19.0 : 18.0,
           minZoom: 17.0,
-          maxZoom: 20.0,
+          maxZoom: kEditMaxZoom,
           rotation: ref.watch(rotationProvider),
           rotationThreshold: kRotationThreshold,
           interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
