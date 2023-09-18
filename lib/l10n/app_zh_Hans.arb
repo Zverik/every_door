@@ -751,7 +751,7 @@
   "@faqEntrance": {},
   "faqTaggingContent": "为什么在编辑器中缺少一个物体？在微测绘模式下，何时显示这些白点？对象是如何排序的？\n\n所有这些问题的答案都在[good_tags。dart]（https://github。com/Zverik/every_door/blob/main/lib/helpers/good_tags。dart）。下面是你可以查看的内容：\n\n* 主标签的钥匙顺序 — 列表 `kMainKeys`。\n* 哪些对象被下载 — 函数 `isGoodTags`。\n* 哪些被认为是便利设施 — 函数 `isAmenityTags`。\n* 哪些点是以何种方式捕捉的 — 函数`detectSnap`。\n* 当一个微测绘对象不完整时 — 函数 `needsMoreInfo`。",
   "@faqTaggingContent": {},
-  "faqFloorsContent": "不。第一个是'addr:floor=3'的标签填充。即楼层数，因为它印在导航上并且常用。第二个没有这个标签，但有'level=3'。该数字是从零到'building:levels - 1'的连续楼层号。也就是说，在三层楼的建筑中，'addr:floor'值取决于哪个国家，但'level'始终都是0，1、2。\n\n以下是编辑器中的符号与这些标记的关系：\n\n* '2'： 'addr:floor=2' 和非空值 'level=*'。\n* '4/'： 'addr:floor=4'，但没有'level'标签。\n* '/1'： 'level=1'，但没有 'addr:floor' 标签。\n* '1/0'： 'addr:floor=1' + 'level=0' （附近有一个对象：具有相同的 'addr:floor'，但'level'不同，反之亦然）。",
+  "faqFloorsContent": "不是。第一个标记为 `addr:floor=3`。这是导航和常用的楼层表示方式。第二个没有这个标签，但是有 `level=3`。该数字是从零到 `building:levels - 1` 的连续楼层号。也就是说，在三层楼的建筑中，`addr:floor` 依照国家有不同定义，但 `level` 始终都是 0、1、2。\n\n以下是编辑器中的符号与这些标记的关系：\n\n* `2`：`addr:floor=2` 和非空值 `level=*`。\n* `4/`：`addr:floor=4`，但没有 `level` 标签。\n* `/1`：`level=1`，但没有 `addr:floor` 标签。\n* `1/0`：`addr:floor=1` + `level=0`（然后附近有一个对象：具有相同的 `addr:floor`，但 `level` 不同，反之亦然）。",
   "@faqFloorsContent": {},
   "faqChangeType": "如何更改便利设施的类型？",
   "@faqChangeType": {},
@@ -905,7 +905,7 @@
   "@versionsFetchError": {
     "description": "Message for when fetching element history fails due to unknown error."
   },
-  "settingsHashtags": "变更集主题标签",
+  "settingsHashtags": "变更集标签",
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
   },
