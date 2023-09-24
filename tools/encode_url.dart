@@ -6,7 +6,7 @@ import 'package:encrypt/encrypt.dart';
 String encryptUrl(String url) {
   const kDefaultAesKey = '+p08T46G5YGKftKBHUeg0A==';
   final encrypter = Encrypter(AES(Key.fromBase64(kDefaultAesKey), mode: AESMode.ctr));
-  final decrypted = encrypter.encrypt(url, iv: IV.fromLength(16));
+  final decrypted = encrypter.encrypt(url, iv: IV.allZerosOfLength(16));
   return decrypted.base64;
 }
 

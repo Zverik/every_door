@@ -1,4 +1,5 @@
 import 'package:encrypt/encrypt.dart';
+import 'package:logging/logging.dart';
 
 enum ImageryType {
   tms,
@@ -13,6 +14,8 @@ enum ImageryCategory {
 }
 
 class Imagery {
+  static final _logger = Logger('Imagery');
+
   final String id;
   final ImageryType type;
   final ImageryCategory? category;
@@ -60,7 +63,12 @@ class Imagery {
     );
   }
 
-  Imagery copyWith({String? url, int? tileSize, String? attribution, int? minZoom, int? maxZoom}) {
+  Imagery copyWith(
+      {String? url,
+      int? tileSize,
+      String? attribution,
+      int? minZoom,
+      int? maxZoom}) {
     return Imagery(
       id: id,
       type: type,
@@ -80,9 +88,16 @@ class Imagery {
   Imagery decrypt() {
     if (!encrypted) return this;
     const kDefaultAesKey = '+p08T46G5YGKftKBHUeg0A==';
-    final encrypter = Encrypter(AES(Key.fromBase64(kDefaultAesKey), mode: AESMode.ctr));
-    final decrypted = encrypter.decrypt(Encrypted.fromBase64(url), iv: IV.fromLength(16));
-    return copyWith(url: decrypted);
+    final encrypter =
+        Encrypter(AES(Key.fromBase64(kDefaultAesKey), mode: AESMode.ctr));
+    try {
+      final decrypted =
+          encrypter.decrypt(Encrypted.fromBase64(url), iv: IV.allZerosOfLength(16));
+      return copyWith(url: decrypted);
+    } catch (e) {
+      _logger.severe('Failed to decrypt an URL "$url": $e');
+      return this;
+    }
   }
 
   @override

@@ -4,10 +4,10 @@ description: Next generation OpenStreetMap amenity mapper
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # Also update version in constants.dart!
-version: 3.1.0+34
+version: 3.1.99+35
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
+  sdk: ">=2.18.0 <4.0.0"
   flutter: "^3.7.0"
 
 dependencies:
@@ -16,11 +16,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.0
-  geolocator: ^9.0.1
-  sensors_plus: ^2.0.5
-  http: ^0.13.3
+  geolocator: ^10.1.0
+  sensors_plus: ^3.0.3
+  http: ^0.13.6
   flutter_map: ^2.1.0
-  latlong2: ^0.8.1
+  latlong2: ^0.8.0
   sqflite: ^2.0.0+3
   shared_preferences: ^2.1.1
   flutter_secure_storage: ^8.0.0
@@ -33,11 +33,11 @@ dependencies:
   xml: ^6.3.0
   country_coder: ^1.1.0
   settings_ui: ^2.0.2
-  uuid: ^3.0.6
+  uuid: ^3.0.7
   archive: ^3.1.6
   phone_numbers_parser: ^4.2.0
   line_icons: ^2.0.1
-  share_plus: ^6.3.4
+  share_plus: ^7.1.0
   path_provider: ^2.0.9
   path: ^1.8.1
   responsive_grid_list: ^1.2.3

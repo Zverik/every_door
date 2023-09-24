@@ -5,6 +5,10 @@
 _Unreleased_
 
 * Removed the `check_date` field from the editor.
+* Switched the default imagery to Mapbox and disabled Maxar (which has forsaken us).
+* Updated the Bing imagery key.
+* Increased minimum Android version to 4.4.
+* Hopefully GPS works much better now, thanks to Baseflow for fixing multiple geolocation issues.
 
 ## 3.1
 

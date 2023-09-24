@@ -118,7 +118,7 @@ class OsmAuthController extends StateNotifier<String?> {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       final info = await deviceInfo.androidInfo;
-      final sdk = info.version.sdkInt ?? 0;
+      final sdk = info.version.sdkInt;
       result = sdk >= 18;
     } else if (Platform.isIOS) {
       final info = await deviceInfo.iosInfo;

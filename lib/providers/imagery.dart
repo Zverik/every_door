@@ -32,7 +32,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
     type: ImageryType.bing,
     name: 'Bing Aerial Imagery',
     url:
-        'OMe8mqtOsgEax6JwKslCwSnfdUmUnnJ9djGBbfrgDh9lM+Lmp82Gh+3/rYFA6cHWZaGKWpq5CDrH0DfqjsPbILNcl6hfAWMnCS6b5l+jEqg=',
+        'ONmGm9hPmmIXyIpRK8Mx33q/TVG91lBWanmUE4XbZl42a+Hpr7b+hd+gqZBF9vXtTteFeLqaXS/JwQvk/eHDRbNcl6hfAWMnCS6b5l+jEqg=',
     encrypted: true,
     icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Bing.png',
     attribution: '© Microsoft Bing',
@@ -66,7 +66,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
     maxZoom: 22,
   ).decrypt();
 
-  ImageryProvider(this._ref) : super(maxarPremiumImagery) {
+  ImageryProvider(this._ref) : super(mapboxImagery) {
     _updateBingUrlTemplate();
     loaded = false;
     loadState();
@@ -78,7 +78,8 @@ class ImageryProvider extends StateNotifier<Imagery> {
     final rows = await _ref.read(presetProvider).imageryQuery(geohash);
     List<Imagery> results = rows.map((row) => Imagery.fromJson(row)).toList();
     results.add(mapboxImagery);
-    results.add(maxarPremiumImagery);
+    // Imagery is disabled by Maxar.
+    // results.add(maxarPremiumImagery);
     if (bingUrlTemplate != null) results.add(bingImagery);
     return results;
   }
@@ -90,7 +91,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
       if (imageryId == bingImagery.id) {
         state = bingImagery;
       } else if (imageryId == maxarPremiumImagery.id) {
-        state = maxarPremiumImagery;
+        state = mapboxImagery;  // yes, we're silently changing the chosen imagery.
       } else if (imageryId == mapboxImagery.id) {
         state = mapboxImagery;
       } else {
