@@ -8,7 +8,7 @@ const kMainKeys = <String>[
   'emergency', 'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
   'marker', 'public_transport', 'traffic_sign', 'hazard', 'telecom',
   'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
-  'advertising', 'playground', 'traffic_calming', 'attraction',
+  'advertising', 'playground', 'traffic_calming', 'attraction', 'cemetery',
 ];
 final kMainKeysSet = Set.of(kMainKeys);
 
@@ -234,7 +234,7 @@ bool isMicroTags(Map<String, String> tags) {
     'playground', 'advertising', 'power', 'traffic_calming',
     'barrier', 'highway', 'railway', 'natural', 'leisure',
     'marker', 'public_transport', 'hazard', 'traffic_sign',
-    'telecom', 'attraction',
+    'telecom', 'attraction', 'cemetery',
   };
   if (kAllGoodKeys.contains(k)) return true;
   return false;
@@ -331,6 +331,8 @@ bool isGoodTags(Map<String, String> tags) {
       'ventilation_shaft',
     };
     return !kWrongManMade.contains(v);
+  } else if (k == 'cemetery') {
+    return v == 'grave';
   }
   return false;
 }
@@ -397,6 +399,12 @@ SnapTo detectSnap(Map<String, String> tags) {
   } else if ({'traffic_calming', 'barrier'}.contains(k)) return SnapTo.highway;
   else if (k == 'historic' && {'plaque', 'blue_plaque'}.contains(tags['memorial']))
     return SnapTo.building;
+  else if (k == 'public_transport' && tags['public_transport'] == 'stop_position') {
+    if (tags['bus'] == 'yes' || tags['trolleybus'] == 'yes')
+      return SnapTo.highway;
+    else if (tags['train'] == 'yes' || tags['subway'] == 'yes' || tags['tram'] == 'yes')
+      return SnapTo.railway;
+  }
 
   return SnapTo.nothing;
 }

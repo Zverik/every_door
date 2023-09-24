@@ -372,6 +372,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
     String? result = this['name'] ?? this['name:en'] ?? this['int_name'];
     if (result != null) return result;
     for (final e in getFullTags().entries) {
+      if (e.key == 'name:signed' || e.key.contains(':19')) continue;
       if (e.key.startsWith('name:')) return e.value;
     }
     return null;

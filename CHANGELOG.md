@@ -9,6 +9,7 @@ _Unreleased_
 * Updated the Bing imagery key.
 * Increased minimum Android version to 4.4.
 * Hopefully GPS works much better now, thanks to Baseflow for fixing multiple geolocation issues.
+* Snapping `stop_position` to the nearest highway or railway.
 
 ## 3.1
 
