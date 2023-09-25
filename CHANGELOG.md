@@ -10,6 +10,7 @@ _Unreleased_
 * Increased minimum Android version to 4.4.
 * Hopefully GPS works much better now, thanks to Baseflow for fixing multiple geolocation issues.
 * Snapping `stop_position` to the nearest highway or railway.
+* Country-specific fields were not filtered properly, leading to duplicates.
 
 ## 3.1
 

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:country_coder/country_coder.dart';
 import 'package:every_door/fields/checkbox.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/direction.dart';
@@ -46,6 +49,7 @@ abstract class PresetField {
   final IconData? icon;
   final String? placeholder;
   final FieldPrerequisite? prerequisite;
+  final LocationSet? locationSet;
 
   const PresetField({
     required this.key,
@@ -53,6 +57,7 @@ abstract class PresetField {
     this.icon,
     this.placeholder,
     this.prerequisite,
+    this.locationSet,
   });
 
   Widget buildWidget(OsmChange element);
@@ -72,6 +77,9 @@ PresetField fieldFromJson(Map<String, dynamic> data,
   final prerequisite = data.containsKey('prerequisiteTag')
       ? FieldPrerequisite.fromJson(data['prerequisiteTag'])
       : null;
+  final locationSet = data['locations'] == null
+      ? null
+      : LocationSet.fromJson(jsonDecode(data['locations']));
 
   // This switch should include at least every tag
   // from [PresetProvider.getStandardFields].
@@ -126,6 +134,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         icon: Icons.credit_card,
         prerequisite: prerequisite,
+        locationSet: locationSet,
         customValues: data['custom_values'] == 1,
         snakeCase: data['snake_case'] == 1,
         type: ComboType.multi,
@@ -182,6 +191,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         placeholder: placeholder,
         prerequisite: prerequisite,
+        locationSet: locationSet,
         maxLines: typ == 'textarea' ? 4 : null,
         capitalize: !kTextLowercase.contains(key),
       );
@@ -191,6 +201,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         placeholder: placeholder,
         prerequisite: prerequisite,
+        locationSet: locationSet,
         keyboardType: TextInputType.number,
       );
     case 'tel':
@@ -199,6 +210,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         placeholder: placeholder,
         prerequisite: prerequisite,
+        locationSet: locationSet,
         keyboardType: TextInputType.phone,
       );
     case 'email':
@@ -207,6 +219,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         placeholder: placeholder,
         prerequisite: prerequisite,
+        locationSet: locationSet,
         keyboardType: TextInputType.emailAddress,
       );
     case 'url':
@@ -215,6 +228,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         placeholder: placeholder,
         prerequisite: prerequisite,
+        locationSet: locationSet,
         keyboardType: TextInputType.url,
       );
     case 'combo':
@@ -225,6 +239,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         key: key,
         label: label,
         prerequisite: prerequisite,
+        locationSet: locationSet,
         customValues: data['custom_values'] == 1,
         snakeCase: data['snake_case'] == 1,
         type: kComboMapping[typ]!,
@@ -236,6 +251,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         options: options.map((e) => e.value).toList(),
         prerequisite: prerequisite,
+        locationSet: locationSet,
       );
     case 'check':
     case 'defaultCheck':
@@ -251,6 +267,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         placeholder: placeholder,
         prerequisite: prerequisite,
+        locationSet: locationSet,
       );
   }
 }

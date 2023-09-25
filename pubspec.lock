@@ -149,10 +149,10 @@ packages:
     dependency: "direct main"
     description:
       name: country_coder
-      sha256: c70363ca7d7ca1aa8a55bf094897584c36e1e1bf6140553c6ff2284a666bdc61
+      sha256: "3cd6f7ba2fb20aeecae41143559c6974a663c7fa1dd1cf020a3e9803a84e2c6c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.1"
+    version: "1.2.0"
   coverage:
     dependency: transitive
     description:

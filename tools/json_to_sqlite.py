@@ -146,7 +146,8 @@ def import_fields(cur, path: str):
         universal integer default 0,
         snake_case integer default 1,
         min_value integer,
-        prerequisite text
+        prerequisite text,
+        locations text
         )""")
 
     def build_fields(data: dict[str, dict]) -> Iterator[tuple]:
@@ -187,12 +188,13 @@ def import_fields(cur, path: str):
                 1 if row.get('snake_case') else 0,
                 row.get('minValue'),
                 None if 'prerequisiteTag' not in row else json.dumps(row['prerequisiteTag']),
+                None if 'locationSet' not in row else json.dumps(row['locationSet']),
             )
 
     cur.executemany(
         "insert into fields (name, key, typ, label, placeholder, options, custom_values, "
-        "universal, snake_case, min_value, prerequisite) "
-        "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", build_fields(data))
+        "universal, snake_case, min_value, prerequisite, locations) "
+        "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", build_fields(data))
     cur.execute("create index fields_uni_idx on fields (universal)")
 
 

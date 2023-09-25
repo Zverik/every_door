@@ -1,3 +1,4 @@
+import 'package:country_coder/country_coder.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:flutter/material.dart';
@@ -47,11 +48,18 @@ class ComboPresetField extends PresetField {
     required String label,
     IconData? icon,
     FieldPrerequisite? prerequisite,
+    LocationSet? locationSet,
     required this.type,
     required this.options,
     this.customValues = true,
     this.snakeCase = true,
-  }) : super(key: key, label: label, icon: icon, prerequisite: prerequisite);
+  }) : super(
+          key: key,
+          label: label,
+          icon: icon,
+          prerequisite: prerequisite,
+          locationSet: locationSet,
+        );
 
   bool get isSingularValue {
     return type == ComboType.regular || type == ComboType.type;

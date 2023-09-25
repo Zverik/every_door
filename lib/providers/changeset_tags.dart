@@ -20,7 +20,7 @@ class ChangesetTagsProvider extends ChangeNotifier {
 
   Map<String, String> generateChangesetTags(Iterable<OsmChange> changes) {
     final hashtags = getHashtags();
-    final maxCommentLength = 250 - hashtags.length;
+    final maxCommentLength = 230 - hashtags.length;
 
     String comment = _generator.generateComment(changes);
     if (comment.length > maxCommentLength) {
@@ -101,9 +101,10 @@ class _TypeCount {
   }
 
   String _getType(OsmChange change) {
-    final rawKey = getMainKey(change.getFullTags());
-    if (rawKey == null) return 'unknown object';
-    final value = change[rawKey]!;
+    final fullTags = change.getFullTags();
+    final rawKey = getMainKey(fullTags);
+    final value = fullTags[rawKey];
+    if (rawKey == null || value == null) return 'unknown object';
     // No use having "disused:shop" in a comment.
     final key = rawKey.substring(rawKey.indexOf(':') + 1);
     if (value == 'yes') return key;

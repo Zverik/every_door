@@ -321,7 +321,7 @@ class PresetProvider {
   /// For each combo key, get and sort values according to downloaded data.
   Future<void> cacheComboOptions() async {
     if (processingCombos) return;
-    _logger.info('Starting global combo values caching');
+    _logger.fine('Starting global combo values caching');
     final timeStart = DateTime.now().millisecondsSinceEpoch;
     processingCombos = true;
     // Most used fields to be processed first.
@@ -369,7 +369,7 @@ class PresetProvider {
 
     final timeTook =
         ((DateTime.now().millisecondsSinceEpoch - timeStart) / 1000).round();
-    _logger.info('Finished processing combo options, took $timeTook seconds');
+    _logger.fine('Finished processing combo options, took $timeTook seconds');
   }
 
   Future<List<ComboOption>> _getComboOptions(Map<String, dynamic> field,
@@ -422,7 +422,8 @@ class PresetProvider {
 
   static const kSkipFields = {'opening_hours/covid19', 'not/name', 'shop'};
 
-  Future<Preset> getFields(Preset preset, {Locale? locale}) async {
+  Future<Preset> getFields(Preset preset,
+      {Locale? locale, LatLng? location}) async {
     if (preset.isFixme)
       return preset.withFields(
           [TextPresetField(key: 'fixme:type', label: 'Fixme type')], []);
@@ -468,6 +469,13 @@ class PresetProvider {
         final options = await _getComboOptions(row);
         field = fieldFromJson(row, options: options);
         _fieldCache[row['name'] as String] = field;
+      }
+
+      // Skip fields that don't fit the location.
+      if (field.locationSet != null && location != null) {
+        final matches = locationMatcher(
+            location.longitude, location.latitude, field.locationSet!);
+        if (!matches) continue;
       }
 
       // query options if needed

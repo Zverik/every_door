@@ -31,7 +31,7 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   adaptive_dialog: ^1.9.0-0
   xml: ^6.3.0
-  country_coder: ^1.1.0
+  country_coder: ^1.2.0
   settings_ui: ^2.0.2
   uuid: ^3.0.7
   archive: ^3.1.6
