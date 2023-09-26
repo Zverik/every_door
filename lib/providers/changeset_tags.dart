@@ -103,6 +103,10 @@ class _TypeCount {
   String _getType(OsmChange change) {
     final fullTags = change.getFullTags();
     final rawKey = getMainKey(fullTags);
+    if (rawKey == null &&
+        detectKind(fullTags, {ElementKind.address}) == ElementKind.address) {
+      return 'address';
+    }
     final value = fullTags[rawKey];
     if (rawKey == null || value == null) return 'unknown object';
     // No use having "disused:shop" in a comment.

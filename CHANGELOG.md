@@ -11,6 +11,8 @@ _Unreleased_
 * Hopefully GPS works much better now, thanks to Baseflow for fixing multiple geolocation issues.
 * Snapping `stop_position` to the nearest highway or railway.
 * Country-specific fields were not filtered properly, leading to duplicates.
+* Allowing adding breaks to opening hours intervals spanning midnight.
+* Mentioning addresses in changeset comments properly.
 
 ## 3.1
 

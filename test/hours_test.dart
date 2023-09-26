@@ -127,6 +127,20 @@ void main() {
     expect(fragment.breaks.first, equals(HoursInterval.str('11:00', '14:00')));
   });
 
+  test('HoursFragment sorts breaks when overlapping midnight', () {
+    HoursFragment fragment = HoursFragment(Weekdays.fullWeek(), HoursInterval.str('19:00', '03:00'),
+        [HoursInterval.str('10:00', '11:00'), HoursInterval.str('23:00', '00:30'),
+        HoursInterval.str('02:00', '03:00')]);
+    expect(fragment.interval, equals(HoursInterval.str('19:00', '02:00')));
+    expect(fragment.breaks, isEmpty);
+
+    fragment = HoursFragment(Weekdays.fullWeek(), HoursInterval.str('19:00', '25:00'),
+      [HoursInterval.str('00:00', '00:30'), HoursInterval.str('00:50', '01:10')]);
+    expect(fragment.interval, equals(HoursInterval.str('19:00', '00:50')));
+    expect(fragment.breaks.length, equals(1));
+    expect(fragment.breaks.first, equals(HoursInterval.str('00:00', '00:30')));
+  });
+
   test('HoursData parses time correctly', () {
     HoursData data = HoursData('6:30-20:00');
     expect(data.fragments.length, equals(1));

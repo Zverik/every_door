@@ -49,6 +49,10 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final interval = widget.fragment.interval;
+    final gapEnoughForBreak = interval != null &&
+        (interval.end.hour - interval.start.hour > 2 ||
+            interval.crossesMidnight);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -108,10 +112,7 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
                 ),
               ],
             ),
-          if (widget.fragment.breaks.length < 4 &&
-              widget.fragment.interval!.end.hour -
-                      widget.fragment.interval!.start.hour >
-                  2) ...[
+          if (widget.fragment.breaks.length < 4 && gapEnoughForBreak) ...[
             if (addingBreak)
               ChooserIntervalField(
                 interval: null,

@@ -121,6 +121,12 @@ class HoursInterval implements Comparable {
     return other._splitAtMidnight().any((part) =>
         parts.any((p2) => (part.start < p2.end && part.end > p2.start)));
   }
+
+  bool containsTime(StringTime t) {
+    final parts = _splitAtMidnight();
+    final nt = t.normalize;
+    return parts.any((p) => p.start <= nt && p.end >= nt);
+  }
 }
 
 class HoursFragment implements Comparable {
@@ -207,35 +213,38 @@ class HoursFragment implements Comparable {
     if (interval == null) breaks.clear();
     if (breaks.isEmpty) return;
 
+    // No we cannot process any breaks crossing midnight. Too hard.
+    // And also remove breaks outside the interval.
+    breaks.removeWhere((b) => b.crossesMidnight || !interval!.intersects(b));
     breaks.sort();
-    for (int i = breaks.length - 1; i >= 1; i--) {
-      if (breaks[i - 1].end >= breaks[i].start) {
-        if (breaks[i - 1].end < breaks[i].end)
-          breaks[i - 1] = HoursInterval(breaks[i - 1].start, breaks[i].end);
+
+    // Merge overlapping breaks.
+    for (int i = 0; i < breaks.length - 1;) {
+      // Note that [i].start <= [i+1].start.
+      if (breaks[i].end >= breaks[i + 1].start) {
+        // If [i-1] is fully contained in [i] then just delete it.
+        if (breaks[i].end < breaks[i + 1].end)
+          breaks[i] = HoursInterval(breaks[i].start, breaks[i + 1].end);
+        breaks.removeAt(i + 1);
+      } else
+        i++;
+    }
+
+    // Trim interval using breaks overlapping its edges.
+    for (int i = 0; i < breaks.length;) {
+      if (breaks[i].contains(interval!)) {
+        // Did we get a break too large after merging?
+        interval = null;
+        breaks.clear();
+        return;
+      } else if (breaks[i].containsTime(interval!.start)) {
+        interval = HoursInterval(breaks[i].end, interval!.end);
         breaks.removeAt(i);
-      }
-    }
-
-    while (breaks.isNotEmpty && breaks.first.start <= interval!.start) {
-      if (breaks.first.end >= interval!.end) {
-        interval = null;
-        breaks.clear();
-        return;
-      }
-      if (breaks.first.end > interval!.start)
-        interval = HoursInterval(breaks.first.end, interval!.end);
-      breaks.removeAt(0);
-    }
-
-    while (breaks.isNotEmpty && breaks.last.end >= interval!.end) {
-      if (breaks.last.start <= interval!.start) {
-        interval = null;
-        breaks.clear();
-        return;
-      }
-      if (breaks.last.start < interval!.end)
-        interval = HoursInterval(interval!.start, breaks.last.start);
-      breaks.removeLast();
+      } else if (breaks[i].containsTime(interval!.end)) {
+        interval = HoursInterval(interval!.start, breaks[i].start);
+        breaks.removeAt(i);
+      } else
+        i++;
     }
   }
 
