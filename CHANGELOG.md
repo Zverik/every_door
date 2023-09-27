@@ -13,6 +13,9 @@ _Unreleased_
 * Country-specific fields were not filtered properly, leading to duplicates.
 * Allowing adding breaks to opening hours intervals spanning midnight.
 * Mentioning addresses in changeset comments properly.
+* Log can be copied now (thanks @ann-who).
+* Increased max zoom when placing an object (thanks @ann-who).
+* Support for `traffic_calming=table` checkbox.
 
 ## 3.1
 

@@ -13,7 +13,7 @@ class ComboOption {
   const ComboOption(this.value, [this.label]);
 
   @override
-  String toString() => value;
+  String toString() => '$value($label)';
 }
 
 enum ComboType {

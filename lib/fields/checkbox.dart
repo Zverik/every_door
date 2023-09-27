@@ -1,3 +1,4 @@
+import 'package:every_door/fields/combo.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CheckboxPresetField extends PresetField {
   final bool tristate;
+  List<ComboOption>? options;
 
   CheckboxPresetField({
     required String key,
@@ -13,6 +15,7 @@ class CheckboxPresetField extends PresetField {
     IconData? icon,
     FieldPrerequisite? prerequisite,
     required this.tristate,
+    this.options,
   }) : super(key: key, label: label, prerequisite: prerequisite, icon: icon);
 
   @override
@@ -32,52 +35,28 @@ class CheckboxInputField extends StatefulWidget {
 class _CheckboxInputFieldState extends State<CheckboxInputField> {
   @override
   Widget build(BuildContext context) {
+    const falseValues = {'no', 'false', '0', 'off'};
     final loc = AppLocalizations.of(context)!;
-    final vYes = loc.fieldCheckboxYes;
+    final vYes = widget.field.options?.length == 2
+        ? (widget.field.options![1].label ?? loc.fieldCheckboxYes)
+        : loc.fieldCheckboxYes;
     final vNo = loc.fieldCheckboxNo;
 
-    String? value = widget.element[widget.field.key] == 'yes' ? 'yes' : null;
-    if (value == null && widget.field.tristate) {
-      if (widget.element[widget.field.key] == 'no') value = 'no';
-    }
+    final keyValue = widget.element[widget.field.key];
+    String? value = falseValues.contains(keyValue)
+            ? 'no'
+            : keyValue;
+    String yesValue = widget.field.options?.length == 2
+        ? widget.field.options![1].value
+        : 'yes';
 
     return RadioField(
-      options: widget.field.tristate ? const ['yes', 'no'] : const ['yes'],
+      options: widget.field.tristate ? [yesValue, 'no'] : [yesValue],
       labels: [vYes, vNo],
       value: value,
       onChange: (newValue) {
         widget.element[widget.field.key] = newValue;
       },
-    );
-  }
-
-  Widget buildCheckbox(BuildContext context) {
-    // Disabled: radio field is better UX-wise.
-    bool? value = widget.element[widget.field.key] == 'yes';
-    if (!value && widget.field.tristate) {
-      if (widget.element[widget.field.key] != 'no') value = null;
-    }
-
-    return Row(
-      children: [
-        Checkbox(
-          tristate: widget.field.tristate,
-          value: value,
-          onChanged: (newValue) {
-            setState(() {
-              if (newValue == true) {
-                widget.element[widget.field.key] = 'yes';
-              } else {
-                if (newValue == false && widget.field.tristate)
-                  widget.element[widget.field.key] = 'no';
-                else
-                  widget.element.removeTag(widget.field.key);
-              }
-            });
-          },
-        ),
-        Spacer(),
-      ],
     );
   }
 }

@@ -373,17 +373,19 @@ class PresetProvider {
   }
 
   Future<List<ComboOption>> _getComboOptions(Map<String, dynamic> field,
-      {bool useCache = true}) async {
+      {bool useCache = true, bool presetOnly = false}) async {
     final String typ = (field['typ']) as String;
-    bool needed = typ.endsWith("ombo") || typ == 'radio';
+    bool needed =
+        typ.endsWith("ombo") || typ == 'radio' || typ == 'defaultCheck';
     if (!needed) return const [];
+    if (typ == 'defaultCheck') presetOnly = true;
 
     final loc = field['loc_options'] != null
         ? jsonDecode(field['loc_options'])
         : <String, String>{};
 
     // Check in the combo cache.
-    if (useCache) {
+    if (!presetOnly && useCache) {
       final cached = await _fetchComboCache(field['key']);
       if (cached != null)
         return cached.map((e) => ComboOption(e, loc[e])).toList();
@@ -395,26 +397,28 @@ class PresetProvider {
       options.addAll((jsonDecode(field['options']) as List).cast<String>());
     }
 
-    // Get options from taginfo
-    final results =
-        await _db!.query('combos', where: 'key = ?', whereArgs: [field['key']]);
-    if (results.isNotEmpty) {
-      final existing = Set.of(options);
-      options.addAll((results.first['options'] as String)
-          .split('\\')
-          .where((v) => !existing.contains(v)));
-    }
+    if (!presetOnly) {
+      // Get options from taginfo
+      final results = await _db!
+          .query('combos', where: 'key = ?', whereArgs: [field['key']]);
+      if (results.isNotEmpty) {
+        final existing = Set.of(options);
+        options.addAll((results.first['options'] as String)
+            .split('\\')
+            .where((v) => !existing.contains(v)));
+      }
 
-    // Count values on the map.
-    final counter =
-        await _ref.read(osmDataProvider).getComboOptionsCount(field['key']);
-    if (counter.isNotEmpty) {
-      mergeSort(options,
-          compare: (a, b) => (counter[b] ?? 0).compareTo(counter[a] ?? 0));
-    }
+      // Count values on the map.
+      final counter =
+          await _ref.read(osmDataProvider).getComboOptionsCount(field['key']);
+      if (counter.isNotEmpty) {
+        mergeSort(options,
+            compare: (a, b) => (counter[b] ?? 0).compareTo(counter[a] ?? 0));
+      }
 
-    // Store the result in the cache.
-    _updateComboCache(field['key'], options);
+      // Store the result in the cache.
+      _updateComboCache(field['key'], options);
+    }
 
     // Return the result wrapped in a ComboOption.
     return options.map((e) => ComboOption(e, loc[e])).toList();

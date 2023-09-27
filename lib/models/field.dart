@@ -259,6 +259,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         key: key,
         label: label,
         tristate: typ == 'check',
+        options: options,
         prerequisite: prerequisite,
       );
     default:
