@@ -6,6 +6,7 @@ import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/direction.dart';
 import 'package:every_door/fields/email.dart';
 import 'package:every_door/fields/floor.dart';
+import 'package:every_door/fields/height.dart';
 import 'package:every_door/fields/hours.dart';
 import 'package:every_door/fields/name.dart';
 import 'package:every_door/fields/phone.dart';
@@ -260,6 +261,12 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         tristate: typ == 'check',
         options: options,
+        prerequisite: prerequisite,
+      );
+    case 'roadheight':
+      return HeightPresetField(
+        key: key,
+        label: label,
         prerequisite: prerequisite,
       );
     default:

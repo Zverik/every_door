@@ -16,6 +16,8 @@ _Unreleased_
 * Log can be copied now (thanks @ann-who).
 * Increased max zoom when placing an object (thanks @ann-who).
 * Support for `traffic_calming=table` checkbox.
+* Fixed error 414 when uploading 700+ changed nodes at once.
+* Support for `roadheight` fields (e.g. `maxheight`).
 
 ## 3.1
 
