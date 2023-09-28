@@ -1,6 +1,6 @@
 # Every Door App Change Log
 
-## 3.2
+## 4.0
 
 _Unreleased_
 
