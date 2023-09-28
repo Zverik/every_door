@@ -4,20 +4,29 @@
 
 _Unreleased_
 
-* Removed the `check_date` field from the editor.
+### Highlights
+
+* Hopefully GPS works much better now, thanks to Jeroeen Weener for
+  [fixing](https://github.com/Baseflow/flutter-geolocator/issues/1114) multiple geolocation issues.
 * Switched the default imagery to Mapbox and disabled Maxar (which has forsaken us).
 * Updated the Bing imagery key.
 * Increased minimum Android version to 4.4.
-* Hopefully GPS works much better now, thanks to Baseflow for fixing multiple geolocation issues.
-* Snapping `stop_position` to the nearest highway or railway.
-* Country-specific fields were not filtered properly, leading to duplicates.
+
+### Editor
+
+* Country-specific fields were not filtered properly, leading to duplicate fields in the editor.
+* Support for `roadheight` fields (e.g. `maxheight`).
+* Removed the `check_date` field from the editor.
 * Allowing adding breaks to opening hours intervals spanning midnight.
+* Support for `traffic_calming=table` checkbox.
+
+### Other
+
+* Snapping `stop_position` to the nearest highway or railway.
 * Mentioning addresses in changeset comments properly.
 * Log can be copied now (thanks @ann-who).
 * Increased max zoom when placing an object (thanks @ann-who).
-* Support for `traffic_calming=table` checkbox.
 * Fixed error 414 when uploading 700+ changed nodes at once.
-* Support for `roadheight` fields (e.g. `maxheight`).
 * Prefix could override an existing main tag (e.g. `was:amenity` vs `shop`).
 
 ## 3.1
