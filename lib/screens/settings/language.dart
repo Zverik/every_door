@@ -59,12 +59,63 @@ class LanguagePage extends ConsumerWidget {
     supported.sort((a, b) => (a.languageCode == 'en' ? 0 : 1)
         .compareTo(b.languageCode == 'en' ? 0 : 1));
 
-    final deviceLocale = Platform.localeName;
-    final deviceLanguageCode = deviceLocale.split('_').first;
-    final isSameLanguage = locale!.languageCode == deviceLanguageCode;
+    bool isLocaleSame(Locale deviceLocale, Locale appLocale) {
+      if (supported.contains(deviceLocale)) {
+        return deviceLocale == appLocale;
+      }
 
-    if (!isSameLanguage && supported.contains(Locale(deviceLanguageCode)))
-      supported.insert(0, Locale(deviceLanguageCode));
+      if (deviceLocale.languageCode != appLocale.languageCode) {
+        return false;
+      }
+
+      if (appLocale.countryCode != null && appLocale.scriptCode != null) {
+        // Current implementation relies on supported locales where are no
+        // situation like this
+        throw UnimplementedError();
+      } else if (appLocale.countryCode == null &&
+          appLocale.scriptCode == null) {
+        return true;
+      } else if (appLocale.countryCode != null) {
+        return deviceLocale.countryCode == appLocale.countryCode;
+      } else if (appLocale.scriptCode != null) {
+        return deviceLocale.scriptCode == appLocale.scriptCode;
+      }
+
+      return false;
+    }
+
+    final deviceLocaleParts = Platform.localeName.split('_');
+    var deviceLocales = <Locale>[];
+    switch (deviceLocaleParts.length) {
+      case 1:
+        deviceLocales.add(Locale(deviceLocaleParts[0]));
+        break;
+      case 2:
+        // We can have for example en-GB and en
+        deviceLocales.add(Locale(deviceLocaleParts[0], deviceLocaleParts[1]));
+        deviceLocales.add(Locale(deviceLocaleParts[0]));
+        break;
+      case 3:
+        var languageCode = deviceLocaleParts[0];
+        var scriptCode = deviceLocaleParts[1];
+        deviceLocales.add(Locale.fromSubtags(
+            languageCode: languageCode, scriptCode: scriptCode));
+        break;
+    }
+
+    Locale? hintedLocale;
+    for (var deviceLocale in deviceLocales) {
+      if (supported.contains(deviceLocale)) {
+        if (!isLocaleSame(deviceLocale, locale!)) {
+          hintedLocale = deviceLocale;
+        }
+        break;
+      }
+    }
+
+    bool needLocaleHint = hintedLocale != null;
+    if (needLocaleHint && hintedLocale.languageCode != 'en')
+      supported.insert(0, hintedLocale);
 
     return Scaffold(
       appBar: AppBar(title: Text(loc.settingsLanguage)),
