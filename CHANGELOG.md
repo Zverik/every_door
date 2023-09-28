@@ -18,6 +18,7 @@ _Unreleased_
 * Support for `traffic_calming=table` checkbox.
 * Fixed error 414 when uploading 700+ changed nodes at once.
 * Support for `roadheight` fields (e.g. `maxheight`).
+* Prefix could override an existing main tag (e.g. `was:amenity` vs `shop`).
 
 ## 3.1
 

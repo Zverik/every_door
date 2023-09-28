@@ -47,13 +47,16 @@ enum ElementKind {
 
 /// Find the single main key for an object. Also considers lifecycle prefixes.
 String? getMainKey(Map<String, String> tags, [bool noPrefix = false]) {
+  String? prefixed;
   for (final k in kMainKeys) {
     if (tags[k] == 'no') continue;
     if (tags.containsKey(k)) return k;
-    if (tags.containsKey(kDisused + k)) return noPrefix ? k : kDisused + k;
-    if (tags.containsKey(kDeleted + k)) return noPrefix ? k : kDeleted + k;
+    if (prefixed == null && tags.containsKey(kDisused + k))
+      prefixed = noPrefix ? k : kDisused + k;
+    if (prefixed == null && tags.containsKey(kDeleted + k))
+      prefixed = noPrefix ? k : kDeleted + k;
   }
-  return null;
+  return prefixed;
 }
 
 /// Sorts the element by kind, using its tags and helper functions from this file.
