@@ -28,6 +28,7 @@ _Unreleased_
 * Increased max zoom when placing an object (thanks @ann-who).
 * Fixed error 414 when uploading 700+ changed nodes at once.
 * Prefix could override an existing main tag (e.g. `was:amenity` vs `shop`).
+* New notes are marked with the `#EveryDoor` hashtag (thanks @deevroman).
 
 ## 3.1
 
