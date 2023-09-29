@@ -165,7 +165,7 @@
   "@tagsValue": {
     "description": "Tags panel, add a new tag dialog: value label"
   },
-  "settingsTitle": "Indstillinger",
+  "settingsTitle": "Konfiguration",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
@@ -1139,5 +1139,17 @@
   "addressBlock": "Blok",
   "@addressBlock": {
     "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "fieldHeightMeters": "Forventer længde i meter, f.eks. 5,4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Forventer længde i fod, f.eks. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldHeightAny": "Forventer længde, f.eks. 5,4 eller 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
