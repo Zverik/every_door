@@ -275,7 +275,7 @@
   "@entranceFlatsNumberList": {},
   "entranceIsUnit": "Memorizza il numero di interno in addr:unit",
   "@entranceIsUnit": {},
-  "entranceRef": "Ref",
+  "entranceRef": "Rif",
   "@entranceRef": {},
   "entranceAccess": "Accesso",
   "@entranceAccess": {},
@@ -807,5 +807,17 @@
   "notesComment": "Il tuo commento",
   "@notesComment": {
     "description": "Label for the note comment field."
+  },
+  "fieldHeightMeters": "Attesa lunghezza in metri, es. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Attesa lunghezza in piedi, es. 7'.4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldHeightAny": "Attesa lunghezza, es. 5.4 o 7'.4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
