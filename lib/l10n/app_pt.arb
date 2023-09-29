@@ -1139,5 +1139,17 @@
   "notesComment": "Nota para outros editores",
   "@notesComment": {
     "description": "Label for the note comment field."
+  },
+  "fieldHeightMeters": "Espera-se comprimento em metros, por ex.: 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Espera-se comprimento em pés, por ex.: 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldHeightAny": "Espera-se comprimento, por ex.: 5.4 ou 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
