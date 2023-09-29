@@ -1139,5 +1139,17 @@
   "notesComment": "Váš komentář",
   "@notesComment": {
     "description": "Label for the note comment field."
+  },
+  "fieldHeightMeters": "Očekávána délka v metrech, např. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Očekávána délka ve stopách, např. 7'14\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldHeightAny": "Očekávána délka, např. 5.4 nebo 7'14\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
