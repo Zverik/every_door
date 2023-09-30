@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/payment.dart';
+import 'package:every_door/fields/text.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
@@ -121,6 +122,21 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
               stdFields.add(PaymentPresetField(label: 'Accept cards'));
             }
           }
+        }
+        // Add postcode to fields for buildings, moreFields for others.
+        // The reason for this hack is that our addresses don't transfer postcodes.
+        // But the addresses in the presets are indivisible, so we can't choose.
+        final postcodeField = TextPresetField(
+          key: "addr:postcode",
+          label: "Postcode",
+          keyboardType: TextInputType.visiblePassword,
+          capitalize: true,
+        );
+        final kind = amenity.kind;
+        if (kind == ElementKind.building || kind == ElementKind.address)
+          preset!.fields.add(postcodeField);
+        else {
+          preset!.moreFields.insert(0, postcodeField);
         }
         // Add opening_hours to moreFields if it's not anywhere.
         if (!preset!.fields.any((field) => field.key == 'opening_hours') &&

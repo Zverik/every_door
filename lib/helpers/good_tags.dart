@@ -374,7 +374,10 @@ bool isStructure(Map<String, String> tags) {
 
 /// Whether we should display address and floor fields in the editor.
 bool needsAddress(Map<String, String> tags) {
-  if (isAmenityTags(tags)) return true;
+  final kind = detectKind(tags);
+  if ({ElementKind.amenity, ElementKind.building,
+       ElementKind.address}.contains(kind))
+    return true;
   const kAmenityLoc = {'atm', 'vending_machine', 'parcel_locker'};
   return kAmenityLoc.contains(tags['amenity']);
 }

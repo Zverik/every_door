@@ -25,6 +25,7 @@ _Unreleased_
 * Warning when adding an amenity from the micromapping mode or vice-versa.
 * Editable addresses in forms for buildings.
 * Forbade changing buildings and entrances types (to amenities).
+* Added `addr:postcode` field to all presets with addresses, including buildings.
 
 ### Other
 
