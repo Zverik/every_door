@@ -274,7 +274,7 @@
   "@buttonYes": {
     "description": "Button for approval."
   },
-  "buildingTypeHouse": "casa",
+  "buildingTypeHouse": "inicio",
   "@buildingTypeHouse": {},
   "changesPurgeTitle": "¿Purgar cambios?",
   "@changesPurgeTitle": {
@@ -492,7 +492,7 @@
   "@tagsUrlCopied": {
     "description": "Popup message when the link to the object was copied to the clipboard."
   },
-  "entranceTypeHome": "casa",
+  "entranceTypeHome": "inicio",
   "@entranceTypeHome": {},
   "entranceTypeGarage": "cochera individual",
   "@entranceTypeGarage": {},
@@ -528,7 +528,7 @@
   "@tagsValue": {
     "description": "Tags panel, add a new tag dialog: value label"
   },
-  "settingsTitle": "Ajustes",
+  "settingsTitle": "Configuración",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
@@ -942,7 +942,7 @@
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."
   },
-  "mapSettings": "Ajustes",
+  "mapSettings": "Configuraciones",
   "@mapSettings": {
     "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
   },
@@ -1139,5 +1139,17 @@
   "notesComment": "Tu comentario",
   "@notesComment": {
     "description": "Label for the note comment field."
+  },
+  "fieldHeightMeters": "Longitud esperada en metros, por ejemplo 5,4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Longitud esperada en pies, por ejemplo, 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldHeightAny": "Longitud esperada, por ejemplo, 5,4 o 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
