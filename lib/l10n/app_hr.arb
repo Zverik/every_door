@@ -1141,5 +1141,17 @@
   "notesComment": "Tvoj komentar",
   "@notesComment": {
     "description": "Label for the note comment field."
+  },
+  "fieldHeightMeters": "Očekuje se duljina u metrima, npr. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Očekuje se duljina u stopama, npr. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldHeightAny": "Očekuje se duljina, npr. 5.4 ili 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
