@@ -36,6 +36,7 @@ _Unreleased_
 * Prefix could override an existing main tag (e.g. `was:amenity` vs `shop`).
 * New notes are marked with the `#EveryDoor` hashtag (thanks @deevroman).
 * For letter boxes, `post:*` address fields are now editable.
+* OSM Note comment dates are now displayed.
 
 ## 3.1
 

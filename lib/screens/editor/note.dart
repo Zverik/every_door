@@ -4,6 +4,7 @@ import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -120,6 +121,8 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final dateFormat =
+        DateFormat.yMMM(Localizations.localeOf(context).toLanguageTag());
     return WillPopScope(
       onWillPop: () async {
         saveAndClose(false);
@@ -148,6 +151,10 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: ': '),
                       ..._parseLinks(comment.message),
+                      TextSpan(
+                        text: ' (${dateFormat.format(comment.date)})',
+                        style: TextStyle(fontSize: kFieldFontSize - 3),
+                      ),
                     ]),
                     style: kFieldTextStyle,
                   ),
@@ -194,7 +201,8 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                         if (message.trim().isNotEmpty) {
                           final answer = await showOkCancelAlertDialog(
                             context: context,
-                            title: MaterialLocalizations.of(context).cancelButtonLabel,
+                            title: MaterialLocalizations.of(context)
+                                .cancelButtonLabel,
                             message: loc.notesCancelMessage,
                             isDestructiveAction: true,
                           );
