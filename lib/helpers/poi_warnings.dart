@@ -58,5 +58,9 @@ String? getWarningForAmenity(OsmChange amenity, AppLocalizations loc) {
     return loc.warningTooOld(loc.years((ageInDays / 365).round()));
   }
 
+  if (!isGoodTags(amenity.getFullTags(true))) {
+    return loc.warningUnsupported;
+  }
+
   return null;
 }

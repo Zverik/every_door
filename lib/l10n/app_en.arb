@@ -179,6 +179,14 @@
       }
     }
   },
+  "warningUnsupported": "This object type is not supported",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "warningWrongMode": "Wrong mode, check for duplicates",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
   "years": "{count,plural, =1{{count} year} few{{count} years} other{{count} years}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",

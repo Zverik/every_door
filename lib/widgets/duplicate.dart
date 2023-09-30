@@ -5,6 +5,7 @@ import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/poi_warnings.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/screens/editor.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +26,15 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
   static final _logger = Logger('DuplicateWarning');
   OsmChange? possibleDuplicate;
   Timer? duplicateTimer;
+  String? warning;
 
   @override
   initState() {
     super.initState();
     widget.amenity.addListener(onAmenityChange);
-    startDuplicateSearch();
+    Future.delayed(Duration.zero, () {
+      onAmenityChange();
+    });
   }
 
   @override
@@ -60,8 +64,18 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
     });
   }
 
+  bool isWrongMode() {
+    final isAmenity = isAmenityTags(widget.amenity.getFullTags(true));
+    final mode = ref.read(editorModeProvider);
+    return (isAmenity && mode == EditorMode.micromapping) ||
+        (!isAmenity && mode == EditorMode.poi);
+  }
+
   onAmenityChange() {
     startDuplicateSearch();
+    final loc = AppLocalizations.of(context)!;
+    warning = getWarningForAmenity(widget.amenity, loc);
+    if (warning == null && isWrongMode()) warning = loc.warningWrongMode;
   }
 
   @override
@@ -72,7 +86,6 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
         : distance(possibleDuplicate!.location, widget.amenity.location)
             .round();
     final loc = AppLocalizations.of(context)!;
-    final warning = getWarningForAmenity(widget.amenity, loc);
     if (possibleDuplicate == null && warning == null) return Container();
 
     return GestureDetector(

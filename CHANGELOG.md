@@ -21,6 +21,8 @@ _Unreleased_
 * Allowing adding breaks to opening hours intervals spanning midnight.
 * Support for `traffic_calming=table` checkbox.
 * Name capitalization (words vs sentences) is now detected from the map.
+* Warning when adding an unsupported object (not visible on the map).
+* Warning when adding an amenity from the micromapping mode or vice-versa.
 * Editable addresses in forms for buildings.
 * Forbade changing buildings and entrances types (to amenities).
 
