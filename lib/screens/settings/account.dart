@@ -141,6 +141,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
         children: [
           if (details?.avatar != null)
             CachedNetworkImage(imageUrl: details!.avatar!),
+          SizedBox(height: 20.0),
           Text(login),
           SizedBox(height: 20.0),
           if (details != null) ...[
