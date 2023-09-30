@@ -12,6 +12,8 @@ _Unreleased_
 * Updated the Bing imagery key.
 * Increased minimum Android version to 4.4.
 * Card payment settings were moved to the editor pane; introducing local card payment defaults.
+* Name capitalization style (words vs sentences) is now detected from the map.
+* New notes are marked with the `#EveryDoor` hashtag (thanks @deevroman).
 
 ### Editor
 
@@ -20,7 +22,6 @@ _Unreleased_
 * Removed the `check_date` field from the editor.
 * Allowing adding breaks to opening hours intervals spanning midnight.
 * Support for `traffic_calming=table` checkbox.
-* Name capitalization (words vs sentences) is now detected from the map.
 * Warning when adding an unsupported object (not visible on the map).
 * Warning when adding an amenity from the micromapping mode or vice-versa.
 * Editable addresses in forms for buildings.
@@ -35,7 +36,6 @@ _Unreleased_
 * Increased max zoom when placing an object (thanks @ann-who).
 * Fixed error 414 when uploading 700+ changed nodes at once.
 * Prefix could override an existing main tag (e.g. `was:amenity` vs `shop`).
-* New notes are marked with the `#EveryDoor` hashtag (thanks @deevroman).
 * For letter boxes, `post:*` address fields are now editable.
 * OSM Note comment dates are now displayed.
 
