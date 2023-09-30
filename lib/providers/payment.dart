@@ -40,7 +40,7 @@ class PaymentProvider {
     // Read the closest payment options from the database and sort by distance.
     final database = await _ref.read(databaseProvider).database;
     final hashes = createGeohashes(location.latitude, location.longitude,
-        kLocalPaymentRadius.toDouble() * 1000, LocalPayment.kGeohashPrecision);
+        kLocalPaymentRadius.toDouble(), LocalPayment.kGeohashPrecision);
     final placeholders = List.generate(hashes.length, (index) => "?").join(",");
     final rows = await database.query(
       LocalPayment.kTableName,
@@ -54,8 +54,7 @@ class PaymentProvider {
 
     // If we got the local option, return it.
     if (localOptions.isEmpty ||
-        distance(location, localOptions.first.center) >
-            kLocalPaymentRadius * 1000) {
+        distance(location, localOptions.first.center) > kLocalPaymentRadius) {
       return null;
     }
     return localOptions.first;

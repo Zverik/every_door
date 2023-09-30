@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Colors, TextStyle;
 
 const kAppTitle = 'Every Door';
-const kAppVersion = '3.2-beta1'; // Also used for presets.db versioning
+const kAppVersion = '4.0-alpha1'; // Also used for presets.db versioning
 
 const kDefaultLocation = <double>[59.42, 24.71];
 const kDatabaseName = 'every_door.db';
@@ -41,7 +41,7 @@ const kManualOption = '✍️'; // Emoji icon for entering values by hand
 const kMinElementsForWarning = 60000; // Alerting user when they have that many elements downloaded
 const kChangesetSplitGap = 0.02; // Decimal degrees, min distance between groups of changes
 const kMaxBulkDownloadZoom = 18; // Max zoom for bulk downloading tiles
-const kLocalPaymentRadius = 5; // How far local payment options reach, in kilometers
+const kLocalPaymentRadius = 5000; // How far local payment options reach, in meters
 const kCapitalizeNames = false; // By default, can be overridden by OSM data
 
 // Should be exactly 8 lines in both lists.
