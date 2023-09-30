@@ -9,6 +9,7 @@ class RadioField extends StatefulWidget {
   final List<String>? values;
   final bool wrap;
   final bool multi;
+  final bool keepOrder;
 
   /// Keep the first options before all others. Warning: this implies the first option can never be a value.
   final bool keepFirst;
@@ -24,6 +25,7 @@ class RadioField extends StatefulWidget {
     this.wrap = false,
     this.multi = false,
     this.keepFirst = false,
+    this.keepOrder = false,
     this.onChange,
     this.onMultiChange,
   });
@@ -98,7 +100,8 @@ class _RadioFieldState extends State<RadioField> {
       int idx = widget.options.indexOf(value);
       labelsForValues[value] = idx >= 0 ? labels[idx] : Text(value);
     }
-    bool pushFirst = getMergedLength() >= 35 && !widget.wrap;
+    bool pushFirst =
+        !widget.keepOrder && !widget.wrap && getMergedLength() >= 35;
 
     final pills = [
       if (widget.keepFirst && widget.options.isNotEmpty)

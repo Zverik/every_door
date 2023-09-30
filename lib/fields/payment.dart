@@ -1,7 +1,8 @@
+import 'package:every_door/fields/helpers/payment_config.dart';
+import 'package:every_door/providers/payment.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,9 +40,15 @@ class PaymentCheckboxInputField extends ConsumerStatefulWidget {
   ConsumerState createState() => _PaymentCheckboxInputFieldState();
 }
 
+class _Value {
+  static const String yes = 'yes';
+  static const String no = 'no';
+  static const String? clear = null;
+}
+
 class _PaymentCheckboxInputFieldState
     extends ConsumerState<PaymentCheckboxInputField> {
-  Iterable<String> commonPayment = ['payment:visa', 'payment:mastercard'];
+  PaymentOptions options = PaymentOptions.initial;
 
   @override
   initState() {
@@ -50,30 +57,29 @@ class _PaymentCheckboxInputFieldState
   }
 
   updateCommonPayment() async {
-    final osmData = ref.read(osmDataProvider);
-    final tags = await osmData.getCardPaymentOptions(widget.element.location);
-    setState(() {
-      commonPayment = tags;
-    });
+    options = await ref
+        .read(paymentProvider)
+        .getAllPaymentOptions(widget.element.location);
+    setState(() {});
   }
 
-  genericNo(bool remove) {
-    for (final key in kGenericKeys)
-      widget.element['payment:$key'] = remove ? null : 'no';
+  cardsGeneric(String? value) {
+    for (final key in kGenericKeys) widget.element['payment:$key'] = value;
   }
 
-  cashNo(bool remove) {
-    widget.element['payment:cash'] = remove ? null : 'no';
+  cash(String? value) {
+    widget.element['payment:cash'] = value;
   }
 
-  paymentYes(bool remove) {
-    if (remove) {
+  cards(String? value) {
+    assert(value != 'no');
+    if (value == null) {
       for (final key in kCardPaymentOptions) {
         widget.element.removeTag('payment:$key');
       }
     } else {
-      for (var key in commonPayment) {
-        widget.element[key] = 'yes';
+      for (var key in options.merged) {
+        widget.element[key] = value;
       }
     }
   }
@@ -93,31 +99,56 @@ class _PaymentCheckboxInputFieldState
       value = tags['payment:cash'] == 'no' ? 'only' : 'accepted';
     }
 
+    String configIcon = options.aroundDiffers ? '⚠️' : '⚙️';
+    bool configFirst = options.around.isNotEmpty && options.local == null;
+
     return RadioField(
-      options: const ['accepted', 'no', 'only'],
-      labels: [vAccepted, vNo, vOnly],
+      options: [
+        if (configFirst) 'defaults',
+        'accepted',
+        'no',
+        'only',
+        if (!configFirst) 'defaults'
+      ],
+      labels: [
+        if (configFirst) configIcon,
+        vAccepted,
+        vNo,
+        vOnly,
+        if (!configFirst) configIcon
+      ],
+      keepFirst: configFirst,
+      keepOrder: true,
       value: value,
-      onChange: (newValue) {
-        if (newValue == 'accepted') {
+      onChange: (newValue) async {
+        if (newValue == 'defaults') {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    PaymentSettingsPane(location: widget.element.location)),
+          );
+          updateCommonPayment();
+        } else if (newValue == 'accepted') {
           // Remove "no" generic values and set commonly used
-          genericNo(true);
-          paymentYes(false);
-          cashNo(true);
+          cardsGeneric(_Value.clear);
+          cards(_Value.yes);
+          cash(_Value.yes);
         } else if (newValue == 'no') {
           // Remove cards "yes" values and set generic cards=no
-          paymentYes(true);
-          genericNo(false);
-          cashNo(true);
+          cards(_Value.clear);
+          cardsGeneric(_Value.no);
+          cash(_Value.yes);
         } else if (newValue == 'only') {
-          genericNo(true);
-          paymentYes(false);
-          cashNo(false);
+          cardsGeneric(_Value.clear);
+          cards(_Value.yes);
+          cash(_Value.no);
         } else {
           // null
           // Remove cards "yes" and generic "no"
-          genericNo(true);
-          paymentYes(true);
-          cashNo(true);
+          cardsGeneric(_Value.clear);
+          cards(_Value.clear);
+          cash(_Value.clear);
         }
       },
     );

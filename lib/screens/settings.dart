@@ -1,8 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/fields/combo.dart';
-import 'package:every_door/fields/helpers/combo_page.dart';
-import 'package:every_door/helpers/payment_tags.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';
 import 'package:every_door/providers/editor_settings.dart';
@@ -11,7 +8,6 @@ import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
-import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/settings/about.dart';
 import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
@@ -191,35 +187,6 @@ class SettingsPage extends ConsumerWidget {
                   },
                   initialValue: editorSettings.preferContact,
                 ),
-              SettingsTile(
-                title: Text(loc.settingsDefaultPayment),
-                value: Text(editorSettings.defaultPayment.join(', ')),
-                trailing: Icon(Icons.navigate_next),
-                onPressed: (context) async {
-                  final locale = Localizations.localeOf(context);
-                  final navigator = Navigator.of(context);
-                  final combo = await ref
-                      .read(presetProvider)
-                      .getField('payment_multi', locale);
-                  if (combo is ComboPresetField) {
-                    combo.options.removeWhere(
-                        (element) => kNotCards.contains(element.value));
-                  }
-                  final List<String>? newValues = await navigator.push(
-                    MaterialPageRoute(
-                      builder: (context) => ComboChooserPage(
-                        combo as ComboPresetField,
-                        editorSettings.defaultPayment,
-                      ),
-                    ),
-                  );
-                  if (newValues != null && newValues.isNotEmpty) {
-                    ref
-                        .read(editorSettingsProvider.notifier)
-                        .setDefaultPayment(newValues);
-                  }
-                },
-              ),
             ],
           ),
           if (defaultTargetPlatform == TargetPlatform.android)

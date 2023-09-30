@@ -3,7 +3,9 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/languages.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -29,17 +31,17 @@ class NamePresetField extends PresetField {
   buildWidget(OsmChange element) => NameInputField(this, element);
 }
 
-class NameInputField extends StatefulWidget {
+class NameInputField extends ConsumerStatefulWidget {
   final NamePresetField field;
   final OsmChange element;
 
   const NameInputField(this.field, this.element);
 
   @override
-  State<NameInputField> createState() => _NameInputFieldState();
+  ConsumerState<NameInputField> createState() => _NameInputFieldState();
 }
 
-class _NameInputFieldState extends State<NameInputField> {
+class _NameInputFieldState extends ConsumerState<NameInputField> {
   final _controllers = <String, TextEditingController>{};
   final _languages = <String>[];
   static final _langData = LanguageData();
@@ -154,6 +156,12 @@ class _NameInputFieldState extends State<NameInputField> {
         DateTime.now().difference(widget.element.updated) <
             Duration(seconds: 3);
 
+    final capitalization = !widget.field.capitalize
+        ? TextCapitalization.none
+        : ref.watch(osmDataProvider).capitalizeNames
+            ? TextCapitalization.words
+            : TextCapitalization.sentences;
+
     return Column(
       children: [
         // Main suffix-less field.
@@ -163,9 +171,7 @@ class _NameInputFieldState extends State<NameInputField> {
               child: TextField(
                 controller: _controllers[''],
                 autofocus: needFocus,
-                textCapitalization: widget.field.capitalize
-                    ? TextCapitalization.sentences
-                    : TextCapitalization.none,
+                textCapitalization: capitalization,
                 decoration: InputDecoration(
                   hintText: widget.field.placeholder,
                   labelText:
@@ -206,9 +212,7 @@ class _NameInputFieldState extends State<NameInputField> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: TextField(
                     controller: _controllers[key],
-                    textCapitalization: widget.field.capitalize
-                        ? TextCapitalization.sentences
-                        : TextCapitalization.none,
+                    textCapitalization: capitalization,
                     decoration: InputDecoration(
                       hintText: _langData.dataForKey(key)?.nameLoc ?? key,
                     ),

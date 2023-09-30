@@ -41,6 +41,8 @@ const kManualOption = '✍️'; // Emoji icon for entering values by hand
 const kMinElementsForWarning = 60000; // Alerting user when they have that many elements downloaded
 const kChangesetSplitGap = 0.02; // Decimal degrees, min distance between groups of changes
 const kMaxBulkDownloadZoom = 18; // Max zoom for bulk downloading tiles
+const kLocalPaymentRadius = 5; // How far local payment options reach, in kilometers
+const kCapitalizeNames = false; // By default, can be overridden by OSM data
 
 // Should be exactly 8 lines in both lists.
 const kDefaultPresets = [

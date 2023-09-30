@@ -3,6 +3,7 @@ import 'package:every_door/models/note.dart';
 import 'package:every_door/models/offset.dart';
 import 'package:every_door/models/osm_area.dart';
 import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/models/payment_local.dart';
 import 'package:every_door/models/road_name.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:flutter/foundation.dart';
@@ -45,7 +46,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       kDatabaseName,
-      version: 5,
+      version: 6,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,
     );
@@ -68,6 +69,7 @@ class DatabaseHelper {
 
     if (version >= 4) await createTablesV4(database);
     if (version >= 5) await createTablesV5(database);
+    if (version >= 6) await createTablesV6(database);
   }
 
   void upgradeDatabase(
@@ -89,6 +91,9 @@ class DatabaseHelper {
     }
     if (newVersion >= 5 && oldVersion < 5) {
       await createTablesV5(database);
+    }
+    if (newVersion >= 6 && oldVersion < 6) {
+      await createTablesV6(database);
     }
   }
 
@@ -118,5 +123,13 @@ class DatabaseHelper {
         "create table ${PresetProvider.kCachedCombosTableName} (key text, options text)");
     await database.execute(
         "create index ${PresetProvider.kCachedCombosTableName}_idx on ${PresetProvider.kCachedCombosTableName} (key)");
+  }
+
+  createTablesV6(Database database) async {
+    // Local payment options
+    await database.execute(
+        "create table ${LocalPayment.kTableName} (${LocalPayment.kTableFields.join(', ')})");
+    await database.execute(
+        "create index ${LocalPayment.kTableName}_geohash on ${LocalPayment.kTableName} (geohash)");
   }
 }

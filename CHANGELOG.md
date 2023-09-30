@@ -11,6 +11,7 @@ _Unreleased_
 * Switched the default imagery to Mapbox and disabled Maxar (which has forsaken us).
 * Updated the Bing imagery key.
 * Increased minimum Android version to 4.4.
+* Card payment settings were moved to the editor pane; introducing local card payment defaults.
 
 ### Editor
 
@@ -19,6 +20,7 @@ _Unreleased_
 * Removed the `check_date` field from the editor.
 * Allowing adding breaks to opening hours intervals spanning midnight.
 * Support for `traffic_calming=table` checkbox.
+* Name capitalization (words vs sentences) is now detected from the map.
 
 ### Other
 

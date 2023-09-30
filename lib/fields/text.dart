@@ -2,6 +2,7 @@ import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -76,14 +77,18 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
       keyboardType = editorSettings.keyboardType;
     }
 
+    final capitalization = !widget.field.capitalize
+        ? TextCapitalization.none
+        : ref.watch(osmDataProvider).capitalizeNames
+            ? TextCapitalization.words
+            : TextCapitalization.sentences;
+
     return Padding(
       padding: EdgeInsets.only(right: 10.0),
       child: TextField(
         controller: _controller,
         keyboardType: keyboardType,
-        textCapitalization: widget.field.capitalize
-            ? TextCapitalization.sentences
-            : TextCapitalization.none,
+        textCapitalization: capitalization,
         decoration: InputDecoration(
           hintText: widget.field.placeholder,
           labelText: widget.field.icon != null ? widget.field.label : null,

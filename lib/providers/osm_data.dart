@@ -21,6 +21,7 @@ import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
+import 'package:logging/logging.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proximity_hash/proximity_hash.dart';
@@ -29,13 +30,16 @@ import 'package:sqflite/utils/utils.dart';
 final osmDataProvider = ChangeNotifierProvider((ref) => OsmDataHelper(ref));
 
 class OsmDataHelper extends ChangeNotifier {
+  static final _logger = Logger('OsmDataHelper');
   final Ref _ref;
   int _length = 0;
   int _obsoleteLength = 0;
   Set<StreetAddress> _addressesWithFloors = {};
+  bool capitalizeNames = kCapitalizeNames;
 
   OsmDataHelper(this._ref) {
     _updateLength();
+    _updateCapitalizeNames();
   }
 
   /// Number of OSM elements in the database.
@@ -53,6 +57,7 @@ class OsmDataHelper extends ChangeNotifier {
       whereArgs: [before.millisecondsSinceEpoch],
     );
     await _updateLength();
+    _updateCapitalizeNames();
     return count;
   }
 
@@ -120,6 +125,7 @@ class OsmDataHelper extends ChangeNotifier {
     });
     if (bounds != null) await _ref.read(downloadedAreaProvider).addArea(bounds);
     await _updateLength();
+    _updateCapitalizeNames();
   }
 
   List<OsmChange> _wrapInChange(Iterable<OsmElement> elements,
@@ -371,18 +377,48 @@ class OsmDataHelper extends ChangeNotifier {
         .mostOccurentItems(cutoff: count < 6 ? 2 : (count / 3).ceil())
         .toSet();
 
-    // If no results, use the default.
-    if (result.isEmpty) {
-      result.addAll(_ref
-          .read(editorSettingsProvider)
-          .defaultPayment
-          .map((e) => 'payment:$e'));
-    }
-
-    // Ensure visa is listed alongside mastercard.
-    if (result.contains('payment:visa')) result.add('payment:mastercard');
-    if (result.contains('payment:mastercard')) result.add('payment:visa');
     return result;
+  }
+
+  Future<bool> _updateCapitalizeNames([LatLng? location]) async {
+    final database = await _ref.read(databaseProvider).database;
+    final List<String> hashes = location == null
+        ? const []
+        : createGeohashes(location.latitude, location.longitude,
+            kBigRadius.toDouble(), kGeohashPrecision);
+    final placeholders = List.generate(hashes.length, (index) => "?").join(",");
+    final rows = await database.query(
+      OsmElement.kTableName,
+      where: placeholders.isEmpty
+          ? "tags like '%\"name\"%'"
+          : "geohash in ($placeholders) and tags like '%\"name\"%'",
+      whereArgs: hashes,
+    );
+    // Get names from the found elements.
+    final elements = rows.map((row) => OsmElement.fromJson(row));
+    final names = elements.map((el) => OsmChange(el).name).whereType<String>();
+    // Split in words and keep those that have at least two.
+    final kNotWord = RegExp(r'\P{Letter}+', unicode: true);
+    final split = names
+        .map((n) => n.split(kNotWord).where((s) => s.isNotEmpty))
+        .where((el) => el.length >= 2)
+        .map((el) => el.skip(1));
+
+    // Count number of capitalized words.
+    final words = split.expand((w) => w).toList(); // do the processing
+    final kCapitalized = RegExp(r'^\p{Lu}(?:$|\p{Ll})', unicode: true);
+    final kNotCapitalized = RegExp(r'^\p{Ll}', unicode: true);
+    final cap =
+        words.where((w) => kCapitalized.matchAsPrefix(w) != null).length;
+    final noncap =
+        words.where((w) => kNotCapitalized.matchAsPrefix(w) != null).length;
+
+    // We need at least 3 named amenities to decide.
+    _logger.fine(
+        'Found $cap capitalized and $noncap non-capitalized names in ${words.length} words.');
+    if (cap + noncap < 3) return kCapitalizeNames;
+    capitalizeNames = cap > noncap;
+    return capitalizeNames;
   }
 
   Future<OsmChange?> findPossibleDuplicate(OsmChange amenity) async {

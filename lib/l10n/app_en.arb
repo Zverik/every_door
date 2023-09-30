@@ -831,6 +831,34 @@
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
+  "fieldPaymentTitle": "Card Payment",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldPaymentAround": "Common Options Around",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "fieldPaymentUseSame": "Use the same tags for mapping",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentUseGlobal": "My defaults are better",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentLocal": "Local Options",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentGlobal": "Global Defaults",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "fieldPaymentChoose": "Choose different local tags...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
   "fieldCheckboxYes": "yes",
   "@fieldCheckboxYes": {
     "description": "Checkbox name for yes."

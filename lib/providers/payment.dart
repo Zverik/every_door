@@ -1,0 +1,109 @@
+import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/models/payment_local.dart';
+import 'package:every_door/providers/database.dart';
+import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/providers/osm_data.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:proximity_hash/proximity_hash.dart';
+import 'package:sqflite/utils/utils.dart';
+
+final paymentProvider = Provider((ref) => PaymentProvider(ref));
+
+class PaymentOptions {
+  final LocalPayment? local;
+  final Set<String> global;
+  final Set<String> around;
+
+  static const initial =
+      PaymentOptions(global: {'payment:visa', 'payment:mastercard'});
+
+  const PaymentOptions(
+      {this.local, required this.global, this.around = const {}});
+
+  Set<String> get merged => local?.options ?? global;
+  bool get aroundDiffers => around.isNotEmpty && !setEquals(around, merged);
+
+  // Do we need these mandatory things?
+  // if (result.contains('payment:visa')) result.add('payment:mastercard');
+  // if (result.contains('payment:mastercard')) result.add('payment:visa');
+}
+
+class PaymentProvider {
+  final Ref _ref;
+
+  PaymentProvider(this._ref);
+
+  Future<LocalPayment?> getPaymentForLocation(LatLng location) async {
+    // Read the closest payment options from the database and sort by distance.
+    final database = await _ref.read(databaseProvider).database;
+    final hashes = createGeohashes(location.latitude, location.longitude,
+        kLocalPaymentRadius.toDouble() * 1000, LocalPayment.kGeohashPrecision);
+    final placeholders = List.generate(hashes.length, (index) => "?").join(",");
+    final rows = await database.query(
+      LocalPayment.kTableName,
+      where: "geohash in ($placeholders)",
+      whereArgs: hashes,
+    );
+    final localOptions = rows.map((row) => LocalPayment.fromJson(row)).toList();
+    const distance = DistanceEquirectangular();
+    localOptions.sort((a, b) =>
+        distance(location, a.center).compareTo(distance(location, b.center)));
+
+    // If we got the local option, return it.
+    if (localOptions.isEmpty ||
+        distance(location, localOptions.first.center) >
+            kLocalPaymentRadius * 1000) {
+      return null;
+    }
+    return localOptions.first;
+  }
+
+  /// Convenience method to query all three data sources.
+  Future<PaymentOptions> getAllPaymentOptions(LatLng location) async {
+    final defaultPayment = _ref.read(editorSettingsProvider).defaultPayment;
+    final localPayment = await getPaymentForLocation(location);
+    // Note that it returns the default payment in case we haven't found any.
+    final paymentAround =
+        await _ref.read(osmDataProvider).getCardPaymentOptions(location);
+    return PaymentOptions(
+      global: defaultPayment.map((k) => 'payment:$k').toSet(),
+      local: localPayment,
+      around: paymentAround,
+    );
+  }
+
+  Future saveLocalPayment(Iterable<String> options, LatLng location) async {
+    final database = await _ref.read(databaseProvider).database;
+    final maxId = firstIntValue(await database.query(
+      LocalPayment.kTableName,
+      columns: ['max(id)'],
+    ));
+    final id = maxId == null ? 1 : maxId + 1;
+    await database.insert(
+      LocalPayment.kTableName,
+      LocalPayment(id: id, center: location, options: options.toSet()).toJson(),
+    );
+  }
+
+  Future deleteLocalPayment(LocalPayment payment) async {
+    final database = await _ref.read(databaseProvider).database;
+    await database.delete(
+      LocalPayment.kTableName,
+      where: 'id = ?',
+      whereArgs: [payment.id],
+    );
+  }
+
+  Future updateLocalPayment(LocalPayment payment) async {
+    final database = await _ref.read(databaseProvider).database;
+    await database.update(
+      LocalPayment.kTableName,
+      payment.toJson(),
+      where: 'id = ?',
+      whereArgs: [payment.id],
+    );
+  }
+}
