@@ -13,7 +13,6 @@ import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/database.dart';
-import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/osm_api.dart';
 import 'package:every_door/providers/road_names.dart';
 import 'package:flutter/material.dart';
@@ -196,7 +195,7 @@ class OsmDataHelper extends ChangeNotifier {
     // Hash addresses by distance.
     final Map<StreetAddress, double> addresses = {};
     for (final e in elements) {
-      final hash = StreetAddress.fromTags(e.tags, e.center);
+      final hash = StreetAddress.fromTags(e.tags, location: e.center);
       if (hash.isNotEmpty) {
         double dist = distance(location, e.center!);
         double? oldDist = addresses[hash];

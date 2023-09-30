@@ -21,6 +21,8 @@ _Unreleased_
 * Allowing adding breaks to opening hours intervals spanning midnight.
 * Support for `traffic_calming=table` checkbox.
 * Name capitalization (words vs sentences) is now detected from the map.
+* Editable addresses in forms for buildings.
+* Forbade changing buildings and entrances types (to amenities).
 
 ### Other
 
@@ -31,6 +33,7 @@ _Unreleased_
 * Fixed error 414 when uploading 700+ changed nodes at once.
 * Prefix could override an existing main tag (e.g. `was:amenity` vs `shop`).
 * New notes are marked with the `#EveryDoor` hashtag (thanks @deevroman).
+* For letter boxes, `post:*` address fields are now editable.
 
 ## 3.1
 

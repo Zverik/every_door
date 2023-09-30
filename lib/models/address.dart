@@ -12,31 +12,48 @@ class StreetAddress {
   final String? blockNumber;
   final String? place;
   final String? city;
+  final String base;
 
-  const StreetAddress(
-      {this.housenumber,
-      this.housename,
-      this.unit,
-      this.street,
-      this.block,
-      this.blockNumber,
-      this.place,
-      this.city,
-      this.location});
+  const StreetAddress({
+    this.housenumber,
+    this.housename,
+    this.unit,
+    this.street,
+    this.block,
+    this.blockNumber,
+    this.place,
+    this.city,
+    this.location,
+    this.base = "addr",
+  });
 
   static const empty = StreetAddress();
 
-  factory StreetAddress.fromTags(Map<String, String> tags, [LatLng? location]) {
+  StreetAddress withBase(String base) => StreetAddress(
+        housenumber: housenumber,
+        housename: housename,
+        unit: unit,
+        street: street,
+        block: block,
+        blockNumber: blockNumber,
+        place: place,
+        city: city,
+        location: location,
+        base: base,
+      );
+
+  factory StreetAddress.fromTags(Map<String, String> tags,
+      {LatLng? location, String base = "addr"}) {
     return StreetAddress(
-      housenumber: tags['addr:housenumber'],
-      housename: tags['addr:housename'],
-      unit: tags['addr:unit'],
-      street: tags['addr:street'],
-      block: tags['addr:block'],
-      blockNumber: tags['addr:block_number'],
-      place: tags['addr:place'],
-      city: (tags['addr:street'] == null && tags['addr:place'] == null)
-          ? tags['addr:city']
+      housenumber: tags['$base:housenumber'],
+      housename: tags['$base:housename'],
+      unit: tags['$base:unit'],
+      street: tags['$base:street'],
+      block: tags['$base:block'],
+      blockNumber: tags['$base:block_number'],
+      place: tags['$base:place'],
+      city: (tags['$base:street'] == null && tags['$base:place'] == null)
+          ? tags['$base:city']
           : null,
       location: location,
     );
@@ -54,33 +71,33 @@ class StreetAddress {
   setTags(OsmChange element) {
     if (isEmpty) return;
     if (housenumber != null)
-      element['addr:housenumber'] = housenumber;
+      element['$base:housenumber'] = housenumber;
     else
-      element['addr:housename'] = housename;
-    if (unit != null) element['addr:unit'] = unit;
-    if (block != null) element['addr:block'] = block;
-    if (blockNumber != null) element['addr:block_number'] = blockNumber;
+      element['$base:housename'] = housename;
+    if (unit != null) element['$base:unit'] = unit;
+    if (block != null) element['$base:block'] = block;
+    if (blockNumber != null) element['$base:block_number'] = blockNumber;
     if (street != null)
-      element['addr:street'] = street;
+      element['$base:street'] = street;
     else if (place != null)
-      element['addr:place'] = place;
+      element['$base:place'] = place;
     else
-      element['addr:city'] = city;
+      element['$base:city'] = city;
   }
 
   forceTags(OsmChange element) {
-    element['addr:housenumber'] = housenumber;
-    element['addr:housename'] = housename;
-    element['addr:unit'] = unit;
-    element['addr:block'] = block;
-    element['addr:block_number'] = blockNumber;
-    element['addr:street'] = street;
-    element['addr:place'] = place;
+    element['$base:housenumber'] = housenumber;
+    element['$base:housename'] = housename;
+    element['$base:unit'] = unit;
+    element['$base:block'] = block;
+    element['$base:block_number'] = blockNumber;
+    element['$base:street'] = street;
+    element['$base:place'] = place;
     // TODO: decide something about the city
-    if (city != null) element['addr:city'] = city;
+    if (city != null) element['$base:city'] = city;
   }
 
-  static clearTags(OsmChange element) {
+  static clearTags(OsmChange element, {String base = "addr"}) {
     for (final key in [
       'housenumber',
       'housename',
@@ -90,7 +107,7 @@ class StreetAddress {
       'street',
       'place',
       'city'
-    ]) element.removeTag('addr:$key');
+    ]) element.removeTag('$base:$key');
   }
 
   @override

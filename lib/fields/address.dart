@@ -10,11 +10,11 @@ import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddressField extends PresetField {
-  AddressField({required String label})
+  AddressField({required String label, String key = "addr"})
       : super(
-          key: "addr",
+          key: key,
           label: label,
-          icon: Icons.home_outlined,
+          icon: key == 'addr' ? Icons.home_outlined : null,
         );
 
   @override
@@ -22,7 +22,7 @@ class AddressField extends PresetField {
 
   @override
   bool hasRelevantKey(Map<String, String> tags) {
-    return StreetAddress.fromTags(tags).isNotEmpty;
+    return StreetAddress.fromTags(tags, base: key).isNotEmpty;
   }
 }
 
@@ -76,7 +76,7 @@ class _AddressInputState extends ConsumerState<AddressInput> {
 
     if (addr == null) return;
     setState(() {
-      addr.forceTags(widget.element);
+      addr.withBase(widget.field.key).forceTags(widget.element);
     });
   }
 
@@ -90,14 +90,15 @@ class _AddressInputState extends ConsumerState<AddressInput> {
     );
     if (addr != null && addr.isNotEmpty) {
       setState(() {
-        addr.forceTags(widget.element);
+        addr.withBase(widget.field.key).forceTags(widget.element);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final current = StreetAddress.fromTags(widget.element.getFullTags());
+    final current = StreetAddress.fromTags(widget.element.getFullTags(),
+        base: widget.field.key);
     final options = nearestAddresses.map((e) => e.toString()).toList();
     if (current.isEmpty) {
       options.insert(0, kChooseOnMap);
@@ -109,7 +110,7 @@ class _AddressInputState extends ConsumerState<AddressInput> {
       onChange: (value) {
         if (value == null) {
           setState(() {
-            StreetAddress.clearTags(widget.element);
+            StreetAddress.clearTags(widget.element, base: widget.field.key);
           });
         } else if (value == kManualOption) {
           addAddress(context);
@@ -119,7 +120,7 @@ class _AddressInputState extends ConsumerState<AddressInput> {
           final addr = nearestAddresses
               .firstWhere((element) => element.toString() == value);
           setState(() {
-            addr.setTags(widget.element);
+            addr.withBase(widget.field.key).setTags(widget.element);
           });
         }
       },

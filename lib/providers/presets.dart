@@ -1,6 +1,5 @@
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/fields/address.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/room.dart';
@@ -576,8 +575,6 @@ class PresetProvider {
     final List<String> stdFields =
         isPOI ? kStandardPoiFields : ['address', 'level'];
     final fields = await _getFields(stdFields, locale);
-    fields['address'] = AddressField(
-        label: await _getFieldLabel('address', locale) ?? 'Address');
     fields['wifi'] = WifiPresetField(
         label: await _getFieldLabel('internet_access', locale) ?? 'Wifi');
     fields['payment'] = PaymentPresetField(

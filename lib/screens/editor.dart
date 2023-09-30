@@ -168,6 +168,11 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   changeType() async {
+    final kind = amenity.kind;
+    if (kind == ElementKind.building || kind == ElementKind.address) {
+      return;
+    }
+
     final locale = Localizations.localeOf(context);
     final newPreset = await Navigator.push(
       context,

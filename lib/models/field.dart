@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:country_coder/country_coder.dart';
+import 'package:every_door/fields/address.dart';
 import 'package:every_door/fields/checkbox.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/direction.dart';
@@ -231,6 +232,11 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         prerequisite: prerequisite,
         locationSet: locationSet,
         keyboardType: TextInputType.url,
+      );
+    case 'address':
+      return AddressField(
+        key: key,
+        label: label,
       );
     case 'combo':
     case 'typeCombo':
