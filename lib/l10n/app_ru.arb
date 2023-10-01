@@ -834,5 +834,9 @@
   "fieldPaymentGlobal": "Теги по умолчанию",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
+  },
+  "fieldNameLangSearch": "Найти язык",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
   }
 }
