@@ -1151,5 +1151,13 @@
   "fieldHeightAny": "Expecting length, e.g. 5.4 or 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "warningWrongMode": "Wrong mode, check for duplicates",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "warningUnsupported": "This object type is not supported",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   }
 }
