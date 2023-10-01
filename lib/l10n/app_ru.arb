@@ -778,5 +778,25 @@
   "fieldDirectionSet": "Выбрать",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "addressBlock": "Блок",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "fieldHeightMeters": "Длина в метрах, например 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Длина в футах, например 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "notesComment": "Ваш комментарий",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "fieldHeightAny": "Это длина: например, 5.4 или 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
