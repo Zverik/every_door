@@ -27,6 +27,7 @@ _Unreleased_
 * Editable addresses in forms for buildings.
 * Forbade changing buildings and entrances types (to amenities).
 * Added `addr:postcode` field to all presets with addresses, including buildings.
+* Added searching to the language chooser.
 
 ### Other
 

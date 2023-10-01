@@ -791,6 +791,10 @@
   "@fieldNameLanguages": {
     "description": "Tooltip for a button to add a name in another language."
   },
+  "fieldNameLangSearch": "Find language",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
   "fieldNameCopy": "Copy value",
   "@fieldNameCopy": {
     "description": "Tooltip for a button to copy name value between languages."

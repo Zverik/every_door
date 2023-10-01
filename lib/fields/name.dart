@@ -105,27 +105,10 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
 
   openLanguageChooser() async {
     final String? result = await showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ResponsiveGridList(
-              minItemWidth: 130.0,
-              children: [
-                for (final lang in _langData.languages)
-                  ListTile(
-                    visualDensity: VisualDensity.compact,
-                    title: Text(lang.nameLoc, style: kFieldTextStyle),
-                    subtitle: Text(lang.nameEn),
-                    tileColor: kFieldColor.withOpacity(0.2),
-                    onTap: () {
-                      Navigator.pop(context, lang.key);
-                    },
-                  ),
-              ],
-            ),
-          );
-        });
+      context: context,
+      builder: (_) => NameLanguageChooser(langData: _langData),
+    );
+
     if (result != null) {
       setState(() {
         addLanguage(result);
@@ -243,6 +226,71 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
           ),
         SizedBox(height: 5.0),
       ],
+    );
+  }
+}
+
+class NameLanguageChooser extends StatefulWidget {
+  final LanguageData langData;
+
+  const NameLanguageChooser({super.key, required this.langData});
+
+  @override
+  State<NameLanguageChooser> createState() => _NameLanguageChooserState();
+}
+
+class _NameLanguageChooserState extends State<NameLanguageChooser> {
+  String filter = "";
+
+  @override
+  Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    final languages = widget.langData.languages.where((lang) =>
+        filter.isEmpty ||
+        lang.nameLoc.toLowerCase().contains(filter) ||
+        lang.nameEn.toLowerCase().contains(filter) ||
+        lang.isoCode.contains(filter));
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 8.0,
+        left: 8.0,
+        right: 8.0,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: ResponsiveGridList(
+              minItemWidth: 130.0,
+              children: [
+                for (final lang in languages)
+                  ListTile(
+                    visualDensity: VisualDensity.compact,
+                    title: Text(lang.nameLoc, style: kFieldTextStyle),
+                    subtitle: Text(lang.nameEn),
+                    tileColor: kFieldColor.withOpacity(0.2),
+                    onTap: () {
+                      Navigator.pop(context, lang.key);
+                    },
+                  ),
+              ],
+            ),
+          ),
+          SizedBox(height: 8.0),
+          TextField(
+            decoration: InputDecoration(
+              fillColor: Theme.of(context).canvasColor,
+              filled: true,
+              hintText: loc.fieldNameLangSearch,
+            ),
+            onChanged: (value) {
+              setState(() {
+                filter = value.trim().toLowerCase();
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }
