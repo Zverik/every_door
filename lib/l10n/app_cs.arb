@@ -1187,5 +1187,9 @@
   "fieldPaymentGlobal": "Globální výchozí",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
+  },
+  "fieldNameLangSearch": "Najít jazyk",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
   }
 }
