@@ -56,7 +56,7 @@ class SettingsPage extends ConsumerWidget {
             tiles: [
               SettingsTile(
                 title: Text(loc.settingsLoginDetails),
-                description: Text(login ?? ''),
+                description: login != null ? Text(login) : null,
                 trailing: Icon(Icons.navigate_next),
                 onPressed: (context) {
                   Navigator.push(
