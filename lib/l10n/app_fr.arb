@@ -1179,5 +1179,17 @@
   "fieldHeightAny": "Longueur attendue, ex : 5.4 ou 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "warningWrongMode": "Mauvais mode, vérifier les doublons",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldPaymentTitle": "Payements par carte",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "warningUnsupported": "Ce type d’objet n’est pas supporté",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   }
 }
