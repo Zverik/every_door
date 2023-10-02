@@ -1180,7 +1180,7 @@
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   },
-  "fieldPaymentChoose": "Elige las diferentes etiquetas locales...",
+  "fieldPaymentChoose": "Escoge otras etiquetas locales...",
   "@fieldPaymentChoose": {
     "description": "Button title for setting up different local payment options."
   },
