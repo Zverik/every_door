@@ -157,7 +157,7 @@
   "@tagsValueLong": {
     "description": "Validation error for when the value length exceeds 255 characters."
   },
-  "settingsTitle": "Inställningar",
+  "settingsTitle": "Konfiguration",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
@@ -1139,5 +1139,57 @@
   "addressBlock": "Kvarter",
   "@addressBlock": {
     "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "fieldPaymentAround": "Vanliga alternativ i närheten",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "warningWrongMode": "Fel läge, undersök om det finns dubletter",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldHeightMeters": "Längd i meter förväntas, t.ex. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldPaymentLocal": "Lokala alternativ",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentUseGlobal": "Mina inställningar är bättre",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentUseSame": "Använd samma taggar för kartering",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentTitle": "Kortbetalning",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "warningUnsupported": "Denna objekttyp stöds inte",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "fieldHeightFeet": "Längd i fot förväntas, t.ex. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldPaymentChoose": "Välj andra lokala taggar…",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldNameLangSearch": "Hitta språk",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldPaymentGlobal": "Globala standardinställningar",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "fieldHeightAny": "Längd förväntas, t.ex. 5.4 eller 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
