@@ -265,7 +265,7 @@
   "@buildingTypeShed": {},
   "buildingTypeIndustrial": "industriale",
   "@buildingTypeIndustrial": {},
-  "buildingTypeGarage": "garage",
+  "buildingTypeGarage": "autorimessa",
   "@buildingTypeGarage": {},
   "buildingTypeConstruction": "in costruzione",
   "@buildingTypeConstruction": {},
@@ -819,5 +819,41 @@
   "fieldHeightAny": "Attesa lunghezza, es. 5.4 o 7'.4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "warningWrongMode": "Modalità errata, controlla i duplicati",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldPaymentLocal": "Opzioni locali",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentUseGlobal": "I miei valori predefiniti sono migliori",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentUseSame": "Usa le stesse etichette per mappare",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentTitle": "Pagamento con carta",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "warningUnsupported": "Questo tipo di oggetto non è supportato",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "fieldPaymentChoose": "Scegli etichette locali differenti...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldNameLangSearch": "Cerca lingua",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldPaymentGlobal": "Parametri predefiniti globali",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
   }
 }
