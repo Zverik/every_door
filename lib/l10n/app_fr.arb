@@ -1132,7 +1132,7 @@
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
   },
-  "fieldPaymentAround": "Options courantes autour",
+  "fieldPaymentAround": "Options courantes à proximité",
   "@fieldPaymentAround": {
     "description": "Tile name for payment options found on the map."
   },
