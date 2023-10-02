@@ -1129,5 +1129,65 @@
   "fieldDirectionSet": "Ezarri",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldPaymentAround": "Inguruan dauden aukera arruntak",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "addressBlock": "Blokea",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "warningWrongMode": "Modu okerra, begiratu ea bikoiztutakorik dagoen",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldHeightMeters": "Luzera metrotan espero da hemen, adib. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldPaymentLocal": "Aukera lokalak",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentUseGlobal": "Nire lehenespenak hobeak dira",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentUseSame": "Etiketatze berdina erabili mapak egiteko",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentTitle": "Txartel bidezko ordainketa",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "warningUnsupported": "Objektu mota honek ez du sostengurik",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "fieldHeightFeet": "Luzera oinetan espero da hemen, adib. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldPaymentChoose": "Aukeratu inguruko etiketa desberdinak...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldNameLangSearch": "Bilatu hizkuntza",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldPaymentGlobal": "Lehenespen globalak",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "notesComment": "Zure iruzkina",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "fieldHeightAny": "Luzera espero da hemen, adib. 5.4 edo 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
