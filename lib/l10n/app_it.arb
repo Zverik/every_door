@@ -855,5 +855,9 @@
   "fieldPaymentGlobal": "Parametri predefiniti globali",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
+  },
+  "fieldPaymentAround": "Opzioni comuni nei dintorni",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
   }
 }
