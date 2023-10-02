@@ -313,7 +313,7 @@
   "@filterByFloor": {
     "description": "Filter pane, label for choosing a floor to filter by."
   },
-  "editorCloseMessage": "Uw niet-opgeslagen wijzingen zullen verloren gaan. Wil u toch sluiten?",
+  "editorCloseMessage": "Wijzigingen verwerpen zonder op te slaan?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -1129,5 +1129,69 @@
   "fieldCardsOnly": "alleen kaarten",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
+  },
+  "fieldDirectionSet": "Stel in",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldPaymentAround": "Veelvoorkomende opties in de buurt",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "addressBlock": "Blok",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "warningWrongMode": "Verkeerde modus, controleer op duplicaten",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldHeightMeters": "Lengte wordt in meters verwacht, bijv. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldPaymentLocal": "Lokale opties",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentUseGlobal": "Mijn standaardwaarden zijn beter",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentUseSame": "Gebruik dezelfde tags voor mapping",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentTitle": "Betalen met pas",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "warningUnsupported": "Dit objecttype wordt niet ondersteund",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "fieldHeightFeet": "Lengte wordt in voet verwacht, bijv. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldPaymentChoose": "Kies andere lokale tags...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldNameLangSearch": "Zoek taal",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldPaymentGlobal": "Globale standaardwaarden",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "notesComment": "Jouw opmerking",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "fieldHeightAny": "Lengte wordt verwacht, bijv. 5.4 of 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
