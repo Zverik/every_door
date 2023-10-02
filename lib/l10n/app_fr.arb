@@ -23,7 +23,7 @@
   "@tileNo": {
     "description": "Préfixe pour une liste d'icônes pour les attributs manquants dans une boutique."
   },
-  "tileNothingAround": "Pas de boutique trouvée autour de vous dans un rayon de {distance} mètres.",
+  "tileNothingAround": "Aucun élément autour de vous dans un rayon de {distance} mètres.",
   "@tileNothingAround": {
     "description": "Première partie du message montré quand rien n'est trouvé autour.",
     "placeholders": {
@@ -35,11 +35,11 @@
       }
     }
   },
-  "tileDragTheMap": "Rapprochez-vous de quoi que ce soit, faites glisser la carte ou ajoutez une boutique manquante.",
+  "tileDragTheMap": "Rapprochez-vous de quoi que ce soit, faites glisser la carte ou ajoutez un élément manquant.",
   "@tileDragTheMap": {
     "description": "Message affiché quand rien n'est trouvé autour de la position."
   },
-  "tileDragOrUnfilter": "Rapprochez-vous de quoi que ce soit, ajoutez une boutique manquante ou désactivez les filtres.",
+  "tileDragOrUnfilter": "Déplacez-vous, ajoutez un élément cartographique ou désactivez les filtres.",
   "@tileDragOrUnfilter": {
     "description": "Message affiché quand rien n'est trouvé autour de la position et qu'un filtre est activé."
   },
@@ -149,7 +149,7 @@
   "@tagsUrlCopied": {
     "description": "Message popup lorsque le lien vers l'objet a été copié dans le presse-papiers."
   },
-  "tagsNewPoint": "Nouvelle boutique",
+  "tagsNewPoint": "Nouvel élément",
   "@tagsNewPoint": {
     "description": "Titre du panneau de l'éditeur de balises pour une nouvelle boutique."
   },
@@ -1086,7 +1086,7 @@
       }
     }
   },
-  "warningTooOld": "La boutique est présente depuis {years}",
+  "warningTooOld": "Cet élément a {years}",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -1131,5 +1131,53 @@
   "fieldDirectionSet": "Choisir",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldPaymentAround": "Options courantes autour",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "addressBlock": "Bloc",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "fieldHeightMeters": "Longueur attendue en mètres, ex : 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldPaymentLocal": "Options locales",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentUseGlobal": "Mes valeurs par défaut sont meilleures",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentUseSame": "Utiliser les mêmes balises pour cartographier",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldHeightFeet": "Longueur attendue en pieds, ex : 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldPaymentChoose": "Choisissez des balises locales différentes…",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldNameLangSearch": "Chercher langue",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldPaymentGlobal": "Valeurs par défaut globales",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "notesComment": "Votre commentaire",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "fieldHeightAny": "Longueur attendue, ex : 5.4 ou 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
