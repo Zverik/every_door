@@ -1170,7 +1170,7 @@
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   },
-  "fieldHeightFeet": "A hosszúsagot lábban kell megadni, pl. 7'4\"",
+  "fieldHeightFeet": "A hosszúságot lábban kell megadni, például 7'4\"",
   "@fieldHeightFeet": {
     "description": "Validation message for when feet are expected."
   },
