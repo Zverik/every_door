@@ -1178,7 +1178,7 @@
   "@fieldPaymentTitle": {
     "description": "Pane title for card payment options."
   },
-  "warningUnsupported": "Ovaj tip objekta nije podržan",
+  "warningUnsupported": "Ova vrsta objekta nije podržana",
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   },
