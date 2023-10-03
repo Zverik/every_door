@@ -1146,7 +1146,7 @@
   "@addressBlock": {
     "description": "Label for addr:block_number or addr_block. Keep it short."
   },
-  "fieldHeightMeters": "A hosszúságot méterben és tizedesponttal kell megadni, pl. 5.4",
+  "fieldHeightMeters": "A hosszúságot méterben és tizedesponttal kell megadni, például 5.4",
   "@fieldHeightMeters": {
     "description": "Validation message for when meters are expected."
   },
