@@ -1190,7 +1190,7 @@
   "@notesComment": {
     "description": "Label for the note comment field."
   },
-  "fieldHeightAny": "Hosszúság megadása lábban vagy p\nméterben, pl. 5.4 or 7'4\"",
+  "fieldHeightAny": "Hosszúságot kell megadni, például 5.4 vagy 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
   }
