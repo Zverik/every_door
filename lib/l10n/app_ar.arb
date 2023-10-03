@@ -83,7 +83,7 @@
   "@filterByFloor": {
     "description": "Filter pane, label for choosing a floor to filter by."
   },
-  "editorCloseMessage": "ستفقد تغييراتك الغير محفوظة، هل تريد المتابعة؟",
+  "editorCloseMessage": "هل تريد تجاهل التغييرات بدون حفظها؟",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -1124,8 +1124,72 @@
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
-  "fieldCardsOnly": "البطاقات فقط",
+  "fieldCardsOnly": "بطاقات فقط",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
+  },
+  "fieldDirectionSet": "ضبط",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldPaymentAround": "طرق الدفع الشائعة في المنطقة",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "addressBlock": "المربع السكني",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "warningWrongMode": "الوضع خاطئ، تحقق من التكرارات",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldHeightMeters": "توقع الطول بالأمتار، على سبيل المثال 4.5",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldPaymentLocal": "الخيارات المحلية",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentUseGlobal": "البقاء على افتراضياتي وهي أفضل",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentUseSame": "استخدم نفس هذه الوسوم للرسم",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentTitle": "بطاقات الائتمان",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "warningUnsupported": "نوع الكائن هذا غير مدعوم",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "fieldHeightFeet": "توقع الطول بالقدم، على سبيل المثال. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldPaymentChoose": "اختر وسوم محلية مختلفة...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldNameLangSearch": "بحث عن اللغة",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldPaymentGlobal": "الافتراضيات العالمية",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "notesComment": "تعليقك",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "fieldHeightAny": "توقع الطول، على سبيل المثال. 5.4 أو 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
