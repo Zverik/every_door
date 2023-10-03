@@ -1186,7 +1186,7 @@
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
   },
-  "notesComment": "Hozzászólás",
+  "notesComment": "Megjegyzés",
   "@notesComment": {
     "description": "Label for the note comment field."
   },
