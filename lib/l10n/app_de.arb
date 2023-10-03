@@ -610,7 +610,7 @@
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
-  "notesClose": "Kartenhinweis lösen",
+  "notesClose": "Kartenhinweis schließen",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
@@ -832,15 +832,15 @@
   "@notesComment": {
     "description": "Label for the note comment field."
   },
-  "fieldPaymentAround": "Übliche Optionen",
+  "fieldPaymentAround": "Übliche Optionen in der Umgebung",
   "@fieldPaymentAround": {
     "description": "Tile name for payment options found on the map."
   },
-  "warningWrongMode": "Falscher Modus, auf Duplikate prüfen",
+  "warningWrongMode": "Falscher Modus, prüfe auf Duplikate",
   "@warningWrongMode": {
     "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
   },
-  "fieldHeightMeters": "Erwartete Länge in Metern, z. B. 5.4",
+  "fieldHeightMeters": "Länge in Metern erwartet, z. B. 5.4",
   "@fieldHeightMeters": {
     "description": "Validation message for when meters are expected."
   },
@@ -864,11 +864,11 @@
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   },
-  "fieldHeightFeet": "Erwartete Länge in Fuß, z. B. 7'4\"",
+  "fieldHeightFeet": "Länge in Fuß erwartet, z. B. 7'4\"",
   "@fieldHeightFeet": {
     "description": "Validation message for when feet are expected."
   },
-  "fieldPaymentChoose": "Andere lokale Tags wählen...",
+  "fieldPaymentChoose": "Andere lokale Tags wählen…",
   "@fieldPaymentChoose": {
     "description": "Button title for setting up different local payment options."
   },
@@ -880,7 +880,7 @@
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
   },
-  "fieldHeightAny": "Erwartete Länge, z. B. 5.4 oder 7'4\"",
+  "fieldHeightAny": "Länge erwartet, z. B. 5.4 oder 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
   }
