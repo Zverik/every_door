@@ -1182,7 +1182,7 @@
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   },
-  "fieldPaymentChoose": "Odaberite različite lokalne oznake...",
+  "fieldPaymentChoose": "Odaberite drugačije lokalne oznake...",
   "@fieldPaymentChoose": {
     "description": "Button title for setting up different local payment options."
   },
