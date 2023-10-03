@@ -52,50 +52,51 @@ class LanguagePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loc = AppLocalizations.of(context)!;
-    final locale = ref.watch(languageProvider);
-    final supported = List.of(AppLocalizations.supportedLocales
+    final localizations = AppLocalizations.of(context)!;
+    final appLocale =
+        ref.watch(languageProvider) ?? Localizations.localeOf(context);
+    var supportedLocales = _getSupportedLocales(appLocale);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(localizations.settingsLanguage)),
+      body: ListView.separated(
+        itemCount: supportedLocales.length,
+        itemBuilder: (context, index) => ListTile(
+          title: Text(kLanguageNames[supportedLocales[index]] ??
+              supportedLocales[index].toLanguageTag()),
+          trailing:
+              supportedLocales[index] == appLocale ? Icon(Icons.check) : null,
+          onTap: () {
+            ref.read(languageProvider.notifier).set(supportedLocales[index]);
+          },
+        ),
+        separatorBuilder: (context, index) => Divider(),
+      ),
+    );
+  }
+
+  List<Locale> _getSupportedLocales(Locale appLocale) {
+    final supportedLocales = List.of(AppLocalizations.supportedLocales
         .where((l) => !kSkipLocales.contains(l)));
-    supported.sort((a, b) => (a.languageCode == 'en' ? 0 : 1)
+
+    // Move EN locales on top of the list
+    supportedLocales.sort((a, b) => (a.languageCode == 'en' ? 0 : 1)
         .compareTo(b.languageCode == 'en' ? 0 : 1));
 
-    bool isLocaleSame(Locale deviceLocale, Locale appLocale) {
-      if (supported.contains(deviceLocale)) {
-        return deviceLocale == appLocale;
-      }
-
-      if (deviceLocale.languageCode != appLocale.languageCode) {
-        return false;
-      }
-
-      if (appLocale.countryCode != null && appLocale.scriptCode != null) {
-        // Current implementation relies on supported locales where are no
-        // situation like this
-        throw UnimplementedError();
-      } else if (appLocale.countryCode == null &&
-          appLocale.scriptCode == null) {
-        return true;
-      } else if (appLocale.countryCode != null) {
-        return deviceLocale.countryCode == appLocale.countryCode;
-      } else if (appLocale.scriptCode != null) {
-        return deviceLocale.scriptCode == appLocale.scriptCode;
-      }
-
-      return false;
-    }
-
-    final deviceLocaleParts = Platform.localeName.split('_');
+    final deviceLocaleParts = Platform.localeName.split('.')[0].split('_');
     var deviceLocales = <Locale>[];
     switch (deviceLocaleParts.length) {
       case 1:
         deviceLocales.add(Locale(deviceLocaleParts[0]));
         break;
       case 2:
-        // We can have for example en-GB and en
+        // We can have en_GB and en for example
         deviceLocales.add(Locale(deviceLocaleParts[0], deviceLocaleParts[1]));
         deviceLocales.add(Locale(deviceLocaleParts[0]));
         break;
       case 3:
+        // Locales with scriptCode has localeCode_scriptCode_countryCode
+        // structure. e.g. "zh_Hans_CN"
         var languageCode = deviceLocaleParts[0];
         var scriptCode = deviceLocaleParts[1];
         deviceLocales.add(Locale.fromSubtags(
@@ -105,32 +106,22 @@ class LanguagePage extends ConsumerWidget {
 
     Locale? hintedLocale;
     for (var deviceLocale in deviceLocales) {
-      if (supported.contains(deviceLocale)) {
-        if (!isLocaleSame(deviceLocale, locale!)) {
-          hintedLocale = deviceLocale;
-        }
-        break;
+      if (!supportedLocales.contains(deviceLocale)) {
+        continue;
       }
+
+      if (deviceLocale != appLocale) {
+        hintedLocale = deviceLocale;
+      }
+
+      // If device locale is supported but not the same as app locale we
+      // shouldn't check more general locale (only languageCode)
+      break;
     }
 
-    bool needLocaleHint = hintedLocale != null;
-    if (needLocaleHint && hintedLocale.languageCode != 'en')
-      supported.insert(0, hintedLocale);
+    if (hintedLocale != null && hintedLocale.languageCode != 'en')
+      supportedLocales.insert(0, hintedLocale);
 
-    return Scaffold(
-      appBar: AppBar(title: Text(loc.settingsLanguage)),
-      body: ListView.separated(
-        itemCount: supported.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(kLanguageNames[supported[index]] ??
-              supported[index].toLanguageTag()),
-          trailing: supported[index] == locale ? Icon(Icons.check) : null,
-          onTap: () {
-            ref.read(languageProvider.notifier).set(supported[index]);
-          },
-        ),
-        separatorBuilder: (context, index) => Divider(),
-      ),
-    );
+    return supportedLocales;
   }
 }
