@@ -300,7 +300,7 @@
       }
     }
   },
-  "years": "{count,plural, =1{{count} éves} few{{count} éves} other{{count} éves}}",
+  "years": "{count,plural, =1{{count} év} few{{count} év} other{{count} év}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -664,7 +664,7 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesCount": "{count,plural, =1{{count} módosítás} few{{count} módosítás} other{{count} módosítás}}",
+  "changesCount": "{count,plural, =1{{count} változtatás} few{{count} változtatás} other{{count} változtatás}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -1133,5 +1133,13 @@
   "faqTagging": "Az összes címkézési kérdés",
   "@faqTagging": {},
   "faqTaggingContent": "Miért hiányzik egy objektum a szerkesztőben? Mikor jelennek meg ezek a fehér pontok a mikrotérképezési módban? Hogyan vannak az objektumok rendezve?\n\nAz összes ilyen kérdésre választ kaphat a [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) fájlból. Itt van, hogy miket nézhet meg:\n\n* A fő címke kulcssorrendje — `kMainKeys` lista.\n* Mely objektumok vannak letöltve — `isGoodTags` függvény.\n* Mi számít szolgáltatásnak — `isAmenityTags` függvény.\n* Mely pontok vannak mely utakhoz illesztve — `detectSnap` függvény.\n* Mikor befejezetlen egy mikrotérképezési objektum — `needsMoreInfo` függvény.",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "fieldPaymentAround": "Szokásos lehetőségek a környéken",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "warningWrongMode": "Hibás mód, ellenőrizze a kettőzéseket",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  }
 }
