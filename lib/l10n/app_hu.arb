@@ -1174,7 +1174,7 @@
   "@fieldHeightFeet": {
     "description": "Validation message for when feet are expected."
   },
-  "fieldPaymentChoose": "Más helyi címkék kiválasztása...",
+  "fieldPaymentChoose": "Eltérő helyi címkék kiválasztása…",
   "@fieldPaymentChoose": {
     "description": "Button title for setting up different local payment options."
   },
