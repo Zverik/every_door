@@ -1,0 +1,3 @@
+* Előbeállítások és légi felvételek frissítve.
+* Javítva lettek az elveszett jegyzetekkel és a kettőzött szolgáltatásokkal kapcsolatos problémák.
+* Háztömbök számozása hozzáadva a japánoknak.
