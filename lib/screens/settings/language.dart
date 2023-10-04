@@ -50,31 +50,6 @@ class LanguagePage extends ConsumerWidget {
     Locale('zh'),
   ];
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final localizations = AppLocalizations.of(context)!;
-    final appLocale =
-        ref.watch(languageProvider) ?? Localizations.localeOf(context);
-    var supportedLocales = _getSupportedLocales(appLocale);
-
-    return Scaffold(
-      appBar: AppBar(title: Text(localizations.settingsLanguage)),
-      body: ListView.separated(
-        itemCount: supportedLocales.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(kLanguageNames[supportedLocales[index]] ??
-              supportedLocales[index].toLanguageTag()),
-          trailing:
-              supportedLocales[index] == appLocale ? Icon(Icons.check) : null,
-          onTap: () {
-            ref.read(languageProvider.notifier).set(supportedLocales[index]);
-          },
-        ),
-        separatorBuilder: (context, index) => Divider(),
-      ),
-    );
-  }
-
   List<Locale> _getSupportedLocales(Locale appLocale) {
     final supportedLocales = List.of(AppLocalizations.supportedLocales
         .where((l) => !kSkipLocales.contains(l)));
@@ -104,14 +79,13 @@ class LanguagePage extends ConsumerWidget {
         break;
     }
 
-    Locale? hintedLocale;
     for (var deviceLocale in deviceLocales) {
       if (!supportedLocales.contains(deviceLocale)) {
         continue;
       }
 
-      if (deviceLocale != appLocale) {
-        hintedLocale = deviceLocale;
+      if (deviceLocale != appLocale && deviceLocale.languageCode != 'en') {
+        supportedLocales.insert(0, deviceLocale);
       }
 
       // If device locale is supported but not the same as app locale we
@@ -119,9 +93,31 @@ class LanguagePage extends ConsumerWidget {
       break;
     }
 
-    if (hintedLocale != null && hintedLocale.languageCode != 'en')
-      supportedLocales.insert(0, hintedLocale);
-
     return supportedLocales;
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localizations = AppLocalizations.of(context)!;
+    final appLocale =
+        ref.watch(languageProvider) ?? Localizations.localeOf(context);
+    var supportedLocales = _getSupportedLocales(appLocale);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(localizations.settingsLanguage)),
+      body: ListView.separated(
+        itemCount: supportedLocales.length,
+        itemBuilder: (context, index) => ListTile(
+          title: Text(kLanguageNames[supportedLocales[index]] ??
+              supportedLocales[index].toLanguageTag()),
+          trailing:
+              supportedLocales[index] == appLocale ? Icon(Icons.check) : null,
+          onTap: () {
+            ref.read(languageProvider.notifier).set(supportedLocales[index]);
+          },
+        ),
+        separatorBuilder: (context, index) => Divider(),
+      ),
+    );
   }
 }
