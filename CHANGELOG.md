@@ -35,10 +35,12 @@ _Unreleased_
 * Mentioning addresses in changeset comments properly.
 * Log can be copied now (thanks @ann-who).
 * Increased max zoom when placing an object (thanks @ann-who).
+* In the language settings panel, the device language is placed first (thanks @ann-who).
 * Fixed error 414 when uploading 700+ changed nodes at once.
 * Prefix could override an existing main tag (e.g. `was:amenity` vs `shop`).
 * For letter boxes, `post:*` address fields are now editable.
 * OSM Note comment dates are now displayed.
+* Added option for `roof:levels=0`.
 
 ## 3.1
 

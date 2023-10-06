@@ -210,7 +210,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                                 style: kFieldTextStyle),
                           ),
                           RadioField(
-                              options: const ['1', '2', '3'],
+                              options: const ['0', '1', '2', '3'],
                               value: building['roof:levels'],
                               onChange: (value) {
                                 setState(() {
