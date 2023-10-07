@@ -2,7 +2,7 @@
 
 ## 4.0
 
-_Unreleased_
+_Released on 2023-10-07_
 
 ### Highlights
 

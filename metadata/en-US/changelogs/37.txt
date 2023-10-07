@@ -1,0 +1,4 @@
+* Hopefully fixed GPS issues.
+* Updated Bing imagery key and removed Maxar.
+* New card payment settings.
+* Smarter name capitalization.
