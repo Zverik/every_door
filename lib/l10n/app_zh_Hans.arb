@@ -1141,5 +1141,17 @@
   "notesComment": "你的评论",
   "@notesComment": {
     "description": "Label for the note comment field."
+  },
+  "warningWrongMode": "模式错误，请检查是否存在重复项",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "warningUnsupported": "不支持此对象类型",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "fieldNameLangSearch": "查找语言",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
   }
 }
