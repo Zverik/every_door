@@ -436,9 +436,11 @@ def import_translations(cur, path):
             for name in data:
                 name_src = references.get(references.presets_name, name, data, 'name')
                 terms_src = references.get(references.presets_name, name, data, 'terms')
+                aliases = data[name].get('aliases')
 
                 terms = [normalize(s) for s in re.split(r'\W+', terms_src or '') if s]
                 nameterms = [normalize(s) for s in re.split(r'\W+', name_src or '') if s]
+                aliasterms = [normalize(s) for s in re.split(r'\W+', aliases or '') if s]
 
                 # First words have higher priority
                 tfirst = None if not terms else terms[0]
@@ -446,13 +448,13 @@ def import_translations(cur, path):
 
                 # Convert to sets to deduplicate
                 nameterms = set(nameterms)
-                terms = set(terms) - nameterms
+                terms = (set(terms) | set(aliasterms)) - nameterms
                 for term in terms:
                     if term:
-                        yield lang, term, name, 1 if term == tfirst else 2
+                        yield lang, term, name, 2 if term == tfirst else 1
                 for term in nameterms:
                     if term:
-                        yield lang, term, name, 3 if term == ntfirst else 4
+                        yield lang, term, name, 4 if term == ntfirst else 3
 
         cur.executemany(
             "insert into preset_terms (lang, term, preset_name, score) values (?, ?, ?, ?)",

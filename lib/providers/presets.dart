@@ -397,12 +397,14 @@ class PresetProvider {
     }
 
     if (!presetOnly) {
-      // Get options from taginfo
+      // Get options from taginfo.
+      // Store them separately to prioritize preset options.
+      final tiOptions = <String>[];
       final results = await _db!
           .query('combos', where: 'key = ?', whereArgs: [field['key']]);
       if (results.isNotEmpty) {
         final existing = Set.of(options);
-        options.addAll((results.first['options'] as String)
+        tiOptions.addAll((results.first['options'] as String)
             .split('\\')
             .where((v) => !existing.contains(v)));
       }
@@ -413,7 +415,10 @@ class PresetProvider {
       if (counter.isNotEmpty) {
         mergeSort(options,
             compare: (a, b) => (counter[b] ?? 0).compareTo(counter[a] ?? 0));
+        mergeSort(tiOptions,
+            compare: (a, b) => (counter[b] ?? 0).compareTo(counter[a] ?? 0));
       }
+      options.addAll(tiOptions);
 
       // Store the result in the cache.
       _updateComboCache(field['key'], options);

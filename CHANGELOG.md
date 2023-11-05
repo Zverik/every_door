@@ -6,6 +6,10 @@ _Unreleased_
 
 * Changed default card payment options to `debit_cards` and `credit_cards`.
 * Fixed word capitalization for description and other similar fields.
+* You can find a preset by aliases now.
+* Fixed amenity warnings not being shown on editor open.
+* For combo boxes, options from a preset are prioritized over taginfo.
+* Marking a shop on a building closed does not remove it from the map.
 
 ## 4.0
 

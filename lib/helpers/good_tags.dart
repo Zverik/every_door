@@ -3,13 +3,18 @@
 /// List of keys to consider when looking for a single main tag, in order of preference.
 const kMainKeys = <String>[
   'amenity', 'shop', 'craft', 'tourism', 'historic', 'club',
-  'highway', 'railway',
-  'office', 'healthcare', 'leisure', 'natural',
-  'emergency', 'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
+  'office', 'healthcare', 'leisure', 'emergency', 'attraction',
+  // non-amenity keys:
+  'highway', 'railway', 'natural',
+  'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
   'marker', 'public_transport', 'traffic_sign', 'hazard', 'telecom',
   'landuse', 'military', 'barrier', 'building', 'entrance', 'boundary',
-  'advertising', 'playground', 'traffic_calming', 'attraction', 'cemetery',
+  'advertising', 'playground', 'traffic_calming', 'cemetery',
 ];
+const kAmenityMainKeys = <String>{
+  'amenity', 'shop', 'craft', 'tourism', 'historic', 'club',
+  'office', 'healthcare', 'leisure', 'emergency', 'attraction',
+};
 final kMainKeysSet = Set.of(kMainKeys);
 
 const kDisused = 'disused:';
@@ -50,7 +55,14 @@ String? getMainKey(Map<String, String> tags, [bool noPrefix = false]) {
   String? prefixed;
   for (final k in kMainKeys) {
     if (tags[k] == 'no') continue;
-    if (tags.containsKey(k)) return k;
+    if (tags.containsKey(k)) {
+      if (
+          !kAmenityMainKeys.contains(k) && prefixed != null &&
+          kAmenityMainKeys.contains(_clearPrefix(prefixed))
+      )
+        return prefixed;
+      return k;
+    }
     if (prefixed == null && tags.containsKey(kDisused + k))
       prefixed = noPrefix ? k : kDisused + k;
     if (prefixed == null && tags.containsKey(kDeleted + k))

@@ -74,8 +74,14 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
   onAmenityChange() {
     startDuplicateSearch();
     final loc = AppLocalizations.of(context)!;
-    warning = getWarningForAmenity(widget.amenity, loc);
-    if (warning == null && isWrongMode()) warning = loc.warningWrongMode;
+    String? newWarning = getWarningForAmenity(widget.amenity, loc);
+    if (newWarning == null && isWrongMode()) newWarning = loc.warningWrongMode;
+
+    if (mounted) {
+      setState(() {
+        warning = newWarning;
+      });
+    }
   }
 
   @override
