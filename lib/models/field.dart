@@ -98,6 +98,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
       return TextPresetField(
         key: key,
         label: label,
+        capitalize: TextFieldCapitalize.asName,
         icon: Icons.work_outlined,
         placeholder: placeholder,
         prerequisite: prerequisite,
@@ -195,7 +196,9 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         prerequisite: prerequisite,
         locationSet: locationSet,
         maxLines: typ == 'textarea' ? 4 : null,
-        capitalize: !kTextLowercase.contains(key),
+        capitalize: kTextLowercase.contains(key)
+            ? TextFieldCapitalize.no
+            : TextFieldCapitalize.sentence,
       );
     case 'number':
       return TextPresetField(

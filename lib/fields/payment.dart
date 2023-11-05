@@ -100,7 +100,9 @@ class _PaymentCheckboxInputFieldState
     }
 
     String configIcon = options.aroundDiffers ? '⚠️' : '⚙️';
-    bool configFirst = options.around.isNotEmpty && options.local == null;
+    bool configFirst = options.aroundDiffers &&
+        options.around.isNotEmpty &&
+        options.local == null;
 
     return RadioField(
       options: [

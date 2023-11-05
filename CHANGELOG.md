@@ -1,5 +1,12 @@
 # Every Door App Change Log
 
+## 4.1
+
+_Unreleased_
+
+* Changed default card payment options to `debit_cards` and `credit_cards`.
+* Fixed word capitalization for description and other similar fields.
+
 ## 4.0
 
 _Released on 2023-10-07_

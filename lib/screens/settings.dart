@@ -39,12 +39,15 @@ class SettingsPage extends ConsumerWidget {
     final haveNotes = ref.watch(notesProvider).haveChanges;
 
     final purgeAll = osmData.obsoleteLength == 0;
-    final dataLength = NumberFormat.compact(
-            locale: Localizations.localeOf(context).toLanguageTag())
-        .format(osmData.length);
-    final obsoleteDataLength = NumberFormat.compact(
-            locale: Localizations.localeOf(context).toLanguageTag())
-        .format(osmData.obsoleteLength);
+    NumberFormat numFormat;
+    try {
+      numFormat = NumberFormat.compact(
+          locale: Localizations.localeOf(context).toLanguageTag());
+    } catch (e) {
+      numFormat = NumberFormat.compact(locale: 'en');
+    }
+    final dataLength = numFormat.format(osmData.length);
+    final obsoleteDataLength = numFormat.format(osmData.obsoleteLength);
 
     return Scaffold(
       appBar: AppBar(title: Text(loc.settingsTitle)),

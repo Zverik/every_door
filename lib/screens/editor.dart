@@ -130,7 +130,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           key: "addr:postcode",
           label: "Postcode",
           keyboardType: TextInputType.visiblePassword,
-          capitalize: true,
+          capitalize: TextFieldCapitalize.all,
         );
         final kind = amenity.kind;
         if (kind == ElementKind.building || kind == ElementKind.address)

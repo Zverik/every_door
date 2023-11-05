@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+enum TextFieldCapitalize { no, asName, sentence, all }
+
 class TextPresetField extends PresetField {
   final TextInputType keyboardType;
-  final bool capitalize;
+  final TextFieldCapitalize capitalize;
   final int? maxLines;
 
   const TextPresetField({
@@ -20,7 +22,7 @@ class TextPresetField extends PresetField {
     FieldPrerequisite? prerequisite,
     LocationSet? locationSet,
     this.keyboardType = TextInputType.text,
-    this.capitalize = true,
+    this.capitalize = TextFieldCapitalize.sentence,
     this.maxLines,
   }) : super(
           key: key,
@@ -77,11 +79,23 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
       keyboardType = editorSettings.keyboardType;
     }
 
-    final capitalization = !widget.field.capitalize
-        ? TextCapitalization.none
-        : ref.watch(osmDataProvider).capitalizeNames
+    TextCapitalization capitalization;
+    switch (widget.field.capitalize) {
+      case TextFieldCapitalize.no:
+        capitalization = TextCapitalization.none;
+        break;
+      case TextFieldCapitalize.sentence:
+        capitalization = TextCapitalization.sentences;
+        break;
+      case TextFieldCapitalize.all:
+        capitalization = TextCapitalization.characters;
+        break;
+      case TextFieldCapitalize.asName:
+        capitalization = ref.watch(osmDataProvider).capitalizeNames
             ? TextCapitalization.words
             : TextCapitalization.sentences;
+        break;
+    }
 
     return Padding(
       padding: EdgeInsets.only(right: 10.0),

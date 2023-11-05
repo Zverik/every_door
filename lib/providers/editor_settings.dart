@@ -9,7 +9,7 @@ final editorSettingsProvider =
 enum ChangesetReview { never, withTags, always }
 
 class EditorSettings {
-  static const kDefaultPayment = ['visa', 'mastercard'];
+  static const kDefaultPayment = ['debit_cards', 'credit_cards'];
 
   final bool preferContact;
   final bool fixNumKeyboard;

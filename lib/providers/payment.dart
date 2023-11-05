@@ -18,17 +18,13 @@ class PaymentOptions {
   final Set<String> around;
 
   static const initial =
-      PaymentOptions(global: {'payment:visa', 'payment:mastercard'});
+      PaymentOptions(global: {'payment:debit_cards', 'payment:credit_cards'});
 
   const PaymentOptions(
       {this.local, required this.global, this.around = const {}});
 
   Set<String> get merged => local?.options ?? global;
   bool get aroundDiffers => around.isNotEmpty && !setEquals(around, merged);
-
-  // Do we need these mandatory things?
-  // if (result.contains('payment:visa')) result.add('payment:mastercard');
-  // if (result.contains('payment:mastercard')) result.add('payment:visa');
 }
 
 class PaymentProvider {
