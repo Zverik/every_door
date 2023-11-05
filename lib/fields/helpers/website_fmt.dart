@@ -84,6 +84,7 @@ class UrlWebsiteProvider extends WebsiteProvider {
       return null;
     }
   }
+
   static const kValidWebsiteUrlSchemes = ["http", "https"];
 
   @override
@@ -250,8 +251,14 @@ class WhatsappProvider extends _ProviderHelper {
           icon: LineIcons.whatSApp,
           label: 'WhatsApp',
           key: 'contact:whatsapp',
-          regexp: RegExp(r'(\+[\d -]+\d)'),
+          regexp: RegExp(r'(\d[\d -]{5,}\d)'),
         );
+
+  @override
+  String format(String value) => '+' + super.format(value);
+
+  @override
+  String display(String full) => format(full);
 }
 
 class ViberProvider extends _ProviderHelper {
