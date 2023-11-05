@@ -584,7 +584,8 @@ class PresetProvider {
         label: await _getFieldLabel('internet_access', locale) ?? 'Wifi');
     fields['payment'] = PaymentPresetField(
         label: await _getFieldLabel('payment_multi', locale) ?? 'Accept cards');
-    fields['addr_door'] = RoomPresetField();
+    fields['addr_door'] = RoomPresetField(
+        label: await _getFieldLabel('ref_room_number', locale) ?? 'Room Number');
     return stdFields.map((e) => fields[e]).whereType<PresetField>().toList();
   }
 
