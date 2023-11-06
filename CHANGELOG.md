@@ -2,7 +2,7 @@
 
 ## 4.1
 
-_Unreleased_
+_Released on 2023-11-06_
 
 * Changed default card payment options to `debit_cards` and `credit_cards`.
 * Fixed word capitalization for description and other similar fields.
