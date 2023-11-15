@@ -162,7 +162,7 @@
   "@faqYellow": {},
   "faqFloors": "A „3” és a „/3” emelet ugyanaz?",
   "@faqFloors": {},
-  "loadingPresets": "Előbeállítások betöltése…",
+  "loadingPresets": "Űrlap betöltése…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
