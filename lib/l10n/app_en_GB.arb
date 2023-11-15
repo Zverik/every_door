@@ -1187,5 +1187,9 @@
   "fieldPaymentGlobal": "Global Defaults",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
+  },
+  "fieldPaymentAround": "Common Options Around",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
   }
 }
