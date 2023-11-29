@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/pin_marker.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/editor_mode.dart';
@@ -13,6 +14,7 @@ import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/editor/types.dart';
+import 'package:every_door/widgets/attribution.dart';
 import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +53,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
     mapSub = controller.mapEventStream.listen((event) {
       if (event is MapEventMove) {
         setState(() {
-          center = event.targetCenter;
+          center = event.camera.center;
         });
       } else if (event is MapEventMoveEnd) {
         updateNearest();
@@ -129,79 +131,58 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
       body: FlutterMap(
         mapController: controller,
         options: MapOptions(
-          center: widget.location,
-          zoom: widget.closer ? 19.0 : 18.0,
+          initialCenter: widget.location,
+          initialZoom: widget.closer ? 19.0 : 18.0,
           minZoom: 17.0,
           maxZoom: kEditMaxZoom,
-          rotation: ref.watch(rotationProvider),
-          rotationThreshold: kRotationThreshold,
-          interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
-          plugins: [ZoomButtonsPlugin()],
+          initialRotation: ref.watch(rotationProvider),
+          interactionOptions: InteractionOptions(
+            flags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+            rotationThreshold: kRotationThreshold,
+          ),
         ),
-        nonRotatedLayers: [
-          ZoomButtonsOptions(
+        children: [
+          AttributionWidget(imagery),
+          buildTileLayer(imagery),
+          LocationMarkerWidget(tracking: false),
+          if (trackLocation != null)
+            CircleLayer(
+              circles: [
+                CircleMarker(
+                  point: center,
+                  radius: 2.0,
+                  color: Colors.yellowAccent,
+                ),
+              ],
+            ),
+          CircleLayer(
+            circles: [
+              for (final note in nearestNotes)
+                CircleMarker(
+                  point: note.location,
+                  radius: 9.0,
+                  color: Colors.grey,
+                ),
+              for (final poi in nearestPOI)
+                CircleMarker(
+                  point: poi.location,
+                  radius: 3.0,
+                  color: poi.kind == ElementKind.entrance
+                      ? Colors.black
+                      : !poi.isModified
+                          ? Colors.greenAccent
+                          : Colors.yellow,
+                ),
+            ],
+          ),
+          MarkerLayer(
+            markers: [PinMarker(center)],
+          ),
+          ZoomButtonsWidget(
             alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
             padding: EdgeInsets.symmetric(
               horizontal: 0.0,
               vertical: 100.0,
-            ),
-          ),
-        ],
-        nonRotatedChildren: [
-          buildAttributionWidget(imagery),
-        ],
-        children: [
-          TileLayerWidget(
-            options: buildTileLayerOptions(imagery),
-          ),
-          LocationMarkerWidget(tracking: false),
-          if (trackLocation != null)
-            CircleLayerWidget(
-              options: CircleLayerOptions(
-                circles: [
-                  CircleMarker(
-                    point: center,
-                    radius: 2.0,
-                    color: Colors.yellowAccent,
-                  ),
-                ],
-              ),
-            ),
-          MarkerLayerWidget(
-            options: MarkerLayerOptions(
-              markers: [
-                Marker(
-                  point: center,
-                  rotate: true,
-                  rotateOrigin: Offset(0.0, -5.0),
-                  rotateAlignment: Alignment.bottomCenter,
-                  anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
-                  builder: (ctx) =>
-                      Icon(Icons.location_pin, color: Colors.black),
-                ),
-              ],
-            ),
-          ),
-          CircleLayerWidget(
-            options: CircleLayerOptions(
-              circles: [
-                for (final note in nearestNotes)
-                  CircleMarker(
-                    point: note.location,
-                    radius: 9.0,
-                    color: Colors.grey,
-                  ),
-                for (final poi in nearestPOI)
-                  CircleMarker(
-                    point: poi.location,
-                    radius: 3.0,
-                    color: poi.kind == ElementKind.entrance
-                        ? Colors.black
-                        : !poi.isModified
-                            ? Colors.greenAccent
-                            : Colors.yellow,
-                  ),
-              ],
             ),
           ),
         ],

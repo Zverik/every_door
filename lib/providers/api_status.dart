@@ -22,6 +22,6 @@ String getApiStatusLoc(ApiStatus status, AppLocalizations loc) {
     case ApiStatus.uploading:
       return loc.apiStatusUploading;
     case ApiStatus.uploadingNotes:
-      return 'Uploading notes'; // TODO: localize
+      return loc.apiStatusUploadingNotes;
   }
 }

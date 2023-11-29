@@ -6,6 +6,7 @@ import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/screens/settings.dart';
+import 'package:every_door/widgets/attribution.dart';
 import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/status_pane.dart';
 import 'package:every_door/widgets/track_button.dart';
@@ -17,7 +18,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavigationPane extends ConsumerStatefulWidget {
-  const NavigationPane({Key? key}) : super(key: key);
+  const NavigationPane({super.key});
 
   @override
   ConsumerState<NavigationPane> createState() => _NavigationPaneState();
@@ -36,23 +37,24 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
   }
 
   onMapEvent(MapEvent event) {
-    bool fromController = event.source == MapEventSource.mapController;
+    bool fromController = event.source == MapEventSource.mapController ||
+        event.source == MapEventSource.nonRotatedSizeChange;
     if (event is MapEventWithMove) {
-      center = event.center;
+      center = event.camera.center;
       if (!fromController) {
-        ref.read(zoomProvider.notifier).state = event.zoom;
-        if (event.zoom > kEditMinZoom) {
+        ref.read(zoomProvider.notifier).state = event.camera.zoom;
+        if (event.camera.zoom > kEditMinZoom) {
           // Switch navigation mode off
           ref.read(navigationModeProvider.notifier).state = false;
         }
       }
     } else if (event is MapEventMoveEnd) {
       if (!fromController) {
-        ref.read(effectiveLocationProvider.notifier).set(event.center);
+        ref.read(effectiveLocationProvider.notifier).set(event.camera.center);
       }
     } else if (event is MapEventRotateEnd) {
       if (!fromController) {
-        double rotation = controller.rotation;
+        double rotation = controller.camera.rotation;
         while (rotation > 200) rotation -= 360;
         while (rotation < -200) rotation += 360;
         if (rotation.abs() < kRotationThreshold) {
@@ -73,12 +75,12 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
 
     // Rotate the map according to the global rotation value.
     ref.listen(rotationProvider, (_, double newValue) {
-      if ((newValue - controller.rotation).abs() >= 1.0)
+      if ((newValue - controller.camera.rotation).abs() >= 1.0)
         controller.rotate(newValue);
     });
 
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
-      controller.move(next, controller.zoom);
+      controller.move(next, controller.camera.zoom);
       setState(() {
         center = next;
       });
@@ -89,21 +91,21 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
         FlutterMap(
           mapController: controller,
           options: MapOptions(
-            center: center,
-            zoom: kEditMinZoom,
+            initialCenter: center,
+            initialZoom: kEditMinZoom,
             minZoom: 4.0,
             maxZoom: kEditMinZoom + 1.0,
-            interactiveFlags: InteractiveFlag.drag |
-                InteractiveFlag.pinchZoom |
-                InteractiveFlag.pinchMove,
-            plugins: [
-              ZoomButtonsPlugin(),
-              OverlayButtonPlugin(),
-            ],
+            interactionOptions: InteractionOptions(
+                flags: InteractiveFlag.drag |
+                    InteractiveFlag.pinchZoom |
+                    InteractiveFlag.pinchMove),
           ),
-          layers: [
+          children: [
+            AttributionWidget(kOSMImagery),
+            buildTileLayer(kOSMImagery),
+            LocationMarkerWidget(),
             // Settings button
-            OverlayButtonOptions(
+            OverlayButtonWidget(
               alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
               padding: EdgeInsets.symmetric(
                 horizontal: 0.0,
@@ -119,7 +121,7 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
                 );
               },
             ),
-            ZoomButtonsOptions(
+            ZoomButtonsWidget(
               alignment:
                   leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
               padding: EdgeInsets.symmetric(
@@ -128,15 +130,6 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
                 vertical: 20.0,
               ),
             ),
-          ],
-          nonRotatedChildren: [
-            buildAttributionWidget(kOSMImagery),
-          ],
-          children: [
-            TileLayerWidget(
-              options: buildTileLayerOptions(kOSMImagery),
-            ),
-            LocationMarkerWidget(),
           ],
         ),
         ApiStatusPane(),

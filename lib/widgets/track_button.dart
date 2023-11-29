@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OverlayButtonOptions extends LayerOptions {
+class OverlayButtonWidget extends ConsumerWidget {
   /// Padding for the button.
   final EdgeInsets padding;
 
@@ -30,8 +29,8 @@ class OverlayButtonOptions extends LayerOptions {
   /// Add safe area to the right side padding.
   final bool safeRight;
 
-  OverlayButtonOptions({
-    Key? key,
+  const OverlayButtonWidget({
+    super.key,
     Stream<void>? rebuild,
     this.alignment = Alignment.topRight,
     required this.padding,
@@ -42,36 +41,15 @@ class OverlayButtonOptions extends LayerOptions {
     this.tooltip,
     this.safeBottom = false,
     this.safeRight = false,
-  }) : super(key: key, rebuild: rebuild);
-}
-
-class OverlayButtonPlugin implements MapPlugin {
-  @override
-  Widget createLayer(
-      LayerOptions options, MapState mapState, Stream<void> stream) {
-    if (options is OverlayButtonOptions) {
-      return OverlayButtonLayer(options);
-    }
-    throw Exception(
-        'Wrong options for TrackButtonPlugin: ${options.runtimeType}');
-  }
-
-  @override
-  bool supportsLayer(LayerOptions options) => options is OverlayButtonOptions;
-}
-
-class OverlayButtonLayer extends ConsumerWidget {
-  final OverlayButtonOptions _options;
-
-  const OverlayButtonLayer(this._options);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (!_options.enabled) return Container();
+    if (!enabled) return Container();
 
     final button = GestureDetector(
-      onTap: _options.onPressed,
-      onLongPress: _options.onLongPressed,
+      onTap: onPressed,
+      onLongPress: onLongPressed,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.5),
@@ -81,7 +59,7 @@ class OverlayButtonLayer extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Icon(
-            _options.icon,
+            icon,
             size: 30.0,
             color: Colors.black.withOpacity(0.5),
           ),
@@ -90,21 +68,18 @@ class OverlayButtonLayer extends ConsumerWidget {
     );
 
     EdgeInsets safePadding = MediaQuery.of(context).padding;
-    return Positioned(
-      bottom: _options.alignment.y > 0
-          ? (_options.safeBottom ? safePadding.bottom : 0.0)
-          : null,
-      top: _options.alignment.y <= 0 ? safePadding.top : null,
-      right: _options.alignment.x >= 0
-          ? (_options.safeRight ? safePadding.right : 0.0)
-          : null,
-      left: _options.alignment.x < 0 ? safePadding.left : null,
+    safePadding = safePadding.copyWith(
+      bottom: safeBottom ? null : 0.0,
+      right: safeRight ? null : 0.0,
+    );
+    return Align(
+      alignment: alignment,
       child: Padding(
-        padding: _options.padding + EdgeInsets.symmetric(horizontal: 10.0),
-        child: _options.tooltip == null
+        padding: padding + safePadding + EdgeInsets.symmetric(horizontal: 10.0),
+        child: tooltip == null
             ? button
             : Tooltip(
-                message: _options.tooltip,
+                message: tooltip,
                 child: button,
               ),
       ),

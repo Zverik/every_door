@@ -400,11 +400,11 @@ class CollectGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
         }
       } else if (el.type == OsmElementType.way) {
         if (el.nodes != null && el.nodes!.isNotEmpty) {
-          final bounds = LatLngBounds.fromPoints(el.nodes!
+          final points = el.nodes!
               .map((nodeId) => nodeLocations[nodeId])
-              .whereType<LatLng>()
-              .toList());
-          if (bounds.isValid) {
+              .whereType<LatLng>();
+          if (points.isNotEmpty) {
+            final bounds = LatLngBounds.fromPoints(points.toList());
             final nodeLoc = el.nodes == null
                 ? null
                 : {
@@ -433,18 +433,22 @@ class CollectGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
         }
       } else if (el.type == OsmElementType.relation) {
         if (el.members != null) {
-          var bounds = LatLngBounds();
+          final points = <LatLng>[];
           for (final m in el.members!) {
             if (m.type == OsmElementType.node &&
                 nodeLocations.containsKey(m.id.ref)) {
-              bounds.extend(nodeLocations[m.id.ref]);
+              points.add(nodeLocations[m.id.ref]!);
             } else if (m.type == OsmElementType.way &&
                 wayGeometries.containsKey(m.id)) {
-              bounds.extendBounds(wayGeometries[m.id]!.bounds);
+              points.addAll([
+                wayGeometries[m.id]!.bounds.northEast,
+                wayGeometries[m.id]!.bounds.southWest,
+              ]);
             }
           }
-          if (bounds.isValid)
-            result.add(el.copyWith(geometry: Envelope(bounds)));
+          if (points.isNotEmpty)
+            result.add(el.copyWith(
+                geometry: Envelope(LatLngBounds.fromPoints(points))));
         }
       }
     }

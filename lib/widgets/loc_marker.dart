@@ -1,78 +1,33 @@
 import 'package:every_door/providers/compass.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'dart:math' show pi;
 
-class LocationMarkerOptions extends LayerOptions {
+class LocationMarkerWidget extends ConsumerWidget {
   final bool tracking;
 
-  LocationMarkerOptions({
-    Key? key,
-    this.tracking = true,
-    Stream<void>? rebuild,
-  }) : super(key: key, rebuild: rebuild);
-}
-
-class LocationMarkerPlugin implements MapPlugin {
-  @override
-  Widget createLayer(
-      LayerOptions options, MapState mapState, Stream<void> stream) {
-    if (options is LocationMarkerOptions) {
-      return _LocationMarkerLayer(options, mapState, stream);
-    }
-    throw Exception('Wrong options type: ${options.runtimeType}');
-  }
-
-  @override
-  bool supportsLayer(LayerOptions options) => options is LocationMarkerOptions;
-}
-
-class LocationMarkerWidget extends StatelessWidget {
-  final LocationMarkerOptions _options;
-
-  LocationMarkerWidget({Key? key, bool tracking = true})
-      : _options = LocationMarkerOptions(tracking: tracking),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final mapState = MapState.maybeOf(context)!;
-    return _LocationMarkerLayer(_options, mapState, mapState.onMoved);
-  }
-}
-
-class _LocationMarkerLayer extends ConsumerWidget {
-  final LocationMarkerOptions _options;
-  final MapState _mapState;
-  final Stream<void>? _stream;
-
-  _LocationMarkerLayer(this._options, this._mapState, this._stream)
-      : super(key: _options.key);
+  LocationMarkerWidget({super.key, this.tracking = true});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final LatLng? trackLocation = ref.watch(geolocationProvider);
+    if (trackLocation == null) return Container();
+
     final CompassData? compass = null; // ref.watch(compassProvider);
-    final bool tracking = _options.tracking && ref.watch(trackingProvider);
-
-    return LayoutBuilder(
-      builder: (context, constraints) => StreamBuilder<void>(
-          stream: _stream,
-          builder: (context, _) {
-            if (trackLocation == null) return Container();
-
-            return CustomPaint(
-              painter: _LocationMarkerPainter(
-                border: tracking,
-                offset: _mapState.getOffsetFromOrigin(trackLocation),
-                heading: compass?.heading,
-              ),
-              size: Size(constraints.maxWidth, constraints.maxHeight),
-            );
-          }),
+    final bool isTracking = tracking && ref.watch(trackingProvider);
+    return MobileLayerTransformer(
+      child: CustomPaint(
+        painter: _LocationMarkerPainter(
+          border: isTracking,
+          offset: MapCamera.of(context).getOffsetFromOrigin(trackLocation),
+          heading: compass?.heading,
+        ),
+        // TODO: check that it's still painted
+        // size: Size(constraints.maxWidth, constraints.maxHeight),
+      ),
     );
   }
 }

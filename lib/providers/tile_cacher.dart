@@ -39,24 +39,23 @@ class TileCacher extends StateNotifier<TileCacherState> {
 
   TileCacher(this._ref) : super(TileCacherState.idle());
 
-  CustomPoint<int> _coordToTile(LatLng coord, int zoom) {
+  math.Point<int> _coordToTile(LatLng coord, int zoom) {
     final z2 = math.pow(2, zoom);
     final x = z2 * (coord.longitude + 180.0) / 360.0;
     final lat = coord.latitudeInRad;
     final y =
         z2 * (1 - math.log(math.tan(lat) + 1 / math.cos(lat)) / math.pi) / 2;
-    return CustomPoint(x.floor(), y.floor());
+    return math.Point(x.floor(), y.floor());
   }
 
   Future<int> cacheTiles(
-      TileLayerOptions options, LatLngBounds bounds, int zoom) async {
+      TileLayer options, LatLngBounds bounds, int zoom) async {
     int downloaded = 0;
     final pt1 = _coordToTile(bounds.northWest, zoom);
     final pt2 = _coordToTile(bounds.southEast, zoom);
     for (int x = pt1.x; x <= pt2.x; x++) {
       for (int y = pt1.y; y <= pt2.y; y++) {
-        final coords = Coords(x, y);
-        coords.z = zoom;
+        final coords = TileCoordinates(x, y, zoom);
         final url = options.tileProvider.getTileUrl(coords, options);
         // Same logic as in CacheManager.getSingleFile().
         final cached = await TileCacheManager.instance.getFileFromCache(url);
@@ -113,7 +112,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
     state = TileCacherState(total: total);
     for (final img in [kOSMImagery, imagery]) {
       if (img.type != ImageryType.tms || img.tileSize != 256) continue;
-      final options = buildTileLayerOptions(img);
+      final options = buildTileLayer(img);
       int layerMaxZoom = maxZoom ?? img.maxZoom;
       if (layerMaxZoom > kMaxBulkDownloadZoom)
         layerMaxZoom = kMaxBulkDownloadZoom;

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' show Point;
 
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
@@ -25,7 +26,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class NotesPane extends ConsumerStatefulWidget {
   final Widget? areaStatusPanel;
 
-  const NotesPane({Key? key, this.areaStatusPanel}) : super(key: key);
+  const NotesPane({super.key, this.areaStatusPanel});
 
   @override
   ConsumerState<NotesPane> createState() => _NotesPaneState();
@@ -54,17 +55,18 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   }
 
   onMapEvent(MapEvent event) {
-    bool fromController = event.source == MapEventSource.mapController;
+    bool fromController = event.source == MapEventSource.mapController ||
+        event.source == MapEventSource.nonRotatedSizeChange;
     if (event is MapEventWithMove && !fromController) {
-      ref.read(zoomProvider.notifier).state = event.zoom - kZoomOffset;
-      if (event.zoom - kZoomOffset < kEditMinZoom) {
+      ref.read(zoomProvider.notifier).state = event.camera.zoom - kZoomOffset;
+      if (event.camera.zoom - kZoomOffset < kEditMinZoom) {
         // Switch navigation mode on
         ref.read(navigationModeProvider.notifier).state = true;
       }
     } else if (event is MapEventMoveEnd && !fromController) {
       // Move the effective location for downloading to work properly.
       ref.read(trackingProvider.notifier).state = false;
-      ref.read(effectiveLocationProvider.notifier).set(event.center);
+      ref.read(effectiveLocationProvider.notifier).set(event.camera.center);
       updateNotes();
     }
   }
@@ -78,14 +80,14 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   List<LatLng> _coordsFromOffsets(List<Offset> offsets) {
     final result = <LatLng>[];
     for (final offset in offsets) {
-      final loc = controller.pointToLatLng(CustomPoint(offset.dx, offset.dy));
-      if (loc != null) result.add(loc);
+      final loc = controller.camera.pointToLatLng(Point(offset.dx, offset.dy));
+      result.add(loc);
     }
     return result;
   }
 
   updateNotes() async {
-    final location = controller.center;
+    final location = controller.camera.center;
     final notes = await ref.read(notesProvider).fetchAllNotes(location);
     if (!mounted) return;
     setState(() {
@@ -118,16 +120,15 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   Widget build(BuildContext context) {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
-    EdgeInsets safePadding = MediaQuery.of(context).padding;
 
     // Rotate the map according to the global rotation value.
     ref.listen(rotationProvider, (_, double newValue) {
-      if ((newValue - controller.rotation).abs() >= 1.0)
+      if ((newValue - controller.camera.rotation).abs() >= 1.0)
         controller.rotate(newValue);
     });
 
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
-      controller.move(next, controller.zoom);
+      controller.move(next, controller.camera.zoom);
       updateNotes();
     });
     ref.listen(notesProvider, (_, next) {
@@ -143,26 +144,23 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                 key: _mapKey,
                 mapController: controller,
                 options: MapOptions(
-                  center: ref.read(effectiveLocationProvider),
+                  initialCenter: ref.read(effectiveLocationProvider),
                   minZoom: kEditMinZoom + kZoomOffset - 0.1,
                   maxZoom: kEditMaxZoom,
-                  zoom: ref.watch(zoomProvider) + kZoomOffset,
-                  // TODO: remove drag when adding map drawing
-                  interactiveFlags: InteractiveFlag.pinchMove |
-                      InteractiveFlag.pinchZoom |
-                      InteractiveFlag.drag,
-                  rotation: ref.watch(rotationProvider),
-                  rotationThreshold: kRotationThreshold,
-                  plugins: [MapDragCreatePlugin()],
+                  initialZoom: ref.watch(zoomProvider) + kZoomOffset,
+                  initialRotation: ref.watch(rotationProvider),
+                  interactionOptions: InteractionOptions(
+                    // TODO: remove drag when adding map drawing
+                    flags: InteractiveFlag.pinchMove |
+                        InteractiveFlag.pinchZoom |
+                        InteractiveFlag.drag,
+                    rotationThreshold: kRotationThreshold,
+                  ),
                 ),
                 children: [
-                  TileLayerWidget(
-                    options: buildTileLayerOptions(
-                        ref.watch(selectedImageryProvider)),
-                  ),
+                  buildTileLayer(ref.watch(selectedImageryProvider)),
                   LocationMarkerWidget(tracking: false),
-                  PolylineLayerWidget(
-                      options: PolylineLayerOptions(
+                  PolylineLayer(
                     polylines: [
                       for (final drawing in _notes.whereType<MapDrawing>())
                         Polyline(
@@ -173,73 +171,63 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                           borderColor: drawing.style.casing,
                         ),
                     ],
-                  )),
-                  MarkerLayerWidget(
-                    options: MarkerLayerOptions(
-                      markers: [
-                        for (final osmNote in _notes.whereType<OsmNote>())
-                          Marker(
-                            point: osmNote.location,
-                            width: 50.0,
-                            height: 50.0,
-                            builder: (BuildContext context) {
-                              return Center(
-                                child: GestureDetector(
-                                  child: Container(
-                                    padding: EdgeInsets.all(10.0),
-                                    color: Colors.transparent,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.black,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        color: osmNote.isChanged
-                                            ? Colors.yellow.withOpacity(0.8)
-                                            : Colors.white.withOpacity(0.8),
-                                      ),
-                                      child:
-                                          SizedBox(width: 30.0, height: 30.0),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    _openNoteEditor(osmNote);
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                      ],
-                    ),
                   ),
-                ],
-                nonRotatedLayers: [
-                  MapDragCreateOptions(
-                    mapKey: _mapKey,
-                    buttons: [
-                      DragButton(
-                        icon: Icons.add,
-                        tooltip: loc.notesAddNote,
-                        bottom: 20.0,
-                        left: !leftHand ? null : 10.0 + safePadding.left,
-                        right: leftHand ? null : 10.0 + safePadding.right,
-                        onDragEnd: (pos) {
-                          _openNoteEditor(null, pos);
-                        },
-                        onTap: () async {
-                          final pos = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  MapChooserPage(location: controller.center),
+                  MarkerLayer(
+                    markers: [
+                      for (final osmNote in _notes.whereType<OsmNote>())
+                        Marker(
+                          point: osmNote.location,
+                          width: 50.0,
+                          height: 50.0,
+                          child: Center(
+                            child: GestureDetector(
+                              child: Container(
+                                padding: EdgeInsets.all(10.0),
+                                color: Colors.transparent,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.black,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    color: osmNote.isChanged
+                                        ? Colors.yellow.withOpacity(0.8)
+                                        : Colors.white.withOpacity(0.8),
+                                  ),
+                                  child: SizedBox(width: 30.0, height: 30.0),
+                                ),
+                              ),
+                              onTap: () {
+                                _openNoteEditor(osmNote);
+                              },
                             ),
-                          );
-                          if (pos != null) _openNoteEditor(null, pos);
-                        },
-                      ),
+                          ),
+                        ),
                     ],
+                  ),
+                  DragButtonWidget(
+                    mapKey: _mapKey,
+                    button: DragButton(
+                      icon: Icons.add,
+                      tooltip: loc.notesAddNote,
+                      alignment: leftHand
+                          ? Alignment.bottomLeft
+                          : Alignment.bottomRight,
+                      onDragEnd: (pos) {
+                        _openNoteEditor(null, pos);
+                      },
+                      onTap: () async {
+                        final pos = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MapChooserPage(
+                                location: controller.camera.center),
+                          ),
+                        );
+                        if (pos != null) _openNoteEditor(null, pos);
+                      },
+                    ),
                   ),
                 ],
               ),

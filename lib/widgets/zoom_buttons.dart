@@ -1,57 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_map/flutter_map.dart';
 
-class ZoomButtonsOptions extends LayerOptions {
+class ZoomButtonsWidget extends StatelessWidget {
   final Alignment alignment;
   final EdgeInsets padding;
 
-  ZoomButtonsOptions({
-    Key? key,
-    Stream<void>? rebuild,
+  const ZoomButtonsWidget({
     this.alignment = Alignment.bottomRight,
     required this.padding,
-  }) : super(key: key, rebuild: rebuild);
-}
-
-class ZoomButtonsPlugin implements MapPlugin {
-  @override
-  Widget createLayer(
-      LayerOptions options, MapState mapState, Stream<void> stream) {
-    if (options is ZoomButtonsOptions) {
-      return ZoomButtonsLayer(options, mapState);
-    }
-    throw Exception(
-        'Wrong options for ZoomButtonsPlugin: ${options.runtimeType}');
-  }
-
-  @override
-  bool supportsLayer(LayerOptions options) => options is ZoomButtonsOptions;
-}
-
-class ZoomButtonsLayer extends StatelessWidget {
-  final ZoomButtonsOptions _options;
-  final MapState _map;
-
-  const ZoomButtonsLayer(this._options, this._map);
+  });
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    return Positioned(
-      bottom: 0.0,
-      right: _options.alignment.x >= 0 ? 0.0 : null,
-      left: _options.alignment.x < 0 ? 0.0 : null,
+    final controller = MapController.of(context);
+    return Align(
+      alignment: alignment,
       child: Padding(
-        padding: _options.padding,
+        padding: padding,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Tooltip(
               message: loc.mapZoomIn,
               child: OutlinedButton(
                 onPressed: () {
-                  _map.move(_map.center, _map.zoom + 1,
-                      source: MapEventSource.custom);
+                  controller.move(
+                    controller.camera.center,
+                    controller.camera.zoom + 1,
+                  );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -72,8 +50,10 @@ class ZoomButtonsLayer extends StatelessWidget {
               message: loc.mapZoomOut,
               child: OutlinedButton(
                 onPressed: () {
-                  _map.move(_map.center, _map.zoom - 1,
-                      source: MapEventSource.custom);
+                  controller.move(
+                    controller.camera.center,
+                    controller.camera.zoom - 1,
+                  );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

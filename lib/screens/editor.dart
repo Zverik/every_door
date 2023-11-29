@@ -5,6 +5,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/pin_marker.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/models/preset.dart';
@@ -478,11 +479,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             child: FlutterMap(
               mapController: mapController,
               options: MapOptions(
-                center: amenity.location,
-                zoom: 17,
+                initialCenter: amenity.location,
+                initialZoom: 17,
                 interactiveFlags: 0,
-                rotation: ref.watch(rotationProvider),
-                allowPanningOnScrollingParent: false,
+                initialRotation: ref.watch(rotationProvider),
+                interactionOptions:
+                    InteractionOptions(flags: InteractiveFlag.none),
                 onTap: !amenity.canMove
                     ? null
                     : (pos, center) async {
@@ -502,48 +504,38 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       },
               ),
               children: [
-                TileLayerWidget(options: buildTileLayerOptions(kOSMImagery)),
-                MarkerLayerWidget(
-                    options: MarkerLayerOptions(markers: [
-                  if (amenity.canMove)
-                    Marker(
-                      point: amenity.location,
-                      rotate: true,
-                      rotateOrigin: Offset(12.0, -5.0),
-                      rotateAlignment: Alignment.bottomLeft,
-                      anchorPos: AnchorPos.exactly(Anchor(138.0, 5.0)),
-                      width: 150.0,
-                      height: 30.0,
-                      builder: (ctx) => Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(Icons.location_pin),
-                          SizedBox(width: 2.0),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.7),
-                              borderRadius: BorderRadius.circular(5.0),
+                buildTileLayer(kOSMImagery),
+                MarkerLayer(
+                  markers: [
+                    if (amenity.canMove)
+                      Marker(
+                        point: amenity.location,
+                        rotate: true,
+                        alignment: Alignment(0.84, -0.7),
+                        width: 150.0,
+                        height: 30.0,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(Icons.location_pin),
+                            SizedBox(width: 2.0),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 5.0),
+                              child: Text(loc.editorMove),
                             ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 5.0),
-                            child: Text(loc.editorMove),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  if (!amenity.canMove)
-                    Marker(
-                      rotate: true,
-                      rotateOrigin: Offset(0.0, -5.0),
-                      rotateAlignment: Alignment.bottomCenter,
-                      point: amenity
-                          .location, // mapController.center throws late init exception
-                      anchorPos: AnchorPos.exactly(Anchor(15.0, 5.0)),
-                      builder: (ctx) =>
-                          Icon(Icons.location_pin, color: Colors.red.shade900),
-                    ),
-                ])),
+                    if (!amenity.canMove)
+                      PinMarker(amenity.location, color: Colors.red.shade900),
+                  ],
+                ),
               ],
             ),
           ),

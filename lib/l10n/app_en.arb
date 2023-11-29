@@ -1162,6 +1162,10 @@
   "@apiStatusUploading": {
     "description": "Text displayed when the app is uploading data to the API."
   },
+  "apiStatusUploadingNotes": "Uploading notes",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
   "faqMapTiny": "Why is the map so tiny?",
   "@faqMapTiny": {},
   "faqMapTinyContent": "Because it's not the point. You only check your positioning on the map, and pan it to adjust. Watch the amenity list below, sorted by distance from you.\n\nThe map gets bigger when you edit amenities far from your location. Although the app was made to edit things you see with your eyes.",

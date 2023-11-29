@@ -1,13 +1,9 @@
+import 'dart:math' show Point;
+
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:logging/logging.dart';
-
-class MapDragCreateOptions extends LayerOptions {
-  List<DragButton> buttons;
-  GlobalKey? mapKey;
-  MapDragCreateOptions({this.buttons = const [], this.mapKey});
-}
 
 class DragButton {
   final IconData icon;
@@ -16,10 +12,8 @@ class DragButton {
   final Function(LatLng)? onDragEnd;
   final Function()? onTap;
   final String? tooltip;
-  final double? top;
-  final double? bottom;
-  final double? left;
-  final double? right;
+  final Alignment alignment;
+  final EdgeInsets padding;
 
   DragButton({
     required this.icon,
@@ -28,143 +22,177 @@ class DragButton {
     this.onDragEnd,
     this.onTap,
     this.tooltip,
-    this.top,
-    this.bottom,
-    this.left,
-    this.right,
-  }) {
-    if (left == null && right == null)
-      throw Exception('Please specify left or right for a button');
-    if (left != null && right != null)
-      throw Exception('Please specify either left or right for a button');
-    if (top == null && bottom == null)
-      throw Exception('Please specify top or bottom for a button');
-    if (bottom != null && top != null)
-      throw Exception('Please specify either top or bottom for a button');
-  }
+    this.alignment = Alignment.bottomRight,
+    this.padding = EdgeInsets.zero,
+  });
 }
 
-class MapDragCreatePlugin implements MapPlugin {
-  @override
-  Widget createLayer(LayerOptions options, MapState mapState, Stream stream) {
-    if (options is MapDragCreateOptions) {
-      return Stack(
-        children: [
-          // DragButtonTargetLayer(mapState),
-          for (final btn in options.buttons)
-            DragButtonsWidget(btn, mapState, options.mapKey),
-        ],
-      );
-    }
-    throw Exception('Unknown layer options type: ${options.runtimeType}');
-  }
-
-  @override
-  bool supportsLayer(LayerOptions options) => options is MapDragCreateOptions;
-}
-
-class DragButtonsWidget extends StatelessWidget {
-  final DragButton options;
-  final MapState _mapState;
-  final GlobalKey? _mapKey;
+class DragButtonWidget extends StatelessWidget {
+  final DragButton button;
+  final GlobalKey? mapKey;
 
   static final _logger = Logger('DragButtonsWidget');
 
-  const DragButtonsWidget(this.options, this._mapState, this._mapKey);
+  const DragButtonWidget({required this.button, this.mapKey});
 
   @override
   Widget build(BuildContext context) {
     const arrowSize = 60.0;
-    final button = ElevatedButton(
+    final camera = MapCamera.of(context);
+    final safePadding =
+        MediaQuery.of(context).padding.copyWith(top: 0, bottom: 0);
+    const commonPadding =
+        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0);
+
+    return Align(
+      alignment: button.alignment,
+      child: Padding(
+        padding: button.padding + safePadding + commonPadding,
+        child: Draggable(
+          data: button,
+          onDragStarted: () {
+            if (button.onDragStart != null) button.onDragStart!();
+          },
+          onDragEnd: (details) {
+            const offset = Point(-arrowSize / 2, -2.0);
+            final pos = Point(details.offset.dx, details.offset.dy);
+            // To adjust offset, we need to know the location of everything.
+            final mapOrigin =
+                mapKey?.currentContext!.findRenderObject()!.paintBounds.topLeft;
+            final globalMapOriginTr = mapKey?.currentContext!
+                .findRenderObject()!
+                .getTransformTo(null)
+                .getTranslation();
+            final globalMapOrigin = globalMapOriginTr == null
+                ? Point(0.0, 0.0)
+                : Point(globalMapOriginTr.x, globalMapOriginTr.y);
+            _logger.info('Map origin: $mapOrigin, global: $globalMapOrigin, '
+                'drop offset: ${pos - offset}, padding: ${button.padding}.');
+            final location =
+                camera.pointToLatLng(pos - offset + globalMapOrigin);
+            if (button.onDragEnd != null) button.onDragEnd!(location);
+          },
+          feedbackOffset: Offset(arrowSize / 2, 70.0),
+          dragAnchorStrategy: (draggable, context, position) =>
+              Offset(arrowSize / 2, 70.0),
+          feedback: CustomPaint(
+            painter:
+                _ArrowUpPainter(button.color ?? Theme.of(context).primaryColor),
+            size: Size(arrowSize, 100.0),
+          ),
+          childWhenDragging: Container(),
+          child: _ButtonItself(
+            icon: button.icon,
+            tooltip: button.tooltip,
+            onTap: button.onTap,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MapDragCreateButton extends StatelessWidget {
+  final IconData icon;
+  final Function()? onDragStart;
+  final Function(LatLng)? onDragEnd;
+  final Function()? onTap;
+  final String? tooltip;
+  final Alignment alignment;
+  final MapController map;
+  final GlobalKey? mapKey;
+
+  static const kArrowSize = 60.0;
+  static final _logger = Logger('MapDragCreateButton');
+
+  const MapDragCreateButton({
+    super.key,
+    this.mapKey,
+    required this.map,
+    required this.icon,
+    this.onDragStart,
+    this.onDragEnd,
+    this.onTap,
+    this.tooltip,
+    this.alignment = Alignment.bottomRight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final safePadding =
+        MediaQuery.of(context).padding.copyWith(top: 0, bottom: 0);
+    const commonPadding =
+        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0);
+    return Align(
+      alignment: alignment,
+      child: Padding(
+        padding: safePadding + commonPadding,
+        child: Draggable(
+          onDragStarted: () {
+            if (onDragStart != null) onDragStart!();
+          },
+          onDragEnd: (details) {
+            const offset = Point(-kArrowSize / 2, -2.0);
+            final pos = Point(details.offset.dx, details.offset.dy);
+            // To adjust offset, we need to know the location of everything.
+            final globalMapOriginTr = mapKey?.currentContext!
+                .findRenderObject()!
+                .getTransformTo(null)
+                .getTranslation();
+            final globalMapOrigin = globalMapOriginTr == null
+                ? Point(0.0, 0.0)
+                : Point(globalMapOriginTr.x, globalMapOriginTr.y);
+            _logger.info(
+                'global: $globalMapOrigin, drop offset: ${pos - offset}.');
+            final location =
+                map.camera.pointToLatLng(pos - offset + globalMapOrigin);
+            if (onDragEnd != null) onDragEnd!(location);
+          },
+          feedbackOffset: Offset(kArrowSize / 2, 70.0),
+          dragAnchorStrategy: (draggable, context, position) =>
+              Offset(kArrowSize / 2, 70.0),
+          feedback: CustomPaint(
+            painter: _ArrowUpPainter(Theme.of(context).primaryColor),
+            size: Size(kArrowSize, 100.0),
+          ),
+          childWhenDragging: Container(),
+          child: _ButtonItself(
+            icon: icon,
+            tooltip: tooltip,
+            onTap: onTap,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ButtonItself extends StatelessWidget {
+  final IconData icon;
+  final String? tooltip;
+  final Function()? onTap;
+
+  const _ButtonItself({required this.icon, this.tooltip, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final widget = ElevatedButton(
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 0.0,
           vertical: 15.0,
         ),
-        child: Icon(options.icon, size: 30.0),
+        child: Icon(icon, size: 30.0),
       ),
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
       ),
       onPressed: () {
-        if (options.onTap != null) options.onTap!();
+        if (onTap != null) onTap!();
       },
     );
 
-    return Positioned(
-      left: options.left,
-      right: options.right,
-      top: options.top,
-      bottom: options.bottom,
-      child: Draggable(
-        data: options,
-        onDragStarted: () {
-          if (options.onDragStart != null) options.onDragStart!();
-        },
-        onDragEnd: (details) {
-          const offset = CustomPoint(-arrowSize / 2, -2.0);
-          final pos = CustomPoint(details.offset.dx, details.offset.dy);
-          // To adjust offset, we need to know the location of everything.
-          final mapOrigin =
-              _mapKey?.currentContext!.findRenderObject()!.paintBounds.topLeft;
-          final globalMapOriginTr = _mapKey?.currentContext!
-              .findRenderObject()!
-              .getTransformTo(null)
-              .getTranslation();
-          final globalMapOrigin = globalMapOriginTr == null
-              ? CustomPoint(0.0, 0.0)
-              : CustomPoint(globalMapOriginTr.x, globalMapOriginTr.y);
-          _logger.info('Map origin: $mapOrigin, global: $globalMapOrigin, '
-              'drop offset: ${pos - offset}, '
-              'top: ${options.top}, bottom: ${options.bottom}.');
-          final location = _pointToLatLng(pos - offset + globalMapOrigin);
-          if (options.onDragEnd != null) options.onDragEnd!(location);
-        },
-        feedbackOffset: Offset(arrowSize / 2, 70.0),
-        dragAnchorStrategy: (draggable, context, position) =>
-            Offset(arrowSize / 2, 70.0),
-        feedback: CustomPaint(
-          painter:
-              _ArrowUpPainter(options.color ?? Theme.of(context).primaryColor),
-          size: Size(arrowSize, 100.0),
-        ),
-        childWhenDragging: Container(),
-        child: options.tooltip == null
-            ? button
-            : Tooltip(
-                message: options.tooltip,
-                child: button,
-              ),
-      ),
-    );
-  }
-
-  LatLng _pointToLatLng(CustomPoint localPoint) {
-    final size = _mapState.originalSize!;
-
-    final localPointCenterDistance =
-        CustomPoint(size.x / 2, size.y / 2) - localPoint;
-    final mapCenter = _mapState.project(_mapState.center);
-    var point = mapCenter - localPointCenterDistance;
-
-    if (_mapState.rotation != 0.0) {
-      point = _rotatePoint(mapCenter, point, _mapState.rotationRad);
-    }
-
-    return _mapState.unproject(point);
-  }
-
-  CustomPoint<num> _rotatePoint(
-      CustomPoint<num> mapCenter, CustomPoint<num> point, double rotationRad) {
-    final m = Matrix4.identity()
-      ..translate(mapCenter.x.toDouble(), mapCenter.y.toDouble())
-      ..rotateZ(-rotationRad)
-      ..translate(-mapCenter.x.toDouble(), -mapCenter.y.toDouble());
-
-    final tp = MatrixUtils.transformPoint(
-        m, Offset(point.x.toDouble(), point.y.toDouble()));
-
-    return CustomPoint(tp.dx, tp.dy);
+    return tooltip == null ? widget : Tooltip(message: tooltip, child: widget);
   }
 }
 
