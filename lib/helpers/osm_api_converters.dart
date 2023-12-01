@@ -146,7 +146,7 @@ class XmlToOsmConverter extends Converter<List<XmlNode>, List<OsmElement>> {
   }
 }
 
-class XmlToOsmSink extends ChunkedConversionSink<List<XmlNode>> {
+class XmlToOsmSink implements ChunkedConversionSink<List<XmlNode>> {
   final XmlToOsmConverter _converter;
   final Sink<List<OsmElement>> _sink;
 
@@ -290,7 +290,7 @@ class XmlToNotesConverter extends Converter<List<XmlNode>, List<OsmNote>> {
   }
 }
 
-class XmlToNotesSink extends ChunkedConversionSink<List<XmlNode>> {
+class XmlToNotesSink implements ChunkedConversionSink<List<XmlNode>> {
   final XmlToNotesConverter _converter;
   final Sink<List<OsmNote>> _sink;
 
@@ -362,7 +362,7 @@ class MarkReferenced extends Converter<List<OsmElement>, List<OsmElement>> {
   }
 }
 
-class MarkReferencedSink extends ChunkedConversionSink<List<OsmElement>> {
+class MarkReferencedSink implements ChunkedConversionSink<List<OsmElement>> {
   final MarkReferenced _converter;
   final Sink<List<OsmElement>> _sink;
 
@@ -461,7 +461,7 @@ class CollectGeometry extends Converter<List<OsmElement>, List<OsmElement>> {
   }
 }
 
-class CollectGeometrySink extends ChunkedConversionSink<List<OsmElement>> {
+class CollectGeometrySink implements ChunkedConversionSink<List<OsmElement>> {
   final CollectGeometry _converter;
   final Sink<List<OsmElement>> _sink;
 
@@ -519,7 +519,7 @@ class ExtractRoadNames extends Converter<List<OsmElement>, List<OsmElement>> {
   }
 }
 
-class ExtractRoadNamesSink extends ChunkedConversionSink<List<OsmElement>> {
+class ExtractRoadNamesSink implements ChunkedConversionSink<List<OsmElement>> {
   final ExtractRoadNames _converter;
   final Sink<List<OsmElement>> _sink;
 
@@ -559,7 +559,7 @@ class StripMembers extends Converter<List<OsmElement>, List<OsmElement>> {
   }
 }
 
-class StripMembersSink extends ChunkedConversionSink<List<OsmElement>> {
+class StripMembersSink implements ChunkedConversionSink<List<OsmElement>> {
   final StripMembers _converter;
   final Sink<List<OsmElement>> _sink;
 
@@ -592,7 +592,7 @@ class FilterAmenities extends Converter<List<OsmElement>, List<OsmElement>> {
   }
 }
 
-class FilterAmenitiesSink extends ChunkedConversionSink<List<OsmElement>> {
+class FilterAmenitiesSink implements ChunkedConversionSink<List<OsmElement>> {
   final FilterAmenities _converter;
   final Sink<List<OsmElement>> _sink;
 
@@ -624,7 +624,7 @@ class FilterSnapTargets extends Converter<List<OsmElement>, List<OsmElement>> {
   }
 }
 
-class FilterSnapTargetsSink extends ChunkedConversionSink<List<OsmElement>> {
+class FilterSnapTargetsSink implements ChunkedConversionSink<List<OsmElement>> {
   final FilterSnapTargets _converter;
   final Sink<List<OsmElement>> _sink;
 
@@ -664,7 +664,7 @@ class ParseUploaded extends Converter<List<XmlNode>, List<UploadedElementRef>> {
   }
 }
 
-class ParseUploadedSink extends ChunkedConversionSink<List<XmlNode>> {
+class ParseUploadedSink implements ChunkedConversionSink<List<XmlNode>> {
   final ParseUploaded _converter;
   final Sink<List<UploadedElementRef>> _sink;
 
