@@ -48,6 +48,7 @@ class EveryDoorApp extends ConsumerWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+          useMaterial3: false,
         ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         // Adding "en" to the front so it's used by default.

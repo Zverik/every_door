@@ -1,5 +1,11 @@
 # Every Door App Change Log
 
+## 5.0
+
+_Unreleased_
+
+* Switched to Dart 3 and upgraded `flutter_map` to version 6.
+
 ## 4.1
 
 _Released on 2023-11-06_
