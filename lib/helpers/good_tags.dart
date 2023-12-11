@@ -220,7 +220,10 @@ bool isAmenityTags(Map<String, String> tags) {
     };
     return goodLeisure.contains(v);
   } else if (k == 'emergency') {
-    return v == 'ambulance_station';
+    const goodEmergency = <String>{
+      'ambulance_station', 'mountain_rescue', 'ses_station', 'water_rescue', 'air_rescue_service',
+    };
+    return goodEmergency.contains(v);
   } else if (k == 'military') {
     return v == 'office';
   } else if (k == 'attraction') {
