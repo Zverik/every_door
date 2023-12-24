@@ -734,5 +734,9 @@
   "accountFieldLogin": "ବ୍ୟବହାରକାରୀ ନାମ",
   "@accountFieldLogin": {
     "description": "Label for the OSM login."
+  },
+  "fieldHoursChooseTime": "ଘଣ୍ଟା ଏବଂ ମିନିଟ",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
   }
 }
