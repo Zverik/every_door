@@ -287,7 +287,7 @@
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
-  "accountPasswordTitle": "OSM Credentials",
+  "accountPasswordTitle": "OSM ଲଗ ଇନ ତଥ୍ୟ",
   "@accountPasswordTitle": {
     "description": "Title for the input dialog for login and password."
   },
@@ -738,5 +738,464 @@
   "fieldHoursChooseTime": "ଘଣ୍ଟା ଏବଂ ମିନିଟ",
   "@fieldHoursChooseTime": {
     "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "messageDataObsolete": "ଡାଟା ପୁରୁଣା ହୋଇଛି, ରିଫ୍ରେସ୍ କରିବାକୁ ଏଠାରେ ଟ୍ୟାପ୍ କରନ୍ତୁ",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "fieldHoursRemoveBreak": "ବିରତି କାଢନ୍ତୁ",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "buildingMoreButton": "ଅଧିକ",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "apiStatusDownloading": "ତଥ୍ୟ ଡାଉନଲୋଡ ହେଉଛି…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "buildingMaterialBrick": "ଇଟା",
+  "@buildingMaterialBrick": {},
+  "fieldHoursRemoveFragment": "ଖଣ୍ଡ ଅପସାରଣ କରନ୍ତୁ",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "buildingMaterialPanels": "ପ୍ୟାନେଲ ଗୁଡ଼ିକ",
+  "@buildingMaterialPanels": {},
+  "faqTaggingContent": "ସମ୍ପାଦକଙ୍କ ଠାରେ କାହିଁକି ଏକ ବସ୍ତୁ ହଜିଯାଉଛି? ମାଇକ୍ରୋମ୍ୟାପିଂ ମୋଡ୍ ରେ ଏହି ଧଳା ବିନ୍ଦୁଗୁଡିକ କେବେ ପ୍ରଦର୍ଶିତ ହୁଏ? ବସ୍ତୁଗୁଡ଼ିକୁ କିପରି ଶ୍ରେଣୀଭୁକ୍ତ କରାଯାଏ?\n\nଏହି ସବୁ ପ୍ରଶ୍ନର ଉତ୍ତର [good_tags.ଡାର୍ଟ] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) ରେ ଅଛି । ଏଠାରେ ଆପଣ କ'ଣ ଦେଖିପାରିବେ:\n\n* ମୁଖ୍ୟ ଟ୍ୟାଗ୍ ପାଇଁ ମୁଖ୍ୟ ଅର୍ଡର - 'kMainkees' ତାଲିକା।\n* କେଉଁ ଅବଜେକ୍ଟଗୁଡିକ ଡାଉନଲୋଡ୍ ହୋଇଛି - ପ୍ରକାର୍ଯ୍ୟ 'ଇସ୍ ଗୁଡ୍ଟ୍ୟାଗ୍ସ୍'।\n* ଯାହାକୁ ଆମେନିଟି ବୋଲି ବିବେଚନା କରାଯାଏ - ଫଙ୍କସନ୍ 'ଇସ୍ ଆମେନିଟି ଟ୍ୟାଗ୍ସ'।\n* କେଉଁ ପଏଣ୍ଟକୁ କେଉଁ ଉପାୟରେ କାଟି ଦିଆଯାଏ - ଫଙ୍କସନ୍ 'ଡିଟେକ୍ ସନ୍ନାପ୍'।\n* ଯେତେବେଳେ ଏକ ମାଇକ୍ରୋମ୍ୟାପିଂ ଅବଜେକ୍ଟ ଅସମ୍ପୂର୍ଣ୍ଣ ଥାଏ - ପ୍ରକାର୍ଯ୍ୟ 'ମୋରଇନ୍ଫୋ ଆବଶ୍ୟକ କରେ'।",
+  "@faqTaggingContent": {},
+  "apiStatusUpdatingDB": "ଆପ୍ ଡାଟାବେସ୍ ରେ ଉପାଦାନ ଗୁଡିକ ସଞ୍ଚୟ କରନ୍ତୁ",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "enableLocation": "ଅବସ୍ଥାନ ସକ୍ଷମ କରନ୍ତୁ",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "buildingTypeGarage": "ଗ୍ୟାରେଜ",
+  "@buildingTypeGarage": {},
+  "fieldDirectionSet": "ରଖନ୍ତୁ",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "buildingMaterialCementBlock": "ସିମେଣ୍ଟ ଇଟା",
+  "@buildingMaterialCementBlock": {},
+  "fieldComboEmpty": "ଖାଲି",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "buildingTypeRetail": "ଦୋକାନ",
+  "@buildingTypeRetail": {},
+  "entranceAccess": "ପହଞ୍ଚ",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "fieldWifiNo": "ନା",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWheelchairLimited": "ସୀମିତ",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "notesAnonymous": "ବେନାମୀ",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "entranceType": "ପ୍ରକାର",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "fieldCardsOnly": "କେବଳ କାର୍ଡ଼",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldPaymentAround": "ଆଖପାଖରେ ସାଧାରଣ ବିକଳ୍ପ",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "addressUnitOptional": "ବୈକଳ୍ପିକ",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "fieldCheckboxYes": "ହଁ",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "messageNoData": "କୌଣସି ଡାଟା ନାହିଁ, ଡାଉନଲୋଡ୍ କରିବାକୁ ଏଠାରେ ଟ୍ୟାପ୍ କରନ୍ତୁ",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "entranceTypeHome": "ଘର",
+  "@entranceTypeHome": {},
+  "entrancesAddEntrance": "ପ୍ରବେଶ ଦ୍ୱାର ଯୋଡନ୍ତୁ",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entranceIsUnit": "ଫ୍ଲାଟ୍ ନମ୍ଵର୍ କୁ addr:unit ରେ ରଖନ୍ତୁ",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "buildingMaterialWood": "କାଠ",
+  "@buildingMaterialWood": {},
+  "fieldFloorNew": "ନୂଆ ମହଲା",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "entranceAccessNo": "ନା",
+  "@entranceAccessNo": {},
+  "buildingTypeCommercial": "ବାଣିଜ୍ୟିକ",
+  "@buildingTypeCommercial": {},
+  "addressPlace": "ଜାଗା",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "entranceAccessDelivery": "ଡେଲିଭରି",
+  "@entranceAccessDelivery": {},
+  "notesCancelMessage": "OSM ଟିପ୍ପଣୀଟିକୁ ନାକଚ କରିବେ?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "buildingRoofLevels": "ଛାତ ମହଲା",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "fieldComboChoose": "ବାଛନ୍ତୁ",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "addressBlock": "ବ୍ଲକ",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "entranceTypeStaircase": "ଶିଡ଼ି",
+  "@entranceTypeStaircase": {},
+  "entranceFlatsNumberList": "ଏକ ସଂଖ୍ୟା ଶ୍ରେଣୀ ହେବା ଆବଶ୍ୟକ",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "fieldHoursAddFragment": "ଏକ ଖଣ୍ଡ ଯୋଡନ୍ତୁ",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "addressStreet": "ଗଳି",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "fieldFloorLevelDesc": "ତଳ ସ୍ତର ପାଇଁ ଫ୍ଲୋର ନମ୍ବର ୦ରୁ ଆରମ୍ଭ",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldHoursSDAddOne": "ତାରିଖ ଯୋଡ଼ନ୍ତୁ",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "addressHouseNotEmpty": "ଖାଲି ରହିବା କଥା ନୁହଁ",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "fieldNameLanguages": "ଅନ୍ୟ ଏକ ଭାଷା",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldFloorShouldBeNumber": "ଦୟାକରି ଏକ ସଂଖ୍ୟା ପ୍ରବେଶ କରନ୍ତୁ",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "apiStatusUploadingNotes": "ଟିପ୍ପଣୀଗୁଡିକ ଅପଲୋଡ୍ ହେଉଛି",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "fieldHoursSDAddRange": "ସୀମା ଯୋଡନ୍ତୁ",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldFloorEmpty": "ଏକ ମହଲା ଚୟନ କରିବାକୁ, ଏକ ଠିକଣା ସେଟ୍ କରନ୍ତୁ।",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "entranceX": "ପ୍ରବେଶ ଦ୍ୱାର {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "fieldHoursWeekdays": "ସୋ ମ ବୁ ଗୁ ଶୁ ଶ ର",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "faqCheckmarksContent": "ଏହା ହେଉଛି ସୁବିଧା ତଥ୍ୟ ନିଶ୍ଚିତ ହେବାର ଚିହ୍ନ । ସେମାନେ ସାମ୍ପ୍ରତିକ ତାରିଖ ସହିତ 'check_date' ଟ୍ୟାଗ୍ ଯୋଡ଼ନ୍ତି।\n\nଚେକ୍ମାର୍କ ପଛର ଧାରଣା ହେଉଛି, କୁହନ୍ତୁ, ଆପଣ ପ୍ରଥମ ଥର ପାଇଁ ଅଧା ସହରର ନିରୀକ୍ଷଣ କରିଥିଲେ। ତା'ପରେ ଏକ ମାସ ପରେ ଆପଣ ଫେରି ଆସି ପୁଣି ନିରୀକ୍ଷଣ କରିବାକୁ ଗଲେ । ଆପଣଙ୍କୁ କୌଣସି ପ୍ରକାରେ ଚିହ୍ନିତ କରିବାକୁ ପଡିବ ଯେ ଆପଣ ସୁବିଧାଗୁଡ଼ିକୁ ଦେଖୁଛନ୍ତି, କିନ୍ତୁ ଏଥିରେ କିଛି ପରିବର୍ତ୍ତନ ହୋଇନାହିଁ । ଏହା ହେଉଛି ଚେକ୍ମାର୍କ: ଆପଣ ଏହାକୁ ଟ୍ୟାପ୍ କରନ୍ତୁ ଏବଂ ଜାରି ରଖନ୍ତୁ।\n\nଦୁଇ ମାସ ପର୍ଯ୍ୟନ୍ତ ମାର୍କ ଯାଞ୍ଚ କରାଯାଏ । ଏହାପରେ ଆପଣ ପୁଣି ଥରେ ସୁବିଧାର ସର୍ଭେ କରିପାରିବେ ।",
+  "@faqCheckmarksContent": {},
+  "faqCheckmarks": "ଚେକ୍ମାର୍କଗୁଡ଼ିକ କ'ଣ ପାଇଁ ଅଛି?",
+  "@faqCheckmarks": {},
+  "fieldHeightMeters": "ମିଟରରେ ଦୈର୍ଘ୍ୟ ଆଶା କରିବା, ଉଦାହରଣ ସ୍ୱରୂପ 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "buttonYes": "ହଁ",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buildingTypeShed": "କ୍ୟାବିନ",
+  "@buildingTypeShed": {},
+  "faqMapTinyContent": "କାରଣ ଏହା କଥା ନୁହେଁ। ଆପଣ କେବଳ ମାନଚିତ୍ରରେ ଆପଣଙ୍କ ଅବସ୍ଥାନ ଯାଞ୍ଚ କରନ୍ତୁ, ଏବଂ ଏହାକୁ ଆଡଜଷ୍ଟ କରିବାକୁ ପ୍ୟାନ୍ କରନ୍ତୁ। ଆପଣଙ୍କଠାରୁ ଦୂରତା ଅନୁଯାୟୀ ଚୟନ କରାଯାଇଥିବା ନିମ୍ନରେ ଥିବା ସୁବିଧା ତାଲିକା ଦେଖନ୍ତୁ।\n\nଯଦିଓ ଆପଣ ଆଖିରେ ଦେଖୁଥିବା ଜିନିଷକୁ ସମ୍ପାଦନ କରିବା ପାଇଁ ଏହି ଆପ୍ ତିଆରି କରାଯାଇଥିଲା, ଯେତେବେଳେ ଆପଣ ଆପଣଙ୍କ ଅବସ୍ଥାନଠାରୁ ଦୂରରେ ଥିବା ସୁବିଧାଗୁଡିକ ସମ୍ପାଦନ କରନ୍ତି, ମାନଚିତ୍ର ବଡ଼ ହୋଇଯାଏ।",
+  "@faqMapTinyContent": {},
+  "notesClose": "ସମାଧାନ କରନ୍ତୁ",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "enableLocationMessage": "ଦୟାକରି ସେଟିଂ ପ୍ୟାନେଲ୍ ରେ ଆପ୍ଲିକେସନ୍ ପାଇଁ ଅବସ୍ଥାନ ଆକସେସ୍ ଅନୁମତି ଦିଅନ୍ତୁ ଯାହା ଦେଖାଯିବ।",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "entranceTypeEmergency": "ଜରୁରୀକାଳୀନ ପରିସ୍ଥିତି",
+  "@entranceTypeEmergency": {},
+  "fieldPaymentLocal": "ସ୍ଥାନୀୟ ବିକଳ୍ପ",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentUseGlobal": "ମୋର ଡିଫଲ୍ଟଗୁଡିକ ଭଲ ଅଟେ",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldFloorFloorDesc": "ଯାତାୟାତ ପାଇଁ ଏବଂ ଲିଫ୍ଟରେ ମହଲା",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldPaymentUseSame": "ମ୍ୟାପିଂ ପାଇଁ ସମାନ ଟ୍ୟାଗ୍ ବ୍ୟବହାର କରନ୍ତୁ",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "buildingRoofShape": "ଛାତ ଆକାର",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "faqMapTiny": "ମୋର ମାନଚିତ୍ର ଏତେ ଛୋଟ କାହିଁକି?",
+  "@faqMapTiny": {},
+  "buildingMaterialPlaster": "ପ୍ଳାଷ୍ଟର",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialMetal": "ଧାତୁ",
+  "@buildingMaterialMetal": {},
+  "fieldHoursClear": "ସଫା",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldPaymentTitle": "କାର୍ଡ଼ ଦେୟ",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "buildingTypeAddress": "ଠିକଣା",
+  "@buildingTypeAddress": {},
+  "buildingType": "ପ୍ରକାର",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "addressHouseNumber": "ଘର",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "faqEntranceContent": "ନିମ୍ନରେ ମୋଡ୍ ବଟନ୍ ର ଏକ ଧାଡ଼ି ଅଛି: ମାଇକ୍ରୋମ୍ୟାପିଂ, ସୁବିଧା, ପ୍ରବେଶ ପଥ ଏବଂ ନୋଟ୍।\n\nପ୍ରବେଶ ମୋଡ୍ ରେ, ମାନଚିତ୍ର ଉପରେ ତଳ କୋଣରେ ଥିବା କବାଟ ବଟନ୍ ଟ୍ୟାପ୍ କରନ୍ତୁ କିମ୍ୱା ଟାଣନ୍ତୁ।",
+  "@faqEntranceContent": {},
+  "buttonNo": "ନା",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "entranceWheelchair": "ଚକଲଗା ଚୌକି",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "fieldHoursSDRemove": "କାଢ଼ନ୍ତୁ",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "apiStatusUploading": "ପରିବର୍ତ୍ତନଗୁଡିକ ଅପଲୋଡ୍ ହେଉଛି",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "entranceTypeShop": "ଦୋକାନ",
+  "@entranceTypeShop": {},
+  "entrancesAddBuilding": "ପ୍ରାସାଦ ଯୋଡନ୍ତୁ",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingMaterial": "ମୁହଁ",
+  "@buildingMaterial": {},
+  "faqChangeTypeContent": "ସମ୍ପାଦକ ଶୀର୍ଷକ ଉପରେ ଟ୍ୟାପ୍ କରନ୍ତୁ, ଯେଉଁଠାରେ ପ୍ରକାର ଲେଖାଯାଇଛି।",
+  "@faqChangeTypeContent": {},
+  "fieldWifiPublic": "ସାର୍ବଜନୀନ",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "buildingMaterialGlass": "କାଚ",
+  "@buildingMaterialGlass": {},
+  "faqEntrance": "ବିଲ୍ଡିଂ ପ୍ରବେଶ ପଥ କିପରି ଯୋଡିବେ?",
+  "@faqEntrance": {},
+  "fieldHoursSave": "ସଞ୍ଚନ୍ତୁ",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "addressUnit": "ଏକକ",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "fieldHeightFeet": "ଫୁଟରେ ଦୈର୍ଘ୍ୟ ଆଶା କରିବା, ଉଦାହରଣ ସ୍ୱରୂପ 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldPaymentChoose": "ବିଭିନ୍ନ ସ୍ଥାନୀୟ ଟ୍ୟାଗ୍ ଚୟନ କରନ୍ତୁ..।",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "faqChangeType": "ସୁବିଧା ପ୍ରକାର କିପରି ପରିବର୍ତ୍ତନ କରିବେ?",
+  "@faqChangeType": {},
+  "fieldWheelchairNo": "ନାଁ",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "faqLettersContent": "ଯଦି ଆପଣଙ୍କ ସଂଖ୍ୟାଗତ କୀବୋର୍ଡ୍ ସମ୍ପୂର୍ଣ୍ଣ କୁ ସୁଇଚ୍ ହୋଇପାରିବ ନାହିଁ, ଆପ୍ଲିକେସନ୍ ସେଟିଂସ୍ ଯାଞ୍ଚ କରନ୍ତୁ। ସେମାନେ ଉପର ବାମ କୋଣରେ ଥିବା ବଟନ ପଛରେ ଅଛନ୍ତି । ସେଠାରେ \"ବିସ୍ତାରିତ ସଂଖ୍ୟାଗତ କୀବୋର୍ଡ\" ଅନ୍ କରନ୍ତୁ।",
+  "@faqLettersContent": {},
+  "entranceTypeGarage": "ଗ୍ୟାରେଜ",
+  "@entranceTypeGarage": {},
+  "fieldCardsNo": "ନା",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "buildingMaterialConcrete": "କଙ୍କ୍ରିଟ",
+  "@buildingMaterialConcrete": {},
+  "faqLetters": "ମୁଁ ଏକ ଆଧାର କିମ୍ବା ଏକ ଫ୍ଲାଟ୍ କ୍ରମାଙ୍କରେ ଚିଠି ପଠାଇ ପାରିବି କି?",
+  "@faqLetters": {},
+  "buildingX": "ପ୍ରାସାଦ {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "fieldWheelchairYes": "ହଁ",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "faqYellowContent": "ପ୍ରବେଶ ପଥରେ ଅଣ-ହଳଦିଆ ଲେବଲ୍ ଏବଂ ମାଇକ୍ରୋମ୍ୟାପିଂ ମୋଡ୍ ରେ ଧଳା ବିନ୍ଦୁର ଅର୍ଥ ହେଉଛି ଉପାଦାନଗୁଡିକରେ କିଛି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଗୁଣର ଅଭାବ ରହିଛି । ଉଦାହରଣ ପାଇଁ:\n\n* କୋଠାଗୁଡ଼ିକରେ ଅନେକ ମହଲା ରହିବ ବୋଲି ଆଶା କରାଯାଉଛି।\n* ପ୍ରବେଶ ଦ୍ୱାରରେ ପ୍ରକାର ଏବଂ ଶିଡ଼ି ପାଇଁ ଫ୍ଲାଟ୍ ରେଞ୍ଜ ରହିବା ଉଚିତ୍ ।\n* ବେଞ୍ଚରେ ସାମଗ୍ରୀ ଏବଂ ବ୍ୟାକରେଷ୍ଟ ରହିବା ଉଚିତ୍ ।\n* ଗଛରେ ପତ୍ରର ପ୍ରକାର ଓ ପତ୍ରଝଡ଼ା ଚକ୍ର ରହିବା ଉଚିତ୍ ।",
+  "@faqYellowContent": {},
+  "buildingTypeApartments": "ଆପାର୍ଟମେଣ୍ଟ ଗୁଡ଼ିକ",
+  "@buildingTypeApartments": {},
+  "entranceRef": "ଆଧାର",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "faqFloors": "ମହଲା '୩' ଏବଂ '/୩' ସମାନ କି?",
+  "@faqFloors": {},
+  "entranceAccessPrivate": "ଘରୋଇ",
+  "@entranceAccessPrivate": {},
+  "fieldNameLangSearch": "ଭାଷା ଖୋଜନ୍ତୁ",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "buildingPostCode": "ପିନକୋଡ",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "fieldPaymentGlobal": "ବିଶ୍ୱବ୍ୟାପୀ ବିକଳ୍ପ",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "entranceTypeService": "ସେବା",
+  "@entranceTypeService": {},
+  "buildingLevels": "ମହଲା",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "notesCloseMessage": "ଟିପ୍ପଣୀଟିକୁ ସମାଧାନ କରିବେ?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "buildingTypeIndustrial": "ଶିଳ୍ପ",
+  "@buildingTypeIndustrial": {},
+  "enableGPS": "GPS ସକ୍ଷମ କରନ୍ତୁ",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "fieldHoursAddBreak": "ଏକ ବିରତି ଯୋଡନ୍ତୁ",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldWifiCustomers": "ଗ୍ରାହକମାନେ",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "faqFloorsContent": "ନାହିଁ। ପ୍ରଥମଟିରେ `addr:floor=୩` ଟ୍ୟାଗ୍ ପୂରଣ ହୋଇଛି। ଏହା ହେଉଛି ମହଲା କାରଣ ଏହା ଯାତାୟାତରେ ଛପାଯାଇଥାଏ ଏବଂ ସାଧାରଣତଃ ବ୍ୟବହୃତ ହୁଏ | ଦ୍ବିତୀୟ ଟ୍ୟାଗ୍ ରେ ଏହି ଟ୍ୟାଗ୍ ନାହିଁ, କିନ୍ତୁ `ମହଲା=୩` ରହିଛି। ଏହି ସଂଖ୍ୟା ହେଉଛି ଶୂନ୍ୟରୁ 'building:ମହଲା - ୧' ପର୍ଯ୍ୟନ୍ତ ଏକ କ୍ରମାଗତ ମହଲା ନମ୍ବର । ଅର୍ଥାତ୍ ତିନି ମହଲା ବିଶିଷ୍ଟ କୋଠାରେ `addr:floor` ମୂଲ୍ୟ ଏକ ଦେଶ ଉପରେ ନିର୍ଭର କରେ, କିନ୍ତୁ 'ମହଲା' ସର୍ବଦା ୦, ୧ କିମ୍ବା ୨ ହୋଇଥାଏ।\n\nଏହି ଟ୍ୟାଗ୍ ଗୁଡିକ ସହିତ ସମ୍ପାଦକରେ ଥିବା ନୋଟେସନ୍ କିପରି ସମ୍ବନ୍ଧିତ ତାହା ଏଠାରେ ଅଛି:\n\n* '୨': 'ଆଡ୍ଡର:ଫ୍ଲୋର=୨' ଏବଂ ଅଣ-ଖାଲି 'ସ୍ତର=*'।\n* '୪/': 'ଆଡ୍ଡର:ଫ୍ଲୋର=୪', କିନ୍ତୁ କୌଣସି 'ସ୍ତର' ଟ୍ୟାଗ୍ ନାହିଁ।\n* '/୧': 'ସ୍ତର=୧', କିନ୍ତୁ କୌଣସି 'ଆଡ୍ଡର:ଫ୍ଲୋର୍' ଟ୍ୟାଗ୍ ନାହିଁ।\n* '୧/୦': 'ଆଡ୍ଡର:ଫ୍ଲୋର=୧' + 'ସ୍ତର=୦' (ଏବଂ ନିକଟରେ ଏକ ବସ୍ତୁ ଅଛି: ସମାନ 'ଆଡ୍ଡର:ଫ୍ଲୋର୍', କିନ୍ତୁ ଭିନ୍ନ 'ସ୍ତର', କିମ୍ବା ଏହାର ବିପରୀତ)।",
+  "@faqFloorsContent": {},
+  "addressX": "ଠିକଣା {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "notesComment": "ଆପଣଙ୍କର ମତାମତ",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "entranceTypeMain": "ମୁଖ୍ୟ",
+  "@entranceTypeMain": {},
+  "buildingTypeConstruction": "ତିଆରି ଚାଲୁଛି",
+  "@buildingTypeConstruction": {},
+  "fieldAddressTap": "ଏକ ଠିକଣା ଟ୍ୟାପ୍ କରନ୍ତୁ",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "enableGPSMessage": "ଦୟାକରି ସେଟିଂସ୍ ପ୍ୟାନେଲ୍ ରେ ଅବସ୍ଥାନ ସେବାଗୁଡିକ ଟର୍ନ୍ ଅନ୍ କରନ୍ତୁ ଯାହା ଦେଖାଯିବ।",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "fieldCheckboxNo": "ନା",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "notesAddNote": "ଟିପ୍ପଣୀ ଯୋଡ଼ନ୍ତୁ",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "buildingMaterialStone": "ପଥର",
+  "@buildingMaterialStone": {},
+  "fieldCardsAccepted": "ଗୃହୀତ",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "buildingTypeHouse": "ଘର",
+  "@buildingTypeHouse": {},
+  "faqTagging": "ସମସ୍ତ ଟ୍ୟାଗିଂ ପ୍ରଶ୍ନ",
+  "@faqTagging": {},
+  "fieldHoursClosedPH": "ସାର୍ବଜନୀନ ଛୁଟିଦିନରେ ବନ୍ଦ",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "entranceAccessYes": "ଖୋଲା",
+  "@entranceAccessYes": {},
+  "fieldNameCopy": "ମୂଲ୍ୟ କପି କରନ୍ତୁ",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "entranceFlats": "ଫ୍ଲାଟ",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "faqYellow": "କିଛି ଘର କ୍ରମାଙ୍କ ହଳଦିଆ କାହିଁକି?",
+  "@faqYellow": {},
+  "fieldPhoneWrong": "ଭୁଲ୍ ଫୋନ୍ ଫର୍ମାଟ୍",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "fieldHeightAny": "ଦୈର୍ଘ୍ୟ ଆଶା କରିବା, ଉଦାହରଣ ସ୍ୱରୂପ 5.4 କିମ୍ବା 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
   }
 }
