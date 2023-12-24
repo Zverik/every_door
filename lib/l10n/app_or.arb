@@ -2,5 +2,737 @@
   "loadingStart": "ଆରମ୍ଭ ହେଉଛି…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "aboutFAQ": "ବାରମ୍ବାର ପଚରାଯାଉଥିବା ପ୍ରଶ୍ନଗୁଡିକ",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "tagsDelete": "ସଫା କରନ୍ତୁ",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "changesPurgeMessage": "ସମସ୍ତ ରେକର୍ଡ ହୋଇଥିବା ପରିବର୍ତ୍ତନ ବିଲୋପ କରନ୍ତୁ ଏବଂ ମୂଳ ଡାଟା ପୁନରୁଦ୍ଧାର କରିବେ?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "changesOsmNote": "OSM ଟିପ୍ପଣୀ",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "editorMarkActive": "ସକ୍ରିୟ ଚିହ୍ନାନ୍ତୁ",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorDeleteButton": "ଲିଭାନ୍ତୁ",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsValueLong": "ମୂଲ୍ୟଟି ଅତି ଲମ୍ବା",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "accountPasswordWarningTitle": "ଚେତାବନୀ",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldPassword": "ପାସୱାର୍ଡ଼",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "editorRestoreMessage": "{amenity} ନିଷ୍କ୍ରିୟ ଅଟେ। ଆପଣ ଏହାକୁ ସକ୍ରିୟ ମାର୍କ କରିବାକୁ ଚାହାଁନ୍ତି କି?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "aboutInstalledVersion": "ସଂସ୍ଥାପିତ ସଂସ୍କରଣ",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "dataDownloadFailed": "ଡାଉନଲୋଡ ବିଫଳ ହେଲା",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "aboutLinks": "ଲିଙ୍କ୍ ଗୁଡିକ",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "tagsAddTag": "ଏକ ଟ୍ୟାଗ ଯୋଡ଼ନ୍ତୁ",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "loadingChanges": "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ଅଣାଯାଉଛି…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "tagsValue": "ମୂଲ୍ୟ",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsKey": "ଚାବି",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "loadingPresets": "ପ୍ରିସେଟ ଲୋଡ ହଉଛି…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "aboutLicense": "ଲାଇସେନ୍ସ",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "legendOther": "ଅନ୍ୟାନ୍ୟ",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "settingsPurgeDataMessage": "ଆପଣଙ୍କୁ ସବୁକିଛି ପୁନଃ ଡାଉନଲୋଡ୍ କରିବାକୁ ପଡିବ । ଆଗକୁ ବଢ଼ିବେ?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "editorMarkChecked": "ମାର୍କ ଯାଞ୍ଚ କରାଯାଇଛି",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "changesPurge": "ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ଲିଭାନ୍ତୁ",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "changesSwipeLeft": "ଏକ ପରିବର୍ତ୍ତନ ପୁନରୁଦ୍ଧାର କରିବାକୁ ବାମ ସ୍ୱାଇପ୍ କରନ୍ତୁ",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursPublicHolidays": "ସାର୍ବଜନୀନ ଛୁଟି",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "settingsDefaultPayment": "ଡିଫଲ୍ଟ ଦେୟ କାର୍ଡ",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsPurgeData": "ପୁରାତନ କ୍ୟାସରେ ଥିବା ତଥ୍ୟକୁ ଲିଭାନ୍ତୁ",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "editorMove": "ଘୁଞ୍ଚାନ୍ତୁ",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "settingsBackground": "ପୃଷ୍ଠଭୂମି ଚିତ୍ର",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "fieldHoursCloses": "ବନ୍ଦ ହେବା ସମୟ",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "editorTags": "ସାଧା ଟ୍ୟାଗଗୁଡ଼ିକ",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "chooseType": "ପ୍ରକାର ବାଛନ୍ତୁ",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "changesDeletedChange": "{change} ବିଲୁପ୍ତ",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "mapSettings": "ସେଟିଂସ",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "accountAuthErrorTitle": "Auth ତ୍ରୁଟି",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "settingsCacheTiles": "ଟାଇଲକୁ ଡାଉନଲୋଡ କରନ୍ତୁ",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "editorMarkDefunct": "ନିଷ୍କ୍ରିୟ ଚିହ୍ନାନ୍ତୁ",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "filterByAddress": "ଠିକଣା ଦ୍ୱାରା",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "versionsVersionMeta": "{user} ଦ୍ୱାରା {datetime} ରେ",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "କୌଣସି ଟ୍ୟାଗ୍ ପରିବର୍ତ୍ତନ ନାହିଁ",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "accountUnreadMail": "ଅପଠିତ ଇମେଲ",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "aboutHelpTranslate": "ଅନୁବାଦ କରିବାରେ ସାହାଯ୍ୟ କରନ୍ତୁ",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "warningTooOld": "ସୁବିଧାଟି {years} ବର୍ଷ ପୁରୁଣା",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "editorCloseTitle": "ସମ୍ପାଦକକୁ ବନ୍ଦକରିବେ?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "versionsEnableInternet": "ସଂସ୍କରଣ ଇତିହାସ ଆଣିବାକୁ ଇଣ୍ଟର୍ନେଟ୍ କୁ ସଂଯୋଗ କରନ୍ତୁ",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "fieldHoursOpens": "ଖୋଲାହେବା ସମୟ",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "settingsPurgeDataTitle": "ତଥ୍ୟ ବିଲୋପ ?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "filterByFloor": "ତାଲା ଦ୍ୱାରା",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "settingsPurgedAllTitle": "ଲିଭାଯାଇଥିବା ତଥ୍ୟ",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "editorDuplicate": "{distance} ମିଟର ଦୂରତାରେ ସମ୍ଭାବ୍ୟ ନକଲ",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "changesUploadedTitle": "ଅପଲୋଡ ହେଲା",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "fieldHoursClosed": "ବନ୍ଦ ଅଛି",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "filterNonConfirmed": "କେବଳ ଅନିଶ୍ଚିତିତ",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "settingsApiServer": "ଏପିଆଇ ସର୍ଭର",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "navEntrancesMode": "ଫାଟକ ଅବସ୍ଥା",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "warningWrongMode": "ଭୁଲ୍ ମୋଡ୍, ନକଲ ଗୁଡିକ ଯାଞ୍ଚ କରନ୍ତୁ",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldHoursFullDay": "ଦିନସାରା",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "versionsLocalChanges": "ସ୍ଥାନୀୟ ପରିବର୍ତ୍ତନ",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "years": "{count,plural, =1{{count} ବର୍ଷ} କିଛି{{count} ବର୍ଷ} ଅନ୍ୟାନ୍ୟ{{count} ବର୍ଷ}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "accountPasswordWarningButton": "ବୁଝିଲି",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "loadingLocation": "ଅବସ୍ଥାନ ଆଣୁଛି…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "accountPasswordTitle": "OSM Credentials",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "settingsNumericKeyboard": "ବିସ୍ତାରିତ ସଂଖ୍ୟାଗତ କୀବୋର୍ଡ",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsPurgedObsoleteTitle": "ପୁରୁଣା ତଥ୍ୟ",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsUploads": "ଅଟକି ରହିଥିବା ଅପଲୋଡ୍",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "aboutSourceCode": "ଉତ୍ସ କୋଡ୍",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "tagsNewPoint": "ନୂତନ ସ୍ଥାନ",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "settingsAbout": "ବାବଦରେ",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutHelpImprove": "{appTitle} କୁ ଉନ୍ନତ କରିବାରେ ସାହାର୍ଯ୍ୟ କରନ୍ତୁ",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutViewLog": "ସିଷ୍ଟମ୍ ଲଗ୍",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "fieldHoursTitle": "ଖୋଲିବା ସମୟ",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "versionsVersionNumber": "ସଂସ୍କରଣ #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "settingsDataManagement": "ତଥ୍ୟ ପରିଚାଳନା",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "changesPurgeTitle": "ପରିବର୍ତ୍ତନ ଗୁଡ଼ିକୁ ଲିଭାଇବେ?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "settingsLanguage": "ଭାଷା",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "mapZoomOut": "ଛୋଟ କରନ୍ତୁ",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "tagsRestore": "ପୁନରୁଦ୍ଧାର କରନ୍ତୁ",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "accountChangesets": "ପରିବର୍ତ୍ତନ ସେଟଗୁଡ଼ିକ",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "tileNothingAround": "{distance} ମିଟରରେ ଆପଣଙ୍କ ଚାରିପାଖରେ କୌଣସି ସୁବିଧା ନାହିଁ।",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "editorDeleteTitle": "{amenity}କୁ ବିଲୋପ କରିବେ?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "accountAuthErrorMessage": "ଭୁଲ୍ ବ୍ୟବହାରକାରୀ ନାମ କିମ୍ୱା ପାସୱାର୍ଡ୍।",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "editorRestore": "ପୁନରୁଦ୍ଧାର କରନ୍ତୁ",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorSave": "ସଞ୍ଚନ୍ତୁ",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "navMicromappingMode": "କ୍ଷୁଦ୍ର ମାନଚିତ୍ର ଗଢ଼ିବା ଅବସ୍ଥା",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "settingsLeftHand": "ବାମହାତୀ ନିୟନ୍ତ୍ରଣ",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "navPoiMode": "ସୁବିଧାଗୁଡ଼ିକର ମୋଡ",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "warningWrongTag": "ଭୁଲ ଟ୍ୟାଗ:{tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "loadingChangesFailed": "ଅଦ୍ୟତନଗୁଡ଼ିକ ଆଣିବା ବିଫଳ ହେଲା",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "settingsPreferContact": "\"ସମ୍ପର୍କ\"କୁ ପସନ୍ଦ କରନ୍ତୁ:\" ଉପସର୍ଗ",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "navDownload": "ଡାଉନଲୋଡ",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "editorRestoreTitle": "ଏହା ଖୋଲା କି?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "loadingTooMuchDataTitle": "ଅତ୍ୟଧିକ ତଥ୍ୟ",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "accountOAuthError": "OAuth ତ୍ରୁଟି",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "tileDragTheMap": "ଦୟାକରି କୌଣସି ଜିନିଷର ନିକଟତର ହୁଅନ୍ତୁ, ମାନଚିତ୍ରକୁ ଟାଣି ନିଅନ୍ତୁ, କିମ୍ୱା ଏକ ନଥିବା ସ୍ଥାନ ଯୋଡନ୍ତୁ।",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "versionsTitle": "{elementRef} ଇତିହାସ",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "navImagery": "ମାନଚିତ୍ର ବଦଳାନ୍ତୁ",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "mapZoomIn": "ବଡ଼ କରନ୍ତୁ",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "warningUnsupported": "ଜିନିଷ ପ୍ରକାରଟି ଅସମର୍ଥ",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "filterNoAddresses": "ପାଖରେ କୌଣସି ଠିକଣା ନାହିଁ",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "editorCloseMessage": "ସଞ୍ଚୟ ବିନା ପରିବର୍ତ୍ତନଗୁଡିକ ପ୍ରତ୍ୟାଖ୍ୟାନ କରିବେ?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "dataDownloadSuccessful": "ଡାଉନଲୋଡ ସଫଳ ହେଲା",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "aboutVersionHistory": "ସଂସ୍କରଣ ଇତିହାସ",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "editorHistory": "ଇତିହାସ",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "chooseTypeClear": "ସଫା",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "fieldHoursButton": "ଖୋଲିବା ସମୟ ସେଟ୍ କରନ୍ତୁ",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "changesUploadFailedTitle": "ଅପଲୋଡ଼ ବିଫଳ ହେଲା",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "fieldHoursAsText": "ଲେଖା ଭାବରେ",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursBreak": "ବିରତି",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "tagsShare": "ଅଂଶୀଦାର କରନ୍ତୁ",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "filterEmpty": "ଖାଲି",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "accountLoginOAuth": "OAuth ସହ ଲଗ୍ ଇନ୍ କରନ୍ତୁ",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "loadingTooMuchData": "ସମ୍ପାଦକଙ୍କୁ ଦ୍ରୁତ କରିବା ପାଇଁ ସେଟିଂସରେ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ଡାଟା ବିଲୋପ କରନ୍ତୁ।",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "tagsKeyError": "ଚାବିଟି ଦୁର୍ଲଭ",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "fieldHoursNumberedWeekday": "\"ଶେଷ ସୋମବାର\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "editorMissing": "ବିଦ୍ୟମାନ ନାହିଁ",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "aboutProjectWebsite": "ପ୍ରକଳ୍ପ ୱେବ୍ ସାଇଟ୍",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "tileDragOrUnfilter": "ଦୟାକରି ଚାରିଆଡ଼େ ଯାଆନ୍ତୁ, ଏକ ସ୍ଥାନ ଯୋଡନ୍ତୁ, କିମ୍ୱା ଫିଲ୍ଟର୍ ସଫା କରନ୍ତୁ।",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "dataDownloadedCount": "{count,plural, =1{ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ .} କିଛି {ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ.} other{ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "navNotesMode": "ଟିପ୍ପଣୀ ଅବସ୍ଥା",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "settingsGoogle": "Google-ଉନ୍ନତ ଅବସ୍ଥାନ ବ୍ୟବହାର କରନ୍ତୁ",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "versionsRetryFetch": "ପୁନଃଚେଷ୍ଟା",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "hashtagsLabel": "ହ୍ୟାସଟ୍ୟାଗ୍ ପାଇଁ ଶବ୍ଦ",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "settingsSystem": "ସିଷ୍ଟମ",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsPresentation": "ଉପସ୍ଥାପନା",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsHashtags": "ପରିବର୍ତ୍ତନ ସେଟର ହ୍ୟାସଟ୍ୟାଗ",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "editorLoadingPreset": "ଲୋଡ୍ ପ୍ରିସେଟ୍…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "settingsLoginDetails": "OSM ଖାତା",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsTitle": "ବିନ୍ନ୍ୟାସ",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "aboutReportIssue": "ଏକ ସମସ୍ୟା ରିପୋର୍ଟ କରନ୍ତୁ",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "settingsPurgeAllData": "ସମସ୍ତ ଡାଉନଲୋଡ ତଥ୍ୟକୁ ଲିଭାନ୍ତୁ",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "hashtagsConfirm": "ଅପଲୋଡ୍ ରେ ଟ୍ୟାଗ୍ ସୁନିଶ୍ଚିତ କରନ୍ତୁ",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesDeletedUndo": "ଅଣ୍ଡୁ",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "editorMoreFields": "ଅଧିକ କ୍ଷେତ୍ର",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "mapLocate": "ପୁଣି ଥରେ ମୋପାଖକୁ",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "chooseLocation": "ଠିକଣା ବାଛନ୍ତୁ",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "navUpload": "ଅପଲୋଡ",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{ବିଲୋପିତ {count} ଜିନିଷ} କିଛି{ବିଲୋପିତ {count} ଜିନିଷ} ଅନ୍ୟ{ବିଲୋପିତ {count} ଜିନିଷ}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsEditor": "ସମ୍ପାଦକ",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "aboutOnGitHub": "GitHub ରେ",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "accountPasswordWarningMessage": "ଡିଭାଇସ୍ ରେ ଆପଣଙ୍କ ପାସୱାର୍ଡ୍ ଷ୍ଟୋର୍ ହେବ। OAuth ବିଫଳ ହେଲେ କେବଳ ଏହାକୁ ଚୟନ କରନ୍ତୁ।",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "fieldHoursHour": "ଘଣ୍ଟା",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "ମିନିଟ",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "warningFixme": "ସଜାଡନ୍ତୁ:{value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "mapFilter": "ଫିଲ୍ଟର",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "tagsUrlCopied": "URL କ୍ଲିପ୍ ବୋର୍ଡକୁ କପି ହୋଇଛି",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "fieldHoursNext": "ପରବର୍ତ୍ତୀ",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "aboutOnWeblate": "Weblate ରେ",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "accountLogout": "ଲଗ୍ ଆଉଟ୍ କରନ୍ତୁ",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "fieldHoursSpecificDays": "ନିର୍ଦ୍ଧିଷ୍ଟ ତାରିଖ",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "changesPending": "ବିଚାରାଧୀନ ରହିଛି",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "accountTitle": "OpenStreetMap ଖାତା",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "changesCount": "{count,plural, =1{{count} ପରିବର୍ତ୍ତନ} କିଛି{{count} ପରିବର୍ତ୍ତନ} ଅନ୍ୟ{{count} ପରିବର୍ତ୍ତନ}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesMapNotes": "ମାନଚିତ୍ର ଟିପ୍ପଣୀ ଏବଂ ଚିତ୍ର",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "accountLoginPassword": "ପାସୱାର୍ଡ ସହିତ ଲଗ୍ ଇନ୍ କରନ୍ତୁ",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "tileNo": "ନା",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "changesUploadedMessage": "APIକୁ {changes} ପ୍ରେରିତ ।",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "versionsFetchError": "ସଂସ୍କରଣ ଇତିହାସ ଆଣିବାରେ ତ୍ରୁଟି",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "accountFieldLogin": "ବ୍ୟବହାରକାରୀ ନାମ",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
   }
 }
