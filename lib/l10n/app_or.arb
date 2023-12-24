@@ -1,1 +1,6 @@
-{}
+{
+  "loadingStart": "ଆରମ୍ଭ ହେଉଛି…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  }
+}
