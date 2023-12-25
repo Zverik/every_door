@@ -1,1 +1,385 @@
-{}
+{
+  "tagsDelete": "Kustuta",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "editorMarkActive": "Märgi Aktiivseks",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorDeleteButton": "Kustuta",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsValueLong": "Väärtus on liiga pikk",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "editorRestoreMessage": "{amenity} on mitteaktiivne. Kas sa tahad selle märkida aktiivseks?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "dataDownloadFailed": "Allalaadimine ebaõnnestus",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "tagsAddTag": "Lisa silt",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "loadingChanges": "Laeb muudatusi…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "tagsValue": "Väärtus",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsKey": "Võti",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "loadingPresets": "Laeb eelseadeid…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "legendOther": "Muu",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "editorMarkChecked": "Märgi vaadatud",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorMove": "Liigu",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorTags": "Töötlemata sildid",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "chooseType": "Vali tüüp",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "mapSettings": "Seaded",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "loadingStart": "Laeb…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "editorMarkDefunct": "Märgi Mittefunktsionaalseks",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "filterByAddress": "Aadressi järgi",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "versionsVersionMeta": "{user} poolt {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "versionsNoTagChanges": "Puuduvad sildi muudatused",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "warningTooOld": "Teenus on {years} vana",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "editorCloseTitle": "Sulge redaktor?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "versionsEnableInternet": "Ühenda internetti, et laadida versiooni ajalugu",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "filterByFloor": "Korruse järgi",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "editorDuplicate": "Võimalik duplikaat {distance} m kauguses",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "filterNonConfirmed": "Ainult mittekinnitatud",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "navEntrancesMode": "Sissepääsuderežiim",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "warningWrongMode": "Vale režiim, kontrollige duplikaate",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "versionsLocalChanges": "Lokaalsed muudatused",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "years": "{count,plural, =1{{count} aasta} few{{count} aastat} other{{count} aastaid}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "loadingLocation": "Asukoha leidmine…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "tagsNewPoint": "Uus Punkt",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "versionsVersionNumber": "Versioon #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "mapZoomOut": "Suumi välja",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "tagsRestore": "Taasta",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tileNothingAround": "{distance} meetri raadiuses ei ole ühtegi teenust.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "editorDeleteTitle": "Kustuta {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorRestore": "Taasta",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorSave": "Salvesta",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "navMicromappingMode": "Mikromäppimisrežiim",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navPoiMode": "Teenuserežiim",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "warningWrongTag": "Vale silt: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "loadingChangesFailed": "Laadimine ebaõnnestus",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "navDownload": "Lae alla",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "editorRestoreTitle": "Kas see on avatud?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "loadingTooMuchDataTitle": "Liiga palju andmeid",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "tileDragTheMap": "Palun liigu lähedamale millegile, tõmba kaarti või lisa puuduv teenus.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "versionsTitle": "{elementRef} ajalugu",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "navImagery": "Muuda kujundus",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "mapZoomIn": "Suumi sisse",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "warningUnsupported": "See objektitüüp ei ole toetatud",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "filterNoAddresses": "Läheduses ei ole aadresse",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "editorCloseMessage": "Loobu muudatustest ilma salvestamata?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "dataDownloadSuccessful": "Allalaadimine õnnestus",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "editorHistory": "Ajalugu",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "chooseTypeClear": "Kustuta",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "tagsShare": "Jaga",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "filterEmpty": "tühi",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "loadingTooMuchData": "Massallalaaditi andmeid seadetes, et muutja oleks kiirem.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "tagsKeyError": "Väärtus on liiga haruldane",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "editorMissing": "Ei eksisteeri",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "tileDragOrUnfilter": "Palun liigu ringi, lisa teenus või tühista filter.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Allalaaditud {count} element.} few{Allalaaditud{count} elementi.} other{Allalaaditud{count} elemente.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "navNotesMode": "Märkmeterežiim",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "versionsRetryFetch": "Proovi uuesti",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "editorLoadingPreset": "Laadib eelseadet…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMoreFields": "Rohkem väljasid",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "mapLocate": "Tagasi minu juurde",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "chooseLocation": "Vali asukoht",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "navUpload": "Lae üles",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "warningFixme": "Fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "mapFilter": "Filter",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "tagsUrlCopied": "URL on lõikelauale kopeeritud",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tileNo": "ei",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "versionsFetchError": "Viga versiooni ajaloo laadimises",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  }
+}
