@@ -1191,5 +1191,9 @@
   "fieldPaymentGlobal": "Valores globales por defecto",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
+  },
+  "apiStatusUploadingNotes": "Subiendo notas",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
