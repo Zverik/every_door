@@ -1193,5 +1193,9 @@
   "fieldPaymentGlobal": "Globalne zadane vrijednosti",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
+  },
+  "apiStatusUploadingNotes": "Prijenos bilježaka",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
