@@ -357,7 +357,7 @@
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
   },
-  "warningFixme": "Fixme: {value}",
+  "warningFixme": "Paranda: {value}",
   "@warningFixme": {
     "description": "Warning message for when an object has a non-empty fixme value.",
     "placeholders": {
@@ -381,5 +381,294 @@
   "versionsFetchError": "Viga versiooni ajaloo laadimises",
   "@versionsFetchError": {
     "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "aboutFAQ": "KKK",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "changesOsmNote": "OSM märge",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "accountPasswordWarningTitle": "Hoiatus",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldPassword": "Parool",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "aboutInstalledVersion": "Installitud versioon",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutLinks": "Lingid",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "aboutLicense": "Litsents",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "settingsPurgeDataMessage": "Sa pead uuesti allalaadima kõik. Jätka?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "changesPurge": "Kustuta muudatused",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "settingsDefaultPayment": "Vaikemaksekaardid",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsPurgeData": "Kustutage aegunud vahemällu salvestatud andmed",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsBackground": "Tausta pilt",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "changesDeletedChange": "Kustutatud {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "accountAuthErrorTitle": "Autoriseerimise Viga",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "settingsCacheTiles": "Lae paanid alla",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "accountUnreadMail": "Lugemata Kirjad",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "aboutHelpTranslate": "Aidake tõlkida",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "settingsPurgeDataTitle": "Kustuta Andmed?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgedAllTitle": "Kustutatud andmed",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "changesUploadedTitle": "Üleslaaditud",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "settingsApiServer": "API Server",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "accountPasswordWarningButton": "Ok",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "OSM volikirjad",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "settingsNumericKeyboard": "Laiendatud Numbriklaviatuur",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsPurgedObsoleteTitle": "Vananenud andmed",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsUploads": "Ootel üleslaadimised",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "aboutSourceCode": "Lähtekood",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "settingsAbout": "Teave",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutHelpImprove": "Aita arendada {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutViewLog": "Süsteemi logi",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "settingsDataManagement": "Andmehaldus",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "changesPurgeTitle": "Kas kustutada muudatused?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "settingsLanguage": "Keel",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "accountChangesets": "Muutmised",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountAuthErrorMessage": "Vale kasutajanime või parool.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "settingsLeftHand": "Vasaku käe juhtelemendid",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsPreferContact": "Eelista \"contact:\" Prefix",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "accountOAuthError": "Autoriseerimise Viga",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "aboutVersionHistory": "Versiooni ajalugu",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "changesUploadFailedTitle": "Üleslaadimine Ebaõnnestus",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "accountLoginOAuth": "Logi sisse Autoriseerimisega",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "aboutProjectWebsite": "Projekti veebisait",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "settingsGoogle": "Kasuta Google-i positsioneerimist",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "hashtagsLabel": "Sõnad siltideks",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "settingsSystem": "Süsteem",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsPresentation": "Esitlus",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsHashtags": "Muudatuste Sildid",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "settingsLoginDetails": "OSM Konto",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsTitle": "Konfiguratsioon",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "aboutReportIssue": "Teatage veast",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "settingsPurgeAllData": "Kustutage kõik allalaaditud andmed",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "hashtagsConfirm": "Kinnita sildid üleslaadimisel",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesDeletedUndo": "Võta tagasi",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Kustutatud {count} element} few{Kustutatud {count} elementi} other{Kustutatud {count} elemente}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsEditor": "Redaktor",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "aboutOnGitHub": "GitHubis",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "accountPasswordWarningMessage": "Sinu parool salvestatakse sellele seadmele. Ainult vali see kui autoriseerimine ebaõnnestub.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "aboutOnWeblate": "Weblateis",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "accountLogout": "Logi Välja",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "changesPending": "Ootel",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "accountTitle": "OpenStreetMap Konto",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "changesCount": "{count,plural, =1{{count} muutus} few{{count} muutust} other{{count} muutusi}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesMapNotes": "Kaardi märked ja joonistused",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "accountLoginPassword": "Logi sisse parooliga",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "changesUploadedMessage": "Saadetud {changes} API-le.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "accountFieldLogin": "Kasutajanimi",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
   }
 }
