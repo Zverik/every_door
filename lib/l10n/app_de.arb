@@ -883,5 +883,9 @@
   "fieldHeightAny": "Länge erwartet, z. B. 5.4 oder 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "apiStatusUploadingNotes": "Notizen hochladen",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
