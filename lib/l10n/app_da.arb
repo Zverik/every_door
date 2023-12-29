@@ -1191,5 +1191,9 @@
   "fieldNameLangSearch": "Find sprog",
   "@fieldNameLangSearch": {
     "description": "Hint for the text field for finding a language in a list."
+  },
+  "apiStatusUploadingNotes": "Uploader noter",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
