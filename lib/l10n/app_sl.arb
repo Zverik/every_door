@@ -1191,5 +1191,9 @@
   "fieldHeightAny": "Pričakovana dolžina, npr. 5,4 ali 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "apiStatusUploadingNotes": "Nalaganje opomb",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
