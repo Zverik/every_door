@@ -1104,7 +1104,7 @@
       "count": {}
     }
   },
-  "notesCancelMessage": "Cancelar a tua nota OSM?",
+  "notesCancelMessage": "Cancelar a sua nota OSM?",
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
@@ -1191,5 +1191,9 @@
   "fieldPaymentGlobal": "Valores padrão globais",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
+  },
+  "apiStatusUploadingNotes": "A enviar notas",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
