@@ -1193,5 +1193,9 @@
   "fieldHeightAny": "Longitud esperada, per exemple 5,4 o 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "apiStatusUploadingNotes": "Carregant annotacions",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
