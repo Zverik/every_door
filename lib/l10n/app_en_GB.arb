@@ -1191,5 +1191,9 @@
   "fieldPaymentAround": "Common Options Around",
   "@fieldPaymentAround": {
     "description": "Tile name for payment options found on the map."
+  },
+  "apiStatusUploadingNotes": "Uploading notes",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
