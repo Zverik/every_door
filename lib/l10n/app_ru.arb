@@ -838,5 +838,9 @@
   "fieldNameLangSearch": "Найти язык",
   "@fieldNameLangSearch": {
     "description": "Hint for the text field for finding a language in a list."
+  },
+  "apiStatusUploadingNotes": "Отправляю заметки",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
