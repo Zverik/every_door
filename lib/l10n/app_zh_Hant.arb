@@ -1139,5 +1139,21 @@
   "notesComment": "你的評論",
   "@notesComment": {
     "description": "Label for the note comment field."
+  },
+  "warningUnsupported": "不支援此種類型",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "warningWrongMode": "模式錯誤，請檢查是否有重覆",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldNameLangSearch": "尋找語言",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldPaymentTitle": "卡片付款",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
   }
 }
