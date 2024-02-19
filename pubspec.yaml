@@ -15,41 +15,41 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.18.0
-  geolocator: ^10.1.0
-  sensors_plus: ^3.0.3
-  http: ^1.1.0
-  flutter_map: ^6.0.1
-  latlong2: ^0.9.0
-  sqflite: ^2.0.0+3
-  shared_preferences: ^2.1.1
-  flutter_secure_storage: ^8.0.0
-  flutter_riverpod: ^2.3.0
-  proximity_hash: ^2.0.0
-  diacritic: ^0.1.3
-  cached_network_image: ^3.2.1
-  flutter_cache_manager: ^3.3.0
   adaptive_dialog: ^1.9.0-0
-  xml: ^6.3.0
-  country_coder: ^1.2.0
-  settings_ui: ^2.0.2
-  uuid: ^3.0.7
   archive: ^3.1.6
-  phone_numbers_parser: ^4.2.0
-  line_icons: ^2.0.1
-  share_plus: ^7.1.0
-  path_provider: ^2.0.9
-  path: ^1.8.1
-  responsive_grid_list: ^1.2.3
-  url_launcher: ^6.0.20
-  flutter_dropdown_alert: ^1.0.3
-  oauth2_client: ^3.0.0
-  device_info_plus: ^8.2.2
-  unorm_dart: ^0.3.0
-  logging: ^1.0.2
+  cached_network_image: ^3.2.1
+  country_coder: ^1.2.0
+  device_info_plus: ^9.1.2
+  diacritic: ^0.1.3
   encrypt: ^5.0.1
+  flutter_cache_manager: ^3.3.0
+  flutter_dropdown_alert: ^1.0.3
+  flutter_map: ^6.0.1
   flutter_markdown: ^0.6.10+2
+  flutter_riverpod: ^2.3.0
+  flutter_secure_storage: ^8.0.0
+  geolocator: ^11.0.0
+  http: ^1.1.0
+  intl: ^0.18.0
+  latlong2: ^0.9.0
+  line_icons: ^2.0.1
+  logging: ^1.0.2
+  oauth2_client: ^3.0.0
+  path: ^1.8.1
   path_drawing: ^1.0.0
+  path_provider: ^2.0.9
+  phone_numbers_parser: ^4.2.0
+  proximity_hash: ^2.1.0
+  responsive_grid_list: ^1.2.3
+  sensors_plus: ^3.0.3
+  settings_ui: ^2.0.2
+  share_plus: ^7.1.0
+  shared_preferences: ^2.1.1
+  sqflite: ^2.0.0+3
+  unorm_dart: ^0.3.0
+  url_launcher: ^6.1.14
+  uuid: ^4.3.3
+  xml: ^6.3.0
 
 # Uncomment this for publishing on F-Droid
 #fdependency_overrides:
