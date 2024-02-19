@@ -43,6 +43,8 @@ const kChangesetSplitGap = 0.02; // Decimal degrees, min distance between groups
 const kMaxBulkDownloadZoom = 18; // Max zoom for bulk downloading tiles
 const kLocalPaymentRadius = 5000; // How far local payment options reach, in meters
 const kCapitalizeNames = false; // By default, can be overridden by OSM data
+const kDrawingMaxPoints = 100; // for hand-drawings
+const kDrawingMaxLength = 5000; // meters, for hand-drawings
 
 // Should be exactly 8 lines in both lists.
 const kDefaultPresets = [
@@ -71,6 +73,7 @@ const kOsmEndpoint = 'api.openstreetmap.org';
 const kOsmAuth2Endpoint = 'www.openstreetmap.org';
 // const kOsmEndpoint = 'master.apis.dev.openstreetmap.org';
 // const kOsmAuth2Endpoint = 'master.apis.dev.openstreetmap.org';
+const kScribblesEndpoint = 'geoscribble.osmz.ru';
 
 const kEraseDatabase = false; // Clear all data on start — do not forget to set to false!
 const kOverwritePresets = false; // Set to false when done testing

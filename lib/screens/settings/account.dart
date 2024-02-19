@@ -58,7 +58,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
         textFields: [
           DialogTextField(
             hintText: loc.accountFieldLogin,
-            initialText: result?[0] ?? ref.watch(authProvider),
+            initialText: result?[0] ?? ref.watch(authProvider)?.displayName ?? '',
           ),
           DialogTextField(
             hintText: loc.accountFieldPassword,
@@ -104,7 +104,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    final login = ref.watch(authProvider);
+    final login = ref.watch(authProvider)?.displayName;
     Widget content;
     if (login == null) {
       // not logged in

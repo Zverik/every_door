@@ -29,7 +29,7 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final osmData = ref.watch(osmDataProvider);
-    final login = ref.watch(authProvider);
+    final login = ref.watch(authProvider)?.displayName;
     final editorSettings = ref.watch(editorSettingsProvider);
     final forceLocation = ref.watch(forceLocationProvider);
     final hashtags = ref.watch(changesetTagsProvider).getHashtags();

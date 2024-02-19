@@ -1,3 +1,4 @@
+import 'package:every_door/helpers/equirectangular.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 
@@ -203,6 +204,15 @@ class LineString extends Geometry {
   @override
   // TODO: proper center on the line
   LatLng get center => bounds.center;
+
+  double getLengthInMeters() {
+    double length = 0.0;
+    final distance = DistanceEquirectangular();
+    for (int i = 1; i < _nodes.length; i++) {
+      length += distance(_nodes[i - 1], _nodes[i]);
+    }
+    return length;
+  }
 
   @override
   String toString() => 'LineString($_nodes)';

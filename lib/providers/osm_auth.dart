@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-final authProvider = StateNotifierProvider<OsmAuthController, String?>(
+final authProvider = StateNotifierProvider<OsmAuthController, OsmUserDetails?>(
     (_) => OsmAuthController());
 
 class OsmUserDetails {
@@ -66,7 +66,7 @@ class OsmAuthException implements Exception {
   String toString() => 'OsmAuthException($message)';
 }
 
-class OsmAuthController extends StateNotifier<String?> {
+class OsmAuthController extends StateNotifier<OsmUserDetails?> {
   static const kLoginKey = 'osmLogin';
   static const kPasswordKey = 'osmPassword';
   static final _logger = Logger('OsmAuthController');
@@ -98,7 +98,11 @@ class OsmAuthController extends StateNotifier<String?> {
       if (!isOAuth) login = null;
     }
 
-    state = login;
+    try {
+      state = await loadUserDetails();
+    } on OsmAuthException {
+      state = null;
+    }
   }
 
   logout() async {
@@ -133,12 +137,7 @@ class OsmAuthController extends StateNotifier<String?> {
 
   storeLoginPassword(String login, String password) async {
     final headers = _getBasicAuthHeaders(login, password);
-    final response = await http.get(
-        Uri.https(kOsmEndpoint, '/api/0.6/user/details'),
-        headers: headers);
-    if (response.statusCode != 200) {
-      throw OsmAuthException('Wrong login or password');
-    }
+    final details = await loadUserDetails(headers);
 
     if (isOAuth) {
       await _helper.deleteToken();
@@ -149,7 +148,7 @@ class OsmAuthController extends StateNotifier<String?> {
     await prefs.setString(kLoginKey, login);
     final secure = FlutterSecureStorage();
     await secure.write(key: kPasswordKey, value: password);
-    state = login;
+    state = details;
   }
 
   loginWithOAuth(BuildContext context) async {
@@ -163,7 +162,7 @@ class OsmAuthController extends StateNotifier<String?> {
       final details = await loadUserDetails(headers);
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(kLoginKey, details.displayName);
-      state = details.displayName;
+      state = details;
     }
   }
 

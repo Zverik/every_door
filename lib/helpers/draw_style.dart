@@ -14,6 +14,17 @@ class DrawingStyle {
     this.stroke = kDefaultStroke,
     this.dashed = false,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! DrawingStyle) return false;
+    return color == other.color &&
+        stroke < kDefaultStroke == other.stroke < kDefaultStroke &&
+        dashed == other.dashed;
+  }
+
+  @override
+  int get hashCode => Object.hash(color, stroke, dashed);
 }
 
 const kTypeStyles = <String, DrawingStyle>{
@@ -30,5 +41,8 @@ const kTypeStyles = <String, DrawingStyle>{
   "stream": DrawingStyle(color: Colors.lightBlue),
   "drain": DrawingStyle(color: Colors.lightBlue, dashed: true),
 };
+
+final kTypeStylesReversed =
+    kTypeStyles.map((key, value) => MapEntry(value, key));
 
 const kUnknownStyle = DrawingStyle(color: Colors.grey);

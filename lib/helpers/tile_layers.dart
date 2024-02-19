@@ -122,53 +122,70 @@ WMSTileLayerOptions _buildWMSOptions(String url, Imagery imagery) {
   );
 }
 
-TileLayer buildTileLayer(Imagery imagery) {
-  String url = imagery.url.replaceAll('{zoom}', '{z}');
-
-  if (imagery.type == ImageryType.bing) {
-    url = ImageryProvider.bingUrlTemplate
-            ?.replaceFirst('{quadkey}', '_QUADKEY_')
-            .replaceFirst('{culture}', '_CULTURE_') ??
-        '';
-  }
-
-  bool tms = false;
-  List<String> subdomains = [];
+class TileLayerOptions {
+  late final String urlTemplate;
   WMSTileLayerOptions? wmsOptions;
+  late final TileProvider tileProvider;
+  late final int minNativeZoom;
+  late final int maxNativeZoom;
+  final double maxZoom = 22;
+  late final double tileSize;
+  bool tms = false;
+  final List<String> subdomains = [];
+  final Map<String, String> additionalOptions = const {'a': 'b'};
+  final String userAgentPackageName = 'info.zverev.ilya.every_door';
 
-  switch (imagery.type) {
-    case ImageryType.tms:
-    case ImageryType.bing:
-      if (url.contains('{-y}')) {
-        url = url.replaceFirst('{-y}', '{y}');
-        tms = true;
-      }
+  TileLayerOptions(Imagery imagery) {
+    String url = imagery.url.replaceAll('{zoom}', '{z}');
 
-      if (url.contains('{switch:')) {
-        final match = RegExp(r'\{switch:([^}]+)\}').firstMatch(url)!;
-        subdomains = match.group(1)!.split(',').map((e) => e.trim()).toList();
-        url = url.substring(0, match.start) + '{s}' + url.substring(match.end);
-      }
-      break;
-    case ImageryType.wms:
-      wmsOptions = _buildWMSOptions(url, imagery);
+    if (imagery.type == ImageryType.bing) {
+      url = ImageryProvider.bingUrlTemplate
+              ?.replaceFirst('{quadkey}', '_QUADKEY_')
+              .replaceFirst('{culture}', '_CULTURE_') ??
+          '';
+    }
+
+    switch (imagery.type) {
+      case ImageryType.tms:
+      case ImageryType.bing:
+        if (url.contains('{-y}')) {
+          url = url.replaceFirst('{-y}', '{y}');
+          tms = true;
+        }
+
+        if (url.contains('{switch:')) {
+          final match = RegExp(r'\{switch:([^}]+)\}').firstMatch(url)!;
+          subdomains.addAll(match.group(1)!.split(',').map((e) => e.trim()));
+          url = url.substring(0, match.start) + '{s}' + url.substring(match.end);
+        }
+        break;
+      case ImageryType.wms:
+        wmsOptions = _buildWMSOptions(url, imagery);
+    }
+
+    tileProvider = imagery.type == ImageryType.bing
+        ? CachedBingTileProvider()
+        : CachedTileProvider();
+
+    urlTemplate = url;
+    minNativeZoom = imagery.minZoom;
+    maxNativeZoom = imagery.maxZoom;
+    tileSize = imagery.tileSize.toDouble();
   }
 
-  final TileProvider tileProvider = imagery.type == ImageryType.bing
-      ? CachedBingTileProvider()
-      : CachedTileProvider();
-
-  return TileLayer(
-    urlTemplate: url,
-    wmsOptions: wmsOptions,
-    tileProvider: tileProvider,
-    minNativeZoom: imagery.minZoom,
-    maxNativeZoom: imagery.maxZoom,
-    maxZoom: 22,
-    tileSize: imagery.tileSize.toDouble(),
-    tms: tms,
-    subdomains: subdomains,
-    additionalOptions: const {'a': 'b'},
-    userAgentPackageName: 'info.zverev.ilya.every_door',
-  );
+  TileLayer buildTileLayer() {
+    return TileLayer(
+      urlTemplate: urlTemplate,
+      wmsOptions: wmsOptions,
+      tileProvider: tileProvider,
+      minNativeZoom: minNativeZoom,
+      maxNativeZoom: maxNativeZoom,
+      maxZoom: maxZoom,
+      tileSize: tileSize,
+      tms: tms,
+      subdomains: subdomains,
+      additionalOptions: additionalOptions,
+      userAgentPackageName: userAgentPackageName,
+    );
+  }
 }

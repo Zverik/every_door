@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/circle_bounds.dart';
+import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/osm_api_converters.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/api_status.dart';
@@ -12,6 +14,7 @@ import 'package:logging/logging.dart';
 import 'package:proximity_hash/proximity_hash.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:http/http.dart' as http;
 import 'package:sqflite/utils/utils.dart';
@@ -19,12 +22,17 @@ import 'package:xml/xml.dart';
 import 'package:xml/xml_events.dart';
 
 final notesProvider = ChangeNotifierProvider((ref) => NotesProvider(ref));
+final ownScribblesProvider =
+    StateNotifierProvider<OwnScribblesController, bool>(
+        (_) => OwnScribblesController());
 
 class NotesProvider extends ChangeNotifier {
   static final _logger = Logger('NotesProvider');
 
   final Ref _ref;
   int length = 0;
+  List<(bool deleted, BaseNote note)> _undoStack = [];
+  int _undoStackLast = 0;
 
   bool get haveChanges => length > 0;
 
@@ -53,16 +61,36 @@ class NotesProvider extends ChangeNotifier {
   }
 
   /// Returns notes from the database.
-  Future<List<BaseNote>> fetchAllNotes(LatLng center, [double? radius]) async {
+  Future<List<BaseNote>> fetchAllNotes(
+      {LatLngBounds? bounds,
+      LatLng? center,
+      double radius = 1000.0,
+      bool osmOnly = false}) async {
     final database = await _ref.read(databaseProvider).database;
-    radius ??= 1000.0; // meters
-    final hashes = createGeohashes(center.latitude, center.longitude, radius,
-        BaseNote.kNoteGeohashPrecision);
+    List<String> hashes;
+    if (bounds != null) {
+      // Expand bounding box a little to account for long lines.
+      // (We query by geohashes for their centers).
+      const kExtendBounds = 0.001; // degrees, ~1100 m
+      // TODO: bounds do not work consistently, see modes/nodes.dart
+      final box = LatLngBounds.fromPoints([
+        LatLng(bounds.south - kExtendBounds, bounds.west - kExtendBounds),
+        LatLng(bounds.north + kExtendBounds, bounds.east + kExtendBounds),
+      ]);
+      hashes = createGeohashesBoundingBox(box.south, box.west, box.north,
+          box.east, BaseNote.kNoteGeohashPrecision);
+    } else if (center != null) {
+      hashes = createGeohashes(center.latitude, center.longitude, radius,
+          BaseNote.kNoteGeohashPrecision);
+    } else {
+      throw ArgumentError('Please specify either box or center');
+    }
     final placeholders = List.generate(hashes.length, (index) => "?").join(",");
+    final typeClause = osmOnly ? ' and type = ${OsmNote.dbType}' : '';
 
     final mapNoteData = await database.query(
       BaseNote.kTableName,
-      where: 'geohash in ($placeholders)',
+      where: 'geohash in ($placeholders)$typeClause',
       whereArgs: hashes,
     );
     return mapNoteData.map((data) => BaseNote.fromJson(data)).toList();
@@ -70,19 +98,8 @@ class NotesProvider extends ChangeNotifier {
 
   /// Returns only OSM notes from the database.
   Future<List<OsmNote>> fetchOsmNotes(LatLng center, [int? radius]) async {
-    final database = await _ref.read(databaseProvider).database;
-    radius ??= 1000; // meters
-    final hashes = createGeohashes(center.latitude, center.longitude,
-        radius.toDouble(), BaseNote.kNoteGeohashPrecision);
-    final placeholders = List.generate(hashes.length, (index) => "?").join(",");
-
-    final mapNoteData = await database.query(
-      BaseNote.kTableName,
-      where: 'geohash in ($placeholders) and type = ${OsmNote.dbType}',
-      whereArgs: hashes,
-    );
-    return mapNoteData
-        .map((data) => BaseNote.fromJson(data))
+    return (await fetchAllNotes(
+            center: center, radius: (radius ?? 1000).toDouble()))
         .whereType<OsmNote>()
         .toList();
   }
@@ -121,17 +138,169 @@ class NotesProvider extends ChangeNotifier {
     return notes.length;
   }
 
+  Future _cleanAndInsertNotes(
+      LatLngBounds bounds, List<BaseNote> notes, List<int> dbTypes) async {
+    final database = await _ref.read(databaseProvider).database;
+    await database.transaction((txn) async {
+      // Clear OSM notes for the area.
+      final placeholders =
+          List.generate(dbTypes.length, (index) => "?").join(",");
+      await txn.delete(
+        BaseNote.kTableName,
+        where:
+            'type in ($placeholders) and id >= 0 and lat >= ? and lat <= ? and lon >= ? and lon <= ?',
+        whereArgs: [
+          ...dbTypes,
+          bounds.south * kCoordinatePrecision,
+          bounds.north * kCoordinatePrecision,
+          bounds.west * kCoordinatePrecision,
+          bounds.east * kCoordinatePrecision,
+        ],
+      );
+
+      // Upload new notes.
+      final batch = txn.batch();
+      for (final note in notes) {
+        batch.insert(
+          BaseNote.kTableName,
+          note.toJson(),
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+      }
+      await batch.commit(noResult: true);
+    });
+  }
+
   Future<List<BaseNote>> _downloadMapNotes(LatLngBounds bounds) async {
+    final ownNotesOnly = _ref.read(ownScribblesProvider);
+    final author = _ref.read(authProvider);
+    final url = Uri.https(kScribblesEndpoint, '/scribbles', {
+      if (ownNotesOnly && author != null) 'user_id': author.id,
+      'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
+    });
+    var response = await http.get(url);
+    if (response.statusCode != 200) {
+      String msg = _extractError(response);
+      throw Exception('Failed to query scribbles: ${response.statusCode} $msg');
+    }
+
+    final data = json.decode(response.body);
     final notes = <BaseNote>[];
-    // TODO: clean the database and add downloaded notes
+    for (final noteData in data) {
+      if (noteData.containsKey('points')) {
+        final points = noteData['points'] as List<dynamic>;
+        notes.add(MapDrawing(
+          id: noteData['id'],
+          author: noteData['username'],
+          coordinates: points.map((ll) => LatLng(ll[1], ll[0])).toList(),
+          pathType: noteData['style'],
+        ));
+      } else if (noteData.containsKey('location')) {
+        final pt = noteData['location'] as List<dynamic>;
+        notes.add(MapNote(
+          id: noteData['id'],
+          location: LatLng(pt[1], pt[0]),
+          message: noteData['text'],
+        ));
+      }
+    }
+
+    await _cleanAndInsertNotes(
+        bounds, notes, [MapDrawing.dbType, MapNote.dbType]);
     return notes;
+  }
+
+  String _colorToHex(Color c) =>
+      c.value.toRadixString(16).padLeft(8, '0').substring(2);
+
+  String _extractError(http.Response response) {
+    String msg = response.request?.url.toString() ?? '';
+    try {
+      final errorData = json.decode(response.body) as Map<String, dynamic>;
+      if (errorData.containsKey('detail')) {
+        final detail = errorData['detail'] as List<dynamic>;
+        if (detail.isNotEmpty && detail[0].containsKey('msg')) {
+          msg = detail[0]['msg'];
+        }
+      }
+    } on Exception {
+      // nothing
+    }
+    return msg;
   }
 
   Future<void> _uploadMapNotes(Iterable<BaseNote> notes) async {
     if (notes.isEmpty) return;
-    // final author = _ref.read(authProvider);
-    // TODO: upload notes
-    // TODO: mark all uploaded notes not changed
+    final author = _ref.read(authProvider);
+    if (author == null) throw StateError('Please login to upload scribbles.');
+
+    final data = <Map<String, dynamic>>[];
+    final ident = {
+      'username': author.displayName,
+      'user_id': author.id,
+      'editor': '$kAppTitle $kAppVersion',
+    };
+    for (final note in notes) {
+      if (note.deleting && note.id == null) continue;
+      if (note is MapDrawing) {
+        if (note.deleting) {
+          data.add({...ident, 'id': note.id, 'deleted': true});
+        } else {
+          data.add({
+            ...ident,
+            'style': kTypeStylesReversed[note.style] ?? 'unknown',
+            'color': _colorToHex(note.style.color),
+            'dashed': note.style.dashed,
+            'thin': note.style.stroke < DrawingStyle.kDefaultStroke,
+            'points': note.coordinates
+                .map((ll) => [ll.longitude, ll.latitude])
+                .toList(),
+          });
+        }
+      } else if (note is MapNote) {
+        if (note.deleting) {
+          data.add({...ident, 'id': note.id, 'deleted': true});
+        } else {
+          data.add({
+            ...ident,
+            'text': note.message,
+            'location': [note.location.longitude, note.location.latitude],
+          });
+        }
+      }
+    }
+
+    final url = Uri.https(kScribblesEndpoint, '/upload');
+    final body = json.encode(data);
+    final response = await http.post(url, body: body, headers: {'Content-Type': 'application/json'});
+    if (response.statusCode != 200) {
+      String msg = _extractError(response);
+      throw Exception('Failed to upload notes: ${response.statusCode} $msg');
+    }
+
+    final ids = json.decode(response.body) as List<dynamic>;
+    if (ids.length != notes.length) {
+      _logger.warning('API returned ${ids.length} ids for ${notes.length} uploaded elements!');
+    }
+
+    // Mark all uploaded notes not changed and set ids.
+    // Skip new notes with "deleting", but delete old deleted notes.
+    int i = 0;
+    for (final note in notes) {
+      if (note.deleting && note.id == null) continue;
+      if (i < ids.length) {
+        if (note.deleting) {
+          await deleteNote(note, notify: false);
+        } else {
+          await saveNote(note, notify: false, newId: ids[i]);
+        }
+      }
+      i += 1;
+    }
+
+    // Clear undo buffer.
+    _undoStack.clear();
+    _undoStackLast = 0;
   }
 
   Future<List<OsmNote>> _downloadOsmNotes(LatLngBounds bounds) async {
@@ -160,33 +329,7 @@ class NotesProvider extends ChangeNotifier {
     }
 
     // Now clean the database and add downloaded notes.
-    final database = await _ref.read(databaseProvider).database;
-    await database.transaction((txn) async {
-      // Clear OSM notes for the area.
-      await txn.delete(
-        BaseNote.kTableName,
-        where: 'type = ? and id >= 0 and lat >= ? and lat <= ? and lon >= ? and lon <= ?',
-        whereArgs: [
-          OsmNote.dbType,
-          bounds.south * kCoordinatePrecision,
-          bounds.north * kCoordinatePrecision,
-          bounds.west * kCoordinatePrecision,
-          bounds.east * kCoordinatePrecision,
-        ],
-      );
-
-      // Upload new notes.
-      final batch = txn.batch();
-      for (final note in notes) {
-        batch.insert(
-          BaseNote.kTableName,
-          note.toJson(),
-          conflictAlgorithm: ConflictAlgorithm.replace,
-        );
-      }
-      await batch.commit(noResult: true);
-    });
-
+    await _cleanAndInsertNotes(bounds, notes, [OsmNote.dbType]);
     return notes;
   }
 
@@ -253,26 +396,100 @@ class NotesProvider extends ChangeNotifier {
     }
   }
 
-  saveNote(BaseNote note, {bool notify = true}) async {
+  Future<void> saveNote(BaseNote note,
+      {bool notify = true, bool addUndo = true, int? newId}) async {
     _logger.info('Saving $note');
     final database = await _ref.read(databaseProvider).database;
-    note.id ??= await getNewNoteId();
-    await database.insert(
-      BaseNote.kTableName,
-      note.toJson(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    if (note.id != null && newId != null) {
+      // Instead of creating, replace note id in the database.
+      final oldId = note.id;
+      note.id = newId;
+      await database.update(
+        BaseNote.kTableName,
+        note.toJson(),
+        where: 'id = ?',
+        whereArgs: [oldId],
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } else {
+      note.id ??= await getNewNoteId();
+      await database.insert(
+        BaseNote.kTableName,
+        note.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      if (addUndo) _addToUndoStack(note, false);
+    }
     if (notify) _checkHaveChangesAndNotify();
   }
 
-  Future<void> deleteNote(BaseNote note, {bool notify = true}) async {
+  Future<void> deleteNote(BaseNote note,
+      {bool notify = true, bool addUndo = true}) async {
     final database = await _ref.read(databaseProvider).database;
     await database.delete(
       BaseNote.kTableName,
       where: 'id = ?',
       whereArgs: [note.id],
     );
+    if (addUndo) _addToUndoStack(note, true);
     if (notify) _checkHaveChangesAndNotify();
+  }
+
+  bool get undoIsEmpty => _undoStackLast <= 0;
+  bool get redoIsEmpty => _undoStackLast >= _undoStack.length;
+
+  _addToUndoStack(BaseNote note, bool deleted) {
+    if (note is OsmNote) return;
+    // Add it to undo stack, discarding the top if needed.
+    if (_undoStackLast < _undoStack.length)
+      _undoStack.removeRange(_undoStackLast, _undoStack.length);
+    _undoStack.add((deleted, note));
+    _undoStackLast += 1;
+  }
+
+  Future<void> undoChange() async {
+    if (_undoStackLast <= 0) return;
+    _undoStackLast -= 1;
+    final deleted = _undoStack[_undoStackLast].$1;
+    final note = _undoStack[_undoStackLast].$2;
+    if (deleted) {
+      // restore with a new note id
+      note.id = null;
+      await saveNote(note, addUndo: false);
+      // At this point, note id was updated.
+    } else {
+      // delete
+      await deleteNote(note, addUndo: false);
+    }
+  }
+
+  Future<void> redoChange() async {
+    if (_undoStackLast >= _undoStack.length) return;
+    final deleted = _undoStack[_undoStackLast].$1;
+    final note = _undoStack[_undoStackLast].$2;
+    _undoStackLast += 1;
+    if (deleted) {
+      // delete again
+      await deleteNote(note, addUndo: false);
+    } else {
+      // restore with a new note id
+      note.id = null;
+      await saveNote(note, addUndo: false);
+      // At this point, note id was updated.
+    }
+  }
+
+  // Useful for undoing notes.
+  Future<MapDrawing?> getLastNewDrawing() async {
+    final database = await _ref.read(databaseProvider).database;
+    final drawing = await database.query(
+      BaseNote.kTableName,
+      where: 'type == ? and id < 0',
+      whereArgs: [MapDrawing.dbType],
+      orderBy: 'id',
+      limit: 1,
+    );
+    return drawing.isEmpty ? null : MapDrawing.fromJson(drawing.first);
   }
 
   Future<int> purgeNotes(DateTime before) async {
@@ -302,5 +519,27 @@ class NotesProvider extends ChangeNotifier {
       columns: ['min(id)'],
     ));
     return minId == null || minId > 0 ? -1 : minId - 1;
+  }
+}
+
+class OwnScribblesController extends StateNotifier<bool> {
+  static const kSettingKey = "own_scribbles";
+
+  OwnScribblesController() : super(false) {
+    loadState();
+  }
+
+  loadState() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedState = prefs.getBool(kSettingKey);
+    if (savedState != null) state = savedState;
+  }
+
+  set(bool newValue) async {
+    if (state != newValue) {
+      state = newValue;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(kSettingKey, state);
+    }
   }
 }

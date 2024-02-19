@@ -1,13 +1,8 @@
-import 'dart:async';
-import 'dart:math' show Point;
-
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/note.dart';
-import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
-import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/notes.dart';
@@ -33,62 +28,31 @@ class NotesPane extends ConsumerStatefulWidget {
 }
 
 class _NotesPaneState extends ConsumerState<NotesPane> {
+  static const kEnablePainter = true;
+
   static const kToolEraser = "eraser";
-  static const kToolNote = "note";
   static const kToolScribble = "scribble";
   static const kZoomOffset = -1.0;
 
-  String _currentTool = kToolNote;
+  String _currentTool = kToolScribble;
   List<BaseNote> _notes = [];
   final controller = MapController();
-  late final StreamSubscription<MapEvent> mapSub;
   final _mapKey = GlobalKey();
   LatLng? newLocation;
 
   @override
   initState() {
     super.initState();
-    mapSub = controller.mapEventStream.listen(onMapEvent);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateNotes();
     });
   }
 
-  onMapEvent(MapEvent event) {
-    bool fromController = event.source == MapEventSource.mapController ||
-        event.source == MapEventSource.nonRotatedSizeChange;
-    if (event is MapEventWithMove && !fromController) {
-      ref.read(zoomProvider.notifier).state = event.camera.zoom - kZoomOffset;
-      if (event.camera.zoom - kZoomOffset < kEditMinZoom) {
-        // Switch navigation mode on
-        ref.read(navigationModeProvider.notifier).state = true;
-      }
-    } else if (event is MapEventMoveEnd && !fromController) {
-      // Move the effective location for downloading to work properly.
-      ref.read(trackingProvider.notifier).state = false;
-      ref.read(effectiveLocationProvider.notifier).set(event.camera.center);
-      updateNotes();
-    }
-  }
-
-  @override
-  void dispose() {
-    mapSub.cancel();
-    super.dispose();
-  }
-
-  List<LatLng> _coordsFromOffsets(List<Offset> offsets) {
-    final result = <LatLng>[];
-    for (final offset in offsets) {
-      final loc = controller.camera.pointToLatLng(Point(offset.dx, offset.dy));
-      result.add(loc);
-    }
-    return result;
-  }
-
   updateNotes() async {
-    final location = controller.camera.center;
-    final notes = await ref.read(notesProvider).fetchAllNotes(location);
+    final notes = await ref
+        .read(notesProvider)
+        .fetchAllNotes(center: controller.camera.center, radius: 3000);
+        // .fetchAllNotes(bounds: controller.camera.visibleBounds);
     if (!mounted) return;
     setState(() {
       _notes = notes.where((n) => !n.deleting).toList();
@@ -119,6 +83,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   @override
   Widget build(BuildContext context) {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
+    final tileLayer = TileLayerOptions(ref.watch(selectedImageryProvider));
     final loc = AppLocalizations.of(context)!;
 
     // Rotate the map according to the global rotation value.
@@ -158,7 +123,20 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   ),
                 ),
                 children: [
-                  buildTileLayer(ref.watch(selectedImageryProvider)),
+                  TileLayer(
+                    urlTemplate: tileLayer.urlTemplate,
+                    wmsOptions: tileLayer.wmsOptions,
+                    tileProvider: tileLayer.tileProvider,
+                    minNativeZoom: tileLayer.minNativeZoom,
+                    maxNativeZoom: tileLayer.maxNativeZoom,
+                    maxZoom: tileLayer.maxZoom,
+                    tileSize: tileLayer.tileSize,
+                    tms: tileLayer.tms,
+                    subdomains: tileLayer.subdomains,
+                    additionalOptions: tileLayer.additionalOptions,
+                    userAgentPackageName: tileLayer.userAgentPackageName,
+                    reset: tileResetController.stream,
+                  ),
                   LocationMarkerWidget(tracking: false),
                   PolylineLayer(
                     polylines: [
@@ -231,20 +209,38 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   ),
                 ],
               ),
-              if (kTypeStyles.containsKey(_currentTool))
+              if (kEnablePainter) ...[
                 PainterWidget(
-                  onDrawn: (offsets) {
+                  map: controller,
+                  onDrawn: (coords) {
                     final note = MapDrawing(
-                      coordinates: _coordsFromOffsets(offsets),
+                      coordinates: coords,
                       pathType: _currentTool,
                     );
-                    setState(() {
-                      _notes.add(note);
-                    });
-                    // ref.read(notesProvider).saveNote(note);
+                    ref.read(notesProvider).saveNote(note);
                   },
-                  style: kTypeStyles[_currentTool]!,
+                  onTap: (location) {
+                    // TODO: find an object at the point (note) and open its details.
+                    // TODO: for eraser, delete drawings under tap.
+                  },
+                  onMapMove: () {
+                    updateNotes();
+                  },
+                  style:
+                      kTypeStyles[_currentTool] ?? kTypeStyles[kToolScribble]!,
                 ),
+                if (!ref.watch(notesProvider).undoIsEmpty)
+                  Positioned(
+                    left: 10,
+                    bottom: 10,
+                    child: ElevatedButton(
+                      child: Text('Undo'),
+                      onPressed: () {
+                        ref.read(notesProvider).undoChange();
+                      },
+                    ),
+                  ),
+              ],
               ApiStatusPane(),
             ],
           ),
