@@ -272,7 +272,7 @@
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
   },
-  "years": "{count,plural, =1{{count} ବର୍ଷ} କିଛି{{count} ବର୍ଷ} ଅନ୍ୟାନ୍ୟ{{count} ବର୍ଷ}}",
+  "years": "{count,plural, =1{{count} ବର୍ଷ} few{{count} ବର୍ଷ} other{{count} ବର୍ଷ}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -551,7 +551,7 @@
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
-  "dataDownloadedCount": "{count,plural, =1{ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ .} କିଛି {ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ.} other{ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ.}}",
+  "dataDownloadedCount": "{count,plural, =1{ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ .} few{ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ.} other{ଡାଉନଲୋଡ ହେଲା {count} ଜିନିଷ.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -630,7 +630,7 @@
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
   },
-  "settingsPurgedMessage": "{count,plural, =1{ବିଲୋପିତ {count} ଜିନିଷ} କିଛି{ବିଲୋପିତ {count} ଜିନିଷ} ଅନ୍ୟ{ବିଲୋପିତ {count} ଜିନିଷ}}",
+  "settingsPurgedMessage": "{count,plural, =1{ବିଲୋପିତ {count} ଜିନିଷ} few{ବିଲୋପିତ {count} ଜିନିଷ} other{ବିଲୋପିତ {count} ଜିନିଷ}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -698,7 +698,7 @@
   "@accountTitle": {
     "description": "Title for the account page."
   },
-  "changesCount": "{count,plural, =1{{count} ପରିବର୍ତ୍ତନ} କିଛି{{count} ପରିବର୍ତ୍ତନ} ଅନ୍ୟ{{count} ପରିବର୍ତ୍ତନ}}",
+  "changesCount": "{count,plural, =1{{count} ପରିବର୍ତ୍ତନ} few{{count} ପରିବର୍ତ୍ତନ} other{{count} ପରିବର୍ତ୍ତନ}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
