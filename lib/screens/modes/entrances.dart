@@ -324,6 +324,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   Widget build(BuildContext context) {
     final location = ref.read(effectiveLocationProvider);
     final imagery = ref.watch(selectedImageryProvider);
+    final tileLayer = TileLayerOptions(imagery);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final LatLng? trackLocation = ref.watch(geolocationProvider);
     final loc = AppLocalizations.of(context)!;
@@ -387,7 +388,20 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 ),
               ),
               children: [
-                buildTileLayer(imagery),
+                TileLayer(
+                  urlTemplate: tileLayer.urlTemplate,
+                  wmsOptions: tileLayer.wmsOptions,
+                  tileProvider: tileLayer.tileProvider,
+                  minNativeZoom: tileLayer.minNativeZoom,
+                  maxNativeZoom: tileLayer.maxNativeZoom,
+                  maxZoom: tileLayer.maxZoom,
+                  tileSize: tileLayer.tileSize,
+                  tms: tileLayer.tms,
+                  subdomains: tileLayer.subdomains,
+                  additionalOptions: tileLayer.additionalOptions,
+                  userAgentPackageName: tileLayer.userAgentPackageName,
+                  reset: tileResetController.stream,
+                ),
                 AttributionWidget(imagery),
                 LocationMarkerWidget(),
                 if (newLocation != null)

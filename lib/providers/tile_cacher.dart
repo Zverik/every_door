@@ -112,7 +112,8 @@ class TileCacher extends StateNotifier<TileCacherState> {
     state = TileCacherState(total: total);
     for (final img in [kOSMImagery, imagery]) {
       if (img.type != ImageryType.tms || img.tileSize != 256) continue;
-      final options = buildTileLayer(img);
+      final options = TileLayerOptions(img);
+      final tileLayer = options.buildTileLayer();
       int layerMaxZoom = maxZoom ?? img.maxZoom;
       if (layerMaxZoom > kMaxBulkDownloadZoom)
         layerMaxZoom = kMaxBulkDownloadZoom;
@@ -123,7 +124,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
         for (int zoom = kMinZoom; zoom <= layerMaxZoom; zoom++) {
           if (_needStop) break;
           try {
-            downloaded += await cacheTiles(options, area, zoom);
+            downloaded += await cacheTiles(tileLayer, area, zoom);
           } on Exception catch (e) {
             _logger.severe('Failed to download tiles: $e');
           }

@@ -102,7 +102,7 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
           ),
           children: [
             AttributionWidget(kOSMImagery),
-            buildTileLayer(kOSMImagery),
+            TileLayerOptions(kOSMImagery).buildTileLayer(),
             LocationMarkerWidget(),
             // Settings button
             OverlayButtonWidget(

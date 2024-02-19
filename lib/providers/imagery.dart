@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:every_door/helpers/tile_layers.dart';
@@ -16,6 +17,8 @@ final imageryProvider = StateNotifierProvider<ImageryProvider, Imagery>(
 final selectedImageryProvider =
     StateNotifierProvider<SelectedImageryProvider, Imagery>(
         (ref) => SelectedImageryProvider(ref));
+
+final StreamController<void> tileResetController = StreamController.broadcast();
 
 class ImageryProvider extends StateNotifier<Imagery> {
   static final _logger = Logger('ImageryProvider');
@@ -167,6 +170,7 @@ class SelectedImageryProvider extends StateNotifier<Imagery> {
   toggle() {
     isOSM = !isOSM;
     state = isOSM ? kOSMImagery : _ref.watch(imageryProvider);
+    tileResetController.add(null);
     storeValue();
   }
 }

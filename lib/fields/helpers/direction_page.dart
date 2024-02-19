@@ -109,6 +109,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
   @override
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
+    final tileLayer = TileLayerOptions(imagery);
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -149,7 +150,20 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
             ),
             children: [
               AttributionWidget(imagery),
-              buildTileLayer(imagery),
+              TileLayer(
+                urlTemplate: tileLayer.urlTemplate,
+                wmsOptions: tileLayer.wmsOptions,
+                tileProvider: tileLayer.tileProvider,
+                minNativeZoom: tileLayer.minNativeZoom,
+                maxNativeZoom: tileLayer.maxNativeZoom,
+                maxZoom: tileLayer.maxZoom,
+                tileSize: tileLayer.tileSize,
+                tms: tileLayer.tms,
+                subdomains: tileLayer.subdomains,
+                additionalOptions: tileLayer.additionalOptions,
+                userAgentPackageName: tileLayer.userAgentPackageName,
+                reset: tileResetController.stream,
+              ),
               LocationMarkerWidget(tracking: false),
               if (direction == null)
                 MarkerLayer(

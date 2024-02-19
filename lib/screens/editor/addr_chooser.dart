@@ -47,6 +47,7 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final imagery = ref.watch(selectedImageryProvider);
+    final tileLayer = TileLayerOptions(imagery);
 
     return Scaffold(
       appBar: AppBar(
@@ -77,7 +78,20 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
         ),
         children: [
           AttributionWidget(imagery),
-          buildTileLayer(imagery),
+          TileLayer(
+            urlTemplate: tileLayer.urlTemplate,
+            wmsOptions: tileLayer.wmsOptions,
+            tileProvider: tileLayer.tileProvider,
+            minNativeZoom: tileLayer.minNativeZoom,
+            maxNativeZoom: tileLayer.maxNativeZoom,
+            maxZoom: tileLayer.maxZoom,
+            tileSize: tileLayer.tileSize,
+            tms: tileLayer.tms,
+            subdomains: tileLayer.subdomains,
+            additionalOptions: tileLayer.additionalOptions,
+            userAgentPackageName: tileLayer.userAgentPackageName,
+            reset: tileResetController.stream,
+          ),
           MarkerLayer(
             markers: [
               PinMarker(widget.location),

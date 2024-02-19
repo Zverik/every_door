@@ -504,7 +504,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       },
               ),
               children: [
-                buildTileLayer(kOSMImagery),
+                TileLayerOptions(kOSMImagery).buildTileLayer(),
                 MarkerLayer(
                   markers: [
                     if (amenity.canMove)

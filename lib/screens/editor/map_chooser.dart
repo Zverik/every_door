@@ -109,6 +109,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   @override
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
+    final tileLayer = TileLayerOptions(imagery);
     final LatLng? trackLocation = ref.watch(geolocationProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
@@ -143,7 +144,20 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
         ),
         children: [
           AttributionWidget(imagery),
-          buildTileLayer(imagery),
+          TileLayer(
+            urlTemplate: tileLayer.urlTemplate,
+            wmsOptions: tileLayer.wmsOptions,
+            tileProvider: tileLayer.tileProvider,
+            minNativeZoom: tileLayer.minNativeZoom,
+            maxNativeZoom: tileLayer.maxNativeZoom,
+            maxZoom: tileLayer.maxZoom,
+            tileSize: tileLayer.tileSize,
+            tms: tileLayer.tms,
+            subdomains: tileLayer.subdomains,
+            additionalOptions: tileLayer.additionalOptions,
+            userAgentPackageName: tileLayer.userAgentPackageName,
+            reset: tileResetController.stream,
+          ),
           LocationMarkerWidget(tracking: false),
           if (trackLocation != null)
             CircleLayer(

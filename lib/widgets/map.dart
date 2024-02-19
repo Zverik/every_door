@@ -288,6 +288,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     });
 
     final imagery = ref.watch(selectedImageryProvider);
+    final tileLayer = TileLayerOptions(imagery);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final iconSize = widget.drawNumbers ? 18.0 : 14.0;
     final legendCon = ref.watch(legendProvider.notifier);
@@ -315,7 +316,20 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         ),
       ),
       children: [
-        buildTileLayer(imagery),
+        TileLayer(
+          urlTemplate: tileLayer.urlTemplate,
+          wmsOptions: tileLayer.wmsOptions,
+          tileProvider: tileLayer.tileProvider,
+          minNativeZoom: tileLayer.minNativeZoom,
+          maxNativeZoom: tileLayer.maxNativeZoom,
+          maxZoom: tileLayer.maxZoom,
+          tileSize: tileLayer.tileSize,
+          tms: tileLayer.tms,
+          subdomains: tileLayer.subdomains,
+          additionalOptions: tileLayer.additionalOptions,
+          userAgentPackageName: tileLayer.userAgentPackageName,
+          reset: tileResetController.stream,
+        ),
         LocationMarkerWidget(),
         if (trackLocation != null)
           CircleLayer(
