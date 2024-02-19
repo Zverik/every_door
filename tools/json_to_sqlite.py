@@ -18,7 +18,7 @@ import requests
 import sqlite3
 import sys
 import unicodedata
-from typing import Optional, Final, NewType, Iterator
+from typing import Optional, Final, NewType, Iterator, Any
 
 
 # Copied from ../lib/helpers/good_tags.dart
@@ -36,7 +36,7 @@ MAIN_KEYS: Final[list[str]] = [
 non_searchable_presets: list[str] = []
 
 # Just a dictionary of preset -> referenced preset.
-ReferenceStorage = NewType('ReferenceStorage', dict[str])
+ReferenceStorage = NewType('ReferenceStorage', dict[str, Any])
 
 
 class ReferenceStorageImpl:
@@ -91,7 +91,7 @@ class ReferenceStorageImpl:
 references = ReferenceStorageImpl()
 
 
-def open_or_download(git_path: str, filename: str, from_nsi: bool = False) -> dict:
+def open_or_download(git_path: Optional[str], filename: str, from_nsi: bool = False) -> dict:
     """
     Either opens the built json file from given git path
     (adding repo name automatically), or downloads the json
@@ -133,7 +133,7 @@ def normalize(s: Optional[str]) -> Optional[str]:
                      if not unicodedata.combining(c)])
 
 
-def import_fields(cur, path: str):
+def import_fields(cur, path: Optional[str]):
     data = open_or_download(path, 'fields.min.json', False)
     cur.execute("""create table fields (
         name text primary key,
@@ -198,7 +198,7 @@ def import_fields(cur, path: str):
     cur.execute("create index fields_uni_idx on fields (universal)")
 
 
-def import_presets(cur, path: str):
+def import_presets(cur, path: Optional[str]):
     data = open_or_download(path, 'presets.min.json', False)
     cur.execute("""create table presets (
         name text primary key,
@@ -373,7 +373,7 @@ def remove_generic_terms(cur):
     cur.execute(f"delete from preset_terms where preset_name in ({nq})", list(preset_names))
 
 
-def import_translations(cur, path):
+def import_translations(cur, path: Optional[str]):
     """
     This just reads all translation field for fields and presets (stored in the same file),
     and prepares two tables from them + preset search terms.
@@ -467,7 +467,7 @@ def import_translations(cur, path):
     cur.execute("create index preset_terms_idx on preset_terms (term collate nocase)")
 
 
-def import_nsi(cur, path: str):
+def import_nsi(cur, path: Optional[str]):
     # True means ``from_nsi``, so it's a different github repo.
     data = open_or_download(path, 'nsi.min.json', True)
     cur.execute("""create table nsi (
