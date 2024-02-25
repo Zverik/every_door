@@ -1187,5 +1187,13 @@
   "apiStatusUploadingNotes": "上傳註解",
   "@apiStatusUploadingNotes": {
     "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "fieldHeightMeters": "預期以公尺為單位的長度，例如 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "預期以英呎為單位的長度，例如 7.4",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
   }
 }
