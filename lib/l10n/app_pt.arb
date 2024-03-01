@@ -1156,7 +1156,7 @@
   "@fieldPaymentAround": {
     "description": "Tile name for payment options found on the map."
   },
-  "warningWrongMode": "Modo incorreto, comprova se há duplicados",
+  "warningWrongMode": "Modo incorreto, verifique se há duplicados",
   "@warningWrongMode": {
     "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
   },
