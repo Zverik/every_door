@@ -427,31 +427,31 @@
   "@fieldWifiCustomers": {
     "description": "Étiquette de champ Wifi pour du wifi disponible uniquement pour les clients."
   },
-  "fieldWheelchairYes": "Oui",
+  "fieldWheelchairYes": "oui",
   "@fieldWheelchairYes": {
     "description": "Étiquette de champ de fauteuil roulant pour une accessibilité totale."
   },
-  "fieldWheelchairLimited": "Limité",
+  "fieldWheelchairLimited": "limité",
   "@fieldWheelchairLimited": {
     "description": "Étiquette de champ de fauteuil roulant pour une accessibilité limitée."
   },
-  "fieldWheelchairNo": "Non",
+  "fieldWheelchairNo": "non",
   "@fieldWheelchairNo": {
     "description": "Étiquette de champ de fauteuil roulant pour une accessibilité inexistante."
   },
-  "fieldCardsAccepted": "Accepté",
+  "fieldCardsAccepted": "accepté",
   "@fieldCardsAccepted": {
     "description": "Étiquette du champ de paiement pour les cartes acceptées."
   },
-  "fieldCardsNo": "Non",
+  "fieldCardsNo": "non",
   "@fieldCardsNo": {
     "description": "Étiquette du champ de paiement pour les espèces uniquement."
   },
-  "fieldCheckboxYes": "Oui",
+  "fieldCheckboxYes": "oui",
   "@fieldCheckboxYes": {
     "description": "Nom de la case à cocher pour le oui."
   },
-  "fieldCheckboxNo": "Non",
+  "fieldCheckboxNo": "non",
   "@fieldCheckboxNo": {
     "description": "Nom de la case à cocher pour le non."
   },
@@ -475,7 +475,7 @@
   "@fieldFloorShouldBeNumber": {
     "description": "Message de validation pour une balise de niveaux, également utilisé dans le formulaire de construction des niveaux."
   },
-  "fieldAddressTap": "Entrez une adresse",
+  "fieldAddressTap": "Choisissez une adresse",
   "@fieldAddressTap": {
     "description": "Titre du volet dans lequel un utilisateur peut toucher une adresse pour la choisir."
   },
@@ -1086,7 +1086,7 @@
       }
     }
   },
-  "warningTooOld": "Cet élément a {years}",
+  "warningTooOld": "Cet élément a {years} ans",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -1164,7 +1164,7 @@
   "@fieldPaymentChoose": {
     "description": "Button title for setting up different local payment options."
   },
-  "fieldNameLangSearch": "Chercher langue",
+  "fieldNameLangSearch": "Chercher une langue",
   "@fieldNameLangSearch": {
     "description": "Hint for the text field for finding a language in a list."
   },
@@ -1191,5 +1191,9 @@
   "warningUnsupported": "Ce type d’objet n’est pas supporté",
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "apiStatusUploadingNotes": "Chargement des notes",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
