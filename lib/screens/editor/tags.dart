@@ -205,7 +205,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
 }
 
 class NewTagPanel extends StatefulWidget {
-  const NewTagPanel({Key? key}) : super(key: key);
+  const NewTagPanel({super.key});
 
   @override
   State<NewTagPanel> createState() => _NewTagPanelState();

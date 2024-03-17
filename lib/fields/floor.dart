@@ -11,10 +11,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
 class FloorPresetField extends PresetField {
-  FloorPresetField({required String label})
+  FloorPresetField({required super.label})
       : super(
           key: "level",
-          label: label,
           icon: Icons.stairs_outlined,
         );
 

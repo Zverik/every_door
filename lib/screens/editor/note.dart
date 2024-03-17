@@ -11,17 +11,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NoteEditorPane extends ConsumerStatefulWidget {
-  final OsmNote? note;
+  final BaseNote? note;
   final LatLng location;
 
-  const NoteEditorPane({Key? key, this.note, required this.location})
-      : super(key: key);
+  const NoteEditorPane({super.key, this.note, required this.location});
 
   @override
   ConsumerState<NoteEditorPane> createState() => _NoteEditorPaneState();
 }
 
 class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
+  late bool isOsmNote;
   String message = '';
 
   @override
@@ -29,36 +29,58 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     super.initState();
 
     // If the last comment is new, pre-fill it for editing.
-    final note = widget.note;
-    if (note != null && note.comments.isNotEmpty) {
-      if (note.comments.last.isNew) {
-        message = note.comments.last.message;
+    isOsmNote = widget.note != null && widget.note is OsmNote;
+    if (widget.note != null) {
+      if (isOsmNote && widget.note != null) {
+        final note = widget.note as OsmNote;
+        if (note.comments.isNotEmpty) {
+          if (note.comments.last.isNew) {
+            message = note.comments.last.message;
+          }
+        }
+      } else {
+        final note = widget.note as MapNote;
+        message = note.message;
       }
     }
   }
 
   bool get isChanged => message.isNotEmpty;
 
-  OsmNote? _buildEditedNote() {
-    final note = widget.note;
-    if (note == null) {
-      return message.isEmpty
-          ? null
-          : OsmNote(
-              location: widget.location,
-              comments: [OsmNoteComment(message: message, isNew: true)],
-            );
+  BaseNote? _buildEditedNote() {
+    if (widget.note == null) {
+      if (message.isEmpty) {
+        return null;
+      } else if (isOsmNote) {
+        return OsmNote(
+          location: widget.location,
+          comments: [OsmNoteComment(message: message, isNew: true)],
+        );
+      } else {
+        return MapNote(
+          location: widget.location,
+          message: message,
+        );
+      }
     }
 
-    if (note.comments.isNotEmpty && note.comments.last.isNew) {
-      if (message.isEmpty)
-        note.comments.removeLast();
-      else
-        note.comments.last.message = message;
-    } else if (message.isNotEmpty) {
-      note.comments.add(OsmNoteComment(message: message, isNew: true));
+    // TODO: conversion of notes! isOsmNote is not reliable.
+    if (isOsmNote) {
+      final note = widget.note as OsmNote;
+      if (note.comments.isNotEmpty && note.comments.last.isNew) {
+        if (message.isEmpty)
+          note.comments.removeLast();
+        else
+          note.comments.last.message = message;
+      } else if (message.isNotEmpty) {
+        note.comments.add(OsmNoteComment(message: message, isNew: true));
+      }
+      return note;
+    } else {
+      final note = widget.note as MapNote;
+      note.message = message; // TODO: check deletion
+      return note;
     }
-    return note;
   }
 
   saveAndClose([bool pop = true]) {
@@ -118,15 +140,21 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     return result;
   }
 
+  Iterable<OsmNoteComment> getOldComments() {
+    if (!isOsmNote || widget.note == null || widget.note is! OsmNote)
+      return const [];
+    return (widget.note as OsmNote).comments.where((c) => !c.isNew);
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final dateFormat =
         DateFormat.yMMM(Localizations.localeOf(context).toLanguageTag());
-    return WillPopScope(
-      onWillPop: () async {
-        saveAndClose(false);
-        return true;
+
+    return PopScope(
+      onPopInvoked: (didPop) {
+        if (didPop) saveAndClose(false);
       },
       child: SingleChildScrollView(
         child: SafeArea(
@@ -141,9 +169,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                for (final OsmNoteComment comment
-                    in widget.note?.comments.where((c) => !c.isNew) ??
-                        const []) ...[
+                for (final OsmNoteComment comment in getOldComments()) ...[
                   SelectableText.rich(
                     TextSpan(children: [
                       TextSpan(

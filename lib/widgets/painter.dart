@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';

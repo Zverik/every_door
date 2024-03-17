@@ -10,10 +10,8 @@ import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddressField extends PresetField {
-  AddressField({required String label, String key = "addr"})
+  AddressField({required super.label, super.key = "addr"})
       : super(
-          key: key,
-          label: label,
           icon: key == 'addr' ? Icons.home_outlined : null,
         );
 

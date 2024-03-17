@@ -11,14 +11,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PhonePresetField extends PresetField {
   PhonePresetField(
-      {required String key,
-      required String label,
-      FieldPrerequisite? prerequisite})
+      {required super.key,
+      required super.label,
+      super.prerequisite})
       : super(
-            key: key,
-            label: label,
-            icon: Icons.phone,
-            prerequisite: prerequisite);
+            icon: Icons.phone);
 
   @override
   Widget buildWidget(OsmChange element) => PhoneInputField(this, element);

@@ -8,10 +8,9 @@ import 'helpers/website_fmt.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WebsiteField extends PresetField {
-  WebsiteField({required String label})
+  WebsiteField({required super.label})
       : super(
           key: "website",
-          label: label,
           icon: Icons.language,
         );
 

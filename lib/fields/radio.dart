@@ -1,4 +1,3 @@
-import 'package:country_coder/country_coder.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
@@ -8,19 +7,13 @@ class RadioPresetField extends PresetField {
   List<String> options;
 
   RadioPresetField({
-    required String key,
-    required String label,
-    IconData? icon,
-    FieldPrerequisite? prerequisite,
-    LocationSet? locationSet,
+    required super.key,
+    required super.label,
+    super.icon,
+    super.prerequisite,
+    super.locationSet,
     required this.options,
-  }) : super(
-          key: key,
-          label: label,
-          prerequisite: prerequisite,
-          locationSet: locationSet,
-          icon: icon,
-        );
+  });
 
   @override
   Widget buildWidget(OsmChange element) => RadioFieldIntl(this, element);

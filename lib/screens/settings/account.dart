@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OsmAccountPage extends ConsumerStatefulWidget {
-  const OsmAccountPage({Key? key}) : super(key: key);
+  const OsmAccountPage({super.key});
 
   @override
   ConsumerState<OsmAccountPage> createState() => _OsmAccountPageState();
@@ -52,13 +52,15 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
     bool done = false;
     List<String>? result;
     while (!done) {
+      if (!mounted) return;
       result = await showTextInputDialog(
         context: context,
         title: loc.accountPasswordTitle,
         textFields: [
           DialogTextField(
             hintText: loc.accountFieldLogin,
-            initialText: result?[0] ?? ref.watch(authProvider)?.displayName ?? '',
+            initialText:
+                result?[0] ?? ref.watch(authProvider)?.displayName ?? '',
           ),
           DialogTextField(
             hintText: loc.accountFieldPassword,
@@ -75,11 +77,13 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
           updateDetails();
         } on ArgumentError {
           // Wrong login
-          await showAlertDialog(
-            context: context,
-            title: loc.accountAuthErrorTitle,
-            message: loc.accountAuthErrorMessage,
-          );
+          if (mounted) {
+            await showAlertDialog(
+              context: context,
+              title: loc.accountAuthErrorTitle,
+              message: loc.accountAuthErrorMessage,
+            );
+          }
         }
       } else {
         done = true;
@@ -92,6 +96,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
       await ref.read(authProvider.notifier).loginWithOAuth(context);
       updateDetails();
     } on Exception catch (e) {
+      if (!mounted) return;
       final loc = AppLocalizations.of(context)!;
       await showAlertDialog(
         context: context,

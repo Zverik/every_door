@@ -143,10 +143,9 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     final refOptions = suggestRefs(entrance['addr:flats']);
     if (entrance['ref'] == null) refOptions.add(kManualOption);
 
-    return WillPopScope(
-      onWillPop: () async {
-        if (widget.entrance != null) saveAndClose(false);
-        return true;
+    return PopScope(
+      onPopInvoked: (didPop) {
+        if (didPop && widget.entrance != null) saveAndClose(false);
       },
       child: SingleChildScrollView(
         child: SafeArea(

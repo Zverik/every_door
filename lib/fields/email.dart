@@ -7,14 +7,12 @@ class EmailPresetField extends PresetField {
   const EmailPresetField({
     String? label,
     IconData? icon,
-    String? placeholder,
-    FieldPrerequisite? prerequisite,
+    super.placeholder,
+    super.prerequisite,
   }) : super(
             key: 'email',
             label: label ?? 'Email',
-            icon: Icons.email_outlined,
-            placeholder: placeholder,
-            prerequisite: prerequisite);
+            icon: Icons.email_outlined);
 
   @override
   Widget buildWidget(OsmChange element) => EmailInputField(this, element);

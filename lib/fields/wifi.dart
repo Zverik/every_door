@@ -6,8 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WifiPresetField extends PresetField {
   WifiPresetField({
-    required String label,
-  }) : super(key: 'internet_access', label: label, icon: Icons.wifi);
+    required super.label,
+  }) : super(key: 'internet_access', icon: Icons.wifi);
 
   @override
   Widget buildWidget(OsmChange element) => WifiInputField(this, element);

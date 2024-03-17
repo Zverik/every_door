@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FloorChooserPane extends StatefulWidget {
-  const FloorChooserPane({Key? key}) : super(key: key);
+  const FloorChooserPane({super.key});
 
   @override
   State<FloorChooserPane> createState() => _FloorChooserPaneState();

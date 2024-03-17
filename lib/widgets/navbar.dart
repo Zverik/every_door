@@ -15,8 +15,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class BrowserNavigationBar extends ConsumerWidget {
   final Function(BuildContext) downloadAmenities;
 
-  const BrowserNavigationBar({Key? key, required this.downloadAmenities})
-      : super(key: key);
+  const BrowserNavigationBar({super.key, required this.downloadAmenities});
 
   Future<bool> _showChangesetPane(BuildContext context) async {
     final result = await showModalBottomSheet(

@@ -42,7 +42,7 @@ class MapChooserPage extends ConsumerStatefulWidget {
 class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   late LatLng center;
   List<OsmChange> nearestPOI = [];
-  List<OsmNote> nearestNotes = [];
+  List<BaseNote> nearestNotes = [];
   final controller = MapController();
   late final StreamSubscription<MapEvent> mapSub;
 
@@ -98,7 +98,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
     // Fetch OSM notes as well.
     final notes = await ref
         .read(notesProvider)
-        .fetchOsmNotes(location, kFarVisibilityRadius);
+        .fetchAllNotes(center: location, radius: kNotesVisibilityRadius);
     // Update the map.
     setState(() {
       nearestPOI = data;
@@ -158,6 +158,19 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
             userAgentPackageName: tileLayer.userAgentPackageName,
             reset: tileResetController.stream,
           ),
+          PolylineLayer(
+            polylines: [
+              for (final drawing in nearestNotes.whereType<MapDrawing>())
+                Polyline(
+                  points: drawing.coordinates,
+                  color: drawing.style.color,
+                  strokeWidth: drawing.style.stroke / 3,
+                  isDotted: drawing.style.dashed,
+                  borderColor: drawing.style.casing.withAlpha(30),
+                  borderStrokeWidth: 2.0,
+                ),
+            ],
+          ),
           LocationMarkerWidget(tracking: false),
           if (trackLocation != null)
             CircleLayer(
@@ -171,7 +184,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
             ),
           CircleLayer(
             circles: [
-              for (final note in nearestNotes)
+              for (final note in nearestNotes.whereType<OsmNote>())
                 CircleMarker(
                   point: note.location,
                   radius: 9.0,

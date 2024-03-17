@@ -8,10 +8,9 @@ import 'helpers/direction_page.dart';
 
 class DirectionPresetField extends PresetField {
   DirectionPresetField(
-      {required String key,
-      required String label,
-      FieldPrerequisite? prerequisite})
-      : super(key: key, label: label, prerequisite: prerequisite);
+      {required super.key,
+      required super.label,
+      super.prerequisite});
 
   @override
   Widget buildWidget(OsmChange element) => DirectionField(this, element);

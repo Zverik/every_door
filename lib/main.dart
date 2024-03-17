@@ -39,7 +39,7 @@ installCertificate() async {
 }
 
 class EveryDoorApp extends ConsumerWidget {
-  const EveryDoorApp({Key? key}) : super(key: key);
+  const EveryDoorApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

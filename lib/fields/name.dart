@@ -14,18 +14,13 @@ class NamePresetField extends PresetField {
   final bool capitalize;
 
   const NamePresetField({
-    required String key,
-    required String label,
-    IconData? icon,
-    required String placeholder,
-    FieldPrerequisite? prerequisite,
+    required super.key,
+    required super.label,
+    super.icon,
+    required String super.placeholder,
+    super.prerequisite,
     this.capitalize = true,
-  }) : super(
-            key: key,
-            label: label,
-            icon: icon,
-            placeholder: placeholder,
-            prerequisite: prerequisite);
+  });
 
   @override
   buildWidget(OsmChange element) => NameInputField(this, element);

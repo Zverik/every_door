@@ -11,14 +11,11 @@ import 'hours/hours_page.dart';
 
 class HoursPresetField extends PresetField {
   HoursPresetField(
-      {required String key,
-      required String label,
-      FieldPrerequisite? prerequisite})
+      {required super.key,
+      required super.label,
+      super.prerequisite})
       : super(
-            key: key,
-            label: label,
-            icon: Icons.schedule,
-            prerequisite: prerequisite);
+            icon: Icons.schedule);
 
   @override
   Widget buildWidget(OsmChange element) => HoursInputField(this, element);
@@ -26,14 +23,11 @@ class HoursPresetField extends PresetField {
 
 class CollectionPresetField extends PresetField {
   CollectionPresetField(
-      {required String key,
-      required String label,
-      FieldPrerequisite? prerequisite})
+      {required super.key,
+      required super.label,
+      super.prerequisite})
       : super(
-            key: key,
-            label: label,
-            icon: Icons.schedule,
-            prerequisite: prerequisite);
+            icon: Icons.schedule);
 
   @override
   Widget buildWidget(OsmChange element) =>

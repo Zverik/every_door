@@ -16,7 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class DuplicateWarning extends ConsumerStatefulWidget {
   final OsmChange amenity;
 
-  const DuplicateWarning({required this.amenity, Key? key}) : super(key: key);
+  const DuplicateWarning({required this.amenity, super.key});
 
   @override
   ConsumerState<DuplicateWarning> createState() => _DuplicateWarningState();

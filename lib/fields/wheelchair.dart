@@ -6,8 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WheelchairPresetField extends PresetField {
   WheelchairPresetField({
-    required String label,
-  }) : super(key: 'wheelchair', label: label, icon: Icons.accessible);
+    required super.label,
+  }) : super(key: 'wheelchair', icon: Icons.accessible);
 
   @override
   Widget buildWidget(OsmChange element) => WheelchairInputField(this, element);

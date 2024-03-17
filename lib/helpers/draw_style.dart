@@ -2,18 +2,24 @@ import 'package:flutter/material.dart';
 
 class DrawingStyle {
   final Color color;
-  final Color casing;
-  final double stroke;
+  final bool thin;
   final bool dashed;
 
   static const kDefaultStroke = 8.0;
 
   const DrawingStyle({
     required this.color,
-    this.casing = Colors.black,
-    this.stroke = kDefaultStroke,
+    this.thin = false,
     this.dashed = false,
   });
+
+  double get stroke => thin ? kDefaultStroke / 2.0 : kDefaultStroke;
+
+  Color get casing {
+    // simplified luminance
+    final lum = 0.2126 * (color.red / 255) + 0.7152 * (color.green / 255) + 0.0722 * (color.blue / 255);
+    return lum > 0.4 ? Colors.black : Colors.white;
+  }
 
   @override
   bool operator ==(Object other) {
@@ -28,7 +34,7 @@ class DrawingStyle {
 }
 
 const kTypeStyles = <String, DrawingStyle>{
-  "scribble": DrawingStyle(color: Colors.white, stroke: 4.0),
+  "scribble": DrawingStyle(color: Colors.white, thin: true),
   "road": DrawingStyle(color: Colors.white70),
   "track": DrawingStyle(color: Colors.white70, dashed: true),
   "footway": DrawingStyle(color: Colors.red),

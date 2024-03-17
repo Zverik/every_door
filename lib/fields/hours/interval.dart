@@ -338,8 +338,7 @@ class HoursMinutesChooser extends StatefulWidget {
       this.title,
       this.startHour = 0,
       this.endHour = 23,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   State<HoursMinutesChooser> createState() => _HoursMinutesChooserState();

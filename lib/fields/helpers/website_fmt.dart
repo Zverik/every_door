@@ -125,15 +125,15 @@ class _ProviderHelper extends WebsiteProvider {
 
   _ProviderHelper({
     List<String>? prefixes,
-    required IconData icon,
-    required String key,
-    required String label,
+    required super.icon,
+    required super.key,
+    required super.label,
     required RegExp regexp,
     String? format,
   })  : _regexp = regexp,
         _format = format ?? '%s',
         super(
-            prefixes: prefixes ?? const [], icon: icon, key: key, label: label);
+            prefixes: prefixes ?? const []);
 
   @override
   bool isValid(String full) => _regexp.hasMatch(full.trim());

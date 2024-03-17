@@ -49,17 +49,18 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   }
 
   updateNotes() async {
-    final notes = await ref
-        .read(notesProvider)
-        .fetchAllNotes(center: controller.camera.center, radius: 3000);
-        // .fetchAllNotes(bounds: controller.camera.visibleBounds);
+    final notes = await ref.read(notesProvider).fetchAllNotes(
+        center: controller.camera.center, radius: kNotesVisibilityRadius);
+    // .fetchAllNotes(bounds: controller.camera.visibleBounds);
     if (!mounted) return;
     setState(() {
       _notes = notes.where((n) => !n.deleting).toList();
     });
   }
 
-  _openNoteEditor(OsmNote? note, [LatLng? location]) async {
+  _openNoteEditor(BaseNote? note, [LatLng? location]) async {
+    if (note is MapDrawing) return;
+
     if (location != null) {
       setState(() {
         newLocation = location;
@@ -146,67 +147,33 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                           color: drawing.style.color,
                           strokeWidth: drawing.style.stroke,
                           isDotted: drawing.style.dashed,
-                          borderColor: drawing.style.casing,
+                          borderColor: drawing.style.casing.withAlpha(30),
+                          borderStrokeWidth: 6.0,
                         ),
                     ],
                   ),
-                  MarkerLayer(
-                    markers: [
-                      for (final osmNote in _notes.whereType<OsmNote>())
-                        Marker(
-                          point: osmNote.location,
-                          width: 50.0,
-                          height: 50.0,
-                          child: Center(
-                            child: GestureDetector(
-                              child: Container(
-                                padding: EdgeInsets.all(10.0),
-                                color: Colors.transparent,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: osmNote.isChanged
-                                        ? Colors.yellow.withOpacity(0.8)
-                                        : Colors.white.withOpacity(0.8),
-                                  ),
-                                  child: SizedBox(width: 30.0, height: 30.0),
-                                ),
-                              ),
-                              onTap: () {
-                                _openNoteEditor(osmNote);
-                              },
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                  DragButtonWidget(
-                    mapKey: _mapKey,
-                    button: DragButton(
-                      icon: Icons.add,
-                      tooltip: loc.notesAddNote,
-                      alignment: leftHand
-                          ? Alignment.bottomLeft
-                          : Alignment.bottomRight,
-                      onDragEnd: (pos) {
-                        _openNoteEditor(null, pos);
-                      },
-                      onTap: () async {
-                        final pos = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MapChooserPage(
-                                location: controller.camera.center),
-                          ),
-                        );
-                        if (pos != null) _openNoteEditor(null, pos);
-                      },
-                    ),
-                  ),
+                  CircleLayer(circles: [
+                    for (final osmNote in _notes.whereType<OsmNote>())
+                      CircleMarker(
+                        point: osmNote.location,
+                        radius: 15.0,
+                        color: osmNote.isChanged
+                            ? Colors.yellow.withOpacity(0.8)
+                            : Colors.white.withOpacity(0.8),
+                        borderColor: Colors.black,
+                        borderStrokeWidth: 1.0,
+                      ),
+                    for (final mapNote in _notes.whereType<MapNote>())
+                      CircleMarker(
+                        point: mapNote.location,
+                        radius: 10.0,
+                        color: mapNote.isChanged
+                            ? Colors.yellow.withOpacity(0.8)
+                            : Colors.white.withOpacity(0.8),
+                        borderColor: Colors.black,
+                        borderStrokeWidth: 1.0,
+                      ),
+                  ]),
                 ],
               ),
               if (kEnablePainter) ...[
@@ -222,6 +189,30 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   onTap: (location) {
                     // TODO: find an object at the point (note) and open its details.
                     // TODO: for eraser, delete drawings under tap.
+                    final locationPx =
+                        controller.camera.latLngToScreenPoint(location);
+                    distanceToLocation(LatLng loc2) {
+                      return locationPx.distanceTo(
+                          controller.camera.latLngToScreenPoint(loc2));
+                    }
+
+                    const kMaxTapDistance = 30;
+                    final closestNotes = _notes
+                        .where((note) => controller.camera.visibleBounds
+                            .contains(note.location))
+                        .toList();
+                    if (closestNotes.isEmpty) return;
+                    closestNotes.sort((a, b) => distanceToLocation(a.location)
+                        .compareTo(distanceToLocation(b.location)));
+                    for (final note in closestNotes) {
+                      if (distanceToLocation(note.location) <=
+                          kMaxTapDistance) {
+                        if (note is OsmNote) {
+                          _openNoteEditor(note);
+                          break;
+                        }
+                      }
+                    }
                   },
                   onMapMove: () {
                     updateNotes();
@@ -241,6 +232,27 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     ),
                   ),
               ],
+              MapDragCreateButton(
+                mapKey: _mapKey,
+                map: controller,
+                icon: Icons.add,
+                tooltip: loc.notesAddNote,
+                alignment:
+                    leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
+                onDragEnd: (pos) {
+                  _openNoteEditor(null, pos);
+                },
+                onTap: () async {
+                  final pos = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MapChooserPage(location: controller.camera.center),
+                    ),
+                  );
+                  if (pos != null) _openNoteEditor(null, pos);
+                },
+              ),
               ApiStatusPane(),
             ],
           ),

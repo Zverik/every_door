@@ -1,4 +1,3 @@
-import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_settings.dart';
@@ -15,23 +14,16 @@ class TextPresetField extends PresetField {
   final int? maxLines;
 
   const TextPresetField({
-    required String key,
-    required String label,
-    IconData? icon,
-    String? placeholder,
-    FieldPrerequisite? prerequisite,
-    LocationSet? locationSet,
+    required super.key,
+    required super.label,
+    super.icon,
+    super.placeholder,
+    super.prerequisite,
+    super.locationSet,
     this.keyboardType = TextInputType.text,
     this.capitalize = TextFieldCapitalize.sentence,
     this.maxLines,
-  }) : super(
-          key: key,
-          label: label,
-          icon: icon,
-          placeholder: placeholder,
-          prerequisite: prerequisite,
-          locationSet: locationSet,
-        );
+  });
 
   @override
   Widget buildWidget(OsmChange element) => TextInputField(this, element);

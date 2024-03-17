@@ -12,8 +12,8 @@ const kGenericKeys = ['cards', 'debit_cards', 'credit_cards'];
 
 class PaymentPresetField extends PresetField {
   PaymentPresetField({
-    required String label,
-  }) : super(key: 'payment', label: label, icon: Icons.credit_card);
+    required super.label,
+  }) : super(key: 'payment', icon: Icons.credit_card);
 
   @override
   Widget buildWidget(OsmChange element) =>

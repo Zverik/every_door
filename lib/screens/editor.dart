@@ -272,18 +272,24 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     final loc = AppLocalizations.of(context)!;
-    return WillPopScope(
-      onWillPop: () async {
-        if (!modified)
-          return true;
-        else {
+    return PopScope(
+      canPop: !modified,
+      onPopInvoked: (didPop) async {
+        if (didPop) return;
+
+        final navigator = Navigator.of(context);
+        bool canPop = true;
+        if (modified) {
           final result = await showOkCancelAlertDialog(
             context: context,
             isDestructiveAction: true,
             title: loc.editorCloseTitle,
             message: loc.editorCloseMessage,
           );
-          return result == OkCancelResult.ok;
+          canPop = result == OkCancelResult.ok;
+        }
+        if (canPop) {
+          navigator.pop();
         }
       },
       child: Scaffold(
@@ -481,7 +487,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
               options: MapOptions(
                 initialCenter: amenity.location,
                 initialZoom: 17,
-                interactiveFlags: 0,
                 initialRotation: ref.watch(rotationProvider),
                 interactionOptions:
                     InteractionOptions(flags: InteractiveFlag.none),
@@ -499,7 +504,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           setState(() {
                             amenity.location = newLocation;
                           });
-                          mapController.move(newLocation, mapController.zoom);
+                          mapController.move(newLocation, mapController.camera.zoom);
                         }
                       },
               ),

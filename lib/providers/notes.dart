@@ -64,7 +64,7 @@ class NotesProvider extends ChangeNotifier {
   Future<List<BaseNote>> fetchAllNotes(
       {LatLngBounds? bounds,
       LatLng? center,
-      double radius = 1000.0,
+      int radius = 1000,
       bool osmOnly = false}) async {
     final database = await _ref.read(databaseProvider).database;
     List<String> hashes;
@@ -80,8 +80,8 @@ class NotesProvider extends ChangeNotifier {
       hashes = createGeohashesBoundingBox(box.south, box.west, box.north,
           box.east, BaseNote.kNoteGeohashPrecision);
     } else if (center != null) {
-      hashes = createGeohashes(center.latitude, center.longitude, radius,
-          BaseNote.kNoteGeohashPrecision);
+      hashes = createGeohashes(center.latitude, center.longitude,
+          radius.toDouble(), BaseNote.kNoteGeohashPrecision);
     } else {
       throw ArgumentError('Please specify either box or center');
     }
@@ -98,8 +98,7 @@ class NotesProvider extends ChangeNotifier {
 
   /// Returns only OSM notes from the database.
   Future<List<OsmNote>> fetchOsmNotes(LatLng center, [int? radius]) async {
-    return (await fetchAllNotes(
-            center: center, radius: (radius ?? 1000).toDouble()))
+    return (await fetchAllNotes(center: center, radius: radius ?? 1000))
         .whereType<OsmNote>()
         .toList();
   }
@@ -272,7 +271,8 @@ class NotesProvider extends ChangeNotifier {
 
     final url = Uri.https(kScribblesEndpoint, '/upload');
     final body = json.encode(data);
-    final response = await http.post(url, body: body, headers: {'Content-Type': 'application/json'});
+    final response = await http
+        .post(url, body: body, headers: {'Content-Type': 'application/json'});
     if (response.statusCode != 200) {
       String msg = _extractError(response);
       throw Exception('Failed to upload notes: ${response.statusCode} $msg');
@@ -280,7 +280,8 @@ class NotesProvider extends ChangeNotifier {
 
     final ids = json.decode(response.body) as List<dynamic>;
     if (ids.length != notes.length) {
-      _logger.warning('API returned ${ids.length} ids for ${notes.length} uploaded elements!');
+      _logger.warning(
+          'API returned ${ids.length} ids for ${notes.length} uploaded elements!');
     }
 
     // Mark all uploaded notes not changed and set ids.

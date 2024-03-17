@@ -104,6 +104,19 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     ref.read(needMapUpdateProvider).trigger();
   }
 
+  bool canPopScope() {
+    if (ref.read(microZoomedInProvider) != null) {
+      ref.read(microZoomedInProvider.notifier).state = null;
+      return false;
+    } else if (!ref.read(trackingProvider) &&
+        ref.read(geolocationProvider) != null) {
+      ref.read(trackingProvider.notifier).state = true;
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final editorMode = ref.watch(editorModeProvider);
@@ -141,19 +154,8 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       }
     }
 
-    return WillPopScope(
-      onWillPop: () async {
-        if (ref.read(microZoomedInProvider) != null) {
-          ref.read(microZoomedInProvider.notifier).state = null;
-          return false;
-        } else if (!ref.read(trackingProvider) &&
-            ref.read(geolocationProvider) != null) {
-          ref.read(trackingProvider.notifier).state = true;
-          return false;
-        } else {
-          return true;
-        }
-      },
+    return PopScope(
+      canPop: canPopScope(),
       child: Scaffold(
         body: Column(
           children: [

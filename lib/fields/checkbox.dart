@@ -10,13 +10,13 @@ class CheckboxPresetField extends PresetField {
   List<ComboOption>? options;
 
   CheckboxPresetField({
-    required String key,
-    required String label,
-    IconData? icon,
-    FieldPrerequisite? prerequisite,
+    required super.key,
+    required super.label,
+    super.icon,
+    super.prerequisite,
     required this.tristate,
     this.options,
-  }) : super(key: key, label: label, prerequisite: prerequisite, icon: icon);
+  });
 
   @override
   Widget buildWidget(OsmChange element) => CheckboxInputField(this, element);

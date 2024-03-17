@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangesetPane extends ConsumerStatefulWidget {
 
-  ChangesetPane({Key? key}) : super(key: key);
+  ChangesetPane({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ChangesetPaneState();
@@ -69,7 +69,7 @@ class _ChangesetPaneState extends ConsumerState<ConsumerStatefulWidget> {
 }
 
 class ChangesetSettingsPage extends StatelessWidget {
-  const ChangesetSettingsPage({Key? key}) : super(key: key);
+  const ChangesetSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class ChangesetSettingsPage extends StatelessWidget {
 }
 
 class ChangesetSheetPane extends StatelessWidget {
-  const ChangesetSheetPane({Key? key}) : super(key: key);
+  const ChangesetSheetPane({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,15 +7,12 @@ class WikiCommonsPresetField extends PresetField {
   const WikiCommonsPresetField({
     String? key,
     String? label,
-    IconData? icon,
-    String? placeholder,
-    FieldPrerequisite? prerequisite,
+    super.icon,
+    super.placeholder,
+    super.prerequisite,
   }) : super(
             key: key ?? 'wikimedia_commons',
-            label: label ?? 'Wikimedia Commons',
-            icon: icon,
-            placeholder: placeholder,
-            prerequisite: prerequisite);
+            label: label ?? 'Wikimedia Commons');
 
   @override
   Widget buildWidget(OsmChange element) => WikiCommonsInputField(this, element);

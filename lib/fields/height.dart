@@ -7,16 +7,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HeightPresetField extends PresetField {
   HeightPresetField(
-      {required String key,
-      required String label,
-      String? placeholder,
-      FieldPrerequisite? prerequisite})
+      {required super.key,
+      required super.label,
+      super.placeholder,
+      super.prerequisite})
       : super(
-            key: key,
-            label: label,
-            icon: Icons.phone,
-            placeholder: placeholder,
-            prerequisite: prerequisite);
+            icon: Icons.phone);
 
   @override
   Widget buildWidget(OsmChange element) => HeightInputField(this, element);

@@ -19,7 +19,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangeListPage extends ConsumerStatefulWidget {
-  const ChangeListPage({Key? key}) : super(key: key);
+  const ChangeListPage({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ChangeListPageState();
@@ -159,11 +159,10 @@ class _ChangeListPageState extends ConsumerState {
       buildChangesList();
     });
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvoked: (didPop) {
         // Fix for cases when the snack bar does not time out.
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
-        return true;
       },
       child: Scaffold(
         appBar: AppBar(
