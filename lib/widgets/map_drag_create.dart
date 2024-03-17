@@ -1,5 +1,6 @@
 import 'dart:math' show Point;
 
+import 'package:every_door/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -81,7 +82,7 @@ class DragButtonWidget extends StatelessWidget {
             size: Size(arrowSize, 100.0),
           ),
           childWhenDragging: Container(),
-          child: _ButtonItself(
+          child: RoundButton(
             icon: button.icon,
             tooltip: button.tooltip,
             onTap: button.onTap,
@@ -156,7 +157,7 @@ class MapDragCreateButton extends StatelessWidget {
             size: Size(kArrowSize, 100.0),
           ),
           childWhenDragging: Container(),
-          child: _ButtonItself(
+          child: RoundButton(
             icon: icon,
             tooltip: tooltip,
             onTap: onTap,
@@ -164,35 +165,6 @@ class MapDragCreateButton extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class _ButtonItself extends StatelessWidget {
-  final IconData icon;
-  final String? tooltip;
-  final Function()? onTap;
-
-  const _ButtonItself({required this.icon, this.tooltip, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    final widget = ElevatedButton(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 0.0,
-          vertical: 15.0,
-        ),
-        child: Icon(icon, size: 30.0),
-      ),
-      style: ElevatedButton.styleFrom(
-        shape: CircleBorder(),
-      ),
-      onPressed: () {
-        if (onTap != null) onTap!();
-      },
-    );
-
-    return tooltip == null ? widget : Tooltip(message: tooltip, child: widget);
   }
 }
 

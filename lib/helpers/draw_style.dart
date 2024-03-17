@@ -52,3 +52,21 @@ final kTypeStylesReversed =
     kTypeStyles.map((key, value) => MapEntry(value, key));
 
 const kUnknownStyle = DrawingStyle(color: Colors.grey);
+
+const kStyleIcons = <String, IconData>{
+  "eraser": Icons.cleaning_services,
+  "scribble": Icons.draw,
+  "road": Icons.edit_road,
+  "track": Icons.edit_road,
+  "footway": Icons.directions_walk,
+  "path": Icons.directions_walk,
+  "cycleway": Icons.directions_bike,
+  "cycleway_shared": Icons.directions_bike,
+  "wall": Icons.fence,
+  "fence": Icons.fence,
+  "power": Icons.power_input,
+  "stream": Icons.water,
+  "drain": Icons.water,
+};
+
+const kUnknownStyleIcon = Icons.line_axis;

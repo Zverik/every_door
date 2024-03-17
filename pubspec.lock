@@ -213,10 +213,10 @@ packages:
     dependency: transitive
     description:
       name: dynamic_color
-      sha256: a866f1f8947bfdaf674d7928e769eac7230388a2e7a2542824fad4bb5b87be3b
+      sha256: eae98052fa6e2826bdac3dd2e921c6ce2903be15c6b7f8b6d8a5d49b5086298d
       url: "https://pub.dev"
     source: hosted
-    version: "1.6.9"
+    version: "1.7.0"
   encrypt:
     dependency: "direct main"
     description:
@@ -253,10 +253,10 @@ packages:
     dependency: transitive
     description:
       name: file
-      sha256: "1b92bec4fc2a72f59a8e15af5f52cd441e4a7860b49499d69dfa817af20e925d"
+      sha256: "5fc22d7c25582e38ad9a8515372cd9a93834027aacf1801cf01164dac0ffa08c"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.4"
+    version: "7.0.0"
   fixnum:
     dependency: transitive
     description:
@@ -319,18 +319,26 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_markdown
-      sha256: "21b085a1c185e46701373866144ced56cfb7a0c33f63c916bb8fe2d0c1491278"
+      sha256: "5b24061317f850af858ef7151dadbb6eb77c1c449c954c7bb064e8a5e0e7d81f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.19"
+    version: "0.6.20"
+  flutter_portal:
+    dependency: "direct main"
+    description:
+      name: flutter_portal
+      sha256: "4601b3dc24f385b3761721bd852a3f6c09cddd4e943dd184ed58ee1f43006257"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.4"
   flutter_riverpod:
     dependency: "direct main"
     description:
       name: flutter_riverpod
-      sha256: "4bce556b7ecbfea26109638d5237684538d4abc509d253e6c5c4c5733b360098"
+      sha256: "0f1974eff5bbe774bf1d870e406fc6f29e3d6f1c46bd9c58e7172ff68a785d7d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.10"
+    version: "2.5.1"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -457,10 +465,10 @@ packages:
     dependency: transitive
     description:
       name: geolocator_windows
-      sha256: a92fae29779d5c6dc60e8411302f5221ade464968fe80a36d330e80a71f087af
+      sha256: "53da08937d07c24b0d9952eb57a3b474e29aae2abf9dd717f7e1230995f13f0e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.2"
+    version: "0.2.3"
   glob:
     dependency: transitive
     description:
@@ -585,10 +593,10 @@ packages:
     dependency: transitive
     description:
       name: logger
-      sha256: "6bbb9d6f7056729537a4309bda2e74e18e5d9f14302489cc1e93f33b3fe32cac"
+      sha256: b3ff55aeb08d9d8901b767650285872cb1bb8f508373b3e348d60268b0c7f770
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2+1"
+    version: "2.1.0"
   logging:
     dependency: "direct main"
     description:
@@ -609,18 +617,18 @@ packages:
     dependency: transitive
     description:
       name: macos_window_utils
-      sha256: b3dfd47bbc605f0e315af684b50370a8f84932267aaa542098063fa384d593bd
+      sha256: "230be594d26f6dee92c5a1544f4242d25138a5bfb9f185b27f14de3949ef0be8"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   markdown:
     dependency: transitive
     description:
       name: markdown
-      sha256: "1b134d9f8ff2da15cb298efe6cd8b7d2a78958c1b00384ebcbdf13fe340a6c90"
+      sha256: ef2a1298144e3f985cc736b22e0ccdaf188b5b3970648f2d9dc13efd1d9df051
       url: "https://pub.dev"
     source: hosted
-    version: "7.2.1"
+    version: "7.2.2"
   matcher:
     dependency: transitive
     description:
@@ -889,10 +897,10 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: "548e2192eb7aeb826eb89387f814edb76594f3363e2c0bb99dd733d795ba3589"
+      sha256: f21b32ffd26a36555e501b04f4a5dca43ed59e16343f1a30c13632b2351dfa4d
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.0"
+    version: "2.5.1"
   rxdart:
     dependency: transitive
     description:
@@ -1182,10 +1190,10 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: c512655380d241a337521703af62d2c122bf7b77a46ff7dd750092aa9433499c
+      sha256: "0ecc004c62fd3ed36a2ffcbe0dd9700aee63bd7532d0b642a488b1ec310f492e"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.4"
+    version: "6.2.5"
   url_launcher_android:
     dependency: transitive
     description:
@@ -1302,18 +1310,18 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "5a751eddf9db89b3e5f9d50c20ab8612296e4e8db69009788d6c8b060a84191c"
+      sha256: "464f5674532865248444b4c3daca12bd9bf2d7c47f759ce2617986e7229494a8"
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.4"
+    version: "5.2.0"
   win32_registry:
     dependency: transitive
     description:
       name: win32_registry
-      sha256: "1c52f994bdccb77103a6231ad4ea331a244dbcef5d1f37d8462f713143b0bfae"
+      sha256: "41fd8a189940d8696b1b810efb9abcf60827b6cbfab90b0c43e8439e3a39d85a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.2"
   window_to_front:
     dependency: transitive
     description:

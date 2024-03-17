@@ -12,6 +12,7 @@ import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/painter.dart';
 import 'package:every_door/widgets/status_pane.dart';
+import 'package:every_door/widgets/style_chooser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -166,14 +167,13 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     for (final mapNote in _notes.whereType<MapNote>())
                       CircleMarker(
                         point: mapNote.location,
-                        radius: 10.0,
-                        color: mapNote.isChanged
-                            ? Colors.yellow.withOpacity(0.8)
-                            : Colors.white.withOpacity(0.8),
+                        radius: 6.0,
+                        color: Colors.lightBlueAccent.withOpacity(0.8),
                         borderColor: Colors.black,
                         borderStrokeWidth: 1.0,
                       ),
                   ]),
+                  // TODO: labels for MapNotes
                 ],
               ),
               if (kEnablePainter) ...[
@@ -220,16 +220,23 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   style:
                       kTypeStyles[_currentTool] ?? kTypeStyles[kToolScribble]!,
                 ),
+                StyleChooserButton(
+                  style: _currentTool,
+                  alignment:
+                      leftHand ? Alignment.bottomRight : Alignment.bottomLeft,
+                  onChange: (newStyle) {
+                    setState(() {
+                      _currentTool = newStyle;
+                    });
+                  },
+                ),
                 if (!ref.watch(notesProvider).undoIsEmpty)
-                  Positioned(
-                    left: 10,
-                    bottom: 10,
-                    child: ElevatedButton(
-                      child: Text('Undo'),
-                      onPressed: () {
-                        ref.read(notesProvider).undoChange();
-                      },
-                    ),
+                  UndoButton(
+                    alignment:
+                        leftHand ? Alignment.bottomRight : Alignment.bottomLeft,
+                    onTap: () {
+                      ref.read(notesProvider).undoChange();
+                    },
                   ),
               ],
               MapDragCreateButton(

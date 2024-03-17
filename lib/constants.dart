@@ -70,6 +70,15 @@ const kDefaultMicroPresets = [
   'tourism/information/guidepost', 'tourism/information/board',
 ];
 
+const kDrawingTools = [
+  // bottom to top, left to right, 2 columns
+  'road', 'track',
+  'footway', 'path',
+  'cycleway', 'cycleway_shared',
+  'wall', 'fence',
+  'power', 'stream',
+];
+
 const kOsmEndpoint = 'api.openstreetmap.org';
 const kOsmAuth2Endpoint = 'www.openstreetmap.org';
 // const kOsmEndpoint = 'master.apis.dev.openstreetmap.org';

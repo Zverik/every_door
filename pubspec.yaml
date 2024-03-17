@@ -7,8 +7,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 4.1.99+40
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
-  flutter: "^3.13.0"
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: "^3.16.0"
 
 dependencies:
   flutter:
@@ -25,8 +25,9 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   flutter_dropdown_alert: ^1.0.3
   flutter_map: ^6.0.1
-  flutter_markdown: ^0.6.10+2
-  flutter_riverpod: ^2.3.0
+  flutter_markdown: ^0.6.20
+  flutter_portal: ^1.1.4
+  flutter_riverpod: ^2.5.1
   flutter_secure_storage: ^8.0.0
   geolocator: ^11.0.0
   http: ^1.1.0
