@@ -175,6 +175,8 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
       } else {
         // Multiple amenities: zoom in and enhance.
         ref.read(microZoomedInProvider.notifier).state = area;
+        // Disable tracking.
+        ref.read(trackingProvider.notifier).state = false;
         // updateNearest(forceLocation: area.center);
         setState(() {
           nearestPOI = nearestPOI

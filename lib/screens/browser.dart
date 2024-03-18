@@ -104,13 +104,17 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     ref.read(needMapUpdateProvider).trigger();
   }
 
-  bool canPopScope() {
+  bool canPopScope(bool updateProviders) {
     if (ref.read(microZoomedInProvider) != null) {
-      ref.read(microZoomedInProvider.notifier).state = null;
+      if (updateProviders) {
+        ref.read(microZoomedInProvider.notifier).state = null;
+      }
       return false;
     } else if (!ref.read(trackingProvider) &&
         ref.read(geolocationProvider) != null) {
-      ref.read(trackingProvider.notifier).state = true;
+      if (updateProviders) {
+        ref.read(trackingProvider.notifier).state = true;
+      }
       return false;
     } else {
       return true;
@@ -128,6 +132,14 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
 
     ref.listen(editorModeProvider, (_, next) {
       ref.read(microZoomedInProvider.notifier).state = null;
+    });
+
+    // Now we have to listen to both providers to change the pop state.
+    ref.listen(microZoomedInProvider, (_, next) {
+      setState(() {});
+    });
+    ref.listen(trackingProvider, (_, next) {
+      setState(() {});
     });
 
     final screenSize = MediaQuery.of(context).size;
@@ -155,7 +167,14 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     }
 
     return PopScope(
-      canPop: canPopScope(),
+      canPop: canPopScope(false),
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          setState(() {
+            canPopScope(true);
+          });
+        }
+      },
       child: Scaffold(
         body: Column(
           children: [
