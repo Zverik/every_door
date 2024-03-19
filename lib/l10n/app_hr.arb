@@ -1062,11 +1062,11 @@
   "@notesClose": {
     "description": "Button title for closing a note."
   },
-  "notesCloseMessage": "Označiti bilješku riješenom?",
+  "notesCloseMessage": "Označiti bilješku kao riješenu?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
-  "notesCancelMessage": "Otkazati svoju OSM bilješku?",
+  "notesCancelMessage": "Otkazati tvoju OSM bilješku?",
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
@@ -1197,5 +1197,39 @@
   "apiStatusUploadingNotes": "Prijenos bilježaka",
   "@apiStatusUploadingNotes": {
     "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "drawChangeTool": "Promijeni alat",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawEraser": "Gumica",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "Cesta",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawTrack": "Neasfaltirana cesta",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawFootway": "Pješačka staza",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawPath": "Neasfaltirana pješačka staza",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCycleway": "Biciklistička staza",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawUndo": "Poništi",
+  "@drawUndo": {},
+  "drawScribble": "Crtaj",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
   }
 }
