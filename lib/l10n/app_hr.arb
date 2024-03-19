@@ -106,15 +106,15 @@
   "@mapFilter": {
     "description": "Tooltip for the amenity filter button on a map."
   },
-  "mapLocate": "Vrati se k meni",
+  "mapLocate": "Natrag na moju poziciju",
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
   },
-  "mapZoomIn": "Približi",
+  "mapZoomIn": "Uvećaj prikaz",
   "@mapZoomIn": {
     "description": "Tooltip for the zoom in (+) button on a map."
   },
-  "mapZoomOut": "Udalji",
+  "mapZoomOut": "Umanji prikaz",
   "@mapZoomOut": {
     "description": "Tooltip for the zoom out (-) button on a map."
   },
@@ -491,21 +491,21 @@
   "@fieldFloorLevelDesc": {
     "description": "Description for the \"addr:floor\" tag."
   },
-  "fieldFloorShouldBeNumber": "Molimo unesite broj",
+  "fieldFloorShouldBeNumber": "Upiši broj",
   "@fieldFloorShouldBeNumber": {
     "description": "Validation message for a levels tag, also used in building levels form."
   },
-  "fieldAddressTap": "Dotaknite adresu",
+  "fieldAddressTap": "Dodirni adresu",
   "@fieldAddressTap": {
     "description": "Title for the pane when a user can tap an address to choose it."
   },
-  "fieldPhoneWrong": "Neispravan telefonski format",
+  "fieldPhoneWrong": "Neispravan format telefonskog broja",
   "@fieldPhoneWrong": {
     "description": "Validation message for a non-standard phone number."
   },
   "buildingTypeAddress": "adresa",
   "@buildingTypeAddress": {},
-  "buildingTypeApartments": "stambena zgrada",
+  "buildingTypeApartments": "apartmani",
   "@buildingTypeApartments": {},
   "loadingStart": "Inicijaliziram…",
   "@loadingStart": {
@@ -646,7 +646,7 @@
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
-  "messageNoData": "Nema podataka, dotaknite ovdje za preuzimanje",
+  "messageNoData": "Nema podataka. Dodirnite ovdje za preuzimanje",
   "@messageNoData": {
     "description": "Message that appears on the main screen when there's no OSM data."
   },
@@ -698,7 +698,7 @@
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
-  "editorRestore": "Vrati nazad",
+  "editorRestore": "Obnovi",
   "@editorRestore": {
     "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
   },
@@ -735,7 +735,7 @@
   "@tagsNewPoint": {
     "description": "Tag editor panel title for a new amenity."
   },
-  "tagsRestore": "Vrati nazad",
+  "tagsRestore": "Obnovi",
   "@tagsRestore": {
     "description": "Tooltip for a button next to a tag value to restore the value to the original."
   },
@@ -904,7 +904,7 @@
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
   },
-  "messageDataObsolete": "Podaci su zastarjeli, dotaknite ovdje da biste ih osvježili",
+  "messageDataObsolete": "Podatci su zastarjeli. Dodirnite ovdje za aktualiziranje podataka",
   "@messageDataObsolete": {
     "description": "Message that appears on the main screen when OSM data is outdated."
   },
@@ -916,7 +916,7 @@
   "@enableGPSMessage": {
     "description": "Contents of the alert for enabling location services."
   },
-  "enableLocation": "Omogući lociranje",
+  "enableLocation": "Uključi lociranje",
   "@enableLocation": {
     "description": "Title of the alert for allowing app access to location."
   },
@@ -932,7 +932,7 @@
   "@buttonNo": {
     "description": "Button for dismissal."
   },
-  "buildingX": "Zgrada br. {n}",
+  "buildingX": "Zgrada {n}",
   "@buildingX": {
     "description": "Option displayed when there's multiple buildings under a tap.",
     "placeholders": {
@@ -954,11 +954,11 @@
   "@buildingPostCode": {
     "description": "Label for addr:postcode in the form. Keep it short."
   },
-  "buildingLevels": "Katova",
+  "buildingLevels": "Katovi",
   "@buildingLevels": {
     "description": "Label for building:levels in the form. Keep it short."
   },
-  "buildingRoofLevels": "Krovnih katova",
+  "buildingRoofLevels": "Krovni katovi",
   "@buildingRoofLevels": {
     "description": "Label for roof:levels in the form. Keep it short."
   },
@@ -1008,19 +1008,19 @@
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
   },
-  "entranceFlatsNumberList": "Trebali bi biti lista brojeva",
+  "entranceFlatsNumberList": "Mora biti popis brojeva",
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
   },
-  "entranceIsUnit": "Spremiti broj stana u addr:unit",
+  "entranceIsUnit": "Spremi broj stana u addr:unit",
   "@entranceIsUnit": {
     "description": "Label for a switch to use addr:unit instead of addr:flats."
   },
-  "entranceAccessYes": "javan",
+  "entranceAccessYes": "otvoren",
   "@entranceAccessYes": {},
   "entranceAccessDelivery": "dostava",
   "@entranceAccessDelivery": {},
-  "entranceWheelchair": "Invalidi",
+  "entranceWheelchair": "Invalidska kolica",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
   },
@@ -1078,7 +1078,7 @@
   "@apiStatusUpdatingDB": {
     "description": "Text displayed when the app is updating the database with downloaded objects."
   },
-  "apiStatusUploading": "Slanje izmjena",
+  "apiStatusUploading": "Prijenos promjena",
   "@apiStatusUploading": {
     "description": "Text displayed when the app is uploading data to the API."
   },
@@ -1088,7 +1088,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Kako dodati ulaz u zgradu?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Na dnu se nalazi niz gumba za način rada: Mikromapiranje, Sadržaji, Ulazi i Bilješke.\n\nU načinu Ulaza dotaknite ili povucite gumb vrata sa donjeg kuta na kartu.",
+  "faqEntranceContent": "Dolje se nalazi niz gumbova za način rada: Mikromapiranje, Sadržaji, Ulazi i Bilješke.\n\nU načinu Ulaza dodirnite ili povucite gumb za vrata u donjem kutu na kartu.",
   "@faqEntranceContent": {},
   "faqYellow": "Zašto su neki kućni brojevi žuti?",
   "@faqYellow": {},
@@ -1098,7 +1098,7 @@
   "@faqLetters": {},
   "faqChangeType": "Kako promijeniti vrstu sadržaja?",
   "@faqChangeType": {},
-  "faqChangeTypeContent": "Dotaknite naslov uređivača, gdje je napisana vrsta.",
+  "faqChangeTypeContent": "Dodirnite naslov uređivača gdje je upisana vrsta.",
   "@faqChangeTypeContent": {},
   "buildingMaterialMetal": "metal",
   "@buildingMaterialMetal": {},
@@ -1108,7 +1108,7 @@
   "@entranceAccessPrivate": {},
   "entranceAccessNo": "ne",
   "@entranceAccessNo": {},
-  "entranceType": "Ulaz",
+  "entranceType": "Vrsta",
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
@@ -1122,11 +1122,11 @@
   },
   "faqMapTinyContent": "Jer nije poanta u njoj. Vi samo provjeravate svoj položaj na karti, te je pomičete radi poravnanja. Pogledajte listu sadržaja ispod, poredanu prema udaljenosti od vas.\n\nKarta postaje veća kada uređujete sadržaje daleko od vaše lokacije. Ali, aplikacija je primarno napravljena za uređivanje stvari koje vidite svojim očima.",
   "@faqMapTinyContent": {},
-  "faqCheckmarksContent": "To su oznake da su podaci o sadržajima provjereni. Dodaju oznaku `check_date` s trenutnim datumom.\n\nIdeja iza kvačica je da ste, recimo, prvi put pregledali pola grada. Zatim ste se nakon mjesec dana vratili i ponovno otišli kartirati. Morate nekako označiti da vidite sadržaje, ali ništa se nije promijenilo u vezi s njima. Tome služi kvačica: dotaknite je i nastavite dalje.\n\nOznaka ostaje provjerena dva mjeseca. Nakon toga možete ponovno provjeriti sadržaje.",
+  "faqCheckmarksContent": "To su oznake da su podatci o sadržajima provjereni. Dodaju oznaku `check_date` s aktualnim datumom.\n\nSvrha kvačice je da ste, recimo, prvi put pregledali pola grada. Zatim ste se nakon mjesec dana vratili i ponovno otišli kartirati. Morate nekako označiti da vidite sadržaje, ali ništa se nije promijenilo u vezi s njima. Tome služi kvačica: dodirnite je i nastavite dalje.\n\nOznaka ostaje označena dva mjeseca. Nakon toga možete ponovo provjeriti sadržaje.",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Ako se vaša brojčana tipkovnica ne može prebaciti na punu tipkovnicu, provjerite postavke aplikacije. Nalaze se iza gumba u gornjem lijevom kutu. Tamo uključite \"proširenu brojčanu tipkovnicu\".",
   "@faqLettersContent": {},
-  "faqFloorsContent": "Ne. Prvi ima popunjenu oznaku `addr:floor=3`. To je kat kako je prikazan na navigaciji i liftu i koji se uobičajeno koristi. Drugi nema ovu oznaku, ali ima `level=3`. Taj je broj sekvencijalni broj kata od nula do `building:levels - 1`. To jest, u trokatnoj zgradi vrijednost `addr:floor` ovisi o državi, ali `level` je uvijek 0, 1 ili 2.\n\nEvo kako se prikaz u uređivaču odnosi na ove oznake:\n\n* `2`: `addr:floor=2` i `level=*` koji nije prazan.\n* `4/`: `addr:floor=4`, ali ne postoji oznaka `level`.\n* `/1`: `level=1`, ali ne postoji oznaka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i postoji objekt u blizini s istim `addr:floor`, ali različitim `level`, ili obrnuto).",
+  "faqFloorsContent": "Ne. Prvi ima popunjenu oznaku `addr:floor=3`. To je kat kako se prikazuje u navigaciji i koji se uobičajeno koristi. Drugi nema ovu oznaku, ali ima `level=3`. Taj je broj sekvencijalni broj kata od nula do `building:levels - 1`. To jest, u trokatnoj zgradi vrijednost `addr:floor` ovisi o državi, ali `level` je uvijek 0, 1 ili 2.\n\nEvo kako se prikaz u uređivaču odnosi na ove oznake:\n\n* `2`: `addr:floor=2` i `level=*` koji nije prazan.\n* `4/`: `addr:floor=4`, ali ne postoji oznaka `level`.\n* `/1`: `level=1`, ali ne postoji oznaka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i postoji objekt u blizini s istim `addr:floor`, ali različitim `level`, ili obrnuto).",
   "@faqFloorsContent": {},
   "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u načinu mikromapiranja? Kako se sortiraju objekti?\n\nOdgovori na sva ova pitanja nalaze se u [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Evo što možete pogledati:\n\n* Redoslijed ključeva za glavnu oznaku — popis `kMainKeys`.\n* Koji se objekti preuzimaju — funkcija `isGoodTags`.\n* Što se smatra sadržajem — funkcija `isAmenityTags`.\n* Koje se točke na koje načine spajaju na puteve — funkcija `detectSnap`.\n* Kada je objekt u mikromapiranju nepotpun — funkcija `needsMoreInfo`.",
   "@faqTaggingContent": {},
@@ -1134,7 +1134,7 @@
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
   },
-  "addressBlock": "Blok",
+  "addressBlock": "Stambeni blok",
   "@addressBlock": {
     "description": "Label for addr:block_number or addr_block. Keep it short."
   },
@@ -1142,7 +1142,7 @@
   "@notesComment": {
     "description": "Label for the note comment field."
   },
-  "fieldHeightMeters": "Očekuje se duljina u metrima, npr. 5.4",
+  "fieldHeightMeters": "Očekuje se duljina u metrima, npr. 5,4",
   "@fieldHeightMeters": {
     "description": "Validation message for when meters are expected."
   },
@@ -1150,7 +1150,7 @@
   "@fieldHeightFeet": {
     "description": "Validation message for when feet are expected."
   },
-  "fieldHeightAny": "Očekuje se duljina, npr. 5.4 ili 7'4\"",
+  "fieldHeightAny": "Očekuje se duljina, npr. 5,4 ili 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
   },
@@ -1214,7 +1214,7 @@
   "@drawTrack": {
     "description": "Tool description: unpaved forestry/farm road. Keep it short."
   },
-  "drawFootway": "Pješačka staza",
+  "drawFootway": "Asfaltirana pješačka staza",
   "@drawFootway": {
     "description": "Tool description: paved/maintained footway. Keep it short."
   },
@@ -1222,7 +1222,7 @@
   "@drawPath": {
     "description": "Tool description: unpaved narrow footway. Keep it short."
   },
-  "drawCycleway": "Biciklistička staza",
+  "drawCycleway": "Odvojena biciklistička staza",
   "@drawCycleway": {
     "description": "Tool description: segregated cycleway. Keep it short."
   },
@@ -1231,5 +1231,25 @@
   "drawScribble": "Crtaj",
   "@drawScribble": {
     "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawPower": "Dalekovod",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawStream": "Potok",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawFence": "Ograda",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawCyclewayShared": "Biciklistička staza",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawWall": "Zid",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
   }
 }
