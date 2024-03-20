@@ -1,17 +1,17 @@
 {
-  "loadingChanges": "Učitavam izmjene…",
+  "loadingChanges": "Učitavanje promjena …",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
-  "loadingTooMuchData": "Obrišite preuzete podatke u Postavkama kako bi uređivač bio brži.",
+  "loadingTooMuchData": "Izbriši preuzete podatke u postavkama za brži rad uređivača.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
-  "dataDownloadFailed": "Neuspješno preuzimanje",
+  "dataDownloadFailed": "Neuspjelo preuzimanje",
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
-  "dataDownloadSuccessful": "Uspješno preuzimanje",
+  "dataDownloadSuccessful": "Uspjelo preuzimanje",
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
@@ -38,11 +38,11 @@
       }
     }
   },
-  "tileDragOrUnfilter": "Pomaknite se, dodajte sadržaj ili poništite filtar.",
+  "tileDragOrUnfilter": "Miči se po karti, dodaj sadržaj ili poništi filtar.",
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
-  "tileDragTheMap": "Približite se bilo čemu, pomaknite kartu ili dodajte sadržaj koji nedostaje.",
+  "tileDragTheMap": "Približi se bilo čemu, pomakni kartu ili dodaj nedostajući sadržaj.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
@@ -50,15 +50,15 @@
   "@legendOther": {
     "description": "Legend item for all other types."
   },
-  "loadingLocation": "Tražim lokaciju…",
+  "loadingLocation": "Traženje lokacije …",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
-  "loadingChangesFailed": "Neuspješno učitavanje izmjena",
+  "loadingChangesFailed": "Neuspjelo učitavanje promjena",
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "loadingPresets": "Učitavam grupe…",
+  "loadingPresets": "Učitavanje postavki …",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
@@ -66,23 +66,23 @@
   "@mapSettings": {
     "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
   },
-  "navImagery": "Promjeni pozadinu",
+  "navImagery": "Promjeni prikaz",
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
-  "navPoiMode": "način Sadržaja",
+  "navPoiMode": "Modus sadržaja",
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
-  "navMicromappingMode": "način Mikromapiranja",
+  "navMicromappingMode": "Modus mikromapiranja",
   "@navMicromappingMode": {
     "description": "Tooltip for the micromapping mode button on the nav panel."
   },
-  "navEntrancesMode": "način Ulaza",
+  "navEntrancesMode": "Modus ulaza",
   "@navEntrancesMode": {
     "description": "Tooltip for the entrances mode button on the nav panel."
   },
-  "navNotesMode": "način Bilješki",
+  "navNotesMode": "Modus bilješki",
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."
   },
@@ -94,7 +94,7 @@
   "@filterByAddress": {
     "description": "Filter pane, label for choosing an address to filter by."
   },
-  "filterEmpty": "prazan",
+  "filterEmpty": "prazno",
   "@filterEmpty": {
     "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
   },
@@ -118,11 +118,11 @@
   "@mapZoomOut": {
     "description": "Tooltip for the zoom out (-) button on a map."
   },
-  "chooseLocation": "Odaberite lokaciju",
+  "chooseLocation": "Odaberi lokaciju",
   "@chooseLocation": {
     "description": "Title for the screen for choosing a location on a map."
   },
-  "chooseType": "Odaberite vrstu",
+  "chooseType": "Odaberi vrstu",
   "@chooseType": {
     "description": "Search field hint on the type choosing screen."
   },
@@ -130,7 +130,7 @@
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
   },
-  "warningFixme": "PopraviMe: {value}",
+  "warningFixme": "Fixme: {value}",
   "@warningFixme": {
     "description": "Warning message for when an object has a non-empty fixme value.",
     "placeholders": {
@@ -178,19 +178,19 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "Odbaciti izmjene bez snimanja?",
+  "editorCloseMessage": "Odbaciti promjene bez spremanja?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
-  "editorMoreFields": "Dodatna polja",
+  "editorMoreFields": "Više polja",
   "@editorMoreFields": {
     "description": "Title of a additional fields group in editor."
   },
-  "editorLoadingPreset": "Učitavam grupu…",
+  "editorLoadingPreset": "Učitavanje postavki …",
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
-  "editorRestoreMessage": "{amenity} je neaktivan. Želite li ga označiti aktivnim?",
+  "editorRestoreMessage": "{amenity} je neaktivan. Želiš li ga označiti aktivnim?",
   "@editorRestoreMessage": {
     "description": "Question on restoring an edited defunct amenity.",
     "placeholders": {
@@ -207,15 +207,15 @@
   "@settingsApiServer": {
     "description": "Section title for API server settings."
   },
-  "settingsSystem": "Sistem",
+  "settingsSystem": "Sustav",
   "@settingsSystem": {
     "description": "Title for the settings section for system-related switches."
   },
-  "settingsGoogle": "Koristi Googleove izmjene za pozicioniranje",
+  "settingsGoogle": "Koristi Google uslugu za pozicioniranje",
   "@settingsGoogle": {
     "description": "Settings switch for disabling Google services for location."
   },
-  "aboutViewLog": "Sistemski zapisi",
+  "aboutViewLog": "Zapis sustava",
   "@aboutViewLog": {
     "description": "Button title to open the log view page."
   },
@@ -231,7 +231,7 @@
   "@aboutOnGitHub": {
     "description": "Button description to indicate a link to GitHub."
   },
-  "aboutHelpTranslate": "Pomozite prevesti",
+  "aboutHelpTranslate": "Pomogni prevesti",
   "@aboutHelpTranslate": {
     "description": "Button title to open the app's Weblate page."
   },
@@ -239,7 +239,7 @@
   "@aboutOnWeblate": {
     "description": "Button description to indicate a link to Weblate."
   },
-  "aboutFAQ": "FAQ",
+  "aboutFAQ": "ČPP",
   "@aboutFAQ": {
     "description": "Title for the FAQ section on the About page."
   },
@@ -247,15 +247,15 @@
   "@aboutLinks": {
     "description": "Title for the links section on the About page."
   },
-  "accountTitle": "OpenStreetMap korisnički račun",
+  "accountTitle": "OpenStreetMap račun",
   "@accountTitle": {
     "description": "Title for the account page."
   },
-  "accountLoginOAuth": "Prijavite se pomoću OAutha",
+  "accountLoginOAuth": "Prijavi se pomoću OAutha",
   "@accountLoginOAuth": {
     "description": "Button label for logging in to OSM via OAuth."
   },
-  "accountLoginPassword": "Prijavite se koristeći lozinku",
+  "accountLoginPassword": "Prijavi se pomoću lozinke",
   "@accountLoginPassword": {
     "description": "Button label for logging in to OSM with a password."
   },
@@ -263,7 +263,7 @@
   "@accountPasswordWarningTitle": {
     "description": "Title for the warning dialog about keeping passwords on the device."
   },
-  "accountPasswordWarningMessage": "Vaša lozinka će biti pohranjena na uređaju. Odaberite ovo samo ukoliko OAuth ne uspije.",
+  "accountPasswordWarningMessage": "Tvoja će se lozinka spremiti na uređaj. Odaberi ovo samo ako OAuth ne uspije.",
   "@accountPasswordWarningMessage": {
     "description": "Message for the warning dialog about keeping passwords on the device."
   },
@@ -283,7 +283,7 @@
   "@accountAuthErrorTitle": {
     "descripton": "Title for the alert dialog about an incorrect password."
   },
-  "accountChangesets": "Skupovi izmjena",
+  "accountChangesets": "Skupovi promjena",
   "@accountChangesets": {
     "description": "Label for the number of changesets a user has uploaded."
   },
@@ -295,15 +295,15 @@
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
   },
-  "hashtagsConfirm": "Potvrdi hashtagove prilikom slanja",
+  "hashtagsConfirm": "Potvrdi hashtagove pri prijenosu",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesUploadedTitle": "Poslano",
+  "changesUploadedTitle": "Preneseno",
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Poslano {changes} API-ju.",
+  "changesUploadedMessage": "Promjene {changes} prenesene u API.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -313,11 +313,11 @@
       }
     }
   },
-  "changesUploadFailedTitle": "Slanje nije uspjelo",
+  "changesUploadFailedTitle": "Prijenos neuspio",
   "@changesUploadFailedTitle": {
     "description": "Title for the notification about a failed changes upload."
   },
-  "changesDeletedChange": "Obrisano {change}",
+  "changesDeletedChange": "Promjena {change} izbrisana",
   "@changesDeletedChange": {
     "description": "Message for the snack bar after you swipe a change away.",
     "placeholders": {
@@ -335,19 +335,19 @@
   "@changesPending": {
     "description": "Subtitle for a change that has not yet been sent to OSM API."
   },
-  "changesMapNotes": "Crteži i zabilješke na karti",
+  "changesMapNotes": "Bilješke na karti i crteži",
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
-  "changesOsmNote": "OSM Bilješke",
+  "changesOsmNote": "OSM bilješka",
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
-  "changesPurge": "Obriši sve izmjene",
+  "changesPurge": "Nepovratno izbriši promjene",
   "@changesPurge": {
     "description": "Purge all changes"
   },
-  "changesPurgeTitle": "Uništi izmjene?",
+  "changesPurgeTitle": "Nepovratno izbrisati promjene?",
   "@changesPurgeTitle": {
     "description": "Dialog title for confirming deletion of all changes."
   },
@@ -355,23 +355,23 @@
   "@fieldHoursAsText": {
     "description": "Button title to open the raw opening hours editor."
   },
-  "changesPurgeMessage": "Uništiti sve spremljene izmjene i vratiti izvorne podatke?",
+  "changesPurgeMessage": "Izbrisati sve spremljene promjene i obnoviti izvorne podatke?",
   "@changesPurgeMessage": {
     "description": "Dialog message for confirming deletion of all changes."
   },
-  "changesSwipeLeft": "Povucite ulijevo za poništavanje promjene",
+  "changesSwipeLeft": "Povuci lijevo za poništavanje promjene",
   "@changesSwipeLeft": {
     "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
   },
-  "fieldHoursPublicHolidays": "Državnim praznicima",
+  "fieldHoursPublicHolidays": "Državni praznici",
   "@fieldHoursPublicHolidays": {
     "description": "Card title for the PH (public holidays) selector."
   },
-  "fieldHoursOpens": "Otvara se u",
+  "fieldHoursOpens": "Otvara u",
   "@fieldHoursOpens": {
     "description": "Title for the interval start."
   },
-  "fieldHoursCloses": "Zatvara se u",
+  "fieldHoursCloses": "Zatvara u",
   "@fieldHoursCloses": {
     "description": "Title for the interval end."
   },
@@ -407,7 +407,7 @@
   "@fieldHoursClear": {
     "description": "Tooltip for a button to clear the opening_hours value."
   },
-  "fieldNameLanguages": "Dodatni jezik",
+  "fieldNameLanguages": "Dodaj ime na jednom drugom jeziku",
   "@fieldNameLanguages": {
     "description": "Tooltip for a button to add a name in another language."
   },
@@ -475,7 +475,7 @@
   "@fieldCheckboxNo": {
     "description": "Checkbox name for no."
   },
-  "fieldFloorEmpty": "Za odabir kata prvo postavite adresu.",
+  "fieldFloorEmpty": "Za biranje kata najprije postavite adresu.",
   "@fieldFloorEmpty": {
     "description": "What is written on the floor chooser if there are no floors to choose."
   },
@@ -507,7 +507,7 @@
   "@buildingTypeAddress": {},
   "buildingTypeApartments": "apartmani",
   "@buildingTypeApartments": {},
-  "loadingStart": "Inicijaliziram…",
+  "loadingStart": "Inicijaliziranje …",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
@@ -515,7 +515,7 @@
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "navUpload": "Pošalji",
+  "navUpload": "Prenesi",
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
   },
@@ -600,7 +600,7 @@
   "@fieldHoursClosed": {
     "description": "Switch tile label for making a schedule closed, e.g. for PH off."
   },
-  "aboutHelpImprove": "Pomozite poboljšati {appTitle}",
+  "aboutHelpImprove": "Pomogni poboljšati {appTitle}",
   "@aboutHelpImprove": {
     "description": "Title for the Help improve section on the About page.",
     "placeholders": {
@@ -611,7 +611,7 @@
       }
     }
   },
-  "aboutReportIssue": "Prijavite problem",
+  "aboutReportIssue": "Prijavi problem",
   "@aboutReportIssue": {
     "description": "Button title to open the app's GitHub issue page."
   },
@@ -623,7 +623,7 @@
   "@accountOAuthError": {
     "description": "Alert title for when OAuth login failed."
   },
-  "changesCount": "{count,plural, =1{{count} izmjena} few{{count} izmjene} other{{count} izmjena}}",
+  "changesCount": "{count,plural, =1{{count} promjena} few{{count} promjene} other{{count} promjena}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
@@ -642,11 +642,11 @@
   "@accountLogout": {
     "description": "Button title for logging out of OSM."
   },
-  "fieldHoursNumberedWeekday": "\"Prošli petak\"",
+  "fieldHoursNumberedWeekday": "„Zadnji ponedjeljak”",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
-  "messageNoData": "Nema podataka. Dodirnite ovdje za preuzimanje",
+  "messageNoData": "Nema podataka. Dodirni ovdje za preuzimanje",
   "@messageNoData": {
     "description": "Message that appears on the main screen when there's no OSM data."
   },
@@ -666,7 +666,7 @@
   "@fieldHoursSpecificDays": {
     "description": "Button title for selectors like Dec 31."
   },
-  "fieldCardsAccepted": "prihvaćene",
+  "fieldCardsAccepted": "prihvaćaju se",
   "@fieldCardsAccepted": {
     "description": "Payment field label for cards accepted."
   },
@@ -694,7 +694,7 @@
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
   },
-  "editorMarkDefunct": "Označi ugašenim",
+  "editorMarkDefunct": "Označi neaktivnim",
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
@@ -723,11 +723,11 @@
   "@editorDeleteButton": {
     "description": "Delete"
   },
-  "tagsShare": "Podijeli",
+  "tagsShare": "Dijeli",
   "@tagsShare": {
     "description": "Tooltip for the sharing button on the tags panel."
   },
-  "tagsUrlCopied": "URL kopiran u međuspremnik",
+  "tagsUrlCopied": "URL je kopiran u međuspremnik",
   "@tagsUrlCopied": {
     "description": "Popup message when the link to the object was copied to the clipboard."
   },
@@ -751,7 +751,7 @@
   "@tagsValue": {
     "description": "Tags panel, add a new tag dialog: value label"
   },
-  "tagsKeyError": "Oznaka je previše rijetka",
+  "tagsKeyError": "Oznaka je prerijetka",
   "@tagsKeyError": {
     "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
   },
@@ -759,7 +759,7 @@
   "@tagsValueLong": {
     "description": "Validation error for when the value length exceeds 255 characters."
   },
-  "versionsTitle": "povijest {elementRef}",
+  "versionsTitle": "{elementRef} povijest",
   "@versionsTitle": {
     "description": "Title for the element versions page.",
     "placeholders": {
@@ -770,7 +770,7 @@
       }
     }
   },
-  "versionsEnableInternet": "Povežite se na internet za dohvaćanje povijesti verzija",
+  "versionsEnableInternet": "Poveži se na internet za dohvaćanje povijesti verzija",
   "@versionsEnableInternet": {
     "description": "Message for when fetching element history fails due to lack of network connection."
   },
@@ -778,7 +778,7 @@
   "@versionsFetchError": {
     "description": "Message for when fetching element history fails due to unknown error."
   },
-  "versionsVersionNumber": "Verzija #{number}",
+  "versionsVersionNumber": "Verzija broj {number}",
   "@versionsVersionNumber": {
     "description": "Card header for the diff for this element version.",
     "placeholders": {
@@ -789,7 +789,7 @@
       }
     }
   },
-  "versionsVersionMeta": "od {user} u {datetime}",
+  "versionsVersionMeta": "od {user}, {datetime}",
   "@versionsVersionMeta": {
     "description": "Card body to show metadata about the element version.",
     "placeholders": {
@@ -813,7 +813,7 @@
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
-  "settingsDataManagement": "Upravljanje podacima",
+  "settingsDataManagement": "Upravljanje podatcima",
   "@settingsDataManagement": {
     "description": "Section title for data settings."
   },
@@ -821,7 +821,7 @@
   "@settingsPresentation": {
     "description": "Section title for presentation options."
   },
-  "settingsLoginDetails": "OSM korisnički račun",
+  "settingsLoginDetails": "OSM račun",
   "@settingsLoginDetails": {
     "description": "Settings entry for logging in to OSM."
   },
@@ -829,46 +829,46 @@
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
   },
-  "settingsPurgeData": "Očisti zastarjele podatke iz predmemorije",
+  "settingsPurgeData": "Nepovratno izbriši zastarjele podatke iz predmemorije",
   "@settingsPurgeData": {
     "description": "Settings entry for purging obsolete OSM data."
   },
-  "settingsPurgeAllData": "Očisti sve podatke iz predmemorije",
+  "settingsPurgeAllData": "Nepovratno izbriši sve podatke iz predmemorije",
   "@settingsPurgeAllData": {
     "description": "Settings entry for purging all cached OSM data."
   },
-  "settingsPurgeDataTitle": "Obrisati podatke?",
+  "settingsPurgeDataTitle": "Izbrisati podatke?",
   "@settingsPurgeDataTitle": {
     "description": "Confirmation dialog title for when purging all downloaded data."
   },
-  "settingsPurgeDataMessage": "Morati ćete sve ponovo preuzeti. Nastaviti?",
+  "settingsPurgeDataMessage": "Morat ćeš sve ponovo preuzeti. Nastaviti?",
   "@settingsPurgeDataMessage": {
     "description": "Confirmation dialog message for when purging all downloaded data."
   },
-  "settingsPurgedObsoleteTitle": "Zastarjeli podaci",
+  "settingsPurgedObsoleteTitle": "Zastarjeli podatci",
   "@settingsPurgedObsoleteTitle": {
     "description": "Notification title for cleaning obsolete data from the cache."
   },
-  "settingsPurgedAllTitle": "Obrisani podaci",
+  "settingsPurgedAllTitle": "Izbrisani podatci",
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Obrisan {count} element} few{Obrisana {count} elementa} other{Obrisano {count} elemenata}}",
+  "settingsPurgedMessage": "{count,plural, =1{Izbrisan {count} element} few{Izbrisana {count} elementa} other{Izbrisano {count} elemenata}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
       "count": {}
     }
   },
-  "settingsUploads": "Čeka na slanje",
+  "settingsUploads": "Predstojeći prijenosi",
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
-  "settingsBackground": "Pozadinska karta",
+  "settingsBackground": "Satelitski prikaz u pozadini",
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
-  "settingsCacheTiles": "Preuzmi pozadinu",
+  "settingsCacheTiles": "Preuzmi slike satelitskog prikaza",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
@@ -884,7 +884,7 @@
   "@settingsEditor": {
     "description": "Title for the settings section for editor presets."
   },
-  "settingsPreferContact": "Preferiraj \"contact:\" prefiks",
+  "settingsPreferContact": "Preferiraj prefiks \"contact:\"",
   "@settingsPreferContact": {
     "description": "Settings switch for using e.g. contact:phone=* over phone=*."
   },
@@ -892,7 +892,7 @@
   "@settingsNumericKeyboard": {
     "description": "Settings switch for using the full keyboard for numeric fields."
   },
-  "settingsDefaultPayment": "Uobičajene kartice za plaćanje",
+  "settingsDefaultPayment": "Zadane kartice za plaćanje",
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
@@ -900,11 +900,11 @@
   "@versionsRetryFetch": {
     "description": "Button label to retry fetching history."
   },
-  "versionsLocalChanges": "Lokalne izmjene",
+  "versionsLocalChanges": "Lokalne promjene",
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
   },
-  "messageDataObsolete": "Podatci su zastarjeli. Dodirnite ovdje za aktualiziranje podataka",
+  "messageDataObsolete": "Podatci su zastarjeli. Dodirni ovdje za aktualiziranje",
   "@messageDataObsolete": {
     "description": "Message that appears on the main screen when OSM data is outdated."
   },
@@ -912,7 +912,7 @@
   "@enableGPS": {
     "description": "Title of the alert for enabling location services."
   },
-  "enableGPSMessage": "Uključite lokacijske usluge na ploči sa postavkama koja će se prikazati.",
+  "enableGPSMessage": "Uključi lokacijske usluge u ploči postavki koje će se prikazati.",
   "@enableGPSMessage": {
     "description": "Contents of the alert for enabling location services."
   },
@@ -920,7 +920,7 @@
   "@enableLocation": {
     "description": "Title of the alert for allowing app access to location."
   },
-  "enableLocationMessage": "Dopustite aplikaciji pristup lokaciji na ploči sa postavkama koja će se prikazati.",
+  "enableLocationMessage": "Dopusti aplikaciji pristup lokaciji na ploči postavki koja će se prikazati.",
   "@enableLocationMessage": {
     "description": "Contents of the alert for allowing app access to location."
   },
@@ -970,7 +970,7 @@
   "@buildingType": {
     "description": "Label for building type (value of building=*) in the form. Keep it short."
   },
-  "buildingMoreButton": "Dodatno",
+  "buildingMoreButton": "Više",
   "@buildingMoreButton": {
     "description": "Button label for opening the building object in a full editor."
   },
@@ -992,7 +992,7 @@
   "@buildingMaterialStone": {},
   "buildingTypeHouse": "kuća",
   "@buildingTypeHouse": {},
-  "buildingTypeRetail": "trgovina",
+  "buildingTypeRetail": "maloprodaja",
   "@buildingTypeRetail": {},
   "buildingTypeCommercial": "komercijalna",
   "@buildingTypeCommercial": {},
@@ -1028,21 +1028,21 @@
   "@entranceTypeMain": {},
   "entranceTypeStaircase": "stubište",
   "@entranceTypeStaircase": {},
-  "entranceTypeHome": "kućni",
+  "entranceTypeHome": "privatni",
   "@entranceTypeHome": {},
-  "entranceTypeShop": "trgovački",
+  "entranceTypeShop": "trgovina",
   "@entranceTypeShop": {},
-  "entranceTypeService": "servisni",
+  "entranceTypeService": "servis",
   "@entranceTypeService": {},
-  "entranceTypeGarage": "garažni",
+  "entranceTypeGarage": "garaža",
   "@entranceTypeGarage": {},
   "entranceRef": "Referenca",
   "@entranceRef": {
     "description": "Label for entrance ref in the form. Keep it short."
   },
-  "entranceTypeEmergency": "za slučaj opasnosti",
+  "entranceTypeEmergency": "u slučaju opasnosti",
   "@entranceTypeEmergency": {},
-  "addressHouseNotEmpty": "Ne bi smio biti prazan",
+  "addressHouseNotEmpty": "Ne smije biti prazno",
   "@addressHouseNotEmpty": {
     "description": "Validator message for addr:housenumber."
   },
@@ -1088,17 +1088,17 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Kako dodati ulaz u zgradu?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Dolje se nalazi niz gumbova za način rada: Mikromapiranje, Sadržaji, Ulazi i Bilješke.\n\nU načinu Ulaza dodirnite ili povucite gumb za vrata u donjem kutu na kartu.",
+  "faqEntranceContent": "Dolje se nalazi niz gumbova za moduse: Mikromapiranje, Sadržaji, Ulazi i Bilješke.\n\nU modusu Ulaza dodirni ili povuci gumb za vrata u donjem kutu na kartu.",
   "@faqEntranceContent": {},
   "faqYellow": "Zašto su neki kućni brojevi žuti?",
   "@faqYellow": {},
-  "faqYellowContent": "Oznake koje nisu žute u načinu Ulaza i bijele točkice u načinu Mikromapiranja znače da elementima nedostaju neki važni atributi. Na primjer:\n\n* Od zgrada se očekuje da imaju označen broj katova.\n* Ulazi trebaju imati vrstu, a za stubišta raspon stanova.\n* Klupe trebaju imati materijal i naslon.\n* Drveće treba imati vrstu lista i ciklus.",
+  "faqYellowContent": "Oznake koje nisu žute u modusu Ulaza i bijele točkice u modusu Mikromapiranja znače da elementima nedostaju neka važna svojstva. Na primjer:\n\n* Zgrade moraju imati brojeve katova.\n* Ulazi trebaju imati vrstu, a stubišta raspon stanova.\n* Klupe trebaju imati materijal i naslon.\n* Stabla trebaju imati vrstu lista i ciklus.",
   "@faqYellowContent": {},
-  "faqLetters": "Mogu li upisivati slova u ref ili broj stana?",
+  "faqLetters": "Mogu li upisati slova u referncu ili broj stana?",
   "@faqLetters": {},
   "faqChangeType": "Kako promijeniti vrstu sadržaja?",
   "@faqChangeType": {},
-  "faqChangeTypeContent": "Dodirnite naslov uređivača gdje je upisana vrsta.",
+  "faqChangeTypeContent": "Dodirni naslov uređivača gdje je upisana vrsta.",
   "@faqChangeTypeContent": {},
   "buildingMaterialMetal": "metal",
   "@buildingMaterialMetal": {},
@@ -1112,23 +1112,23 @@
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
-  "addressHouseNumber": "Kućni br.",
+  "addressHouseNumber": "Kuća",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
   },
-  "addressUnitOptional": "neobavezno",
+  "addressUnitOptional": "opcionalno",
   "@addressUnitOptional": {
     "description": "Hint for addr:unit that it's optional."
   },
-  "faqMapTinyContent": "Jer nije poanta u njoj. Vi samo provjeravate svoj položaj na karti, te je pomičete radi poravnanja. Pogledajte listu sadržaja ispod, poredanu prema udaljenosti od vas.\n\nKarta postaje veća kada uređujete sadržaje daleko od vaše lokacije. Ali, aplikacija je primarno napravljena za uređivanje stvari koje vidite svojim očima.",
+  "faqMapTinyContent": "Jer nije poanta u njoj. Ti samo provjeravaš svoj položaj na karti, te ga pomičeš radi poravnanja. Pogledaj popis sadržaja koji je poredan prema udaljenosti od tebe.\n\nKarta postaje veća kada uređuješ sadržaje daleko od tvoje lokacije, iako je aplikacija primarno napravljena za uređivanje stvari koje vidiš.",
   "@faqMapTinyContent": {},
-  "faqCheckmarksContent": "To su oznake da su podatci o sadržajima provjereni. Dodaju oznaku `check_date` s aktualnim datumom.\n\nSvrha kvačice je da ste, recimo, prvi put pregledali pola grada. Zatim ste se nakon mjesec dana vratili i ponovno otišli kartirati. Morate nekako označiti da vidite sadržaje, ali ništa se nije promijenilo u vezi s njima. Tome služi kvačica: dodirnite je i nastavite dalje.\n\nOznaka ostaje označena dva mjeseca. Nakon toga možete ponovo provjeriti sadržaje.",
+  "faqCheckmarksContent": "Te oznake služe za potvrđivanje podataka sadržaja. Dodaju oznaku `check_date` s aktualnim datumom.\n\nSvrha kvačica je da si, recimo, prvi put istražio/la pola grada. Zatim si se nakon mjesec dana vratio/la i ponovo istražio/la grad. Moraš nekako označiti da vidiš sadržaje, ali ništa se nije promijenilo u vezi s njima. Tome služi kvačica: dodirni je i nastavi dalje.\n\nOznaka ostaje označena dva mjeseca. Nakon toga možeš ponovo istražiti sadržaje.",
   "@faqCheckmarksContent": {},
-  "faqLettersContent": "Ako se vaša brojčana tipkovnica ne može prebaciti na punu tipkovnicu, provjerite postavke aplikacije. Nalaze se iza gumba u gornjem lijevom kutu. Tamo uključite \"proširenu brojčanu tipkovnicu\".",
+  "faqLettersContent": "Ako se tvoja brojčana tipkovnica ne može prebaciti na punu tipkovnicu, provjeri postavke aplikacije. Nalaze se iza gumba u gornjem lijevom kutu. Tamo uključi opciju „Proširena brojčana tipkovnica”.",
   "@faqLettersContent": {},
   "faqFloorsContent": "Ne. Prvi ima popunjenu oznaku `addr:floor=3`. To je kat kako se prikazuje u navigaciji i koji se uobičajeno koristi. Drugi nema ovu oznaku, ali ima `level=3`. Taj je broj sekvencijalni broj kata od nula do `building:levels - 1`. To jest, u trokatnoj zgradi vrijednost `addr:floor` ovisi o državi, ali `level` je uvijek 0, 1 ili 2.\n\nEvo kako se prikaz u uređivaču odnosi na ove oznake:\n\n* `2`: `addr:floor=2` i `level=*` koji nije prazan.\n* `4/`: `addr:floor=4`, ali ne postoji oznaka `level`.\n* `/1`: `level=1`, ali ne postoji oznaka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i postoji objekt u blizini s istim `addr:floor`, ali različitim `level`, ili obrnuto).",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u načinu mikromapiranja? Kako se sortiraju objekti?\n\nOdgovori na sva ova pitanja nalaze se u [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Evo što možete pogledati:\n\n* Redoslijed ključeva za glavnu oznaku — popis `kMainKeys`.\n* Koji se objekti preuzimaju — funkcija `isGoodTags`.\n* Što se smatra sadržajem — funkcija `isAmenityTags`.\n* Koje se točke na koje načine spajaju na puteve — funkcija `detectSnap`.\n* Kada je objekt u mikromapiranju nepotpun — funkcija `needsMoreInfo`.",
+  "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u načinu mikromapiranja? Kako se sortiraju objekti?\n\nOdgovori na sva ova pitanja nalaze se na [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Pogledaj sljedeće:\n\n* Redoslijed ključeva za glavnu oznaku – popis `kMainKeys`.\n* Koji se objekti preuzimaju – funkcija `isGoodTags`.\n* Što se smatra sadržajem – funkcija `isAmenityTags`.\n* Koje se točke na koje načine spajaju na puteve – funkcija `detectSnap`.\n* Kada je objekt u mikromapiranju nepotpun – funkcija `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "fieldDirectionSet": "Postavi",
   "@fieldDirectionSet": {
@@ -1154,7 +1154,7 @@
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
   },
-  "fieldPaymentAround": "Uobičajeni načini plaćanja u okolici",
+  "fieldPaymentAround": "Opcije plaćanja u okolici",
   "@fieldPaymentAround": {
     "description": "Tile name for payment options found on the map."
   },
@@ -1182,7 +1182,7 @@
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   },
-  "fieldPaymentChoose": "Odaberite drugačije lokalne oznake...",
+  "fieldPaymentChoose": "Odaberi drugačije lokalne oznake …",
   "@fieldPaymentChoose": {
     "description": "Button title for setting up different local payment options."
   },
@@ -1190,7 +1190,7 @@
   "@fieldNameLangSearch": {
     "description": "Hint for the text field for finding a language in a list."
   },
-  "fieldPaymentGlobal": "Globalne zadane vrijednosti",
+  "fieldPaymentGlobal": "Globalno zadano",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
   },
