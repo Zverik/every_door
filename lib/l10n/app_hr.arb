@@ -26,7 +26,7 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
-  "tileNothingAround": "Nema lokacija u okrugu od {distance} metara.",
+  "tileNothingAround": "Nema usluga u okrugu od {distance} metara.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -38,11 +38,11 @@
       }
     }
   },
-  "tileDragOrUnfilter": "Miči se po karti, dodaj lokaciju ili poništi filtar.",
+  "tileDragOrUnfilter": "Miči se po karti, dodaj uslugu ili poništi filtar.",
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
-  "tileDragTheMap": "Približi se bilo čemu, pomakni kartu ili dodaj nedostajuću lokaciju.",
+  "tileDragTheMap": "Približi se bilo čemu, pomakni kartu ili dodaj nedostajuću uslugu.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
@@ -70,7 +70,7 @@
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
-  "navPoiMode": "Modus lokacija",
+  "navPoiMode": "Modus usluga",
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
@@ -149,7 +149,7 @@
       }
     }
   },
-  "warningTooOld": "Lokacija je stara {years}",
+  "warningTooOld": "Usluga je stara {years}",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -190,7 +190,7 @@
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
-  "editorRestoreMessage": "Lokacija {amenity} je neaktivna. Želiš li je označiti aktivnom?",
+  "editorRestoreMessage": "{amenity} je neaktivno. Želiš li je označiti aktivnom?",
   "@editorRestoreMessage": {
     "description": "Question on restoring an edited defunct amenity.",
     "placeholders": {
@@ -710,7 +710,7 @@
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."
   },
-  "editorDeleteTitle": "Izbrisati lokaciju {amenity}?",
+  "editorDeleteTitle": "Izbrisati {amenity}?",
   "@editorDeleteTitle": {
     "description": "Dialog title for deleting an amenity.",
     "placeholders": {
@@ -1088,7 +1088,7 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Kako dodati ulaz u zgradu?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Dolje se nalazi niz gumbova za moduse: mikrokartiranje, lokacije, ulazi i bilješke.\n\nU modusu ulaza dodirni ili povuci gumb za vrata u donjem kutu na kartu.",
+  "faqEntranceContent": "Dolje se nalazi niz gumbova za moduse: mikrokartiranje, usluge, ulazi i bilješke.\n\nU modusu ulaza dodirni ili povuci gumb za vrata u donjem kutu na kartu.",
   "@faqEntranceContent": {},
   "faqYellow": "Zašto su neki kućni brojevi žuti?",
   "@faqYellow": {},
@@ -1096,7 +1096,7 @@
   "@faqYellowContent": {},
   "faqLetters": "Mogu li upisati slova u referncu ili broj stana?",
   "@faqLetters": {},
-  "faqChangeType": "Kako promijeniti vrstu lokacije?",
+  "faqChangeType": "Kako promijeniti vrstu usluge?",
   "@faqChangeType": {},
   "faqChangeTypeContent": "Dodirni naslov uređivača gdje je upisana vrsta.",
   "@faqChangeTypeContent": {},
@@ -1120,15 +1120,15 @@
   "@addressUnitOptional": {
     "description": "Hint for addr:unit that it's optional."
   },
-  "faqMapTinyContent": "Jer je karta mišljena samo za provjeravanje tvog položaja na karti, te za pomicanje karte radi prilagođavanja. Dolje pogledaj popis lokacija koji je poredan prema udaljenosti od tebe.\n\nKarta postaje veća kada uređuješ sadržaje daleko od tvoje lokacije, iako je aplikacija primarno napravljena za uređivanje stvari koje vidiš.",
+  "faqMapTinyContent": "Jer je karta mišljena samo za provjeravanje tvog položaja na karti, te za pomicanje karte radi prilagođavanja. Dolje pogledaj popis usluga koji je poredan prema udaljenosti od tebe.\n\nKarta postaje veća kada uređuješ usluge daleko od tvoje lokacije, iako je aplikacija primarno napravljena za uređivanje stvari koje vidiš.",
   "@faqMapTinyContent": {},
-  "faqCheckmarksContent": "Te oznake služe za potvrđivanje podataka lokacije. Dodaju oznaku `check_date` s aktualnim datumom.\n\nSvrha kvačica je da si, recimo, prvi put istražio/la pola grada. Zatim si se nakon mjesec dana vratio/la i ponovo istražio/la grad. Moraš nekako označiti da vidiš lokaciju, ali ništa se nije promijenilo u vezi s njom. Tome služi kvačica: dodirni je i nastavi dalje.\n\nOznaka ostaje označena dva mjeseca. Nakon toga možeš ponovo istražiti lokacije.",
+  "faqCheckmarksContent": "Te oznake služe za potvrđivanje podataka usluge. Dodaju oznaku `check_date` s aktualnim datumom.\n\nSvrha kvačica je da si, recimo, prvi put istražio/la pola grada. Zatim si se nakon mjesec dana vratio/la i ponovo istražio/la grad. Moraš nekako označiti da vidiš uslugu, ali ništa se nije promijenilo u vezi s njom. Tome služi kvačica: dodirni je i nastavi dalje.\n\nOznaka ostaje označena dva mjeseca. Nakon toga možeš ponovo istražiti usluge.",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Ako se tvoja brojčana tipkovnica ne može prebaciti na punu tipkovnicu, provjeri postavke aplikacije. Nalaze se iza gumba u gornjem lijevom kutu. Tamo uključi opciju „Proširena brojčana tipkovnica”.",
   "@faqLettersContent": {},
   "faqFloorsContent": "Ne. Prvi ima popunjenu oznaku `addr:floor=3`. To je kat kako se prikazuje u navigaciji i koji se uobičajeno koristi. Drugi nema ovu oznaku, ali ima `level=3`. Taj je broj sekvencijalni broj kata od nula do `building:levels - 1`. To jest, u trokatnoj zgradi vrijednost `addr:floor` ovisi o državi, ali `level` je uvijek 0, 1 ili 2.\n\nEvo kako se prikaz u uređivaču odnosi na ove oznake:\n\n* `2`: `addr:floor=2` i `level=*` koji nije prazan.\n* `4/`: `addr:floor=4`, ali ne postoji oznaka `level`.\n* `/1`: `level=1`, ali ne postoji oznaka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i postoji objekt u blizini s istim `addr:floor`, ali različitim `level`, ili obrnuto).",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u modusu mikrokartiranja? Kako se razvrstavaju objekti?\n\nOdgovori na sva ova pitanja nalaze se na [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Pogledaj sljedeće:\n\n* Redoslijed ključeva za glavnu oznaku – popis `kMainKeys`.\n* Koji se objekti preuzimaju – funkcija `isGoodTags`.\n* Što se smatra lokacijom – funkcija `isAmenityTags`.\n* Koje se točke na koje načine spajaju na puteve – funkcija `detectSnap`.\n* Kada je objekt mikrokartiranja nepotpun – funkcija `needsMoreInfo`.",
+  "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u modusu mikrokartiranja? Kako se razvrstavaju objekti?\n\nOdgovori na sva ova pitanja nalaze se na [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Pogledaj sljedeće:\n\n* Redoslijed ključeva za glavnu oznaku – popis `kMainKeys`.\n* Koji se objekti preuzimaju – funkcija `isGoodTags`.\n* Što se smatra uslugom – funkcija `isAmenityTags`.\n* Koje se točke na koje načine spajaju na puteve – funkcija `detectSnap`.\n* Kada je objekt mikrokartiranja nepotpun – funkcija `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "fieldDirectionSet": "Postavi",
   "@fieldDirectionSet": {
