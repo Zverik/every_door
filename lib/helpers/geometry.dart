@@ -1,3 +1,5 @@
+import 'dart:math' show sqrt, pow;
+
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
@@ -191,15 +193,19 @@ class MultiPolygon implements Polygon {
 }
 
 class LineString extends Geometry {
-  final List<LatLng> _nodes;
+  final List<LatLng> nodes;
+  LatLngBounds? _cachedBounds;
 
-  LineString(Iterable<LatLng> nodes) : _nodes = List.of(nodes) {
-    if (_nodes.length < 2)
+  LineString(Iterable<LatLng> nodes) : nodes = List.of(nodes, growable: false) {
+    if (this.nodes.length < 2)
       throw GeometryException('A path must have at least two nodes.');
   }
 
   @override
-  LatLngBounds get bounds => LatLngBounds.fromPoints(_nodes);
+  LatLngBounds get bounds {
+    _cachedBounds ??= LatLngBounds.fromPoints(nodes);
+    return _cachedBounds!;
+  }
 
   @override
   // TODO: proper center on the line
@@ -208,12 +214,67 @@ class LineString extends Geometry {
   double getLengthInMeters() {
     double length = 0.0;
     final distance = DistanceEquirectangular();
-    for (int i = 1; i < _nodes.length; i++) {
-      length += distance(_nodes[i - 1], _nodes[i]);
+    for (int i = 1; i < nodes.length; i++) {
+      length += distance(nodes[i - 1], nodes[i]);
     }
     return length;
   }
 
+  LatLng closestPoint(LatLng point) {
+    num minDist = double.infinity;
+    LatLng point = nodes[0];
+
+    for (int i = 1; i < nodes.length; i++) {
+      final x = point.longitude;
+      final y = point.latitude;
+      final x1 = nodes[i - 1].longitude;
+      final y1 = nodes[i - 1].latitude;
+      final x2 = nodes[i].longitude;
+      final y2 = nodes[i].latitude;
+      final dx = x2 - x1;
+      final dy = y2 - y1;
+
+      final dot = (x - x1) * dx + (y - y1) * dy;
+      final len = dx * dx + dy * dy;
+      double t = -1;
+      if (len > 0.0) t = dot / len;
+
+      double ix;
+      double iy;
+      if (t <= 0)
+        (ix, iy) = (x1, y1);
+      else if (t >= 1)
+        (ix, iy) = (x2, y2);
+      else
+        (ix, iy) = (x1 + t * dx, y1 + t * dy);
+
+      final d = pow(x - ix, 2) + pow(y - iy, 2);
+      if (d < minDist) {
+        minDist = d;
+        point = LatLng(iy, ix);
+      }
+    }
+
+    return point;
+  }
+
+  double distanceToPoint(LatLng point, {bool inMeters = true}) {
+    // I am lazy hence this is a StackOverflow-inspired code.
+    final closest = closestPoint(point);
+    if (inMeters) {
+      final distance = DistanceEquirectangular();
+      return distance(point, closest);
+    } else {
+      return sqrt(pow(point.longitude - closest.longitude, 2) +
+          pow(point.latitude - closest.latitude, 2));
+    }
+  }
+
+  bool intersects(LineString other) {
+    if (!bounds.isOverlapping(other.bounds)) return false;
+    return true; // TODO
+  }
+
   @override
-  String toString() => 'LineString($_nodes)';
+  String toString() => 'LineString($nodes)';
 }

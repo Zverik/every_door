@@ -224,7 +224,7 @@ class LineDrawer extends CustomPainter {
       path.lineTo(_offsets[i].dx, _offsets[i].dy);
     canvas.drawPath(
         _style.dashed
-            ? dashPath(path, dashArray: CircularIntervalList([10.0, 6.0]))
+            ? dashPath(path, dashArray: CircularIntervalList([1.0, 10.0]))
             : path,
         paint);
   }

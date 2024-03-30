@@ -85,7 +85,7 @@ class DragButtonWidget extends StatelessWidget {
           child: RoundButton(
             icon: button.icon,
             tooltip: button.tooltip,
-            onTap: button.onTap,
+            onPressed: button.onTap,
           ),
         ),
       ),
@@ -160,7 +160,7 @@ class MapDragCreateButton extends StatelessWidget {
           child: RoundButton(
             icon: icon,
             tooltip: tooltip,
-            onTap: onTap,
+            onPressed: onTap,
           ),
         ),
       ),

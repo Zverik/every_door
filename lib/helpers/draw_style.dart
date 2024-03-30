@@ -35,6 +35,7 @@ class DrawingStyle {
 
 const kTypeStyles = <String, DrawingStyle>{
   "scribble": DrawingStyle(color: Colors.white, thin: true),
+  "eraser": DrawingStyle(color: Colors.black54),
   "road": DrawingStyle(color: Colors.white70),
   "track": DrawingStyle(color: Colors.white70, dashed: true),
   "footway": DrawingStyle(color: Colors.red),
@@ -52,6 +53,8 @@ final kTypeStylesReversed =
     kTypeStyles.map((key, value) => MapEntry(value, key));
 
 const kUnknownStyle = DrawingStyle(color: Colors.grey);
+const kToolEraser = "eraser";
+const kToolScribble = "scribble";
 
 const kStyleIcons = <String, IconData>{
   "eraser": Icons.cleaning_services,

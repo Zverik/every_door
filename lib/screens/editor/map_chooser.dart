@@ -162,7 +162,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
             polylines: [
               for (final drawing in nearestNotes.whereType<MapDrawing>())
                 Polyline(
-                  points: drawing.coordinates,
+                  points: drawing.path.nodes,
                   color: drawing.style.color,
                   strokeWidth: drawing.style.stroke / 3,
                   isDotted: drawing.style.dashed,

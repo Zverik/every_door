@@ -1,8 +1,10 @@
+import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 class StyleChooserButton extends StatefulWidget {
   final EdgeInsets padding;
@@ -24,6 +26,13 @@ class StyleChooserButton extends StatefulWidget {
 
 class _StyleChooserButtonState extends State<StyleChooserButton> {
   bool isOpen = false;
+
+  selectTool(String tool) {
+    widget.onChange(tool);
+    setState(() {
+      isOpen = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +63,57 @@ class _StyleChooserButtonState extends State<StyleChooserButton> {
                   });
                 },
                 child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Container(
-                    color: Colors.lightGreen,
+                  padding: safePadding +
+                      EdgeInsets.only(left: 10.0, bottom: 120.0, right: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      SizedBox(
+                        height: 500,
+                        child: ResponsiveGridList(
+                          listViewBuilderOptions:
+                              ListViewBuilderOptions(reverse: true),
+                          maxItemsPerRow: 2,
+                          minItemWidth: 100,
+                          // crossAxisCount: 2,
+                          children: [
+                            for (final tool in kDrawingTools)
+                              GestureDetector(
+                                child: StylePill(style: tool),
+                                onTap: () {
+                                  selectTool(tool);
+                                },
+                              ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20.0),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(width: 100),
+                          RoundButton(
+                            icon: kStyleIcons[kToolScribble] ?? kUnknownStyleIcon,
+                            foreground: Colors.black,
+                            background: Colors.white,
+                            onPressed: () {
+                              selectTool(kToolScribble);
+                            },
+                          ),
+                          SizedBox(width: 20),
+                          RoundButton(
+                            icon: kStyleIcons[kToolEraser] ?? kUnknownStyleIcon,
+                            foreground: Colors.red,
+                            background: Colors.white,
+                            onPressed: () {
+                              selectTool(kToolEraser);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -65,7 +122,7 @@ class _StyleChooserButtonState extends State<StyleChooserButton> {
           child: RoundButton(
             icon: kStyleIcons[widget.style] ?? kUnknownStyleIcon,
             tooltip: loc.drawChangeTool,
-            onTap: () {
+            onPressed: () {
               setState(() {
                 isOpen = true;
               });
@@ -119,12 +176,27 @@ class StylePill extends StatelessWidget {
 
     // TODO: make it round
     return Container(
-      child: Column(
+      padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+      decoration: BoxDecoration(
+        color: Colors.white70,
+        borderRadius: BorderRadius.circular(5.0),
+        border: Border.fromBorderSide(BorderSide(color: Colors.black)),
+      ),
+      child: Row(
         children: [
           Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(45.0),
+              border: Border.fromBorderSide(BorderSide(color: Colors.black)),
+            ),
             child: Icon(kStyleIcons[style] ?? kUnknownStyleIcon),
           ),
-          Text(getLocalizedStyle(loc)),
+          SizedBox(width: 5.0),
+          Text(
+            getLocalizedStyle(loc),
+            style: TextStyle(fontSize: kFieldFontSize),
+          ),
         ],
       ),
     );
@@ -159,7 +231,7 @@ class UndoButton extends StatelessWidget {
           background: Theme.of(context).canvasColor,
           foreground: Theme.of(context).primaryColor,
           tooltip: loc.drawUndo,
-          onTap: onTap,
+          onPressed: onTap,
         ),
       ),
     );

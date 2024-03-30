@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class RoundButton extends StatelessWidget {
   final IconData icon;
   final String? tooltip;
-  final Function()? onTap;
+  final Function()? onPressed;
   final bool small;
   final Color? background;
   final Color? foreground;
@@ -11,7 +11,7 @@ class RoundButton extends StatelessWidget {
   const RoundButton({
     required this.icon,
     this.tooltip,
-    this.onTap,
+    this.onPressed,
     this.small = false,
     this.background,
     this.foreground,
@@ -33,7 +33,7 @@ class RoundButton extends StatelessWidget {
         foregroundColor: foreground,
       ),
       onPressed: () {
-        if (onTap != null) onTap!();
+        if (onPressed != null) onPressed!();
       },
     );
 

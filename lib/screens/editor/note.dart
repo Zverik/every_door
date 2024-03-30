@@ -197,6 +197,16 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                     message = value.trim();
                   },
                 ),
+                if (widget.note == null)
+                  SwitchListTile(
+                    value: isOsmNote,
+                    title: Text('Publish to OSM'),
+                    onChanged: (value) {
+                      setState(() {
+                        isOsmNote = !isOsmNote;
+                      });
+                    },
+                  ),
                 Row(
                   children: [
                     if (widget.note != null)

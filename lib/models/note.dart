@@ -1,5 +1,6 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
+import 'package:every_door/helpers/geometry.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:proximity_hash/geohash.dart';
 import 'dart:convert' show json;
@@ -218,18 +219,18 @@ class OsmNote extends BaseNote {
 
 class MapDrawing extends BaseNote {
   static const dbType = 3;
-  final List<LatLng> coordinates;
+  final LineString path;
   final String? author;
   final String pathType;
 
   MapDrawing({
     super.id,
-    required this.coordinates,
+    required this.path,
     required this.pathType,
     this.author,
     super.created,
     super.deleting,
-  }) : super(type: dbType, location: coordinates[coordinates.length >> 1]);
+  }) : super(type: dbType, location: path.nodes[path.nodes.length >> 1]);
 
   DrawingStyle get style => kTypeStyles[pathType] ?? kUnknownStyle;
 
@@ -244,7 +245,7 @@ class MapDrawing extends BaseNote {
       id: data['id'],
       pathType: data['path_type'],
       author: data['author'],
-      coordinates: coords,
+      path: LineString(coords),
       created: DateTime.fromMillisecondsSinceEpoch(data['created']),
       deleting: data['is_deleting'] == 1,
     );
@@ -256,8 +257,7 @@ class MapDrawing extends BaseNote {
       ...super.toJson(),
       'path_type': pathType,
       'author': author,
-      'coords':
-          coordinates.map((c) => '${c.latitude};${c.longitude}').join('|'),
+      'coords': path.nodes.map((c) => '${c.latitude};${c.longitude}').join('|'),
     };
   }
 

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/circle_bounds.dart';
 import 'package:every_door/helpers/draw_style.dart';
+import 'package:every_door/helpers/geometry.dart';
 import 'package:every_door/helpers/osm_api_converters.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/api_status.dart';
@@ -25,13 +26,14 @@ final notesProvider = ChangeNotifierProvider((ref) => NotesProvider(ref));
 final ownScribblesProvider =
     StateNotifierProvider<OwnScribblesController, bool>(
         (_) => OwnScribblesController());
+final currentPaintToolProvider = StateProvider<String>((_) => kToolScribble);
 
 class NotesProvider extends ChangeNotifier {
   static final _logger = Logger('NotesProvider');
 
   final Ref _ref;
   int length = 0;
-  List<(bool deleted, BaseNote note)> _undoStack = [];
+  final List<(bool deleted, MapDrawing note)> _undoStack = [];
   int _undoStackLast = 0;
 
   bool get haveChanges => length > 0;
@@ -191,7 +193,7 @@ class NotesProvider extends ChangeNotifier {
         notes.add(MapDrawing(
           id: noteData['id'],
           author: noteData['username'],
-          coordinates: points.map((ll) => LatLng(ll[1], ll[0])).toList(),
+          path: LineString(points.map((ll) => LatLng(ll[1], ll[0]))),
           pathType: noteData['style'],
         ));
       } else if (noteData.containsKey('location')) {
@@ -251,7 +253,7 @@ class NotesProvider extends ChangeNotifier {
             'color': _colorToHex(note.style.color),
             'dashed': note.style.dashed,
             'thin': note.style.stroke < DrawingStyle.kDefaultStroke,
-            'points': note.coordinates
+            'points': note.path.nodes
                 .map((ll) => [ll.longitude, ll.latitude])
                 .toList(),
           });
@@ -427,6 +429,9 @@ class NotesProvider extends ChangeNotifier {
   Future<void> deleteNote(BaseNote note,
       {bool notify = true, bool addUndo = true}) async {
     final database = await _ref.read(databaseProvider).database;
+    // TODO: NOOOOO THIS DELETES FROM DATABASE
+    // TODO: Set deletion flag and do this properly. Also rethink the undo stack.
+    // TODO: Undo stack should group deletions.
     await database.delete(
       BaseNote.kTableName,
       where: 'id = ?',
@@ -440,7 +445,7 @@ class NotesProvider extends ChangeNotifier {
   bool get redoIsEmpty => _undoStackLast >= _undoStack.length;
 
   _addToUndoStack(BaseNote note, bool deleted) {
-    if (note is OsmNote) return;
+    if (note is !MapDrawing) return;
     // Add it to undo stack, discarding the top if needed.
     if (_undoStackLast < _undoStack.length)
       _undoStack.removeRange(_undoStackLast, _undoStack.length);
