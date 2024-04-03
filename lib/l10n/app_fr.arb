@@ -1195,5 +1195,43 @@
   "apiStatusUploadingNotes": "Chargement des notes",
   "@apiStatusUploadingNotes": {
     "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "drawUndo": "Retour",
+  "@drawUndo": {},
+  "drawEraser": "Effacer",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawPower": "Ligne électrique",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawFootway": "Chemin piéton",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawCycleway": "Piste cyclable",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "Voie cyclable",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawWall": "Mur",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawRoad": "Route",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawTrack": "Chemin",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawScribble": "Griffoner",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
   }
 }
