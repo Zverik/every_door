@@ -4,16 +4,20 @@ import 'package:every_door/helpers/geometry.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/editor/note.dart';
+import 'package:every_door/screens/settings.dart';
 import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/painter.dart';
 import 'package:every_door/widgets/status_pane.dart';
 import 'package:every_door/widgets/style_chooser.dart';
+import 'package:every_door/widgets/track_button.dart';
+import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -79,11 +83,30 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     });
   }
 
+  List<BaseNote> findMarkerUnderTap(LatLng location) {
+    final locationPx = controller.camera.latLngToScreenPoint(location);
+    distanceToLocation(LatLng loc2) {
+      return locationPx.distanceTo(controller.camera.latLngToScreenPoint(loc2));
+    }
+
+    const kMaxTapDistance = 30;
+    final closestNotes = _notes
+        .where(
+            (note) => controller.camera.visibleBounds.contains(note.location))
+        .where((note) => distanceToLocation(note.location) <= kMaxTapDistance)
+        .toList();
+
+    closestNotes.sort((a, b) => distanceToLocation(a.location)
+        .compareTo(distanceToLocation(b.location)));
+    return closestNotes;
+  }
+
   @override
   Widget build(BuildContext context) {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final tileLayer = TileLayerOptions(ref.watch(selectedImageryProvider));
     final currentTool = ref.watch(currentPaintToolProvider);
+    final locked = ref.watch(drawingLockedProvider);
     final loc = AppLocalizations.of(context)!;
 
     // Rotate the map according to the global rotation value.
@@ -99,6 +122,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     ref.listen(notesProvider, (_, next) {
       updateNotes();
     });
+    EdgeInsets safePadding = MediaQuery.of(context).padding;
 
     return Column(
       children: [
@@ -121,6 +145,14 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         InteractiveFlag.drag,
                     rotationThreshold: kRotationThreshold,
                   ),
+                  onTap: !locked
+                      ? null
+                      : (position, ll) {
+                          final markers =
+                              findMarkerUnderTap(ll).whereType<OsmNote>();
+                          if (markers.isNotEmpty)
+                            _openNoteEditor(markers.first);
+                        },
                 ),
                 children: [
                   TileLayer(
@@ -185,7 +217,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 2.0, horizontal: 4.0),
                                   decoration: BoxDecoration(
                                     color: Colors.black38,
                                     borderRadius: BorderRadius.circular(5.0),
@@ -201,91 +234,162 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         ),
                     ],
                   ),
+                  if (locked) ...[
+                    OverlayButtonWidget(
+                      alignment: leftHand
+                          ? Alignment.bottomRight
+                          : Alignment.bottomLeft,
+                      safeBottom: true,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                        vertical: 24.0,
+                      ),
+                      onPressed: () {
+                        ref.read(drawingLockedProvider.notifier).state = false;
+                      },
+                      icon: Icons.lock,
+                    ),
+                    OverlayButtonWidget(
+                      alignment:
+                          leftHand ? Alignment.topRight : Alignment.topLeft,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 0.0,
+                        vertical: 10.0,
+                      ),
+                      icon: Icons.menu,
+                      tooltip: loc.mapSettings,
+                      safeRight: true,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsPage()),
+                        );
+                      },
+                    ),
+                    // Tracking button
+                    OverlayButtonWidget(
+                      alignment:
+                          leftHand ? Alignment.topLeft : Alignment.topRight,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 0.0,
+                        vertical: 10.0,
+                      ),
+                      safeRight: true,
+                      icon: Icons.my_location,
+                      tooltip: loc.mapLocate,
+                      onPressed: () {
+                        // Jump to the current location.
+                        final LatLng location = ref.read(geolocationProvider) ??
+                            ref.read(effectiveLocationProvider);
+                        controller.move(location, controller.camera.zoom);
+                      },
+                      onLongPressed: () {
+                        if (ref.read(rotationProvider) != 0.0) {
+                          ref.read(rotationProvider.notifier).state = 0.0;
+                          controller.rotate(0.0);
+                        }
+                      },
+                    ),
+                    ZoomButtonsWidget(
+                      alignment: leftHand
+                          ? Alignment.bottomLeft
+                          : Alignment.bottomRight,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 0.0 +
+                            (leftHand ? safePadding.left : safePadding.right),
+                        vertical: 100.0,
+                      ),
+                    ),
+                  ]
                 ],
               ),
               if (kEnablePainter) ...[
-                PainterWidget(
-                  map: controller,
-                  onDrawn: (coords) {
-                    if (currentTool == kToolEraser) {
-                      // TODO: delete drawings that intersect the line.
-                      // Also make it a single event in the undo stack!
-                    } else {
-                      final note = MapDrawing(
-                        path: LineString(coords),
-                        pathType: currentTool,
-                      );
-                      ref.read(notesProvider).saveNote(note);
-                    }
-                  },
-                  onTap: (location) {
-                    final locationPx =
-                        controller.camera.latLngToScreenPoint(location);
-                    distanceToLocation(LatLng loc2) {
-                      return locationPx.distanceTo(
-                          controller.camera.latLngToScreenPoint(loc2));
-                    }
+                if (!locked)
+                  PainterWidget(
+                    map: controller,
+                    onDrawn: (coords) {
+                      if (currentTool == kToolEraser) {
+                        final line = LineString(coords);
+                        final crossing = _notes
+                            .whereType<MapDrawing>()
+                            .where((note) => line.intersects(note.path));
+                        ref.read(notesProvider).deleteDrawings(crossing);
+                      } else {
+                        final note = MapDrawing(
+                          path: LineString(coords),
+                          pathType: currentTool,
+                        );
+                        setState(() {
+                          _notes.add(note);
+                        });
+                        ref.read(notesProvider).saveNote(note);
+                      }
+                    },
+                    onTap: (location) {
+                      final locationPx =
+                          controller.camera.latLngToScreenPoint(location);
+                      distanceToLocation(LatLng loc2) {
+                        return locationPx.distanceTo(
+                            controller.camera.latLngToScreenPoint(loc2));
+                      }
 
-                    const kMaxTapDistance = 30;
-                    final closestNotes = _notes
-                        .where((note) => controller.camera.visibleBounds
-                            .contains(note.location))
-                        .toList();
-                    if (closestNotes.isEmpty) return;
-                    closestNotes.sort((a, b) => distanceToLocation(a.location)
-                        .compareTo(distanceToLocation(b.location)));
-                    bool found = false;
-                    for (final note in closestNotes) {
-                      if (distanceToLocation(note.location) <=
-                          kMaxTapDistance) {
+                      bool found = false;
+                      final closestNotes = findMarkerUnderTap(location);
+                      for (final note in closestNotes) {
                         if (note is OsmNote) {
                           _openNoteEditor(note);
                           found = true;
                           break;
-                        } else if (note is MapNote && currentTool == kToolEraser) {
+                        } else if (note is MapNote &&
+                            currentTool == kToolEraser) {
                           // Tapping on a note in eraser mode deletes it.
                           ref.read(notesProvider).deleteNote(note);
                           found = true;
                           break;
                         }
                       }
-                    }
-                    if (!found && currentTool == kToolEraser) {
-                      // Find a map drawing under the tap and delete it.
-                      double minDistance = double.infinity;
-                      MapDrawing? closest;
-                      for (final note in _notes.whereType<MapDrawing>()) {
-                        if (note.path.bounds.contains(location)) {
-                          final closestPoint = note.path.closestPoint(location);
-                          final distance = distanceToLocation(closestPoint);
-                          if (distance < minDistance) {
-                            minDistance = distance;
-                            closest = note;
+                      if (!found && currentTool == kToolEraser) {
+                        // Find a map drawing under the tap and delete it.
+                        double minDistance = double.infinity;
+                        MapDrawing? closest;
+                        for (final note in _notes.whereType<MapDrawing>()) {
+                          if (note.path.bounds.contains(location)) {
+                            final closestPoint =
+                                note.path.closestPoint(location);
+                            final distance = distanceToLocation(closestPoint);
+                            if (distance < minDistance) {
+                              minDistance = distance;
+                              closest = note;
+                            }
                           }
                         }
+                        if (closest != null) {
+                          ref.read(notesProvider).deleteNote(closest);
+                        }
                       }
-                      if (closest != null) {
-                        ref.read(notesProvider).deleteNote(closest);
-                      }
-                    }
-                  },
-                  onMapMove: () {
-                    updateNotes();
-                  },
-                  style:
-                      kTypeStyles[currentTool] ?? kTypeStyles[kToolScribble]!,
-                ),
-                StyleChooserButton(
-                  style: currentTool,
-                  alignment:
-                      leftHand ? Alignment.bottomRight : Alignment.bottomLeft,
-                  onChange: (newStyle) {
-                    setState(() {
-                      ref.read(currentPaintToolProvider.notifier).state =
-                          newStyle;
-                    });
-                  },
-                ),
+                    },
+                    onMapMove: () {
+                      updateNotes();
+                    },
+                    style:
+                        kTypeStyles[currentTool] ?? kTypeStyles[kToolScribble]!,
+                  ),
+                if (!locked)
+                  StyleChooserButton(
+                    style: currentTool,
+                    alignment:
+                        leftHand ? Alignment.bottomRight : Alignment.bottomLeft,
+                    onChange: (newStyle) {
+                      setState(() {
+                        ref.read(currentPaintToolProvider.notifier).state =
+                            newStyle;
+                      });
+                    },
+                    onLock: () {
+                      ref.read(drawingLockedProvider.notifier).state = true;
+                    },
+                  ),
                 if (!ref.watch(notesProvider).undoIsEmpty)
                   UndoButton(
                     alignment:

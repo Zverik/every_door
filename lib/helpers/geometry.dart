@@ -270,9 +270,40 @@ class LineString extends Geometry {
     }
   }
 
+  bool _segmentsIntersect(LatLng a1, LatLng a2, LatLng b1, LatLng b2) {
+    // Copied from https://stackoverflow.com/a/24392281/1297601
+    final a = a1.longitude;
+    final b = a1.latitude;
+    final c = a2.longitude;
+    final d = a2.latitude;
+    final p = b1.longitude;
+    final q = b1.latitude;
+    final r = b2.longitude;
+    final s = b2.latitude;
+
+    double det, gamma, lambda;
+    det = (c - a) * (s - q) - (r - p) * (d - b);
+    if (det == 0) {
+      return false;
+    } else {
+      lambda = ((s - q) * (r - a) + (p - r) * (s - b)) / det;
+      gamma = ((b - d) * (r - a) + (c - a) * (s - b)) / det;
+      return (0 <= lambda && lambda <= 1) && (0 <= gamma && gamma <= 1);
+    }
+  }
+
   bool intersects(LineString other) {
     if (!bounds.isOverlapping(other.bounds)) return false;
-    return true; // TODO
+    for (int i = 1; i < nodes.length; i++) {
+      // Iterating over segments.
+      for (int j = 1; j < other.nodes.length; j++) {
+        // Iterating over other line segments. Yes, O(n²).
+        if (_segmentsIntersect(
+            nodes[i - 1], nodes[i], other.nodes[j - 1], other.nodes[j]))
+          return true;
+      }
+    }
+    return false;
   }
 
   @override

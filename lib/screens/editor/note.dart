@@ -23,29 +23,66 @@ class NoteEditorPane extends ConsumerStatefulWidget {
 class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
   late bool isOsmNote;
   String message = '';
+  List<String> shortcuts = [];
+
+  static const kMaxShortcuts = 7;
+  static const kDefaultShortcuts = [
+    'asphalt',
+    'ground',
+    'gate open',
+    'gate closed',
+    'culvert',
+    'bridge'
+  ];
 
   @override
   void initState() {
     super.initState();
 
-    // If the last comment is new, pre-fill it for editing.
     isOsmNote = widget.note != null && widget.note is OsmNote;
+    // If the last comment is new, pre-fill it for editing.
+    message = extractMessage();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      updateShortcutsList();
+    });
+  }
+
+  String extractMessage() {
     if (widget.note != null) {
-      if (isOsmNote && widget.note != null) {
+      if (widget.note is OsmNote) {
         final note = widget.note as OsmNote;
         if (note.comments.isNotEmpty) {
           if (note.comments.last.isNew) {
-            message = note.comments.last.message;
+            return note.comments.last.message;
           }
         }
       } else {
         final note = widget.note as MapNote;
-        message = note.message;
+        return note.message;
       }
     }
+    return "";
   }
 
-  bool get isChanged => message.isNotEmpty;
+  updateShortcutsList() async {
+    final popular =
+        await ref.read(notesProvider).getPopularNotes(kMaxShortcuts);
+    // First go popular, then unused defaults until we get to max.
+    setState(() {
+      if (popular.length == kMaxShortcuts)
+        shortcuts = popular;
+      else {
+        shortcuts = popular +
+            kDefaultShortcuts
+                .where((element) => !popular.contains(element))
+                .take(kMaxShortcuts - popular.length)
+                .toList();
+      }
+    });
+  }
+
+  bool get isChanged => message != extractMessage();
 
   BaseNote? _buildEditedNote() {
     if (widget.note == null) {
@@ -64,8 +101,8 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
       }
     }
 
-    // TODO: conversion of notes! isOsmNote is not reliable.
-    if (isOsmNote) {
+    // Not converting notes between types because that would require database queries here.
+    if (widget.note is OsmNote) {
       final note = widget.note as OsmNote;
       if (note.comments.isNotEmpty && note.comments.last.isNew) {
         if (message.isEmpty)
@@ -77,8 +114,9 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
       }
       return note;
     } else {
+      if (message.isEmpty) return null; // Not deleting MapNotes by clearing a message.
       final note = widget.note as MapNote;
-      note.message = message; // TODO: check deletion
+      note.message = message;
       return note;
     }
   }
@@ -97,12 +135,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     if (widget.note != null) {
       final note = _buildEditedNote();
       if (note != null) {
-        if (note.isNew) {
-          ref.read(notesProvider).deleteNote(note);
-        } else {
-          note.deleting = true;
-          ref.read(notesProvider).saveNote(note);
-        }
+        ref.read(notesProvider).deleteNote(note);
       }
     }
     Navigator.pop(context);
@@ -197,6 +230,38 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                     message = value.trim();
                   },
                 ),
+                if (!isOsmNote)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 4,
+                      runSpacing: 4,
+                      children: [
+                        for (final shortcut in shortcuts)
+                          GestureDetector(
+                            onTap: () {
+                              message = shortcut;
+                              saveAndClose();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 2.0, horizontal: 4.0),
+                              decoration: BoxDecoration(
+                                color: Colors.black38,
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Text(
+                                shortcut,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: kFieldFontSize),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                 if (widget.note == null)
                   SwitchListTile(
                     value: isOsmNote,

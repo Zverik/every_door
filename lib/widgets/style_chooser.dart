@@ -1,30 +1,34 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
-class StyleChooserButton extends StatefulWidget {
+class StyleChooserButton extends ConsumerStatefulWidget {
   final EdgeInsets padding;
   final String style;
   final Alignment alignment;
   final Function(String) onChange;
+  final Function()? onLock;
 
   const StyleChooserButton({
     super.key,
     this.padding = EdgeInsets.zero,
     required this.style,
     required this.onChange,
+    this.onLock,
     this.alignment = Alignment.bottomLeft,
   });
 
   @override
-  State<StyleChooserButton> createState() => _StyleChooserButtonState();
+  ConsumerState<StyleChooserButton> createState() => _StyleChooserButtonState();
 }
 
-class _StyleChooserButtonState extends State<StyleChooserButton> {
+class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
   bool isOpen = false;
 
   selectTool(String tool) {
@@ -36,6 +40,7 @@ class _StyleChooserButtonState extends State<StyleChooserButton> {
 
   @override
   Widget build(BuildContext context) {
+    final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
     final safePadding =
         MediaQuery.of(context).padding.copyWith(top: 0, bottom: 0);
@@ -63,8 +68,8 @@ class _StyleChooserButtonState extends State<StyleChooserButton> {
                   });
                 },
                 child: Padding(
-                  padding: safePadding +
-                      EdgeInsets.only(left: 10.0, bottom: 120.0, right: 10.0),
+                  padding:
+                      EdgeInsets.only(left: 10.0, bottom: 70.0, right: 10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -91,11 +96,23 @@ class _StyleChooserButtonState extends State<StyleChooserButton> {
                       ),
                       SizedBox(height: 20.0),
                       Row(
+                        textDirection:
+                            leftHand ? TextDirection.rtl : TextDirection.ltr,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(width: 100),
+                          if (widget.onLock != null)
+                            RoundButton(
+                              icon: Icons.lock_open,
+                              foreground: Colors.grey,
+                              background: Colors.white,
+                              onPressed: () {
+                                if (widget.onLock != null) widget.onLock!();
+                              },
+                            ),
+                          SizedBox(width: widget.onLock == null ? 100 : 20),
                           RoundButton(
-                            icon: kStyleIcons[kToolScribble] ?? kUnknownStyleIcon,
+                            icon:
+                                kStyleIcons[kToolScribble] ?? kUnknownStyleIcon,
                             foreground: Colors.black,
                             background: Colors.white,
                             onPressed: () {
@@ -119,15 +136,17 @@ class _StyleChooserButtonState extends State<StyleChooserButton> {
               ),
             ],
           ),
-          child: RoundButton(
-            icon: kStyleIcons[widget.style] ?? kUnknownStyleIcon,
-            tooltip: loc.drawChangeTool,
-            onPressed: () {
-              setState(() {
-                isOpen = true;
-              });
-            },
-          ),
+          child: isOpen
+              ? Container()
+              : RoundButton(
+                  icon: kStyleIcons[widget.style] ?? kUnknownStyleIcon,
+                  tooltip: loc.drawChangeTool,
+                  onPressed: () {
+                    setState(() {
+                      isOpen = true;
+                    });
+                  },
+                ),
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/circle_bounds.dart';
+import 'package:every_door/helpers/counter.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/geometry.dart';
 import 'package:every_door/helpers/osm_api_converters.dart';
@@ -27,13 +28,14 @@ final ownScribblesProvider =
     StateNotifierProvider<OwnScribblesController, bool>(
         (_) => OwnScribblesController());
 final currentPaintToolProvider = StateProvider<String>((_) => kToolScribble);
+final drawingLockedProvider = StateProvider<bool>((_) => false);
 
 class NotesProvider extends ChangeNotifier {
   static final _logger = Logger('NotesProvider');
 
   final Ref _ref;
   int length = 0;
-  final List<(bool deleted, MapDrawing note)> _undoStack = [];
+  final List<(bool deleted, List<MapDrawing> notes)> _undoStack = [];
   int _undoStackLast = 0;
 
   bool get haveChanges => length > 0;
@@ -103,6 +105,21 @@ class NotesProvider extends ChangeNotifier {
     return (await fetchAllNotes(center: center, radius: radius ?? 1000))
         .whereType<OsmNote>()
         .toList();
+  }
+
+  /// Returns most popular scribble notes.
+  Future<List<String>> getPopularNotes([int count = 10]) async {
+    final database = await _ref.read(databaseProvider).database;
+    final mapNoteData = await database.query(
+      BaseNote.kTableName,
+      where: 'type = ?',
+      whereArgs: [MapNote.dbType],
+    );
+    final notes = mapNoteData
+        .map((data) => MapNote.fromJson(data))
+        .where((note) => !note.deleting)
+        .map((note) => note.message);
+    return Counter(notes).mostOccurentItems(count: count, cutoff: 2).toList();
   }
 
   /// Downloads OSM notes and drawings from servers.
@@ -293,7 +310,7 @@ class NotesProvider extends ChangeNotifier {
       if (note.deleting && note.id == null) continue;
       if (i < ids.length) {
         if (note.deleting) {
-          await deleteNote(note, notify: false);
+          await deleteNote(note, notify: false, fromDB: true);
         } else {
           await saveNote(note, notify: false, newId: ids[i]);
         }
@@ -366,7 +383,7 @@ class NotesProvider extends ChangeNotifier {
         }
         final newNote = _parseNoteXML(resp.body);
         if (newNote != null) await saveNote(newNote, notify: false);
-        deleteNote(note, notify: false);
+        deleteNote(note, notify: false, fromDB: true);
       } else {
         for (final comment in note.comments) {
           if (comment.isNew) {
@@ -394,7 +411,7 @@ class NotesProvider extends ChangeNotifier {
               .severe('Error uploading note: ${resp.statusCode} ${resp.body}');
           continue;
         }
-        deleteNote(note, notify: false);
+        deleteNote(note, notify: false, fromDB: true);
       }
     }
   }
@@ -405,6 +422,7 @@ class NotesProvider extends ChangeNotifier {
     final database = await _ref.read(databaseProvider).database;
     if (note.id != null && newId != null) {
       // Instead of creating, replace note id in the database.
+      // This is used only internally after uploading new notes and getting their server ids.
       final oldId = note.id;
       note.id = newId;
       await database.update(
@@ -421,68 +439,82 @@ class NotesProvider extends ChangeNotifier {
         note.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
-      if (addUndo) _addToUndoStack(note, false);
+      if (addUndo) _addToUndoStack([note], false);
     }
     if (notify) _checkHaveChangesAndNotify();
   }
 
+  Future<void> deleteDrawings(Iterable<MapDrawing> notes) async {
+    _logger.info('Deleting ${notes.length} drawings.');
+    for (final note in notes)
+      await deleteNote(note, notify: false, addUndo: false);
+    _addToUndoStack(notes, true);
+    _checkHaveChangesAndNotify();
+  }
+
   Future<void> deleteNote(BaseNote note,
-      {bool notify = true, bool addUndo = true}) async {
+      {bool notify = true, bool addUndo = true, bool fromDB = false}) async {
     final database = await _ref.read(databaseProvider).database;
-    // TODO: NOOOOO THIS DELETES FROM DATABASE
-    // TODO: Set deletion flag and do this properly. Also rethink the undo stack.
-    // TODO: Undo stack should group deletions.
-    await database.delete(
-      BaseNote.kTableName,
-      where: 'id = ?',
-      whereArgs: [note.id],
-    );
-    if (addUndo) _addToUndoStack(note, true);
+    if (!note.isNew && !fromDB) {
+      // Do not delete, instead mark as deleted.
+      note.deleting = true;
+      // Also comment changes should be saved here.
+      await saveNote(note, addUndo: false, notify: false);
+    } else {
+      await database.delete(
+        BaseNote.kTableName,
+        where: 'id = ?',
+        whereArgs: [note.id],
+      );
+    }
+    if (addUndo) _addToUndoStack([note], true);
     if (notify) _checkHaveChangesAndNotify();
   }
 
   bool get undoIsEmpty => _undoStackLast <= 0;
   bool get redoIsEmpty => _undoStackLast >= _undoStack.length;
 
-  _addToUndoStack(BaseNote note, bool deleted) {
-    if (note is !MapDrawing) return;
+  _addToUndoStack(Iterable<BaseNote> notes, bool deleted) {
+    final toAdd = notes.whereType<MapDrawing>().toList();
+    if (toAdd.isEmpty) return;
     // Add it to undo stack, discarding the top if needed.
     if (_undoStackLast < _undoStack.length)
       _undoStack.removeRange(_undoStackLast, _undoStack.length);
-    _undoStack.add((deleted, note));
+    _undoStack.add((deleted, toAdd));
     _undoStackLast += 1;
+  }
+
+  Future<void> _restoreOneChange(MapDrawing note, bool deleted) async {
+    if (deleted) {
+      if (note.isNew) {
+        // restore with a new note id
+        note.id = null;
+      } else {
+        // just remove the flag
+        note.deleting = false;
+      }
+      await saveNote(note, addUndo: false, notify: false);
+    } else {
+      await deleteNote(note, addUndo: false, notify: false);
+    }
   }
 
   Future<void> undoChange() async {
     if (_undoStackLast <= 0) return;
     _undoStackLast -= 1;
     final deleted = _undoStack[_undoStackLast].$1;
-    final note = _undoStack[_undoStackLast].$2;
-    if (deleted) {
-      // restore with a new note id
-      note.id = null;
-      await saveNote(note, addUndo: false);
-      // At this point, note id was updated.
-    } else {
-      // delete
-      await deleteNote(note, addUndo: false);
-    }
+    final notes = _undoStack[_undoStackLast].$2;
+    for (final note in notes) await _restoreOneChange(note, deleted);
+    _checkHaveChangesAndNotify();
   }
 
   Future<void> redoChange() async {
     if (_undoStackLast >= _undoStack.length) return;
     final deleted = _undoStack[_undoStackLast].$1;
-    final note = _undoStack[_undoStackLast].$2;
+    final notes = _undoStack[_undoStackLast].$2;
     _undoStackLast += 1;
-    if (deleted) {
-      // delete again
-      await deleteNote(note, addUndo: false);
-    } else {
-      // restore with a new note id
-      note.id = null;
-      await saveNote(note, addUndo: false);
-      // At this point, note id was updated.
-    }
+    for (final note in notes) await _restoreOneChange(note, !deleted);
+    _checkHaveChangesAndNotify();
   }
 
   // Useful for undoing notes.
@@ -508,13 +540,33 @@ class NotesProvider extends ChangeNotifier {
     return count;
   }
 
-  Future<void> clearChangedMapNotes() async {
-    final database = await _ref.read(databaseProvider).database;
-    await database.delete(
-      BaseNote.kTableName,
-      where: 'is_changed = 1 and (type = ? or type = ?)',
-      whereArgs: [MapNote.dbType, MapDrawing.dbType],
-    );
+  /// Undoes changes to a note or all notes.
+  Future<void> clearChanges({BaseNote? note, bool mapOnly = true}) async {
+    final notes = [if (note != null) note];
+    if (note == null) {
+      final database = await _ref
+          .read(databaseProvider)
+          .database;
+      final stored = await database.query(
+        BaseNote.kTableName,
+        where: 'is_changed = 1',
+      );
+      notes.addAll(stored.map((row) => BaseNote.fromJson(row)).where((n) => !mapOnly || (n is MapNote || n is MapDrawing)));
+    }
+
+    for (final curNote in notes) {
+      if (curNote.isNew) {
+        await deleteNote(curNote, fromDB: true, addUndo: false, notify: false);
+      } else {
+        curNote.revert();
+        await saveNote(curNote, addUndo: false, notify: false);
+      }
+    }
+
+    // Clear undo buffer, since MapDrawings are not removed one by one.
+    _undoStack.clear();
+    _undoStackLast = 0;
+
     _checkHaveChangesAndNotify();
   }
 

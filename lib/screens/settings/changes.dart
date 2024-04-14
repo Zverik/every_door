@@ -225,9 +225,9 @@ class _ChangeListPageState extends ConsumerState {
                         chProvider.deleteChange(change.change!);
                         ref.read(needMapUpdateProvider).trigger();
                       } else if (change.note != null) {
-                        nProvider.deleteNote(change.note!);
+                        nProvider.clearChanges(note: change.note!);
                       } else if (change.allMapNotes) {
-                        nProvider.clearChangedMapNotes();
+                        nProvider.clearChanges(mapOnly: true);
                       }
                       _changeList.removeAt(index);
 
@@ -242,7 +242,7 @@ class _ChangeListPageState extends ConsumerState {
                                   if (change.change != null) {
                                     await chProvider.saveChange(change.change!);
                                   } else if (change.note != null) {
-                                    await nProvider.saveNote(change.note!);
+                                    await nProvider.clearChanges(note: change.note!);
                                   }
                                   buildChangesList();
                                 },

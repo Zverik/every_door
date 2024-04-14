@@ -25,6 +25,15 @@ class BaseNote {
   bool get isChanged => isNew || deleting;
   bool get isNew => (id ?? -1) < 0;
 
+  /// Reverts changes if possible (except isNew) and returns true if successful.
+  bool revert() {
+    if (!isChanged || isNew) return false;
+    if (deleting) deleting = false;
+    if (isChanged)
+      throw UnimplementedError('A note has a state that cannot be reverted.');
+    return true;
+  }
+
   static const kTableName = 'notes';
   static const kTableFields = [
     'id integer primary key',
@@ -180,6 +189,12 @@ class OsmNote extends BaseNote {
 
   @override
   bool get isChanged => super.isChanged || hasNewComments;
+
+  @override
+  bool revert() {
+    comments.removeWhere((c) => c.isNew);
+    return super.revert();
+  }
 
   String? getNoteTitle() {
     return (message?.length ?? 0) < 100 ? message : message?.substring(0, 100);

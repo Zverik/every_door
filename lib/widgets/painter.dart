@@ -88,7 +88,8 @@ class _PainterWidgetState extends State<PainterWidget> {
   void _onPointerMove(PointerMoveEvent event) {
     if (!drawing) return;
     setState(() {
-      _offsets.add(event.localPosition);
+      if (_offsets.isEmpty || _offsets.last != event.localPosition)
+        _offsets.add(event.localPosition);
     });
   }
 
