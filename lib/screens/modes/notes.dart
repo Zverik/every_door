@@ -148,10 +148,14 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   onTap: !locked
                       ? null
                       : (position, ll) {
-                          final markers =
-                              findMarkerUnderTap(ll).whereType<OsmNote>();
-                          if (markers.isNotEmpty)
-                            _openNoteEditor(markers.first);
+                          final markers = findMarkerUnderTap(ll);
+                          for (final note in markers) {
+                            if (note is OsmNote ||
+                                (note is MapNote && note.isNew)) {
+                              _openNoteEditor(note);
+                              break;
+                            }
+                          }
                         },
                 ),
                 children: [
@@ -210,7 +214,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                           point: mapNote.location,
                           rotate: true,
                           alignment: Alignment.topRight,
-                          width: 150,
+                          width: 300,
                           child: Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Row(
@@ -337,7 +341,10 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       bool found = false;
                       final closestNotes = findMarkerUnderTap(location);
                       for (final note in closestNotes) {
-                        if (note is OsmNote) {
+                        if (note is OsmNote ||
+                            (note is MapNote &&
+                                note.isNew &&
+                                currentTool != kToolEraser)) {
                           _openNoteEditor(note);
                           found = true;
                           break;

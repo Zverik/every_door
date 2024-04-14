@@ -99,6 +99,7 @@ class BaseNote {
 }
 
 class MapNote extends BaseNote {
+  static const kMaxLength = 40;
   static const dbType = 1;
   final String? author;
   String message;

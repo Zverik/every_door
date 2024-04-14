@@ -1146,6 +1146,10 @@
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
+  "notesDelete": "Delete",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
   "notesCancelMessage": "Cancel your OSM note?",
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."

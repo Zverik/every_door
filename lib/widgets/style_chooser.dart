@@ -30,6 +30,7 @@ class StyleChooserButton extends ConsumerStatefulWidget {
 
 class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
   bool isOpen = false;
+  bool isDragging = false;
 
   selectTool(String tool) {
     widget.onChange(tool);
@@ -85,9 +86,21 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                           // crossAxisCount: 2,
                           children: [
                             for (final tool in kDrawingTools)
-                              GestureDetector(
-                                child: StylePill(style: tool),
-                                onTap: () {
+                              DragTarget(
+                                builder: (BuildContext context,
+                                    List<Object?> candidateData,
+                                    List<dynamic> rejectedData) {
+                                  return GestureDetector(
+                                    child: StylePill(
+                                      style: tool,
+                                      focused: candidateData.isNotEmpty,
+                                    ),
+                                    onTap: () {
+                                      selectTool(tool);
+                                    },
+                                  );
+                                },
+                                onAccept: (data) {
                                   selectTool(tool);
                                 },
                               ),
@@ -100,7 +113,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                             leftHand ? TextDirection.rtl : TextDirection.ltr,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (widget.onLock != null)
+                          if (widget.onLock != null && !isDragging)
                             RoundButton(
                               icon: Icons.lock_open,
                               foreground: Colors.grey,
@@ -109,22 +122,48 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                                 if (widget.onLock != null) widget.onLock!();
                               },
                             ),
-                          SizedBox(width: widget.onLock == null ? 100 : 20),
-                          RoundButton(
-                            icon:
-                                kStyleIcons[kToolScribble] ?? kUnknownStyleIcon,
-                            foreground: Colors.black,
-                            background: Colors.white,
-                            onPressed: () {
+                          SizedBox(
+                              width: widget.onLock == null || isDragging
+                                  ? 100
+                                  : 20),
+                          DragTarget(
+                            builder: (BuildContext context,
+                                List<Object?> candidateData,
+                                List<dynamic> rejectedData) {
+                              return RoundButton(
+                                icon: kStyleIcons[kToolScribble] ??
+                                    kUnknownStyleIcon,
+                                foreground: Colors.black,
+                                background: candidateData.isEmpty
+                                    ? Colors.white
+                                    : Colors.yellowAccent,
+                                onPressed: () {
+                                  selectTool(kToolScribble);
+                                },
+                              );
+                            },
+                            onAccept: (data) {
                               selectTool(kToolScribble);
                             },
                           ),
                           SizedBox(width: 20),
-                          RoundButton(
-                            icon: kStyleIcons[kToolEraser] ?? kUnknownStyleIcon,
-                            foreground: Colors.red,
-                            background: Colors.white,
-                            onPressed: () {
+                          DragTarget(
+                            builder: (BuildContext context,
+                                List<Object?> candidateData,
+                                List<dynamic> rejectedData) {
+                              return RoundButton(
+                                icon: kStyleIcons[kToolEraser] ??
+                                    kUnknownStyleIcon,
+                                foreground: Colors.red,
+                                background: candidateData.isEmpty
+                                    ? Colors.white
+                                    : Colors.yellowAccent,
+                                onPressed: () {
+                                  selectTool(kToolEraser);
+                                },
+                              );
+                            },
+                            onAccept: (data) {
                               selectTool(kToolEraser);
                             },
                           ),
@@ -138,14 +177,30 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
           ),
           child: isOpen
               ? Container()
-              : RoundButton(
-                  icon: kStyleIcons[widget.style] ?? kUnknownStyleIcon,
-                  tooltip: loc.drawChangeTool,
-                  onPressed: () {
+              : Draggable(
+                  feedback: Container(),
+                  data: 1,
+                  onDraggableCanceled: (v, o) {
                     setState(() {
-                      isOpen = true;
+                      isOpen = false;
                     });
                   },
+                  onDragStarted: () {
+                    setState(() {
+                      isOpen = true;
+                      isDragging = true;
+                    });
+                  },
+                  child: RoundButton(
+                    icon: kStyleIcons[widget.style] ?? kUnknownStyleIcon,
+                    tooltip: loc.drawChangeTool,
+                    onPressed: () {
+                      setState(() {
+                        isOpen = true;
+                        isDragging = false;
+                      });
+                    },
+                  ),
                 ),
         ),
       ),
@@ -155,8 +210,9 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
 
 class StylePill extends StatelessWidget {
   final String style;
+  final bool focused;
 
-  const StylePill({super.key, required this.style});
+  const StylePill({super.key, required this.style, this.focused = false});
 
   String getLocalizedStyle(AppLocalizations loc) {
     switch (style) {
@@ -192,29 +248,32 @@ class StylePill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final drStyle = kTypeStyles[style] ?? kUnknownStyle;
 
-    // TODO: make it round
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+      padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
       decoration: BoxDecoration(
-        color: Colors.white70,
-        borderRadius: BorderRadius.circular(5.0),
-        border: Border.fromBorderSide(BorderSide(color: Colors.black)),
+        color: focused ? Colors.yellowAccent : Colors.white70,
+        borderRadius: BorderRadius.circular(25.0),
       ),
       child: Row(
         children: [
           Container(
+            padding: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: drStyle.color,
               borderRadius: BorderRadius.circular(45.0),
-              border: Border.fromBorderSide(BorderSide(color: Colors.black)),
             ),
-            child: Icon(kStyleIcons[style] ?? kUnknownStyleIcon),
+            child: Icon(
+              kStyleIcons[style] ?? kUnknownStyleIcon,
+              color: drStyle.casing,
+            ),
           ),
-          SizedBox(width: 5.0),
+          SizedBox(width: 8.0),
           Text(
             getLocalizedStyle(loc),
             style: TextStyle(fontSize: kFieldFontSize),
+            overflow: TextOverflow.clip, // does not work :(
           ),
         ],
       ),

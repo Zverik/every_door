@@ -114,7 +114,8 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
       }
       return note;
     } else {
-      if (message.isEmpty) return null; // Not deleting MapNotes by clearing a message.
+      if (message.isEmpty)
+        return null; // Not deleting MapNotes by clearing a message.
       final note = widget.note as MapNote;
       note.message = message;
       return note;
@@ -227,7 +228,12 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                   ),
                   style: kFieldTextStyle,
                   onChanged: (value) {
-                    message = value.trim();
+                    setState(() {
+                      message = value.trim();
+                      if (!isOsmNote && message.length > MapNote.kMaxLength) {
+                        isOsmNote = true;
+                      }
+                    });
                   },
                 ),
                 if (!isOsmNote)
@@ -266,31 +272,36 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                   SwitchListTile(
                     value: isOsmNote,
                     title: Text('Publish to OSM'),
-                    onChanged: (value) {
-                      setState(() {
-                        isOsmNote = !isOsmNote;
-                      });
-                    },
+                    onChanged: message.length > MapNote.kMaxLength
+                        ? null
+                        : (value) {
+                            setState(() {
+                              isOsmNote = !isOsmNote;
+                            });
+                          },
                   ),
                 Row(
                   children: [
                     if (widget.note != null)
                       TextButton(
                         child: Text(
-                          loc.notesClose.toUpperCase(),
+                          widget.note!.isNew
+                              ? loc.notesDelete.toUpperCase()
+                              : loc.notesClose.toUpperCase(),
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.error),
                         ),
                         onPressed: () async {
-                          final answer = await showOkCancelAlertDialog(
-                            context: context,
-                            title: loc.notesCloseMessage,
-                            okLabel: loc.notesClose,
-                            isDestructiveAction: true,
-                          );
-                          if (answer == OkCancelResult.ok) {
-                            deleteAndClose();
+                          if (widget.note is OsmNote && !widget.note!.isNew) {
+                            final answer = await showOkCancelAlertDialog(
+                              context: context,
+                              title: loc.notesCloseMessage,
+                              okLabel: loc.notesClose,
+                              isDestructiveAction: true,
+                            );
+                            if (answer != OkCancelResult.ok) return;
                           }
+                          deleteAndClose();
                         },
                       ),
                     Expanded(child: Container()),
@@ -299,7 +310,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                           MaterialLocalizations.of(context).cancelButtonLabel),
                       onPressed: () async {
                         final navigator = Navigator.of(context);
-                        if (message.trim().isNotEmpty) {
+                        if (isChanged) {
                           final answer = await showOkCancelAlertDialog(
                             context: context,
                             title: MaterialLocalizations.of(context)

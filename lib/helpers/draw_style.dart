@@ -42,9 +42,9 @@ const kTypeStyles = <String, DrawingStyle>{
   "path": DrawingStyle(color: Colors.red, dashed: true),
   "cycleway": DrawingStyle(color: Colors.purpleAccent),
   "cycleway_shared": DrawingStyle(color: Colors.purpleAccent, dashed: true),
-  "wall": DrawingStyle(color: Colors.yellow),
-  "fence": DrawingStyle(color: Colors.yellow, dashed: true),
-  "power": DrawingStyle(color: Colors.orangeAccent),
+  "wall": DrawingStyle(color: Colors.yellow, thin: true),
+  "fence": DrawingStyle(color: Colors.yellow, dashed: true, thin: true),
+  "power": DrawingStyle(color: Colors.orangeAccent, thin: true),
   "stream": DrawingStyle(color: Colors.lightBlue),
   "drain": DrawingStyle(color: Colors.lightBlue, dashed: true),
 };
