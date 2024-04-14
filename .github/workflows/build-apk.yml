@@ -24,9 +24,9 @@ jobs:
     - run: flutter clean
     - run: flutter pub get
     - run: flutter test
-    - run: flutter build apk
+    - run: flutter build apk --flavor beta
     - name: Rename APK
-      run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/EveryDoor-$(git log -n 1 --format='%h').apk
+      run: mv build/app/outputs/flutter-apk/app-beta-release.apk build/app/outputs/flutter-apk/EveryDoor-$(git log -n 1 --format='%h').apk
     - name: Archive APK
       uses: actions/upload-artifact@v4
       with:

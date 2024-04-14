@@ -26,6 +26,17 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+
+    flavorDimensions += "default"
+
+    productFlavors {
+        beta {
+            dimension "default"
+            applicationIdSuffix ".beta"
+            resValue "string", "app_name", "Every Door β"
+        }
+    }
+
     compileSdkVersion 34
     namespace "info.zverev.ilya.every_door"
 
@@ -49,6 +60,7 @@ android {
 
     defaultConfig {
         applicationId "info.zverev.ilya.every_door"
+        resValue "string", "app_name", "Every Door"
         minSdkVersion 19
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()

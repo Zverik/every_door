@@ -4,7 +4,7 @@
    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <!-- uses-sdk tools:overrideLibrary="com.it_nomads.fluttersecurestorage" / -->
    <application
-        android:label="Every Door"
+        android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:name="${applicationName}"
         android:allowBackup="true"
