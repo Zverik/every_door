@@ -308,10 +308,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
         interactionOptions: InteractionOptions(
           flags: ref.watch(microZoomedInProvider) != null
               ? InteractiveFlag.none
-              : (InteractiveFlag.drag |
-                  InteractiveFlag.pinchZoom |
-                  InteractiveFlag.pinchMove |
-                  InteractiveFlag.rotate),
+              : InteractiveFlag.all,
           rotationThreshold: kRotationThreshold,
         ),
       ),

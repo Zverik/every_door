@@ -202,7 +202,7 @@ class NotesProvider extends ChangeNotifier {
       throw Exception('Failed to query scribbles: ${response.statusCode} $msg');
     }
 
-    final data = json.decode(response.body);
+    final data = json.decode(utf8.decode(response.bodyBytes));
     final notes = <BaseNote>[];
     for (final noteData in data) {
       if (noteData.containsKey('points')) {

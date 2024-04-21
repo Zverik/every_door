@@ -138,7 +138,6 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           maxZoom: kEditMaxZoom,
           initialRotation: ref.watch(rotationProvider),
           interactionOptions: InteractionOptions(
-            flags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
             rotationThreshold: kRotationThreshold,
           ),
         ),

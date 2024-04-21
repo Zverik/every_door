@@ -96,9 +96,8 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
             minZoom: 4.0,
             maxZoom: kEditMinZoom + 1.0,
             interactionOptions: InteractionOptions(
-                flags: InteractiveFlag.drag |
-                    InteractiveFlag.pinchZoom |
-                    InteractiveFlag.pinchMove),
+                flags: InteractiveFlag.all - InteractiveFlag.rotate,
+            ),
           ),
           children: [
             AttributionWidget(kOSMImagery),
