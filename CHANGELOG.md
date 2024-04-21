@@ -8,6 +8,9 @@ _Unreleased_
 * The 4th mode for notes is feature-complete. Try drawing things!
 * Allowing most interactions on maps.
 * Allowing deletion of point buildings.
+* In combo field value lists, can search by translated values.
+* Hopefully fixed `PlatformException` when logging in to OSM.
+* Airport gates can be added or edited in micromapping mode.
 
 ## 4.1
 

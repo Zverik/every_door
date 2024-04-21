@@ -252,7 +252,7 @@ bool isMicroTags(Map<String, String> tags) {
     'playground', 'advertising', 'power', 'traffic_calming',
     'barrier', 'highway', 'railway', 'natural', 'leisure',
     'marker', 'public_transport', 'hazard', 'traffic_sign',
-    'telecom', 'attraction', 'cemetery',
+    'telecom', 'attraction', 'cemetery', 'aeroway',
   };
   if (kAllGoodKeys.contains(k)) return true;
   return false;

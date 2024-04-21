@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:every_door/constants.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logging/logging.dart';
 import 'package:oauth2_client/access_token_response.dart';
@@ -68,17 +69,31 @@ class OpenStreetMapOAuthHelper {
   }
 
   Future<AccessTokenResponse?> _loadToken() async {
-    final secure = FlutterSecureStorage();
-    final data = await secure.read(key: kTokenKey);
+    final secure = FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true));
+    String? data;
+    try {
+      data = await secure.read(key: kTokenKey);
+    } on PlatformException {
+      await secure.deleteAll();
+    }
     return data == null ? null : AccessTokenResponse.fromMap(jsonDecode(data));
   }
 
   _saveToken(AccessTokenResponse? token) async {
-    final secure = FlutterSecureStorage();
-    if (token == null)
-      await secure.delete(key: kTokenKey);
-    else
-      await secure.write(key: kTokenKey, value: jsonEncode(token.respMap));
+    final secure = FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true));
+    try {
+      if (token == null)
+        await secure.delete(key: kTokenKey);
+      else
+        await secure.write(key: kTokenKey, value: jsonEncode(token.respMap));
+    } on PlatformException {
+      await secure.deleteAll();
+      if (token != null) {
+        await secure.write(key: kTokenKey, value: jsonEncode(token.respMap));
+      }
+    }
   }
 
   Future<AccessTokenResponse> _fetchToken() async {

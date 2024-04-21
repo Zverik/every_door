@@ -14,6 +14,7 @@ List<WebsiteProvider> websiteProviders = [
   TelegramProvider(),
   WhatsappProvider(),
   ViberProvider(),
+  TikTokProvider(),
 ];
 
 abstract class WebsiteProvider {
@@ -276,11 +277,23 @@ class ViberProvider extends _ProviderHelper {
 class LinkedinProvider extends _ProviderHelper {
   LinkedinProvider()
       : super(
-          icon: LineIcons.linkedin,
-          label: 'LinkedIn',
-          prefixes: ['linkedin', 'li'],
-          key: 'contact:linkedin',
-          regexp: RegExp(r'(?:linkedin\.com/company/)?([^/ ]+)/?$'),
-          format: 'https://www.linkedin.com/company/%s',
+    icon: LineIcons.linkedin,
+    label: 'LinkedIn',
+    prefixes: ['linkedin', 'li'],
+    key: 'contact:linkedin',
+    regexp: RegExp(r'(?:linkedin\.com/company/)?([^/ ]+)/?$'),
+    format: 'https://www.linkedin.com/company/%s',
+  );
+}
+
+class TikTokProvider extends _ProviderHelper {
+  TikTokProvider()
+      : super(
+          icon: Icons.music_note,
+          label: 'TikTok',
+          prefixes: ['tiktok', 'tt'],
+          key: 'contact:tiktok',
+          regexp: RegExp(r'(?:tiktok\.com/)?@?([^@ /?]+)'),
+          format: 'https://www.tiktok.com/@%s',
         );
 }

@@ -5,6 +5,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/osm_oauth2_client.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,8 +88,13 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
 
     String? pwd;
     if (login != null) {
-      final secure = FlutterSecureStorage();
-      pwd = await secure.read(key: kPasswordKey);
+      final secure = FlutterSecureStorage(
+          aOptions: AndroidOptions(encryptedSharedPreferences: true));
+      try {
+        pwd = await secure.read(key: kPasswordKey);
+      } on PlatformException {
+        await secure.deleteAll();
+      }
     }
 
     if (pwd != null) {
@@ -110,7 +116,9 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
     if (isOAuth) {
       await _helper.deleteToken();
     } else {
-      await FlutterSecureStorage().delete(key: kPasswordKey);
+      await FlutterSecureStorage(
+              aOptions: AndroidOptions(encryptedSharedPreferences: true))
+          .delete(key: kPasswordKey);
     }
     await prefs.remove(kLoginKey);
     state = null;
@@ -146,7 +154,8 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(kLoginKey, login);
-    final secure = FlutterSecureStorage();
+    final secure = FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true));
     await secure.write(key: kPasswordKey, value: password);
     state = details;
   }
@@ -197,8 +206,14 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
     } else {
       final prefs = await SharedPreferences.getInstance();
       final login = prefs.getString(kLoginKey);
-      final secure = FlutterSecureStorage();
-      final password = await secure.read(key: kPasswordKey);
+      final secure = FlutterSecureStorage(
+          aOptions: AndroidOptions(encryptedSharedPreferences: true));
+      String? password;
+      try {
+        password = await secure.read(key: kPasswordKey);
+      } on PlatformException {
+        await secure.deleteAll();
+      }
       if (login == null || password == null)
         throw StateError('No login and password found.');
       return _getBasicAuthHeaders(login, password);

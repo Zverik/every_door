@@ -90,7 +90,10 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
       // Prune options
       final nFilter = normalizeString(filter);
       options = options
-          .where((element) => normalizeString(element.value).contains(nFilter))
+          .where((element) =>
+              normalizeString(element.value).contains(nFilter) ||
+              (element.label != null &&
+                  normalizeString(element.label ?? '').contains(nFilter)))
           .toList();
       if (widget.field.customValues) {
         // Add this new value as an option
