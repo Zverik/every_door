@@ -7,6 +7,7 @@ _Unreleased_
 * Switched to Dart 3 and upgraded `flutter_map` to version 6.
 * The 4th mode for notes is feature-complete. Try drawing things!
 * Allowing most interactions on maps.
+* Allowing deletion of point buildings.
 
 ## 4.1
 

@@ -104,11 +104,14 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   }
 
   deleteAndClose() {
+    final changes = ref.read(changesProvider);
     if (building.isNew) {
-      final changes = ref.read(changesProvider);
       changes.deleteChange(building);
-      ref.read(needMapUpdateProvider).trigger();
+    } else if (building.canDelete) {
+      building.deleted = true;
+      changes.saveChange(building);
     }
+    ref.read(needMapUpdateProvider).trigger();
     Navigator.pop(context);
   }
 
@@ -372,7 +375,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                       },
                       child: Text(loc.buildingMoreButton.toUpperCase() + '...'),
                     ),
-                    if (building.isNew && widget.building != null)
+                    if (building.canDelete && widget.building != null)
                       TextButton(
                         child: Text(loc.editorDeleteButton.toUpperCase()),
                         onPressed: () async {
