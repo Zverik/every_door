@@ -1114,7 +1114,7 @@
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
   },
-  "notesCancelMessage": "Annuller din OSM-note?",
+  "notesCancelMessage": "Annullér din OSM-note?",
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
@@ -1249,5 +1249,9 @@
   "drawTrack": "Spor",
   "@drawTrack": {
     "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "notesDelete": "Slet",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
   }
 }
