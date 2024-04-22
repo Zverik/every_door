@@ -1249,5 +1249,9 @@
   "drawStream": "Potok",
   "@drawStream": {
     "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "notesDelete": "Odstranit",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
   }
 }
