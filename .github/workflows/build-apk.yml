@@ -25,7 +25,7 @@ jobs:
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk --flavor beta
-    - uses: r0adkll/sign-android-release@v1
+    - uses: noriban/sign-android-release@v5
       name: Sign app APK
       id: sign_app
       with:
