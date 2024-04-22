@@ -1249,5 +1249,9 @@
   "drawPower": "Red eléctrica",
   "@drawPower": {
     "description": "Tool description: power line. Keep it short."
+  },
+  "notesDelete": "Borrar",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
   }
 }
