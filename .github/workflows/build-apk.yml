@@ -25,11 +25,20 @@ jobs:
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk --flavor beta
+    - uses: r0adkll/sign-android-release@v1
+      name: Sign app APK
+      id: sign_app
+      with:
+        releaseDirectory: build/app/outputs/flutter-apk
+        signingKeyBase64: ${{ secrets.KEYSTORE_JKS }}
+        alias: github
+        keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+        keyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
     - name: Rename APK
-      run: mv build/app/outputs/flutter-apk/app-beta-release.apk build/app/outputs/flutter-apk/EveryDoor-$(git log -n 1 --format='%h').apk
+      run: mv ${{steps.sign_app.outputs.signedReleaseFile}} build/app/outputs/flutter-apk/EveryDoor-$(git log -n 1 --format='%h').apk
     - name: Archive APK
       uses: actions/upload-artifact@v4
       with:
         name: everydoor-apk
         path: build/app/outputs/flutter-apk/EveryDoor*.apk
-        retention-days: 90
+        retention-days: 60
