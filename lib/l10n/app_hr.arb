@@ -1251,5 +1251,9 @@
   "drawWall": "Zid",
   "@drawWall": {
     "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "notesDelete": "Obriši",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
   }
 }
