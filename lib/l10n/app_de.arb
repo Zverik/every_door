@@ -941,5 +941,9 @@
   "drawStream": "Bach",
   "@drawStream": {
     "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "notesDelete": "Löschen",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
   }
 }
