@@ -1251,5 +1251,9 @@
   "drawStream": "Rierol",
   "@drawStream": {
     "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "notesDelete": "Esborrar",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
   }
 }
