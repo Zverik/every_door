@@ -1,1 +1,24 @@
-{}
+{
+  "dataDownloadSuccessful": "Изтеглянето е успешно",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "faqTagging": "Всички въпроси за таговете",
+  "@faqTagging": {},
+  "loadingStart": "Инициализиране…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingPresets": "Зареждане на заготовките…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingChanges": "Зареждане на промените…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingLocation": "Определяне на позицията…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  }
+}
