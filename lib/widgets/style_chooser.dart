@@ -82,36 +82,32 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      SizedBox(
-                        height: 500,
-                        child: ResponsiveGridList(
-                          listViewBuilderOptions:
-                              ListViewBuilderOptions(reverse: true),
-                          maxItemsPerRow: 2,
-                          minItemWidth: 100,
-                          // crossAxisCount: 2,
-                          children: [
-                            for (final tool in kDrawingTools)
-                              DragTarget(
-                                builder: (BuildContext context,
-                                    List<Object?> candidateData,
-                                    List<dynamic> rejectedData) {
-                                  return GestureDetector(
-                                    child: StylePill(
-                                      style: tool,
-                                      focused: candidateData.isNotEmpty,
-                                    ),
-                                    onTap: () {
-                                      selectTool(tool);
-                                    },
-                                  );
-                                },
-                                onAccept: (data) {
-                                  selectTool(tool);
-                                },
-                              ),
-                          ],
-                        ),
+                      ResponsiveGridList(
+                        listViewBuilderOptions: ListViewBuilderOptions(
+                            reverse: true, shrinkWrap: true),
+                        maxItemsPerRow: 4,
+                        minItemWidth: 150,
+                        children: [
+                          for (final tool in kDrawingTools)
+                            DragTarget(
+                              builder: (BuildContext context,
+                                  List<Object?> candidateData,
+                                  List<dynamic> rejectedData) {
+                                return GestureDetector(
+                                  child: StylePill(
+                                    style: tool,
+                                    focused: candidateData.isNotEmpty,
+                                  ),
+                                  onTap: () {
+                                    selectTool(tool);
+                                  },
+                                );
+                              },
+                              onAccept: (data) {
+                                selectTool(tool);
+                              },
+                            ),
+                        ],
                       ),
                       SizedBox(height: 20.0),
                       Row(
