@@ -30,6 +30,9 @@ android {
     flavorDimensions += "default"
 
     productFlavors {
+        prod {
+            dimension "default"
+        }
         beta {
             dimension "default"
             applicationIdSuffix ".beta"

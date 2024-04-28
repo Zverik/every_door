@@ -159,7 +159,29 @@ class NotesProvider extends ChangeNotifier {
   Future _cleanAndInsertNotes(
       LatLngBounds bounds, List<BaseNote> notes, List<int> dbTypes) async {
     final database = await _ref.read(databaseProvider).database;
+    bool hasOsmNotes = dbTypes.contains(OsmNote.dbType);
     await database.transaction((txn) async {
+      // For OSM notes, first read the existing modified ones.
+      final keepNotes = <int, OsmNote>{};
+      if (hasOsmNotes) {
+        final existing = await txn.query(
+          BaseNote.kTableName,
+          where:
+              'type = ? and id >= 0 and lat >= ? and lat <= ? and lon >= ? and lon <= ? and is_changed = 1',
+          whereArgs: [
+            OsmNote.dbType,
+            bounds.south * kCoordinatePrecision,
+            bounds.north * kCoordinatePrecision,
+            bounds.west * kCoordinatePrecision,
+            bounds.east * kCoordinatePrecision,
+          ],
+        );
+        keepNotes.addEntries(existing
+            .map((row) => OsmNote.fromJson(row))
+            .where((note) => note.id != null)
+            .map((note) => MapEntry(note.id!, note)));
+      }
+
       // Clear OSM notes for the area.
       final placeholders =
           List.generate(dbTypes.length, (index) => "?").join(",");
@@ -179,6 +201,16 @@ class NotesProvider extends ChangeNotifier {
       // Upload new notes.
       final batch = txn.batch();
       for (final note in notes) {
+        if (note is OsmNote && keepNotes.containsKey(note.id)) {
+          // We have modifications to the note, merge them in.
+          // Meaning, just add the new comment if we have it.
+          final editedNote = keepNotes[note.id]!;
+          if (editedNote.comments.isNotEmpty &&
+              editedNote.comments.last.isNew) {
+            note.comments.add(editedNote.comments.last);
+          }
+        }
+
         batch.insert(
           BaseNote.kTableName,
           note.toJson(),
@@ -544,14 +576,14 @@ class NotesProvider extends ChangeNotifier {
   Future<void> clearChanges({BaseNote? note, bool mapOnly = true}) async {
     final notes = [if (note != null) note];
     if (note == null) {
-      final database = await _ref
-          .read(databaseProvider)
-          .database;
+      final database = await _ref.read(databaseProvider).database;
       final stored = await database.query(
         BaseNote.kTableName,
         where: 'is_changed = 1',
       );
-      notes.addAll(stored.map((row) => BaseNote.fromJson(row)).where((n) => !mapOnly || (n is MapNote || n is MapDrawing)));
+      notes.addAll(stored
+          .map((row) => BaseNote.fromJson(row))
+          .where((n) => !mapOnly || (n is MapNote || n is MapDrawing)));
     }
 
     for (final curNote in notes) {

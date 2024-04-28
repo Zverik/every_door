@@ -72,7 +72,9 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
           maxZoom: 20.0,
           initialRotation: ref.watch(rotationProvider),
           interactionOptions: InteractionOptions(
-            flags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+            flags: InteractiveFlag.all -
+                InteractiveFlag.flingAnimation -
+                InteractiveFlag.rotate,
             rotationThreshold: kRotationThreshold,
           ),
         ),

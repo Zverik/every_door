@@ -96,7 +96,9 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
             minZoom: 4.0,
             maxZoom: kEditMinZoom + 1.0,
             interactionOptions: InteractionOptions(
-                flags: InteractiveFlag.all - InteractiveFlag.rotate,
+              flags: InteractiveFlag.all -
+                  InteractiveFlag.flingAnimation -
+                  InteractiveFlag.rotate,
             ),
           ),
           children: [

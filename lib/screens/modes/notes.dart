@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/geometry.dart';
@@ -40,14 +42,35 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   List<BaseNote> _notes = [];
   final controller = MapController();
   final _mapKey = GlobalKey();
+  late final StreamSubscription<MapEvent> mapSub;
   LatLng? newLocation;
 
   @override
   initState() {
     super.initState();
+    mapSub = controller.mapEventStream.listen(onMapEvent);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateNotes();
     });
+  }
+
+  @override
+  void dispose() {
+    mapSub.cancel();
+    super.dispose();
+  }
+
+  recordMapMove(MapCamera camera) {
+    ref.read(effectiveLocationProvider.notifier).set(camera.center);
+    ref.read(zoomProvider.notifier).state = camera.zoom;
+  }
+
+  onMapEvent(MapEvent event) {
+    bool fromController = event.source == MapEventSource.mapController ||
+        event.source == MapEventSource.nonRotatedSizeChange;
+    if (event is MapEventMoveEnd && !fromController) {
+      recordMapMove(event.camera);
+    }
   }
 
   updateNotes() async {
@@ -139,6 +162,9 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   initialZoom: ref.watch(zoomProvider) + kZoomOffset,
                   initialRotation: ref.watch(rotationProvider),
                   interactionOptions: InteractionOptions(
+                    flags: InteractiveFlag.all -
+                        InteractiveFlag.flingAnimation -
+                        InteractiveFlag.rotate,
                     rotationThreshold: kRotationThreshold,
                   ),
                   onTap: !locked
@@ -373,6 +399,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       }
                     },
                     onMapMove: () {
+                      recordMapMove(controller.camera);
                       updateNotes();
                     },
                     style:
