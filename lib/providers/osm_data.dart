@@ -35,10 +35,12 @@ class OsmDataHelper extends ChangeNotifier {
   int _obsoleteLength = 0;
   Set<StreetAddress> _addressesWithFloors = {};
   bool capitalizeNames = kCapitalizeNames;
+  List<Floor> floorNumbering = [];
 
   OsmDataHelper(this._ref) {
     _updateLength();
     _updateCapitalizeNames();
+    updateFloorNumbering();
   }
 
   /// Number of OSM elements in the database.
@@ -125,6 +127,7 @@ class OsmDataHelper extends ChangeNotifier {
     if (bounds != null) await _ref.read(downloadedAreaProvider).addArea(bounds);
     await _updateLength();
     _updateCapitalizeNames();
+    updateFloorNumbering();
   }
 
   List<OsmChange> _wrapInChange(Iterable<OsmElement> elements,
@@ -246,6 +249,63 @@ class OsmDataHelper extends ChangeNotifier {
 
   bool hasMultipleFloors(StreetAddress address) =>
       _addressesWithFloors.contains(address);
+
+  /// Returns common floors for level=0, level=1 and level=2.
+  /// If lower levels are missing or ambiguous, higher levels not returned.
+  Future<List<Floor>> updateFloorNumbering([LatLng? location]) async {
+    final database = await _ref.read(databaseProvider).database;
+    final hashes = location == null
+        ? const []
+        : createGeohashes(location.latitude, location.longitude,
+            kBigRadius.toDouble(), kGeohashPrecision);
+    final placeholders = List.generate(hashes.length, (index) => "?").join(",");
+    final rows = await database.query(
+      OsmElement.kTableName,
+      where: hashes.isEmpty
+          ? "tags like '%addr:floor%'"
+          : "geohash in ($placeholders) and tags like '%addr:floor%'",
+      whereArgs: hashes,
+    );
+    final elements = rows.map((row) => OsmElement.fromJson(row));
+    final elementTags = elements.map((row) => row.tags).toList();
+
+    // Add all new changes with floors
+    final changedElements = _ref.read(changesProvider).all();
+    elementTags.addAll(changedElements.map((e) => e.getFullTags()));
+
+    // Count addr:floor values for levels=0..kMaxFloor.
+    final floors = <int, Counter<String>>{};
+    const kMaxFloor = 1;
+    for (final tags in elementTags) {
+      final newFloors = MultiFloor.fromTags(tags);
+      for (final floor in newFloors.floors) {
+        final level = floor.level?.roundToDouble();
+        if (level != null && floor.floor != null) {
+          if (level == floor.level && level <= kMaxFloor && level >= 0) {
+            final intLevel = level.toInt();
+            if (!floors.containsKey(intLevel))
+              floors[intLevel] = Counter<String>();
+            floors[intLevel]!.add(floor.floor!);
+          }
+        }
+      }
+    }
+
+    // Iterate over levels and check that floors are unambiguous enough.
+    final result = <Floor>[];
+    for (int i = 0; i <= kMaxFloor; i++) {
+      if (!floors.containsKey(i)) break;
+      final firstTwo = floors[i]!.mostOccurent(2).toList();
+      if (firstTwo.first.count < 3) break;
+      // 3 vs 1 ok, 6 vs 2 etc.
+      if (firstTwo.length > 1 && firstTwo[1].count * 3 > firstTwo.first.count)
+        break;
+      result.add(Floor(level: i.toDouble(), floor: firstTwo.first.item));
+    }
+
+    floorNumbering = result;
+    return result;
+  }
 
   Future<List<Floor>> getFloorsAround(LatLng location,
       [StreetAddress? address]) async {
@@ -395,7 +455,8 @@ class OsmDataHelper extends ChangeNotifier {
     );
     // Get names from the found elements.
     final elements = rows.map((row) => OsmElement.fromJson(row));
-    final names = elements.map((el) => OsmChange(el).name).whereType<String>();
+    final names =
+        elements.map((el) => OsmChange(el)['name']).whereType<String>();
     // Split in words and keep those that have at least two.
     final kNotWord = RegExp(r'\P{Letter}+', unicode: true);
     final split = names

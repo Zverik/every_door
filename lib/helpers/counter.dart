@@ -52,4 +52,7 @@ class CounterEntry<T> {
   final int count;
 
   const CounterEntry(this.item, this.count);
+
+  @override
+  String toString() => 'CounterEntry($item, $count)';
 }

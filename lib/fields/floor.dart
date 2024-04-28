@@ -57,20 +57,22 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
     final osmData = ref.read(osmDataProvider);
     final tags = widget.element.getFullTags();
     final addr = StreetAddress.fromTags(tags);
-    List<Floor> floors;
+
+    List<Floor> floors = List.of(osmData.floorNumbering);
     try {
-      floors = await osmData.getFloorsAround(widget.element.location, addr);
-      Floor.collapseList(floors);
+      floors.addAll(await osmData.getFloorsAround(widget.element.location, addr));
+      floors = Floor.collapseList(floors);
     } on Exception catch (e) {
       Logger('FloorInputField').warning('Error getting floors', e);
-      floors = [];
     }
+
     final currentFloors = MultiFloor.fromTags(tags);
     if (currentFloors.isNotEmpty) {
       for (final f in currentFloors.floors)
         if (!floors.contains(f)) floors.add(f);
       floors.sort();
     }
+
     if (mounted) {
       setState(() {
         address = addr;

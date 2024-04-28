@@ -20,7 +20,7 @@ class Floor implements Comparable<Floor> {
       other is Floor && level == other.level && floor == other.floor;
 
   @override
-  int get hashCode => (level ?? -100.123).hashCode + (floor ?? '').hashCode;
+  int get hashCode => Object.hash(level ?? -100.123, floor ?? '');
 
   @override
   String toString() => 'Floor($floor/$level)';
@@ -80,7 +80,7 @@ class Floor implements Comparable<Floor> {
     // TODO: replace these floors with .makeDuplicate()
   }
 
-  static collapseList(List<Floor> floors) {
+  static collapseList(Iterable<Floor> floors) {
     final set = floors.toSet();
     collapse(set);
     final result = set.toList();

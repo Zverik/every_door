@@ -25,7 +25,6 @@ class CountryLocaleController extends ChangeNotifier {
     if (location != null) {
       for (final l in _getLanguageKeysForLocation(location)) {
         if (AppLocalizations.delegate.isSupported(l)) {
-          print('Found supported locale: $l');
           newLocale = l;
           break;
         }

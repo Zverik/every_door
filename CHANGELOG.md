@@ -9,6 +9,7 @@ _Unreleased_
 * The 4th mode for notes is feature-complete. Try drawing things!
 * Days of week are displayed in a local language.
 * In combo field value lists, can search by translated values.
+* Always suggesting floor tags for levels 0 and 1.
 
 ### Other
 

@@ -13,6 +13,7 @@ import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/providers/need_update.dart';
+import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/helpers/tile_layers.dart';
@@ -229,6 +230,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     // Save changes and close.
     final changes = ref.read(changesProvider);
     changes.saveChange(amenity);
+    if (amenity.hasTag('addr:floor'))
+      ref.read(osmDataProvider).updateFloorNumbering(amenity.location);
     Navigator.pop(context);
     ref.read(needMapUpdateProvider).trigger();
   }
@@ -504,7 +507,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                           setState(() {
                             amenity.location = newLocation;
                           });
-                          mapController.move(newLocation, mapController.camera.zoom);
+                          mapController.move(
+                              newLocation, mapController.camera.zoom);
                         }
                       },
               ),
