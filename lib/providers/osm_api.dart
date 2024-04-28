@@ -494,7 +494,7 @@ class OsmApiHelper {
       }
       final chProv = _ref.read(changesProvider);
       await chProv.clearChanges(includeErrored: clearErrored, ids: changeIds);
-      _updateElementsAfterUpload(updates);
+      await _updateElementsAfterUpload(updates);
       return updates.length;
     } finally {
       // Close the changeset.

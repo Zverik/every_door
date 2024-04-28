@@ -15,8 +15,9 @@ _Unreleased_
 
 * Allowing most interactions on maps.
 * Allowing deletion of point buildings.
-* Hopefully fixed `PlatformException` when logging in to OSM.
 * Airport gates can be added or edited in micromapping mode.
+* Hopefully fixed the `PlatformException` when logging in to OSM.
+* Hopefully fixed the issue when you upload changes and then momentarily see the old data.
 * Switched to Dart 3 and upgraded `flutter_map` to version 6.
 
 ## 4.1

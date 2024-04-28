@@ -49,8 +49,8 @@ class ChangesProvider extends ChangeNotifier {
       else
         _changes[e.id] = e;
     }
-    notifyListeners();
     loaded = true;
+    notifyListeners();
   }
 
   _ensureLoaded() {
@@ -169,7 +169,6 @@ class ChangesProvider extends ChangeNotifier {
           (includeErrored || value.error == null) &&
           (idSet.isEmpty || idSet.contains(key.toString())));
     }
-    notifyListeners();
 
     final database = await _ref.read(databaseProvider).database;
     final keepIds =
@@ -185,6 +184,8 @@ class ChangesProvider extends ChangeNotifier {
         whereArgs: keepIds,
       );
     }
+
+    notifyListeners();
   }
 
   bool haveNoErrorChanges() {
