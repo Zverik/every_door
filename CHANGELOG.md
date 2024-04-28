@@ -4,13 +4,19 @@
 
 _Unreleased_
 
-* Switched to Dart 3 and upgraded `flutter_map` to version 6.
+### Highlights
+
 * The 4th mode for notes is feature-complete. Try drawing things!
+* Days of week are displayed in a local language.
+* In combo field value lists, can search by translated values.
+
+### Other
+
 * Allowing most interactions on maps.
 * Allowing deletion of point buildings.
-* In combo field value lists, can search by translated values.
 * Hopefully fixed `PlatformException` when logging in to OSM.
 * Airport gates can be added or edited in micromapping mode.
+* Switched to Dart 3 and upgraded `flutter_map` to version 6.
 
 ## 4.1
 

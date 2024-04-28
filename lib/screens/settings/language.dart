@@ -11,6 +11,7 @@ class LanguagePage extends ConsumerWidget {
   static final kLanguageNames = {
     Locale('ar'): 'اَلْعَرَبِيَّةُ',
     Locale('be'): 'Беларуская мова',
+    Locale('bg'): 'Български език',
     Locale('ca'): 'Català',
     Locale('cs'): 'Čeština',
     Locale('da'): 'Dansk',

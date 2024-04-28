@@ -1,6 +1,8 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/providers/country_locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'days_range.dart';
 
@@ -13,15 +15,16 @@ Widget buildEditorForDaysRange(DaysRange range, Function(DaysRange) onChange) {
   throw UnsupportedError('Unsupported range type: ${range.runtimeType}');
 }
 
-class WeekdaysPanel extends StatelessWidget {
+class WeekdaysPanel extends ConsumerWidget {
   final Weekdays weekdays;
   final Function(Weekdays) onChange;
 
   const WeekdaysPanel(this.weekdays, this.onChange);
 
   @override
-  Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loc =
+        ref.watch(countryLocaleProvider).loc ?? AppLocalizations.of(context)!;
     final weekdayTitles = loc.fieldHoursWeekdays.split(' ');
 
     return Row(
