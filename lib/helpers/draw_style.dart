@@ -46,7 +46,7 @@ const kTypeStyles = <String, DrawingStyle>{
   "fence": DrawingStyle(color: Colors.yellow, dashed: true, thin: true),
   "power": DrawingStyle(color: Colors.orangeAccent, thin: true),
   "stream": DrawingStyle(color: Colors.lightBlue),
-  "drain": DrawingStyle(color: Colors.lightBlue, dashed: true),
+  "culvert": DrawingStyle(color: Colors.lightBlue, dashed: true),
 };
 
 final kTypeStylesReversed =
@@ -60,7 +60,7 @@ const kStyleIcons = <String, IconData>{
   "eraser": Icons.cleaning_services,
   "scribble": Icons.draw,
   "road": Icons.edit_road,
-  "track": Icons.edit_road,
+  "track": Icons.forest,
   "footway": Icons.directions_walk,
   "path": Icons.directions_walk,
   "cycleway": Icons.directions_bike,
@@ -69,7 +69,7 @@ const kStyleIcons = <String, IconData>{
   "fence": Icons.fence,
   "power": Icons.power_input,
   "stream": Icons.water,
-  "drain": Icons.water,
+  "culvert": Icons.water,
 };
 
 const kUnknownStyleIcon = Icons.line_axis;

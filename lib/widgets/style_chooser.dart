@@ -246,6 +246,8 @@ class StylePill extends StatelessWidget {
         return loc.drawPower;
       case "stream":
         return loc.drawStream;
+      case "culvert":
+        return loc.drawCulvert;
       default:
         return style;
     }

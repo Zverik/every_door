@@ -74,9 +74,9 @@ const kDrawingTools = [
   // bottom to top, left to right, 2 columns
   'road', 'track',
   'footway', 'path',
-  'cycleway', 'cycleway_shared',
+  'cycleway', 'power',
   'wall', 'fence',
-  'power', 'stream',
+  'stream', 'culvert',
 ];
 
 const kOsmEndpoint = 'api.openstreetmap.org';

@@ -1210,6 +1210,10 @@
   "@drawStream": {
     "description": "Tool description: stream or other narrow waterway. Keep it short."
   },
+  "drawCulvert": "Culvert",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
   "apiStatusDownloading": "Downloading data…",
   "@apiStatusDownloading": {
     "description": "Text displayed when the app is downloading data from the API."

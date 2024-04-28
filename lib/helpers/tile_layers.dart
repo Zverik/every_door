@@ -123,7 +123,7 @@ WMSTileLayerOptions _buildWMSOptions(String url, Imagery imagery) {
 }
 
 class TileLayerOptions {
-  late final String urlTemplate;
+  String? urlTemplate;
   WMSTileLayerOptions? wmsOptions;
   late final TileProvider tileProvider;
   late final int minNativeZoom;
@@ -158,16 +158,17 @@ class TileLayerOptions {
           subdomains.addAll(match.group(1)!.split(',').map((e) => e.trim()));
           url = url.substring(0, match.start) + '{s}' + url.substring(match.end);
         }
+        urlTemplate = url;
         break;
       case ImageryType.wms:
         wmsOptions = _buildWMSOptions(url, imagery);
+        break;
     }
 
     tileProvider = imagery.type == ImageryType.bing
         ? CachedBingTileProvider()
         : CachedTileProvider();
 
-    urlTemplate = url;
     minNativeZoom = imagery.minZoom;
     maxNativeZoom = imagery.maxZoom;
     tileSize = imagery.tileSize.toDouble();
