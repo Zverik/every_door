@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 class StyleChooserButton extends ConsumerStatefulWidget {
@@ -30,8 +29,6 @@ class StyleChooserButton extends ConsumerStatefulWidget {
 }
 
 class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
-  static final _logger = Logger('StyleChooserButton');
-
   bool isOpen = false;
   bool isDragging = false;
 
@@ -54,9 +51,6 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
     // For the panel determine the global bottom padding.
     final gpb = context.globalPaintBounds ?? Rect.zero;
     final paddingBottom = gpb.isEmpty ? 50.0 : MediaQuery.of(context).size.height - gpb.bottom;
-
-    // TODO: remove for release
-    _logger.info('Height: ${MediaQuery.of(context).size.height}, gpb: ${gpb.top}-${gpb.bottom}, paddingBottom: $paddingBottom, safe: ${safePadding.bottom}');
 
     return Align(
       alignment: widget.alignment,
