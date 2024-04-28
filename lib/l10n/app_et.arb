@@ -670,5 +670,9 @@
   "accountFieldLogin": "Kasutajanimi",
   "@accountFieldLogin": {
     "description": "Label for the OSM login."
+  },
+  "fieldHoursWeekdays": "E T K N R L P",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
   }
 }
