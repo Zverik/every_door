@@ -1255,5 +1255,9 @@
   "notesDelete": "Obriši",
   "@notesDelete": {
     "description": "Button title for deleting a new note."
+  },
+  "drawCulvert": "Podzemni odvodni kanal",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
   }
 }
