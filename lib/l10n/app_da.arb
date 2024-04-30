@@ -1253,5 +1253,9 @@
   "notesDelete": "Slet",
   "@notesDelete": {
     "description": "Button title for deleting a new note."
+  },
+  "drawCulvert": "Underføring",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
   }
 }
