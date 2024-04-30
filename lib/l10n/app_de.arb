@@ -945,5 +945,9 @@
   "notesDelete": "Löschen",
   "@notesDelete": {
     "description": "Button title for deleting a new note."
+  },
+  "drawCulvert": "Wasserdurchlass",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
   }
 }
