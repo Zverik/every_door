@@ -15,7 +15,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "dataDownloadedCount": "{count,plural, =1{Preuzet je {count} element.} few{Preuzeto {count} elemenata.} other{Preuzeto {count} elemenata.}}",
+  "dataDownloadedCount": "{count,plural, =1{Preuzet je {count} element.} few{Preuzeta su {count} elementa.} other{Preuzeto je {count} elemenata.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -864,11 +864,11 @@
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
-  "settingsBackground": "Satelitski prikaz u pozadini",
+  "settingsBackground": "Prikaz pozadine",
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
-  "settingsCacheTiles": "Preuzmi slike satelitskog prikaza",
+  "settingsCacheTiles": "Preuzmi pločice",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
