@@ -1249,5 +1249,13 @@
   "drawFootway": "Via pedonal",
   "@drawFootway": {
     "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawCulvert": "Galeria",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "notesDelete": "Eliminar",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
   }
 }
