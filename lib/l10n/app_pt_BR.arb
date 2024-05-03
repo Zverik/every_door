@@ -10,7 +10,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Enviado {changes} a API.",
+  "changesUploadedMessage": "Enviado {changes} à API.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -158,7 +158,7 @@
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
-  "settingsApiServer": "Servidor de API",
+  "settingsApiServer": "Servidor da API",
   "@settingsApiServer": {
     "description": "Section title for API server settings."
   },
@@ -1191,5 +1191,71 @@
   "fieldPaymentGlobal": "Valores padrão globais",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
-  }
+  },
+  "drawCulvert": "Galeria",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "notesDelete": "Apagar",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawScribble": "Rabisco",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawChangeTool": "Alterar ferramenta",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawEraser": "Borracha",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "Estrada",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawTrack": "Trilha",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawPath": "Caminho",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCycleway": "Ciclovia",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "Ciclofaixa",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawFootway": "Caminho de pedestre",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawStream": "Córrego",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawWall": "Muro",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawFence": "Cerca",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawPower": "Linha de transmissão",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "apiStatusUploadingNotes": "Enviando notas",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "drawUndo": "Desfazer",
+  "@drawUndo": {}
 }
