@@ -40,7 +40,7 @@ android {
         }
     }
 
-    compileSdkVersion 34
+    compileSdk 34
     namespace "info.zverev.ilya.every_door"
 
     compileOptions {
@@ -64,8 +64,8 @@ android {
     defaultConfig {
         applicationId "info.zverev.ilya.every_door"
         resValue "string", "app_name", "Every Door"
-        minSdkVersion 19
-        targetSdkVersion 34
+        minSdk 19
+        targetSdk 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
