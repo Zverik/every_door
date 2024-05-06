@@ -2,7 +2,7 @@
 
 ## 5.0
 
-_Unreleased_
+_Released on 2024-05-06_
 
 ### Highlights
 
@@ -22,6 +22,8 @@ _Unreleased_
 * Supporting locationSets for presets, fixing duplicate presets in the list.
 * Speed fields are not filtered out now.
 * Switched to Dart 3 and upgraded `flutter_map` to version 6.
+* Translations into Estonian (thanks August Murasev Frokjaer), Odia (thanks Soumendra Kumar Sahoo),
+  and major updates to Croatian (thanks Milo Ivir).
 
 ## 4.1
 
