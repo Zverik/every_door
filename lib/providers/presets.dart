@@ -210,7 +210,16 @@ class PresetProvider {
 
       if (seenPresets.contains(row['name'])) continue;
       seenPresets.add(row['name'] as String);
-      presets.add(Preset.fromJson(row));
+
+      final preset = Preset.fromJson(row);
+      if (location != null && preset.locationSet != null) {
+        // Test that the location is correct.
+        if (!locationMatcher(
+            location.longitude, location.latitude, preset.locationSet!))
+          continue;
+      }
+
+      presets.add(preset);
       if (presets.length >= kMaxShownPresets) break;
     }
     return presets;
@@ -585,7 +594,8 @@ class PresetProvider {
     fields['payment'] = PaymentPresetField(
         label: await _getFieldLabel('payment_multi', locale) ?? 'Accept cards');
     fields['addr_door'] = RoomPresetField(
-        label: await _getFieldLabel('ref_room_number', locale) ?? 'Room Number');
+        label:
+            await _getFieldLabel('ref_room_number', locale) ?? 'Room Number');
     return stdFields.map((e) => fields[e]).whereType<PresetField>().toList();
   }
 

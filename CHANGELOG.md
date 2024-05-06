@@ -16,8 +16,10 @@ _Unreleased_
 * Allowing most interactions on maps.
 * Allowing deletion of point buildings.
 * Airport gates can be added or edited in micromapping mode.
+* Location marker is now better visible against dark backgrounds.
 * Hopefully fixed the `PlatformException` when logging in to OSM.
 * Hopefully fixed the issue when you upload changes and then momentarily see the old data.
+* Supporting locationSets for presets, fixing duplicate presets in the list.
 * Switched to Dart 3 and upgraded `flutter_map` to version 6.
 
 ## 4.1
