@@ -1255,5 +1255,9 @@
   "notesDelete": "Esborrar",
   "@notesDelete": {
     "description": "Button title for deleting a new note."
+  },
+  "drawCulvert": "Claveguera",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
   }
 }
