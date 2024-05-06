@@ -20,6 +20,7 @@ _Unreleased_
 * Hopefully fixed the `PlatformException` when logging in to OSM.
 * Hopefully fixed the issue when you upload changes and then momentarily see the old data.
 * Supporting locationSets for presets, fixing duplicate presets in the list.
+* Speed fields are not filtered out now.
 * Switched to Dart 3 and upgraded `flutter_map` to version 6.
 
 ## 4.1

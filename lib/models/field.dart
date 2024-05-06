@@ -201,6 +201,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
             : TextFieldCapitalize.sentence,
       );
     case 'number':
+    case 'roadspeed':
       return TextPresetField(
         key: key,
         label: label,

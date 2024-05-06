@@ -152,7 +152,7 @@ def import_fields(cur, path: Optional[str]):
 
     def build_fields(data: dict[str, dict]) -> Iterator[tuple]:
         bad_types = set([
-            'access', 'cycleway', 'roadspeed',
+            'access', 'cycleway',
             'wikidata', 'wikipedia', 'restrictions', 'structureRadio',
             'networkCombo', 'onewayCheck', 'manyCombo', 'directionalCombo',
         ])
