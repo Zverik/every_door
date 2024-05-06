@@ -44,6 +44,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/prod
+/android/app/beta
 
 # Python stuff
 __pycache__/
