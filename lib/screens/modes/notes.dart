@@ -130,6 +130,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     final tileLayer = TileLayerOptions(ref.watch(selectedImageryProvider));
     final currentTool = ref.watch(currentPaintToolProvider);
     final locked = ref.watch(drawingLockedProvider);
+    ref.watch(geolocationProvider); // not using, but it triggers repaints
     final loc = AppLocalizations.of(context)!;
 
     // Rotate the map according to the global rotation value.

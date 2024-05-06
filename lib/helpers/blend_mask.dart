@@ -1,6 +1,7 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+// Copied from https://stackoverflow.com/a/77039320/1297601
 class BlendMask extends SingleChildRenderObjectWidget {
   final BlendMode blendMode;
   final double opacity;
