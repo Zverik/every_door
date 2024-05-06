@@ -128,16 +128,6 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
                   style: TextStyle(fontSize: 30.0),
                 ),
               )),
-          SizedBox(height: 20.0),
-          ElevatedButton(
-              onPressed: () {
-                showLoginDialog(context);
-              },
-              // style: ButtonStyle(backgroundColor: Colors.grey.shade100),
-              child: Text(
-                loc.accountLoginPassword,
-                style: TextStyle(fontSize: 18.0),
-              )),
         ],
       );
     } else {
