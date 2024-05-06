@@ -117,6 +117,7 @@ class LanguagePage extends ConsumerWidget {
               supportedLocales[index] == appLocale ? Icon(Icons.check) : null,
           onTap: () {
             ref.read(languageProvider.notifier).set(supportedLocales[index]);
+            Navigator.of(context).pop();
           },
         ),
         separatorBuilder: (context, index) => Divider(),

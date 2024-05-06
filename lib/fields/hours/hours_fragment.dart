@@ -112,7 +112,7 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
                 ),
               ],
             ),
-          if (widget.fragment.breaks.length < 4 && gapEnoughForBreak) ...[
+          if (widget.fragment.breaks.length < 6 && gapEnoughForBreak) ...[
             if (addingBreak)
               ChooserIntervalField(
                 interval: null,

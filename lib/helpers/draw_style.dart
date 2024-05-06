@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class DrawingStyle {
   final Color color;
@@ -57,7 +58,7 @@ const kToolEraser = "eraser";
 const kToolScribble = "scribble";
 
 const kStyleIcons = <String, IconData>{
-  "eraser": Icons.cleaning_services,
+  "eraser": LineIcons.eraser,
   "scribble": Icons.draw,
   "road": Icons.edit_road,
   "track": Icons.forest,

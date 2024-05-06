@@ -45,24 +45,13 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
         ref.read(zoomProvider.notifier).state = event.camera.zoom;
         if (event.camera.zoom > kEditMinZoom) {
           // Switch navigation mode off
+          ref.read(rotationProvider.notifier).state = 0;
           ref.read(navigationModeProvider.notifier).state = false;
         }
       }
     } else if (event is MapEventMoveEnd) {
       if (!fromController) {
         ref.read(effectiveLocationProvider.notifier).set(event.camera.center);
-      }
-    } else if (event is MapEventRotateEnd) {
-      if (!fromController) {
-        double rotation = controller.camera.rotation;
-        while (rotation > 200) rotation -= 360;
-        while (rotation < -200) rotation += 360;
-        if (rotation.abs() < kRotationThreshold) {
-          ref.read(rotationProvider.notifier).state = 0.0;
-          controller.rotate(0.0);
-        } else {
-          ref.read(rotationProvider.notifier).state = rotation;
-        }
       }
     }
   }
@@ -72,12 +61,6 @@ class _NavigationPaneState extends ConsumerState<NavigationPane> {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
     EdgeInsets safePadding = MediaQuery.of(context).padding;
-
-    // Rotate the map according to the global rotation value.
-    ref.listen(rotationProvider, (_, double newValue) {
-      if ((newValue - controller.camera.rotation).abs() >= 1.0)
-        controller.rotate(newValue);
-    });
 
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
       controller.move(next, controller.camera.zoom);
