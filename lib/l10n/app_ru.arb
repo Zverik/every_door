@@ -896,5 +896,13 @@
   "drawTrack": "Грунтовка",
   "@drawTrack": {
     "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "notesDelete": "Удалить",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawCulvert": "Труба",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
   }
 }
