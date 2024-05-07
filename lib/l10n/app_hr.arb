@@ -313,11 +313,11 @@
       }
     }
   },
-  "changesUploadFailedTitle": "Prijenos neuspio",
+  "changesUploadFailedTitle": "Neuspješan prijenos",
   "@changesUploadFailedTitle": {
     "description": "Title for the notification about a failed changes upload."
   },
-  "changesDeletedChange": "Promjena {change} izbrisana",
+  "changesDeletedChange": "Izbrisana promjena: {change}",
   "@changesDeletedChange": {
     "description": "Message for the snack bar after you swipe a change away.",
     "placeholders": {
@@ -407,7 +407,7 @@
   "@fieldHoursClear": {
     "description": "Tooltip for a button to clear the opening_hours value."
   },
-  "fieldNameLanguages": "Dodaj ime na jednom drugom jeziku",
+  "fieldNameLanguages": "Dodaj ime na nekom drugom jeziku",
   "@fieldNameLanguages": {
     "description": "Tooltip for a button to add a name in another language."
   },
@@ -751,7 +751,7 @@
   "@tagsValue": {
     "description": "Tags panel, add a new tag dialog: value label"
   },
-  "tagsKeyError": "Oznaka je prerijetka",
+  "tagsKeyError": "Oznaka je prerijetko korištena",
   "@tagsKeyError": {
     "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
   },
@@ -778,7 +778,7 @@
   "@versionsFetchError": {
     "description": "Message for when fetching element history fails due to unknown error."
   },
-  "versionsVersionNumber": "Verzija broj {number}",
+  "versionsVersionNumber": "Verzija #{number}",
   "@versionsVersionNumber": {
     "description": "Card header for the diff for this element version.",
     "placeholders": {
@@ -868,7 +868,7 @@
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
-  "settingsCacheTiles": "Preuzmi pločice",
+  "settingsCacheTiles": "Preuzmi pozadinu",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
@@ -904,7 +904,7 @@
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
   },
-  "messageDataObsolete": "Podatci su zastarjeli. Dodirni ovdje za aktualiziranje",
+  "messageDataObsolete": "Podatci su zastarjeli. Dodirni ovdje za ažuriranje",
   "@messageDataObsolete": {
     "description": "Message that appears on the main screen when OSM data is outdated."
   },
@@ -1088,13 +1088,13 @@
   "@faqCheckmarks": {},
   "faqEntrance": "Kako dodati ulaz u zgradu?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Dolje se nalazi niz gumbova za moduse: mikrokartiranje, usluge, ulazi i bilješke.\n\nU modusu ulaza dodirni ili povuci gumb za vrata u donjem kutu na kartu.",
+  "faqEntranceContent": "Dolje se nalazi niz gumba za moduse: mikrokartiranje, usluge, ulazi i bilješke.\n\nU modusu ulaza dodirni ili povuci gumb za vrata u donjem kutu na kartu.",
   "@faqEntranceContent": {},
   "faqYellow": "Zašto su neki kućni brojevi žuti?",
   "@faqYellow": {},
-  "faqYellowContent": "Oznake koje nisu žute u modusu ulaza i bijele točkice u modusu mikrokartiranja znače da elementima nedostaju neka važna svojstva. Na primjer:\n\n* Zgrade moraju imati podatke o broju katova.\n* Ulazi bi trebali imati podatke o vrsti, a stubišta o rasponu brojeva stanova.\n* Klupe bi trebale imati podatke o materijul i naslonu.\n* Stabla bi trebala imati podatke o vrsti lišća i ciklus.",
+  "faqYellowContent": "Oznake koje nisu žute u modusu ulaza i bijele točkice u modusu mikrokartiranja znače da elementima nedostaju neka važna svojstva. Na primjer:\n\n* Zgrade trebaju imati podatke o broju katova.\n* Ulazi bi trebali imati podatke o vrsti, a stubišta o rasponu brojeva stanova.\n* Klupe bi trebale imati podatke o materijalu i naslonu.\n* Stabla bi trebala imati podatke o vrsti lišća i ciklus.",
   "@faqYellowContent": {},
-  "faqLetters": "Mogu li upisati slova u referncu ili broj stana?",
+  "faqLetters": "Mogu li upisati slova u referencu ili broj stana?",
   "@faqLetters": {},
   "faqChangeType": "Kako promijeniti vrstu usluge?",
   "@faqChangeType": {},
@@ -1120,9 +1120,9 @@
   "@addressUnitOptional": {
     "description": "Hint for addr:unit that it's optional."
   },
-  "faqMapTinyContent": "Jer je karta mišljena samo za provjeravanje tvog položaja na karti, te za pomicanje karte radi prilagođavanja. Dolje pogledaj popis usluga koji je poredan prema udaljenosti od tebe.\n\nKarta postaje veća kada uređuješ usluge daleko od tvoje lokacije, iako je aplikacija primarno napravljena za uređivanje stvari koje vidiš.",
+  "faqMapTinyContent": "Jer je karta zamišljena samo za provjeravanje tvog položaja na karti, te za pomicanje karte radi prilagođavanja. Dolje pogledaj popis usluga koji je poredan prema udaljenosti od tebe.\n\nKarta postaje veća kada uređuješ usluge daleko od tvoje lokacije, iako je aplikacija primarno napravljena za uređivanje stvari koje vidiš.",
   "@faqMapTinyContent": {},
-  "faqCheckmarksContent": "Te oznake služe za potvrđivanje podataka usluge. Dodaju oznaku `check_date` s aktualnim datumom.\n\nSvrha kvačica je da si, recimo, prvi put istražio/la pola grada. Zatim si se nakon mjesec dana vratio/la i ponovo istražio/la grad. Moraš nekako označiti da vidiš uslugu, ali ništa se nije promijenilo u vezi s njom. Tome služi kvačica: dodirni je i nastavi dalje.\n\nOznaka ostaje označena dva mjeseca. Nakon toga možeš ponovo istražiti usluge.",
+  "faqCheckmarksContent": "Te oznake služe za potvrđivanje ažurnosti podataka. Dodaju oznaku `check_date` s aktualnim datumom.\n\nSvrha kvačica je da si, recimo, prvi put istražio/la pola grada. Zatim si se nakon mjesec dana vratio/la i ponovo istražio/la grad. Moraš nekako označiti da vidiš uslugu, ali da se ništa nije promijenilo u vezi s njom. Tome služi kvačica: dodirni je i nastavi dalje.\n\nOznaka ostaje označena dva mjeseca. Nakon toga možeš ponovo provjeriti ažurnost.",
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Ako se tvoja brojčana tipkovnica ne može prebaciti na punu tipkovnicu, provjeri postavke aplikacije. Nalaze se iza gumba u gornjem lijevom kutu. Tamo uključi opciju „Proširena brojčana tipkovnica”.",
   "@faqLettersContent": {},
@@ -1142,7 +1142,7 @@
   "@notesComment": {
     "description": "Label for the note comment field."
   },
-  "fieldHeightMeters": "Očekuje se duljina u metrima, npr. 5,4",
+  "fieldHeightMeters": "Očekuje se duljina u metrima, npr. 5.4",
   "@fieldHeightMeters": {
     "description": "Validation message for when meters are expected."
   },
@@ -1150,7 +1150,7 @@
   "@fieldHeightFeet": {
     "description": "Validation message for when feet are expected."
   },
-  "fieldHeightAny": "Očekuje se duljina, npr. 5,4 ili 7'4\"",
+  "fieldHeightAny": "Očekuje se duljina, npr. 5.4 ili 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
   },
