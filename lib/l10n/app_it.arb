@@ -859,5 +859,71 @@
   "fieldPaymentAround": "Opzioni comuni nei dintorni",
   "@fieldPaymentAround": {
     "description": "Tile name for payment options found on the map."
+  },
+  "drawChangeTool": "Cambia strumento",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawRoad": "Strada",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawTrack": "Agroforestale",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "apiStatusUploadingNotes": "Caricamento note",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "notesDelete": "Elimina",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawUndo": "Annulla",
+  "@drawUndo": {},
+  "drawEraser": "Gomma",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawScribble": "Disegno",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawCyclewayShared": "Corsia bici",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawCulvert": "Conduttura",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "drawCycleway": "Ciclabile",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawFootway": "Pedonale",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawPath": "Sentiero",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawWall": "Muro",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawStream": "Fiume",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawFence": "Recinzione",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawPower": "Linea elettrica",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
   }
 }
