@@ -1249,5 +1249,13 @@
   "drawCyclewayShared": "Droga rowerowa",
   "@drawCyclewayShared": {
     "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "notesDelete": "Usuń",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawCulvert": "Przepust",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
   }
 }
