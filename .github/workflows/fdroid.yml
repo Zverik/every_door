@@ -1,0 +1,25 @@
+name: Build apk like F-Droid
+
+on:
+  [workflow_dispatch]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+        fetch-depth: 0
+    - uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+    - run: sed -i -e 's/^#f//' pubspec.yaml
+    - run: sed -i -e 's/^\(.*\bMultiDex\b\)/\/\/ \1/' android/app/src/main/java/io/flutter/app/FlutterMultiDexApplication.java
+    - run: echo '{}' > lib/l10n/app_zh.arb
+    - run: export PUB_CACHE=$(pwd)/.pub-cache
+    - run: vendor/flutter/bin/flutter config --no-analytics
+    - run: vendor/flutter/bin/flutter pub get
+    - run: curl -L https://textual.ru/presets.db -o assets/presets.db
+    - run: vendor/flutter/bin/flutter build apk --release --flavor prod --split-per-abi --target-platform=android-arm64
