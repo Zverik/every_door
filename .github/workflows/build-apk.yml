@@ -11,20 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: true
     - uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '21'
         distribution: 'adopt'
-    - uses: subosito/flutter-action@v2
-      with:
-        channel: 'stable'
-        flutter-version: '3.19.x'
-    - run: curl https://textual.ru/presets.db -o assets/presets.db
+    - run: curl -L https://textual.ru/presets.db -o assets/presets.db
     - run: echo '{}' > lib/l10n/app_zh.arb
-    - run: flutter clean
-    - run: flutter pub get
-    - run: flutter test
-    - run: flutter build apk --flavor beta
+    - run: vendor/flutter/bin/flutter pub get
+    - run: vendor/flutter/bin/flutter test
+    - run: vendor/flutter/bin/flutter build apk --flavor beta
     - uses: noriban/sign-android-release@v5
       name: Sign app APK
       id: sign_app
