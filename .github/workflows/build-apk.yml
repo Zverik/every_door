@@ -13,12 +13,12 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
+        fetch-depth: 0
     - uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'adopt'
     - run: echo '{}' > lib/l10n/app_zh.arb
-    - run: vendor/flutter/bin/flutter clean
     - run: vendor/flutter/bin/flutter pub get
     - run: curl -L https://textual.ru/presets.db -o assets/presets.db
       name: Download presets database
