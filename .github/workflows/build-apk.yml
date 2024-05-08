@@ -16,7 +16,7 @@ jobs:
         fetch-depth: 0
     - uses: actions/setup-java@v4
       with:
-        java-version: '21'
+        java-version: '17'
         distribution: 'adopt'
     - run: echo '{}' > lib/l10n/app_zh.arb
     - run: vendor/flutter/bin/flutter pub get
