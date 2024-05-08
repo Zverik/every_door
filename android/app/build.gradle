@@ -80,6 +80,10 @@ flutter {
     source '../..'
 }
 
+dependencies {
+    implementation 'com.google.errorprone:error_prone_annotations:2.27.1'
+}
+
 // Do this for an F-Droid release I guess
 //configurations.implementation {
 //    exclude group: 'com.google.android.gms'
