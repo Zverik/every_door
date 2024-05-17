@@ -1195,5 +1195,59 @@
   "apiStatusUploadingNotes": "Laddar upp anteckningar",
   "@apiStatusUploadingNotes": {
     "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "drawChangeTool": "Byt verktyg",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawPath": "Stig",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawFootway": "Gångväg",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawRoad": "Väg",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawWall": "Mur",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "notesDelete": "Radera",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawUndo": "Ångra",
+  "@drawUndo": {},
+  "drawEraser": "Radergummi",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawCycleway": "Cykelväg",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "Cykelfil",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawPower": "Kraftledning",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawFence": "Staket",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawStream": "Bäck",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawCulvert": "Kulvert",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
   }
 }
