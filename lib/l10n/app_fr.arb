@@ -39,7 +39,7 @@
   "@tileDragTheMap": {
     "description": "Message affiché quand rien n'est trouvé autour de la position."
   },
-  "tileDragOrUnfilter": "Déplacez-vous, ajoutez un élément cartographique ou désactivez les filtres.",
+  "tileDragOrUnfilter": "Déplacez-vous, ajoutez un élément sur la carte ou désactivez les filtres.",
   "@tileDragOrUnfilter": {
     "description": "Message affiché quand rien n'est trouvé autour de la position et qu'un filtre est activé."
   },
@@ -107,7 +107,7 @@
   "@editorMarkActive": {
     "description": "Titre du bouton permettant de marquer un équipement actif."
   },
-  "editorMarkDefunct": "Marquer comme Inactif",
+  "editorMarkDefunct": "Marquer comme inactif",
   "@editorMarkDefunct": {
     "description": "Titre du bouton pour marquer un équipement comme inactif (désaffecté, fermé, mais toujours présent)."
   },
@@ -123,7 +123,7 @@
   "@editorRestoreTitle": {
     "description": "Titre de la question sur la restauration d'un équipement inactif."
   },
-  "editorRestoreMessage": "{amenity} est inactif. Voulez-vous le marquer comme actif ?",
+  "editorRestoreMessage": "{amenity} est inactif. Voulez-vous le marquer comme actif ?",
   "@editorRestoreMessage": {
     "description": "Question sur la restauration d'un équipement inactif.",
     "placeholders": {
@@ -145,7 +145,7 @@
   "@editorDeleteButton": {
     "description": "Supprimer"
   },
-  "tagsUrlCopied": "URL copiée dans le presse-papiers",
+  "tagsUrlCopied": "URL copiée dans le presse-papier",
   "@tagsUrlCopied": {
     "description": "Message popup lorsque le lien vers l'objet a été copié dans le presse-papiers."
   },
@@ -177,7 +177,7 @@
   "@settingsTitle": {
     "description": "Titre de la barre d'application pour le panneau des paramètres."
   },
-  "settingsApiServer": "Serveur API",
+  "settingsApiServer": "Serveur d'API",
   "@settingsApiServer": {
     "description": "Titre de la section pour les paramètres du serveur API."
   },
@@ -201,11 +201,11 @@
   "@settingsPurgeAllData": {
     "description": "Paramètre pour supprimer toutes les données en cache."
   },
-  "settingsPurgeDataTitle": "Supprimer les données ?",
+  "settingsPurgeDataTitle": "Supprimer les données ?",
   "@settingsPurgeDataTitle": {
     "description": "Titre de la boite de dialogue pour supprimer toutes les données."
   },
-  "settingsPurgeDataMessage": "Vous devrez tout re-télécharger. Continuer ?",
+  "settingsPurgeDataMessage": "Vous devrez tout re-télécharger. Continuer ?",
   "@settingsPurgeDataMessage": {
     "description": "Boite de dialogue pour supprimer toutes les données."
   },
@@ -359,7 +359,7 @@
   "@changesPurgeTitle": {
     "description": "Titre de la boîte de dialogue permettant de confirmer la suppression de toutes les modifications."
   },
-  "changesPurgeMessage": "Supprimer toutes les modifications enregistrées et restaurer les données d'origine ?",
+  "changesPurgeMessage": "Supprimer toutes les modifications enregistrées et restaurer les données d'origine ?",
   "@changesPurgeMessage": {
     "description": "Message de la boite de dialogue pour confirmer la suppression de toutes les modifications."
   },
@@ -589,7 +589,7 @@
   "@entranceAccess": {
     "description": "Etquette pour l'accès de l'entrée dans le formulaire. Garder le plus court pssible."
   },
-  "entranceAccessYes": "Oui",
+  "entranceAccessYes": "oui",
   "@entranceAccessYes": {},
   "entranceAccessPrivate": "privé",
   "@entranceAccessPrivate": {},
@@ -651,7 +651,7 @@
   "@apiStatusUpdatingDB": {
     "description": "Texte affiché lorsque l'application met à jour la base de données avec les objets téléchargés."
   },
-  "apiStatusUploading": "Envoi des objets",
+  "apiStatusUploading": "Envoi des modifications",
   "@apiStatusUploading": {
     "description": "Texte affiché lorsque l'application envoie des données vers l'API."
   },
@@ -664,7 +664,7 @@
       }
     }
   },
-  "buildingTypeAddress": "Adresse",
+  "buildingTypeAddress": "adresse",
   "@buildingTypeAddress": {},
   "editorDuplicate": "Possible doublon à {distance} m",
   "@editorDuplicate": {
@@ -680,7 +680,7 @@
   },
   "faqMapTiny": "Pourquoi la carte est si petite ?",
   "@faqMapTiny": {},
-  "faqMapTinyContent": "Parce que ce n’est pas le but. La carte sert uniquement à vous positionner et afficher une liste des points d’intérêts à proximité triés en fonction de leur distance par rapport à votre position.\n\nLa carte est agrandie lors de l’édition de points d’intérêts éloignés de votre position. Bien que l’application est avant tout destinée à vous aider à modifier ce que vous pouvez voir autour de vous.",
+  "faqMapTinyContent": "Parce que ce n’est pas le but. La carte sert uniquement à vous positionner et afficher une liste des points d’intérêts à proximité triés en fonction de leur distance par rapport à votre position.\n\nLa carte est agrandie lors de l’édition de points d’intérêts éloignés de votre position, bien que l’application soit avant tout destinée à vous aider à modifier ce que vous voyez autour de vous.",
   "@faqMapTinyContent": {},
   "faqCheckmarks": "À quoi servent les marqueurs de validation ?",
   "@faqCheckmarks": {},
@@ -688,7 +688,7 @@
   "@faqCheckmarksContent": {},
   "faqEntrance": "Comment ajouter l’entrée d’un bâtiment ?",
   "@faqEntrance": {},
-  "faqEntranceContent": "En haut à droite, un bouton permet de basculer entre différent modes d’édition : points d’intérêts, micromapping, entrées, et notes.\n\nDans le mode « Entrées », appuyez ou faites glisser l’icône de porte, dans le coin inférieur droit, vers la carte.",
+  "faqEntranceContent": "En haut à droite, un bouton permet de basculer entre différent modes d’édition : points d’intérêts, micromapping, entrées, et notes.\n\nDans le mode « Entrées », appuyez ou faites glisser l’icône de porte, dans le coin inférieur droit, vers la carte.",
   "@faqEntranceContent": {},
   "faqLetters": "Comment utiliser des lettres dans les numéros d’adresse ?",
   "@faqLetters": {},
@@ -696,17 +696,17 @@
   "@faqLettersContent": {},
   "faqFloors": "Quelle est la différence entre les étages « 3 » et « /3 » ?",
   "@faqFloors": {},
-  "faqFloorsContent": "Le premier correspond à l’attribut `addr:floor=3`, c’est l’étage comme indiqué lors de la navigation et généralement utilisé mais dépend de la localité, tandis que le second correspond à `level=3` selon le schéma `building:level` où le rez-de-chaussée est l’étage 0.\n\nAinsi, les valeurs suivantes indiqueront :\n\n* `2` : `addr:floor=2` et `level=*` ;\n* `4/` : `addr:floor=4`, sans `level` ;\n* `/1` : `level=1`, sans `addr:floor` ;\n* `1/0` : `addr:floor=1` et `level=0` (et il y a un objet proche : avec le même `addr:floor`, mais un différent `level`, ou l'inverse).",
+  "faqFloorsContent": "Le premier correspond à l’attribut `addr:floor=3`, c’est l’étage comme indiqué lors de la navigation et généralement utilisé mais dépend de la localité, tandis que le second correspond à `level=3` selon le schéma `building:level` où le rez-de-chaussée est l’étage 0.\n\nAinsi, les valeurs suivantes indiqueront :\n\n* `2` : `addr:floor=2` et `level=*` ;\n* `4/` : `addr:floor=4`, sans `level` ;\n* `/1` : `level=1`, sans `addr:floor` ;\n* `1/0` : `addr:floor=1` et `level=0` (et il y a un objet proche : avec le même `addr:floor`, mais un différent `level`, ou l'inverse).",
   "@faqFloorsContent": {},
   "faqTagging": "Questions relatives aux attributs",
   "@faqTagging": {},
-  "faqTaggingContent": "Pourquoi un élément est manquant dans l’éditeur ? Quand ces points blancs sont-ils affiché en mode Micromapping ? Comment sont triés les éléments ?\n\nLes réponses à toutes ces questions sont dans [good\\_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) dont les thèmes principaux :\n\n* L’ordre des attributs : list `kMainKeys` ;\n* Les éléments sont téléchargés : function `isGoodTags` ;\n* Ce qui est considéré comme un point d’intérêt : function `isAmenityTags` ;\n* Les points qui sont aimantés : function `detectSnap` ;\n* Quand un objet micro-cartographié est incomplet : function `needsMoreInfo`.",
+  "faqTaggingContent": "Pourquoi un élément est manquant dans l’éditeur ? Quand ces points blancs sont-ils affiché en mode Micromapping ? Comment sont triés les éléments ?\n\nLes réponses à toutes ces questions sont dans [good\\_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) dont les thèmes principaux :\n\n* L’ordre des attributs : liste `kMainKeys` ;\n* Les éléments sont téléchargés : fonction `isGoodTags` ;\n* Ce qui est considéré comme un point d’intérêt : fonction `isAmenityTags` ;\n* Les points qui sont aimantés : fonction `detectSnap` ;\n* Quand un objet micro-cartographié est incomplet : fonction `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "aboutReportIssue": "Signaler un problème",
   "@aboutReportIssue": {
     "description": "Button title to open the app's GitHub issue page."
   },
-  "aboutHelpTranslate": "Aider aux traductions",
+  "aboutHelpTranslate": "Aider à traduire",
   "@aboutHelpTranslate": {
     "description": "Button title to open the app's Weblate page."
   },
@@ -734,7 +734,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "loadingTooMuchData": "Effacer les donnés téléchargées dans les préférences pour rendre l'éditeur plus rapide.",
+  "loadingTooMuchData": "Effacer les données téléchargées dans les préférences pour rendre l'éditeur plus rapide.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -789,7 +789,7 @@
   "@fieldHoursClosed": {
     "description": "Switch tile label for making a schedule closed, e.g. for PH off."
   },
-  "fieldHoursMinute": "Minute",
+  "fieldHoursMinute": "Minutes",
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
   },
@@ -797,7 +797,7 @@
   "@fieldHoursAsText": {
     "description": "Button title to open the raw opening hours editor."
   },
-  "fieldHoursNumberedWeekday": "\"Dernier Lundi\"",
+  "fieldHoursNumberedWeekday": "\"Dernier lundi\"",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
@@ -817,7 +817,7 @@
   "@buildingPostCode": {
     "description": "Label for addr:postcode in the form. Keep it short."
   },
-  "faqChangeType": "Comment changer le type d'un objet ?",
+  "faqChangeType": "Comment changer le type d'un objet ?",
   "@faqChangeType": {},
   "buildingMaterial": "Façade",
   "@buildingMaterial": {},
@@ -871,7 +871,7 @@
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
-  "versionsVersionMeta": "par {user} à {datetime}",
+  "versionsVersionMeta": "par {user} le {datetime}",
   "@versionsVersionMeta": {
     "description": "Card body to show metadata about the element version.",
     "placeholders": {
@@ -887,7 +887,7 @@
       }
     }
   },
-  "versionsEnableInternet": "Connectez-vous à internet pour récupérer l'historique des versions",
+  "versionsEnableInternet": "Connectez-vous à Internet pour récupérer l'historique des versions",
   "@versionsEnableInternet": {
     "description": "Message for when fetching element history fails due to lack of network connection."
   },
@@ -918,7 +918,7 @@
   "@notesAnonymous": {
     "description": "Name for anonymous note submitters."
   },
-  "notesCloseMessage": "Marquer cette note comme résolue ?",
+  "notesCloseMessage": "Marquer cette note comme résolue ?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -1044,7 +1044,7 @@
   "@fieldHoursSave": {
     "description": "Tooltip for a button to save opening_hours value."
   },
-  "fieldHoursRemoveFragment": "Retirer le fragment",
+  "fieldHoursRemoveFragment": "Retirer les horaires spécifiques",
   "@fieldHoursRemoveFragment": {
     "description": "Tooltip for a button to remove a fragment in the hours editor."
   },
@@ -1072,9 +1072,9 @@
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
-  "faqYellowContent": "Les marqueurs non jaunes dans le mode entrée, et les points blancs dans le mode micromapping, signifient que ces éléments manquent certains attributs importants. Par exemple :\n\n* Les bâtiments devraient avoir un nombre d'étages.\n* Les entrées devraient avoir un type et, pour les escaliers, une rampe.\n* Les bancs devraient avoir un matériau et une précision sur le dossier.\n* Les arbres devraient avoir un type de feuille et un cycle.",
+  "faqYellowContent": "Les marqueurs non jaunes dans le mode entrée, et les points blancs dans le mode micromapping, signifient que ces éléments manquent certains attributs importants. Par exemple :\n\n* Les bâtiments devraient avoir un nombre d'étages.\n* Les entrées devraient avoir un type et, pour les escaliers, une rampe.\n* Les bancs devraient avoir un matériau et une précision sur le dossier.\n* Les arbres devraient avoir un type de feuille et un cycle.",
   "@faqYellowContent": {},
-  "faqYellow": "Pourquoi certains numéros d'adresse sont jaunes ?",
+  "faqYellow": "Pourquoi certains numéros d'adresse sont jaunes ?",
   "@faqYellow": {},
   "warningWrongTag": "Mauvaise étiquette : {tag}",
   "@warningWrongTag": {
@@ -1112,7 +1112,7 @@
       "count": {}
     }
   },
-  "notesCancelMessage": "Annuler votre note OSM ?",
+  "notesCancelMessage": "Annuler votre note OSM ?",
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
@@ -1124,7 +1124,7 @@
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
   },
-  "hashtagsConfirm": "Confirmer les étiquettes au téléversement",
+  "hashtagsConfirm": "Confirmer les étiquettes lors du téléversement",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
@@ -1230,8 +1230,32 @@
   "@drawTrack": {
     "description": "Tool description: unpaved forestry/farm road. Keep it short."
   },
-  "drawScribble": "Griffoner",
+  "drawScribble": "Dessiner",
   "@drawScribble": {
     "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawCulvert": "Canalisation",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "notesDelete": "Supprimer",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawChangeTool": "Changer d'outil",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawFence": "Clôture",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawPath": "Sentier",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawStream": "Rivière",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
   }
 }
