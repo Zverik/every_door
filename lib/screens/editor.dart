@@ -6,6 +6,7 @@ import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/helpers/pin_marker.dart';
+import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/models/preset.dart';
@@ -238,7 +239,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
   deleteAndClose() {
     if (widget.amenity != null) {
-      // No use deleting an amenity that just've been created.
+      // No use deleting an amenity that just have been created.
       final changes = ref.read(changesProvider);
       if (amenity.isNew) {
         changes.deleteChange(amenity);
@@ -249,6 +250,78 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       ref.read(needMapUpdateProvider).trigger();
     }
     Navigator.pop(context);
+  }
+
+  deletionDialog(AppLocalizations loc) async {
+    // Check that the address is important.
+    bool importantAddress = false;
+    final tags = amenity.getFullTags();
+    final addr = StreetAddress.fromTags(tags);
+    if (addr.isNotEmpty) {
+      final osmData = ref.read(osmDataProvider);
+      importantAddress = await osmData.isUniqueAddress(addr, amenity.location);
+    }
+
+    if (!mounted) return;
+
+    const int kCancel = 0;
+    const int kDelete = 1;
+    const int kKeepAddress = 2;
+    int? answer;
+
+    if (importantAddress) {
+      answer = await showModalActionSheet<int>(
+        context: context,
+        title: loc.editorDeleteTitle(amenity.typeAndName),
+        actions: [
+          SheetAction(
+            key: kKeepAddress,
+            label: loc.editorDeleteKeepAddressButton,
+            isDefaultAction: true,
+            icon: Icons.delete_outline,
+          ),
+          SheetAction(
+            key: kDelete,
+            label: loc.editorDeleteButton,
+            icon: Icons.delete_forever,
+          ),
+          SheetAction(
+            key: kCancel,
+            label: MaterialLocalizations.of(context).cancelButtonLabel,
+            icon: Icons.arrow_back,
+          ),
+        ],
+      );
+    } else {
+      answer = await showModalActionSheet<int>(
+        context: context,
+        title: loc.editorDeleteTitle(amenity.typeAndName),
+        actions: [
+          SheetAction(
+            key: kDelete,
+            label: loc.editorDeleteButton,
+            isDestructiveAction: true,
+            isDefaultAction: true,
+            icon: Icons.delete_forever,
+          ),
+          SheetAction(
+            key: kCancel,
+            label: MaterialLocalizations.of(context).cancelButtonLabel,
+            icon: Icons.arrow_back,
+          ),
+        ],
+      );
+    }
+
+    if (answer == kDelete) {
+      deleteAndClose();
+    } else if (answer == kKeepAddress) {
+      // Delete all tags except address.
+      for (final k in amenity.getFullTags().keys)
+        if (!k.startsWith('addr:') || k == 'addr:floor')
+          amenity.removeTag(k);
+      saveAndClose();
+    }
   }
 
   confirmDisused(BuildContext context) async {
@@ -451,15 +524,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                     amenity.deleted = false;
                   });
                 } else {
-                  final answer = await showOkCancelAlertDialog(
-                    context: context,
-                    title: loc.editorDeleteTitle(amenity.typeAndName),
-                    okLabel: loc.editorDeleteButton,
-                    isDestructiveAction: true,
-                  );
-                  if (answer == OkCancelResult.ok) {
-                    deleteAndClose();
-                  }
+                  deletionDialog(loc);
                 }
               },
             ),

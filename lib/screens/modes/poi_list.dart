@@ -110,6 +110,7 @@ class _PoiListPageState extends ConsumerState<PoiListPane> {
         case ElementKind.micro:
           return isMicromapping;
         case ElementKind.building:
+        case ElementKind.address:
         case ElementKind.entrance:
           return false;
         default:

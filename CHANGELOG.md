@@ -4,6 +4,7 @@
 
 _Unreleased_
 
+* When deleting an amenity with a unique address, suggest keeping the address.
 * Minimum supported Android version is 5.0 now, due to Flutter upgrade.
 
 ## 5.0

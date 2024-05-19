@@ -284,6 +284,10 @@
   "@editorDeleteButton": {
     "description": "Delete"
   },
+  "editorDeleteKeepAddressButton": "Delete, but keep the address",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
   "tagsShare": "Share",
   "@tagsShare": {
     "description": "Tooltip for the sharing button on the tags panel."

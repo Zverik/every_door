@@ -167,11 +167,11 @@ class OsmDataHelper extends ChangeNotifier {
         .every((k) => k.startsWith('addr:') || kMetaTags.contains(k));
   }
 
-  Future<List<StreetAddress>> getAddressesAround(LatLng location,
-      {int limit = 4, bool includeAmenities = true}) async {
+  Future<List<OsmElement>> _getAddressedElementsAround(LatLng location,
+      {int radius = kVisibilityRadius}) async {
     final database = await _ref.read(databaseProvider).database;
     final hashes = createGeohashes(location.latitude, location.longitude,
-        kVisibilityRadius.toDouble(), kGeohashPrecision);
+        radius.toDouble(), kGeohashPrecision);
     final placeholders = List.generate(hashes.length, (index) => "?").join(",");
     final rows = await database.query(
       OsmElement.kTableName,
@@ -191,11 +191,19 @@ class OsmDataHelper extends ChangeNotifier {
         .map((e) => e.toElement(newId: -1));
     elements.addAll(changedElements);
 
+    return elements;
+  }
+
+  Future<List<StreetAddress>> getAddressesAround(LatLng location,
+      {int limit = 4, bool includeAmenities = true}) async {
+    final elements = await _getAddressedElementsAround(location);
+
     // Removed non-buildings if requested.
     if (!includeAmenities)
       elements.removeWhere((e) => !isBuildingOrAddressPoint(e.tags));
 
     // Hash addresses by distance.
+    const distance = DistanceEquirectangular();
     final Map<StreetAddress, double> addresses = {};
     for (final e in elements) {
       final hash = StreetAddress.fromTags(e.tags, location: e.center);
@@ -211,6 +219,14 @@ class OsmDataHelper extends ChangeNotifier {
     results.sort((a, b) => addresses[a]!.compareTo(addresses[b]!));
     if (results.length > limit) return results.sublist(0, limit);
     return results;
+  }
+
+  Future<bool> isUniqueAddress(StreetAddress address, LatLng location) async {
+    final elements = await _getAddressedElementsAround(location);
+    final addresses = Counter(elements
+        .map((e) => StreetAddress.fromTags(e.tags))
+        .where((a) => a.isNotEmpty));
+    return addresses[address] == 1;
   }
 
   Future updateAddressesWithFloors() async {
