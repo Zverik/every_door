@@ -281,11 +281,12 @@ packages:
   flutter_dropdown_alert:
     dependency: "direct main"
     description:
-      name: flutter_dropdown_alert
-      sha256: "5d58b6edd6f478e36ef33187999c77139f983ea0fc54cda10ddddc35c585a2f8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.7"
+      path: "."
+      ref: master
+      resolved-ref: "54ed9bf98b48dc0f21abd428c984657980093659"
+      url: "https://github.com/Zverik/flutter_dropdown_alert.git"
+    source: git
+    version: "1.0.8"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:

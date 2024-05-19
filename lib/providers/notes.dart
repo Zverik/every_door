@@ -28,7 +28,7 @@ final ownScribblesProvider =
     StateNotifierProvider<OwnScribblesController, bool>(
         (_) => OwnScribblesController());
 final currentPaintToolProvider = StateProvider<String>((_) => kToolScribble);
-final drawingLockedProvider = StateProvider<bool>((_) => false);
+final drawingLockedProvider = StateProvider<bool>((_) => true);
 
 class NotesProvider extends ChangeNotifier {
   static final _logger = Logger('NotesProvider');

@@ -276,7 +276,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       onPressed: () {
                         ref.read(drawingLockedProvider.notifier).state = false;
                       },
-                      icon: Icons.lock,
+                      icon: kStyleIcons[currentTool] ?? Icons.lock_open,
                     ),
                     OverlayButtonWidget(
                       alignment:

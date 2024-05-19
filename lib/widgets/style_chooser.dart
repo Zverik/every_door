@@ -117,7 +117,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                         children: [
                           if (widget.onLock != null && !isDragging)
                             RoundButton(
-                              icon: Icons.lock_open,
+                              icon: Icons.lock,
                               foreground: Colors.grey,
                               background: Colors.white,
                               onPressed: () {

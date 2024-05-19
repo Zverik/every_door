@@ -5,6 +5,7 @@
 _Unreleased_
 
 * Added the recent walked path display in small blue dots.
+* GeoScribbles drawing is locked by default.
 * When deleting an amenity with a unique address, suggest keeping the address.
 * Minimum supported Android version is 5.0 now, due to Flutter upgrade.
 

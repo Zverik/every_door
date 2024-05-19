@@ -52,8 +52,12 @@ dependencies:
   uuid: ^4.3.3
   xml: ^6.3.0
 
+dependency_overrides:
+  flutter_dropdown_alert:
+    git:
+      url: https://github.com/Zverik/flutter_dropdown_alert.git
+      ref: master
 # Uncomment this for publishing on F-Droid
-#fdependency_overrides:
 #f  geolocator_android:
 #f    git:
 #f      url: https://github.com/Zverik/flutter-geolocator.git
