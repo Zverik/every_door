@@ -1,5 +1,11 @@
 # Every Door App Change Log
 
+## 5.1
+
+_Unreleased_
+
+* Minimum supported Android version is 5.0 now, due to Flutter upgrade.
+
 ## 5.0
 
 _Released on 2024-05-06_
@@ -23,6 +29,7 @@ _Released on 2024-05-06_
 * Speed fields are not filtered out now.
 * Removed the password login button.
 * Switched to Dart 3 and upgraded `flutter_map` to version 6.
+* Minimum supported iOS version is 12 now.
 * Translations into Estonian (thanks August Murasev Frokjaer), Odia (thanks Soumendra Kumar Sahoo),
   and major updates to Croatian (thanks Milo Ivir).
 
