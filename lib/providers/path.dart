@@ -9,8 +9,8 @@ final pathProvider = StateNotifierProvider<PathController, List<LatLng>>(
 
 class PathController extends StateNotifier<List<LatLng>> {
   static const kPathKey = 'path';
-  static const kBreakInterval = Duration(minutes: 30);
-  static const kBreakDistance = 300; // meters
+  static const kBreakInterval = Duration(minutes: 20);
+  static const kBreakDistance = 200; // meters
   static const kMaxPoints = 1000;
 
   final Ref _ref;
