@@ -16,6 +16,7 @@ import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/widgets/attribution.dart';
 import 'package:every_door/widgets/loc_marker.dart';
+import 'package:every_door/widgets/walkpath.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -173,6 +174,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                 ),
             ],
           ),
+          WalkPathPolyline(),
           LocationMarkerWidget(tracking: false),
           if (trackLocation != null)
             CircleLayer(

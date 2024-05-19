@@ -23,6 +23,7 @@ import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/multi_hit.dart';
 import 'package:every_door/widgets/status_pane.dart';
 import 'package:every_door/widgets/track_button.dart';
+import 'package:every_door/widgets/walkpath.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -400,6 +401,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   reset: tileResetController.stream,
                 ),
                 AttributionWidget(imagery),
+                WalkPathPolyline(),
                 LocationMarkerWidget(),
                 if (newLocation != null)
                   CircleLayer(

@@ -19,6 +19,7 @@ import 'package:every_door/widgets/painter.dart';
 import 'package:every_door/widgets/status_pane.dart';
 import 'package:every_door/widgets/style_chooser.dart';
 import 'package:every_door/widgets/track_button.dart';
+import 'package:every_door/widgets/walkpath.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -196,6 +197,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     userAgentPackageName: tileLayer.userAgentPackageName,
                     reset: tileResetController.stream,
                   ),
+                  WalkPathPolyline(),
                   LocationMarkerWidget(tracking: false),
                   PolylineLayer(
                     polylines: [
