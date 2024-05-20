@@ -162,7 +162,7 @@
   "@faqYellow": {},
   "faqFloors": "A „3” és a „/3” emelet ugyanaz?",
   "@faqFloors": {},
-  "loadingPresets": "Űrlap betöltése…",
+  "loadingPresets": "Címkesablonok betöltése…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
@@ -331,7 +331,7 @@
   "@editorMoreFields": {
     "description": "Title of a additional fields group in editor."
   },
-  "editorLoadingPreset": "Előbeállítás betöltése…",
+  "editorLoadingPreset": "Címkesablon betöltése…",
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
@@ -1193,5 +1193,75 @@
   "fieldHeightAny": "Hosszúságot kell megadni, például 5.4 vagy 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "notesDelete": "Törlés",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawEraser": "Radír",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "Út",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawPath": "Ösvény",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "Törlés, de a cím megtartása",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "drawStream": "Patak",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawCulvert": "Csatorna",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "apiStatusUploadingNotes": "Jegyzetek feltöltése",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "drawScribble": "Firkálás",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawTrack": "Mezőgazdasági út",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawFootway": "Járda",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawCycleway": "Kerékpárút",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "Kerékpársáv",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawWall": "Fal",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawFence": "Kerítés",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawPower": "Villanyvezeték",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawUndo": "Visszavonás",
+  "@drawUndo": {},
+  "drawChangeTool": "Eszköz megváltoztatása",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
   }
 }
