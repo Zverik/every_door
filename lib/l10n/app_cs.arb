@@ -1257,5 +1257,9 @@
   "drawCulvert": "Propust",
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "Odstranit, ale ponechat adresu",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }
