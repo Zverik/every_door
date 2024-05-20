@@ -1,0 +1,4 @@
+* GPS-problémák remélhetőleg javítva.
+* A Bing légi felvétel kulcsa frissítve és a Maxar eltávolítva.
+* Új bankkártyás fizetési beállítások.
+* Okosabb név nagybetűzés.

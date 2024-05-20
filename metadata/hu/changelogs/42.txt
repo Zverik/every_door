@@ -1,0 +1,4 @@
+* Firkálási jegyzetek mód.
+* A hét napjai a helyi nyelven.
+* Emelet címkék javaslatai.
+* Címkesablonok és légi felvételek frissítései.
