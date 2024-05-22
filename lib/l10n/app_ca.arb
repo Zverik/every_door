@@ -1259,5 +1259,9 @@
   "drawCulvert": "Claveguera",
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "Suprimeix, però conserva l'adreça",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }
