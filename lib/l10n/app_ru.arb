@@ -908,5 +908,9 @@
   "editorDeleteKeepAddressButton": "Удалить, но оставить адрес",
   "@editorDeleteKeepAddressButton": {
     "description": "Button for keeping the address"
+  },
+  "fieldWebsiteQR": "Отсканируйте QR-код",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
   }
 }

@@ -1249,5 +1249,17 @@
   "drawCulvert": "Kulvert",
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "drawTrack": "Spår",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawScribble": "Klottra",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "Ta bort, men behåll adressen",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }

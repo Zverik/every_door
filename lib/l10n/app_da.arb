@@ -23,7 +23,7 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
-  "tileNothingAround": "Ingen faciliteter omkring dig inden for {distance} meter.",
+  "tileNothingAround": "Ingen faciliteter inden for {distance} meter.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -1257,5 +1257,9 @@
   "drawCulvert": "Underføring",
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "Slet, men behold adressen",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }
