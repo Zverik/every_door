@@ -77,6 +77,8 @@ class OsmMember {
   }
 }
 
+enum IsMember { no, way, relation }
+
 class OsmElement {
   final OsmId id;
   final Map<String, String> tags;
@@ -88,7 +90,7 @@ class OsmElement {
   final List<int>? nodes;
   final Map<int, LatLng>? nodeLocations; // not stored to the database
   final List<OsmMember>? members;
-  final bool isMember;
+  final IsMember isMember;
 
   OsmElementType get type => id.type;
 
@@ -103,7 +105,7 @@ class OsmElement {
     this.nodes,
     this.nodeLocations,
     this.members,
-    this.isMember = false,
+    this.isMember = IsMember.no,
   }) : center = center ??
             (geometry is Polygon
                 ? geometry.findPointOnSurface()
@@ -115,7 +117,7 @@ class OsmElement {
       int? version,
       LatLng? center,
       Geometry? geometry,
-      bool? isMember,
+      IsMember? isMember,
       List<int>? nodes,
       Map<int, LatLng>? nodeLocations,
       bool currentTimestamp = false,
@@ -174,6 +176,7 @@ class OsmElement {
   factory OsmElement.fromJson(Map<String, dynamic> data) {
     List<dynamic>? members = json.decode(data['members']);
     String? nodes = data['nodes'];
+    final int m = data['is_member'];
     return OsmElement(
       id: OsmId.fromString(data['osmid']),
       version: data['version'],
@@ -192,7 +195,11 @@ class OsmElement {
           ?.whereType<String>()
           .map((e) => OsmMember.fromString(e))
           .toList(),
-      isMember: data['is_member'] == 1,
+      isMember: m == 1
+          ? IsMember.way
+          : m == 2
+              ? IsMember.relation
+              : IsMember.no,
     );
   }
 
@@ -217,7 +224,11 @@ class OsmElement {
       'tags': json.encode(tags),
       'nodes': nodes?.join(','),
       'members': json.encode(members?.map((e) => e.toString()).toList()),
-      'is_member': isMember ? 1 : 0,
+      'is_member': isMember == IsMember.relation
+          ? 2
+          : isMember == IsMember.way
+              ? 1
+              : 0,
     };
   }
 

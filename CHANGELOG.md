@@ -7,6 +7,8 @@ _Unreleased_
 * Added the recent walked path display in small blue dots.
 * GeoScribbles drawing is locked by default.
 * When deleting an amenity with a unique address, suggest keeping the address.
+* Now possible to move nodes that are relation members.
+* Fixed blue marker for unmovable objects in the editor.
 * Minimum supported Android version is 5.0 now, due to Flutter upgrade.
 
 ## 5.0

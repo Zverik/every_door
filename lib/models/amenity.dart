@@ -108,10 +108,14 @@ class OsmChange extends ChangeNotifier implements Comparable {
   bool get isArea => element?.isArea ?? false;
   bool get isPoint => element?.isPoint ?? true;
   bool get canDelete =>
-      (element?.isPoint ?? true) && !(element?.isMember ?? false);
+      (element?.isPoint ?? true) &&
+      (element == null || element?.isMember == IsMember.no);
   bool get isBuilding =>
       detectKind(getFullTags(), {ElementKind.building}) == ElementKind.building;
-  bool get canMove => canDelete && (isNew || kind != ElementKind.entrance);
+  bool get canMove =>
+      (element?.isPoint ?? true) &&
+      (element?.isMember != IsMember.way) &&
+      (isNew || kind != ElementKind.entrance);
   ElementKind get kind => detectKind(getFullTags());
   bool get isIncomplete => needsMoreInfo(getFullTags());
 
@@ -292,7 +296,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
       version: newVersion ?? 1,
       timestamp: DateTime.now(),
       tags: getFullTags(),
-      isMember: element?.isMember ?? false,
+      isMember: element?.isMember ?? IsMember.no,
       // overriding location call for toXML()
       center: newLocation ?? element?.center,
       downloaded: DateTime.now(),

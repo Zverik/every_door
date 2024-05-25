@@ -328,11 +328,15 @@ class MarkReferenced extends Converter<List<OsmElement>, List<OsmElement>> {
       }
 
       // Process references in this element
+      final isMember = element.id.type == OsmElementType.relation
+          ? IsMember.relation
+          : IsMember.way;
+
       if (refs != null) {
         for (final ref in refs) {
           final el = _stack[ref];
           if (el != null) {
-            referenced.add(el.copyWith(isMember: true));
+            referenced.add(el.copyWith(isMember: isMember));
             _stack.remove(ref);
           } else {
             _refs.add(ref);
@@ -342,7 +346,7 @@ class MarkReferenced extends Converter<List<OsmElement>, List<OsmElement>> {
 
       // Emit if already referenced, stash otherwise
       if (_refs.contains(element.id)) {
-        referenced.add(element.copyWith(isMember: true));
+        referenced.add(element.copyWith(isMember: isMember));
         _refs.remove(element.id);
       } else {
         _stack[element.id] = element;

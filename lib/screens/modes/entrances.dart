@@ -401,7 +401,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                   reset: tileResetController.stream,
                 ),
                 AttributionWidget(imagery),
-                WalkPathPolyline(),
+                WalkPathPolyline(faint: true),
                 LocationMarkerWidget(),
                 if (newLocation != null)
                   CircleLayer(

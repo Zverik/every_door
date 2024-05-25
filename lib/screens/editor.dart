@@ -318,8 +318,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     } else if (answer == kKeepAddress) {
       // Delete all tags except address.
       for (final k in amenity.getFullTags().keys)
-        if (!k.startsWith('addr:') || k == 'addr:floor')
-          amenity.removeTag(k);
+        if (!k.startsWith('addr:') || k == 'addr:floor') amenity.removeTag(k);
       saveAndClose();
     }
   }
@@ -607,7 +606,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                         ),
                       ),
                     if (!amenity.canMove)
-                      PinMarker(amenity.location, color: Colors.red.shade900),
+                      PinMarker(amenity.location,
+                          color: Colors.red.shade900, blend: false),
                   ],
                 ),
               ],

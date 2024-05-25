@@ -23,8 +23,10 @@ class WeekdaysPanel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final locProvider = ref.watch(countryLocaleProvider);
+    final currentLoc = AppLocalizations.of(context)!;
     final loc =
-        ref.watch(countryLocaleProvider).loc ?? AppLocalizations.of(context)!;
+        locProvider.multiple ? currentLoc : locProvider.loc ?? currentLoc;
     final weekdayTitles = loc.fieldHoursWeekdays.split(' ');
 
     return Row(

@@ -4,7 +4,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WalkPathPolyline extends ConsumerWidget {
-  const WalkPathPolyline({super.key});
+  final bool faint;
+
+  const WalkPathPolyline({super.key, this.faint = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -13,10 +15,10 @@ class WalkPathPolyline extends ConsumerWidget {
     return PolylineLayer(polylines: [
       Polyline(
         points: walkPath,
-        color: Colors.blue,
+        color: Colors.blue.withOpacity(faint ? 0.3 : 0.5),
         isDotted: true,
         strokeWidth: 3.0,
-        borderColor: Colors.black38,
+        borderColor: Colors.black26,
         borderStrokeWidth: 3.0,
       ),
     ]);

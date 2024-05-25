@@ -16,6 +16,7 @@ import 'package:every_door/screens/settings.dart';
 import 'package:every_door/widgets/attribution.dart';
 import 'package:every_door/widgets/loc_marker.dart';
 import 'package:every_door/widgets/track_button.dart';
+import 'package:every_door/widgets/walkpath.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -328,6 +329,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
           reset: tileResetController.stream,
         ),
         LocationMarkerWidget(),
+        WalkPathPolyline(faint: true),
         if (trackLocation != null)
           CircleLayer(
             circles: [

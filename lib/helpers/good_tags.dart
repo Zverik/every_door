@@ -119,6 +119,8 @@ bool isAmenityTags(Map<String, String> tags) {
       'bench',
       'parking_space',
       'clothes_dryer',
+      'dressing_room',
+      'shower',
       'waste_basket',
       'bicycle_parking',
       'shelter',
@@ -418,8 +420,8 @@ SnapTo detectSnap(Map<String, String> tags) {
     };
     if (kSnapRailway.contains(tags['railway']!)) return SnapTo.railway;
   } else if ({'traffic_calming', 'barrier'}.contains(k)) return SnapTo.highway;
-  else if (k == 'historic' && {'plaque', 'blue_plaque'}.contains(tags['memorial']))
-    return SnapTo.building;
+  // else if (k == 'historic' && {'plaque', 'blue_plaque'}.contains(tags['memorial']))
+  //   return SnapTo.building;
   else if (k == 'public_transport' && tags['public_transport'] == 'stop_position') {
     if (tags['bus'] == 'yes' || tags['trolleybus'] == 'yes')
       return SnapTo.highway;
@@ -439,7 +441,7 @@ bool isSnapTargetTags(Map<String, String> tags, [SnapTo? kind]) {
     return !{'platform', 'station', 'signal_box', 'platform_edge'}
       .contains(tags['railway']);
   if (tags.containsKey('building') && (kind == null || kind == SnapTo.building))
-    return tags['building'] != 'roof';
+    return tags['building'] != 'roof' && tags['building'] != 'part';
   if (tags.containsKey('barrier') && (kind == null || kind == SnapTo.wall))
     return {'wall', 'fence'}.contains(tags['barrier']);
   return false;

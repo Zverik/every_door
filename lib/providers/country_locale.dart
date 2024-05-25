@@ -15,6 +15,7 @@ class CountryLocaleController extends ChangeNotifier {
 
   Locale? locale;
   AppLocalizations? loc;
+  bool multiple = false;
 
   CountryLocaleController(this._ref);
 
@@ -22,8 +23,12 @@ class CountryLocaleController extends ChangeNotifier {
     location ??= _ref.read(effectiveLocationProvider);
 
     Locale? newLocale;
+    bool newMultiple = false;
     if (location != null) {
-      for (final l in _getLanguageKeysForLocation(location)) {
+      final localesToTest = _getLanguageKeysForLocation(location);
+      // We get two for each language.
+      newMultiple = localesToTest.length > 2;
+      for (final l in localesToTest) {
         if (AppLocalizations.delegate.isSupported(l)) {
           newLocale = l;
           break;
@@ -33,6 +38,7 @@ class CountryLocaleController extends ChangeNotifier {
 
     if (newLocale != locale) {
       locale = newLocale;
+      multiple = newMultiple;
       loc = newLocale == null
           ? null
           : await AppLocalizations.delegate.load(newLocale);
