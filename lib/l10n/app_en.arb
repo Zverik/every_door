@@ -923,6 +923,10 @@
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
   },
+  "fieldWebsiteQR": "Scan a QR Code",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
   "messageNoData": "No data, tap here to download",
   "@messageNoData": {
     "description": "Message that appears on the main screen when there's no OSM data."

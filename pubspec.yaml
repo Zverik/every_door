@@ -35,6 +35,7 @@ dependencies:
   latlong2: ^0.9.0
   line_icons: ^2.0.1
   logging: ^1.0.2
+  mobile_scanner: ^5.1.1
   oauth2_client: ^3.2.2
   path: ^1.8.1
   path_drawing: ^1.0.0

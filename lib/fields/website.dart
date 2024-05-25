@@ -1,8 +1,10 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/fields/helpers/qr_code.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
+import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'helpers/website_fmt.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,6 +36,8 @@ class WebsiteInputField extends ConsumerStatefulWidget {
 }
 
 class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
+  static final _logger = Logger('WebsiteInputField');
+
   late TextEditingController _controller;
   late WebsiteProvider _provider;
   late FocusNode _fieldFocus;
@@ -74,6 +78,31 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
           preferContact: ref.read(editorSettingsProvider).preferContact);
     });
     return true;
+  }
+
+  detectAndSubmitUrl(String url) {
+    WebsiteProvider? found;
+    // Skip first for the end (it's the generic URL provider).
+    for (int i = 1; i < websiteProviders.length; i++) {
+      if (websiteProviders[i].isValid(url, url: true)) {
+        found = websiteProviders[i];
+        break;
+      }
+    }
+    if (found == null && websiteProviders[0].isValid(url, url: true)) {
+      found = websiteProviders[0];
+    }
+
+    _logger.info('Provider ${found?.label ?? "unknown"} for $url');
+    if (found != null) {
+      setState(() {
+        // Weird we need to do this check twice.
+        if (found != null) {
+          found.setValue(widget.element, found.format(url),
+              preferContact: ref.read(editorSettingsProvider).preferContact);
+        }
+      });
+    }
   }
 
   showProviderChooser() async {
@@ -182,7 +211,18 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
                   },
                 ),
               ),
-            )
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.qr_code_scanner,
+                size: 30.0,
+              ),
+              onPressed: () async {
+                final String? detected = await Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => QrCodeScanner()));
+                if (detected != null) detectAndSubmitUrl(detected);
+              },
+            ),
           ],
         ),
         for (final website in websites)

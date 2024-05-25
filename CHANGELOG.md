@@ -4,12 +4,14 @@
 
 _Unreleased_
 
-* Added the recent walked path display in small blue dots.
+* Added the recent walked path display as small blue dots.
 * GeoScribbles drawing is locked by default.
+* QR code scanner for the website field.
 * When deleting an amenity with a unique address, suggest keeping the address.
 * Now possible to move nodes that are relation members.
-* Fixed blue marker for unmovable objects in the editor.
-* Minimum supported Android version is 5.0 now, due to Flutter upgrade.
+* Fixed a blue marker for unmovable objects in the editor.
+* Fixed the white map when adding an object on iOS.
+* Minimal supported Android version is 5.0 now, due to the Flutter upgrade.
 
 ## 5.0
 
@@ -34,7 +36,7 @@ _Released on 2024-05-06_
 * Speed fields are not filtered out now.
 * Removed the password login button.
 * Switched to Dart 3 and upgraded `flutter_map` to version 6.
-* Minimum supported iOS version is 12 now.
+* Minimal supported iOS version is 12 now.
 * Translations into Estonian (thanks August Murasev Frokjaer), Odia (thanks Soumendra Kumar Sahoo),
   and major updates to Croatian (thanks Milo Ivir).
 

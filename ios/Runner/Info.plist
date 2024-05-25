@@ -49,6 +49,8 @@
 	<string>This app is for mapping amenities around you, so it needs to know where you are.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>The editor does not use location in the background.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to scan QR codes.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
