@@ -47,6 +47,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidSettings(
         accuracy: LocationAccuracy.best,
+        intervalDuration: Duration(seconds: 1),
         forceLocationManager: _ref.read(forceLocationProvider),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
