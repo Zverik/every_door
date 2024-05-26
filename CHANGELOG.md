@@ -10,7 +10,8 @@ _Unreleased_
 * When deleting an amenity with a unique address, suggest keeping the address.
 * Now possible to move nodes that are relation members.
 * Fixed a blue marker for unmovable objects in the editor.
-* Fixed the white map when adding an object on iOS.
+* Hopefully fixed the white map when adding an object on iOS.
+* Location on Android is now updated once a second (thanks fr1 for a hint).
 * Minimal supported Android version is 5.0 now, due to the Flutter upgrade.
 
 ## 5.0
