@@ -1263,5 +1263,9 @@
   "drawChangeTool": "Eszköz megváltoztatása",
   "@drawChangeTool": {
     "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "fieldWebsiteQR": "QR-kód beolvasása",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
   }
 }
