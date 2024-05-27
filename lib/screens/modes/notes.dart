@@ -148,6 +148,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
       updateNotes();
     });
     EdgeInsets safePadding = MediaQuery.of(context).padding;
+    min(double a, double b) => a < b ? a : b;
 
     return Column(
       children: [
@@ -161,7 +162,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   initialCenter: ref.read(effectiveLocationProvider),
                   minZoom: kEditMinZoom,
                   maxZoom: kEditMaxZoom,
-                  initialZoom: ref.watch(zoomProvider) + kZoomOffset,
+                  initialZoom:
+                      min(kEditMaxZoom, ref.watch(zoomProvider) + kZoomOffset),
                   initialRotation: ref.watch(rotationProvider),
                   interactionOptions: InteractionOptions(
                     flags: InteractiveFlag.all -

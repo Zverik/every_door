@@ -13,6 +13,7 @@ _Unreleased_
 * Hopefully fixed the white map when adding an object on iOS.
 * Location on Android is now updated once a second (thanks @freeExec for a hint).
 * Dotted scribble lines are now dashed (now supported in `flutter_map` 7.0).
+* Fixed all missing field name translations.
 * Minimal supported Android version is 5.0 now, due to the Flutter upgrade.
 
 ## 5.0

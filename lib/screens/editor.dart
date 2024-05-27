@@ -112,6 +112,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         if (amenity['building'] != null) {
           stdFields.removeWhere((e) => e.key == 'level');
         }
+
         // Move some fields to stdFields if present.
         if (!needsStdFields) {
           final hasStdFields = stdFields.map((e) => e.key).toSet();
@@ -126,12 +127,15 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             }
           }
         }
+
         // Add postcode to fields for buildings, moreFields for others.
         // The reason for this hack is that our addresses don't transfer postcodes.
         // But the addresses in the presets are indivisible, so we can't choose.
+        final postcodeString =
+            mounted ? AppLocalizations.of(context)?.buildingPostCode : null;
         final postcodeField = TextPresetField(
           key: "addr:postcode",
-          label: "Postcode",
+          label: postcodeString ?? "Postcode",
           keyboardType: TextInputType.visiblePassword,
           capitalize: TextFieldCapitalize.all,
         );
@@ -141,6 +145,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         else {
           preset!.moreFields.insert(0, postcodeField);
         }
+
         // Add opening_hours to moreFields if it's not anywhere.
         if (!preset!.fields.any((field) => field.key == 'opening_hours') &&
             !preset!.moreFields.any((field) => field.key == 'opening_hours')) {
@@ -269,6 +274,11 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     const int kKeepAddress = 2;
     int? answer;
 
+    // Since AdaptiveDialog adds a cancel button on iOS, we need to hide it there.
+    // This line copies the clause directly.
+    bool addCancel =
+        AdaptiveDialog.instance.defaultStyle.isMaterial(Theme.of(context));
+
     if (importantAddress) {
       answer = await showModalActionSheet<int>(
         context: context,
@@ -285,11 +295,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             label: loc.editorDeleteButton,
             icon: Icons.delete_forever,
           ),
-          SheetAction(
-            key: kCancel,
-            label: MaterialLocalizations.of(context).cancelButtonLabel,
-            icon: Icons.arrow_back,
-          ),
+          if (addCancel)
+            SheetAction(
+              key: kCancel,
+              label: MaterialLocalizations.of(context).cancelButtonLabel,
+              icon: Icons.arrow_back,
+            ),
         ],
       );
     } else {
@@ -304,11 +315,12 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             isDefaultAction: true,
             icon: Icons.delete_forever,
           ),
-          SheetAction(
-            key: kCancel,
-            label: MaterialLocalizations.of(context).cancelButtonLabel,
-            icon: Icons.arrow_back,
-          ),
+          if (addCancel)
+            SheetAction(
+              key: kCancel,
+              label: MaterialLocalizations.of(context).cancelButtonLabel,
+              icon: Icons.arrow_back,
+            ),
         ],
       );
     }

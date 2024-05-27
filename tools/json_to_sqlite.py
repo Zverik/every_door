@@ -60,8 +60,8 @@ class ReferenceStorageImpl:
     def get(self, which: ReferenceStorage, name: str, data: dict[str, dict],
             field: str) -> Optional[str]:
         if name not in which:
-            return data[name].get(field)
-        return data.get(which[name], {}).get(field) or data[name].get(field)
+            return data.get(name, {}).get(field)
+        return data.get(which[name], {}).get(field) or data.get(name, {}).get(field)
 
     def add(self, which: ReferenceStorage, value: Optional[str], name: str) -> None:
         """
@@ -175,6 +175,8 @@ def import_fields(cur, path: Optional[str]):
             references.add(references.fields_placeholder, row.get('placeholder'), name)
             # Note that label reference does not imply strings reference.
             references.add(references.fields_strings, row.get('stringsCrossReference'), name)
+            foptions = (row.get('options') or references.get(
+                references.fields_strings, name, data, 'options') or [])
 
             yield (
                 name,
@@ -182,7 +184,7 @@ def import_fields(cur, path: Optional[str]):
                 row['type'],
                 flabel,
                 fplace,
-                None if 'options' not in row else json.dumps(row['options']),
+                None if not foptions else json.dumps(foptions),
                 0 if row.get('customValues') is False else 1,
                 1 if row.get('universal') else 0,
                 1 if row.get('snake_case') else 0,
@@ -399,7 +401,9 @@ def import_translations(cur, path: Optional[str]):
         data = open_or_download(path, f'translations/{lang}.min.json', False)
 
         def build_fields(lang: str, data: dict[str, dict]) -> Iterator[tuple]:
-            for name in data:
+            keys = set(data.keys())
+            keys.update(references.fields_label.keys())
+            for name in keys:
                 label = references.get(references.fields_label, name, data, 'label')
                 placeholder = references.get(
                     references.fields_placeholder, name, data, 'placeholder')
