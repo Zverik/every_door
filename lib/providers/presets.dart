@@ -74,6 +74,7 @@ class PresetProvider {
       // final unpacked = io.GZipCodec().decode(bytes);
       await dbFile.writeAsBytes(bytes, flush: true);
       prefs.setString(kDbVersion, kAppVersion);
+      await clearComboCache();
     }
 
     _db = await openDatabase(dbFile.path);
@@ -308,6 +309,11 @@ class PresetProvider {
 
   static const kCachedCombosTableName = 'cached_combos';
 
+  Future<void> clearComboCache() async {
+    final database = await _ref.read(databaseProvider).database;
+    await database.delete(kCachedCombosTableName);
+  }
+
   Future<void> _updateComboCache(String key, Iterable<String> options) async {
     final database = await _ref.read(databaseProvider).database;
     await database.insert(
@@ -474,18 +480,19 @@ class PresetProvider {
     List<PresetField> moreFields = [];
     final seenFields = <String>{};
     for (final row in results) {
-      if (seenFields.contains(row['name'])) continue;
-      if (kSkipFields.contains(row['name'])) continue;
-      seenFields.add(row['name'] as String);
+      final name = row['name'] as String;
+      if (seenFields.contains(name)) continue;
+      if (kSkipFields.contains(name)) continue;
+      seenFields.add(name);
 
       // Either build a field, or restore it from a cache.
       PresetField field;
-      if (_fieldCache.containsKey(row['name'])) {
-        field = _fieldCache[row['name']]!;
+      if (_fieldCache.containsKey(name)) {
+        field = _fieldCache[name]!;
       } else {
         final options = await _getComboOptions(row);
         field = fieldFromJson(row, options: options);
-        _fieldCache[row['name'] as String] = field;
+        _fieldCache[name] = field;
       }
 
       // Skip fields that don't fit the location.
@@ -551,20 +558,21 @@ class PresetProvider {
     Map<String, PresetField> fields = {};
     final seenFields = <String>{};
     for (final row in results) {
-      if (seenFields.contains(row['name'])) continue;
-      seenFields.add(row['name'] as String);
+      final name = row['name'] as String;
+      if (seenFields.contains(name)) continue;
+      seenFields.add(name);
 
       // Either build a field, or restore it from a cache.
       PresetField field;
-      if (_fieldCache.containsKey(row['name'])) {
-        field = _fieldCache[row['name']]!;
+      if (_fieldCache.containsKey(name)) {
+        field = _fieldCache[name]!;
       } else {
         final options = await _getComboOptions(row);
         field = fieldFromJson(row, options: options);
-        _fieldCache[row['name'] as String] = field;
+        _fieldCache[name] = field;
       }
 
-      fields[row['name'] as String] = field;
+      fields[name] = field;
     }
     return fields;
   }

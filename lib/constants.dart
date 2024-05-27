@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Colors, TextStyle;
 
 const kAppTitle = 'Every Door';
-const kAppVersion = '5.1-beta2'; // Also used for presets.db versioning
+const kAppVersion = '5.1'; // Also used for presets.db versioning
 
 const kDefaultLocation = <double>[59.42, 24.71];
 const kDatabaseName = 'every_door.db';
@@ -32,7 +32,7 @@ const kMaxNSIPresets = 3; // how many of them can come from NSI
 const kFollowLinks = true; // whether to open links and phones on tap
 const kUploadOnClose = false; // whether to trigger data upload on app deactivation
 const kShowContactSetting = true; // whether to show the "contact:" setting
-const kSlowDownGPS = false; // skip location changes that are too small to register
+const kSlowDownGPS = true; // skip location changes that are too small to register
 const kInitialZoom = 17.0; // For POI list screen
 const kEditMinZoom = 15.0; // Below that, the navigation mode switches on
 const kEditMaxZoom = 21.0; // Same for all modes

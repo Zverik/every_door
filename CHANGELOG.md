@@ -2,7 +2,7 @@
 
 ## 5.1
 
-_Unreleased_
+_Released on 2024-05-28_
 
 * Added the recent walked path display as small blue dots.
 * GeoScribbles drawing is locked by default.

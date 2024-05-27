@@ -32,7 +32,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
   late DateTime _stateTime;
 
   GeolocationController(this._ref) : super(null) {
-    _stateTime = DateTime.now();
+    _stateTime = DateTime.now().subtract(Duration(hours: 1));
     _statSub = Geolocator.getServiceStatusStream().listen((status) {
       if (status == ServiceStatus.enabled) {
         enableTracking();
