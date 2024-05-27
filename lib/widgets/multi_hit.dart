@@ -36,7 +36,7 @@ class MultiHitMarkerLayer extends StatelessWidget {
       )) continue;
 
       // Apply map camera to marker position
-      final pos = pxPoint.subtract(camera.pixelOrigin);
+      final pos = pxPoint - camera.pixelOrigin.round();
 
       final rotatedChild = rotate
           ? GestureDetector(

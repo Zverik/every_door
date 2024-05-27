@@ -206,7 +206,9 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                           points: drawing.path.nodes,
                           color: drawing.style.color,
                           strokeWidth: drawing.style.stroke,
-                          isDotted: drawing.style.dashed,
+                          pattern: drawing.style.dashed
+                              ? StrokePattern.dashed(segments: const [10, 13])
+                              : const StrokePattern.solid(),
                           borderColor: drawing.style.casing.withAlpha(30),
                           borderStrokeWidth: 6.0,
                         ),
@@ -333,96 +335,93 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   ]
                 ],
               ),
-              if (kEnablePainter) ...[
-                if (!locked)
-                  PainterWidget(
-                    map: controller,
-                    onDrawn: (coords) {
-                      if (currentTool == kToolEraser) {
-                        final line = LineString(coords);
-                        final crossing = _notes
-                            .whereType<MapDrawing>()
-                            .where((note) => line.intersects(note.path));
-                        ref.read(notesProvider).deleteDrawings(crossing);
-                      } else {
-                        final note = MapDrawing(
-                          path: LineString(coords),
-                          pathType: currentTool,
-                        );
-                        setState(() {
-                          _notes.add(note);
-                        });
-                        ref.read(notesProvider).saveNote(note);
-                      }
-                    },
-                    onTap: (location) {
-                      final locationPx =
-                          controller.camera.latLngToScreenPoint(location);
-                      distanceToLocation(LatLng loc2) {
-                        return locationPx.distanceTo(
-                            controller.camera.latLngToScreenPoint(loc2));
-                      }
+              if (kEnablePainter && !locked) ...[
+                PainterWidget(
+                  map: controller,
+                  onDrawn: (coords) {
+                    if (currentTool == kToolEraser) {
+                      final line = LineString(coords);
+                      final crossing = _notes
+                          .whereType<MapDrawing>()
+                          .where((note) => line.intersects(note.path));
+                      ref.read(notesProvider).deleteDrawings(crossing);
+                    } else {
+                      final note = MapDrawing(
+                        path: LineString(coords),
+                        pathType: currentTool,
+                      );
+                      setState(() {
+                        _notes.add(note);
+                      });
+                      ref.read(notesProvider).saveNote(note);
+                    }
+                  },
+                  onTap: (location) {
+                    final locationPx =
+                        controller.camera.latLngToScreenPoint(location);
+                    distanceToLocation(LatLng loc2) {
+                      return locationPx.distanceTo(
+                          controller.camera.latLngToScreenPoint(loc2));
+                    }
 
-                      bool found = false;
-                      final closestNotes = findMarkerUnderTap(location);
-                      for (final note in closestNotes) {
-                        if (note is OsmNote ||
-                            (note is MapNote &&
-                                note.isNew &&
-                                currentTool != kToolEraser)) {
-                          _openNoteEditor(note);
-                          found = true;
-                          break;
-                        } else if (note is MapNote &&
-                            currentTool == kToolEraser) {
-                          // Tapping on a note in eraser mode deletes it.
-                          ref.read(notesProvider).deleteNote(note);
-                          found = true;
-                          break;
-                        }
+                    bool found = false;
+                    final closestNotes = findMarkerUnderTap(location);
+                    for (final note in closestNotes) {
+                      if (note is OsmNote ||
+                          (note is MapNote &&
+                              note.isNew &&
+                              currentTool != kToolEraser)) {
+                        _openNoteEditor(note);
+                        found = true;
+                        break;
+                      } else if (note is MapNote &&
+                          currentTool == kToolEraser) {
+                        // Tapping on a note in eraser mode deletes it.
+                        ref.read(notesProvider).deleteNote(note);
+                        found = true;
+                        break;
                       }
-                      if (!found && currentTool == kToolEraser) {
-                        // Find a map drawing under the tap and delete it.
-                        double minDistance = double.infinity;
-                        MapDrawing? closest;
-                        for (final note in _notes.whereType<MapDrawing>()) {
-                          if (note.path.bounds.contains(location)) {
-                            final closestPoint =
-                                note.path.closestPoint(location);
-                            final distance = distanceToLocation(closestPoint);
-                            if (distance < minDistance) {
-                              minDistance = distance;
-                              closest = note;
-                            }
+                    }
+                    if (!found && currentTool == kToolEraser) {
+                      // Find a map drawing under the tap and delete it.
+                      double minDistance = double.infinity;
+                      MapDrawing? closest;
+                      for (final note in _notes.whereType<MapDrawing>()) {
+                        if (note.path.bounds.contains(location)) {
+                          final closestPoint = note.path.closestPoint(location);
+                          final distance = distanceToLocation(closestPoint);
+                          if (distance < minDistance) {
+                            minDistance = distance;
+                            closest = note;
                           }
                         }
-                        if (closest != null) {
-                          ref.read(notesProvider).deleteNote(closest);
-                        }
                       }
-                    },
-                    onMapMove: () {
-                      recordMapMove(controller.camera);
-                      updateNotes();
-                    },
-                    style:
-                        kTypeStyles[currentTool] ?? kTypeStyles[kToolScribble]!,
-                  ),
-                if (!locked)
-                  StyleChooserButton(
-                    style: currentTool,
-                    alignment:
-                        leftHand ? Alignment.bottomRight : Alignment.bottomLeft,
-                    onChange: (newStyle) {
-                      setState(() {
-                        ref.read(currentPaintToolProvider.notifier).state =
-                            newStyle;
-                      });
-                    },
-                    onLock: () {
-                      ref.read(drawingLockedProvider.notifier).state = true;
-                    },
-                  ),
+                      if (closest != null) {
+                        ref.read(notesProvider).deleteNote(closest);
+                      }
+                    }
+                  },
+                  onMapMove: () {
+                    recordMapMove(controller.camera);
+                    updateNotes();
+                  },
+                  style:
+                      kTypeStyles[currentTool] ?? kTypeStyles[kToolScribble]!,
+                ),
+                StyleChooserButton(
+                  style: currentTool,
+                  alignment:
+                      leftHand ? Alignment.bottomRight : Alignment.bottomLeft,
+                  onChange: (newStyle) {
+                    setState(() {
+                      ref.read(currentPaintToolProvider.notifier).state =
+                          newStyle;
+                    });
+                  },
+                  onLock: () {
+                    ref.read(drawingLockedProvider.notifier).state = true;
+                  },
+                ),
                 if (!ref.watch(notesProvider).undoIsEmpty)
                   UndoButton(
                     alignment:

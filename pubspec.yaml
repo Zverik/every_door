@@ -24,7 +24,7 @@ dependencies:
   encrypt: ^5.0.1
   flutter_cache_manager: ^3.3.0
   flutter_dropdown_alert: ^1.0.3
-  flutter_map: ^6.0.1
+  flutter_map: ^7.0.0
   flutter_markdown: ^0.7.1
   flutter_portal: ^1.1.4
   flutter_riverpod: ^2.5.1

@@ -11,7 +11,8 @@ _Unreleased_
 * Now possible to move nodes that are relation members.
 * Fixed a blue marker for unmovable objects in the editor.
 * Hopefully fixed the white map when adding an object on iOS.
-* Location on Android is now updated once a second (thanks fr1 for a hint).
+* Location on Android is now updated once a second (thanks @freeExec for a hint).
+* Dotted scribble lines are now dashed (now supported in `flutter_map` 7.0).
 * Minimal supported Android version is 5.0 now, due to the Flutter upgrade.
 
 ## 5.0

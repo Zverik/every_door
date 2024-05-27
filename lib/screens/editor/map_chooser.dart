@@ -168,7 +168,9 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                   points: drawing.path.nodes,
                   color: drawing.style.color,
                   strokeWidth: drawing.style.stroke / 3,
-                  isDotted: drawing.style.dashed,
+                  pattern: drawing.style.dashed
+                      ? StrokePattern.dashed(segments: const [10, 13])
+                      : const StrokePattern.solid(),
                   borderColor: drawing.style.casing.withAlpha(30),
                   borderStrokeWidth: 2.0,
                 ),
