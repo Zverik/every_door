@@ -1263,5 +1263,9 @@
   "editorDeleteKeepAddressButton": "Izbriši, ali zadrži adresu",
   "@editorDeleteKeepAddressButton": {
     "description": "Button for keeping the address"
+  },
+  "fieldWebsiteQR": "Skeniraj QR kod",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
   }
 }
