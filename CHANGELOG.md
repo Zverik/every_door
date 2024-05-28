@@ -2,13 +2,14 @@
 
 ## 5.1
 
-_Released on 2024-05-28_
+_Released on 2024-05-29_
 
 * Added the recent walked path display as small blue dots.
 * GeoScribbles drawing is locked by default.
 * QR code scanner for the website field.
 * When deleting an amenity with a unique address, suggest keeping the address.
 * Now possible to move nodes that are relation members.
+* Button to mark a building demolished.
 * Fixed a blue marker for unmovable objects in the editor.
 * Hopefully fixed the white map when adding an object on iOS.
 * Location on Android is now updated once a second (thanks @freeExec for a hint).

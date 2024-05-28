@@ -19,6 +19,7 @@ final kMainKeysSet = Set.of(kMainKeys);
 
 const kDisused = 'disused:';
 const kDeleted = 'was:';
+const kBuildingDeleted = 'demolished:';
 
 /// List of highway=* values that can denote a named road.
 const kHighwayRoadValues = <String>{
@@ -67,6 +68,8 @@ String? getMainKey(Map<String, String> tags, [bool noPrefix = false]) {
       prefixed = noPrefix ? k : kDisused + k;
     if (prefixed == null && tags.containsKey(kDeleted + k))
       prefixed = noPrefix ? k : kDeleted + k;
+    if (k == "building" && prefixed == null && tags.containsKey(kBuildingDeleted + k))
+      prefixed = noPrefix ? k : kBuildingDeleted + k;
   }
   return prefixed;
 }

@@ -258,6 +258,10 @@
   "@editorMissing": {
     "description": "Button title to delete an amenity (since it's missing)."
   },
+  "editorDeleteBuilding": "Demolished",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
   "editorRestoreTitle": "Is it open?",
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."

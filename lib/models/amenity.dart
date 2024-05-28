@@ -98,10 +98,16 @@ class OsmChange extends ChangeNotifier implements Comparable {
     return element!.id;
   }
 
-  bool get deleted => _deleted || (_mainKey?.startsWith(kDeleted) ?? false);
+  bool get deleted =>
+      _deleted ||
+      (_mainKey?.startsWith(kDeleted) ?? false) ||
+      (_mainKey?.startsWith(kBuildingDeleted) ?? false);
   bool get hardDeleted => _deleted;
   bool get isModified =>
-      newTags.isNotEmpty || newLocation != null || newNodes != null || deleted;
+      newTags.isNotEmpty ||
+      newLocation != null ||
+      newNodes != null ||
+      hardDeleted;
   bool get isConfirmed =>
       !deleted && (newTags.length == 1 && newTags.keys.first == kCheckedKey);
   bool get isNew => element == null;
@@ -213,7 +219,11 @@ class OsmChange extends ChangeNotifier implements Comparable {
   set deleted(bool value) {
     if (value == deleted) return;
     if (isNew || !canDelete) {
-      togglePrefix(kDeleted);
+      // We use this for new because if they are not deleted higher up,
+      // they are meant to have this prefix.
+      togglePrefix((_mainKey?.endsWith("building") ?? false)
+          ? kBuildingDeleted
+          : kDeleted);
     } else {
       _deleted = value;
     }

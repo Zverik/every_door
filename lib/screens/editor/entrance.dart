@@ -30,6 +30,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   bool manualRef = false;
   bool putFlatsInUnit = false;
   bool showAddressForm = false;
+  bool saved = false;
   late final FocusNode _focus;
 
   static const kEntrancePreset = Preset(
@@ -42,6 +43,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
   void initState() {
     super.initState();
     _focus = FocusNode();
+    saved = false;
     if (widget.entrance != null) {
       entrance = widget.entrance!.copy();
     } else {
@@ -94,6 +96,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
         justTags: true);
     final changes = ref.read(changesProvider);
     changes.saveChange(entrance);
+    saved = true;
     ref.read(needMapUpdateProvider).trigger();
     if (pop) Navigator.pop(context);
   }
@@ -112,6 +115,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
       }) entrance.removeTag(k);
       changes.saveChange(entrance);
     }
+    saved = true;
     ref.read(needMapUpdateProvider).trigger();
     Navigator.pop(context);
   }
@@ -145,7 +149,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
 
     return PopScope(
       onPopInvoked: (didPop) {
-        if (didPop && widget.entrance != null) saveAndClose(false);
+        if (didPop && widget.entrance != null && !saved) saveAndClose(false);
       },
       child: SingleChildScrollView(
         child: SafeArea(

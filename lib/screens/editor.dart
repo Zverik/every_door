@@ -503,13 +503,15 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
   Widget buildTopButtons(context) {
     final loc = AppLocalizations.of(context)!;
+    final kind = amenity.kind;
+
     return Container(
       padding: EdgeInsets.only(right: 5.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           // Display "closed" button just for amenities.
-          if (isAmenityTags(amenity.getFullTags()))
+          if (kind == ElementKind.amenity)
             MaterialButton(
               color: amenity.isDisused ? Colors.brown : Colors.orange,
               textColor: Colors.white,
@@ -523,22 +525,27 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
               },
             ),
           SizedBox(width: 10.0),
-          if (amenity.canDelete || !amenity.isBuilding)
-            MaterialButton(
-              color: Colors.red,
-              textColor: Colors.white,
-              child:
-                  Text(amenity.deleted ? loc.editorRestore : loc.editorMissing),
-              onPressed: () async {
-                if (amenity.deleted) {
-                  setState(() {
-                    amenity.deleted = false;
-                  });
-                } else {
+          MaterialButton(
+            color: Colors.red,
+            textColor: Colors.white,
+            child: Text(amenity.deleted
+                ? loc.editorRestore
+                : kind == ElementKind.building
+                    ? loc.editorDeleteBuilding
+                    : loc.editorMissing),
+            onPressed: () async {
+              if (amenity.deleted) {
+                setState(() {
+                  amenity.deleted = false;
+                });
+              } else {
+                if (kind != ElementKind.building)
                   deletionDialog(loc);
-                }
-              },
-            ),
+                else
+                  deleteAndClose();
+              }
+            },
+          ),
         ],
       ),
     );
@@ -569,6 +576,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                 initialRotation: ref.watch(rotationProvider),
                 interactionOptions:
                     InteractionOptions(flags: InteractiveFlag.none),
+                keepAlive:
+                    true, // see https://github.com/fleaflet/flutter_map/issues/1892
                 onTap: !amenity.canMove
                     ? null
                     : (pos, center) async {

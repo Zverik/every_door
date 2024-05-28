@@ -29,6 +29,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
   late final OsmChange building;
   bool manualLevels = false;
   bool buildingsNeedAddresses = true;
+  bool saved = false;
   late final FocusNode _levelsFocus;
   List<String> nearestLevels = [];
 
@@ -43,6 +44,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
       lon: widget.location.longitude,
       inside: 'Q55', // Netherlands
     );
+    saved = false;
     updateLevels();
   }
 
@@ -99,6 +101,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
       building.removeTag(OsmChange.kCheckedKey);
     final changes = ref.read(changesProvider);
     changes.saveChange(building);
+    saved = true;
     ref.read(needMapUpdateProvider).trigger();
     if (pop) Navigator.pop(context);
   }
@@ -107,10 +110,11 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     final changes = ref.read(changesProvider);
     if (building.isNew) {
       changes.deleteChange(building);
-    } else if (building.canDelete) {
+    } else {
       building.deleted = true;
       changes.saveChange(building);
     }
+    saved = true;
     ref.read(needMapUpdateProvider).trigger();
     Navigator.pop(context);
   }
@@ -131,7 +135,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
 
     return PopScope(
       onPopInvoked: (didPop) {
-        if (didPop && widget.building != null) saveAndClose(false);
+        if (didPop && widget.building != null && !saved) saveAndClose(false);
       },
       child: SingleChildScrollView(
         child: SafeArea(
@@ -375,14 +379,17 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                       },
                       child: Text(loc.buildingMoreButton.toUpperCase() + '...'),
                     ),
-                    if (building.canDelete && widget.building != null)
+                    if (false && !building.deleted && widget.building != null)
                       TextButton(
                         child: Text(loc.editorDeleteButton.toUpperCase()),
                         onPressed: () async {
                           final answer = await showOkCancelAlertDialog(
                             context: context,
-                            title: loc.editorDeleteTitle(
-                                'building'), // TODO: better msg
+                            title: loc.editorDeleteTitle(loc
+                                .buildingX(building["addr:housenumber"] ??
+                                    building["addr:housename"] ??
+                                    '')
+                                .trim()),
                             okLabel: loc.editorDeleteButton,
                             isDestructiveAction: true,
                           );
