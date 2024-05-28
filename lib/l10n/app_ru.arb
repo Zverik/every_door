@@ -912,5 +912,9 @@
   "fieldWebsiteQR": "Отсканируйте QR-код",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteBuilding": "Снесено",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }
