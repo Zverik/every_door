@@ -1257,5 +1257,17 @@
   "notesDelete": "Eliminar",
   "@notesDelete": {
     "description": "Button title for deleting a new note."
+  },
+  "editorDeleteBuilding": "Demolido",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "fieldWebsiteQR": "Escanear um código QR",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteKeepAddressButton": "Eliminar, mas manter a morada",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }
