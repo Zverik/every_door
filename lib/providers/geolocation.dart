@@ -171,7 +171,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
 
     // Update state location only if it's far, time passed, or it is null.
-    const kLocationThreshold = 10; // meters
+    const kLocationThreshold = 5; // meters
     const kLocationInterval = Duration(seconds: 10);
     final oldState = state;
 
