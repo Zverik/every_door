@@ -1265,5 +1265,9 @@
   "fieldWebsiteQR": "Skenovat QR kód",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteBuilding": "Zbouráno",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }
