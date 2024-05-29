@@ -1261,5 +1261,13 @@
   "editorDeleteKeepAddressButton": "Eliminar, pero conservar la dirección",
   "@editorDeleteKeepAddressButton": {
     "description": "Button for keeping the address"
+  },
+  "fieldWebsiteQR": "Escanear un código QR",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteBuilding": "Demolido",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }

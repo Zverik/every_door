@@ -1257,5 +1257,17 @@
     "description": "Text displayed when the app is uploading notes to the API."
   },
   "drawUndo": "Desfazer",
-  "@drawUndo": {}
+  "@drawUndo": {},
+  "editorDeleteBuilding": "Demolido",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "fieldWebsiteQR": "Escanear um código QR",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteKeepAddressButton": "Apagar, mas manter o endereço",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  }
 }

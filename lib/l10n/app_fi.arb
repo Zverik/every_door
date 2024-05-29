@@ -1239,5 +1239,21 @@
   "drawEraser": "Pyyhekumi",
   "@drawEraser": {
     "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "notesDelete": "Poista",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawPower": "Sähkölinja",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawCulvert": "Rumpu",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "fieldWebsiteQR": "Skannaa QR-koodi",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
   }
 }

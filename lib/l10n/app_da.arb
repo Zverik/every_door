@@ -1261,5 +1261,13 @@
   "editorDeleteKeepAddressButton": "Slet, men behold adressen",
   "@editorDeleteKeepAddressButton": {
     "description": "Button for keeping the address"
+  },
+  "fieldWebsiteQR": "Scan en QR-kode",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteBuilding": "Nedrevet",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }
