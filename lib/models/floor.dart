@@ -131,12 +131,15 @@ class MultiFloor {
       element.removeTag('addr:floor');
     } else {
       floors.sort();
-      element['level'] = floors
+      // Remove null level values and use set to remove duplicates
+      element['level'] = [...floors.where((f) => f.level != null)]
           .map((f) => f._levelStr)
+          .toSet()
           .join(';')
           .replaceFirst(_kTailSemicolons, '');
-      element['addr:floor'] = floors
-          .map((f) => f.floor ?? '')
+      element['addr:floor'] = [...floors.where((f) => f.floor != null)]
+          .map((f) => f.floor)
+          .toSet()
           .join(';')
           .replaceFirst(_kTailSemicolons, '');
     }
