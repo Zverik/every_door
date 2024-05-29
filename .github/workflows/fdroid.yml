@@ -16,7 +16,6 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
     - run: sed -i -e 's/^#f\|^ *mobile_scanner.*$//' pubspec.yaml
-    - run: sed -i -e 's/^\(.*\bMultiDex\b\)/\/\/ \1/' android/app/src/main/java/io/flutter/app/FlutterMultiDexApplication.java
     - run: mv lib/fields/helpers/qr_code.dart.fdroid lib/fields/helpers/qr_code.dart
     - run: echo '{}' > lib/l10n/app_zh.arb
     - run: export PUB_CACHE=$(pwd)/.pub-cache
