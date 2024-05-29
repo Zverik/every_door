@@ -379,7 +379,9 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                       },
                       child: Text(loc.buildingMoreButton.toUpperCase() + '...'),
                     ),
-                    if (false && !building.deleted && widget.building != null)
+                    if (!building.deleted &&
+                        widget.building != null &&
+                        building.canDelete)
                       TextButton(
                         child: Text(loc.editorDeleteButton.toUpperCase()),
                         onPressed: () async {
