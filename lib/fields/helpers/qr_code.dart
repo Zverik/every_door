@@ -3,6 +3,8 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QrCodeScanner extends StatefulWidget {
+  static const kEnabled = true;
+
   const QrCodeScanner({super.key});
 
   @override

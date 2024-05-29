@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+
+class QrCodeScanner extends StatelessWidget {
+  static const kEnabled = false;
+
+  const QrCodeScanner({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(loc.fieldWebsiteQR),
+      ),
+      body: Center(
+        child: Text('Sorry!'),
+      ),
+    );
+  }
+}

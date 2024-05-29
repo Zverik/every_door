@@ -212,17 +212,18 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
                 ),
               ),
             ),
-            IconButton(
-              icon: Icon(
-                Icons.qr_code_scanner,
-                size: 30.0,
+            if (QrCodeScanner.kEnabled)
+              IconButton(
+                icon: Icon(
+                  Icons.qr_code_scanner,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  final String? detected = await Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => QrCodeScanner()));
+                  if (detected != null) detectAndSubmitUrl(detected);
+                },
               ),
-              onPressed: () async {
-                final String? detected = await Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => QrCodeScanner()));
-                if (detected != null) detectAndSubmitUrl(detected);
-              },
-            ),
           ],
         ),
         for (final website in websites)
