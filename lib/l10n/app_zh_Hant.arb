@@ -669,7 +669,7 @@
   "@fieldHoursWeekdays": {
     "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
   },
-  "fieldHoursClosedPH": "公共假日休息",
+  "fieldHoursClosedPH": "國定假期休息",
   "@fieldHoursClosedPH": {
     "description": "Switch label for PH off."
   },
@@ -1195,5 +1195,79 @@
   "fieldHeightFeet": "預期以英呎為單位的長度，例如 7.4",
   "@fieldHeightFeet": {
     "description": "Validation message for when feet are expected."
+  },
+  "editorDeleteBuilding": "已經拆除",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "fieldWebsiteQR": "掃描 QR code",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "drawEraser": "消除",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawTrack": "路跡",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawUndo": "復原",
+  "@drawUndo": {},
+  "drawChangeTool": "變動工具",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "notesDelete": "刪除",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawFence": "圍籬",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawWall": "牆壁",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "刪除，但保留地址資訊",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "drawRoad": "道路",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawScribble": "塗鴨",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawPath": "路徑",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCycleway": "單車道",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "單車車道",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawPower": "電線",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawFootway": "人行通道",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawStream": "溝",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawCulvert": "涵管",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
   }
 }
