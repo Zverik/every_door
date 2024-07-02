@@ -1,0 +1,1275 @@
+{
+  "loadingPresets": "Memuat preset…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingTooMuchDataTitle": "Terlalu banyak data",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "Pengunduhan gagal",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "Pengunduhan berhasil",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "tileDragTheMap": "Silakan mendekat ke tempat apa pun, seret peta, atau tambahkan fasilitas yang belum ada.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Silakan berpindah-pindah, menambah fasilitas, atau menghapus filter.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "legendOther": "Lainnya",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "navUpload": "Mengunggah",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navNotesMode": "Modus catatan",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "filterNoAddresses": "…Tidak ada alamat di sekitar",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "warningWrongTag": "Tag salah: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningWrongMode": "Mode salah, periksa duplikat",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "editorSave": "Simpan",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorMarkChecked": "Tandai sudah diperiksa",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorCloseTitle": "Tutup editornya?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "Buang perubahan tanpa menyimpan?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorDuplicate": "Kemungkinan duplikat dalam {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorMarkActive": "Tandai Aktif",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Tandai Mati",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorRestore": "Memulihkan",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorDeleteBuilding": "Tandas",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "editorDeleteTitle": "Hapus {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "Hapus",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "tagsNewPoint": "Poin Baru",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsRestore": "Pulihkan",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsAddTag": "Tambahkan tanda",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Kunci",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "versionsFetchError": "Terjadi kesalahan saat mengambil riwayat versi",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "Mencoba kembali",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsLocalChanges": "Perubahan lokal",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsNoTagChanges": "Tidak ada perubahan tag",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsTitle": "Konfigurasi",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsApiServer": "Server API",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsPresentation": "Presentasi",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsLoginDetails": "Akun OSM",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeData": "Bersihkan data cache yang usang",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeDataTitle": "Hapus Data?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsPurgeDataMessage": "Anda harus mengunduh ulang semuanya. Yakin Lanjut cyin?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "Data Usang",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsUploads": "Unggahan yang tertunda",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsLeftHand": "Kontrol tangan kiri",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsLanguage": "Bahasa",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsEditor": "Editor",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsDefaultPayment": "Kartu Pembayaran Default",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "aboutInstalledVersion": "Versi terinstal",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "Situs web proyek",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutFAQ": "Pertanyaan Umum",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "Tautan",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountOAuthError": "Kesalahan OAuth",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountPasswordWarningButton": "Dipahami",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldLogin": "Pengguna",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountFieldPassword": "Kata sandi",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountAuthErrorTitle": "Kesalahan Otentikasi",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountChangesets": "Perubahan",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountUnreadMail": "Surat yang belum dibaca",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "hashtagsLabel": "Kata-kata untuk hashtag",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "changesDeletedUndo": "Batalkan",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesPending": "Tertunda",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesOsmNote": "catatan OSM",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "changesPurge": "Bersihkan perubahan",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "changesPurgeTitle": "Bersihkan Perubahan?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesSwipeLeft": "Gesek ke kiri untuk membatalkan perubahan",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursButton": "Tetapkan jam buka",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursFullDay": "Sehari penuh",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursCloses": "Menutup",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursHour": "Jam",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Menit",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursChooseTime": "Jam dan menit",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "Bersihkan",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "Simpan",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursRemoveFragment": "Hapus fragmen",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursRemoveBreak": "Hapus jam istirahat",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursWeekdays": "Senin Selasa Rabu Kamis Jum'at Sabtu Minggu",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "­Tutup pada hari libur nasional",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursSDAddOne": "Tambahkan tanggal",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldCardsNo": "No",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCardsOnly": "kartu saja",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldPaymentAround": "Pilihan Umum di Sekitar",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "fieldPaymentLocal": "Opsi Lokal",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentChoose": "Pilih tag lokal yang berbeda...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldFloorNew": "Lantai baru",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldPhoneWrong": "Format telepon salah",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "fieldHeightMeters": "Mengharapkan panjang dalam meter, mis. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Mengharapkan panjang dalam satuan kaki, mis. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "messageDataObsolete": "Data sudah usang, ketuk di sini untuk menyegarkan",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableLocation": "Aktifkan Lokasi",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "enableLocationMessage": "Harap izinkan akses lokasi untuk aplikasi di panel pengaturan yang akan ditampilkan.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "entranceAccessYes": "Buka",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "pribadi",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "Tidak",
+  "@entranceAccessNo": {},
+  "entranceAccessDelivery": "pengiriman",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "Kursi roda",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "drawScribble": "Tulisan cakar Ayam",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawEraser": "Penghapus",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "Jalan",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawTrack": "Lacak",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawFootway": "Trotoar",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawPath": "Jalur",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCycleway": "Jalur sepeda",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "Jalur sepeda",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawWall": "Dinding",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawFence": "Pagar",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawPower": "Saluran listrik",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawCulvert": "Gorong-gorong",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "apiStatusDownloading": "Mengunduh data…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "Menyimpan elemen ke database aplikasi",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "faqMapTiny": "Mengapa petanya sangat kecil?",
+  "@faqMapTiny": {},
+  "faqCheckmarks": "Untuk apa tanda centang itu?",
+  "@faqCheckmarks": {},
+  "loadingStart": "Menginisialisasi…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingChanges": "Memuat perubahan…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingLocation": "Mendapatkan lokasi…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingTooMuchData": "Bersihkan data yang diunduh di Pengaturan untuk mempercepat editor.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "loadingChangesFailed": "Gagal memuat perubahan",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "dataDownloadedCount": "{count,plural, =1{Elemen {count} yang diunduh.} beberapa{Elemen {count} yang diunduh.} other{Elemen {count} yang diunduh.}}",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "tileNo": "TIDAK",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "navImagery": "Ganti citra",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "tileNothingAround": "Tidak ada fasilitas di sekitar Anda dalam jarak {distance} meter.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "navDownload": "Unduh",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navPoiMode": "Modus kemudahan",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Mode pemetaan mikro",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "filterByFloor": "Berdasarkan lantai",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "filterEmpty": "kosong",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "chooseLocation": "Pilih lokasi",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "navEntrancesMode": "Modus masuk",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "filterByAddress": "Berdasarkan alamat",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterNonConfirmed": "Hanya belum dikonfirmasi",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "mapSettings": "Pengaturan",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "Saring",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "Kembali ke tempat semula",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomOut": "Perkecil",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "editorMove": "Bergerak",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "mapZoomIn": "Perbesar",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "editorMissing": "Tidak ada",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "chooseType": "Pilih jenis",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Jernih",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "warningFixme": "Perbaikan saya: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningTooOld": "Fasilitas sudah berumur {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "warningUnsupported": "Jenis objek ini tidak didukung",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "years": "{count,plural, =1{{count} tahun} beberapa{{count} tahun} lainnya{{count} tahun}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorHistory": "Riwayat",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Tag mentah",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorMoreFields": "Lebih Banyak Bidang",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorLoadingPreset": "Memuat prasetel…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "tagsShare": "Bagikan",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "editorRestoreTitle": "Apakah itu terbuka?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "versionsTitle": "riwayat {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "editorRestoreMessage": "{amenity} tidak aktif. Apakah Anda ingin menandainya aktif?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteKeepAddressButton": "Hapus, tapi simpan alamatnya",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "tagsKeyError": "Kuncinya terlalu langka",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsUrlCopied": "URL disalin ke papan klip",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsDelete": "Bersih",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "tagsValue": "Nilai",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsValueLong": "Nilainya terlalu panjang",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "versionsEnableInternet": "Hubungkan ke internet untuk mengambil riwayat versi",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsVersionNumber": "Versi #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsVersionMeta": "oleh {user} pada {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsDataManagement": "Manajemen data",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsPurgeAllData": "Bersihkan semua data yang diunduh",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsHashtags": "Ubah Hashtag",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "settingsPurgedAllTitle": "Data yang Dihapus",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Membersihkan {count} elemen} beberapa{Membersihkan {count} elemen} lainnya{Membersihkan {count} elemen}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsBackground": "Citra latar belakang",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsCacheTiles": "Unduh ubin",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsGoogle": "Gunakan Pemosisian yang Disempurnakan Google",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "settingsPreferContact": "Lebih suka \"kontak:\" Awalan",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsNumericKeyboard": "Keyboard Numerik yang Diperluas",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsSystem": "Sistem",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsAbout": "Tentang",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutViewLog": "Catatan sistem",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutSourceCode": "Kode sumber",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "di GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutVersionHistory": "Riwayat versi",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutHelpTranslate": "Bantu terjemahkan",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutLicense": "Lisensi",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutReportIssue": "Laporkan masalah",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutOnWeblate": "di Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "accountLoginPassword": "Masuk dengan Kata Sandi",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "aboutHelpImprove": "Bantu tingkatkan {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "accountTitle": "Akun OpenStreetMap",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "Masuk dengan OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountPasswordWarningTitle": "Peringatan",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "Kata sandi Anda akan disimpan di perangkat. Hanya pilih ini ketika OAuth gagal.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "Kredensial OSM",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountAuthErrorMessage": "Username atau password salah.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "Keluar",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "hashtagsConfirm": "Konfirmasikan tag saat diunggah",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesMapNotes": "Catatan peta dan gambar",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesCount": "{count,plural, =1{{count} perubahan} beberapa{{count} perubahan} lainnya{{count} perubahan",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesUploadedTitle": "Di unggah",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadedMessage": "Mengirimkan {changes} ke API.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesUploadFailedTitle": "Gagal mengunggah",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "changesDeletedChange": "Dihapus {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesPurgeMessage": "Hapus semua perubahan yang tercatat dan pulihkan data asli?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "fieldHoursTitle": "Jam buka",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursAsText": "Sebagai Teks",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursClosed": "Tertutup/Ditutup",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursNumberedWeekday": "\"Senin lalu\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursPublicHolidays": "Hari libur nasional",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursOpens": "Buka",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursSpecificDays": "Tanggal yang spesifik",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursBreak": "Rehat",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursAddFragment": "Tambahkan sebuah fragmen",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursNext": "Selanjutnya",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursAddBreak": "Tambahkan istirahat",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursSDRemove": "Menghapus",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddRange": "Tambahkan jangkauan",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldDirectionSet": "Atur",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldWheelchairLimited": "Terbatas",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldNameLanguages": "Bahasa lain",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameLangSearch": "Temukan bahasa",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldComboEmpty": "kosong",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldWifiCustomers": "pelanggan",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldNameCopy": "Salin nilai",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldWheelchairYes": "Ya",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldComboChoose": "memilih",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "Tidak ada",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "Publik",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWheelchairNo": "Tidak",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsAccepted": "Diterima",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldPaymentTitle": "Pembayaran Kartu",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldPaymentUseSame": "Gunakan tag yang sama untuk pemetaan",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentUseGlobal": "Default saya lebih baik",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentGlobal": "Default Global",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "fieldFloorLevelDesc": "Nomor lantai dimulai dari 0 untuk permukaan tanah",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldCheckboxYes": "Ya",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "Tidak",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorEmpty": "Untuk memilih lantai, tetapkan alamat.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorFloorDesc": "Lantai seperti pada navigasi dan di elevator",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldAddressTap": "Ketuk sebuah alamat",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldHeightAny": "Panjang yang diharapkan, mis. 5,4 atau 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
+  },
+  "fieldFloorShouldBeNumber": "Silakan masukkan nomor",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldWebsiteQR": "Pindai Kode QR",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "messageNoData": "Tidak ada data, ketuk di sini untuk mengunduh",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "enableGPS": "Aktifkan GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Silakan aktifkan layanan lokasi di panel pengaturan yang akan ditampilkan.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "buildingMaterialBrick": "bata",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialCementBlock": "blok semen",
+  "@buildingMaterialCementBlock": {},
+  "buttonYes": "Ya",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "Tidak",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingX": "Bangunan {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "addressX": "Alamat {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingPostCode": "Kode Pos",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingRoofShape": "Bentuk Atap",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingMoreButton": "Selebihnya",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterialConcrete": "konkret",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialStone": "Batu 🗿",
+  "@buildingMaterialStone": {},
+  "entrancesAddBuilding": "Tambahkan bangunan",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "entranceX": "Pintu masuk {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "entrancesAddEntrance": "Tambahkan pintu masuk",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "buildingLevels": "Lantai",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Lantai atap",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingType": "Tipe",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMaterial": "Tatapan",
+  "@buildingMaterial": {},
+  "buildingMaterialPlaster": "plester",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "Kayu",
+  "@buildingMaterialWood": {},
+  "buildingMaterialPanels": "panel",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialMetal": "logam",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "Kaca",
+  "@buildingMaterialGlass": {},
+  "buildingTypeAddress": "alamat",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "Rumah",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "Apartemen",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "pengecer",
+  "@buildingTypeRetail": {},
+  "buildingTypeShed": "gudang",
+  "@buildingTypeShed": {},
+  "buildingTypeCommercial": "komersial",
+  "@buildingTypeCommercial": {},
+  "entranceFlats": "Rumah susun",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "buildingTypeIndustrial": "Industri",
+  "@buildingTypeIndustrial": {},
+  "entranceFlatsNumberList": "Seharusnya berupa daftar angka",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "buildingTypeGarage": "Garasi",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "Konstruksi",
+  "@buildingTypeConstruction": {},
+  "entranceIsUnit": "Simpan nomor tetap di alamat:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceRef": "Referensi masuk",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceType": "Tipe",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeService": "Servis",
+  "@entranceTypeService": {},
+  "entranceAccess": "Akses",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceTypeStaircase": "tangga",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "Rumah",
+  "@entranceTypeHome": {},
+  "entranceTypeMain": "Utama",
+  "@entranceTypeMain": {},
+  "entranceTypeShop": "Toko",
+  "@entranceTypeShop": {},
+  "entranceTypeGarage": "Garasi",
+  "@entranceTypeGarage": {},
+  "entranceTypeEmergency": "darurat",
+  "@entranceTypeEmergency": {},
+  "addressHouseNumber": "Nomor Rumah",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Tidak boleh kosong",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Unit",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "Opsional",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "notesAddNote": "Tambahkan catatan",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "Anonim",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "addressBlock": "Nomor blok",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "addressStreet": "Jalan",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "notesComment": "Komentarmu",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "notesClose": "Selesaikan",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesDelete": "Hapus",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "addressPlace": "Tempat",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesCloseMessage": "Tandai catatan itu sudah diselesaikan?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "notesCancelMessage": "Batalkan catatan OSM-mu?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "drawUndo": "Batalkan",
+  "@drawUndo": {},
+  "drawChangeTool": "Ganti alat",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "apiStatusUploadingNotes": "Mengunggah catatan",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "drawStream": "Sungai kecil/kali",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "apiStatusUploading": "Mengunggah perubahan",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "faqMapTinyContent": "Karena bukan itu intinya. Anda hanya memeriksa posisi Anda di peta, dan menggesernya untuk menyesuaikan. Perhatikan daftar fasilitas di bawah ini, diurutkan berdasarkan jarak dari Anda.\n\nPeta menjadi lebih besar ketika Anda mengedit fasilitas yang jauh dari lokasi Anda. Meskipun aplikasi ini dibuat untuk mengedit hal-hal yang Anda lihat dengan mata Anda.",
+  "@faqMapTinyContent": {},
+  "faqCheckmarksContent": "Ini adalah tanda bahwa data fasilitas telah dikonfirmasi. Mereka menambahkan tag `check_date` dengan tanggal saat ini.\n\nGagasan di balik tanda centang ini adalah, katakanlah,Anda mensurvei separuh kota untuk pertama kalinya. Kemudian setelah sebulan Anda kembali dan melakukan survei lagi. Anda perlu menandai bahwa Anda melihat fasilitasnya, tetapi tidak ada yang berubah.\n\nTanda itu tetap diperiksa selama dua bulan. Setelah itu Anda boleh mensurvei fasilitasnya lagi.",
+  "@faqCheckmarksContent": {},
+  "faqEntrance": "Bagaimana cara menambahkan pintu masuk gedung?",
+  "@faqEntrance": {},
+  "faqYellow": "Mengapa beberapa nomor rumah berwarna kuning?",
+  "@faqYellow": {},
+  "faqYellowContent": "Label non-kuning pada mode masuk dan titik putih pada mode pemetaan mikro berarti elemen tersebut tidak memiliki beberapa atribut penting. Misalnya:\n\n* Bangunan diharapkan memiliki sejumlah tingkat.\n* Pintu masuk harus memiliki tipe dan, untuk tangga, jarak datar.\n* Bangku harus memiliki bahan dan .\n* Pohon harus memiliki jenis dan siklus daun.",
+  "@faqYellowContent": {},
+  "faqEntranceContent": "Di bagian bawah terdapat deretan tombol mode: micromapping, fasilitas, pintu masuk, dan catatan.\n\nDalam mode pintu masuk, ketuk atau seret tombol pintu di sudut bawah ke peta.",
+  "@faqEntranceContent": {},
+  "faqLetters": "Bisakah saya mengetikkan huruf ke dalam ref atau angka tetap?",
+  "@faqLetters": {},
+  "faqFloors": "Apakah lantai '3' dan '/3' sama?",
+  "@faqFloors": {},
+  "faqLettersContent": "Jika keyboard numerik Anda tidak dapat dialihkan ke keyboard lengkap, periksa pengaturan aplikasi. Mereka berada di belakang tombol di pojok kiri atas. Aktifkan \"keyboard numerik tambahan\" di sana.",
+  "@faqLettersContent": {},
+  "faqFloorsContent": "Tidak. Tag `addr:floor=3` yang pertama terisi. Itulah dasar yang tercetak pada navigasi dan umum digunakan. Yang kedua tidak memiliki tag ini, tetapi memiliki `level=3`. Angka tersebut merupakan nomor lantai berurutan dari nol hingga `gedung:tingkat - 1`. Artinya, di gedung tiga lantai, nilai `addr:floor` bergantung pada suatu negara,tetapi `level` selalu 0, 1, atau 2.\n\nBerikut adalah notasi di editor yang terkait dengan tag tersebut:\n\n* `2`: `addr:lantai=2`dan `level=*` yang tidak kosong.\n* `4/`: `addr:floor=4`, tetapi tidak ada tag `level`.\n* `/1`: `level=1`, tetapi tidak ada tag `addr:floor`.\n* `1/0`: `addr:lantai=1`+ `level=0` (dan ada objek di dekatnya: dengan `addr:floor` yang sama, tetapi `level` berbeda, atau sebaliknya).",
+  "@faqFloorsContent": {},
+  "faqChangeTypeContent": "Ketuk judul editor, tempat penulisan jenisnya.",
+  "@faqChangeTypeContent": {},
+  "faqChangeType": "Bagaimana cara mengubah jenis fasilitas?",
+  "@faqChangeType": {},
+  "faqTagging": "Semua pertanyaan penandaan",
+  "@faqTagging": {},
+  "faqTaggingContent": "Mengapa ada objek yang hilang di editor? Kapan titik putih ini ditampilkan dalam mode pemetaan mikro? Bagaimana objek diurutkan?\n\nJawaban atas semua pertanyaan ini ada di [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Inilah yang dapat Anda lihat:\n\n* Urutan kunci untuk tag utama — daftar `kMainKeys`.\n* Objek mana yang diunduh — fungsi `isGoodTags`.\n* Apa yang dianggap sebagai fasilitas — fungsi `isAmenityTags`.\n* Titik mana yang diambil dengan cara apa — fungsi `detectSnap`.\n* Ketika objek pemetaan mikro tidak lengkap — fungsi `needsMoreInfo`.",
+  "@faqTaggingContent": {}
+}

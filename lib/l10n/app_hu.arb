@@ -11,7 +11,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "tileNo": "nem",
+  "tileNo": "nincs",
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
@@ -31,7 +31,7 @@
   "@chooseLocation": {
     "description": "Title for the screen for choosing a location on a map."
   },
-  "warningTooOld": "A szolgáltatás {years}",
+  "warningTooOld": "A létesítmény kora: {years}",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -49,7 +49,7 @@
   "@editorRestore": {
     "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
   },
-  "editorDeleteTitle": "Törli a(z) {amenity} szolgáltatást?",
+  "editorDeleteTitle": "Törli a(z) {amenity} létesítményt?",
   "@editorDeleteTitle": {
     "description": "Dialog title for deleting an amenity.",
     "placeholders": {
@@ -112,7 +112,7 @@
       }
     }
   },
-  "fieldHoursOpens": "Nyit",
+  "fieldHoursOpens": "Nyitás:",
   "@fieldHoursOpens": {
     "description": "Title for the interval start."
   },
@@ -124,7 +124,7 @@
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
-  "fieldCheckboxYes": "igen",
+  "fieldCheckboxYes": "van",
   "@fieldCheckboxYes": {
     "description": "Checkbox name for yes."
   },
@@ -178,7 +178,7 @@
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "loadingTooMuchData": "Törölje a letöltött adatokat a Beállításokban, hogy gyorsabbá tegye a szerkesztőt.",
+  "loadingTooMuchData": "A szerkesztő gyorsításához törölje a letöltött adatokat a Beállításokban.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -193,7 +193,7 @@
       "count": {}
     }
   },
-  "tileNothingAround": "Nincsenek szolgáltatások Ön körül {distance} méteren belül.",
+  "tileNothingAround": "Nincs szolgáltatás Ön körül {distance} méteren belül.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -205,7 +205,7 @@
       }
     }
   },
-  "tileDragTheMap": "Menjen közelebb valamihez, húzza a térképet, vagy adjon hozzá egy hiányzó szolgáltatást.",
+  "tileDragTheMap": "Menjen közelebb valamihez, húzza el a térképet, vagy adjon hozzá egy hiányzó szolgáltatást.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
@@ -245,7 +245,7 @@
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."
   },
-  "filterNoAddresses": "Nincsenek címek a közelben",
+  "filterNoAddresses": "Nincs cím a közelben",
   "@filterNoAddresses": {
     "description": "An error message for no addresses nearby, used on filter pane and in address editor."
   },
@@ -335,11 +335,11 @@
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
-  "editorMove": "Mozgatás",
+  "editorMove": "Áthelyezés",
   "@editorMove": {
     "description": "Label for the map, a hint that you can move the object."
   },
-  "editorDuplicate": "Lehetséges kettőzés {distance} méteren belül",
+  "editorDuplicate": "Lehetséges kettőzött objektum {distance} méteren belül",
   "@editorDuplicate": {
     "description": "Message about a possible duplicate",
     "placeholders": {
@@ -442,7 +442,7 @@
       }
     }
   },
-  "versionsVersionMeta": "– {user} {datetime}-kor",
+  "versionsVersionMeta": "– {user} ekkor: {datetime}",
   "@versionsVersionMeta": {
     "description": "Card body to show metadata about the element version.",
     "placeholders": {
@@ -482,7 +482,7 @@
   "@settingsLoginDetails": {
     "description": "Settings entry for logging in to OSM."
   },
-  "settingsHashtags": "Módosításcsomag kettős keresztes címkéi",
+  "settingsHashtags": "Módosításcsomag kettős keresztes (#) címkéi",
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
   },
@@ -513,7 +513,7 @@
       "count": {}
     }
   },
-  "settingsBackground": "Háttér légi felvétel",
+  "settingsBackground": "Háttér-légifelvétel",
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
@@ -553,7 +553,7 @@
   "@settingsSystem": {
     "description": "Title for the settings section for system-related switches."
   },
-  "settingsGoogle": "Google által javított pozicionálás használata",
+  "settingsGoogle": "Google által javított helymeghatározás használata",
   "@settingsGoogle": {
     "description": "Settings switch for disabling Google services for location."
   },
@@ -600,7 +600,7 @@
       }
     }
   },
-  "aboutReportIssue": "Hiba jelentése",
+  "aboutReportIssue": "Hiba bejelentése",
   "@aboutReportIssue": {
     "description": "Button title to open the app's GitHub issue page."
   },
@@ -656,7 +656,7 @@
   "@accountUnreadMail": {
     "description": "Label for the number of unread private messages a user has."
   },
-  "hashtagsLabel": "Szavak a kettős keresztes címkékhez",
+  "hashtagsLabel": "Szavak a kettős keresztes (#) címkékhez",
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
   },
@@ -753,7 +753,7 @@
   "@fieldHoursPublicHolidays": {
     "description": "Card title for the PH (public holidays) selector."
   },
-  "fieldHoursCloses": "Zár",
+  "fieldHoursCloses": "Zárás:",
   "@fieldHoursCloses": {
     "description": "Title for the interval end."
   },
@@ -893,7 +893,7 @@
   "@fieldAddressTap": {
     "description": "Title for the pane when a user can tap an address to choose it."
   },
-  "fieldPhoneWrong": "Hibás telefonformátum",
+  "fieldPhoneWrong": "Hibás telefonszám-formátum",
   "@fieldPhoneWrong": {
     "description": "Validation message for a non-standard phone number."
   },
@@ -1218,7 +1218,7 @@
   "@drawStream": {
     "description": "Tool description: stream or other narrow waterway. Keep it short."
   },
-  "drawCulvert": "Csatorna",
+  "drawCulvert": "Áteresz",
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
   },
@@ -1234,7 +1234,7 @@
   "@drawTrack": {
     "description": "Tool description: unpaved forestry/farm road. Keep it short."
   },
-  "drawFootway": "Járda",
+  "drawFootway": "Gyalogút",
   "@drawFootway": {
     "description": "Tool description: paved/maintained footway. Keep it short."
   },
@@ -1267,5 +1267,9 @@
   "fieldWebsiteQR": "QR-kód beolvasása",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteBuilding": "Lebontott",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }

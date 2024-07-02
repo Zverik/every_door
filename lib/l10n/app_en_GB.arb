@@ -1249,5 +1249,25 @@
   "drawPower": "Power line",
   "@drawPower": {
     "description": "Tool description: power line. Keep it short."
+  },
+  "editorDeleteBuilding": "Demolished",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "fieldWebsiteQR": "Scan a QR Code",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "notesDelete": "Delete",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawCulvert": "Culvert",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "Delete, but keep the address",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }

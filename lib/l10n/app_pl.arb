@@ -1257,5 +1257,17 @@
   "drawCulvert": "Przepust",
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "editorDeleteBuilding": "Zburzony",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "fieldWebsiteQR": "Zeskanuj kod QR",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteKeepAddressButton": "Usuń, ale zachowaj adres",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }
