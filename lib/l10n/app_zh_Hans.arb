@@ -1,5 +1,5 @@
 {
-  "loadingStart": "正在初始化……",
+  "loadingStart": "初始化中…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
@@ -329,11 +329,11 @@
   "@filterNoAddresses": {
     "description": "An error message for no addresses nearby, used on filter pane and in address editor."
   },
-  "filterByAddress": "按地址",
+  "filterByAddress": "根据地址",
   "@filterByAddress": {
     "description": "Filter pane, label for choosing an address to filter by."
   },
-  "filterByFloor": "按楼层",
+  "filterByFloor": "根据楼层",
   "@filterByFloor": {
     "description": "Filter pane, label for choosing a floor to filter by."
   },
@@ -349,7 +349,7 @@
   "@editorMoreFields": {
     "description": "Title of a additional fields group in editor."
   },
-  "tagsAddTag": "添加一个标签",
+  "tagsAddTag": "添加标签",
   "@tagsAddTag": {
     "description": "Tags panel button for adding a new tag."
   },
@@ -706,7 +706,7 @@
   "@aboutVersionHistory": {
     "description": "Button title to open GitHub releases page."
   },
-  "aboutInstalledVersion": "安装的版本",
+  "aboutInstalledVersion": "已安装版本",
   "@aboutInstalledVersion": {
     "description": "Button description for installed app version."
   },
@@ -1153,5 +1153,123 @@
   "fieldNameLangSearch": "查找语言",
   "@fieldNameLangSearch": {
     "description": "Hint for the text field for finding a language in a list."
-  }
+  },
+  "fieldHeightMeters": "以米为单位的预期长度，例如 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "以英尺为单位的预期长度，例如 7 '4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldPaymentAround": "附近有常见选项",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "fieldPaymentTitle": "银行卡支付",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldPaymentUseSame": "使用相同的标签进行地图绘制",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentUseGlobal": "我的预设值更好",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentChoose": "选择不同的本地化标签...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldPaymentLocal": "本地选项",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentGlobal": "全局预设",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "drawEraser": "清除",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "notesDelete": "删除",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawChangeTool": "更换工具",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawScribble": "涂画",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawRoad": "道路",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawPath": "小路",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCyclewayShared": "单车车道",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawCycleway": "单车专用道",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawFence": "围栏",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawPower": "电线",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawStream": "溪流",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "删除，但保留地址",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "editorDeleteBuilding": "已拆除",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "fieldWebsiteQR": "扫描二维码",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "drawTrack": "路辙",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawFootway": "人行道",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawWall": "墙壁",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawCulvert": "涵洞",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "apiStatusUploadingNotes": "上传注记",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "fieldHeightAny": "预期长度，如 5.4 或 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
+  },
+  "drawUndo": "还原",
+  "@drawUndo": {}
 }
