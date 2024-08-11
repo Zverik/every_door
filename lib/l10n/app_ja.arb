@@ -1191,5 +1191,27 @@
   "fieldHeightAny": "長さは次のように入力、例：5.4または 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "editorDeleteBuilding": "取壊し済",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "notesDelete": "削除",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawChangeTool": "ツールを切替",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "editorDeleteKeepAddressButton": "削除するが住所のみ保存",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "drawUndo": "元に戻す",
+  "@drawUndo": {},
+  "fieldWebsiteQR": "QRコードを読み取る",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
   }
 }
