@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';
@@ -12,12 +13,14 @@ import 'package:every_door/screens/browser.dart';
 import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:country_coder/country_coder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoadingPage extends ConsumerStatefulWidget {
@@ -26,8 +29,56 @@ class LoadingPage extends ConsumerStatefulWidget {
 }
 
 class _LoadingPageState extends ConsumerState<LoadingPage> {
+  static final _logger = Logger('LoadingPageState');
   String? message;
   static const kPrefLastSizeWarning = 'last_size_warning';
+
+  // https://en.wikipedia.org/wiki/Geo_URI_scheme
+  parseGeoLocation(String geo) {
+    if (!geo.startsWith("geo:")) return null;
+    final geoSplit = geo.split("geo:");
+    if (geoSplit.length != 2) return null;
+    final semicolonSplit = geoSplit[1].split(";");
+    final questionMarkSplit = semicolonSplit[0].split("?");
+    final latLonSplit = questionMarkSplit[0].split(",");
+    try {
+      final lat = double.parse(latLonSplit[0]);
+      final lon = double.parse(latLonSplit[1]);
+      return LatLng(lat, lon);
+    } catch (e) {
+      _logger.severe("Couldn't parseGeoLocation: " + questionMarkSplit[0] + "\n" + e.toString());
+      return null;
+    }
+  }
+
+  Future setLocationFromAndroidIntent() async {
+    const intentLocationChannel = MethodChannel('info.zverev.ilya.every_door/location');
+    try {
+      final result = await intentLocationChannel.invokeMethod<String>('getLocationFromIntent');
+      if (result != null) {
+        final parsedLocation = parseGeoLocation(result);
+        if (parsedLocation != null) {
+          ref.read(effectiveLocationProvider.notifier).set(parsedLocation);
+          return true;
+        }
+      }
+    } on PlatformException catch (e) {
+      _logger.severe("Failed calling getLocationFromIntent: " + e.toString());
+    }
+    return false;
+  }
+
+  Future acquireUserLocation(AppLocalizations loc) async {
+    setState(() {
+      message = loc.loadingLocation;
+    });
+    if (!mounted) return;
+    await ref.read(geolocationProvider.notifier).enableTracking(context);
+    LatLng? location = ref.read(geolocationProvider);
+    if (location != null) {
+      ref.read(effectiveLocationProvider.notifier).set(location);
+    }
+  }
 
   Future doInit() async {
     final loc = AppLocalizations.of(context)!;
@@ -69,15 +120,13 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     // Update floors in the background.
     ref.read(osmDataProvider).updateAddressesWithFloors();
 
-    // Acquire user location.
-    setState(() {
-      message = loc.loadingLocation;
-    });
-    if (!mounted) return;
-    await ref.read(geolocationProvider.notifier).enableTracking(context);
-    LatLng? location = ref.read(geolocationProvider);
-    if (location != null) {
-      ref.read(effectiveLocationProvider.notifier).set(location);
+    if (Platform.isAndroid) {
+      final success = await setLocationFromAndroidIntent();
+      if (!success) {
+        await acquireUserLocation(loc);
+      }
+    } else {
+      await acquireUserLocation(loc);
     }
 
     // Alert if there are too many changes loaded.
