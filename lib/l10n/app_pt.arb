@@ -1262,7 +1262,7 @@
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
   },
-  "fieldWebsiteQR": "Escanear um código QR",
+  "fieldWebsiteQR": "Digitalizar um código QR",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
   },
