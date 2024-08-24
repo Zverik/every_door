@@ -911,7 +911,7 @@
   "@editorHistory": {
     "description": "Tooltip for a button to open version history pane."
   },
-  "editorTags": "Rauwe tags",
+  "editorTags": "Ruwe tags",
   "@editorTags": {
     "description": "Tooltip for a button to open tags pane."
   },
@@ -1197,5 +1197,9 @@
   "apiStatusUploadingNotes": "Notities aan het uploaden",
   "@apiStatusUploadingNotes": {
     "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "editorDeleteBuilding": "Vernietigd",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }
