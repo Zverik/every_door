@@ -1257,5 +1257,17 @@
   "drawStream": "Rivière",
   "@drawStream": {
     "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "editorDeleteBuilding": "Démoli",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "editorDeleteKeepAddressButton": "Supprimer, mais conserver l'adresse",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "fieldWebsiteQR": "Scanner un QR Code",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
   }
 }
