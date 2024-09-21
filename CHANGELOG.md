@@ -8,6 +8,7 @@ _Unreleased_
 * Scale bar for the map chooser.
 * Allowing entering arbitraty keys in the raw tags panel.
 * Not changing zoom when switching to the notes mode.
+* Undo in the notes mode works on labels too.
 * Updated all presets and imagery layers.
 * New supported languages: Greek (thanks Jim Kats) and Indonesian (thanks teamediacommunity).
 

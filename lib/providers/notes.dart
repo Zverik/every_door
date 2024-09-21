@@ -35,7 +35,7 @@ class NotesProvider extends ChangeNotifier {
 
   final Ref _ref;
   int length = 0;
-  final List<(bool deleted, List<MapDrawing> notes)> _undoStack = [];
+  final List<(bool deleted, List<BaseNote> notes)> _undoStack = [];
   int _undoStackLast = 0;
 
   bool get haveChanges => length > 0;
@@ -507,7 +507,7 @@ class NotesProvider extends ChangeNotifier {
   bool get redoIsEmpty => _undoStackLast >= _undoStack.length;
 
   _addToUndoStack(Iterable<BaseNote> notes, bool deleted) {
-    final toAdd = notes.whereType<MapDrawing>().toList();
+    final toAdd = notes.where((n) => n is MapNote || n is MapDrawing).toList();
     if (toAdd.isEmpty) return;
     // Add it to undo stack, discarding the top if needed.
     if (_undoStackLast < _undoStack.length)
@@ -516,7 +516,7 @@ class NotesProvider extends ChangeNotifier {
     _undoStackLast += 1;
   }
 
-  Future<void> _restoreOneChange(MapDrawing note, bool deleted) async {
+  Future<void> _restoreOneChange(BaseNote note, bool deleted) async {
     if (deleted) {
       if (note.isNew) {
         // restore with a new note id

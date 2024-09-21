@@ -160,7 +160,7 @@ class _ChangeListPageState extends ConsumerState {
     });
 
     return PopScope(
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, result) {
         // Fix for cases when the snack bar does not time out.
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
       },

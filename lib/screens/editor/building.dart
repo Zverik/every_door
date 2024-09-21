@@ -134,7 +134,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
         building['building:material:concrete'] == 'panels') material = 'panels';
 
     return PopScope(
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, Object? result) {
         if (didPop && widget.building != null && !saved) saveAndClose(false);
       },
       child: SingleChildScrollView(

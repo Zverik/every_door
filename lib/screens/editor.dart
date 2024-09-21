@@ -361,7 +361,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final loc = AppLocalizations.of(context)!;
     return PopScope(
       canPop: !modified,
-      onPopInvoked: (didPop) async {
+      onPopInvokedWithResult: (didPop, res) async {
         if (didPop) return;
 
         final navigator = Navigator.of(context);

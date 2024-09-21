@@ -168,7 +168,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
 
     return PopScope(
       canPop: canPopScope(false),
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, Object? result) {
         if (!didPop) {
           setState(() {
             canPopScope(true);

@@ -148,7 +148,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     if (entrance['ref'] == null) refOptions.add(kManualOption);
 
     return PopScope(
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, result) {
         if (didPop && widget.entrance != null && !saved) saveAndClose(false);
       },
       child: SingleChildScrollView(

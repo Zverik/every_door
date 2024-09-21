@@ -126,6 +126,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     if (isChanged) {
       final note = _buildEditedNote();
       if (note != null) {
+        print('note editor: saving note!');
         ref.read(notesProvider).saveNote(note);
       }
     }
@@ -186,154 +187,149 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     final dateFormat =
         DateFormat.yMMM(Localizations.localeOf(context).toLanguageTag());
 
-    return PopScope(
-      onPopInvoked: (didPop) {
-        if (didPop) saveAndClose(false);
-      },
-      child: SingleChildScrollView(
-        child: SafeArea(
-          top: false,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: 6.0,
-              left: 10.0,
-              right: 10.0,
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final OsmNoteComment comment in getOldComments()) ...[
-                  SelectableText.rich(
-                    TextSpan(children: [
-                      TextSpan(
-                          text: comment.author ?? loc.notesAnonymous,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: ': '),
-                      ..._parseLinks(comment.message),
-                      TextSpan(
-                        text: ' (${dateFormat.format(comment.date)})',
-                        style: TextStyle(fontSize: kFieldFontSize - 3),
-                      ),
-                    ]),
-                    style: kFieldTextStyle,
-                  ),
-                  SizedBox(height: 10.0),
-                ],
-                TextFormField(
-                  autofocus: true,
-                  initialValue: message,
-                  decoration: InputDecoration(
-                    labelText: loc.notesComment,
-                  ),
+    return SingleChildScrollView(
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 6.0,
+            left: 10.0,
+            right: 10.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final OsmNoteComment comment in getOldComments()) ...[
+                SelectableText.rich(
+                  TextSpan(children: [
+                    TextSpan(
+                        text: comment.author ?? loc.notesAnonymous,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(text: ': '),
+                    ..._parseLinks(comment.message),
+                    TextSpan(
+                      text: ' (${dateFormat.format(comment.date)})',
+                      style: TextStyle(fontSize: kFieldFontSize - 3),
+                    ),
+                  ]),
                   style: kFieldTextStyle,
-                  onChanged: (value) {
-                    setState(() {
-                      message = value.trim();
-                      if (!isOsmNote && message.length > MapNote.kMaxLength) {
-                        isOsmNote = true;
-                      }
-                    });
-                  },
                 ),
-                if (!isOsmNote)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      spacing: 4,
-                      runSpacing: 4,
-                      children: [
-                        for (final shortcut in shortcuts)
-                          GestureDetector(
-                            onTap: () {
-                              message = shortcut;
-                              saveAndClose();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 2.0, horizontal: 4.0),
-                              decoration: BoxDecoration(
-                                color: Colors.black38,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Text(
-                                shortcut,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: kFieldFontSize),
-                              ),
+                SizedBox(height: 10.0),
+              ],
+              TextFormField(
+                autofocus: true,
+                initialValue: message,
+                decoration: InputDecoration(
+                  labelText: loc.notesComment,
+                ),
+                style: kFieldTextStyle,
+                onChanged: (value) {
+                  setState(() {
+                    message = value.trim();
+                    if (!isOsmNote && message.length > MapNote.kMaxLength) {
+                      isOsmNote = true;
+                    }
+                  });
+                },
+              ),
+              if (!isOsmNote)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    spacing: 4,
+                    runSpacing: 4,
+                    children: [
+                      for (final shortcut in shortcuts)
+                        GestureDetector(
+                          onTap: () {
+                            message = shortcut;
+                            saveAndClose();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 2.0, horizontal: 4.0),
+                            decoration: BoxDecoration(
+                              color: Colors.black38,
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: Text(
+                              shortcut,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: kFieldFontSize),
                             ),
                           ),
-                      ],
-                    ),
-                  ),
-                if (widget.note == null)
-                  SwitchListTile(
-                    value: isOsmNote,
-                    title: Text('Publish to OSM'),
-                    onChanged: message.length > MapNote.kMaxLength
-                        ? null
-                        : (value) {
-                            setState(() {
-                              isOsmNote = !isOsmNote;
-                            });
-                          },
-                  ),
-                Row(
-                  children: [
-                    if (widget.note != null)
-                      TextButton(
-                        child: Text(
-                          widget.note!.isNew
-                              ? loc.notesDelete.toUpperCase()
-                              : loc.notesClose.toUpperCase(),
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.error),
                         ),
-                        onPressed: () async {
-                          if (widget.note is OsmNote && !widget.note!.isNew) {
-                            final answer = await showOkCancelAlertDialog(
-                              context: context,
-                              title: loc.notesCloseMessage,
-                              okLabel: loc.notesClose,
-                              isDestructiveAction: true,
-                            );
-                            if (answer != OkCancelResult.ok) return;
-                          }
-                          deleteAndClose();
+                    ],
+                  ),
+                ),
+              if (widget.note == null)
+                SwitchListTile(
+                  value: isOsmNote,
+                  title: Text('Publish to OSM'),
+                  onChanged: message.length > MapNote.kMaxLength
+                      ? null
+                      : (value) {
+                          setState(() {
+                            isOsmNote = !isOsmNote;
+                          });
                         },
-                      ),
-                    Expanded(child: Container()),
+                ),
+              Row(
+                children: [
+                  if (widget.note != null)
                     TextButton(
                       child: Text(
-                          MaterialLocalizations.of(context).cancelButtonLabel),
+                        widget.note!.isNew
+                            ? loc.notesDelete.toUpperCase()
+                            : loc.notesClose.toUpperCase(),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.error),
+                      ),
                       onPressed: () async {
-                        final navigator = Navigator.of(context);
-                        if (isChanged) {
+                        if (widget.note is OsmNote && !widget.note!.isNew) {
                           final answer = await showOkCancelAlertDialog(
                             context: context,
-                            title: MaterialLocalizations.of(context)
-                                .cancelButtonLabel,
-                            message: loc.notesCancelMessage,
+                            title: loc.notesCloseMessage,
+                            okLabel: loc.notesClose,
                             isDestructiveAction: true,
                           );
                           if (answer != OkCancelResult.ok) return;
                         }
-                        navigator.pop();
+                        deleteAndClose();
                       },
                     ),
-                    TextButton(
-                      child:
-                          Text(MaterialLocalizations.of(context).okButtonLabel),
-                      onPressed: () {
-                        saveAndClose();
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  Expanded(child: Container()),
+                  TextButton(
+                    child: Text(
+                        MaterialLocalizations.of(context).cancelButtonLabel),
+                    onPressed: () async {
+                      final navigator = Navigator.of(context);
+                      if (isChanged) {
+                        final answer = await showOkCancelAlertDialog(
+                          context: context,
+                          title: MaterialLocalizations.of(context)
+                              .cancelButtonLabel,
+                          message: loc.notesCancelMessage,
+                          isDestructiveAction: true,
+                        );
+                        if (answer != OkCancelResult.ok) return;
+                      }
+                      navigator.pop();
+                    },
+                  ),
+                  TextButton(
+                    child:
+                        Text(MaterialLocalizations.of(context).okButtonLabel),
+                    onPressed: () {
+                      saveAndClose();
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
