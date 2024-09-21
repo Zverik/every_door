@@ -66,7 +66,7 @@
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
-  "tileDragTheMap": "Běžte prosím blíže k čemukoli, posuňte mapu nebo přidejte chybějící bod.",
+  "tileDragTheMap": "Přesuňte se prosím blíže k něčemu, posuňte mapu nebo přidejte chybějící bod.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },

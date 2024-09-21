@@ -1267,5 +1267,9 @@
   "fieldWebsiteQR": "Escaneja un codi QR",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteBuilding": "Enderrocat",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }

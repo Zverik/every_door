@@ -1255,5 +1255,13 @@
   "fieldWebsiteQR": "Skannaa QR-koodi",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
+  },
+  "drawCyclewayShared": "Pyöräkaista",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "Poista, mutta pidä osoite",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }
