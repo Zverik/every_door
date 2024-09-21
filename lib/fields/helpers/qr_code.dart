@@ -14,6 +14,11 @@ class QrCodeScanner extends StatefulWidget {
 class _QrCodeScannerState extends State<QrCodeScanner> {
   bool done = false;
 
+  Future<String> resolveRedirects(String url) async {
+    // TODO: use HEAD and get the proper location.
+    return url;
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -22,7 +27,7 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
         title: Text(loc.fieldWebsiteQR),
       ),
       body: MobileScanner(
-        onDetect: (codes) {
+        onDetect: (codes) async {
           if (!done && mounted && codes.barcodes.isNotEmpty) {
             final code = codes.barcodes.first;
             String? url;
@@ -38,7 +43,9 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
 
             if (url != null) {
               done = true; // we need this because it scans twice sometimes
-              Navigator.pop(context, url);
+              final nav = Navigator.of(context);
+              String properUrl = await resolveRedirects(url);
+              nav.pop(properUrl);
             }
           }
         },

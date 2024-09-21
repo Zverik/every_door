@@ -431,6 +431,10 @@ SnapTo detectSnap(Map<String, String> tags) {
     else if (tags['train'] == 'yes' || tags['subway'] == 'yes' || tags['tram'] == 'yes')
       return SnapTo.railway;
   }
+  else if (tags['support'] == 'wall_mounted') return SnapTo.wall;
+  else if (k == 'tourism' && tags['tourism'] == 'artwork') {
+    if ({'mural', 'graffiti'}.contains(tags['artwork_type'])) return SnapTo.wall;
+  }
 
   return SnapTo.nothing;
 }

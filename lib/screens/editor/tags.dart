@@ -248,7 +248,12 @@ class _NewTagPanelState extends State<NewTagPanel> {
                       autofocus: true,
                       textCapitalization: TextCapitalization.none,
                       textInputAction: TextInputAction.next,
-                      onFieldSubmitted: (value) => onSubmitted(),
+                      // onFieldSubmitted: (value) => onSubmitted(),
+                      onFieldSubmitted: (value) {
+                        // Move focus to the next one.
+                        _key = value.trim();
+                        _valueFocus.requestFocus();
+                      },
                       onChanged: (value) {
                         _key = value.trim();
                       },

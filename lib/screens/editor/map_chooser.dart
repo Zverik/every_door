@@ -163,7 +163,9 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           ),
           PolylineLayer(
             polylines: [
-              for (final drawing in nearestNotes.whereType<MapDrawing>())
+              for (final drawing in nearestNotes
+                  .whereType<MapDrawing>()
+                  .where((d) => !d.deleting))
                 Polyline(
                   points: drawing.path.nodes,
                   color: drawing.style.color,
@@ -210,6 +212,9 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           ),
           MarkerLayer(
             markers: [PinMarker(center)],
+          ),
+          Scalebar(
+            alignment: !leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
           ),
           ZoomButtonsWidget(
             alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,

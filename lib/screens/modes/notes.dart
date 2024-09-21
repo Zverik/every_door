@@ -38,7 +38,6 @@ class NotesPane extends ConsumerStatefulWidget {
 
 class _NotesPaneState extends ConsumerState<NotesPane> {
   static const kEnablePainter = true;
-  static const kZoomOffset = 1.0;
 
   List<BaseNote> _notes = [];
   final controller = MapController();
@@ -162,8 +161,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   initialCenter: ref.read(effectiveLocationProvider),
                   minZoom: kEditMinZoom,
                   maxZoom: kEditMaxZoom,
-                  initialZoom:
-                      min(kEditMaxZoom, ref.watch(zoomProvider) + kZoomOffset),
+                  initialZoom: ref.watch(zoomProvider),
                   initialRotation: ref.watch(rotationProvider),
                   interactionOptions: InteractionOptions(
                     flags: InteractiveFlag.all -

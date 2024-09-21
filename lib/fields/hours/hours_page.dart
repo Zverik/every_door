@@ -104,7 +104,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
         // The "24/7" value is removed in `initState()`, so we return it here.
         // (Although it shouldn't be called logically).
         initialValue: widget.hours?.trim() == '24/7' ? '24/7' : hours.hours,
-        textCapitalization: TextCapitalization.words,
+        textCapitalization: TextCapitalization.sentences,
         keyboardType: TextInputType.visiblePassword,
         autovalidateMode: AutovalidateMode.always,
         style: kFieldTextStyle,
