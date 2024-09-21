@@ -820,7 +820,7 @@
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
-  "changesCount": "{count,plural, =1{{count} perubahan} few{{count} perubahan} other{{count} perubahan",
+  "changesCount": "{count,plural, =1{{count} perubahan} few{{count} perubahan} other{{count} perubahan}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
