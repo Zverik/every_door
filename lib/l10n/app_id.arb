@@ -458,7 +458,7 @@
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "dataDownloadedCount": "{count,plural, =1{Elemen {count} yang diunduh.} beberapa{Elemen {count} yang diunduh.} other{Elemen {count} yang diunduh.}}",
+  "dataDownloadedCount": "{count,plural, =1{Elemen {count} yang diunduh.} few{Elemen {count} yang diunduh.} other{Elemen {count} yang diunduh.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -580,7 +580,7 @@
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   },
-  "years": "{count,plural, =1{{count} tahun} beberapa{{count} tahun} lainnya{{count} tahun}}",
+  "years": "{count,plural, =1{{count} tahun} few{{count} tahun} other{{count} tahun}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -702,7 +702,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Membersihkan {count} elemen} beberapa{Membersihkan {count} elemen} lainnya{Membersihkan {count} elemen}}",
+  "settingsPurgedMessage": "{count,plural, =1{Membersihkan {count} elemen} few{Membersihkan {count} elemen} other{Membersihkan {count} elemen}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -820,7 +820,7 @@
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
-  "changesCount": "{count,plural, =1{{count} perubahan} beberapa{{count} perubahan} lainnya{{count} perubahan",
+  "changesCount": "{count,plural, =1{{count} perubahan} few{{count} perubahan} other{{count} perubahan",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
