@@ -1,5 +1,16 @@
 # Every Door App Change Log
 
+## 5.2
+
+_Unreleased_
+
+* Added waterway features (like dams) support, snapped to rivers.
+* Scale bar for the map chooser.
+* Allowing entering arbitraty keys in the raw tags panel.
+* Not changing zoom when switching to the notes mode.
+* Updated all presets and imagery layers.
+* New supported languages: Greek (thanks Jim Kats) and Indonesian (thanks teamediacommunity).
+
 ## 5.1
 
 _Released on 2024-05-29_
