@@ -273,7 +273,7 @@ class OsmDataHelper extends ChangeNotifier {
     final hashes = location == null
         ? const []
         : createGeohashes(location.latitude, location.longitude,
-            kBigRadius.toDouble(), kGeohashPrecision);
+            kLocalFloorsRadius.toDouble(), kGeohashPrecision);
     final placeholders = List.generate(hashes.length, (index) => "?").join(",");
     final rows = await database.query(
       OsmElement.kTableName,

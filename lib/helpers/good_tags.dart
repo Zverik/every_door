@@ -38,7 +38,7 @@ const kBuildingNeedsAddress = {
 
 /// Type of object to snap an element to.
 /// E.g. entrances are snapped to `SnapTo.building`.
-enum SnapTo { nothing, building, highway, railway, wall }
+enum SnapTo { nothing, building, highway, railway, wall, stream }
 
 /// Kind of element for sorting elements between modes.
 enum ElementKind {
@@ -257,7 +257,7 @@ bool isMicroTags(Map<String, String> tags) {
     'playground', 'advertising', 'power', 'traffic_calming',
     'barrier', 'highway', 'railway', 'natural', 'leisure',
     'marker', 'public_transport', 'hazard', 'traffic_sign',
-    'telecom', 'attraction', 'cemetery', 'aeroway',
+    'telecom', 'attraction', 'cemetery', 'aeroway', 'waterway',
   };
   if (kAllGoodKeys.contains(k)) return true;
   return false;
@@ -356,6 +356,13 @@ bool isGoodTags(Map<String, String> tags) {
     return !kWrongManMade.contains(v);
   } else if (k == 'cemetery') {
     return v == 'grave';
+  } else if (k == 'waterway') {
+    const kGoodWaterway = <String>{
+      'dam', 'weir', 'waterfall', 'rapids', 'lock_gate', 'sluice_gate',
+      'floodgate', 'debris_screen', 'check_dam', 'turning_point',
+      'water_point', 'fuel',
+    };
+    return kGoodWaterway.contains(v);
   }
   return false;
 }
@@ -435,6 +442,10 @@ SnapTo detectSnap(Map<String, String> tags) {
   else if (k == 'tourism' && tags['tourism'] == 'artwork') {
     if ({'mural', 'graffiti'}.contains(tags['artwork_type'])) return SnapTo.wall;
   }
+  else if (k == 'waterway') {
+    if (!{'turning_point', 'water_point', 'fuel'}.contains(tags[k]))
+      return SnapTo.stream;
+  }
 
   return SnapTo.nothing;
 }
@@ -451,6 +462,8 @@ bool isSnapTargetTags(Map<String, String> tags, [SnapTo? kind]) {
     return tags['building'] != 'roof' && tags['building'] != 'part';
   if (tags.containsKey('barrier') && (kind == null || kind == SnapTo.wall))
     return {'wall', 'fence'}.contains(tags['barrier']);
+  if (tags.containsKey('waterway') && (kind == null || kind == SnapTo.stream))
+    return {'river', 'stream', 'ditch', 'drain', 'canal'}.contains(tags['waterway']);
   return false;
 }
 
