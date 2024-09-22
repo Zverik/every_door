@@ -289,7 +289,6 @@ bool isGoodTags(Map<String, String> tags) {
       'parking_entrance',
       'loading_dock',
       'waste_dump_site',
-      'sanitary_dump_station',
       'waste_transfer_station',
     };
     return !kWrongAmenities.contains(v);
