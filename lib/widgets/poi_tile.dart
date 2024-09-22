@@ -103,7 +103,6 @@ class PoiTile extends ConsumerWidget {
     final missing = buildMissing(ref);
 
     return Container(
-      padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: !amenity.isDisused ? Colors.white : Colors.grey.shade200,
         border: showWarning
@@ -111,68 +110,73 @@ class PoiTile extends ConsumerWidget {
             : null,
       ),
       width: width,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          if (onToggleCheck != null && needsCheckDate(amenity.getFullTags()))
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: amenity.wasOld ? onToggleCheck : null,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 8.0),
-                    child: Icon(
-                      amenity.isOld ? Icons.check : Icons.check_circle,
-                      color: amenity.isOld ? Colors.black : Colors.green,
-                      size: 30.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                ref.read(microZoomedInProvider.notifier).state = null;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => PoiEditorPage(amenity: amenity),
-                      fullscreenDialog: true,
-                  ),
-                );
-              },
-              child: Text.rich(
-                TextSpan(
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (onToggleCheck != null && needsCheckDate(amenity.getFullTags()))
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: amenity.wasOld ? onToggleCheck : null,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    TextSpan(
-                        text: title,
-                        style: !amenity.isDisused
-                            ? null
-                            : TextStyle(
-                                decoration: TextDecoration.lineThrough)),
-                    if (present.isNotEmpty) ...[
-                      TextSpan(text: '\n'),
-                      TextSpan(text: present),
-                    ],
-                    if (missing.isNotEmpty) ...[
-                      TextSpan(text: '\n'),
-                      TextSpan(
-                        text: '${loc.tileNo} $missing',
-                        style: TextStyle(backgroundColor: Colors.red.shade50),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Icon(
+                        amenity.isOld ? Icons.check : Icons.check_circle,
+                        color: amenity.isOld ? Colors.black : Colors.green,
+                        size: 30.0,
                       ),
-                    ],
+                    ),
                   ],
                 ),
-                style: TextStyle(fontSize: 16.0),
+              ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0, top: 8.0, bottom: 8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    ref.read(microZoomedInProvider.notifier).state = null;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => PoiEditorPage(amenity: amenity),
+                          fullscreenDialog: true,
+                      ),
+                    );
+                  },
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: title,
+                            style: !amenity.isDisused
+                                ? null
+                                : TextStyle(
+                                    decoration: TextDecoration.lineThrough)),
+                        if (present.isNotEmpty) ...[
+                          TextSpan(text: '\n'),
+                          TextSpan(text: present),
+                        ],
+                        if (missing.isNotEmpty) ...[
+                          TextSpan(text: '\n'),
+                          TextSpan(
+                            text: '${loc.tileNo} $missing',
+                            style: TextStyle(backgroundColor: Colors.red.shade50),
+                          ),
+                        ],
+                      ],
+                    ),
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -9,6 +9,8 @@ _Unreleased_
 * Allowing entering arbitraty keys in the raw tags panel.
 * Not changing zoom when switching to the notes mode.
 * Undo in the notes mode works on labels too.
+* Redirects in QR codes are automatically resolved (if online).
+* Checkmark tap area now covers the entire height of a cell.
 * Updated all presets and imagery layers.
 * New supported languages: Greek (thanks Jim Kats) and Indonesian (thanks teamediacommunity).
 
