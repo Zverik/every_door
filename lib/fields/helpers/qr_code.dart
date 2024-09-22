@@ -16,7 +16,7 @@ class QrCodeScanner extends StatefulWidget {
 class _QrCodeScannerState extends State<QrCodeScanner> {
   static final _logger = Logger('QrCodeScanner');
 
-  bool done = false;
+  String? _scannedLast;
 
   Future<Uri> _resolveRedirects(Uri uri, [int depth = 0]) async {
     final client = http.Client();
@@ -66,9 +66,12 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
       ),
       body: MobileScanner(
         onDetect: (codes) async {
-          if (!done && mounted && codes.barcodes.isNotEmpty) {
+          final code = codes.barcodes.first;
+          if (code.rawValue != _scannedLast && mounted && codes.barcodes.isNotEmpty) {
+            // we need this because it scans twice sometimes
+            _scannedLast = code.rawValue;
+
             final nav = Navigator.of(context);
-            final code = codes.barcodes.first;
             String? url;
             if (code.type == BarcodeType.url) {
               url = code.url?.url;
@@ -84,7 +87,6 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
             }
 
             if (url != null) {
-              done = true; // we need this because it scans twice sometimes
               if (mounted) nav.pop(url);
             }
           }

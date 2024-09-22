@@ -177,8 +177,9 @@ class FacebookProvider extends _ProviderHelper {
           prefixes: ['fb', 'facebook', 'face'],
           key: 'contact:facebook',
           regexp: RegExp(
-              r'(?:facebook(?:\.com)?/)?((?:groups/)?[^/? ]+)/?(?:\?.*)?$'),
-          regexpUrl: RegExp(r'facebook\.com/((?:groups/)?[^/? ]+)/?(?:\?.*)?$'),
+              r'(?:facebook(?:\.com)?/)?((?:groups/|people/)?[^/? ]+(?:/[0-9]{8,})?)/?(?:\?.*)?$'),
+          regexpUrl: RegExp(
+              r'facebook\.com/((?:groups|people/)?[^/? ]+(?:/[0-9]{8,})?)/?(?:\?.*)?$'),
           format: 'https://www.facebook.com/%s/',
         );
 }
