@@ -6,7 +6,7 @@ _Released on 2024-09-24_
 
 * Added waterway features (like dams) support, snapped to rivers.
 * Scale bar for the map chooser.
-* Allowing entering arbitraty keys in the raw tags panel.
+* Allowing entering arbitrary keys in the raw tags panel.
 * Not changing zoom when switching to the notes mode.
 * Undo in the notes mode works on labels too.
 * Redirects in QR codes are automatically resolved (if online).
