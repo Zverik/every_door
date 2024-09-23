@@ -2,7 +2,7 @@
 
 ## 5.2
 
-_Unreleased_
+_Released on 2024-09-24_
 
 * Added waterway features (like dams) support, snapped to rivers.
 * Scale bar for the map chooser.
