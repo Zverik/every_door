@@ -14,6 +14,7 @@ class PhotoAiPage extends StatefulWidget {
 
 class _PhotoAiPageState extends State<PhotoAiPage> {
   static final _logger = Logger('PhotoAiPage');
+  bool processing = false;
 
   processPhoto(file) async {
     final nav = Navigator.of(context);
@@ -69,12 +70,18 @@ class _PhotoAiPageState extends State<PhotoAiPage> {
                 title: 'Nothing found',
                 message: 'Nothing tag-worthy found in the image.');
           }
+          setState(() {
+            processing = false;
+          });
         } else if (data['error'] != null) {
           _logger.warning('Error: ${data["error"]}');
           if (mounted) {
             await showOkAlertDialog(
                 context: context, title: 'Error', message: '${data["error"]}');
           }
+          setState(() {
+            processing = false;
+          });
         }
       } on FormatException {
         _logger
@@ -85,6 +92,7 @@ class _PhotoAiPageState extends State<PhotoAiPage> {
               title: 'Server error',
               message: 'Malformed response from image-to-osm.');
         }
+        nav.pop();
       }
     }
   }
@@ -92,13 +100,18 @@ class _PhotoAiPageState extends State<PhotoAiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CameraCamera(
-        enableAudio: false,
-        resolutionPreset: ResolutionPreset.veryHigh,
-        onFile: (file) {
-          processPhoto(file);
-        },
-      ),
+      body: processing
+          ? Center(child: Text('processing...'))
+          : CameraCamera(
+              enableAudio: false,
+              resolutionPreset: ResolutionPreset.veryHigh,
+              onFile: (file) {
+                processPhoto(file);
+                setState(() {
+                  processing = true;
+                });
+              },
+            ),
     );
   }
 }
