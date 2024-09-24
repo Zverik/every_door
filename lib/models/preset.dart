@@ -108,7 +108,7 @@ class Preset {
   }
 
   String get subtitle {
-    if (_subtitle != null) return _subtitle!;
+    if (_subtitle != null) return _subtitle;
     final key = getMainKey(addTags);
     if (key == null) return '';
     return '$key=${addTags[key]}';
@@ -130,6 +130,21 @@ class Preset {
   }
 
   Preset withSubtitle(String subtitle) {
+    return Preset(
+      id: id,
+      fields: fields,
+      moreFields: moreFields,
+      onArea: onArea,
+      addTags: addTags,
+      removeTags: removeTags,
+      name: name,
+      subtitle: subtitle,
+      icon: icon,
+      fromNSI: fromNSI,
+    );
+  }
+
+  Preset withTags(Map<String, String> addTags) {
     return Preset(
       id: id,
       fields: fields,

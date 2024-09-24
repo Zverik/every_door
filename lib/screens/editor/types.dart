@@ -1,4 +1,5 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/fields/name.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/editor_mode.dart';
@@ -6,6 +7,7 @@ import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor.dart';
+import 'package:every_door/screens/editor/photo_ai.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:every_door/models/preset.dart';
@@ -25,6 +27,7 @@ class TypeChooserPage extends ConsumerStatefulWidget {
 
 class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   List<Preset> presets = const [];
+  Preset? aiPreset;
   DateTime resultsUpdated = DateTime.now();
   final controller = TextEditingController();
   int updateMutex = 0;
@@ -84,7 +87,8 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
 
   /// Regular expression to match Japanese and Chinese hieroglyphs, to allow 1-char search strings for these.
   /// Taken from https://stackoverflow.com/a/43419070
-  final reCJK = RegExp('^[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]');
+  final reCJK = RegExp(
+      '^[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]');
 
   updatePresets(String substring) async {
     final mutex = DateTime.now().millisecondsSinceEpoch;
@@ -157,6 +161,47 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     }
   }
 
+  applyPreset(BuildContext context, Preset preset) {
+    if (widget.launchEditor) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PoiEditorPage(
+            location: widget.location,
+            preset: preset,
+          ),
+        ),
+      );
+    } else {
+      // Editing preset, return the new one.
+      Navigator.pop(context, preset);
+    }
+  }
+
+  setAiPreset(Map<String, String>? tags) async {
+    if (tags == null)
+      aiPreset = null;
+    else {
+      final presets = ref.read(presetProvider);
+      final newPreset = await presets.getPresetForTags(tags);
+      if (newPreset == Preset.defaultPreset) {
+        aiPreset = Preset(
+          id: 'ai-preset',
+          name: 'AI Detected',
+          fields: [
+            NamePresetField(key: 'name', label: 'Name', placeholder: '')
+          ],
+          addTags: tags,
+        );
+      } else {
+        aiPreset = newPreset.withTags(tags);
+      }
+      setState(() {
+
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -177,14 +222,17 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
               prefixIcon: Icon(Icons.search),
               hintText: loc.chooseType + '...',
               border: InputBorder.none,
-              suffixIcon: IconButton(
-                icon: Icon(Icons.clear),
-                tooltip: loc.chooseTypeClear,
-                onPressed: () {
-                  controller.clear();
-                  updatePresets('');
-                },
-              ),
+              suffixIcon: !widget.launchEditor
+                  ? null
+                  : IconButton(
+                      icon: Icon(Icons.camera_alt),
+                      tooltip: 'Take a photo and ask ChatGPT',
+                      onPressed: () async {
+                        final tags = await Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => PhotoAiPage()));
+                        setAiPreset(tags);
+                      },
+                    ),
             ),
             onChanged: (value) {
               updatePresets(value);
@@ -192,54 +240,80 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
           ),
         ),
       ),
-      body: ResponsiveGridList(
-        minItemWidth: 170.0,
-        horizontalGridSpacing: 5,
-        verticalGridSpacing: 5,
-        rowMainAxisAlignment: MainAxisAlignment.start,
+      body: Column(
         children: [
-          for (final preset in presets)
-            GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      preset.name,
-                      style: TextStyle(fontSize: 16.0),
-                    ),
-                    SizedBox(height: 4.0),
-                    Text(
-                      preset.subtitle,
-                      style: TextStyle(
-                          fontSize: 14.0, color: Colors.grey.shade600),
-                    ),
-                  ],
-                ),
-                color: !preset.isFixme
-                    ? (preset.fromNSI
-                        ? Colors.grey.withOpacity(0.2)
-                        : kFieldColor.withOpacity(0.2))
-                    : Colors.red.withOpacity(0.2),
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-              ),
-              onTap: () {
-                if (widget.launchEditor) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PoiEditorPage(
-                        location: widget.location,
-                        preset: preset,
+          if (aiPreset != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        aiPreset?.name ?? 'AI Preset',
+                        style: TextStyle(fontSize: 16.0),
                       ),
-                    ),
-                  );
-                } else {
-                  // Editing preset, return the new one.
-                  Navigator.pop(context, preset);
-                }
-              },
+                      SizedBox(height: 4.0),
+                      Text(
+                        aiPreset!.addTags.entries
+                            .map((e) => '${e.key}=${e.value}')
+                            .join('\n'),
+                        style: TextStyle(
+                            fontSize: 14.0, color: Colors.grey.shade600),
+                      ),
+                    ],
+                  ),
+                  width: double.infinity,
+                  color: kFieldColor.withOpacity(0.2),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                ),
+                onTap: () {
+                  applyPreset(context, aiPreset!);
+                },
+              ),
             ),
+          Expanded(
+            child: ResponsiveGridList(
+              listViewBuilderOptions: ListViewBuilderOptions(),
+              minItemWidth: 170.0,
+              horizontalGridSpacing: 5,
+              verticalGridSpacing: 5,
+              rowMainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                for (final preset in presets)
+                  GestureDetector(
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            preset.name,
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                          SizedBox(height: 4.0),
+                          Text(
+                            preset.subtitle,
+                            style: TextStyle(
+                                fontSize: 14.0, color: Colors.grey.shade600),
+                          ),
+                        ],
+                      ),
+                      color: !preset.isFixme
+                          ? (preset.fromNSI
+                              ? Colors.grey.withOpacity(0.2)
+                              : kFieldColor.withOpacity(0.2))
+                          : Colors.red.withOpacity(0.2),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                    ),
+                    onTap: () {
+                      applyPreset(context, preset);
+                    },
+                  ),
+              ],
+            ),
+          ),
         ],
       ),
     );
