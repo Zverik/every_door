@@ -145,6 +145,8 @@ bool isAmenityTags(Map<String, String> tags) {
       'clock',
       'watering_place',
       'public_bookcase',
+      'food_sharing',
+      'give_box',
       'car_sharing',
       'bicycle_repair_station',
       'loading_dock',
