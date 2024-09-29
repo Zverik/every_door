@@ -54,4 +54,4 @@ is the preferred way for releases.
 
 ## Author and License
 
-The editor was written by © 2022 Ilya Zverev and published under the ISC license.
+The editor was written by © 2024 Ilya Zverev and published under the ISC license.
