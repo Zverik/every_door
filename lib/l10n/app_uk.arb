@@ -332,7 +332,7 @@
   "@fieldWheelchairNo": {
     "description": "Wheelchair field label for no accessibility."
   },
-  "enableGPSMessage": "Зараз будуть відкриті системні налаштування. Будь ласка, увікніть GPS.",
+  "enableGPSMessage": "Зараз будуть відкриті системні налаштування. Будь ласка, увімкніть GPS.",
   "@enableGPSMessage": {
     "description": "Contents of the alert for enabling location services."
   },
@@ -553,7 +553,7 @@
   "@fieldCardsAccepted": {
     "description": "Payment field label for cards accepted."
   },
-  "fieldCardsNo": "ніт",
+  "fieldCardsNo": "ні",
   "@fieldCardsNo": {
     "description": "Payment field label for cash only."
   },
@@ -593,7 +593,7 @@
   "@messageNoData": {
     "description": "Message that appears on the main screen when there's no OSM data."
   },
-  "messageDataObsolete": "Дані застаріні. Натисніть для оновлення",
+  "messageDataObsolete": "Дані застарілі. Натисніть для оновлення",
   "@messageDataObsolete": {
     "description": "Message that appears on the main screen when OSM data is outdated."
   },
@@ -1094,5 +1094,155 @@
   "fieldCardsOnly": "тільки карткою",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
+  },
+  "fieldPaymentTitle": "Оплата карткою",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldPaymentLocal": "Локальні параметри",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentGlobal": "Глобальні значення за замовчуванням",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "fieldHeightMeters": "Очікувана довжина в метрах, наприклад, 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "faqCheckmarks": "Для чого потрібні галочки?",
+  "@faqCheckmarks": {},
+  "warningUnsupported": "Цей тип об'єкта не підтримується",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "warningWrongMode": "Неправильний режим, перевірте наявність дублікатів",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldNameLangSearch": "Знайдіть мову",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldPaymentChoose": "Вибирайте різні локальні теги...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldPaymentAround": "Поширені варіанти навколо",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "fieldPaymentUseSame": "Використовуйте однакові теги для мапінгу",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldHeightAny": "Очікувана довжина, наприклад, 5,4 або 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
+  },
+  "fieldPaymentUseGlobal": "Мої налаштування за замовчуванням кращі",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldHeightFeet": "Очікувана довжина в футах, наприклад, 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "faqCheckmarksContent": "Це позначки про те, що дані про зручності були підтверджені. Вони додають тег `check_date` з поточною датою.\n\nІдея галочок полягає в тому, що, скажімо, ви опитали половину міста з першого разу. Потім через місяць ви повернулися і пішли опитувати знову. Вам потрібно якось відмітити, що ви бачите благоустрій, але в ньому нічого не змінилося. Це і є галочка: ти її натискаєш і йдеш далі.\n\nГалочка залишається відміченою протягом двох місяців. Після цього ви можете знову провести опитування.",
+  "@faqCheckmarksContent": {},
+  "notesDelete": "Видалити",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawUndo": "Відмінити",
+  "@drawUndo": {},
+  "drawTrack": "Трек",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawFootway": "Пішохідна доріжка",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawWall": "Стіна",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawPower": "Лінія електропередач",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "addressBlock": "Блок",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "editorDeleteKeepAddressButton": "Видаліть, але збережіть адресу",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "drawScribble": "Каракулі",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawChangeTool": "Інструмент зміни",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawPath": "Стежка",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCyclewayShared": "Велосмуга",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawFence": "Паркан",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "faqFloors": "Чи однакові поверхи \"3\" і \"/3\"?",
+  "@faqFloors": {},
+  "editorDeleteBuilding": "Знесено",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "fieldWebsiteQR": "Відскануйте QR-код",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "notesComment": "Ваш коментар",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "drawEraser": "Ластик",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "Дорога",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawCycleway": "Велодоріжка",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawStream": "Потік",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawCulvert": "Водопропускна труба",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "faqYellow": "Чому деякі номери будинків жовті?",
+  "@faqYellow": {},
+  "faqYellowContent": "Нежовті мітки в режимі входів і білі точки в режимі мікрокарти означають, що елементам не вистачає деяких важливих атрибутів. Наприклад:\n\n* Будівлі повинні мати кількість рівнів.\n* Входи повинні мати тип, а для сходів - діапазон площин.\n* Лавки повинні мати матеріал та спинку.\n* Дерева повинні мати тип листя та цикл.",
+  "@faqYellowContent": {},
+  "faqLetters": "Чи можна вводити літери в реф або фіксований номер?",
+  "@faqLetters": {},
+  "apiStatusUploadingNotes": "Примітки до завантаження",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
