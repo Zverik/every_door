@@ -1131,5 +1131,39 @@
   "fieldDirectionSet": "Адзначыць",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldNameLangSearch": "Знайсці мову",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "notesDelete": "Выдаліць",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "fieldWebsiteQR": "Адскануйце QR-код",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "drawUndo": "Скасаваць",
+  "@drawUndo": {},
+  "drawChangeTool": "Змяніць інструмент",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "editorDeleteBuilding": "Знесены",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "editorDeleteKeepAddressButton": "Выдаліць, але захаваць адрас",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "drawRoad": "Дарога",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "notesComment": "Ваш каментар",
+  "@notesComment": {
+    "description": "Label for the note comment field."
   }
 }
