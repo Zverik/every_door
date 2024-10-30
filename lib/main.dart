@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:every_door/helpers/log_store.dart';
+import 'package:every_door/helpers/navigation_helper.dart';
+import 'package:every_door/providers/app_links_provider.dart';
 import 'package:every_door/providers/language.dart';
+import 'package:every_door/providers/navigation_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
@@ -44,23 +47,40 @@ class EveryDoorApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final navigatorKey = ref.read(navigatonKeyProvider);
+    final uriAsyncValue = ref.watch(uriLinkStreamProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      uriAsyncValue.whenData((uri) {
+        if (uri != null) {
+          final screen = NavigationHelper.navigateByUri(uri);
+          if (context.mounted) {
+            navigatorKey.currentState?.push(
+              MaterialPageRoute(builder: (context) => screen),
+            );
+          }
+        }
+      });
+    });
+
     return Portal(
       child: MaterialApp(
-          title: kAppTitle,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
-            useMaterial3: false,
-          ),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          // Adding "en" to the front so it's used by default.
-          supportedLocales: [Locale('en')] + AppLocalizations.supportedLocales,
-          locale: ref.watch(languageProvider),
-          home: LoadingPage(),
-          builder: (context, child) => Stack(children: [
-            if (child != null) child,
-            DropdownAlert(delayDismiss: 5000),
-          ]),
+        navigatorKey: navigatorKey,
+        title: kAppTitle,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+          useMaterial3: false,
+        ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        // Adding "en" to the front so it's used by default.
+        supportedLocales: [Locale('en')] + AppLocalizations.supportedLocales,
+        locale: ref.watch(languageProvider),
+        home: LoadingPage(),
+        builder: (context, child) => Stack(children: [
+          if (child != null) child,
+          DropdownAlert(delayDismiss: 5000),
+        ]),
       ),
     );
   }
