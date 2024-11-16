@@ -24,7 +24,7 @@ jobs:
     - run: curl -L https://textual.ru/presets.db -o assets/presets.db
     - run: vendor/flutter/bin/flutter build apk --release --flavor prod --split-per-abi --target-platform=android-arm64
     - name: Rename APK
-      run: mv ${{steps.sign_app.outputs.signedReleaseFile}} build/app/outputs/flutter-apk/EveryDoor-$(git log -n 1 --format='%h').apk
+      run: mv build/app/outputs/flutter-apk/app*.apk build/app/outputs/flutter-apk/EveryDoor-$(git log -n 1 --format='%h').apk
     - name: Archive APK
       uses: actions/upload-artifact@v4
       with:
