@@ -1,5 +1,14 @@
 # Every Door App Change Log
 
+## 5.3
+
+_Unreleased_
+
+* Added cycle barriers and xmas features.
+* New adaptive icon — thanks @RedAuburn.
+* Updated presets and imagery layers, upgraded libraries.
+* Major updates to Estonian translation (thanks Priit Jõerüüt).
+
 ## 5.2
 
 _Released on 2024-09-24_

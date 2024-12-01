@@ -4,6 +4,7 @@
 const kMainKeys = <String>[
   'amenity', 'shop', 'craft', 'tourism', 'historic', 'club',
   'office', 'healthcare', 'leisure', 'emergency', 'attraction',
+  'xmas:feature',
   // non-amenity keys:
   'highway', 'railway', 'natural',
   'waterway', 'man_made', 'power', 'aeroway', 'aerialway',
@@ -95,7 +96,7 @@ ElementKind detectKind(Map<String, String> tags, [Set<ElementKind>? accepted]) {
 }
 
 /// Removed any prefix for the key, which is before the first `:` character.
-String _clearPrefix(String key) => key.substring(key.indexOf(':') + 1);
+String _clearPrefix(String key) => key.startsWith('xmas:') ? key : key.substring(key.indexOf(':') + 1);
 
 /// Checks if the object qualifies for an amenity, mostly based on its main tag.
 bool isAmenityTags(Map<String, String> tags) {
@@ -240,6 +241,8 @@ bool isAmenityTags(Map<String, String> tags) {
       'train', 'summer_toboggan', 'river_rafting',
     };
     return goodAttraction.contains(v);
+  } else if (k == 'xmas:feature') {
+    return v != 'tree';
   }
   return false;
 }
@@ -260,6 +263,7 @@ bool isMicroTags(Map<String, String> tags) {
     'barrier', 'highway', 'railway', 'natural', 'leisure',
     'marker', 'public_transport', 'hazard', 'traffic_sign',
     'telecom', 'attraction', 'cemetery', 'aeroway', 'waterway',
+    'xmas:feature',
   };
   if (kAllGoodKeys.contains(k)) return true;
   return false;
@@ -280,6 +284,7 @@ bool isGoodTags(Map<String, String> tags) {
     'club', 'emergency', 'power', 'aerialway', 'aeroway', 'advertising',
     'playground', 'entrance', 'traffic_calming', 'marker',
     'public_transport', 'hazard', 'traffic_sign', 'telecom',
+    'xmas:feature',
   };
   if (kAllGoodKeys.contains(k)) return true;
 

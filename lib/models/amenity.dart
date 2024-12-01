@@ -500,8 +500,11 @@ class OsmChange extends ChangeNotifier implements Comparable {
       final mainKey = _mainKey;
       final pos = mainKey?.indexOf(':');
       if (mainKey != null && pos != null && pos > 0) {
-        result[mainKey.substring(pos + 1)] = result[mainKey]!;
-        result.remove(mainKey);
+        final prefix = mainKey.substring(0, pos);
+        if (!{'addr', 'xmas'}.contains(prefix)) {
+          result[mainKey.substring(pos + 1)] = result[mainKey]!;
+          result.remove(mainKey);
+        }
       }
     }
     return result;

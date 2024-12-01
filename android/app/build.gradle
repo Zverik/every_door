@@ -41,17 +41,16 @@ android {
     namespace "info.zverev.ilya.every_door"
 
     compileOptions {
-        // https://stackoverflow.com/a/77629542/1297601
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '21'
     }
 
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(21)
     }
 
     sourceSets {
