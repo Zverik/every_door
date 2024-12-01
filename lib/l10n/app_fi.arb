@@ -1263,5 +1263,13 @@
   "editorDeleteKeepAddressButton": "Poista, mutta pidä osoite",
   "@editorDeleteKeepAddressButton": {
     "description": "Button for keeping the address"
+  },
+  "editorDeleteBuilding": "Purettu",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "drawScribble": "Piirrä",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
   }
 }

@@ -3,7 +3,7 @@
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
   },
-  "editorMarkActive": "Märgi Aktiivseks",
+  "editorMarkActive": "Märgi aktiivseks",
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
   },
@@ -15,7 +15,7 @@
   "@tagsValueLong": {
     "description": "Validation error for when the value length exceeds 255 characters."
   },
-  "editorRestoreMessage": "{amenity} on mitteaktiivne. Kas sa tahad selle märkida aktiivseks?",
+  "editorRestoreMessage": "{amenity} on mitteaktiivne. Kas sa tahad ta märkida aktiivseks?",
   "@editorRestoreMessage": {
     "description": "Question on restoring an edited defunct amenity.",
     "placeholders": {
@@ -24,7 +24,7 @@
       }
     }
   },
-  "dataDownloadFailed": "Allalaadimine ebaõnnestus",
+  "dataDownloadFailed": "Allalaadimine ei õnnestunud",
   "@dataDownloadFailed": {
     "description": "Alert title for the error happened during a data download."
   },
@@ -32,7 +32,7 @@
   "@tagsAddTag": {
     "description": "Tags panel button for adding a new tag."
   },
-  "loadingChanges": "Laeb muudatusi…",
+  "loadingChanges": "Laadime muudatusi…",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
   },
@@ -40,11 +40,11 @@
   "@tagsValue": {
     "description": "Tags panel, add a new tag dialog: value label"
   },
-  "tagsKey": "Võti",
+  "tagsKey": "Väli",
   "@tagsKey": {
     "description": "Tags panel, add a new tag dialog: key label"
   },
-  "loadingPresets": "Laeb eelseadeid…",
+  "loadingPresets": "Laadime eelseadeid…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
@@ -52,11 +52,11 @@
   "@legendOther": {
     "description": "Legend item for all other types."
   },
-  "editorMarkChecked": "Märgi vaadatud",
+  "editorMarkChecked": "Märgi vaadatuks",
   "@editorMarkChecked": {
     "description": "Tooltip for a button to mark the amenity checked without changing properties."
   },
-  "editorMove": "Liigu",
+  "editorMove": "Teisalda",
   "@editorMove": {
     "description": "Label for the map, a hint that you can move the object."
   },
@@ -68,15 +68,15 @@
   "@chooseType": {
     "description": "Search field hint on the type choosing screen."
   },
-  "mapSettings": "Seaded",
+  "mapSettings": "Seadistused",
   "@mapSettings": {
     "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
   },
-  "loadingStart": "Laeb…",
+  "loadingStart": "Rakenduse käivitamine…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
   },
-  "editorMarkDefunct": "Märgi Mittefunktsionaalseks",
+  "editorMarkDefunct": "Märgi mittetöötavaks",
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
@@ -100,7 +100,7 @@
       }
     }
   },
-  "versionsNoTagChanges": "Puuduvad sildi muudatused",
+  "versionsNoTagChanges": "Siltide muudatusi pole",
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
@@ -114,11 +114,11 @@
       }
     }
   },
-  "editorCloseTitle": "Sulge redaktor?",
+  "editorCloseTitle": "Kas sulge kaardi muutmisvaate?",
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "versionsEnableInternet": "Ühenda internetti, et laadida versiooni ajalugu",
+  "versionsEnableInternet": "Versioonide ajaloo laadimiseks loo võrguühendus",
   "@versionsEnableInternet": {
     "description": "Message for when fetching element history fails due to lack of network connection."
   },
@@ -126,7 +126,7 @@
   "@filterByFloor": {
     "description": "Filter pane, label for choosing a floor to filter by."
   },
-  "editorDuplicate": "Võimalik duplikaat {distance} m kauguses",
+  "editorDuplicate": "Võimalik duplikaat {distance} m kaugusel",
   "@editorDuplicate": {
     "description": "Message about a possible duplicate",
     "placeholders": {
@@ -142,30 +142,30 @@
   "@filterNonConfirmed": {
     "description": "Filter pane, a switch for showing only amenities that were not confirmed."
   },
-  "navEntrancesMode": "Sissepääsuderežiim",
+  "navEntrancesMode": "Sissepääsude kaardistamise režiim",
   "@navEntrancesMode": {
     "description": "Tooltip for the entrances mode button on the nav panel."
   },
-  "warningWrongMode": "Vale režiim, kontrollige duplikaate",
+  "warningWrongMode": "Vale režiim, kontrolli duplikaate",
   "@warningWrongMode": {
     "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
   },
-  "versionsLocalChanges": "Lokaalsed muudatused",
+  "versionsLocalChanges": "Muudatused nutiseadmes",
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
   },
-  "years": "{count,plural, =1{{count} aasta} few{{count} aastat} other{{count} aastaid}}",
+  "years": "{count,plural, =1{{count} aasta} few{{count} aastat} other{{count} aastat}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
       "count": {}
     }
   },
-  "loadingLocation": "Asukoha leidmine…",
+  "loadingLocation": "Tuvastame asukohta…",
   "@loadingLocation": {
     "description": "Loading screen message for firing up GPS and waiting for a location."
   },
-  "tagsNewPoint": "Uus Punkt",
+  "tagsNewPoint": "Uus teenus või huvipunkt",
   "@tagsNewPoint": {
     "description": "Tag editor panel title for a new amenity."
   },
@@ -200,7 +200,7 @@
       }
     }
   },
-  "editorDeleteTitle": "Kustuta {amenity}?",
+  "editorDeleteTitle": "Kas kustutame {amenity}?",
   "@editorDeleteTitle": {
     "description": "Dialog title for deleting an amenity.",
     "placeholders": {
@@ -217,11 +217,11 @@
   "@editorSave": {
     "description": "Save button title in the editor"
   },
-  "navMicromappingMode": "Mikromäppimisrežiim",
+  "navMicromappingMode": "Mikrokaardistamise režiim",
   "@navMicromappingMode": {
     "description": "Tooltip for the micromapping mode button on the nav panel."
   },
-  "navPoiMode": "Teenuserežiim",
+  "navPoiMode": "Teenuste haldusrežiim",
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
@@ -235,15 +235,15 @@
       }
     }
   },
-  "loadingChangesFailed": "Laadimine ebaõnnestus",
+  "loadingChangesFailed": "Laadimine ei õnnestunud",
   "@loadingChangesFailed": {
     "description": "Loading screen notification title for when loading changes has failed."
   },
-  "navDownload": "Lae alla",
+  "navDownload": "Laadi alla",
   "@navDownload": {
     "description": "Tooltip for the download data button on the nav panel."
   },
-  "editorRestoreTitle": "Kas see on avatud?",
+  "editorRestoreTitle": "Kas see koht on avatud?",
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."
   },
@@ -251,11 +251,11 @@
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "tileDragTheMap": "Palun liigu lähedamale millegile, tõmba kaarti või lisa puuduv teenus.",
+  "tileDragTheMap": "Palun liigu soovitud kohale lähemale, liiguta kaarti või lisa puuduv teenus.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
-  "versionsTitle": "{elementRef} ajalugu",
+  "versionsTitle": "Ajalugu: {elementRef}",
   "@versionsTitle": {
     "description": "Title for the element versions page.",
     "placeholders": {
@@ -266,7 +266,7 @@
       }
     }
   },
-  "navImagery": "Muuda kujundus",
+  "navImagery": "Vaheta taevafotode aluskaarti",
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
@@ -282,7 +282,7 @@
   "@filterNoAddresses": {
     "description": "An error message for no addresses nearby, used on filter pane and in address editor."
   },
-  "editorCloseMessage": "Loobu muudatustest ilma salvestamata?",
+  "editorCloseMessage": "Kas loobud muudatustest ilma salvestamata?",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -306,11 +306,11 @@
   "@filterEmpty": {
     "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
   },
-  "loadingTooMuchData": "Massallalaaditi andmeid seadetes, et muutja oleks kiirem.",
+  "loadingTooMuchData": "Et kaardi muutmine toimiks kiiremini, kustuta vanad allalaaditud andmed.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
-  "tagsKeyError": "Väärtus on liiga haruldane",
+  "tagsKeyError": "See väli on harvakasutatav",
   "@tagsKeyError": {
     "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
   },
@@ -322,14 +322,14 @@
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
-  "dataDownloadedCount": "{count,plural, =1{Allalaaditud {count} element.} few{Allalaaditud{count} elementi.} other{Allalaaditud{count} elemente.}}",
+  "dataDownloadedCount": "{count,plural, =1{Allalaaditud {count} objekt.} few{Allalaaditud{count} objekti.} other{Allalaaditud{count} objekti.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
       "count": {}
     }
   },
-  "navNotesMode": "Märkmeterežiim",
+  "navNotesMode": "Märkmete režiim",
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."
   },
@@ -337,11 +337,11 @@
   "@versionsRetryFetch": {
     "description": "Button label to retry fetching history."
   },
-  "editorLoadingPreset": "Laadib eelseadet…",
+  "editorLoadingPreset": "Laadime eelseadistust…",
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
-  "editorMoreFields": "Rohkem väljasid",
+  "editorMoreFields": "Lisaväljad",
   "@editorMoreFields": {
     "description": "Title of a additional fields group in editor."
   },
@@ -353,11 +353,11 @@
   "@chooseLocation": {
     "description": "Title for the screen for choosing a location on a map."
   },
-  "navUpload": "Lae üles",
+  "navUpload": "Laadi üles",
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
   },
-  "warningFixme": "Paranda: {value}",
+  "warningFixme": "Vajab parandamist: {value}",
   "@warningFixme": {
     "description": "Warning message for when an object has a non-empty fixme value.",
     "placeholders": {
@@ -378,7 +378,7 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
-  "versionsFetchError": "Viga versiooni ajaloo laadimises",
+  "versionsFetchError": "Viga versiooni ajaloo laadimisel",
   "@versionsFetchError": {
     "description": "Message for when fetching element history fails due to unknown error."
   },
@@ -386,7 +386,7 @@
   "@aboutFAQ": {
     "description": "Title for the FAQ section on the About page."
   },
-  "changesOsmNote": "OSM märge",
+  "changesOsmNote": "OSMi märge",
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
@@ -394,11 +394,11 @@
   "@accountPasswordWarningTitle": {
     "description": "Title for the warning dialog about keeping passwords on the device."
   },
-  "accountFieldPassword": "Parool",
+  "accountFieldPassword": "Salasõna",
   "@accountFieldPassword": {
     "description": "Label for the OSM password."
   },
-  "aboutInstalledVersion": "Installitud versioon",
+  "aboutInstalledVersion": "Paigaldatud versioon",
   "@aboutInstalledVersion": {
     "description": "Button description for installed app version."
   },
@@ -410,7 +410,7 @@
   "@aboutLicense": {
     "description": "Button title to open the app's license on GitHub."
   },
-  "settingsPurgeDataMessage": "Sa pead uuesti allalaadima kõik. Jätka?",
+  "settingsPurgeDataMessage": "Sa pead kõik andmed hiljem uuesti allalaadima. Kas jätkame?",
   "@settingsPurgeDataMessage": {
     "description": "Confirmation dialog message for when purging all downloaded data."
   },
@@ -418,15 +418,15 @@
   "@changesPurge": {
     "description": "Purge all changes"
   },
-  "settingsDefaultPayment": "Vaikemaksekaardid",
+  "settingsDefaultPayment": "Vaikimisi maksekaardid",
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
-  "settingsPurgeData": "Kustutage aegunud vahemällu salvestatud andmed",
+  "settingsPurgeData": "Kustuta aegunud andmed vahemälust",
   "@settingsPurgeData": {
     "description": "Settings entry for purging obsolete OSM data."
   },
-  "settingsBackground": "Tausta pilt",
+  "settingsBackground": "Taevafotode aluskaart",
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
@@ -440,23 +440,23 @@
       }
     }
   },
-  "accountAuthErrorTitle": "Autoriseerimise Viga",
+  "accountAuthErrorTitle": "Autentimise viga",
   "@accountAuthErrorTitle": {
     "descripton": "Title for the alert dialog about an incorrect password."
   },
-  "settingsCacheTiles": "Lae paanid alla",
+  "settingsCacheTiles": "Laadi paanid alla",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
-  "accountUnreadMail": "Lugemata Kirjad",
+  "accountUnreadMail": "Lugemata sõnumid",
   "@accountUnreadMail": {
     "description": "Label for the number of unread private messages a user has."
   },
-  "aboutHelpTranslate": "Aidake tõlkida",
+  "aboutHelpTranslate": "Aita tõlkida",
   "@aboutHelpTranslate": {
     "description": "Button title to open the app's Weblate page."
   },
-  "settingsPurgeDataTitle": "Kustuta Andmed?",
+  "settingsPurgeDataTitle": "Kas kustutame andmed?",
   "@settingsPurgeDataTitle": {
     "description": "Confirmation dialog title for when purging all downloaded data."
   },
@@ -472,15 +472,15 @@
   "@settingsApiServer": {
     "description": "Section title for API server settings."
   },
-  "accountPasswordWarningButton": "Ok",
+  "accountPasswordWarningButton": "Selge",
   "@accountPasswordWarningButton": {
     "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
   },
-  "accountPasswordTitle": "OSM volikirjad",
+  "accountPasswordTitle": "OSMi mandaadid",
   "@accountPasswordTitle": {
     "description": "Title for the input dialog for login and password."
   },
-  "settingsNumericKeyboard": "Laiendatud Numbriklaviatuur",
+  "settingsNumericKeyboard": "Laiendatud numbriklahvistik",
   "@settingsNumericKeyboard": {
     "description": "Settings switch for using the full keyboard for numeric fields."
   },
@@ -496,7 +496,7 @@
   "@aboutSourceCode": {
     "description": "Button title to open the repository on GitHub."
   },
-  "settingsAbout": "Teave",
+  "settingsAbout": "Rakenduse teave",
   "@settingsAbout": {
     "description": "Title for the About section in settings."
   },
@@ -519,7 +519,7 @@
   "@settingsDataManagement": {
     "description": "Section title for data settings."
   },
-  "changesPurgeTitle": "Kas kustutada muudatused?",
+  "changesPurgeTitle": "Kas kustutame muudatused?",
   "@changesPurgeTitle": {
     "description": "Dialog title for confirming deletion of all changes."
   },
@@ -527,35 +527,35 @@
   "@settingsLanguage": {
     "description": "Settings entry for changing the app language."
   },
-  "accountChangesets": "Muutmised",
+  "accountChangesets": "Muudatuskogumid",
   "@accountChangesets": {
     "description": "Label for the number of changesets a user has uploaded."
   },
-  "accountAuthErrorMessage": "Vale kasutajanime või parool.",
+  "accountAuthErrorMessage": "Vale kasutajanimi või salasõna.",
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
-  "settingsLeftHand": "Vasaku käe juhtelemendid",
+  "settingsLeftHand": "Kasuta juhtnuppe vasaku käe jaoks",
   "@settingsLeftHand": {
     "description": "Switch for enabling left hand controls, when most buttons move to the left."
   },
-  "settingsPreferContact": "Eelista \"contact:\" Prefix",
+  "settingsPreferContact": "Eelista „contact:“ eesliidet",
   "@settingsPreferContact": {
     "description": "Settings switch for using e.g. contact:phone=* over phone=*."
   },
-  "accountOAuthError": "Autoriseerimise Viga",
+  "accountOAuthError": "OAuthi teenuse viga",
   "@accountOAuthError": {
     "description": "Alert title for when OAuth login failed."
   },
-  "aboutVersionHistory": "Versiooni ajalugu",
+  "aboutVersionHistory": "Versioonide ajalugu",
   "@aboutVersionHistory": {
     "description": "Button title to open GitHub releases page."
   },
-  "changesUploadFailedTitle": "Üleslaadimine Ebaõnnestus",
+  "changesUploadFailedTitle": "Üleslaadimine ei õnnestunud",
   "@changesUploadFailedTitle": {
     "description": "Title for the notification about a failed changes upload."
   },
-  "accountLoginOAuth": "Logi sisse Autoriseerimisega",
+  "accountLoginOAuth": "Logi sisse OAuthi teenusega",
   "@accountLoginOAuth": {
     "description": "Button label for logging in to OSM via OAuth."
   },
@@ -563,7 +563,7 @@
   "@aboutProjectWebsite": {
     "description": "Button title to open the every-door.app website."
   },
-  "settingsGoogle": "Kasuta Google-i positsioneerimist",
+  "settingsGoogle": "Kasuta Google'i asukohatuvastust",
   "@settingsGoogle": {
     "description": "Settings switch for disabling Google services for location."
   },
@@ -579,23 +579,23 @@
   "@settingsPresentation": {
     "description": "Section title for presentation options."
   },
-  "settingsHashtags": "Muudatuste Sildid",
+  "settingsHashtags": "Muudatuskogumi sildid",
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
   },
-  "settingsLoginDetails": "OSM Konto",
+  "settingsLoginDetails": "OSMi Konto",
   "@settingsLoginDetails": {
     "description": "Settings entry for logging in to OSM."
   },
-  "settingsTitle": "Konfiguratsioon",
+  "settingsTitle": "Seadistused",
   "@settingsTitle": {
     "description": "App bar title for the settings panel."
   },
-  "aboutReportIssue": "Teatage veast",
+  "aboutReportIssue": "Teata veast",
   "@aboutReportIssue": {
     "description": "Button title to open the app's GitHub issue page."
   },
-  "settingsPurgeAllData": "Kustutage kõik allalaaditud andmed",
+  "settingsPurgeAllData": "Kustuta kõik allalaaditud andmed",
   "@settingsPurgeAllData": {
     "description": "Settings entry for purging all cached OSM data."
   },
@@ -603,18 +603,18 @@
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
-  "changesDeletedUndo": "Võta tagasi",
+  "changesDeletedUndo": "Pööra tegevus tagasi",
   "@changesDeletedUndo": {
     "description": "Button label for undoing a change deletion."
   },
-  "settingsPurgedMessage": "{count,plural, =1{Kustutatud {count} element} few{Kustutatud {count} elementi} other{Kustutatud {count} elemente}}",
+  "settingsPurgedMessage": "{count,plural, =1{Kustutatud {count} objekt} few{Kustutatud {count} objekti} other{Kustutatud {count} objekti}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
       "count": {}
     }
   },
-  "settingsEditor": "Redaktor",
+  "settingsEditor": "Kaardi muutmisvaade",
   "@settingsEditor": {
     "description": "Title for the settings section for editor presets."
   },
@@ -622,15 +622,15 @@
   "@aboutOnGitHub": {
     "description": "Button description to indicate a link to GitHub."
   },
-  "accountPasswordWarningMessage": "Sinu parool salvestatakse sellele seadmele. Ainult vali see kui autoriseerimine ebaõnnestub.",
+  "accountPasswordWarningMessage": "Sinu salasõna salvestatakse selles seadmes. Vali see eelistus, kui OAuthi teenusega tuvastamine ei toimi.",
   "@accountPasswordWarningMessage": {
     "description": "Message for the warning dialog about keeping passwords on the device."
   },
-  "aboutOnWeblate": "Weblateis",
+  "aboutOnWeblate": "Weblate'is",
   "@aboutOnWeblate": {
     "description": "Button description to indicate a link to Weblate."
   },
-  "accountLogout": "Logi Välja",
+  "accountLogout": "Logi välja",
   "@accountLogout": {
     "description": "Button title for logging out of OSM."
   },
@@ -638,7 +638,7 @@
   "@changesPending": {
     "description": "Subtitle for a change that has not yet been sent to OSM API."
   },
-  "accountTitle": "OpenStreetMap Konto",
+  "accountTitle": "OpenStreetMapi Konto",
   "@accountTitle": {
     "description": "Title for the account page."
   },
@@ -653,7 +653,7 @@
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
-  "accountLoginPassword": "Logi sisse parooliga",
+  "accountLoginPassword": "Logi sisse salasõnaga",
   "@accountLoginPassword": {
     "description": "Button label for logging in to OSM with a password."
   },
@@ -674,5 +674,574 @@
   "fieldHoursWeekdays": "E T K N R L P",
   "@fieldHoursWeekdays": {
     "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "editorDeleteKeepAddressButton": "Kustuta, aga säilita aadress",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "fieldHoursButton": "Sisesta lahtiolekuaeg",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursTitle": "Lahtiolekuaeg",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursCloses": "Suletakse",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursNext": "Edasi",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursClear": "Tühjenda",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldComboEmpty": "tühi",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldNameLangSearch": "Otsi keelt",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldWheelchairLimited": "piiratud ligipääs",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldCardsNo": "ei võeta vastu",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "addressX": "Aadress {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "fieldPaymentLocal": "Sinu eelistused",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "drawPower": "Elektriliin",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "fieldHoursFullDay": "Terve ööpäev",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursAsText": "Tekstina",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursSpecificDays": "Konkreetsel kuupäeval",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Suletud",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Riigipühad",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursBreak": "Puhkepaus",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursHour": "Tunnid",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minutid",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursChooseTime": "Tunnid ja minutid",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursSave": "Salvesta",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursAddFragment": "Lisa lahtiolekuaja osa",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursRemoveFragment": "Eemalda lahtiolekuaja osa",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursAddBreak": "Lisa puhkepaus",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursRemoveBreak": "Eemalda puhkepaus",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursClosedPH": "Riigipühadel suletud",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursSDRemove": "Eemalda",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSDAddOne": "Lisa kuupäev",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Lisa kuupäevavahemik",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldNameLanguages": "Veel üks keel",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldDirectionSet": "Määra suund",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldWifiPublic": "avalik võrk",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldCardsAccepted": "võetakse vastu",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldPaymentUseSame": "Kasuta kaardistamisel samu silte",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentUseGlobal": "Minu vaikimisi valikud on etemad",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentChoose": "Vali oma eelistatud sildid...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldCheckboxYes": "jah",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "ei",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorEmpty": "Korruse valimiseks sisesta esmalt aadress.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorNew": "Uus korrus",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorFloorDesc": "Korruse number nii, nagu see hooneplaanil ja lifti(de)s märgitud on",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "Korruse number alates 0'st loendates maapinnal asuvast korrusest",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldFloorShouldBeNumber": "Palun sisesta number",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldWebsiteQR": "Skaneeri QR-koodi",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "enableGPS": "Lülita GPS sisse",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "Järgnevas seadistuste vaates palun lülita asukohateenused sisse.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocation": "Palun lülita asukoha tuvastamine sisse",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "enableLocationMessage": "Järgnevas seadistuste vaates palun lülita asukohateenused selle rakenduse jaoks sisse.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonYes": "Jah",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "entrancesAddEntrance": "Lisa sissepääs",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "Lisa hoone",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingX": "Hoone {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "entranceX": "Sissepääs {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingLevels": "Korruseid",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "Katusekorruseid",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "Katuse kuju",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "Tüüp",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Detailne vaade",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterial": "Fassaadikate",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "tellised",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "krohv",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "puit",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "betoon",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "valmispaneelid",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "betoonplokid",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialStone": "kivi",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "metall",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "klaas",
+  "@buildingMaterialGlass": {},
+  "buildingTypeAddress": "aadress",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "eramu",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "kortermaja",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "jaekaubandushoone",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "ärihoone",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "kuur",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "tööstushoone",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeConstruction": "ehitusjärgus hoone",
+  "@buildingTypeConstruction": {},
+  "entranceFlats": "Korterid",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "Peaks olema numbrite loend",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceIsUnit": "Salvesta korterite loend addr:unit sildiga",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceRef": "Viitenumber",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccessYes": "avalik",
+  "@entranceAccessYes": {},
+  "entranceAccess": "Ligipääs",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessPrivate": "erakasutuseks",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "keelatud",
+  "@entranceAccessNo": {},
+  "entranceAccessDelivery": "kohaletoimetamiseks",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "Ratastool",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceType": "Tüüp",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeMain": "peasissepääs",
+  "@entranceTypeMain": {},
+  "entranceTypeStaircase": "trepikoja sissepääs",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "kodu sissepääs",
+  "@entranceTypeHome": {},
+  "entranceTypeShop": "poe sissepääs",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "teenistussissepääs",
+  "@entranceTypeService": {},
+  "addressHouseNumber": "Majanumber",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Majanumber ei tohiks jääda tühjaks",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "entranceTypeGarage": "garaaži sissepääs",
+  "@entranceTypeGarage": {},
+  "entranceTypeEmergency": "avariisissepääs",
+  "@entranceTypeEmergency": {},
+  "addressUnit": "Üksus",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "pole kohustuslik",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressBlock": "Kvartali number",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "addressStreet": "Tänav",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "Asula",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesDelete": "Kustuta",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "notesCancelMessage": "Kas katkestame märkuse lisamise?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "drawUndo": "Pööra tagasi",
+  "@drawUndo": {},
+  "drawChangeTool": "Muuda tarvikut",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawScribble": "Kritseldaja",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawEraser": "Kustutaja",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "Tee",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawCycleway": "Rattatee",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawPath": "Rada",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCyclewayShared": "Rattarada",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawStream": "Oja",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawCulvert": "Truup",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "apiStatusDownloading": "Laadime andmeid alla…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUpdatingDB": "Salvestame objekte rakenduse andmebaasi",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "fieldHoursNumberedWeekday": "„Viimasel esmaspäeval“",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldNameCopy": "Kopeeri väärtus",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldComboChoose": "vali",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "puudub",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiCustomers": "võrk vaid klientidele",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "täismahuline ligipääs",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairNo": "ligipääs puudub",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsOnly": "vaid kaardimaksed",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldPaymentAround": "Levinud valikud",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "fieldPaymentTitle": "Kaardimaksed",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldPaymentGlobal": "Üldised vaikimisi valikud",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "fieldHeightFeet": "Eeldame, et pikkus on jalgades, näiteks 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldAddressTap": "Palun klõpsi aadressi",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldPhoneWrong": "Vigane telefoninumbri vorming",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "fieldHeightMeters": "Eeldame, et pikkus on meetrites, näiteks 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightAny": "Eeldame, et tegemist on pikkusega, näiteks 5.4 või 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
+  },
+  "messageNoData": "Andmeid pole, allalaadimiseks klõpsi",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "Andmed on aegunud, uuendamiseks klõpsi",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "buttonNo": "Ei",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buildingPostCode": "Sihtnumber",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "notesAddNote": "Lisa märkus",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesComment": "Sinu kommentaar",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "notesAnonymous": "Anonüümne",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Lahendatud",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Kas märgime lahendatuks?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "drawTrack": "Lihtne tee",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawFootway": "Jalgtee",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawFence": "Aed",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawWall": "Müür",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "apiStatusUploading": "Laadime muudatusi üles",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "apiStatusUploadingNotes": "Laadime märkusi üles",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "faqMapTinyContent": "Sest see pole oluline. Sa ainult kontrolli oma asukohta kaardil ja kohandamiseks pööra kaarti. Vaatta allpoole kuvatavat teenuste nimekirja, mis on sorteeritud sinu kauguse järgi neist.\n\nKaart muutub suuremaks, kui muudad teenuseid oma asukohast kaugel. Kuigi olemuselt rakendus on tehtud selleks, et muuta objekte nägemisulatuses.",
+  "@faqMapTinyContent": {},
+  "faqMapTiny": "Miks kaart on nii väike?",
+  "@faqMapTiny": {},
+  "changesPurgeMessage": "Kas kustutame kõik salvestatud muudatused ja taastame algsed andmed?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "changesSwipeLeft": "Muudatuse tagasivõtmiseks viipa vasakule",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursOpens": "Avatakse",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "buildingTypeGarage": "garaaž",
+  "@buildingTypeGarage": {},
+  "editorDeleteBuilding": "Lammutatud",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }
