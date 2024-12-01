@@ -69,7 +69,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     final location = ref.read(effectiveLocationProvider);
     final bbox = boundsFromRadius(location, kVisibilityRadius);
     final status = await area.getAreaStatus(bbox);
-    if (status != areaStatus) {
+    if (status != areaStatus && mounted) {
       setState(() {
         areaStatus = status;
       });
