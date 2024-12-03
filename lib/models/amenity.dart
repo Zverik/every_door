@@ -479,6 +479,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
     return '$num, $street';
   }
 
+  bool get isChristmasTree => this['xmas:feature'] == 'tree';
+
   // Helper methods
 
   /// Returns a map with complete object tags. All changes are applied,

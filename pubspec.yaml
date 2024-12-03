@@ -76,6 +76,7 @@ flutter:
   assets:
     - assets/presets.db
     - assets/lets-encrypt-r3.pem
+    - assets/christmas-tree.png
     - assets/roofs/
 
 flutter_launcher_icons:

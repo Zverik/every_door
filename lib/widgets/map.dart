@@ -350,16 +350,17 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: getIconColor(amenities[i], legendCon)
-                            .withOpacity(widget.drawNumbers ? 0.7 : 1.0),
-                        borderRadius: BorderRadius.circular(iconSize / 2),
+                    if (!amenities[i].isChristmasTree)
+                      Container(
+                        decoration: BoxDecoration(
+                          color: getIconColor(amenities[i], legendCon)
+                              .withOpacity(widget.drawNumbers ? 0.7 : 1.0),
+                          borderRadius: BorderRadius.circular(iconSize / 2),
+                        ),
+                        width: iconSize,
+                        height: iconSize,
                       ),
-                      width: iconSize,
-                      height: iconSize,
-                    ),
-                    if (!widget.drawNumbers && amenities[i].isIncomplete)
+                    if (!widget.drawNumbers && amenities[i].isIncomplete && !amenities[i].isChristmasTree)
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -367,6 +368,11 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
                         ),
                         width: iconSize / 3,
                         height: iconSize / 3,
+                      ),
+                    if (amenities[i].isChristmasTree)
+                      Image.asset(
+                        'assets/christmas-tree.png',
+                        width: iconSize * 2,
                       ),
                     if (widget.drawNumbers && i < 9)
                       Container(
