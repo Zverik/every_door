@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:every_door/providers/app_links_provider.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';
 import 'package:every_door/providers/geolocation.dart';
@@ -79,6 +80,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     if (location != null) {
       ref.read(effectiveLocationProvider.notifier).set(location);
     }
+    await ref.read(geoIntentProvider).checkLatestIntent();
 
     // Alert if there are too many changes loaded.
     final needSizeAlert =

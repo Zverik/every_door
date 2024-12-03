@@ -5,11 +5,39 @@ import 'package:app_links/app_links.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:logging/logging.dart';
 
-final appLinksProvider = Provider((ref) => AppLinks());
+final geoIntentProvider = Provider((ref) => GeoIntentController(ref));
+
+class GeoIntentController {
+  final Ref _ref;
+
+  GeoIntentController(this._ref) {
+    initStreamListener();
+  }
+
+  initStreamListener() async {
+    await for (final uri in AppLinks().uriLinkStream) {
+      _handleGeoIntent(uri);
+    }
+  }
+
+  checkLatestIntent() async {
+    final latest = await AppLinks().getLatestLink();
+    if (latest != null) _handleGeoIntent(latest);
+  }
+
+  _handleGeoIntent(Uri uri) {
+    if (uri.scheme == 'geo' && uri.path.isNotEmpty) {
+      final location = _parseLatLngFromGeoUri(uri);
+      if (location != null) {
+        _ref.read(geolocationProvider.notifier).disableTracking();
+        _ref.read(effectiveLocationProvider.notifier).set(location);
+      }
+    }
+  }
+}
 
 final uriLinkStreamProvider = StreamProvider<Uri?>((ref) async* {
-  final appLinks = ref.watch(appLinksProvider);
-  await for (final uri in appLinks.uriLinkStream) {
+  await for (final uri in AppLinks().uriLinkStream) {
     if (uri.scheme == 'geo' && uri.path.isNotEmpty) {
       _handleGeoIntent(uri, ref);
     }

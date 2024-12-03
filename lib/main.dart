@@ -2,10 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:every_door/helpers/log_store.dart';
-import 'package:every_door/helpers/navigation_helper.dart';
-import 'package:every_door/providers/app_links_provider.dart';
 import 'package:every_door/providers/language.dart';
-import 'package:every_door/providers/navigation_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
@@ -47,25 +44,8 @@ class EveryDoorApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final navigatorKey = ref.read(navigatonKeyProvider);
-    final uriAsyncValue = ref.watch(uriLinkStreamProvider);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      uriAsyncValue.whenData((uri) {
-        if (uri != null) {
-          final screen = NavigationHelper.navigateByUri(uri);
-          if (context.mounted) {
-            navigatorKey.currentState?.push(
-              MaterialPageRoute(builder: (context) => screen),
-            );
-          }
-        }
-      });
-    });
-
     return Portal(
       child: MaterialApp(
-        navigatorKey: navigatorKey,
         title: kAppTitle,
         theme: ThemeData(
           primarySwatch: Colors.blue,
