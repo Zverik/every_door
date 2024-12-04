@@ -2,9 +2,10 @@
 
 ## 5.3
 
-_Unreleased_
+_Released on 2024-12-04_
 
 * Added cycle barriers and xmas features.
+* Support `geo:` links — thanks @ann-who.
 * New adaptive icon — thanks @RedAuburn.
 * Updated presets and imagery layers, upgraded libraries.
 * Major updates to Estonian translation (thanks Priit Jõerüüt).
