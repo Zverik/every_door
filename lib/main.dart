@@ -46,21 +46,21 @@ class EveryDoorApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Portal(
       child: MaterialApp(
-          title: kAppTitle,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
-            useMaterial3: false,
-          ),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          // Adding "en" to the front so it's used by default.
-          supportedLocales: [Locale('en')] + AppLocalizations.supportedLocales,
-          locale: ref.watch(languageProvider),
-          home: LoadingPage(),
-          builder: (context, child) => Stack(children: [
-            if (child != null) child,
-            DropdownAlert(delayDismiss: 5000),
-          ]),
+        title: kAppTitle,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+          useMaterial3: false,
+        ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        // Adding "en" to the front so it's used by default.
+        supportedLocales: [Locale('en')] + AppLocalizations.supportedLocales,
+        locale: ref.watch(languageProvider),
+        home: LoadingPage(),
+        builder: (context, child) => Stack(children: [
+          if (child != null) child,
+          DropdownAlert(delayDismiss: 5000),
+        ]),
       ),
     );
   }
