@@ -953,7 +953,7 @@
   "@fieldHoursSave": {
     "description": "Tooltip for a button to save opening_hours value."
   },
-  "fieldHoursRemoveFragment": "Прибрати розклад",
+  "fieldHoursRemoveFragment": "Прибрати фрагмент (розкладу)",
   "@fieldHoursRemoveFragment": {
     "description": "Tooltip for a button to remove a fragment in the hours editor."
   },
@@ -1091,7 +1091,7 @@
   "@editorTags": {
     "description": "Tooltip for a button to open tags pane."
   },
-  "fieldCardsOnly": "тільки карткою",
+  "fieldCardsOnly": "Лише карткою",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
@@ -1244,5 +1244,30 @@
   "apiStatusUploadingNotes": "Примітки до завантаження",
   "@apiStatusUploadingNotes": {
     "description": "Text displayed when the app is uploading notes to the API."
-  }
+  },
+  "warningFixme": "Виправити: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "faqChangeType": "Як змінити тип точки (amenity type)?",
+  "@faqChangeType": {},
+  "fieldDirectionSet": "Напрямок вказаний",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "faqTagging": "Всі помічені питання",
+  "@faqTagging": {},
+  "faqLettersContent": "Якщо ваша цифрова клавіатура не переключається на повнорозмірну, перевірте налаштування застосунку. Для цього натисніть кнопку у лівому верхньому кутку та оберіть \"розширена цифрова клавіатура\".",
+  "@faqLettersContent": {},
+  "faqFloorsContent": "Ні. Перший має заповнений тег `addr:floor=3. Це поверх, що показується при навігації і зазвичай використовується. Другий не має цього тегу, але має `level=3`. Цей номер є послідовним номером поверху від нуля до `building:levels - 1``. У трьохповерховій будівлі значення `addr:floor` залежить від країни, але `level` завжди 0, 1, або 2.\n\nОсь такими тегами подібне позначається в редакторі:\n\n* `2`: `addr:floor=2` і не порожній `level=*`\n* `4/`: `addr:floor=4`, але без тегу `level`.\n* `/1`: `level=1`, але без тегу `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (і є об’єкт поруч: з тим самим `addr:floor`, але різним `level`, або навпаки.",
+  "@faqFloorsContent": {},
+  "faqChangeTypeContent": "Натисніть на поле у редакторі, де написаний тип.",
+  "@faqChangeTypeContent": {},
+  "faqTaggingContent": "Чому об'єкт відсутній у редакторі? Коли ці білі крапки відображаються в режимі micromapping? Як сортуються обʼєкти?\n\nЦей код дає відповіді на всі ці питання: [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Зверніть увагу на:\n\n* Порядок ключів основного тегу — у списку `kMainKeys`.\n* Які об'єкти завантажуються — функція `isGoodTags`.\n* Теги типів точок — функція `isAmenityTags`.\n* Які точки підвʼязуються до яких шляхів — функція `detectSnap`.\n* Коли об'єкт micromapping неповний — функція `needsMoreInfo`.",
+  "@faqTaggingContent": {}
 }
