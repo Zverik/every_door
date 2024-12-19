@@ -1063,5 +1063,57 @@
   "faqMapTinyContent": "เพราะว่านั่นไม่ใช่สาระสำคัญ คุณตรวจสอบตำแหน่งของคุณบนแผนที่ ลากเพื่อปรับ ดูรายชื่อสถานที่ด้านล่างที่เรียงตามระยะห่างจากคุณ\n\nแผนที่จะขยายใหญ่ขึ้นเมื่อคุณแก้ไขสถานที่ที่อยู่ไกลจากคุณ ถึงแม้ว่าแอปนี้ถูกออกแบบมาสำหรับการแก้ไขสิ่งที่เห็นได้ด้วยตาเปล่าก็ตาม",
   "@faqMapTinyContent": {},
   "faqCheckmarksContent": "เป็นเครื่องหมายว่าข้อมูลสถานที่ได้รับการยืนยันแล้ว มันจะเพิ่มแท็ก `check_date` ด้วยวันที่ในปัจจุบัน\n\nคอนเซปต์ของเครื่องหมายถูกนั้นคือ สมมุติว่าคุณสำรวจไปแล้วครึ่งเมืองในครั้งแรก และผ่านไปหนึ่งเดือนคุณกลับมาสำรวจอีกครั้ง คุณอาจจะต้องทำเครื่องหมายว่าคุณเห็นสถานที่แล้ว แต่ไม่มีอะไรเปลี่ยนแปลง นั่นคือเครื่องหมายถูกที่คุณจะแตะและดำเนินการต่อ\n\nเครื่องหมายถูกจะแสดงผลอยู่สองสัปดาห์ หลังจากนั้นคุณอาจจะกลับมาสำรวจสถานที่อีกครั้ง",
-  "@faqCheckmarksContent": {}
+  "@faqCheckmarksContent": {},
+  "fieldHeightMeters": "ต้องการความยาวในหน่วยเมตร เช่น 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "ต้องการความยาวในหน่วยฟุต เช่น 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldHeightAny": "ต้องการความยาว เช่น 5.4 หรือ 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
+  },
+  "fieldNameLangSearch": "ค้นหาภาษา",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldCardsOnly": "รับบัตรเท่านั้น",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "editorDeleteBuilding": "ถูกรื้อถอนแล้ว",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "warningWrongTag": "แท็กผิด: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "สิ่งอำนวยความสะดวกนี้มีอายุ {years} ปี",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "fieldPaymentTitle": "การชำระเงินด้วยบัตร",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldWebsiteQR": "สแกนคิวอาร์โคด",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  }
 }
