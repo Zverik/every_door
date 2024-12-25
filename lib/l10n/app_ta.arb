@@ -1,1 +1,1275 @@
-{}
+{
+  "loadingStart": "தொடங்குதல்…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "loadingPresets": "முன்னமைவுகளை ஏற்றுகிறது…",
+  "@loadingPresets": {
+    "description": "Loading screen message for loading presets."
+  },
+  "loadingChanges": "மாற்றங்களை ஏற்றுகிறது…",
+  "@loadingChanges": {
+    "description": "Loading screen message for loading stored changes."
+  },
+  "loadingLocation": "இருப்பிடத்தைப் பெறுதல்…",
+  "@loadingLocation": {
+    "description": "Loading screen message for firing up GPS and waiting for a location."
+  },
+  "loadingChangesFailed": "மாற்றங்களை ஏற்றுவதில் தோல்வி",
+  "@loadingChangesFailed": {
+    "description": "Loading screen notification title for when loading changes has failed."
+  },
+  "loadingTooMuchDataTitle": "அதிக தரவு",
+  "@loadingTooMuchDataTitle": {
+    "description": "Title for a warning alert when there's too much data downloaded."
+  },
+  "editorMarkDefunct": "மார்க் செயலிழந்தது",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorMissing": "இல்லை",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "tagsShare": "பங்கு",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsUrlCopied": "முகவரி இடைநிலைப்பலகைக்கு நகலெடுக்கப்பட்டது",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "versionsRetryFetch": "மீண்டும் முயற்சிக்கவும்",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsNoTagChanges": "குறிச்சொல் மாற்றங்கள் இல்லை",
+  "@versionsNoTagChanges": {
+    "description": "Card body for when no tag changes occurred in this version."
+  },
+  "settingsTitle": "உள்ளமைவு",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsApiServer": "பநிஇ சேவையகம்",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "changesUploadedTitle": "பதிவேற்றப்பட்டது",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "fieldHoursOpens": "திறப்புகள்",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "மூடுகிறது",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursBreak": "இடைவேளை",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "அடுத்தது",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursHour": "மணி",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursSDAddOne": "தேதி சேர்க்கவும்",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "வரம்பைச் சேர்க்கவும்",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldDirectionSet": "கணம்",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldNameLanguages": "மற்றொரு மொழி",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldWheelchairNo": "இல்லை",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsAccepted": "ஏற்றுக்கொள்ளப்பட்டது",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "இல்லை",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldFloorEmpty": "ஒரு தளத்தைத் தேர்வு செய்ய, முகவரியை அமைக்கவும்.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "entranceTypeEmergency": "அவசரநிலை",
+  "@entranceTypeEmergency": {},
+  "addressHouseNumber": "வீடு",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "drawEraser": "அழிப்பான்",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "சாலை",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawTrack": "மின்தடம்",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawPath": "பாதை",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCycleway": "சைக்கிள் பாதை",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "சுழற்சி பாதை",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "faqYellow": "சில அவுச்நம்பர்ச் மஞ்சள் ஏன்?",
+  "@faqYellow": {},
+  "faqFloorsContent": "இல்லை. முதலாவது `ஏ.டி.டி.ஆர்: மாடி = 3` குறிச்சொல் நிரப்பப்பட்டது. இது வழிசெலுத்தலில் அச்சிடப்பட்டு பொதுவாகப் பயன்படுத்தப்படுவதால் அது தான். இரண்டாவதாக இந்த குறிச்சொல் இல்லை, ஆனால் `நிலை = 3` உள்ளது. அந்த எண் பூச்சியத்திலிருந்து கட்டிடம்: நிலைகள் - 1` வரையிலான தொடர்ச்சியான மாடி எண். அதாவது, மூன்று மாடி கட்டிடத்தில் `ஏ.டி.டி.ஆர்: மாடி` மதிப்பு ஒரு நாட்டைப் பொறுத்தது, ஆனால்` நிலை` எப்போதும் 0, 1, அல்லது 2 ஆகும்.\n\n இந்த குறிச்சொற்கள் தொடர்பான எடிட்டரில் உள்ள குறியீடு இங்கே:\n\n * `2`:` ஏ.டி.டி.ஆர்: மாடி = 2` மற்றும் காலியாக இல்லாத `நிலை =*`.\n * `4/`: `ஏ.டி.டி.ஆர்: மாடி = 4`, ஆனால்` நிலை` குறிச்சொல் இல்லை.\n * `/1`:` நிலை = 1`, ஆனால் `ஏடிஆர்: மாடி` குறிச்சொல் இல்லை.\n .",
+  "@faqFloorsContent": {},
+  "faqChangeType": "ஒரு வசதி வகையை மாற்றுவது எப்படி?",
+  "@faqChangeType": {},
+  "faqChangeTypeContent": "வகை எழுதப்பட்ட எடிட்டர் தலைப்பைத் தட்டவும்.",
+  "@faqChangeTypeContent": {},
+  "faqTagging": "அனைத்து குறியீட்டு கேள்விகளும்",
+  "@faqTagging": {},
+  "loadingTooMuchData": "எடிட்டரை விரைவாகச் செய்ய அமைப்புகளில் பதிவிறக்கம் செய்யப்பட்ட தரவை தூய்மைப்படுத்துங்கள்.",
+  "@loadingTooMuchData": {
+    "description": "Message of a warning alert when there's too much data downloaded."
+  },
+  "dataDownloadFailed": "பதிவிறக்கம் தோல்வியடைந்தது",
+  "@dataDownloadFailed": {
+    "description": "Alert title for the error happened during a data download."
+  },
+  "dataDownloadSuccessful": "வெற்றிகரமாக பதிவிறக்கவும்",
+  "@dataDownloadSuccessful": {
+    "description": "Alert title for when the data was successfully downloaded."
+  },
+  "tileNo": "இல்லை",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "tileNothingAround": "{distance} மீட்டரில் உங்களைச் சுற்றியுள்ள வசதிகள் இல்லை.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "dataDownloadedCount": "{எண்ணிக்கை, பன்மை, = 1 {பதிவிறக்கம் {count} உறுப்பு.} சில {பதிவிறக்கம் {count} கூறுகள்.",
+  "@dataDownloadedCount": {
+    "description": "Alert contents when we've successfully downloaded some data.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "tileDragTheMap": "தயவுசெய்து எதற்கும் நெருக்கமாக நகர்த்தவும், வரைபடத்தை இழுக்கவும் அல்லது காணாமல் போன வசதியைச் சேர்க்கவும்.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "legendOther": "மற்றொன்று",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "tileDragOrUnfilter": "தயவுசெய்து நகர்த்தவும், ஒரு வசதியைச் சேர்க்கவும் அல்லது வடிப்பானை அழிக்கவும்.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "navUpload": "பதிவேற்றும்",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navDownload": "பதிவிறக்கம்",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navImagery": "படங்களை மாற்றவும்",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navPoiMode": "வசதி முறை",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "filterEmpty": "காலி",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "filterNonConfirmed": "உறுதிப்படுத்தப்படாதது மட்டுமே",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "mapSettings": "அமைப்புகள்",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "navMicromappingMode": "மைக்ரோமேப்பிங் பயன்முறை",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navEntrancesMode": "நுழைவாயில்கள் பயன்முறை",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "navNotesMode": "குறிப்புகள் பயன்முறை",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "filterNoAddresses": "அருகிலுள்ள முகவரிகள் இல்லை",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterByAddress": "முகவரி மூலம்",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "filterByFloor": "தரையில்",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "mapFilter": "வடிப்பி",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "என்னிடம் திரும்பி",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapZoomIn": "பெரிதாக்கு",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "சிறிதாக்கு",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "chooseLocation": "இருப்பிடத்தைத் தேர்வுசெய்க",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "வகையைத் தேர்வுசெய்க",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "தெளிவான",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "warningFixme": "Fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "தவறான குறிச்சொல்: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "வசதி {years} பழையது",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "warningUnsupported": "இந்த பொருள் வகை ஆதரிக்கப்படவில்லை",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "warningWrongMode": "தவறான பயன்முறை, நகல்களை சரிபார்க்கவும்",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "years": "{எண்ணிக்கை, பன்மை, = 1 {{count} ஆண்டு} சில {{count} ஆண்டுகள்} பிற {{count} ஆண்டுகள்}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorSave": "சேமி",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorMarkChecked": "மார்க் சரிபார்க்கப்பட்டது",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "வரலாறு",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "மூல குறிச்சொற்கள்",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorCloseTitle": "எடிட்டரை மூடு?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "சேமிக்காமல் மாற்றங்களை நிராகரிக்கவா?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorMoreFields": "மேலும் புலங்கள்",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorLoadingPreset": "முன்னமைவை ஏற்றுகிறது…",
+  "@editorLoadingPreset": {
+    "description": "Message shown when loading a preset in the editor."
+  },
+  "editorMove": "நகர்த்தவும்",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorDuplicate": "{தூரத்தில் சாத்தியமான நகல்",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorMarkActive": "மார்க் செயலில்",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorRestore": "மீட்டமை",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorDeleteBuilding": "இடிக்கப்பட்டது",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "editorRestoreTitle": "இது திறந்திருக்கிறதா?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorDeleteTitle": "{amenity} நீக்கு?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "நீக்கு",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "editorRestoreMessage": "{amenity} செயலற்றது. நீங்கள் அதை செயலில் குறிக்க விரும்புகிறீர்களா?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteKeepAddressButton": "நீக்கு, ஆனால் முகவரியை வைத்திருங்கள்",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "tagsNewPoint": "புதிய புள்ளி",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsRestore": "மீட்டமை",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "தெளிவான",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "tagsAddTag": "ஒரு குறிச்சொல்லைச் சேர்க்கவும்",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "விசை",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "மதிப்பு",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "versionsFetchError": "பதிப்பு வரலாற்றைப் பெறுவதில் பிழை",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsLocalChanges": "உள்ளக மாற்றங்கள்",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionNumber": "பதிப்பு #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "tagsKeyError": "விசை மிகவும் அரிதானது",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsValueLong": "மதிப்பு மிக நீளமானது",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "versionsTitle": "{elementRef} வரலாறு",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsEnableInternet": "பதிப்பு வரலாற்றைப் பெற இணையத்துடன் இணைக்கவும்",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsVersionMeta": "{user} இல் {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsDataManagement": "தரவு மேலாண்மை",
+  "@settingsDataManagement": {
+    "description": "Section title for data settings."
+  },
+  "settingsPresentation": "விளக்கக்காட்சி",
+  "@settingsPresentation": {
+    "description": "Section title for presentation options."
+  },
+  "settingsPurgeData": "வழக்கற்றுப் போன தற்காலிக சேமிப்பு தரவை தூய்மைப்படுத்துங்கள்",
+  "@settingsPurgeData": {
+    "description": "Settings entry for purging obsolete OSM data."
+  },
+  "settingsPurgeAllData": "பதிவிறக்கம் செய்யப்பட்ட அனைத்து தரவையும் தூய்மைப்படுத்துங்கள்",
+  "@settingsPurgeAllData": {
+    "description": "Settings entry for purging all cached OSM data."
+  },
+  "settingsPurgeDataTitle": "தரவை நீக்கவா?",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "settingsLoginDetails": "OSM கணக்கு",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsHashtags": "மாற்றுதல் ஏச்டேக்குகள்",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "settingsPurgeDataMessage": "நீங்கள் எல்லாவற்றையும் மீண்டும் ஏற்ற வேண்டும். தொடரவா?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "வழக்கற்றுப் போன தரவு",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "தரவு நீக்கப்பட்டது",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "settingsPurgedMessage": "{எண்ணிக்கை, பன்மை, = 1 {சுத்திகரிக்கப்பட்ட {count} உறுப்பு} சில {சுத்திகரிக்கப்பட்ட {count} கூறுகள்} பிற {சுத்திகரிக்கப்பட்ட {count} கூறுகள்}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "settingsUploads": "பதிவேற்றங்கள் நிலுவையில் உள்ளன",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsBackground": "பின்னணி படங்கள்",
+  "@settingsBackground": {
+    "description": "Settings entry for choosing background satellite imagery."
+  },
+  "settingsCacheTiles": "ஓடுகளைப் பதிவிறக்கவும்",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "settingsLeftHand": "இடது கை கட்டுப்பாடுகள்",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "settingsLanguage": "மொழி",
+  "@settingsLanguage": {
+    "description": "Settings entry for changing the app language."
+  },
+  "settingsEditor": "திருத்தி",
+  "@settingsEditor": {
+    "description": "Title for the settings section for editor presets."
+  },
+  "settingsPreferContact": "\"தொடர்பு:\" முன்னொட்டு ஆகியவற்றை விரும்புங்கள்",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsNumericKeyboard": "நீட்டிக்கப்பட்ட எண் விசைப்பலகை",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsDefaultPayment": "இயல்புநிலை கட்டண அட்டைகள்",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "settingsSystem": "மண்டலம்",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "settingsGoogle": "Google- மேம்படுத்தப்பட்ட பொருத்துதலைப் பயன்படுத்தவும்",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "settingsAbout": "பற்றி",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "aboutViewLog": "கணினி பதிவு",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutVersionHistory": "பதிப்பு வரலாறு",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutInstalledVersion": "நிறுவப்பட்ட பதிப்பு",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "திட்ட இணையதளம்",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutSourceCode": "மூலக் குறியீடு",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "aboutOnGitHub": "கிட்அப்பில்",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "உரிமம்",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "{appTitle} ஐ மேம்படுத்த உதவுங்கள்",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "ஒரு சிக்கலைப் புகாரளிக்கவும்",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpTranslate": "மொழிபெயர்க்க உதவுங்கள்",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "aboutOnWeblate": "வெப்லேட்டில்",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "aboutFAQ": "கேள்விகள்",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "இணைப்புகள்",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountTitle": "OpenStreetMap கணக்கு",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "accountLoginOAuth": "OAUTH உடன் உள்நுழைக",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "OAUTH பிழை",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountLoginPassword": "கடவுச்சொல்லுடன் உள்நுழைக",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "எச்சரிக்கை",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "உங்கள் கடவுச்சொல் சாதனத்தில் சேமிக்கப்படும். OAUTH தோல்வியுற்றால் மட்டுமே இதைத் தேர்வுசெய்க.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "புரிந்து கொள்ளப்பட்டது",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordTitle": "OSM நற்சான்றிதழ்கள்",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "accountFieldLogin": "பயனர்பெயர்",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountFieldPassword": "கடவுச்சொல்",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountAuthErrorTitle": "அங்கீகார பிழை",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "accountAuthErrorMessage": "தவறான பயனர்பெயர் அல்லது கடவுச்சொல்.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "விடுபதிகை",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountChangesets": "மாற்றங்கள்",
+  "@accountChangesets": {
+    "description": "Label for the number of changesets a user has uploaded."
+  },
+  "accountUnreadMail": "படிக்காத அஞ்சல்",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "hashtagsLabel": "ஏச்டேக்குகளுக்கான சொற்கள்",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "hashtagsConfirm": "பதிவேற்றத்தில் குறிச்சொற்களை உறுதிப்படுத்தவும்",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesUploadFailedTitle": "பதிவேற்றம் தோல்வியடைந்தது",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "changesDeletedChange": "நீக்கப்பட்டது {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesDeletedUndo": "செயல்தவிர்",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesCount": "{எண்ணிக்கை, பன்மை, = 1 {{count} மாற்றம்} சில {{count} மாற்றங்கள்} பிற {{count} மாற்றங்கள்}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "changesUploadedMessage": "பநிஇ க்கு {changes} அனுப்பப்பட்டது.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "changesPending": "நிலுவையில் உள்ளது",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "changesMapNotes": "வரைபட குறிப்புகள் மற்றும் வரைபடங்கள்",
+  "@changesMapNotes": {
+    "description": "Title for a grouped change tile for map notes and drawings."
+  },
+  "changesOsmNote": "OSM குறிப்பு",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "changesPurge": "மாற்றங்களை தூய்மைப்படுத்துங்கள்",
+  "@changesPurge": {
+    "description": "Purge all changes"
+  },
+  "changesPurgeTitle": "மாற்றங்களை சுத்திகரிக்கவா?",
+  "@changesPurgeTitle": {
+    "description": "Dialog title for confirming deletion of all changes."
+  },
+  "changesPurgeMessage": "பதிவுசெய்யப்பட்ட அனைத்து மாற்றங்களையும் நீக்கி அசல் தரவை மீட்டெடுக்கவா?",
+  "@changesPurgeMessage": {
+    "description": "Dialog message for confirming deletion of all changes."
+  },
+  "changesSwipeLeft": "ஒரு மாற்றத்தை செயல்தவிர்க்க இடதுபுறம் ச்வைப் செய்யவும்",
+  "@changesSwipeLeft": {
+    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+  },
+  "fieldHoursButton": "தொடக்க நேரங்களை அமைக்கவும்",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursTitle": "திறந்த நேரம்",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursFullDay": "முழு நாள்",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursAsText": "உரையாக",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "\"கடைசி திங்கள்\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "குறிப்பிட்ட தேதி",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "மூடப்பட்டது",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "பொது விடுமுறை",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursMinute": "நிமிடங்கள்",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursChooseTime": "மணி மற்றும் மணித்துளி",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursClear": "தெளிவான",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSave": "சேமி",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursAddFragment": "ஒரு துண்டு சேர்க்கவும்",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "fieldHoursRemoveFragment": "துண்டு அகற்றவும்",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursAddBreak": "ஒரு இடைவெளி சேர்க்கவும்",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursRemoveBreak": "இடைவெளியை அகற்று",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursWeekdays": "Mu செ we th th frata su su",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "பொது விடுமுறை நாட்களில் மூடப்பட்டது",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursSDRemove": "அகற்று",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldNameLangSearch": "மொழியைக் கண்டுபிடி",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldNameCopy": "மதிப்பு மதிப்பு",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldComboEmpty": "காலி",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "தேர்வு",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "இல்லை",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "பொது",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "வாடிக்கையாளர்கள்",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "ஆம்",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "வரையறுக்கப்பட்ட",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldCardsOnly": "அட்டை மட்டும்",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldPaymentTitle": "அட்டை செலுத்துதல்",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldPaymentAround": "சுற்றி பொதுவான விருப்பங்கள்",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "fieldPaymentUseSame": "மேப்பிங்கிற்கு அதே குறிச்சொற்களைப் பயன்படுத்தவும்",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentUseGlobal": "எனது இயல்புநிலை சிறந்தது",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldPaymentLocal": "உள்ளக விருப்பங்கள்",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentGlobal": "உலகளாவிய இயல்புநிலை",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "fieldPaymentChoose": "வெவ்வேறு உள்ளக குறிச்சொற்களைத் தேர்வுசெய்க ...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldCheckboxYes": "ஆம்",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "இல்லை",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorNew": "புதிய தளம்",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorFloorDesc": "வழிசெலுத்தல் மற்றும் லிஃப்ட் போன்ற தளம்",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "தரை மட்டத்திற்கு 0 முதல் தொடங்குகிறது",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldAddressTap": "முகவரியைத் தட்டவும்",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldFloorShouldBeNumber": "தயவுசெய்து ஒரு எண்ணை உள்ளிடவும்",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldPhoneWrong": "தவறான தொலைபேசி வடிவம்",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "fieldHeightFeet": "கால்களில் நீளத்தை எதிர்பார்க்கிறது, எ.கா. 7'4 \"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldHeightAny": "நீளத்தை எதிர்பார்க்கிறது, எ.கா. 5.4 அல்லது 7'4 \"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
+  },
+  "fieldHeightMeters": "மீட்டரில் நீளத்தை எதிர்பார்க்கிறது, எ.கா. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldWebsiteQR": "ஒரு QR குறியீட்டை ச்கேன் செய்யுங்கள்",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "messageNoData": "தரவு இல்லை, பதிவிறக்கம் செய்ய இங்கே தட்டவும்",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "enableLocation": "இருப்பிடத்தை இயக்கவும்",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "enableLocationMessage": "காண்பிக்கப்படும் அமைப்புகள் குழுவில் பயன்பாட்டிற்கான இருப்பிட அணுகலை அனுமதிக்கவும்.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "messageDataObsolete": "தரவு வழக்கற்றுப் போனது, புதுப்பிக்க இங்கே தட்டவும்",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "சி.பி.எச்",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableGPSMessage": "காண்பிக்கப்படும் அமைப்புகள் குழுவில் இருப்பிட சேவைகளை இயக்கவும்.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "buttonYes": "ஆம்",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "இல்லை",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "entrancesAddEntrance": "நுழைவு சேர்க்கவும்",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "கட்டிடத்தைச் சேர்க்கவும்",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingX": "கட்டிடம் {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "addressX": "முகவரி {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingPostCode": "அஞ்சல் குறியீடு",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "entranceX": "நுழைவு {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingLevels": "நிலைகள்",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingRoofLevels": "கூரை நிலைகள்",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "buildingRoofShape": "கூரை வடிவம்",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "வகை",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "மேலும்",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterial": "முகப்பில்",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "செங்கல்",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialPlaster": "பிளாச்டர்",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "மரம்",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "கான்கிரீட்",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "பேனல்கள்",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "சிமென்ட் தொகுதிகள்",
+  "@buildingMaterialCementBlock": {},
+  "buildingTypeRetail": "சில்லறை",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "வணிக",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "கொட்டகை",
+  "@buildingTypeShed": {},
+  "buildingMaterialStone": "கல்",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "மாழை",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "கண்ணாடி",
+  "@buildingMaterialGlass": {},
+  "buildingTypeAddress": "முகவரி",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "வீடு",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "குடியிருப்புகள்",
+  "@buildingTypeApartments": {},
+  "buildingTypeIndustrial": "தொழில்",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeGarage": "கேரேச்",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "கட்டுமானம்",
+  "@buildingTypeConstruction": {},
+  "entranceFlats": "பிளாட்",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "எண்களின் பட்டியலாக இருக்க வேண்டும்",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceIsUnit": "பிளாட் எண்ணை ஏ.டி.டி.ஆர்: யூனிட்டில் சேமிக்கவும்",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceRef": "குறிப்பு",
+  "@entranceRef": {
+    "description": "Label for entrance ref in the form. Keep it short."
+  },
+  "entranceAccess": "அணுகல்",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessYes": "திற",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "தனிப்பட்ட",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "இல்லை",
+  "@entranceAccessNo": {},
+  "entranceAccessDelivery": "வழங்கு",
+  "@entranceAccessDelivery": {},
+  "entranceWheelchair": "சக்கர நாற்காலி",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceType": "வகை",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "entranceTypeMain": "முக்கிய",
+  "@entranceTypeMain": {},
+  "entranceTypeStaircase": "படிக்கட்டு",
+  "@entranceTypeStaircase": {},
+  "entranceTypeHome": "வீடு",
+  "@entranceTypeHome": {},
+  "addressStreet": "தெரு",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "addressPlace": "இடம்",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "entranceTypeShop": "கடை",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "பணி",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "கேரேச்",
+  "@entranceTypeGarage": {},
+  "addressHouseNotEmpty": "காலியாக இருக்கக்கூடாது",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "அலகு",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "விரும்பினால்",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressBlock": "தொகுதி",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesAddNote": "குறிப்பைச் சேர்க்கவும்",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesComment": "உங்கள் கருத்து",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "notesAnonymous": "அநாமதேய",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "தீர்க்க",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "தீர்க்கப்பட்ட குறிப்பைக் குறிக்கவும்?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "notesDelete": "நீக்கு",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "notesCancelMessage": "உங்கள் OSM குறிப்பை ரத்து செய்யவா?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "drawUndo": "செயல்தவிர்",
+  "@drawUndo": {},
+  "drawWall": "சுவர்",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawFence": "வேலி",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawChangeTool": "கருவியை மாற்றவும்",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawScribble": "எழுது",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawFootway": "பாதை",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawPower": "ஆற்றல் வரி",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawStream": "ச்ட்ரீம்",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "apiStatusUpdatingDB": "பயன்பாட்டு தரவுத்தளத்தில் கூறுகளைச் சேமிக்கிறது",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploading": "பதிவேற்றும் மாற்றங்கள்",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "apiStatusUploadingNotes": "குறிப்புகளைப் பதிவேற்றுகிறது",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "faqMapTiny": "வரைபடம் ஏன் சிறியது?",
+  "@faqMapTiny": {},
+  "drawCulvert": "கல்வெர்ட்",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "apiStatusDownloading": "தரவைப் பதிவிறக்குகிறது…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "faqEntrance": "கட்டிட நுழைவாயிலை எவ்வாறு சேர்ப்பது?",
+  "@faqEntrance": {},
+  "faqEntranceContent": "கீழே பயன்முறை பொத்தான்கள் உள்ளன: மைக்ரோமேப்பிங், வசதிகள், நுழைவாயில்கள் மற்றும் குறிப்புகள்.\n\n நுழைவாயில்கள் பயன்முறையில், கீழ் மூலையில் உள்ள கதவு பொத்தானை வரைபடத்தில் தட்டவும் அல்லது இழுக்கவும்.",
+  "@faqEntranceContent": {},
+  "faqMapTinyContent": "ஏனெனில் அது புள்ளி அல்ல. நீங்கள் வரைபடத்தில் உங்கள் நிலைப்பாட்டை மட்டுமே சரிபார்த்து, அதை சரிசெய்ய பான். உங்களிடமிருந்து தூரத்தால் வரிசைப்படுத்தப்பட்ட கீழே உள்ள வசதி பட்டியலைப் பாருங்கள்.\n\n உங்கள் இருப்பிடத்திலிருந்து வெகு தொலைவில் உள்ள வசதிகளைத் திருத்தும்போது வரைபடம் பெரிதாகிறது. உங்கள் கண்களால் நீங்கள் காணும் விசயங்களைத் திருத்த பயன்பாடு செய்யப்பட்டிருந்தாலும்.",
+  "@faqMapTinyContent": {},
+  "faqCheckmarks": "சோதனை என்ன?",
+  "@faqCheckmarks": {},
+  "faqCheckmarksContent": "வசதி தரவு உறுதிப்படுத்தப்பட்ட மதிப்பெண்கள் இவை. அவை தற்போதைய தேதியுடன் `check_date` குறிச்சொல்லைச் சேர்க்கின்றன.\n\n செக்மார்க்சுக்குப் பின்னால் உள்ள சிந்தனை என்னவென்றால், நீங்கள் முதல் முறையாக நகரத்தை பாதி கணக்கெடுத்தீர்கள் என்று சொல்லுங்கள். ஒரு மாதத்திற்குப் பிறகு நீங்கள் திரும்பி வந்து மீண்டும் கணக்கெடுப்புக்குச் சென்றீர்கள். நீங்கள் வசதியைக் காண்கிறீர்கள் என்று நீங்கள் எப்படியாவது குறிக்க வேண்டும், ஆனால் அதைப் பற்றி எதுவும் மாறவில்லை. அதுதான் செக்மார்க்: நீங்கள் அதைத் தட்டவும் தொடரவும்.\n\n குறி இரண்டு மாதங்கள் சரிபார்க்கப்படுகிறது. அதன் பிறகு நீங்கள் மீண்டும் வசதிகளை ஆய்வு செய்யலாம்.",
+  "@faqCheckmarksContent": {},
+  "faqYellowContent": "நுழைவாயில்கள் பயன்முறையில் மஞ்சள் அல்லாத லேபிள்கள் மற்றும் மைக்ரோமேப்பிங் பயன்முறையில் வெள்ளை புள்ளிகள் என்பது கூறுகளுக்கு சில முக்கியமான பண்புகளைக் கொண்டிருக்கவில்லை. உதாரணமாக:\n\n * கட்டிடங்களுக்கு எண்ணிக்கை இருக்கும் என்று எதிர்பார்க்கப்படுகிறது.\n * நுழைவாயில்கள் வகை மற்றும், படிக்கட்டுகளுக்கு, தட்டையான வரம்பு இருக்க வேண்டும்.\n * பெஞ்சுகளில் பொருள் மற்றும் பேக்ரெச்ட் இருக்க வேண்டும்.\n * மரங்களுக்கு இலை வகை மற்றும் சுழற்சி இருக்க வேண்டும்.",
+  "@faqYellowContent": {},
+  "faqLetters": "கடிதங்களை ஒரு REF அல்லது ஒரு தட்டையான எண்ணில் தட்டச்சு செய்யலாமா?",
+  "@faqLetters": {},
+  "faqLettersContent": "உங்கள் எண் விசைப்பலகையை முழுமையாக மாற்ற முடியாவிட்டால், பயன்பாட்டு அமைப்புகளை சரிபார்க்கவும். அவை மேல் இடது மூலையில் உள்ள பொத்தானின் பின்னால் உள்ளன. அங்கு \"நீட்டிக்கப்பட்ட எண் விசைப்பலகை\" ஐ மாற்றவும்.",
+  "@faqLettersContent": {},
+  "faqFloors": "தளங்கள் '3' மற்றும் '/3' ஆகியவை ஒரே மாதிரியானதா?",
+  "@faqFloors": {},
+  "faqTaggingContent": "எடிட்டரில் ஒரு பொருள் ஏன் காணவில்லை? இந்த வெள்ளை புள்ளிகள் மைக்ரோமேப்பிங் பயன்முறையில் காட்டப்படும் போது? பொருள்கள் எவ்வாறு வரிசைப்படுத்தப்படுகின்றன?\n\n இந்த எல்லா கேள்விகளுக்கும் பதில்கள் [good_tags.dart] (https://github.com/zverik/every_door/blob/main/lib/helpers/good_tags.dart) இல் உள்ளன. நீங்கள் பார்க்கக்கூடியது இங்கே:\n\n * முதன்மையான குறிச்சொல்லின் முக்கிய ஆர்டர் - பட்டியல் `kmainkeys`.\n * எந்த பொருள்கள் பதிவிறக்கம் செய்யப்படுகின்றன - செயல்பாடு `isgoodtags`.\n * ஒரு வசதி என்று கருதப்படுவது - செயல்பாடு `isamenityTags`.\n * எந்த புள்ளிகள் எந்த வழிகளில் துண்டிக்கப்படுகின்றன - `கண்டறிதல்கள்`.\n * மைக்ரோமேப்பிங் பொருள் முழுமையடையாதபோது - செயல்பாடு `தேவைகள் மோர்ன்ஃபோ`.",
+  "@faqTaggingContent": {}
+}
