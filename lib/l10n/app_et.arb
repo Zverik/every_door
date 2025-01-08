@@ -322,7 +322,7 @@
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
-  "dataDownloadedCount": "{count,plural, =1{Allalaaditud {count} objekt.} few{Allalaaditud{count} objekti.} other{Allalaaditud{count} objekti.}}",
+  "dataDownloadedCount": "{count,plural, =1{Allalaaditud {count} objekt.} few{Allalaaditud {count} objekti.} other{Allalaaditud {count} objekti.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -1243,5 +1243,11 @@
   "editorDeleteBuilding": "Lammutatud",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
-  }
+  },
+  "faqCheckmarks": "Mille jaoks on ✓-märked?",
+  "@faqCheckmarks": {},
+  "faqEntrance": "Kuidas saan lisada hoone sissepääsu?",
+  "@faqEntrance": {},
+  "faqCheckmarksContent": "Need kinnitavad teenuse andmete kontrollitust ja lisavad „check_date“ sildi, mille väärtuseks on jooksev kuupäev (või uuendavad seda).\n\nKogu idee on selles, et oled näiteks esmase kohtvaatluse käigus pool linna kaardistanud. Kuu aja pärast jätkad kohtvaatlust. Kuidagi pead ju märkima, et mitte midagi pole muutunud. Selleks ongi siis linnukene: klõpsid seda ja lähed järgmise objekti juurde.\n\nKontrollimise märge kehtib kaks kuud. Pärast seda saad neid teenuseid uuesti kaardistada.",
+  "@faqCheckmarksContent": {}
 }
