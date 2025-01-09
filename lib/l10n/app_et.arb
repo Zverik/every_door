@@ -1249,5 +1249,11 @@
   "faqEntrance": "Kuidas saan lisada hoone sissepääsu?",
   "@faqEntrance": {},
   "faqCheckmarksContent": "Need kinnitavad teenuse andmete kontrollitust ja lisavad „check_date“ sildi, mille väärtuseks on jooksev kuupäev (või uuendavad seda).\n\nKogu idee on selles, et oled näiteks esmase kohtvaatluse käigus pool linna kaardistanud. Kuu aja pärast jätkad kohtvaatlust. Kuidagi pead ju märkima, et mitte midagi pole muutunud. Selleks ongi siis linnukene: klõpsid seda ja lähed järgmise objekti juurde.\n\nKontrollimise märge kehtib kaks kuud. Pärast seda saad neid teenuseid uuesti kaardistada.",
-  "@faqCheckmarksContent": {}
+  "@faqCheckmarksContent": {},
+  "faqYellowContent": "Mitte-kollased sildid sissepääsude kaardistusvaates ja valged mummud mikrokaardistusvaates tähendavad, et mõned vajalikud andmed on puudu. Näiteks:\n\n* hoonetel peaks olema kirjas korruste arv,\n* sissepääsudel peaks olema tüüp ja trepikodadel korterite vahemik,\n* pinkidel peaks olema kirjas materjal seljatoe teave,\n* puudel peaks olema kirjas lehetüüp ja hooajalisus.",
+  "@faqYellowContent": {},
+  "faqEntranceContent": "Ekraanivaate all ääres on töövaadete nuppude rida: mikrokaardistamine, teenused, sissepääsud ja märkmed.\n\nSissepääsude kaardistusvaates vajuta all nurgas olev ukse ikoon alla ja lohista hoones vajalikku asukohta.",
+  "@faqEntranceContent": {},
+  "faqYellow": "Miks on mõned majade numbrid kollased?",
+  "@faqYellow": {}
 }
