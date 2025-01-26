@@ -1,5 +1,14 @@
 # Every Door App Change Log
 
+## 5.4
+
+_Unreleased_
+
+* Fixed conflict processing on way uploads.
+* Enabled overzoom for Esri tiles.
+* Fax and mobile fields are treated as phone numbers.
+* Updated presets and imagery layers.
+
 ## 5.3
 
 _Released on 2024-12-04_
