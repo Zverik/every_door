@@ -136,7 +136,7 @@
   "@warningWrongMode": {
     "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
   },
-  "years": "{count,plural, =1{שנה} few{{count} שנים} two{שנתיים} many{{count} שנה}}",
+  "years": "{count,plural, =1{שנה} few{{count} שנים} two{שנתיים} other{{count} שנה}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
