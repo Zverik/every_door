@@ -211,13 +211,10 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         keyboardType: TextInputType.number,
       );
     case 'tel':
-      return TextPresetField(
+      return PhonePresetField(
         key: key,
         label: label,
-        placeholder: placeholder,
         prerequisite: prerequisite,
-        locationSet: locationSet,
-        keyboardType: TextInputType.phone,
       );
     case 'email':
       return TextPresetField(

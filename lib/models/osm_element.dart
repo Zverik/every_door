@@ -149,12 +149,12 @@ class OsmElement {
       timestamp: timestamp,
       downloaded: downloaded,
       tags: tags,
-      center: old.center ?? center,
-      geometry: old.geometry ?? geometry,
-      nodes: old.nodes ?? nodes,
-      nodeLocations: old.nodeLocations ?? nodeLocations,
-      members: old.members ?? members,
-      isMember: old.isMember,
+      center: center ?? old.center,
+      geometry: geometry ?? old.geometry,
+      nodes: nodes ?? old.nodes,
+      nodeLocations: nodeLocations ?? old.nodeLocations,
+      members: members ?? old.members,
+      isMember: isMember,
     );
   }
 

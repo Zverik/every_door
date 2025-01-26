@@ -4,6 +4,7 @@ import 'package:every_door/models/imagery.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:logging/logging.dart';
 
 class TileCacheManager {
   static const key = 'tileCache';
@@ -15,6 +16,8 @@ class TileCacheManager {
 }
 
 class CachedTileProvider extends TileProvider {
+  static final _logger = Logger('CachedTileProvider');
+
   CachedTileProvider();
 
   @override
@@ -25,6 +28,9 @@ class CachedTileProvider extends TileProvider {
       url,
       cacheManager: TileCacheManager.instance,
       headers: headers,
+      errorListener: (e) {
+        _logger.warning('Failed to load a tile: $e');
+      }
     );
   }
 }
@@ -46,8 +52,8 @@ class CachedBingTileProvider extends TileProvider {
 
   @override
   String getTileUrl(TileCoordinates coordinates, TileLayer options) {
-    final quadkey =
-        _tileToQuadkey(coordinates.x.round(), coordinates.y.round(), coordinates.z.round());
+    final quadkey = _tileToQuadkey(
+        coordinates.x.round(), coordinates.y.round(), coordinates.z.round());
     final tileUrl = super.getTileUrl(coordinates, options);
     return tileUrl
         .replaceFirst('_QUADKEY_', quadkey)
@@ -143,6 +149,17 @@ class TileLayerOptions {
               ?.replaceFirst('{quadkey}', '_QUADKEY_')
               .replaceFirst('{culture}', '_CULTURE_') ??
           '';
+    } else if (imagery.type == ImageryType.tms && url.contains('MapServer')) {
+      // For ArcGIS Rest API, add a flag to produce 404 error on missing tiles.
+      final reArcGIS = RegExp(r'(/MapServer/tile/\{z\}/\{y\}/\{x\})(\?.+)?$');
+      final m = reArcGIS.firstMatch(url);
+      if (m != null) {
+        if (m.group(2)?.isEmpty ?? true) {
+          url += '?blankTile=false';
+        } else {
+          url += '&blankTile=false';
+        }
+      }
     }
 
     switch (imagery.type) {
@@ -156,7 +173,8 @@ class TileLayerOptions {
         if (url.contains('{switch:')) {
           final match = RegExp(r'\{switch:([^}]+)\}').firstMatch(url)!;
           subdomains.addAll(match.group(1)!.split(',').map((e) => e.trim()));
-          url = url.substring(0, match.start) + '{s}' + url.substring(match.end);
+          url =
+              url.substring(0, match.start) + '{s}' + url.substring(match.end);
         }
         urlTemplate = url;
         break;
