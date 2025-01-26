@@ -179,7 +179,7 @@
       }
     }
   },
-  "dataDownloadedCount": "{எண்ணிக்கை, பன்மை, = 1 {பதிவிறக்கம் {count} உறுப்பு.} சில {பதிவிறக்கம் {count} கூறுகள்.",
+  "dataDownloadedCount": "{count,plural,=1{பதிவிறக்கம் {count} உறுப்பு.} few{பதிவிறக்கம் {count} கூறுகள்.} other{பதிவிறக்கம் {count} கூறுகள்.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
     "placeholders": {
@@ -315,7 +315,7 @@
   "@warningWrongMode": {
     "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
   },
-  "years": "{எண்ணிக்கை, பன்மை, = 1 {{count} ஆண்டு} சில {{count} ஆண்டுகள்} பிற {{count} ஆண்டுகள்}}",
+  "years": "{count,plural,=1{{count} ஆண்டு} few{{count} ஆண்டுகள்} other{{count} ஆண்டுகள்}}",
   "@years": {
     "description": "Number of years. Used in the \"amenity is N years old\" message.",
     "placeholders": {
@@ -358,7 +358,7 @@
   "@editorMove": {
     "description": "Label for the map, a hint that you can move the object."
   },
-  "editorDuplicate": "{தூரத்தில் சாத்தியமான நகல்",
+  "editorDuplicate": "{distance} சாத்தியமான நகல்",
   "@editorDuplicate": {
     "description": "Message about a possible duplicate",
     "placeholders": {
@@ -534,7 +534,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsPurgedMessage": "{எண்ணிக்கை, பன்மை, = 1 {சுத்திகரிக்கப்பட்ட {count} உறுப்பு} சில {சுத்திகரிக்கப்பட்ட {count} கூறுகள்} பிற {சுத்திகரிக்கப்பட்ட {count} கூறுகள்}}",
+  "settingsPurgedMessage": "{count,plural,=1{சுத்திகரிக்கப்பட்ட {count} உறுப்பு} few{சுத்திகரிக்கப்பட்ட {count} கூறுகள்} other{சுத்திகரிக்கப்பட்ட {count} கூறுகள்}}",
   "@settingsPurgedMessage": {
     "description": "Notification message after some cached elements were deleted.",
     "placeholders": {
@@ -734,7 +734,7 @@
   "@changesDeletedUndo": {
     "description": "Button label for undoing a change deletion."
   },
-  "changesCount": "{எண்ணிக்கை, பன்மை, = 1 {{count} மாற்றம்} சில {{count} மாற்றங்கள்} பிற {{count} மாற்றங்கள்}}",
+  "changesCount": "{count,plural,=1{{count} மாற்றம்} few{{count} மாற்றங்கள்} other{{count} மாற்றங்கள்}}",
   "@changesCount": {
     "description": "Number of changed elements to display or to upload.",
     "placeholders": {
