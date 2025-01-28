@@ -28,12 +28,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class MapChooserPage extends ConsumerStatefulWidget {
   final LatLng location;
   final bool creating;
-  final bool closer;
 
   const MapChooserPage({
     required this.location,
     this.creating = false,
-    this.closer = false,
   });
 
   @override
@@ -115,6 +113,9 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
 
+    double initialZoom = ref.watch(zoomProvider);
+    if (initialZoom < 18) initialZoom = 18;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(loc.chooseLocation),
@@ -134,7 +135,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
         mapController: controller,
         options: MapOptions(
           initialCenter: widget.location,
-          initialZoom: widget.closer ? 19.0 : 18.0,
+          initialZoom: initialZoom,
           minZoom: 17.0,
           maxZoom: kEditMaxZoom,
           initialRotation: ref.watch(rotationProvider),

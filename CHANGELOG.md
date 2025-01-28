@@ -8,7 +8,9 @@ _Unreleased_
 * Enabled overzoom for Esri tiles.
 * Fax and mobile fields are treated as phone numbers.
 * Fixed editing in extreme latitudes.
+* Disabled zoom change when tapping the (+) button.
 * Fixed missing recently used presets when adding a thing.
+* Added cadastre imagery layers.
 * Updated presets and imagery layers.
 
 ## 5.3

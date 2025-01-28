@@ -70,7 +70,7 @@ if __name__ == '__main__':
         # We substitute Mapbox imagery with a built-in one.
         if imagery['id'] == 'Mapbox':
             continue
-        if imagery.get('category') not in (None, 'photo', 'map'):
+        if imagery.get('category') not in (None, 'photo', 'map', 'other'):
             continue
         if imagery.get('country_code') == 'AQ':
             continue

@@ -198,7 +198,6 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
                         builder: (context) => MapChooserPage(
                           creating: true,
                           location: location,
-                          closer: editorMode == EditorMode.micromapping,
                         ),
                         fullscreenDialog: true,
                       ),
