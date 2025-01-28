@@ -7,6 +7,8 @@ _Unreleased_
 * Fixed conflict processing on way uploads.
 * Enabled overzoom for Esri tiles.
 * Fax and mobile fields are treated as phone numbers.
+* Fixed editing in extreme latitudes.
+* Fixed missing recently used presets when adding a thing.
 * Updated presets and imagery layers.
 
 ## 5.3

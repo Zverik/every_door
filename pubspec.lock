@@ -950,11 +950,12 @@ packages:
   proximity_hash:
     dependency: "direct main"
     description:
-      name: proximity_hash
-      sha256: "074019c28c333fa58c96d1f8c647b3bfd39a408f6b0f78600428de73a467d9a9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
+      path: "."
+      ref: master
+      resolved-ref: "0789da48390bf2cd0cda1962b81c720321dc889e"
+      url: "https://github.com/Zverik/proximity_hash.git"
+    source: git
+    version: "2.2.0"
   pub_semver:
     dependency: transitive
     description:

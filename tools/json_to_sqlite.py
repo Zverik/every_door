@@ -11,6 +11,7 @@ Note that imagery is added in a separate script, ``add_imagery.py``.
 And there is also taginfo data for combo options, see ``add_taginfo.py``.
 """
 
+import datetime
 import json
 import os
 import re
@@ -131,6 +132,12 @@ def normalize(s: Optional[str]) -> Optional[str]:
         return s
     return u"".join([c for c in unicodedata.normalize('NFKD', s.lower().strip())
                      if not unicodedata.combining(c)])
+
+
+def store_version(cur):
+    version = datetime.datetime.now().strftime('%Y%m%d-%H%M')
+    cur.execute("create table version (version text)")
+    cur.execute("insert into version (version) values (?)", (version,))
 
 
 def import_fields(cur, path: Optional[str]):
@@ -535,6 +542,7 @@ if __name__ == '__main__':
 
     db = sqlite3.connect(sys.argv[1])
     cur = db.cursor()
+    store_version(cur)
     import_fields(cur, git_path)
     import_presets(cur, git_path)
     import_translations(cur, git_path)

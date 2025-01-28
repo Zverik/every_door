@@ -1,4 +1,5 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/counter.dart';
 import 'package:every_door/helpers/equirectangular.dart';
 import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/providers/editor_mode.dart';
@@ -68,23 +69,22 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
 
     // Get presets for all elements.
     final presetProv = ref.read(presetProvider);
-    final presets = <Preset, int>{};
+    final presetsCount = Counter<Preset>();
     for (final element in data) {
       final preset = await presetProv.getPresetForTags(element.getFullTags(),
           locale: locale);
       if (preset != Preset.defaultPreset && !preset.isFixme)
-        presets[preset] = (presets[preset] ?? 0) + 1;
+        presetsCount.add(preset);
     }
 
     // Sort and return most common.
-    final presetsCount = presets.entries.toList();
-    presetsCount.sort((a, b) => b.value.compareTo(a.value));
-    return presetsCount.map((e) => e.key).take(count).toList();
+    return presetsCount.mostOccurentItems(count: count).toList();
   }
 
   /// Regular expression to match Japanese and Chinese hieroglyphs, to allow 1-char search strings for these.
   /// Taken from https://stackoverflow.com/a/43419070
-  final reCJK = RegExp('^[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]');
+  final reCJK = RegExp(
+      '^[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]');
 
   updatePresets(String substring) async {
     final mutex = DateTime.now().millisecondsSinceEpoch;
@@ -103,16 +103,25 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       final presetsToAdd = <Preset>[];
       presetsToAdd.addAll(ref.read(lastPresetsProvider).getPresets());
       // Add presets from around.
+      final presetsAround = <Preset>[];
       if (widget.location != null) {
-        final presetsAround = await _getPresetsAround(widget.location!);
-        for (final p in presetsAround)
-          if (!presetsToAdd.contains(p)) presetsToAdd.add(p);
+        final presetsAroundTmp = await _getPresetsAround(widget.location!);
+        for (final p in presetsAroundTmp)
+          if (!presetsToAdd.contains(p)) presetsAround.add(p);
       }
 
       // Keep 2 or 4 (or 0) added presets.
       for (final p in presetsToAdd) newPresets.remove(p);
-      if ((presetsToAdd.length + newPresets.length) % 2 != 0)
-        presetsToAdd.removeAt(presetsToAdd.length - 1);
+      if ((presetsToAdd.length + presetsAround.length) % 2 != 0) {
+        if (presetsAround.isNotEmpty)
+          presetsAround.removeLast();
+        else if (presetsToAdd.length > 2)
+          presetsToAdd.removeLast();
+      }
+      presetsToAdd.addAll(presetsAround);
+
+      // Filter newPresets and check that we add no more than 4 items.
+      newPresets.removeWhere((p) => !newPresets.contains(p));
       if (presetsToAdd.length + newPresets.length - defaultList.length > 4)
         presetsToAdd.removeRange(4, presetsToAdd.length);
 

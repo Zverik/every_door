@@ -58,6 +58,10 @@ dependency_overrides:
     git:
       url: https://github.com/Zverik/flutter_dropdown_alert.git
       ref: master
+  proximity_hash:
+    git:
+      url: https://github.com/Zverik/proximity_hash.git
+      ref: master
 # Uncomment this for publishing on F-Droid
 #f  geolocator_android:
 #f    git:
