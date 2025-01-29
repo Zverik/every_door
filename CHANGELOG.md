@@ -2,7 +2,7 @@
 
 ## 5.4
 
-_Unreleased_
+_Released on 2025-01-29_
 
 * Fixed conflict processing on way uploads.
 * Enabled overzoom for Esri tiles.
@@ -12,6 +12,7 @@ _Unreleased_
 * Fixed missing recently used presets when adding a thing.
 * Added cadastre imagery layers.
 * Updated presets and imagery layers.
+* New supported languages: Hebrew (thanks Yaron Shahrabani) and Tamil (thanks TamilNeram).
 
 ## 5.3
 
