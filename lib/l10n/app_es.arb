@@ -262,7 +262,7 @@
   "@changesPending": {
     "description": "Subtitle for a change that has not yet been sent to OSM API."
   },
-  "fieldFloorLevelDesc": "Número de planta a partir de 0 para la planta baja",
+  "fieldFloorLevelDesc": "Número de piso a partir de 0 para la planta baja",
   "@fieldFloorLevelDesc": {
     "description": "Description for the \"addr:floor\" tag."
   },
@@ -340,11 +340,11 @@
   "@fieldCheckboxNo": {
     "description": "Checkbox name for no."
   },
-  "fieldFloorFloorDesc": "La planta como indica en la navegación y en ascensores/elevadores",
+  "fieldFloorFloorDesc": "Piso como indica en la navegación y en ascensores/elevadores",
   "@fieldFloorFloorDesc": {
     "descripton": "Description for the \"level\" tag."
   },
-  "fieldFloorShouldBeNumber": "Ingresa un número",
+  "fieldFloorShouldBeNumber": "Por favor ingresa un número",
   "@fieldFloorShouldBeNumber": {
     "description": "Validation message for a levels tag, also used in building levels form."
   },
@@ -737,7 +737,7 @@
   "@loadingTooMuchDataTitle": {
     "description": "Title for a warning alert when there's too much data downloaded."
   },
-  "loadingTooMuchData": "Purgar los datos descargados desde los ajustes, para acelerar el editor.",
+  "loadingTooMuchData": "Purgar los datos descargados desde Configuraciones, para acelerar el editor.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
   },
@@ -792,7 +792,7 @@
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
   },
-  "changesSwipeLeft": "Desliza el dedo hacia la izquierda para deshacer un cambio",
+  "changesSwipeLeft": "Desliza hacia la izquierda para deshacer un cambio",
   "@changesSwipeLeft": {
     "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
   },
@@ -846,7 +846,7 @@
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Si tu teclado numérico no puede cambiarse a uno completo, comprueba los ajustes de la aplicación. Están detrás del botón de la esquina superior izquierda. Activa allí el «teclado numérico ampliado».",
   "@faqLettersContent": {},
-  "faqTaggingContent": "¿Por qué falta un objeto en el editor? ¿Cuándo se muestran estos puntos blancos en el modo de «micromapping»? ¿Cómo se ordenan los objetos?\n\nLas respuestas a todas estas preguntas están en [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Esto es lo que puedes mirar:\n\n* El orden de las claves para la etiqueta principal — lista «kMainKeys».\n* Qué objetos se descargan — función «isGoodTags».\n* Qué se considera un servicio — función «isAmenityTags».\n* Qué puntos se ajustan a qué formas — función «detectSnap».\n* Cuando un objeto de micromapping está incompleto — función «needsMoreInfo».",
+  "faqTaggingContent": "¿Por qué falta un objeto en el editor? ¿Cuándo se muestran estos puntos blancos en el modo de «micromapping»? ¿Cómo se ordenan los objetos?\n\nLas respuestas a todas estas preguntas están en [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Esto es lo que puedes mirar:\n\n* El orden de las claves para la etiqueta principal — lista «kMainKeys».\n* Qué objetos se descargan — función «isGoodTags».\n* Qué se considera un servicio — función «isAmenityTags».\n* Qué puntos se ajustan a qué formas — función «detectSnap».\n* Cuando un objeto de micromapeo está incompleto — función «needsMoreInfo».",
   "@faqTaggingContent": {},
   "versionsEnableInternet": "Conectarse a Internet para obtener el historial de versiones",
   "@versionsEnableInternet": {
@@ -930,7 +930,7 @@
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
   },
-  "navPoiMode": "Modo de servicio",
+  "navPoiMode": "Modo de servicios",
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
@@ -1152,7 +1152,7 @@
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
   },
-  "fieldPaymentAround": "Opciones más comunes",
+  "fieldPaymentAround": "Opciones más comunes cercanas",
   "@fieldPaymentAround": {
     "description": "Tile name for payment options found on the map."
   },
@@ -1168,7 +1168,7 @@
   "@fieldPaymentUseGlobal": {
     "description": "Button to copy global default to local payment settings."
   },
-  "fieldPaymentUseSame": "Utilizar las mismas etiquetas para el mapeado",
+  "fieldPaymentUseSame": "Utilizar las mismas etiquetas para el mapeo",
   "@fieldPaymentUseSame": {
     "description": "Button title for copying payment options around to the local settings."
   },
@@ -1184,7 +1184,7 @@
   "@fieldPaymentChoose": {
     "description": "Button title for setting up different local payment options."
   },
-  "fieldNameLangSearch": "Buscar el idioma",
+  "fieldNameLangSearch": "Buscar idioma",
   "@fieldNameLangSearch": {
     "description": "Hint for the text field for finding a language in a list."
   },
@@ -1234,7 +1234,7 @@
   "@drawCycleway": {
     "description": "Tool description: segregated cycleway. Keep it short."
   },
-  "drawCyclewayShared": "Carril bici",
+  "drawCyclewayShared": "Carril bici compartido",
   "@drawCyclewayShared": {
     "description": "Tool description: non-segregated cycleway. Keep it short."
   },
@@ -1258,7 +1258,7 @@
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
   },
-  "editorDeleteKeepAddressButton": "Eliminar, pero conservar la dirección",
+  "editorDeleteKeepAddressButton": "Borrar, pero conservar la dirección",
   "@editorDeleteKeepAddressButton": {
     "description": "Button for keeping the address"
   },
