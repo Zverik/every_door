@@ -10,19 +10,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PhonePresetField extends PresetField {
-  PhonePresetField(
-      {required super.key,
-      required super.label,
-      super.prerequisite})
-      : super(
-            icon: Icons.phone);
+  PhonePresetField({
+    required String key,
+    required super.label,
+    super.prerequisite,
+  }) : super(
+          key: key.replaceFirst('contact:', ''),
+          icon: Icons.phone,
+        );
 
   @override
   Widget buildWidget(OsmChange element) => PhoneInputField(this, element);
 
   @override
   bool hasRelevantKey(Map<String, String> tags) =>
-      tags.containsKey('phone') || tags.containsKey('contact:phone');
+      tags.containsKey(key) || tags.containsKey('contact:$key');
 }
 
 class PhoneInputField extends ConsumerStatefulWidget {
@@ -42,6 +44,8 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
   late final String? countryIso;
   late final String phoneTag;
 
+  String get _key => widget.field.key;
+
   @override
   void initState() {
     super.initState();
@@ -53,7 +57,7 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
       }
     });
 
-    numbers = (widget.element.getContact('phone') ?? '')
+    numbers = (widget.element.getContact(_key) ?? '')
         .split(';')
         .map((e) => e.trim())
         .where((element) => element.isNotEmpty)
@@ -65,8 +69,8 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
     );
 
     phoneTag = ref.read(editorSettingsProvider).preferContact
-        ? 'contact:phone'
-        : 'phone';
+        ? 'contact:$_key'
+        : _key;
   }
 
   @override

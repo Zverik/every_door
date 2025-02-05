@@ -437,6 +437,8 @@ class SpecificDays extends DaysRange {
     return result;
   }
 
+  String _pad2(int n) => n.toString().padLeft(2, '0');
+
   String makeDatePart(List<Date> interval) {
     const kMonths = [
       'Jan',
@@ -454,15 +456,15 @@ class SpecificDays extends DaysRange {
     ];
 
     final firstStr =
-        '${kMonths[interval.first.month - 1]} ${interval.first.day}';
+        '${kMonths[interval.first.month - 1]} ${_pad2(interval.first.day)}';
     if (interval.last == interval.first) {
       return firstStr;
     } else {
       if (interval.last.month == interval.first.month) {
-        return '$firstStr-${interval.last.day}';
+        return '$firstStr-${_pad2(interval.last.day)}';
       } else {
         final lastStr =
-            '${kMonths[interval.last.month - 1]} ${interval.last.day}';
+            '${kMonths[interval.last.month - 1]} ${_pad2(interval.last.day)}';
         return '$firstStr-$lastStr';
       }
     }

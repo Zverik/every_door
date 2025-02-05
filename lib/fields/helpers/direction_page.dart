@@ -149,7 +149,6 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
                   InteractionOptions(flags: InteractiveFlag.none),
             ),
             children: [
-              AttributionWidget(imagery),
               TileLayer(
                 urlTemplate: tileLayer.urlTemplate,
                 wmsOptions: tileLayer.wmsOptions,
@@ -164,6 +163,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
                 userAgentPackageName: tileLayer.userAgentPackageName,
                 reset: tileResetController.stream,
               ),
+              AttributionWidget(imagery),
               LocationMarkerWidget(tracking: false),
               if (direction == null)
                 MarkerLayer(
