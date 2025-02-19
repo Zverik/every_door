@@ -1,10 +1,10 @@
 import 'package:every_door/helpers/counter.dart';
-import 'package:every_door/helpers/equirectangular.dart';
-import 'package:every_door/helpers/circle_bounds.dart';
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
+import 'package:every_door/helpers/geometry/circle_bounds.dart';
+import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/helpers/location_object.dart';
 import 'package:every_door/helpers/normalizer.dart';
-import 'package:every_door/helpers/payment_tags.dart';
+import 'package:every_door/helpers/tags/payment_tags.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/floor.dart';
 import 'package:every_door/models/osm_element.dart';
@@ -498,7 +498,7 @@ class OsmDataHelper extends ChangeNotifier {
   }
 
   Future<OsmChange?> findPossibleDuplicate(OsmChange amenity) async {
-    final mainKey = getMainKey(amenity.getFullTags());
+    final mainKey = clearPrefixNull(amenity.mainKey);
     if (mainKey == null) return null;
 
     final database = await _ref.read(databaseProvider).database;

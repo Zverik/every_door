@@ -1,5 +1,5 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
 import 'package:every_door/providers/changes.dart';

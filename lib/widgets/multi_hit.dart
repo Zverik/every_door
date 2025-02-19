@@ -1,7 +1,10 @@
-import 'dart:math' show Point;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+
+extension OffsetExtension on Offset {
+  /// returns new [Offset] where roundToDouble() is called on [dx] and [dy] independently
+  Offset round() => Offset(dx.roundToDouble(), dy.roundToDouble());
+}
 
 class MultiHitMarkerLayer extends StatelessWidget {
   final List<Marker> markers;
@@ -18,7 +21,7 @@ class MultiHitMarkerLayer extends StatelessWidget {
       var marker = markers[i];
 
       // Decide whether to use cached point or calculate it
-      var pxPoint = camera.project(marker.point).round();
+      var pxPoint = camera.projectAtZoom(marker.point).round();
 
       // Resolve real alignment
       const alignment = Alignment.center;
@@ -28,10 +31,10 @@ class MultiHitMarkerLayer extends StatelessWidget {
       final bottom = marker.height - top;
 
       // Cull if out of bounds
-      if (!camera.pixelBounds.containsPartialBounds(
-        Bounds(
-          Point(pxPoint.x + left, pxPoint.y - bottom),
-          Point(pxPoint.x - right, pxPoint.y + top),
+      if (!camera.pixelBounds.overlaps(
+        Rect.fromPoints(
+          Offset(pxPoint.dx + left, pxPoint.dy - bottom),
+          Offset(pxPoint.dx - right, pxPoint.dy + top),
         ),
       )) continue;
 
@@ -56,8 +59,8 @@ class MultiHitMarkerLayer extends StatelessWidget {
           key: marker.key,
           width: marker.width,
           height: marker.height,
-          left: pos.x - right,
-          top: pos.y - bottom,
+          left: pos.dx - right,
+          top: pos.dy - bottom,
           child: rotatedChild,
         ),
       );

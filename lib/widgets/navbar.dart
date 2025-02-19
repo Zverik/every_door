@@ -13,9 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BrowserNavigationBar extends ConsumerWidget {
-  final Function(BuildContext) downloadAmenities;
-
-  const BrowserNavigationBar({super.key, required this.downloadAmenities});
+  const BrowserNavigationBar({super.key});
 
   Future<bool> _showChangesetPane(BuildContext context) async {
     final result = await showModalBottomSheet(
@@ -44,7 +42,7 @@ class BrowserNavigationBar extends ConsumerWidget {
         onPressed: apiStatus != ApiStatus.idle
             ? null
             : () {
-                downloadAmenities(context);
+                ref.read(uploaderProvider).download(context);
               },
         icon: Icon(Icons.download),
         tooltip: loc.navDownload,
@@ -81,7 +79,7 @@ class BrowserNavigationBar extends ConsumerWidget {
         ]),
         tooltip: loc.navUpload,
         color: Colors.yellow,
-        disabledColor: Colors.yellow.withOpacity(0.2),
+        disabledColor: Colors.yellow.withValues(alpha: 0.2),
       );
     }
 
@@ -99,18 +97,11 @@ class BrowserNavigationBar extends ConsumerWidget {
       color: Colors.white70,
     );
 
-    const kEditorModes = [
-      EditorMode.micromapping,
-      EditorMode.poi,
-      EditorMode.entrances,
-      EditorMode.notes,
-    ];
-
     final editorModeTooltips = {
-      EditorMode.micromapping: loc.navMicromappingMode,
-      EditorMode.poi: loc.navPoiMode,
-      EditorMode.entrances: loc.navEntrancesMode,
-      EditorMode.notes: loc.navNotesMode,
+      "micro": loc.navMicromappingMode,
+      "amenity": loc.navPoiMode,
+      "entrances": loc.navEntrancesMode,
+      "notes": loc.navNotesMode,
     };
 
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
@@ -128,15 +119,15 @@ class BrowserNavigationBar extends ConsumerWidget {
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               children: [
-                for (final mode in kEditorModes)
+                for (final mode
+                    in ref.read(editorModeProvider.notifier).modes())
                   IconButton(
-                    icon: Icon(editorMode == mode
-                        ? kEditorModeIcons[mode]!
-                        : kEditorModeIconsOutlined[mode]!),
-                    tooltip: editorModeTooltips[mode],
+                    // TODO: does it work with MultiIcon?
+                    icon: (editorMode == mode ? mode.icon : mode.iconOutlined).getWidget(),
+                    tooltip: editorModeTooltips[mode.name],
                     color: editorMode == mode ? Colors.yellow : Colors.white70,
                     onPressed: () {
-                      ref.read(editorModeProvider.notifier).set(mode);
+                      ref.read(editorModeProvider.notifier).set(mode.name);
                     },
                   ),
               ],

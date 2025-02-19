@@ -1,5 +1,5 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -44,8 +44,7 @@ String? getWarningForAmenity(OsmChange amenity, AppLocalizations loc) {
     return loc.warningFixme(fixmeValue);
   }
 
-  final tags = amenity.getFullTags(true);
-  final mainKey = getMainKey(tags);
+  final mainKey = amenity.mainKey;
   if (mainKey != null &&
       _kTagsWithoutYesValue.contains(mainKey) &&
       amenity[mainKey] == 'yes') {
@@ -55,11 +54,11 @@ String? getWarningForAmenity(OsmChange amenity, AppLocalizations loc) {
   final int ageInDays = DateTime.now()
       .difference(amenity.element?.timestamp ?? DateTime.now())
       .inDays;
-  if (isAmenityTags(tags) && ageInDays >= kOldAmenityWarning && amenity.isOld) {
+  if (ElementKind.amenity.matchesChange(amenity) && ageInDays >= kOldAmenityWarning && amenity.isOld) {
     return loc.warningTooOld(loc.years((ageInDays / 365).round()));
   }
 
-  if (!isGoodTags(tags)) {
+  if (!ElementKind.everything.matchesChange(amenity)) {
     return loc.warningUnsupported;
   }
 

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/equirectangular.dart';
-import 'package:every_door/helpers/good_tags.dart';
-import 'package:every_door/helpers/poi_warnings.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
+import 'package:every_door/helpers/tags/poi_warnings.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -44,8 +44,8 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
   }
 
   startDuplicateSearch() {
-    if (!widget.amenity.isNew || !isAmenityTags(widget.amenity.getFullTags()))
-      return;
+    final isAmenity = ElementKind.amenity.matchesChange(widget.amenity);
+    if (!widget.amenity.isNew || !isAmenity) return;
     possibleDuplicate = null;
     if (duplicateTimer != null) {
       duplicateTimer?.cancel();
@@ -65,10 +65,11 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
   }
 
   bool isWrongMode() {
-    final isAmenity = isAmenityTags(widget.amenity.getFullTags(true));
+    final isAmenity = ElementKind.amenity.matchesChange(widget.amenity);
+    // This is a hack, and it might fail in some cases of redefined modes.
     final mode = ref.read(editorModeProvider);
-    return (isAmenity && mode == EditorMode.micromapping) ||
-        (!isAmenity && mode == EditorMode.poi);
+    return (isAmenity && mode.name == "micro") ||
+        (!isAmenity && mode.name == "amenity");
   }
 
   onAmenityChange() {

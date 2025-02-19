@@ -1,6 +1,7 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/geometry.dart';
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/geometry/geometry.dart';
+import 'package:every_door/helpers/tags/snap_tags.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:proximity_hash/geohash.dart';
 import 'dart:convert';
@@ -271,9 +272,7 @@ class OsmElement {
   bool get isObsolete =>
       downloaded != null &&
       DateTime.now().difference(downloaded!) > kObsoleteData;
-  bool get isAmenity => isAmenityTags(tags);
-  bool get isMicro => isMicroTags(tags);
-  bool get isGood => isGoodTags(tags);
+  bool get isGood => ElementKind.everything.matchesTags(tags);
   bool get isSnapTarget =>
       id.type == OsmElementType.way && isSnapTargetTags(tags);
   bool get isGeometryValid =>

@@ -1,26 +1,21 @@
-import 'dart:async';
-
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
-import 'package:every_door/helpers/geometry.dart';
-import 'package:every_door/helpers/tile_layers.dart';
+import 'package:every_door/helpers/geometry/geometry.dart';
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/editor_settings.dart';
-import 'package:every_door/providers/geolocation.dart';
-import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/editor/note.dart';
-import 'package:every_door/screens/settings.dart';
-import 'package:every_door/widgets/loc_marker.dart';
+import 'package:every_door/screens/modes/definitions/notes.dart';
+import 'package:every_door/widgets/area_status.dart';
+import 'package:every_door/widgets/map.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:every_door/widgets/painter.dart';
 import 'package:every_door/widgets/status_pane.dart';
 import 'package:every_door/widgets/style_chooser.dart';
-import 'package:every_door/widgets/track_button.dart';
-import 'package:every_door/widgets/walkpath.dart';
-import 'package:every_door/widgets/zoom_buttons.dart';
+import 'package:every_door/widgets/map_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,36 +23,25 @@ import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotesPane extends ConsumerStatefulWidget {
-  final Widget? areaStatusPanel;
+  final NotesModeDefinition def;
 
-  const NotesPane({super.key, this.areaStatusPanel});
+  const NotesPane(this.def, {super.key});
 
   @override
   ConsumerState<NotesPane> createState() => _NotesPaneState();
 }
 
 class _NotesPaneState extends ConsumerState<NotesPane> {
-  static const kEnablePainter = true;
-
   List<BaseNote> _notes = [];
-  final controller = MapController();
-  final _mapKey = GlobalKey();
-  late final StreamSubscription<MapEvent> mapSub;
-  LatLng? newLocation;
+  final _controller = CustomMapController();
+  LatLng? _newLocation;
 
   @override
   initState() {
     super.initState();
-    mapSub = controller.mapEventStream.listen(onMapEvent);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateNotes();
     });
-  }
-
-  @override
-  void dispose() {
-    mapSub.cancel();
-    super.dispose();
   }
 
   recordMapMove(MapCamera camera) {
@@ -65,17 +49,11 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     ref.read(zoomProvider.notifier).state = camera.zoom;
   }
 
-  onMapEvent(MapEvent event) {
-    bool fromController = event.source == MapEventSource.mapController ||
-        event.source == MapEventSource.nonRotatedSizeChange;
-    if (event is MapEventMoveEnd && !fromController) {
-      recordMapMove(event.camera);
-    }
-  }
-
   updateNotes() async {
-    final notes = await ref.read(notesProvider).fetchAllNotes(
-        center: controller.camera.center, radius: kNotesVisibilityRadius);
+    final location = ref.read(effectiveLocationProvider);
+    final notes = await ref
+        .read(notesProvider)
+        .fetchAllNotes(center: location, radius: kNotesVisibilityRadius);
     // .fetchAllNotes(bounds: controller.camera.visibleBounds);
     if (!mounted) return;
     setState(() {
@@ -88,7 +66,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
 
     if (location != null) {
       setState(() {
-        newLocation = location;
+        _newLocation = location;
       });
     }
     await showModalBottomSheet(
@@ -102,103 +80,74 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
       ),
     );
     setState(() {
-      newLocation = null;
+      _newLocation = null;
     });
   }
 
-  List<BaseNote> findMarkerUnderTap(LatLng location) {
-    final locationPx = controller.camera.latLngToScreenPoint(location);
-    distanceToLocation(LatLng loc2) {
-      return locationPx.distanceTo(controller.camera.latLngToScreenPoint(loc2));
-    }
-
+  List<BaseNote> findClosestNotes(
+      LatLng location, double Function(LatLng) distance) {
     const kMaxTapDistance = 30;
+    final camera = _controller.mapController!.camera;
     final closestNotes = _notes
-        .where(
-            (note) => controller.camera.visibleBounds.contains(note.location))
-        .where((note) => distanceToLocation(note.location) <= kMaxTapDistance)
+        .where((note) => camera.visibleBounds.contains(note.location))
+        .where((note) => distance(note.location) <= kMaxTapDistance)
         .toList();
 
-    closestNotes.sort((a, b) => distanceToLocation(a.location)
-        .compareTo(distanceToLocation(b.location)));
+    closestNotes
+        .sort((a, b) => distance(a.location).compareTo(distance(b.location)));
+
     return closestNotes;
   }
 
   @override
   Widget build(BuildContext context) {
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
-    final tileLayer = TileLayerOptions(ref.watch(selectedImageryProvider));
     final currentTool = ref.watch(currentPaintToolProvider);
     final locked = ref.watch(drawingLockedProvider);
-    ref.watch(geolocationProvider); // not using, but it triggers repaints
     final loc = AppLocalizations.of(context)!;
 
-    // Rotate the map according to the global rotation value.
-    ref.listen(rotationProvider, (_, double newValue) {
-      if ((newValue - controller.camera.rotation).abs() >= 1.0)
-        controller.rotate(newValue);
-    });
-
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
-      controller.move(next, controller.camera.zoom);
       updateNotes();
     });
     ref.listen(notesProvider, (_, next) {
       updateNotes();
     });
-    EdgeInsets safePadding = MediaQuery.of(context).padding;
-    min(double a, double b) => a < b ? a : b;
 
     return Column(
       children: [
         Expanded(
           child: Stack(
             children: [
-              FlutterMap(
-                key: _mapKey,
-                mapController: controller,
-                options: MapOptions(
-                  initialCenter: ref.read(effectiveLocationProvider),
-                  minZoom: kEditMinZoom,
-                  maxZoom: kEditMaxZoom,
-                  initialZoom: ref.watch(zoomProvider),
-                  initialRotation: ref.watch(rotationProvider),
-                  interactionOptions: InteractionOptions(
-                    flags: InteractiveFlag.all -
-                        InteractiveFlag.flingAnimation -
-                        InteractiveFlag.rotate,
-                    rotationThreshold: kRotationThreshold,
-                  ),
-                  onTap: !locked
-                      ? null
-                      : (position, ll) {
-                          final markers = findMarkerUnderTap(ll);
-                          for (final note in markers) {
-                            if (note is OsmNote ||
-                                (note is MapNote && note.isNew)) {
-                              _openNoteEditor(note);
-                              break;
-                            }
+              CustomMap(
+                controller: _controller,
+                onTap: !locked
+                    ? null
+                    : (ll, dist) {
+                        final notes = findClosestNotes(ll, dist);
+                        for (final note in notes) {
+                          if (note is OsmNote ||
+                              (note is MapNote && note.isNew)) {
+                            _openNoteEditor(note);
+                            break;
                           }
-                        },
-                ),
-                children: [
-                  TileLayer(
-                    urlTemplate: tileLayer.urlTemplate,
-                    wmsOptions: tileLayer.wmsOptions,
-                    tileProvider: tileLayer.tileProvider,
-                    minNativeZoom: tileLayer.minNativeZoom,
-                    maxNativeZoom: tileLayer.maxNativeZoom,
-                    maxZoom: tileLayer.maxZoom,
-                    tileSize: tileLayer.tileSize,
-                    tms: tileLayer.tms,
-                    subdomains: tileLayer.subdomains,
-                    additionalOptions: tileLayer.additionalOptions,
-                    userAgentPackageName: tileLayer.userAgentPackageName,
-                    reset: tileResetController.stream,
-                  ),
-                  WalkPathPolyline(),
-                  LocationMarkerWidget(tracking: false),
+                        }
+                      },
+                drawPinMarker: false,
+                faintWalkPath: false,
+                drawStandardButtons: locked,
+                drawZoomButtons: locked,
+                updateState: true,
+                layers: [
+                  if (_newLocation != null)
+                    CircleLayer(
+                      circles: [
+                        CircleMarker(
+                          point: _newLocation!,
+                          radius: 5.0,
+                          color: Colors.red,
+                        ),
+                      ],
+                    ),
                   PolylineLayer(
                     polylines: [
                       for (final drawing in _notes.whereType<MapDrawing>())
@@ -220,8 +169,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         point: osmNote.location,
                         radius: 15.0,
                         color: osmNote.isChanged
-                            ? Colors.yellow.withOpacity(0.8)
-                            : Colors.white.withOpacity(0.8),
+                            ? Colors.yellow.withValues(alpha: 0.8)
+                            : Colors.white.withValues(alpha: 0.8),
                         borderColor: Colors.black,
                         borderStrokeWidth: 1.0,
                       ),
@@ -229,7 +178,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       CircleMarker(
                         point: mapNote.location,
                         radius: 6.0,
-                        color: Colors.lightBlueAccent.withOpacity(0.8),
+                        color: Colors.lightBlueAccent.withValues(alpha: 0.8),
                         borderColor: Colors.black,
                         borderStrokeWidth: 1.0,
                       ),
@@ -265,79 +214,25 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         ),
                     ],
                   ),
-                  if (locked) ...[
-                    OverlayButtonWidget(
-                      alignment: leftHand
-                          ? Alignment.bottomRight
-                          : Alignment.bottomLeft,
-                      safeBottom: true,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 24.0,
-                      ),
-                      onPressed: () {
-                        ref.read(drawingLockedProvider.notifier).state = false;
-                      },
-                      icon: kStyleIcons[currentTool] ?? Icons.lock_open,
-                    ),
-                    OverlayButtonWidget(
-                      alignment:
-                          leftHand ? Alignment.topRight : Alignment.topLeft,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 0.0,
-                        vertical: 10.0,
-                      ),
-                      icon: Icons.menu,
-                      tooltip: loc.mapSettings,
-                      safeRight: true,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsPage()),
-                        );
-                      },
-                    ),
-                    // Tracking button
-                    OverlayButtonWidget(
-                      alignment:
-                          leftHand ? Alignment.topLeft : Alignment.topRight,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 0.0,
-                        vertical: 10.0,
-                      ),
-                      safeRight: true,
-                      icon: Icons.my_location,
-                      tooltip: loc.mapLocate,
-                      onPressed: () {
-                        // Jump to the current location.
-                        final LatLng location = ref.read(geolocationProvider) ??
-                            ref.read(effectiveLocationProvider);
-                        controller.move(location, controller.camera.zoom);
-                      },
-                      onLongPressed: () {
-                        if (ref.read(rotationProvider) != 0.0) {
-                          ref.read(rotationProvider.notifier).state = 0.0;
-                          controller.rotate(0.0);
-                        }
-                      },
-                    ),
-                    ZoomButtonsWidget(
-                      alignment: leftHand
-                          ? Alignment.bottomLeft
-                          : Alignment.bottomRight,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 0.0 +
-                            (leftHand ? safePadding.left : safePadding.right),
-                        vertical: 100.0,
-                      ),
-                    ),
-                  ]
                 ],
               ),
-              if (kEnablePainter && !locked) ...[
+              if (locked)
+                OverlayButtonWidget(
+                  alignment:
+                      leftHand ? Alignment.bottomRight : Alignment.bottomLeft,
+                  safeBottom: true,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 24.0,
+                  ),
+                  onPressed: () {
+                    ref.read(drawingLockedProvider.notifier).state = false;
+                  },
+                  icon: kStyleIcons[currentTool] ?? Icons.lock_open,
+                ),
+              if (!locked && _controller.mapController != null) ...[
                 PainterWidget(
-                  map: controller,
+                  map: _controller.mapController!,
                   onDrawn: (coords) {
                     if (currentTool == kToolEraser) {
                       final line = LineString(coords);
@@ -357,15 +252,18 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     }
                   },
                   onTap: (location) {
+                    final controller = _controller.mapController!;
                     final locationPx =
-                        controller.camera.latLngToScreenPoint(location);
-                    distanceToLocation(LatLng loc2) {
-                      return locationPx.distanceTo(
-                          controller.camera.latLngToScreenPoint(loc2));
+                        controller.camera.latLngToScreenOffset(location);
+                    double distanceToLocation(LatLng loc2) {
+                      return (locationPx -
+                              controller.camera.latLngToScreenOffset(loc2))
+                          .distance;
                     }
 
                     bool found = false;
-                    final closestNotes = findMarkerUnderTap(location);
+                    final closestNotes =
+                        findClosestNotes(location, distanceToLocation);
                     for (final note in closestNotes) {
                       if (note is OsmNote ||
                           (note is MapNote &&
@@ -402,7 +300,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     }
                   },
                   onMapMove: () {
-                    recordMapMove(controller.camera);
+                    recordMapMove(_controller.mapController!.camera);
                     updateNotes();
                   },
                   style:
@@ -432,21 +330,22 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   ),
               ],
               MapDragCreateButton(
-                mapKey: _mapKey,
-                map: controller,
-                icon: Icons.add,
-                tooltip: loc.notesAddNote,
+                map: _controller,
+                icon: MultiIcon(
+                  fontIcon: Icons.add,
+                  tooltip: loc.notesAddNote,
+                ),
                 alignment:
                     leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
                 onDragEnd: (pos) {
                   _openNoteEditor(null, pos);
                 },
                 onTap: () async {
+                  final location = ref.read(effectiveLocationProvider);
                   final pos = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          MapChooserPage(location: controller.camera.center),
+                      builder: (context) => MapChooserPage(location: location),
                     ),
                   );
                   if (pos != null) _openNoteEditor(null, pos);
@@ -456,7 +355,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
             ],
           ),
         ),
-        if (widget.areaStatusPanel != null) widget.areaStatusPanel!,
+        AreaStatusPanel(),
       ],
     );
   }

@@ -1,7 +1,8 @@
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:flutter/material.dart';
 
 class RoundButton extends StatelessWidget {
-  final IconData icon;
+  final MultiIcon icon;
   final String? tooltip;
   final Function()? onPressed;
   final bool small;
@@ -25,7 +26,7 @@ class RoundButton extends StatelessWidget {
           horizontal: 0.0,
           vertical: small ? 10.0 : 15.0,
         ),
-        child: Icon(icon, size: small ? 20.0 : 30.0),
+        child: icon.getWidget(size: small ? 20.0 : 30.0),
       ),
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
@@ -37,6 +38,8 @@ class RoundButton extends StatelessWidget {
       },
     );
 
-    return tooltip == null ? widget : Tooltip(message: tooltip, child: widget);
+    return tooltip == null && icon.tooltip == null
+        ? widget
+        : Tooltip(message: tooltip ?? icon.tooltip, child: widget);
   }
 }

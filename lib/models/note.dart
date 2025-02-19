@@ -1,6 +1,6 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
-import 'package:every_door/helpers/geometry.dart';
+import 'package:every_door/helpers/geometry/geometry.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:proximity_hash/geohash.dart';
 import 'dart:convert' show json;

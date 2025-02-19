@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/log_store.dart';
 import 'package:every_door/providers/language.dart';
 import 'package:flutter/foundation.dart';
@@ -26,6 +27,7 @@ void main() {
       FlutterError.presentError(details);
       logStore.addFromFlutter(details);
     };
+    ElementKind.reset();
     runApp(ProviderScope(child: const EveryDoorApp()));
   }, (error, stack) {
     logStore.addFromZone(error, stack);

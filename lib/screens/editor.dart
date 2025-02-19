@@ -4,8 +4,9 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/text.dart';
-import 'package:every_door/helpers/good_tags.dart';
-import 'package:every_door/helpers/pin_marker.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/tags/main_key.dart';
+import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
@@ -83,6 +84,15 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     setState(() {});
   }
 
+  /// Whether we should display address and floor fields in the editor.
+  bool needsAddress(Map<String, String> tags) {
+    final kind = ElementKind.match(tags);
+    if ({ElementKind.amenity, ElementKind.building, ElementKind.address}
+        .contains(kind)) return true;
+    const kAmenityLoc = {'atm', 'vending_machine', 'parcel_locker'};
+    return kAmenityLoc.contains(tags['amenity']);
+  }
+
   updatePreset(Locale locale, [bool detect = false]) async {
     await Future.delayed(Duration.zero); // to disconnect from initState
     final presets = ref.read(presetProvider);
@@ -139,8 +149,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           keyboardType: TextInputType.visiblePassword,
           capitalize: TextFieldCapitalize.all,
         );
-        final kind = amenity.kind;
-        if (kind == ElementKind.building || kind == ElementKind.address)
+        final postcodeFirst = ElementKind.matchChange(
+                amenity, [ElementKind.building, ElementKind.address]) !=
+            ElementKind.unknown;
+        if (postcodeFirst)
           preset!.fields.add(postcodeField);
         else {
           preset!.moreFields.insert(0, postcodeField);
@@ -192,7 +204,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   changeType() async {
-    final kind = amenity.kind;
+    final kind = ElementKind.matchChange(amenity);
     if (kind == ElementKind.building || kind == ElementKind.address) {
       return;
     }
@@ -226,7 +238,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   saveAndClose() {
     final fullTags = amenity.getFullTags();
     // Setting the mark automatically.
-    if (needsCheckDate(fullTags)) amenity.check();
+    if (ElementKind.needsCheck.matchesTags(fullTags)) amenity.check();
     // Remove opening_hours:signed if needed.
     amenity.removeOpeningHoursSigned();
     // Store the preset when an object was saved, to track used ones.
@@ -355,7 +367,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final preset = this.preset;
     final bool modified = widget.amenity == null || amenity != widget.amenity;
     final bool needsCheck = amenity.age >= kOldAmenityDaysEditor &&
-        needsCheckDate(amenity.getFullTags());
+        ElementKind.needsCheck.matchesChange(amenity);
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     final loc = AppLocalizations.of(context)!;
@@ -503,7 +515,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
   Widget buildTopButtons(context) {
     final loc = AppLocalizations.of(context)!;
-    final kind = amenity.kind;
+    final kind = ElementKind.matchChange(amenity);
 
     return Container(
       padding: EdgeInsets.only(right: 5.0),
@@ -616,7 +628,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                             SizedBox(width: 2.0),
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white.withValues(alpha: 0.7),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               padding: EdgeInsets.symmetric(

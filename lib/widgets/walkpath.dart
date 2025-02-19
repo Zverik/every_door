@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// A polyline for a [FlutterMap] that displays the recently
+/// walked path.
 class WalkPathPolyline extends ConsumerWidget {
   final bool faint;
 
@@ -11,6 +13,8 @@ class WalkPathPolyline extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final walkPath = ref.watch(pathProvider);
+
+    if (walkPath.isEmpty) return Container();
 
     return PolylineLayer(polylines: [
       Polyline(

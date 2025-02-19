@@ -1,4 +1,3 @@
-import 'package:every_door/helpers/good_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/presets.dart';
@@ -52,9 +51,7 @@ class LegendController extends StateNotifier<List<LegendItem>> {
   Future updateLegend(List<OsmChange> amenities, {Locale? locale}) async {
     // Considering amenities are listed closest to farthest
     // TODO: run simultaneously to speed this up
-    final typesMap = {
-      for (final a in amenities) a: await _getLabel(a.getFullTags(), locale)
-    };
+    final typesMap = {for (final a in amenities) a: await _getLabel(a, locale)};
 
     // Make a map for types, limited to the number of colours.
     bool haveExtra = false;
@@ -136,12 +133,13 @@ class LegendController extends StateNotifier<List<LegendItem>> {
     return usedList.map((e) => e.key).followedBy(neverUsedColors).toList();
   }
 
-  Future<String?> _getLabel(Map<String, String> tags, Locale? locale) async {
-    final preset =
-        await _ref.read(presetProvider).getPresetForTags(tags, locale: locale);
+  Future<String?> _getLabel(OsmChange change, Locale? locale) async {
+    final preset = await _ref
+        .read(presetProvider)
+        .getPresetForTags(change.getFullTags(true), locale: locale);
     if (preset != Preset.defaultPreset) return preset.name;
-    final k = getMainKey(tags);
-    return k == null ? null : '$k = ${tags[k]}';
+    final k = change.mainKey;
+    return k == null ? null : '$k = ${change[k]}';
   }
 
   LegendItem? getLegendItem(OsmChange amenity) =>

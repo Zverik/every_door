@@ -1,6 +1,6 @@
 import 'dart:math' show sqrt, pow;
 
-import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 

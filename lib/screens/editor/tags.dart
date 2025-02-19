@@ -1,5 +1,5 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/common_keys.dart';
+import 'package:every_door/helpers/tags/common_keys.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter/material.dart';

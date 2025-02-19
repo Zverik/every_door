@@ -1,4 +1,4 @@
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +8,7 @@ final lastPresetsProvider = Provider((ref) => LastPresetsProvider(ref));
 class LastPresetsProvider {
   final Ref _ref;
   // I could use queue, but it does not have .indexOf().
-  final Map<EditorMode, List<Preset>> _lastPresets = {};
+  final Map<String, List<Preset>> _lastPresets = {};
   final Map<String, Map<String, String>> _lastTags = {};
 
   static const kMaxLastPresets = 3;
@@ -18,8 +18,9 @@ class LastPresetsProvider {
   registerPreset(Preset preset, Map<String, String> tags,
       {bool justTags = false}) {
     final mode = _ref.read(editorModeProvider);
-    if (!_lastPresets.containsKey(mode)) _lastPresets[mode] = <Preset>[];
-    final list = _lastPresets[mode]!;
+    if (!_lastPresets.containsKey(mode.name))
+      _lastPresets[mode.name] = <Preset>[];
+    final list = _lastPresets[mode.name]!;
 
     // Push the preset to the top and trim the list.
     final pos = list.indexOf(preset);
@@ -34,7 +35,7 @@ class LastPresetsProvider {
     }
 
     // Store tags, removing useless things.
-    if (!isAmenityTags(tags)) {
+    if (ElementKind.micro.matchesTags(tags)) {
       final Map<String, String> newTags = {};
       const kDeleteKeys = {
         'check_date',
@@ -61,7 +62,7 @@ class LastPresetsProvider {
 
   List<Preset> getPresets() {
     final mode = _ref.read(editorModeProvider);
-    return _lastPresets[mode] ?? const [];
+    return _lastPresets[mode.name] ?? const [];
   }
 
   Map<String, String>? getTagsForPreset(Preset preset) => _lastTags[preset.id];

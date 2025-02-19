@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/api_status.dart';
@@ -104,29 +104,18 @@ class _ChangeListPageState extends ConsumerState {
     tmpFile.delete();
   }
 
-  IconData getTypeIcon(ElementKind kind) {
-    switch (kind) {
-      case ElementKind.amenity:
-        return Icons.shopping_cart;
-      case ElementKind.micro:
-        return Icons.park;
-      case ElementKind.building:
-        return Icons.home;
-      case ElementKind.entrance:
-        return Icons.door_front_door;
-      default:
-        return Icons.question_mark;
-    }
-  }
-
   buildChangesList() async {
     final loc = AppLocalizations.of(context)!;
     final changes = ref.read(changesProvider);
     final changesList = changes.all();
     changesList.sort((a, b) => b.updated.compareTo(a.updated));
 
-    final items = changesList.map((c) =>
-        ChangeItem(change: c, icon: getTypeIcon(c.kind), title: c.typeAndName));
+    final items = changesList.map((c) => ChangeItem(
+          change: c,
+          icon:
+              ElementKind.matchChange(c).icon?.fontIcon ?? Icons.question_mark,
+          title: c.typeAndName,
+        ));
 
     final notes = ref.read(notesProvider);
     final noteList = await notes.fetchChanges();
@@ -242,7 +231,8 @@ class _ChangeListPageState extends ConsumerState {
                                   if (change.change != null) {
                                     await chProvider.saveChange(change.change!);
                                   } else if (change.note != null) {
-                                    await nProvider.clearChanges(note: change.note!);
+                                    await nProvider.clearChanges(
+                                        note: change.note!);
                                   }
                                   buildChangesList();
                                 },

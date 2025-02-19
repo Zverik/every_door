@@ -1,5 +1,5 @@
-import 'package:every_door/helpers/good_tags.dart';
-import 'package:every_door/helpers/poi_warnings.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/tags/poi_warnings.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -44,7 +44,7 @@ class PoiTile extends ConsumerWidget {
   }
 
   String buildMissing(WidgetRef ref) {
-    if (!isAmenityTags(amenity.getFullTags())) return '';
+    if (!ElementKind.amenity.matchesChange(amenity)) return '';
 
     List<String> missing = [];
     if (amenity['opening_hours'] == null) missing.add(PoiIcons.hours);
@@ -64,7 +64,7 @@ class PoiTile extends ConsumerWidget {
   }
 
   String buildPresent() {
-    if (!isAmenityTags(amenity.getFullTags())) return '';
+    if (!ElementKind.amenity.matchesChange(amenity)) return '';
 
     List<String> present = [];
     if (amenity.acceptsCards)
@@ -101,6 +101,7 @@ class PoiTile extends ConsumerWidget {
         (showWarning ? PoiIcons.warning : '') +
         amenity.typeAndName;
     final missing = buildMissing(ref);
+    final needsCheckDate = ElementKind.needsCheck.matchesChange(amenity);
 
     return Container(
       decoration: BoxDecoration(
@@ -115,7 +116,7 @@ class PoiTile extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (onToggleCheck != null && needsCheckDate(amenity.getFullTags()))
+            if (onToggleCheck != null && needsCheckDate)
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: amenity.wasOld ? onToggleCheck : null,

@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
-import 'package:every_door/helpers/geometry.dart';
-import 'package:every_door/helpers/simplify.dart';
+import 'package:every_door/helpers/geometry/geometry.dart';
+import 'package:every_door/helpers/geometry/simplify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -39,7 +39,7 @@ class _PainterWidgetState extends State<PainterWidget> {
   static final _logger = Logger('PainterWidget');
 
   LatLng _coordFromOffset(Offset offset) =>
-      widget.map.camera.pointToLatLng(math.Point(offset.dx, offset.dy));
+      widget.map.camera.offsetToCrs(offset);
 
   void _stopDrawing() {
     if (drawing || _offsets.isNotEmpty) {
@@ -149,16 +149,16 @@ class _PainterWidgetState extends State<PainterWidget> {
     double zoomAfterPinchZoom,
   ) {
     final camera = widget.map.camera;
-    final oldCenterPt = camera.project(camera.center, zoomAfterPinchZoom);
+    final oldCenterPt = camera.projectAtZoom(camera.center, zoomAfterPinchZoom);
     final newFocalLatLong =
         camera.offsetToCrs(_focalStartLocal, zoomAfterPinchZoom);
-    final newFocalPt = camera.project(newFocalLatLong, zoomAfterPinchZoom);
-    final oldFocalPt = camera.project(_focalStartLatLng, zoomAfterPinchZoom);
+    final newFocalPt = camera.projectAtZoom(newFocalLatLong, zoomAfterPinchZoom);
+    final oldFocalPt = camera.projectAtZoom(_focalStartLatLng, zoomAfterPinchZoom);
     final zoomDifference = oldFocalPt - newFocalPt;
     final moveDifference = _rotateOffset(_focalStartLocal - _lastFocalLocal);
 
-    final newCenterPt = oldCenterPt + zoomDifference + moveDifference.toPoint();
-    return camera.unproject(newCenterPt, zoomAfterPinchZoom);
+    final newCenterPt = oldCenterPt + zoomDifference + moveDifference;
+    return camera.unprojectAtZoom(newCenterPt, zoomAfterPinchZoom);
   }
 
   Offset _rotateOffset(Offset offset) {

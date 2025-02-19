@@ -1,5 +1,6 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/round_button.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,15 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
   bool isOpen = false;
   bool isDragging = false;
 
+  static const kDrawingTools = [
+    // bottom to top, left to right, 2 columns
+    'road', 'track',
+    'footway', 'path',
+    'cycleway', 'power',
+    'wall', 'fence',
+    'stream', 'culvert',
+  ];
+
   selectTool(String tool) {
     widget.onChange(tool);
     setState(() {
@@ -50,7 +60,8 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
 
     // For the panel determine the global bottom padding.
     final gpb = context.globalPaintBounds ?? Rect.zero;
-    final paddingBottom = gpb.isEmpty ? 50.0 : MediaQuery.of(context).size.height - gpb.bottom;
+    final paddingBottom =
+        gpb.isEmpty ? 50.0 : MediaQuery.of(context).size.height - gpb.bottom;
 
     return Align(
       alignment: widget.alignment,
@@ -103,7 +114,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                                   },
                                 );
                               },
-                              onAccept: (data) {
+                              onAcceptWithDetails: (details) {
                                 selectTool(tool);
                               },
                             ),
@@ -117,7 +128,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                         children: [
                           if (widget.onLock != null && !isDragging)
                             RoundButton(
-                              icon: Icons.lock,
+                              icon: MultiIcon(fontIcon: Icons.lock),
                               foreground: Colors.grey,
                               background: Colors.white,
                               onPressed: () {
@@ -133,8 +144,9 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                                 List<Object?> candidateData,
                                 List<dynamic> rejectedData) {
                               return RoundButton(
-                                icon: kStyleIcons[kToolScribble] ??
-                                    kUnknownStyleIcon,
+                                icon: MultiIcon(
+                                    fontIcon: kStyleIcons[kToolScribble] ??
+                                        kUnknownStyleIcon),
                                 foreground: Colors.black,
                                 background: candidateData.isEmpty
                                     ? Colors.white
@@ -144,7 +156,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                                 },
                               );
                             },
-                            onAccept: (data) {
+                            onAcceptWithDetails: (details) {
                               selectTool(kToolScribble);
                             },
                           ),
@@ -154,8 +166,9 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                                 List<Object?> candidateData,
                                 List<dynamic> rejectedData) {
                               return RoundButton(
-                                icon: kStyleIcons[kToolEraser] ??
-                                    kUnknownStyleIcon,
+                                icon: MultiIcon(
+                                    fontIcon: kStyleIcons[kToolEraser] ??
+                                        kUnknownStyleIcon),
                                 foreground: Colors.red,
                                 background: candidateData.isEmpty
                                     ? Colors.white
@@ -165,7 +178,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                                 },
                               );
                             },
-                            onAccept: (data) {
+                            onAcceptWithDetails: (details) {
                               selectTool(kToolEraser);
                             },
                           ),
@@ -194,7 +207,9 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                     });
                   },
                   child: RoundButton(
-                    icon: kStyleIcons[widget.style] ?? kUnknownStyleIcon,
+                    icon: MultiIcon(
+                        fontIcon:
+                            kStyleIcons[widget.style] ?? kUnknownStyleIcon),
                     tooltip: loc.drawChangeTool,
                     onPressed: () {
                       setState(() {
@@ -308,7 +323,7 @@ class UndoButton extends StatelessWidget {
       child: Padding(
         padding: safePadding + commonPadding,
         child: RoundButton(
-          icon: Icons.undo,
+          icon: MultiIcon(fontIcon: Icons.undo),
           small: true,
           background: Theme.of(context).canvasColor,
           foreground: Theme.of(context).primaryColor,

@@ -1,5 +1,5 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/models/payment_local.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/editor_settings.dart';

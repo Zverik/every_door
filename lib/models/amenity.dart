@@ -1,14 +1,15 @@
 import 'dart:ui';
 
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/equirectangular.dart';
-import 'package:every_door/helpers/good_tags.dart';
-import 'package:every_door/helpers/payment_tags.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/tags/main_key.dart';
+import 'package:every_door/helpers/tags/payment_tags.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:intl/intl.dart';
-import 'package:every_door/helpers/tag_emoji.dart';
+import 'package:every_door/helpers/tags/tag_emoji.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
@@ -116,14 +117,9 @@ class OsmChange extends ChangeNotifier implements Comparable {
   bool get canDelete =>
       (element?.isPoint ?? true) &&
       (element == null || element?.isMember == IsMember.no);
-  bool get isBuilding =>
-      detectKind(getFullTags(), {ElementKind.building}) == ElementKind.building;
   bool get canMove =>
-      (element?.isPoint ?? true) &&
-      (element?.isMember != IsMember.way) &&
-      (isNew || kind != ElementKind.entrance);
-  ElementKind get kind => detectKind(getFullTags());
-  bool get isIncomplete => needsMoreInfo(getFullTags());
+      (element?.isPoint ?? true) && (element?.isMember != IsMember.way);
+  String? get mainKey => _mainKey;
 
   revert() {
     // Cannot revert a new object
@@ -192,9 +188,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
   bool get isCheckedToday => age <= 1;
 
   bool isCountedOld(int age) {
-    final mk = _mainKey;
     return age >=
-        (mk != null && isStructureTag(mk, this[mk])
+        (ElementKind.structure.matchesChange(this)
             ? kOldStructureDays
             : kOldAmenityDays);
   }
@@ -369,7 +364,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
       newK = k.substring(prefix.length);
     } else {
       // Delete another prefix if exists.
-      newK = prefix + k.substring(k.indexOf(':') + 1);
+      newK = prefix + clearPrefix(k);
     }
 
     this[newK] = this[k];
@@ -499,14 +494,10 @@ class OsmChange extends ChangeNotifier implements Comparable {
     _fullTagsCache = Map.of(result);
 
     if (clearDisused) {
-      final mainKey = _mainKey;
-      final pos = mainKey?.indexOf(':');
-      if (mainKey != null && pos != null && pos > 0) {
-        final prefix = mainKey.substring(0, pos);
-        if (!{'addr', 'xmas'}.contains(prefix)) {
-          result[mainKey.substring(pos + 1)] = result[mainKey]!;
-          result.remove(mainKey);
-        }
+      final noPrefixKey = clearPrefixNull(_mainKey);
+      if (noPrefixKey != null && noPrefixKey != _mainKey) {
+        result[noPrefixKey] = result[_mainKey]!;
+        result.remove(_mainKey);
       }
     }
     return result;

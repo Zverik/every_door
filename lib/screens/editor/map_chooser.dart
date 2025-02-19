@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/good_tags.dart';
-import 'package:every_door/helpers/pin_marker.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
-import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/notes.dart';
@@ -26,11 +25,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MapChooserPage extends ConsumerStatefulWidget {
-  final LatLng location;
+  final LatLng? location;
   final bool creating;
 
   const MapChooserPage({
-    required this.location,
+    this.location,
     this.creating = false,
   });
 
@@ -48,7 +47,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   @override
   void initState() {
     super.initState();
-    center = widget.location;
+    center = widget.location ?? ref.read(effectiveLocationProvider);
     mapSub = controller.mapEventStream.listen((event) {
       if (event is MapEventMove) {
         setState(() {
@@ -77,18 +76,10 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
         await provider.getElements(location, kVisibilityRadius);
     // Filter for amenities (or not amenities).
     data = data.where((e) {
-      switch (e.kind) {
-        case ElementKind.amenity:
-          return editorMode == EditorMode.poi;
-        case ElementKind.micro:
-          return editorMode == EditorMode.micromapping;
-        case ElementKind.building:
-          return false;
-        case ElementKind.entrance:
-          return true;
-        default:
-          return e.isNew;
-      }
+      if (editorMode.isOurKind(e)) return true;
+      if (ElementKind.building.matchesChange(e)) return false;
+      if (ElementKind.entrance.matchesChange(e)) return true;
+      return e.isNew;
     }).toList();
     // Apply the building filter.
     if (filter.isNotEmpty) {
@@ -109,7 +100,6 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
     final tileLayer = TileLayerOptions(imagery);
-    final LatLng? trackLocation = ref.watch(geolocationProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
 
@@ -134,7 +124,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
       body: FlutterMap(
         mapController: controller,
         options: MapOptions(
-          initialCenter: widget.location,
+          initialCenter: center,
           initialZoom: initialZoom,
           minZoom: 17.0,
           maxZoom: kEditMaxZoom,
@@ -147,7 +137,6 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           ),
         ),
         children: [
-          AttributionWidget(imagery),
           TileLayer(
             urlTemplate: tileLayer.urlTemplate,
             wmsOptions: tileLayer.wmsOptions,
@@ -155,13 +144,14 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
             minNativeZoom: tileLayer.minNativeZoom,
             maxNativeZoom: tileLayer.maxNativeZoom,
             maxZoom: tileLayer.maxZoom,
-            tileSize: tileLayer.tileSize,
+            tileDimension: tileLayer.tileSize,
             tms: tileLayer.tms,
             subdomains: tileLayer.subdomains,
             additionalOptions: tileLayer.additionalOptions,
             userAgentPackageName: tileLayer.userAgentPackageName,
             reset: tileResetController.stream,
           ),
+          AttributionWidget(imagery),
           PolylineLayer(
             polylines: [
               for (final drawing in nearestNotes
@@ -180,17 +170,16 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
             ],
           ),
           WalkPathPolyline(),
-          LocationMarkerWidget(tracking: false),
-          if (trackLocation != null)
-            CircleLayer(
-              circles: [
-                CircleMarker(
-                  point: center,
-                  radius: 2.0,
-                  color: Colors.yellowAccent,
-                ),
-              ],
-            ),
+          LocationMarkerWidget(),
+          CircleLayer(
+            circles: [
+              CircleMarker(
+                point: center,
+                radius: 2.0,
+                color: Colors.yellowAccent,
+              ),
+            ],
+          ),
           CircleLayer(
             circles: [
               for (final note in nearestNotes.whereType<OsmNote>())
@@ -203,7 +192,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                 CircleMarker(
                   point: poi.location,
                   radius: 3.0,
-                  color: poi.kind == ElementKind.entrance
+                  color: ElementKind.entrance.matchesChange(poi)
                       ? Colors.black
                       : !poi.isModified
                           ? Colors.greenAccent

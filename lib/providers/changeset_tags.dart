@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -101,13 +101,9 @@ class _TypeCount {
   }
 
   String _getType(OsmChange change) {
-    final fullTags = change.getFullTags();
-    final rawKey = getMainKey(fullTags);
-    if (rawKey == null &&
-        detectKind(fullTags, {ElementKind.address}) == ElementKind.address) {
-      return 'address';
-    }
-    final value = fullTags[rawKey];
+    if (ElementKind.address.matchesChange(change)) return 'address';
+    final rawKey = change.mainKey;
+    final value = change[rawKey ?? ''];
     if (rawKey == null || value == null) return 'unknown object';
     // No use having "disused:shop" in a comment.
     final key = rawKey.substring(rawKey.indexOf(':') + 1);

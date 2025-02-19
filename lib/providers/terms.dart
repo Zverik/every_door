@@ -1,4 +1,5 @@
-import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/preset.dart';
@@ -29,8 +30,8 @@ class TermsProvider {
     final database = await _ref.read(databaseProvider).database;
     for (final element in elements) {
       // Build index only for amenities.
-      if (!(element.element?.isAmenity ?? true)) continue;
       final tags = element.getFullTags();
+      if (!ElementKind.amenity.matchesTags(tags)) continue;
       final preset = await presetProv.getPresetForTags(tags);
       String? presetName;
       if (preset != Preset.defaultPreset) {
@@ -64,7 +65,6 @@ class TermsProvider {
           query,
           locale: locale,
           location: location,
-          nsi: NsiQueryType.none,
         );
     final database = await _ref.read(databaseProvider).database;
 

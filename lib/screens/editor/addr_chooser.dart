@@ -1,5 +1,5 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/pin_marker.dart';
+import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/imagery.dart';
@@ -79,7 +79,6 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
           ),
         ),
         children: [
-          AttributionWidget(imagery),
           TileLayer(
             urlTemplate: tileLayer.urlTemplate,
             wmsOptions: tileLayer.wmsOptions,
@@ -87,13 +86,14 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
             minNativeZoom: tileLayer.minNativeZoom,
             maxNativeZoom: tileLayer.maxNativeZoom,
             maxZoom: tileLayer.maxZoom,
-            tileSize: tileLayer.tileSize,
+            tileDimension: tileLayer.tileSize,
             tms: tileLayer.tms,
             subdomains: tileLayer.subdomains,
             additionalOptions: tileLayer.additionalOptions,
             userAgentPackageName: tileLayer.userAgentPackageName,
             reset: tileResetController.stream,
           ),
+          AttributionWidget(imagery),
           MarkerLayer(
             markers: [
               PinMarker(widget.location),

@@ -1,6 +1,6 @@
 import 'package:every_door/models/osm_element.dart';
 import 'package:test/test.dart';
-import 'package:every_door/helpers/snap_nodes.dart';
+import 'package:every_door/helpers/geometry/snap_nodes.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
 OsmElement wayFromPoints(List<LatLng> points) {

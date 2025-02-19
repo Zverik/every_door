@@ -1,21 +1,18 @@
 import 'dart:async';
-import 'dart:math' show min, max, Point;
+import 'dart:math' show min, max;
 
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/closest_points.dart';
-import 'package:every_door/helpers/pin_marker.dart';
-import 'package:every_door/models/amenity.dart';
+import 'package:every_door/helpers/geometry/closest_points.dart';
+import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
-import 'package:every_door/providers/legend.dart';
 import 'package:every_door/providers/location.dart';
-import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/settings.dart';
 import 'package:every_door/widgets/attribution.dart';
 import 'package:every_door/widgets/loc_marker.dart';
-import 'package:every_door/widgets/track_button.dart';
+import 'package:every_door/widgets/map_button.dart';
 import 'package:every_door/widgets/walkpath.dart';
 import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +22,16 @@ import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AmenityMapController {
-  Function(LatLng, bool, bool)? moveListener;
+class CustomMapController {
   Function(Iterable<LatLng>)? zoomListener;
+  MapController? mapController;
+  GlobalKey? mapKey;
 
-  setLocation(LatLng location, {bool emitDrag = true, bool onlyIfFar = false}) {
-    if (moveListener != null) moveListener!(location, emitDrag, onlyIfFar);
+  setLocation({LatLng? location, double? zoom}) {
+    if (mapController != null) {
+      mapController!.move(location ?? mapController!.camera.center,
+          zoom ?? mapController!.camera.zoom);
+    }
   }
 
   zoomToFit(Iterable<LatLng> locations) {
@@ -40,105 +41,118 @@ class AmenityMapController {
   }
 }
 
-class AmenityMap extends ConsumerStatefulWidget {
-  final LatLng initialLocation;
-  final List<OsmChange> amenities;
-  final List<LatLng> otherObjects;
-  final void Function(LatLng)? onDrag;
-  final void Function(LatLng)? onDragEnd;
-  final void Function(LatLng)? onTrack;
-  final void Function(LatLngBounds)? onTap;
-  final VoidCallback? onFilterTap;
-  final AmenityMapController? controller;
-  final bool colorsFromLegend;
-  final bool drawNumbers;
+/// General map widget for every map in Every Door. Encloses layer management,
+/// interaction, additional buttons etc etc.
+class CustomMap extends ConsumerStatefulWidget {
+  final void Function(LatLng, double Function(LatLng))? onTap;
+  final CustomMapController? controller;
+  final List<Widget> layers;
+  final List<MapButton> buttons;
   final bool drawZoomButtons;
+  final bool drawStandardButtons;
+  final bool drawPinMarker;
+  final bool faintWalkPath;
+  final bool interactive;
+  final bool track;
+  final bool onlyOSM;
+  final bool allowRotation;
+  final bool updateState;
+  final bool switchToNavigate;
 
-  const AmenityMap({
-    required this.initialLocation,
-    this.onDrag,
-    this.onDragEnd,
-    this.onTrack,
+  const CustomMap({
+    super.key,
     this.onTap,
-    this.onFilterTap,
-    this.amenities = const [],
-    this.otherObjects = const [],
     this.controller,
-    this.drawNumbers = true,
-    this.colorsFromLegend = false,
-    this.drawZoomButtons = false,
+    this.layers = const [],
+    this.buttons = const [],
+    this.drawZoomButtons = true,
+    this.drawStandardButtons = true,
+    this.drawPinMarker = true,
+    this.faintWalkPath = true,
+    this.interactive = true,
+    this.track = true,
+    this.onlyOSM = false,
+    this.allowRotation = true,
+    this.switchToNavigate = true,
+    this.updateState = false,
   });
 
   @override
-  ConsumerState createState() => _AmenityMapState();
+  ConsumerState createState() => _CustomMapState();
 }
 
-class _AmenityMapState extends ConsumerState<AmenityMap> {
+class _CustomMapState extends ConsumerState<CustomMap> {
   static const kMapZoom = 17.0;
-  static const kMicroZoom = 18.0;
 
-  late final MapController mapController;
-  late final StreamSubscription<MapEvent> mapSub;
-  late LatLng mapCenter;
-  bool showAttribution = true;
-  double? savedZoom;
+  final MapController _controller = MapController();
+  final _mapKey = GlobalKey();
+  LatLng? _center;
+  StreamSubscription<MapEvent>? mapSub;
 
   @override
   void initState() {
     super.initState();
-    mapController = MapController();
-    mapCenter = widget.initialLocation;
     if (widget.controller != null) {
-      widget.controller!.moveListener = onControllerLocation;
       widget.controller!.zoomListener = onControllerZoom;
+      widget.controller!.mapKey = _mapKey;
     }
-    mapSub = mapController.mapEventStream.listen(onMapEvent);
-    // hideAttribution();
   }
 
-  hideAttribution() {
-    Future.delayed(Duration(seconds: 9), () {
-      if (showAttribution) {
-        setState(() {
-          showAttribution = false;
-        });
-      }
-    });
+  @override
+  void dispose() {
+    widget.controller?.mapController = null;
+    widget.controller?.mapKey = null;
+    mapSub?.cancel();
+    super.dispose();
+  }
+
+  void onMapReady() {
+    if (widget.updateState) {
+      mapSub = _controller.mapEventStream.listen(onMapEvent);
+    }
+    widget.controller?.mapController = _controller;
+    _center = _controller.camera.center;
+    setState(() {});
   }
 
   void onMapEvent(MapEvent event) {
+    bool fromController = event.source == MapEventSource.mapController ||
+        event.source == MapEventSource.nonRotatedSizeChange;
+
     if (event is MapEventWithMove) {
-      mapCenter = event.camera.center;
-      if (event.source != MapEventSource.mapController &&
-          event.source != MapEventSource.nonRotatedSizeChange) {
+      if (!fromController) {
         ref.read(trackingProvider.notifier).state = false;
         ref.read(zoomProvider.notifier).state = event.camera.zoom;
-        if (event.camera.zoom < kEditMinZoom) {
-          // Switch navigation mode on
-          ref.read(navigationModeProvider.notifier).state = true;
+        if (widget.switchToNavigate) {
+          final bool isNavigating = ref.read(navigationModeProvider);
+          if (isNavigating) {
+            if (event.camera.zoom > kEditMinZoom) {
+              // Switch navigation mode off
+              ref.read(navigationModeProvider.notifier).state = false;
+            }
+          } else if (event.camera.zoom < kEditMinZoom) {
+            // Switch navigation mode on
+            ref.read(navigationModeProvider.notifier).state = true;
+            ref.read(rotationProvider.notifier).state = 0;
+          }
         }
-        setState(() {
-          // redraw center marker
-        });
-        if (widget.onDrag != null) widget.onDrag!(event.camera.center);
+      }
+      if (event.camera.center != _center) {
+        _center = _controller.camera.center;
+        setState(() {});
       }
     } else if (event is MapEventMoveEnd) {
-      if (widget.onDragEnd != null &&
-          event.source != MapEventSource.mapController)
-        widget.onDragEnd!(event.camera.center);
-    } else if (event is MapEventTap) {
-      if (widget.onTap != null) {
-        widget.onTap!(_getBoundsForRadius(
-            event.tapPosition, event.camera.zoom, kTapRadius));
+      if (!fromController) {
+        ref.read(effectiveLocationProvider.notifier).set(event.camera.center);
       }
     } else if (event is MapEventRotateEnd) {
       if (event.source != MapEventSource.mapController) {
-        double rotation = mapController.camera.rotation;
+        double rotation = _controller.camera.rotation;
         while (rotation > 200) rotation -= 360;
         while (rotation < -200) rotation += 360;
         if (rotation.abs() < kRotationThreshold) {
           ref.read(rotationProvider.notifier).state = 0.0;
-          mapController.rotate(0.0);
+          _controller.rotate(0.0);
         } else {
           ref.read(rotationProvider.notifier).state = rotation;
         }
@@ -146,37 +160,12 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     }
   }
 
-  void onControllerLocation(LatLng location, bool emitDrag, bool onlyIfFar) {
-    if (onlyIfFar) {
-      const maxDist = 1e-7; // degrees
-      final center = mapController.camera.center;
-      final dist = (center.longitude - location.longitude).abs() +
-          (center.latitude - location.latitude).abs();
-      if (dist / 2 <= maxDist) return;
-    }
-    mapController.move(location, mapController.camera.zoom);
-    if (emitDrag && widget.onDrag != null) {
-      widget.onDrag!(location);
-    }
-  }
-
-  LatLngBounds _getBoundsForRadius(
-      LatLng center, double zoom, double radiusPixels) {
-    const crs = Epsg3857();
-    final point = crs.latLngToPoint(center, zoom);
-    final swPoint =
-        crs.pointToLatLng(point - Point(radiusPixels, radiusPixels), zoom);
-    final nePoint =
-        crs.pointToLatLng(point + Point(radiusPixels, radiusPixels), zoom);
-    return LatLngBounds(swPoint, nePoint);
-  }
-
   double _calculateZoom(Iterable<LatLng> locations, EdgeInsets padding) {
     // Add a virtual location to keep center.
     // Here we don't reproject, since on low zooms Mercator could be considered equirectandular.
     // Taking first 9, for we display only 9.
     final bounds = LatLngBounds.fromPoints(locations.take(9).toList());
-    final center = mapController.camera.center;
+    final center = _controller.camera.center;
     final dlat = max(
       (bounds.north - center.latitude).abs(),
       (bounds.south - center.latitude).abs(),
@@ -191,7 +180,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
     );
     return CameraFit.bounds(
             bounds: newBounds, padding: padding, maxZoom: kMapZoom + 1)
-        .fit(mapController.camera)
+        .fit(_controller.camera)
         .zoom;
   }
 
@@ -206,7 +195,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       zoom = _calculateZoom(locations.take(locations.length - 2), kPadding);
     }
 
-    final curZoom = mapController.camera.zoom;
+    final curZoom = _controller.camera.zoom;
     double maxZoomHere = kMapZoom;
     if (zoom > kMapZoom && zoom > curZoom) {
       // Overzoom only if points are too close.
@@ -216,102 +205,86 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
       zoom = min(curZoom, kMapZoom - 1);
     else if (zoom > maxZoomHere) zoom = max(curZoom, maxZoomHere);
     if ((zoom - curZoom).abs() >= kZoomThreshold) {
-      mapController.move(mapController.camera.center, zoom);
+      _controller.move(_controller.camera.center, zoom);
       ref.read(zoomProvider.notifier).state = zoom;
     }
   }
 
-  @override
-  void dispose() {
-    mapSub.cancel();
-    super.dispose();
-  }
+  void onMapTap(TapPosition pos, LatLng location) {
+    final locationPx = _controller.camera.latLngToScreenOffset(location);
 
-  Color getIconColor(OsmChange amenity, LegendController legendController) {
-    if (!widget.colorsFromLegend) return Colors.white;
-    return legendController.getLegendItem(amenity)?.color ?? kLegendOtherColor;
+    double distanceToLocation(LatLng loc2) {
+      return (locationPx - _controller.camera.latLngToScreenOffset(loc2))
+          .distance;
+    }
+
+    if (widget.onTap != null) {
+      widget.onTap!(location, distanceToLocation);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final LatLng? trackLocation = ref.watch(geolocationProvider);
 
-    // When tracking location, move map and notify the poi list.
-    ref.listen<LatLng?>(geolocationProvider, (_, LatLng? location) {
-      if (location != null && ref.watch(trackingProvider)) {
-        mapController.move(location, mapController.camera.zoom);
-        if (widget.onDragEnd != null) widget.onDragEnd!(location);
-        if (widget.onTrack != null) widget.onTrack!(location);
-      }
-    });
+    // TODO: move those two to tracking provider
+    if (widget.track) {
+      // When tracking location, move map and notify the poi list.
+      ref.listen<LatLng?>(geolocationProvider, (_, LatLng? location) {
+        if (location != null && ref.watch(trackingProvider)) {
+          _controller.move(location, _controller.camera.zoom);
+          ref.read(effectiveLocationProvider.notifier).set(location);
+        }
+      });
 
-    // When turning the tracking on, move the map immediately.
-    ref.listen(trackingProvider, (_, bool newState) {
-      if (trackLocation != null && newState) {
-        mapController.move(trackLocation, mapController.camera.zoom);
-        if (widget.onDragEnd != null) widget.onDragEnd!(trackLocation);
-        if (widget.onTrack != null) widget.onTrack!(trackLocation);
-      }
-    });
+      // When turning the tracking on, move the map immediately.
+      ref.listen(trackingProvider, (_, bool newState) {
+        if (trackLocation != null && newState) {
+          _controller.move(trackLocation, _controller.camera.zoom);
+          ref.read(effectiveLocationProvider.notifier).set(trackLocation);
+        }
+      });
+    }
+
+    ref.watch(geolocationProvider); // not using, but it triggers repaints
 
     // Rotate the map according to the global rotation value.
     ref.listen(rotationProvider, (_, double newValue) {
-      if ((newValue - mapController.camera.rotation).abs() >= 1.0) {
-        mapController.rotate(newValue);
+      if ((newValue - _controller.camera.rotation).abs() >= 1.0) {
+        _controller.rotate(newValue);
       }
     });
 
-    // For micromapping, zoom in and out.
-    ref.listen<LatLngBounds?>(microZoomedInProvider,
-        (_, LatLngBounds? newState) {
-      double oldZoom = mapController.camera.zoom;
-      double targetZoom =
-          newState != null ? kMicromappingTapZoom : (savedZoom ?? oldZoom);
-      if (newState != null && targetZoom < oldZoom) targetZoom = oldZoom;
-      savedZoom = oldZoom;
-      mapController.move(
-          newState?.center ?? mapController.camera.center, targetZoom);
-    });
-
-    // When switching to micromapping, increase zoom.
-    ref.listen(editorModeProvider, (_, next) {
-      if (next == EditorMode.micromapping) {
-        if (mapController.camera.zoom < kMicroZoom) {
-          mapController.move(mapController.camera.center, kMicroZoom);
-          ref.read(zoomProvider.notifier).state = kMicroZoom;
-        }
-      }
-    });
-
-    // Update colors when the legend is ready.
-    ref.listen(legendProvider, (_, next) {
-      setState(() {});
+    // Update map position when changing panes.
+    ref.listen(effectiveLocationProvider, (_, LatLng next) {
+      _controller.move(next, _controller.camera.zoom);
     });
 
     final imagery = ref.watch(selectedImageryProvider);
+    final isNavigating = ref.read(navigationModeProvider);
     final tileLayer = TileLayerOptions(imagery);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
-    final iconSize = widget.drawNumbers ? 18.0 : 14.0;
-    final legendCon = ref.watch(legendProvider.notifier);
     final loc = AppLocalizations.of(context)!;
-    final amenities = List.of(widget.amenities);
 
     return FlutterMap(
-      mapController: mapController,
+      mapController: _controller,
+      key: _mapKey,
       options: MapOptions(
-        initialCenter: widget.initialLocation, // This does not work :(
+        initialCenter: ref.watch(effectiveLocationProvider),
         initialRotation: ref.watch(rotationProvider),
-        // zoom: kMapZoom,
-        // colorsFromLegend is an indirect way to know it's micromapping mode.
         initialZoom: ref.watch(zoomProvider),
-        minZoom: kEditMinZoom - 0.1,
-        maxZoom: kEditMaxZoom,
+        minZoom: isNavigating ? 4.0 : kEditMinZoom - 0.1,
+        maxZoom: isNavigating ? kEditMinZoom + 0.1 : kEditMaxZoom,
         interactionOptions: InteractionOptions(
-          flags: ref.watch(microZoomedInProvider) != null
+          flags: !widget.interactive
               ? InteractiveFlag.none
-              : InteractiveFlag.all - InteractiveFlag.flingAnimation,
+              : InteractiveFlag.all -
+                  InteractiveFlag.flingAnimation -
+                  (widget.allowRotation ? 0 : InteractiveFlag.rotate),
           rotationThreshold: kRotationThreshold,
         ),
+        onMapReady: onMapReady,
+        onTap: widget.onTap == null ? null : onMapTap,
       ),
       children: [
         TileLayer(
@@ -321,7 +294,7 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
           minNativeZoom: tileLayer.minNativeZoom,
           maxNativeZoom: tileLayer.maxNativeZoom,
           maxZoom: tileLayer.maxZoom,
-          tileSize: tileLayer.tileSize,
+          tileDimension: tileLayer.tileSize,
           tms: tileLayer.tms,
           subdomains: tileLayer.subdomains,
           additionalOptions: tileLayer.additionalOptions,
@@ -329,135 +302,63 @@ class _AmenityMapState extends ConsumerState<AmenityMap> {
           reset: tileResetController.stream,
         ),
         LocationMarkerWidget(),
-        WalkPathPolyline(faint: true),
-        if (trackLocation != null)
-          CircleLayer(
-            circles: [
-              for (final objLocation in widget.otherObjects)
-                CircleMarker(
-                  point: objLocation,
-                  color: Colors.black.withOpacity(0.4),
-                  radius: 2.0,
-                ),
-            ],
-          ),
-        MarkerLayer(
-          markers: [
-            for (var i = amenities.length - 1; i >= 0; i--)
-              Marker(
-                point: amenities[i].location,
-                rotate: true,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    if (!amenities[i].isChristmasTree)
-                      Container(
-                        decoration: BoxDecoration(
-                          color: getIconColor(amenities[i], legendCon)
-                              .withOpacity(widget.drawNumbers ? 0.7 : 1.0),
-                          borderRadius: BorderRadius.circular(iconSize / 2),
-                        ),
-                        width: iconSize,
-                        height: iconSize,
-                      ),
-                    if (!widget.drawNumbers && amenities[i].isIncomplete && !amenities[i].isChristmasTree)
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(iconSize / 6),
-                        ),
-                        width: iconSize / 3,
-                        height: iconSize / 3,
-                      ),
-                    if (amenities[i].isChristmasTree)
-                      Image.asset(
-                        'assets/christmas-tree.png',
-                        width: iconSize * 2,
-                      ),
-                    if (widget.drawNumbers && i < 9)
-                      Container(
-                        padding: EdgeInsets.only(left: 1.0),
-                        child: Text(
-                          (i + 1).toString(),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: iconSize - 3.0,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            if (!ref.watch(trackingProvider) || trackLocation == null)
-              PinMarker(mapCenter),
-          ],
-        ),
-        AttributionWidget(showAttribution ? imagery : null),
-        // Settings button
-        OverlayButtonWidget(
-          alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
-          padding: EdgeInsets.symmetric(
-            horizontal: 0.0,
-            vertical: 10.0,
-          ),
-          icon: Icons.menu,
-          tooltip: loc.mapSettings,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsPage()),
-            );
-          },
-        ),
-        // Filter button
-        if (widget.onFilterTap != null)
+        WalkPathPolyline(faint: widget.faintWalkPath),
+        AttributionWidget(imagery),
+        ...widget.layers,
+        if (widget.drawPinMarker &&
+            _center != null &&
+            (!ref.watch(trackingProvider) || trackLocation == null))
+          MarkerLayer(markers: [PinMarker(_center!)]),
+        if (widget.drawStandardButtons)
+          // Settings button
           OverlayButtonWidget(
-            alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
+            alignment: leftHand ? Alignment.topRight : Alignment.topLeft,
             padding: EdgeInsets.symmetric(
               horizontal: 0.0,
               vertical: 10.0,
             ),
-            icon: ref.watch(poiFilterProvider).isNotEmpty
-                ? Icons.filter_alt
-                : Icons.filter_alt_outlined,
-            tooltip: loc.mapFilter,
-            onPressed: widget.onFilterTap!,
+            icon: Icons.menu,
+            tooltip: loc.mapSettings,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage()),
+              );
+            },
           ),
-        // Tracking button
-        OverlayButtonWidget(
+        MapButtonColumn(
           alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
-          padding: EdgeInsets.symmetric(
-            // horizontal: widget.onFilterTap == null ? 0.0 : 50.0,
-            horizontal: 0.0,
-            vertical: widget.onFilterTap == null ? 10.0 : 60.0,
-          ),
-          enabled: !ref.watch(trackingProvider) && trackLocation != null,
-          icon: Icons.my_location,
-          tooltip: loc.mapLocate,
-          onPressed: () {
-            ref.read(geolocationProvider.notifier).enableTracking(context);
-          },
-          onLongPressed: () {
-            if (ref.read(rotationProvider) != 0.0) {
-              ref.read(rotationProvider.notifier).state = 0.0;
-              mapController.rotate(0.0);
-            } else {
-              ref.read(geolocationProvider.notifier).enableTracking(context);
-            }
-          },
+          buttons: [
+            ...widget.buttons,
+            if (widget.drawStandardButtons)
+              // Tracking button
+              MapButton(
+                enabled: !ref.watch(trackingProvider) && trackLocation != null,
+                icon: Icons.my_location,
+                tooltip: loc.mapLocate,
+                onPressed: () {
+                  ref
+                      .read(geolocationProvider.notifier)
+                      .enableTracking(context);
+                },
+                onLongPressed: () {
+                  if (ref.read(rotationProvider) != 0.0) {
+                    ref.read(rotationProvider.notifier).state = 0.0;
+                    _controller.rotate(0.0);
+                  } else {
+                    ref
+                        .read(geolocationProvider.notifier)
+                        .enableTracking(context);
+                  }
+                },
+              ),
+          ],
+          safeRight: true,
         ),
         if (widget.drawZoomButtons)
           ZoomButtonsWidget(
             alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
-            padding: EdgeInsets.symmetric(
-              horizontal: 0.0,
-              // colorsFromLegend is an indirect way to know it's micromapping mode.
-              vertical:
-                  !leftHand && amenities.isEmpty && widget.colorsFromLegend
-                      ? 80.0
-                      : 20.0,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 20.0),
           ),
       ],
     );

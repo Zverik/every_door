@@ -1,65 +1,67 @@
-import 'package:flutter/material.dart';
+import 'package:every_door/screens/modes/definitions/amenity.dart';
+import 'package:every_door/screens/modes/definitions/base.dart';
+import 'package:every_door/screens/modes/definitions/entrances.dart';
+import 'package:every_door/screens/modes/definitions/micro.dart';
+import 'package:every_door/screens/modes/definitions/notes.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final editorModeProvider =
-    StateNotifierProvider<EditorModeController, EditorMode>(
-        (_) => EditorModeController());
+    StateNotifierProvider<EditorModeController, BaseModeDefinition>(
+        (ref) => EditorModeController(ref));
 
 final microZoomedInProvider = StateProvider<LatLngBounds?>((_) => null);
 final navigationModeProvider = StateProvider<bool>((ref) => false);
 
-enum EditorMode {
-  poi,
-  micromapping,
-  entrances,
-  notes,
-}
-
-const kEditorModeIcons = {
-  EditorMode.poi: Icons.free_breakfast, // local_cafe icon is broken
-  EditorMode.micromapping: Icons.park,
-  EditorMode.entrances: Icons.home,
-  EditorMode.notes: Icons.note_alt,
-};
-
-const kEditorModeIconsOutlined = {
-  EditorMode.poi: Icons.free_breakfast_outlined,
-  EditorMode.micromapping: Icons.park_outlined,
-  EditorMode.entrances: Icons.home_outlined,
-  EditorMode.notes: Icons.note_alt_outlined,
-};
-
-const kNextMode = {
-  EditorMode.micromapping: EditorMode.poi,
-  EditorMode.poi: EditorMode.entrances,
-  EditorMode.entrances: EditorMode.notes,
-  EditorMode.notes: EditorMode.micromapping,
-};
-
-class EditorModeController extends StateNotifier<EditorMode> {
+class EditorModeController extends StateNotifier<BaseModeDefinition> {
   static const kModeKey = 'micromappingMode';
+  static final _logger = Logger('EditorModeController');
 
-  EditorModeController() : super(EditorMode.poi) {
+  final Ref _ref;
+  final List<BaseModeDefinition> _modes = [];
+  int _currentMode = 1;
+
+  EditorModeController(this._ref) : super(AmenityModeDefinition(_ref)) {
+    reset();
     loadState();
+  }
+
+  reset() {
+    _modes.clear();
+    _logger.fine('Ref class: ${_ref.runtimeType}');
+    _modes.addAll([
+      MicromappingModeDefinition(_ref),
+      AmenityModeDefinition(_ref),
+      EntrancesModeDefinition(_ref),
+      NotesModeDefinition(_ref),
+    ]);
+    _currentMode = 1;
+    state = _modes[_currentMode];
+  }
+
+  Iterable<BaseModeDefinition> modes() sync* {
+    for (final mode in _modes) yield mode;
   }
 
   loadState() async {
     final prefs = await SharedPreferences.getInstance();
-    final modes = {for (final m in EditorMode.values) m.name: m};
-    state = modes[prefs.getString(kModeKey)] ?? EditorMode.poi;
-  }
-
-  set(EditorMode newValue) async {
-    if (state != newValue) {
-      state = newValue;
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(kModeKey, state.name);
+    final mode = prefs.getString(kModeKey);
+    final idx = _modes.indexWhere((m) => m.name == mode);
+    if (idx >= 0) {
+      _currentMode = idx;
+      state = _modes[idx];
     }
   }
 
-  next() async {
-    await set(kNextMode[state]!);
+  set(String name) async {
+    final i = _modes.indexWhere((m) => m.name == name);
+    if (i >= 0 && _currentMode != i && i < _modes.length) {
+      _currentMode = i;
+      state = _modes[i];
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(kModeKey, state.name);
+    }
   }
 }

@@ -1,5 +1,12 @@
 # Every Door App Change Log
 
+## 6.0
+
+_Unreleased_
+
+* Plugin support.
+* (+) buttons for the first two modes can also be dragged onto the map.
+
 ## 5.4
 
 _Released on 2025-01-29_

@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:every_door/helpers/geometry.dart';
+import 'package:every_door/helpers/geometry/geometry.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
 void main() {

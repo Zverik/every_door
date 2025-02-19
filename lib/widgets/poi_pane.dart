@@ -17,7 +17,6 @@ class PoiPane extends ConsumerStatefulWidget {
 }
 
 class _PoiPaneState extends ConsumerState<PoiPane> {
-
   @override
   Widget build(BuildContext context) {
     return widget.amenities.isEmpty
@@ -31,17 +30,25 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
   Widget nothingAroundPane(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final hasFilter = ref.watch(poiFilterProvider).isNotEmpty;
+    final needDownload = true; // TODO: areaStatusProvider
+
+    String message;
+    if (needDownload)
+      message = "Try tapping the download button"; // TODO: better words and loc
+    else if (hasFilter)
+      message = loc.tileDragOrUnfilter;
+    else
+      message = loc.tileDragTheMap;
+
     return Center(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Text(
-            loc.tileNothingAround(kVisibilityRadius) +
-                '\n' +
-                (hasFilter ? loc.tileDragOrUnfilter : loc.tileDragTheMap),
-            style: TextStyle(fontSize: 18.0),
-            textAlign: TextAlign.center,
-          ),
-        ));
+      padding: const EdgeInsets.all(15.0),
+      child: Text(
+        loc.tileNothingAround(kVisibilityRadius) + '\n' + message,
+        style: TextStyle(fontSize: 18.0),
+        textAlign: TextAlign.center,
+      ),
+    ));
   }
 
   Widget buildGridHorizontal(BuildContext context) {

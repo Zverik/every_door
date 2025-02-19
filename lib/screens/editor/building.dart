@@ -1,6 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:country_coder/country_coder.dart';
-import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/widgets/address_form.dart';
 import 'package:every_door/widgets/radio_field.dart';
@@ -83,6 +83,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     final List<int> nearestInt = values.map((e) => e.key).take(2).toList();
     nearestInt.sort();
 
+    if (!mounted) return;
     setState(() {
       nearestLevels = nearestInt.map((e) => e.toString()).toList();
     });

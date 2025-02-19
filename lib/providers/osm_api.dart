@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:every_door/helpers/good_tags.dart';
-import 'package:every_door/helpers/snap_nodes.dart';
+import 'package:every_door/helpers/geometry/snap_nodes.dart';
+import 'package:every_door/helpers/tags/snap_tags.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';

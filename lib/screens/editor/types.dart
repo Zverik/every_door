@@ -1,8 +1,8 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/counter.dart';
-import 'package:every_door/helpers/equirectangular.dart';
-import 'package:every_door/helpers/good_tags.dart';
-import 'package:every_door/providers/editor_mode.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
+import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/last_presets.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
@@ -17,8 +17,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;
   final bool launchEditor;
+  final ElementKindImpl? kinds;
+  final List<String> defaults;
 
-  const TypeChooserPage({this.location, this.launchEditor = true});
+  const TypeChooserPage({
+    this.location,
+    this.launchEditor = true,
+    this.kinds,
+    this.defaults = const [],
+  });
 
   @override
   ConsumerState createState() => _TypeChooserPageState();
@@ -41,20 +48,12 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   Future<List<Preset>> _getPresetsAround(LatLng location,
       [int count = 3]) async {
     final locale = Localizations.localeOf(context);
-    final editorMode = ref.read(editorModeProvider);
-    var data = await ref
+    List<OsmChange> data = await ref
         .read(osmDataProvider)
         .getElements(location, kVisibilityRadius);
-    data = data.where((e) {
-      switch (e.kind) {
-        case ElementKind.amenity:
-          return editorMode == EditorMode.poi;
-        case ElementKind.micro:
-          return editorMode == EditorMode.micromapping;
-        default:
-          return false;
-      }
-    }).toList();
+    if (widget.kinds != null) {
+      data = data.where((e) => widget.kinds?.matchesChange(e) ?? true).toList();
+    }
     if (data.isEmpty) return const [];
 
     // Sort by distance and trim.
@@ -93,11 +92,8 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     final prov = ref.read(presetProvider);
     final locale = Localizations.localeOf(context);
     if (substring.length < 2 && !reCJK.hasMatch(substring)) {
-      final editorMode = ref.read(editorModeProvider);
-      final defaultList = editorMode == EditorMode.micromapping
-          ? kDefaultMicroPresets
-          : kDefaultPresets;
-      final newPresets = await prov.getPresetsById(defaultList, locale: locale);
+      final newPresets =
+          await prov.getPresetsById(widget.defaults, locale: locale);
 
       // Add last presets.
       final presetsToAdd = <Preset>[];
@@ -111,18 +107,16 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       }
 
       // Keep 2 or 4 (or 0) added presets.
-      for (final p in presetsToAdd) newPresets.remove(p);
       if ((presetsToAdd.length + presetsAround.length) % 2 != 0) {
         if (presetsAround.isNotEmpty)
           presetsAround.removeLast();
-        else if (presetsToAdd.length > 2)
-          presetsToAdd.removeLast();
+        else if (presetsToAdd.length > 2) presetsToAdd.removeLast();
       }
       presetsToAdd.addAll(presetsAround);
 
       // Filter newPresets and check that we add no more than 4 items.
-      newPresets.removeWhere((p) => !newPresets.contains(p));
-      if (presetsToAdd.length + newPresets.length - defaultList.length > 4)
+      newPresets.removeWhere((p) => presetsToAdd.contains(p));
+      if (presetsToAdd.length + newPresets.length - widget.defaults.length > 4)
         presetsToAdd.removeRange(4, presetsToAdd.length);
 
       if (mounted && updateMutex == mutex) {
@@ -132,14 +126,21 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         });
       }
     } else {
-      final editorMode = ref.read(editorModeProvider);
-
-      final newPresets = await prov.getPresetsAutocomplete(substring,
-          locale: locale,
-          location: widget.location,
-          nsi: editorMode == EditorMode.poi
-              ? NsiQueryType.amenities
-              : NsiQueryType.micromapping);
+      final nsiPresets = await prov.getNSIAutocomplete(
+        substring,
+        location: widget.location,
+        filter: widget.kinds,
+      );
+      final dbPresets = await prov.getPresetsAutocomplete(
+        substring,
+        locale: locale,
+        location: widget.location,
+      );
+      final newPresets = nsiPresets
+          .take(kMaxNSIPresets)
+          .followedBy(dbPresets)
+          .take(kMaxShownPresets)
+          .toList();
 
       // Add a fix me preset for entered string.
       newPresets.add(Preset.fixme(substring.trim()));
@@ -148,7 +149,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         setState(() {
           resultsUpdated = DateTime.now();
           presets = newPresets;
-          if (editorMode == EditorMode.poi) updateNSISubtitles(context);
+          if (newPresets.any((p) => p.fromNSI)) updateNSISubtitles(context);
         });
       }
     }
@@ -227,9 +228,9 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
                 ),
                 color: !preset.isFixme
                     ? (preset.fromNSI
-                        ? Colors.grey.withOpacity(0.2)
-                        : kFieldColor.withOpacity(0.2))
-                    : Colors.red.withOpacity(0.2),
+                        ? Colors.grey.withValues(alpha: 0.2)
+                        : kFieldColor.withValues(alpha: 0.2))
+                    : Colors.red.withValues(alpha: 0.2),
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
               ),
               onTap: () {

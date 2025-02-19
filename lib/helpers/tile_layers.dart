@@ -135,7 +135,7 @@ class TileLayerOptions {
   late final int minNativeZoom;
   late final int maxNativeZoom;
   final double maxZoom = 22;
-  late final double tileSize;
+  late final int tileSize;
   bool tms = false;
   final List<String> subdomains = [];
   final Map<String, String> additionalOptions = const {'a': 'b'};
@@ -189,7 +189,7 @@ class TileLayerOptions {
 
     minNativeZoom = imagery.minZoom;
     maxNativeZoom = imagery.maxZoom;
-    tileSize = imagery.tileSize.toDouble();
+    tileSize = imagery.tileSize;
   }
 
   TileLayer buildTileLayer() {
@@ -200,7 +200,7 @@ class TileLayerOptions {
       minNativeZoom: minNativeZoom,
       maxNativeZoom: maxNativeZoom,
       maxZoom: maxZoom,
-      tileSize: tileSize,
+      tileDimension: tileSize,
       tms: tms,
       subdomains: subdomains,
       additionalOptions: additionalOptions,

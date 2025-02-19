@@ -15,6 +15,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final databaseProvider = Provider((_) => DatabaseHelper._());
 
 class DatabaseHelper {
+  static const _kDatabaseName = 'every_door.db';
   static final _logger = Logger('DatabaseHelper');
 
   DatabaseHelper._();
@@ -32,7 +33,7 @@ class DatabaseHelper {
       await db.query(OsmChange.kTableName, columns: ['count(*)']);
     } on DatabaseException catch (e) {
       _logger.severe('Database is broken!', e);
-      await deleteDatabase(kDatabaseName);
+      await deleteDatabase(_kDatabaseName);
       return await createDatabase();
     }
     return db;
@@ -41,11 +42,11 @@ class DatabaseHelper {
   Future<Database> createDatabase() async {
     if (kEraseDatabase && kDebugMode) {
       _logger.warning('Erasing database! Disable this in constants.dart.');
-      await deleteDatabase(kDatabaseName);
+      await deleteDatabase(_kDatabaseName);
     }
 
     return await openDatabase(
-      kDatabaseName,
+      _kDatabaseName,
       version: 6,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,

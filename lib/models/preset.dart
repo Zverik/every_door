@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/fields/name.dart';
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 

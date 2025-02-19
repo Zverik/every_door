@@ -1,4 +1,4 @@
-import 'package:every_door/helpers/equirectangular.dart';
+import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
 class LocationObject<T> {

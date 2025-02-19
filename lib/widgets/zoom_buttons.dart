@@ -1,3 +1,4 @@
+import 'package:every_door/widgets/map_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -22,29 +23,15 @@ class ZoomButtonsWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Tooltip(
-              message: loc.mapZoomIn,
-              child: OutlinedButton(
-                onPressed: () {
-                  controller.move(
-                    controller.camera.center,
-                    controller.camera.zoom + 1,
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.add,
-                    size: 30.0,
-                    color: Colors.black.withOpacity(0.5),
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.white.withOpacity(0.5),
-                  shape: CircleBorder(side: BorderSide()),
-                  padding: EdgeInsets.zero,
-                ),
-              ),
+            MapButton(
+              icon: Icons.add,
+              tooltip: loc.mapZoomIn,
+              onPressed: () {
+                controller.move(
+                  controller.camera.center,
+                  controller.camera.zoom + 1,
+                );
+              },
             ),
             Tooltip(
               message: loc.mapZoomOut,

@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'package:every_door/helpers/pin_marker.dart';
+import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
@@ -156,7 +156,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
                 minNativeZoom: tileLayer.minNativeZoom,
                 maxNativeZoom: tileLayer.maxNativeZoom,
                 maxZoom: tileLayer.maxZoom,
-                tileSize: tileLayer.tileSize,
+                tileDimension: tileLayer.tileSize,
                 tms: tileLayer.tms,
                 subdomains: tileLayer.subdomains,
                 additionalOptions: tileLayer.additionalOptions,
@@ -164,7 +164,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
                 reset: tileResetController.stream,
               ),
               AttributionWidget(imagery),
-              LocationMarkerWidget(tracking: false),
+              LocationMarkerWidget(),
               if (direction == null)
                 MarkerLayer(
                   markers: [PinMarker(widget.location)],

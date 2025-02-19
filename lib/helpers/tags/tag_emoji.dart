@@ -1,4 +1,4 @@
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/tags/main_key.dart';
 
 const kTagEmoji = <String, String>{
   'amenity=arts_centre': '🎨',
@@ -152,7 +152,7 @@ String? getEmojiForTags(Map<String, String> tags) {
   final List<String> emoji = [];
   final mainKey = getMainKey(tags);
   if (mainKey != null) {
-    final kv = kTagEmoji['$mainKey=${tags[mainKey]}'];
+    final kv = kTagEmoji['${clearPrefix(mainKey)}=${tags[mainKey]}'];
     if (kv != null && kv.isNotEmpty)
       emoji.add(kv);
   }

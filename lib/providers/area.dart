@@ -1,10 +1,23 @@
+import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/geometry/circle_bounds.dart';
 import 'package:every_door/models/osm_area.dart';
 import 'package:every_door/providers/database.dart';
+import 'package:every_door/providers/location.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
-final downloadedAreaProvider = Provider((ref) => AreaProvider(ref));
+final downloadedAreaProvider =
+    ChangeNotifierProvider((ref) => AreaProvider(ref));
+
+final areaStatusProvider = FutureProvider((ref) async {
+  final area = ref.watch(downloadedAreaProvider);
+  final location = ref.watch(effectiveLocationProvider);
+  final bbox = boundsFromRadius(location, kVisibilityRadius);
+  final status = await area.getAreaStatus(bbox);
+  return status;
+});
 
 enum AreaStatus {
   missing,
@@ -12,7 +25,7 @@ enum AreaStatus {
   fresh,
 }
 
-class AreaProvider {
+class AreaProvider extends ChangeNotifier {
   final Ref _ref;
 
   AreaProvider(this._ref);
@@ -21,6 +34,7 @@ class AreaProvider {
     final database = await _ref.read(databaseProvider).database;
     final area = OsmDownloadedArea(bounds, DateTime.now());
     await database.insert(OsmDownloadedArea.kTableName, area.toJson());
+    notifyListeners();
   }
 
   Future purgeAreas(DateTime before) async {
@@ -30,6 +44,7 @@ class AreaProvider {
       where: 'downloaded < ?',
       whereArgs: [before.millisecondsSinceEpoch],
     );
+    notifyListeners();
   }
 
   Future<List<LatLngBounds>> getAllAreas({bool withObsolete = false}) async {

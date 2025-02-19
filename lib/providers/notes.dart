@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/circle_bounds.dart';
+import 'package:every_door/helpers/geometry/circle_bounds.dart';
 import 'package:every_door/helpers/counter.dart';
 import 'package:every_door/helpers/draw_style.dart';
-import 'package:every_door/helpers/geometry.dart';
+import 'package:every_door/helpers/geometry/geometry.dart';
 import 'package:every_door/helpers/osm_api_converters.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/api_status.dart';

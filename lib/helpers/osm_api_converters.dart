@@ -1,6 +1,6 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/geometry.dart';
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/geometry/geometry.dart';
+import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
@@ -485,6 +485,12 @@ class CollectGeometrySink implements ChunkedConversionSink<List<OsmElement>> {
 /// A pass-through converter that builds a list of road names and
 /// their locations. Uses all node locations for highway ways if present.
 class ExtractRoadNames extends Converter<List<OsmElement>, List<OsmElement>> {
+  /// List of highway=* values that can denote a named road.
+  static const kHighwayRoadValues = <String>{
+    'service', 'residential', 'pedestrian', 'unclassified', 'tertiary',
+    'secondary', 'primary', 'trunk', 'motorway', 'living_street',
+  };
+
   final Set<RoadNameRecord>? _names;
 
   const ExtractRoadNames(this._names);
@@ -510,7 +516,7 @@ class ExtractRoadNames extends Converter<List<OsmElement>, List<OsmElement>> {
             GeoHasher().encode(c.longitude, c.latitude,
                 precision: kRoadNameGeohashPrecision)
         };
-        _names!.addAll(
+        _names.addAll(
             hashes.map((h) => RoadNameRecord(element.tags['name']!, h)));
       }
     }

@@ -6,10 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'dart:math' show pi;
 
+/// This is the blue circle displayed at the user location.
+/// Uses [geolocationProvider] for getting the GPS tracker data.
+/// Returns an empty [Container] if not tracking.
 class LocationMarkerWidget extends ConsumerWidget {
-  final bool tracking;
-
-  LocationMarkerWidget({super.key, this.tracking = true});
+  LocationMarkerWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,11 +18,10 @@ class LocationMarkerWidget extends ConsumerWidget {
     if (trackLocation == null) return Container();
 
     final CompassData? compass = null; // ref.watch(compassProvider);
-    final bool isTracking = tracking && ref.watch(trackingProvider);
     return MobileLayerTransformer(
       child: CustomPaint(
         painter: _LocationMarkerPainter(
-          border: isTracking,
+          border: ref.watch(trackingProvider),
           offset: MapCamera.of(context).getOffsetFromOrigin(trackLocation),
           heading: compass?.heading,
         ),

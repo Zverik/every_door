@@ -5,7 +5,7 @@ import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/room.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/fields/wifi.dart';
-import 'package:every_door/helpers/good_tags.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/helpers/nsi_features.dart';
@@ -102,7 +102,10 @@ class PresetProvider {
     return "langs (lang, lscore) as (values ${values.join(',')})";
   }
 
-  Future<List<Preset>> _getNSIAutocomplete(String query) async {
+  Future<List<Preset>> getNSIAutocomplete(String query,
+      {LatLng? location,
+      ElementKindImpl? filter,
+      int limit = kMaxNSIPresets}) async {
     // Considering database loaded at this point.
     const sql = '''
     with matches as (
@@ -115,17 +118,26 @@ class PresetProvider {
     inner join matches on nsi.id = nsi_id
     order by term_len, locations is null
     ''';
-    final results = await _db!.rawQuery(sql, [query + '%']);
-    return results.map((e) => Preset.fromNSIJson(e)).toList();
-  }
 
-  List<Preset> _filterByLocation(List<Preset> presets, LatLng location) {
-    return presets
-        .where((p) =>
-            p.locationSet == null ||
-            locationMatcher(
-                location.longitude, location.latitude, p.locationSet!))
-        .toList();
+    // Query the database.
+    final results = await _db!.rawQuery(sql, [normalizeString(query) + '%']);
+    Iterable<Preset> nsiResults = results.map((e) => Preset.fromNSIJson(e));
+
+    // Filter by location.
+    if (location != null) {
+      nsiResults = nsiResults.where((p) =>
+          p.locationSet == null ||
+          locationMatcher(
+              location.longitude, location.latitude, p.locationSet!));
+    }
+
+    // Filter by type.
+    if (filter != null) {
+      nsiResults =
+          nsiResults.where((p) => filter.matchesTags(p.addTags));
+    }
+
+    return nsiResults.take(limit).toList();
   }
 
   Future<List<Preset>> fillNSIPresetNames(List<Preset> suggested,
@@ -145,9 +157,9 @@ class PresetProvider {
 
   Future<List<Preset>> getPresetsAutocomplete(String query,
       {bool isArea = false,
-      NsiQueryType nsi = NsiQueryType.none,
       Locale? locale,
-      LatLng? location}) async {
+      LatLng? location,
+      int limit = kMaxShownPresets}) async {
     final terms = query
         .split(' ')
         .where((s) => s.length >= 2)
@@ -179,28 +191,6 @@ class PresetProvider {
     final results = await _db!.rawQuery(sql, terms.map((t) => '$t%').toList());
 
     final presets = <Preset>[];
-    if (nsi != NsiQueryType.none) {
-      // Query the database.
-      List<Preset> nsiResults =
-          await _getNSIAutocomplete(normalizeString(query));
-      // Filter by location.
-      if (location != null) {
-        nsiResults = _filterByLocation(nsiResults, location);
-      }
-      // Filter by type.
-      if (nsi == NsiQueryType.amenities) {
-        nsiResults = nsiResults.where((p) => isAmenityTags(p.addTags)).toList();
-      } else if (nsi == NsiQueryType.micromapping) {
-        nsiResults = nsiResults.where((p) => isMicroTags(p.addTags)).toList();
-      }
-      // Remove the tail.
-      if (nsiResults.length > kMaxNSIPresets) {
-        nsiResults.removeRange(kMaxNSIPresets, nsiResults.length);
-      }
-      // Append to the result.
-      presets.addAll(nsiResults);
-    }
-
     final seenPresets = <String>[];
     for (final row in results) {
       // Check that both terms are present.
@@ -221,7 +211,7 @@ class PresetProvider {
       }
 
       presets.add(preset);
-      if (presets.length >= kMaxShownPresets) break;
+      if (presets.length >= limit) break;
     }
     return presets;
   }
@@ -278,6 +268,7 @@ class PresetProvider {
 
   Future<List<Preset>> getPresetsById(List<String> ids,
       {Locale? locale}) async {
+    if (ids.isEmpty) return [];
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
     final questions = List.filled(ids.length, '?').join(',');
