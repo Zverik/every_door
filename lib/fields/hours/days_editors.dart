@@ -107,13 +107,19 @@ class NumberedWeekdayPanel extends StatelessWidget {
             },
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.only(right: 8.0),
+          child: Text(
+            "Week#",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
         for (final i in days)
           Column(
             children: [
               Checkbox(
                 value: weekday.days.contains(i),
                 onChanged: (value) {
-                  // Forbid removing all checkboxes.
                   if (value != true && weekday.days.length <= 1) return;
                   onChange(weekday.toggleDay(i, value));
                 },
