@@ -925,5 +925,17 @@
   "drawPower": "Linea elettrica",
   "@drawPower": {
     "description": "Tool description: power line. Keep it short."
+  },
+  "fieldWebsiteQR": "Scannerizza un QR Code",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "editorDeleteBuilding": "Demolito",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "editorDeleteKeepAddressButton": "Cancella, ma mantieni l'indirizzo",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
   }
 }
