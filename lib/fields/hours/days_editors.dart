@@ -120,6 +120,7 @@ class NumberedWeekdayPanel extends StatelessWidget {
               Checkbox(
                 value: weekday.days.contains(i),
                 onChanged: (value) {
+                  // Forbid removing all checkboxes.
                   if (value != true && weekday.days.length <= 1) return;
                   onChange(weekday.toggleDay(i, value));
                 },
