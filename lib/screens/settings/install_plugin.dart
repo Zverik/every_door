@@ -109,7 +109,6 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         }
       } finally {
         client.close();
-        tmpPath.delete();
       }
 
       // Now unpack and install.

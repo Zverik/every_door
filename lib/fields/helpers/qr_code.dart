@@ -41,6 +41,8 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
           }
         }
       }
+    } catch (e) {
+      _logger.info('Error when checking for redirects: $e');
     } finally {
       client.close();
     }
@@ -67,7 +69,9 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
       body: MobileScanner(
         onDetect: (codes) async {
           final code = codes.barcodes.first;
-          if (code.rawValue != _scannedLast && mounted && codes.barcodes.isNotEmpty) {
+          if (code.rawValue != _scannedLast &&
+              mounted &&
+              codes.barcodes.isNotEmpty) {
             // we need this because it scans twice sometimes
             _scannedLast = code.rawValue;
 
