@@ -51,17 +51,18 @@ class ElementKind {
 
   static ElementKindImpl get(String name) => _kinds[name] ?? unknown;
 
+  static const _kMatchedKinds = [
+    'amenity',
+    'micro',
+    'building',
+    'entrance',
+    'address',
+    'empty',
+  ];
+
   static ElementKindImpl match(Map<String, String> tags,
       [List<ElementKindImpl>? kinds]) {
-    const kMatchedKinds = [
-      'amenity',
-      'micro',
-      'building',
-      'entrance',
-      'address',
-      'empty',
-    ];
-    for (final k in kinds ?? kMatchedKinds) {
+    for (final k in kinds ?? _kMatchedKinds) {
       final ek = _kinds[k]!;
       if (ek.matchesTags(tags)) return ek;
     }
@@ -70,15 +71,7 @@ class ElementKind {
 
   static ElementKindImpl matchChange(OsmChange change,
       [List<ElementKindImpl>? kinds]) {
-    const kMatchedKinds = [
-      'amenity',
-      'micro',
-      'building',
-      'entrance',
-      'address',
-      'empty',
-    ];
-    kinds ??= kMatchedKinds.map((k) => _kinds[k]!).toList();
+    kinds ??= _kMatchedKinds.map((k) => _kinds[k]!).toList();
     for (final k in kinds) {
       if (k.matchesChange(change)) return k;
     }
@@ -86,11 +79,12 @@ class ElementKind {
   }
 
   static void reset() {
-    register("unknown", ElementKindImpl()); // by default everything matches
+    register(ElementKindImpl(name: 'unknown')); // by default everything matches
     registerStandardKinds();
   }
 
-  static void register(String name, ElementKindImpl kind) {
+  static void register(ElementKindImpl kind) {
+    final name = kind.name;
     if (!_kinds.containsKey(name)) {
       _kinds[name] = kind;
     } else {
@@ -100,12 +94,14 @@ class ElementKind {
 }
 
 class ElementKindImpl {
+  final String name;
   final MultiIcon? icon;
   final TagMatcher? matcher;
   final bool onMainKey;
   final bool replace;
 
   const ElementKindImpl({
+    required this.name,
     this.matcher,
     this.icon,
     this.onMainKey = true,
@@ -134,6 +130,7 @@ class ElementKindImpl {
 
   ElementKindImpl mergeWith(ElementKindImpl other) {
     return ElementKindImpl(
+      name: name,
       icon: other.icon ?? icon,
       onMainKey: other.onMainKey,
       matcher: matcher == null || other.replace
@@ -142,9 +139,10 @@ class ElementKindImpl {
     );
   }
 
-  factory ElementKindImpl.fromJson(Map<String, dynamic> data) {
+  factory ElementKindImpl.fromJson(String name, Map<String, dynamic> data) {
     final replace = data.containsKey('matcher');
     return ElementKindImpl(
+      name: name,
       onMainKey: data['onMainKey'] as bool? ?? true,
       matcher: TagMatcher.fromJson(data[replace ? 'matcher' : 'update']),
       replace: replace,

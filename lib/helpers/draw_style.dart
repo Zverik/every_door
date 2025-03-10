@@ -17,9 +17,7 @@ class DrawingStyle {
   double get stroke => thin ? kDefaultStroke / 2.0 : kDefaultStroke;
 
   Color get casing {
-    // simplified luminance
-    final lum = 0.2126 * (color.red / 255) + 0.7152 * (color.green / 255) + 0.0722 * (color.blue / 255);
-    return lum > 0.4 ? Colors.black : Colors.white;
+    return color.computeLuminance() > 0.4 ? Colors.black : Colors.white;
   }
 
   @override

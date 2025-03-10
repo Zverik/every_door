@@ -49,6 +49,10 @@ class CustomMap extends ConsumerStatefulWidget {
   final List<Widget> layers;
   final List<MapButton> buttons;
   final bool drawZoomButtons;
+
+  /// When there is a floating button on the screen, zoom buttons
+  /// need to be moved higher.
+  final bool hasFloatingButton;
   final bool drawStandardButtons;
   final bool drawPinMarker;
   final bool faintWalkPath;
@@ -66,6 +70,7 @@ class CustomMap extends ConsumerStatefulWidget {
     this.layers = const [],
     this.buttons = const [],
     this.drawZoomButtons = true,
+    this.hasFloatingButton = false,
     this.drawStandardButtons = true,
     this.drawPinMarker = true,
     this.faintWalkPath = true,
@@ -358,7 +363,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         if (widget.drawZoomButtons)
           ZoomButtonsWidget(
             alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: widget.hasFloatingButton ? 100.0 : 20.0),
           ),
       ],
     );

@@ -47,14 +47,14 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
     return uri;
   }
 
-  Future<String> _resolveRedirectsStr(String url) async {
+  Future<Uri?> _resolveRedirectsStr(String url) async {
     try {
       final uri = await _resolveRedirects(Uri.parse(url));
-      return uri.toString();
+      return uri;
     } on FormatException {
       _logger.warning('Failed to build an uri from $url');
     }
-    return url;
+    return null;
   }
 
   @override
@@ -72,11 +72,12 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
             _scannedLast = code.rawValue;
 
             final nav = Navigator.of(context);
-            String? url;
+            String? stringUrl;
+            Uri? url;
             if (code.type == BarcodeType.url) {
-              url = code.url?.url;
-              if (url != null) {
-                url = await _resolveRedirectsStr(url);
+              stringUrl = code.url?.url;
+              if (stringUrl != null) {
+                url = await _resolveRedirectsStr(stringUrl);
               }
             } else if (code.type == BarcodeType.text ||
                 code.type == BarcodeType.unknown) {

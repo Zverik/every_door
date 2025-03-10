@@ -26,7 +26,10 @@ class RoundButton extends StatelessWidget {
           horizontal: 0.0,
           vertical: small ? 10.0 : 15.0,
         ),
-        child: icon.getWidget(size: small ? 20.0 : 30.0),
+        child: icon.getWidget(
+          size: small ? 20.0 : 30.0,
+          color: foreground ?? Colors.white,
+        ),
       ),
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),

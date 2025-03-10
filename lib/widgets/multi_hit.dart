@@ -7,7 +7,7 @@ extension OffsetExtension on Offset {
 }
 
 class MultiHitMarkerLayer extends StatelessWidget {
-  final List<Marker> markers;
+  final List<Marker?> markers;
   final Function(List<Key>)? onTap;
 
   MultiHitMarkerLayer({this.markers = const [], this.onTap, super.key});
@@ -19,6 +19,7 @@ class MultiHitMarkerLayer extends StatelessWidget {
     var rotatedMarkers = <Widget>[];
     for (var i = 0; i < markers.length; i++) {
       var marker = markers[i];
+      if (marker == null) continue;
 
       // Decide whether to use cached point or calculate it
       var pxPoint = camera.projectAtZoom(marker.point).round();

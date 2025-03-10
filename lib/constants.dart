@@ -3,6 +3,12 @@ import 'package:flutter/material.dart' show Colors, TextStyle;
 const kAppTitle = 'Every Door';
 const kAppVersion = '5.4'; // Also used for presets.db versioning
 
+// we might want to redefine
+const kOldAmenityDays = 60; // check_date expiration rate
+const kOldStructureDays = 360; // check_date expiration rate for churches and schools
+const kSlowDownGPS = true; // skip location changes that are too small to register
+const kRotationThreshold = 30.0; // degrees, for snapping to zero rotation
+
 // global
 const kDefaultLocation = <double>[59.42, 24.71];
 const kBigRadius = 1000; // for downloading, in meters
@@ -10,11 +16,7 @@ const kSmallRadius = 400; // for downloading, in meters
 const kVisibilityRadius = 100; // meters
 const kObsoleteData = Duration(days: 3); // for yellow warning
 const kSuperObsoleteData = Duration(days: 14); // for purging
-const kOldAmenityDays = 60; // check_date expiration rate
-const kOldStructureDays = 360; // check_date expiration rate for churches and schools
 const kFieldColor = Colors.lightBlueAccent;
-const kSlowDownGPS = true; // skip location changes that are too small to register
-const kRotationThreshold = 30.0; // degrees, for snapping to zero rotation
 const kManualOption = '✍️'; // Emoji icon for entering values by hand
 const kLocalPaymentRadius = 5000; // How far local payment options reach, in meters
 const kLocalFloorsRadius = 5000; // How far local floor options reach, in meters

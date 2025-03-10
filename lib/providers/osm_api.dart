@@ -70,6 +70,33 @@ class OsmApiHelper {
     }
   }
 
+  Future<OsmElement?> singleElement(OsmId id) async {
+    var client = http.Client();
+    try {
+      final typeName = kOsmElementTypeName[id.type]!;
+      final full = id.type == OsmElementType.node ? '' : '/full';
+      final url = Uri.https(kOsmEndpoint, '/api/0.6/$typeName/${id.ref}$full');
+      var request = http.Request('GET', url);
+      var response = await client.send(request);
+      if (response.statusCode != 200) {
+        throw Exception('Failed to query OSM API: ${response.statusCode} $url');
+      }
+      final els = await response.stream
+          .transform(utf8.decoder)
+          .toXmlEvents()
+          .selectSubtreeEvents(
+              (event) => kOsmTypes.containsKey(event.localName))
+          .toXmlNodes()
+          .transform(XmlToOsmConverter())
+          .transform(CollectGeometry())
+          .flatten()
+          .toList();
+      return els.where((e) => e.id == id).firstOrNull;
+    } finally {
+      client.close();
+    }
+  }
+
   Future<List<OsmElement>> elements(Iterable<OsmId> ids) async {
     const kBatchSize = 500; // elements in a single request
     var client = http.Client();

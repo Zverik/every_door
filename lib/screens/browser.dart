@@ -60,14 +60,14 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       editorPanel = NavigationPane();
     } else if (editorMode is AmenityModeDefinition ) {
       editorPanel = AmenityPane(editorMode);
-    } else if (editorMode is MicromappingModeDefinition ) {
+    } else if (editorMode is DefaultMicromappingModeDefinition ) {
       editorPanel = MicromappingPane(editorMode);
     } else if (editorMode is EntrancesModeDefinition) {
       editorPanel = EntrancesPane(editorMode);
     } else if (editorMode is NotesModeDefinition) {
       editorPanel = NotesPane(editorMode);
     } else {
-      editorPanel = Container();
+      editorPanel = Center(child: Text('Broken mode definition'));
     }
 
     return PopScope(

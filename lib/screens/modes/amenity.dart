@@ -42,10 +42,21 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
   void initState() {
     super.initState();
 
+    widget.def.addListener(onDefChange);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateFarFromUser();
       updateNearest();
     });
+  }
+
+  @override
+  void dispose() {
+    widget.def.removeListener(onDefChange);
+    super.dispose();
+  }
+
+  void onDefChange() {
+    if (mounted) setState(() {});
   }
 
   updateFarFromUser() {
@@ -115,7 +126,10 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
         left: false,
         right: false,
         top: isWide,
-        child: PoiPane(widget.def.nearestPOI),
+        child: PoiPane(
+          widget.def.nearestPOI,
+          isCountedOld: widget.def.isCountedOld,
+        ),
       );
       final mediaHeight = MediaQuery.of(context).size.height;
       if (isWide || mediaHeight <= 600)

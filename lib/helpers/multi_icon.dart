@@ -16,24 +16,39 @@ class MultiIcon {
     this.fontIcon,
     Uint8List? imageData,
     Uint8List? svgData,
+    Uint8List? siData,
     String? asset,
     this.tooltip,
   }) {
     if (imageData != null) {
       image = MemoryImage(imageData);
-    }
-    if (svgData != null) {
-      svg = ScalableImage.fromSIBytes(svgData);
-    }
-    if (asset != null) {
+    } else if (asset != null) {
       image = AssetImage(asset);
+    } else {
+      image = null;
     }
+
+    if (svgData != null) {
+      svg = ScalableImage.fromSvgString(String.fromCharCodes(svgData));
+    } else if (siData != null) {
+      svg = ScalableImage.fromSIBytes(siData);
+    } else {
+      svg = null;
+    }
+  }
+
+  MultiIcon._({this.fontIcon, this.image, this.svg, this.tooltip});
+
+  MultiIcon withTooltip(String? tooltip) {
+    return MultiIcon._(
+        fontIcon: fontIcon, image: image, svg: svg, tooltip: tooltip);
   }
 
   Widget getWidget({
     double? size,
     Color? color,
     String? semanticLabel,
+    bool icon = true,
   }) {
     if (fontIcon != null)
       return Icon(
@@ -44,12 +59,19 @@ class MultiIcon {
       );
     if (image != null) {
       // TODO: learn how it recolours and document.
-      return ImageIcon(
-        image!,
-        color: color,
-        size: size,
-        semanticLabel: semanticLabel,
-      );
+      return icon
+          ? ImageIcon(
+              image!,
+              color: color,
+              size: size,
+              semanticLabel: semanticLabel,
+            )
+          : Image(
+              image: image!,
+              semanticLabel: semanticLabel,
+              width: size,
+              height: size,
+            );
     }
     if (svg != null) {
       // TODO: document what the current color is.

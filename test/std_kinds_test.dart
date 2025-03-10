@@ -207,6 +207,8 @@ void main() {
         'tourism=hotel',
         'xmas:feature=market',
         'random=tag',
+        'building=yes',
+        'entrance=main',
       ],
     );
   });

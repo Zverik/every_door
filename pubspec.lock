@@ -315,6 +315,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_archive:
+    dependency: "direct main"
+    description:
+      name: flutter_archive
+      sha256: "5ca235f304c12bf468979235f400f79846d204169d715939e39197106f5fc970"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.3"
   flutter_cache_manager:
     dependency: "direct main"
     description:
@@ -739,6 +747,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.16+1"
+  material_color_names:
+    dependency: "direct main"
+    description:
+      name: material_color_names
+      sha256: "12bf9cdbe60002908730605854172d878ad726fd4f2dfdc665aea1b32895fc8e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   material_color_utilities:
     dependency: transitive
     description:

@@ -7,6 +7,7 @@ import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/uploader.dart';
+import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/settings/changeset_pane.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,7 +28,7 @@ class BrowserNavigationBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editorMode = ref.watch(editorModeProvider);
+    ref.watch(editorModeProvider); // to update the widget
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
     final hasNotesToUpload = ref.watch(notesProvider).haveChanges;
@@ -97,13 +98,6 @@ class BrowserNavigationBar extends ConsumerWidget {
       color: Colors.white70,
     );
 
-    final editorModeTooltips = {
-      "micro": loc.navMicromappingMode,
-      "amenity": loc.navPoiMode,
-      "entrances": loc.navEntrancesMode,
-      "notes": loc.navNotesMode,
-    };
-
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     return Container(
       color: Colors.black87,
@@ -121,21 +115,34 @@ class BrowserNavigationBar extends ConsumerWidget {
               children: [
                 for (final mode
                     in ref.read(editorModeProvider.notifier).modes())
-                  IconButton(
-                    // TODO: does it work with MultiIcon?
-                    icon: (editorMode == mode ? mode.icon : mode.iconOutlined).getWidget(),
-                    tooltip: editorModeTooltips[mode.name],
-                    color: editorMode == mode ? Colors.yellow : Colors.white70,
-                    onPressed: () {
-                      ref.read(editorModeProvider.notifier).set(mode.name);
-                    },
-                  ),
+                  ModeIconButton(mode),
               ],
             ),
           ),
           Expanded(child: !leftHand ? imageryButton : dataButton),
         ],
       ),
+    );
+  }
+}
+
+class ModeIconButton extends ConsumerWidget {
+  final BaseModeDefinition mode;
+
+  const ModeIconButton(this.mode, {super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isCurrent = ref.watch(editorModeProvider) == mode;
+    final icon = mode.getIcon(context, !isCurrent);
+
+    return IconButton(
+      icon: icon.getWidget(color: isCurrent ? Colors.yellow : Colors.white70),
+      tooltip: icon.tooltip ?? '?',
+      color: isCurrent ? Colors.yellow : Colors.white70,
+      onPressed: () {
+        ref.read(editorModeProvider.notifier).set(mode.name);
+      },
     );
   }
 }

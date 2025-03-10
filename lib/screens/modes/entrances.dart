@@ -1,3 +1,4 @@
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/location.dart';
@@ -26,7 +27,6 @@ class EntrancesPane extends ConsumerStatefulWidget {
 class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   final _controller = CustomMapController();
   final Map<String, GlobalKey> _globalKeys = {};
-  double? _savedZoom;
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   }
 
   void onDefChange() {
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   Future<void> updateNearest() async {
@@ -118,6 +118,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
               controller: _controller,
               drawPinMarker: false,
               updateState: true,
+              hasFloatingButton: primaryButton != null,
               layers: [
                 if (widget.def.newLocation != null)
                   CircleLayer(
@@ -132,7 +133,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 MultiHitMarkerLayer(
                   markers: [
                     for (final element in widget.def.nearest)
-                      widget.def.buildMarker(element).buildMarker(
+                      widget.def.buildMarker(element)?.buildMarker(
                             key: _globalKeys[element.databaseId],
                             point: element.location,
                           ),
@@ -146,89 +147,33 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
               ],
             ),
             if (primaryButton != null)
-              MapDragCreateButton(
-                map: _controller,
+              DraggableEditButton(
+                controller: _controller,
                 icon: primaryButton,
                 alignment:
                     !leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
-                onDragStart: () {
-                  final adjust = widget.def.adjustZoomPrimary;
-                  if (adjust != 0.0 && _savedZoom == null) {
-                    final controller = _controller.mapController!;
-                    _savedZoom = controller.camera.zoom;
-                    controller.move(
-                        controller.camera.center, _savedZoom! + adjust);
-                  }
-                },
-                onDragEnd: (pos) {
-                  if (_savedZoom != null) {
-                    final controller = _controller.mapController!;
-                    controller.move(controller.camera.center, _savedZoom!);
-                    _savedZoom = null;
-                  }
+                adjustZoom: widget.def.adjustZoomPrimary,
+                onEditor: (context, pos) {
                   widget.def.openEditor(
                     context: context,
                     isPrimary: true,
                     location: pos,
                   );
                 },
-                onTap: () async {
-                  final pos = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MapChooserPage(),
-                    ),
-                  );
-                  if (context.mounted && pos != null) {
-                    widget.def.openEditor(
-                      context: context,
-                      isPrimary: true,
-                      location: pos,
-                    );
-                  }
-                },
               ),
             if (secondaryButton != null)
-              MapDragCreateButton(
-                map: _controller,
+              DraggableEditButton(
+                controller: _controller,
                 icon: secondaryButton,
                 alignment:
                     leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
-                onDragStart: () {
-                  final adjust = widget.def.adjustZoomSecondary;
-                  if (adjust != 0.0 && _savedZoom == null) {
-                    final controller = _controller.mapController!;
-                    _savedZoom = controller.camera.zoom;
-                    controller.move(
-                        controller.camera.center, _savedZoom! + adjust);
-                  }
-                },
-                onDragEnd: (pos) {
-                  if (_savedZoom != null) {
-                    final controller = _controller.mapController!;
-                    controller.move(controller.camera.center, _savedZoom!);
-                    _savedZoom = null;
-                  }
+                adjustZoom: widget.def.adjustZoomSecondary,
+                onEditor: (context, pos) {
                   widget.def.openEditor(
                     context: context,
                     isPrimary: false,
                     location: pos,
                   );
-                },
-                onTap: () async {
-                  final pos = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MapChooserPage(),
-                    ),
-                  );
-                  if (pos != null && context.mounted) {
-                    widget.def.openEditor(
-                      context: context,
-                      isPrimary: false,
-                      location: pos,
-                    );
-                  }
                 },
               ),
             ApiStatusPane(),
@@ -236,6 +181,66 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
         ),
         AreaStatusPanel(),
       ],
+    );
+  }
+}
+
+class DraggableEditButton extends StatefulWidget {
+  final MultiIcon icon;
+  final double adjustZoom;
+  final Function(BuildContext, LatLng) onEditor;
+  final CustomMapController controller;
+  final Alignment alignment;
+
+  const DraggableEditButton({
+    super.key,
+    required this.controller,
+    required this.icon,
+    this.adjustZoom = 0.0,
+    required this.onEditor,
+    this.alignment = Alignment.bottomRight,
+  });
+
+  @override
+  State<DraggableEditButton> createState() => _DraggableEditButtonState();
+}
+
+class _DraggableEditButtonState extends State<DraggableEditButton> {
+  double? _savedZoom;
+
+  @override
+  Widget build(BuildContext context) {
+    return MapDragCreateButton(
+      map: widget.controller,
+      icon: widget.icon,
+      alignment: widget.alignment,
+      onDragStart: () {
+        final adjust = widget.adjustZoom;
+        if (adjust != 0.0 && _savedZoom == null) {
+          final controller = widget.controller.mapController!;
+          _savedZoom = controller.camera.zoom;
+          controller.move(controller.camera.center, _savedZoom! + adjust);
+        }
+      },
+      onDragEnd: (pos) {
+        if (_savedZoom != null) {
+          final controller = widget.controller.mapController!;
+          controller.move(controller.camera.center, _savedZoom!);
+          _savedZoom = null;
+        }
+        widget.onEditor(context, pos);
+      },
+      onTap: () async {
+        final pos = await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MapChooserPage(),
+          ),
+        );
+        if (pos != null && context.mounted) {
+          widget.onEditor(context, pos);
+        }
+      },
     );
   }
 }

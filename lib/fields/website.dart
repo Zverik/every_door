@@ -219,9 +219,9 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  final String? detected = await Navigator.push(context,
+                  final Uri? detected = await Navigator.push(context,
                       MaterialPageRoute(builder: (_) => QrCodeScanner()));
-                  if (detected != null) detectAndSubmitUrl(detected);
+                  if (detected != null) detectAndSubmitUrl(detected.toString());
                 },
               ),
           ],

@@ -38,7 +38,7 @@ class TagMatcher {
     final rawKey = clearPrefixNull(onlyKey);
     if (good.contains(rawKey)) return true;
     if (missing.any((k) => !tags.containsKey(k))) return true;
-    if (rules.isEmpty) return missing.isEmpty;
+    if (rules.isEmpty) return missing.isEmpty && good.isEmpty;
 
     if (onlyKey != null) {
       final rule = rules[rawKey];
@@ -61,7 +61,7 @@ class TagMatcher {
     final rawKey = clearPrefixNull(onlyKey);
     if (good.contains(rawKey)) return true;
     if (missing.any((k) => change[k] == null)) return true;
-    if (rules.isEmpty) return missing.isEmpty;
+    if (rules.isEmpty) return missing.isEmpty && good.isEmpty;
 
     if (onlyKey != null) {
       final rule = rules[rawKey];
@@ -124,6 +124,8 @@ class ValueMatcher {
 
   /// Conditional rules for some values. They allow to check other
   /// sub-tags, e.g. "recycling_type=*" for "amenity=recycling".
+  /// When [only] and [except] are empty, only values in this map
+  /// are accepted (it works as "only").
   final Map<String, TagMatcher> when;
 
   /// When updating a matcher, replace all fields or add values.
@@ -138,20 +140,28 @@ class ValueMatcher {
 
   /// Tests the value to match all the rules.
   bool matches(String value, Map<String, String> tags) {
-    if ((only.isNotEmpty || when.isNotEmpty) &&
-        !(only.contains(value) || when.containsKey(value))) return false;
+    if (only.isNotEmpty && !(only.contains(value) || when.containsKey(value)))
+      return false;
     if (except.isNotEmpty && except.contains(value)) return false;
     if (!(when[value]?.matches(tags) ?? true)) return false;
+    if (when.isNotEmpty &&
+        except.isEmpty &&
+        only.isEmpty &&
+        !when.containsKey(value)) return false;
     return true;
   }
 
   /// Tests an [OsmChange] object for a match. Performs exactly
   /// as [match], but doesn't call [OsmChange.getFullTags].
   bool matchesChange(String value, OsmChange change) {
-    if ((only.isNotEmpty || when.isNotEmpty) &&
-        !(only.contains(value) || when.containsKey(value))) return false;
+    if (only.isNotEmpty && !(only.contains(value) || when.containsKey(value)))
+      return false;
     if (except.isNotEmpty && except.contains(value)) return false;
     if (!(when[value]?.matchesChange(change) ?? true)) return false;
+    if (when.isNotEmpty &&
+        except.isEmpty &&
+        only.isEmpty &&
+        !when.containsKey(value)) return false;
     return true;
   }
 
@@ -175,10 +185,14 @@ class ValueMatcher {
   /// keys that replicated this class fields.
   factory ValueMatcher.fromJson(Map<String, dynamic> data) {
     return ValueMatcher(
-      except: Set.of(data['except'] ?? const []),
-      only: Set.of(data['only'] ?? const []),
-      when: (data['when'] as Map<String, dynamic>)
-          .map((k, v) => MapEntry(k, TagMatcher.fromJson(data['when']))),
+      except: Set.of(
+          (data['except'] as Iterable<dynamic>?)?.whereType<String>() ??
+              const []),
+      only: Set.of((data['only'] as Iterable<dynamic>?)?.whereType<String>() ??
+          const []),
+      when: (data['when'] as Map<String, dynamic>?)
+              ?.map((k, v) => MapEntry(k, TagMatcher.fromJson(data['when']))) ??
+          const {},
       replace: data['replace'] ?? true,
     );
   }

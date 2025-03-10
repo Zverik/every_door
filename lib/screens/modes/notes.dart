@@ -1,4 +1,3 @@
-import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/geometry/geometry.dart';
 import 'package:every_door/helpers/multi_icon.dart';
@@ -32,16 +31,26 @@ class NotesPane extends ConsumerStatefulWidget {
 }
 
 class _NotesPaneState extends ConsumerState<NotesPane> {
-  List<BaseNote> _notes = [];
   final _controller = CustomMapController();
   LatLng? _newLocation;
 
   @override
   initState() {
     super.initState();
+    widget.def.addListener(onDefChange);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateNotes();
     });
+  }
+
+  @override
+  void dispose() {
+    widget.def.removeListener(onDefChange);
+    super.dispose();
+  }
+
+  void onDefChange() {
+    if (mounted) setState(() {});
   }
 
   recordMapMove(MapCamera camera) {
@@ -49,16 +58,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     ref.read(zoomProvider.notifier).state = camera.zoom;
   }
 
-  updateNotes() async {
-    final location = ref.read(effectiveLocationProvider);
-    final notes = await ref
-        .read(notesProvider)
-        .fetchAllNotes(center: location, radius: kNotesVisibilityRadius);
-    // .fetchAllNotes(bounds: controller.camera.visibleBounds);
-    if (!mounted) return;
-    setState(() {
-      _notes = notes.where((n) => !n.deleting).toList();
-    });
+  updateNotes() {
+    widget.def.updateNearest();
   }
 
   _openNoteEditor(BaseNote? note, [LatLng? location]) async {
@@ -88,7 +89,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
       LatLng location, double Function(LatLng) distance) {
     const kMaxTapDistance = 30;
     final camera = _controller.mapController!.camera;
-    final closestNotes = _notes
+    final closestNotes = widget.def.notes
         .where((note) => camera.visibleBounds.contains(note.location))
         .where((note) => distance(note.location) <= kMaxTapDistance)
         .toList();
@@ -136,6 +137,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                 faintWalkPath: false,
                 drawStandardButtons: locked,
                 drawZoomButtons: locked,
+                hasFloatingButton: true,
                 updateState: true,
                 layers: [
                   if (_newLocation != null)
@@ -150,7 +152,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     ),
                   PolylineLayer(
                     polylines: [
-                      for (final drawing in _notes.whereType<MapDrawing>())
+                      for (final drawing
+                          in widget.def.notes.whereType<MapDrawing>())
                         Polyline(
                           points: drawing.path.nodes,
                           color: drawing.style.color,
@@ -164,7 +167,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     ],
                   ),
                   CircleLayer(circles: [
-                    for (final osmNote in _notes.whereType<OsmNote>())
+                    for (final osmNote in widget.def.notes.whereType<OsmNote>())
                       CircleMarker(
                         point: osmNote.location,
                         radius: 15.0,
@@ -174,7 +177,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         borderColor: Colors.black,
                         borderStrokeWidth: 1.0,
                       ),
-                    for (final mapNote in _notes.whereType<MapNote>())
+                    for (final mapNote in widget.def.notes.whereType<MapNote>())
                       CircleMarker(
                         point: mapNote.location,
                         radius: 6.0,
@@ -185,7 +188,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   ]),
                   MarkerLayer(
                     markers: [
-                      for (final mapNote in _notes.whereType<MapNote>())
+                      for (final mapNote
+                          in widget.def.notes.whereType<MapNote>())
                         Marker(
                           point: mapNote.location,
                           rotate: true,
@@ -236,7 +240,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                   onDrawn: (coords) {
                     if (currentTool == kToolEraser) {
                       final line = LineString(coords);
-                      final crossing = _notes
+                      final crossing = widget.def.notes
                           .whereType<MapDrawing>()
                           .where((note) => line.intersects(note.path));
                       ref.read(notesProvider).deleteDrawings(crossing);
@@ -246,7 +250,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         pathType: currentTool,
                       );
                       setState(() {
-                        _notes.add(note);
+                        widget.def.notes.add(note);
                       });
                       ref.read(notesProvider).saveNote(note);
                     }
@@ -284,7 +288,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       // Find a map drawing under the tap and delete it.
                       double minDistance = double.infinity;
                       MapDrawing? closest;
-                      for (final note in _notes.whereType<MapDrawing>()) {
+                      for (final note
+                          in widget.def.notes.whereType<MapDrawing>()) {
                         if (note.path.bounds.contains(location)) {
                           final closestPoint = note.path.closestPoint(location);
                           final distance = distanceToLocation(closestPoint);

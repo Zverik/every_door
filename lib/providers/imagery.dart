@@ -24,6 +24,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
   static final _logger = Logger('ImageryProvider');
   final Ref _ref;
   bool loaded = false;
+  final List<Imagery> _additional = [];
 
   static String? bingUrlTemplate;
 
@@ -63,7 +64,8 @@ class ImageryProvider extends StateNotifier<Imagery> {
     url:
         "EcKQpupFzHsz359rFNAelnzeXi+ZgGVtMyCwNNTaeQFgK+nHlqvc3+K/iN0M0e3HYI2cJbm2TxXm5QT0ranPEswj6sVgagtKNkXyi2HZct8mbGBfTzGg3/T5LHVs4c/lqaviIIxV85VP4LkSJCPEi3vinH+s4lpJUycdGGFHPshdeNTDOW4DB6QHSbDKBzsRrRIdxCRM1If92rsopU+JPMud2IUmLx99Hw85cCGEj9Qopkdzi7OfUaYQpauIfd0e",
     encrypted: true,
-    icon: 'https://osmlab.github.io/editor-layer-index/sources/world/MapBoxSatellite.png',
+    icon:
+        'https://osmlab.github.io/editor-layer-index/sources/world/MapBoxSatellite.png',
     attribution: '© Mapbox',
     minZoom: 1,
     maxZoom: 22,
@@ -72,7 +74,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
   ImageryProvider(this._ref) : super(mapboxImagery) {
     _updateBingUrlTemplate();
     loaded = false;
-    loadState();
+    _loadState();
   }
 
   Future<List<Imagery>> getImageryListForLocation(LatLng location) async {
@@ -80,6 +82,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
         geoHasher.encode(location.longitude, location.latitude, precision: 4);
     final rows = await _ref.read(presetProvider).imageryQuery(geohash);
     List<Imagery> results = rows.map((row) => Imagery.fromJson(row)).toList();
+    results.addAll(_additional);
     results.add(mapboxImagery);
     // Imagery is disabled by Maxar.
     // results.add(maxarPremiumImagery);
@@ -87,16 +90,22 @@ class ImageryProvider extends StateNotifier<Imagery> {
     return results;
   }
 
-  loadState() async {
+  /// Loads the chosen imagery from shared preferences. There are some
+  /// system keys it processes in code: for Bing, Maxar, and Mapbox.
+  /// If it's none of those, it asks [PresetProvider] if it knows this key.
+  _loadState() async {
     final prefs = await SharedPreferences.getInstance();
     final imageryId = prefs.getString(kImageryKey);
     if (imageryId != null) {
       if (imageryId == bingImagery.id) {
         state = bingImagery;
       } else if (imageryId == maxarPremiumImagery.id) {
-        state = mapboxImagery;  // yes, we're silently changing the chosen imagery.
+        state =
+            mapboxImagery; // yes, we're silently changing the chosen imagery.
       } else if (imageryId == mapboxImagery.id) {
         state = mapboxImagery;
+      } else if (_additional.any((i) => i.id == imageryId)) {
+        state = _additional.firstWhere((i) => i.id == imageryId);
       } else {
         final imagery =
             await _ref.read(presetProvider).singleImageryQuery(imageryId);
@@ -108,14 +117,50 @@ class ImageryProvider extends StateNotifier<Imagery> {
     loaded = true;
   }
 
-  saveState() async {
+  /// Simply saves the current chosen imagery to shared preferences.
+  _saveState() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(kImageryKey, state.id);
   }
 
+  /// Changes the current imagery, notifies listeners, and saves the state.
   setImagery(Imagery value) {
     state = value;
-    saveState();
+    _saveState();
+  }
+
+  /// Adds the imagery definition to an internal additional imagery
+  /// list, to be provided to everywhere. Also if the imagery added
+  /// has been stored to preferences, immediately switches to it.
+  void registerImagery(Imagery imagery) async {
+    if (!_additional.any((i) => i.id == imagery.id)) {
+      _additional.add(imagery);
+
+      final prefs = await SharedPreferences.getInstance();
+      final imageryId = prefs.getString(kImageryKey);
+      if (imageryId != null && imageryId == imagery.id) {
+        state = imagery;
+      }
+    }
+  }
+
+  /// Removes one specific additional imagery entry. Behaves
+  /// like [resetImagery], in that it changes state, but does
+  /// not save it.
+  void unregisterImagery(String imageryId) {
+    _additional.removeWhere((i) => i.id == imageryId);
+    if (state.id == imageryId) state = mapboxImagery;
+  }
+
+  /// Called to clear the list of imagery added. Usually called
+  /// on plugin de-registration, and some of the imagery can be
+  /// immediately reinstated (including the selected one), so
+  /// we're changing the state, but not saving it.
+  void resetImagery() {
+    if (_additional.any((i) => i == state)) {
+      state = mapboxImagery;
+    }
+    _additional.clear();
   }
 
   Future _updateBingUrlTemplate() async {

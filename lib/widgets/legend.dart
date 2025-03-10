@@ -1,13 +1,17 @@
 import 'package:every_door/constants.dart';
-import 'package:every_door/providers/legend.dart';
+import 'package:every_door/helpers/legend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class LegendPane extends ConsumerWidget {
+class LegendPane extends StatelessWidget {
+  final LegendController _legend;
+
+  LegendPane(this._legend, {super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final legend = List.of(ref.watch(legendProvider));
+  Widget build(BuildContext context) {
+    final legend = List.of(_legend.legend);
     if (legend.isEmpty) return Container();
 
     final loc = AppLocalizations.of(context)!;
@@ -21,7 +25,9 @@ class LegendPane extends ConsumerWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.circle, color: item.color, size: 20.0),
+                if (item.color != null)
+                  Icon(Icons.circle, color: item.color, size: 20.0),
+                if (item.icon != null) item.icon!.getWidget(icon: false, size: 20.0),
                 SizedBox(width: 5.0),
                 Expanded(
                   child: Padding(

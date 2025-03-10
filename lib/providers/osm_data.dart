@@ -160,6 +160,20 @@ class OsmDataHelper extends ChangeNotifier {
     return await _queryElements(hashes);
   }
 
+  /// Queries a single element from the downloaded objects
+  /// and returns an [OsmChange] for it, even if it was deleted.
+  Future<OsmChange?> getElement(OsmId id) async {
+    final database = await _ref.read(databaseProvider).database;
+    final rows = await database.query(
+      OsmElement.kTableName,
+      where: 'osmid = ?',
+      whereArgs: [id.toString()],
+    );
+    if (rows.isEmpty) return null;
+    final changes = _ref.read(changesProvider);
+    return changes.changeFor(OsmElement.fromJson(rows.first));
+  }
+
   bool isBuildingOrAddressPoint(Map<String, String> tags) {
     if (tags.containsKey('building')) return true;
     const kMetaTags = {'source', 'note'};

@@ -99,15 +99,26 @@ void main() {
       vmatch(v, 'third', {}, isFalse);
     });
 
+    test('When + except', () {
+      final v = ValueMatcher(
+        except: {'second'},
+        when: {'first': TagMatcher.empty},
+      );
+      vmatch(v, '', {}, isTrue);
+      vmatch(v, 'first', {}, isTrue);
+      vmatch(v, 'second', {}, isFalse);
+      vmatch(v, 'third', {}, isTrue);
+    });
+
     test('Except has priority on when', () {
       final v = ValueMatcher(
         except: {'first'},
         when: {'first': TagMatcher.empty},
       );
       // Should be no way of getting "true".
-      vmatch(v, '', {}, isFalse);
+      vmatch(v, '', {}, isTrue);
       vmatch(v, 'first', {}, isFalse);
-      vmatch(v, 'third', {}, isFalse);
+      vmatch(v, 'third', {}, isTrue);
     });
 
     test('Replacing matcher', () {
@@ -154,8 +165,9 @@ void main() {
 
     test('Good is checked', () {
       final t = TagMatcher({}, good: {'first'});
-      tmatch(t, {'first': 'other'}, null, isTrue); // because rules are empty
+      tmatch(t, {'first': 'other'}, null, isFalse);
       tmatch(t, {'first': 'other'}, 'first', isTrue);
+      tmatch(t, {'first': 'other', 'other': 'what'}, 'other', isFalse);
     });
 
     test('Good is checked w/o rules', () {

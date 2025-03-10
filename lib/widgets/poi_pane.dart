@@ -1,5 +1,7 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +11,9 @@ import 'poi_tile.dart';
 
 class PoiPane extends ConsumerStatefulWidget {
   final List<OsmChange> amenities;
+  final Function(OsmChange, int)? isCountedOld;
 
-  const PoiPane(this.amenities);
+  const PoiPane(this.amenities, {this.isCountedOld});
 
   @override
   ConsumerState<PoiPane> createState() => _PoiPaneState();
@@ -30,7 +33,7 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
   Widget nothingAroundPane(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final hasFilter = ref.watch(poiFilterProvider).isNotEmpty;
-    final needDownload = true; // TODO: areaStatusProvider
+    final needDownload = ref.read(areaStatusProvider).value != AreaStatus.fresh;
 
     String message;
     if (needDownload)
@@ -49,6 +52,14 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
         textAlign: TextAlign.center,
       ),
     ));
+  }
+
+  void toggleCheck(OsmChange element) {
+    setState(() {
+      element.toggleCheck();
+    });
+    final changes = ref.read(changesProvider);
+    changes.saveChange(element);
   }
 
   Widget buildGridHorizontal(BuildContext context) {
@@ -72,12 +83,9 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
                 amenity: entry.value,
                 width: 190.0,
                 onToggleCheck: () {
-                  setState(() {
-                    entry.value.toggleCheck();
-                  });
-                  final changes = ref.read(changesProvider);
-                  changes.saveChange(entry.value);
+                  toggleCheck(entry.value);
                 },
+                isCountedOld: widget.isCountedOld,
               ),
           ],
         ),

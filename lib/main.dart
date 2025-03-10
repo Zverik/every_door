@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/log_store.dart';
+import 'package:every_door/providers/app_links_provider.dart';
 import 'package:every_door/providers/language.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -51,13 +52,15 @@ class EveryDoorApp extends ConsumerWidget {
         title: kAppTitle,
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          hintColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+          hintColor:
+              Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
           useMaterial3: false,
         ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         // Adding "en" to the front so it's used by default.
         supportedLocales: [Locale('en')] + AppLocalizations.supportedLocales,
         locale: ref.watch(languageProvider),
+        navigatorKey: ref.read(geoIntentProvider).navigatorKey,
         home: LoadingPage(),
         builder: (context, child) => Stack(children: [
           if (child != null) child,

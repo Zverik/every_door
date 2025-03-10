@@ -269,9 +269,6 @@ class OsmElement {
   }
 
   bool get isPoint => id.type == OsmElementType.node;
-  bool get isObsolete =>
-      downloaded != null &&
-      DateTime.now().difference(downloaded!) > kObsoleteData;
   bool get isGood => ElementKind.everything.matchesTags(tags);
   bool get isSnapTarget =>
       id.type == OsmElementType.way && isSnapTargetTags(tags);

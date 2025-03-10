@@ -1,6 +1,5 @@
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/editor_settings.dart';
-import 'package:every_door/providers/legend.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
 import 'package:every_door/widgets/area_status.dart';
@@ -44,18 +43,31 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
   void initState() {
     super.initState();
 
+    widget.def.addListener(onDefChange);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateNearest();
     });
+  }
+
+  @override
+  void dispose() {
+    widget.def.removeListener(onDefChange);
+    super.dispose();
+  }
+
+  void onDefChange() {
+    if (mounted) setState(() {});
   }
 
   updateNearest() async {
     // Disabling updates in zoomed in mode.
     if (ref.read(microZoomedInProvider) != null) return;
 
-    final locale = Localizations.localeOf(context);
     await widget.def.updateNearest();
-    widget.def.updateLegend(locale);
+
+    if (mounted) {
+      widget.def.updateLegend(context);
+    }
 
     // Zoom automatically only when tracking location.
     if (mounted && ref.read(trackingProvider)) {
@@ -70,7 +82,8 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
 
     if (amenitiesAtCenter.isEmpty) return;
     if (amenitiesAtCenter.length == 1 ||
-        ref.read(microZoomedInProvider) != null) {
+        ref.read(microZoomedInProvider) != null ||
+        !widget.def.enableZoomingIn) {
       if (amenitiesAtCenter.length > 1) {
         // Sort by distance.
         amenitiesAtCenter.sort(
@@ -144,11 +157,6 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
       controller.move(newState?.center ?? controller.camera.center, targetZoom);
     });
 
-    // Update colors when the legend is ready.
-    ref.listen(legendProvider, (_, next) {
-      setState(() {});
-    });
-
     final screenSize = MediaQuery.of(context).size;
     final isWide =
         screenSize.width > screenSize.height && screenSize.height < 600;
@@ -181,7 +189,7 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
           child: bottomPaneChild,
         );
     } else if (!isWide) {
-      bottomPane = LegendPane();
+      bottomPane = LegendPane(widget.def.legend);
     } else {
       bottomPane = SizedBox(
         child: SingleChildScrollView(
@@ -189,7 +197,7 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
             left: false,
             bottom: false,
             right: false,
-            child: LegendPane(),
+            child: LegendPane(widget.def.legend),
           ),
         ),
         width: 200.0,
@@ -208,6 +216,7 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
                 controller: _controller,
                 onTap: micromappingTap,
                 updateState: true,
+                hasFloatingButton: widget.def.nearestPOI.isNotEmpty && !isWide,
                 layers: [
                   CircleLayer(
                     circles: [

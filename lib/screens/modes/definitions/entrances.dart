@@ -2,7 +2,11 @@ import 'package:country_coder/country_coder.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/plugin.dart';
+import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/location.dart';
+import 'package:every_door/providers/presets.dart';
+import 'package:every_door/screens/editor.dart';
 import 'package:every_door/screens/editor/building.dart';
 import 'package:every_door/screens/editor/entrance.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
@@ -11,14 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class EntrancesModeDefinition extends BaseModeDefinition {
-  static final kOurKinds = <ElementKindImpl>[
-    ElementKind.entrance,
-    ElementKind.building,
-    ElementKind.address,
-  ];
-
-  bool buildingsNeedAddresses = false;
+abstract class EntrancesModeDefinition extends BaseModeDefinition {
   List<OsmChange> nearest = [];
   LatLng? newLocation;
 
@@ -28,10 +25,64 @@ class EntrancesModeDefinition extends BaseModeDefinition {
   String get name => "entrances";
 
   @override
-  MultiIcon get icon => MultiIcon(fontIcon: Icons.home);
+  MultiIcon getIcon(BuildContext context, bool outlined) {
+    final loc = AppLocalizations.of(context)!;
+    return MultiIcon(
+      fontIcon: !outlined ? Icons.home : Icons.home_outlined,
+      tooltip: loc.navEntrancesMode,
+    );
+  }
 
   @override
-  MultiIcon get iconOutlined => MultiIcon(fontIcon: Icons.home_outlined);
+  Future<void> updateNearest() async {
+    nearest = await super.getNearestChanges();
+    notifyListeners();
+  }
+
+  double get adjustZoomPrimary => 0.0;
+  double get adjustZoomSecondary => 0.0;
+
+  SizedMarker? buildMarker(OsmChange element);
+
+  MultiIcon? getButton(BuildContext context, bool isPrimary);
+
+  void openEditor({
+    required BuildContext context,
+    OsmChange? element,
+    LatLng? location,
+    bool? isPrimary,
+  });
+
+  Widget disambiguationLabel(BuildContext context, OsmChange element) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Text(element.typeAndName, style: TextStyle(fontSize: 20.0)),
+    );
+  }
+}
+
+class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
+  static final kOurKinds = <ElementKindImpl>[
+    ElementKind.entrance,
+    ElementKind.building,
+    ElementKind.address,
+  ];
+
+  bool buildingsNeedAddresses = false;
+
+  DefaultEntrancesModeDefinition(super.ref);
+
+  @override
+  String get name => "entrances";
+
+  @override
+  MultiIcon getIcon(BuildContext context, bool outlined) {
+    final loc = AppLocalizations.of(context)!;
+    return MultiIcon(
+      fontIcon: !outlined ? Icons.home : Icons.home_outlined,
+      tooltip: loc.navEntrancesMode,
+    );
+  }
 
   ElementKindImpl _getOurKind(OsmChange element) =>
       ElementKind.matchChange(element, kOurKinds);
@@ -40,7 +91,7 @@ class EntrancesModeDefinition extends BaseModeDefinition {
   bool isOurKind(OsmChange element) =>
       _getOurKind(element) != ElementKind.unknown;
 
-  double get adjustZoomPrimary => 0.0;
+  @override
   double get adjustZoomSecondary => 0.7;
 
   @override
@@ -134,6 +185,7 @@ class EntrancesModeDefinition extends BaseModeDefinition {
     return number;
   }
 
+  @override
   SizedMarker buildMarker(OsmChange element) {
     final kind = _getOurKind(element);
     if (kind == ElementKind.building) {
@@ -159,6 +211,7 @@ class EntrancesModeDefinition extends BaseModeDefinition {
     }
   }
 
+  @override
   MultiIcon? getButton(BuildContext context, bool isPrimary) {
     final loc = AppLocalizations.of(context)!;
     if (isPrimary) {
@@ -168,12 +221,13 @@ class EntrancesModeDefinition extends BaseModeDefinition {
       );
     } else {
       return MultiIcon(
-        fontIcon: Icons.house,
-        tooltip: loc.entrancesAddBuilding,
+        fontIcon: Icons.sensor_door,
+        tooltip: loc.entrancesAddEntrance,
       );
     }
   }
 
+  @override
   void openEditor({
     required BuildContext context,
     OsmChange? element,
@@ -204,6 +258,7 @@ class EntrancesModeDefinition extends BaseModeDefinition {
     notifyListeners();
   }
 
+  @override
   Widget disambiguationLabel(BuildContext context, OsmChange element) {
     final loc = AppLocalizations.of(context)!;
     final kind = _getOurKind(element);
@@ -236,13 +291,148 @@ class EntrancesModeDefinition extends BaseModeDefinition {
   }
 
   @override
-  void updateFromJson(Map<String, dynamic> data) {
+  void updateFromJson(Map<String, dynamic> data, Plugin plugin) {
     // TODO: implement updateFromJson
   }
 }
 
 class EntrancesModeCustom extends EntrancesModeDefinition {
-  EntrancesModeCustom(super.ref, Map<String, dynamic> data) {
-    // TODO
+  final String _name;
+  MultiIcon? _icon;
+  MultiIcon? _iconOutlined;
+  MultiIcon? _primary;
+  MultiIcon? _secondary;
+  String? _primaryPreset;
+  String? _secondaryPreset;
+  double? _zoomPrimary;
+  double? _zoomSecondary;
+  List<ElementKindImpl> _kinds = const [];
+  Map<String, dynamic> _rendering = const {};
+
+  EntrancesModeCustom({
+    required ref,
+    required String name,
+    required Map<String, dynamic> data,
+    required Plugin plugin,
+  })  : _name = name,
+        super(ref) {
+    _kinds = (data['kinds'] as List<dynamic>?)
+            ?.map((k) => ElementKind.get(k))
+            .toList() ??
+        const [];
+    _rendering = data['markers'] ?? const {};
+
+    final modeIconName = data['icon'];
+    if (modeIconName != null) {
+      _icon = plugin.loadIcon(modeIconName, data['name'] ?? _name);
+      if (data.containsKey('iconOutlined')) {
+        _iconOutlined =
+            plugin.loadIcon(data['iconOutlined']!, data['name'] ?? _name);
+      }
+    }
+
+    final Map<String, dynamic>? primary = data['primary'];
+    if (primary != null) {
+      _zoomPrimary = primary['adjustZoom'];
+      _primaryPreset = primary['preset'];
+      final iconName = primary['icon'];
+      if (iconName != null) {
+        _primary = plugin.loadIcon(iconName, primary['tooltip']);
+      }
+    }
+
+    final Map<String, dynamic>? secondary = data['secondary'];
+    if (secondary != null) {
+      _zoomSecondary = secondary['adjustZoom'];
+      _secondaryPreset = secondary['preset'];
+      final iconName = secondary['icon'];
+      if (iconName != null) {
+        _secondary = plugin.loadIcon(iconName, secondary['tooltip']);
+      }
+    }
+  }
+
+  @override
+  String get name => _name;
+
+  @override
+  double get adjustZoomPrimary => _zoomPrimary ?? 0.0;
+
+  @override
+  double get adjustZoomSecondary => _zoomSecondary ?? 0.0;
+
+  @override
+  bool isOurKind(OsmChange element) {
+    return ElementKind.matchChange(element, _kinds) != ElementKind.unknown;
+  }
+
+  @override
+  MultiIcon getIcon(BuildContext context, bool outlined) {
+    return (!outlined ? _icon : _iconOutlined ?? _icon) ??
+        super.getIcon(context, outlined);
+  }
+
+  @override
+  SizedMarker? buildMarker(OsmChange element) {
+    final kind = ElementKind.matchChange(element, _kinds);
+    final data = _rendering[kind.name] as Map<String, dynamic>?;
+    if (data != null) {
+      final isComplete = (data['requiredKeys'] as List<dynamic>?)
+              ?.every((k) => element[k] != null) ??
+          false;
+      final String? labelTemplate = data['label'];
+      if (labelTemplate == null) {
+        return EntranceMarker(isComplete: isComplete);
+      } else {
+        final re = RegExp(r'\{([^}]+)\}');
+        final label =
+            labelTemplate.replaceAllMapped(re, (m) => element[m[1]!] ?? '?');
+        return BuildingMarker(isComplete: isComplete, label: label);
+      }
+    }
+    return null;
+  }
+
+  @override
+  MultiIcon? getButton(BuildContext context, bool isPrimary) {
+    return isPrimary ? _primary : _secondary;
+  }
+
+  @override
+  void openEditor({
+    required BuildContext context,
+    OsmChange? element,
+    LatLng? location,
+    bool? isPrimary,
+  }) async {
+    Preset? preset;
+    if (element == null) {
+      final presetName = isPrimary ?? true ? _primaryPreset : _secondaryPreset;
+      if (presetName == null) return;
+      final locale = Localizations.localeOf(context);
+      final presets = await ref
+          .read(presetProvider)
+          .getPresetsById([presetName], locale: locale);
+      if (presets.isEmpty) return;
+      preset = presets.first;
+    }
+
+    if (!context.mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PoiEditorPage(
+          amenity: element,
+          location: location,
+          preset: preset,
+        ),
+        fullscreenDialog: true,
+      ),
+    );
+  }
+
+  @override
+  void updateFromJson(Map<String, dynamic> data, Plugin plugin) {
+    // TODO: implement updateFromJson
   }
 }

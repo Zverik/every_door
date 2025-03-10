@@ -30,6 +30,7 @@ class PoiTile extends ConsumerWidget {
   final int? index;
   final double? width;
   final VoidCallback? onToggleCheck;
+  final Function(OsmChange, int)? isCountedOld;
 
   late final String title;
   late final String present;
@@ -39,6 +40,7 @@ class PoiTile extends ConsumerWidget {
     required this.amenity,
     this.width,
     this.onToggleCheck,
+    this.isCountedOld,
   }) {
     present = buildPresent();
   }
@@ -101,7 +103,13 @@ class PoiTile extends ConsumerWidget {
         (showWarning ? PoiIcons.warning : '') +
         amenity.typeAndName;
     final missing = buildMissing(ref);
+
     final needsCheckDate = ElementKind.needsCheck.matchesChange(amenity);
+    final isOld =
+        isCountedOld == null ? false : isCountedOld!(amenity, amenity.age);
+    final wasOld = isCountedOld == null
+        ? false
+        : (!amenity.isNew && isCountedOld!(amenity, amenity.baseAge));
 
     return Container(
       decoration: BoxDecoration(
@@ -116,19 +124,19 @@ class PoiTile extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (onToggleCheck != null && needsCheckDate)
+            if (onToggleCheck != null && isCountedOld != null && needsCheckDate)
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTap: amenity.wasOld ? onToggleCheck : null,
+                onTap: wasOld ? onToggleCheck : null,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.only(left: 8.0),
                       child: Icon(
-                        amenity.isOld ? Icons.check : Icons.check_circle,
-                        color: amenity.isOld ? Colors.black : Colors.green,
+                        isOld ? Icons.check : Icons.check_circle,
+                        color: isOld ? Colors.black : Colors.green,
                         size: 30.0,
                       ),
                     ),
@@ -137,15 +145,15 @@ class PoiTile extends ConsumerWidget {
               ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(right: 8.0, top: 8.0, bottom: 8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
                     ref.read(microZoomedInProvider.notifier).state = null;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => PoiEditorPage(amenity: amenity),
-                          fullscreenDialog: true,
+                        builder: (_) => PoiEditorPage(amenity: amenity),
+                        fullscreenDialog: true,
                       ),
                     );
                   },
@@ -166,7 +174,8 @@ class PoiTile extends ConsumerWidget {
                           TextSpan(text: '\n'),
                           TextSpan(
                             text: '${loc.tileNo} $missing',
-                            style: TextStyle(backgroundColor: Colors.red.shade50),
+                            style:
+                                TextStyle(backgroundColor: Colors.red.shade50),
                           ),
                         ],
                       ],

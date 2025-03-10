@@ -182,6 +182,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
 
   // Check date management.
   int get age => calculateAge(this[kCheckedKey]);
+  int get baseAge => calculateAge(element?.tags[kCheckedKey]);
   bool get isOld => isCountedOld(age);
   bool get wasOld =>
       !isNew && isCountedOld(calculateAge(element?.tags[kCheckedKey]));

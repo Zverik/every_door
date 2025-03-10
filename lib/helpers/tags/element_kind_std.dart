@@ -7,20 +7,20 @@ import 'package:flutter/material.dart';
 
 /// To be used only from [ElementKind.reset].
 void registerStandardKinds() {
-  ElementKind.register("empty", _EmptyKind());
-  ElementKind.register("amenity", _AmenityKind());
-  ElementKind.register("micro", _MicroKind());
-  ElementKind.register("building", _BuildingKind());
-  ElementKind.register("entrance", _EntranceKind());
-  ElementKind.register("address", _AddressKind());
-  ElementKind.register("structure", _StructureKind());
-  ElementKind.register("needsCheck", _AmenityKind());
-  ElementKind.register("needsInfo", _NeedsMoreInfo());
-  ElementKind.register("everything", _EverythingKind());
+  ElementKind.register(_EmptyKind());
+  ElementKind.register(_AmenityKind());
+  ElementKind.register(_MicroKind());
+  ElementKind.register(_BuildingKind());
+  ElementKind.register(_EntranceKind());
+  ElementKind.register(_AddressKind());
+  ElementKind.register(_StructureKind());
+  ElementKind.register(_AmenityKind(name: 'needsCheck'));
+  ElementKind.register(_NeedsMoreInfo());
+  ElementKind.register(_EverythingKind());
 }
 
 class _AmenityKind extends ElementKindImpl {
-  _AmenityKind()
+  _AmenityKind({super.name = 'amenity'})
       : super(
           icon: MultiIcon(fontIcon: Icons.shopping_cart),
           matcher: TagMatcher(good: {
@@ -171,6 +171,7 @@ class _AmenityKind extends ElementKindImpl {
 class _MicroKind extends ElementKindImpl {
   _MicroKind()
       : super(
+            name: 'micro',
             icon: MultiIcon(fontIcon: Icons.park),
             matcher: TagMatcher({}, good: {
               'advertising',
@@ -215,6 +216,7 @@ class _MicroKind extends ElementKindImpl {
 class _EntranceKind extends ElementKindImpl {
   _EntranceKind()
       : super(
+          name: 'entrance',
           icon: MultiIcon(fontIcon: Icons.door_front_door),
           matcher: TagMatcher({
             'entrance': ValueMatcher(),
@@ -227,6 +229,7 @@ class _EntranceKind extends ElementKindImpl {
 class _BuildingKind extends ElementKindImpl {
   _BuildingKind()
       : super(
+          name: 'building',
           icon: MultiIcon(fontIcon: Icons.home),
           matcher: TagMatcher({
             'building': ValueMatcher(except: {"entrance"}),
@@ -236,7 +239,11 @@ class _BuildingKind extends ElementKindImpl {
 }
 
 class _AddressKind extends ElementKindImpl {
-  _AddressKind() : super(icon: MultiIcon(fontIcon: Icons.onetwothree));
+  _AddressKind()
+      : super(
+          name: 'address',
+          icon: MultiIcon(fontIcon: Icons.onetwothree),
+        );
 
   @override
   bool matchesTags(Map<String, String> tags) {
@@ -256,7 +263,7 @@ class _AddressKind extends ElementKindImpl {
 class _EmptyKind extends ElementKindImpl {
   static const _kMetaTags = {'source', 'note'};
 
-  _EmptyKind() : super(onMainKey: false);
+  _EmptyKind() : super(name: 'empty', onMainKey: false);
 
   @override
   bool matchesTags(Map<String, String> tags) {
@@ -271,6 +278,7 @@ class _EmptyKind extends ElementKindImpl {
 class _EverythingKind extends ElementKindImpl {
   _EverythingKind()
       : super(
+          name: 'everything',
           matcher: TagMatcher(good: {
             'shop',
             'craft',
@@ -430,6 +438,7 @@ class _EverythingKind extends ElementKindImpl {
 class _StructureKind extends ElementKindImpl {
   _StructureKind()
       : super(
+          name: 'structure',
           matcher: TagMatcher({
             'amenity': ValueMatcher(
               only: {
@@ -467,6 +476,7 @@ class _StructureKind extends ElementKindImpl {
 class _NeedsMoreInfo extends ElementKindImpl {
   _NeedsMoreInfo()
       : super(
+          name: 'needsInfo',
           matcher: TagMatcher({
             'amenity': ValueMatcher(when: {
               'bench': TagMatcher({}, missing: {'backrest', 'material'}),

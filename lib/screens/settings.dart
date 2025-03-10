@@ -14,6 +14,7 @@ import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/changeset_pane.dart';
 import 'package:every_door/screens/settings/imagery.dart';
 import 'package:every_door/screens/settings/language.dart';
+import 'package:every_door/screens/settings/plugins.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
@@ -163,6 +164,17 @@ class SettingsPage extends ConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LanguagePage()),
+                  );
+                },
+              ),
+              SettingsTile(
+                title: Text('Plugins'),
+                trailing: Icon(Icons.navigate_next),
+                onPressed: (context) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PluginSettingsPage()),
                   );
                 },
               ),
