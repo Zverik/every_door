@@ -220,10 +220,10 @@ void main() {
     expect(SpecificDays.parse('Jan 1'), isNotNull);
     expect(SpecificDays.parse('Feb 30'), isNull);
     expect(SpecificDays.parse('Jan 1'), equals(SpecificDays({Date(1, 1)})));
-    expect(SpecificDays.parse('Jan 1')?.makeString(), equals('Jan 1'));
+    expect(SpecificDays.parse('Jan 1')?.makeString(), equals('Jan 01'));
     expect(SpecificDays.parse('Aug 20-23')?.makeString(), equals('Aug 20-23'));
-    expect(SpecificDays.parse('Feb 27-Mar 3')?.makeString(), equals('Feb 27-Mar 3'));
+    expect(SpecificDays.parse('Feb 27-Mar 3')?.makeString(), equals('Feb 27-Mar 03'));
     // Does not account for New Year switch.
-    expect(SpecificDays.parse('Dec 30-Jan 2')?.makeString(), equals('Jan 1-2,Dec 30-31'));
+    expect(SpecificDays.parse('Dec 30-Jan 2')?.makeString(), equals('Jan 01-02,Dec 30-31'));
   });
 }
