@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/plugin_repo.dart';
+import 'package:every_door/screens/settings/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -118,6 +119,11 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         throw Exception(
             'The URL implies plugin id "${data.id}", but it actually is "${tmpData.id}"');
       }
+      final bundledUrl = tmpData.url;
+      if (bundledUrl != null && bundledUrl != data.url) {
+        throw Exception(
+            'The plugin supplies URL different from ${data.url}: $bundledUrl');
+      }
 
       // TODO: show and agree idk
 
@@ -155,7 +161,19 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         ),
       );
     } else {
-      body = Text('Installed?');
+      body = Column(
+        children: [
+          Text('Installed?'),
+          TextButton(
+            child: Text('See logs'),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (_) => LogDisplayPage(),
+              ));
+            },
+          ),
+        ],
+      );
     }
     return Scaffold(
       appBar: AppBar(

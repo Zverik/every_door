@@ -4,6 +4,7 @@ import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/plugin_manager.dart';
 import 'package:every_door/providers/plugin_repo.dart';
 import 'package:every_door/screens/settings/install_plugin.dart';
+import 'package:every_door/screens/settings/manage_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -76,22 +77,10 @@ class PluginRow extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isActive = ref.watch(pluginManagerProvider).contains(plugin);
-    return Dismissible(
-      key: Key(plugin.id),
-      direction: DismissDirection.endToStart,
-      background: Container(
-        color: Colors.red,
-        padding: EdgeInsets.only(right: 15.0),
-        alignment: Alignment.centerRight,
-        child: Icon(Icons.delete, color: Colors.white),
-      ),
-      onDismissed: (_) {
-        // Plugin deletion is easily reversible (by installing it anew),
-        // so we don't ask the user again.
-        ref.read(pluginRepositoryProvider.notifier).deletePlugin(plugin.id);
-      },
-      child: SwitchListTile(
-        title: Text(plugin.id),
+    return ListTile(
+      title: Text(plugin.getName(context)),
+      trailing: Icon(Icons.navigate_next),
+      leading: Switch(
         value: isActive,
         onChanged: (newValue) {
           ref
@@ -99,6 +88,11 @@ class PluginRow extends ConsumerWidget {
               .setStateAndSave(plugin, newValue);
         },
       ),
+      onTap: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (_) => ManagePluginPage(plugin),
+        ));
+      },
     );
   }
 }

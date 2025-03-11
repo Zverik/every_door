@@ -8,7 +8,7 @@ import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
-import 'package:every_door/providers/plugin_repo.dart';
+import 'package:every_door/providers/plugin_manager.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/browser.dart';
 import 'package:flutter/foundation.dart' show compute;
@@ -72,7 +72,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     setState(() {
       message = "Loading plugins";
     });
-    ref.read(pluginRepositoryProvider);
+    ref.read(pluginManagerProvider);
 
     // Update floors in the background.
     ref.read(osmDataProvider).updateAddressesWithFloors();

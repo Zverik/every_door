@@ -21,7 +21,7 @@ class PluginLocalizations {
     return {}; // TODO
   }
 
-  dynamic _resolveKey(Map<String, dynamic> data, String key) {
+  String? _resolveKey(Map<String, dynamic> data, String key) {
     final parts = key.split('.');
     dynamic k = data;
     for (final p in parts) {
@@ -29,7 +29,7 @@ class PluginLocalizations {
       k = k[p];
       if (k == null) return null;
     }
-    return k;
+    return k.toString();
   }
 
   String translate(BuildContext context, String key,
@@ -37,7 +37,7 @@ class PluginLocalizations {
     final locale = Localizations.localeOf(context);
     final trans = _getTranslations(locale);
     return trans[key] ??
-        (data == null ? key : _resolveKey(data, key)); // TODO: args for resolved?
+        (data == null ? key : _resolveKey(data, key)) ?? key; // TODO: args for resolved?
   }
 
   String translateN(BuildContext context, String key, int count,

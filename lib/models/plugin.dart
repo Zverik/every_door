@@ -27,6 +27,8 @@ class PluginData {
   const PluginData(this.id, this.data);
 
   String? get version => data['version'];
+
+  Uri? get url => data.containsKey('url') ? Uri.tryParse(data['url']) : null;
 }
 
 /// Plugin metadata. Same as [PluginData], but with added service methods
@@ -49,6 +51,11 @@ class Plugin extends PluginData {
       Plugin(id: pd.id, data: pd.data, directory: directory);
 
   // TODO
+
+  String getName(BuildContext context) {
+    final translated = translate(context, 'name');
+    return translated == 'name' ? id : translated;
+  }
 
   String translate(BuildContext context, String key,
       {Map<String, dynamic>? args}) {

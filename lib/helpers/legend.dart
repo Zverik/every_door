@@ -71,6 +71,10 @@ class LegendController extends ChangeNotifier {
   /// cleared via [resetFixes].
   final Map<String, MultiIcon> _fixedIcons = {};
 
+  /// If false, does not add presets with icons defined to the legend. See
+  /// [fixPreset] for adding icons.
+  bool iconsInLegend = true;
+
   static const kLegendColors = [
     NamedColor('red', 0xfffd0f0b),
     NamedColor('teal', 0xff1dd798),
@@ -192,7 +196,10 @@ class LegendController extends ChangeNotifier {
     final labelToLegend = {for (final l in newLegend) l.label: l};
     _legendMap = typesMap.map((amenity, label) =>
         MapEntry(amenity.databaseId, labelToLegend[label?.label]));
-    _legend = newLegend;
+    _legend = iconsInLegend
+        ? newLegend
+        : newLegend.where((l) => l.color != null).toList();
+
     notifyListeners();
   }
 

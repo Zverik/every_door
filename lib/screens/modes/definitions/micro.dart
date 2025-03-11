@@ -88,8 +88,6 @@ abstract class MicromappingModeDefinition extends BaseModeDefinition {
     notifyListeners();
   }
 
-  Widget buildMarker(int index, OsmChange element, bool isZoomedIn);
-
   void openEditor(BuildContext context, LatLng location) async {
     Navigator.push(
       context,
@@ -133,25 +131,13 @@ abstract class MicromappingModeDefinition extends BaseModeDefinition {
         // TODO: test and error reporting
       }
     }
-  }
-}
 
-class DefaultMicromappingModeDefinition extends MicromappingModeDefinition {
-  DefaultMicromappingModeDefinition(super.ref);
-
-  @override
-  String get name => "micro";
-
-  @override
-  MultiIcon getIcon(BuildContext context, bool outlined) {
-    final loc = AppLocalizations.of(context)!;
-    return MultiIcon(
-      fontIcon: !outlined ? Icons.park : Icons.park_outlined,
-      tooltip: loc.navMicromappingMode,
-    );
+    final iconsInLegend = data['iconsInLegend'];
+    if (iconsInLegend != null && iconsInLegend is bool) {
+      legend.iconsInLegend = iconsInLegend;
+    }
   }
 
-  @override
   Widget buildMarker(int index, OsmChange element, bool isZoomedIn) {
     final icon = legend.getLegendItem(element);
     if (isZoomedIn) {
@@ -170,6 +156,13 @@ class DefaultMicromappingModeDefinition extends MicromappingModeDefinition {
   }
 }
 
+class DefaultMicromappingModeDefinition extends MicromappingModeDefinition {
+  DefaultMicromappingModeDefinition(super.ref);
+
+  @override
+  String get name => "micro";
+}
+
 class MicromappingModeCustom extends MicromappingModeDefinition {
   final String _name;
   MultiIcon? _icon;
@@ -182,10 +175,6 @@ class MicromappingModeCustom extends MicromappingModeDefinition {
     required Plugin plugin,
   })  : _name = name,
         super(ref) {
-    _kinds = (data['kinds'] as List<dynamic>?)
-            ?.map((k) => ElementKind.get(k))
-            .toList() ??
-        [ElementKind.micro];
 
     final modeIconName = data['icon'];
     if (modeIconName != null) {
@@ -195,6 +184,8 @@ class MicromappingModeCustom extends MicromappingModeDefinition {
             plugin.loadIcon(data['iconOutlined']!, data['name'] ?? _name);
       }
     }
+
+    updateFromJson(data, plugin);
   }
 
   @override
@@ -205,16 +196,4 @@ class MicromappingModeCustom extends MicromappingModeDefinition {
 
   @override
   String get name => _name;
-
-  @override
-  Widget buildMarker(int index, OsmChange element, bool isZoomedIn) {
-    // TODO: implement buildMarker
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateNearest() {
-    // TODO: implement updateNearest
-    throw UnimplementedError();
-  }
 }
