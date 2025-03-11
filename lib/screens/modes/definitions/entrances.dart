@@ -19,6 +19,12 @@ abstract class EntrancesModeDefinition extends BaseModeDefinition {
   List<OsmChange> nearest = [];
   LatLng? newLocation;
 
+  List<ElementKindImpl> _kinds = [
+    ElementKind.entrance,
+    ElementKind.building,
+    ElementKind.address,
+  ];
+
   EntrancesModeDefinition(super.ref);
 
   @override
@@ -33,6 +39,13 @@ abstract class EntrancesModeDefinition extends BaseModeDefinition {
     );
   }
 
+  ElementKindImpl getOurKind(OsmChange element) =>
+      ElementKind.matchChange(element, _kinds);
+
+  @override
+  bool isOurKind(OsmChange element) =>
+      getOurKind(element) != ElementKind.unknown;
+
   @override
   Future<void> updateNearest() async {
     nearest = await super.getNearestChanges();
@@ -40,6 +53,7 @@ abstract class EntrancesModeDefinition extends BaseModeDefinition {
   }
 
   double get adjustZoomPrimary => 0.0;
+
   double get adjustZoomSecondary => 0.0;
 
   SizedMarker? buildMarker(OsmChange element);
@@ -59,37 +73,20 @@ abstract class EntrancesModeDefinition extends BaseModeDefinition {
       child: Text(element.typeAndName, style: TextStyle(fontSize: 20.0)),
     );
   }
+
+  @override
+  void updateFromJson(Map<String, dynamic> data, Plugin plugin) {
+    _kinds = parseKinds(data['kinds']) ?? parseKinds(data['kind']) ?? _kinds;
+  }
 }
 
 class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
-  static final kOurKinds = <ElementKindImpl>[
-    ElementKind.entrance,
-    ElementKind.building,
-    ElementKind.address,
-  ];
-
   bool buildingsNeedAddresses = false;
 
   DefaultEntrancesModeDefinition(super.ref);
 
   @override
   String get name => "entrances";
-
-  @override
-  MultiIcon getIcon(BuildContext context, bool outlined) {
-    final loc = AppLocalizations.of(context)!;
-    return MultiIcon(
-      fontIcon: !outlined ? Icons.home : Icons.home_outlined,
-      tooltip: loc.navEntrancesMode,
-    );
-  }
-
-  ElementKindImpl _getOurKind(OsmChange element) =>
-      ElementKind.matchChange(element, kOurKinds);
-
-  @override
-  bool isOurKind(OsmChange element) =>
-      _getOurKind(element) != ElementKind.unknown;
 
   @override
   double get adjustZoomSecondary => 0.7;
@@ -104,7 +101,7 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
 
     // Sort by buildings, addresses, entrances
     int indexKind(OsmChange change) {
-      final kind = _getOurKind(change);
+      final kind = getOurKind(change);
       if (kind == ElementKind.building) return 0;
       if (kind == ElementKind.address) return 1;
       if (kind == ElementKind.entrance) return 2;
@@ -187,7 +184,7 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
 
   @override
   SizedMarker buildMarker(OsmChange element) {
-    final kind = _getOurKind(element);
+    final kind = getOurKind(element);
     if (kind == ElementKind.building) {
       final isComplete = element['building:levels'] != null;
       return BuildingMarker(
@@ -261,7 +258,7 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
   @override
   Widget disambiguationLabel(BuildContext context, OsmChange element) {
     final loc = AppLocalizations.of(context)!;
-    final kind = _getOurKind(element);
+    final kind = getOurKind(element);
 
     String label;
     if (kind == ElementKind.building) {
@@ -289,11 +286,6 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
       child: Text(label, style: TextStyle(fontSize: 20.0)),
     );
   }
-
-  @override
-  void updateFromJson(Map<String, dynamic> data, Plugin plugin) {
-    // TODO: implement updateFromJson
-  }
 }
 
 class EntrancesModeCustom extends EntrancesModeDefinition {
@@ -306,8 +298,8 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
   String? _secondaryPreset;
   double? _zoomPrimary;
   double? _zoomSecondary;
-  List<ElementKindImpl> _kinds = const [];
   Map<String, dynamic> _rendering = const {};
+  final Map<String, MultiIcon> _markerIcons = {};
 
   EntrancesModeCustom({
     required ref,
@@ -316,10 +308,8 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
     required Plugin plugin,
   })  : _name = name,
         super(ref) {
-    _kinds = (data['kinds'] as List<dynamic>?)
-            ?.map((k) => ElementKind.get(k))
-            .toList() ??
-        const [];
+    super.updateFromJson(data, plugin);
+
     _rendering = data['markers'] ?? const {};
 
     final modeIconName = data['icon'];
@@ -350,6 +340,16 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
         _secondary = plugin.loadIcon(iconName, secondary['tooltip']);
       }
     }
+
+    // Cache icons, because later we won't have access to the plugin data.
+    _rendering.forEach((k, data) {
+      if (data is Map<String, dynamic> && data.containsKey('icon')) {
+        _markerIcons['$k.icon'] = plugin.loadIcon(data['icon']!);
+        if (data.containsKey('iconPartial')) {
+          _markerIcons['$k.partial'] = plugin.loadIcon(data['iconPartial']!);
+        }
+      }
+    });
   }
 
   @override
@@ -360,11 +360,6 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
 
   @override
   double get adjustZoomSecondary => _zoomSecondary ?? 0.0;
-
-  @override
-  bool isOurKind(OsmChange element) {
-    return ElementKind.matchChange(element, _kinds) != ElementKind.unknown;
-  }
 
   @override
   MultiIcon getIcon(BuildContext context, bool outlined) {
@@ -380,14 +375,21 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
       final isComplete = (data['requiredKeys'] as List<dynamic>?)
               ?.every((k) => element[k] != null) ??
           false;
+      final String? icon = data['icon'];
       final String? labelTemplate = data['label'];
-      if (labelTemplate == null) {
-        return EntranceMarker(isComplete: isComplete);
-      } else {
+      if (icon != null) {
+        final defaultIcon = _markerIcons['${kind.name}.icon']!;
+        final ourIcon = isComplete
+            ? defaultIcon
+            : _markerIcons['${kind.name}.partial'] ?? defaultIcon;
+        return IconMarker(ourIcon);
+      } else if (labelTemplate != null) {
         final re = RegExp(r'\{([^}]+)\}');
         final label =
             labelTemplate.replaceAllMapped(re, (m) => element[m[1]!] ?? '?');
         return BuildingMarker(isComplete: isComplete, label: label);
+      } else {
+        return EntranceMarker(isComplete: isComplete);
       }
     }
     return null;
@@ -429,10 +431,5 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
         fullscreenDialog: true,
       ),
     );
-  }
-
-  @override
-  void updateFromJson(Map<String, dynamic> data, Plugin plugin) {
-    // TODO: implement updateFromJson
   }
 }

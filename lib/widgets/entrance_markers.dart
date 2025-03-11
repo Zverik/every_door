@@ -1,4 +1,5 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -132,5 +133,14 @@ class EntranceMarker extends SizedMarker {
               ),
             ),
           ),
+        );
+}
+
+class IconMarker extends SizedMarker {
+  IconMarker(MultiIcon icon)
+      : super(
+          width: 50.0,
+          height: 50.0,
+          child: Center(child: icon.getWidget(size: 30.0, icon: false)),
         );
 }
