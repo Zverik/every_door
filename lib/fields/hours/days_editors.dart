@@ -107,6 +107,13 @@ class NumberedWeekdayPanel extends StatelessWidget {
             },
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.only(right: 8.0),
+          child: Text(
+            "Week#",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
         for (final i in days)
           Column(
             children: [
