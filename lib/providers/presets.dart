@@ -9,6 +9,7 @@ import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/helpers/nsi_features.dart';
+import 'package:every_door/providers/add_presets.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/foundation.dart';
@@ -106,6 +107,11 @@ class PresetProvider {
       {LatLng? location,
       ElementKindImpl? filter,
       int limit = kMaxNSIPresets}) async {
+    // Check for the plugin presets.
+    final fromPlugins = _ref
+        .read(pluginPresetsProvider)
+        .getAutocomplete(terms: [normalizeString(query)], nsi: true);
+
     // Considering database loaded at this point.
     const sql = '''
     with matches as (
@@ -121,7 +127,8 @@ class PresetProvider {
 
     // Query the database.
     final results = await _db!.rawQuery(sql, [normalizeString(query) + '%']);
-    Iterable<Preset> nsiResults = results.map((e) => Preset.fromNSIJson(e));
+    Iterable<Preset> nsiResults =
+        fromPlugins.followedBy(results.map((e) => Preset.fromNSIJson(e)));
 
     // Filter by location.
     if (location != null) {
@@ -133,8 +140,7 @@ class PresetProvider {
 
     // Filter by type.
     if (filter != null) {
-      nsiResults =
-          nsiResults.where((p) => filter.matchesTags(p.addTags));
+      nsiResults = nsiResults.where((p) => filter.matchesTags(p.addTags));
     }
 
     return nsiResults.take(limit).toList();
@@ -167,6 +173,12 @@ class PresetProvider {
         .map((s) => normalizeString(s));
     if (terms.isEmpty) return [];
 
+    // Query the plugin presets.
+    final fromPlugins = _ref
+        .read(pluginPresetsProvider)
+        .getAutocomplete(terms: terms, nsi: false);
+
+    // Do the big database query.
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
     final isAreaClause = isArea ? 'where can_area = 1' : '';
@@ -190,8 +202,8 @@ class PresetProvider {
     ''';
     final results = await _db!.rawQuery(sql, terms.map((t) => '$t%').toList());
 
-    final presets = <Preset>[];
-    final seenPresets = <String>[];
+    final presets = fromPlugins; // no need to copy
+    final seenPresets = presets.map((p) => p.id).toList();
     for (final row in results) {
       // Check that both terms are present.
       final foundTerms = (row['terms'] as String).split(',');
@@ -225,6 +237,11 @@ class PresetProvider {
     if (tags['amenity'] == 'fixme') {
       return Preset.fixme(tags['fixme:type'] ?? 'unknown');
     }
+
+    // Check the plugin presets.
+    final fromPlugins =
+        _ref.read(pluginPresetsProvider).getPresetForTags(tags, isArea: isArea);
+    if (fromPlugins != null) return fromPlugins;
 
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
@@ -267,8 +284,11 @@ class PresetProvider {
   }
 
   Future<List<Preset>> getPresetsById(List<String> ids,
-      {Locale? locale}) async {
+      {Locale? locale, bool plugins = true}) async {
     if (ids.isEmpty) return [];
+    final Map<String, Preset> fromPlugins =
+        plugins ? _ref.read(pluginPresetsProvider).getById(ids) : {};
+
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
     final questions = List.filled(ids.length, '?').join(',');
@@ -283,17 +303,17 @@ class PresetProvider {
       order by lscore
     ''';
     final results = await _db!.rawQuery(sql, ids);
-    final presets = <String, Preset>{};
-    final seenFields = <String>{};
+    final presets = fromPlugins; // no point in copying
+    final seenPresets = Set.of(presets.keys);
     for (final row in results) {
       final String name = row['name'] as String;
-      if (seenFields.contains(name)) continue;
-      seenFields.add(name);
+      if (seenPresets.contains(name)) continue;
+      seenPresets.add(name);
       presets[name] = Preset.fromJson(row);
     }
     if (presets.length != ids.length) {
       _logger.warning(
-          'getPresetsById fail: for ${ids.length} ids got ${results.length} results.');
+          'getPresetsById fail: for ${ids.length} ids got ${presets.length} results.');
     }
     return ids.map((e) => presets[e]).whereType<Preset>().toList();
   }
@@ -393,7 +413,7 @@ class PresetProvider {
     if (!presetOnly && useCache) {
       final cached = await _fetchComboCache(field['key']);
       if (cached != null)
-        return cached.map((e) => ComboOption(e, loc[e])).toList();
+        return cached.map((e) => ComboOption(e, label: loc[e])).toList();
     }
 
     // First add the options from the preset.
@@ -431,18 +451,24 @@ class PresetProvider {
     }
 
     // Return the result wrapped in a ComboOption.
-    return options.map((e) => ComboOption(e, loc[e])).toList();
+    return options.map((e) => ComboOption(e, label: loc[e])).toList();
   }
 
   static const kSkipFields = {'opening_hours/covid19', 'not/name', 'shop'};
 
   Future<Preset> getFields(Preset preset,
-      {Locale? locale, LatLng? location}) async {
+      {Locale? locale, LatLng? location, bool plugins = true}) async {
     if (preset.isFixme)
       return preset.withFields(
           [TextPresetField(key: 'fixme:type', label: 'Fixme type')], []);
 
     if (!ready) await _waitUntilReady();
+    if (plugins) {
+      final fromPlugin =
+          await _ref.read(pluginPresetsProvider).loadFields(preset, locale);
+      if (fromPlugin.fields.isNotEmpty) return fromPlugin;
+    }
+
     final langCTE = _localeCTE(locale);
     // TODO: fix row_number()
     final sql = '''
@@ -520,13 +546,22 @@ class PresetProvider {
         : results.first['label'] as String;
   }
 
-  Future<Map<String, PresetField>> _getFields(
-      List<String> names, Locale? locale) async {
+  Future<Map<String, PresetField>> getFieldsByName(
+      Iterable<String> names, Locale? locale) async {
+    // Run fields by plugins.
+    final pluginProvider = _ref.read(pluginPresetsProvider);
+    final fromPlugins = {
+      for (final name in names) name: pluginProvider.getField(name)
+    };
+    fromPlugins.removeWhere((k, v) => v == null);
+
     // There's a chance all the fields were cached.
-    final nonCachedNames =
-        names.where((element) => !_fieldCache.containsKey(element)).toList();
+    final nonCachedNames = names.where((element) =>
+        !_fieldCache.containsKey(element) && !fromPlugins.containsKey(element));
     if (nonCachedNames.isEmpty)
-      return {for (final name in names) name: _fieldCache[name]!};
+      return {
+        for (final name in names) name: _fieldCache[name] ?? fromPlugins[name]!
+      };
 
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
@@ -544,7 +579,7 @@ class PresetProvider {
     where f.name in ($params)
     order by lscore
     ''';
-    final results = await _db!.rawQuery(sql, names);
+    final results = await _db!.rawQuery(sql, names.toList());
 
     Map<String, PresetField> fields = {};
     final seenFields = <String>{};
@@ -565,6 +600,11 @@ class PresetProvider {
 
       fields[name] = field;
     }
+
+    // Add back the plugin fields.
+    fromPlugins.forEach((k, v) {
+      if (v != null) fields[k] = v;
+    });
     return fields;
   }
 
@@ -587,7 +627,7 @@ class PresetProvider {
   Future<List<PresetField>> getStandardFields(Locale locale, bool isPOI) async {
     final List<String> stdFields =
         isPOI ? kStandardPoiFields : ['address', 'level'];
-    final fields = await _getFields(stdFields, locale);
+    final fields = await getFieldsByName(stdFields, locale);
     fields['wifi'] = WifiPresetField(
         label: await _getFieldLabel('internet_access', locale) ?? 'Wifi');
     fields['payment'] = PaymentPresetField(
@@ -599,7 +639,7 @@ class PresetProvider {
   }
 
   Future<PresetField> getField(String fieldName, [Locale? locale]) async {
-    final fields = await _getFields([fieldName], locale);
+    final fields = await getFieldsByName([fieldName], locale);
     final result = fields[fieldName];
     if (result == null) throw ArgumentError('Missing field $fieldName');
     return result;

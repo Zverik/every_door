@@ -394,6 +394,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                       child: Text(
                           MaterialLocalizations.of(context).cancelButtonLabel),
                       onPressed: () {
+                        saved = true;
                         ref.read(needMapUpdateProvider).trigger();
                         Navigator.pop(context);
                       },

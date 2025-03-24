@@ -210,29 +210,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         children: [
           for (final preset in presets)
             GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      preset.name,
-                      style: TextStyle(fontSize: 16.0),
-                    ),
-                    SizedBox(height: 4.0),
-                    Text(
-                      preset.subtitle,
-                      style: TextStyle(
-                          fontSize: 14.0, color: Colors.grey.shade600),
-                    ),
-                  ],
-                ),
-                color: !preset.isFixme
-                    ? (preset.fromNSI
-                        ? Colors.grey.withValues(alpha: 0.2)
-                        : kFieldColor.withValues(alpha: 0.2))
-                    : Colors.red.withValues(alpha: 0.2),
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-              ),
+              child: PresetTile(preset),
               onTap: () {
                 if (widget.launchEditor) {
                   Navigator.pushReplacement(
@@ -252,6 +230,38 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
             ),
         ],
       ),
+    );
+  }
+}
+
+class PresetTile extends StatelessWidget {
+  final Preset preset;
+
+  const PresetTile(this.preset, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            preset.name,
+            style: TextStyle(fontSize: 16.0),
+          ),
+          SizedBox(height: 4.0),
+          Text(
+            preset.subtitle,
+            style: TextStyle(fontSize: 14.0, color: Colors.grey.shade600),
+          ),
+        ],
+      ),
+      color: !preset.isFixme
+          ? (preset.fromNSI
+              ? Colors.grey.withValues(alpha: 0.2)
+              : kFieldColor.withValues(alpha: 0.2))
+          : Colors.red.withValues(alpha: 0.2),
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
     );
   }
 }

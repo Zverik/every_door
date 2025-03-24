@@ -101,7 +101,7 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
         // options.insert(0, ComboOption(newValue, 'Use this new value'));
       }
     } else if (widget.allowEmpty && widget.field.isSingularValue) {
-      options.insert(0, ComboOption('', '<${loc.fieldComboEmpty}>'));
+      options.insert(0, ComboOption('', label: '<${loc.fieldComboEmpty}>'));
     }
 
     return ResponsiveGridList(
@@ -116,7 +116,7 @@ class _ComboChooserPageState extends State<ComboChooserPage> {
             title: Text(opt.label ?? opt.value, style: kFieldTextStyle),
             subtitle: opt.label == null ? null : Text(opt.value),
             selected: values.contains(opt.value),
-            tileColor: kFieldColor.withOpacity(0.2),
+            tileColor: kFieldColor.withValues(alpha: 0.2),
             selectedTileColor: kFieldColor,
             selectedColor: Colors.white,
             onTap: () {

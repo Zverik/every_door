@@ -406,6 +406,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                       child: Text(
                           MaterialLocalizations.of(context).cancelButtonLabel),
                       onPressed: () {
+                        saved = true;
                         Navigator.pop(context);
                       },
                     ),

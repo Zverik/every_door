@@ -9,6 +9,7 @@ import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor.dart';
 import 'package:every_door/screens/editor/building.dart';
 import 'package:every_door/screens/editor/entrance.dart';
+import 'package:every_door/screens/editor/sheet.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/entrance_markers.dart';
 import 'package:flutter/material.dart';
@@ -288,16 +289,43 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
   }
 }
 
+class _ButtonData {
+  MultiIcon? icon;
+  String? preset;
+  ElementKindImpl? kind;
+  double? zoom;
+  List<String> fields = const [];
+
+  _ButtonData(
+      {this.icon, this.preset, this.kind, this.zoom, this.fields = const []});
+
+  factory _ButtonData.fromJson(dynamic data, Plugin plugin) {
+    if (data == null || data is! Map<String, dynamic>) return _ButtonData();
+    MultiIcon? icon;
+    final iconName = data['icon'];
+    if (iconName != null) {
+      icon = plugin.loadIcon(iconName, data['tooltip']);
+    }
+    final ElementKindImpl kind = ElementKind.get(data['kind'] ?? '');
+    final fields =
+        (data['fields'] as List?)?.whereType<String>().toList() ?? [];
+
+    return _ButtonData(
+      icon: icon,
+      zoom: data['adjustZoom'],
+      preset: data['preset'],
+      kind: kind == ElementKind.unknown ? null : kind,
+      fields: fields,
+    );
+  }
+}
+
 class EntrancesModeCustom extends EntrancesModeDefinition {
   final String _name;
   MultiIcon? _icon;
   MultiIcon? _iconOutlined;
-  MultiIcon? _primary;
-  MultiIcon? _secondary;
-  String? _primaryPreset;
-  String? _secondaryPreset;
-  double? _zoomPrimary;
-  double? _zoomSecondary;
+  late _ButtonData _primary;
+  late _ButtonData _secondary;
   Map<String, dynamic> _rendering = const {};
   final Map<String, MultiIcon> _markerIcons = {};
 
@@ -321,25 +349,8 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
       }
     }
 
-    final Map<String, dynamic>? primary = data['primary'];
-    if (primary != null) {
-      _zoomPrimary = primary['adjustZoom'];
-      _primaryPreset = primary['preset'];
-      final iconName = primary['icon'];
-      if (iconName != null) {
-        _primary = plugin.loadIcon(iconName, primary['tooltip']);
-      }
-    }
-
-    final Map<String, dynamic>? secondary = data['secondary'];
-    if (secondary != null) {
-      _zoomSecondary = secondary['adjustZoom'];
-      _secondaryPreset = secondary['preset'];
-      final iconName = secondary['icon'];
-      if (iconName != null) {
-        _secondary = plugin.loadIcon(iconName, secondary['tooltip']);
-      }
-    }
+    _primary = _ButtonData.fromJson(data['primary'], plugin);
+    _secondary = _ButtonData.fromJson(data['secondary'], plugin);
 
     // Cache icons, because later we won't have access to the plugin data.
     _rendering.forEach((k, data) {
@@ -356,10 +367,10 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
   String get name => _name;
 
   @override
-  double get adjustZoomPrimary => _zoomPrimary ?? 0.0;
+  double get adjustZoomPrimary => _primary.zoom ?? 0.0;
 
   @override
-  double get adjustZoomSecondary => _zoomSecondary ?? 0.0;
+  double get adjustZoomSecondary => _secondary.zoom ?? 0.0;
 
   @override
   MultiIcon getIcon(BuildContext context, bool outlined) {
@@ -397,7 +408,7 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
 
   @override
   MultiIcon? getButton(BuildContext context, bool isPrimary) {
-    return isPrimary ? _primary : _secondary;
+    return isPrimary ? _primary.icon : _secondary.icon;
   }
 
   @override
@@ -407,9 +418,12 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
     LatLng? location,
     bool? isPrimary,
   }) async {
+    // When tapping a button, we need to know which kind of object
+    // to create.
     Preset? preset;
     if (element == null) {
-      final presetName = isPrimary ?? true ? _primaryPreset : _secondaryPreset;
+      isPrimary ??= true;
+      final presetName = isPrimary ? _primary.preset : _secondary.preset;
       if (presetName == null) return;
       final locale = Localizations.localeOf(context);
       final presets = await ref
@@ -417,19 +431,61 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
           .getPresetsById([presetName], locale: locale);
       if (presets.isEmpty) return;
       preset = presets.first;
+    } else if (isPrimary == null) {
+      // When tapping an object, we must know which preset it adheres to.
+      // First trying with kinds, if those are defined.
+      if (_primary.kind?.matchesChange(element) ?? false)
+        isPrimary = true;
+      else if (_secondary.kind?.matchesChange(element) ?? false)
+        isPrimary = false;
+
+      // If failed, trying with presets.
+      if (isPrimary == null) {
+        final detPreset = await ref
+            .read(presetProvider)
+            .getPresetForTags(element.getFullTags(), isArea: element.isArea);
+        if (detPreset.id == _primary.preset)
+          isPrimary = true;
+        else if (detPreset.id == _secondary.preset) isPrimary = false;
+      }
     }
 
+    // To get fields for a bottom sheet editor, we need to know which mode
+    // should be chosen. A null is also an option.
+    final List<String> fields = isPrimary == null
+        ? []
+        : (isPrimary ? _primary.fields : _secondary.fields);
+
     if (!context.mounted) return;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PoiEditorPage(
-          amenity: element,
+    if (fields.isEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PoiEditorPage(
+            amenity: element,
+            location: location,
+            preset: preset,
+          ),
+          fullscreenDialog: true,
+        ),
+      );
+    } else {
+      if (location != null) {
+        newLocation = location;
+        notifyListeners();
+      }
+      await showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (context) => BottomEditorPane(
+          element: element,
           location: location,
           preset: preset,
+          fields: fields,
         ),
-        fullscreenDialog: true,
-      ),
-    );
+      );
+      newLocation = null;
+      notifyListeners();
+    }
   }
 }

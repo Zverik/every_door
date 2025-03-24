@@ -114,7 +114,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     if (preset!.fields.isEmpty) {
       preset = await presets.getFields(preset!,
           locale: locale, location: amenity.location);
-      if (needsAddress(amenity.getFullTags())) {
+      if (!preset!.noStandard && needsAddress(amenity.getFullTags())) {
         final bool needsStdFields =
             preset!.fields.length <= 1 || needsStandardFields();
         stdFields = await presets.getStandardFields(locale, needsStdFields);

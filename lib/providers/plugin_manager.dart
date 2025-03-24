@@ -1,6 +1,7 @@
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/plugin.dart';
+import 'package:every_door/providers/add_presets.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/plugin_repo.dart';
@@ -66,6 +67,8 @@ class PluginManager extends Notifier<List<Plugin>> {
     _enableImagery(plugin);
     _enableElementKinds(plugin);
     _enableModes(plugin);
+    _enableFields(plugin);
+    _enablePresets(plugin);
     // TODO: use the data from the plugin
     state = state.followedBy([plugin]).toList();
   }
@@ -75,6 +78,8 @@ class PluginManager extends Notifier<List<Plugin>> {
     _disableImagery(plugin);
     _disableElementKinds(plugin);
     _disableModes(plugin);
+    _disablePresets(plugin);
+    _disableFields(plugin);
     // TODO: clear the data from the plugin
     state = state.where((p) => p != plugin).toList();
   }
@@ -181,5 +186,41 @@ class PluginManager extends Notifier<List<Plugin>> {
         _enableElementKinds(plugin);
       }
     }
+  }
+
+  void _enableFields(Plugin plugin) {
+    final fieldData = plugin.data['fields'];
+    if (fieldData == null || fieldData is! Map) return;
+    final prov = ref.read(pluginPresetsProvider);
+    fieldData.forEach((k, data) {
+      prov.addField(k, data, plugin);
+    });
+    // TODO
+  }
+
+  void _disableFields(Plugin plugin) {
+    final fieldData = plugin.data['fields'];
+    if (fieldData == null || fieldData is! Map) return;
+    final prov = ref.read(pluginPresetsProvider);
+    for (final k in fieldData.keys) prov.removeField(k);
+    // TODO
+  }
+
+  void _enablePresets(Plugin plugin) {
+    final presetData = plugin.data['presets'];
+    if (presetData == null || presetData is! Map) return;
+    final prov = ref.read(pluginPresetsProvider);
+    presetData.forEach((k, data) {
+      prov.addPreset(k, data, plugin);
+    });
+    // TODO
+  }
+
+  void _disablePresets(Plugin plugin) {
+    final presetData = plugin.data['presets'];
+    if (presetData == null || presetData is! Map) return;
+    final prov = ref.read(pluginPresetsProvider);
+    for (final k in presetData.keys) prov.removePreset(k, plugin);
+    // TODO
   }
 }

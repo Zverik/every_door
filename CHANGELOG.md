@@ -4,8 +4,10 @@
 
 _Unreleased_
 
-* Plugin support.
+* [Plugin support](https://izv.ee/everydoor/plugins/).
 * (+) buttons for the first two modes can also be dragged onto the map.
+* Removing preset tags properly.
+* Turns out "Cancel" buttons for buildings and entrances kept the changes.
 
 ## 5.4
 

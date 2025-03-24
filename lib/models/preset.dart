@@ -8,6 +8,7 @@ import 'package:every_door/models/field.dart';
 class Preset {
   final List<PresetField> fields; // Always open
   final List<PresetField> moreFields; // Open when set or requested
+  final Map<String, dynamic>? fieldData; // For plugins to cache
   final bool onArea; // Can this preset be used on a area?
   final Map<String, String> addTags; // Added when preset is chosen
   final Map<String, String?> removeTags; // Removed when preset is replaced
@@ -18,6 +19,7 @@ class Preset {
   final LocationSet? locationSet;
   final bool fromNSI;
   final bool isFixme;
+  final bool noStandard; // For plugins, do not extract standard fields
 
   // Hope we don't resort to using this
   static const defaultPreset = Preset(
@@ -38,8 +40,10 @@ class Preset {
     String? subtitle,
     this.icon,
     this.locationSet,
+    this.fieldData,
     this.fromNSI = false,
     this.isFixme = false,
+    this.noStandard = false,
   }) : _subtitle = subtitle;
 
   factory Preset.fixme(String title, {String? subtitle}) {
@@ -108,7 +112,7 @@ class Preset {
   }
 
   String get subtitle {
-    if (_subtitle != null) return _subtitle!;
+    if (_subtitle != null) return _subtitle;
     final key = getMainKey(addTags);
     if (key == null) return '';
     return '$key=${addTags[key]}';
@@ -119,6 +123,7 @@ class Preset {
       id: id,
       fields: fields,
       moreFields: moreFields,
+      fieldData: fieldData,
       onArea: onArea,
       addTags: addTags,
       removeTags: removeTags,
@@ -126,6 +131,7 @@ class Preset {
       subtitle: _subtitle,
       icon: icon,
       fromNSI: fromNSI,
+      noStandard: noStandard,
     );
   }
 
@@ -134,6 +140,7 @@ class Preset {
       id: id,
       fields: fields,
       moreFields: moreFields,
+      fieldData: fieldData,
       onArea: onArea,
       addTags: addTags,
       removeTags: removeTags,
@@ -141,6 +148,7 @@ class Preset {
       subtitle: subtitle,
       icon: icon,
       fromNSI: fromNSI,
+      noStandard: noStandard,
     );
   }
 
@@ -158,7 +166,8 @@ class Preset {
   }
 
   doRemoveTags(OsmChange change) {
-    removeTags.forEach((key, value) {
+    final tags = removeTags.isEmpty ? addTags : removeTags;
+    tags.forEach((key, value) {
       if (change[key] != null) {
         if (value == '*' || value == change[key]) change.removeTag(key);
       }

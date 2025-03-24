@@ -8,8 +8,9 @@ import 'helpers/combo_page.dart';
 class ComboOption {
   final String value;
   final String? label;
+  final Widget? widget;
 
-  const ComboOption(this.value, [this.label]);
+  const ComboOption(this.value, {this.label, this.widget});
 
   @override
   String toString() => '$value($label)';

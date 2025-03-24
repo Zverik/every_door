@@ -9,6 +9,7 @@ import 'package:every_door/fields/email.dart';
 import 'package:every_door/fields/floor.dart';
 import 'package:every_door/fields/height.dart';
 import 'package:every_door/fields/hours.dart';
+import 'package:every_door/fields/inline_combo.dart';
 import 'package:every_door/fields/name.dart';
 import 'package:every_door/fields/phone.dart';
 import 'package:every_door/fields/radio.dart';
@@ -74,7 +75,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
     {List<ComboOption> options = const []}) {
   final String key = data['key'];
   final String label =
-      data['loc_label'] ?? data['label'] ?? data['name'] ?? 'field';
+      data['loc_label'] ?? data['label'] ?? data['name'] ?? key;
   final placeholder = data['loc_placeholder'] ?? data['placeholder'];
   final prerequisite = data.containsKey('prerequisiteTag')
       ? FieldPrerequisite.fromJson(data['prerequisiteTag'])
@@ -238,6 +239,131 @@ PresetField fieldFromJson(Map<String, dynamic> data,
       return AddressField(
         key: key,
         label: label,
+      );
+    case 'combo':
+    case 'typeCombo':
+    case 'multiCombo':
+    case 'semiCombo':
+      return ComboPresetField(
+        key: key,
+        label: label,
+        prerequisite: prerequisite,
+        locationSet: locationSet,
+        customValues: data['custom_values'] == 1,
+        snakeCase: data['snake_case'] == 1,
+        type: kComboMapping[typ]!,
+        options: options,
+      );
+    case 'radio':
+      return RadioPresetField(
+        key: key,
+        label: label,
+        options: options.map((e) => e.value).toList(),
+        prerequisite: prerequisite,
+        locationSet: locationSet,
+      );
+    case 'check':
+    case 'defaultCheck':
+      return CheckboxPresetField(
+        key: key,
+        label: label,
+        tristate: typ == 'check',
+        options: options,
+        prerequisite: prerequisite,
+      );
+    case 'roadheight':
+      return HeightPresetField(
+        key: key,
+        label: label,
+        prerequisite: prerequisite,
+      );
+    default:
+      return TextPresetField(
+        key: key,
+        label: label,
+        placeholder: placeholder,
+        prerequisite: prerequisite,
+        locationSet: locationSet,
+      );
+  }
+}
+
+PresetField fieldFromPlugin(Map<String, dynamic> data,
+    {List<ComboOption> options = const []}) {
+  final String key = data['key'];
+  final String label = data['label'] ?? data['name'] ?? key;
+  final String? placeholder = data['placeholder'];
+  final prerequisite = data.containsKey('prerequisiteTag')
+      ? FieldPrerequisite.fromJson(data['prerequisiteTag'])
+      : null;
+  final locationSet = data['locations'] == null
+      ? null
+      : LocationSet.fromJson(jsonDecode(data['locations']));
+
+  String typ = data['type'] ?? 'text';
+  if (data['name'] == 'ref') typ = 'number'; // Patch some refs to be numbers
+  switch (typ) {
+    case 'text':
+    case 'colour': // TODO: remove when we have a colour picker
+    case 'date':
+    case 'textarea':
+      return TextPresetField(
+        key: key,
+        label: label,
+        placeholder: placeholder,
+        prerequisite: prerequisite,
+        locationSet: locationSet,
+        maxLines: typ == 'textarea' ? 4 : null,
+        capitalize: TextFieldCapitalize.sentence,
+      );
+    case 'number':
+    case 'roadspeed':
+      return TextPresetField(
+        key: key,
+        label: label,
+        placeholder: placeholder,
+        prerequisite: prerequisite,
+        locationSet: locationSet,
+        keyboardType: TextInputType.number,
+      );
+    case 'tel':
+      return PhonePresetField(
+        key: key,
+        label: label,
+        prerequisite: prerequisite,
+      );
+    case 'email':
+      return TextPresetField(
+        key: key,
+        label: label,
+        placeholder: placeholder,
+        prerequisite: prerequisite,
+        locationSet: locationSet,
+        keyboardType: TextInputType.emailAddress,
+      );
+    case 'url':
+      return TextPresetField(
+        key: key,
+        label: label,
+        placeholder: placeholder,
+        prerequisite: prerequisite,
+        locationSet: locationSet,
+        keyboardType: TextInputType.url,
+      );
+    case 'address':
+      return AddressField(
+        key: key,
+        label: label,
+      );
+    case 'inline':
+    case 'inlineCombo':
+      return InlineComboPresetField(
+        key: key,
+        label: label,
+        options: options,
+        customValues: (data['customValues'] as bool?) ?? false,
+        numeric: (data['numeric'] as bool?) ?? true,
+        // TODO: other things
       );
     case 'combo':
     case 'typeCombo':

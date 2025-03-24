@@ -1320,6 +1320,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
+  trie_search:
+    dependency: "direct main"
+    description:
+      name: trie_search
+      sha256: "575f0a6bdb0d2091ce708612d7ed6ef26b4067afa8e7a04e2b46b78cd4fba936"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   typed_data:
     dependency: transitive
     description:
