@@ -26,6 +26,7 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   flutter_dropdown_alert: ^1.0.3
   flutter_map: ^8.0.0
+  flutter_map_mbtiles: ^1.0.4
   flutter_markdown: ^0.7.1
   flutter_portal: ^1.1.4
   flutter_riverpod: ^2.5.1
@@ -38,6 +39,7 @@ dependencies:
   line_icons: ^2.0.1
   logging: ^1.0.2
   material_color_names: ^1.0.0
+  mbtiles: ^0.4.2
   mobile_scanner: ^5.2.3  # 6.0.0 requires iOS 15+, unacceptable!
   oauth2_client: ^3.3.0
   path: ^1.8.1

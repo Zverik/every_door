@@ -1,10 +1,12 @@
 import 'package:encrypt/encrypt.dart';
 import 'package:logging/logging.dart';
+import 'package:mbtiles/mbtiles.dart';
 
 enum ImageryType {
   tms,
   wms,
   bing,
+  mbtiles,
 }
 
 enum ImageryCategory {
@@ -23,6 +25,7 @@ class Imagery {
   final String? icon;
   final String? attribution;
   final String url;
+  final MbTiles? mbtiles;
   final int minZoom;
   final int maxZoom;
   final bool best;
@@ -38,6 +41,7 @@ class Imagery {
     this.icon,
     this.attribution,
     required this.url,
+    this.mbtiles,
     int? minZoom,
     int? maxZoom,
     this.best = false,

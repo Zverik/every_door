@@ -14,6 +14,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 final imageryProvider = StateNotifierProvider<ImageryProvider, Imagery>(
     (ref) => ImageryProvider(ref));
 
+final baseImageryProvider = StateProvider<Imagery>((ref) => kOSMImagery);
+
 final selectedImageryProvider =
     StateNotifierProvider<SelectedImageryProvider, Imagery>(
         (ref) => SelectedImageryProvider(ref));
@@ -197,7 +199,7 @@ class SelectedImageryProvider extends StateNotifier<Imagery> {
 
   static const kPrefsKey = 'selected_imagery_osm';
 
-  SelectedImageryProvider(this._ref) : super(kOSMImagery) {
+  SelectedImageryProvider(this._ref) : super(_ref.read(baseImageryProvider)) {
     loadValue();
   }
 
@@ -214,7 +216,8 @@ class SelectedImageryProvider extends StateNotifier<Imagery> {
 
   toggle() {
     isOSM = !isOSM;
-    state = isOSM ? kOSMImagery : _ref.watch(imageryProvider);
+    state =
+        isOSM ? _ref.watch(baseImageryProvider) : _ref.watch(imageryProvider);
     tileResetController.add(null);
     storeValue();
   }

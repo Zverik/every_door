@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/note.dart';
@@ -99,6 +100,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   @override
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
+    final isOSM = imagery == ref.watch(baseImageryProvider);
     final tileLayer = TileLayerOptions(imagery);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
@@ -116,7 +118,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
                 ref.read(selectedImageryProvider.notifier).toggle();
               });
             },
-            icon: Icon(imagery == kOSMImagery ? Icons.map_outlined : Icons.map),
+            icon: Icon(isOSM ? Icons.map_outlined : Icons.map),
             tooltip: loc.navImagery,
           ),
         ],
@@ -137,20 +139,8 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           ),
         ),
         children: [
-          TileLayer(
-            urlTemplate: tileLayer.urlTemplate,
-            wmsOptions: tileLayer.wmsOptions,
-            tileProvider: tileLayer.tileProvider,
-            minNativeZoom: tileLayer.minNativeZoom,
-            maxNativeZoom: tileLayer.maxNativeZoom,
-            maxZoom: tileLayer.maxZoom,
-            tileDimension: tileLayer.tileSize,
-            tms: tileLayer.tms,
-            subdomains: tileLayer.subdomains,
-            additionalOptions: tileLayer.additionalOptions,
-            userAgentPackageName: tileLayer.userAgentPackageName,
-            reset: tileResetController.stream,
-          ),
+          tileLayer.buildTileLayer(reset: true),
+          ...ref.watch(overlayImageryProvider),
           AttributionWidget(imagery),
           PolylineLayer(
             polylines: [

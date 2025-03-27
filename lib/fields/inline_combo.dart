@@ -13,6 +13,7 @@ class InlineComboPresetField extends PresetField {
   InlineComboPresetField({
     required super.key,
     required super.label,
+    super.placeholder,
     required this.options,
     this.customValues = false,
     this.numeric = true,
@@ -61,6 +62,10 @@ class _InlineComboFieldState extends State<InlineComboField> {
         keyboardType:
             widget.field.numeric ? TextInputType.number : TextInputType.text,
         style: kFieldTextStyle,
+        decoration: InputDecoration(
+          hintText: widget.field.placeholder,
+          labelText: widget.field.icon != null ? widget.field.label : null,
+        ),
         initialValue: widget.element[widget.field.key],
         focusNode: _focusNode,
         validator: (value) => !widget.field.numeric || validateNumber(value)

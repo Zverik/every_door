@@ -45,7 +45,7 @@ class PluginPresetsProvider {
         (data['removeTags'] as Map<String, dynamic>?)
             ?.map((k, v) => MapEntry(k, v.toString()))
             .map((k, v) => MapEntry(k, v == '*' ? null : v));
-    final onArea = (data['area'] as bool?) != false;
+    final onArea = (data['area'] as bool?) ?? true;
     final noStandard = (data['standard'] as bool?) == false;
     final String? iconStr = data['icon'];
     String? iconUrl;

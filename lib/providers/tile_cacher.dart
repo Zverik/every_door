@@ -88,12 +88,13 @@ class TileCacher extends StateNotifier<TileCacherState> {
   Future<bool> cacheForAll({int? maxZoom}) async {
     await _waitUntilImageryLoaded();
     final imagery = _ref.read(imageryProvider);
+    final base = _ref.read(baseImageryProvider);
     final areas = await _ref.read(downloadedAreaProvider).getAllAreas();
     _needStop = false;
 
     // First count how many tiles we need to get.
     int total = 0;
-    for (final img in [kOSMImagery, imagery]) {
+    for (final img in [base, imagery]) {
       if (img.type != ImageryType.tms || img.tileSize != 256) continue;
       int layerMaxZoom = maxZoom ?? img.maxZoom;
       if (layerMaxZoom > kMaxBulkDownloadZoom)
@@ -110,7 +111,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
     int downloaded = 0;
     int processed = 0;
     state = TileCacherState(total: total);
-    for (final img in [kOSMImagery, imagery]) {
+    for (final img in [base, imagery]) {
       if (img.type != ImageryType.tms || img.tileSize != 256) continue;
       final options = TileLayerOptions(img);
       final tileLayer = options.buildTileLayer();

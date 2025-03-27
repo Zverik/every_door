@@ -91,9 +91,10 @@ class BrowserNavigationBar extends ConsumerWidget {
           : () {
               ref.read(selectedImageryProvider.notifier).toggle();
             },
-      icon: Icon(ref.watch(selectedImageryProvider) == kOSMImagery
-          ? Icons.map_outlined
-          : Icons.map),
+      icon: Icon(
+          ref.watch(selectedImageryProvider) == ref.watch(baseImageryProvider)
+              ? Icons.map_outlined
+              : Icons.map),
       tooltip: loc.navImagery,
       color: Colors.white70,
     );

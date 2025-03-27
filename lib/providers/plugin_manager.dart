@@ -1,15 +1,21 @@
+import 'dart:io';
+
 import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/add_presets.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/providers/plugin_repo.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
+import 'package:mbtiles/mbtiles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final pluginManagerProvider =
@@ -97,30 +103,97 @@ class PluginManager extends Notifier<List<Plugin>> {
     final imageryData = plugin.data['imagery'];
     if (imageryData == null || imageryData is! Map) return;
     for (final entry in imageryData.entries) {
-      final data = entry.value as Map<String, dynamic>;
-      final url = data['url'] as String;
-      final imagery = Imagery(
-        id: entry.key,
-        name: data['name'] ?? entry.key, // TODO: translatable
-        type: data['type'] == 'wms' || url.toLowerCase().contains('service=wms')
-            ? ImageryType.wms
-            : ImageryType.tms,
-        url: url,
-        attribution: data['attribution'],
-        minZoom: data['minZoom'],
-        maxZoom: data['maxZoom'],
-        tileSize: data['tileSize'] ?? 256,
-        wms4326: data['has4326'] ?? false,
-      );
-      ref.read(imageryProvider.notifier).registerImagery(imagery);
+      final imagery = _imageryFromMap(entry.key, entry.value, plugin);
+      if (imagery == null) {
+        _logger.warning('Failed to parse imagery ${entry.key}');
+        continue;
+      }
+
+      if (entry.key == 'base') {
+        ref.read(baseImageryProvider.notifier).state = imagery;
+      } else {
+        ref.read(imageryProvider.notifier).registerImagery(imagery);
+      }
     }
+
+    final overlayData = plugin.data['overlays'];
+    if (overlayData == null || overlayData is! Map) return;
+    for (final entry in overlayData.entries) {
+      final imagery = _imageryFromMap(entry.key, entry.value, plugin);
+      ref.read(overlayImageryProvider.notifier).addLayer(
+            key: entry.key,
+            imagery: imagery,
+            widget: imagery == null
+                ? _widgetFromMap(entry.key, entry.value, plugin)
+                : null,
+          );
+    }
+  }
+
+  Widget? _widgetFromMap(String key, Map<String, dynamic> data, Plugin plugin) {
+    final url = data['url'] as String;
+    if (data['type'] == 'geojson' ||
+        url.endsWith('.geojson') ||
+        url.endsWith('.json')) {
+      // TODO
+      return null;
+    }
+    return null;
+  }
+
+  Imagery? _imageryFromMap(
+      String key, Map<String, dynamic> data, Plugin plugin) {
+    final url = data['url'] as String;
+
+    File? mbtiles;
+    ImageryType type;
+    if (url.startsWith('http')) {
+      if (data['type'] == 'wms' || url.toLowerCase().contains('service=wms')) {
+        type = ImageryType.wms;
+      } else {
+        type = ImageryType.tms;
+      }
+    } else {
+      if (data['type'] == 'mbtiles' || url.toLowerCase().endsWith('.mbtiles')) {
+        type = ImageryType.mbtiles;
+        mbtiles = plugin.resolvePath(url);
+      } else {
+        return null;
+      }
+    }
+
+    final imagery = Imagery(
+      id: key,
+      name: data['name'] ?? key, // TODO: translatable
+      type: type,
+      url: url,
+      mbtiles: mbtiles != null
+          ? MbTiles(mbtilesPath: mbtiles.path, gzip: false)
+          : null,
+      attribution: data['attribution'],
+      minZoom: data['minZoom'],
+      maxZoom: data['maxZoom'],
+      tileSize: data['tileSize'] ?? 256,
+      wms4326: data['has4326'] ?? false,
+    );
+    return imagery;
   }
 
   void _disableImagery(Plugin plugin) {
     final imageryData = plugin.data['imagery'];
     if (imageryData == null || imageryData is! Map) return;
     for (final entry in imageryData.entries) {
-      ref.read(imageryProvider.notifier).unregisterImagery(entry.key);
+      if (entry.key == 'base') {
+        ref.read(baseImageryProvider.notifier).state = kOSMImagery;
+      } else {
+        ref.read(imageryProvider.notifier).unregisterImagery(entry.key);
+      }
+    }
+
+    final overlayData = plugin.data['overlays'];
+    if (overlayData == null || overlayData is! Map) return;
+    for (final entry in overlayData.entries) {
+      ref.read(overlayImageryProvider.notifier).removeLayer(entry.key);
     }
   }
 

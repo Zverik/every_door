@@ -6,6 +6,8 @@ import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
+import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
@@ -610,7 +612,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       },
               ),
               children: [
-                TileLayerOptions(kOSMImagery).buildTileLayer(),
+                TileLayerOptions(ref.watch(baseImageryProvider))
+                    .buildTileLayer(),
+                ...ref.watch(overlayImageryProvider),
                 MarkerLayer(
                   markers: [
                     if (amenity.canMove)

@@ -4,6 +4,7 @@ import 'package:every_door/models/imagery.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_mbtiles/flutter_map_mbtiles.dart';
 import 'package:logging/logging.dart';
 
 class TileCacheManager {
@@ -24,14 +25,11 @@ class CachedTileProvider extends TileProvider {
   ImageProvider getImage(TileCoordinates coordinates, TileLayer options) {
     final url = getTileUrl(coordinates, options);
     // print(url);
-    return CachedNetworkImageProvider(
-      url,
-      cacheManager: TileCacheManager.instance,
-      headers: headers,
-      errorListener: (e) {
-        _logger.warning('Failed to load a tile: $e');
-      }
-    );
+    return CachedNetworkImageProvider(url,
+        cacheManager: TileCacheManager.instance,
+        headers: headers, errorListener: (e) {
+      _logger.warning('Failed to load a tile: $e');
+    });
   }
 }
 
@@ -181,18 +179,26 @@ class TileLayerOptions {
       case ImageryType.wms:
         wmsOptions = _buildWMSOptions(url, imagery);
         break;
+      case ImageryType.mbtiles:
+        break;
     }
 
-    tileProvider = imagery.type == ImageryType.bing
-        ? CachedBingTileProvider()
-        : CachedTileProvider();
+    tileProvider = switch (imagery.type) {
+      ImageryType.tms => CachedTileProvider(),
+      ImageryType.wms => CachedTileProvider(),
+      ImageryType.bing => CachedBingTileProvider(),
+      ImageryType.mbtiles => MbTilesTileProvider(
+          mbtiles: imagery.mbtiles!,
+          silenceTileNotFound: false,
+        ),
+    };
 
     minNativeZoom = imagery.minZoom;
     maxNativeZoom = imagery.maxZoom;
     tileSize = imagery.tileSize;
   }
 
-  TileLayer buildTileLayer() {
+  TileLayer buildTileLayer({bool reset = false}) {
     return TileLayer(
       urlTemplate: urlTemplate,
       wmsOptions: wmsOptions,
@@ -205,6 +211,7 @@ class TileLayerOptions {
       subdomains: subdomains,
       additionalOptions: additionalOptions,
       userAgentPackageName: userAgentPackageName,
+      reset: reset ? tileResetController.stream : null,
     );
   }
 }

@@ -37,7 +37,7 @@ android {
         }
     }
 
-    compileSdk 34
+    compileSdk 35
     namespace "info.zverev.ilya.every_door"
 
     compileOptions {

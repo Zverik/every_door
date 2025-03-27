@@ -68,15 +68,20 @@ class Plugin extends PluginData {
         args: args, data: data);
   }
 
+  File resolvePath(String name) {
+    final file =  File('${directory.path}/$name');
+    if (!file.absolute.path.startsWith(directory.absolute.path)) {
+      throw ArgumentError('File "$name" is not inside the plugin directory');
+    }
+    return file;
+  }
+
   MultiIcon loadIcon(String name, [String? tooltip]) {
     final cached = _iconCache[name];
     if (cached != null)
       return cached.tooltip == tooltip ? cached : cached.withTooltip(tooltip);
 
-    final file = File('${directory.path}/icons/$name');
-    if (!file.absolute.path.startsWith(directory.absolute.path)) {
-      throw ArgumentError('File "$name" is not inside the plugin directory');
-    }
+    final file = resolvePath('icons/$name');
 
     MultiIcon icon;
     if (file.existsSync()) {

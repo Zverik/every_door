@@ -3,6 +3,7 @@ import 'dart:math' show min, max;
 
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/geometry/closest_points.dart';
+import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
@@ -292,20 +293,8 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         onTap: widget.onTap == null ? null : onMapTap,
       ),
       children: [
-        TileLayer(
-          urlTemplate: tileLayer.urlTemplate,
-          wmsOptions: tileLayer.wmsOptions,
-          tileProvider: tileLayer.tileProvider,
-          minNativeZoom: tileLayer.minNativeZoom,
-          maxNativeZoom: tileLayer.maxNativeZoom,
-          maxZoom: tileLayer.maxZoom,
-          tileDimension: tileLayer.tileSize,
-          tms: tileLayer.tms,
-          subdomains: tileLayer.subdomains,
-          additionalOptions: tileLayer.additionalOptions,
-          userAgentPackageName: tileLayer.userAgentPackageName,
-          reset: tileResetController.stream,
-        ),
+        tileLayer.buildTileLayer(reset: true),
+        ...ref.watch(overlayImageryProvider),
         LocationMarkerWidget(),
         WalkPathPolyline(faint: widget.faintWalkPath),
         AttributionWidget(imagery),

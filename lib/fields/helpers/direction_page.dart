@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/providers/imagery.dart';
@@ -109,6 +110,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
   @override
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
+    final isOSM = imagery == ref.watch(baseImageryProvider);
     final tileLayer = TileLayerOptions(imagery);
     final loc = AppLocalizations.of(context)!;
 
@@ -130,7 +132,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
                 ref.read(selectedImageryProvider.notifier).toggle();
               });
             },
-            icon: Icon(imagery == kOSMImagery ? Icons.map_outlined : Icons.map),
+            icon: Icon(isOSM ? Icons.map_outlined : Icons.map),
             tooltip: loc.navImagery,
           ),
         ],
@@ -149,20 +151,8 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
                   InteractionOptions(flags: InteractiveFlag.none),
             ),
             children: [
-              TileLayer(
-                urlTemplate: tileLayer.urlTemplate,
-                wmsOptions: tileLayer.wmsOptions,
-                tileProvider: tileLayer.tileProvider,
-                minNativeZoom: tileLayer.minNativeZoom,
-                maxNativeZoom: tileLayer.maxNativeZoom,
-                maxZoom: tileLayer.maxZoom,
-                tileDimension: tileLayer.tileSize,
-                tms: tileLayer.tms,
-                subdomains: tileLayer.subdomains,
-                additionalOptions: tileLayer.additionalOptions,
-                userAgentPackageName: tileLayer.userAgentPackageName,
-                reset: tileResetController.stream,
-              ),
+              tileLayer.buildTileLayer(reset: true),
+              ...ref.watch(overlayImageryProvider),
               AttributionWidget(imagery),
               LocationMarkerWidget(),
               if (direction == null)
@@ -175,7 +165,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
             DirectionArrow(
               direction: direction!,
               fov: fov,
-              color: imagery == kOSMImagery ? Colors.black : Colors.yellow,
+              color: isOSM ? Colors.black : Colors.yellow,
               size: _gdKey.currentContext?.findRenderObject()?.paintBounds.size,
             ),
           GestureDetector(
