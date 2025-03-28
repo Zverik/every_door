@@ -110,9 +110,11 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final login = ref.watch(authProvider)?.displayName;
+    final theme = Theme.of(context);
+
     Widget content;
     if (login == null) {
-      // not logged in
+      // not logged in - keep original UI
       content = Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -131,37 +133,115 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
         ],
       );
     } else {
-      content = Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (details?.avatar != null)
-            CachedNetworkImage(imageUrl: details!.avatar!),
-          SizedBox(height: 20.0),
-          Text(login),
-          SizedBox(height: 20.0),
-          if (details != null) ...[
-            Text('${loc.accountChangesets}: ${details!.changesets}'),
-            Text('${loc.accountUnreadMail}: ${details!.unreadMessages}'),
-            SizedBox(height: 20.0),
-          ],
-          ElevatedButton(
-              onPressed: () async {
-                if (await showOkCancelAlertDialog(
-                      context: context,
-                      title: loc.accountLogout + '?',
-                      okLabel: loc.accountLogout.toUpperCase(),
-                      isDestructiveAction: true,
-                    ) ==
-                    OkCancelResult.ok) {
-                  // logout
-                  ref.read(authProvider.notifier).logout();
-                  setState(() {
-                    details = null;
-                  });
-                }
-              },
-              child: Text(loc.accountLogout)),
-        ],
+      // logged in - updated UI
+      content = Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Conditional avatar: network image or icon
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: details?.avatar != null
+                    ? CircleAvatar(
+                        radius: 60,
+                        backgroundImage:
+                            CachedNetworkImageProvider(details!.avatar!),
+                      )
+                    : CircleAvatar(
+                        radius: 60,
+                        backgroundColor: theme.colorScheme.primaryContainer,
+                        child: Icon(
+                          Icons.person,
+                          size: 60,
+                          color: theme.colorScheme.onPrimaryContainer,
+                        ),
+                      ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                login,
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: theme.colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: 20),
+              if (details != null) ...[
+                Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        _buildStatRow(
+                          loc.accountChangesets,
+                          details!.changesets.toString(),
+                          theme,
+                        ),
+                        const SizedBox(height: 10),
+                        _buildStatRow(
+                          loc.accountUnreadMail,
+                          details!.unreadMessages.toString(),
+                          theme,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+              ],
+              ElevatedButton(
+                onPressed: () async {
+                  if (await showOkCancelAlertDialog(
+                        context: context,
+                        title: loc.accountLogout + '?',
+                        okLabel: loc.accountLogout.toUpperCase(),
+                        isDestructiveAction: true,
+                      ) ==
+                      OkCancelResult.ok) {
+                    // logout
+                    ref.read(authProvider.notifier).logout();
+                    setState(() {
+                      details = null;
+                    });
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: theme.colorScheme.error,
+                  foregroundColor: theme.colorScheme.onError,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12.0,
+                    horizontal: 40.0,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text(
+                  loc.accountLogout,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: theme.colorScheme.onError,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       );
     }
 
@@ -170,6 +250,27 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
         title: Text(loc.accountTitle),
       ),
       body: Center(child: content),
+    );
+  }
+
+  Widget _buildStatRow(String label, String value, ThemeData theme) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.colorScheme.onSurface.withOpacity(0.7),
+          ),
+        ),
+        Text(
+          value,
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+            color: theme.colorScheme.primary,
+          ),
+        ),
+      ],
     );
   }
 }
