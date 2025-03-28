@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LanguagePage extends ConsumerWidget {
+class LanguagePage extends ConsumerStatefulWidget {
   const LanguagePage({super.key});
 
   static final kLanguageNames = {
@@ -57,9 +57,33 @@ class LanguagePage extends ConsumerWidget {
     Locale('zh'),
   ];
 
+  @override
+  _LanguagePageState createState() => _LanguagePageState();
+}
+
+class _LanguagePageState extends ConsumerState<LanguagePage> {
+  TextEditingController searchController = TextEditingController();
+  List<Locale> filteredLocales = [];
+
+  @override
+  void initState() {
+    super.initState();
+    searchController.addListener(_filterLocales);
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterLocales() {
+    setState(() {});
+  }
+
   List<Locale> _getSupportedLocales(Locale appLocale) {
     final supportedLocales = List.of(AppLocalizations.supportedLocales
-        .where((l) => !kSkipLocales.contains(l)));
+        .where((l) => !LanguagePage.kSkipLocales.contains(l)));
 
     // Move EN locales on top of the list
     supportedLocales.sort((a, b) => (a.languageCode == 'en' ? 0 : 1)
@@ -102,29 +126,50 @@ class LanguagePage extends ConsumerWidget {
 
     return supportedLocales;
   }
-
+  
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    final appLocale =
-        ref.watch(languageProvider) ?? Localizations.localeOf(context);
+    final appLocale = ref.watch(languageProvider) ?? Localizations.localeOf(context);
     var supportedLocales = _getSupportedLocales(appLocale);
+
+    filteredLocales = supportedLocales.where((locale) {
+      String query = searchController.text.toLowerCase();
+      String languageName = LanguagePage.kLanguageNames[locale]?.toLowerCase() ?? '';
+      return query.isEmpty || languageName.contains(query);
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(title: Text(localizations.settingsLanguage)),
-      body: ListView.separated(
-        itemCount: supportedLocales.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(kLanguageNames[supportedLocales[index]] ??
-              supportedLocales[index].toLanguageTag()),
-          trailing:
-              supportedLocales[index] == appLocale ? Icon(Icons.check) : null,
-          onTap: () {
-            ref.read(languageProvider.notifier).set(supportedLocales[index]);
-            Navigator.of(context).pop();
-          },
-        ),
-        separatorBuilder: (context, index) => Divider(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                labelText: 'Search Language',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.separated(
+              itemCount: filteredLocales.length,
+              itemBuilder: (context, index) => ListTile(
+                title: Text(LanguagePage.kLanguageNames[filteredLocales[index]] ??
+                    filteredLocales[index].toLanguageTag()),
+                trailing: filteredLocales[index] == appLocale ? Icon(Icons.check) : null,
+                onTap: () {
+                  ref.read(languageProvider.notifier).set(filteredLocales[index]);
+                  Navigator.of(context).pop();
+                },
+              ),
+              separatorBuilder: (context, index) => Divider(),
+            ),
+          ),
+        ],
       ),
     );
   }
