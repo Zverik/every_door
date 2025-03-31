@@ -1086,7 +1086,7 @@
       }
     }
   },
-  "warningTooOld": "Cet élément a {years} ans",
+  "warningTooOld": "Cet élément a {years}",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {

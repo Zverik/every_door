@@ -23,7 +23,7 @@
   "@editorCloseTitle": {
     "description": "Title for the message on closing the editor without saving changes."
   },
-  "editorCloseMessage": "تغییرات ذخیره نشده خود را از دست خواهید داد. ادامه می‌دهید؟",
+  "editorCloseMessage": "تغییرات را بدون ذخیره سازی کنار می‌گذارید؟",
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
@@ -592,5 +592,140 @@
   "chooseTypeClear": "پاک کردن",
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
+  },
+  "settingsAbout": "درباره",
+  "@settingsAbout": {
+    "description": "Title for the About section in settings."
+  },
+  "warningWrongMode": "حالت اشتباه، موارد تکراری را بررسی کنید",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "aboutFAQ": "سؤالات متداول",
+  "@aboutFAQ": {
+    "description": "Title for the FAQ section on the About page."
+  },
+  "aboutLinks": "پیوندها",
+  "@aboutLinks": {
+    "description": "Title for the links section on the About page."
+  },
+  "accountOAuthError": "خطای OAuth",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "settingsPreferContact": "پیشوند \"contact:\" را ترجیح دهید",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsSystem": "سیستم",
+  "@settingsSystem": {
+    "description": "Title for the settings section for system-related switches."
+  },
+  "accountPasswordWarningButton": "فهمیدم",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountLoginPassword": "ورود با رمز عبور",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordTitle": "اطلاعات ورود OSM",
+  "@accountPasswordTitle": {
+    "description": "Title for the input dialog for login and password."
+  },
+  "settingsNumericKeyboard": "صفحه کلید عددی توسعه یافته",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "aboutViewLog": "گزارش سیستم",
+  "@aboutViewLog": {
+    "description": "Button title to open the log view page."
+  },
+  "aboutInstalledVersion": "نسخه نصب شده",
+  "@aboutInstalledVersion": {
+    "description": "Button description for installed app version."
+  },
+  "aboutProjectWebsite": "وب‌سایت پروژه",
+  "@aboutProjectWebsite": {
+    "description": "Button title to open the every-door.app website."
+  },
+  "aboutOnGitHub": "در GitHub",
+  "@aboutOnGitHub": {
+    "description": "Button description to indicate a link to GitHub."
+  },
+  "aboutLicense": "مجوز",
+  "@aboutLicense": {
+    "description": "Button title to open the app's license on GitHub."
+  },
+  "aboutHelpImprove": "کمک به بهبود {appTitle}",
+  "@aboutHelpImprove": {
+    "description": "Title for the Help improve section on the About page.",
+    "placeholders": {
+      "appTitle": {
+        "type": "String",
+        "description": "Name of app.",
+        "example": "Every Door"
+      }
+    }
+  },
+  "aboutReportIssue": "گزارش مشکل",
+  "@aboutReportIssue": {
+    "description": "Button title to open the app's GitHub issue page."
+  },
+  "aboutHelpTranslate": "کمک به ترجمه",
+  "@aboutHelpTranslate": {
+    "description": "Button title to open the app's Weblate page."
+  },
+  "accountAuthErrorMessage": "نام کاربری یا رمز عبور اشتباه است.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "خروج از سیستم",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "settingsGoogle": "استفاده از موقعیت یابی پیشرفته گوگل",
+  "@settingsGoogle": {
+    "description": "Settings switch for disabling Google services for location."
+  },
+  "warningUnsupported": "این نوع شی پشتیبانی نمی شود",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "aboutVersionHistory": "تاریخچه نسخه",
+  "@aboutVersionHistory": {
+    "description": "Button title to open GitHub releases page."
+  },
+  "aboutSourceCode": "کد منبع",
+  "@aboutSourceCode": {
+    "description": "Button title to open the repository on GitHub."
+  },
+  "accountTitle": "حساب OpenStreetMap",
+  "@accountTitle": {
+    "description": "Title for the account page."
+  },
+  "settingsDefaultPayment": "کارت های پرداخت پیش فرض",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "editorDeleteKeepAddressButton": "حذف شود، اما آدرس حفظ شود",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "accountLoginOAuth": "ورود با OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "aboutOnWeblate": "در Weblate",
+  "@aboutOnWeblate": {
+    "description": "Button description to indicate a link to Weblate."
+  },
+  "accountAuthErrorTitle": "خطای احراز هویت",
+  "@accountAuthErrorTitle": {
+    "descripton": "Title for the alert dialog about an incorrect password."
+  },
+  "editorDeleteBuilding": "تخریب شده",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
   }
 }
