@@ -1082,5 +1082,5 @@ const kCommonKeys = <String>{
   'sanitary_dump_station:round_drain', 'lcd', 'area_lcd', 'entrance:steps',
   'roof:ridge:direction', 'building:name', 'whc:criteria', 'hut',
   'animal_boarding', 'water_characteristic',
-  'destination:symbol:lanes:backward',
+  'destination:symbol:lanes:backward', 'ref:RS:kucni_broj',
 };
