@@ -19,6 +19,7 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
     - run: echo '{}' > lib/l10n/app_zh.arb
+    - run: rm lib/l10n/app_nap.arb
     - run: vendor/flutter/bin/flutter pub get
     - run: curl -L https://textual.ru/presets.db -o assets/presets.db
       name: Download presets database

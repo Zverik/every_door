@@ -18,6 +18,7 @@ jobs:
     - run: sed -i -e 's/^#f\|^ *mobile_scanner.*$//' pubspec.yaml
     - run: mv lib/fields/helpers/qr_code.dart.fdroid lib/fields/helpers/qr_code.dart
     - run: echo '{}' > lib/l10n/app_zh.arb
+    - run: rm lib/l10n/app_nap.arb
     - run: export PUB_CACHE=$(pwd)/.pub-cache
     - run: vendor/flutter/bin/flutter config --no-analytics
     - run: vendor/flutter/bin/flutter pub get

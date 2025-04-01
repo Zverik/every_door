@@ -102,32 +102,36 @@ class PluginManager extends Notifier<List<Plugin>> {
 
   void _enableImagery(Plugin plugin) {
     final imageryData = plugin.data['imagery'];
-    if (imageryData == null || imageryData is! Map) return;
-    for (final entry in imageryData.entries) {
-      final imagery = _imageryFromMap(entry.key, entry.value, plugin);
-      if (imagery == null) {
-        _logger.warning('Failed to parse imagery ${entry.key}');
-        continue;
-      }
+    if (imageryData != null && imageryData is Map) {
+      for (final entry in imageryData.entries) {
+        final imagery = _imageryFromMap(entry.key, entry.value, plugin);
+        if (imagery == null) {
+          _logger.warning('Failed to parse imagery ${entry.key}');
+          continue;
+        }
 
-      if (entry.key == 'base') {
-        ref.read(baseImageryProvider.notifier).state = imagery;
-      } else {
-        ref.read(imageryProvider.notifier).registerImagery(imagery);
+        if (entry.key == 'base') {
+          ref.read(baseImageryProvider.notifier).state = imagery;
+        } else {
+          ref.read(imageryProvider.notifier).registerImagery(imagery);
+        }
       }
     }
 
     final overlayData = plugin.data['overlays'];
-    if (overlayData == null || overlayData is! Map) return;
-    for (final entry in overlayData.entries) {
-      final imagery = _imageryFromMap(entry.key, entry.value, plugin);
-      ref.read(overlayImageryProvider.notifier).addLayer(
-            key: entry.key,
-            imagery: imagery,
-            widget: imagery == null
-                ? _widgetFromMap(entry.key, entry.value, plugin)
-                : null,
-          );
+    if (overlayData != null && overlayData is List) {
+      for (final entry in overlayData.asMap().entries) {
+        if (entry.value is! Map<String, dynamic>) continue;
+        final key = 'plugin_${plugin.id}_${entry.key}';
+        final imagery = _imageryFromMap(key, entry.value, plugin);
+        ref.read(overlayImageryProvider.notifier).addLayer(
+              key: key,
+              imagery: imagery,
+              widget: imagery == null
+                  ? _widgetFromMap(key, entry.value, plugin)
+                  : null,
+            );
+      }
     }
   }
 
@@ -184,19 +188,21 @@ class PluginManager extends Notifier<List<Plugin>> {
 
   void _disableImagery(Plugin plugin) {
     final imageryData = plugin.data['imagery'];
-    if (imageryData == null || imageryData is! Map) return;
-    for (final entry in imageryData.entries) {
-      if (entry.key == 'base') {
-        ref.read(baseImageryProvider.notifier).state = kOSMImagery;
-      } else {
-        ref.read(imageryProvider.notifier).unregisterImagery(entry.key);
+    if (imageryData != null && imageryData is Map) {
+      for (final entry in imageryData.entries) {
+        if (entry.key == 'base') {
+          ref.read(baseImageryProvider.notifier).state = kOSMImagery;
+        } else {
+          ref.read(imageryProvider.notifier).unregisterImagery(entry.key);
+        }
       }
     }
 
     final overlayData = plugin.data['overlays'];
-    if (overlayData == null || overlayData is! Map) return;
-    for (final entry in overlayData.entries) {
-      ref.read(overlayImageryProvider.notifier).removeLayer(entry.key);
+    if (overlayData != null) {
+      ref
+          .read(overlayImageryProvider.notifier)
+          .removeLayers('plugin_${plugin.id}_');
     }
   }
 

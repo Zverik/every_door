@@ -34,4 +34,11 @@ class OverlayImagery extends Notifier<List<Widget>> {
     _order.remove(key);
     _updateState();
   }
+
+  void removeLayers(String prefix) {
+    _imagery.removeWhere((k, _) => k.startsWith(prefix));
+    _widgets.removeWhere((k, _) => k.startsWith(prefix));
+    _order.removeWhere((k) => k.startsWith(prefix));
+    _updateState();
+  }
 }
