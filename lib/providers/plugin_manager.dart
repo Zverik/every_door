@@ -13,6 +13,7 @@ import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map_geojson2/flutter_map_geojson2.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:mbtiles/mbtiles.dart';
@@ -135,8 +136,10 @@ class PluginManager extends Notifier<List<Plugin>> {
     if (data['type'] == 'geojson' ||
         url.endsWith('.geojson') ||
         url.endsWith('.json')) {
-      // TODO
-      return null;
+      final layer = GeoJsonLayer(
+        data: FileGeoJson(plugin.resolvePath(url)),
+      );
+      return layer;
     }
     return null;
   }
