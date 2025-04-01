@@ -618,7 +618,7 @@
   },
   "buildingTypeIndustrial": "industrieel",
   "@buildingTypeIndustrial": {},
-  "entranceRef": "Ref",
+  "entranceRef": "Verw",
   "@entranceRef": {
     "description": "Label for entrance ref in the form. Keep it short."
   },
