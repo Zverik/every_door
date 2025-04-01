@@ -141,7 +141,9 @@ class PluginManager extends Notifier<List<Plugin>> {
         url.endsWith('.geojson') ||
         url.endsWith('.json')) {
       final layer = GeoJsonLayer(
-        data: FileGeoJson(plugin.resolvePath(url)),
+        data: url.startsWith('http')
+            ? NetworkGeoJson(url)
+            : FileGeoJson(plugin.resolvePath(url)),
       );
       return layer;
     }
@@ -153,21 +155,24 @@ class PluginManager extends Notifier<List<Plugin>> {
     final url = data['url'] as String;
 
     File? mbtiles;
-    ImageryType type;
+    ImageryType? type;
     if (url.startsWith('http')) {
       if (data['type'] == 'wms' || url.toLowerCase().contains('service=wms')) {
         type = ImageryType.wms;
-      } else {
+      } else if (data['type'] == 'tms' ||
+          url.endsWith('.jpg') ||
+          url.endsWith('.jpeg') ||
+          url.endsWith('.png')) {
         type = ImageryType.tms;
       }
     } else {
       if (data['type'] == 'mbtiles' || url.toLowerCase().endsWith('.mbtiles')) {
         type = ImageryType.mbtiles;
         mbtiles = plugin.resolvePath(url);
-      } else {
-        return null;
       }
     }
+
+    if (type == null) return null;
 
     final imagery = Imagery(
       id: key,
