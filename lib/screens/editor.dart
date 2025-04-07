@@ -197,7 +197,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final tags = amenity.getFullTags();
     for (final f in preset!.moreFields) {
       if (hasStdFields.contains(f.key)) continue;
-      if (f.hasRelevantKey(tags) || f.meetsPrerequisite(tags)) {
+      final meetsPrerequisite = f.prerequisite?.matches(tags) ?? false;
+      if (f.hasRelevantKey(tags) || meetsPrerequisite) {
         fields.add(f);
       } else {
         moreFields.add(f);
@@ -670,6 +671,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     for (final field in fields) {
       bool hasTags = field.hasRelevantKey(tags);
       bool isMandatory = kMandatoryKeys.contains(field.key);
+      final color =
+          !isMandatory ? null : (hasTags ? Colors.green : Colors.red.shade800);
+
       rows.add(Row(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -684,9 +688,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                   ? Text(field.label)
                   : Icon(
                       field.icon ?? Icons.sms,
-                      color: !isMandatory
-                          ? null
-                          : (hasTags ? Colors.green : Colors.red.shade800),
+                      color: color,
                     ),
             ),
           ),

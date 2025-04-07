@@ -10,6 +10,7 @@ import 'package:every_door/providers/osm_auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/plugin_manager.dart';
 import 'package:every_door/providers/presets.dart';
+import 'package:every_door/providers/shared_file.dart';
 import 'package:every_door/screens/browser.dart';
 import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
@@ -88,6 +89,10 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
       ref.read(effectiveLocationProvider.notifier).set(location);
     }
     await ref.read(geoIntentProvider).checkLatestIntent();
+
+    // Initialize the file listener. Note that the initial shared file
+    // is checked in the plugin manager after everything's been loaded.
+    ref.read(sharedFileProvider);
 
     // Alert if there are too many changes loaded.
     final needSizeAlert =

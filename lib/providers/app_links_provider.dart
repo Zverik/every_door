@@ -22,10 +22,10 @@ class GeoIntentController {
     initStreamListener();
   }
 
-  initStreamListener() async {
-    await for (final uri in AppLinks().uriLinkStream) {
+  initStreamListener() {
+    AppLinks().uriLinkStream.listen((uri) {
       _handleGeoIntent(uri);
-    }
+    });
   }
 
   checkLatestIntent() async {

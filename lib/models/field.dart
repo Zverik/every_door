@@ -13,6 +13,7 @@ import 'package:every_door/fields/inline_combo.dart';
 import 'package:every_door/fields/name.dart';
 import 'package:every_door/fields/phone.dart';
 import 'package:every_door/fields/radio.dart';
+import 'package:every_door/fields/section.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/fields/website.dart';
 import 'package:every_door/fields/wheelchair.dart';
@@ -20,6 +21,9 @@ import 'package:every_door/fields/wiki_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/amenity.dart';
 
+/// Tag dependency definition. Basically a structure that defines
+/// which tags and which values should or should not be preset in a tag list.
+/// See https://github.com/ideditor/schema-builder/blob/main/README.md#prerequisitetag
 class FieldPrerequisite {
   final String? key;
   final String? keyNot;
@@ -46,12 +50,32 @@ class FieldPrerequisite {
   }
 }
 
+/// Field definition. Each field type needs to subclass this one.
+/// There are multiple examples in the `fields` directory.
 abstract class PresetField {
+  /// OSM tag key for this field. If the field does not use this
+  /// attribute (or adds more keys, e.g. `contact:phone` for `phone`),
+  /// do override the [hasRelevantKey] method.
   final String key;
+
+  /// Field label to display alongside it. Can be overridden for
+  /// a multi-line field in [buildWidgets].
   final String label;
+
+  /// Icon for the field. Displayed only in the standard fields block
+  /// in the full-page editor.
   final IconData? icon;
+
+  /// Placeholder for text-based fields.
   final String? placeholder;
+
+  /// Tag prerequisites for moving this field into the main block.
+  /// If a field is in the "more fields" block, it's collapsed by default.
+  /// When a prerequisite matches, it is moved to the main "fields" block.
   final FieldPrerequisite? prerequisite;
+
+  /// Locations to determine whether to skip the field. It allows for
+  /// country-specific fields.
   final LocationSet? locationSet;
 
   const PresetField({
@@ -63,12 +87,12 @@ abstract class PresetField {
     this.locationSet,
   });
 
+  /// Builds a field-editing widget for the given [element].
   Widget buildWidget(OsmChange element);
 
+  /// Tests whether the object has tags matching this field.
+  /// The purpose is to check whether the field has a non-empty value.
   bool hasRelevantKey(Map<String, String> tags) => tags.containsKey(key);
-
-  bool meetsPrerequisite(Map<String, String> tags) =>
-      prerequisite != null && prerequisite!.matches(tags);
 }
 
 PresetField fieldFromJson(Map<String, dynamic> data,
@@ -403,6 +427,9 @@ PresetField fieldFromPlugin(Map<String, dynamic> data,
         label: label,
         prerequisite: prerequisite,
       );
+    case 'label':
+    case 'section':
+      return SectionPresetField(label);
     default:
       return TextPresetField(
         key: key,

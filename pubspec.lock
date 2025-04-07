@@ -699,6 +699,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.1"
+  listen_sharing_intent:
+    dependency: "direct main"
+    description:
+      name: listen_sharing_intent
+      sha256: "957509f1cd7e68e598a8f39fca59b103a48c6b97490bfd85141d9ec93e498324"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.9.1"
   lists:
     dependency: transitive
     description:

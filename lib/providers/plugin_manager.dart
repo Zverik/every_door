@@ -9,6 +9,7 @@ import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/providers/plugin_repo.dart';
+import 'package:every_door/providers/shared_file.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
@@ -60,12 +61,17 @@ class PluginManager extends Notifier<List<Plugin>> {
     for (final plugin in enabledPlugins) {
       _enable(plugin, true);
     }
+
+    // This is very deep, because we need everything set up before
+    // we can process incoming files.
+    ref.read(sharedFileProvider).checkInitialMedia();
   }
 
   Future<void> _saveEnabled() async {
     final prefs = await SharedPreferences.getInstance();
     final enabledList = state.map((p) => p.id).toList();
     enabledList.sort();
+    _logger.info('Saving enabled plugins: $enabledList');
     await prefs.setStringList(_kEnabledKey, enabledList);
   }
 
@@ -88,7 +94,7 @@ class PluginManager extends Notifier<List<Plugin>> {
     _disablePresets(plugin);
     _disableFields(plugin);
     // TODO: clear the data from the plugin
-    state = state.where((p) => p != plugin).toList();
+    state = state.where((p) => p.id != plugin.id).toList();
   }
 
   Future<void> setStateAndSave(Plugin id, bool active) async {
