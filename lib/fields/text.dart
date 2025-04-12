@@ -5,6 +5,7 @@ import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum TextFieldCapitalize { no, asName, sentence, all }
 
@@ -57,6 +58,7 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final value = widget.element[widget.field.key] ?? '';
     if (value != _controller.text.trim()) {
       // Hopefully that's not the time when we type a letter in the field.
@@ -89,6 +91,9 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
         break;
     }
 
+    final isFixmeField = widget.field.key == 'fixme';
+    final showClearButton = _controller.text.isNotEmpty && isFixmeField;
+
     return Padding(
       padding: EdgeInsets.only(right: 10.0),
       child: TextField(
@@ -98,6 +103,18 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
         decoration: InputDecoration(
           hintText: widget.field.placeholder,
           labelText: widget.field.icon != null ? widget.field.label : null,
+          suffixIcon: showClearButton
+              ? IconButton(
+                  icon: Icon(Icons.clear),
+                  tooltip: loc.tagsDelete,
+                  onPressed: () {
+                    setState(() {
+                      _controller.clear();
+                      widget.element[widget.field.key] = '';
+                    });
+                  },
+                )
+              : null,
         ),
         style: kFieldTextStyle,
         maxLines: widget.field.maxLines ?? 1,
