@@ -13,6 +13,7 @@ class TextPresetField extends PresetField {
   final TextInputType keyboardType;
   final TextFieldCapitalize capitalize;
   final int? maxLines;
+  final bool showClearButton;
 
   const TextPresetField({
     required super.key,
@@ -24,6 +25,7 @@ class TextPresetField extends PresetField {
     this.keyboardType = TextInputType.text,
     this.capitalize = TextFieldCapitalize.sentence,
     this.maxLines,
+    this.showClearButton = false,
   });
 
   @override
@@ -91,8 +93,7 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
         break;
     }
 
-    final isFixmeField = widget.field.key == 'fixme';
-    final showClearButton = _controller.text.isNotEmpty && isFixmeField;
+    final showClearButton = _controller.text.isNotEmpty && widget.field.showClearButton;
 
     return Padding(
       padding: EdgeInsets.only(right: 10.0),
