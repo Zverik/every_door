@@ -156,6 +156,15 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         key: key,
         label: label,
       );
+    case 'fixme':
+      return TextPresetField(
+        key: key,
+        label: label,
+        placeholder: placeholder,
+        prerequisite: prerequisite,
+        locationSet: locationSet,
+        showClearButton: true,
+      );
     case 'payment:':
       return ComboPresetField(
         key: key,
@@ -323,6 +332,18 @@ PresetField fieldFromPlugin(Map<String, dynamic> data,
   final locationSet = data['locations'] == null
       ? null
       : LocationSet.fromJson(jsonDecode(data['locations']));
+
+  // Special case for fixme field
+  if (key == 'fixme') {
+    return TextPresetField(
+      key: key,
+      label: label,
+      placeholder: placeholder,
+      prerequisite: prerequisite,
+      locationSet: locationSet,
+      showClearButton: true,
+    );
+  }
 
   String typ = data['type'] ?? 'text';
   if (data['name'] == 'ref') typ = 'number'; // Patch some refs to be numbers
