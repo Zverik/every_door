@@ -190,11 +190,6 @@ class _RadioFieldState extends State<RadioField> {
                     .onChange!(newValues.isEmpty ? null : newValues.join(';'));
               if (widget.onMultiChange != null)
                 widget.onMultiChange!(newValues);
-              if (pushFirst) {
-                scrollController.animateTo(0.0,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeOut);
-              }
             },
           ),
     ];
