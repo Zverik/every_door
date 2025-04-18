@@ -1272,6 +1272,6 @@
   "@faqChangeTypeContent": {},
   "faqTagging": "All tagging questions",
   "@faqTagging": {},
-  "faqTaggingContent": "Why an object is missing in the editor? When these white dots are displayed in the micromapping mode? How objects are sorted?\n\nAnswers to all these questions are in [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Here's what you can look at:\n\n* The key order for the main tag — list `kMainKeys`.\n* Which objects are downloaded — function `isGoodTags`.\n* What is considered an amenity — function `isAmenityTags`.\n* Which points are snapped to what ways — function `detectSnap`.\n* When a micromapping object is incomplete — function `needsMoreInfo`.",
+  "faqTaggingContent": "Why is an object missing in the editor? When these white dots are displayed in the micromapping mode? How are objects sorted?\n\nAnswers to all these questions are in [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Here's what you can look at:\n\n* The key order for the main tag — list `kMainKeys`.\n* Which objects are downloaded — function `isGoodTags`.\n* What is considered an amenity — function `isAmenityTags`.\n* Which points are snapped to what ways — function `detectSnap`.\n* When a micromapping object is incomplete — function `needsMoreInfo`.",
   "@faqTaggingContent": {}
 }
