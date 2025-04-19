@@ -73,7 +73,9 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
               "shop": "beauty",
               "name": "Beauty Shop 42"
               // other tags
-           }
+           },
+           "preset_id": "...", // should be based on type, e.g. shop/beauty or amenity/veterinary
+           "preset_name": "..." // some name 
         }
         ```
 
@@ -99,7 +101,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
                   MaterialPageRoute(
                     builder: (context) => PoiEditorPage(
                       location: widget.location,
-                      preset: Preset(id: "shop/beauty", addTags: tags, name: 'AI'),
+                      preset: Preset(id: response['preset_id'] as String, addTags: tags, name: response['preset_name'] as String),
                     ),
                   ),
               );
