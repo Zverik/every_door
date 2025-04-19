@@ -86,8 +86,22 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       });
 
       if (response != null) {
-        print('OpenAI Response: $response');
-        // Handle the JSON response here
+        if (response['status'] == 'FAILED') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('AI could not determine tags for the photo.'),
+            ),
+          );
+        } else {
+          print('OpenAI Response: $response');
+          // Handle the JSON response here
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to communicate with AI service.'),
+          ),
+        );
       }
     }
   }
