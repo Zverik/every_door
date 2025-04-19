@@ -68,7 +68,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         );
     }
     final XFile? photo = await _picker.pickImage(
-      source: ImageSource.gallery,
+      source: ImageSource.camera,
       imageQuality: 50, 
       maxWidth: 800,   
       maxHeight: 800,
