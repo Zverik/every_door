@@ -52,6 +52,7 @@ dependencies:
   uuid: ^4.3.3
   xml: ^6.3.0
   app_links: ^6.3.2
+  flutter_compass: '^0.8.1'
 
 dependency_overrides:
   flutter_dropdown_alert:
