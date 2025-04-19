@@ -14,6 +14,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:typed_data';
 
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;
@@ -43,11 +46,71 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   Future<void> _openCamera() async {
     final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
     if (photo != null) {
-      // Handle the photo in the callback
-      print('Photo path: ${photo.path}');
-      // Add your callback logic here
+      // Convert the photo to bytes
+      final bytes = await photo.readAsBytes();
+
+      // Call OpenAI API with the photo and text
+      final response = await _callOpenAI(bytes, 'What is it? Response in JSON please.');
+
+      if (response != null) {
+        print('OpenAI Response: $response');
+        // Handle the JSON response here
+      }
     }
   }
+
+  Future<Map<String, dynamic>?> _callOpenAI(
+    Uint8List photoBytes,
+    String prompt,
+  ) async {
+  const String apiUrl = 'https://api.openai.com/v1/chat/completions';
+
+// Build the data‑URL for a JPEG
+  final String base64Image = base64Encode(photoBytes);
+  final String dataUrl = 'data:image/jpeg;base64,$base64Image';
+
+  // Construct the body with two messages: one text, one image
+   final Map<String, dynamic> body = {
+    'model': 'gpt-4o-mini', // or 'gpt-4o-vision-preview' depending on your access
+    'messages': [
+      {
+        'role': 'user',
+        'content': [
+                {"type": "text", "text": prompt},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": dataUrl
+                    }
+                }
+          ]
+      }
+    ],
+  };
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $apiKey',
+        if (organization.isNotEmpty) 'OpenAI-Organization': organization,
+      },
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      print('Response: ${response.body}');
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      print('Failed [${response.statusCode}]: ${response.body}');
+      return null;
+    }
+  } catch (e) {
+    print('Exception while calling OpenAI: $e');
+    return null;
+  }
+}
 
   Future<List<Preset>> _getPresetsAround(LatLng location,
       [int count = 3]) async {
