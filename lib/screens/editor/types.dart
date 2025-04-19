@@ -17,8 +17,9 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
+import 'package:shared_preferences/shared_preferences.dart';
 
-
+  
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;
   final bool launchEditor;
@@ -30,6 +31,8 @@ class TypeChooserPage extends ConsumerStatefulWidget {
 }
 
 class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
+  static const String kOpenAIApiKeyPref = 'openai_api_key';
+
   List<Preset> presets = const [];
   DateTime resultsUpdated = DateTime.now();
   final controller = TextEditingController();
@@ -37,16 +40,34 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   final ImagePicker _picker = ImagePicker();
   bool _isLoading = false;
 
+  String apiKey = "";
+
   @override
-  initState() {
+  void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updatePresets('');
     });
+    _loadApiKey();
+  }
+
+  Future<void> _loadApiKey() async {
+    final prefs = await SharedPreferences.getInstance();
+    final storedApiKey = prefs.getString(kOpenAIApiKeyPref) ?? '';
+    setState(() {
+      apiKey = storedApiKey;
+    });
   }
 
   Future<void> _openCamera() async {
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    if (apiKey == '') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('You must configure OpenAI key in Settings first.'),
+          ),
+        );
+    }
+    final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
     if (photo != null) {
       setState(() {
         _isLoading = true;
@@ -151,8 +172,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         Uri.parse(apiUrl),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer $apiKey',
-          if (organization.isNotEmpty) 'OpenAI-Organization': organization,
+          'Authorization': 'Bearer $apiKey'
         },
         body: jsonEncode(body),
       );

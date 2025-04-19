@@ -12,6 +12,7 @@ import 'package:every_door/screens/settings/about.dart';
 import 'package:every_door/screens/settings/account.dart';
 import 'package:every_door/screens/settings/changes.dart';
 import 'package:every_door/screens/settings/changeset_pane.dart';
+import 'package:every_door/screens/settings/openai_pane.dart';
 import 'package:every_door/screens/settings/imagery.dart';
 import 'package:every_door/screens/settings/language.dart';
 import 'package:flutter/foundation.dart';
@@ -79,6 +80,17 @@ class SettingsPage extends ConsumerWidget {
                           builder: (context) => ChangesetSettingsPage()));
                 },
               ),
+              SettingsTile(
+                title: Text("OpenAI"),
+                trailing: Icon(Icons.navigate_next),
+                description: null,
+                onPressed: (context) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OpenAISettingsPage()));
+                },
+              )
             ],
           ),
           SettingsSection(
