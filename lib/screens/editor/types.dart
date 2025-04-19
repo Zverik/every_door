@@ -67,7 +67,12 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
           ),
         );
     }
-    final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? photo = await _picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 50, 
+      maxWidth: 800,   
+      maxHeight: 800,
+    );
     if (photo != null) {
       setState(() {
         _isLoading = true;
@@ -150,7 +155,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     final String dataUrl = 'data:image/jpeg;base64,$base64Image';
 
     final Map<String, dynamic> body = {
-      'model': 'gpt-4o',
+      'model': 'gpt-4.1',
       'messages': [
         {
           'role': 'user',
@@ -168,6 +173,11 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     };
 
     try {
+      final encodedBody = jsonEncode(body);
+      final byteSize = utf8.encode(encodedBody).length;
+      print('Body size in characters: ${encodedBody.length}');
+      print('Body size in bytes: $byteSize');
+
       final response = await http.post(
         Uri.parse(apiUrl),
         headers: {
@@ -177,13 +187,14 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         body: jsonEncode(body),
       );
 
+      final responseBody = utf8.decode(response.bodyBytes);
       if (response.statusCode == 200) {
-        print('Response: ${response.body}');
+        print('Response: ${responseBody}');
 
-        final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        final jsonResponse = jsonDecode(responseBody) as Map<String, dynamic>;
         return jsonDecode(jsonResponse['choices'][0]['message']['content']);
       } else {
-        print('Failed [${response.statusCode}]: ${response.body}');
+        print('Failed [${response.statusCode}]: ${responseBody}');
         return null;
       }
     } catch (e) {
