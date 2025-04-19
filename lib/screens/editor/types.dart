@@ -46,7 +46,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   }
 
   Future<void> _openCamera() async {
-    final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
     if (photo != null) {
       setState(() {
         _isLoading = true;
@@ -93,6 +93,16 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
             ),
           );
         } else {
+              final tags = Map<String, String>.from(response['tags']);
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PoiEditorPage(
+                      location: widget.location,
+                      preset: Preset(id: "shop/beauty", addTags: tags, name: 'AI'),
+                    ),
+                  ),
+              );
           print('OpenAI Response: $response');
           // Handle the JSON response here
         }
@@ -116,9 +126,8 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     final String base64Image = base64Encode(photoBytes);
     final String dataUrl = 'data:image/jpeg;base64,$base64Image';
 
-    // Construct the body with two messages: one text, one image
     final Map<String, dynamic> body = {
-      'model': 'gpt-4o', // or 'gpt-4o-vision-preview' depending on your access
+      'model': 'gpt-4o',
       'messages': [
         {
           'role': 'user',
@@ -365,7 +374,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
                         MaterialPageRoute(
                           builder: (context) => PoiEditorPage(
                             location: widget.location,
-                            preset: Preset(id: "shop/beauty", addTags: {"shop": "beauty"}, name: 'AI'),
+                            preset: preset
                           ),
                         ),
                       );
