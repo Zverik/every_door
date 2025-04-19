@@ -46,7 +46,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   }
 
   Future<void> _openCamera() async {
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
     if (photo != null) {
       setState(() {
         _isLoading = true;
@@ -56,7 +56,30 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
       final bytes = await photo.readAsBytes();
 
       // Call OpenAI API with the photo and text
-      final response = await _callOpenAI(bytes, 'What is it? Response in JSON please.');
+      final response = await _callOpenAI(bytes, '''
+        You are experienced OpenStreetMap editor. 
+        I will send you a photo of place and you need to return me a JSON with tags which should be assigned to given place.
+        Main tags which I require is:
+        - type (like shop=beauty or amenity=veterinary)
+        - name
+        But fill free to to also add other tags if you think they can be useful, BUT only if you are confident it is needed.
+        If photo doesn't similar to something what should be mapped in OpenStreetMap don't try to infer tags and just return 
+        status=FAILED.
+        Format of JSON:
+        ```
+        {
+           "status": ..., // SUCCESS or FAILED
+           "tags": {
+              "shop": "beauty",
+              "name": "Beauty Shop 42"
+              // other tags
+           }
+        }
+        ```
+
+        DO NOT USE MARKDOWN IN OUTPUT. It should be decodable by normal JSON parser.
+
+      ''');
 
       setState(() {
         _isLoading = false;
@@ -81,7 +104,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
 
     // Construct the body with two messages: one text, one image
     final Map<String, dynamic> body = {
-      'model': 'gpt-4o-mini', // or 'gpt-4o-vision-preview' depending on your access
+      'model': 'gpt-4o', // or 'gpt-4o-vision-preview' depending on your access
       'messages': [
         {
           'role': 'user',
@@ -111,7 +134,9 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
 
       if (response.statusCode == 200) {
         print('Response: ${response.body}');
-        return jsonDecode(response.body) as Map<String, dynamic>;
+
+        final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        return jsonDecode(jsonResponse['choices'][0]['message']['content']);
       } else {
         print('Failed [${response.statusCode}]: ${response.body}');
         return null;
