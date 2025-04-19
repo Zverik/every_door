@@ -18,6 +18,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 
+
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;
   final bool launchEditor;
@@ -34,6 +35,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   final controller = TextEditingController();
   int updateMutex = 0;
   final ImagePicker _picker = ImagePicker();
+  bool _isLoading = false;
 
   @override
   initState() {
@@ -46,11 +48,19 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   Future<void> _openCamera() async {
     final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
     if (photo != null) {
+      setState(() {
+        _isLoading = true;
+      });
+
       // Convert the photo to bytes
       final bytes = await photo.readAsBytes();
 
       // Call OpenAI API with the photo and text
       final response = await _callOpenAI(bytes, 'What is it? Response in JSON please.');
+
+      setState(() {
+        _isLoading = false;
+      });
 
       if (response != null) {
         print('OpenAI Response: $response');
@@ -63,54 +73,54 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     Uint8List photoBytes,
     String prompt,
   ) async {
-  const String apiUrl = 'https://api.openai.com/v1/chat/completions';
+    const String apiUrl = 'https://api.openai.com/v1/chat/completions';
 
-// Build the data‑URL for a JPEG
-  final String base64Image = base64Encode(photoBytes);
-  final String dataUrl = 'data:image/jpeg;base64,$base64Image';
+    // Build the data‑URL for a JPEG
+    final String base64Image = base64Encode(photoBytes);
+    final String dataUrl = 'data:image/jpeg;base64,$base64Image';
 
-  // Construct the body with two messages: one text, one image
-   final Map<String, dynamic> body = {
-    'model': 'gpt-4o-mini', // or 'gpt-4o-vision-preview' depending on your access
-    'messages': [
-      {
-        'role': 'user',
-        'content': [
-                {"type": "text", "text": prompt},
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": dataUrl
-                    }
-                }
+    // Construct the body with two messages: one text, one image
+    final Map<String, dynamic> body = {
+      'model': 'gpt-4o-mini', // or 'gpt-4o-vision-preview' depending on your access
+      'messages': [
+        {
+          'role': 'user',
+          'content': [
+            {"type": "text", "text": prompt},
+            {
+              "type": "image_url",
+              "image_url": {
+                "url": dataUrl
+              }
+            }
           ]
+        }
+      ],
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $apiKey',
+          if (organization.isNotEmpty) 'OpenAI-Organization': organization,
+        },
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        print('Response: ${response.body}');
+        return jsonDecode(response.body) as Map<String, dynamic>;
+      } else {
+        print('Failed [${response.statusCode}]: ${response.body}');
+        return null;
       }
-    ],
-  };
-
-  try {
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $apiKey',
-        if (organization.isNotEmpty) 'OpenAI-Organization': organization,
-      },
-      body: jsonEncode(body),
-    );
-
-    if (response.statusCode == 200) {
-      print('Response: ${response.body}');
-      return jsonDecode(response.body) as Map<String, dynamic>;
-    } else {
-      print('Failed [${response.statusCode}]: ${response.body}');
+    } catch (e) {
+      print('Exception while calling OpenAI: $e');
       return null;
     }
-  } catch (e) {
-    print('Exception while calling OpenAI: $e');
-    return null;
   }
-}
 
   Future<List<Preset>> _getPresetsAround(LatLng location,
       [int count = 3]) async {
@@ -243,96 +253,105 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    return Scaffold(
-      appBar: AppBar(
-        title: Container(
-          width: double.infinity,
-          height: 40.0,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          child: TextField(
-            autofocus: true,
-            controller: controller,
-            textInputAction: TextInputAction.search,
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              hintText: loc.chooseType + '...',
-              border: InputBorder.none,
-              suffixIcon: IconButton(
-                icon: Icon(Icons.clear),
-                      tooltip: loc.chooseTypeClear,
-                      onPressed: () {
-                        controller.clear();
-                        updatePresets('');
-                      },
-                    ),
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            title: Container(
+              width: double.infinity,
+              height: 40.0,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              child: TextField(
+                autofocus: true,
+                controller: controller,
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  hintText: loc.chooseType + '...',
+                  border: InputBorder.none,
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.clear),
+                    tooltip: loc.chooseTypeClear,
+                    onPressed: () {
+                      controller.clear();
+                      updatePresets('');
+                    },
                   ),
-                  onChanged: (value) {
-                    updatePresets(value);
-            },
+                ),
+                onChanged: (value) {
+                  updatePresets(value);
+                },
+              ),
+            ),
+          ),
+          body: ResponsiveGridList(
+            minItemWidth: 170.0,
+            horizontalGridSpacing: 5,
+            verticalGridSpacing: 5,
+            rowMainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              for (final preset in presets)
+                GestureDetector(
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          preset.name,
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        SizedBox(height: 4.0),
+                        Text(
+                          preset.subtitle,
+                          style: TextStyle(
+                              fontSize: 14.0, color: Colors.grey.shade600),
+                        ),
+                      ],
+                    ),
+                    color: !preset.isFixme
+                        ? (preset.fromNSI
+                            ? Colors.grey.withOpacity(0.2)
+                            : kFieldColor.withOpacity(0.2))
+                        : Colors.red.withOpacity(0.2),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                  ),
+                  onTap: () {
+                    if (widget.launchEditor) {
+                      print('Preset: ${preset}');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PoiEditorPage(
+                            location: widget.location,
+                            preset: Preset(id: "shop/beauty", addTags: {"shop": "beauty"}, name: 'AI'),
+                          ),
+                        ),
+                      );
+                    } else {
+                      // Editing preset, return the new one.
+                      Navigator.pop(context, preset);
+                    }
+                  },
+                ),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: _openCamera,
+            tooltip: 'AI',
+            label: Text('AI'),
           ),
         ),
-      ),
-      body: ResponsiveGridList(
-        minItemWidth: 170.0,
-        horizontalGridSpacing: 5,
-        verticalGridSpacing: 5,
-        rowMainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          for (final preset in presets)
-            GestureDetector(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      preset.name,
-                      style: TextStyle(fontSize: 16.0),
-                    ),
-                    SizedBox(height: 4.0),
-                    Text(
-                      preset.subtitle,
-                      style: TextStyle(
-                          fontSize: 14.0, color: Colors.grey.shade600),
-                    ),
-                  ],
-                ),
-                color: !preset.isFixme
-                    ? (preset.fromNSI
-                        ? Colors.grey.withOpacity(0.2)
-                        : kFieldColor.withOpacity(0.2))
-                    : Colors.red.withOpacity(0.2),
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-              ),
-              onTap: () {
-
-                if (widget.launchEditor) {
-
-              print('Preset: ${preset}');
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PoiEditorPage(
-                        location: widget.location,
-                        preset: Preset(id: "shop/beauty", addTags: {"shop": "beauty"}, name: 'AI'),
-                      ),
-                    ),
-                  );
-                } else {
-                  // Editing preset, return the new one.
-                  Navigator.pop(context, preset);
-                }
-              },
+        if (_isLoading)
+          Container(
+            color: Colors.black.withOpacity(0.5),
+            child: Center(
+              child: CircularProgressIndicator(),
             ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _openCamera,
-        tooltip: 'AI',
-        label: Text('AI'),
-      ),
+          ),
+      ],
     );
   }
 }
