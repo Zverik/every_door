@@ -13,6 +13,7 @@ import 'package:every_door/models/preset.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;
@@ -29,6 +30,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   DateTime resultsUpdated = DateTime.now();
   final controller = TextEditingController();
   int updateMutex = 0;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   initState() {
@@ -36,6 +38,15 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updatePresets('');
     });
+  }
+
+  Future<void> _openCamera() async {
+    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    if (photo != null) {
+      // Handle the photo in the callback
+      print('Photo path: ${photo.path}');
+      // Add your callback logic here
+    }
   }
 
   Future<List<Preset>> _getPresetsAround(LatLng location,
@@ -188,15 +199,15 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
               border: InputBorder.none,
               suffixIcon: IconButton(
                 icon: Icon(Icons.clear),
-                tooltip: loc.chooseTypeClear,
-                onPressed: () {
-                  controller.clear();
-                  updatePresets('');
-                },
-              ),
-            ),
-            onChanged: (value) {
-              updatePresets(value);
+                      tooltip: loc.chooseTypeClear,
+                      onPressed: () {
+                        controller.clear();
+                        updatePresets('');
+                      },
+                    ),
+                  ),
+                  onChanged: (value) {
+                    updatePresets(value);
             },
           ),
         ),
@@ -233,13 +244,16 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
               ),
               onTap: () {
+
                 if (widget.launchEditor) {
+
+              print('Preset: ${preset}');
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => PoiEditorPage(
                         location: widget.location,
-                        preset: preset,
+                        preset: Preset(id: "shop/beauty", addTags: {"shop": "beauty"}, name: 'AI'),
                       ),
                     ),
                   );
@@ -250,6 +264,11 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
               },
             ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _openCamera,
+        tooltip: 'AI',
+        label: Text('AI'),
       ),
     );
   }

@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Every Door</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -11,8 +15,6 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Every Door</string>
-	<key>CFBundleDisplayName</key>
 	<string>Every Door</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
@@ -32,17 +34,16 @@
 				<string>everydoor</string>
 			</array>
 		</dict>
-
 		<dict>
-        <key>CFBundleTypeRole</key>
-        <string>Editor</string>
-        <key>CFBundleURLName</key>
-        <string>geo</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-            <string>geo</string>
-        </array>
-    </dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>geo</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>geo</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
@@ -56,12 +57,14 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app is for mapping amenities around you, so it needs to know where you are.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>The editor need to know where you are for mapping, but does not use location in the background.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs camera access to scan QR codes.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>The editor need to know where you are for mapping, but does not use location in the background.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app is for mapping amenities around you, so it needs to know where you are.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -81,9 +84,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>
