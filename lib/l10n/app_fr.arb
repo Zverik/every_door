@@ -1168,7 +1168,7 @@
   "@fieldNameLangSearch": {
     "description": "Hint for the text field for finding a language in a list."
   },
-  "fieldPaymentGlobal": "Valeurs par défaut globales",
+  "fieldPaymentGlobal": "Valeurs globales par défaut",
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
   },
