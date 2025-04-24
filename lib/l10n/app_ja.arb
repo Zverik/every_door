@@ -569,7 +569,7 @@
   "@buildingTypeGarage": {},
   "buildingTypeConstruction": "建築中",
   "@buildingTypeConstruction": {},
-  "entranceFlats": "Flats",
+  "entranceFlats": "アパート",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
   },
@@ -577,7 +577,7 @@
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
   },
-  "entranceIsUnit": "Store the flat number in addr:unit",
+  "entranceIsUnit": "addr:unitに部屋番号を保存",
   "@entranceIsUnit": {
     "description": "Label for a switch to use addr:unit instead of addr:flats."
   },
