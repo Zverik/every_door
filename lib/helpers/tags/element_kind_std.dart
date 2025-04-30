@@ -54,7 +54,6 @@ class _AmenityKind extends ElementKindImpl {
                 'fountain',
                 'parking_entrance',
                 'telephone',
-                'charging_station',
                 'taxi',
                 'water_point',
                 'bbq',
