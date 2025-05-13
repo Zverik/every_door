@@ -420,5 +420,637 @@
   "aboutLinks": "Σύνδεσμοι",
   "@aboutLinks": {
     "description": "Title for the links section on the About page."
+  },
+  "drawChangeTool": "Αλλαγή εργαλείου",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "fieldHeightFeet": "Αναμένεται μήκος σε πόδια, π.χ. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "notesDelete": "Διαγραφή",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "entranceTypeStaircase": "σκάλα",
+  "@entranceTypeStaircase": {},
+  "editorDeleteTitle": "Διαγραφή {amenity};",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorMissing": "Δεν Υπάρχει",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "notesCloseMessage": "Επισήμανε την σημείωση ως επιλυμένη;",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "editorDeleteBuilding": "Κατεδαφισμένο",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "navEntrancesMode": "Λειτουργία εισόδων",
+  "@navEntrancesMode": {
+    "description": "Tooltip for the entrances mode button on the nav panel."
+  },
+  "navMicromappingMode": "Λειτουργία μικροχαρτογράφησης",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "entranceAccess": "Πρόσβαση",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceType": "Τύπος",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "tileNothingAround": "Καμία υποδομή γύρω σου για {distance} μέτρα.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
+    }
+  },
+  "fieldHoursSave": "Αποθήκευση",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldWifiCustomers": "πελάτες",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "ναι",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "settingsCacheTiles": "Λήψη πλακιδίων",
+  "@settingsCacheTiles": {
+    "description": "Tooltip for a button to download and cache tiles for imageries."
+  },
+  "fieldHoursAddFragment": "Προσθήκη τμήματος",
+  "@fieldHoursAddFragment": {
+    "description": "Button in opening hours editor to add a fragment for days."
+  },
+  "settingsPurgedMessage": "{count,plural, =1{Καθαρίστηκε {count} στοιχείο} few{Καθαρίστηκαν {count} στοιχεία} other{Καθαρίστηκαν {count} στοιχεία}}",
+  "@settingsPurgedMessage": {
+    "description": "Notification message after some cached elements were deleted.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "years": "{count,plural, =1{{count} έτους} few{{count} ετών} other{{count} ετών}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorMarkActive": "Επισήμανση ως Ενεργό",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkChecked": "Επισήμανση ως ελεγμένο",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "entranceX": "Είσοδος {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingRoofLevels": "Επίπεδα οροφής",
+  "@buildingRoofLevels": {
+    "description": "Label for roof:levels in the form. Keep it short."
+  },
+  "fieldWifiNo": "όχι",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "δημόσιο",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldHoursSDAddRange": "Προσθήκη εύρους",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "fieldHeightMeters": "Αναμένεται μήκος σε μέτρα, π.χ. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldFloorLevelDesc": "Ο αριθμός ορόφου ξεκινά από το 0 για το ισόγειο",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldHoursWeekdays": "Δε Τρ Τε Πε Πα Σα Κυ",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursSDAddOne": "Προσθήκη ημέρας",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "settingsPurgeDataTitle": "Διαγραφή δεδομένων;",
+  "@settingsPurgeDataTitle": {
+    "description": "Confirmation dialog title for when purging all downloaded data."
+  },
+  "apiStatusUpdatingDB": "Αποθήκευση στοιχείων στην βάση δεδομένων της εφαρμογής",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "apiStatusUploadingNotes": "Ανέβασμα σημειώσεων",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "changesDeletedUndo": "Αναίρεση",
+  "@changesDeletedUndo": {
+    "description": "Button label for undoing a change deletion."
+  },
+  "changesOsmNote": "OSM σημείωση",
+  "@changesOsmNote": {
+    "description": "Prefix for an OSM note in a changes tile."
+  },
+  "buildingPostCode": "ΤΚ",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingType": "Τύπος",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingRoofShape": "Σχήμα οροφής",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "changesCount": "{count,plural, =1{{count} αλλαγή} few{{count} αλλαγές} other{{count} αλλαγές}}",
+  "@changesCount": {
+    "description": "Number of changed elements to display or to upload.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "tileDragTheMap": "Παρακαλώ μετακινήσου κοντινότερα σε οτιδήποτε, μετακίνησε τον χάρτη ή πρόσθεσε μια υποδομή που λείπει.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Παρακαλώ μετακινήσου γύρω, πρόσθεσε μια υποδομή ή καθάρισε το φίλτρο.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayer when there's nothing around, and a filter is on."
+  },
+  "navPoiMode": "Λειτουργία υποδομών",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navImagery": "Εναλλαγή αεροφωτογραφιών",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "navNotesMode": "Λειτουργία σημειώσεων",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "editorMarkDefunct": "Επισήμανση ως Οριστικά Κλειστό",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorRestoreTitle": "Είναι ανοιχτό;",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorRestoreMessage": "{amenity} είναι ανενεργό. Θέλεις να το επισημάνεις ως ενεργό;",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "warningUnsupported": "Αυτός ο τύπος αντικειμένου δεν υποστηρίζεται",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "warningWrongMode": "Λάθος λειτουργία, έλεγξε για διπλότυπα",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "warningTooOld": "Η υποδομή είναι {years}",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "settingsPreferContact": "Προτίμησε το πρόθεμα \"contact:\"",
+  "@settingsPreferContact": {
+    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+  },
+  "settingsPurgedAllTitle": "Διαγραμμένα δεδομένα",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "hashtagsConfirm": "Επιβεβαίωση ετικετών στο ανέβασμα",
+  "@hashtagsConfirm": {
+    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+  },
+  "changesDeletedChange": "Διεγράφη {change}",
+  "@changesDeletedChange": {
+    "description": "Message for the snack bar after you swipe a change away.",
+    "placeholders": {
+      "change": {
+        "description": "Name of the deleted object",
+        "example": "shop"
+      }
+    }
+  },
+  "changesUploadedMessage": "Αποστολή {changes} στο API.",
+  "@changesUploadedMessage": {
+    "description": "Message for the notification about a successful upload.",
+    "placeholders": {
+      "changes": {
+        "description": "Number of changes",
+        "example": "5 changes"
+      }
+    }
+  },
+  "fieldWheelchairNo": "όχι",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldWheelchairLimited": "περιορισμένη",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldNameCopy": "Αντιγραφή τιμής",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldNameLangSearch": "Εύρεση γλώσσας",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldNameLanguages": "Άλλη γλώσσα",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldHoursSDRemove": "Αφαίρεση",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldHoursSpecificDays": "Συγκεκριμένη ημέρα",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursTitle": "Ωράριο Λειτουργίας",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursCloses": "Κλείνει",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursClear": "Εκκαθάριση",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursClosed": "Κλειστά",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursClosedPH": "Κλειστά στις αργίες",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursFullDay": "Όλη μέρα",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursHour": "Ώρα",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Λεπτό",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursNext": "Επόμενο",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursNumberedWeekday": "\"Τελευταία Δευτέρα\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursOpens": "Ανοίγει",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursPublicHolidays": "Αργίες",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursRemoveFragment": "Αφαίρεση τμήματος",
+  "@fieldHoursRemoveFragment": {
+    "description": "Tooltip for a button to remove a fragment in the hours editor."
+  },
+  "fieldHoursRemoveBreak": "Αφαίρεση κενού",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursAsText": "Ως κείμενο",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursChooseTime": "Ώρα και λεπτά",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursButton": "Όρισε ωράριο λειτουργίας",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursAddBreak": "Προσθήκη κενού",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursBreak": "Ξεκούραση",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldDirectionSet": "Ορισμός",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldComboChoose": "επέλεξε",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldComboEmpty": "άδειο",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldFloorNew": "Νέος Όροφος",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorFloorDesc": "Όροφοι όπως στην πλοήγηση και στα ασανσέρ",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorEmpty": "Για επιλογή ορόφου, όρισε διεύθυνση.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldCheckboxNo": "όχι",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldCheckboxYes": "ναι",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCardsNo": "όχι",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCardsOnly": "κάρτα μόνο",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldCardsAccepted": "δεκτές",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldPhoneWrong": "Λάθος μορφή τηλεφώνου",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "fieldFloorShouldBeNumber": "Παρακαλώ πρόσθεσε έναν αριθμό",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldHeightAny": "Αναμένεται μήκος, π.χ. 5.4 ή 7'4\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
+  },
+  "fieldAddressTap": "Επιλογή διεύθυνσης",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "messageNoData": "Κανένα δεδομένο, πάτα εδώ για λήψη",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "Τα δεδομένα είναι ξεπερασμένα, πάτα εδώ για ανανέωση",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "Ενεργοποίηση GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableLocation": "Ενεργοποίηση Τοποθεσίας",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "enableGPSMessage": "Παρακαλώ ενεργοποίησε τις υπηρεσίες τοποθεσίας στο παράθυρο ρυθμίσεων που θα εμφανιστεί.",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "enableLocationMessage": "Παρακαλώ επέτρεψε την πρόσβαση τοποθεσίας για την εφαρμογή στο παράθυρο ρυθμίσεων που θα εμφανιστεί.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonNo": "Όχι",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "buttonYes": "Ναι",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "entrancesAddEntrance": "Προσθήκη εισόδου",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "Προσθήκη κτιρίου",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "addressX": "Διεύθυνση {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingLevels": "Επίπεδα",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "buildingMaterial": "Πρόσοψη",
+  "@buildingMaterial": {},
+  "buildingMoreButton": "Περισσότερα",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingX": "Κτίριο {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "buildingMaterialBrick": "τούβλο",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialConcrete": "μπετόν",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialPanels": "πάνελ",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialPlaster": "γύψος",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "ξύλο",
+  "@buildingMaterialWood": {},
+  "buildingMaterialCementBlock": "τσιμεντόλιθοι",
+  "@buildingMaterialCementBlock": {},
+  "buildingMaterialGlass": "γυαλί",
+  "@buildingMaterialGlass": {},
+  "buildingMaterialMetal": "μέταλλο",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialStone": "πέτρα",
+  "@buildingMaterialStone": {},
+  "buildingTypeAddress": "διεύθυνση",
+  "@buildingTypeAddress": {},
+  "buildingTypeApartments": "διαμερίσματα",
+  "@buildingTypeApartments": {},
+  "buildingTypeCommercial": "εμπορικό",
+  "@buildingTypeCommercial": {},
+  "buildingTypeGarage": "γκαράζ",
+  "@buildingTypeGarage": {},
+  "buildingTypeHouse": "σπίτι",
+  "@buildingTypeHouse": {},
+  "buildingTypeIndustrial": "βιομηχανικό",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeRetail": "λιανεμπόριο",
+  "@buildingTypeRetail": {},
+  "buildingTypeShed": "υπόστεγο",
+  "@buildingTypeShed": {},
+  "buildingTypeConstruction": "υπό κατασκευή",
+  "@buildingTypeConstruction": {},
+  "entranceFlats": "Διαμερίσματα",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "Πρέπει να είναι μια λίστα από αριθμούς",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceIsUnit": "Αποθήκευση του αριθμού διαμερίσματος στο addr:unit",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "entranceAccessYes": "ανοιχτή",
+  "@entranceAccessYes": {},
+  "entranceAccessNo": "όχι",
+  "@entranceAccessNo": {},
+  "entranceAccessPrivate": "ιδιωτική",
+  "@entranceAccessPrivate": {},
+  "entranceWheelchair": "Αναπηρικό αμαξίδιο",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceTypeMain": "κύρια",
+  "@entranceTypeMain": {},
+  "entranceTypeShop": "μαγαζιού",
+  "@entranceTypeShop": {},
+  "entranceTypeHome": "σπιτιού",
+  "@entranceTypeHome": {},
+  "entranceTypeEmergency": "έκτακτης ανάγκης",
+  "@entranceTypeEmergency": {},
+  "entranceTypeGarage": "γκαράζ",
+  "@entranceTypeGarage": {},
+  "entranceTypeService": "υπηρεσίας",
+  "@entranceTypeService": {},
+  "addressBlock": "Τετράγωνο",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "addressHouseNotEmpty": "Δεν πρέπει να είναι κενό",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "addressUnit": "Μονάδα",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "addressUnitOptional": "προαιρετικό",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "addressHouseNumber": "Σπίτι",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressStreet": "Οδός",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "notesAddNote": "Προσθήκη σημείωσης",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "addressPlace": "Μέρος",
+  "@addressPlace": {
+    "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "notesComment": "Το σχόλιο σου",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "notesAnonymous": "Ανώνυμος",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Επίλυση",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCancelMessage": "Ακύρωση της OSM σημείωσης σου;",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "drawUndo": "Αναίρεση",
+  "@drawUndo": {},
+  "apiStatusDownloading": "Λήψη δεδομένων…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUploading": "Ανέβασμα αλλαγών",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
   }
 }
