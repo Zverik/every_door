@@ -657,7 +657,7 @@
   "@accountLoginPassword": {
     "description": "Button label for logging in to OSM with a password."
   },
-  "changesUploadedMessage": "Saadetud {changes} API-le.",
+  "changesUploadedMessage": "{changes} muudatust on lisatud OpenStreetMapi andmebaasi.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1264,7 +1264,7 @@
   "@faqLetters": {},
   "faqTagging": "Kõik küsimused siltide kohta",
   "@faqTagging": {},
-  "faqTaggingContent": "Miks mõni objekt on rakenduse muutmisvaates puudu? Millal kuvatakse valgeid mummusid mikrokaardistamise vaates? Kuidas toimib objektide järjestamine?\n\nVastused neile küsimustele on lähtekoodi lõigus [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Näiteks vaata siia:\n\n* Võtmete järjekord põhisildis — loend „kMainKeys“.\n* Mis objekte laadime alla — funktsioon „isGoodTags“.\n* Mida loeme teenuseks („amenity=*“) — funktsioon „isAmenityTags“.\n* Missuguseid sõlmi napsame joonte külge — funktsioon „detectSnap“.\n* Kuidas tuvastame, et mikrokaardistamise mõttes on objekt veel poolik — funktsioon „needsMoreInfo“.",
+  "faqTaggingContent": "Miks mõni objekt on rakenduse muutmisvaates puudu? Millal kuvatakse valgeid mummusid mikrokaardistamise vaates? Kuidas toimib objektide järjestamine?\n\nVastused neile küsimustele on lähtekoodi lõigus [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Näiteks vaata siia:\n\n* Võtmete järjekord põhisildis — loend „kMainKeys“ failis „main_key.dart“.\n* Mis objekte laadime alla — klass „_EverythingKind“.\n* Mida loeme teenuseks („amenity=*“) — klass „_AmenityKind“.\n* Missuguseid sõlmi napsame joonte külge — klass „ElementKindImpl“ (vaata ka alamklasse).\n* Kuidas tuvastame, et mikrokaardistamise mõttes on objekt veel poolik — klass „_NeedsMoreInfo“.",
   "@faqTaggingContent": {},
   "faqFloorsContent": "Ei. Esimesel juhul on täidetud „addr:floor=3“ silt. See on ka korrusenumber, mille leiad siltidelt ja on kasutatav tee leidmiseks. Teisel juhul on sildiks hoopis „level=3“. See on korruste järjekorranumber lugedes nullist kuni „building:levels - 1“. See tähendab, et kolmekordse hoone „addr:floor“ silti väärtus sõltub maast, aga „level“ väärtus on alati 0, 1 või 2.\n\nNii käib antud siltide kohane üleskirjutus rakenduses:\n\n* „2“ tähendab „addr:floor=2“ ja täidetud „level=*“.\n* „4/“ tähendab „addr:floor=4“, aga puudub „level“ silt.\n* „/1“ tähendab „level=1“, aga puudub „addr:floor“ silt.\n* „1/0“ tähendab “addr:floor=1“ + „level=0“ (ja seal on läheduses objekt: sama „addr:floor“ väärtusega, kuid erineva „level“ väärtusega või vastupidi).",
   "@faqFloorsContent": {},
