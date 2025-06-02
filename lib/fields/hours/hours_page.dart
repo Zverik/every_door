@@ -30,6 +30,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   List<String> _cachedAround = [];
   final ScrollController _scrollController = ScrollController();
   bool isRaw = false;
+  List<int> _weekends = [5, 6];
 
   @override
   initState() {
@@ -38,6 +39,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     // Erase 24/7.
     hours = HoursData(hoursStr == '24/7' ? '' : hoursStr);
     isRaw = hours.raw;
+    _weekends = getWeekends(widget.element?.location);
     _findDefaultIntervals();
     _updateInactiveCard();
 
@@ -131,7 +133,10 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     if (hours.fragments.isEmpty) {
       // No fragments — add a new empty one.
       setState(() {
-        hours.fragments.add(HoursFragment.inactive(Weekdays.parse('Mo-Fr')!));
+        final workdays =
+            Weekdays(List.generate(7, (i) => _weekends.contains(i)))
+                .getMissing()!;
+        hours.fragments.add(HoursFragment.inactive(workdays));
       });
     } else if (pos < 0) {
       // If there are no inactive cards, check if we need to add one.

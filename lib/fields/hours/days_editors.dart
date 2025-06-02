@@ -29,28 +29,31 @@ class WeekdaysPanel extends ConsumerWidget {
         locProvider.multiple ? currentLoc : locProvider.loc ?? currentLoc;
     final weekdayTitles = loc.fieldHoursWeekdays.split(' ');
 
-    return Row(
-      children: [
-        for (int i = 0; i < 7; i++)
-          Column(
-            children: [
-              Checkbox(
-                value: weekdays.days[i],
-                onChanged: (value) {
-                  // Forbid removing all checkboxes.
-                  if (weekdays.days
-                      .asMap()
-                      .entries
-                      .every((e) => e.key == i || !e.value)) return;
+    final rowChildren = <Column>[];
+    for (int i = 0; i < 7; i++) {
+      final dow = (i + locProvider.firstDayOfWeek) % 7;
+      rowChildren.add(
+        Column(
+          children: [
+            Checkbox(
+              value: weekdays.days[dow],
+              onChanged: (value) {
+                // Forbid removing all checkboxes.
+                if (weekdays.days
+                    .asMap()
+                    .entries
+                    .every((e) => e.key == dow || !e.value)) return;
 
-                  onChange(weekdays.copyWith(i, value ?? !weekdays.days[i]));
-                },
-              ),
-              Text(weekdayTitles[i]),
-            ],
-          ),
-      ],
-    );
+                onChange(weekdays.copyWith(dow, value ?? !weekdays.days[dow]));
+              },
+            ),
+            Text(weekdayTitles[dow]),
+          ],
+        ),
+      );
+    }
+
+    return Row(children: rowChildren);
   }
 }
 
