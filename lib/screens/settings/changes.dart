@@ -96,10 +96,12 @@ class _ChangeListPageState extends ConsumerState {
     File tmpFile =
         File('${tempDir.path}/everydoor-${formatTime("YYmmdd")}.osc');
     await tmpFile.writeAsString(changeset, flush: true);
-    await Share.shareXFiles(
-      [XFile(tmpFile.path, mimeType: 'application/xml')],
-      subject:
-          '${changeList.length} changes from $kAppTitle on ${formatTime("YYYY-mm-dd HH:MM")}',
+    await SharePlus.instance.share(
+      ShareParams(
+        files: [XFile(tmpFile.path, mimeType: 'application/xml')],
+        subject:
+            '${changeList.length} changes from $kAppTitle on ${formatTime("YYYY-mm-dd HH:MM")}',
+      ),
     );
     tmpFile.delete();
   }

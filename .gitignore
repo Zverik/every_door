@@ -57,3 +57,6 @@ assets/*.db-journal
 coverage/
 lib/l10n/app_zh.arb
 *.apk
+
+# I just keep them there
+/plugins/

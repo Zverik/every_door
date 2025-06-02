@@ -79,15 +79,17 @@ class _TagEditorPageState extends State<TagEditorPage> {
                 tooltip: loc.tagsShare,
                 child: IconButton(
                   onPressed: () {
-                    Share.share(_getUrl());
+                    SharePlus.instance.share(ShareParams(
+                      uri: Uri.parse(_getUrl()),
+                    ));
                   },
                   icon: Icon(Icons.share),
                 ),
               ),
               onLongPress: () {
+                final msg = ScaffoldMessenger.of(context);
                 Clipboard.setData(ClipboardData(text: _getUrl())).then((_) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text(loc.tagsUrlCopied)));
+                  msg.showSnackBar(SnackBar(content: Text(loc.tagsUrlCopied)));
                 });
               },
             ),

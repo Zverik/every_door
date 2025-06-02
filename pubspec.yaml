@@ -28,31 +28,31 @@ dependencies:
   flutter_map: ^8.0.0
   flutter_map_geojson2: ^1.0.0
   flutter_map_mbtiles: ^1.0.4
-  flutter_markdown: ^0.7.1
   flutter_portal: ^1.1.4
   flutter_riverpod: ^2.5.1
-  flutter_secure_storage: ^9.2.4
-  geolocator: ^13.0.1
+  flutter_secure_storage: ^9.2.4  # 10.0.0-beta requires Android SDK 23+.
+  geolocator: ^13.0.1  # 14.0.1 needs Flutter 3.29.
   http: ^1.1.0
   intl: ^0.19.0
   jovial_svg: ^1.1.25
   latlong2: ^0.9.0
   line_icons: ^2.0.1
   logging: ^1.0.2
+  markdown_widget: ^2.3.2+8
   material_color_names: ^1.0.0
   mbtiles: ^0.4.2
-  mobile_scanner: ^5.2.3  # 6.0.0 requires iOS 15+, unacceptable!
+  mobile_scanner: ^5.2.3  # 6.0.0 requires iOS 15+, unacceptable! 7.0.0 fixes that (but needs Flutter 3.29).
   oauth2_client: ^3.3.0
   path: ^1.8.1
   path_drawing: ^1.0.0
   path_provider: ^2.0.9
-  phone_numbers_parser: ^4.2.0  # Later versions do not allow free-form countries.
+  phone_numbers_parser: ^9.0.3
   proximity_hash: ^2.2.0
   listen_sharing_intent: ^1.9.1
   responsive_grid_list: ^1.2.3
   sensors_plus: ^6.1.0
   settings_ui: ^2.0.2
-  share_plus: ^10.0.2
+  share_plus: ^11.0.0
   shared_preferences: ^2.1.1
   sqflite: ^2.0.0+3
   trie_search: ^1.0.0

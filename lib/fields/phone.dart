@@ -86,19 +86,19 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
     String digits = value.characters.where((p0) => kDigits.contains(p0)).string;
     try {
       if (value.startsWith('+') || digits.length >= 11) {
-        final res = PhoneNumber.fromRaw('+$digits');
-        return res.validate()
-            ? '+${res.countryCode} ${res.getFormattedNsn()}'
+        final res = PhoneNumber.parse('+$digits');
+        return res.isValid()
+            ? '+${res.countryCode} ${res.formatNsn()}'
             : null;
       }
       final res = countryIso != null
-          ? PhoneNumber.fromIsoCode(countryIso!, value)
-          : PhoneNumber.fromRaw(value);
-      if (!res.validate()) return null;
+          ? PhoneNumber.parse(value, destinationCountry: isoCodeConversionMap[countryIso])
+          : PhoneNumber.parse(value);
+      if (!res.isValid()) return null;
       if (!value.contains('-')) {
-        value = res.getFormattedNsn();
+        value = res.formatNsn();
       }
-      return '+${res.countryCode} ${res.getFormattedNsn()}';
+      return '+${res.countryCode} ${res.formatNsn()}';
     } on PhoneNumberException {
       return null;
     }

@@ -8,6 +8,9 @@ _Unreleased_
 * (+) buttons for the first two modes can also be dragged onto the map.
 * Removing preset tags properly.
 * Turns out "Cancel" buttons for buildings and entrances kept the changes.
+* Added `sr-Latn` language for Serbia (thanks @alnzrv).
+* Updated roof assets (thanks @mxdanger).
+* Updated a phone number parsing library.
 
 ## 5.4
 

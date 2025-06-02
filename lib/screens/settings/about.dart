@@ -1,6 +1,6 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/screens/settings/log.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -130,10 +130,15 @@ class AboutPage extends StatelessWidget {
                       EdgeInsets.only(bottom: 22, left: 24, right: 24),
                   tilePadding: EdgeInsets.symmetric(horizontal: 24),
                   children: <Widget>[
-                    MarkdownBody(
-                        onTapLink: (text, href, title) => launchUrl(
-                            Uri.parse(href!),
-                            mode: LaunchMode.externalApplication),
+                    MarkdownBlock(
+                        config: MarkdownConfig(
+                          configs: [
+                            LinkConfig(
+                              onTap: (href) => launchUrl(Uri.parse(href),
+                                  mode: LaunchMode.externalApplication),
+                            ),
+                          ],
+                        ),
                         data: faq.answer)
                   ],
                 )),
