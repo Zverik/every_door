@@ -367,8 +367,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       deleteAndClose();
     } else if (answer == kKeepAddress) {
       // Delete all tags except address.
-      for (final k in amenity.getFullTags().keys)
-        if (!k.startsWith('addr:') || k == 'addr:floor') amenity.removeTag(k);
+      for (final k in amenity.getFullTags().keys) {
+        if (!k.startsWith('building') &&
+            (!k.startsWith('addr:') || k == 'addr:floor')) amenity.removeTag(k);
+      }
       saveAndClose();
     }
   }

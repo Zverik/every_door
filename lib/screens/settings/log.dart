@@ -25,7 +25,9 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.jumpTo(_controller.position.maxScrollExtent);
+      if (_controller.hasClients) {
+        _controller.jumpTo(_controller.position.maxScrollExtent);
+      }
     });
   }
 
@@ -44,6 +46,25 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget body;
+    if (logStore.isEmpty) {
+      body = Center(
+        child: Text(
+          'No system messages',
+          style:
+              TextStyle(fontStyle: FontStyle.italic, fontSize: kFieldFontSize),
+        ),
+      );
+    } else {
+      body = SingleChildScrollView(
+        controller: _controller,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SelectableText(logStore.last(30).join('\n')),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('System Log'),
@@ -51,18 +72,12 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
           IconButton(
             icon: Icon(Icons.copy),
             tooltip: 'Copy All Logs',
-            onPressed: _copyAllLogsToClipboard,
+            onPressed: logStore.isEmpty ? null : _copyAllLogsToClipboard,
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        controller: _controller,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SelectableText(logStore.last(30).join('\n')),
-        ),
-      ),
-      floatingActionButton: sentMessage
+      body: body,
+      floatingActionButton: sentMessage || logStore.isEmpty
           ? null
           : FloatingActionButton(
               child: Icon(Icons.send),

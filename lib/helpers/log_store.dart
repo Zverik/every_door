@@ -8,6 +8,9 @@ final logStore = LogStore();
 class LogStore {
   final List<String> lines = [];
 
+  bool get isEmpty => lines.isEmpty;
+  bool get isNotEmpty => lines.isNotEmpty;
+
   clear() {
     lines.clear();
   }

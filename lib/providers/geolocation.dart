@@ -102,7 +102,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
       onLocationEvent,
       onError: onLocationError,
     );
-    _logger.info('Subscribed to position stream');
+    _logger.fine('Subscribed to position stream');
   }
 
   reloadTracking() async {
