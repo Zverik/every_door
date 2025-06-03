@@ -778,7 +778,7 @@
   "@faqChangeTypeContent": {},
   "faqTagging": "Všechny otázky o značkách",
   "@faqTagging": {},
-  "faqTaggingContent": "Proč v editoru chybí objekt? Když se tyto bílé tečky zobrazují v režimu mikromapování? Jak se objekty třídí?\n\nOdpovědi na všechny tyto otázky najdete v souboru [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Tady se můžete podívat:\n\n* Pořadí klíčů pro hlavní značku - seznam `kMainKeys`.\n* Které objekty se stahují - funkce `isGoodTags`.\n* Co je považováno za vybavení - funkce `isAmenityTags`.\n* Které body jsou přichyceny jakým způsobem - funkce `detectSnap`.\n* Když je objekt mikromapování neúplný - funkce `needsMoreInfo`.",
+  "faqTaggingContent": "Proč v editoru chybí objekt? Kdy se tyto bílé tečky zobrazují v režimu mikromapování? Jak se objekty řadí?\n\nOdpovědi na všechny tyto otázky najdete v souboru [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Tady se můžete podívat:\n\n* Pořadí klíčů pro hlavní značku – seznam `kMainKeys` v souboru `main_key.dart`.\n* Které objekty se stahují – třída `_EverythingKind`.\n* Co je považováno za vybavení – třída `_AmenityKind`.\n* Které body jsou přichyceny jakým způsobem – logika třídy `ElementKindImpl` (viz relevantní podtřídy).\n* Když je objekt mikromapování neúplný – funkce `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "tagsKey": "Klíč",
   "@tagsKey": {
@@ -977,7 +977,7 @@
   "@accountLoginPassword": {
     "description": "Button label for logging in to OSM with a password."
   },
-  "changesUploadedMessage": "Odesláno {changes} do API.",
+  "changesUploadedMessage": "{changes} odesláno na OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1269,5 +1269,13 @@
   "editorDeleteBuilding": "Zbouráno",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "tileDragDownload": "Zkuste klepnout na tlačítko stažení.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Bude převedeno na poznámku OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
   }
 }
