@@ -1269,5 +1269,13 @@
   "editorDeleteBuilding": "Nedrevet",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "warningFixmeNote": "Vil blive omdannet til en OSM-note",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "tileDragDownload": "Prøv at trykke på download-knappen.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
   }
 }
