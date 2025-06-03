@@ -333,18 +333,6 @@ PresetField fieldFromPlugin(Map<String, dynamic> data,
       ? null
       : LocationSet.fromJson(jsonDecode(data['locations']));
 
-  // Special case for fixme field
-  if (key == 'fixme') {
-    return TextPresetField(
-      key: key,
-      label: label,
-      placeholder: placeholder,
-      prerequisite: prerequisite,
-      locationSet: locationSet,
-      showClearButton: true,
-    );
-  }
-
   String typ = data['type'] ?? 'text';
   if (data['name'] == 'ref') typ = 'number'; // Patch some refs to be numbers
   switch (typ) {
@@ -360,6 +348,7 @@ PresetField fieldFromPlugin(Map<String, dynamic> data,
         locationSet: locationSet,
         maxLines: typ == 'textarea' ? 4 : null,
         capitalize: TextFieldCapitalize.sentence,
+        showClearButton: (data['clearButton'] as bool?) ?? false,
       );
     case 'number':
     case 'roadspeed':
