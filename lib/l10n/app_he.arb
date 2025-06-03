@@ -530,7 +530,7 @@
   "@fieldHoursRemoveBreak": {
     "description": "Tooltip for a button to remove a break in an opening hours fragment."
   },
-  "fieldHoursWeekdays": "א׳ ב׳ ג׳ ד׳ ה ו׳ ש",
+  "fieldHoursWeekdays": "ב׳ ג׳ ד׳ ה׳ ו׳ ש׳ א׳",
   "@fieldHoursWeekdays": {
     "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
   },

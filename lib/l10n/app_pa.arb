@@ -348,7 +348,7 @@
   "@dataDownloadSuccessful": {
     "description": "Alert title for when the data was successfully downloaded."
   },
-  "buildingMaterialConcrete": "ਪੱਕਾ",
+  "buildingMaterialConcrete": "ਕੰਕਰੀਟ",
   "@buildingMaterialConcrete": {},
   "entranceAccessNo": "ਨਹੀਂ",
   "@entranceAccessNo": {},
@@ -365,7 +365,7 @@
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
   },
-  "faqTaggingContent": "ਸੰਪਾਦਕ ਵਿੱਚ ਇੱਕ ਵਸਤੂ ਕਿਉਂ ਗੁੰਮ ਹੈ? ਜਦੋਂ ਇਹ ਚਿੱਟੇ ਬਿੰਦੀਆਂ ਮਾਈਕ੍ਰੋਮੈਪਿੰਗ ਮੋਡ ਵਿੱਚ ਪ੍ਰਦਰਸ਼ਿਤ ਹੁੰਦੀਆਂ ਹਨ? ਵਸਤੂਆਂ ਨੂੰ ਕਿਵੇਂ ਕ੍ਰਮਬੱਧ ਕੀਤਾ ਜਾਂਦਾ ਹੈ? ਇਹਨਾਂ ਸਾਰੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) ਵਿੱਚ ਹਨ। ਇੱਥੇ ਤੁਸੀਂ ਕੀ ਦੇਖ ਸਕਦੇ ਹੋ: * ਮੁੱਖ ਟੈਗ ਲਈ ਮੁੱਖ ਕ੍ਰਮ — ਸੂਚੀ `kMainKeys`। * ਕਿਹੜੀਆਂ ਵਸਤੂਆਂ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ — ਫੰਕਸ਼ਨ `isGoodTags`। * ਕੀ ਇੱਕ ਸਹੂਲਤ ਮੰਨਿਆ ਜਾਂਦਾ ਹੈ — ਫੰਕਸ਼ਨ `isAmenityTags`। * ਕਿਹੜੇ ਬਿੰਦੂ ਕਿਸ ਤਰੀਕਿਆਂ ਨਾਲ ਸਨੈਪ ਕੀਤੇ ਜਾਂਦੇ ਹਨ — ਫੰਕਸ਼ਨ `ਡਿਟੈਕਟਸਨੈਪ`। * ਜਦੋਂ ਇੱਕ ਮਾਈਕ੍ਰੋਮੈਪਿੰਗ ਆਬਜੈਕਟ ਅਧੂਰਾ ਹੁੰਦਾ ਹੈ — ਫੰਕਸ਼ਨ `NedsMoreInfo`।",
+  "faqTaggingContent": "ਸੰਪਾਦਕ ਵਿੱਚ ਇੱਕ ਵਸਤੂ ਕਿਉਂ ਗੁੰਮ ਹੈ? ਜਦੋਂ ਇਹ ਚਿੱਟੇ ਬਿੰਦੀਆਂ ਮਾਈਕ੍ਰੋਮੈਪਿੰਗ ਮੋਡ ਵਿੱਚ ਪ੍ਰਦਰਸ਼ਿਤ ਹੁੰਦੀਆਂ ਹਨ? ਵਸਤੂਆਂ ਨੂੰ ਕਿਵੇਂ ਕ੍ਰਮਬੱਧ ਕੀਤਾ ਜਾਂਦਾ ਹੈ?\n\nਇਹਨਾਂ ਸਾਰੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) ਵਿੱਚ ਹਨ। ਇੱਥੇ ਤੁਸੀਂ ਕੀ ਦੇਖ ਸਕਦੇ ਹੋ:\n\n* ਮੁੱਖ ਟੈਗ ਲਈ ਮੁੱਖ ਕ੍ਰਮ — ਸੂਚੀ `kMainKeys`।\n* ਕਿਹੜੀਆਂ ਵਸਤੂਆਂ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ — ਫੰਕਸ਼ਨ `isGoodTags`।\n* ਕੀ ਇੱਕ ਸਹੂਲਤ ਮੰਨਿਆ ਜਾਂਦਾ ਹੈ — ਫੰਕਸ਼ਨ `isAmenityTags`।\n* ਕਿਹੜੇ ਬਿੰਦੂ ਕਿਸ ਤਰੀਕਿਆਂ ਨਾਲ ਸਨੈਪ ਕੀਤੇ ਜਾਂਦੇ ਹਨ — ਫੰਕਸ਼ਨ `ਡਿਟੈਕਟਸਨੈਪ`।\n* ਜਦੋਂ ਇੱਕ ਮਾਈਕ੍ਰੋਮੈਪਿੰਗ ਆਬਜੈਕਟ ਅਧੂਰਾ ਹੁੰਦਾ ਹੈ — ਫੰਕਸ਼ਨ `NedsMoreInfo`।",
   "@faqTaggingContent": {},
   "notesCancelMessage": "ਤੁਹਾਡੇ ਨੋਟ ਰੱਦ ਕਰੋ?",
   "@notesCancelMessage": {
@@ -889,5 +889,387 @@
   "fieldHoursRemoveBreak": "ਬਰੇਕ ਹਟਾਓ",
   "@fieldHoursRemoveBreak": {
     "description": "Tooltip for a button to remove a break in an opening hours fragment."
-  }
+  },
+  "fieldHeightMeters": "ਲੰਬਾਈ ਦੀ ਮੀਟਰਾਂ ਵਿੱਚ ਉਮੀਦ, ਜਿਵੇਂ ਕਿ ੫੶੪",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "faqChangeTypeContent": "ਸੰਪਾਦਕ ਦੇ ਸਿਰਲੇਖ 'ਤੇ ਟੈਪ ਕਰੋ, ਜਿੱਥੇ ਕਿਸਮ ਲਿਖੀ ਹੋਈ ਹੈ।",
+  "@faqChangeTypeContent": {},
+  "fieldNameCopy": "ਕਾਪੀ",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "buildingMaterialGlass": "ਕੱਚ",
+  "@buildingMaterialGlass": {},
+  "buildingTypeConstruction": "ਉਸਾਰੀ",
+  "@buildingTypeConstruction": {},
+  "buildingTypeGarage": "ਗੈਰੇਜ",
+  "@buildingTypeGarage": {},
+  "entranceAccessDelivery": "ਡਿਲੀਵਰੀ",
+  "@entranceAccessDelivery": {},
+  "addressUnitOptional": "ਵਿਕਲਪਿਕ",
+  "@addressUnitOptional": {
+    "description": "Hint for addr:unit that it's optional."
+  },
+  "warningUnsupported": "ਇਹ ਵਸਤੂ ਕਿਸਮ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "fieldHoursWeekdays": "ਸੋਮ ਮੰਗਲ ਬੁੱਧ ਵੀਰ ਸ਼ੁੱਕਰ ਸ਼ਨੀ ਐਤ",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursSDAddRange": "ਰੇਂਜ ਸ਼ਾਮਲ ਕਰੋ",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "buildingMaterial": "ਇਮਾਰਤ ਦਾ ਮੂੰਹ",
+  "@buildingMaterial": {},
+  "fieldFloorEmpty": "ਮੰਜ਼ਿਲ ਚੁਣਨ ਲਈ, ਇੱਕ ਪਤਾ ਦਰਜ ਕਰੋ।",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldAddressTap": "ਇਕ ਪਤਾ ਚੁਣੋ",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldPhoneWrong": "ਗ਼ਲਤ ਫ਼ੋਨ ਫਾਰਮੈਟ",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "enableLocation": "ਲੋਕੇਸ਼ਨ ਸੇਵਾ ਚਾਲੂ ਕਰੋ",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "entranceX": "ਪ੍ਰਵੇਸ਼ {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingRoofShape": "ਛੱਤ ਦੀ ਸ਼ਕਲ",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingPostCode": "ਪੋਸਟ ਕੌਡ",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingMaterialPanels": "ਪੈਨਲ",
+  "@buildingMaterialPanels": {},
+  "buildingMaterialCementBlock": "ਸੀਮਿੰਟ ਬਲਾਕ",
+  "@buildingMaterialCementBlock": {},
+  "buildingTypeRetail": "ਪ੍ਰਚੂਨ",
+  "@buildingTypeRetail": {},
+  "entranceTypeStaircase": "ਪੌੜੀਆਂ",
+  "@entranceTypeStaircase": {},
+  "entranceTypeShop": "ਦੁਕਾਨ",
+  "@entranceTypeShop": {},
+  "addressUnit": "ਯੂਨਿਟ",
+  "@addressUnit": {
+    "description": "Label for addr:unit in the form. Keep it short."
+  },
+  "faqCheckmarks": "ਚੈੱਕਮਾਰਕ ਕਿਸ ਲਈ ਹਨ?",
+  "@faqCheckmarks": {},
+  "notesDelete": "ਮਿਟਾਓ",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawFootway": "ਤੁਰਨ ਦਾ ਰਾਹ",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawFence": "ਵਾੜ",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "notesComment": "ਤੁਹਾਡੀ ਟਿੱਪਣੀ",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "apiStatusUpdatingDB": "ਐਪ ਡਾਟਾਬੇਸ ਵਿੱਚ ਐਲੀਮੈਂਟਸ ਸੇਵ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ",
+  "@apiStatusUpdatingDB": {
+    "description": "Text displayed when the app is updating the database with downloaded objects."
+  },
+  "faqEntrance": "ਇਮਾਰਤ ਦਾ ਪ੍ਰਵੇਸ਼ ਦੁਆਰ ਕਿਵੇਂ ਸ਼ਾਮਲ ਕੀਤਾ ਜਾਵੇ?",
+  "@faqEntrance": {},
+  "faqYellow": "ਕਈ ਮਕਾਨ ਨੰਬਰ ਪੀਲੇ ਰੰਗ ਵਿੱਚ ਕਿਓਂ ਹਨ?",
+  "@faqYellow": {},
+  "faqEntranceContent": "ਹੇਠਾਂ ਮੋਡ ਬਟਨਾਂ ਦੀ ਇੱਕ ਕਤਾਰ ਹੈ: ਮਾਈਕ੍ਰੋਮੈਪਿੰਗ, ਸਹੂਲਤਾਂ, ਪ੍ਰਵੇਸ਼ ਦੁਆਰ, ਅਤੇ ਨੋਟਸ।\n\nਪ੍ਰਵੇਸ਼ ਦੁਆਰ ਮੋਡ ਵਿੱਚ, ਨਕਸ਼ੇ 'ਤੇ ਹੇਠਲੇ ਕੋਨੇ ਵਿੱਚ ਦਰਵਾਜ਼ੇ ਦੇ ਬਟਨ ਨੂੰ ਟੈਪ ਕਰੋ ਜਾਂ ਘਸੀਟੋ।",
+  "@faqEntranceContent": {},
+  "entranceFlatsNumberList": "ਨੰਬਰਾਂ ਦੀ ਇੱਕ ਸੂਚੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceAccess": "ਪਹੁੰਚ",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessYes": "ਖੋਲ੍ਹੋ",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "ਨਿੱਜੀ",
+  "@entranceAccessPrivate": {},
+  "entranceWheelchair": "ਵ੍ਹੀਲਚੇਅਰ",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceTypeService": "ਸੇਵਾ",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "ਗੈਰੇਜ",
+  "@entranceTypeGarage": {},
+  "drawUndo": "ਉਧੇੜੋ",
+  "@drawUndo": {},
+  "drawChangeTool": "ਸੰਦ ਬਦਲੋ",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawScribble": "ਲਿਖਣਾ",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawRoad": "ਸੜਕ",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawTrack": "ਟਰੈਕ",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawCycleway": "ਸਾਈਕਲ ਦਾ ਰਾਹ",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "ਸਾਈਕਲ ਲੇਨ",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawWall": "ਕੰਧ",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawStream": "ਸਟ੍ਰੀਮ",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawCulvert": "ਪੁਲੀ",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "apiStatusDownloading": "ਡਾਟਾ ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "faqLetters": "ਕੀ ਮੈਂ ਇੱਕ ref ਜਾਂ ਫਲੈਟ ਨੰਬਰ ਵਿੱਚ ਅੱਖਰ ਟਾਈਪ ਕਰ ਸਕਦਾ ਹਾਂ?",
+  "@faqLetters": {},
+  "editorDeleteKeepAddressButton": "ਮਿਟਾਓ, ਪਰ ਪਤਾ ਰੱਖੋ",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "fieldHoursSDAddOne": "ਮਿਤੀ ਸ਼ਾਮਲ ਕਰੋ",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursClosedPH": "ਜਨਤਕ ਛੁੱਟੀਆਂ ਵਾਲੇ ਦਿਨ ਬੰਦ",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldNameLangSearch": "ਭਾਸ਼ਾ ਲੱਭੋ",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldComboChoose": "ਚੁਣੋ",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldPaymentTitle": "ਕਾਰਡ ਭੁਗਤਾਨ",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldWheelchairLimited": "ਸੀਮਿਤ",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldPaymentAround": "ਆਲੇ-ਦੁਆਲੇ ਦੇ ਆਮ ਵਿਕਲਪ",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "fieldCardsAccepted": "ਸਵੀਕਾਰ ਕੀਤਾ",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldPaymentUseGlobal": "ਮੇਰੇ ਡਿਫਾਲਟ ਵਧੀਆ ਹਨ",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "fieldFloorNew": "ਨਵੀਂ ਮੰਜ਼ਿਲ",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldPaymentChoose": "ਅਲੱਗ ਸਥਾਨਕ ਟੈਗ ਚੁਣੋ…",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "fieldHeightFeet": "ਲੰਬਾਈ ਦੀ ਫੁੱਟਾਂ ਵਿੱਚ ਉਮੀਦ, ਜਿਵੇਂ ਕਿ ੭'੪\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "entrancesAddEntrance": "ਪ੍ਰਵੇਸ਼ ਸ਼ਾਮਲ ਕਰੋ",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "addressBlock": "ਬਲਾਕ",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "addressHouseNotEmpty": "ਖਾਲੀ ਨਹੀਂ ਹੋਣਾ ਚਾਹੀਦਾ",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "notesCloseMessage": "ਕੀ ਨੋਟ ਨੂੰ ਹੱਲ ਕੀਤਾ ਹੋਇਆ ਵਜੋਂ ਨਿਸ਼ਾਨਬੱਧ ਕਰਨਾ ਹੈ?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "apiStatusUploading": "ਤਬਦੀਲੀਆਂ ਅਪਲੋਡ ਕੀਤਿਆਂ ਜਾ ਰਹੀਆਂ ਹਨ",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "faqMapTiny": "ਨਕਸ਼ਾ ਇੰਨਾ ਛੋਟਾ ਕਿਓਂ ਹੈ?",
+  "@faqMapTiny": {},
+  "faqFloors": "ਕੀ ਮੰਜ਼ਿਲ '੩' ਅਤੇ '/੩' ਇੱਕੋ ਹਨ?",
+  "@faqFloors": {},
+  "enableGPSMessage": "ਕਿਰਪਾ ਕਰਕੇ ਸੈਟਿੰਗ ਪੈਨਲ ਵਿੱਚ ਦਿਖਾਈ ਦੇਣ ਵਾਲੀਆਂ ਸਥਾਨ ਸੇਵਾਵਾਂ ਨੂੰ ਚਾਲੂ ਕਰੋ।",
+  "@enableGPSMessage": {
+    "description": "Contents of the alert for enabling location services."
+  },
+  "fieldWifiCustomers": "ਗਾਹਕ",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "warningWrongMode": "ਗਲਤ ਮੋਡ, ਡੁਪਲੀਕੇਟ ਦੀ ਜਾਂਚ ਕਰੋ",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "fieldComboEmpty": "ਖਾਲੀ",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldCardsOnly": "ਸਿਰਫ਼ ਕਾਰਡ",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldWifiPublic": "ਜਨਤਕ",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "buildingTypeShed": "ਸ਼ੈੱਡ",
+  "@buildingTypeShed": {},
+  "fieldHoursSDRemove": "ਹਟਾਓ",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "editorDeleteBuilding": "ਢਾਹ ਦਿੱਤਾ ਗਿਆ",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "buildingTypeIndustrial": "ਉਦਯੋਗਿਕ",
+  "@buildingTypeIndustrial": {},
+  "enableLocationMessage": "ਕਿਰਪਾ ਕਰਕੇ ਸੈਟਿੰਗ ਪੈਨਲ ਵਿੱਚ ਦਿਖਾਈ ਦੇਣ ਵਾਲੀਆਂ ਲੋਕੇਸ਼ਨ ਸੇਵਾਵਾਂ ਨੂੰ ਚਾਲੂ ਕਰੋ।",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "fieldPaymentLocal": "ਸਥਾਨਕ ਵਿਕਲਪ",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
+  },
+  "fieldPaymentUseSame": "ਮੈਪਿੰਗ ਲਈ ਉਹੀ ਟੈਗ ਵਰਤੋ",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "messageNoData": "ਕੋਈ ਡਾਟਾ ਨਹੀਂ, ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਇੱਥੇ ਦੱਬੋ",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "fieldFloorFloorDesc": "ਮੰਜਿਲ ਜਿਵੇਂ ਕਿ ਨੇਵੀਗੇਸ਼ਨ 'ਤੇ ਅਤੇ ਐਲੀਵੇਟਰਾਂ ਵਿੱਚ",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "buildingX": "ਇਮਾਰਤ {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "fieldFloorLevelDesc": "ਮੰਜ਼ਿਲ ਨੰਬਰ ਜ਼ਮੀਨ ਪੱਧਰ ਲਈ ੦ ਤੋਂ ਸ਼ੁਰੂ",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "drawPath": "ਰਾਹ",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "fieldHeightAny": "ਲੰਬਾਈ ਦੀ ਉਮੀਦ, ਜਿਵੇਂ ਕਿ ੫੶੪ ਜਾਂ ੭'੪\"",
+  "@fieldHeightAny": {
+    "description": "Validation message for when meters or feet are expected."
+  },
+  "messageDataObsolete": "ਡਾਟਾ ਪੁਰਾਣਾ ਹੋ ਗਿਆ ਹੈ, ਤਾਜ਼ਾ ਕਰਨ ਲਈ ਇੱਥੇ ਦੱਬੋ",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "entranceIsUnit": "ਫਲੈਟ ਨੰਬਰ ਨੂੰ addr:unit ਫਾਰਮੈਟ ਵਿੱਚ ਸਟੋਰ ਕਰੋ",
+  "@entranceIsUnit": {
+    "description": "Label for a switch to use addr:unit instead of addr:flats."
+  },
+  "buildingTypeCommercial": "ਵਪਾਰਕ",
+  "@buildingTypeCommercial": {},
+  "drawPower": "ਪਾਵਰ ਲਾਈਨ",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "buildingMaterialMetal": "ਧਾਤ",
+  "@buildingMaterialMetal": {},
+  "drawEraser": "ਇਰੇਜ਼ਰ",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "faqChangeType": "ਸਹੂਲਤ ਦੀ ਕਿਸਮ ਨੂੰ ਕਿਵੇਂ ਬਦਲਿਆ ਜਾਵੇ?",
+  "@faqChangeType": {},
+  "entranceTypeEmergency": "ਸੰਕਟਕਾਲੀਨ",
+  "@entranceTypeEmergency": {},
+  "apiStatusUploadingNotes": "ਨੋਟ ਅਪਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "faqMapTinyContent": "ਕਿਉਂਕਿ ਇਹ ਮੁੱਦਾ ਨਹੀਂ ਹੈ। ਤੁਸੀਂ ਸਿਰਫ਼ ਨਕਸ਼ੇ 'ਤੇ ਆਪਣੀ ਸਥਿਤੀ ਦੀ ਜਾਂਚ ਕਰਦੇ ਹੋ, ਅਤੇ ਇਸਨੂੰ ਐਡਜਸਟ ਕਰਨ ਲਈ ਅੱਗੇ-ਪਿੱਛੇ ਕਰ ਸਕਦੇ ਹੋ। ਹੇਠਾਂ ਦਿੱਤੀ ਸਹੂਲਤ ਸੂਚੀ ਵੇਖੋ, ਜੋ ਤੁਹਾਡੇ ਤੋਂ ਦੂਰੀ ਦੇ ਅਨੁਸਾਰ ਕ੍ਰਮਬੱਧ ਹੈ।\n\nਜਦੋਂ ਤੁਸੀਂ ਆਪਣੇ ਸਥਾਨ ਤੋਂ ਦੂਰ ਸਹੂਲਤਾਂ ਨੂੰ ਸੰਪਾਦਿਤ ਕਰਦੇ ਹੋ ਤਾਂ ਨਕਸ਼ਾ ਵੱਡਾ ਹੋ ਜਾਂਦਾ ਹੈ। ਹਾਲਾਂਕਿ ਇਹ ਐਪ ਉਨ੍ਹਾਂ ਚੀਜ਼ਾਂ ਨੂੰ ਸੰਪਾਦਿਤ ਕਰਨ ਲਈ ਬਣਾਈ ਗਈ ਸੀ ਜੋ ਤੁਸੀਂ ਆਪਣੀਆਂ ਅੱਖਾਂ ਨਾਲ ਦੇਖਦੇ ਹੋ।",
+  "@faqMapTinyContent": {},
+  "faqCheckmarksContent": "ਇਹ ਉਹ ਨਿਸ਼ਾਨ ਹਨ ਜਿਨ੍ਹਾਂ ਨਾਲ ਸਹੂਲਤ ਡੇਟਾ ਦੀ ਪੁਸ਼ਟੀ ਹੋਈ ਸੀ। ਉਹ ਮੌਜੂਦਾ ਮਿਤੀ ਦੇ ਨਾਲ `check_date` ਟੈਗ ਜੋੜਦੇ ਹਨ।\n\nਚੈੱਕਮਾਰਕਸ ਦੇ ਪਿੱਛੇ ਵਿਚਾਰ ਇਹ ਹੈ ਕਿ, ਮੰਨ ਲਓ, ਤੁਸੀਂ ਪਹਿਲੀ ਵਾਰ ਅੱਧੇ ਸ਼ਹਿਰ ਦਾ ਸਰਵੇਖਣ ਕੀਤਾ ਸੀ। ਫਿਰ ਇੱਕ ਮਹੀਨੇ ਬਾਅਦ ਤੁਸੀਂ ਵਾਪਸ ਆਏ ਅਤੇ ਦੁਬਾਰਾ ਸਰਵੇਖਣ ਕਰਨ ਗਏ। ਤੁਹਾਨੂੰ ਕਿਸੇ ਤਰ੍ਹਾਂ ਇਹ ਨਿਸ਼ਾਨ ਲਗਾਉਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ ਕਿ ਤੁਸੀਂ ਸਹੂਲਤ ਵੇਖਦੇ ਹੋ, ਪਰ ਇਸ ਵਿੱਚ ਕੁਝ ਵੀ ਨਹੀਂ ਬਦਲਿਆ ਹੈ। ਇਹੀ ਚੈੱਕਮਾਰਕ ਹੈ: ਤੁਸੀਂ ਇਸਨੂੰ ਟੈਪ ਕਰੋ ਅਤੇ ਜਾਰੀ ਰੱਖੋ।\n\nਨਿਸ਼ਾਨ ਦੋ ਮਹੀਨਿਆਂ ਲਈ ਚੈੱਕ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਉਸ ਤੋਂ ਬਾਅਦ ਤੁਸੀਂ ਦੁਬਾਰਾ ਸਹੂਲਤਾਂ ਦਾ ਸਰਵੇਖਣ ਕਰ ਸਕਦੇ ਹੋ।",
+  "@faqCheckmarksContent": {},
+  "faqYellowContent": "ਪ੍ਰਵੇਸ਼ ਮੋਡ ਵਿੱਚ ਗੈਰ-ਪੀਲੇ ਲੇਬਲ ਅਤੇ ਮਾਈਕ੍ਰੋਮੈਪਿੰਗ ਮੋਡ ਵਿੱਚ ਚਿੱਟੇ ਬਿੰਦੀਆਂ ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਤੱਤਾਂ ਵਿੱਚ ਕੁਝ ਮਹੱਤਵਪੂਰਨ ਗੁਣਾਂ ਦੀ ਘਾਟ ਹੈ। ਉਦਾਹਰਣ ਵਜੋਂ:\n\n* ਇਮਾਰਤਾਂ ਵਿੱਚ ਪੱਧਰਾਂ ਦੀ ਗਿਣਤੀ ਹੋਣ ਦੀ ਉਮੀਦ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।\n* ਪ੍ਰਵੇਸ਼ ਦੁਆਰ ਦੀ ਕਿਸਮ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ ਅਤੇ, ਪੌੜੀਆਂ ਲਈ, ਸਮਤਲ ਰੇਂਜ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।\n* ਬੈਂਚਾਂ ਵਿੱਚ ਸਮੱਗਰੀ ਅਤੇ ਪਿੱਠ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।\n* ਰੁੱਖਾਂ ਵਿੱਚ ਪੱਤਿਆਂ ਦੀ ਕਿਸਮ ਅਤੇ ਚੱਕਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।",
+  "@faqYellowContent": {},
+  "faqFloorsContent": "ਨਹੀਂ। ਪਹਿਲੇ ਵਿੱਚ `addr:floor=3` ਟੈਗ ਭਰਿਆ ਹੋਇਆ ਹੈ। ਇਹ ਫਲੋਰ ਹੈ ਕਿਉਂਕਿ ਇਹ ਨੈਵੀਗੇਸ਼ਨ 'ਤੇ ਛਾਪਿਆ ਜਾਂਦਾ ਹੈ ਅਤੇ ਆਮ ਤੌਰ 'ਤੇ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ। ਦੂਜੇ ਵਿੱਚ ਇਹ ਟੈਗ ਨਹੀਂ ਹੈ, ਪਰ `level=3` ਹੈ। ਉਹ ਨੰਬਰ ਜ਼ੀਰੋ ਤੋਂ `building:levels - 1` ਤੱਕ ਇੱਕ ਕ੍ਰਮਵਾਰ ਫਲੋਰ ਨੰਬਰ ਹੈ। ਯਾਨੀ, ਤਿੰਨ ਮੰਜ਼ਿਲਾ ਇਮਾਰਤ ਵਿੱਚ `addr:floor` ਮੁੱਲ ਇੱਕ ਦੇਸ਼ 'ਤੇ ਨਿਰਭਰ ਕਰਦਾ ਹੈ, ਪਰ `level` ਹਮੇਸ਼ਾ 0, 1, ਜਾਂ 2 ਹੁੰਦਾ ਹੈ।\n\nਇੱਥੇ ਦੱਸਿਆ ਗਿਆ ਹੈ ਕਿ ਸੰਪਾਦਕ ਵਿੱਚ ਨੋਟੇਸ਼ਨ ਇਹਨਾਂ ਟੈਗਾਂ ਨਾਲ ਕਿਵੇਂ ਸੰਬੰਧਿਤ ਹੈ:\n\n* `2`: `addr:floor=2` ਅਤੇ ਗੈਰ-ਖਾਲੀ `level=*`।\n* `4/`: `addr:floor=4`, ਪਰ ਕੋਈ `level` ਟੈਗ ਨਹੀਂ ਹੈ।\n* `/1`: `level=1`, ਪਰ ਕੋਈ `addr:floor` ਟੈਗ ਨਹੀਂ ਹੈ।\n* `1/0`: `addr:floor=1` + `level=0` (ਅਤੇ ਨੇੜੇ ਹੀ ਇੱਕ ਵਸਤੂ ਹੈ: ਇੱਕੋ `addr:floor` ਨਾਲ, ਪਰ ਵੱਖਰਾ `level`, ਜਾਂ ਇਸਦੇ ਉਲਟ)।",
+  "@faqFloorsContent": {},
+  "faqLettersContent": "ਜੇਕਰ ਤੁਹਾਡਾ ਸੰਖਿਆਤਮਕ ਕੀਬੋਰਡ ਪੂਰੇ ਕੀਬੋਰਡ 'ਤੇ ਨਹੀਂ ਬਦਲਿਆ ਜਾ ਸਕਦਾ, ਤਾਂ ਐਪ ਸੈਟਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ। ਉਹ ਉੱਪਰ ਖੱਬੇ ਕੋਨੇ 'ਤੇ ਬਟਨ ਦੇ ਪਿੱਛੇ ਹਨ। ਉੱਥੇ \"ਐਕਸਟੈਂਡਡ ਸੰਖਿਆਤਮਕ ਕੀਬੋਰਡ\" ਨੂੰ ਚਾਲੂ ਕਰੋ।",
+  "@faqLettersContent": {},
+  "buildingMaterialBrick": "ਇੱਟ",
+  "@buildingMaterialBrick": {},
+  "fieldPaymentGlobal": "ਗਲੋਬਲ ਡਿਫਾਲਟ",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "fieldWebsiteQR": "QR ਕੋਡ ਸਕੈਨ ਕਰੋ",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "buildingMaterialPlaster": "ਪਲਾਸਟਰ",
+  "@buildingMaterialPlaster": {},
+  "buildingMaterialWood": "ਲੱਕੜ",
+  "@buildingMaterialWood": {},
+  "buildingMaterialStone": "ਪੱਥਰ",
+  "@buildingMaterialStone": {}
 }
