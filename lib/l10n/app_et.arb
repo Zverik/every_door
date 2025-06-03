@@ -1271,5 +1271,13 @@
   "faqLettersContent": "Kui sinu nutiseadme numbriklahvistik pole ümberlülitatav täisklahvistikuks, siis palun kontrolli seadistusi. Tavaliselt saad seda teha nupu alt ülalt vasakulst nurgast. Võta sealt kasutusele näiteks „laiendatud numbriklahvistik“.",
   "@faqLettersContent": {},
   "faqFloors": "Kas „3“ ja „/3“ korrused on üks ja sama?",
-  "@faqFloors": {}
+  "@faqFloors": {},
+  "tileDragDownload": "Proovi klõpsida allalaadimise nuppu.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Muudetakse OpenStreetMapi märkmeks",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  }
 }
