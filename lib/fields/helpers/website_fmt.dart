@@ -266,13 +266,17 @@ class WhatsappProvider extends _ProviderHelper {
           label: 'WhatsApp',
           key: 'contact:whatsapp',
           regexp: RegExp(r'(\d[\d -]{5,}\d)'),
+          format: '+%s',
         );
 
   @override
-  String format(String value) => '+' + super.format(value);
-
-  @override
-  String display(String full) => format(full);
+  String display(String full) {
+    try {
+      return format(full);
+    } on ArgumentError {
+      return full;
+    }
+  }
 }
 
 class ViberProvider extends _ProviderHelper {

@@ -40,6 +40,8 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
   final _controllers = <String, TextEditingController>{};
   final _languages = <String>[];
   static final _langData = LanguageData();
+  late FocusNode nameFocus;
+  late bool _needFocus;
 
   @override
   void initState() {
@@ -50,6 +52,20 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
     for (final k in getLanguageKeysForLocation()) addLanguage(k);
     for (final k in widget.element.getFullTags().keys) {
       if (k.startsWith(widget.field.key + ':')) addLanguage(k);
+    }
+
+    // This is a hack to auto-focus on the name when the element was just created.
+    final updatedAgo = DateTime.now().difference(widget.element.updated);
+    _needFocus = widget.element.isNew &&
+        widget.field.key == 'name' &&
+        widget.element[widget.field.key] == null &&
+        updatedAgo < Duration(seconds: 3);
+
+    nameFocus = FocusNode();
+    if (_needFocus) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        nameFocus.requestFocus();
+      });
     }
   }
 
@@ -72,6 +88,7 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
     for (final controller in _controllers.values) {
       controller.dispose();
     }
+    nameFocus.dispose();
     super.dispose();
   }
 
@@ -127,13 +144,6 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
     // TODO: only update when page is back from inactive?
     updateFromTags();
 
-    // This is a hack to auto-focus on the name when the element was just created.
-    bool needFocus = widget.element.isNew &&
-        widget.field.key == 'name' &&
-        widget.element[widget.field.key] == null &&
-        DateTime.now().difference(widget.element.updated) <
-            Duration(seconds: 3);
-
     final capitalization = !widget.field.capitalize
         ? TextCapitalization.none
         : ref.watch(osmDataProvider).capitalizeNames
@@ -148,7 +158,7 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
             Expanded(
               child: TextField(
                 controller: _controllers[''],
-                autofocus: needFocus,
+                focusNode: nameFocus,
                 textCapitalization: capitalization,
                 decoration: InputDecoration(
                   hintText: widget.field.placeholder,

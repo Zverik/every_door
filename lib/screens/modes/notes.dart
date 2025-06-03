@@ -3,6 +3,7 @@ import 'package:every_door/helpers/geometry/geometry.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/editor_settings.dart';
+import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
@@ -40,6 +41,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     widget.def.addListener(onDefChange);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateNotes();
+      // Disable location tracking.
+      ref.read(trackingProvider.notifier).state = false;
     });
   }
 
