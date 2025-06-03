@@ -12,6 +12,7 @@ _Unreleased_
 * Now warning about `amenity=fixme` objects.
 * Untyped amenities with just a name will be converted to OSM notes.
 * "Clear" button for the fixme field (thanks @soham-dixit).
+* Compass direction (thanks @SiarheiFedartsou).
 * Added `sr-Latn` language for Serbia (thanks @alnzrv).
 * Updated roof assets (thanks @mxdanger).
 * Updated a phone number parsing library.

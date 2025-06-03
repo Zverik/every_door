@@ -17,7 +17,7 @@ class LocationMarkerWidget extends ConsumerWidget {
     final LatLng? trackLocation = ref.watch(geolocationProvider);
     if (trackLocation == null) return Container();
 
-    final CompassData? compass = null; // ref.watch(compassProvider);
+    final CompassData? compass = ref.watch(compassProvider);
     return MobileLayerTransformer(
       child: CustomPaint(
         painter: _LocationMarkerPainter(
@@ -37,11 +37,11 @@ class _LocationMarkerPainter extends CustomPainter {
   final Offset offset;
   final double? heading;
 
-  static final kMarkerColor = Colors.blue.withOpacity(0.4);
-  static final kBorderColor = Colors.black.withOpacity(0.8);
+  static final kMarkerColor = Colors.blue.withValues(alpha: 0.4);
+  static final kBorderColor = Colors.black.withValues(alpha: 0.8);
   static const kCircleRadius = 10.0;
   static const kHeadingRadius = 20.0;
-  static const kHeadingAngleWidth = 30.0 * pi / 180.0; // 30°
+  static const kHeadingAngleWidth = 60.0 * pi / 180.0; // 60°
 
   _LocationMarkerPainter(
       {required this.border, required this.offset, this.heading});
@@ -61,12 +61,14 @@ class _LocationMarkerPainter extends CustomPainter {
           Rect.fromCircle(center: offset, radius: kHeadingRadius);
       final headingPaint = Paint()
         ..shader = RadialGradient(colors: [
-          kMarkerColor.withOpacity(1.0),
-          kMarkerColor.withOpacity(0.0)
+          kMarkerColor.withValues(alpha: 1.0),
+          kMarkerColor.withValues(alpha: 0.0)
         ]).createShader(headingRect);
       canvas.drawArc(
         headingRect,
-        heading! - kHeadingAngleWidth / 2,
+        // Subtracting pi/2 adjusts the heading because Flutter's arc drawing starts at the positive x-axis,
+        // while a heading of 0 represents north (upwards).
+        (heading! - pi / 2) - kHeadingAngleWidth / 2,
         kHeadingAngleWidth,
         true,
         headingPaint,
