@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/providers/osm_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:every_door/helpers/log_store.dart';
@@ -28,10 +29,32 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
     });
   }
 
+  void _copyAllLogsToClipboard() {
+    final logText = logStore.lines.join('\n');
+    Clipboard.setData(ClipboardData(text: logText));
+
+    // Show a snackbar to provide user feedback
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('All logs copied to clipboard'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('System Log')),
+      appBar: AppBar(
+        title: Text('System Log'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.copy),
+            tooltip: 'Copy All Logs',
+            onPressed: _copyAllLogsToClipboard,
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         controller: _controller,
         child: Padding(
