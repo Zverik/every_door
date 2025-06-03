@@ -37,7 +37,7 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
 
     String message;
     if (needDownload)
-      message = "Try tapping the download button"; // TODO: better words and loc
+      message = loc.tileDragDownload;
     else if (hasFilter)
       message = loc.tileDragOrUnfilter;
     else

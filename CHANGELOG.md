@@ -9,6 +9,8 @@ _Unreleased_
 * Removing preset tags properly.
 * Turns out "Cancel" buttons for buildings and entrances kept the changes.
 * Correct weekday order and default holidays for various countries.
+* Now warning about `amenity=fixme` objects.
+* Untyped amenities with just a name will be converted to OSM notes.
 * Added `sr-Latn` language for Serbia (thanks @alnzrv).
 * Updated roof assets (thanks @mxdanger).
 * Updated a phone number parsing library.

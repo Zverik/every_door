@@ -6,7 +6,9 @@ import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
+import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/address.dart';
@@ -239,20 +241,41 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   saveAndClose() {
-    final fullTags = amenity.getFullTags();
-    // Setting the mark automatically.
-    if (ElementKind.needsCheck.matchesTags(fullTags)) amenity.check();
-    // Remove opening_hours:signed if needed.
-    amenity.removeOpeningHoursSigned();
-    // Store the preset when an object was saved, to track used ones.
-    if (widget.preset != null) {
-      ref.read(lastPresetsProvider).registerPreset(widget.preset!, fullTags);
+    if (amenity.isFixmeNote()) {
+      // Convert fixme amenity to an OSM note.
+      // 1. create a note
+      final note = OsmNote(
+        location: amenity.location,
+        comments: [
+          OsmNoteComment(
+            message: "Amenity described as \"${amenity['fixme:type']}\""
+                " with name \"${amenity['name'] ?? ''}\".",
+            isNew: true,
+          )
+        ],
+      );
+      ref.read(notesProvider).saveNote(note);
+      // 2. remove the amenity
+      if (widget.amenity != null) {
+        // It's new by [OsmChange.isFixmeNote] definition.
+        ref.read(changesProvider).deleteChange(amenity);
+      }
+    } else {
+      final fullTags = amenity.getFullTags();
+      // Setting the mark automatically.
+      if (ElementKind.needsCheck.matchesTags(fullTags)) amenity.check();
+      // Remove opening_hours:signed if needed.
+      amenity.removeOpeningHoursSigned();
+      // Store the preset when an object was saved, to track used ones.
+      if (widget.preset != null) {
+        ref.read(lastPresetsProvider).registerPreset(widget.preset!, fullTags);
+      }
+      // Save changes and close.
+      final changes = ref.read(changesProvider);
+      changes.saveChange(amenity);
+      if (amenity.hasTag('addr:floor'))
+        ref.read(osmDataProvider).updateFloorNumbering(amenity.location);
     }
-    // Save changes and close.
-    final changes = ref.read(changesProvider);
-    changes.saveChange(amenity);
-    if (amenity.hasTag('addr:floor'))
-      ref.read(osmDataProvider).updateFloorNumbering(amenity.location);
     Navigator.pop(context);
     ref.read(needMapUpdateProvider).trigger();
   }
@@ -368,7 +391,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   @override
   Widget build(BuildContext context) {
     final preset = this.preset;
-    final bool modified = widget.amenity == null || amenity != widget.amenity;
+    final bool modified = widget.amenity == null ||
+        amenity != widget.amenity ||
+        amenity.isFixmeNote();
     final bool needsCheck = amenity.age >= kOldAmenityDaysEditor &&
         ElementKind.needsCheck.matchesChange(amenity);
     final double bottomPadding = MediaQuery.of(context).padding.bottom;

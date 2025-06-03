@@ -36,8 +36,12 @@ const _kTagsWithoutYesValue = {
 };
 
 String? getWarningForAmenity(OsmChange amenity, AppLocalizations loc) {
+  if (amenity.isFixmeNote()) {
+    return loc.warningFixmeNote;
+  }
+
   String? fixmeValue = amenity['fixme'];
-  if (fixmeValue != null && !amenity.isNew && amenity['amenity'] != 'fixme') {
+  if (fixmeValue != null) {
     if (fixmeValue.length > 50) {
       fixmeValue = fixmeValue.substring(0, 50) + '…';
     }

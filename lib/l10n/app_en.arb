@@ -64,7 +64,11 @@
   },
   "tileDragOrUnfilter": "Please move around, add an amenity, or clear the filter.",
   "@tileDragOrUnfilter": {
-    "description": "Message displayer when there's nothing around, and a filter is on."
+    "description": "Message displayed when there's nothing around, and a filter is on."
+  },
+  "tileDragDownload": "Try tapping the download button.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
   },
   "legendOther": "Other",
   "@legendOther": {
@@ -149,6 +153,10 @@
   "chooseTypeClear": "Clear",
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
+  },
+  "warningFixmeNote": "Will be converted to an OSM note",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
   },
   "warningFixme": "Fixme: {value}",
   "@warningFixme": {

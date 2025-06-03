@@ -475,7 +475,13 @@ class OsmChange extends ChangeNotifier implements Comparable {
     return '$num, $street';
   }
 
-  bool get isChristmasTree => this['xmas:feature'] == 'tree';
+  bool isFixmeNote() {
+    if (!isNew || this['amenity'] != 'fixme') return false;
+    final tags = getFullTags();
+    return {'amenity', 'check_date', 'fixme', 'fixme:type', 'name'}
+        .containsAll(tags.keys);
+  }
+
 
   // Helper methods
 

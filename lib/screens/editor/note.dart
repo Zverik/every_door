@@ -126,7 +126,6 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     if (isChanged) {
       final note = _buildEditedNote();
       if (note != null) {
-        print('note editor: saving note!');
         ref.read(notesProvider).saveNote(note);
       }
     }
