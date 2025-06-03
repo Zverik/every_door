@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:logging/logging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_compass/flutter_compass.dart';
+import 'package:flutter_compass_v2/flutter_compass_v2.dart';
 import 'dart:math' show pi;
 
 final compassProvider = StateNotifierProvider<CompassController, CompassData?>(

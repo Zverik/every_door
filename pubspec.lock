@@ -339,14 +339,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
-  flutter_compass:
+  flutter_compass_v2:
     dependency: "direct main"
     description:
-      name: flutter_compass
-      sha256: "1b4d7e6c95a675ec8482b5c9c9ccf1ebf0ced3dbec59dce28ad609da953de850"
+      name: flutter_compass_v2
+      sha256: c17b1533a43f5192e73d2f475ec2c142cc1e193eba6a9b49433d1ab68d70606b
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.1"
+    version: "1.0.3"
   flutter_dropdown_alert:
     dependency: "direct main"
     description:
