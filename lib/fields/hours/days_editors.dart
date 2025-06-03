@@ -97,17 +97,26 @@ class NumberedWeekdayPanel extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 15.0, right: 10.0),
-          child: DropdownButton<int>(
-            items: Iterable.generate(7)
-                .map((i) => DropdownMenuItem<int>(
-                      child: Text(weekdayTitles[i]),
-                      value: i,
-                    ))
-                .toList(),
-            value: weekday.weekday,
-            onChanged: (value) {
-              if (value != null) onChange(NumberedWeekday(value, weekday.days));
-            },
+          child: Column(
+            children: [
+              DropdownButton<int>(
+                items: Iterable.generate(7)
+                    .map((i) => DropdownMenuItem<int>(
+                          child: Text(weekdayTitles[i]),
+                          value: i,
+                        ))
+                    .toList(),
+                value: weekday.weekday,
+                onChanged: (value) {
+                  if (value != null)
+                    onChange(NumberedWeekday(value, weekday.days));
+                },
+              ),
+              Text(
+                'Week #',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
           ),
         ),
         for (final i in days)
