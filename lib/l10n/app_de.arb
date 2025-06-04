@@ -141,7 +141,7 @@
   "@changesCount": {},
   "changesUploadedTitle": "Hochgeladen",
   "@changesUploadedTitle": {},
-  "changesUploadedMessage": "{changes} hochgeladen.",
+  "changesUploadedMessage": "Zu OpensStreetMap changes} hochgeladen.",
   "@changesUploadedMessage": {},
   "changesUploadFailedTitle": "Fehler beim Hochladen",
   "@changesUploadFailedTitle": {},
@@ -961,5 +961,13 @@
   "editorDeleteBuilding": "Abgerissen",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "warningFixmeNote": "Wird in eine OSM-Note umgewandelt",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "tileDragDownload": "Versuche den Download-Button zu drücken.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
   }
 }
