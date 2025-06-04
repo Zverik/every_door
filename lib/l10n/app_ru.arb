@@ -153,7 +153,7 @@
   "@changesCount": {},
   "changesUploadedTitle": "Отправлено",
   "@changesUploadedTitle": {},
-  "changesUploadedMessage": "Отослали {changes} в API.",
+  "changesUploadedMessage": "Отослали {changes} в OpenStreetMap.",
   "@changesUploadedMessage": {},
   "changesUploadFailedTitle": "Не удалось отправить",
   "@changesUploadFailedTitle": {},
@@ -493,7 +493,7 @@
   "@faqChangeTypeContent": {},
   "faqTagging": "Любые вопросы по тегам",
   "@faqTagging": {},
-  "faqTaggingContent": "Почему объект отсутствует в редакторе? Когда выводятся белые точки на объектах в режиме микромаппинга? Как сортируются объекты?\n\nОтветы на все эти вопросы в [good\\_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Вот на что обратить внимание:\n\n* Порядок определения главного тега — список `kMainKeys`.\n* Какие объекты загружаются — функция `isGoodTags`.\n* Что считается заведением — функция `isAmenityTags`.\n* Какие точки прилепляются к линиям, и каким — функция `detectSnap`.\n* Когда объект микромаппинга неполон — функция `needsMoreInfo`.",
+  "faqTaggingContent": "Почему объект отсутствует в редакторе? Когда выводятся белые точки на объектах в режиме микромаппинга? Как сортируются объекты?\n\nОтветы на все эти вопросы в [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Вот на что обратить внимание:\n\n* Порядок определения главного тега — список `kMainKeys` в `main_key.dart`.\n* Какие объекты загружаются — класс `_EverythingKind`.\n* Что считается заведением — класс `_AmenityKind`.\n* Какие точки прилепляются к линиям, и каким — логика класса `ElementKindImpl`(и в связанных подклассах).\n* Когда объект микромаппинга неполон — класс `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "versionsRetryFetch": "Повторить",
   "@versionsRetryFetch": {
@@ -657,7 +657,7 @@
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
   },
-  "tagsRestore": "Вернуть",
+  "tagsRestore": "Восстановить",
   "@tagsRestore": {
     "description": "Tooltip for a button next to a tag value to restore the value to the original."
   },
@@ -916,5 +916,13 @@
   "editorDeleteBuilding": "Снесено",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "warningFixmeNote": "Будет преобразовано в заметку OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "tileDragDownload": "Попробуйте нажать кнопку скачивания.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
   }
 }
