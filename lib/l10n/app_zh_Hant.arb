@@ -525,7 +525,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "已經將 {changes} 傳送到 API。",
+  "changesUploadedMessage": "已經將 {changes} 傳送到開放街圖。",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1066,7 +1066,7 @@
   "@faqCheckmarksContent": {},
   "faqFloorsContent": "不是，第一個欄位已經填入 `addr:floor=3` 標籤，這是在導航與平常用途會說到的樓層。第一個的確有這個標籤，但是有 `level=3`，這個數字是從零開始到 `building:levels -1` 的連續樓層數字。這就意味三層樓的建築 `addr:floor` 值依照國家有不同定議，但是 `level` 總是 0、1 或是 2。\n\n這邊是編輯器相關的標籤標示方式：\n\n* `2`：`addr:floor=2` 與非空白 `level=*。\n* `4`：`addr:floor=4，但沒有`level`標籤。\n*`/1`：`level=1`，但是沒有`addr:floor`標籤。\n*`1/0`：`addr:floor=1` + `level=0` (然後那邊附近有相同 `addr:floor` 的物件，但不同 `level`，或是相反狀況)。",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "為什麼編輯器內有遺漏物件呢？什麼時候小白點會在在微細畫地圖模式顯示？物件會如果排列？\n\n這些問題的解答都在 [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart)。這邊是你可以閱讀的：\n\n* 主要標籤的鍵順序 — `kMainKeys`清單。\n* 那些物件會下載下來 — 功能 `isGoodTags`。\n* 那些被視為便利設施 — 功能 `isAmenityTags`。\n* 那些節點切斷路徑 — 功能 `detectSnap`。\n* 當微細畫地圖物件不完整 — 功能 `needsMoreInfo`。",
+  "faqTaggingContent": "為什麼編輯器內有遺漏物件呢？什麼時候小白點會在在微細畫地圖模式顯示？物件會如果排列？\n\n這些問題的解答都在 [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart)。這邊是你可以閱讀的：\n\n* 主要標籤的鍵順序 — 在 `main_key.dart` `kMainKeys`清單。\n* 那些物件會下載下來 — 功能 `_EverythingKind`。\n* 那些被視為便利設施 — 功能 `_AmenityKind`。\n* 那些節點切斷路徑 — 功能 `ElementKindImpl` logic (參見相關次功能)。\n* 當微細畫地圖物件不完整 — 功能 `_NeedsMoreInfo`。",
   "@faqTaggingContent": {},
   "fieldDirectionSet": "設置",
   "@fieldDirectionSet": {
@@ -1269,5 +1269,13 @@
   "drawCulvert": "涵管",
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "warningFixmeNote": "會被轉換為OSM備註",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "tileDragDownload": "試著按下載按鈕。",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
   }
 }
