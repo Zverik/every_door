@@ -149,7 +149,7 @@
   "@changesCount": {},
   "changesUploadedTitle": "Caricato",
   "@changesUploadedTitle": {},
-  "changesUploadedMessage": "{changes} inviate all'API.",
+  "changesUploadedMessage": "{changes} inviate a OpenStreetMap.",
   "@changesUploadedMessage": {},
   "changesUploadFailedTitle": "Caricamento fallito",
   "@changesUploadFailedTitle": {},
@@ -937,5 +937,13 @@
   "editorDeleteKeepAddressButton": "Cancella, ma mantieni l'indirizzo",
   "@editorDeleteKeepAddressButton": {
     "description": "Button for keeping the address"
+  },
+  "tileDragDownload": "Prova a premere il pulsante download.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Sarà convertito in una nota OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
   }
 }
