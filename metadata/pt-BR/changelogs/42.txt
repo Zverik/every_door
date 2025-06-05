@@ -1,0 +1,4 @@
+* Modo de rabiscos.
+* Dias da semana em um idioma local.
+* Sugestões de etiquetas de andar.
+* Atualizações de predefinições e imagens.
