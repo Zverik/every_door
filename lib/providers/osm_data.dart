@@ -283,6 +283,7 @@ class OsmDataHelper extends ChangeNotifier {
   /// Returns common floors for level=0, level=1 and level=2.
   /// If lower levels are missing or ambiguous, higher levels not returned.
   Future<List<Floor>> updateFloorNumbering([LatLng? location]) async {
+    // TODO: this performs very slow, making the app slow on saving.
     final database = await _ref.read(databaseProvider).database;
     final hashes = location == null
         ? const []

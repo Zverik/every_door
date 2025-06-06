@@ -39,10 +39,11 @@ class SharedFileController {
         .firstOrNull;
 
     if (firstOurFile == null) {
-      _logger.info('Got files, but nothing matches: $files');
+      if (files.isNotEmpty) {
+        _logger.info('Got files, but nothing matches: $files');
+      }
       return;
     }
-    ;
 
     final file = File(firstOurFile.path);
     if (!await file.exists()) {
