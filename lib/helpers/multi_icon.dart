@@ -9,7 +9,7 @@ import 'package:jovial_svg/jovial_svg.dart';
 class MultiIcon {
   final IconData? fontIcon;
   late final ImageProvider<Object>? image;
-  late final ScalableImage? svg;
+  late ScalableImage? svg;
   final String? tooltip;
 
   MultiIcon({
@@ -17,6 +17,7 @@ class MultiIcon {
     Uint8List? imageData,
     Uint8List? svgData,
     Uint8List? siData,
+    String? imageUrl,
     String? asset,
     this.tooltip,
   }) {
@@ -24,6 +25,8 @@ class MultiIcon {
       image = MemoryImage(imageData);
     } else if (asset != null) {
       image = AssetImage(asset);
+    } else if (imageUrl != null && !imageUrl.contains('.svg')) {
+      image = NetworkImage(imageUrl);
     } else {
       image = null;
     }
@@ -32,6 +35,9 @@ class MultiIcon {
       svg = ScalableImage.fromSvgString(String.fromCharCodes(svgData));
     } else if (siData != null) {
       svg = ScalableImage.fromSIBytes(siData);
+    } else if (imageUrl != null && imageUrl.contains('.svg')) {
+      svg = null;
+      _loadNetworkSvg(Uri.parse(imageUrl));
     } else {
       svg = null;
     }
@@ -42,6 +48,12 @@ class MultiIcon {
   MultiIcon withTooltip(String? tooltip) {
     return MultiIcon._(
         fontIcon: fontIcon, image: image, svg: svg, tooltip: tooltip);
+  }
+
+  void _loadNetworkSvg(Uri url) async {
+    final loaded = await ScalableImage.fromSvgHttpUrl(url);
+    await loaded.prepareImages();
+    svg = loaded;
   }
 
   Widget getWidget({
@@ -79,6 +91,6 @@ class MultiIcon {
       return SizedBox(
           width: size, height: size, child: ScalableImageWidget(si: modified));
     }
-    return Container();
+    return SizedBox(width: size, height: size);
   }
 }

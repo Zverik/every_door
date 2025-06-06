@@ -1,8 +1,8 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/changes.dart';
+import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,12 +54,13 @@ class _PoiPaneState extends ConsumerState<PoiPane> {
     ));
   }
 
-  void toggleCheck(OsmChange element) {
+  void toggleCheck(OsmChange element) async {
     setState(() {
       element.toggleCheck();
     });
     final changes = ref.read(changesProvider);
-    changes.saveChange(element);
+    await changes.saveChange(element);
+    ref.read(needMapUpdateProvider.notifier).trigger();
   }
 
   Widget buildGridHorizontal(BuildContext context) {

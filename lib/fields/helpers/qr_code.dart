@@ -6,8 +6,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QrCodeScanner extends StatefulWidget {
   static const kEnabled = true;
+  final bool resolveRedirects;
 
-  const QrCodeScanner({super.key});
+  const QrCodeScanner({super.key, this.resolveRedirects = true});
 
   @override
   State<QrCodeScanner> createState() => _QrCodeScannerState();
@@ -32,7 +33,9 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
         _logger.info('Found redirect: $uri → $newUrl');
         if (newUrl != null) {
           try {
-            final newUri = Uri.parse(newUrl);
+            Uri newUri = Uri.parse(newUrl);
+            if (!newUri.hasAuthority)
+              newUri = uri.resolveUri(newUri);
             return depth < 3
                 ? await _resolveRedirects(newUri, depth + 1)
                 : newUri;
@@ -51,7 +54,10 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
 
   Future<Uri?> _resolveRedirectsStr(String url) async {
     try {
-      final uri = await _resolveRedirects(Uri.parse(url));
+      Uri uri = Uri.parse(url);
+      if (widget.resolveRedirects) {
+        uri = await _resolveRedirects(uri);
+      }
       return uri;
     } on FormatException {
       _logger.warning('Failed to build an uri from $url');

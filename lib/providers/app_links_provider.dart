@@ -38,10 +38,13 @@ class GeoIntentController {
       _logger.info('Got geo uri $uri');
       final location = _parseLatLngFromGeoUri(uri.path);
       _navigateToLocation(location);
+    } else if (uri.scheme == 'everydoor' && uri.path.startsWith('/nav')) {
+      _logger.info('Got nav uri $uri');
+      _handleNavLink(uri.path);
     } else if ((uri.scheme == 'http' || uri.scheme == 'https') &&
-        uri.host == 'every-door.app') {
-      _logger.info('Got every-door.app deep link: ${uri.path}');
-      if (uri.path.startsWith('/plugin/')) {
+        uri.host == 'plugins.every-door.app') {
+      _logger.info('Got plugins.every-door.app deep link: ${uri.path}');
+      if (uri.path.startsWith('/i/')) {
         navigatorKey.currentState?.push(
           MaterialPageRoute(
             builder: (_) => InstallPluginPage(uri),
@@ -49,26 +52,7 @@ class GeoIntentController {
           ),
         );
       } else if (uri.path.startsWith('/nav/')) {
-        final reLatLng = RegExp(r'/nav/(-?[0-9.]+,-?[0-9.]+)');
-        final m1 = reLatLng.matchAsPrefix(uri.path);
-        if (m1 != null) {
-          final location = _parseLatLngFromGeoUri(m1[1]!);
-          _navigateToLocation(location);
-        } else {
-          final reOsm = RegExp(r'/nav/(n[a-z]*|w[a-z]*|r[a-z]*)/([0-9]+)',
-              caseSensitive: false);
-          final m2 = reOsm.matchAsPrefix(uri.path);
-          if (m2 != null) {
-            const kOsmTypes = {
-              'n': OsmElementType.node,
-              'w': OsmElementType.way,
-              'r': OsmElementType.relation,
-            };
-            final osmType = kOsmTypes[m2[1]![0]]!;
-            final osmId = int.parse(m2[2]!);
-            _openObjectEditor(OsmId(osmType, osmId));
-          }
-        }
+        _handleNavLink(uri.path);
       }
     }
   }
@@ -92,6 +76,29 @@ class GeoIntentController {
     if (location != null) {
       _ref.read(geolocationProvider.notifier).disableTracking();
       _ref.read(effectiveLocationProvider.notifier).set(location);
+    }
+  }
+
+  _handleNavLink(String path) {
+    final reLatLng = RegExp(r'/nav/(-?[0-9.]+,-?[0-9.]+)');
+    final m1 = reLatLng.matchAsPrefix(path);
+    if (m1 != null) {
+      final location = _parseLatLngFromGeoUri(m1[1]!);
+      _navigateToLocation(location);
+    } else {
+      final reOsm = RegExp(r'/nav/(n[a-z]*|w[a-z]*|r[a-z]*)/([0-9]+)',
+          caseSensitive: false);
+      final m2 = reOsm.matchAsPrefix(path);
+      if (m2 != null) {
+        const kOsmTypes = {
+          'n': OsmElementType.node,
+          'w': OsmElementType.way,
+          'r': OsmElementType.relation,
+        };
+        final osmType = kOsmTypes[m2[1]![0]]!;
+        final osmId = int.parse(m2[2]!);
+        _openObjectEditor(OsmId(osmType, osmId));
+      }
     }
   }
 

@@ -51,7 +51,8 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
   }
 
   @override
-  bool isOurKind(OsmChange element) => _kinds.any((k) => k.matchesChange(element));
+  bool isOurKind(OsmChange element) =>
+      _kinds.any((k) => k.matchesChange(element));
 
   @override
   updateNearest({int? forceRadius}) async {
@@ -103,12 +104,18 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
   }
 
   Widget buildMarker(int index, OsmChange element) {
-    return NumberedMarker(index: index);
+    return NumberedMarker(
+      index: index,
+      color: isCountedOld(element, element.age)
+          ? Colors.white
+          : Colors.lightGreenAccent,
+    );
   }
 
   bool isCountedOld(OsmChange element, int age) {
     for (final entry in _checkIntervals.entries) {
-      if (entry.key != 'amenity' && ElementKind.get(entry.key).matchesChange(element))
+      if (entry.key != 'amenity' &&
+          ElementKind.get(entry.key).matchesChange(element))
         return age >= entry.value;
     }
     return age >= _checkIntervals['amenity']!;

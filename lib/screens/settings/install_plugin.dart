@@ -11,7 +11,7 @@ import 'package:path_provider/path_provider.dart';
 class InstallPluginPage extends ConsumerStatefulWidget {
   /// An URI for the plugin. Can be either a direct URL for a file to download
   /// (should end with an .edp extension), or an Every Door-style link:
-  /// https://every-door.app/plugin/id?url=<download url>&ref=<ref>&version=<version>&update=true
+  /// https://plugins.every-door.app/i/id?url=<download url>&ref=<ref>&version=<version>&update=true
   /// Note than none of the query parameters are required.
   final Uri uri;
 
@@ -25,32 +25,51 @@ class InstallPluginPage extends ConsumerStatefulWidget {
 class PluginUriData {
   late final String id;
   late final Uri? url;
-  late final String? version;
-  late final String? ref;
-  late final bool update;
+  late final PluginVersion? version;
+  late final bool ask;
 
   PluginUriData(Uri uri) {
-    if (uri.host == 'every-door.app') {
+    final args = uri.queryParameters;
+    if (uri.host == 'plugins.every-door.app') {
+      String? v = args['version'];
       // Parse the entire shebang.
-      id = uri.path.split('/').last;
+      if (args.containsKey('url')) {
+        // Supplying a direct url to a package.
+        url = Uri.parse(args['url']!);
+        id = uri.path.split('/').last;
+        ask = true;
+      } else if (uri.path.endsWith('.edp')) {
+        // Linking to a file on the server.
+        url = uri;
+        final idParts = uri.path.split('/').last.split('.');
+        id = idParts.first;
+        // Extract version from the file name like 'plugin_id.v1.2.edp'
+        if (v == null && idParts.length >= 3 && idParts[1].startsWith('v')) {
+          v = idParts[1].substring(1);
+          if (idParts.length >= 4) v = v + '.' + idParts[2];
+        }
+        ask = false;
+      } else {
+        // Linking to a plugin id. Should not happen.
+        id = uri.path.split('/').last;
+        url = uri.replace(path: '/$id.edp');
+        ask = true;
+      }
       if (id.length < 2) {
         throw ArgumentError('Identifier "$id" is too short in the URI $uri');
       }
-      final args = uri.queryParameters;
-      url = args.containsKey('url') ? Uri.parse(args['url']!) : null;
-      version = args['version'];
-      ref = args['ref'];
-      update = args['update'] == 'true';
+
+      version = v == null ? null : PluginVersion(v);
     } else if (uri.path.endsWith('.edp')) {
       // Direct link to a file.
       // We require the id to be equal to the file name.
       final fileName = uri.path.split('/').last;
-      final lastDotPos = fileName.lastIndexOf('.');
+      final lastDotPos = fileName.indexOf('.');
       id = fileName.substring(0, lastDotPos);
       url = uri;
-      version = null;
-      ref = null;
-      update = true;
+      final String? v = args['version'];
+      version = v == null ? null : PluginVersion(v);
+      ask = false;
     } else {
       throw ArgumentError(
           'The URI points neither to Every Door website, not to an edp file');
@@ -68,14 +87,25 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
     super.initState();
     try {
       _data = PluginUriData(widget.uri);
-    } catch (e) {
+      if (!_data!.ask) {
+        _agreed = true;
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          _wrapInstall();
+        });
+      }
+    } on ArgumentError catch (e) {
       _error = 'Failed to parse URI: $e';
+    } catch (e) {
+      _error = 'Internal error while parsing: $e';
+      rethrow;
     }
   }
 
   Future<void> _installPlugin() async {
     final data = _data;
-    if (data == null) return;
+    if (data == null) {
+      throw Exception('Tried to install null data');
+    }
 
     final repo = ref.read(pluginRepositoryProvider.notifier);
 
@@ -84,7 +114,8 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         .where((p) => p.id == data.id)
         .firstOrNull;
 
-    if (installed == null || data.update) {
+    if (installed == null ||
+        ((data.version ?? PluginVersion.zero) > installed.version)) {
       if (data.url == null) {
         throw Exception(
             'No URL specified for installation of plugin "${data.id}"');
@@ -130,40 +161,95 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
       await repo.installFromTmpDir(pluginDir);
     } else {
       // TODO: update the currently installed plugin, and enable it.
+      throw Exception(
+          'The plugin has been already installed and of the latest version.');
     }
 
-    if (mounted) Navigator.of(context).pop();
+    if (mounted) {
+      Navigator.of(context).popUntil((r) {
+        return r.isFirst || r.settings.name == 'settings';
+      });
+    }
+  }
+
+  void _wrapInstall() async {
+    try {
+      await _installPlugin();
+    } on Exception catch (e) {
+      setState(() {
+        _error = 'Installation error: $e';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     Widget body;
+    const kFontSize = 20.0;
 
     if (_error != null) {
-      body = Center(
-        child: Text(_error ?? 'error'),
+      body = Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _error ?? 'error',
+            style: TextStyle(color: Colors.red, fontSize: kFontSize),
+          ),
+          SizedBox(height: kFontSize),
+          Text(
+            widget.uri.toString(),
+            style: TextStyle(fontSize: kFontSize),
+          ),
+        ],
       );
     } else if (!_agreed) {
-      body = Center(
-        child: Column(
-          children: [
-            Text('Install plugin from ${widget.uri}?'),
-            TextButton(
-              child: Text('YES'),
-              onPressed: () {
-                setState(() {
-                  _agreed = true;
-                });
-                _installPlugin();
-              },
-            ),
-          ],
-        ),
+      body = Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Install plugin "${_data?.id}" '
+            'version ${_data?.version ?? "unknown"}?',
+            style: TextStyle(fontSize: kFontSize),
+          ),
+          SizedBox(height: kFontSize),
+          Text(
+            'Source: ${widget.uri.authority}',
+            style: TextStyle(fontSize: kFontSize),
+          ),
+          SizedBox(height: kFontSize),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                child: Text('YES'),
+                onPressed: () {
+                  setState(() {
+                    _agreed = true;
+                  });
+                  _wrapInstall();
+                },
+              ),
+              SizedBox(width: 20.0),
+              TextButton(
+                child: Text('NO'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ],
       );
     } else {
       body = Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('Installed?'),
+          CircularProgressIndicator(),
+          SizedBox(height: kFontSize),
+          Text('Installing...', style: TextStyle(fontSize: kFontSize)),
           TextButton(
             child: Text('See logs'),
             onPressed: () {
@@ -179,7 +265,10 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
       appBar: AppBar(
         title: Text('Plugin installation'),
       ),
-      body: body,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: body,
+      ),
     );
   }
 }

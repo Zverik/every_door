@@ -18,17 +18,97 @@ class PluginLoadException implements Exception {
   }
 }
 
+class PluginVersion {
+  late final int? _major;
+  late final int _minor;
+
+  static final zero = PluginVersion('0');
+
+  PluginVersion(dynamic version) {
+    if (version is int) {
+      _major = null;
+      _minor = version;
+    } else {
+      final p = version.toString().indexOf('.');
+      if (p < 0) {
+        _major = null;
+        _minor = int.parse(version);
+      } else {
+        _major = int.parse(version.substring(0, p));
+        _minor = int.parse(version.substring(p + 1));
+      }
+    }
+  }
+
+  @override
+  String toString() => _major == null ? _minor.toString() : '$_major.$_minor';
+
+  @override
+  bool operator ==(Object other) =>
+      other is PluginVersion &&
+      other._major == _major &&
+      other._minor == _minor;
+
+  bool operator <(PluginVersion other) {
+    if (_major == null) return other._major != null || other._minor > _minor;
+    if (other._major == null || other._major < _major) return false;
+    return other._major > _major || other._minor > _minor;
+  }
+
+  bool operator >(PluginVersion other) {
+    if (_major != null)
+      return other._major == null ||
+          other._major < _major ||
+          (other._major == _major && other._minor < _minor);
+    return other._major == null && other._minor < _minor;
+  }
+
+  bool fresherThan(PluginVersion? version) => version == null || this > version;
+
+  @override
+  int get hashCode => Object.hash(_major, _minor);
+}
+
 /// Plugin metadata. Basically an identifier and a dictionary
 /// from the bundled yaml file.
 class PluginData {
   final String id;
   final Map<String, dynamic> data;
+  final bool installed;
+  final PluginVersion version;
 
-  const PluginData(this.id, this.data);
+  PluginData(this.id, this.data, {this.installed = true})
+      : version = PluginVersion(data['version']);
 
-  String? get version => data['version'];
+  String get name => data['name'] ?? id;
+  String get description => data['description'] ?? '';
+  String? get author => data['author'];
 
-  Uri? get url => data.containsKey('url') ? Uri.tryParse(data['url']) : null;
+  Uri? get url =>
+      data.containsKey('source') ? Uri.tryParse(data['source']) : null;
+  Uri? get homepage =>
+      data.containsKey('homepage') ? Uri.tryParse(data['homepage']) : null;
+
+  MultiIcon? get icon => null;
+}
+
+/// Plugin metadata for a record from an external plugin repository.
+class RemotePlugin extends PluginData {
+  RemotePlugin(Map<String, dynamic> data, {super.installed = false})
+      : super(data['id'], data);
+
+  int get downloads => data['downloads'] ?? 0;
+  DateTime get updated => DateTime.parse(data['updated']);
+  bool get experimental => data['experimental'] ?? false;
+  bool get hidden => data['hidden'] ?? false;
+  bool get local => data['country'] != null;
+
+  @override
+  Uri? get url => Uri.tryParse(data['download']);
+
+  @override
+  MultiIcon? get icon =>
+      data.containsKey('icon') ? MultiIcon(imageUrl: data['icon']) : null;
 }
 
 /// Plugin metadata. Same as [PluginData], but with added service methods
@@ -36,6 +116,7 @@ class PluginData {
 class Plugin extends PluginData {
   static final _logger = Logger('Plugin');
 
+  bool active;
   final Directory directory;
   final PluginLocalizations _localizations;
   final Map<String, MultiIcon> _iconCache = {};
@@ -45,16 +126,21 @@ class Plugin extends PluginData {
       required Map<String, dynamic> data,
       required this.directory})
       : _localizations = PluginLocalizations(directory),
+        active = false,
         super(id, data);
 
   factory Plugin.fromData(PluginData pd, Directory directory) =>
       Plugin(id: pd.id, data: pd.data, directory: directory);
 
+  @override
+  MultiIcon? get icon =>
+      data.containsKey('icon') ? loadIcon(data['icon']) : null;
+
   // TODO
 
   String getName(BuildContext context) {
     final translated = translate(context, 'name');
-    return translated == 'name' ? id : translated;
+    return translated == 'name' ? name : translated;
   }
 
   String translate(BuildContext context, String key,
@@ -69,7 +155,7 @@ class Plugin extends PluginData {
   }
 
   File resolvePath(String name) {
-    final file =  File('${directory.path}/$name');
+    final file = File('${directory.path}/$name');
     if (!file.absolute.path.startsWith(directory.absolute.path)) {
       throw ArgumentError('File "$name" is not inside the plugin directory');
     }

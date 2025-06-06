@@ -4,11 +4,12 @@
 
 _Unreleased_
 
-* [Plugin support](https://izv.ee/everydoor/plugins/).
+* [Plugin support](https://plugins.every-door.app/)!
 * (+) buttons for the first two modes can also be dragged onto the map.
-* Removing preset tags properly.
 * Turns out "Cancel" buttons for buildings and entrances kept the changes.
 * Correct weekday order and default holidays for various countries.
+* POI on the map turn green when confirmed.
+* Removing preset tags properly.
 * Now warning about `amenity=fixme` objects.
 * Untyped amenities with just a name will be converted to OSM notes.
 * "Clear" button for the fixme field (thanks @soham-dixit).

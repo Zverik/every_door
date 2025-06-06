@@ -77,6 +77,7 @@ class PluginManager extends Notifier<List<Plugin>> {
 
   void _enable(Plugin plugin, [bool force = false]) {
     if (!force && state.contains(plugin)) return;
+    plugin.active = true;
     _enableImagery(plugin);
     _enableElementKinds(plugin);
     _enableModes(plugin);
@@ -88,6 +89,7 @@ class PluginManager extends Notifier<List<Plugin>> {
 
   void _disable(Plugin plugin) {
     if (!state.contains(plugin)) return;
+    plugin.active = false;
     _disableImagery(plugin);
     _disableElementKinds(plugin);
     _disableModes(plugin);

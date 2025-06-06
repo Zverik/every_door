@@ -174,7 +174,9 @@ class SettingsPage extends ConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PluginSettingsPage()),
+                      builder: (context) => PluginSettingsPage(),
+                      settings: RouteSettings(name: 'settings'),
+                    )
                   );
                 },
               ),

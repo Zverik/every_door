@@ -40,15 +40,21 @@
                 <data android:scheme="geo"/>
             </intent-filter>
 
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="everydoor" android:path="/nav" />
+            </intent-filter>
+
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" />
                 <data android:scheme="http" />
-                <data android:host="every-door.app" />
-                <data android:pathPrefix="/plugin" />
-                <data android:pathPrefix="/nav" />
+                <data android:host="plugins.every-door.app" />
+                <data android:pathPrefix="/i" />
             </intent-filter>
 
             <intent-filter>
@@ -57,11 +63,9 @@
                 <data
                     android:mimeType="application/zip"
                     android:scheme="content" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="application/zip" />
+                <data
+                    android:mimeType="application/octet-stream"
+                    android:scheme="content" />
             </intent-filter>
         </activity>
        <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" android:exported="true">
@@ -77,6 +81,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+       <!--Remove Firebase Logging used by MLKit-->
+       <service
+           android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+           tools:node="remove">
+       </service>
     </application>
     <queries>
         <intent>
