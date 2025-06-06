@@ -3,8 +3,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QrCodeScanner extends StatelessWidget {
   static const kEnabled = false;
+  final bool resolveRedirects;
 
-  const QrCodeScanner({super.key});
+  const QrCodeScanner({super.key, this.resolveRedirects = true});
 
   @override
   Widget build(BuildContext context) {
