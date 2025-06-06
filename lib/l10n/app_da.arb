@@ -1277,5 +1277,77 @@
   "tileDragDownload": "Prøv at trykke på download-knappen.",
   "@tileDragDownload": {
     "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "pluginsUrl": "Udvidelses-URL",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsUpdate": "Opdater",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "settingsPlugins": "Udvidelser",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "Aktivér",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Deaktiver",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Deaktiveret",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Udvidelsesarkiv",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Søg",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsInstall": "Installer",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsMore": "Mere...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsUnknownVersion": "ukendt",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Kilde: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsInstallation": "Installation af udvidelse",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Installer udvidelsen \"{plugin}\" version {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
   }
 }
