@@ -1,0 +1,4 @@
+* Hashtags alteradas.
+* Intervalo de confirmação aumentado para 2 meses.
+* O campo Nome é destacado ao criar um novo POI.
+* Avisos para serviços com a etiqueta `fixme` ou que são muito antigas.

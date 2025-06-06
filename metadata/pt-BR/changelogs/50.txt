@@ -1,0 +1,4 @@
+* Conflitos e níveis de zoom corrigidos.
+* Edição corrigida em latitudes extremas.
+* Camadas de imagens de cadastro adicionadas.
+* Traduções para hebraico e tâmil.

@@ -1,0 +1,4 @@
+* Problemas de GPS corrigidos (espero).
+* Chave de imagens do Bing atualizada e Maxar removido.
+* Novas configurações de pagamento com cartão.
+* Capitalização de nomes mais inteligente.

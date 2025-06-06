@@ -1,0 +1,4 @@
+* Adicionada a exibição do caminho percorrido recentemente.
+* O desenho de rabiscos é bloqueado por padrão.
+* Leitor de QR code para o campo de website.
+* A localização agora é atualizada a cada segundo.

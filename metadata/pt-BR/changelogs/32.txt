@@ -1,0 +1,4 @@
+* Você pode diminuir o zoom ao máximo.
+* Os níveis de zoom são preservados entre os modos.
+* Editor de direção para assentos e câmeras.
+* Cores estabilizadas no modo de micromapeamento.

@@ -126,7 +126,7 @@
   "@chooseType": {
     "description": "Search field hint on the type choosing screen."
   },
-  "chooseTypeClear": "Izbriši",
+  "chooseTypeClear": "Isprazni",
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
   },
@@ -303,7 +303,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Promjene {changes} prenesene u API.",
+  "changesUploadedMessage": "Poslano {changes} promjena u OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -403,7 +403,7 @@
   "@fieldHoursSave": {
     "description": "Tooltip for a button to save opening_hours value."
   },
-  "fieldHoursClear": "Izbriši",
+  "fieldHoursClear": "Isprazni",
   "@fieldHoursClear": {
     "description": "Tooltip for a button to clear the opening_hours value."
   },
@@ -1128,7 +1128,7 @@
   "@faqLettersContent": {},
   "faqFloorsContent": "Ne. Prvi ima popunjenu oznaku `addr:floor=3`. To je kat kako se prikazuje u navigaciji i koji se uobičajeno koristi. Drugi nema ovu oznaku, ali ima `level=3`. Taj je broj sekvencijalni broj kata od nula do `building:levels - 1`. To jest, u trokatnoj zgradi vrijednost `addr:floor` ovisi o državi, ali `level` je uvijek 0, 1 ili 2.\n\nEvo kako se prikaz u uređivaču odnosi na ove oznake:\n\n* `2`: `addr:floor=2` i `level=*` koji nije prazan.\n* `4/`: `addr:floor=4`, ali ne postoji oznaka `level`.\n* `/1`: `level=1`, ali ne postoji oznaka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (i postoji objekt u blizini s istim `addr:floor`, ali različitim `level`, ili obrnuto).",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u modusu mikrokartiranja? Kako se razvrstavaju objekti?\n\nOdgovori na sva ova pitanja nalaze se na [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Pogledaj sljedeće:\n\n* Redoslijed ključeva za glavnu oznaku – popis `kMainKeys`.\n* Koji se objekti preuzimaju – funkcija `isGoodTags`.\n* Što se smatra uslugom – funkcija `isAmenityTags`.\n* Koje se točke na koje načine spajaju na puteve – funkcija `detectSnap`.\n* Kada je objekt mikrokartiranja nepotpun – funkcija `needsMoreInfo`.",
+  "faqTaggingContent": "Zašto objekt nedostaje u uređivaču? Kada se ove bijele točkice prikazuju u modusu mikrokartiranja? Kako se razvrstavaju objekti?\n\nOdgovori na sva ova pitanja nalaze se na [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Pogledaj sljedeće:\n\n* Redoslijed ključeva za glavnu oznaku — popis `kMainKeys` u `main_key.dart`.\n* Koji se objekti preuzimaju — klasa `_EverythingKind`.\n* Što se smatra uslugom — klasa `_AmenityKind`.\n* Koje se točke na koje načine spajaju na puteve — logika klase `ElementKindImpl` (vidi relevantne podklase).\n* Kada je objekt mikrokartiranja nepotpun — klasa `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "fieldDirectionSet": "Postavi",
   "@fieldDirectionSet": {
@@ -1271,5 +1271,13 @@
   "editorDeleteBuilding": "Srušeno",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "warningFixmeNote": "Bit će pretvoreno u OSM bilješku",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "tileDragDownload": "Pokušajte dodirnuti gumb za preuzimanje.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
   }
 }

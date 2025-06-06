@@ -530,7 +530,7 @@
   "@fieldHoursRemoveBreak": {
     "description": "Tooltip for a button to remove a break in an opening hours fragment."
   },
-  "fieldHoursWeekdays": "ב׳ ג׳ ד׳ ה׳ ו׳ ש׳ א׳",
+  "fieldHoursWeekdays": "ב׳ ג׳ ד׳ ה ו׳ ש׳ א׳",
   "@fieldHoursWeekdays": {
     "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
   },
@@ -1100,7 +1100,7 @@
   "@accountFieldLogin": {
     "description": "Label for the OSM login."
   },
-  "changesUploadedMessage": "{changes} שינויים נשלחו ל־API.",
+  "changesUploadedMessage": "{changes} שינויים נשלחו ל־OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1270,6 +1270,6 @@
   "@faqFloorsContent": {},
   "faqLettersContent": "אם אין לך אפשרות להחליף בין מקלדת נומרית למלאה, רצוי לבדוק את הגדרות היישומון. הן מאחורי הכפתור בפינה הימנית העליונה. להפעיל שם את „הרחבת מקלדת נומרית”.",
   "@faqLettersContent": {},
-  "faqTaggingContent": "למה חסרים פריטים בעורך? מתי מופיעות הנקודות הלבנות האלה במצב המיפוי הזעיר? איך פריטים מסודרים?\n\nהתשובות לכל השאלות האלה מופיעות ב־[good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). אלו דברים שכדאי לבדוק:\n\n* סדר התגיות לתגית הראשית — הרשימה `kMainKeys`.\n* אילו פריטים יימשכו למכשיר — הפונקציה `isGoodTags`.\n* מה נחשב שירות לציבור — הפונקציה `isAmenityTags`.\n* אילו נקודות מוצמדות לאילו דרכים — הפונקציה `detectSnap`.\n* מתי פריט מיפוי זעיר הוא חלקי — הפונקציה `needsMoreInfo`.",
+  "faqTaggingContent": "למה חסר פריט בעורך? מתי מופיעות הנקודות הלבנות האלה במצב המיפוי הזעיר? איך פריטים מסודרים?\n\nהתשובות לכל השאלות האלה מופיעות ב־[element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). אלו דברים שכדאי לבדוק:\n\n* סדר התגיות לתגית הראשית — הרשימה `kMainKeys` ב־`main_key.dart`.\n* אילו פריטים יימשכו למכשיר — המחלקה `‎_EverythingKind`.\n* מה נחשב שירות לציבור — המחלקה `‎_AmenityKind`.\n* אילו נקודות מוצמדות לאילו דרכים — הלוגיקה של המחלקה `ElementKindImpl` (תת־מחלקות תואמות בפנים).\n* מתי פריט מיפוי זעיר הוא חלקי — המחלקה `‎_NeedsMoreInfo`.",
   "@faqTaggingContent": {}
 }

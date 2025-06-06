@@ -1,0 +1,3 @@
+* Predefinições e imagens atualizadas.
+* Problemas com notas perdidas e serviços duplicados foram corrigidos.
+* Números de quadra adicionados para o Japão.
