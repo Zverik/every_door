@@ -5,6 +5,7 @@ import 'package:every_door/screens/settings/plugin_repo.dart';
 import 'package:every_door/widgets/plugin_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PluginSettingsPage extends ConsumerStatefulWidget {
   const PluginSettingsPage({super.key});
@@ -16,12 +17,12 @@ class PluginSettingsPage extends ConsumerStatefulWidget {
 class _PluginSettingsPageState extends ConsumerState<PluginSettingsPage> {
   @override
   Widget build(BuildContext context) {
-    final manager = ref.watch(pluginManagerProvider);
+    final loc = AppLocalizations.of(context)!;
     final plugins = ref.watch(pluginRepositoryProvider);
     Iterable<Widget> cards =
         plugins.where((p) => p.active).map((p) => PluginCard(
               plugin: p,
-              actionText: 'DISABLE',
+              actionText: loc.pluginsDisable.toUpperCase(),
               onAction: () {
                 ref
                     .read(pluginManagerProvider.notifier)
@@ -39,11 +40,11 @@ class _PluginSettingsPageState extends ConsumerState<PluginSettingsPage> {
       cards = cards.followedBy([
         Container(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8.0, top: 32.0),
-          child: Text('Disabled', style: Theme.of(context).textTheme.bodySmall),
+          child: Text(loc.pluginsDisabledHeader, style: Theme.of(context).textTheme.bodySmall),
         ),
       ]).followedBy(inactive.map((p) => PluginCard(
             plugin: p,
-            actionText: 'ENABLE',
+            actionText: loc.pluginsEnable.toUpperCase(),
             onAction: () {
               ref.read(pluginManagerProvider.notifier).setStateAndSave(p, true);
             },
@@ -57,7 +58,7 @@ class _PluginSettingsPageState extends ConsumerState<PluginSettingsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Plugins'),
+        title: Text(loc.settingsPlugins),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

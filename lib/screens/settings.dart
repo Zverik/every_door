@@ -168,7 +168,7 @@ class SettingsPage extends ConsumerWidget {
                 },
               ),
               SettingsTile(
-                title: Text('Plugins'),
+                title: Text(loc.settingsPlugins),
                 trailing: Icon(Icons.navigate_next),
                 onPressed: (context) {
                   Navigator.push(

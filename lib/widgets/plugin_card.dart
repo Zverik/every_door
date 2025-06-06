@@ -1,5 +1,6 @@
 import 'package:every_door/models/plugin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PluginCard extends StatelessWidget {
   final PluginData plugin;
@@ -18,6 +19,7 @@ class PluginCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     return Card(
       child: Column(
@@ -53,7 +55,7 @@ class PluginCard extends StatelessWidget {
                   onPressed: onAction,
                 ),
               TextButton(
-                child: Text('MORE...'),
+                child: Text(loc.pluginsMore.toUpperCase()),
                 onPressed: onMore,
               ),
               const SizedBox(width: 8.0),

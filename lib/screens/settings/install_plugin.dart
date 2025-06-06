@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InstallPluginPage extends ConsumerStatefulWidget {
   /// An URI for the plugin. Can be either a direct URL for a file to download
@@ -186,6 +187,7 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
   Widget build(BuildContext context) {
     Widget body;
     const kFontSize = 20.0;
+    final loc = AppLocalizations.of(context)!;
 
     if (_error != null) {
       body = Column(
@@ -209,13 +211,13 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Install plugin "${_data?.id}" '
-            'version ${_data?.version ?? "unknown"}?',
+            loc.pluginsInstallQuestion(
+                _data?.id ?? '', _data?.version ?? loc.pluginsUnknownVersion),
             style: TextStyle(fontSize: kFontSize),
           ),
           SizedBox(height: kFontSize),
           Text(
-            'Source: ${widget.uri.authority}',
+            loc.pluginsInstallSource(widget.uri.authority),
             style: TextStyle(fontSize: kFontSize),
           ),
           SizedBox(height: kFontSize),
@@ -223,7 +225,7 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                child: Text('YES'),
+                child: Text(loc.buttonYes.toUpperCase()),
                 onPressed: () {
                   setState(() {
                     _agreed = true;
@@ -233,7 +235,7 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
               ),
               SizedBox(width: 20.0),
               TextButton(
-                child: Text('NO'),
+                child: Text(loc.buttonNo.toUpperCase()),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -263,7 +265,7 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Plugin installation'),
+        title: Text(loc.pluginsInstallation),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

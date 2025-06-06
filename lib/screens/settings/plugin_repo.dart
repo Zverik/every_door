@@ -7,6 +7,7 @@ import 'package:every_door/screens/settings/install_plugin.dart';
 import 'package:every_door/widgets/plugin_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PluginRepositoryPage extends ConsumerStatefulWidget {
   const PluginRepositoryPage({super.key});
@@ -32,7 +33,8 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
     super.dispose();
   }
 
-  void _installFromQrCode() async {
+  void _installFromQrCode(BuildContext context) async {
+    final loc = AppLocalizations.of(context)!;
     final nav = Navigator.of(context);
 
     Uri? detected;
@@ -47,7 +49,7 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
       // If we've got no scanner, just present a text input dialog.
       final List<String>? answer = await showTextInputDialog(
         context: context,
-        title: 'Plugin URL',
+        title: loc.pluginsUrl,
         textFields: [
           DialogTextField(
             keyboardType: TextInputType.url,
@@ -69,6 +71,7 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final AsyncValue<List<RemotePlugin>> plugins = ref.watch(edprProvider);
 
     final Map<String, PluginVersion> installed = Map.fromEntries(ref
@@ -78,7 +81,10 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
     List<Widget> items;
     if (plugins.isLoading) {
       items = [
-        CircularProgressIndicator(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [CircularProgressIndicator()],
+        ),
         Text('Loading plugin list...'),
       ];
     } else if (plugins.hasError) {
@@ -89,7 +95,6 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
       final list = List<RemotePlugin>.of(plugins.value ?? []);
       if (_filter.isNotEmpty) {
         final f = _filter.toLowerCase();
-        print('Filtering by $f');
         list.removeWhere((p) =>
             !p.name.toLowerCase().contains(f) &&
             !p.id.toLowerCase().contains(f));
@@ -101,9 +106,9 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
                     onMore: () {},
                     actionText: installed.containsKey(p.id)
                         ? p.version.fresherThan(installed[p.id])
-                            ? 'UPDATE'
+                            ? loc.pluginsUpdate.toUpperCase()
                             : null
-                        : 'INSTALL',
+                        : loc.pluginsInstall.toUpperCase(),
                     onAction: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -117,11 +122,13 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Plugin Repository'),
+        title: Text(loc.pluginsRepository),
         actions: [
           IconButton(
             icon: Icon(Icons.qr_code),
-            onPressed: _installFromQrCode,
+            onPressed: () {
+              _installFromQrCode(context);
+            },
           ),
         ],
       ),
@@ -131,36 +138,37 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
         },
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16.0,
-                horizontal: 16.0,
-              ),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Search',
-                  prefixIcon: Icon(Icons.search),
-                  suffixIcon: _controller.text.isEmpty
-                      ? null
-                      : IconButton(
-                          icon: Icon(Icons.clear),
-                          onPressed: () {
-                            setState(() {
-                              _controller.clear();
-                              _filter = '';
-                            });
-                          },
-                        ),
+            if (plugins.valueOrNull?.isNotEmpty ?? false)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16.0,
+                  horizontal: 16.0,
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    _filter = value.trim();
-                  });
-                },
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: loc.pluginsSearch,
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: _controller.text.isEmpty
+                        ? null
+                        : IconButton(
+                            icon: Icon(Icons.clear),
+                            onPressed: () {
+                              setState(() {
+                                _controller.clear();
+                                _filter = '';
+                              });
+                            },
+                          ),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _filter = value.trim();
+                    });
+                  },
+                ),
               ),
-            ),
             ...items,
           ],
         ),
