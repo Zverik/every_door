@@ -12,6 +12,7 @@ _Unreleased_
 * Removing preset tags properly.
 * Now warning about `amenity=fixme` objects.
 * Untyped amenities with just a name will be converted to OSM notes.
+* All main keys are now prefixed with `disused:`, e.g. `amenity` and `healthcare`.
 * "Clear" button for the fixme field (thanks @soham-dixit).
 * Compass direction (thanks @SiarheiFedartsou).
 * Profile page looks a bit better (thanks @soham-dixit).

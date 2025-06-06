@@ -360,16 +360,30 @@ class OsmChange extends ChangeNotifier implements Comparable {
     final k = _mainKey;
     if (k == null) return null;
 
-    String newK;
+    final swap = <String, String>{};
     if (k.startsWith(prefix)) {
-      newK = k.substring(prefix.length);
+      swap[k] = k.substring(prefix.length);
+      // Remove this prefix from all other amenity keys.
+      for (final kk in kAmenityMainKeys) {
+        if (hasTag('$prefix$kk')) {
+          swap['$prefix$kk'] = kk;
+        }
+      }
     } else {
       // Delete another prefix if exists.
-      newK = prefix + clearPrefix(k);
+      swap[k] = prefix + clearPrefix(k);
+      // Add this prefix to all other amenity keys.
+      for (final kk in kAmenityMainKeys) {
+        if (hasTag(kk)) {
+          swap[kk] = '$prefix$kk';
+        }
+      }
     }
 
-    this[newK] = this[k];
-    removeTag(k);
+    for (final e in swap.entries) {
+      this[e.value] = this[e.key];
+      removeTag(e.key);
+    }
   }
 
   toggleDisused() {

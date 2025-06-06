@@ -13,7 +13,7 @@ const kMainKeys = <String>[
   'building', 'entrance', 'boundary', 'landuse',
 ];
 
-const _kAmenityMainKeys = <String>{
+const kAmenityMainKeys = <String>{
   'amenity',
   'shop',
   'craft',
@@ -58,14 +58,14 @@ String? getMainKey(Map<String, String> tags) {
     if (tags[k] == 'no') continue;
     if (tags.containsKey(k)) {
       // If we have seen a prefixed amenity, return that amenity instead of this non-amenity.
-      if (!_kAmenityMainKeys.contains(k) && isPrefixedAmenity) return prefixed;
+      if (!kAmenityMainKeys.contains(k) && isPrefixedAmenity) return prefixed;
       // Otherwise this amenity key takes precedence.
       return k;
     }
     if (prefixed == null && prefixedKeys.containsKey(k)) {
       prefixed = prefixedKeys[k];
       if (tags[prefixed] == 'no') continue;
-      isPrefixedAmenity = _kAmenityMainKeys.contains(k);
+      isPrefixedAmenity = kAmenityMainKeys.contains(k);
     }
   }
   return prefixed;
