@@ -473,11 +473,11 @@
   "@faqMapTinyContent": {},
   "faqCheckmarks": "Для чего галочки в списке?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "Это отметка о том, что заведение проверено. Добавляет к объекту метку `check_date` с текущей датой.\n\nСуть галочки в том, что ты, скажем, обошёл полгорода в первый раз. А потом вернулся туда через месяц, решил снова обойти. И тебе нужно как-то отметить, что ты проверил, что заведение на месте, но ничего не изменилось. Это и есть галочка: нажал — и пошёл дальше.\n\nГалочка держится два месяца после проверки. Потом можно будет обойти заведения заново.",
+  "faqCheckmarksContent": "Это отметка о том, что заведение проверено. Добавляет к объекту тег `check_date` с текущей датой.\n\nСуть галочки в том, что ты, скажем, обошёл полгорода в первый раз. А потом вернулся туда через месяц, решил снова обойти. И тебе нужно как-то отметить, что ты проверил, что заведение на месте, но ничего не изменилось. Это и есть галочка: нажал — и пошёл дальше.\n\nГалочка держится два месяца после проверки. Потом можно будет обойти заведения заново.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "Как добавить подъезд?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Внизу экрана есть кнопки для переключения режимов: микрокартировка, заведения, подъезды и записи.\n\nВ режиме подъездов нажмите или перетяните кнопку с дверью снизу на карту.",
+  "faqEntranceContent": "Внизу экрана есть кнопки для переключения режимов: микромаппинг, заведения, подъезды и записи.\n\nВ режиме подъездов нажмите или перетяните кнопку с дверью снизу на карту.",
   "@faqEntranceContent": {},
   "faqLetters": "Как ввести буквы в номер квартиры?",
   "@faqLetters": {},
@@ -485,15 +485,15 @@
   "@faqLettersContent": {},
   "faqFloors": "Этажи \"3\" и \"/3\" — одно и то же?",
   "@faqFloors": {},
-  "faqFloorsContent": "Нет. В первом заполнена метка `addr:floor=3`. Это этаж, как он написан в навигации и используется в жизни. Во втором эта метка пуста, но есть `level=3`. Это число — номер этажа в последовательной нумерации от нуля до `building:levels - 1`. То есть, в трёхэтажном доме `addr:floor` зависит от страны, а `level` всегда 0, 1 или 2.\n\nВот как условное обозначение в редакторе зависит от этих меток:\n\n* `2`: `addr:floor=2` и непустой `level=*`.\n* `4/`: `addr:floor=4`, метка `level` отсутствует.\n* `/1`: `level=1`, метка `addr:floor` отсутствует.\n* `1/0`: `addr:floor=1` + `level=0` (и рядом есть объект с тем же `addr:floor`, но другим `level`, или наоборот).",
+  "faqFloorsContent": "Нет. В первом заполнен тег `addr:floor=3`. Это этаж, как он написан в навигации и используется в жизни. Во втором этот тег пуст, но есть `level=3`. Это число — номер этажа в последовательной нумерации от нуля до `building:levels - 1`. То есть, в трёхэтажном доме `addr:floor` зависит от страны, а `level` всегда 0, 1 или 2.\n\nВот как условное обозначение в редакторе зависит от этих тегов:\n\n* `2`: `addr:floor=2` и непустой `level=*`.\n* `4/`: `addr:floor=4`, тег `level` отсутствует.\n* `/1`: `level=1`, тег `addr:floor` отсутствует.\n* `1/0`: `addr:floor=1` + `level=0` (и рядом есть объект с тем же `addr:floor`, но другим `level`, или наоборот).",
   "@faqFloorsContent": {},
   "faqChangeType": "Как поменять тип заведения?",
   "@faqChangeType": {},
   "faqChangeTypeContent": "Нажмите на заголовок редактора, где написан этот тип.",
   "@faqChangeTypeContent": {},
-  "faqTagging": "Любые вопросы по меткам",
+  "faqTagging": "Любые вопросы по тегам",
   "@faqTagging": {},
-  "faqTaggingContent": "Почему объект отсутствует в редакторе? Когда выводятся белые точки на объектах в режиме микрокартировки? Как сортируются объекты?\n\nОтветы на все эти вопросы в [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Вот на что обратить внимание:\n\n* Порядок определения главной метки — список `kMainKeys` в `main_key.dart`.\n* Какие объекты загружаются — класс `_EverythingKind`.\n* Что считается заведением — класс `_AmenityKind`.\n* Какие точки прилепляются к линиям, и каким — логика класса `ElementKindImpl`(и в связанных подклассах).\n* Когда объект микрокартировки неполон — класс `_NeedsMoreInfo`.",
+  "faqTaggingContent": "Почему объект отсутствует в редакторе? Когда выводятся белые точки на объектах в режиме микромаппинга? Как сортируются объекты?\n\nОтветы на все эти вопросы в [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Вот на что обратить внимание:\n\n* Порядок определения главного тега — список `kMainKeys` в `main_key.dart`.\n* Какие объекты загружаются — класс `_EverythingKind`.\n* Что считается заведением — класс `_AmenityKind`.\n* Какие точки прилепляются к линиям, и каким — логика класса `ElementKindImpl`(и в связанных подклассах).\n* Когда объект микромаппинга неполон — класс `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "versionsRetryFetch": "Повторить",
   "@versionsRetryFetch": {
@@ -545,7 +545,7 @@
       }
     }
   },
-  "versionsNoTagChanges": "Нет изменений в метках",
+  "versionsNoTagChanges": "Нет изменений в тегах",
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
@@ -585,7 +585,7 @@
   "@navDownload": {
     "description": "Tooltip for the download data button on the nav panel."
   },
-  "navMicromappingMode": "Режим микрокартировки",
+  "navMicromappingMode": "Режим микромаппинга",
   "@navMicromappingMode": {
     "description": "Tooltip for the micromapping mode button on the nav panel."
   },
@@ -715,7 +715,7 @@
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."
   },
-  "faqYellowContent": "Белые метки в режиме входов и белые точки в режиме микрокартировки означают, что объектам не хватает важных атрибутов. Например:\n\n* зданиям нужно прописать количество этажей;\n* входам нужно указать тип и, для подъездов, номера квартир;\n* скамейкам нужны материал и наличие спинки;\n* у деревьев ожидается вид листьев и цикл листопада.",
+  "faqYellowContent": "Белые метки в режиме входов и белые точки в режиме микромаппинга означают, что объектам не хватает важных атрибутов. Например:\n\n* зданиям нужно прописать количество этажей;\n* входам нужно указать тип и, для подъездов, номера квартир;\n* скамейкам нужны материал и наличие спинки;\n* у деревьев ожидается вид листьев и цикл листопада.",
   "@faqYellowContent": {},
   "fieldCardsOnly": "только картой",
   "@fieldCardsOnly": {
@@ -739,7 +739,7 @@
       "count": {}
     }
   },
-  "warningWrongTag": "Неправильная метка: {tag}",
+  "warningWrongTag": "Неправильный тег: {tag}",
   "@warningWrongTag": {
     "description": "Warning message for tags like shop=yes and amenity=no.",
     "placeholders": {
@@ -759,15 +759,15 @@
       }
     }
   },
-  "settingsHashtags": "Метки пакетов правок",
+  "settingsHashtags": "Хэштеги пакетов правок",
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
   },
-  "hashtagsLabel": "Слова для меток",
+  "hashtagsLabel": "Слова для хэштегов",
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
   },
-  "hashtagsConfirm": "Подтверждать метки перед загрузкой",
+  "hashtagsConfirm": "Подтверждать теги перед загрузкой",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
@@ -807,7 +807,7 @@
   "@warningWrongMode": {
     "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
   },
-  "fieldPaymentLocal": "Локальные опции",
+  "fieldPaymentLocal": "Местные опции",
   "@fieldPaymentLocal": {
     "description": "Tile name for stored local payment options."
   },
@@ -815,7 +815,7 @@
   "@fieldPaymentUseGlobal": {
     "description": "Button to copy global default to local payment settings."
   },
-  "fieldPaymentUseSame": "Использовать те же метки для картировки",
+  "fieldPaymentUseSame": "Использовать те же теги для микромапинга",
   "@fieldPaymentUseSame": {
     "description": "Button title for copying payment options around to the local settings."
   },
@@ -827,7 +827,7 @@
   "@warningUnsupported": {
     "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
   },
-  "fieldPaymentChoose": "Выбрать другие локальные метки...",
+  "fieldPaymentChoose": "Выбрать другие местные теги...",
   "@fieldPaymentChoose": {
     "description": "Button title for setting up different local payment options."
   },
