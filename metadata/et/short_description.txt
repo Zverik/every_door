@@ -1,0 +1,1 @@
+Rakendus OpenStreetMapi huvipunktide muutmiseks ja mikrokaardistamiseks
