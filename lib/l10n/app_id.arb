@@ -831,7 +831,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Mengirimkan {changes} ke API.",
+  "changesUploadedMessage": "Mengirimkan {changes} ke OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
