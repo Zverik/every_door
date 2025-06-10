@@ -807,15 +807,15 @@
   "@warningWrongMode": {
     "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
   },
-  "fieldPaymentLocal": "Местные опции",
+  "fieldPaymentLocal": "Местный вариант",
   "@fieldPaymentLocal": {
     "description": "Tile name for stored local payment options."
   },
-  "fieldPaymentUseGlobal": "Мои настройки по умолчанию лучше",
+  "fieldPaymentUseGlobal": "Мои теги лучше",
   "@fieldPaymentUseGlobal": {
     "description": "Button to copy global default to local payment settings."
   },
-  "fieldPaymentUseSame": "Использовать те же теги для микромапинга",
+  "fieldPaymentUseSame": "Использовать те же теги",
   "@fieldPaymentUseSame": {
     "description": "Button title for copying payment options around to the local settings."
   },
