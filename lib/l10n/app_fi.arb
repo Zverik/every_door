@@ -552,7 +552,7 @@
       "count": {}
     }
   },
-  "changesUploadedMessage": "{changes} lähetettiin API:lle.",
+  "changesUploadedMessage": "{changes} lähetettiin OpenStreetMapiin.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1128,7 +1128,7 @@
   "@faqFloors": {},
   "faqChangeTypeContent": "Paina editorin otsikkoa, jossa tyyppi on kirjoitettuna.",
   "@faqChangeTypeContent": {},
-  "faqTaggingContent": "Miksi kohde puuttuu editorista? Milloin valkoiset pisteet näytetään Mikrokartoitus-tilassa? Miten kohteet järjestetään?\n\nVastaukset kaikkiin näihin kysymyksiin on löydettävissä tiedostosta [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Voit tutkia seuraavia:\n\n* Avainjärjestys pääominaisuudelle – lista `kMainKeys`.\n* Mitkä kohteet ladataan – funktio `isGoodTags`.\n* Mikä lasketaan palveluksi – funktio `isAmenityTags`.\n* Mitkä pisteet kohdistetaan automaattisesti ja millaisiin väyliin – funktio `detectSnap`.\n* Milloin mikrokartoituksen kohde on puutteellinen – funktio `needsMoreInfo`.",
+  "faqTaggingContent": "Miksi kohde puuttuu editorista? Milloin valkoiset pisteet näytetään Mikrokartoitus-tilassa? Miten kohteet järjestetään?\n\nVastaukset kaikkiin näihin kysymyksiin on löydettävissä tiedostosta [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Voit tutkia seuraavia:\n\n* Avainjärjestys pääominaisuudelle – lista `kMainKeys` tiedostossa `main_key.dart`.\n* Mitkä kohteet ladataan – luokka `_EverythingKind`.\n* Mikä lasketaan palveluksi – luokka `_AmenityKind`.\n* Mitkä pisteet kohdistetaan automaattisesti ja millaisiin väyliin – luokan `ElementKindImpl` logiikka (lue relevantit aliluokat).\n* Milloin mikrokartoituksen kohde on puutteellinen – luokka `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "faqTagging": "Kaikki kysymykset ominaisuuksista",
   "@faqTagging": {},
@@ -1271,5 +1271,85 @@
   "drawScribble": "Piirrä",
   "@drawScribble": {
     "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "settingsPlugins": "Liitännäiset",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "Ota käyttöön",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Poista käytöstä",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Ei käytössä",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Liitännäisten lähde",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Etsi",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Päivitä",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "Asenna",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "Liitännäisen URL-osoite",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "Lisää...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Liitännäisen asennus",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsUnknownVersion": "tuntematon",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallQuestion": "Asennetaanko liitännäisen ”{plugin}” versio {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsInstallSource": "Lähde: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "tileDragDownload": "Kokeile painaa latauspainiketta.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Muutetaan OSM-karttailmoitukseksi",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
   }
 }
