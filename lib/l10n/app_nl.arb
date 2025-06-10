@@ -457,7 +457,7 @@
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
-  "changesUploadedMessage": "{changes} naar de API gestuurd.",
+  "changesUploadedMessage": "{changes} naar OpenStreetMap gestuurd.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -879,7 +879,7 @@
   "@faqMapTinyContent": {},
   "faqTagging": "Alle tagging-vragen",
   "@faqTagging": {},
-  "faqTaggingContent": "Waarom mist er een object in de bewerker? Wanneer worden deze witte puntjes weergegeven in micromapping-modus? Hoe worden objecten gesorteerd?\n\nAntwoorden op al deze vragen staan in [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Hier is waar je naar kan kijken:\n\n* De sleutelsortering voor de hoofdtag — lijst `kMainKeys`.\n* Welke objecten worden gedownload — functie `isGoodTags`.\n* Wat als voorziening wordt beschouwd — functie `isAmenityTags`.\n* Welke punten in lijn worden gezet met welke wegen — functie `detectSnap`.\n* Wanneer een micromapping-object incompleet is — functie `needsMoreInfo`.",
+  "faqTaggingContent": "Waarom mist er een object in de bewerker? Wanneer worden deze witte puntjes weergegeven in modus Micromapping? Hoe worden objecten gesorteerd?\n\nAntwoorden op al deze vragen staan in [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Hier is waar je naar kan kijken:\n\n* De sleutelvolgorde voor de hoofdtag — lijst `kMainKeys` in `main_key.dart`.\n* Welke objecten worden gedownload — klasse `_EverythingKind`.\n* Wat als een voorziening wordt beschouwd — klasse `_AmenityKind`.\n* Welke punten aan welke wegen worden gesnapt — klasse `ElementKindImpl` logica (bekijk de relevante subklassen).\n* Wanneer een object van micromapping incompleet is — klasse `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "faqCheckmarks": "Waar zijn de vinkjes voor?",
   "@faqCheckmarks": {},
@@ -1271,5 +1271,85 @@
   "fieldWebsiteQR": "Een QR-code scannen",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
+  },
+  "pluginsRepository": "Opslagplaats plug-ins",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Zoeken",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Bijwerken",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "Installeren",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "URL plug-in",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "Meer...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Installeren van plug-in",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallSource": "Bron: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "tileDragDownload": "Probeer eens door op de knop Downloaden te tikken.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "pluginsUnknownVersion": "onbekend",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsEnable": "Inschakelen",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Uitschakelen",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Uitgeschakeld",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "warningFixmeNote": "Zal worden geconverteerd naar een opmerking van OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "settingsPlugins": "Plug-ins",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsInstallQuestion": "Plug-in \"{plugin}\" versie {version} installeren?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
   }
 }

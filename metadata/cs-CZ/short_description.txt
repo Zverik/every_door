@@ -1,0 +1,1 @@
+Mobilní editor OpenStreetMap pro body zájmu a mikromapování

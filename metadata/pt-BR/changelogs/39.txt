@@ -1,0 +1,3 @@
+* Correção do uso de maiúsculas nas descrições.
+* Correção de avisos amarelos de serviços que não eram exibidos.
+* Correção de marcação de uma loja em um prédio desativado.

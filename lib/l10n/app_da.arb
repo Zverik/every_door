@@ -252,7 +252,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Sendte {changes} til API'et.",
+  "changesUploadedMessage": "Sendte {changes} til OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -824,7 +824,7 @@
   "@faqLettersContent": {},
   "faqEntranceContent": "Nederst er der en række knapper til valg af korttilstand: mikro-kortlægning, faciliteter, indgange og noter.\n\nI tilstanden 'indgange' kan du trykke på eller trække dørknappen i nederste hjørne ind på kortet.",
   "@faqEntranceContent": {},
-  "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Hvornår vises disse hvide prikker i mikro-kortlægning-indstillingen? Hvordan sorteres objekter?\n\nSvarene på alle disse spørgsmål findes i [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Her er, hvad du kan se på:\n\n* Nøgleordenen for det primære tag - liste `kMainKeys`.\n* Hvilke objekter der downloades - funktion `isGoodTags`.\n* Hvad der betragtes som en facilitet - funktion `isAmenityTags`.\n* Hvilke punkter forbindes til hvilke veje - funktion `detectSnap`.\n* Når et mikrokortlægningsobjekt er ufuldstændigt - funktion `needsMoreInfo`.",
+  "faqTaggingContent": "Hvorfor mangler et objekt i editoren? Hvornår vises disse hvide prikker i mikro-kortlægning-indstillingen? Hvordan sorteres objekter?\n\nSvarene på alle disse spørgsmål findes i [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Her er, hvad du kan se på:\n\n* Nøgleordenen for det primære tag - liste `kMainKeys` i `main_key.dart`.\n* Hvilke objekter der downloades - klasse `_EverythingKind`.\n* Hvad der betragtes som en facilitet - klasse `_AmenityKind`.\n* Hvilke punkter forbindes til hvilke linjestrenge - klasse `ElementKindImpl` logic (see relevant subclasses).\n* Når et mikrokortlægningsobjekt er ufuldstændigt - klasse `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "faqFloorsContent": "Nej. Den første har `addr:floor=3`-tagget udfyldt. Det er etagen, som den angives ved vejvisning og i almindelighed anvendes. Den anden har ikke dette tag, men har `level=3`. Det nummer er et fortløbende etagenummer fra nul til `building:levels - 1`. Det vil sige, at i en treetagers bygning afhænger værdien af `addr:floor` af landet, men `level` er altid 0, 1 eller 2.\n\nHer er hvordan notationen i editoren er relaterede til disse tags:\n\n* `2`: `addr:floor=2` og ikke-tom `level=*`.\n* `4/`: `addr:floor=4`, men der er ikke noget `level`-tag.\n* `/1`: `level=1`, men der er ikke noget `addr:floor`-tag.\n* `1/0`: `addr:floor=1` + `level=0` (og der er et objekt i nærheden: med samme `addr:floor`, men med et andet `level`, eller omvendt).",
   "@faqFloorsContent": {},
@@ -1269,5 +1269,85 @@
   "editorDeleteBuilding": "Nedrevet",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "warningFixmeNote": "Vil blive omdannet til en OSM-note",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "tileDragDownload": "Prøv at trykke på download-knappen.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "pluginsUrl": "Udvidelses-URL",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsUpdate": "Opdater",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "settingsPlugins": "Udvidelser",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "Aktivér",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Deaktiver",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Deaktiveret",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Udvidelsesarkiv",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Søg",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsInstall": "Installer",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsMore": "Mere...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsUnknownVersion": "ukendt",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Kilde: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsInstallation": "Installation af udvidelse",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Installer udvidelsen \"{plugin}\" version {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
   }
 }

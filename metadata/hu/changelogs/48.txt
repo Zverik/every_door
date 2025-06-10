@@ -1,0 +1,3 @@
+* Kerékpáros akadályok és karácsonyi térképelemek.
+* A „geo:” hivatkozások támogatása.
+* Új alkalmazkodó ikon.

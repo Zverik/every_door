@@ -1,0 +1,5 @@
+Tento editor vás nenutí přemýšlet. Stačí zajít do nákupního centra a zapnout Every Door. Kolem sebe uvidíte zmapované obchody: klepněte na fajfku pro ty, které se zde stále nacházejí, a přidejte obchody, které na mapě nejsou. To není vše: díky tomuto jednoduchému editoru můžete udržovat aktuální celé své město.
+
+Aplikace také nabízí režim mikromapování pro ověřování a přidávání laviček a pouličního osvětlení. Také má režim vchodů pro přidávání atributů a vchodů do budov – ty jsou následně automaticky spojeny s obrysy budov.
+
+Aplikace Every Door používá předvolby a další data z editoru iD.

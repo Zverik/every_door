@@ -657,7 +657,7 @@
   "@accountLoginPassword": {
     "description": "Button label for logging in to OSM with a password."
   },
-  "changesUploadedMessage": "Saadetud {changes} API-le.",
+  "changesUploadedMessage": "{changes} muudatust on lisatud OpenStreetMapi andmebaasi.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1264,12 +1264,92 @@
   "@faqLetters": {},
   "faqTagging": "Kõik küsimused siltide kohta",
   "@faqTagging": {},
-  "faqTaggingContent": "Miks mõni objekt on rakenduse muutmisvaates puudu? Millal kuvatakse valgeid mummusid mikrokaardistamise vaates? Kuidas toimib objektide järjestamine?\n\nVastused neile küsimustele on lähtekoodi lõigus [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Näiteks vaata siia:\n\n* Võtmete järjekord põhisildis — loend „kMainKeys“.\n* Mis objekte laadime alla — funktsioon „isGoodTags“.\n* Mida loeme teenuseks („amenity=*“) — funktsioon „isAmenityTags“.\n* Missuguseid sõlmi napsame joonte külge — funktsioon „detectSnap“.\n* Kuidas tuvastame, et mikrokaardistamise mõttes on objekt veel poolik — funktsioon „needsMoreInfo“.",
+  "faqTaggingContent": "Miks mõni objekt on rakenduse muutmisvaates puudu? Millal kuvatakse valgeid mummusid mikrokaardistamise vaates? Kuidas toimib objektide järjestamine?\n\nVastused neile küsimustele on lähtekoodi lõigus [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Näiteks vaata siia:\n\n* Võtmete järjekord põhisildis — loend „kMainKeys“ failis „main_key.dart“.\n* Mis objekte laadime alla — klass „_EverythingKind“.\n* Mida loeme teenuseks („amenity=*“) — klass „_AmenityKind“.\n* Missuguseid sõlmi napsame joonte külge — klass „ElementKindImpl“ (vaata ka alamklasse).\n* Kuidas tuvastame, et mikrokaardistamise mõttes on objekt veel poolik — klass „_NeedsMoreInfo“.",
   "@faqTaggingContent": {},
   "faqFloorsContent": "Ei. Esimesel juhul on täidetud „addr:floor=3“ silt. See on ka korrusenumber, mille leiad siltidelt ja on kasutatav tee leidmiseks. Teisel juhul on sildiks hoopis „level=3“. See on korruste järjekorranumber lugedes nullist kuni „building:levels - 1“. See tähendab, et kolmekordse hoone „addr:floor“ silti väärtus sõltub maast, aga „level“ väärtus on alati 0, 1 või 2.\n\nNii käib antud siltide kohane üleskirjutus rakenduses:\n\n* „2“ tähendab „addr:floor=2“ ja täidetud „level=*“.\n* „4/“ tähendab „addr:floor=4“, aga puudub „level“ silt.\n* „/1“ tähendab „level=1“, aga puudub „addr:floor“ silt.\n* „1/0“ tähendab “addr:floor=1“ + „level=0“ (ja seal on läheduses objekt: sama „addr:floor“ väärtusega, kuid erineva „level“ väärtusega või vastupidi).",
   "@faqFloorsContent": {},
   "faqLettersContent": "Kui sinu nutiseadme numbriklahvistik pole ümberlülitatav täisklahvistikuks, siis palun kontrolli seadistusi. Tavaliselt saad seda teha nupu alt ülalt vasakulst nurgast. Võta sealt kasutusele näiteks „laiendatud numbriklahvistik“.",
   "@faqLettersContent": {},
   "faqFloors": "Kas „3“ ja „/3“ korrused on üks ja sama?",
-  "@faqFloors": {}
+  "@faqFloors": {},
+  "tileDragDownload": "Proovi klõpsida allalaadimise nuppu.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Muudetakse OpenStreetMapi märkmeks",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsInstall": "Paigalda",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsEnable": "Võta kasutusele",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Eemalda kasutuselt",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Pole kasutusel",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Lisamoodulite hoidla",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Otsi",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Uuenda",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsMore": "Vaata lisaks...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Lisamooduli paigaldus",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Kas paigaldame „{plugin}“ lisamooduli versiooni {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "teadmata",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Allikas: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "settingsPlugins": "Lisamoodulid",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsUrl": "Lisamooduli võrguaadress",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  }
 }

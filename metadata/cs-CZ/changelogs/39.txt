@@ -1,0 +1,3 @@
+* Fixed capitalization for descriptions.
+* Fixed yellow amenity warnings not shown.
+* Fixed marking a shop on a building disused.

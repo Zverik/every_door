@@ -1,0 +1,4 @@
+* Predefinições e camadas de imagens atualizadas.
+* Traduções para grego e indonésio.
+* Barra de escala para o seletor de mapas.
+* Recursos de hidrovias adicionados ao micromapeamento.

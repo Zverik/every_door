@@ -1,0 +1,4 @@
+* Címkesablonok és légi felvételek frissítve.
+* Görög és indonéz fordítás.
+* Méretezősáv a térképválasztónál.
+* Vízi térképelemek hozzáadva a mikrotérképezéshez.

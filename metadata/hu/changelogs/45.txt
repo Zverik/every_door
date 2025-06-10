@@ -1,0 +1,4 @@
+* Hozzáadva a legutóbb bejárt útvonal megjelenítése.
+* A GeoScribbles rajzolás alapértelmezetten zárolva van.
+* QR-kódbeolvasó a webhely mezőhöz.
+* A helyzet mostantól másodpercenként egyszer frissül.

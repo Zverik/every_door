@@ -1,0 +1,4 @@
+* Andmekonfliktide ja suumitasemete parandused.
+* Muutmine suurtel laiuskraadidel toimib paremini .
+* Lisandus kadastrikaartide ülekate.
+* Heebrea ja tamili keelte tõlked.

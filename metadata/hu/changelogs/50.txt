@@ -1,0 +1,4 @@
+* Javítva az ütközések és a nagyítási szintek.
+* Javítva az extrém szélességi körökön való szerkesztés.
+* Hozzáadva a kataszter légifelvétel-rétegek.
+* Fordítás héber és tamil nyelvre.

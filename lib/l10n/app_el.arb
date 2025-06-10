@@ -683,7 +683,7 @@
       }
     }
   },
-  "changesUploadedMessage": "Αποστολή {changes} στο API.",
+  "changesUploadedMessage": "{changes} απεστάλησαν στο OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1052,5 +1052,171 @@
   "apiStatusUploading": "Ανέβασμα αλλαγών",
   "@apiStatusUploading": {
     "description": "Text displayed when the app is uploading data to the API."
+  },
+  "settingsPlugins": "Πρόσθετα",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "changesPending": "Σε εκκρεμότητα",
+  "@changesPending": {
+    "description": "Subtitle for a change that has not yet been sent to OSM API."
+  },
+  "pluginsEnable": "Ενεργοποίηση",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsSearch": "Αναζήτηση",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsRepository": "Αποθήκη πρόσθετων",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsInstall": "Εγκατάσταση",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "URL πρόσθετου",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsUpdate": "Ενημέρωση",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsMore": "Περισσότερα...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsUnknownVersion": "άγνωστης",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Πηγή: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "fieldPaymentUseSame": "Χρήση των ίδιων ετικετών για χαρτογράφηση",
+  "@fieldPaymentUseSame": {
+    "description": "Button title for copying payment options around to the local settings."
+  },
+  "fieldPaymentUseGlobal": "Τα προεπιλεγμένα μου είναι καλύτερα",
+  "@fieldPaymentUseGlobal": {
+    "description": "Button to copy global default to local payment settings."
+  },
+  "drawPath": "Μονοπάτι",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawFence": "Φράκτης",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "faqMapTiny": "Γιατί είναι ο χάρτης τόσο μικρός;",
+  "@faqMapTiny": {},
+  "settingsDefaultPayment": "Προεπιλεγμένες κάρτες πληρωμών",
+  "@settingsDefaultPayment": {
+    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+  },
+  "fieldWebsiteQR": "Σάρωση κωδικού QR",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "drawWall": "Τοίχος",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "faqEntrance": "Πώς να προσθέσω μια είσοδο κτιρίου;",
+  "@faqEntrance": {},
+  "faqYellow": "Γιατί είναι κάποιοι αριθμοί κτιρίων κίτρινοι;",
+  "@faqYellow": {},
+  "faqFloors": "Είναι οι όροφοι '3' και '/3' ίδιοι;",
+  "@faqFloors": {},
+  "drawPower": "Γραμμή ρεύματος",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "pluginsDisable": "Απενεργοποίηση",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "drawStream": "Ρέμα",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "fieldPaymentGlobal": "Προεπιλογές για παγκόσμια",
+  "@fieldPaymentGlobal": {
+    "description": "Tile name for global payment defaults."
+  },
+  "pluginsInstallation": "Εγκατάσταση πρόσθετου",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "fieldPaymentChoose": "Επιλογή διαφορετικών τοπικών ετικετών...",
+  "@fieldPaymentChoose": {
+    "description": "Button title for setting up different local payment options."
+  },
+  "pluginsInstallQuestion": "Εγκατάσταση πρόσθετου \"{plugin}\" έκδοσης {version};",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsDisabledHeader": "Απενεργοποιημένο",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "settingsUploads": "Εκκρεμείς μεταφορτώσεις",
+  "@settingsUploads": {
+    "description": "Settings entry for browsing changes to upload."
+  },
+  "settingsNumericKeyboard": "Εκτεταμένο αριθμητικό πληκτρολόγιο",
+  "@settingsNumericKeyboard": {
+    "description": "Settings switch for using the full keyboard for numeric fields."
+  },
+  "settingsLeftHand": "Χειρισμοί αριστερού χεριού",
+  "@settingsLeftHand": {
+    "description": "Switch for enabling left hand controls, when most buttons move to the left."
+  },
+  "changesUploadedTitle": "Επιτυχής αποστολή",
+  "@changesUploadedTitle": {
+    "description": "Title for the notification about a successful upload."
+  },
+  "changesUploadFailedTitle": "Αποστολή απέτυχε",
+  "@changesUploadFailedTitle": {
+    "description": "Title for the notification about a failed changes upload."
+  },
+  "fieldPaymentAround": "Συχνές επιλογές τριγύρω",
+  "@fieldPaymentAround": {
+    "description": "Tile name for payment options found on the map."
+  },
+  "fieldPaymentTitle": "Κάρτα πληρωμής",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "entranceAccessDelivery": "διανομή",
+  "@entranceAccessDelivery": {},
+  "drawRoad": "Δρόμος",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "fieldPaymentLocal": "Τοπικές επιλογές",
+  "@fieldPaymentLocal": {
+    "description": "Tile name for stored local payment options."
   }
 }

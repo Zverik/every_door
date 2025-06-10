@@ -193,7 +193,7 @@
       "count": {}
     }
   },
-  "tileNothingAround": "Nincs szolgáltatás Ön körül {distance} méteren belül.",
+  "tileNothingAround": "Nincs létesítmény Ön körül {distance} méteren belül.",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -205,11 +205,11 @@
       }
     }
   },
-  "tileDragTheMap": "Menjen közelebb valamihez, húzza el a térképet, vagy adjon hozzá egy hiányzó szolgáltatást.",
+  "tileDragTheMap": "Menjen közelebb valamihez, húzza el a térképet, vagy adjon hozzá egy hiányzó létesítményt.",
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
-  "tileDragOrUnfilter": "Menjen egy kört, adjon hozzá egy szolgáltatást, vagy törölje a szűrőt.",
+  "tileDragOrUnfilter": "Menjen egy kört, adjon hozzá egy létesítményt, vagy törölje a szűrőt.",
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
@@ -229,7 +229,7 @@
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
   },
-  "navPoiMode": "Szolgáltatás mód",
+  "navPoiMode": "Létesítmény mód",
   "@navPoiMode": {
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
@@ -675,7 +675,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "{changes} elküldve az API-nak.",
+  "changesUploadedMessage": "A(z) {changes} elküldve az OpenStreetMapnek.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1110,15 +1110,15 @@
   "@apiStatusUploading": {
     "description": "Text displayed when the app is uploading data to the API."
   },
-  "faqMapTinyContent": "Mert nem ez a lényeg. Csak ellenőrizze a helyzetét a térképen, és rögzítse a beállításhoz. Nézze meg az alábbi szolgáltatáslistát, amely az Öntől való távolság szerint van rendezve.\n\nA térkép nagyobb lesz, ha a helyzetétől távol eső szolgáltatásokat szerkeszt. Bár az alkalmazás a szemmel látható dolgok szerkesztéséhez készült.",
+  "faqMapTinyContent": "Mert nem ez a lényeg. Csak ellenőrizze a helyzetét a térképen, és rögzítse a beállításhoz. Nézze meg az alábbi létesítménylistát, amely az Öntől való távolság szerint van rendezve.\n\nA térkép nagyobb lesz, ha a helyzetétől távol eső létesítményeket szerkeszt. Bár az alkalmazás a szemmel látható dolgok szerkesztéséhez készült.",
   "@faqMapTinyContent": {},
   "faqCheckmarks": "Mire valók az ellenőrzőjelek?",
   "@faqCheckmarks": {},
-  "faqCheckmarksContent": "Ezek a jelek a szolgáltatás adatainak megerősítését jelentik. Hozzáadják a „check_date” címkét az aktuális dátummal.\n\nAz ellenőrzőjelek mögött az alábbi ötlet áll: tegyük fel, hogy első alkalommal felmérte a fél várost. Aztán egy hónap múlva visszajött, és újra elment felmérni. Valahogyan meg kell jelölnie, hogy látja a szolgáltatást, de semmi sem változott rajta. Ez az ellenőrzőjel: koppintson rá és folytassa.\n\nA jel két hónapig marad ellenőrzött állapotban. Ezt követően újra felmérheti a szolgáltatásokat.",
+  "faqCheckmarksContent": "Ezek a jelek a létesítmény adatainak megerősítését jelentik. Hozzáadják a „check_date” címkét az aktuális dátummal.\n\nAz ellenőrzőjelek mögött az alábbi ötlet áll: tegyük fel, hogy első alkalommal felmérte a fél várost. Aztán egy hónap múlva visszajött, és újra elment felmérni. Valahogyan meg kell jelölnie, hogy látja a létesítményt, de semmi sem változott rajta. Ez az ellenőrzőjel: koppintson rá és folytassa.\n\nA jel két hónapig marad ellenőrzött állapotban. Ezt követően újra felmérheti a létesítményeket.",
   "@faqCheckmarksContent": {},
   "faqEntrance": "Hogyan lehet hozzáadni egy épület bejáratát?",
   "@faqEntrance": {},
-  "faqEntranceContent": "Alul található a módgombok sora: mikrotérképezés, szolgáltatások, bejáratok és jegyzetek.\n\nA bejáratok módban koppintson vagy húzza az alsó sarokban lévő ajtógombot a térképre.",
+  "faqEntranceContent": "Alul található a módgombok sora: mikrotérképezés, létesítmények, bejáratok és jegyzetek.\n\nA bejáratok módban koppintson vagy húzza az alsó sarokban lévő ajtógombot a térképre.",
   "@faqEntranceContent": {},
   "faqYellowContent": "A nem sárga címkék a bejáratok módban és a fehér pontok a mikrotérképezési módban azt jelentik, hogy az elemekből hiányzik néhány fontos attribútum. Például:\n\n* Az épületeknél elvárható, hogy meg legyen adva a szintek száma.\n* A bejáratoknak rendelkezniük kell típussal, lépcsőházak esetén lakástartománnyal.\n* A padoknak anyaga és kartámasza kell legyen.\n* A fáknak levéltípusuk és lombhullatási ciklusuk van.",
   "@faqYellowContent": {},
@@ -1126,13 +1126,13 @@
   "@faqLettersContent": {},
   "faqFloorsContent": "Nem. Az elsőben az „addr:floor=3” címke van kitöltve. Ez az emelet, ahogy a navigációnál ki van írva és általánosan használt. A másodikban nem ez a címke, hanem „level=3” van megadva. Ez a szám egy folyamatos emeletszám nullától a „building:levels − 1”-ig. Vagyis egy háromemeletes épületben az „addr:floor” értéke egy adott országtól függ, de a „level” mindig 0, 1 vagy 2.\n\nLássuk, hogyan kapcsolódik a szerkesztőben lévő jelölés ezekhez a címkékhez:\n\n* „2”: „addr:floor=2” és nem üres „level=*”.\n* „4/”: „addr:floor=4”, de nincs „level” címke.\n* „/1”: „level=1”, de nincs „addr:floor” címke.\n* „1/0”: „addr:floor=1” + „level=0” (és van egy objektum a közelben: ugyanolyan „addr:floor”, de eltérő „level” értékkel, vagy fordítva).",
   "@faqFloorsContent": {},
-  "faqChangeType": "Hogyan lehet megváltoztatni egy szolgáltatás típusát?",
+  "faqChangeType": "Hogyan lehet megváltoztatni egy létesítmény típusát?",
   "@faqChangeType": {},
   "faqChangeTypeContent": "Koppintson a szerkesztő címére, ahol a típus ki van írva.",
   "@faqChangeTypeContent": {},
   "faqTagging": "Az összes címkézési kérdés",
   "@faqTagging": {},
-  "faqTaggingContent": "Miért hiányzik egy objektum a szerkesztőben? Mikor jelennek meg ezek a fehér pontok a mikrotérképezési módban? Hogyan vannak az objektumok rendezve?\n\nAz összes ilyen kérdésre választ kaphat a [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) fájlból. Itt van, hogy miket nézhet meg:\n\n* A fő címke kulcssorrendje — `kMainKeys` lista.\n* Mely objektumok vannak letöltve — `isGoodTags` függvény.\n* Mi számít szolgáltatásnak — `isAmenityTags` függvény.\n* Mely pontok vannak mely utakhoz illesztve — `detectSnap` függvény.\n* Mikor befejezetlen egy mikrotérképezési objektum — `needsMoreInfo` függvény.",
+  "faqTaggingContent": "Miért hiányzik egy objektum a szerkesztőben? Mikor jelennek meg ezek a fehér pontok a mikrotérképezési módban? Hogyan vannak az objektumok rendezve?\n\nAz összes ilyen kérdésre választ kaphat a [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) fájlból. Itt van, hogy miket nézhet meg:\n\n* A fő címke kulcssorrendje — a `main_key.dart` fájlban lévő `kMainKeys` lista.\n* Mely objektumok vannak letöltve — az `_EverythingKind` osztály.\n* Mi számít létesítménynek — az `_AmenityKind` osztály.\n* Mely pontok vannak mely utakhoz illesztve — az `ElementKindImpl` osztály logikája (nézze meg a kapcsolódó alosztályokat).\n* Mikor befejezetlen egy mikrotérképezési objektum — a class `_NeedsMoreInfo` osztály.",
   "@faqTaggingContent": {},
   "fieldPaymentAround": "Szokásos lehetőségek a környéken",
   "@fieldPaymentAround": {
@@ -1271,5 +1271,85 @@
   "editorDeleteBuilding": "Lebontott",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "pluginsEnable": "Engedélyezés",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "settingsPlugins": "Bővítmények",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsDisable": "Letiltás",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Letiltva",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Bővítménytároló",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsInstall": "Telepítés",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsMore": "Több…",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Bővítménytelepítés",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Telepíti a „{plugin}” bővítmény {version} számú verzióját?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "ismeretlen",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Forrás: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsSearch": "Keresés",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUrl": "Bővítmény URL-e",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "tileDragDownload": "Próbáljon meg a letöltés gombra koppintani.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "OpenStreetMap-jegyzetté lesz átalakítva",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsUpdate": "Frissítés",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
   }
 }
