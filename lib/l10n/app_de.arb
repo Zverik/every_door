@@ -141,7 +141,7 @@
   "@changesCount": {},
   "changesUploadedTitle": "Hochgeladen",
   "@changesUploadedTitle": {},
-  "changesUploadedMessage": "Zu OpensStreetMap changes} hochgeladen.",
+  "changesUploadedMessage": "Zu OpenStreetMap {changes} hochgeladen.",
   "@changesUploadedMessage": {},
   "changesUploadFailedTitle": "Fehler beim Hochladen",
   "@changesUploadFailedTitle": {},
