@@ -502,7 +502,7 @@
   "@faqChangeTypeContent": {},
   "faqTagging": "Tutte le domande sui tag",
   "@faqTagging": {},
-  "faqTaggingContent": "Perché manca un elemento nell'editor? Quando vengono visualizzati questi punti bianchi nella modalità di micromappatura? Come vengono ordinati gli oggetti?\n\nLe risposte a tutte queste domande si trovano in [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Ecco cosa puoi trovare:\n\n* L'ordine delle chiavi per il tag principale - lista `kMainKeys`.\n* Quali oggetti vengono scaricati - funzione `isGoodTags`.\n* Cosa viene considerato un'amenità - funzione `isAmenityTags`.\n* Quali punti vengono agganciati in quali modi - funzione `detectSnap`.\n* Quando un oggetto di micromappatura è incompleto - funzione `needsMoreInfo`.",
+  "faqTaggingContent": "Perché manca un elemento nell'editor? Quando vengono visualizzati questi punti bianchi nella modalità di micromappatura? Come vengono ordinati gli oggetti?\n\nLe risposte a tutte queste domande si trovano in [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Ecco cosa puoi trovare:\n\n* L'ordine delle chiavi per il tag principale - lista `kMainKeys` in `main_key.dart`.\n* Quali oggetti vengono scaricati - classe `_EverythingKind`.\n* Cosa viene considerato un'amenità - classe `_AmenityKind`.\n* Quali punti vengono agganciati in quali modi - class `ElementKindImpl` logic (vedi sottoclassi rilevanti).\n* Quando un oggetto di micromappatura è incompleto - classe `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "editorDuplicate": "Possibile duplicato entro {distance} m",
   "@editorDuplicate": {
@@ -945,5 +945,69 @@
   "warningFixmeNote": "Sarà convertito in una nota OSM",
   "@warningFixmeNote": {
     "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsInstall": "Installa",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsMore": "Altro...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsEnable": "Abilita",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Disattiva",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Disattivato",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsSearch": "Cerca",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Aggiorna",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsUrl": "URL del plugin",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsInstallSource": "Sorgente: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsInstallation": "Installazione plugin",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Installare la versione {version} di {plugin}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "sconosciuto",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
   }
 }
