@@ -12,7 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class InstallPluginPage extends ConsumerStatefulWidget {
   /// An URI for the plugin. Can be either a direct URL for a file to download
   /// (should end with an .edp extension), or an Every Door-style link:
-  /// https://plugins.every-door.app/i/id?url=<download url>&ref=<ref>&version=<version>&update=true
+  /// https://plugins.every-door.app/i/id?url=<download url>&version=<version>&update=true
   /// Note than none of the query parameters are required.
   final Uri uri;
 
@@ -27,10 +27,12 @@ class PluginUriData {
   late final String id;
   late final Uri? url;
   late final PluginVersion? version;
+  late final bool update;
   late final bool ask;
 
   PluginUriData(Uri uri) {
     final args = uri.queryParameters;
+    update = args['update'] == "true";
     if (uri.host == 'plugins.every-door.app') {
       String? v = args['version'];
       // Parse the entire shebang.
@@ -115,7 +117,7 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         .where((p) => p.id == data.id)
         .firstOrNull;
 
-    if (installed == null ||
+    if (installed == null || data.update ||
         ((data.version ?? PluginVersion.zero) > installed.version)) {
       if (data.url == null) {
         throw Exception(
@@ -147,7 +149,7 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
       // Now unpack and install.
       final pluginDir = await repo.unpackAndDelete(tmpPath);
       final tmpData = await repo.readPluginData(pluginDir);
-      if (tmpData.id != data.id) {
+      if (tmpData.id != data.id && data.id != 'my') {
         throw Exception(
             'The URL implies plugin id "${data.id}", but it actually is "${tmpData.id}"');
       }
@@ -202,6 +204,15 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
           Text(
             widget.uri.toString(),
             style: TextStyle(fontSize: kFontSize),
+          ),
+          SizedBox(height: kFontSize),
+          TextButton(
+            child: Text('See logs'),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (_) => LogDisplayPage(),
+              ));
+            },
           ),
         ],
       );
