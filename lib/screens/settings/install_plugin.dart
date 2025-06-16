@@ -6,6 +6,7 @@ import 'package:every_door/screens/settings/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -81,6 +82,8 @@ class PluginUriData {
 }
 
 class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
+  static final _logger = Logger('InstallPluginPage');
+
   late final PluginUriData? _data;
   bool _agreed = false;
   String? _error;
@@ -178,10 +181,11 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
   void _wrapInstall() async {
     try {
       await _installPlugin();
-    } on Exception catch (e) {
+    } catch (e, stack) {
       setState(() {
         _error = 'Installation error: $e';
       });
+      _logger.severe('Installation error', e, stack);
     }
   }
 
@@ -206,13 +210,15 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
             style: TextStyle(fontSize: kFontSize),
           ),
           SizedBox(height: kFontSize),
-          TextButton(
-            child: Text('See logs'),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (_) => LogDisplayPage(),
-              ));
-            },
+          Center(
+            child: TextButton(
+              child: Text(loc.pluginsSeeLogs.toUpperCase()),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (_) => LogDisplayPage(),
+                ));
+              },
+            ),
           ),
         ],
       );
@@ -256,22 +262,24 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         ],
       );
     } else {
-      body = Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CircularProgressIndicator(),
-          SizedBox(height: kFontSize),
-          Text('Installing...', style: TextStyle(fontSize: kFontSize)),
-          TextButton(
-            child: Text('See logs'),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (_) => LogDisplayPage(),
-              ));
-            },
-          ),
-        ],
+      body = Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: kFontSize),
+            Text('Installing...', style: TextStyle(fontSize: kFontSize)),
+            TextButton(
+              child: Text(loc.pluginsSeeLogs.toUpperCase()),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (_) => LogDisplayPage(),
+                ));
+              },
+            ),
+          ],
+        ),
       );
     }
     return Scaffold(

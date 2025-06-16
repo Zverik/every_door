@@ -29,13 +29,14 @@ class PluginVersion {
       _major = null;
       _minor = version;
     } else {
-      final p = version.toString().indexOf('.');
+      final vs = version.toString();
+      final p = vs.indexOf('.');
       if (p < 0) {
         _major = null;
-        _minor = int.parse(version);
+        _minor = int.parse(vs);
       } else {
-        _major = int.parse(version.substring(0, p));
-        _minor = int.parse(version.substring(p + 1));
+        _major = int.parse(vs.substring(0, p));
+        _minor = int.parse(vs.substring(p + 1));
       }
     }
   }
