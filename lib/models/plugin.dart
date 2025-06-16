@@ -126,7 +126,7 @@ class Plugin extends PluginData {
       {required String id,
       required Map<String, dynamic> data,
       required this.directory})
-      : _localizations = PluginLocalizations(directory),
+      : _localizations = PluginLocalizations(directory, data),
         active = false,
         super(id, data);
 
@@ -137,22 +137,13 @@ class Plugin extends PluginData {
   MultiIcon? get icon =>
       data.containsKey('icon') ? loadIcon(data['icon']) : null;
 
-  // TODO
-
-  String getName(BuildContext context) {
-    final translated = translate(context, 'name');
-    return translated == 'name' ? name : translated;
-  }
+  PluginLocalizationsBranch getLocalizationsBranch(String prefix) =>
+      PluginLocalizationsBranch(_localizations, prefix);
 
   String translate(BuildContext context, String key,
       {Map<String, dynamic>? args}) {
-    return _localizations.translate(context, key, args: args, data: data);
-  }
-
-  String translateN(BuildContext context, String key, int count,
-      {Map<String, dynamic>? args}) {
-    return _localizations.translateN(context, key, count,
-        args: args, data: data);
+    final locale = Localizations.localeOf(context);
+    return _localizations.translate(locale, key, args: args, data: data);
   }
 
   File resolvePath(String name) {

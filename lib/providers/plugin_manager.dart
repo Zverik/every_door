@@ -77,24 +77,34 @@ class PluginManager extends Notifier<List<Plugin>> {
 
   void _enable(Plugin plugin, [bool force = false]) {
     if (!force && state.contains(plugin)) return;
+    try {
+      _enableImagery(plugin);
+      _enableElementKinds(plugin);
+      _enableModes(plugin);
+      _enableFields(plugin);
+      _enablePresets(plugin);
+    } catch (e) {
+      // Installation failed, revert.
+      _technicallyDisable(plugin);
+      rethrow;
+    }
     plugin.active = true;
-    _enableImagery(plugin);
-    _enableElementKinds(plugin);
-    _enableModes(plugin);
-    _enableFields(plugin);
-    _enablePresets(plugin);
     // TODO: use the data from the plugin
     state = state.followedBy([plugin]).toList();
   }
 
-  void _disable(Plugin plugin) {
-    if (!state.contains(plugin)) return;
-    plugin.active = false;
+  void _technicallyDisable(Plugin plugin) {
     _disableImagery(plugin);
     _disableElementKinds(plugin);
     _disableModes(plugin);
     _disablePresets(plugin);
     _disableFields(plugin);
+  }
+
+  void _disable(Plugin plugin) {
+    if (!state.contains(plugin)) return;
+    _technicallyDisable(plugin);
+    plugin.active = false;
     // TODO: clear the data from the plugin
     state = state.where((p) => p.id != plugin.id).toList();
   }
@@ -288,7 +298,8 @@ class PluginManager extends Notifier<List<Plugin>> {
     if (fieldData == null || fieldData is! Map) return;
     final prov = ref.read(pluginPresetsProvider);
     fieldData.forEach((k, data) {
-      prov.addField(k, data, plugin);
+      prov.addField(
+          k, data, plugin, plugin.getLocalizationsBranch('fields.$k'));
     });
     // TODO
   }
@@ -306,7 +317,8 @@ class PluginManager extends Notifier<List<Plugin>> {
     if (presetData == null || presetData is! Map) return;
     final prov = ref.read(pluginPresetsProvider);
     presetData.forEach((k, data) {
-      prov.addPreset(k, data, plugin);
+      prov.addPreset(
+          k, data, plugin, plugin.getLocalizationsBranch('presets.$k'));
     });
     // TODO
   }

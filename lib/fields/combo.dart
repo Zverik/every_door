@@ -12,6 +12,10 @@ class ComboOption {
 
   const ComboOption(this.value, {this.label, this.widget});
 
+  ComboOption withLabel(String label) {
+    return ComboOption(value, label: label, widget: widget);
+  }
+
   @override
   String toString() => '$value($label)';
 }

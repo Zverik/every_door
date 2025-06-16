@@ -22,7 +22,7 @@ class _ManagePluginPageState extends ConsumerState<ManagePluginPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.plugin.getName(context)),
+        title: Text(widget.plugin.translate(context, 'name')),
       ),
       body: ListView(
         children: [

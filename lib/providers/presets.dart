@@ -176,7 +176,7 @@ class PresetProvider {
     // Query the plugin presets.
     final fromPlugins = _ref
         .read(pluginPresetsProvider)
-        .getAutocomplete(terms: terms, nsi: false);
+        .getAutocomplete(terms: terms, nsi: false, locale: locale);
 
     // Do the big database query.
     if (!ready) await _waitUntilReady();
@@ -239,8 +239,9 @@ class PresetProvider {
     }
 
     // Check the plugin presets.
-    final fromPlugins =
-        _ref.read(pluginPresetsProvider).getPresetForTags(tags, isArea: isArea);
+    final fromPlugins = _ref
+        .read(pluginPresetsProvider)
+        .getPresetForTags(tags, isArea: isArea, locale: locale);
     if (fromPlugins != null) return fromPlugins;
 
     if (!ready) await _waitUntilReady();
@@ -287,7 +288,7 @@ class PresetProvider {
       {Locale? locale, bool plugins = true}) async {
     if (ids.isEmpty) return [];
     final Map<String, Preset> fromPlugins =
-        plugins ? _ref.read(pluginPresetsProvider).getById(ids) : {};
+        plugins ? _ref.read(pluginPresetsProvider).getById(ids, locale) : {};
 
     if (!ready) await _waitUntilReady();
     final langCTE = _localeCTE(locale);
@@ -551,7 +552,7 @@ class PresetProvider {
     // Run fields by plugins.
     final pluginProvider = _ref.read(pluginPresetsProvider);
     final fromPlugins = {
-      for (final name in names) name: pluginProvider.getField(name)
+      for (final name in names) name: pluginProvider.getField(name, locale)
     };
     fromPlugins.removeWhere((k, v) => v == null);
 

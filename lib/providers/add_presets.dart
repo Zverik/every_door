@@ -1,6 +1,7 @@
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/normalizer.dart';
+import 'package:every_door/helpers/plugin_i18n.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/models/preset.dart';
@@ -16,9 +17,10 @@ class PluginPresetsProvider {
   static final _logger = Logger('PluginPresetsProvider');
   final Ref _ref;
 
-  final Map<String, Preset> _presets = {};
+  final Map<String, PluginPreset> _presets = {};
   final Trie<String> _terms = Trie<String>();
-  final Map<String, PresetField> _fields = {};
+  final Map<String, PresetField> _fieldsCache = {};
+  final Map<String, FieldTemplate> _fields = {};
   final Map<String, Map<String, String?>> _presetTags = {};
 
   PluginPresetsProvider(this._ref);
@@ -26,10 +28,12 @@ class PluginPresetsProvider {
   void reset() {
     _terms.clear();
     _presets.clear();
+    _fieldsCache.clear();
     _fields.clear();
   }
 
-  void addPreset(String key, Map<String, dynamic> data, Plugin plugin) {
+  void addPreset(String key, Map<String, dynamic> data, Plugin plugin,
+      PluginLocalizationsBranch loc) {
     final id =
         key; // '$key-${plugin.id}' does not work, since referenced in plugins
     // TODO: keep all translations?
@@ -66,7 +70,7 @@ class PluginPresetsProvider {
 
     // Add the preset itself.
     final fromNSI = !data.containsKey('fields');
-    _presets[id] = Preset(
+    _presets[id] = PluginPreset(
       id: id,
       name: name,
       addTags: addTags,
@@ -76,6 +80,7 @@ class PluginPresetsProvider {
       fromNSI: fromNSI,
       fieldData: fieldsData,
       noStandard: noStandard,
+      localizations: loc,
     );
     if (!fromNSI) _presetTags[id] = tags;
 
@@ -99,44 +104,31 @@ class PluginPresetsProvider {
     // TODO: terms?
   }
 
-  void addField(String id, Map<String, dynamic> data, Plugin plugin) {
-    final copy = Map.of(data);
-    // TODO: translate labels?
-    // TODO: options
-    List<ComboOption> options = [];
-    final dataOptions = data['options'];
-    final kReExtension = RegExp(r'\.[a-z]+$');
-    if (dataOptions != null && dataOptions is List) {
-      final labels = (data['labels'] as List?)?.whereType<String>().toList();
-      for (int i = 0; i < dataOptions.length; i++) {
-        final label = labels == null || labels.length <= i ? null : labels[i];
-        final icon = label != null && kReExtension.hasMatch(label)
-            ? plugin.loadIcon(label)
-            : null;
-        options.add(ComboOption(
-          dataOptions[i].toString(),
-          label: icon == null ? (label ?? dataOptions[i].toString()) : null,
-          widget: icon?.getWidget(size: 40.0, icon: false),
-        ));
-      }
-    }
-    final field = fieldFromPlugin(copy, options: options);
-    // TODO?
-    _fields[id] = field;
+  void addField(String id, Map<String, dynamic> data, Plugin plugin,
+      PluginLocalizationsBranch loc) {
+    _fields[id] = FieldTemplate(data, loc, plugin);
+    _fieldsCache.remove(id);
   }
 
   void removeField(String id) {
+    _fieldsCache.remove(id);
     _fields.remove(id);
   }
 
-  PresetField? getField(String id) {
-    return _fields[id]; // TODO: locale?
+  PresetField? getField(String id, Locale? locale) {
+    if (true || !_fieldsCache.containsKey(id)) {
+      final field = _fields[id];
+      if (field == null) return null;
+      _fieldsCache[id] = field.withLocale(locale);
+    }
+    return _fieldsCache[id];
   }
 
   List<Preset> getAutocomplete({
     required Iterable<String> terms,
     bool nsi = false,
     bool isArea = false,
+    Locale? locale,
   }) {
     final presets = <String>{};
     for (final term in terms) {
@@ -145,16 +137,17 @@ class PluginPresetsProvider {
 
     return presets
         .map((id) => _presets[id])
-        .whereType<Preset>()
+        .whereType<PluginPreset>()
         .where((p) => p.fromNSI == nsi)
         .where((p) => !isArea || p.onArea)
+        .map((p) => p.withLocale(locale))
         .toList();
   }
 
   Preset? getPresetForTags(Map<String, String> tags,
       {bool isArea = false, Locale? locale}) {
     int matched = 0;
-    Preset? best;
+    PluginPreset? best;
     for (final e in _presetTags.entries) {
       if (e.value.length <= matched) continue;
       bool failed = false;
@@ -172,15 +165,15 @@ class PluginPresetsProvider {
         }
       }
     }
-    return best;
+    return best?.withLocale(locale);
   }
 
-  Map<String, Preset> getById(List<String> ids) {
+  Map<String, Preset> getById(List<String> ids, Locale? locale) {
     // I failed to write it in one line :(
     Map<String, Preset> result = {};
     for (final id in ids) {
       final p = _presets[id];
-      if (p != null) result[id] = p;
+      if (p != null) result[id] = p.withLocale(locale);
     }
     return result;
   }
@@ -228,7 +221,7 @@ class PluginPresetsProvider {
         fields.add(fieldMap[name]!);
       } else {
         // Otherwise we hope it's a plugin-defined field.
-        final field = getField(name);
+        final field = getField(name, locale);
         if (field != null) {
           fields.add(field);
         } else {
@@ -266,7 +259,7 @@ class PluginPresetsProvider {
         } else if (fieldMap.containsKey(name)) {
           moreFields.add(fieldMap[name]!);
         } else {
-          final field = getField(name);
+          final field = getField(name, locale);
           if (field != null) {
             moreFields.add(field);
           } else {
@@ -277,5 +270,95 @@ class PluginPresetsProvider {
     }
 
     return preset.withFields(fields, moreFields);
+  }
+}
+
+class PluginPreset extends Preset {
+  final PluginLocalizationsBranch localizations;
+
+  PluginPreset({
+    required super.id,
+    super.fields = const [],
+    super.moreFields = const [],
+    super.onArea = true,
+    required super.addTags,
+    super.removeTags = const {},
+    required super.name,
+    super.subtitle,
+    super.icon,
+    super.locationSet,
+    super.fieldData,
+    super.fromNSI = false,
+    super.isFixme = false,
+    super.noStandard = false,
+    required this.localizations,
+  });
+
+  Preset withLocale(Locale? locale) {
+    return Preset(
+      id: id,
+      fields: fields,
+      moreFields: moreFields,
+      fieldData: fieldData,
+      onArea: onArea,
+      addTags: addTags,
+      removeTags: removeTags,
+      name: locale == null ? name : localizations.translate(locale, 'name'),
+      subtitle: subtitle,
+      icon: icon,
+      fromNSI: fromNSI,
+      noStandard: noStandard,
+    );
+  }
+}
+
+class FieldTemplate {
+  final Map<String, dynamic> data;
+  late final List<ComboOption> options;
+  final PluginLocalizationsBranch localizations;
+
+  FieldTemplate(this.data, this.localizations, Plugin plugin) {
+    options = _buildComboOptions(plugin);
+  }
+
+  List<ComboOption> _buildComboOptions(Plugin plugin) {
+    List<ComboOption> options = [];
+    final dataOptions = data['options'];
+    final kReExtension = RegExp(r'\.[a-z]+$');
+    if (dataOptions != null && dataOptions is List) {
+      final labels = (data['labels'] as List?)?.whereType<String>().toList();
+      for (int i = 0; i < dataOptions.length; i++) {
+        final label = labels == null || labels.length <= i ? null : labels[i];
+        final icon = label != null && kReExtension.hasMatch(label)
+            ? plugin.loadIcon(label)
+            : null;
+        options.add(ComboOption(
+          dataOptions[i].toString(),
+          label: icon == null ? (label ?? dataOptions[i].toString()) : null,
+          widget: icon?.getWidget(size: 40.0, icon: false),
+        ));
+      }
+    }
+    return options;
+  }
+
+  PresetField withLocale(Locale? locale) {
+    final copy = Map.of(data);
+    final newOptions = List.of(options);
+    if (locale != null) {
+      for (final k in ['label', 'placeholder']) {
+        if (copy.containsKey(k))
+          copy[k] = localizations.translate(locale, k);
+      }
+      if (options.isNotEmpty) {
+        final labels = localizations.translateList(locale, 'labels');
+        for (int i = 0; i < newOptions.length; i++) {
+          if (labels.length > i) {
+            newOptions[i] = newOptions[i].withLabel(labels[i]);
+          }
+        }
+      }
+    }
+    return fieldFromPlugin(copy, options: newOptions);
   }
 }

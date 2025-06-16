@@ -51,7 +51,7 @@ class MapDragCreateButton extends StatelessWidget {
             final globalMapOrigin = globalMapOriginTr == null
                 ? Offset(0.0, 0.0)
                 : Offset(globalMapOriginTr.x, globalMapOriginTr.y);
-            _logger.info(
+            _logger.fine(
                 'global: $globalMapOrigin, drop offset: ${pos - offset}.');
             final location = map.mapController?.camera
                 .offsetToCrs(pos - offset + globalMapOrigin);
