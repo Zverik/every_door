@@ -18,6 +18,7 @@ final edprProvider = FutureProvider<List<RemotePlugin>>((ref) async {
 
   final url = Uri.https(kEdprEndpoint, '/api/list', {
     'countries': countryIds,
+    'exp': 1,
   });
   var response = await http.get(url);
   if (response.statusCode != 200) {
