@@ -246,7 +246,7 @@ class PluginManager extends Notifier<List<Plugin>> {
     ElementKind.reset();
     for (final otherPlugin in state) {
       if (plugin.id != otherPlugin.id) {
-        _enableElementKinds(plugin);
+        _enableElementKinds(otherPlugin);
       }
     }
   }
@@ -288,7 +288,7 @@ class PluginManager extends Notifier<List<Plugin>> {
     ref.read(editorModeProvider.notifier).reset();
     for (final otherPlugin in state) {
       if (plugin.id != otherPlugin.id) {
-        _enableModes(plugin);
+        _enableModes(otherPlugin);
       }
     }
   }

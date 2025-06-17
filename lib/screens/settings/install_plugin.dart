@@ -54,7 +54,7 @@ class PluginUriData {
         }
         ask = false;
       } else {
-        // Linking to a plugin id. Should not happen.
+        // Linking to a plugin id. Means, download the latest version from EDPR.
         id = uri.path.split('/').last;
         url = uri.replace(path: '/$id.edp');
         ask = true;

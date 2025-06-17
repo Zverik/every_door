@@ -151,7 +151,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 controller: _controller,
                 icon: primaryButton,
                 alignment:
-                    !leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
+                    leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
                 adjustZoom: widget.def.adjustZoomPrimary,
                 onEditor: (context, pos) {
                   widget.def.openEditor(
@@ -166,7 +166,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                 controller: _controller,
                 icon: secondaryButton,
                 alignment:
-                    leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
+                    !leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
                 adjustZoom: widget.def.adjustZoomSecondary,
                 onEditor: (context, pos) {
                   widget.def.openEditor(

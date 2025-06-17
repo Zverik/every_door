@@ -212,7 +212,7 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
   @override
   MultiIcon? getButton(BuildContext context, bool isPrimary) {
     final loc = AppLocalizations.of(context)!;
-    if (isPrimary) {
+    if (!isPrimary) {
       return MultiIcon(
         fontIcon: Icons.house,
         tooltip: loc.entrancesAddBuilding,
@@ -236,7 +236,7 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
         location ?? element?.location ?? ref.read(effectiveLocationProvider);
     Widget pane;
     // TODO: how do we create one?
-    if (isPrimary != null && !isPrimary ||
+    if ((isPrimary != null && isPrimary) ||
         (element != null && ElementKind.entrance.matchesChange(element))) {
       pane = EntranceEditorPane(entrance: element, location: loc);
     } else {
