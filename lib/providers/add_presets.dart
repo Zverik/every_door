@@ -36,7 +36,11 @@ class PluginPresetsProvider {
       PluginLocalizationsBranch loc) {
     final id =
         key; // '$key-${plugin.id}' does not work, since referenced in plugins
-    // TODO: keep all translations?
+    if (!data.containsKey('name'))
+      throw Exception('Preset $key should have "name" attribute');
+    if (!data.containsKey('tags'))
+      throw Exception('Preset $key should have tags listed');
+
     final String name = data['name'];
     final Map<String, String?> tags = (data['tags'] as Map<String, dynamic>)
         .map((k, v) => MapEntry(k, v.toString()))
@@ -106,6 +110,8 @@ class PluginPresetsProvider {
 
   void addField(String id, Map<String, dynamic> data, Plugin plugin,
       PluginLocalizationsBranch loc) {
+    if (!data.containsKey('key'))
+      throw Exception('Field $id should have "key" attribute');
     _fields[id] = FieldTemplate(data, loc, plugin);
     _fieldsCache.remove(id);
   }
@@ -324,8 +330,8 @@ class FieldTemplate {
   List<ComboOption> _buildComboOptions(Plugin plugin) {
     List<ComboOption> options = [];
     final dataOptions = data['options'];
-    final kReExtension = RegExp(r'\.[a-z]+$');
     if (dataOptions != null && dataOptions is List) {
+      final kReExtension = RegExp(r'\.[a-z]+$');
       final labels = (data['labels'] as List?)?.whereType<String>().toList();
       for (int i = 0; i < dataOptions.length; i++) {
         final label = labels == null || labels.length <= i ? null : labels[i];
