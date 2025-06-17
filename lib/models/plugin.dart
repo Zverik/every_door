@@ -159,23 +159,36 @@ class Plugin extends PluginData {
     if (cached != null)
       return cached.tooltip == tooltip ? cached : cached.withTooltip(tooltip);
 
-    final file = resolvePath('icons/$name');
-
     MultiIcon icon;
-    if (file.existsSync()) {
-      final data = file.readAsBytesSync();
-      if (name.endsWith('.svg')) {
-        icon = MultiIcon(svgData: data, tooltip: tooltip);
-      } else if (name.endsWith('.si')) {
-        icon = MultiIcon(siData: data, tooltip: tooltip);
+
+    if (name.startsWith('U+')) {
+      final code = int.tryParse(name.substring(2), radix: 16);
+      if (code != null) {
+        final data = IconData(code, fontFamily: 'Emoji');
+        icon = MultiIcon(fontIcon: data);
       } else {
-        icon = MultiIcon(imageData: data, tooltip: tooltip);
+        _logger.severe('Wrong code point: $name');
+        icon = MultiIcon(fontIcon: Icons.question_mark);
       }
     } else {
-      _logger.warning('No icon in ${file.path}');
-      icon = MultiIcon(fontIcon: Icons.question_mark, tooltip: tooltip);
+      final file = resolvePath('icons/$name');
+
+      if (file.existsSync()) {
+        final data = file.readAsBytesSync();
+        if (name.endsWith('.svg')) {
+          icon = MultiIcon(svgData: data);
+        } else if (name.endsWith('.si')) {
+          icon = MultiIcon(siData: data);
+        } else {
+          icon = MultiIcon(imageData: data);
+        }
+      } else {
+        _logger.severe('No icon in ${file.path}');
+        icon = MultiIcon(fontIcon: Icons.question_mark);
+      }
     }
 
+    if (tooltip != null) icon = icon.withTooltip(tooltip);
     _iconCache[name] = icon;
     return icon;
   }

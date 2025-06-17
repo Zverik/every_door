@@ -19,6 +19,8 @@ class _PluginSettingsPageState extends ConsumerState<PluginSettingsPage> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final plugins = ref.watch(pluginRepositoryProvider);
+    ref.watch(pluginManagerProvider); // to update the panel
+
     Iterable<Widget> cards =
         plugins.where((p) => p.active).map((p) => PluginCard(
               plugin: p,

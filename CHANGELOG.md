@@ -18,6 +18,7 @@ _Unreleased_
 * Profile page looks a bit better (thanks @soham-dixit).
 * Added `sr-Latn` language for Serbia (thanks @alnzrv).
 * Updated roof assets (thanks @mxdanger).
+* Added `building:part` and `indoor` to main keys.
 * Updated a phone number parsing library.
 
 ## 5.4

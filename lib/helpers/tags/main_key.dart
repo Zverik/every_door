@@ -10,7 +10,7 @@ const kMainKeys = <String>[
   'advertising', 'playground', 'traffic_calming', 'cemetery',
   'military', 'barrier',
   // structure tags should be last:
-  'building', 'entrance', 'boundary', 'landuse',
+  'building', 'entrance', 'building:part', 'indoor', 'boundary', 'landuse',
 ];
 
 const kAmenityMainKeys = <String>{
