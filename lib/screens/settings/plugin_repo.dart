@@ -20,6 +20,7 @@ class PluginRepositoryPage extends ConsumerStatefulWidget {
 class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
   late final TextEditingController _controller;
   String _filter = '';
+  bool _experimental = false;
 
   @override
   void initState() {
@@ -99,6 +100,7 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
             !p.name.toLowerCase().contains(f) &&
             !p.id.toLowerCase().contains(f));
       }
+      if (!_experimental) list.removeWhere((p) => p.experimental);
       list.sort((a, b) => b.downloads.compareTo(a.downloads));
       items = list
               .map((p) => PluginCard(
@@ -144,29 +146,45 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
                   vertical: 16.0,
                   horizontal: 16.0,
                 ),
-                child: TextField(
-                  controller: _controller,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: loc.pluginsSearch,
-                    prefixIcon: Icon(Icons.search),
-                    suffixIcon: _controller.text.isEmpty
-                        ? null
-                        : IconButton(
-                            icon: Icon(Icons.clear),
-                            onPressed: () {
-                              setState(() {
-                                _controller.clear();
-                                _filter = '';
-                              });
-                            },
-                          ),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      _filter = value.trim();
-                    });
-                  },
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: loc.pluginsSearch,
+                          prefixIcon: Icon(Icons.search),
+                          suffixIcon: _controller.text.isEmpty
+                              ? null
+                              : IconButton(
+                                  icon: Icon(Icons.clear),
+                                  onPressed: () {
+                                    setState(() {
+                                      _controller.clear();
+                                      _filter = '';
+                                    });
+                                  },
+                                ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _filter = value.trim();
+                          });
+                        },
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.construction),
+                      color: _experimental ? Colors.black : Colors.grey,
+                      tooltip: 'Include experimental builds',
+                      onPressed: () {
+                        setState(() {
+                          _experimental = !_experimental;
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ),
             ...items,
