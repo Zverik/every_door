@@ -1349,5 +1349,9 @@
   "warningFixmeNote": "Will be converted to an OSM note",
   "@warningFixmeNote": {
     "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsSeeLogs": "See logs",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
   }
 }
