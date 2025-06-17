@@ -164,8 +164,7 @@ class Plugin extends PluginData {
     if (name.startsWith('U+')) {
       final code = int.tryParse(name.substring(2), radix: 16);
       if (code != null) {
-        final data = IconData(code, fontFamily: 'Emoji');
-        icon = MultiIcon(fontIcon: data);
+        icon = MultiIcon(emoji: String.fromCharCode(code));
       } else {
         _logger.severe('Wrong code point: $name');
         icon = MultiIcon(fontIcon: Icons.question_mark);

@@ -8,12 +8,14 @@ import 'package:jovial_svg/jovial_svg.dart';
 /// recommended dimensions are 256×256.
 class MultiIcon {
   final IconData? fontIcon;
+  final String? emoji;
   late final ImageProvider<Object>? image;
   late ScalableImage? svg;
   final String? tooltip;
 
   MultiIcon({
     this.fontIcon,
+    this.emoji,
     Uint8List? imageData,
     Uint8List? svgData,
     Uint8List? siData,
@@ -41,13 +43,21 @@ class MultiIcon {
     } else {
       svg = null;
     }
+
+    if ((emoji?.runes.length ?? 0) > 1) {
+      throw ArgumentError('MultiIcon allows only one rune for emoji: $emoji');
+    }
   }
 
-  MultiIcon._({this.fontIcon, this.image, this.svg, this.tooltip});
+  MultiIcon._({this.fontIcon, this.emoji, this.image, this.svg, this.tooltip});
 
   MultiIcon withTooltip(String? tooltip) {
     return MultiIcon._(
-        fontIcon: fontIcon, image: image, svg: svg, tooltip: tooltip);
+        fontIcon: fontIcon,
+        emoji: emoji,
+        image: image,
+        svg: svg,
+        tooltip: tooltip);
   }
 
   void _loadNetworkSvg(Uri url) async {
@@ -91,6 +101,18 @@ class MultiIcon {
       return SizedBox(
           width: size, height: size, child: ScalableImageWidget(si: modified));
     }
+    if (emoji != null)
+      return Text(
+        emoji!,
+        overflow: TextOverflow.visible,
+        style: TextStyle(
+          color: color,
+          fontSize: size,
+          height: 1.0,
+          leadingDistribution: TextLeadingDistribution.even,
+          inherit: false,
+        ),
+      );
     return SizedBox(width: size, height: size);
   }
 }
