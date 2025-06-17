@@ -1351,5 +1351,9 @@
   "pluginsUrl": "Lisamooduli võrguaadress",
   "@pluginsUrl": {
     "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsSeeLogs": "Vaata logisid",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
   }
 }
