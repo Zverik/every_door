@@ -21,6 +21,10 @@ class PluginCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
+    String description = plugin.description
+        .replaceAll('\n\n', '#NL#')
+        .replaceAll('\n', ' ')
+        .replaceAll('#NL#', '\n\n');
     return Card(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -34,12 +38,12 @@ class PluginCard extends StatelessWidget {
             enabled: active,
             onTap: onMore,
           ),
-          if (plugin.description.isNotEmpty)
+          if (description.isNotEmpty)
             Padding(
               padding:
                   const EdgeInsets.only(left: 16.0, right: 24.0, bottom: 16.0),
               child: Text(
-                plugin.description,
+                description,
                 style: theme.listTileTheme.subtitleTextStyle ??
                     theme.textTheme.bodyMedium?.copyWith(
                       color: theme.textTheme.bodySmall?.color,

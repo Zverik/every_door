@@ -255,28 +255,36 @@ class PluginManager extends Notifier<List<Plugin>> {
     final modeData = plugin.data['modes'];
     if (modeData == null || modeData is! Map) return;
     for (final entry in modeData.entries) {
-      final modeType = entry.value['type'];
+      if (entry.value is! Map) {
+        throw ArgumentError('Data for mode ${entry.key} is not a map');
+      }
+      final modeParams = entry.value as Map<String, dynamic>;
+
       final modeProvider = ref.read(editorModeProvider.notifier);
       final oldMode = modeProvider.get(entry.key);
-      _logger.info('Looking for ${entry.key} of type $modeType: $oldMode');
+      _logger.fine('Looking for mode ${entry.key}: $oldMode');
       if (oldMode != null) {
-        oldMode.updateFromJson(entry.value, plugin);
-        // TODO: replaces
+        if (modeParams['hide'] == true) {
+          modeProvider.unregister(entry.key);
+        } else {
+          oldMode.updateFromJson(modeParams, plugin);
+        }
         continue;
       }
 
       BaseModeDefinition mode;
+      final modeType = modeParams['type'];
       switch (modeType) {
         case 'entrances':
           mode = EntrancesModeCustom(
-              ref: ref, name: entry.key, data: entry.value, plugin: plugin);
+              ref: ref, name: entry.key, data: modeParams, plugin: plugin);
         case 'micro':
           mode = MicromappingModeCustom(
-              ref: ref, name: entry.key, data: entry.value, plugin: plugin);
+              ref: ref, name: entry.key, data: modeParams, plugin: plugin);
         // TODO: amenity and notes
         default:
           throw ArgumentError(
-              'Unknown mode type for ${entry.key}: "$modeType"');
+              'Unknown or unsupported mode type for ${entry.key}: "$modeType"');
       }
       modeProvider.register(mode);
     }
