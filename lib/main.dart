@@ -12,7 +12,7 @@ import 'package:every_door/screens/loading.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 import 'package:logging/logging.dart';
 

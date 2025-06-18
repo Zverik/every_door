@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 class InstallPluginPage extends ConsumerStatefulWidget {
   /// An URI for the plugin. Can be either a direct URL for a file to download

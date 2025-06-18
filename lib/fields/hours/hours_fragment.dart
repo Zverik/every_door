@@ -1,7 +1,7 @@
 import 'package:every_door/fields/hours/days_editors.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/fields/hours/interval.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 import 'days_range.dart';
 import 'hours_model.dart';

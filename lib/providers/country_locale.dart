@@ -5,7 +5,7 @@ import 'package:every_door/providers/location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 final countryLocaleProvider =
     ChangeNotifierProvider((ref) => CountryLocaleController(ref));

@@ -1,7 +1,7 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 const _kTagsWithoutYesValue = {
   'amenity',

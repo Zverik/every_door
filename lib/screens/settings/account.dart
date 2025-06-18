@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:every_door/providers/osm_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 class OsmAccountPage extends ConsumerStatefulWidget {
   const OsmAccountPage({super.key});
@@ -19,16 +19,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
   @override
   void initState() {
     super.initState();
-    updateOAuth();
     updateDetails();
-  }
-
-  updateOAuth() async {
-    bool newCanUseOAuth =
-        await ref.read(authProvider.notifier).supportsOAuthLogin();
-    setState(() {
-      canUseOAuth = newCanUseOAuth;
-    });
   }
 
   Future updateDetails() async {
@@ -52,7 +43,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
     bool done = false;
     List<String>? result;
     while (!done) {
-      if (!mounted) return;
+      if (!context.mounted) return;
       result = await showTextInputDialog(
         context: context,
         title: loc.accountPasswordTitle,
@@ -72,12 +63,12 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
       if (result != null) {
         final auth = ref.read(authProvider.notifier);
         try {
-          await auth.storeLoginPassword(result[0], result[1]);
+          // await auth.storeLoginPassword(result[0], result[1]);
           done = true;
           updateDetails();
         } on ArgumentError {
           // Wrong login
-          if (mounted) {
+          if (context.mounted) {
             await showAlertDialog(
               context: context,
               title: loc.accountAuthErrorTitle,
@@ -146,7 +137,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withValues(alpha: 0.1),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -260,7 +251,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
         Text(
           label,
           style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurface.withOpacity(0.7),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
           ),
         ),
         Text(

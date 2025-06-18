@@ -12,7 +12,7 @@ import 'package:every_door/screens/editor.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:latlong2/latlong.dart' show LatLng;
 
 class BuildingEditorPane extends ConsumerStatefulWidget {

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:every_door/models/address.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 class AddressForm extends ConsumerStatefulWidget {
   final LatLng location;

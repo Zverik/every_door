@@ -1,7 +1,7 @@
 import 'hours_model.dart';
 import 'package:every_door/helpers/counter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 class ChooserIntervalField extends StatefulWidget {
   final HoursInterval? interval;

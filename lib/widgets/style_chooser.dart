@@ -4,7 +4,7 @@ import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/round_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';

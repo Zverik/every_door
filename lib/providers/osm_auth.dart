@@ -1,17 +1,10 @@
-import 'dart:io' show Platform;
-import 'dart:convert' show base64, utf8;
-
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/osm_oauth2_client.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final authProvider = StateNotifierProvider<OsmAuthController, OsmUserDetails?>(
     (_) => OsmAuthController());
@@ -68,13 +61,9 @@ class OsmAuthException implements Exception {
 }
 
 class OsmAuthController extends StateNotifier<OsmUserDetails?> {
-  static const kLoginKey = 'osmLogin';
-  static const kPasswordKey = 'osmPassword';
   static final _logger = Logger('OsmAuthController');
 
   final OpenStreetMapOAuthHelper _helper = OpenStreetMapOAuthHelper();
-  bool isOAuth = false;
-  bool? _supportsOAuth;
 
   bool get authorized => state != null;
 
@@ -83,27 +72,6 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
   }
 
   loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? login = prefs.getString(kLoginKey);
-
-    String? pwd;
-    if (login != null) {
-      final secure = FlutterSecureStorage(
-          aOptions: AndroidOptions(encryptedSharedPreferences: true));
-      try {
-        pwd = await secure.read(key: kPasswordKey);
-      } on PlatformException {
-        await secure.deleteAll();
-      }
-    }
-
-    if (pwd != null) {
-      isOAuth = false;
-    } else {
-      isOAuth = await supportsOAuthLogin();
-      if (!isOAuth) login = null;
-    }
-
     try {
       state = await loadUserDetails();
     } on OsmAuthException {
@@ -112,72 +80,20 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
   }
 
   logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (isOAuth) {
-      await _helper.deleteToken();
-    } else {
-      await FlutterSecureStorage(
-              aOptions: AndroidOptions(encryptedSharedPreferences: true))
-          .delete(key: kPasswordKey);
-    }
-    await prefs.remove(kLoginKey);
+    await _helper.deleteToken();
     state = null;
-  }
-
-  Future<bool> supportsOAuthLogin() async {
-    if (_supportsOAuth != null) return _supportsOAuth!;
-    bool result = false;
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (Platform.isAndroid) {
-      final info = await deviceInfo.androidInfo;
-      final sdk = info.version.sdkInt;
-      result = sdk >= 18;
-    } else if (Platform.isIOS) {
-      final info = await deviceInfo.iosInfo;
-      final match = RegExp(r'^(\d+)').matchAsPrefix(info.systemVersion ?? '');
-      if (match != null) {
-        result = int.parse(match.group(1)!) >= 11;
-      }
-    }
-    _supportsOAuth = result;
-    return result;
-  }
-
-  storeLoginPassword(String login, String password) async {
-    final headers = _getBasicAuthHeaders(login, password);
-    final details = await loadUserDetails(headers);
-
-    if (isOAuth) {
-      await _helper.deleteToken();
-      isOAuth = false;
-    }
-
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(kLoginKey, login);
-    final secure = FlutterSecureStorage(
-        aOptions: AndroidOptions(encryptedSharedPreferences: true));
-    await secure.write(key: kPasswordKey, value: password);
-    state = details;
   }
 
   loginWithOAuth(BuildContext context) async {
     final token = await _helper.getToken();
     if (token != null) {
-      isOAuth = true;
       final authStr = await _helper.getAuthorizationValue(token);
       if (authStr == null)
         throw OsmAuthException('Failed to build auth string');
       final headers = {'Authorization': authStr};
       final details = await loadUserDetails(headers);
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(kLoginKey, details.displayName);
       state = details;
     }
-  }
-
-  Map<String, String> _getBasicAuthHeaders(String login, String password) {
-    final authStr = base64.encode(utf8.encode('$login:$password'));
-    return {'Authorization': 'Basic $authStr'};
   }
 
   Future<bool> _testAuthHeaders(Map<String, String> headers) async {
@@ -190,34 +106,18 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
   }
 
   Future<Map<String, String>> getAuthHeaders() async {
-    if (isOAuth) {
-      final authStr = await _helper.getAuthorizationValue();
-      if (authStr == null) {
-        state = null;
-        throw OsmAuthException('User is not logged in.');
-      }
-      final headers = {'Authorization': authStr};
-      if (!await _testAuthHeaders(headers)) {
-        state = null;
-        throw OsmAuthException(
-            'Could not use the saved OAuth token, please re-login.');
-      }
-      return headers;
-    } else {
-      final prefs = await SharedPreferences.getInstance();
-      final login = prefs.getString(kLoginKey);
-      final secure = FlutterSecureStorage(
-          aOptions: AndroidOptions(encryptedSharedPreferences: true));
-      String? password;
-      try {
-        password = await secure.read(key: kPasswordKey);
-      } on PlatformException {
-        await secure.deleteAll();
-      }
-      if (login == null || password == null)
-        throw StateError('No login and password found.');
-      return _getBasicAuthHeaders(login, password);
+    final authStr = await _helper.getAuthorizationValue();
+    if (authStr == null) {
+      state = null;
+      throw OsmAuthException('User is not logged in.');
     }
+    final headers = {'Authorization': authStr};
+    if (!await _testAuthHeaders(headers)) {
+      state = null;
+      throw OsmAuthException(
+          'Could not use the saved OAuth token, please re-login.');
+    }
+    return headers;
   }
 
   Future<OsmUserDetails> loadUserDetails([Map<String, String>? headers]) async {

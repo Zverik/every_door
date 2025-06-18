@@ -18,7 +18,7 @@ import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/widgets/poi_pane.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 

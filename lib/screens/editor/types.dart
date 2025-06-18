@@ -12,7 +12,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;

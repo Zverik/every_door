@@ -3,7 +3,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/field.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'hours/hours_model.dart';

@@ -20,7 +20,7 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:country_coder/country_coder.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoadingPage extends ConsumerStatefulWidget {

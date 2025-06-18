@@ -3,7 +3,7 @@ import 'package:every_door/fields/combo.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 class ComboChooserPage extends StatefulWidget {
   final ComboPresetField field;

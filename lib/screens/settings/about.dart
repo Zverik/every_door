@@ -3,7 +3,7 @@ import 'package:every_door/screens/settings/log.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:url_launcher/url_launcher.dart';
 
 class FAQ {

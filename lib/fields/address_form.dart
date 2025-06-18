@@ -1,5 +1,6 @@
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/providers/editor_settings.dart';
@@ -9,7 +10,6 @@ import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/models/address.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddressFormPresetField extends PresetField {
   final bool autoFocus;

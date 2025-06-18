@@ -7,7 +7,7 @@ import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
 /// Language-aware field editor. E.g. name + name:en + ...
 class NamePresetField extends PresetField {
