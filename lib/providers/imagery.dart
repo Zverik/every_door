@@ -95,7 +95,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
   /// Loads the chosen imagery from shared preferences. There are some
   /// system keys it processes in code: for Bing, Maxar, and Mapbox.
   /// If it's none of those, it asks [PresetProvider] if it knows this key.
-  _loadState() async {
+  Future<void> _loadState() async {
     final prefs = await SharedPreferences.getInstance();
     final imageryId = prefs.getString(kImageryKey);
     if (imageryId != null) {
@@ -120,13 +120,13 @@ class ImageryProvider extends StateNotifier<Imagery> {
   }
 
   /// Simply saves the current chosen imagery to shared preferences.
-  _saveState() async {
+  Future<void> _saveState() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(kImageryKey, state.id);
   }
 
   /// Changes the current imagery, notifies listeners, and saves the state.
-  setImagery(Imagery value) {
+  void setImagery(Imagery value) {
     state = value;
     _saveState();
   }
@@ -134,14 +134,18 @@ class ImageryProvider extends StateNotifier<Imagery> {
   /// Adds the imagery definition to an internal additional imagery
   /// list, to be provided to everywhere. Also if the imagery added
   /// has been stored to preferences, immediately switches to it.
-  void registerImagery(Imagery imagery) async {
+  void registerImagery(Imagery imagery, bool force) async {
     if (!_additional.any((i) => i.id == imagery.id)) {
       _additional.add(imagery);
 
-      final prefs = await SharedPreferences.getInstance();
-      final imageryId = prefs.getString(kImageryKey);
-      if (imageryId != null && imageryId == imagery.id) {
-        state = imagery;
+      if (force) {
+        setImagery(imagery);
+      } else {
+        final prefs = await SharedPreferences.getInstance();
+        final imageryId = prefs.getString(kImageryKey);
+        if (imageryId != null && imageryId == imagery.id) {
+          state = imagery;
+        }
       }
     }
   }
@@ -203,18 +207,18 @@ class SelectedImageryProvider extends StateNotifier<Imagery> {
     loadValue();
   }
 
-  loadValue() async {
+  Future<void> loadValue() async {
     final prefs = await SharedPreferences.getInstance();
     bool newOSM = prefs.getBool(kPrefsKey) ?? isOSM;
     if (newOSM != isOSM) toggle();
   }
 
-  storeValue() async {
+  Future<void> storeValue() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(kPrefsKey, isOSM);
   }
 
-  toggle() {
+  void toggle() {
     isOSM = !isOSM;
     state =
         isOSM ? _ref.watch(baseImageryProvider) : _ref.watch(imageryProvider);

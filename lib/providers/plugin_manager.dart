@@ -131,7 +131,8 @@ class PluginManager extends Notifier<List<Plugin>> {
         if (entry.key == 'base') {
           ref.read(baseImageryProvider.notifier).state = imagery;
         } else {
-          ref.read(imageryProvider.notifier).registerImagery(imagery);
+          final bool force = imageryData['force'] == true;
+          ref.read(imageryProvider.notifier).registerImagery(imagery, force);
         }
       }
     }

@@ -179,9 +179,9 @@ class MicromappingModeCustom extends MicromappingModeDefinition {
     final modeIconName = data['icon'];
     if (modeIconName != null) {
       _icon = plugin.loadIcon(modeIconName, data['name'] ?? _name);
-      if (data.containsKey('iconOutlined')) {
+      if (data.containsKey('iconGray')) {
         _iconOutlined =
-            plugin.loadIcon(data['iconOutlined']!, data['name'] ?? _name);
+            plugin.loadIcon(data['iconGray']!, data['name'] ?? _name);
       }
     }
 

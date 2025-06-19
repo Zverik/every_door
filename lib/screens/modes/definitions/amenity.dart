@@ -138,7 +138,6 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
       intervals.forEach((kind, interval) {
         if (interval is int) _checkIntervals[kind] = interval;
       });
-      print('Updated intervals to $_checkIntervals');
     }
   }
 }
