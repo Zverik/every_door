@@ -14,7 +14,8 @@ import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/entrance_markers.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 abstract class EntrancesModeDefinition extends BaseModeDefinition {
   List<OsmChange> nearest = [];
@@ -322,8 +323,8 @@ class _ButtonData {
 
 class EntrancesModeCustom extends EntrancesModeDefinition {
   final String _name;
+  MultiIcon? _iconActive;
   MultiIcon? _icon;
-  MultiIcon? _iconOutlined;
   late _ButtonData _primary;
   late _ButtonData _secondary;
   Map<String, dynamic> _rendering = const {};
@@ -340,13 +341,13 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
 
     _rendering = data['markers'] ?? const {};
 
-    final modeIconName = data['icon'];
-    if (modeIconName != null) {
-      _icon = plugin.loadIcon(modeIconName, data['name'] ?? _name);
-      if (data.containsKey('iconGray')) {
-        _iconOutlined =
-            plugin.loadIcon(data['iconGray']!, data['name'] ?? _name);
-      }
+    // Both icons are considered optional.
+    final tooltip = data['name'] ?? _name;
+    if (data.containsKey('icon')) {
+      _icon = plugin.loadIcon(data['icon']!, tooltip);
+    }
+    if (data.containsKey('iconActive')) {
+      _iconActive = plugin.loadIcon(data['iconActive']!, tooltip);
     }
 
     _primary = _ButtonData.fromJson(data['primary'], plugin);
@@ -374,7 +375,7 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
 
   @override
   MultiIcon getIcon(BuildContext context, bool outlined) {
-    return (!outlined ? _icon : _iconOutlined ?? _icon) ??
+    return (outlined ? _icon ?? _iconActive : _iconActive ?? _icon) ??
         super.getIcon(context, outlined);
   }
 

@@ -11,7 +11,8 @@ import 'package:every_door/widgets/poi_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:material_color_names/material_color_names.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 const _kDefaultMicroPresets = [
   // Should be exactly 8 lines.
@@ -165,8 +166,8 @@ class DefaultMicromappingModeDefinition extends MicromappingModeDefinition {
 
 class MicromappingModeCustom extends MicromappingModeDefinition {
   final String _name;
+  MultiIcon? _iconActive;
   MultiIcon? _icon;
-  MultiIcon? _iconOutlined;
 
   MicromappingModeCustom({
     required ref,
@@ -175,14 +176,13 @@ class MicromappingModeCustom extends MicromappingModeDefinition {
     required Plugin plugin,
   })  : _name = name,
         super(ref) {
-
-    final modeIconName = data['icon'];
-    if (modeIconName != null) {
-      _icon = plugin.loadIcon(modeIconName, data['name'] ?? _name);
-      if (data.containsKey('iconGray')) {
-        _iconOutlined =
-            plugin.loadIcon(data['iconGray']!, data['name'] ?? _name);
-      }
+    // Both icons are considered optional.
+    final tooltip = data['name'] ?? _name;
+    if (data.containsKey('icon')) {
+      _icon = plugin.loadIcon(data['icon']!, tooltip);
+    }
+    if (data.containsKey('iconActive')) {
+      _iconActive = plugin.loadIcon(data['iconActive']!, tooltip);
     }
 
     updateFromJson(data, plugin);
@@ -190,7 +190,7 @@ class MicromappingModeCustom extends MicromappingModeDefinition {
 
   @override
   MultiIcon getIcon(BuildContext context, bool outlined) {
-    return (!outlined ? _icon : _iconOutlined ?? _icon) ??
+    return (outlined ? _icon ?? _iconActive : _iconActive ?? _icon) ??
         super.getIcon(context, outlined);
   }
 
