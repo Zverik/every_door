@@ -466,7 +466,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "{changes} enviats a la API.",
+  "changesUploadedMessage": "{changes} enviats a OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -962,7 +962,7 @@
   "@tagsShare": {
     "description": "Tooltip for the sharing button on the tags panel."
   },
-  "faqTaggingContent": "Per què falta un objecte a l'editor? Quan es mostren aquests punts blancs en el mode de micromapa? Com s'ordenen els objectes?\n\nLes respostes a totes aquestes preguntes es troben a [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Aquí teniu el que podeu comprovar:\n\n* L'ordre de les claus de l'etiqueta principal — llista `kMainKeys`.\n* Quins objectes es descarreguen — funció `isGoodTags`.\n* El que es considera un equipament — funció `isAmenityTags`.\n* Quins punts s'ajusten a quins vials — funció `detectSnap`.\n* Quan està incomplet un objecte de micromapa — funció `needsMoreInfo`.",
+  "faqTaggingContent": "Per què falta un objecte a l'editor? Quan es mostren aquests punts blancs en el mode de micromapatge? Com s'ordenen els objectes?\n\nLes respostes a totes aquestes preguntes es troben a [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Això és el que podeu veure:\n\n* L'ordre de claus per a l'etiqueta principal: llista `kMainKeys` a `main_key.dart`.\n* Quins objectes es descarreguen: classe `_EverythingKind`.\n* Què es considera un servei: classe `_AmenityKind`.\n* Quins punts s'encaixen a quines direccions: lògica de la classe `ElementKindImpl` (vegeu les subclasses rellevants).\n* Quan un objecte de micromapatge està incomplet: classe `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "versionsTitle": "Històric de {elementRef}",
   "@versionsTitle": {
@@ -1271,5 +1271,89 @@
   "editorDeleteBuilding": "Enderrocat",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "pluginsSeeLogs": "Veure registres",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "settingsPlugins": "Complements",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "Activa",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Desactiva",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Desactivat",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Repositori de complements",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Cerca",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Actualitza",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "Instal·la",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsMore": "Més...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallQuestion": "Voleu instal·lar el complement \"{plugin}\" versió {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "desconegut",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "tileDragDownload": "Proveu de prémer el botó de descàrrega.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Es convertirà en una nota OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsInstallation": "Instal·lació del complement",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsUrl": "URL del complement",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsInstallSource": "Font: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
   }
 }
