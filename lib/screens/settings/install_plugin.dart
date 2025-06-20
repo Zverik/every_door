@@ -8,7 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class InstallPluginPage extends ConsumerStatefulWidget {
   /// An URI for the plugin. Can be either a direct URL for a file to download
@@ -120,7 +121,8 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         .where((p) => p.id == data.id)
         .firstOrNull;
 
-    if (installed == null || data.update ||
+    if (installed == null ||
+        data.update ||
         ((data.version ?? PluginVersion.zero) > installed.version)) {
       if (data.url == null) {
         throw Exception(
@@ -137,6 +139,10 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
       try {
         var request = http.Request('GET', data.url!);
         var response = await client.send(request);
+        if (response.statusCode != 200) {
+          throw Exception(
+              "Could not download plugin, code ${response.statusCode} for ${data.url}");
+        }
         final fileSize = ((response.contentLength ?? 0) / 1024 / 1024).round();
         if (fileSize > 100) {
           throw Exception(
@@ -161,8 +167,6 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         throw Exception(
             'The plugin supplies URL different from ${data.url}: $bundledUrl');
       }
-
-      // TODO: show and agree idk
 
       await repo.installFromTmpDir(pluginDir);
     } else {

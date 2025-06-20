@@ -118,8 +118,7 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
                       );
                     },
                   ))
-              .toList() ??
-          [];
+              .toList();
     }
 
     return Scaffold(

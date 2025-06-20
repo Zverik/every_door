@@ -25,10 +25,14 @@ class PluginVersion {
   static final zero = PluginVersion('0');
 
   PluginVersion(dynamic version) {
-    if (version is int) {
+    if (version == null) {
+      // Null version is considered "0", equal to [zero].
+      _major = null;
+      _minor = 0;
+    } if (version is int) {
       _major = null;
       _minor = version;
-    } else {
+    } else if (version is String || version is double) {
       final vs = version.toString();
       final p = vs.indexOf('.');
       if (p < 0) {
@@ -38,6 +42,8 @@ class PluginVersion {
         _major = int.parse(vs.substring(0, p));
         _minor = int.parse(vs.substring(p + 1));
       }
+    } else {
+      throw ArgumentError('Plugin version should be a number or a string');
     }
   }
 
