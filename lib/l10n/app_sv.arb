@@ -248,7 +248,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Skickade {changes} till API:t.",
+  "changesUploadedMessage": "Skickade {changes} till OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1066,7 +1066,7 @@
   "@faqCheckmarksContent": {},
   "faqFloorsContent": "Nej. Den förstnämnda resulterar i etiketten `addr:floor=3`. Det är den våning som anges i navigationen och som vanligen används. Den andra ger inte denna etikett, utan `level=3`. Det talet är ett våningsnummer i en sekvens från 0 till `bulding:levels - 1`. Med andra ord beror värdet på `addr:floor` i en trevåningsbyggnad på land, men `level` är alltid 0, 1 eller 2.\n\nSå här förhåller sig notationen i appen till dessa etiketter:\n\n* `2`: `addr:floor=2` och icke-tom `level=*`.\n* `4/`: `addr:floor=4` men det finns ingen `level`-etikett.\n* `/1`: `level=1` men det finns ingen `addr:floor`-etikett.\n* `1/0`: `addr:floor=1` + `level=0` (och det finns ett objekt i närheten: med samma `addr:floor`men annan `level`, eller tvärtom.",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "Varför saknas ett objekt i editorn? När visas vita punkter i mikrokartläggningsläget? Hur sorteras objekt?\n\nSvar på alla dessa frågor finns i [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Det här är vad du kan titta på:\n\n* Nyckelordningen för huvudetiketten — listan `kMainKeys`.\n* Vilka objekt som laddas ned — funktionen `isGoodTags`.\n* Vad som betraktas som ett ställe — `isAmenityTags`.\n* Vilka punkter som fästs till vilka vägar — funktionen `detectSnap`.\n* När ett mikrokartläggningsobjekt är inkomplett — funktionen `needsMoreInfo`.",
+  "faqTaggingContent": "Varför saknas ett objekt i editorn? När visas dessa vita punkter i mikrokartläggningsläget? Hur sorteras objekt?\n\nSvar på alla dessa frågor finns i [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Det här är vad du kan titta på:\n\n* Nyckelordningen för huvudetiketten — lista `kMainKeys` i `main_key.dart`.\n* Vilka objekt som laddas ned — klass `_EverythingKind`.\n* Vad som betraktas som ett ställe — klass `_AmenityKind`.\n* Vilka punkter som fästs till vilka vägar — klass `ElementKindImpl`logik (se relevanta underklasser)\n* När ett mikrokartläggningsobjekt är inkomplett — klass `needsMoreInfo`.",
   "@faqTaggingContent": {},
   "settingsHashtags": "Hashtags för ändringsset",
   "@settingsHashtags": {
@@ -1124,7 +1124,7 @@
   "@faqYellow": {},
   "faqYellowContent": "Icke-gula etiketter i entréläget och vita prickar i mikromappningsläget betyder att elementen saknar vissa viktiga attribut. Till exempel:\n\n* Byggnader förväntas ha våningsplanantal.\n* Entréer skall ha typ och för trapphus även hur många våningar som omfattas.\n* Bänkar skall ha material och ryggstöd.\n* Träd skall ha lövtyp och cykel.",
   "@faqYellowContent": {},
-  "fieldCardsOnly": "endast kontanter",
+  "fieldCardsOnly": "endast kort",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
@@ -1269,5 +1269,89 @@
   "editorDeleteBuilding": "Demolerades",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "settingsPlugins": "Insticksprogram",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "Aktivera",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Inaktivera",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Inaktiverade",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Insticksprogramsförråd",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Sök",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Uppdatera",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "Installera",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsMore": "Mer…",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsUrl": "Insticksprogram-URL",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsUnknownVersion": "okänt",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Källa: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsInstallation": "Insticksprogramsinstallation",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Installera insticksprogram \"{plugin}\" version {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "tileDragDownload": "Testa att trycka på nedladdningsknappen.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Kommer att konverteras till en OSM-anteckning",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsSeeLogs": "Se loggar",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
   }
 }

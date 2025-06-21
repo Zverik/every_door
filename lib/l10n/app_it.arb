@@ -1009,5 +1009,17 @@
   "pluginsUnknownVersion": "sconosciuto",
   "@pluginsUnknownVersion": {
     "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "settingsPlugins": "Plugin",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsRepository": "Repository dei plugin",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSeeLogs": "Vedi registri",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
   }
 }
