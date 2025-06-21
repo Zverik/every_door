@@ -4,6 +4,8 @@ import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/plugin_i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:markdown_widget/markdown_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Thrown only when loading a plugin. Prints the enclosed exception as well.
 class PluginLoadException implements Exception {
@@ -29,7 +31,7 @@ class PluginVersion {
       // Null version is considered "0", equal to [zero].
       _major = null;
       _minor = 0;
-    } if (version is int) {
+    } else if (version is int) {
       _major = null;
       _minor = version;
     } else if (version is String || version is double) {
@@ -139,6 +141,8 @@ class Plugin extends PluginData {
   factory Plugin.fromData(PluginData pd, Directory directory) =>
       Plugin(id: pd.id, data: pd.data, directory: directory);
 
+  String? get intro => data['intro'];
+
   @override
   MultiIcon? get icon =>
       data.containsKey('icon') ? loadIcon(data['icon']) : null;
@@ -196,5 +200,38 @@ class Plugin extends PluginData {
     if (tooltip != null) icon = icon.withTooltip(tooltip);
     _iconCache[name] = icon;
     return icon;
+  }
+
+  Future<void> showIntro(BuildContext context) async {
+    final intro = this.intro;
+    if (intro == null) return;
+
+    await showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(translate(context, 'name')),
+        content: SingleChildScrollView(
+          child: MarkdownBlock(
+            config: MarkdownConfig(
+              configs: [
+                LinkConfig(
+                  onTap: (href) => launchUrl(Uri.parse(href),
+                      mode: LaunchMode.externalApplication),
+                ),
+              ],
+            ),
+            data: translate(context, 'intro'),
+          ),
+        ),
+        actions: [
+          TextButton(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

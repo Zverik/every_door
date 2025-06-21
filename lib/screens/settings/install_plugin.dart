@@ -10,11 +10,12 @@ import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class InstallPluginPage extends ConsumerStatefulWidget {
   /// An URI for the plugin. Can be either a direct URL for a file to download
   /// (should end with an .edp extension), or an Every Door-style link:
-  /// https://plugins.every-door.app/i/id?url=<download url>&version=<version>&update=true
+  /// https://plugins.every-door.app/i/id?url=&lt;download_url&gt;&amp;version=&lt;version&gt;&amp;update=true
   /// Note than none of the query parameters are required.
   final Uri uri;
 
@@ -168,7 +169,13 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
             'The plugin supplies URL different from ${data.url}: $bundledUrl');
       }
 
-      await repo.installFromTmpDir(pluginDir);
+      final plugin = await repo.installFromTmpDir(pluginDir);
+
+      if (plugin.intro != null && await _needShowIntro(plugin) && mounted) {
+        _logger.info('Showing intro for ${plugin.id}!');
+        _saveIntroShown(plugin);
+        await plugin.showIntro(context);
+      }
     } else {
       // TODO: update the currently installed plugin, and enable it.
       throw Exception(
@@ -180,6 +187,34 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
         return r.isFirst || r.settings.name == 'settings';
       });
     }
+  }
+
+  static const _kIntroRefKey = 'intro_shown';
+
+  Future<bool> _needShowIntro(Plugin plugin) async {
+    if (plugin.intro == null) return false;
+    final prefs = await SharedPreferences.getInstance();
+    final introList = prefs.getStringList(_kIntroRefKey);
+    if (introList == null || introList.isEmpty) return true;
+    final Map<String, PluginVersion> introMap = Map.fromEntries(introList
+        .map((e) => e.split(':'))
+        .map((p) => MapEntry(p[0], PluginVersion(p[1]))));
+    _logger.info(
+        'Need intro? Last version was ${introMap[plugin.id]}, new version is ${plugin.version}');
+    return plugin.version > (introMap[plugin.id] ?? PluginVersion.zero);
+  }
+
+  Future<void> _saveIntroShown(Plugin plugin) async {
+    if (plugin.intro == null) return;
+    final value = '${plugin.id}:${plugin.version}';
+    final prefs = await SharedPreferences.getInstance();
+    List<String>? introList = prefs.getStringList(_kIntroRefKey);
+    if (introList == null || introList.isEmpty) {
+      introList = [value];
+    } else {
+      introList.add(value);
+    }
+    await prefs.setStringList(_kIntroRefKey, introList);
   }
 
   void _wrapInstall() async {

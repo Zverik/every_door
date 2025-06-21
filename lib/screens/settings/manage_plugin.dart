@@ -56,6 +56,13 @@ class _ManagePluginPageState extends ConsumerState<ManagePluginPage> {
                 ));
               },
             ),
+          if (widget.plugin.intro != null)
+            ListTile(
+              title: Text('Show Intro'),
+              onTap: () {
+                widget.plugin.showIntro(context);
+              },
+            ),
         ],
       ),
     );

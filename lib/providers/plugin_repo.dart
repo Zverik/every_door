@@ -164,7 +164,7 @@ class PluginRepository extends Notifier<List<Plugin>> {
   /// the directory after either error or success. Will throw
   /// exceptions when either file operations fail, or plugin
   /// cannot be enabled because of internal errors.
-  Future<void> installFromTmpDir(Directory tmpPluginDir) async {
+  Future<Plugin> installFromTmpDir(Directory tmpPluginDir) async {
     try {
       // Read the metadata.
       final tmpPlugin = await readPluginData(tmpPluginDir);
@@ -176,13 +176,17 @@ class PluginRepository extends Notifier<List<Plugin>> {
       final pluginDir = _getPluginDirectory(tmpPlugin.id);
       await tmpPluginDir.rename(pluginDir.path);
 
-      final plugin =
-          Plugin.fromData(await readPluginData(pluginDir), pluginDir);
+      final data = await readPluginData(pluginDir);
+      final plugin = Plugin.fromData(data, pluginDir);
 
       // Add the plugin record to the list.
       state = state.followedBy([plugin]).toList();
 
-      ref.read(pluginManagerProvider.notifier).setStateAndSave(plugin, true);
+      await ref
+          .read(pluginManagerProvider.notifier)
+          .setStateAndSave(plugin, true);
+
+      return plugin;
     } finally {
       // delete the directory and exit
       try {
