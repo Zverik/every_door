@@ -30,7 +30,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
     });
   }
 
-  showLoginDialog(BuildContext context) async {
+  Future<void> showLoginDialog(BuildContext context) async {
     final loc = AppLocalizations.of(context)!;
     final isOk = await showOkCancelAlertDialog(
       context: context,
@@ -82,7 +82,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
     }
   }
 
-  loginWithOAuth() async {
+  Future<void> loginWithOAuth() async {
     try {
       await ref.read(authProvider.notifier).loginWithOAuth(context);
       updateDetails();
@@ -125,112 +125,117 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
       );
     } else {
       // logged in - updated UI
-      content = Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Conditional avatar: network image or icon
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.1),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+      content = SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Conditional avatar: network image or icon
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: details?.avatar != null
+                      ? CircleAvatar(
+                          radius: 60,
+                          backgroundImage:
+                              CachedNetworkImageProvider(details!.avatar!),
+                        )
+                      : CircleAvatar(
+                          radius: 60,
+                          backgroundColor: theme.colorScheme.primaryContainer,
+                          child: Icon(
+                            Icons.person,
+                            size: 60,
+                            color: theme.colorScheme.onPrimaryContainer,
+                          ),
+                        ),
                 ),
-                child: details?.avatar != null
-                    ? CircleAvatar(
-                        radius: 60,
-                        backgroundImage:
-                            CachedNetworkImageProvider(details!.avatar!),
-                      )
-                    : CircleAvatar(
-                        radius: 60,
-                        backgroundColor: theme.colorScheme.primaryContainer,
-                        child: Icon(
-                          Icons.person,
-                          size: 60,
-                          color: theme.colorScheme.onPrimaryContainer,
+                const SizedBox(height: 20),
+                Text(
+                  login,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                if (details != null) ...[
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 400.0),
+                    child: Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            _buildStatRow(
+                              loc.accountChangesets,
+                              details!.changesets.toString(),
+                              theme,
+                            ),
+                            const SizedBox(height: 10),
+                            _buildStatRow(
+                              loc.accountUnreadMail,
+                              details!.unreadMessages.toString(),
+                              theme,
+                            ),
+                          ],
                         ),
                       ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                login,
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurface,
-                ),
-              ),
-              const SizedBox(height: 20),
-              if (details != null) ...[
-                Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        _buildStatRow(
-                          loc.accountChangesets,
-                          details!.changesets.toString(),
-                          theme,
-                        ),
-                        const SizedBox(height: 10),
-                        _buildStatRow(
-                          loc.accountUnreadMail,
-                          details!.unreadMessages.toString(),
-                          theme,
-                        ),
-                      ],
+                  const SizedBox(height: 30),
+                ],
+                ElevatedButton(
+                  onPressed: () async {
+                    if (await showOkCancelAlertDialog(
+                          context: context,
+                          title: loc.accountLogout + '?',
+                          okLabel: loc.accountLogout.toUpperCase(),
+                          isDestructiveAction: true,
+                        ) ==
+                        OkCancelResult.ok) {
+                      // logout
+                      ref.read(authProvider.notifier).logout();
+                      setState(() {
+                        details = null;
+                      });
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: theme.colorScheme.error,
+                    foregroundColor: theme.colorScheme.onError,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 40.0,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    loc.accountLogout,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: theme.colorScheme.onError,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
               ],
-              ElevatedButton(
-                onPressed: () async {
-                  if (await showOkCancelAlertDialog(
-                        context: context,
-                        title: loc.accountLogout + '?',
-                        okLabel: loc.accountLogout.toUpperCase(),
-                        isDestructiveAction: true,
-                      ) ==
-                      OkCancelResult.ok) {
-                    // logout
-                    ref.read(authProvider.notifier).logout();
-                    setState(() {
-                      details = null;
-                    });
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: theme.colorScheme.error,
-                  foregroundColor: theme.colorScheme.onError,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12.0,
-                    horizontal: 40.0,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: Text(
-                  loc.accountLogout,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: theme.colorScheme.onError,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       );
