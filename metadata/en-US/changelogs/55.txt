@@ -1,0 +1,4 @@
+* Plugin support!
+* Markers on the map turn green for confirmed amenities.
+* Correct weekday order for US and Israel.
+* Displaying compass direction.
