@@ -105,7 +105,6 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
       items = list
               .map((p) => PluginCard(
                     plugin: p,
-                    onMore: () {},
                     actionText: installed.containsKey(p.id)
                         ? p.version.fresherThan(installed[p.id])
                             ? loc.pluginsUpdate.toUpperCase()
@@ -187,6 +186,7 @@ class _PluginRepositoryPageState extends ConsumerState<PluginRepositoryPage> {
                 ),
               ),
             ...items,
+            SizedBox(height: 100.0),
           ],
         ),
       ),

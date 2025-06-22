@@ -5,7 +5,8 @@ import 'package:every_door/screens/settings/plugin_repo.dart';
 import 'package:every_door/widgets/plugin_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class PluginSettingsPage extends ConsumerStatefulWidget {
   const PluginSettingsPage({super.key});
@@ -42,7 +43,8 @@ class _PluginSettingsPageState extends ConsumerState<PluginSettingsPage> {
       cards = cards.followedBy([
         Container(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8.0, top: 32.0),
-          child: Text(loc.pluginsDisabledHeader, style: Theme.of(context).textTheme.bodySmall),
+          child: Text(loc.pluginsDisabledHeader,
+              style: Theme.of(context).textTheme.bodySmall),
         ),
       ]).followedBy(inactive.map((p) => PluginCard(
             plugin: p,
@@ -73,10 +75,11 @@ class _PluginSettingsPageState extends ConsumerState<PluginSettingsPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: ListView(
-          children: <Widget>[
-                SizedBox(height: 12.0),
-              ] +
-              cards.toList(),
+          children: [
+            SizedBox(height: 12.0),
+            ...cards,
+            SizedBox(height: 100.0),
+          ],
         ),
       ),
     );

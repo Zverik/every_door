@@ -1,20 +1,21 @@
 import 'package:every_door/models/plugin.dart';
 import 'package:flutter/material.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class PluginCard extends StatelessWidget {
   final PluginData plugin;
   final bool active;
   final String? actionText;
   final Function()? onAction;
-  final Function() onMore;
+  final Function()? onMore;
 
   const PluginCard(
       {super.key,
       required this.plugin,
       this.active = true,
       this.onAction,
-      required this.onMore,
+      this.onMore,
       this.actionText});
 
   @override
@@ -58,10 +59,11 @@ class PluginCard extends StatelessWidget {
                   child: Text(actionText ?? 'ACTION'),
                   onPressed: onAction,
                 ),
-              TextButton(
-                child: Text(loc.pluginsMore.toUpperCase()),
-                onPressed: onMore,
-              ),
+              if (onMore != null)
+                TextButton(
+                  child: Text(loc.pluginsMore.toUpperCase()),
+                  onPressed: onMore,
+                ),
               const SizedBox(width: 8.0),
             ],
           ),
