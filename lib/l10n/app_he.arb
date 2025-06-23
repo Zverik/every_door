@@ -1271,5 +1271,89 @@
   "faqLettersContent": "אם אין לך אפשרות להחליף בין מקלדת נומרית למלאה, רצוי לבדוק את הגדרות היישומון. הן מאחורי הכפתור בפינה הימנית העליונה. להפעיל שם את „הרחבת מקלדת נומרית”.",
   "@faqLettersContent": {},
   "faqTaggingContent": "למה חסר פריט בעורך? מתי מופיעות הנקודות הלבנות האלה במצב המיפוי הזעיר? איך פריטים מסודרים?\n\nהתשובות לכל השאלות האלה מופיעות ב־[element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). אלו דברים שכדאי לבדוק:\n\n* סדר התגיות לתגית הראשית — הרשימה `kMainKeys` ב־`main_key.dart`.\n* אילו פריטים יימשכו למכשיר — המחלקה `‎_EverythingKind`.\n* מה נחשב שירות לציבור — המחלקה `‎_AmenityKind`.\n* אילו נקודות מוצמדות לאילו דרכים — הלוגיקה של המחלקה `ElementKindImpl` (תת־מחלקות תואמות בפנים).\n* מתי פריט מיפוי זעיר הוא חלקי — המחלקה `‎_NeedsMoreInfo`.",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "settingsPlugins": "תוספים",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "הפעלה",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisabledHeader": "מושבת",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "מאגר תוספים",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsUpdate": "עדכון",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "התקנה",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "כתובת תוסף",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsInstallation": "התקנת תוסף",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "להתקין את התוסף „{plugin}” בגרסה {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsInstallSource": "מקור: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "warningFixmeNote": "יומר להערה ב־OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsMore": "עוד…",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "tileDragDownload": "אפשר לנסות ללחוץ על כפתור ההורדה.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "pluginsDisable": "השבתה",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsSearch": "חיפוש",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUnknownVersion": "לא ידוע",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsSeeLogs": "ר׳ יומנים",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  }
 }
