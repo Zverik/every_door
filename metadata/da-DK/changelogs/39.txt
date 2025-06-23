@@ -1,0 +1,3 @@
+* Rettet store bogstaver til beskrivelser.
+* Rettet manglende gule advarsler om faciliteter.
+* Rettet markering af en butik på bygning som nedlagt.

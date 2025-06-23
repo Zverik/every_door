@@ -1,0 +1,5 @@
+Denne editor tvinger dig ikke til at tænke. Bare gå til et indkøbscenter, og start Every Door. Du vil se kortlagte butikker omkring dig: Tryk på fluebenet for dem, der stadig er der, og tilføj butikker, der ikke er på kortet. Det er hele processen: Du kan holde hele din by opdateret takket være denne enkle editor.
+
+Der er også en mikrokortlægning-tilstand til at verificere og tilføje bænke og gadelamper. Og en indgangstilstand til at tilføje bygningsegenskaber og indgange. — som automatisk flettes sammen med bygningskonturer.
+
+Every Door bruger forudindstillinger og andre data fra iD-editoren.

@@ -1,0 +1,4 @@
+* Du kan zoome ud til maksimum.
+* Zoomniveauer bevares mellem tilstande.
+* Retningseditor for bænke og kameraer.
+* Stabiliserede farver i mikrokortlægnings-tilstand.

@@ -1,0 +1,4 @@
+* Understøttelse af udvidelser!
+* Markører på kortet skifter til grønt for bekræftede faciliteter.
+* Korrekt ugedagsrækkefølge for USA og Israel.
+* Visning af kompasretning.

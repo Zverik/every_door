@@ -1,0 +1,4 @@
+* Rettet konflikter og zoomniveauer.
+* Rettet redigering på ekstreme breddegrader.
+* Tilføjet cadastre-baggrundsbilledlag.
+* Oversættelser til hebraisk og tamilsk.

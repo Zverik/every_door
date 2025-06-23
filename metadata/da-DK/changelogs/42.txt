@@ -1,0 +1,4 @@
+* Tilstand for skriblerier.
+* Ugedage på et lokalt sprog.
+* Forslag til etage-tags.
+* Opdateringer til forudindstillinger og baggrundsbilleder.

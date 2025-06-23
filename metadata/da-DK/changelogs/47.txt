@@ -1,0 +1,4 @@
+* Opdaterede forudindstillinger og baggrundbilledlag.
+* Græske og indonesiske oversættelser.
+* Skalabjælke til kortvælger.
+* Tilføjet vandvejsobjekter til mikrokortlægning.
