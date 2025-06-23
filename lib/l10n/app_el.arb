@@ -1222,5 +1222,22 @@
   "warningFixmeNote": "Θα μετατραπεί σε σημείωση OSM",
   "@warningFixmeNote": {
     "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "tileDragDownload": "Δοκιμάστε να πατήσετε το κουμπί λήψης.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "editorTags": "Ακατέργαστες ετικέτες",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "warningFixme": "Διόρθωσε με: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
   }
 }
