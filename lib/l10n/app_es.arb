@@ -35,7 +35,7 @@
   "@editorCloseMessage": {
     "description": "Message on closing the editor without saving changes."
   },
-  "editorLoadingPreset": "Cargando preajuste…",
+  "editorLoadingPreset": "Cargando ajustes preestablecidos…",
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
@@ -91,7 +91,7 @@
   "@chooseType": {
     "description": "Search field hint on the type choosing screen."
   },
-  "loadingPresets": "Cargando preajustes…",
+  "loadingPresets": "Cargando ajustes preestablecidos…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
@@ -846,7 +846,7 @@
   "@faqCheckmarksContent": {},
   "faqLettersContent": "Si tu teclado numérico no puede cambiarse a uno completo, comprueba las configuraciones de la aplicación. Están detrás del botón de la esquina superior izquierda. Activa allí el «teclado numérico ampliado».",
   "@faqLettersContent": {},
-  "faqTaggingContent": "¿Por qué falta un objeto en el editor? ¿Cuándo se muestran estos puntos blancos en el modo de micromapeo? ¿Cómo se ordenan los objetos?\n\nLas respuestas a todas estas preguntas están en [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Esto es lo que puedes mirar:\n\n* El orden de las claves para la etiqueta principal — lista «kMainKeys».\n* Qué objetos se descargan — función «isGoodTags».\n* Qué se considera un servicio — función «isAmenityTags».\n* Qué puntos se ajustan a qué formas — función «detectSnap».\n* Cuando un objeto de micromapeo está incompleto — función «needsMoreInfo».",
+  "faqTaggingContent": "¿Por qué falta un objeto en el editor? ¿Cuándo se muestran estos puntos blancos en el modo de micromapeo? ¿Cómo se ordenan los objetos?\n\nLas respuestas a todas estas preguntas están en [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Esto es lo que puedes mirar:\n\n* El orden de las claves para la etiqueta principal — lista «kMainKeys».\n* Qué objetos se descargan — función «isGoodTags».\n* Qué se considera un servicio — función «isAmenityTags».\n* Qué puntos se ajustan a qué formas — función «detectSnap».\n* Cuando un objeto de micromapeo está incompleto — función «needsMoreInfo».",
   "@faqTaggingContent": {},
   "versionsEnableInternet": "Conectarse a Internet para obtener el historial de versiones",
   "@versionsEnableInternet": {
