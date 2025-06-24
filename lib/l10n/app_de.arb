@@ -754,7 +754,7 @@
   },
   "faqFloorsContent": "Nein, das erste Geschoss hat das Attribut `addr:floor=3`. Das ist die Etage, die im Gebäude, beispielsweise in Aufzügen vermerkt ist. Das zweite Geschoss hat ein anderes Attribut, nämlich `level=3`. Diese Zahl ist einfach eine fortlaufende Geschossnummer von Null bis `building:levels` − 1. D.h., in einem dreistöckigen Gebäude variiert der Wert für `addr:floor` je nach Land, aber `level` ist immer 0, 1 oder 2.\n\nIm Folgenden sieht man, wie diese Attribute in Every Door dargestellt werden:\n\n* `2`: `addr:floor=2` und irgendein `level=*`.\n* `4/`: `addr:floor=4`, aber ohne `level`-Attribut.\n* `/1`: `level=1`, aber ohne `addr:floor`-Attribut.\n* `1/0`: `addr:floor=1` + `level=0` (und es gibt in der Nähe ein Objekt mit dem selben Wert für `addr:floor`, aber unterschiedlichem `level`-Wert, oder umgekehrt).",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "Wieso fehlt ein Objekt im Editor? Wann werden im Mikromapping-Modus weiße Punkte angezeigt? Wie werden die Objekte sortiert?\n\nAntworten dazu sind in [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) zu finden. Hier sind Dinge, die du anschauen kannst:\n\n* Die Sortierreihenfolge für den Hauptwert — Liste `kMainKeys`.\n* Welche Objekte heruntergeladen werden — Funktion `isGoodTags`.\n* Was als Einrichtung (`amenity`) eingeordnet wird — Funktion `isAmenityTags`.\n* Welche Knoten mit welche Linien verbunden werden — Funktion `detectSnap`.\n* Wann ein Mikromapping-Objekt als unvollständig angesehen wird — Funktion `needsMoreInfo`.",
+  "faqTaggingContent": "Warum fehlt ein Objekt im Editor? Wann werden diese weißen Punkte im Mikromapping-Modus angezeigt? Wie werden Objekte sortiert?\n\nAntworten auf all diese Fragen findest du in [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Hier findest du alles, was du wissen musst:\n\n* Die Schlüsselreihenfolge für das Haupt-Tag – Liste `kMainKeys` in `main_key.dart`.\n* Welche Objekte heruntergeladen werden – Klasse `_EverythingKind`.\n* Was als Annehmlichkeit gilt – Klasse `_AmenityKind`.\n* Welche Punkte auf welche Weise ausgerichtet werden – Logik der Klasse `ElementKindImpl` (siehe entsprechende Unterklassen).\n* Wann ein Mikromapping-Objekt unvollständig ist – Klasse `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "editorTags": "Alle Attribute",
   "@editorTags": {
@@ -1029,6 +1029,20 @@
       "host": {
         "description": "Web host, no path or scheme",
         "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsInstallQuestion": "Plugin „{plugin}“ Version {version} installieren?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
       }
     }
   }
