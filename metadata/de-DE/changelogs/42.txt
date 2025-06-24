@@ -1,0 +1,4 @@
+* Kritzelnotizen-Modus.
+* Wochentage in lokaler Sprache.
+* Vorschläge für Stockwerk-Erfassung.
+* Updates für Voreinstellungen und Hintergrundbilder.

@@ -1,0 +1,3 @@
+* Fahrradsperren und Weihnachts-Dinge hinzugefügt.
+* Unterstützung von `geo:`-Links.
+* Neues adaptives Icon.

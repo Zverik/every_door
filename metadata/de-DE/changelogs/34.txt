@@ -1,0 +1,3 @@
+* Aktualisierte Voreinstellungen und Hintergrundbilder.
+* Probleme mit Notizen und doppelten Einträgen behoben.
+* Block-Nummern für japanische Adressen hinzugefügt.

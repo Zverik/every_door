@@ -1,0 +1,5 @@
+Dieser Editor verhindet, dass du zuviel denken musst. Z.B. kannst du einfach in ein Einkaufszentrum gehen und Every Door starten. Du wirst schon in OpenStreetMap erfasste Dinge um dich sehen: bestätige Dinge, die da sind, und erfasse Läden, die noch nicht auf der Karte sind. Das ist schon Alles: du kannst dank diesem simplen Editor die Daten deiner ganze Stadt in OpenStreetMap auf dem Laufenden halten.
+
+Es gibt auch einen Micromapping-Modus zum Verifizieren und Hinzufügen von Sitzbänken und Strassenlaternen. Und einen Eingangs-Modus zum Hinzufügen von Gebäude-Attributen und -Eingängen (die automatisch in der Gebäudekontour hinzugefügt werden).
+
+Every Door verwendet die Voreinstellungen und andere Daten vom iD Editor.

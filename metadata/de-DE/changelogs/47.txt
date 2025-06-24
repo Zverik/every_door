@@ -1,0 +1,4 @@
+* Aktualisierte Voreinstellungen und Hintergrundbilder.
+* Übersetzung in Griechische und Indonesisch.
+* Maßstabsleiste für die Kartenauswahl.
+* `waterway`-Merkmale zum Micromapping-Modus hinzugefügt.
