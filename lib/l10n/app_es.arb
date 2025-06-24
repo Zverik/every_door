@@ -99,7 +99,7 @@
   "@settingsPurgedAllTitle": {
     "description": "Notification title for cleaning all downloaded data from the cache."
   },
-  "settingsDefaultPayment": "Tarjetas de pago predefinidas",
+  "settingsDefaultPayment": "Tarjetas de pago por defecto",
   "@settingsDefaultPayment": {
     "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
   },
@@ -107,7 +107,7 @@
   "@accountPasswordWarningTitle": {
     "description": "Title for the warning dialog about keeping passwords on the device."
   },
-  "changesUploadedMessage": "Enviado {changes} a la API.",
+  "changesUploadedMessage": "Enviado {changes} a OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -266,7 +266,7 @@
   "@fieldFloorLevelDesc": {
     "description": "Description for the \"addr:floor\" tag."
   },
-  "enableLocation": "Activar ubicación",
+  "enableLocation": "Habilitar ubicación",
   "@enableLocation": {
     "description": "Title of the alert for allowing app access to location."
   },
@@ -274,7 +274,7 @@
   "@buttonYes": {
     "description": "Button for approval."
   },
-  "buildingTypeHouse": "inicio",
+  "buildingTypeHouse": "casa",
   "@buildingTypeHouse": {},
   "changesPurgeTitle": "¿Purgar cambios?",
   "@changesPurgeTitle": {
@@ -364,15 +364,15 @@
   "@messageDataObsolete": {
     "description": "Message that appears on the main screen when OSM data is outdated."
   },
-  "enableGPS": "Activar el GPS",
+  "enableGPS": "Habilitar el GPS",
   "@enableGPS": {
     "description": "Title of the alert for enabling location services."
   },
-  "enableGPSMessage": "Activa los servicios de ubicación en el panel de ajustes que será mostrado.",
+  "enableGPSMessage": "Activa los servicios de ubicación en el panel de configuraciones que será mostrado.",
   "@enableGPSMessage": {
     "description": "Contents of the alert for enabling location services."
   },
-  "enableLocationMessage": "Permitir el acceso a la ubicación de la aplicación en el panel de ajustes que será mostrado.",
+  "enableLocationMessage": "Permitir el acceso a la ubicación de la aplicación en el panel de configuraciones que será mostrado.",
   "@enableLocationMessage": {
     "description": "Contents of the alert for allowing app access to location."
   },
@@ -842,11 +842,11 @@
   "@buildingMaterialGlass": {},
   "faqFloorsContent": "No. El primero tiene añadida la etiqueta «addr:floor=3». Ese es el piso tal y como está impreso en la navegación y se utiliza habitualmente. El segundo no tiene esta etiqueta, pero tiene «level=3». Ese número es un número de planta secuencial desde cero hasta «building:levels - 1». Es decir, en un edificio de tres plantas el valor de «addr:floor» depende de un país, pero «level» es siempre 0, 1 o 2.\n\nAsí es como la notación en el editor se relaciona con estas etiquetas:\n\n* «2»: «addr:floor=2» y «level=*» no vacío.\n* «4/»: «addr:floor=4», pero no hay etiqueta «level».\n* 1: «level=1», pero no hay etiqueta «addr:floor».\n* «1/0»: «addr:floor=1» y «level=0» (y hay un objeto cercano con la misma dirección de piso «addr:floor», pero diferente nivel «level», o viceversa).",
   "@faqFloorsContent": {},
-  "faqCheckmarksContent": "Marcan que los datos del elemento fueron confirmados. Estas añaden la etiqueta «check_date» con la fecha actual.\n\nLa idea detrás de las marcas de verificación es que, por ejemplo, luego de sondear la mitad de la ciudad por primera vez, al cabo de un mes regresas y vuelves a sondear. Debes marcar de alguna manera que ves el elemento, pero que nada ha cambiado en él. Esa es la marca de verificación: la pulsas y continúas.\n\nLa marca permanece así durante dos meses. Después, puedes volver a sondear los elementos.",
+  "faqCheckmarksContent": "Marcan que los datos del servicio fueron confirmados. Estas añaden la etiqueta «check_date» con la fecha actual.\n\nLa idea detrás de las marcas de verificación es que, por ejemplo, luego de sondear la mitad de la ciudad por primera vez, al cabo de un mes regresas y vuelves a sondear. Debes marcar de alguna manera que ves el servicio, pero que nada ha cambiado en él. Esa es la marca de verificación: la pulsas y continúas.\n\nLa marca permanece así durante dos meses. Después, puedes volver a sondear los servicios.",
   "@faqCheckmarksContent": {},
-  "faqLettersContent": "Si tu teclado numérico no puede cambiarse a uno completo, comprueba los ajustes de la aplicación. Están detrás del botón de la esquina superior izquierda. Activa allí el «teclado numérico ampliado».",
+  "faqLettersContent": "Si tu teclado numérico no puede cambiarse a uno completo, comprueba las configuraciones de la aplicación. Están detrás del botón de la esquina superior izquierda. Activa allí el «teclado numérico ampliado».",
   "@faqLettersContent": {},
-  "faqTaggingContent": "¿Por qué falta un objeto en el editor? ¿Cuándo se muestran estos puntos blancos en el modo de «micromapping»? ¿Cómo se ordenan los objetos?\n\nLas respuestas a todas estas preguntas están en [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Esto es lo que puedes mirar:\n\n* El orden de las claves para la etiqueta principal — lista «kMainKeys».\n* Qué objetos se descargan — función «isGoodTags».\n* Qué se considera un servicio — función «isAmenityTags».\n* Qué puntos se ajustan a qué formas — función «detectSnap».\n* Cuando un objeto de micromapeo está incompleto — función «needsMoreInfo».",
+  "faqTaggingContent": "¿Por qué falta un objeto en el editor? ¿Cuándo se muestran estos puntos blancos en el modo de micromapeo? ¿Cómo se ordenan los objetos?\n\nLas respuestas a todas estas preguntas están en [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Esto es lo que puedes mirar:\n\n* El orden de las claves para la etiqueta principal — lista «kMainKeys».\n* Qué objetos se descargan — función «isGoodTags».\n* Qué se considera un servicio — función «isAmenityTags».\n* Qué puntos se ajustan a qué formas — función «detectSnap».\n* Cuando un objeto de micromapeo está incompleto — función «needsMoreInfo».",
   "@faqTaggingContent": {},
   "versionsEnableInternet": "Conectarse a Internet para obtener el historial de versiones",
   "@versionsEnableInternet": {
@@ -1090,7 +1090,7 @@
   "@notesCancelMessage": {
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
-  "warningFixme": "Arreglarme: {value}",
+  "warningFixme": "Arréglame: {value}",
   "@warningFixme": {
     "description": "Warning message for when an object has a non-empty fixme value.",
     "placeholders": {
@@ -1192,7 +1192,7 @@
   "@fieldPaymentGlobal": {
     "description": "Tile name for global payment defaults."
   },
-  "apiStatusUploadingNotes": "Subiendo notas",
+  "apiStatusUploadingNotes": "Cargando notas",
   "@apiStatusUploadingNotes": {
     "description": "Text displayed when the app is uploading notes to the API."
   },
@@ -1230,11 +1230,11 @@
   "@drawPath": {
     "description": "Tool description: unpaved narrow footway. Keep it short."
   },
-  "drawCycleway": "Carril bici",
+  "drawCycleway": "Carril de bicicleta",
   "@drawCycleway": {
     "description": "Tool description: segregated cycleway. Keep it short."
   },
-  "drawCyclewayShared": "Carril bici compartido",
+  "drawCyclewayShared": "Carril compartido de bicicleta",
   "@drawCyclewayShared": {
     "description": "Tool description: non-segregated cycleway. Keep it short."
   },
@@ -1269,5 +1269,89 @@
   "editorDeleteBuilding": "Demolido",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "warningFixmeNote": "Será convertido en una nota de OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "tileDragDownload": "Intenta pulsar el botón de descarga.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "pluginsInstall": "Instalar",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsSeeLogs": "Ver registros",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "pluginsDisable": "Deshabilitar",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsEnable": "Habilitar",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisabledHeader": "Deshabilitado(s)",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Repositorio de extensiones",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Buscar",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Actualizar",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsMore": "Más...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Instalación de la extensión",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsUrl": "URL de la extensión",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsUnknownVersion": "desconocida",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Fuente: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsInstallQuestion": "¿Instalar extensión \"{plugin}\" versión {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "settingsPlugins": "Extensiones",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
   }
 }
