@@ -1,4 +1,4 @@
-* Opdaterede forudindstillinger og baggrundbilledlag.
+* Opdaterede forudindstillinger og baggrundsbilledlag.
 * Græske og indonesiske oversættelser.
 * Skalabjælke til kortvælger.
 * Tilføjet vandvejsobjekter til mikrokortlægning.
