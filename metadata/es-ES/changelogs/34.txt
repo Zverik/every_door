@@ -1,0 +1,3 @@
+* Actualizado los ajustes preestablecidos y las imágenes.
+* Solucionado los problemas relacionados con la pérdida de notas y la duplicación de servicios.
+* Añadido números de manzana para Japón.

@@ -1,0 +1,4 @@
+* Añadido la visualización de la ruta recorrida recientemente.
+* El dibujo GeoScribbles está bloqueado por defecto.
+* Escáner de códigos QR para el campo del sitio web.
+* La ubicación ahora se actualiza una vez por segundo.

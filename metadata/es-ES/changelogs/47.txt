@@ -1,0 +1,4 @@
+* Actualización de los ajustes preestablecidos y las capas de imágenes.
+* Traducciones al griego y al indonesio.
+* Barra de escala para el selector de mapas.
+* Añadido características de vías fluviales al micromapeo.

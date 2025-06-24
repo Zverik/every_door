@@ -1,0 +1,5 @@
+Este editor no te hace pensar. Solo tienes que ir a un centro comercial y abrir Every Door. Verás las tiendas que hay a tu alrededor en el mapa: pulsa la marca de verificación de las que sigan allí y añade las que no estén en el mapa. Eso es todo: gracias a este sencillo editor, podrás mantener toda tu ciudad actualizada.
+
+También hay un modo de micromapeo para verificar y añadir bancos y farolas. Y un modo de entrada para añadir atributos de edificios y entradas, que se fusionan automáticamente con los contornos de los edificios.
+
+Every Door utiliza ajustes preestablecidos y otros datos del editor iD.
