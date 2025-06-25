@@ -1,0 +1,4 @@
+* Suporte a extensões!
+* Os marcadores no mapa ficam verdes para os serviços confirmados.
+* Ordem correta dos dias da semana para EUA e Israel.
+* Exibição da direção da bússola.
