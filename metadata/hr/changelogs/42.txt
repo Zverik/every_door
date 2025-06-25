@@ -1,0 +1,4 @@
+* Crtkaranje u modusu rada za bilješke.
+* Dani u tjednu na lokalnom jeziku.
+* Prijedlozi oznaka katova.
+* Ažuriranja predodređenih oznaka i pozadinskih karti.

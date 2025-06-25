@@ -1,0 +1,4 @@
+* Promijenjeni hashtagovi.
+* Interval potvrde povećan na 2 mjeseca.
+* Polje za naziv je fokusirano prilikom izrade nove točke interesa.
+* Upozorenja za sadržaje koji imaju oznaku `fixme` ili koji su prestari.

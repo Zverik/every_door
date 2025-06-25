@@ -1,0 +1,4 @@
+* Možete zumirati do maksimuma.
+* Razine zumiranja su sačuvane između različitih modusa rada.
+* Uređivač smjera za klupe i kamere.
+* Stabilizirane boje u modusu mikromapiranja.

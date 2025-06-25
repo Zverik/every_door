@@ -1,0 +1,4 @@
+* Dodan je prikaz nedavno prijeđenog puta.
+* Crtanje GeoScribblesom je inicijalno zaključano.
+* Čitač QR koda za polje web-stranice.
+* Lokacija se sada ažurira jednom u sekundi.

@@ -1,0 +1,5 @@
+Ovaj uređivač vas ne tjera na razmišljanje. Jednostavno otiđite u trgovački centar i pokrenite Every Door. Vidjeti ćete mapirane trgovine oko sebe: dotaknite kvačicu za sve koje su još tamo i dodajte trgovine koje nisu na karti. To je cijeli proces: možete ažurirati cijeli svoj grad zahvaljujući ovom jednostavnom uređivaču.
+
+Tu je i način mikromapiranja za provjeru i dodavanje klupa i uličnih svjetiljki. I način ulaza za dodavanje atributa zgrade i ulaza — koji se automatski spajaju u konture zgrade.
+
+Every Door koristi predefinirane oznake i druge podatke iz iD uređivača.
