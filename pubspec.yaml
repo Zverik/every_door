@@ -31,6 +31,7 @@ dependencies:
   flutter_portal: ^1.1.4
   flutter_riverpod: ^2.5.1
   flutter_secure_storage: ^10.0.0-beta.4
+  qr_code_scanner_plus: ^2.0.10+1
   geolocator: ^14.0.1
   http: ^1.1.0
   intl: ^0.20.2
@@ -41,7 +42,6 @@ dependencies:
   markdown_widget: ^2.3.2+8
   material_color_names: ^1.0.0
   mbtiles: ^0.4.2
-  mobile_scanner: ^7.0.1
   oauth2_client: ^4.2.0
   path: ^1.8.1
   path_drawing: ^1.0.0
@@ -87,8 +87,6 @@ flutter:
     - assets/presets.db
     - assets/lets-encrypt-r3.pem
     - assets/roofs/
-    # REMOVE THIS!
-    # - assets/plugin.edp
 
 flutter_launcher_icons:
   android: "ic_launcher"

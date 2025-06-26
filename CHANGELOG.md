@@ -20,6 +20,7 @@ _Unreleased_
 * Updated roof assets (thanks @mxdanger).
 * Added `building:part` and `indoor` to main keys.
 * Updated a phone number parsing library.
+* Replaced the QR scanning library to not use proprietary libraries.
 * Minimal supported Android version is 6.0 now.
 
 ## 5.4

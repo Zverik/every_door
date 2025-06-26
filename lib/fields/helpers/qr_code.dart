@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class QrCodeScanner extends StatefulWidget {
   static const kEnabled = true;
@@ -18,6 +19,13 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
   static final _logger = Logger('QrCodeScanner');
 
   String? _scannedLast;
+  final _qrKey = GlobalKey(debugLabel: 'QR');
+
+  @override
+  void initState() {
+    super.initState();
+    _scannedLast = null;
+  }
 
   Future<Uri> _resolveRedirects(Uri uri, [int depth = 0]) async {
     final client = http.Client();
@@ -34,8 +42,7 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
         if (newUrl != null) {
           try {
             Uri newUri = Uri.parse(newUrl);
-            if (!newUri.hasAuthority)
-              newUri = uri.resolveUri(newUri);
+            if (!newUri.hasAuthority) newUri = uri.resolveUri(newUri);
             return depth < 3
                 ? await _resolveRedirects(newUri, depth + 1)
                 : newUri;
@@ -65,6 +72,24 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
     return null;
   }
 
+  Future<void> _parseCode(Barcode code) async {
+    if (code.code != _scannedLast && mounted) {
+      // We need this because mobile_scanner scanned twice sometimes.
+      _scannedLast = code.code;
+
+      final nav = Navigator.of(context);
+      Uri? url;
+      final value = code.code;
+      if (value != null && value.startsWith("http")) {
+        url = await _resolveRedirectsStr(value);
+      }
+
+      if (url != null) {
+        if (mounted) nav.pop(url);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -72,35 +97,13 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
       appBar: AppBar(
         title: Text(loc.fieldWebsiteQR),
       ),
-      body: MobileScanner(
-        onDetect: (codes) async {
-          final code = codes.barcodes.first;
-          if (code.rawValue != _scannedLast &&
-              mounted &&
-              codes.barcodes.isNotEmpty) {
-            // we need this because it scans twice sometimes
-            _scannedLast = code.rawValue;
-
-            final nav = Navigator.of(context);
-            String? stringUrl;
-            Uri? url;
-            if (code.type == BarcodeType.url) {
-              stringUrl = code.url?.url;
-              if (stringUrl != null) {
-                url = await _resolveRedirectsStr(stringUrl);
-              }
-            } else if (code.type == BarcodeType.text ||
-                code.type == BarcodeType.unknown) {
-              final value = code.displayValue;
-              if (value != null && value.startsWith("http")) {
-                url = await _resolveRedirectsStr(value);
-              }
-            }
-
-            if (url != null) {
-              if (mounted) nav.pop(url);
-            }
-          }
+      body: QRView(
+        key: _qrKey,
+        onQRViewCreated: (QRViewController ctrl) {
+          ctrl.scannedDataStream.listen((code) {
+            if (!mounted) return;
+            _parseCode(code);
+          });
         },
       ),
     );
