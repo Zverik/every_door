@@ -1,0 +1,4 @@
+* Tilføjet visning af nyligt gået sti.
+* GeoScribbles-tegning er låst som standard.
+* QR-kodescanner til hjemmesidefeltet.
+* Position opdateres nu en gang i sekundet.

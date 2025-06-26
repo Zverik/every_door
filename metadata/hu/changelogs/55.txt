@@ -1,0 +1,4 @@
+* Bővítménytámogatás!
+* A térképen lévő jelölők zöldre váltanak a jóváhagyott létesítményeknél.
+* A hét napjainak helyes sorrendje az Egyesült Államokban és Izraelben.
+* Az iránytű irányának megjelenítése.

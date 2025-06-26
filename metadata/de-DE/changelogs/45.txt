@@ -1,0 +1,4 @@
+* Anzeige des zuletzt zurückgelegten Weges hinzugefügt.
+* GeoScribbles sind standardmäßig gesperrt.
+* QR-Code-Scanner für das Webseiten-Feld.
+* Der Standort wird nun einmal pro Sekunde aktualisiert.

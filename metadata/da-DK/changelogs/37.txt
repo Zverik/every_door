@@ -1,0 +1,4 @@
+* Forhåbentlig løst GPS-problemer.
+* Opdateret Bing-billednøgle og fjernet Maxar.
+* Nye indstillinger for kortbetaling.
+* Smartere brug af store bogstaver i navne.

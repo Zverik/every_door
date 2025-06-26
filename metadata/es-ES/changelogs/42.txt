@@ -1,0 +1,4 @@
+* Modo de notas garabateadas.
+* Días de la semana en el idioma local.
+* Sugerencias de etiquetas de piso.
+* Actualizaciones de ajustes preestablecidos e imágenes.

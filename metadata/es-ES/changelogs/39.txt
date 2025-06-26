@@ -1,0 +1,3 @@
+* Corregido la capitalización para las descripciones.
+* Corregido el error por el que no se mostraban las advertencias amarillas sobre los servicios.
+* Corregido el error por el que se marcaba una tienda en un edificio en desuso.

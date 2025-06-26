@@ -1,0 +1,4 @@
+* Solucionado los conflictos y los niveles de zoom.
+* Solucionado la edición en latitudes extremas.
+* Añadido capas de imágenes catastrales.
+* Añadido traducciones al hebreo y al tamil.

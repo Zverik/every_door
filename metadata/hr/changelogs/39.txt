@@ -1,0 +1,3 @@
+* Ispravljena upotreba velikih slova u opisima.
+* Ispravljena žuta upozorenja o uslugama koja se nisu prikazivala.
+* Ispravljeno označavanje trgovine na napuštenoj zgradi.

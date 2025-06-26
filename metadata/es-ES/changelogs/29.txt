@@ -1,0 +1,4 @@
+* Cambios en los hashtags.
+* Aumento del intervalo de confirmación a 2 meses.
+* El campo «name» se selecciona automáticamente al crear un nuevo PDI.
+* Advertencias para servicios que tienen una etiqueta «fixme» o que son demasiado antiguos.

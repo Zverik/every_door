@@ -1,0 +1,3 @@
+* Ažurirane predefinirane oznake i pozadinske zračne snimke.
+* Ispravljeni problemi s izgubljenim bilješkama i dupliciranim sadržajima.
+* Dodani brojevi blokova za Japan.

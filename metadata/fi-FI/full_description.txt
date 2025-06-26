@@ -1,0 +1,5 @@
+Tämän editorin kanssa ei tarvitse ihmetellä. Riittää, että menet kauppakeskukseen ja avaat Every Doorin. Näet kartoitettuja kauppoja ympärilläsi: paina valintamerkkiä, jos kauppa on vielä olemassa, ja lisää puuttuvat kaupat kartalle. Siinä koko prosessi: voit pitää koko kaupungin ajan tasalla tämän yksinkertaisen editorin ansiosta.
+
+Mikrokartoitus-tilassa voi myös tarkistaa ja lisätä sekä penkkejä että katuvaloja. Sisäänkäynnit-tilassa rakennuksiin voi lisätä ominaisuuksia ja sisäänkäyntejä – jotka yhdistetään automaattisesti rakennuksen ääriviivaan.
+
+Every Door käyttää iD-editorin kohdetyyppejä ja muita tietoja.

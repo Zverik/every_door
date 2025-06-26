@@ -1,0 +1,3 @@
+* Dodane biciklističke barijere i Božićne značajke.
+* Podrška za "geo:" poveznice.
+* Nova prilagodljiva ikona.

@@ -1,0 +1,4 @@
+* Ažurirane predodređene oznake i slojevi pozadinskih karti
+* Grčki i indonezijski prijevodi.
+* Mjerilo za odabir karte.
+* Dodane značajke plovnog puta u mikromapiranje.

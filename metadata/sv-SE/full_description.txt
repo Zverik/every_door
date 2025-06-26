@@ -1,0 +1,5 @@
+Denna editor tvingar dig inte att tänka. Gå bara till ett varuhus och starta Every Door. Du kommer att se kartlagda butiker runt dig: bocka i rutan för de som fortfarande finns kvar och lägg till butiker som inte finns på kartan. Det är hela processen: du kan hålla hela din stad uppdaterad genom att använda denna enkla editor.
+
+Det finns också ett mikrokartläggningsläge för att verifiera och lägga till bänkar och gatulampor. Och ett entré-läge för att lägga till byggnadsattribut och entréer — som automatiskt fästs i byggnadskonturer.
+
+Every Door använder förinställningar och annan data från iD editor.

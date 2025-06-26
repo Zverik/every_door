@@ -1,0 +1,4 @@
+* Changeset Hashtags.
+* Bestätigungs-Intervall auf 2 Monate erhöht.
+* Fokus auf der Namens-Eingabe, wenn ein neuer POI erstellt wird.
+* Warnung für Objekte mit `fixme`-Tag oder zu alte Objekte.

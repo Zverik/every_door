@@ -1,0 +1,4 @@
+* Plugin-Unterstützung!
+* Markierungen auf der Karte werden grün für bestätigte Einrichtungen.
+* Korrekte Wochentagsreihenfolge für die USA und Israel.
+* Anzeige der Himmelsrichtung.

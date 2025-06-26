@@ -1,0 +1,4 @@
+* Konflikte und Zoomstufen wurden behoben.
+* Bearbeitung in extremen Breitengraden korrigiert.
+* Kataster-Hintergrundbilder hinzugefügt.
+* Übersetzung ins Hebräische und Tamilische.

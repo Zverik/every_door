@@ -1,0 +1,4 @@
+* Puedes alejar la imagen al máximo.
+* Los niveles de zoom se mantienen entre los distintos modos.
+* Editor de dirección para bancos y cámaras.
+* Colores estabilizados en el modo de micromapeo.

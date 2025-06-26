@@ -1,0 +1,3 @@
+* Großschreibung für Beschreibungen korrigiert.
+* Gelbe Warnungen werden für Einrichtungen nicht mehr angezeigt.
+* Lädens können nicht mehr auf einem `disused` Gebäude erfasst werden.

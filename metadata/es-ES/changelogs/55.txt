@@ -1,0 +1,4 @@
+* ¡Compatible con extensiones!
+* Los marcadores del mapa se vuelven verdes cuando se confirman los servicios.
+* Orden correcto de los días de la semana para EE.UU. e Israel.
+* Visualización de la dirección de la brújula.

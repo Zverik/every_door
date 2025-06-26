@@ -1,0 +1,4 @@
+* Ispravljeni konflikti i razine zumiranja.
+* Popravljeno uređivanje na ekstremnim geografskim širinama.
+* Dodani slojevi katastarskih slika.
+* Prijevodi na hebrejski i tamilski.

@@ -1,0 +1,4 @@
+* GPS-Probleme (hoffentlich) behoben.
+* Bing-API-Schlüssel aktualisiert und Maxar entfernt.
+* Neue Einstellungen für Kartenzahlungen.
+* Verbesserte Großschreibung von Namen.

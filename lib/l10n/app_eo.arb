@@ -883,7 +883,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Sendis {changes} al la API.",
+  "changesUploadedMessage": "Sendis {changes} al la OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1179,5 +1179,9 @@
   "drawCycleway": "Biciklovojo",
   "@drawCycleway": {
     "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "pluginsMore": "Pli...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
   }
 }

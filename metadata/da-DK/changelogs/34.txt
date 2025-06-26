@@ -1,0 +1,3 @@
+* Opdaterede forudindstillinger og baggrundsbilleder.
+* Løste problemer med mistede noter og duplikerede faciliteter.
+* Tilføjet bloknumre for Japan.

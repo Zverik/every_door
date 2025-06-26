@@ -1,0 +1,4 @@
+* Podrška za dodatke!
+* Oznake na karti postaju zelene za potvrđene usluge.
+* Ispravan redoslijed dana u tjednu za SAD i Izrael.
+* Prikaz smjera kompasa.

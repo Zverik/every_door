@@ -1,0 +1,4 @@
+* Sie können bis zum Maximum herauszoomen.
+* Die Zoomstufen bleiben zwischen den Modi erhalten.
+* Editor für die Richtung von Bänken und Kameras.
+* Vereinheitlichte Farben im Mikromapping-Modus.

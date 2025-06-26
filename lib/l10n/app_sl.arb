@@ -216,7 +216,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "{changes} poslane na API.",
+  "changesUploadedMessage": "{changes} poslane na OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -826,7 +826,7 @@
   "@faqTagging": {},
   "faqFloorsContent": "Ne. Prvi ima izpolnjeno oznako »addr:floor=3«. To je nadstropje, kot je natisnjeno na navigaciji in se običajno uporablja. Drugi nima te oznake, ima pa oznako »level=3«. Ta številka je zaporedna številka nadstropja od nič do »building:levels - 1«. To pomeni, da je v trinadstropni stavbi vrednost »addr:floor« odvisna od kraja, vendar je »level« vedno 0, 1 ali 2.\n\nTukaj je prikazano, kako se zapis v urejevalniku nanaš na te oznake:\n\n* `2`: `addr:floor=2` in neprazno `level=*`.\n* `4/`: `addr:floor=4`, vendar ni oznake `level`.\n* `/1`: `level=1`, vendar ni oznake `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (in v bližini je predmet z enakim `addr:floor`, vendar drugačnim `level`, ali obratno).",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "Zakaj v urejevalniku ni predmeta? Kdaj se te bele pike prikažejo v načinu mikromapiranja? Kako so razvrščeni predmeti?\n\nOdgovore na vsa ta vprašanja najdete v [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Tukaj si lahko ogledate:\n\n* Vrstni red ključev za glavno oznako — seznam `kMainKeys`.\n* Kateri predmeti so preneseni — funkcija `isGoodTags`.\n* Kaj se šteje za točko POI — funkcija `isAmenityTags`.\n* Katere točke se pripenjajo na katere poti — funkcija `detectSnap`.\n* Kdaj je objekt mikromapiranja nepopoln — funkcija `needsMoreInfo`.",
+  "faqTaggingContent": "Zakaj v urejevalniku ni predmeta? Kdaj se te bele pike prikažejo v načinu mikromapiranja? Kako so razvrščeni predmeti?\n\nOdgovore na vsa ta vprašanja najdete v [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Tukaj si lahko ogledate:\n\n* Vrstni red ključev za glavno oznako — seznam `kMainKeys` v `main_key.dart`.\n* Kateri predmeti so preneseni — klasa `_EverythingKind`.\n* Kaj se šteje za točko POI — klasa `_AmenityKind`.\n* Katere točke se pripenjajo na katere poti — klasa `ElementKindImpl` logic (glej ustrezne podrazrede).\n* Kdaj je objekt mikromapiranja nepopoln — klasa ` NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "buildingMaterialBrick": "opeka",
   "@buildingMaterialBrick": {},
@@ -1269,5 +1269,89 @@
   "editorDeleteBuilding": "Porušena",
   "@editorDeleteBuilding": {
     "description": "Button title to mark a building demolished."
+  },
+  "pluginsSeeLogs": "Oglej si dnevnike",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "settingsPlugins": "Vtičniki",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "Omogoči",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Onemogoči",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Onemogočeni",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsSearch": "Išči",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsInstall": "Namesti",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "URL vtičnika",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "Več …",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Nameščanje vtičnika",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Naj namesti vtičnik »{plugin}« različica {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "neznana",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Vir: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "tileDragDownload": "Poskusi tapniti gumb za prenos.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Spremenjeno bo v opombo OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsRepository": "Repozitorij vtičnikov",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsUpdate": "Posodobi",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
   }
 }

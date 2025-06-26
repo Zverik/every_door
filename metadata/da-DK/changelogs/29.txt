@@ -1,0 +1,4 @@
+* Ændringssæt-hashtags.
+* Øget bekræftelsesinterval til 2 måneder.
+* Navnefeltet er i fokus, når man opretter et nyt interessepunkt.
+* Advarsler for faciliteter, der har et `fixme` tag eller som er for gamle.
