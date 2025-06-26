@@ -21,6 +21,7 @@ _Unreleased_
 * Added `building:part` and `indoor` to main keys.
 * Updated a phone number parsing library.
 * Replaced the QR scanning library to not use proprietary libraries.
+* Exact version in the About pane.
 * Minimal supported Android version is 6.0 now.
 
 ## 5.4
