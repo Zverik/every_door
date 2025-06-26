@@ -2,9 +2,9 @@
 
 ## 6.0
 
-_Unreleased_
+_Released on 2025-06-26_
 
-* [Plugin support](https://plugins.every-door.app/)!
+* [Plugin support](https://every-door.app/plugins/)!
 * (+) buttons for the first two modes can also be dragged onto the map.
 * Turns out "Cancel" buttons for buildings and entrances kept the changes.
 * Correct weekday order and default holidays for various countries.
@@ -23,6 +23,7 @@ _Unreleased_
 * Replaced the QR scanning library to not use proprietary libraries.
 * Exact version in the About pane.
 * Minimal supported Android version is 6.0 now.
+* Major updates to Greek (thanks Kim Kats) and Punjabi (thanks Mandeep) translations.
 
 ## 5.4
 
