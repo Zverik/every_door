@@ -1328,7 +1328,7 @@
   "@pluginsInstallation": {
     "description": "Page title for installing a single plugin from the web."
   },
-  "pluginsInstallQuestion": "Instalirati dodatak \"{plugin}\" verzije {version}?",
+  "pluginsInstallQuestion": "Instalirati dodatak \"{plugin}\" (verzija {version})?",
   "@pluginsInstallQuestion": {
     "description": "Message that appears when installing a plugin from an unverified source.",
     "placeholders": {
@@ -1342,7 +1342,7 @@
       }
     }
   },
-  "pluginsUnknownVersion": "nepoznate",
+  "pluginsUnknownVersion": "nepoznata",
   "@pluginsUnknownVersion": {
     "description": "What is displayed instead of a version number, if the plugin version is unknown."
   },
