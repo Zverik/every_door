@@ -31,7 +31,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 import 'package:logging/logging.dart';
 
 class PoiEditorPage extends ConsumerStatefulWidget {
@@ -84,7 +85,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     super.dispose();
   }
 
-  onAmenityChange() {
+  void onAmenityChange() {
     setState(() {});
   }
 
@@ -97,7 +98,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     return kAmenityLoc.contains(tags['amenity']);
   }
 
-  updatePreset(Locale locale, [bool detect = false]) async {
+  Future<void> updatePreset(Locale locale, [bool detect = false]) async {
     await Future.delayed(Duration.zero); // to disconnect from initState
     final presets = ref.read(presetProvider);
     if (preset == null) detect = true;
@@ -187,7 +188,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     return allFields.contains('opening_hours') && allFields.contains('phone');
   }
 
-  extractFields() {
+  void extractFields() {
     final hasStdFields = stdFields.map((e) => e.key).toSet();
     hasStdFields.remove('internet_access');
     try {
@@ -208,7 +209,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     }
   }
 
-  changeType() async {
+  Future<void> changeType() async {
     final kind = ElementKind.matchChange(amenity);
     if (kind == ElementKind.building || kind == ElementKind.address) {
       return;
@@ -240,9 +241,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     updatePreset(locale, preset!.fromNSI);
   }
 
-  saveAndClose() {
+  void saveAndClose() {
     if (amenity.isFixmeNote()) {
-      // Convert fixme amenity to an OSM note.
+      // Convert fix me amenity to an OSM note.
       // 1. create a note
       final note = OsmNote(
         location: amenity.location,
@@ -280,7 +281,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     ref.read(needMapUpdateProvider).trigger();
   }
 
-  deleteAndClose() {
+  void deleteAndClose() {
     if (widget.amenity != null) {
       // No use deleting an amenity that just have been created.
       final changes = ref.read(changesProvider);
@@ -295,7 +296,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     Navigator.pop(context);
   }
 
-  deletionDialog(AppLocalizations loc) async {
+  Future<void> deletionDialog(AppLocalizations loc) async {
     // Check that the address is important.
     bool importantAddress = false;
     final tags = amenity.getFullTags();
@@ -375,7 +376,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     }
   }
 
-  confirmDisused(BuildContext context) async {
+  Future<void> confirmDisused(BuildContext context) async {
     String oldMainKey = getMainKey(amenity.element?.tags ?? {}) ?? '';
     if (amenity.isDisused && oldMainKey.startsWith(kDisused)) {
       final loc = AppLocalizations.of(context)!;
@@ -424,7 +425,17 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       child: Scaffold(
         appBar: AppBar(
           title: GestureDetector(
-            child: Text(preset?.name ?? amenity.name ?? 'Editor'),
+            child: Stack(children: [
+              // Text(preset?.name ?? amenity.name ?? 'Editor'),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.white38, width: 1.5, style: BorderStyle.solid),
+                  ),
+                ),
+                child: Text(preset?.name ?? amenity.name ?? 'Editor'),
+              ),
+            ]),
             onTap: changeType,
           ),
           actions: [
@@ -543,7 +554,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     );
   }
 
-  Widget buildTopButtons(context) {
+  Widget buildTopButtons(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final kind = ElementKind.matchChange(amenity);
 
