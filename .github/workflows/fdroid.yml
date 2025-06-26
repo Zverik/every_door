@@ -23,6 +23,7 @@ jobs:
     - run: vendor/flutter/bin/flutter config --no-analytics
     - run: vendor/flutter/bin/flutter pub get
     - run: curl -L https://textual.ru/presets.db -o assets/presets.db
+    - run: vendor/flutter/bin/dart run build_runner build
     - run: vendor/flutter/bin/flutter build apk --release --flavor prod --split-per-abi --target-platform=android-arm64
     - name: Rename APK
       run: mv build/app/outputs/flutter-apk/app*.apk build/app/outputs/flutter-apk/EveryDoor-$(git log -n 1 --format='%h').apk

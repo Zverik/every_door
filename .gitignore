@@ -57,6 +57,7 @@ assets/*.db-journal
 coverage/
 lib/l10n/app_zh.arb
 lib/generated/
+lib/commit_info.g.dart
 *.apk
 
 # I just keep them there

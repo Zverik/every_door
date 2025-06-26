@@ -49,8 +49,9 @@ is the preferred way for releases.
 2. From the `tools` directory, run `./update.sh <path_to_taginfo_db>`.
     * Alternatively, do `curl https://textual.ru/presets.db -o assets/presets.db`
 3. `echo '{}' > lib/l10n/app_zh.arb` (fixing Dart's localization issues).
-4. `flutter pub get`.
-5. `flutter build`.
+4. `dart run build_runner build`
+5. `flutter pub get`.
+6. `flutter build`.
 
 ## Author, License, and Sponsors
 

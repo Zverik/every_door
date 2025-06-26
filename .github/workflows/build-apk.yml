@@ -23,6 +23,7 @@ jobs:
     - run: vendor/flutter/bin/flutter pub get
     - run: curl -L https://textual.ru/presets.db -o assets/presets.db
       name: Download presets database
+    - run: vendor/flutter/bin/dart run build_runner build
     - run: vendor/flutter/bin/flutter test
     - run: vendor/flutter/bin/flutter build apk --flavor beta
     - uses: noriban/sign-android-release@v5

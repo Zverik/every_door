@@ -1,10 +1,14 @@
+import 'dart:io' show Platform;
+
 import 'package:every_door/constants.dart';
 import 'package:every_door/screens/settings/log.dart';
+import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:every_door/commit_info.g.dart';
 
 class FAQ {
   final String question;
@@ -33,13 +37,41 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
 
+    String platform;
+    if (Platform.isAndroid)
+      platform = 'Android';
+    else if (Platform.isIOS)
+      platform = 'iOS';
+    else
+      platform = 'unknown';
+
+    String version = '$kAppTitle $platform $kAppVersion';
+    if (commitInfo != null) {
+      version += ' ${commitInfo?.commitIdShort}';
+      if (commitInfo?.localChanges ?? false) {
+        version += '+local';
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('${loc.settingsAbout} $kAppTitle $kAppVersion'),
+        title: Text('${loc.settingsAbout} $kAppTitle'),
       ),
       body: SettingsList(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0),
         sections: [
+          SettingsSection(
+            // title: Text('Version'),
+            tiles: [
+              SettingsTile(
+                title: Text(version),
+                trailing: Icon(Icons.copy),
+                onPressed: (context) {
+                  Clipboard.setData(ClipboardData(text: version));
+                },
+              ),
+            ],
+          ),
           SettingsSection(
             title: Text(loc.aboutHelpImprove(kAppTitle)),
             tiles: [
