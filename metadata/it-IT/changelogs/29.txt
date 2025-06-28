@@ -1,0 +1,4 @@
+* Hashtag per il gruppo di modifiche.
+* Intervallo di conferma aumentato a 2 mesi.
+* Il campo dei nomi è focalizzato quando si crea un nuovo POI.
+* Avvisi per luoghi che hanno un tag `fixme` o che sono troppo vecchi.

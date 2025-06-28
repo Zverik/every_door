@@ -1,0 +1,4 @@
+* Supporto per i plugin!
+* I segnalini sulla mappa diventano verdi per i luoghi confermati.
+* Corretto l'ordine dei giorni settimanali per US e Israele.
+* Viene mostrata la direzione della bussola.
