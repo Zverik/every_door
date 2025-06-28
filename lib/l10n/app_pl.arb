@@ -1314,8 +1314,44 @@
   "@pluginsUrl": {
     "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
   },
-  "pluginsMore": "Wiecej...",
+  "pluginsMore": "Więcej...",
   "@pluginsMore": {
     "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Instalacja wtyczek",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Zainstalować wtyczkę \"{plugin}\" w wersji {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "nieznane",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Źródło: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsSeeLogs": "Zobacz dzienniki",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
   }
 }
