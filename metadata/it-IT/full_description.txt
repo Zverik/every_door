@@ -1,0 +1,5 @@
+Questo editor non ti fa pensare. Vai da un centro commerciale e avvia EveryDoor. Vedrai i negozi mappati intorno a te: tocca il segno di spunta per quelli che sono ancora lì, e aggiungi i negozi che non sono sulla mappa. Questo è l'intero processo: puoi mantenere aggiornata la tua città grazie a questo semplice editor.
+
+C'è anche una modalità micromapping per verificare e aggiungere panche e lampioni. E una modalità per l'aggiunta di attributi agli edifici e di ingressi — che vengono fusi automaticamente nei contorni degli edifici.
+
+EveryDoor utilizza preset e altri dati dell'editor iD.
