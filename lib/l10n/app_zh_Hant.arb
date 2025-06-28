@@ -375,7 +375,7 @@
   "@settingsDataManagement": {
     "description": "Section title for data settings."
   },
-  "settingsPresentation": "介紹",
+  "settingsPresentation": "顯示",
   "@settingsPresentation": {
     "description": "Section title for presentation options."
   },
@@ -597,7 +597,7 @@
   "@fieldHoursAsText": {
     "description": "Button title to open the raw opening hours editor."
   },
-  "fieldHoursNumberedWeekday": "\"上週一\"",
+  "fieldHoursNumberedWeekday": "\"每月最後一個週一\"",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
@@ -1048,7 +1048,7 @@
   },
   "faqEntrance": "如何增加建築出入口？",
   "@faqEntrance": {},
-  "faqEntranceContent": "在底下有一排模式按鈕：細微畫地圖、便利設施、出入品與註解。\n\n在出入口模式，點一下或是拖拉底下角落的門按鈕到地圖上。",
+  "faqEntranceContent": "在底下有一排模式按鈕：細微畫地圖、便利設施、出入口與註解。\n\n在出入口模式，點一下或是拖拉底下角落的門按鈕到地圖上。",
   "@faqEntranceContent": {},
   "faqLetters": "我可以輸入字母到編號或是套房數字嗎？",
   "@faqLetters": {},
@@ -1128,7 +1128,7 @@
   "@faqYellow": {},
   "faqYellowContent": "入 口模式時的非黃色標籤，以及微畫地圖模式的白色點表示元素欠缺一些重要屬性，譬如說：\n\n* 建築應該有樓層數。\n* 入口應該有類別，譬如樓梯、平台範圍。\n* 長椅應該有材質與背靠資訊。\n* 樹林應當有葉子型式與是否落葉。",
   "@faqYellowContent": {},
-  "fieldCardsOnly": "僅限卡片",
+  "fieldCardsOnly": "僅限銀行卡",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
