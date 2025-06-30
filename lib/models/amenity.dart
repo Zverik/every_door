@@ -121,7 +121,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
       (element?.isPoint ?? true) && (element?.isMember != IsMember.way);
   String? get mainKey => _mainKey;
 
-  revert() {
+  void revert() {
     // Cannot revert a new object
     if (isNew) return;
 
@@ -135,7 +135,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
   String? operator [](String k) =>
       newTags.containsKey(k) ? newTags[k] : element?.tags[k];
 
-  operator []=(String k, String? v) {
+  void operator []=(String k, String? v) {
     if (v == null || v.isEmpty) {
       removeTag(k);
     } else if (element == null || element!.tags[k] != v) {
@@ -149,17 +149,19 @@ class OsmChange extends ChangeNotifier implements Comparable {
     notifyListeners();
   }
 
-  removeTag(String key) {
+  void removeTag(String key) {
     if (element != null && element!.tags.containsKey(key)) {
       newTags[key] = null;
     } else if (newTags[key] != null) {
       newTags.remove(key);
+    } else {
+      return;
     }
     _updateMainKey();
     notifyListeners();
   }
 
-  undoTagChange(String key) {
+  void undoTagChange(String key) {
     if (newTags.containsKey(key)) {
       newTags.remove(key);
       _updateMainKey();
@@ -170,7 +172,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
   bool hasTag(String key) => this[key] != null;
   bool changedTag(String key) => newTags.containsKey(key);
 
-  _updateMainKey() {
+  void _updateMainKey() {
     _fullTagsCache = null;
     _mainKey = getMainKey(getFullTags());
   }
@@ -195,17 +197,17 @@ class OsmChange extends ChangeNotifier implements Comparable {
             : kOldAmenityDays);
   }
 
-  check() {
+  void check() {
     this[kCheckedKey] = kDateFormat.format(DateTime.now());
   }
 
-  uncheck() {
+  void uncheck() {
     newTags.remove(kCheckedKey);
     _updateMainKey();
     notifyListeners();
   }
 
-  toggleCheck() {
+  void toggleCheck() {
     if (newTags.containsKey(kCheckedKey))
       uncheck();
     else
@@ -356,9 +358,9 @@ class OsmChange extends ChangeNotifier implements Comparable {
     return _mainKey?.startsWith(kDisused) ?? false;
   }
 
-  togglePrefix(String prefix) {
+  void togglePrefix(String prefix) {
     final k = _mainKey;
-    if (k == null) return null;
+    if (k == null) return;
 
     final swap = <String, String>{};
     if (k.startsWith(prefix)) {
@@ -369,6 +371,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
           swap['$prefix$kk'] = kk;
         }
       }
+      // Remove the `disused=yes` tag.
+      removeTag(prefix.substring(0, prefix.length - 1));
     } else {
       // Delete another prefix if exists.
       swap[k] = prefix + clearPrefix(k);
@@ -386,7 +390,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
     }
   }
 
-  toggleDisused() {
+  void toggleDisused() {
     togglePrefix(kDisused);
   }
 
@@ -416,7 +420,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
 
   String? getContact(String key) => this[key] ?? this[_getAltContactKey(key)];
 
-  setContact(String key, String value) {
+  void setContact(String key, String value) {
     final alternativeKey = _getAltContactKey(key);
     if (this[alternativeKey] != null)
       this[alternativeKey] = value;
@@ -424,7 +428,7 @@ class OsmChange extends ChangeNotifier implements Comparable {
       this[key] = value;
   }
 
-  removeOpeningHoursSigned() {
+  void removeOpeningHoursSigned() {
     const kSigned = 'opening_hours:signed';
     if (this[kSigned] == 'no' &&
         this['opening_hours'] != null &&
