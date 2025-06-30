@@ -12,46 +12,10 @@ The roadmap is in [a project](https://github.com/users/Zverik/projects/1/views/2
 
 [More screenshots](https://wiki.openstreetmap.org/wiki/Every_Door)
 
-## Presets and Translations
+## How to Contribute
 
-The editor uses [presets from iD](https://github.com/openstreetmap/id-tagging-schema):
-they are managed in a dedicated repository and translated on [Transifex](https://www.transifex.com/openstreetmap/id-editor/translate/#ru/presets/).
-
-To translate value options, first make a pull request to the iD tagging repo
-adding desired options, [like here](https://github.com/openstreetmap/id-tagging-schema/blob/main/data/fields/camera/type.json).
-Then, when the translation source on Transifex is updated, there will be strings to translate.
-[Like here](https://www.transifex.com/openstreetmap/id-editor/translate/#ru/presets/101711314?q=key%3Apresets.fields.camera%2Ftype).
-
-Brands are managed in the [Name Suggestion Index](https://github.com/osmlab/name-suggestion-index).
-
-Help translate the app at [Weblate](https://hosted.weblate.org/projects/every-door/app/). I'm grateful
-to them for a libre hosting.
-
-## Design
-
-I need help with design. That includes [a new icon](https://github.com/Zverik/every_door/tree/main/icon),
-[the website](https://github.com/Zverik/everydoor-website), Flutter animations for everything,
-and general UX improvements. Please help.
-
-### Principles
-
-1. ED displays and edits only tagged nodes and polygons represented with their centerpoints. No roads.
-2. ED focuses on surveying: adding and detailing things that you can see around you. Not map maintenance.
-3. Fewer buttons and menus: heuristic is preferable to a setting, and every button benefits the surveyor.
-
-## How To Build
-
-You will need the [Flutter SDK](https://docs.flutter.dev/development/tools/sdk/overview) installed.
-Alternatively, clone with submodules (`git clone --recursive`) and use `vendor/flutter/bin/flutter`. That
-is the preferred way for releases.
-
-1. Download [taginfo-db.db](https://taginfo.openstreetmap.org/download) and unpack it somewhere (it's ~9 GB).
-2. From the `tools` directory, run `./update.sh <path_to_taginfo_db>`.
-    * Alternatively, do `curl https://textual.ru/presets.db -o assets/presets.db`
-3. `echo '{}' > lib/l10n/app_zh.arb` (fixing Dart's localization issues).
-4. `dart run build_runner build`
-5. `flutter pub get`.
-6. `flutter build`.
+Please read the [Contributor's Guide](https://every-door.app/develop/) to learn how
+to report bugs, translate the app, submit improvements, and build the app.
 
 ## Author, License, and Sponsors
 
