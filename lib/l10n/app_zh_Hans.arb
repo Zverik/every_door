@@ -63,7 +63,7 @@
   "@editorMarkActive": {
     "description": "Button title to mark an amenity active (non-defunct)."
   },
-  "editorMarkDefunct": "标记为失效的",
+  "editorMarkDefunct": "标记为不再使用的",
   "@editorMarkDefunct": {
     "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
   },
@@ -79,7 +79,7 @@
   "@editorRestoreTitle": {
     "description": "Title for question on restoring an edited defunct amenity."
   },
-  "editorRestoreMessage": "{amenity} 是非活跃状态。你想将其标记为活跃状态吗？",
+  "editorRestoreMessage": "{amenity} 处于闲置状态。你想将其标记为活跃状态吗 ？",
   "@editorRestoreMessage": {
     "description": "Question on restoring an edited defunct amenity.",
     "placeholders": {
@@ -121,7 +121,7 @@
   "@settingsDataManagement": {
     "description": "Section title for data settings."
   },
-  "settingsPresentation": "介绍",
+  "settingsPresentation": "显示",
   "@settingsPresentation": {
     "description": "Section title for presentation options."
   },
@@ -257,7 +257,7 @@
   "@fieldHoursClosedPH": {
     "description": "Switch label for PH off."
   },
-  "fieldComboEmpty": "空",
+  "fieldComboEmpty": "留空",
   "@fieldComboEmpty": {
     "description": "Option for a combo field that sets an empty value."
   },
@@ -285,7 +285,7 @@
   "@fieldFloorNew": {
     "description": "Title for the floor creation pane."
   },
-  "fieldFloorFloorDesc": "在导航和电梯中一样的楼层",
+  "fieldFloorFloorDesc": "楼层（在导航指示和电梯中显示一致）",
   "@fieldFloorFloorDesc": {
     "descripton": "Description for the \"level\" tag."
   },
@@ -309,7 +309,7 @@
   "@enableLocation": {
     "description": "Title of the alert for allowing app access to location."
   },
-  "tileNothingAround": "您周围 {distance} 米内没有任何便利设施。",
+  "tileNothingAround": "您周围 {distance} 米内没有任何设施。",
   "@tileNothingAround": {
     "description": "First part of the message displayed when there is nothing around.",
     "placeholders": {
@@ -409,7 +409,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "已将 {changes} 发送到 API。",
+  "changesUploadedMessage": "已将 {changes} 发送至 OpenStreetMap。",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -560,7 +560,7 @@
   "@buildingTypeIndustrial": {},
   "buildingTypeGarage": "车库",
   "@buildingTypeGarage": {},
-  "buildingTypeConstruction": "建设中",
+  "buildingTypeConstruction": "在建",
   "@buildingTypeConstruction": {},
   "entranceFlats": "单元楼",
   "@entranceFlats": {
@@ -729,7 +729,7 @@
   "@fieldHoursAsText": {
     "description": "Button title to open the raw opening hours editor."
   },
-  "fieldHoursNumberedWeekday": "“上周一”",
+  "fieldHoursNumberedWeekday": "“每月最后一个周一”",
   "@fieldHoursNumberedWeekday": {
     "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
   },
@@ -749,9 +749,9 @@
   "@faqCheckmarks": {},
   "faqEntrance": "如何添加建筑物入口？",
   "@faqEntrance": {},
-  "faqTaggingContent": "为什么在编辑器中缺少一个物体？在微测绘模式下，何时显示这些白点？对象是如何排序的？\n\n所有这些问题的答案都在[good_tags。dart]（https://github。com/Zverik/every_door/blob/main/lib/helpers/good_tags。dart）。下面是你可以查看的内容：\n\n* 主标签的钥匙顺序 — 列表 `kMainKeys`。\n* 哪些对象被下载 — 函数 `isGoodTags`。\n* 哪些被认为是便利设施 — 函数 `isAmenityTags`。\n* 哪些点是以何种方式捕捉的 — 函数`detectSnap`。\n* 当一个微测绘对象不完整时 — 函数 `needsMoreInfo`。",
+  "faqTaggingContent": "为什么编辑器中缺少一个对象？微地图绘制模式中何时显示这些白点？如何对对象进行排序？\n\n所有这些问题的答案都在 [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) 中。以下是您可以查看的内容：\n\n* 主标签的键顺序 —— `main_key.dart` 中的列表 `kMainKeys`。\n* 下载哪些对象 —— 类 `_EverythingKind`。\n* 什么被认为是设施 —— 类 `_AmenityKind`。\n* 哪些点会以何种方式捕捉 —— 类 `ElementKindImpl` 逻辑（请参阅相关子类）。\n* 当微地图绘制对象不完整时 —— 类 `_NeedsMoreInfo`。",
   "@faqTaggingContent": {},
-  "faqFloorsContent": "不是。第一个标记为 `addr:floor=3`。这是导航和常用的楼层表示方式。第二个没有这个标签，但是有 `level=3`。该数字是从零到 `building:levels - 1` 的连续楼层号。也就是说，在三层楼的建筑中，`addr:floor` 依照国家有不同定义，但 `level` 始终都是 0、1、2。\n\n以下是编辑器中的符号与这些标记的关系：\n\n* `2`：`addr:floor=2` 和非空值 `level=*`。\n* `4/`：`addr:floor=4`，但没有 `level` 标签。\n* `/1`：`level=1`，但没有 `addr:floor` 标签。\n* `1/0`：`addr:floor=1` + `level=0`（然后附近有一个对象：具有相同的 `addr:floor`，但 `level` 不同，反之亦然）。",
+  "faqFloorsContent": "不。第一个是'addr:floor=3'的标签填充。即楼层数，因为它印在导航上并且常用。第二个没有这个标签，但有'level=3'。该数字是从零到'building:levels - 1'的连续楼层号。也就是说，在三层楼的建筑中，'addr:floor'值取决于哪个国家，但'level'始终都是0，1、2。\n\n以下是编辑器中的符号与这些标记的关系：\n\n* '2'： 'addr:floor=2' 和非空值 'level=*'。\n* '4/'： 'addr:floor=4'，但没有'level'标签。\n* '/1'： 'level=1'，但没有 'addr:floor' 标签。\n* '1/0'： 'addr:floor=1' + 'level=0' （附近有一个对象：具有相同的 'addr:floor'，但'level'不同，反之亦然）。",
   "@faqFloorsContent": {},
   "faqChangeType": "如何更改便利设施的类型？",
   "@faqChangeType": {},
@@ -781,9 +781,9 @@
   "@buildingMaterialCementBlock": {},
   "faqMapTiny": "为什么地图这么小？",
   "@faqMapTiny": {},
-  "faqMapTinyContent": "因为这不是重点。你只需在地图上检查你的定位，并平移它来调整。观察下面的便利设施列表，按与你的距离排序。\n\n当你编辑离你的位置很远的设施时，地图会变大。尽管这个应用程序是为了编辑你用眼睛看到的东西。",
+  "faqMapTinyContent": "因为这不是重点。您只需在地图上查看自己的位置，然后平移地图进行调整。查看下方的设施列表，它会按距离您的远近排序。\n\n当你编辑的设施距离你的位置较远时，地图会变大。虽然这款应用是用来编辑你亲眼所见的事物。",
   "@faqMapTinyContent": {},
-  "faqEntranceContent": "在底部有一排模式按钮：微测绘、便利设施、入口和注记。\n\n在入口模式中，点击或拖动屏幕底部角落的门按钮到地图上。",
+  "faqEntranceContent": "在底部有一排模式按钮：微地图绘制、便利设施、出入口和注记。\n\n在入口模式中，点击或拖动屏幕底部角落的门按钮到地图上。",
   "@faqEntranceContent": {},
   "faqLetters": "我可以在参考编号或公寓号中键入字母吗？",
   "@faqLetters": {},
@@ -846,7 +846,7 @@
   "@fieldHoursMinute": {
     "description": "Label for the minute chooser."
   },
-  "faqCheckmarksContent": "这些是便利设施数据被确认的标志。它们添加了带有当前日期的`check_date`标签。\n\n检查标记背后的想法是，比如说，你第一次调查了半个城市。然后过了一个月，你又回来了，再次去调查。你需要以某种方式标记你看到了这个便利设施，但它没有任何变化。这就是复选标记：你点击它然后继续。\n\n这个标记会保持两个月。此后，你可以再次调查这些设施。",
+  "faqCheckmarksContent": "这些是用于确认设施数据的标记。它们会添加一个 `check_date` 标签并记录当前日期。\n\n使用对勾标记的想法是这样的：假设你第一次调查时覆盖了半个城市，一个月后你再次回来进行调查。这时你需要以某种方式标记你看到这个设施了，但它没有任何变化。这就是对勾的用途：你点击它，然后继续。\n\n这个标记会维持勾选状态两个月，之后你可以重新对这些设施进行调查。",
   "@faqCheckmarksContent": {},
   "versionsTitle": "{elementRef} 历史",
   "@versionsTitle": {
@@ -879,11 +879,11 @@
   "@fieldHoursSDAddRange": {
     "description": "Tooltip for button on the specific days interval to add a range of dates."
   },
-  "fieldNameCopy": "复制值",
+  "fieldNameCopy": "复制名称值",
   "@fieldNameCopy": {
     "description": "Tooltip for a button to copy name value between languages."
   },
-  "notesCloseMessage": "将笔记标记为已解决？",
+  "notesCloseMessage": "将注记标记为已解决？",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
@@ -891,7 +891,7 @@
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
-  "warningTooOld": "便利设施是{years}年之前的",
+  "warningTooOld": "该设施是{years}年之前的",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
     "placeholders": {
@@ -917,7 +917,7 @@
   "@changesPurge": {
     "description": "Purge all changes"
   },
-  "entrancesAddEntrance": "添加入口",
+  "entrancesAddEntrance": "添加出入口",
   "@entrancesAddEntrance": {
     "description": "Tooltip for the button to add an entrance node."
   },
@@ -931,7 +931,7 @@
   },
   "faqYellow": "为什么有些门牌号是黄色的？",
   "@faqYellow": {},
-  "fieldCardsOnly": "仅限卡片",
+  "fieldCardsOnly": "仅限银行卡",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
@@ -1018,7 +1018,7 @@
   "@fieldHoursChooseTime": {
     "description": "Tooltip for a button to open hours and minutes chooser."
   },
-  "fieldHoursRemoveBreak": "删除破损",
+  "fieldHoursRemoveBreak": "移除休息时间",
   "@fieldHoursRemoveBreak": {
     "description": "Tooltip for a button to remove a break in an opening hours fragment."
   },
@@ -1026,7 +1026,7 @@
   "@fieldNameLanguages": {
     "description": "Tooltip for a button to add a name in another language."
   },
-  "navMicromappingMode": "精细绘图模式",
+  "navMicromappingMode": "微地图绘制模式",
   "@navMicromappingMode": {
     "description": "Tooltip for the micromapping mode button on the nav panel."
   },
@@ -1096,7 +1096,7 @@
   "@mapZoomIn": {
     "description": "Tooltip for the zoom in (+) button on a map."
   },
-  "editorMarkChecked": "标记已核对",
+  "editorMarkChecked": "标记为已核对",
   "@editorMarkChecked": {
     "description": "Tooltip for a button to mark the amenity checked without changing properties."
   },
@@ -1271,5 +1271,89 @@
     "description": "Validation message for when meters or feet are expected."
   },
   "drawUndo": "还原",
-  "@drawUndo": {}
+  "@drawUndo": {},
+  "tileDragDownload": "尝试点击下载按钮。",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "settingsPlugins": "插件",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "warningFixmeNote": "将被转换为 OSM 注释",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "pluginsDisabledHeader": "已禁用",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "插件仓库",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "搜索",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsInstall": "安装",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUpdate": "更新",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsMore": "更多……",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "插件安装",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsUnknownVersion": "未知",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallQuestion": "安装插件“{plugin}”版本{version}？",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsSeeLogs": "查看日志",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "pluginsInstallSource": "来源： {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsEnable": "启用",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsUrl": "插件URL",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsDisable": "禁用",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  }
 }
