@@ -1,0 +1,4 @@
+* Added the recently walked path display.
+* GeoScribbles drawing is locked by default.
+* QR code scanner for the website field.
+* Location is now updated once a second.

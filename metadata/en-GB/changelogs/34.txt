@@ -1,0 +1,3 @@
+* Updated presets and imagery.
+* Fixed issues with lost notes and duplicate amenities.
+* Added block numbers for Japan.

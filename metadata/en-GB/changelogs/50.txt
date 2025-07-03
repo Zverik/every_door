@@ -1,0 +1,4 @@
+* Fixed conflicts and zoom levels.
+* Fixed editing in extreme latitudes.
+* Added cadastre imagery layers.
+* Translations into Hebrew and Tamil.
