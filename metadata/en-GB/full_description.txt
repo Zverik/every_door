@@ -1,0 +1,5 @@
+This editor does not make you think. Just go to a shopping centre, and start Every Door. You'll see mapped shops around you: tap on the checkmark for any that are still there, and add shops that are not on the map. That's the entire process: you can keep your entire town up-to-date thanks to this simple editor.
+
+There is also a micromapping mode for verifying and adding benches and street lamps. And an entrance mode for adding building attributes and entrances — which are merged automatically into building contours.
+
+Every Door uses presets and other data from iD editor.
