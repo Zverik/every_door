@@ -1,0 +1,4 @@
+* Podpora doplňků!
+* Značky na mapě se změní na zelenou u potvrzených bodů.
+* Správné pořadí dnů v týdnu pro USA a Izrael.
+* Zobrazení směru kompasu.

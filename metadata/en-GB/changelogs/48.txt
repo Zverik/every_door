@@ -1,0 +1,3 @@
+* Added cycle barriers and xmas features.
+* Support "geo:" links.
+* New adaptive icon.

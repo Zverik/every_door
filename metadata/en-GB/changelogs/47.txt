@@ -1,0 +1,4 @@
+* Updated presets and imagery layers.
+* Greek and Indonesian translations.
+* Scale bar for the map chooser.
+* Added waterway features to micromapping.

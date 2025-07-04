@@ -1,0 +1,4 @@
+* Scribble notes mode.
+* Days of the week in a local language.
+* Floor tags suggestions.
+* Updates to presets and imagery.
