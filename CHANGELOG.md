@@ -1,5 +1,11 @@
 # Every Door App Change Log
 
+## 6.1
+
+_Unreleased_
+
+* Tags for entrances are now remembered again.
+
 ## 6.0
 
 _Released on 2025-06-26_

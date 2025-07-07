@@ -28,14 +28,14 @@ class CustomMapController {
   MapController? mapController;
   GlobalKey? mapKey;
 
-  setLocation({LatLng? location, double? zoom}) {
+  void setLocation({LatLng? location, double? zoom}) {
     if (mapController != null) {
       mapController!.move(location ?? mapController!.camera.center,
           zoom ?? mapController!.camera.zoom);
     }
   }
 
-  zoomToFit(Iterable<LatLng> locations) {
+  void zoomToFit(Iterable<LatLng> locations) {
     if (locations.isNotEmpty) {
       if (zoomListener != null) zoomListener!(locations);
     }
@@ -190,7 +190,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         .zoom;
   }
 
-  onControllerZoom(Iterable<LatLng> locations) {
+  void onControllerZoom(Iterable<LatLng> locations) {
     const kPadding = EdgeInsets.all(12.0);
     const kZoomThreshold = 0.2;
     const kTooCloseThreshold = 10.0; // meters. I know, bad.

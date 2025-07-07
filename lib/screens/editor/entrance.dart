@@ -83,7 +83,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     return RegExp(r'^\d[\d\w]*$').hasMatch(value!.trim());
   }
 
-  saveAndClose([bool pop = true]) {
+  void saveAndClose([bool pop = true]) {
     // Only remove check_date when the original did not have it.
     if (entrance.element?.tags[OsmChange.kCheckedKey] == null)
       entrance.removeTag(OsmChange.kCheckedKey);
@@ -101,7 +101,7 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
     if (pop) Navigator.pop(context);
   }
 
-  deleteAndClose() {
+  void deleteAndClose() {
     final changes = ref.read(changesProvider);
     if (entrance.isNew) {
       changes.deleteChange(entrance);

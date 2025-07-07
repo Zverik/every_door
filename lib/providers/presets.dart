@@ -46,14 +46,14 @@ class PresetProvider {
     initDatabase();
   }
 
-  initMatcher() {
+  void initMatcher() {
     final data = JsonDecoder().convert(nsiFeaturesRaw);
     locationMatcher = LocationMatcher({
       'features': data['features'].whereType<Map<String, dynamic>>().toList()
     });
   }
 
-  initDatabase() async {
+  Future<void> initDatabase() async {
     final appDir = await getApplicationDocumentsDirectory();
     final dbFile = io.File(path.join(appDir.path, 'presets.db'));
     final prefs = await SharedPreferences.getInstance();

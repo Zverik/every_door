@@ -15,7 +15,7 @@ class LastPresetsProvider {
 
   LastPresetsProvider(this._ref);
 
-  registerPreset(Preset preset, Map<String, String> tags,
+  void registerPreset(Preset preset, Map<String, String> tags,
       {bool justTags = false}) {
     final mode = _ref.read(editorModeProvider);
     if (!_lastPresets.containsKey(mode.name))
@@ -35,7 +35,7 @@ class LastPresetsProvider {
     }
 
     // Store tags, removing useless things.
-    if (ElementKind.micro.matchesTags(tags)) {
+    if (!ElementKind.amenity.matchesTags(tags)) {
       final Map<String, String> newTags = {};
       const kDeleteKeys = {
         'check_date',
