@@ -278,7 +278,7 @@
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
   },
-  "warningFixme": "Fixme: {value}",
+  "warningFixme": "சரிசெய்என்னை: {value}",
   "@warningFixme": {
     "description": "Warning message for when an object has a non-empty fixme value.",
     "placeholders": {
@@ -741,7 +741,7 @@
       "count": {}
     }
   },
-  "changesUploadedMessage": "பநிஇ க்கு {changes} அனுப்பப்பட்டது.",
+  "changesUploadedMessage": "Opentreetmap க்கு {changes} அனுப்பப்பட்டது.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -843,7 +843,7 @@
   "@fieldHoursRemoveBreak": {
     "description": "Tooltip for a button to remove a break in an opening hours fragment."
   },
-  "fieldHoursWeekdays": "Mu செ we th th frata su su",
+  "fieldHoursWeekdays": "தி செ அ வி வெ கா ஞா",
   "@fieldHoursWeekdays": {
     "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
   },
@@ -859,7 +859,7 @@
   "@fieldNameLangSearch": {
     "description": "Hint for the text field for finding a language in a list."
   },
-  "fieldNameCopy": "மதிப்பு மதிப்பு",
+  "fieldNameCopy": "மதிப்பு நகல்",
   "@fieldNameCopy": {
     "description": "Tooltip for a button to copy name value between languages."
   },
@@ -1270,6 +1270,90 @@
   "@faqLettersContent": {},
   "faqFloors": "தளங்கள் '3' மற்றும் '/3' ஆகியவை ஒரே மாதிரியானதா?",
   "@faqFloors": {},
-  "faqTaggingContent": "எடிட்டரில் ஒரு பொருள் ஏன் காணவில்லை? இந்த வெள்ளை புள்ளிகள் மைக்ரோமேப்பிங் பயன்முறையில் காட்டப்படும் போது? பொருள்கள் எவ்வாறு வரிசைப்படுத்தப்படுகின்றன?\n\n இந்த எல்லா கேள்விகளுக்கும் பதில்கள் [good_tags.dart] (https://github.com/zverik/every_door/blob/main/lib/helpers/good_tags.dart) இல் உள்ளன. நீங்கள் பார்க்கக்கூடியது இங்கே:\n\n * முதன்மையான குறிச்சொல்லின் முக்கிய ஆர்டர் - பட்டியல் `kmainkeys`.\n * எந்த பொருள்கள் பதிவிறக்கம் செய்யப்படுகின்றன - செயல்பாடு `isgoodtags`.\n * ஒரு வசதி என்று கருதப்படுவது - செயல்பாடு `isamenityTags`.\n * எந்த புள்ளிகள் எந்த வழிகளில் துண்டிக்கப்படுகின்றன - `கண்டறிதல்கள்`.\n * மைக்ரோமேப்பிங் பொருள் முழுமையடையாதபோது - செயல்பாடு `தேவைகள் மோர்ன்ஃபோ`.",
-  "@faqTaggingContent": {}
+  "faqTaggingContent": "எடிட்டரில் ஒரு பொருள் ஏன் காணவில்லை? மைக்ரோமேப்பிங் பயன்முறையில் இந்த வெள்ளை புள்ளிகள் எப்போது காட்டப்படுகின்றன? பொருள்கள் எவ்வாறு வரிசைப்படுத்தப்படுகின்றன? \n\nஇந்த எல்லா கேள்விகளுக்கும் பதில்கள் [element_kind_std.dart] (https://github.com/zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) இல் உள்ளன. நீங்கள் பார்க்கக்கூடியது இங்கே: \n\n* முக்கிய குறிச்சொல்லுக்கான முக்கிய ஆர்டர் - `main_key.dart` இல்` Kmainkeys` பட்டியல். \n* எந்த பொருள்கள் பதிவிறக்கம் செய்யப்படுகின்றன - வகுப்பு `_ everythingkind`. \n* ஒரு வசதி என்று கருதப்படுவது - வகுப்பு `_amenityKind`. \n. \n* மைக்ரோமேப்பிங் பொருள் முழுமையடையாதபோது - வகுப்பு `_needsmoreinfo`.",
+  "@faqTaggingContent": {},
+  "tileDragDownload": "பதிவிறக்க பொத்தானைத் தட்ட முயற்சிக்கவும்.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "OSM குறிப்பாக மாற்றப்படும்",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "settingsPlugins": "செருகுநிரல்கள்",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "இயக்கு",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "முடக்கு",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "முடக்கப்பட்டது",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "சொருகி களஞ்சியம்",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "தேடல்",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "புதுப்பிப்பு",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "நிறுவவும்",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "சொருகி முகவரி",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "மேலும் ...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "சொருகி நிறுவல்",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "சொருகி \"{plugin}\" பதிப்பு {version} ஐ நிறுவவும்?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "தெரியவில்லை",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "ஆதாரம்: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsSeeLogs": "பதிவுகள் பார்க்கவும்",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  }
 }
