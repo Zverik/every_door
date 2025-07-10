@@ -323,7 +323,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "{changes}個の変更をAPIに転送しました。",
+  "changesUploadedMessage": "{changes}個の変更をOpenStreetMapに転送しました。",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1054,7 +1054,7 @@
   "@faqCheckmarksContent": {},
   "faqFloorsContent": "いいえ。前者には `addr:floor=3` タグが入力されています。これによりフロアがナビゲーションに表示され、広く使われています。（訳注：日本での事情は異なると思われる）後者にはこのタグが無く単に `level=3`タグだけです。数字はゼロから `building:levels - 1`までの連続したフロア番号です。つまり、3階建ての建物において、 `addr:floor` の値は国により異なりますが、 `level` は常に 0, 1, または 2です。\n\nこれらのタグに関連するエディタ内の記法は以下の通り:\n\n* `2`: `addr:floor=2` 及び空で無い `level=*`.\n* `4/`: `addr:floor=4`, しかし `level` タグは無し.\n* `/1`: `level=1`, しかし `addr:floor` タグは無し.\n* `1/0`: `addr:floor=1` + `level=0` (and there's an object nearby:w with the same `addr:floor`, but different `level`, or vice-versa).",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "エディタ内になぜオブジェクトが無いのでしょうか？マイクロマッピングモードではこれらの白いドットはいつ表示されるのでしょうか？オーブジェクトのソート順は？\n\nこれらの質問への回答は全て[good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) にあります。以下のような内容です:\n\n* メインタグのキー順 — list `kMainKeys`.\n* どのオブジェクトがダウンロード対象か — function `isGoodTags`.\n* どれが施設に該当するのか — function `isAmenityTags`.\n* どのポイントがどのウェイにくっつくのか — function `detectSnap`.\n* マイクロマッピングのオブジェクトが不完全な時 — function `needsMoreInfo`.",
+  "faqTaggingContent": "エディタ内になぜオブジェクトが無いのでしょうか？マイクロマッピングモードではこれらの白いドットはいつ表示されるのでしょうか？オーブジェクトのソート順は？\n\nこれらの質問への回答は全て[element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) にあります。以下のような内容です:\n\n* メインタグのキー順 — list ` in `main_key.dart`内の`kMainKeys`.\n* どのオブジェクトがダウンロード対象か — class `_EverythingKind`.\n* どれが施設に該当するのか — function class `_AmenityKind`.\n* どのポイントがどのウェイにくっつくのか — class `ElementKindImpl` logic (see relevant subclasses).\n* マイクロマッピングのオブジェクトが不完全な時 — class `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "mapLocate": "元に戻る",
   "@mapLocate": {
@@ -1269,5 +1269,89 @@
   "drawPath": "小道（自動車通行不可）",
   "@drawPath": {
     "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "tileDragDownload": "ダウンロードボタンをタップしてみてください。",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "OSMメモに変換されます",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "settingsPlugins": "プラグイン",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "有効化",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "無効化",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "無効",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "プラグインのリポジトリ",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "検索",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "更新",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "インストール",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "プラグインのURL",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "詳細...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "プラグインのインストール",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "プラグイン \"{plugin}\" バージョン {version}をインストールしますか?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "不明",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "ソース: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsSeeLogs": "ログを見る",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
   }
 }

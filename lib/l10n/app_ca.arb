@@ -606,7 +606,7 @@
   "@fieldHoursRemoveBreak": {
     "description": "Tooltip for a button to remove a break in an opening hours fragment."
   },
-  "fieldHoursWeekdays": "Dl Dm Dc Dj Dv Ds Dg",
+  "fieldHoursWeekdays": "Dl Dt Dc Dj Dv Ds Dg",
   "@fieldHoursWeekdays": {
     "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
   },
