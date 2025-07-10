@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:every_door/helpers/tile_layers.dart';
+import 'package:every_door/models/imagery/bing.dart';
+import 'package:every_door/models/imagery/tiles.dart';
+import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/models/imagery.dart';
@@ -10,6 +12,15 @@ import 'package:logging/logging.dart';
 import 'package:proximity_hash/proximity_hash.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+const kOSMImagery = TmsImagery(
+  id: 'openstreetmap',
+  name: 'OpenStreetMap',
+  url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  attribution: '© OpenStreetMap contributors',
+  minZoom: 0,
+  maxZoom: 19,
+);
 
 final imageryProvider = StateNotifierProvider<ImageryProvider, Imagery>(
     (ref) => ImageryProvider(ref));
@@ -33,9 +44,8 @@ class ImageryProvider extends StateNotifier<Imagery> {
   static const kBingUrlKey = 'bing_url_template';
   static const kImageryKey = 'imagery_id';
 
-  static final bingImagery = Imagery(
+  static final bingImagery = BingImagery(
     id: 'bing',
-    type: ImageryType.bing,
     name: 'Bing Aerial Imagery',
     url:
         'ONmGm9hPmmIXyIpRK8Mx33q/TVG91lBWanmUE4XbZl42a+Hpr7b+hd+gqZBF9vXtTteFeLqaXS/JwQvk/eHDRbNcl6hfAWMnCS6b5l+jEqg=',
@@ -46,9 +56,8 @@ class ImageryProvider extends StateNotifier<Imagery> {
     maxZoom: 22,
   ).decrypt();
 
-  static final maxarPremiumImagery = Imagery(
+  static final maxarPremiumImagery = TmsImagery(
     id: 'Maxar-Premium',
-    type: ImageryType.tms,
     name: 'Maxar Premium Imagery',
     url:
         "EcKQpupFzHs7yZp0CdAT3zOWVWST2GB8eji2OtSHNANsdO7JnPHXw+riiIBA2aPDb5GFaKmySAOl/QDz57eaWI18qPwmdhpDeFLMmiDRZ4JQYGJbTzCq1On6IkNnrsnn5KvbL+1P3sAVur9nCCvaomT6i1Tv/WUFFD9zKG8gOf1TCN7mPWIhDOQteeacbx0X60EeyXhg1tyyrtcJ53TgTsScje4/URAsVSNjMjTBz+dbzBpTrcTtI5t398LZP4wP",
@@ -59,9 +68,8 @@ class ImageryProvider extends StateNotifier<Imagery> {
     maxZoom: 22,
   ).decrypt();
 
-  static final mapboxImagery = Imagery(
+  static final mapboxImagery = TmsImagery(
     id: 'Mapbox',
-    type: ImageryType.tms,
     name: 'Mapbox Satellite',
     url:
         "EcKQpupFzHsz359rFNAelnzeXi+ZgGVtMyCwNNTaeQFgK+nHlqvc3+K/iN0M0e3HYI2cJbm2TxXm5QT0ranPEswj6sVgagtKNkXyi2HZct8mbGBfTzGg3/T5LHVs4c/lqaviIIxV85VP4LkSJCPEi3vinH+s4lpJUycdGGFHPshdeNTDOW4DB6QHSbDKBzsRrRIdxCRM1If92rsopU+JPMud2IUmLx99Hw85cCGEj9Qopkdzi7OfUaYQpauIfd0e",
@@ -83,7 +91,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
     final geohash =
         geoHasher.encode(location.longitude, location.latitude, precision: 4);
     final rows = await _ref.read(presetProvider).imageryQuery(geohash);
-    List<Imagery> results = rows.map((row) => Imagery.fromJson(row)).toList();
+    List<Imagery> results = rows.map((row) => TileImagery.fromJson(row)).whereType<Imagery>().toList();
     results.addAll(_additional);
     results.add(mapboxImagery);
     // Imagery is disabled by Maxar.
@@ -112,7 +120,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
         final imagery =
             await _ref.read(presetProvider).singleImageryQuery(imageryId);
         if (imagery != null) {
-          state = Imagery.fromJson(imagery);
+          state = TileImagery.fromJson(imagery);
         }
       }
     }

@@ -1,4 +1,3 @@
-import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';

@@ -1,8 +1,10 @@
-import 'dart:io';
-
 import 'package:every_door/helpers/tags/element_kind.dart';
-import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/models/imagery.dart';
+import 'package:every_door/models/imagery/geojson.dart';
+import 'package:every_door/models/imagery/mbtiles.dart';
+import 'package:every_door/models/imagery/tiles.dart';
+import 'package:every_door/models/imagery/tms.dart';
+import 'package:every_door/models/imagery/wms.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/add_presets.dart';
 import 'package:every_door/providers/editor_mode.dart';
@@ -13,7 +15,6 @@ import 'package:every_door/providers/shared_file.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_map_geojson2/flutter_map_geojson2.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
@@ -144,70 +145,62 @@ class PluginManager extends Notifier<List<Plugin>> {
         final key = 'plugin_${plugin.id}_${entry.key}';
         final imagery = _imageryFromMap(key, entry.value, plugin);
         ref.read(overlayImageryProvider.notifier).addLayer(
-              key: key,
-              imagery: imagery,
-              widget: imagery == null
-                  ? _widgetFromMap(key, entry.value, plugin)
-                  : null,
-            );
+              key: key, imagery: imagery);
       }
     }
-  }
-
-  Widget? _widgetFromMap(String key, Map<String, dynamic> data, Plugin plugin) {
-    final url = data['url'] as String;
-    if (data['type'] == 'geojson' ||
-        url.endsWith('.geojson') ||
-        url.endsWith('.json')) {
-      final layer = GeoJsonLayer(
-        data: url.startsWith('http')
-            ? NetworkGeoJson(url)
-            : FileGeoJson(plugin.resolvePath(url)),
-      );
-      return layer;
-    }
-    return null;
   }
 
   Imagery? _imageryFromMap(
       String key, Map<String, dynamic> data, Plugin plugin) {
     final url = data['url'] as String;
 
-    File? mbtiles;
-    ImageryType? type;
-    if (url.startsWith('http')) {
-      if (data['type'] == 'wms' || url.toLowerCase().contains('service=wms')) {
-        type = ImageryType.wms;
-      } else if (data['type'] == 'tms' ||
-          url.endsWith('.jpg') ||
-          url.endsWith('.jpeg') ||
-          url.endsWith('.png')) {
-        type = ImageryType.tms;
-      }
-    } else {
-      if (data['type'] == 'mbtiles' || url.toLowerCase().endsWith('.mbtiles')) {
-        type = ImageryType.mbtiles;
-        mbtiles = plugin.resolvePath(url);
-      }
-    }
-
-    if (type == null) return null;
-
-    final imagery = Imagery(
+    final tmi = TileImageryData(
       id: key,
       name: data['name'] ?? key, // TODO: translatable
-      type: type,
       url: url,
-      mbtiles: mbtiles != null
-          ? MbTiles(mbtilesPath: mbtiles.path, gzip: false)
-          : null,
       attribution: data['attribution'],
       minZoom: data['minZoom'],
       maxZoom: data['maxZoom'],
       tileSize: data['tileSize'] ?? 256,
-      wms4326: data['has4326'] ?? false,
     );
-    return imagery;
+
+    if (data['type'] == 'geojson' ||
+        url.endsWith('.geojson') ||
+        url.endsWith('.json')) {
+      return GeoJsonImagery(
+        id: tmi.id,
+        category: tmi.category,
+        name: tmi.name,
+        icon: tmi.icon,
+        attribution: tmi.attribution,
+        source: url.startsWith('http')
+            ? NetworkGeoJson(url)
+            : FileGeoJson(plugin.resolvePath(url)),
+      );
+    }
+
+    if (url.startsWith('http')) {
+      if (data['type'] == 'wms' || url.toLowerCase().contains('service=wms')) {
+        return WmsImagery.from(tmi, wms4326: data['has4326'] ?? false);
+      } else if (data['type'] == 'tms' ||
+          url.endsWith('.jpg') ||
+          url.endsWith('.jpeg') ||
+          url.endsWith('.png')) {
+        return TmsImagery.from(tmi);
+      }
+    } else {
+      if (data['type'] == 'mbtiles' || url.toLowerCase().endsWith('.mbtiles')) {
+        final mbtiles = plugin.resolvePath(url);
+        if (mbtiles.existsSync()) {
+          return MbTilesImagery.from(
+              tmi, mbtiles: MbTiles(mbtilesPath: mbtiles.path, gzip: false));
+        } else {
+          throw ArgumentError('File $mbtiles does not exist.');
+        }
+      }
+    }
+
+    return null;
   }
 
   void _disableImagery(Plugin plugin) {

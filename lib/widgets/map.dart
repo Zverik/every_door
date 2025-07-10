@@ -19,7 +19,6 @@ import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
@@ -268,7 +267,6 @@ class _CustomMapState extends ConsumerState<CustomMap> {
 
     final imagery = ref.watch(selectedImageryProvider);
     final isNavigating = ref.read(navigationModeProvider);
-    final tileLayer = TileLayerOptions(imagery);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
 
@@ -293,7 +291,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         onTap: widget.onTap == null ? null : onMapTap,
       ),
       children: [
-        tileLayer.buildTileLayer(reset: true),
+        imagery.buildLayer(reset: true),
         ...ref.watch(overlayImageryProvider),
         LocationMarkerWidget(),
         WalkPathPolyline(faint: widget.faintWalkPath),

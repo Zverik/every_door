@@ -22,7 +22,6 @@ import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
-import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/screens/editor/tags.dart';
 import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/editor/versions.dart';
@@ -651,8 +650,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                       },
               ),
               children: [
-                TileLayerOptions(ref.watch(baseImageryProvider))
-                    .buildTileLayer(),
+                ref.watch(baseImageryProvider).buildLayer(),
                 ...ref.watch(overlayImageryProvider),
                 MarkerLayer(
                   markers: [

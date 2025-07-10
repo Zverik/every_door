@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
-import 'package:every_door/helpers/tile_layers.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/widgets/attribution.dart';
@@ -43,7 +42,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
     });
   }
 
-  _initFields(String? value) {
+  void _initFields(String? value) {
     fov = 0;
     direction = null;
     if (value != null) {
@@ -93,7 +92,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
     return '${_clamp(d1)}-${_clamp(d1 + fov)}';
   }
 
-  updateDirection(Offset localPosition) {
+  void updateDirection(Offset localPosition) {
     final bounds = _gdKey.currentContext!.findRenderObject()!.paintBounds;
     final d = bounds.center - localPosition;
     final r = d.distance;
@@ -111,7 +110,6 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
     final isOSM = imagery == ref.watch(baseImageryProvider);
-    final tileLayer = TileLayerOptions(imagery);
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -151,7 +149,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
                   InteractionOptions(flags: InteractiveFlag.none),
             ),
             children: [
-              tileLayer.buildTileLayer(reset: true),
+              imagery.buildLayer(reset: true),
               ...ref.watch(overlayImageryProvider),
               AttributionWidget(imagery),
               LocationMarkerWidget(),

@@ -21,7 +21,6 @@ import 'package:every_door/widgets/zoom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
@@ -101,7 +100,6 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
     final isOSM = imagery == ref.watch(baseImageryProvider);
-    final tileLayer = TileLayerOptions(imagery);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
 
@@ -139,7 +137,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           ),
         ),
         children: [
-          tileLayer.buildTileLayer(reset: true),
+          imagery.buildLayer(reset: true),
           ...ref.watch(overlayImageryProvider),
           AttributionWidget(imagery),
           PolylineLayer(

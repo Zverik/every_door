@@ -9,7 +9,6 @@ import 'package:every_door/widgets/attribution.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:every_door/helpers/tile_layers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
 
@@ -32,7 +31,7 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
     findNearestAddresses();
   }
 
-  findNearestAddresses() async {
+  Future<void> findNearestAddresses() async {
     final provider = ref.read(osmDataProvider);
     List<StreetAddress> data = await provider.getAddressesAround(
       widget.location,
@@ -49,7 +48,6 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
     final loc = AppLocalizations.of(context)!;
     final imagery = ref.watch(selectedImageryProvider);
     final isOSM = imagery == ref.watch(baseImageryProvider);
-    final tileLayer = TileLayerOptions(imagery);
 
     return Scaffold(
       appBar: AppBar(
@@ -81,7 +79,7 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
           ),
         ),
         children: [
-          tileLayer.buildTileLayer(reset: true),
+          imagery.buildLayer(reset: true),
           ...ref.watch(overlayImageryProvider),
           AttributionWidget(imagery),
           MarkerLayer(
@@ -98,9 +96,9 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(
-                                color: Colors.black.withOpacity(0.3)),
+                                color: Colors.black.withValues(alpha: 0.3)),
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white.withOpacity(0.7),
+                            color: Colors.white.withValues(alpha: 0.7),
                           ),
                           padding: EdgeInsets.symmetric(
                             vertical: 5.0,

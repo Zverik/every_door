@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/tile_layers.dart';
-import 'package:every_door/models/imagery.dart';
+import 'package:every_door/helpers/tile_caches.dart';
+import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/providers/area.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -95,7 +95,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
     // First count how many tiles we need to get.
     int total = 0;
     for (final img in [base, imagery]) {
-      if (img.type != ImageryType.tms || img.tileSize != 256) continue;
+      if (img is! TmsImagery || img.tileSize != 256) continue;
       int layerMaxZoom = maxZoom ?? img.maxZoom;
       if (layerMaxZoom > kMaxBulkDownloadZoom)
         layerMaxZoom = kMaxBulkDownloadZoom;
@@ -112,9 +112,10 @@ class TileCacher extends StateNotifier<TileCacherState> {
     int processed = 0;
     state = TileCacherState(total: total);
     for (final img in [base, imagery]) {
-      if (img.type != ImageryType.tms || img.tileSize != 256) continue;
-      final options = TileLayerOptions(img);
-      final tileLayer = options.buildTileLayer();
+      if (img is! TmsImagery || img.tileSize != 256) continue;
+      final tileLayer = img.buildLayer();
+      if (tileLayer is! TileLayer) continue;
+
       int layerMaxZoom = maxZoom ?? img.maxZoom;
       if (layerMaxZoom > kMaxBulkDownloadZoom)
         layerMaxZoom = kMaxBulkDownloadZoom;
@@ -144,7 +145,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
     return true;
   }
 
-  stop() {
+  void stop() {
     _needStop = true;
   }
 }

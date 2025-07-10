@@ -59,7 +59,7 @@ class ImageryPageState extends ConsumerState {
             final list = snapshot.data!;
             return ListView.separated(
               itemBuilder: (context, index) => ListTile(
-                title: Text(list[index].name),
+                title: Text(list[index].name ?? list[index].id),
                 trailing:
                     list[index].id == imagery.id ? Icon(Icons.check) : null,
                 leading: list[index].icon == null
