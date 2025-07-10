@@ -179,7 +179,7 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
     } else {
       // TODO: update the currently installed plugin, and enable it.
       throw Exception(
-          'The plugin has been already installed and of the latest version.');
+          'The latest version of the plugin has already been installed.');
     }
 
     if (mounted) {
