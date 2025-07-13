@@ -141,7 +141,7 @@ class History {
     }
   }
 
-  createDiffs(Map<String, String?> localChanges) {
+  void createDiffs(Map<String, String?> localChanges) {
     if (localChanges.isNotEmpty) {
       // merge in local changes to the latest remote version, so we can diff local changes
       var mergedLocalVersion =
@@ -209,7 +209,7 @@ class _VersionsPageState extends State<VersionsPage> {
   History? history;
   Exception? error;
 
-  getHistory() async {
+  Future<void> getHistory() async {
     try {
       var newHistory = History(widget.amenity.id.fullRef);
       await newHistory.loadHistory();

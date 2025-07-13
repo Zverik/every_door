@@ -38,7 +38,7 @@ Future<List<double>?> getRegionCenter(
   return pointsSum.map((x) => x / pointsCount).toList();
 }
 
-main(List<String> args) async {
+Future<void> main(List<String> args) async {
   if (args.length < 2) {
     print(
         'Adds country language information from Organic Maps to languages.dart.');

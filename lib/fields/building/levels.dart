@@ -40,7 +40,7 @@ class _BuildingLevelsFieldState extends ConsumerState<BuildingLevelsField> {
     updateLevels();
   }
 
-  updateLevels() async {
+  Future<void> updateLevels() async {
     // TODO: wtf is this mess?! Simplify.
     final provider = ref.read(osmDataProvider);
     const radius = kVisibilityRadius;

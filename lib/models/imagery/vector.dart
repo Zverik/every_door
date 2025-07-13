@@ -1,5 +1,5 @@
 import 'package:every_door/models/imagery.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 
 class VectorImagery extends Imagery {
   VectorImagery({required super.id, super.name});

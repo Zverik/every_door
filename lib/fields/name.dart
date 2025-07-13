@@ -92,14 +92,14 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
     super.dispose();
   }
 
-  addLanguage(String key) {
+  void addLanguage(String key) {
     if (_controllers.containsKey(key)) return;
     if (key.endsWith(':signed') || key.contains('19')) return;
     _controllers[key] = TextEditingController(text: widget.element[key] ?? '');
     _languages.add(key);
   }
 
-  copyForLanguageKey(String key) {
+  void copyForLanguageKey(String key) {
     if (widget.element[key] == null) {
       // Copy from name.
       setState(() {
@@ -115,7 +115,7 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
     }
   }
 
-  openLanguageChooser() async {
+  Future<void> openLanguageChooser() async {
     final String? result = await showModalBottomSheet(
       context: context,
       builder: (_) => NameLanguageChooser(langData: _langData),
@@ -128,7 +128,7 @@ class _NameInputFieldState extends ConsumerState<NameInputField> {
     }
   }
 
-  updateFromTags() {
+  void updateFromTags() {
     for (final kv in _controllers.entries) {
       final value = widget.element[kv.key.isEmpty ? widget.field.key : kv.key];
       if (value != kv.value.text.trim().replaceAll('  ', ' ')) {
@@ -273,7 +273,7 @@ class _NameLanguageChooserState extends State<NameLanguageChooser> {
                     visualDensity: VisualDensity.compact,
                     title: Text(lang.nameLoc, style: kFieldTextStyle),
                     subtitle: Text(lang.nameEn),
-                    tileColor: kFieldColor.withOpacity(0.2),
+                    tileColor: kFieldColor.withValues(alpha: 0.2),
                     onTap: () {
                       Navigator.pop(context, lang.key);
                     },

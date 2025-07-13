@@ -13,6 +13,7 @@ import 'package:every_door/screens/editor/sheet.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/entrance_markers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show Ref;
 import 'package:latlong2/latlong.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
@@ -331,7 +332,7 @@ class EntrancesModeCustom extends EntrancesModeDefinition {
   final Map<String, MultiIcon> _markerIcons = {};
 
   EntrancesModeCustom({
-    required ref,
+    required Ref ref,
     required String name,
     required Map<String, dynamic> data,
     required Plugin plugin,

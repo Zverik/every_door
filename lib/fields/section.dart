@@ -1,7 +1,6 @@
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 
 class SectionPresetField extends PresetField {
   final String title;

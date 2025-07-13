@@ -42,7 +42,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
     'stream', 'culvert',
   ];
 
-  selectTool(String tool) {
+  void selectTool(String tool) {
     widget.onChange(tool);
     setState(() {
       isOpen = false;

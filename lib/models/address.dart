@@ -68,7 +68,7 @@ class StreetAddress {
           blockNumber == null);
   bool get isNotEmpty => !isEmpty;
 
-  setTags(OsmChange element) {
+  void setTags(OsmChange element) {
     if (isEmpty) return;
     if (housenumber != null)
       element['$base:housenumber'] = housenumber;
@@ -85,7 +85,7 @@ class StreetAddress {
       element['$base:city'] = city;
   }
 
-  forceTags(OsmChange element) {
+  void forceTags(OsmChange element) {
     element['$base:housenumber'] = housenumber;
     element['$base:housename'] = housename;
     element['$base:unit'] = unit;
@@ -97,7 +97,7 @@ class StreetAddress {
     if (city != null) element['$base:city'] = city;
   }
 
-  static clearTags(OsmChange element, {String base = "addr"}) {
+  static void clearTags(OsmChange element, {String base = "addr"}) {
     for (final key in [
       'housenumber',
       'housename',

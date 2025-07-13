@@ -69,8 +69,7 @@ class OpenStreetMapOAuthHelper {
   }
 
   Future<AccessTokenResponse?> _loadToken() async {
-    final secure = FlutterSecureStorage(
-        aOptions: AndroidOptions(encryptedSharedPreferences: true));
+    final secure = FlutterSecureStorage();
     String? data;
     try {
       data = await secure.read(key: kTokenKey);
@@ -80,9 +79,8 @@ class OpenStreetMapOAuthHelper {
     return data == null ? null : AccessTokenResponse.fromMap(jsonDecode(data));
   }
 
-  _saveToken(AccessTokenResponse? token) async {
-    final secure = FlutterSecureStorage(
-        aOptions: AndroidOptions(encryptedSharedPreferences: true));
+  Future<void> _saveToken(AccessTokenResponse? token) async {
+    final secure = FlutterSecureStorage();
     try {
       if (token == null)
         await secure.delete(key: kTokenKey);

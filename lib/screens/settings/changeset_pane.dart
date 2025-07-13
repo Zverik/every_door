@@ -24,7 +24,7 @@ class _ChangesetPaneState extends ConsumerState<ConsumerStatefulWidget> {
         .getHashtags(clearHashes: true));
   }
 
-  _saveHashtags(String value) {
+  void _saveHashtags(String value) {
     ref.read(changesetTagsProvider).saveHashtags(value);
   }
 

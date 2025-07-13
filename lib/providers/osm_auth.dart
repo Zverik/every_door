@@ -61,7 +61,7 @@ class OsmAuthException implements Exception {
 }
 
 class OsmAuthController extends StateNotifier<OsmUserDetails?> {
-  static final _logger = Logger('OsmAuthController');
+  static final _logger = Logger('OsmAuthController'); // ignore: unused_field
 
   final OpenStreetMapOAuthHelper _helper = OpenStreetMapOAuthHelper();
 
@@ -71,7 +71,7 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
     loadData();
   }
 
-  loadData() async {
+  Future<void> loadData() async {
     try {
       state = await loadUserDetails();
     } on OsmAuthException {
@@ -79,12 +79,12 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
     }
   }
 
-  logout() async {
+  Future<void> logout() async {
     await _helper.deleteToken();
     state = null;
   }
 
-  loginWithOAuth(BuildContext context) async {
+  Future<void> loginWithOAuth(BuildContext context) async {
     final token = await _helper.getToken();
     if (token != null) {
       final authStr = await _helper.getAuthorizationValue(token);

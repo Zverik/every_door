@@ -64,7 +64,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     return null;
   }
 
-  chooseEditorToOpen(Iterable<OsmChange> elements) async {
+  Future<void> chooseEditorToOpen(Iterable<OsmChange> elements) async {
     if (elements.isEmpty) return;
     if (elements.length == 1) {
       widget.def.openEditor(

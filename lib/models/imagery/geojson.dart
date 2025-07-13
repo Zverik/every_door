@@ -1,5 +1,5 @@
 import 'package:every_door/models/imagery.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_map_geojson2/flutter_map_geojson2.dart';
 
 class GeoJsonImagery extends Imagery {

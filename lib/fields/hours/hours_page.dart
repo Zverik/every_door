@@ -54,7 +54,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     super.dispose();
   }
 
-  _findDefaultIntervals() async {
+  Future<void> _findDefaultIntervals() async {
     if (widget.element == null) return;
     final data = ref.read(osmDataProvider);
     _cachedAround =
@@ -63,7 +63,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     setState(() {});
   }
 
-  _updateTimeDefaults() {
+  void _updateTimeDefaults() {
     timeDefaults.updateFromAround(_cachedAround, hours.fragments);
   }
 
@@ -127,7 +127,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
         (fragment) => !fragment.active && fragment.weekdays is Weekdays);
   }
 
-  _updateInactiveCard() {
+  void _updateInactiveCard() {
     if (isRaw) return;
     int pos = _getInactiveCardPosition();
     if (hours.fragments.isEmpty) {
@@ -161,7 +161,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     }
   }
 
-  _addInactiveFragment(DaysRange range) {
+  void _addInactiveFragment(DaysRange range) {
     final newFragment = HoursFragment.inactive(range);
     int inactivePos = _getInactiveCardPosition();
     setState(() {

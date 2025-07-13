@@ -63,7 +63,7 @@ class _HoursInputFieldState extends ConsumerState<HoursInputField> {
         .replaceAllMapped(RegExp(r',(\S)'), (m) => ', ${m.group(1)}');
   }
 
-  findMostCommonInterval() async {
+  Future<void> findMostCommonInterval() async {
     const kMinMatchingIntervals = 3;
 
     final data = ref.read(osmDataProvider);

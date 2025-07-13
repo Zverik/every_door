@@ -37,3 +37,4 @@ linter:
 analyzer:
   exclude:
     - vendor/**
+    - lib/generated/**

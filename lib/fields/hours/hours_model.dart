@@ -116,7 +116,7 @@ class HoursInterval implements Comparable {
         parts.any((p2) => part.start >= p2.start && part.end <= p2.end));
   }
 
-  bool intersects(other) {
+  bool intersects(HoursInterval other) {
     final parts = _splitAtMidnight();
     return other._splitAtMidnight().any((part) =>
         parts.any((p2) => (part.start < p2.end && part.end > p2.start)));
@@ -171,7 +171,7 @@ class HoursFragment implements Comparable {
 
   /// Given interval and breaks, adds a new interval to maintain
   /// the breaks order. E.g. 6-14 + 15-21 = 6-21 + break 14-15.
-  addInterval(HoursInterval other) {
+  void addInterval(HoursInterval other) {
     if (interval == null) {
       // Given an empty fragment, initialize it with the given interval.
       interval = other;
@@ -197,19 +197,19 @@ class HoursFragment implements Comparable {
     }
   }
 
-  updateInterval(HoursInterval? newInterval) {
+  void updateInterval(HoursInterval? newInterval) {
     interval = newInterval;
     _fixAndSortBreaks();
   }
 
-  addBreak(HoursInterval br) {
+  void addBreak(HoursInterval br) {
     if (interval == null)
       throw ArgumentError('Cannot add a break to a disabled fragment.');
     breaks.add(br);
     _fixAndSortBreaks();
   }
 
-  _fixAndSortBreaks() {
+  void _fixAndSortBreaks() {
     if (interval == null) breaks.clear();
     if (breaks.isEmpty) return;
 
@@ -350,7 +350,7 @@ class HoursData {
     caseSensitive: false,
   );
 
-  _parseHours() {
+  void _parseHours() {
     hours = hours.trim();
     if (hours == '24/7') {
       this.fragments = [HoursFragment.make24()];
@@ -396,7 +396,7 @@ class HoursData {
     this.fragments = complete ? fragments : [];
   }
 
-  _sortAndDeduplicate(List<HoursFragment> fragments) {
+  void _sortAndDeduplicate(List<HoursFragment> fragments) {
     fragments.sort();
     for (int i = fragments.length - 1; i > 0; i--) {
       if (fragments[i].weekdays.runtimeType ==
@@ -445,7 +445,7 @@ class HoursData {
     return parts.join('; ');
   }
 
-  updateHours(String newHours) {
+  void updateHours(String newHours) {
     hours = newHours.trim();
   }
 

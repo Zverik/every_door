@@ -59,7 +59,7 @@ class ChangesetTagsProvider extends ChangeNotifier {
     return hashtags;
   }
 
-  saveHashtags(String value) async {
+  Future<void> saveHashtags(String value) async {
     final tags = value
         .split(RegExp(r'\s+|#'))
         .map((s) => s.replaceAll('#', ''))
@@ -89,7 +89,7 @@ class _TypeCount {
     }
   }
 
-  add(OsmChange change) {
+  void add(OsmChange change) {
     String type = _getType(change);
     if (change.isNew)
       created[type] = (created[type] ?? 0) + 1;

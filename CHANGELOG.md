@@ -4,6 +4,7 @@
 
 _Unreleased_
 
+* Displaying icons for presets.
 * Tags for entrances are now remembered again.
 
 ## 6.0

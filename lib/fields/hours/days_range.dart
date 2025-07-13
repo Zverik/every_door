@@ -126,11 +126,11 @@ class Weekdays extends DaysRange {
   @override
   bool get isFull => days.every((open) => open);
 
-  setFrom(Weekdays other) {
+  void setFrom(Weekdays other) {
     for (int i = 0; i < days.length; i++) days[i] = other.days[i];
   }
 
-  copyWith(int index, bool isSet) {
+  Weekdays copyWith(int index, bool isSet) {
     return Weekdays(days)..days[index] = isSet;
   }
 

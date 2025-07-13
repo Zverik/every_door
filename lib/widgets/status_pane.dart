@@ -18,7 +18,7 @@ class ApiStatusPane extends ConsumerWidget {
         margin: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: Colors.white.withOpacity(0.8),
+          color: Colors.white.withValues(alpha: 0.8),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -59,7 +59,7 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
     if (mounted) setState(() {});
   }
 
-  updateNearest() async {
+  Future<void> updateNearest() async {
     // Disabling updates in zoomed in mode.
     if (ref.read(microZoomedInProvider) != null) return;
 
@@ -75,7 +75,7 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
     }
   }
 
-  micromappingTap(LatLng position, double Function(LatLng) distance) async {
+  Future<void> micromappingTap(LatLng position, double Function(LatLng) distance) async {
     List<OsmChange> amenitiesAtCenter = widget.def.nearestPOI
         .where((element) => distance(element.location) <= kTapRadius)
         .toList();

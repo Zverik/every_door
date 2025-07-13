@@ -66,7 +66,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
     super.dispose();
   }
 
-  updateNearest() async {
+  Future<void> updateNearest() async {
     final provider = ref.read(osmDataProvider);
     final filter = ref.read(poiFilterProvider);
     final editorMode = ref.read(editorModeProvider);

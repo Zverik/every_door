@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/fields/helpers/combo_page.dart';
@@ -31,7 +30,7 @@ class _PaymentSettingsPaneState extends ConsumerState<PaymentSettingsPane> {
     loadPayment();
   }
 
-  loadPayment() async {
+  Future<void> loadPayment() async {
     options =
         await ref.read(paymentProvider).getAllPaymentOptions(widget.location);
     setState(() {});
@@ -158,4 +157,9 @@ class _PaymentSettingsPaneState extends ConsumerState<PaymentSettingsPane> {
       ),
     );
   }
+}
+
+// A small bit of `iterable_extensions.dart` that we use here.
+extension SortingIterable<T> on Iterable<T> {
+  List<T> sorted([Comparator<T>? compare]) => [...this]..sort(compare);
 }

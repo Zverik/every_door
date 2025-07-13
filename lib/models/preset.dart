@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/fields/name.dart';
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
@@ -15,7 +16,7 @@ class Preset {
   final String id;
   final String name;
   final String? _subtitle;
-  final String? icon;
+  final MultiIcon? icon;
   final LocationSet? locationSet;
   final bool fromNSI;
   final bool isFixme;
@@ -90,12 +91,41 @@ class Preset {
           data['add_tags'] != null ? jsonDecode(data['add_tags']) : null),
       removeTags: decodeTagsSkipNull(
           data['remove_tags'] != null ? jsonDecode(data['remove_tags']) : null),
-      icon: data['icon'],
+      icon: _resolveIcon(data['imageURL'] ?? data['icon'])?.withTooltip(
+          data['loc_name'] ?? data['name']),
       locationSet: data['locations'] == null
           ? null
           : LocationSet.fromJson(jsonDecode(data['locations'])),
       name: data['loc_name'],
     );
+  }
+
+  static MultiIcon? _resolveIcon(Object? url) {
+    if (url == null || url is! String) return null;
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return MultiIcon(imageUrl: url);
+    }
+
+    final dashPos = url.indexOf('-');
+    if (dashPos > 0) {
+      final typ = url.substring(0, dashPos);
+      final icon = url.substring(dashPos + 1);
+      if (typ == 'maki') {
+        return MultiIcon(
+            imageUrl: 'https://raw.githubusercontent.com/mapbox/maki/refs/heads/main/icons/$icon.svg');
+      } else if (typ == 'temaki') {
+        return MultiIcon(
+            imageUrl: 'https://raw.githubusercontent.com/rapideditor/temaki/refs/heads/main/icons/$icon.svg');
+      } else if (typ == 'roentgen') {
+        return MultiIcon(
+            imageUrl: 'https://raw.githubusercontent.com/openstreetmap/iD/refs/heads/develop/svg/roentgen/$icon.svg');
+      } else if (typ == 'fas') {
+        return MultiIcon(
+            imageUrl: 'https://raw.githubusercontent.com/openstreetmap/iD/refs/heads/develop/svg/fontawesome/$url.svg');
+      }
+    }
+
+    return null;
   }
 
   factory Preset.fromNSIJson(Map<String, dynamic> data) {
@@ -152,7 +182,7 @@ class Preset {
     );
   }
 
-  doAddTags(OsmChange change) {
+  void doAddTags(OsmChange change) {
     final mainKey = getMainKey(addTags);
     addTags.forEach((key, value) {
       if (value == '*') return;
@@ -165,7 +195,7 @@ class Preset {
     });
   }
 
-  doRemoveTags(OsmChange change) {
+  void doRemoveTags(OsmChange change) {
     final tags = removeTags.isEmpty ? addTags : removeTags;
     tags.forEach((key, value) {
       if (change[key] != null) {

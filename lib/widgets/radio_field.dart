@@ -92,7 +92,7 @@ class _RadioFieldState extends State<RadioField> {
     super.dispose();
   }
 
-  rebuildLabels() {
+  void rebuildLabels() {
     labels = [];
     for (int i = 0; i < widget.options.length; i++) {
       if (i < (widget.widgetLabels?.length ?? 0)) {

@@ -74,7 +74,7 @@ class _BottomEditorPaneState extends ConsumerState<BottomEditorPane> {
     super.dispose();
   }
 
-  onAmenityChange() {
+  void onAmenityChange() {
     setState(() {});
   }
 
@@ -91,7 +91,7 @@ class _BottomEditorPaneState extends ConsumerState<BottomEditorPane> {
     setState(() {});
   }
 
-  saveAndClose([bool pop = true]) {
+  void saveAndClose([bool pop = true]) {
     final fullTags = element.getFullTags();
     // Setting the mark automatically.
     if (ElementKind.needsCheck.matchesTags(fullTags)) element.check();
@@ -107,7 +107,7 @@ class _BottomEditorPaneState extends ConsumerState<BottomEditorPane> {
     if (pop) Navigator.pop(context);
   }
 
-  deleteAndClose() {
+  void deleteAndClose() {
     if (widget.element != null) {
       // No use deleting an amenity that just have been created.
       final changes = ref.read(changesProvider);

@@ -9,6 +9,7 @@ import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/poi_marker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show Ref;
 import 'package:latlong2/latlong.dart';
 import 'package:material_color_names/material_color_names.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
@@ -170,7 +171,7 @@ class MicromappingModeCustom extends MicromappingModeDefinition {
   MultiIcon? _icon;
 
   MicromappingModeCustom({
-    required ref,
+    required Ref ref,
     required String name,
     required Map<String, dynamic> data,
     required Plugin plugin,

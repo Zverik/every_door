@@ -81,7 +81,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
     return result;
   }
 
-  updateStreets() async {
+  Future<void> updateStreets() async {
     final provider = ref.read(osmDataProvider);
     nearestStreets =
         await ref.read(roadNameProvider).getNamesAround(widget.location);
@@ -99,7 +99,7 @@ class _AddressFormState extends ConsumerState<AddressForm> {
     return value.isEmpty ? null : value;
   }
 
-  notifyOnChange() {
+  void notifyOnChange() {
     final unit = _unitController.text.trim();
     final block = _blockController.text.trim();
     final address = StreetAddress(

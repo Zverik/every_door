@@ -43,7 +43,7 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
     super.dispose();
   }
 
-  startDuplicateSearch() {
+  void startDuplicateSearch() {
     final isAmenity = ElementKind.amenity.matchesChange(widget.amenity);
     if (!widget.amenity.isNew || !isAmenity) return;
     possibleDuplicate = null;
@@ -72,7 +72,7 @@ class _DuplicateWarningState extends ConsumerState<DuplicateWarning> {
         (!isAmenity && mode.name == "amenity");
   }
 
-  onAmenityChange() {
+  void onAmenityChange() {
     startDuplicateSearch();
     final loc = AppLocalizations.of(context)!;
     String? newWarning = getWarningForAmenity(widget.amenity, loc);

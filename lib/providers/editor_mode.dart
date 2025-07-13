@@ -28,7 +28,7 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
     loadState();
   }
 
-  reset() {
+  void reset() {
     _modes.clear();
     _logger.fine('Ref class: ${_ref.runtimeType}');
     _modes.addAll([
@@ -45,7 +45,7 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
     for (final mode in _modes) yield mode;
   }
 
-  loadState() async {
+  Future<void> loadState() async {
     final prefs = await SharedPreferences.getInstance();
     final mode = prefs.getString(kModeKey);
     final idx = _modes.indexWhere((m) => m.name == mode);
@@ -55,7 +55,7 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
     }
   }
 
-  set(String name) async {
+  Future<void> set(String name) async {
     final i = _modes.indexWhere((m) => m.name == name);
     if (i >= 0 && _currentMode != i && i < _modes.length) {
       _currentMode = i;
@@ -69,7 +69,7 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
     return _modes.where((m) => m.name == name).firstOrNull;
   }
 
-  register(BaseModeDefinition mode) {
+  void register(BaseModeDefinition mode) {
     final oldMode = get(mode.name);
     if (oldMode == mode) {
       state = _modes[_currentMode]; // TODO: proper notifying
@@ -84,7 +84,7 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
     state = _modes[_currentMode]; // TODO: proper notifying
   }
 
-  unregister(String name) {
+  void unregister(String name) {
     int pos = _modes.indexWhere((m) => m.name == name);
     if (pos >= 0) {
       if (_currentMode >= pos) _currentMode -= 1;

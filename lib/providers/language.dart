@@ -16,7 +16,7 @@ class LanguageController extends StateNotifier<Locale?> {
     loadState();
   }
 
-  loadState() async {
+  Future<void> loadState() async {
     final prefs = await SharedPreferences.getInstance();
     final l = prefs.getStringList(kLocaleKey);
     if (l != null) {
@@ -28,7 +28,7 @@ class LanguageController extends StateNotifier<Locale?> {
     }
   }
 
-  set(Locale? newValue) async {
+  Future<void> set(Locale? newValue) async {
     if (state != newValue) {
       state = newValue;
       final prefs = await SharedPreferences.getInstance();

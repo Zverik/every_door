@@ -18,15 +18,15 @@ class LocationObjectSet<T> {
     if (initList != null) addAll(initList);
   }
 
-  add(LatLng location, T value) {
+  void add(LatLng location, T value) {
     _objects.add(LocationObject(location, value));
   }
 
-  addAll(Iterable<LocationObject<T>> objects) {
+  void addAll(Iterable<LocationObject<T>> objects) {
     _objects.addAll(objects);
   }
 
-  sortByDistance(LatLng location, {bool unique = false}) {
+  void sortByDistance(LatLng location, {bool unique = false}) {
     if (_objects.length <= 1) return;
 
     const distance = DistanceEquirectangular();

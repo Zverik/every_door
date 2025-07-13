@@ -36,7 +36,6 @@ abstract class NotesModeDefinition extends BaseModeDefinition {
   @override
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) {
     if (data.containsKey('locked')) {
-      print('setting locked to ${data["locked"]}');
       ref.read(drawingLockedProvider.notifier).state = data['locked']!;
     }
   }

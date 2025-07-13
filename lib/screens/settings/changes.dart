@@ -87,7 +87,7 @@ class _ChangeListPageState extends ConsumerState {
     return result;
   }
 
-  downloadChanges(WidgetRef ref) async {
+  Future<void> downloadChanges(WidgetRef ref) async {
     final changes = ref.watch(changesProvider);
     final changeList = changes.all();
     String changeset =
@@ -106,7 +106,7 @@ class _ChangeListPageState extends ConsumerState {
     tmpFile.delete();
   }
 
-  buildChangesList() async {
+  Future<void> buildChangesList() async {
     final loc = AppLocalizations.of(context)!;
     final changes = ref.read(changesProvider);
     final changesList = changes.all();

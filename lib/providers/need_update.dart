@@ -6,7 +6,7 @@ final needMapUpdateProvider = ChangeNotifierProvider((_) => NeedMapUpdateNotifie
 /// Simple provider to notify the POI list that it needs to be updated.
 class NeedMapUpdateNotifier extends ChangeNotifier {
   /// Calls notifyListeners().
-  trigger() {
+  void trigger() {
     notifyListeners();
   }
 }

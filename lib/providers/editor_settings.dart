@@ -76,39 +76,39 @@ class EditorSettingsProvider extends StateNotifier<EditorSettings> {
     load();
   }
 
-  load() async {
+  Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     state = EditorSettings.fromStrings(prefs.getStringList(kSettingsKey));
   }
 
-  store() async {
+  Future<void> store() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(kSettingsKey, state.toStrings());
   }
 
-  setPreferContact(bool value) {
+  void setPreferContact(bool value) {
     state = state.copyWith(preferContact: value);
     store();
   }
 
-  setFixNumKeyboard(bool value) {
+  void setFixNumKeyboard(bool value) {
     state = state.copyWith(fixNumKeyboard: value);
     store();
   }
 
-  setLeftHand(bool value) {
+  void setLeftHand(bool value) {
     state = state.copyWith(leftHand: value);
     store();
   }
 
-  setDefaultPayment(List<String> values) {
+  void setDefaultPayment(List<String> values) {
     if (values.isNotEmpty) {
       state = state.copyWith(defaultPayment: values);
       store();
     }
   }
 
-  setChangesetReview(ChangesetReview value) {
+  void setChangesetReview(ChangesetReview value) {
     state = state.copyWith(changesetReview: value);
     store();
   }

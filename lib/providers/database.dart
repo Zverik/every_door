@@ -98,7 +98,7 @@ class DatabaseHelper {
     }
   }
 
-  createTablesV4(Database database) async {
+  Future<void> createTablesV4(Database database) async {
     // Road names
     await database.execute(
         "create table ${RoadNameRecord.kTableName} (${RoadNameRecord.kTableFields.join(', ')})");
@@ -106,7 +106,7 @@ class DatabaseHelper {
         "create index ${RoadNameRecord.kTableName}_geohash on ${RoadNameRecord.kTableName} (geohash)");
   }
 
-  createTablesV5(Database database) async {
+  Future<void> createTablesV5(Database database) async {
     // Imagery offsets
     await database.execute(
         "create table ${ImageryOffset.kTableName} (${ImageryOffset.kTableFields.join(', ')})");
@@ -126,7 +126,7 @@ class DatabaseHelper {
         "create index ${PresetProvider.kCachedCombosTableName}_idx on ${PresetProvider.kCachedCombosTableName} (key)");
   }
 
-  createTablesV6(Database database) async {
+  Future<void> createTablesV6(Database database) async {
     // Local payment options
     await database.execute(
         "create table ${LocalPayment.kTableName} (${LocalPayment.kTableFields.join(', ')})");

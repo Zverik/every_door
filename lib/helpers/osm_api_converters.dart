@@ -1,6 +1,5 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/geometry/geometry.dart';
-import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';

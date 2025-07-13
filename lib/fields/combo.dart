@@ -116,7 +116,7 @@ class _RadioComboFieldState extends State<RadioComboField> {
     }
   }
 
-  setComboValues(List<String> values) {
+  void setComboValues(List<String> values) {
     if (widget.field.type == ComboType.multi) {
       List<String> keysToDelete = [];
       widget.element.getFullTags().forEach((key, value) {
@@ -155,7 +155,7 @@ class _RadioComboFieldState extends State<RadioComboField> {
     }
   }
 
-  removeComboValue(String value) {
+  void removeComboValue(String value) {
     switch (widget.field.type) {
       case ComboType.regular:
         widget.element.removeTag(widget.field.key);
@@ -178,7 +178,7 @@ class _RadioComboFieldState extends State<RadioComboField> {
     }
   }
 
-  openChooser(List<String> values) async {
+  Future<void> openChooser(List<String> values) async {
     final List<String>? newValue = await Navigator.push(
       context,
       MaterialPageRoute(

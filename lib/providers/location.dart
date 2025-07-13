@@ -20,7 +20,7 @@ class EffectiveLocationController extends StateNotifier<LatLng> {
     _restore();
   }
 
-  _restore() async {
+  Future<void> _restore() async {
     final geoPos = _ref.read(geolocationProvider);
     if (geoPos != null) {
       state = geoPos;
@@ -33,7 +33,7 @@ class EffectiveLocationController extends StateNotifier<LatLng> {
     }
   }
 
-  set(LatLng location) async {
+  Future<void> set(LatLng location) async {
     state = location;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(kSavedLocation,

@@ -11,11 +11,11 @@ class LogStore {
   bool get isEmpty => lines.isEmpty;
   bool get isNotEmpty => lines.isNotEmpty;
 
-  clear() {
+  void clear() {
     lines.clear();
   }
 
-  last(int count) =>
+  List<String> last(int count) =>
       lines.length <= count ? lines : lines.sublist(lines.length - count);
 
   String _formatTime(DateTime time) {
@@ -25,12 +25,12 @@ class LogStore {
     return '$hour:$minute:$second';
   }
 
-  _addLine(String? str, [DateTime? time]) {
+  void _addLine(String? str, [DateTime? time]) {
     if (str == null) return;
     lines.add('[${_formatTime(time ?? DateTime.now())}] $str');
   }
 
-  addFromLogger(LogRecord record) {
+  void addFromLogger(LogRecord record) {
     final line =
         '${record.level.name.substring(0, 1)}/${record.loggerName}: ${record.message}';
     print(line);
@@ -40,12 +40,12 @@ class LogStore {
     _addLine(record.stackTrace?.toString(), record.time);
   }
 
-  addFromFlutter(FlutterErrorDetails details) {
+  void addFromFlutter(FlutterErrorDetails details) {
     _addLine('Flutter: ${details.exceptionAsString()}');
     _addLine(details.stack?.toString());
   }
 
-  addFromZone(Object error, StackTrace stack) {
+  void addFromZone(Object error, StackTrace stack) {
     print('Async error: $error');
     print(stack);
     _addLine('Async: $error');

@@ -54,7 +54,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     super.dispose();
   }
 
-  updateLevels() async {
+  Future<void> updateLevels() async {
     // TODO: wtf is this mess?! Simplify.
     final provider = ref.read(osmDataProvider);
     const radius = kVisibilityRadius;
@@ -96,7 +96,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     return levels >= 1 && levels <= 40;
   }
 
-  saveAndClose([bool pop = true]) {
+  void saveAndClose([bool pop = true]) {
     // Only remove check_date when the original did not have it.
     if (building.element?.tags[OsmChange.kCheckedKey] == null)
       building.removeTag(OsmChange.kCheckedKey);
@@ -107,7 +107,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     if (pop) Navigator.pop(context);
   }
 
-  deleteAndClose() {
+  void deleteAndClose() {
     final changes = ref.read(changesProvider);
     if (building.isNew) {
       changes.deleteChange(building);

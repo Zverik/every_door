@@ -60,7 +60,7 @@ abstract class WebsiteProvider {
           : 'contact:$key');
 
   /// Replaces tag value for element.
-  setValue(OsmChange element, String value, {bool preferContact = false}) {
+  void setValue(OsmChange element, String value, {bool preferContact = false}) {
     element.setContact(
         preferContact && !key.startsWith('contact:') ? 'contact:$key' : key,
         value);

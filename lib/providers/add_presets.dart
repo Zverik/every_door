@@ -55,14 +55,13 @@ class PluginPresetsProvider {
             .map((k, v) => MapEntry(k, v == '*' ? null : v));
     final onArea = (data['area'] as bool?) ?? true;
     final noStandard = (data['standard'] as bool?) == false;
+
     final String? iconStr = data['icon'];
-    String? iconUrl;
     MultiIcon? iconImg;
     if (iconStr != null) {
-      if (iconStr.startsWith('http')) {
-        iconUrl = iconStr;
+      if (iconStr.startsWith('http://') || iconStr.startsWith('https://')) {
+        iconImg = MultiIcon(imageUrl: iconStr, tooltip: name);
       } else {
-        // Not supported anywhere currently.
         iconImg = plugin.loadIcon(iconStr);
       }
     }
@@ -80,7 +79,7 @@ class PluginPresetsProvider {
       addTags: addTags,
       removeTags: removeTags ?? const {},
       onArea: onArea,
-      icon: iconUrl,
+      icon: iconImg,
       fromNSI: fromNSI,
       fieldData: fieldsData,
       noStandard: noStandard,
@@ -122,7 +121,7 @@ class PluginPresetsProvider {
   }
 
   PresetField? getField(String id, Locale? locale) {
-    if (true || !_fieldsCache.containsKey(id)) {
+    if (!_fieldsCache.containsKey(id)) {
       final field = _fields[id];
       if (field == null) return null;
       _fieldsCache[id] = field.withLocale(locale);

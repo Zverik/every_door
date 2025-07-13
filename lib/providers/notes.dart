@@ -44,7 +44,7 @@ class NotesProvider extends ChangeNotifier {
     _checkHaveChangesAndNotify();
   }
 
-  _checkHaveChangesAndNotify() async {
+  Future<void> _checkHaveChangesAndNotify() async {
     final database = await _ref.read(databaseProvider).database;
     final count = firstIntValue(await database.query(
       BaseNote.kTableName,
@@ -123,7 +123,7 @@ class NotesProvider extends ChangeNotifier {
   }
 
   /// Downloads OSM notes and drawings from servers.
-  downloadNotes(LatLng center) async {
+  Future<void> downloadNotes(LatLng center) async {
     final bounds = boundsFromRadius(center, kBigRadius);
     await Future.wait([
       _downloadOsmNotes(bounds),
@@ -261,7 +261,7 @@ class NotesProvider extends ChangeNotifier {
   }
 
   String _colorToHex(Color c) =>
-      c.value.toRadixString(16).padLeft(8, '0').substring(2);
+      c.toARGB32().toRadixString(16).padLeft(8, '0').substring(2);
 
   String _extractError(http.Response response) {
     String msg = response.request?.url.toString() ?? '';
@@ -506,7 +506,7 @@ class NotesProvider extends ChangeNotifier {
   bool get undoIsEmpty => _undoStackLast <= 0;
   bool get redoIsEmpty => _undoStackLast >= _undoStack.length;
 
-  _addToUndoStack(Iterable<BaseNote> notes, bool deleted) {
+  void _addToUndoStack(Iterable<BaseNote> notes, bool deleted) {
     final toAdd = notes.where((n) => n is MapNote || n is MapDrawing).toList();
     if (toAdd.isEmpty) return;
     // Add it to undo stack, discarding the top if needed.
@@ -619,13 +619,13 @@ class OwnScribblesController extends StateNotifier<bool> {
     loadState();
   }
 
-  loadState() async {
+  Future<void> loadState() async {
     final prefs = await SharedPreferences.getInstance();
     final savedState = prefs.getBool(kSettingKey);
     if (savedState != null) state = savedState;
   }
 
-  set(bool newValue) async {
+  Future<void> set(bool newValue) async {
     if (state != newValue) {
       state = newValue;
       final prefs = await SharedPreferences.getInstance();

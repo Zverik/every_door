@@ -548,7 +548,7 @@ class TimeDefaults {
     updateFromAround(around ?? [], fragments);
   }
 
-  updateFromAround(List<String> hoursAround,
+  void updateFromAround(List<String> hoursAround,
       [Iterable<HoursFragment>? fragments]) {
     final kStart = RegExp(r'(?:^|Mo|Tu|We|Th|Fr|Sa|Su|;)\s*(\d?\d:\d\d)-');
     final kEnd = RegExp(r'-(\d?\d:\d\d)(?:$|;)');

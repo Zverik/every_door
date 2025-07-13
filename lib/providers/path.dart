@@ -23,7 +23,7 @@ class PathController extends StateNotifier<List<LatLng>> {
     });
   }
 
-  updateLocation(LatLng pos, [DateTime? dt]) async {
+  Future<void> updateLocation(LatLng pos, [DateTime? dt]) async {
     dt ??= DateTime.now();
     List<LatLng> newPath = List.of(state);
     DateTime? lu = _lastUpdate;
@@ -66,7 +66,7 @@ class PathController extends StateNotifier<List<LatLng>> {
     return (<LatLng>[], null);
   }
 
-  _storePath() async {
+  Future<void> _storePath() async {
     final prefs = await SharedPreferences.getInstance();
     if (state.isEmpty) {
       await prefs.remove(kPathKey);

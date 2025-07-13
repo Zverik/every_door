@@ -56,16 +56,16 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     if (mounted) setState(() {});
   }
 
-  recordMapMove(MapCamera camera) {
+  void recordMapMove(MapCamera camera) {
     ref.read(effectiveLocationProvider.notifier).set(camera.center);
     ref.read(zoomProvider.notifier).state = camera.zoom;
   }
 
-  updateNotes() {
+  void updateNotes() {
     widget.def.updateNearest();
   }
 
-  _openNoteEditor(BaseNote? note, [LatLng? location]) async {
+  Future<void> _openNoteEditor(BaseNote? note, [LatLng? location]) async {
     if (note is MapDrawing) return;
 
     if (location != null) {

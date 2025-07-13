@@ -35,7 +35,7 @@ void main() {
   });
 }
 
-installCertificate() async {
+Future<void> installCertificate() async {
   ByteData data =
       await PlatformAssetBundle().load('assets/lets-encrypt-r3.pem');
   SecurityContext.defaultContext

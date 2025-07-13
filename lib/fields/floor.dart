@@ -53,7 +53,7 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
     super.dispose();
   }
 
-  updateFloors() async {
+  Future<void> updateFloors() async {
     final osmData = ref.read(osmDataProvider);
     final tags = widget.element.getFullTags();
     final addr = StreetAddress.fromTags(tags);
@@ -81,7 +81,7 @@ class _FloorInputFieldState extends ConsumerState<FloorInputField> {
     }
   }
 
-  addFloor(BuildContext context) async {
+  Future<void> addFloor(BuildContext context) async {
     final List<String>? result = await showModalBottomSheet(
       context: context,
       isScrollControlled: true,

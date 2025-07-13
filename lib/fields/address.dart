@@ -44,7 +44,7 @@ class _AddressInputState extends ConsumerState<AddressInput> {
     loadAddresses();
   }
 
-  loadAddresses() async {
+  Future<void> loadAddresses() async {
     final osmData = ref.read(osmDataProvider);
     final addr =
         await osmData.getAddressesAround(widget.element.location, limit: 3);
@@ -53,7 +53,7 @@ class _AddressInputState extends ConsumerState<AddressInput> {
     });
   }
 
-  addAddress(BuildContext context) async {
+  Future<void> addAddress(BuildContext context) async {
     final StreetAddress? addr = await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -78,7 +78,7 @@ class _AddressInputState extends ConsumerState<AddressInput> {
     });
   }
 
-  chooseAddressOnMap() async {
+  Future<void> chooseAddressOnMap() async {
     final StreetAddress? addr = await Navigator.push(
       context,
       MaterialPageRoute(

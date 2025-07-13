@@ -85,7 +85,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
   final reCJK = RegExp(
       '^[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]');
 
-  updatePresets(String substring) async {
+  Future<void> updatePresets(String substring) async {
     final mutex = DateTime.now().millisecondsSinceEpoch;
     updateMutex = mutex;
 
@@ -155,7 +155,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     }
   }
 
-  updateNSISubtitles(BuildContext context) async {
+  Future<void> updateNSISubtitles(BuildContext context) async {
     final upd = resultsUpdated;
     final prov = ref.read(presetProvider);
     final locale = Localizations.localeOf(context);
@@ -210,7 +210,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         children: [
           for (final preset in presets)
             GestureDetector(
-              child: PresetTile(preset),
+              child: ClipRect(child: PresetTile(preset)),
               onTap: () {
                 if (widget.launchEditor) {
                   Navigator.pushReplacement(
@@ -242,17 +242,26 @@ class PresetTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            preset.name,
-            style: TextStyle(fontSize: 16.0),
+          if (preset.icon != null) Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: preset.icon!.getWidget(icon: false, size: 24.0),
           ),
-          SizedBox(height: 4.0),
-          Text(
-            preset.subtitle,
-            style: TextStyle(fontSize: 14.0, color: Colors.grey.shade600),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                preset.name,
+                style: TextStyle(fontSize: 16.0),
+              ),
+              SizedBox(height: 4.0),
+              Text(
+                preset.subtitle,
+                style: TextStyle(fontSize: 14.0, color: Colors.grey.shade600),
+              ),
+            ],
           ),
         ],
       ),
@@ -261,7 +270,7 @@ class PresetTile extends StatelessWidget {
               ? Colors.grey.withValues(alpha: 0.2)
               : kFieldColor.withValues(alpha: 0.2))
           : Colors.red.withValues(alpha: 0.2),
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
     );
   }
 }

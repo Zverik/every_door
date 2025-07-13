@@ -22,18 +22,18 @@ class GeoIntentController {
     initStreamListener();
   }
 
-  initStreamListener() {
+  void initStreamListener() {
     AppLinks().uriLinkStream.listen((uri) {
       _handleGeoIntent(uri);
     });
   }
 
-  checkLatestIntent() async {
+  Future<void> checkLatestIntent() async {
     final latest = await AppLinks().getLatestLink();
     if (latest != null) _handleGeoIntent(latest);
   }
 
-  _handleGeoIntent(Uri uri) {
+  void _handleGeoIntent(Uri uri) {
     if (uri.scheme == 'geo' && uri.path.isNotEmpty) {
       _logger.info('Got geo uri $uri');
       final location = _parseLatLngFromGeoUri(uri.path);
@@ -79,7 +79,7 @@ class GeoIntentController {
     }
   }
 
-  _handleNavLink(String path) {
+  void _handleNavLink(String path) {
     final reLatLng = RegExp(r'/nav/(-?[0-9.]+,-?[0-9.]+)');
     final m1 = reLatLng.matchAsPrefix(path);
     if (m1 != null) {

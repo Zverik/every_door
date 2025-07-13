@@ -30,7 +30,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
     });
   }
 
-  loadAddresses() async {
+  Future<void> loadAddresses() async {
     final osmData = ref.read(osmDataProvider);
     final location = ref.read(effectiveLocationProvider);
     final addr = await osmData.getAddressesAround(location, limit: 3);
@@ -39,7 +39,7 @@ class _PoiFilterPaneState extends ConsumerState<PoiFilterPane> {
     });
   }
 
-  updateFloors() async {
+  Future<void> updateFloors() async {
     final filter = ref.watch(poiFilterProvider);
     final osmData = ref.read(osmDataProvider);
     final location = ref.read(effectiveLocationProvider);

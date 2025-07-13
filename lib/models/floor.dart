@@ -55,7 +55,7 @@ class Floor implements Comparable<Floor> {
   }
 
   /// Removes incomplete duplicates.
-  static collapse(Set<Floor> floors) {
+  static void collapse(Set<Floor> floors) {
     final compLevels = floors
         .where((element) => element.isComplete)
         .map((e) => e.level!)
@@ -80,7 +80,7 @@ class Floor implements Comparable<Floor> {
     // TODO: replace these floors with .makeDuplicate()
   }
 
-  static collapseList(Iterable<Floor> floors) {
+  static List<Floor> collapseList(Iterable<Floor> floors) {
     final set = floors.toSet();
     collapse(set);
     final result = set.toList();
@@ -125,7 +125,7 @@ class MultiFloor {
 
   static final _kTailSemicolons = RegExp(r';+$');
 
-  setTags(OsmChange element) {
+  void setTags(OsmChange element) {
     if (floors.isEmpty) {
       element.removeTag('level');
       element.removeTag('addr:floor');

@@ -47,11 +47,11 @@ class ZoomButtonsWidget extends StatelessWidget {
                   child: Icon(
                     Icons.remove,
                     size: 30.0,
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withValues(alpha: 0.5),
                   ),
                 ),
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.white.withOpacity(0.5),
+                  backgroundColor: Colors.white.withValues(alpha: 0.5),
                   shape: CircleBorder(side: BorderSide()),
                   padding: EdgeInsets.zero,
                 ),

@@ -5,11 +5,11 @@ class Counter<T> {
     if (initial != null) addAll(initial);
   }
 
-  add(T item, [int? count]) {
+  void add(T item, [int? count]) {
     _data[item] = (_data[item] ?? 0) + (count ?? 1);
   }
 
-  addAll(Iterable<T> items, [int? count]) {
+  void addAll(Iterable<T> items, [int? count]) {
     for (final item in items) add(item, count);
   }
 
@@ -23,7 +23,7 @@ class Counter<T> {
 
   int operator [](T item) => _data[item] ?? 0;
 
-  operator []=(T item, int value) {
+  void operator []=(T item, int value) {
     _data[item] = value;
   }
 

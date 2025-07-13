@@ -62,7 +62,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
   }
 
-  _subscribeToPositions() async {
+  Future<void> _subscribeToPositions() async {
     await _locSub?.cancel();
     _locSub = null;
 
@@ -105,7 +105,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     _logger.fine('Subscribed to position stream');
   }
 
-  reloadTracking() async {
+  Future<void> reloadTracking() async {
     if (_ref.read(trackingProvider)) {
       if (await Geolocator.isLocationServiceEnabled()) {
         disableTracking();
@@ -114,11 +114,11 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
   }
 
-  disableTracking() {
+  void disableTracking() {
     _ref.read(trackingProvider.notifier).state = false;
   }
 
-  enableTracking([BuildContext? context]) async {
+  Future<void> enableTracking([BuildContext? context]) async {
     final bool tracking = _ref.read(trackingProvider);
     if (tracking) return;
 
@@ -164,7 +164,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     _updateLocation(_fromPosition(pos));
   }
 
-  _updateLocation(LatLng newLocation) {
+  void _updateLocation(LatLng newLocation) {
     if (!kSlowDownGPS) {
       state = newLocation;
       return;
@@ -183,7 +183,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
   }
 
-  onLocationError(event) {
+  void onLocationError(Object event) {
     _logger.warning('Location error! $event');
     disableTracking();
     state = null;
@@ -208,13 +208,13 @@ class ForceLocationController extends StateNotifier<bool> {
     _read();
   }
 
-  _read() async {
+  Future<void> _read() async {
     final prefs = await SharedPreferences.getInstance();
     state = prefs.getBool(_kForceLocationKey) ?? false;
     loaded = true;
   }
 
-  set(bool force) async {
+  Future<void> set(bool force) async {
     if (state == force) return;
     state = force;
     final prefs = await SharedPreferences.getInstance();

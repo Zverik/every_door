@@ -65,7 +65,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     return "";
   }
 
-  updateShortcutsList() async {
+  Future<void> updateShortcutsList() async {
     final popular =
         await ref.read(notesProvider).getPopularNotes(kMaxShortcuts);
     // First go popular, then unused defaults until we get to max.
@@ -122,7 +122,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     }
   }
 
-  saveAndClose([bool pop = true]) {
+  void saveAndClose([bool pop = true]) {
     if (isChanged) {
       final note = _buildEditedNote();
       if (note != null) {
@@ -132,7 +132,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
     if (pop) Navigator.pop(context);
   }
 
-  deleteAndClose() {
+  void deleteAndClose() {
     if (widget.note != null) {
       final note = _buildEditedNote();
       if (note != null) {

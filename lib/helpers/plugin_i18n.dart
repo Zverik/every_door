@@ -115,7 +115,6 @@ class PluginLocalizations {
 
   List<String>? _resolveKeyList(Map<String, dynamic> data, String key) {
     if (data.containsKey(key) && data[key] is List) {
-      print('found list for $key: ${data[key]}');
       return (data[key] as List).whereType<String>().toList();
     }
 
@@ -126,7 +125,6 @@ class PluginLocalizations {
       k = k[p];
       if (k == null) return null;
     }
-    print('found $key: $k');
     if (k is List) return k.whereType<String>().toList();
     return null;
   }

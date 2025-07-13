@@ -27,7 +27,7 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
 
   bool get isOff => widget.fragment.active && widget.fragment.interval == null;
 
-  _callOnChange(
+  void _callOnChange(
       {bool? isOff,
       DaysRange? weekdays,
       HoursInterval? interval,

@@ -19,7 +19,7 @@ class WalkPathPolyline extends ConsumerWidget {
     return PolylineLayer(polylines: [
       Polyline(
         points: walkPath,
-        color: Colors.blue.withOpacity(0.5),
+        color: Colors.blue.withValues(alpha: 0.5),
         pattern: StrokePattern.dotted(spacingFactor: faint ? 2.0 : 2.5),
         strokeWidth: faint ? 5.0 : 4.0,
         borderColor: Colors.black26,

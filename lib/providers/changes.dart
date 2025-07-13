@@ -18,7 +18,7 @@ class ChangesProvider extends ChangeNotifier {
 
   ChangesProvider(this._ref);
 
-  loadChanges() async {
+  Future<void> loadChanges() async {
     final database = await _ref.read(databaseProvider).database;
     final rows = await database.rawQuery("""
       select * from ${OsmChange.kTableName} c
@@ -53,7 +53,7 @@ class ChangesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  _ensureLoaded() {
+  void _ensureLoaded() {
     if (!loaded) throw StateError("Changes were not loaded");
   }
 
@@ -103,7 +103,7 @@ class ChangesProvider extends ChangeNotifier {
     return result;
   }
 
-  saveChange(OsmChange change) async {
+  Future<void> saveChange(OsmChange change) async {
     _logger.info('Saving $change');
     if (change.isModified) {
       await _addChange(change);
@@ -112,14 +112,14 @@ class ChangesProvider extends ChangeNotifier {
     }
   }
 
-  setError(OsmChange change, String? error) async {
+  Future<void> setError(OsmChange change, String? error) async {
     if (change.error != error) {
       change.error = error;
       await saveChange(change);
     }
   }
 
-  _addChange(OsmChange change) async {
+  Future<void> _addChange(OsmChange change) async {
     _ensureLoaded();
     final database = await _ref.read(databaseProvider).database;
     change.updated = DateTime.now();
@@ -135,7 +135,7 @@ class ChangesProvider extends ChangeNotifier {
     );
   }
 
-  deleteChange(OsmChange change) async {
+  Future<void> deleteChange(OsmChange change) async {
     _ensureLoaded();
     if (change.isNew) {
       if (!_new.containsKey(change.databaseId)) return;
@@ -154,7 +154,7 @@ class ChangesProvider extends ChangeNotifier {
     );
   }
 
-  clearChanges({bool includeErrored = false, List<String>? ids}) async {
+  Future<void> clearChanges({bool includeErrored = false, List<String>? ids}) async {
     _ensureLoaded();
     if (includeErrored && ids == null) {
       _new.clear();

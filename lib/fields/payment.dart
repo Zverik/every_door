@@ -56,22 +56,22 @@ class _PaymentCheckboxInputFieldState
     updateCommonPayment();
   }
 
-  updateCommonPayment() async {
+  Future<void> updateCommonPayment() async {
     options = await ref
         .read(paymentProvider)
         .getAllPaymentOptions(widget.element.location);
     setState(() {});
   }
 
-  cardsGeneric(String? value) {
+  void cardsGeneric(String? value) {
     for (final key in kGenericKeys) widget.element['payment:$key'] = value;
   }
 
-  cash(String? value) {
+  void cash(String? value) {
     widget.element['payment:cash'] = value;
   }
 
-  cards(String? value) {
+  void cards(String? value) {
     assert(value != 'no');
     if (value == null) {
       for (final key in kCardPaymentOptions) {

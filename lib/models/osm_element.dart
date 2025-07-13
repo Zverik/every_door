@@ -233,7 +233,7 @@ class OsmElement {
     };
   }
 
-  toXML(XmlBuilder builder, {String? changeset, bool visible = true}) {
+  void toXML(XmlBuilder builder, {String? changeset, bool visible = true}) {
     builder.element(kOsmElementTypeName[id.type]!, nest: () {
       builder.attribute('id', id.ref);
       builder.attribute('version', version);

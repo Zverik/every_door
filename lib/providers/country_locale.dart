@@ -23,7 +23,7 @@ class CountryLocaleController extends ChangeNotifier {
 
   CountryLocaleController(this._ref);
 
-  update(LatLng? location) async {
+  Future<void> update(LatLng? location) async {
     location ??= _ref.read(effectiveLocationProvider);
 
     Locale? newLocale;

@@ -59,7 +59,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
     if (mounted) setState(() {});
   }
 
-  updateFarFromUser() {
+  void updateFarFromUser() {
     final gpsLocation = ref.read(geolocationProvider);
     bool newFar;
     if (gpsLocation != null) {
@@ -77,7 +77,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
     }
   }
 
-  updateNearest() async {
+  Future<void> updateNearest() async {
     final int radius = farFromUser ? kFarVisibilityRadius : kVisibilityRadius;
 
     await widget.def.updateNearest(forceRadius: radius);

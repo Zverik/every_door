@@ -80,7 +80,7 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
     return true;
   }
 
-  detectAndSubmitUrl(String url) {
+  void detectAndSubmitUrl(String url) {
     WebsiteProvider? found;
     // Skip first for the end (it's the generic URL provider).
     for (int i = 1; i < websiteProviders.length; i++) {
@@ -105,7 +105,7 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
     }
   }
 
-  showProviderChooser() async {
+  Future<void> showProviderChooser() async {
     final result = await showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -118,7 +118,7 @@ class _WebsiteInputFieldState extends ConsumerState<WebsiteInputField> {
               for (final provider in websiteProviders)
                 GestureDetector(
                   child: Container(
-                    color: kFieldColor.withOpacity(0.2),
+                    color: kFieldColor.withValues(alpha: 0.2),
                     padding: EdgeInsets.symmetric(
                       vertical: 4.0,
                       horizontal: 8.0,

@@ -7,10 +7,13 @@ import 'package:jovial_svg/jovial_svg.dart';
 /// and vector images. An image should be rectangular,
 /// recommended dimensions are 256×256.
 class MultiIcon {
+  static final _svgCache = ScalableImageCache(size: 200);
+
   final IconData? fontIcon;
   final String? emoji;
   late final ImageProvider<Object>? image;
-  late ScalableImage? svg;
+  late final ScalableImage? svg;
+  late final ScalableImageSource? svgSource;
   final String? tooltip;
 
   MultiIcon({
@@ -35,13 +38,16 @@ class MultiIcon {
 
     if (svgData != null) {
       svg = ScalableImage.fromSvgString(String.fromCharCodes(svgData));
+      svgSource = null;
     } else if (siData != null) {
       svg = ScalableImage.fromSIBytes(siData);
+      svgSource = null;
     } else if (imageUrl != null && imageUrl.contains('.svg')) {
       svg = null;
-      _loadNetworkSvg(Uri.parse(imageUrl));
+      svgSource = ScalableImageSource.fromSvgHttpUrl(Uri.parse(imageUrl));
     } else {
       svg = null;
+      svgSource = null;
     }
 
     if ((emoji?.runes.length ?? 0) > 1) {
@@ -49,7 +55,7 @@ class MultiIcon {
     }
   }
 
-  MultiIcon._({this.fontIcon, this.emoji, this.image, this.svg, this.tooltip});
+  MultiIcon._({this.fontIcon, this.emoji, this.image, this.svg, this.svgSource, this.tooltip});
 
   MultiIcon withTooltip(String? tooltip) {
     return MultiIcon._(
@@ -57,21 +63,34 @@ class MultiIcon {
         emoji: emoji,
         image: image,
         svg: svg,
+        svgSource: svgSource,
         tooltip: tooltip);
   }
 
-  void _loadNetworkSvg(Uri url) async {
-    final loaded = await ScalableImage.fromSvgHttpUrl(url);
-    await loaded.prepareImages();
-    svg = loaded;
-  }
-
   Widget getWidget({
+    BuildContext? context,
     double? size,
     Color? color,
     String? semanticLabel,
     bool icon = true,
+    bool fixedSize = true,
   }) {
+    if (size == null && fixedSize) {
+      // In most use cases, having the size to match the image size is not what
+      // is expected. So we're initializing the size the same way [Icon] does
+      // that.
+      if (context != null) {
+        final IconThemeData iconTheme = IconTheme.of(context);
+        final bool applyTextScaling = iconTheme.applyTextScaling ?? false;
+        final double tentativeIconSize = iconTheme.size ?? kDefaultFontSize;
+        size = applyTextScaling
+            ? MediaQuery.textScalerOf(context).scale(tentativeIconSize)
+            : tentativeIconSize;
+      } else {
+        size = 24.0;
+      }
+    }
+
     if (fontIcon != null)
       return Icon(
         fontIcon,
@@ -80,7 +99,6 @@ class MultiIcon {
         semanticLabel: semanticLabel,
       );
     if (image != null) {
-      // TODO: learn how it recolours and document.
       return icon
           ? ImageIcon(
               image!,
@@ -96,10 +114,17 @@ class MultiIcon {
             );
     }
     if (svg != null) {
-      // TODO: document what the current color is.
-      final modified = color == null ? svg! : svg!.modifyCurrentColor(color);
-      return SizedBox(
-          width: size, height: size, child: ScalableImageWidget(si: modified));
+      final modified = color == null || !icon ? svg! : svg!.modifyCurrentColor(color);
+      final widget = ScalableImageWidget(si: modified, fit: BoxFit.contain);
+      return size == null ? widget : SizedBox(width: size, height: size, child: widget);
+    }
+    if (svgSource != null) {
+      final widget = ScalableImageWidget.fromSISource(
+          si: svgSource!,
+          cache: _svgCache,
+          currentColor: icon ? color : null,
+      );
+      return size == null ? widget : SizedBox(width: size, height: size, child: widget);
     }
     if (emoji != null)
       return Text(
@@ -114,5 +139,14 @@ class MultiIcon {
         ),
       );
     return SizedBox(width: size, height: size);
+  }
+}
+
+class NetworkSvg extends StatelessWidget {
+  const NetworkSvg({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
