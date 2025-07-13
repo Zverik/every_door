@@ -4,6 +4,7 @@
 
 _Unreleased_
 
+* Vector tiles support!
 * Displaying icons for presets.
 * Tags for entrances are now remembered again.
 
