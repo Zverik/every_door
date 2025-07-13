@@ -62,13 +62,7 @@ class ImageryPageState extends ConsumerState {
                 title: Text(list[index].name ?? list[index].id),
                 trailing:
                     list[index].id == imagery.id ? Icon(Icons.check) : null,
-                leading: list[index].icon == null
-                    ? null
-                    : Image(
-                        image: NetworkImage(list[index].icon!),
-                        height: 30.0,
-                        width: 30.0,
-                      ),
+                leading: list[index].icon?.getWidget(size: 30.0, icon: false),
                 onTap: () {
                   ref.read(imageryProvider.notifier).setImagery(list[index]);
                   Navigator.pop(context);

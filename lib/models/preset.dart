@@ -91,8 +91,8 @@ class Preset {
           data['add_tags'] != null ? jsonDecode(data['add_tags']) : null),
       removeTags: decodeTagsSkipNull(
           data['remove_tags'] != null ? jsonDecode(data['remove_tags']) : null),
-      icon: _resolveIcon(data['imageURL'] ?? data['icon'])?.withTooltip(
-          data['loc_name'] ?? data['name']),
+      icon: _resolveIcon(data['imageURL'] ?? data['icon'])
+          ?.withTooltip(data['loc_name'] ?? data['name']),
       locationSet: data['locations'] == null
           ? null
           : LocationSet.fromJson(jsonDecode(data['locations'])),
@@ -112,16 +112,20 @@ class Preset {
       final icon = url.substring(dashPos + 1);
       if (typ == 'maki') {
         return MultiIcon(
-            imageUrl: 'https://raw.githubusercontent.com/mapbox/maki/refs/heads/main/icons/$icon.svg');
+            imageUrl:
+                'https://raw.githubusercontent.com/mapbox/maki/refs/heads/main/icons/$icon.svg');
       } else if (typ == 'temaki') {
         return MultiIcon(
-            imageUrl: 'https://raw.githubusercontent.com/rapideditor/temaki/refs/heads/main/icons/$icon.svg');
+            imageUrl:
+                'https://raw.githubusercontent.com/rapideditor/temaki/refs/heads/main/icons/$icon.svg');
       } else if (typ == 'roentgen') {
         return MultiIcon(
-            imageUrl: 'https://raw.githubusercontent.com/openstreetmap/iD/refs/heads/develop/svg/roentgen/$icon.svg');
+            imageUrl:
+                'https://raw.githubusercontent.com/openstreetmap/iD/refs/heads/develop/svg/roentgen/$icon.svg');
       } else if (typ == 'fas') {
         return MultiIcon(
-            imageUrl: 'https://raw.githubusercontent.com/openstreetmap/iD/refs/heads/develop/svg/fontawesome/$url.svg');
+            imageUrl:
+                'https://raw.githubusercontent.com/openstreetmap/iD/refs/heads/develop/svg/fontawesome/$url.svg');
       }
     }
 

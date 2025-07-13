@@ -19,8 +19,9 @@ class OverlayImagery extends Notifier<List<Widget>> {
         .toList();
   }
 
-  void addLayer({required String key, Imagery? imagery}) {
-    if (imagery != null) _imagery[key] = imagery;
+  Future<void> addLayer(String key, Imagery imagery) async {
+    await imagery.initialize();
+    _imagery[key] = imagery;
     _order.add(key);
     _updateState();
   }

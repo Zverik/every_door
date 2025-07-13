@@ -14,7 +14,7 @@ class TileCacheManager {
 class CachedTileProvider extends TileProvider {
   static final _logger = Logger('CachedTileProvider');
 
-  CachedTileProvider();
+  CachedTileProvider({super.headers});
 
   @override
   ImageProvider getImage(TileCoordinates coordinates, TileLayer options) {

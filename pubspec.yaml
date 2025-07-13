@@ -7,7 +7,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 6.0.1+56
 
 environment:
-  sdk: ">=3.7.0 <4.0.0"
+  sdk: ">=3.6.0 <4.0.0"
   flutter: "^3.29.0"
 
 dependencies:
@@ -61,6 +61,7 @@ dependencies:
   url_launcher: ^6.1.14
   uuid: ^4.3.3
   vector_map_tiles: ^9.0.0-beta.8
+  vector_tile_renderer: ^6.0.0
   # vector_map_tiles_mbtiles: ^1.2.0
   # vector_map_tiles_pmtiles: ^1.5.0
   xml: ^6.3.0
@@ -92,6 +93,7 @@ flutter:
     - assets/presets.db
     - assets/lets-encrypt-r3.pem
     - assets/roofs/
+    - assets/styles/
 
 flutter_launcher_icons:
   android: "ic_launcher"

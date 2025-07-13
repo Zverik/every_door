@@ -1,3 +1,4 @@
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/models/imagery/wms.dart';
@@ -6,11 +7,12 @@ class TileImageryData {
   final String id;
   final ImageryCategory? category;
   final String? name;
-  final String? icon;
+  final MultiIcon? icon;
   final String? attribution;
   final bool best;
   final bool overlay;
   final String url;
+  final Map<String, String>? headers;
   final int? minZoom;
   final int? maxZoom;
   final int tileSize;
@@ -22,6 +24,7 @@ class TileImageryData {
     this.icon,
     this.attribution,
     required this.url,
+    this.headers,
     this.minZoom,
     this.maxZoom,
     this.overlay = false,
@@ -32,6 +35,7 @@ class TileImageryData {
 
 abstract class TileImagery extends Imagery {
   final String url;
+  final Map<String, String>? headers;
   final int minZoom;
   final int maxZoom;
   final int tileSize;
@@ -43,6 +47,7 @@ abstract class TileImagery extends Imagery {
     super.icon,
     super.attribution,
     required this.url,
+    this.headers,
     int? minZoom,
     int? maxZoom,
     super.overlay = false,
@@ -61,6 +66,7 @@ abstract class TileImagery extends Imagery {
         overlay: data.overlay,
         best: data.best,
         url: data.url,
+        headers: data.headers,
         minZoom: data.minZoom,
         maxZoom: data.maxZoom,
         tileSize: data.tileSize,
@@ -71,7 +77,7 @@ abstract class TileImagery extends Imagery {
       id: data['id'],
       name: data['name'],
       attribution: data['attribution'],
-      icon: data['icon'],
+      icon: data['icon'] == null ? null : MultiIcon(imageUrl: data['icon']),
       url: data['url'],
       minZoom: data['min_zoom'],
       maxZoom: data['max_zoom'],

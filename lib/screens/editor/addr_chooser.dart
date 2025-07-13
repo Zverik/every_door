@@ -1,9 +1,9 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/providers/location.dart';
-import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/widgets/attribution.dart';
 import 'package:flutter/material.dart';

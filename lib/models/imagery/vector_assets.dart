@@ -1,29 +1,23 @@
 import 'package:every_door/models/imagery.dart';
+import 'package:every_door/models/imagery/vector.dart';
 import 'package:every_door/models/imagery/vector/style_reader.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:vector_map_tiles/vector_map_tiles.dart';
 
-class VectorImagery extends Imagery {
-  static final _logger = Logger('VectorImagery');
-  Style? style;
-  final bool fast;
+class VectorAssetsImagery extends VectorImagery {
+  static final _logger = Logger('VectorAssetsImagery');
 
   // We need those to initialize the layer.
-  final String? url;
-  final String? apiKey;
-  final Plugin? plugin;
-  final Map<String, String>? headers;
+  final String stylePath;
+  final String spritesBase;
 
-  VectorImagery({
+  VectorAssetsImagery({
     required super.id,
-    this.style,
-    this.fast = true,
-    this.url,
-    this.apiKey,
-    this.plugin,
-    this.headers,
+    required this.stylePath,
+    required this.spritesBase,
+    super.fast,
     super.category,
     super.name,
     super.icon,
@@ -34,14 +28,8 @@ class VectorImagery extends Imagery {
 
   @override
   Future<void> initialize() async {
-    if (style == null && url != null) {
-      style = await EdStyleReader(
-        url: url!,
-        apiKey: apiKey,
-        plugin: plugin,
-        httpHeaders: headers,
-      ).read();
-    }
+    style ??= await EdStyleReader(url: stylePath)
+        .readAssets(spritesBase: spritesBase);
   }
 
   @override

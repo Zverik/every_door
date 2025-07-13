@@ -7,7 +7,7 @@ import 'package:every_door/fields/text.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/note.dart';
-import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';

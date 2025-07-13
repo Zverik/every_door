@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/amenity.dart';
@@ -9,7 +10,6 @@ import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/location.dart';
-import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/poi_filter.dart';

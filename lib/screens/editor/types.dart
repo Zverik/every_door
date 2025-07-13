@@ -12,7 +12,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;
@@ -245,10 +246,11 @@ class PresetTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (preset.icon != null) Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: preset.icon!.getWidget(icon: false, size: 24.0),
-          ),
+          if (preset.icon != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: preset.icon!.getWidget(icon: false, size: 24.0),
+            ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

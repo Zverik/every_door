@@ -55,7 +55,14 @@ class MultiIcon {
     }
   }
 
-  MultiIcon._({this.fontIcon, this.emoji, this.image, this.svg, this.svgSource, this.tooltip});
+  MultiIcon._({
+    this.fontIcon,
+    this.emoji,
+    this.image,
+    this.svg,
+    this.svgSource,
+    this.tooltip,
+  });
 
   MultiIcon withTooltip(String? tooltip) {
     return MultiIcon._(
@@ -114,17 +121,22 @@ class MultiIcon {
             );
     }
     if (svg != null) {
-      final modified = color == null || !icon ? svg! : svg!.modifyCurrentColor(color);
+      final modified =
+          color == null || !icon ? svg! : svg!.modifyCurrentColor(color);
       final widget = ScalableImageWidget(si: modified, fit: BoxFit.contain);
-      return size == null ? widget : SizedBox(width: size, height: size, child: widget);
+      return size == null
+          ? widget
+          : SizedBox(width: size, height: size, child: widget);
     }
     if (svgSource != null) {
       final widget = ScalableImageWidget.fromSISource(
-          si: svgSource!,
-          cache: _svgCache,
-          currentColor: icon ? color : null,
+        si: svgSource!,
+        cache: _svgCache,
+        currentColor: icon ? color : null,
       );
-      return size == null ? widget : SizedBox(width: size, height: size, child: widget);
+      return size == null
+          ? widget
+          : SizedBox(width: size, height: size, child: widget);
     }
     if (emoji != null)
       return Text(

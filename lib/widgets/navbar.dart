@@ -1,9 +1,9 @@
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/editor_settings.dart';
-import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/uploader.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';

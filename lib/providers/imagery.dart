@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/imagery/bing.dart';
 import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/models/imagery/tms.dart';
@@ -13,25 +14,8 @@ import 'package:proximity_hash/proximity_hash.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-const kOSMImagery = TmsImagery(
-  id: 'openstreetmap',
-  name: 'OpenStreetMap',
-  url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-  attribution: '© OpenStreetMap contributors',
-  minZoom: 0,
-  maxZoom: 19,
-);
-
 final imageryProvider = StateNotifierProvider<ImageryProvider, Imagery>(
     (ref) => ImageryProvider(ref));
-
-final baseImageryProvider = StateProvider<Imagery>((ref) => kOSMImagery);
-
-final selectedImageryProvider =
-    StateNotifierProvider<SelectedImageryProvider, Imagery>(
-        (ref) => SelectedImageryProvider(ref));
-
-final StreamController<void> tileResetController = StreamController.broadcast();
 
 class ImageryProvider extends StateNotifier<Imagery> {
   static final _logger = Logger('ImageryProvider');
@@ -50,7 +34,9 @@ class ImageryProvider extends StateNotifier<Imagery> {
     url:
         'ONmGm9hPmmIXyIpRK8Mx33q/TVG91lBWanmUE4XbZl42a+Hpr7b+hd+gqZBF9vXtTteFeLqaXS/JwQvk/eHDRbNcl6hfAWMnCS6b5l+jEqg=',
     encrypted: true,
-    icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Bing.png',
+    icon: MultiIcon(
+        imageUrl:
+            'https://osmlab.github.io/editor-layer-index/sources/world/Bing.png'),
     attribution: '© Microsoft Bing',
     minZoom: 1,
     maxZoom: 22,
@@ -62,7 +48,9 @@ class ImageryProvider extends StateNotifier<Imagery> {
     url:
         "EcKQpupFzHs7yZp0CdAT3zOWVWST2GB8eji2OtSHNANsdO7JnPHXw+riiIBA2aPDb5GFaKmySAOl/QDz57eaWI18qPwmdhpDeFLMmiDRZ4JQYGJbTzCq1On6IkNnrsnn5KvbL+1P3sAVur9nCCvaomT6i1Tv/WUFFD9zKG8gOf1TCN7mPWIhDOQteeacbx0X60EeyXhg1tyyrtcJ53TgTsScje4/URAsVSNjMjTBz+dbzBpTrcTtI5t398LZP4wP",
     encrypted: true,
-    icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png',
+    icon: MultiIcon(
+        imageUrl:
+            'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png'),
     attribution: '© DigitalGlobe',
     minZoom: 1,
     maxZoom: 22,
@@ -74,8 +62,9 @@ class ImageryProvider extends StateNotifier<Imagery> {
     url:
         "EcKQpupFzHsz359rFNAelnzeXi+ZgGVtMyCwNNTaeQFgK+nHlqvc3+K/iN0M0e3HYI2cJbm2TxXm5QT0ranPEswj6sVgagtKNkXyi2HZct8mbGBfTzGg3/T5LHVs4c/lqaviIIxV85VP4LkSJCPEi3vinH+s4lpJUycdGGFHPshdeNTDOW4DB6QHSbDKBzsRrRIdxCRM1If92rsopU+JPMud2IUmLx99Hw85cCGEj9Qopkdzi7OfUaYQpauIfd0e",
     encrypted: true,
-    icon:
-        'https://osmlab.github.io/editor-layer-index/sources/world/MapBoxSatellite.png',
+    icon: MultiIcon(
+        imageUrl:
+            'https://osmlab.github.io/editor-layer-index/sources/world/MapBoxSatellite.png'),
     attribution: '© Mapbox',
     minZoom: 1,
     maxZoom: 22,
@@ -91,7 +80,10 @@ class ImageryProvider extends StateNotifier<Imagery> {
     final geohash =
         geoHasher.encode(location.longitude, location.latitude, precision: 4);
     final rows = await _ref.read(presetProvider).imageryQuery(geohash);
-    List<Imagery> results = rows.map((row) => TileImagery.fromJson(row)).whereType<Imagery>().toList();
+    List<Imagery> results = rows
+        .map((row) => TileImagery.fromJson(row))
+        .whereType<Imagery>()
+        .toList();
     results.addAll(_additional);
     results.add(mapboxImagery);
     // Imagery is disabled by Maxar.
@@ -108,19 +100,18 @@ class ImageryProvider extends StateNotifier<Imagery> {
     final imageryId = prefs.getString(kImageryKey);
     if (imageryId != null) {
       if (imageryId == bingImagery.id) {
-        state = bingImagery;
+        await _initializeAndSet(bingImagery);
       } else if (imageryId == maxarPremiumImagery.id) {
-        state =
-            mapboxImagery; // yes, we're silently changing the chosen imagery.
+        _setDefault(); // yes, we're silently changing the chosen imagery.
       } else if (imageryId == mapboxImagery.id) {
-        state = mapboxImagery;
+        await _initializeAndSet(mapboxImagery);
       } else if (_additional.any((i) => i.id == imageryId)) {
-        state = _additional.firstWhere((i) => i.id == imageryId);
+        await _initializeAndSet(_additional.firstWhere((i) => i.id == imageryId));
       } else {
         final imagery =
             await _ref.read(presetProvider).singleImageryQuery(imageryId);
         if (imagery != null) {
-          state = TileImagery.fromJson(imagery);
+          await _initializeAndSet(TileImagery.fromJson(imagery));
         }
       }
     }
@@ -133,9 +124,21 @@ class ImageryProvider extends StateNotifier<Imagery> {
     await prefs.setString(kImageryKey, state.id);
   }
 
+  /// Sets the default layer. This layer is expected to require
+  /// no initialization.
+  void _setDefault() {
+    state = mapboxImagery;
+  }
+
+  /// Sets the layer and calls its initialization method.
+  Future<void> _initializeAndSet(Imagery imagery) async {
+    await imagery.initialize();
+    state = imagery;
+  }
+
   /// Changes the current imagery, notifies listeners, and saves the state.
-  void setImagery(Imagery value) {
-    state = value;
+  Future<void> setImagery(Imagery value) async {
+    _initializeAndSet(value);
     _saveState();
   }
 
@@ -147,12 +150,12 @@ class ImageryProvider extends StateNotifier<Imagery> {
       _additional.add(imagery);
 
       if (force) {
-        setImagery(imagery);
+        await setImagery(imagery);
       } else {
         final prefs = await SharedPreferences.getInstance();
         final imageryId = prefs.getString(kImageryKey);
         if (imageryId != null && imageryId == imagery.id) {
-          state = imagery;
+          await _initializeAndSet(imagery);
         }
       }
     }
@@ -163,7 +166,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
   /// not save it.
   void unregisterImagery(String imageryId) {
     _additional.removeWhere((i) => i.id == imageryId);
-    if (state.id == imageryId) state = mapboxImagery;
+    if (state.id == imageryId) _setDefault();
   }
 
   /// Called to clear the list of imagery added. Usually called
@@ -171,9 +174,7 @@ class ImageryProvider extends StateNotifier<Imagery> {
   /// immediately reinstated (including the selected one), so
   /// we're changing the state, but not saving it.
   void resetImagery() {
-    if (_additional.any((i) => i == state)) {
-      state = mapboxImagery;
-    }
+    if (_additional.any((i) => i == state)) _setDefault();
     _additional.clear();
   }
 
@@ -202,35 +203,5 @@ class ImageryProvider extends StateNotifier<Imagery> {
     url = url.replaceFirst('{subdomain}', '{switch:${subdomains.join(",")}}');
     bingUrlTemplate = url;
     await prefs.setString(kBingUrlKey, url);
-  }
-}
-
-class SelectedImageryProvider extends StateNotifier<Imagery> {
-  final Ref _ref;
-  bool isOSM = true;
-
-  static const kPrefsKey = 'selected_imagery_osm';
-
-  SelectedImageryProvider(this._ref) : super(_ref.read(baseImageryProvider)) {
-    loadValue();
-  }
-
-  Future<void> loadValue() async {
-    final prefs = await SharedPreferences.getInstance();
-    bool newOSM = prefs.getBool(kPrefsKey) ?? isOSM;
-    if (newOSM != isOSM) toggle();
-  }
-
-  Future<void> storeValue() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(kPrefsKey, isOSM);
-  }
-
-  void toggle() {
-    isOSM = !isOSM;
-    state =
-        isOSM ? _ref.watch(baseImageryProvider) : _ref.watch(imageryProvider);
-    tileResetController.add(null);
-    storeValue();
   }
 }

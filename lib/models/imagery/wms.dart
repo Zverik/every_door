@@ -1,6 +1,6 @@
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery/tiles.dart';
-import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:flutter/material.dart' show Widget;
 import 'package:flutter_map/flutter_map.dart'
     show TileLayer, WMSTileLayerOptions, Epsg4326, Epsg3857;
@@ -8,13 +8,14 @@ import 'package:flutter_map/flutter_map.dart'
 class WmsImagery extends TileImagery {
   final bool wms4326;
 
-  WmsImagery({
+  const WmsImagery({
     required super.id,
     super.category,
     super.name,
     super.icon,
     super.attribution,
     required super.url,
+    super.headers,
     super.minZoom,
     super.maxZoom,
     super.overlay = false,
@@ -32,6 +33,7 @@ class WmsImagery extends TileImagery {
         overlay: data.overlay,
         best: data.best,
         url: data.url,
+        headers: data.headers,
         minZoom: data.minZoom,
         maxZoom: data.maxZoom,
         wms4326: wms4326,
@@ -90,7 +92,7 @@ class WmsImagery extends TileImagery {
   Widget buildLayer({bool reset = false}) {
     return TileLayer(
       wmsOptions: _buildWMSOptions(url),
-      tileProvider: CachedTileProvider(),
+      tileProvider: CachedTileProvider(headers: headers),
       minNativeZoom: minZoom,
       maxNativeZoom: maxZoom,
       maxZoom: 22,

@@ -1,7 +1,7 @@
 import 'package:encrypt/encrypt.dart';
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery/tiles.dart';
-import 'package:every_door/providers/imagery.dart' show tileResetController;
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:flutter/material.dart' show Widget;
 import 'package:flutter_map/flutter_map.dart' show TileLayer, TileProvider;
 import 'package:logging/logging.dart' show Logger;
@@ -17,6 +17,7 @@ class TmsImagery extends TileImagery {
     super.icon,
     super.attribution,
     required super.url,
+    super.headers,
     super.minZoom,
     super.maxZoom,
     super.overlay = false,
@@ -35,6 +36,7 @@ class TmsImagery extends TileImagery {
         overlay: data.overlay,
         best: data.best,
         url: data.url,
+        headers: data.headers,
         minZoom: data.minZoom,
         maxZoom: data.maxZoom,
         tileSize: data.tileSize,
@@ -55,6 +57,7 @@ class TmsImagery extends TileImagery {
       attribution: attribution ?? this.attribution,
       icon: icon,
       url: url ?? this.url,
+      headers: headers,
       minZoom: minZoom ?? this.minZoom,
       maxZoom: maxZoom ?? this.maxZoom,
       best: best,
@@ -80,7 +83,7 @@ class TmsImagery extends TileImagery {
     }
   }
 
-  TileProvider getTileProvider() => CachedTileProvider();
+  TileProvider getTileProvider() => CachedTileProvider(headers: headers);
 
   String prepareUrl() => url;
 

@@ -3,6 +3,7 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/providers/area.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;

@@ -7,7 +7,6 @@ import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
-import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/screens/settings.dart';
@@ -21,6 +20,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+
+import '../providers/cur_imagery.dart';
 
 class CustomMapController {
   Function(Iterable<LatLng>)? zoomListener;

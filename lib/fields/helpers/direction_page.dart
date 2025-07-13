@@ -1,7 +1,7 @@
 import 'dart:math' as math;
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
-import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/widgets/attribution.dart';
 import 'package:every_door/widgets/loc_marker.dart';

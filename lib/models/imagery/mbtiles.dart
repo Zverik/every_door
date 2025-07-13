@@ -1,5 +1,5 @@
 import 'package:every_door/models/imagery/tiles.dart';
-import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:flutter/material.dart' show Widget;
 import 'package:flutter_map/flutter_map.dart' show TileLayer;
 import 'package:flutter_map_mbtiles/flutter_map_mbtiles.dart';
@@ -8,7 +8,7 @@ import 'package:mbtiles/mbtiles.dart';
 class MbTilesImagery extends TileImagery {
   final MbTiles mbtiles;
 
-  MbTilesImagery({
+  const MbTilesImagery({
     required super.id,
     super.category,
     super.name,

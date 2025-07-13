@@ -18,5 +18,4 @@ class GeoJsonImagery extends Imagery {
   Widget buildLayer({bool reset = false}) {
     return GeoJsonLayer(data: source);
   }
-
 }

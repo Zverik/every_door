@@ -4,9 +4,12 @@ import 'package:every_door/models/imagery/geojson.dart';
 import 'package:every_door/models/imagery/mbtiles.dart';
 import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/models/imagery/tms.dart';
+import 'package:every_door/models/imagery/vector.dart';
+import 'package:every_door/models/imagery/vector/style_reader.dart';
 import 'package:every_door/models/imagery/wms.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/add_presets.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/overlays.dart';
@@ -31,9 +34,9 @@ class PluginManager extends Notifier<List<Plugin>> {
 
   @override
   List<Plugin> build() {
-    ref.listen(pluginRepositoryProvider, (old, list) {
+    ref.listen(pluginRepositoryProvider, (old, list) async {
       if (old == null || old.isEmpty) {
-        loadStateAndEnable();
+        await loadStateAndEnable();
         return;
       }
 
@@ -42,13 +45,13 @@ class PluginManager extends Notifier<List<Plugin>> {
         if (!list.contains(p)) _disable(p);
       }
       for (final p in list) {
-        if (!old.contains(p)) _enable(p);
+        if (!old.contains(p)) await _enable(p);
       }
     });
     return [];
   }
 
-  void loadStateAndEnable() async {
+  Future<void> loadStateAndEnable() async {
     // Read enabled list.
     final prefs = await SharedPreferences.getInstance();
     final enabledList = prefs.getStringList(_kEnabledKey);
@@ -60,7 +63,7 @@ class PluginManager extends Notifier<List<Plugin>> {
 
     // Enable plugins.
     for (final plugin in enabledPlugins) {
-      _enable(plugin, true);
+      await _enable(plugin, true);
     }
 
     // This is very deep, because we need everything set up before
@@ -76,14 +79,14 @@ class PluginManager extends Notifier<List<Plugin>> {
     await prefs.setStringList(_kEnabledKey, enabledList);
   }
 
-  void _enable(Plugin plugin, [bool force = false]) {
+  Future<void> _enable(Plugin plugin, [bool force = false]) async {
     if (!force && state.contains(plugin)) return;
     try {
-      _enableImagery(plugin);
       _enableElementKinds(plugin);
       _enableModes(plugin);
       _enableFields(plugin);
       _enablePresets(plugin);
+      await _enableImagery(plugin);
     } catch (e) {
       // Installation failed, revert.
       _technicallyDisable(plugin);
@@ -95,11 +98,11 @@ class PluginManager extends Notifier<List<Plugin>> {
   }
 
   void _technicallyDisable(Plugin plugin) {
-    _disableImagery(plugin);
     _disableElementKinds(plugin);
     _disableModes(plugin);
     _disablePresets(plugin);
     _disableFields(plugin);
+    _disableImagery(plugin);
   }
 
   void _disable(Plugin plugin) {
@@ -114,23 +117,23 @@ class PluginManager extends Notifier<List<Plugin>> {
     if (!active) {
       _disable(id);
     } else {
-      _enable(id);
+      await _enable(id);
     }
     await _saveEnabled();
   }
 
-  void _enableImagery(Plugin plugin) {
+  Future<void> _enableImagery(Plugin plugin) async {
     final imageryData = plugin.data['imagery'];
     if (imageryData != null && imageryData is Map) {
       for (final entry in imageryData.entries) {
-        final imagery = _imageryFromMap(entry.key, entry.value, plugin);
+        final imagery = await _imageryFromMap(entry.key, entry.value, plugin);
         if (imagery == null) {
           _logger.warning('Failed to parse imagery ${entry.key}');
           continue;
         }
 
         if (entry.key == 'base') {
-          ref.read(baseImageryProvider.notifier).state = imagery;
+          ref.read(baseImageryProvider.notifier).set(imagery);
         } else {
           final bool force = imageryData['force'] == true;
           ref.read(imageryProvider.notifier).registerImagery(imagery, force);
@@ -143,16 +146,22 @@ class PluginManager extends Notifier<List<Plugin>> {
       for (final entry in overlayData.asMap().entries) {
         if (entry.value is! Map<String, dynamic>) continue;
         final key = 'plugin_${plugin.id}_${entry.key}';
-        final imagery = _imageryFromMap(key, entry.value, plugin);
-        ref.read(overlayImageryProvider.notifier).addLayer(
-              key: key, imagery: imagery);
+        final imagery = await _imageryFromMap(key, entry.value, plugin);
+        if (imagery != null) {
+          ref.read(overlayImageryProvider.notifier).addLayer(key, imagery);
+        }
       }
     }
   }
 
-  Imagery? _imageryFromMap(
-      String key, Map<String, dynamic> data, Plugin plugin) {
-    final url = data['url'] as String;
+  Future<Imagery?> _imageryFromMap(
+      String key, Map<String, dynamic> data, Plugin plugin) async {
+    final String url = data['url'] as String;
+    final bool isURL = url.startsWith('http://') || url.startsWith('https://');
+    final String? ext = url.contains('.')
+        ? url.substring(url.lastIndexOf('.') + 1).toLowerCase()
+        : null;
+    final String? typ = data['type'] as String?;
 
     final tmi = TileImageryData(
       id: key,
@@ -162,44 +171,57 @@ class PluginManager extends Notifier<List<Plugin>> {
       minZoom: data['minZoom'],
       maxZoom: data['maxZoom'],
       tileSize: data['tileSize'] ?? 256,
+      headers: data['headers'] is Map ? data['headers'] : null,
     );
 
-    if (data['type'] == 'geojson' ||
-        url.endsWith('.geojson') ||
-        url.endsWith('.json')) {
+    if (typ == 'geojson' || ext == 'geojson' || ext == 'json') {
       return GeoJsonImagery(
         id: tmi.id,
         category: tmi.category,
         name: tmi.name,
         icon: tmi.icon,
         attribution: tmi.attribution,
-        source: url.startsWith('http')
-            ? NetworkGeoJson(url)
+        source: isURL
+            ? NetworkGeoJson(url, headers: tmi.headers ?? const {})
             : FileGeoJson(plugin.resolvePath(url)),
       );
     }
 
-    if (url.startsWith('http')) {
-      if (data['type'] == 'wms' || url.toLowerCase().contains('service=wms')) {
+    if (typ == 'vector') {
+      return VectorImagery(
+        id: tmi.id,
+        category: tmi.category,
+        name: tmi.name,
+        icon: tmi.icon,
+        attribution: tmi.attribution,
+        url: url,
+        plugin: plugin,
+        headers: tmi.headers,
+      );
+    }
+
+    if (isURL) {
+      if (typ == 'wms' || url.toLowerCase().contains('service=wms')) {
         return WmsImagery.from(tmi, wms4326: data['has4326'] ?? false);
-      } else if (data['type'] == 'tms' ||
+      } else if (typ == 'tms' ||
           url.endsWith('.jpg') ||
           url.endsWith('.jpeg') ||
           url.endsWith('.png')) {
         return TmsImagery.from(tmi);
       }
     } else {
-      if (data['type'] == 'mbtiles' || url.toLowerCase().endsWith('.mbtiles')) {
+      if (typ == 'mbtiles' || ext == 'mbtiles') {
         final mbtiles = plugin.resolvePath(url);
         if (mbtiles.existsSync()) {
-          return MbTilesImagery.from(
-              tmi, mbtiles: MbTiles(mbtilesPath: mbtiles.path, gzip: false));
+          return MbTilesImagery.from(tmi,
+              mbtiles: MbTiles(mbtilesPath: mbtiles.path, gzip: false));
         } else {
           throw ArgumentError('File $mbtiles does not exist.');
         }
       }
     }
 
+    _logger.severe('Could not understand imagery $key for plugin ${plugin.id}');
     return null;
   }
 
@@ -208,7 +230,7 @@ class PluginManager extends Notifier<List<Plugin>> {
     if (imageryData != null && imageryData is Map) {
       for (final entry in imageryData.entries) {
         if (entry.key == 'base') {
-          ref.read(baseImageryProvider.notifier).state = kOSMImagery;
+          ref.read(baseImageryProvider.notifier).revert();
         } else {
           ref.read(imageryProvider.notifier).unregisterImagery(entry.key);
         }
