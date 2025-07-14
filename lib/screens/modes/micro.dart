@@ -218,6 +218,7 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
                 updateState: true,
                 hasFloatingButton: widget.def.nearestPOI.isEmpty && !isWide,
                 layers: [
+                  ...widget.def.mapLayers(),
                   CircleLayer(
                     circles: [
                       for (final objLocation in widget.def.otherPOI)

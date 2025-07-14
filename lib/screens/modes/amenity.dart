@@ -157,6 +157,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
                 drawZoomButtons: farFromUser,
                 updateState: true,
                 layers: [
+                  ...widget.def.mapLayers(),
                   CircleLayer(
                     circles: [
                       for (final objLocation in widget.def.otherPOI)

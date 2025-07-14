@@ -54,4 +54,6 @@ abstract class BaseModeDefinition extends ChangeNotifier {
     result.removeWhere((k) => k == ElementKind.unknown);
     return result.isEmpty ? null : result;
   }
+
+  List<Widget> mapLayers() => [];
 }

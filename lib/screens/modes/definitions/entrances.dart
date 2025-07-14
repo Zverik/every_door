@@ -2,8 +2,10 @@ import 'package:country_coder/country_coder.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/imagery/vector_assets.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/models/preset.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/screens/editor.dart';
@@ -86,13 +88,26 @@ abstract class EntrancesModeDefinition extends BaseModeDefinition {
 class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
   bool buildingsNeedAddresses = false;
 
-  DefaultEntrancesModeDefinition(super.ref);
+  static final _kBuildingContours = VectorAssetsImagery(
+    id: 'entrances-contours',
+    stylePath: 'assets/styles/buildings.json',
+  );
+
+  DefaultEntrancesModeDefinition(super.ref) {
+    _kBuildingContours.initialize();
+  }
 
   @override
   String get name => "entrances";
 
   @override
-  double get adjustZoomSecondary => 0.7;
+  double get adjustZoomPrimary => 0.7;
+
+  @override
+  List<Widget> mapLayers() {
+    if (ref.read(imageryIsBaseProvider)) return [];
+    return [_kBuildingContours.buildLayer()];
+  }
 
   @override
   Future<void> updateNearest({LatLng? forceLocation, int? forceRadius}) async {

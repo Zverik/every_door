@@ -48,7 +48,7 @@ class VectorImagery extends Imagery {
   Widget buildLayer({bool reset = false}) {
     final style = this.style;
     if (style == null) {
-      _logger.severe('Non-initialized vector layer: $id');
+      _logger.warning('Non-initialized vector layer: $id');
       return Container();
     }
 

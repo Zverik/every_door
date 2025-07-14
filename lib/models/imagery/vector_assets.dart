@@ -11,12 +11,12 @@ class VectorAssetsImagery extends VectorImagery {
 
   // We need those to initialize the layer.
   final String stylePath;
-  final String spritesBase;
+  final String? spritesBase;
 
   VectorAssetsImagery({
     required super.id,
     required this.stylePath,
-    required this.spritesBase,
+    this.spritesBase,
     super.fast,
     super.category,
     super.name,

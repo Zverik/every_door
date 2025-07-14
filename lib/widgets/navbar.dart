@@ -10,7 +10,8 @@ import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/settings/changeset_pane.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class BrowserNavigationBar extends ConsumerWidget {
   const BrowserNavigationBar({super.key});
@@ -88,12 +89,10 @@ class BrowserNavigationBar extends ConsumerWidget {
       onPressed: isNavigation
           ? null
           : () {
-              ref.read(selectedImageryProvider.notifier).toggle();
+              ref.read(imageryIsBaseProvider.notifier).toggle();
             },
       icon: Icon(
-          ref.watch(selectedImageryProvider) == ref.watch(baseImageryProvider)
-              ? Icons.map_outlined
-              : Icons.map),
+          ref.watch(imageryIsBaseProvider) ? Icons.map_outlined : Icons.map),
       tooltip: loc.navImagery,
       color: Colors.white70,
     );

@@ -47,7 +47,7 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final imagery = ref.watch(selectedImageryProvider);
-    final isOSM = imagery == ref.watch(baseImageryProvider);
+    final isOSM = ref.watch(imageryIsBaseProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +56,7 @@ class _AddrChooserPageState extends ConsumerState<AddrChooserPage> {
           IconButton(
             onPressed: () {
               setState(() {
-                ref.read(selectedImageryProvider.notifier).toggle();
+                ref.read(imageryIsBaseProvider.notifier).toggle();
               });
             },
             icon: Icon(isOSM ? Icons.map_outlined : Icons.map),

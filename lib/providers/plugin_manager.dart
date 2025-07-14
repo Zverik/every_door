@@ -148,7 +148,16 @@ class PluginManager extends Notifier<List<Plugin>> {
         final key = 'plugin_${plugin.id}_${entry.key}';
         final imagery = await _imageryFromMap(key, entry.value, plugin);
         if (imagery != null) {
-          ref.read(overlayImageryProvider.notifier).addLayer(key, imagery);
+          Set<String>? modes;
+          final modesData = entry.value['modes'];
+          if (modesData is String)
+            modes = {modesData};
+          else if (modesData is Iterable)
+            modes = modesData.map((i) => i.toString()).toSet();
+
+          ref
+              .read(overlayImageryProvider.notifier)
+              .addLayer(key, imagery, modes);
         }
       }
     }
@@ -195,6 +204,8 @@ class PluginManager extends Notifier<List<Plugin>> {
         icon: tmi.icon,
         attribution: tmi.attribution,
         url: url,
+        apiKey: data['key'],
+        fast: data['fast'] != false,
         plugin: plugin,
         headers: tmi.headers,
       );

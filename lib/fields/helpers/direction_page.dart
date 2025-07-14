@@ -109,7 +109,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
   @override
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
-    final isOSM = imagery == ref.watch(baseImageryProvider);
+    final isOSM = ref.watch(imageryIsBaseProvider);
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -127,7 +127,7 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
           IconButton(
             onPressed: () {
               setState(() {
-                ref.read(selectedImageryProvider.notifier).toggle();
+                ref.read(imageryIsBaseProvider.notifier).toggle();
               });
             },
             icon: Icon(isOSM ? Icons.map_outlined : Icons.map),

@@ -1,5 +1,6 @@
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/need_update.dart';
@@ -102,6 +103,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     final primaryButton = widget.def.getButton(context, true);
     final secondaryButton = widget.def.getButton(context, false);
 
+    ref.watch(imageryIsBaseProvider); // to update the overlay
+
     ref.listen(needMapUpdateProvider, (_, next) {
       updateNearest();
     });
@@ -120,16 +123,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
               updateState: true,
               hasFloatingButton: primaryButton != null,
               layers: [
-                if (widget.def.newLocation != null)
-                  CircleLayer(
-                    circles: [
-                      CircleMarker(
-                        point: widget.def.newLocation!,
-                        radius: 5.0,
-                        color: Colors.red,
-                      ),
-                    ],
-                  ),
+                ...widget.def.mapLayers(),
                 MultiHitMarkerLayer(
                   markers: [
                     for (final element in widget.def.nearest)
@@ -144,6 +138,16 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     chooseEditorToOpen(objects);
                   },
                 ),
+                if (widget.def.newLocation != null)
+                  CircleLayer(
+                    circles: [
+                      CircleMarker(
+                        point: widget.def.newLocation!,
+                        radius: 5.0,
+                        color: Colors.red,
+                      ),
+                    ],
+                  ),
               ],
             ),
             if (primaryButton != null)

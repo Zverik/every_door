@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/tms.dart';
-import 'package:every_door/models/imagery/vector.dart';
 import 'package:every_door/models/imagery/vector_assets.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,9 +10,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 final baseImageryProvider =
     NotifierProvider<BaseImageryNotifier, Imagery>(BaseImageryNotifier.new);
 
-final selectedImageryProvider =
-    NotifierProvider<SelectedImageryProvider, Imagery>(
-        SelectedImageryProvider.new);
+final imageryIsBaseProvider =
+    NotifierProvider<ImageryIsBaseProvider, bool>(ImageryIsBaseProvider.new);
+
+final selectedImageryProvider = Provider<Imagery>((ref) {
+  final base = ref.watch(baseImageryProvider);
+  final imagery = ref.watch(imageryProvider);
+  final isBase = ref.watch(imageryIsBaseProvider);
+
+  tileResetController.add(null);
+  return isBase ? base : imagery;
+});
 
 final StreamController<void> tileResetController = StreamController.broadcast();
 
@@ -30,7 +37,7 @@ class BaseImageryNotifier extends Notifier<Imagery> {
   static final _kBaseImagery = VectorAssetsImagery(
     id: 'openfreemap-liberty',
     name: 'OpenFreeMap Liberty',
-    attribution: '© OpenFreeMap',
+    attribution: '© OSM contributors, OpenFreeMap',
     stylePath: 'assets/styles/liberty.json',
     spritesBase: 'assets/styles/ofm',
   );
@@ -60,35 +67,28 @@ class BaseImageryNotifier extends Notifier<Imagery> {
   }
 }
 
-class SelectedImageryProvider extends Notifier<Imagery> {
-  bool isBase = true;
-
+class ImageryIsBaseProvider extends Notifier<bool> {
   static const kPrefsKey = 'selected_imagery_osm';
 
   @override
-  Imagery build() {
-    loadValue();
-    ref.listen(baseImageryProvider, (_, next) {
-      if (isBase) state = next;
-    });
-    return ref.read(baseImageryProvider);
+  bool build() {
+    _loadValue();
+    return true;
   }
 
-  Future<void> loadValue() async {
+  Future<void> _loadValue() async {
     final prefs = await SharedPreferences.getInstance();
-    bool newOSM = prefs.getBool(kPrefsKey) ?? isBase;
-    if (newOSM != isBase) toggle();
+    bool? newOSM = prefs.getBool(kPrefsKey);
+    if (newOSM != null && newOSM != state) state = newOSM;
   }
 
-  Future<void> storeValue() async {
+  Future<void> _storeValue() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(kPrefsKey, isBase);
+    await prefs.setBool(kPrefsKey, state);
   }
 
   void toggle() {
-    isBase = !isBase;
-    state = isBase ? ref.read(baseImageryProvider) : ref.read(imageryProvider);
-    tileResetController.add(null);
-    storeValue();
+    state = !state;
+    _storeValue();
   }
 }

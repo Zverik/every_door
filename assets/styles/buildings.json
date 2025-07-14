@@ -1,0 +1,23 @@
+{
+  "version": 8,
+  "id": "buildings",
+  "sources": {
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://tiles.openfreemap.org/planet"
+    }
+  },
+  "layers": [
+    {
+      "id": "building",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "building",
+      "minzoom": 18,
+      "maxzoom": 24,
+      "paint": {
+        "line-color": "rgba(255, 255, 255, 1)"
+      }
+    }
+  ]
+}

@@ -99,7 +99,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
   @override
   Widget build(BuildContext context) {
     final imagery = ref.watch(selectedImageryProvider);
-    final isOSM = imagery == ref.watch(baseImageryProvider);
+    final isOSM = ref.watch(imageryIsBaseProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
 
@@ -113,7 +113,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
           IconButton(
             onPressed: () {
               setState(() {
-                ref.read(selectedImageryProvider.notifier).toggle();
+                ref.read(imageryIsBaseProvider.notifier).toggle();
               });
             },
             icon: Icon(isOSM ? Icons.map_outlined : Icons.map),

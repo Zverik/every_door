@@ -5,6 +5,7 @@
 _Unreleased_
 
 * Vector tiles support!
+* Building contours for the entrances mode.
 * Displaying icons for presets.
 * Tags for entrances are now remembered again.
 

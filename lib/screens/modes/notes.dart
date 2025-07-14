@@ -143,16 +143,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                 hasFloatingButton: true,
                 updateState: true,
                 layers: [
-                  if (_newLocation != null)
-                    CircleLayer(
-                      circles: [
-                        CircleMarker(
-                          point: _newLocation!,
-                          radius: 5.0,
-                          color: Colors.red,
-                        ),
-                      ],
-                    ),
+                  ...widget.def.mapLayers(),
                   PolylineLayer(
                     polylines: [
                       for (final drawing
@@ -221,6 +212,16 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         ),
                     ],
                   ),
+                  if (_newLocation != null)
+                    CircleLayer(
+                      circles: [
+                        CircleMarker(
+                          point: _newLocation!,
+                          radius: 5.0,
+                          color: Colors.red,
+                        ),
+                      ],
+                    ),
                 ],
               ),
               if (locked)
