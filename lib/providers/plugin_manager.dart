@@ -1,4 +1,5 @@
 import 'package:every_door/helpers/tags/element_kind.dart';
+import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/geojson.dart';
 import 'package:every_door/models/imagery/mbtiles.dart';
@@ -126,7 +127,8 @@ class PluginManager extends Notifier<List<Plugin>> {
     final imageryData = plugin.data['imagery'];
     if (imageryData != null && imageryData is Map) {
       for (final entry in imageryData.entries) {
-        final imagery = await _imageryFromMap(entry.key, entry.value, plugin);
+        final imagery = await _imageryFromMap(entry.key, entry.value, plugin,
+            isBase: entry.key == 'base');
         if (imagery == null) {
           _logger.warning('Failed to parse imagery ${entry.key}');
           continue;
@@ -134,6 +136,7 @@ class PluginManager extends Notifier<List<Plugin>> {
 
         if (entry.key == 'base') {
           ref.read(baseImageryProvider.notifier).set(imagery);
+          _logger.info('Set base imagery ${imagery.id}');
         } else {
           final bool force = imageryData['force'] == true;
           ref.read(imageryProvider.notifier).registerImagery(imagery, force);
@@ -164,7 +167,8 @@ class PluginManager extends Notifier<List<Plugin>> {
   }
 
   Future<Imagery?> _imageryFromMap(
-      String key, Map<String, dynamic> data, Plugin plugin, [bool isBase = false]) async {
+      String key, Map<String, dynamic> data, Plugin plugin,
+      {bool isBase = false}) async {
     final String url = data['url'] as String;
     final bool isURL = url.startsWith('http://') || url.startsWith('https://');
     final String? ext = url.contains('.')
@@ -208,6 +212,7 @@ class PluginManager extends Notifier<List<Plugin>> {
         fast: data['fast'] != false,
         plugin: plugin,
         headers: tmi.headers,
+        cachingStore: isBase ? kTileCacheBase : kTileCacheImagery,
       );
     }
 
@@ -218,7 +223,8 @@ class PluginManager extends Notifier<List<Plugin>> {
           url.endsWith('.jpg') ||
           url.endsWith('.jpeg') ||
           url.endsWith('.png')) {
-        return TmsImagery.from(tmi);
+        return TmsImagery.from(tmi,
+            cachingStore: isBase ? kTileCacheBase : kTileCacheImagery);
       }
     } else {
       if (typ == 'mbtiles' || ext == 'mbtiles') {

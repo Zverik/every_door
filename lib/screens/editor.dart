@@ -38,8 +38,14 @@ class PoiEditorPage extends ConsumerStatefulWidget {
   final OsmChange? amenity;
   final Preset? preset;
   final LatLng? location;
+  final bool isModified;
 
-  const PoiEditorPage({this.amenity, this.preset, this.location});
+  const PoiEditorPage({
+    this.amenity,
+    this.preset,
+    this.location,
+    this.isModified = false,
+  });
 
   @override
   ConsumerState createState() => _PoiEditorPageState();
@@ -394,6 +400,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   Widget build(BuildContext context) {
     final preset = this.preset;
     final bool modified = widget.amenity == null ||
+        widget.isModified ||
         amenity != widget.amenity ||
         amenity.isFixmeNote();
     final bool needsCheck = amenity.age >= kOldAmenityDaysEditor &&
@@ -429,7 +436,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
               Container(
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(color: Colors.white38, width: 1.5, style: BorderStyle.solid),
+                    bottom: BorderSide(
+                        color: Colors.white38,
+                        width: 1.5,
+                        style: BorderStyle.solid),
                   ),
                 ),
                 child: Text(preset?.name ?? amenity.name ?? 'Editor'),

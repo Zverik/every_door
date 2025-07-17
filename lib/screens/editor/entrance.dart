@@ -13,7 +13,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class EntranceEditorPane extends ConsumerStatefulWidget {
   final OsmChange? entrance;
@@ -352,8 +353,10 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                PoiEditorPage(amenity: entrance),
+                            builder: (context) => PoiEditorPage(
+                              amenity: entrance,
+                              isModified: entrance != widget.entrance,
+                            ),
                             fullscreenDialog: true,
                           ),
                         );

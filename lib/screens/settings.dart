@@ -84,6 +84,7 @@ class SettingsPage extends ConsumerWidget {
                 ),
                 SettingsTile(
                   title: Text(loc.settingsDataManagement),
+                  trailing: Icon(Icons.navigate_next),
                   onPressed: (context) async {
                     Navigator.push(
                       context,

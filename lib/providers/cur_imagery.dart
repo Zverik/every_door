@@ -44,12 +44,12 @@ class BaseImageryNotifier extends Notifier<Imagery> {
     spritesBase: 'assets/styles/ofm',
   );
 
-  Imagery _base = _kBaseImagery;
+  final Imagery _base = _kBaseImagery;
 
   @override
   Imagery build() {
     _base.initialize().then((_) {
-      state = _base;
+      if (state == _kOSMImagery) state = _base;
     });
     return _kOSMImagery;
   }
@@ -60,12 +60,6 @@ class BaseImageryNotifier extends Notifier<Imagery> {
 
   void revert() {
     state = _base;
-  }
-
-  void setBase(Imagery imagery) {
-    final isBase = state == _base;
-    _base = imagery;
-    if (isBase) state = _base;
   }
 }
 

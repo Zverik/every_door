@@ -1,5 +1,6 @@
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
+import 'package:http/io_client.dart';
 
 const kTileCacheBase = 'base';
 const kTileCacheImagery = 'satellite';
@@ -7,7 +8,9 @@ const kTileCacheImagery = 'satellite';
 class CachedBingTileProvider extends FMTCTileProvider {
   CachedBingTileProvider()
       : super(
-            stores: {kTileCacheImagery: BrowseStoreStrategy.readUpdateCreate});
+          stores: {kTileCacheImagery: BrowseStoreStrategy.readUpdateCreate},
+          httpClient: IOClient(),
+        );
 
   String _tileToQuadkey(int x, int y, int z) {
     String quad = '';

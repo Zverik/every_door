@@ -8,7 +8,8 @@ _Unreleased_
 * Building contours for the entrances mode.
 * Displaying icons for presets.
 * New data management settings panel.
-* New imagery caching, thanks to @JaffaKetchup amazing FMTC package.
+* New imagery caching, thanks to @JaffaKetchup for the amazing FMTC package.
+* To undo a change, tap a button instead of swiping.
 * Tags for entrances are now remembered again.
 
 ## 6.0

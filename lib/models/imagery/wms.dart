@@ -5,6 +5,7 @@ import 'package:flutter/material.dart' show Widget;
 import 'package:flutter_map/flutter_map.dart'
     show TileLayer, WMSTileLayerOptions, Epsg4326, Epsg3857;
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
+import 'package:http/io_client.dart';
 
 class WmsImagery extends TileImagery {
   final FMTCTileProvider _tileProvider;
@@ -26,6 +27,7 @@ class WmsImagery extends TileImagery {
   }) : _tileProvider = FMTCTileProvider(
           stores: {kTileCacheImagery: BrowseStoreStrategy.readUpdateCreate},
           headers: headers,
+          httpClient: IOClient(),
         );
 
   WmsImagery.from(TileImageryData data, {bool wms4326 = false})

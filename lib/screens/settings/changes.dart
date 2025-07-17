@@ -140,10 +140,44 @@ class _ChangeListPageState extends ConsumerState {
     });
   }
 
+  void _deleteChange(BuildContext context, int index) {
+    final loc = AppLocalizations.of(context)!;
+    final change = _changeList[index];
+    final chProvider = ref.read(changesProvider);
+    final nProvider = ref.read(notesProvider);
+    if (change.change != null) {
+      chProvider.deleteChange(change.change!);
+      ref.read(needMapUpdateProvider).trigger();
+    } else if (change.note != null) {
+      nProvider.clearChanges(note: change.note!);
+    } else if (change.allMapNotes) {
+      nProvider.clearChanges(mapOnly: true);
+    }
+    _changeList.removeAt(index);
+
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(loc.changesDeletedChange(change.title)),
+      action: change.change == null && change.note == null
+          ? null
+          : SnackBarAction(
+        label: loc.changesDeletedUndo.toUpperCase(),
+        onPressed: () async {
+          if (change.change != null) {
+            await chProvider.saveChange(change.change!);
+          } else if (change.note != null) {
+            await nProvider.clearChanges(
+                note: change.note!);
+          }
+          buildChangesList();
+        },
+      ),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     final changes = ref.watch(changesProvider);
-    final hasManyTypes = _changeList.map((e) => e.icon).toSet().length > 1;
     final loc = AppLocalizations.of(context)!;
 
     ref.listen(changesProvider, (previous, next) {
@@ -206,81 +240,35 @@ class _ChangeListPageState extends ConsumerState {
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   final change = _changeList[index];
-                  return Dismissible(
-                    key: Key(change.hashCode.toString()),
-                    direction: DismissDirection.endToStart,
-                    onDismissed: (direction) {
-                      final chProvider = ref.read(changesProvider);
-                      final nProvider = ref.read(notesProvider);
-                      if (change.change != null) {
-                        chProvider.deleteChange(change.change!);
-                        ref.read(needMapUpdateProvider).trigger();
-                      } else if (change.note != null) {
-                        nProvider.clearChanges(note: change.note!);
-                      } else if (change.allMapNotes) {
-                        nProvider.clearChanges(mapOnly: true);
-                      }
-                      _changeList.removeAt(index);
-
-                      ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(loc.changesDeletedChange(change.title)),
-                        action: change.change == null && change.note == null
-                            ? null
-                            : SnackBarAction(
-                                label: loc.changesDeletedUndo.toUpperCase(),
-                                onPressed: () async {
-                                  if (change.change != null) {
-                                    await chProvider.saveChange(change.change!);
-                                  } else if (change.note != null) {
-                                    await nProvider.clearChanges(
-                                        note: change.note!);
-                                  }
-                                  buildChangesList();
-                                },
-                              ),
-                      ));
-                    },
-                    background: Container(
+                  return ListTile(
+                    title: Text(change.title),
+                    subtitle:
+                        Text(change.change?.error ?? loc.changesPending),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete),
                       color: Colors.red,
-                      padding: EdgeInsets.only(right: 15.0),
-                      child: Icon(Icons.delete, color: Colors.white),
-                      alignment: Alignment.centerRight,
+                      onPressed: () {
+                        _deleteChange(context, index);
+                      },
                     ),
-                    child: ListTile(
-                      title: Text(change.title),
-                      subtitle:
-                          Text(change.change?.error ?? loc.changesPending),
-                      trailing: !hasManyTypes ? null : Icon(change.icon),
-                      onTap: change.change == null
-                          ? null
-                          : () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) =>
-                                      PoiEditorPage(amenity: change.change!),
-                                  fullscreenDialog: true,
-                                ),
-                              );
-                            },
-                    ),
+                    onTap: change.change == null
+                        ? null
+                        : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    PoiEditorPage(amenity: change.change!),
+                                fullscreenDialog: true,
+                              ),
+                            );
+                          },
                   );
                 },
                 separatorBuilder: (context, index) => Divider(),
                 itemCount: _changeList.length,
               ),
             ),
-            if (_changeList.length <= 5)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: Center(
-                  child: Text(
-                    loc.changesSwipeLeft,
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                ),
-              ),
           ],
         ),
       ),
