@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/oauth2_client_debug.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logging/logging.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
 
-class OpenStreetMapOAuth2Client extends OAuth2Client {
+class OpenStreetMapOAuth2Client extends OAuth2ClientDebug {
   OpenStreetMapOAuth2Client()
       : super(
           authorizeUrl: 'https://$kOsmAuth2Endpoint/oauth2/authorize',
@@ -27,6 +28,7 @@ class OAuthHelperError implements Exception {
 }
 
 class OpenStreetMapOAuthHelper {
+  static final _logger = Logger('OpenStreetMapOAuthHelper');
   static const kTokenKey = 'osmToken';
 
   final OAuth2Client _client = OpenStreetMapOAuth2Client();
@@ -52,13 +54,15 @@ class OpenStreetMapOAuthHelper {
         }
       }
     } else {
+      _logger.info('Retrieved null token, requestAuth=$requestAuth');
       if (!requestAuth) return null;
       token = await _fetchToken();
     }
 
     if (!token.isValid()) {
+      _logger.severe('Invalid token: ${token.respMap}');
       throw OAuthHelperError(
-          'Provider error ${token.httpStatusCode}: ${token.error}: ${token.errorDescription}');
+          'Provider error ${token.httpStatusCode}: ${token.error}; ${token.errorDescription}');
     }
 
     if (!token.isBearer()) {
@@ -86,7 +90,9 @@ class OpenStreetMapOAuthHelper {
         await secure.delete(key: kTokenKey);
       else
         await secure.write(key: kTokenKey, value: jsonEncode(token.respMap));
-    } on PlatformException {
+    } on PlatformException catch (e) {
+      _logger.warning(
+          token == null ? 'Failed to delete token' : 'Failed to save token', e);
       await secure.deleteAll();
       if (token != null) {
         await secure.write(key: kTokenKey, value: jsonEncode(token.respMap));
@@ -154,8 +160,7 @@ class OpenStreetMapOAuthHelper {
       try {
         token = await getToken(false);
       } on Exception catch (e) {
-        Logger('OpenStreetMapOAuthHelper')
-            .warning('Failed to get token in getAuthValue', e);
+        _logger.warning('Failed to get token in getAuthValue', e);
         return null;
       }
       if (token == null) return null; // Not authorizing here

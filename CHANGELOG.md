@@ -11,6 +11,7 @@ _Unreleased_
 * New imagery caching, thanks to @JaffaKetchup for the amazing FMTC package.
 * To undo a change, tap a button instead of swiping.
 * Tags for entrances are now remembered again.
+* Increased maximum zoom to 22.
 
 ## 6.0
 
