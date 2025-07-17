@@ -113,7 +113,7 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
     }
     final headers = {'Authorization': authStr};
     if (!await _testAuthHeaders(headers)) {
-      state = null;
+      await logout();
       throw OsmAuthException(
           'Could not use the saved OAuth token, please re-login.');
     }
