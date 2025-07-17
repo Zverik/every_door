@@ -18,7 +18,7 @@ class LogDisplayPage extends ConsumerStatefulWidget {
 
 class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
   static const kMaxLogLinesToSend = 20;
-  bool sentMessage = false;
+  bool sentMessage = true; // TODO: fix sendmail on the server
   final _controller = ScrollController();
 
   @override

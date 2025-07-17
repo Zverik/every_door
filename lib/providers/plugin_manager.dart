@@ -187,19 +187,6 @@ class PluginManager extends Notifier<List<Plugin>> {
       headers: data['headers'] is Map ? data['headers'] : null,
     );
 
-    if (typ == 'geojson' || ext == 'geojson' || ext == 'json') {
-      return GeoJsonImagery(
-        id: tmi.id,
-        category: tmi.category,
-        name: tmi.name,
-        icon: tmi.icon,
-        attribution: tmi.attribution,
-        source: isURL
-            ? NetworkGeoJson(url, headers: tmi.headers ?? const {})
-            : FileGeoJson(plugin.resolvePath(url)),
-      );
-    }
-
     if (typ == 'vector') {
       return VectorImagery(
         id: tmi.id,
@@ -213,6 +200,19 @@ class PluginManager extends Notifier<List<Plugin>> {
         plugin: plugin,
         headers: tmi.headers,
         cachingStore: isBase ? kTileCacheBase : kTileCacheImagery,
+      );
+    }
+
+    if (typ == 'geojson' || ext == 'geojson' || ext == 'json') {
+      return GeoJsonImagery(
+        id: tmi.id,
+        category: tmi.category,
+        name: tmi.name,
+        icon: tmi.icon,
+        attribution: tmi.attribution,
+        source: isURL
+            ? NetworkGeoJson(url, headers: tmi.headers ?? const {})
+            : FileGeoJson(plugin.resolvePath(url)),
       );
     }
 

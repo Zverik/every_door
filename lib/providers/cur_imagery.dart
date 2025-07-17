@@ -55,7 +55,9 @@ class BaseImageryNotifier extends Notifier<Imagery> {
   }
 
   void set(Imagery imagery) {
-    state = imagery;
+    imagery.initialize().then((_){
+      state = imagery;
+    });
   }
 
   void revert() {
