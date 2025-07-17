@@ -125,6 +125,7 @@ class OsmAuthController extends StateNotifier<OsmUserDetails?> {
         Uri.https(kOsmEndpoint, '/api/0.6/user/details'),
         headers: headers ?? await getAuthHeaders());
     if (response.statusCode != 200) {
+      await logout();
       throw OsmAuthException('Wrong oauth access token');
     }
     if (response.body.contains('<html')) {
