@@ -1,12 +1,14 @@
 # Every Door App Change Log
 
-## 6.1
+## 7.0
 
 _Unreleased_
 
 * Vector tiles support!
 * Building contours for the entrances mode.
 * Displaying icons for presets.
+* New data management settings panel.
+* New imagery caching, thanks to @JaffaKetchup amazing FMTC package.
 * Tags for entrances are now remembered again.
 
 ## 6.0

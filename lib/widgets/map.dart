@@ -267,7 +267,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
     });
 
     final imagery = ref.watch(selectedImageryProvider);
-    final isNavigating = ref.read(navigationModeProvider);
+    final isNavigating = ref.watch(navigationModeProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
 
@@ -278,7 +278,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         initialCenter: ref.watch(effectiveLocationProvider),
         initialRotation: ref.watch(rotationProvider),
         initialZoom: ref.watch(zoomProvider),
-        minZoom: isNavigating ? 4.0 : kEditMinZoom - 0.1,
+        minZoom: isNavigating ? kNavigateMinZoom : kEditMinZoom - 0.1,
         maxZoom: isNavigating ? kEditMinZoom + 0.1 : kEditMaxZoom,
         interactionOptions: InteractionOptions(
           flags: !widget.interactive

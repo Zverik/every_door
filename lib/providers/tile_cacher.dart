@@ -59,14 +59,14 @@ class TileCacher extends StateNotifier<TileCacherState> {
         final coords = TileCoordinates(x, y, zoom);
         final url = options.tileProvider.getTileUrl(coords, options);
         // Same logic as in CacheManager.getSingleFile().
-        final cached = await TileCacheManager.instance.getFileFromCache(url);
+        final cached = null; // await TileCacheManager.instance.getFileFromCache(url);
         if (cached == null || !cached.validTill.isAfter(DateTime.now())) {
           final headers = {
             'User-Agent':
                 'flutter_map (info.zverev.ilya.every_door; tile_cacher)'
           };
-          await TileCacheManager.instance
-              .downloadFile(url, authHeaders: headers);
+          // await TileCacheManager.instance
+          //     .downloadFile(url, authHeaders: headers);
           downloaded += 1;
         }
       }

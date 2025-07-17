@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/models/imagery/vector_assets.dart';
@@ -25,13 +26,14 @@ final selectedImageryProvider = Provider<Imagery>((ref) {
 final StreamController<void> tileResetController = StreamController.broadcast();
 
 class BaseImageryNotifier extends Notifier<Imagery> {
-  static const _kOSMImagery = TmsImagery(
+  static final _kOSMImagery = TmsImagery(
     id: 'openstreetmap',
     name: 'OpenStreetMap',
     url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     attribution: '© OpenStreetMap contributors',
     minZoom: 0,
     maxZoom: 19,
+    cachingStore: kTileCacheBase,
   );
 
   static final _kBaseImagery = VectorAssetsImagery(

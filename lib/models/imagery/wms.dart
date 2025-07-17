@@ -4,11 +4,13 @@ import 'package:every_door/providers/cur_imagery.dart';
 import 'package:flutter/material.dart' show Widget;
 import 'package:flutter_map/flutter_map.dart'
     show TileLayer, WMSTileLayerOptions, Epsg4326, Epsg3857;
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 
 class WmsImagery extends TileImagery {
+  final FMTCTileProvider _tileProvider;
   final bool wms4326;
 
-  const WmsImagery({
+  WmsImagery({
     required super.id,
     super.category,
     super.name,
@@ -21,23 +23,26 @@ class WmsImagery extends TileImagery {
     super.overlay = false,
     super.best = false,
     this.wms4326 = false,
-  });
+  }) : _tileProvider = FMTCTileProvider(
+          stores: {kTileCacheImagery: BrowseStoreStrategy.readUpdateCreate},
+          headers: headers,
+        );
 
   WmsImagery.from(TileImageryData data, {bool wms4326 = false})
-    : this(
-        id: data.id,
-        category: data.category,
-        name: data.name,
-        icon: data.icon,
-        attribution: data.attribution,
-        overlay: data.overlay,
-        best: data.best,
-        url: data.url,
-        headers: data.headers,
-        minZoom: data.minZoom,
-        maxZoom: data.maxZoom,
-        wms4326: wms4326,
-      );
+      : this(
+          id: data.id,
+          category: data.category,
+          name: data.name,
+          icon: data.icon,
+          attribution: data.attribution,
+          overlay: data.overlay,
+          best: data.best,
+          url: data.url,
+          headers: data.headers,
+          minZoom: data.minZoom,
+          maxZoom: data.maxZoom,
+          wms4326: wms4326,
+        );
 
   WMSTileLayerOptions _buildWMSOptions(String url) {
     final uri = Uri.parse(url);
@@ -92,7 +97,7 @@ class WmsImagery extends TileImagery {
   Widget buildLayer({bool reset = false}) {
     return TileLayer(
       wmsOptions: _buildWMSOptions(url),
-      tileProvider: CachedTileProvider(headers: headers),
+      tileProvider: _tileProvider,
       minNativeZoom: minZoom,
       maxNativeZoom: maxZoom,
       maxZoom: 22,

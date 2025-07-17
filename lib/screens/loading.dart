@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/providers/app_links_provider.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';
@@ -17,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:country_coder/country_coder.dart';
@@ -44,6 +46,13 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
 
     // Load changeset hashtags.
     ref.read(changesetTagsProvider);
+
+    // Initialize imagery caches.
+    await FMTCObjectBoxBackend().initialise(
+      maxDatabaseSize: 1000000, // 1 GB
+    );
+    await FMTCStore(kTileCacheBase).manage.create();
+    await FMTCStore(kTileCacheImagery).manage.create();
 
     // Initialize Bing imagery.
     ref.read(imageryProvider);

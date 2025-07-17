@@ -4,13 +4,15 @@ import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/providers/cur_imagery.dart';
 import 'package:flutter/material.dart' show Widget;
 import 'package:flutter_map/flutter_map.dart' show TileLayer, TileProvider;
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:logging/logging.dart' show Logger;
 
 class TmsImagery extends TileImagery {
   static final _logger = Logger('TmsImagery');
   final bool encrypted;
+  final TileProvider _tileProvider;
 
-  const TmsImagery({
+  TmsImagery({
     required super.id,
     super.category,
     super.name,
@@ -24,24 +26,28 @@ class TmsImagery extends TileImagery {
     super.best = false,
     super.tileSize = 256,
     this.encrypted = false,
-  });
+    String cachingStore = kTileCacheImagery,
+  }) : _tileProvider = FMTCTileProvider(
+          stores: {cachingStore: BrowseStoreStrategy.readUpdateCreate},
+          headers: headers,
+        );
 
   TmsImagery.from(TileImageryData data, {bool encrypted = false})
-    : this(
-        id: data.id,
-        category: data.category,
-        name: data.name,
-        icon: data.icon,
-        attribution: data.attribution,
-        overlay: data.overlay,
-        best: data.best,
-        url: data.url,
-        headers: data.headers,
-        minZoom: data.minZoom,
-        maxZoom: data.maxZoom,
-        tileSize: data.tileSize,
-        encrypted: encrypted,
-      );
+      : this(
+          id: data.id,
+          category: data.category,
+          name: data.name,
+          icon: data.icon,
+          attribution: data.attribution,
+          overlay: data.overlay,
+          best: data.best,
+          url: data.url,
+          headers: data.headers,
+          minZoom: data.minZoom,
+          maxZoom: data.maxZoom,
+          tileSize: data.tileSize,
+          encrypted: encrypted,
+        );
 
   TmsImagery copyWith({
     String? url,
@@ -83,7 +89,7 @@ class TmsImagery extends TileImagery {
     }
   }
 
-  TileProvider getTileProvider() => CachedTileProvider(headers: headers);
+  TileProvider getTileProvider() => _tileProvider;
 
   String prepareUrl() => url;
 

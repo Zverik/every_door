@@ -4,6 +4,8 @@ import 'package:every_door/providers/imagery.dart';
 import 'package:flutter_map/flutter_map.dart' show TileProvider;
 
 class BingImagery extends TmsImagery {
+  final _tileProvider = CachedBingTileProvider();
+
   BingImagery({
     required super.id,
     super.category,
@@ -41,7 +43,7 @@ class BingImagery extends TmsImagery {
   }
 
   @override
-  TileProvider getTileProvider() => CachedBingTileProvider();
+  TileProvider getTileProvider() => _tileProvider;
 
   @override
   String prepareUrl() {

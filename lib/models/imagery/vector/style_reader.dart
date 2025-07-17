@@ -1,13 +1,31 @@
 import 'dart:convert' show json;
+import 'dart:io';
 
 import 'package:every_door/models/plugin.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
+import 'package:mbtiles/mbtiles.dart';
 import 'package:vector_map_tiles/vector_map_tiles.dart';
 import 'package:vector_map_tiles/src/style/uri_mapper.dart';
+import 'package:vector_map_tiles_mbtiles/vector_map_tiles_mbtiles.dart';
 import 'package:vector_tile_renderer/vector_tile_renderer.dart'
     show ThemeReader, SpriteIndexReader;
+
+class StyleLoadingException implements Exception {
+  final String message;
+
+  StyleLoadingException(this.message);
+  StyleLoadingException.url(String url)
+      : message = 'Error loading style from $url';
+
+  @override
+  String toString() => 'StyleLoadingException($message)';
+}
+
+extension HttpChecker on String {
+  bool isHttp() => startsWith('http://') || startsWith('https://');
+}
 
 /// This class redefines [StyleReader] to support reading definitions and
 /// layers from plugins.
@@ -28,36 +46,29 @@ class EdStyleReader {
 
   Future<Style> read() async {
     final uriMapper = StyleUriMapper(key: apiKey);
-    final url = uriMapper.map(this.url);
-    final styleText = await _httpGet(url, httpHeaders);
+    final styleText = await _getOrRead(url, plugin, uriMapper.map);
+
     final style = json.decode(styleText);
     if (style is! Map<String, dynamic>) {
-      throw _invalidStyle(url);
+      throw StyleLoadingException.url(url);
     }
+
     final sources = style['sources'];
     if (sources is! Map) {
-      throw _invalidStyle(url);
+      throw StyleLoadingException.url(url);
     }
     final providerByName = await _readProviderByName(sources);
 
     final spriteUri = style['sprite'];
     SpriteStyle? sprites;
     if (spriteUri is String && spriteUri.trim().isNotEmpty) {
-      final spriteUris = uriMapper.mapSprite(this.url, spriteUri);
+      final isHttp = spriteUri.isHttp();
+      final spriteUris = isHttp
+          ? uriMapper.mapSprite(url, spriteUri)
+          : _mapSpriteFile(spriteUri);
       for (final spriteUri in spriteUris) {
-        dynamic spritesJson;
-        try {
-          final spritesJsonText = await _httpGet(spriteUri.json, httpHeaders);
-          spritesJson = json.decode(spritesJsonText);
-        } catch (e) {
-          _logger.severe('Error reading sprite uri: ${spriteUri.json}');
-          continue;
-        }
-        sprites = SpriteStyle(
-          atlasProvider: () => _loadBinary(spriteUri.image, httpHeaders),
-          index: SpriteIndexReader().read(spritesJson),
-        );
-        break;
+        sprites = await _readSprites(spriteUri);
+        if (sprites != null) break;
       }
     }
 
@@ -68,15 +79,68 @@ class EdStyleReader {
     );
   }
 
+  Future<SpriteStyle?> _readSprites(SpriteUri spriteUri) async {
+    dynamic spritesJson;
+    try {
+      final spritesJsonText = await _getOrRead(spriteUri.json, plugin);
+      spritesJson = json.decode(spritesJsonText);
+    } catch (e) {
+      _logger.severe('Error reading sprite uri: ${spriteUri.json}');
+      return null;
+    }
+
+    final spriteData = SpriteIndexReader().read(spritesJson);
+    if (spriteUri.json.isHttp()) {
+      return SpriteStyle(
+        atlasProvider: () => _loadBinary(spriteUri.image, httpHeaders),
+        index: spriteData,
+      );
+    } else {
+      final spriteFile = plugin?.resolvePath(spriteUri.image);
+      if (spriteFile == null || !spriteFile.existsSync()) {
+        _logger.severe('Image for sprite is missing: ${spriteUri.image}');
+        return null;
+      }
+      return SpriteStyle(
+        atlasProvider: () => spriteFile.readAsBytes(),
+        index: spriteData,
+      );
+    }
+  }
+
+  Future<String> _getOrRead(String url, Plugin? plugin,
+      [String Function(String)? mapUrl]) async {
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      if (mapUrl != null) url = mapUrl(url);
+      return await _httpGet(url, httpHeaders);
+    } else {
+      final styleFile = plugin?.resolvePath(url);
+      if (styleFile == null || !styleFile.existsSync()) {
+        throw StyleLoadingException(
+            'Cannot find file in the plugin: $styleFile');
+      }
+      return await styleFile.readAsString();
+    }
+  }
+
+  List<SpriteUri> _mapSpriteFile(String spriteBase) {
+    final uris = <SpriteUri>[];
+    for (final suffix in ['@2x', '']) {
+      uris.add(SpriteUri(
+          json: '$spriteBase$suffix.json', image: '$spriteBase$suffix.png'));
+    }
+    return uris;
+  }
+
   Future<Style> readAssets({String? spritesBase}) async {
     final styleText = await rootBundle.loadString(url);
     final style = json.decode(styleText);
     if (style is! Map<String, dynamic>) {
-      throw _invalidStyle(url);
+      throw StyleLoadingException.url(url);
     }
     final sources = style['sources'];
     if (sources is! Map) {
-      throw _invalidStyle(url);
+      throw StyleLoadingException.url(url);
     }
     final providerByName = await _readProviderByName(sources);
 
@@ -123,34 +187,47 @@ class EdStyleReader {
         final sourceUrl = StyleUriMapper(key: apiKey).mapSource(url, entryUrl);
         source = json.decode(await _httpGet(sourceUrl, httpHeaders));
         if (source is! Map) {
-          throw _invalidStyle(sourceUrl);
+          throw StyleLoadingException.url(sourceUrl);
         }
       } else {
         source = entry.value;
       }
       final entryTiles = source['tiles'];
-      final maxzoom = source['maxzoom'] as int? ?? 14;
-      final minzoom = source['minzoom'] as int? ?? 1;
+      final maxZoom = source['maxzoom'] as int? ?? 14;
+      final minZoom = source['minzoom'] as int? ?? 1;
       if (entryTiles is List && entryTiles.isNotEmpty) {
         final tileUri = entryTiles[0] as String;
-        final tileUrl = StyleUriMapper(key: apiKey).mapTiles(tileUri);
-        providers[entry.key] = NetworkVectorTileProvider(
-            type: type,
-            urlTemplate: tileUrl,
-            maximumZoom: maxzoom,
-            minimumZoom: minzoom,
-            httpHeaders: httpHeaders);
+        if (tileUri.isHttp()) {
+          final tileUrl = StyleUriMapper(key: apiKey).mapTiles(tileUri);
+          providers[entry.key] = NetworkVectorTileProvider(
+              type: type,
+              urlTemplate: tileUrl,
+              maximumZoom: maxZoom,
+              minimumZoom: minZoom,
+              httpHeaders: httpHeaders);
+        } else if (tileUri.endsWith('.mbtiles')) {
+          final path = plugin?.resolvePath(tileUri);
+          if (path == null || !path.existsSync()) {
+            throw StyleLoadingException('Cannot file provider ${entry.key} in file $tileUri');
+          }
+          final needGzip = source['gzip'] as bool? ?? true;
+          final mbtiles = MbTiles(mbtilesPath: path.path, gzip: needGzip);
+          providers[entry.key] = MbTilesVectorTileProvider(
+            mbtiles: mbtiles,
+            minimumZoom: minZoom,
+            maximumZoom: maxZoom,
+          );
+        } else {
+          throw StyleLoadingException('Cannot understand provider ${entry.key}: $tileUri');
+        }
       }
     }
     if (providers.isEmpty) {
-      throw 'Unexpected response';
+      throw StyleLoadingException('No providers found');
     }
     return providers;
   }
 }
-
-String _invalidStyle(String url) =>
-    'Uri does not appear to be a valid style: $url';
 
 Future<String> _httpGet(String url, Map<String, String>? httpHeaders) async {
   final response = await http.get(Uri.parse(url), headers: httpHeaders);

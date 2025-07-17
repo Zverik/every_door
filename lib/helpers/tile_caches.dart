@@ -1,38 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:logging/logging.dart';
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 
-class TileCacheManager {
-  static const key = 'tileCache';
-  static CacheManager instance = CacheManager(
-    Config(key, maxNrOfCacheObjects: 10000, stalePeriod: Duration(days: 120)),
-  );
-}
+const kTileCacheBase = 'base';
+const kTileCacheImagery = 'satellite';
 
-class CachedTileProvider extends TileProvider {
-  static final _logger = Logger('CachedTileProvider');
-
-  CachedTileProvider({super.headers});
-
-  @override
-  ImageProvider getImage(TileCoordinates coordinates, TileLayer options) {
-    final url = getTileUrl(coordinates, options);
-    // print(url);
-    return CachedNetworkImageProvider(
-      url,
-      cacheManager: TileCacheManager.instance,
-      headers: headers,
-      errorListener: (e) {
-        _logger.warning('Failed to load a tile: $e');
-      },
-    );
-  }
-}
-
-class CachedBingTileProvider extends TileProvider {
-  CachedBingTileProvider();
+class CachedBingTileProvider extends FMTCTileProvider {
+  CachedBingTileProvider()
+      : super(
+            stores: {kTileCacheImagery: BrowseStoreStrategy.readUpdateCreate});
 
   String _tileToQuadkey(int x, int y, int z) {
     String quad = '';
@@ -57,14 +32,5 @@ class CachedBingTileProvider extends TileProvider {
     return tileUrl
         .replaceFirst('_QUADKEY_', quadkey)
         .replaceFirst('_CULTURE_', 'en');
-  }
-
-  @override
-  ImageProvider getImage(TileCoordinates coordinates, TileLayer options) {
-    return CachedNetworkImageProvider(
-      getTileUrl(coordinates, options),
-      cacheManager: TileCacheManager.instance,
-      headers: headers,
-    );
   }
 }

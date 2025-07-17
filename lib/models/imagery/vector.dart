@@ -1,7 +1,9 @@
+import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/vector/style_reader.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:logging/logging.dart';
 import 'package:vector_map_tiles/vector_map_tiles.dart';
 
@@ -9,6 +11,7 @@ class VectorImagery extends Imagery {
   static final _logger = Logger('VectorImagery');
   Style? style;
   final bool fast;
+  final FMTCTileProvider _tileProvider;
 
   // We need those to initialize the layer.
   final String? url;
@@ -30,7 +33,9 @@ class VectorImagery extends Imagery {
     super.attribution,
     super.overlay = false,
     super.best = false,
-  });
+    String cachingStore = kTileCacheImagery,
+  }) : _tileProvider = FMTCTileProvider(
+            stores: {cachingStore: BrowseStoreStrategy.readUpdateCreate});
 
   @override
   Future<void> initialize() async {

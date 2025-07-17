@@ -26,6 +26,7 @@ const kNotesVisibilityRadius = 3000; // meters. Can be displayed very far out
 const kInitialZoom = 17.0; // For POI list screen
 const kEditMinZoom = 15.0; // Below that, the navigation mode switches on
 const kEditMaxZoom = 21.0; // Same for all modes
+const kNavigateMinZoom = 4.0; // For the navigation, far zoom-out mode
 const kDrawingMaxPoints = 100; // for hand-drawings
 const kDrawingMaxLength = 5000; // meters, for hand-drawings
 // editor

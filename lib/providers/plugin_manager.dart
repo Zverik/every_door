@@ -164,7 +164,7 @@ class PluginManager extends Notifier<List<Plugin>> {
   }
 
   Future<Imagery?> _imageryFromMap(
-      String key, Map<String, dynamic> data, Plugin plugin) async {
+      String key, Map<String, dynamic> data, Plugin plugin, [bool isBase = false]) async {
     final String url = data['url'] as String;
     final bool isURL = url.startsWith('http://') || url.startsWith('https://');
     final String? ext = url.contains('.')
