@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/plugin_i18n.dart';
+import 'package:every_door/models/version.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+final kApiVersion = PluginVersion('1.1');
 
 /// Thrown only when loading a plugin. Prints the enclosed exception as well.
 class PluginLoadException implements Exception {
@@ -18,64 +21,6 @@ class PluginLoadException implements Exception {
   String toString() {
     return parent == null ? message : "$message: $parent";
   }
-}
-
-class PluginVersion {
-  late final int? _major;
-  late final int _minor;
-
-  static final zero = PluginVersion('0');
-
-  PluginVersion(dynamic version) {
-    if (version == null) {
-      // Null version is considered "0", equal to [zero].
-      _major = null;
-      _minor = 0;
-    } else if (version is int) {
-      _major = null;
-      _minor = version;
-    } else if (version is String || version is double) {
-      final vs = version.toString();
-      final p = vs.indexOf('.');
-      if (p < 0) {
-        _major = null;
-        _minor = int.parse(vs);
-      } else {
-        _major = int.parse(vs.substring(0, p));
-        _minor = int.parse(vs.substring(p + 1));
-      }
-    } else {
-      throw ArgumentError('Plugin version should be a number or a string');
-    }
-  }
-
-  @override
-  String toString() => _major == null ? _minor.toString() : '$_major.$_minor';
-
-  @override
-  bool operator ==(Object other) =>
-      other is PluginVersion &&
-      other._major == _major &&
-      other._minor == _minor;
-
-  bool operator <(PluginVersion other) {
-    if (_major == null) return other._major != null || other._minor > _minor;
-    if (other._major == null || other._major < _major) return false;
-    return other._major > _major || other._minor > _minor;
-  }
-
-  bool operator >(PluginVersion other) {
-    if (_major != null)
-      return other._major == null ||
-          other._major < _major ||
-          (other._major == _major && other._minor < _minor);
-    return other._major == null && other._minor < _minor;
-  }
-
-  bool fresherThan(PluginVersion? version) => version == null || this > version;
-
-  @override
-  int get hashCode => Object.hash(_major, _minor);
 }
 
 /// Plugin metadata. Basically an identifier and a dictionary
@@ -92,6 +37,8 @@ class PluginData {
   String get name => data['name'] ?? id;
   String get description => data['description'] ?? '';
   String? get author => data['author'];
+  PluginVersionRange? get apiVersion =>
+      data.containsKey('api') ? PluginVersionRange(data['api']) : null;
 
   Uri? get url =>
       data.containsKey('source') ? Uri.tryParse(data['source']) : null;

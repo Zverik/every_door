@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:every_door/models/plugin.dart';
+import 'package:every_door/models/version.dart';
 import 'package:every_door/providers/plugin_repo.dart';
 import 'package:every_door/screens/settings/log.dart';
 import 'package:flutter/material.dart';
@@ -167,6 +168,10 @@ class _InstallPluginPageState extends ConsumerState<InstallPluginPage> {
       if (bundledUrl != null && bundledUrl != data.url) {
         throw Exception(
             'The plugin supplies URL different from ${data.url}: $bundledUrl');
+      }
+      if (!(tmpData.apiVersion?.matches(kApiVersion) ?? true)) {
+        throw Exception(
+            'The plugin API version (${tmpData.apiVersion}) does not match the current version ($kApiVersion).');
       }
 
       final plugin = await repo.installFromTmpDir(pluginDir);

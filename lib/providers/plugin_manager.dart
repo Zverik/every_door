@@ -6,7 +6,6 @@ import 'package:every_door/models/imagery/mbtiles.dart';
 import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/models/imagery/vector.dart';
-import 'package:every_door/models/imagery/vector/style_reader.dart';
 import 'package:every_door/models/imagery/wms.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/add_presets.dart';
@@ -82,6 +81,8 @@ class PluginManager extends Notifier<List<Plugin>> {
 
   Future<void> _enable(Plugin plugin, [bool force = false]) async {
     if (!force && state.contains(plugin)) return;
+    if (!(plugin.apiVersion?.matches(kApiVersion) ?? true)) return;
+
     try {
       _enableElementKinds(plugin);
       _enableModes(plugin);
@@ -180,6 +181,7 @@ class PluginManager extends Notifier<List<Plugin>> {
       id: key,
       name: data['name'] ?? key, // TODO: translatable
       url: url,
+      icon: data.containsKey('icon') ? plugin.loadIcon(data['icon']) : null,
       attribution: data['attribution'],
       minZoom: data['minZoom'],
       maxZoom: data['maxZoom'],

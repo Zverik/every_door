@@ -9,6 +9,7 @@ _Unreleased_
 * Displaying icons for presets.
 * New data management settings panel.
 * New imagery caching, thanks to @JaffaKetchup for the amazing FMTC package.
+* Plugin API is now versioned, this one is 1.1.
 * To undo a change, tap a button instead of swiping.
 * Tags for entrances are now remembered again.
 * Increased maximum zoom to 22.

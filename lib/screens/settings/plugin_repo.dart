@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/fields/helpers/qr_code.dart';
 import 'package:every_door/models/plugin.dart';
+import 'package:every_door/models/version.dart';
 import 'package:every_door/providers/edpr.dart';
 import 'package:every_door/providers/plugin_repo.dart';
 import 'package:every_door/screens/settings/install_plugin.dart';

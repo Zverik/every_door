@@ -1,4 +1,4 @@
-import 'package:every_door/models/plugin.dart';
+import 'package:every_door/models/version.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -44,5 +44,12 @@ void main() {
     expect(PluginVersion('1.0') > PluginVersion('0.1'), isTrue);
     expect(PluginVersion('10') > PluginVersion('0.1'), isFalse);
     expect(PluginVersion('1.0') > PluginVersion('10'), isTrue);
+  });
+
+  test('Flat numbering disabled', () {
+    expect(PluginVersion('0', false) == PluginVersion('0.0', true), isTrue);
+    expect(PluginVersion('0.0', false) == PluginVersion('0.0', true), isTrue);
+    expect(PluginVersion('0', false) == PluginVersion('0', true), isFalse);
+    expect(PluginVersion('1', false) == PluginVersion('1.0', true), isTrue);
   });
 }
