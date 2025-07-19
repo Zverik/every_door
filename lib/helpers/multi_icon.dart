@@ -152,13 +152,14 @@ class MultiIcon {
       );
     return SizedBox(width: size, height: size);
   }
-}
-
-class NetworkSvg extends StatelessWidget {
-  const NetworkSvg({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+  String toString() {
+    if (fontIcon != null) return 'MultiIcon(fontIcon=$fontIcon)';
+    if (image != null) return 'MultiIcon(image=$image)';
+    if (svg != null) return 'MultiIcon(svg=$svg)';
+    if (svgSource != null) return 'MultiIcon(svgSource=$svgSource)';
+    if (emoji != null) return 'MultiIcon(emoji=$emoji)';
+    return 'MultiIcon(empty)';
   }
 }

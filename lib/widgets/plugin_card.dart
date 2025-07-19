@@ -18,11 +18,19 @@ class PluginCard extends StatelessWidget {
       this.onMore,
       this.actionText});
 
+  String _translateIfPossible(BuildContext context, String field,
+      [String? def]) {
+    if (plugin is Plugin) {
+      return (plugin as Plugin).translate(context, field);
+    }
+    return def ?? plugin.data[field] ?? '<$field>';
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-    String description = plugin.description
+    String description = _translateIfPossible(context, 'description')
         .replaceAll('\n\n', '#NL#')
         .replaceAll('\n', ' ')
         .replaceAll('#NL#', '\n\n');
@@ -32,7 +40,7 @@ class PluginCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: Text(plugin.name),
+            title: Text(_translateIfPossible(context, 'name', plugin.name)),
             subtitle: Text('v${plugin.version}' +
                 (plugin.author == null ? '' : ' by ${plugin.author}')),
             leading: plugin.icon?.getWidget(icon: false, size: 30),

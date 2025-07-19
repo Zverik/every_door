@@ -146,7 +146,7 @@ class EdStyleReader {
 
     SpriteStyle? sprites;
     if (spritesBase != null) {
-      for (final suffix in ['', '@2x']) {
+      for (final suffix in ['@2x', '']) {
         dynamic spritesJson;
         try {
           final spritesJsonText =
