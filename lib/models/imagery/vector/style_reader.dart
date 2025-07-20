@@ -1,9 +1,8 @@
 import 'dart:convert' show json;
-import 'dart:io';
 
+import 'package:every_door/models/imagery/vector/style_cache.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 import 'package:mbtiles/mbtiles.dart';
 import 'package:vector_map_tiles/vector_map_tiles.dart';
@@ -46,12 +45,7 @@ class EdStyleReader {
 
   Future<Style> read() async {
     final uriMapper = StyleUriMapper(key: apiKey);
-    final styleText = await _getOrRead(url, plugin, uriMapper.map);
-
-    final style = json.decode(styleText);
-    if (style is! Map<String, dynamic>) {
-      throw StyleLoadingException.url(url);
-    }
+    final style = await _getOrRead(url, plugin, uriMapper.map);
 
     final sources = style['sources'];
     if (sources is! Map) {
@@ -82,8 +76,7 @@ class EdStyleReader {
   Future<SpriteStyle?> _readSprites(SpriteUri spriteUri) async {
     dynamic spritesJson;
     try {
-      final spritesJsonText = await _getOrRead(spriteUri.json, plugin);
-      spritesJson = json.decode(spritesJsonText);
+      spritesJson = await _getOrRead(spriteUri.json, plugin);
     } catch (e) {
       _logger.severe('Error reading sprite uri: ${spriteUri.json}');
       return null;
@@ -92,7 +85,8 @@ class EdStyleReader {
     final spriteData = SpriteIndexReader().read(spritesJson);
     if (spriteUri.json.isHttp()) {
       return SpriteStyle(
-        atlasProvider: () => _loadBinary(spriteUri.image, httpHeaders),
+        atlasProvider: () =>
+            StyleCache.instance.loadBinary(spriteUri.image, httpHeaders),
         index: spriteData,
       );
     } else {
@@ -108,18 +102,22 @@ class EdStyleReader {
     }
   }
 
-  Future<String> _getOrRead(String url, Plugin? plugin,
+  Future<Map<String, dynamic>> _getOrRead(String url, Plugin? plugin,
       [String Function(String)? mapUrl]) async {
     if (url.startsWith('http://') || url.startsWith('https://')) {
       if (mapUrl != null) url = mapUrl(url);
-      return await _httpGet(url, httpHeaders);
+      return await StyleCache.instance.loadJson(url, httpHeaders);
     } else {
       final styleFile = plugin?.resolvePath(url);
       if (styleFile == null || !styleFile.existsSync()) {
         throw StyleLoadingException(
             'Cannot find file in the plugin: $styleFile');
       }
-      return await styleFile.readAsString();
+      final data = json.decode(await styleFile.readAsString());
+      if (data is! Map<String, dynamic>) {
+        throw StyleLoadingException('Style is not a JSON object: $styleFile');
+      }
+      return data;
     }
   }
 
@@ -185,10 +183,7 @@ class EdStyleReader {
       var entryUrl = entry.value['url'] as String?;
       if (entryUrl != null) {
         final sourceUrl = StyleUriMapper(key: apiKey).mapSource(url, entryUrl);
-        source = json.decode(await _httpGet(sourceUrl, httpHeaders));
-        if (source is! Map) {
-          throw StyleLoadingException.url(sourceUrl);
-        }
+        source = await StyleCache.instance.loadJson(sourceUrl, httpHeaders);
       } else {
         source = entry.value;
       }
@@ -208,7 +203,8 @@ class EdStyleReader {
         } else if (tileUri.endsWith('.mbtiles')) {
           final path = plugin?.resolvePath(tileUri);
           if (path == null || !path.existsSync()) {
-            throw StyleLoadingException('Cannot file provider ${entry.key} in file $tileUri');
+            throw StyleLoadingException(
+                'Cannot file provider ${entry.key} in file $tileUri');
           }
           final needGzip = source['gzip'] as bool? ?? true;
           final mbtiles = MbTiles(mbtilesPath: path.path, gzip: needGzip);
@@ -218,7 +214,8 @@ class EdStyleReader {
             maximumZoom: maxZoom,
           );
         } else {
-          throw StyleLoadingException('Cannot understand provider ${entry.key}: $tileUri');
+          throw StyleLoadingException(
+              'Cannot understand provider ${entry.key}: $tileUri');
         }
       }
     }
@@ -226,25 +223,6 @@ class EdStyleReader {
       throw StyleLoadingException('No providers found');
     }
     return providers;
-  }
-}
-
-Future<String> _httpGet(String url, Map<String, String>? httpHeaders) async {
-  final response = await http.get(Uri.parse(url), headers: httpHeaders);
-  if (response.statusCode == 200) {
-    return response.body;
-  } else {
-    throw 'HTTP ${response.statusCode}: ${response.body}';
-  }
-}
-
-Future<Uint8List> _loadBinary(
-    String url, Map<String, String>? httpHeaders) async {
-  final response = await http.get(Uri.parse(url), headers: httpHeaders);
-  if (response.statusCode == 200) {
-    return response.bodyBytes;
-  } else {
-    throw 'HTTP ${response.statusCode}: ${response.body}';
   }
 }
 

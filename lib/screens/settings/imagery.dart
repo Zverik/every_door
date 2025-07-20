@@ -45,7 +45,7 @@ class ImageryPageState extends ConsumerState {
                 leading: list[index].icon?.getWidget(size: 30.0, icon: false),
                 onTap: () {
                   ref.read(imageryProvider.notifier).setImagery(list[index]);
-                  Navigator.pop(context);
+                  Navigator.of(context).popUntil((r) => r.isFirst);
                 },
               ),
               separatorBuilder: (context, index) => Divider(),

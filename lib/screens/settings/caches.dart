@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart';
 import 'package:every_door/helpers/tile_caches.dart';
+import 'package:every_door/models/imagery/vector/style_cache.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -23,6 +24,7 @@ class _CachesPageState extends ConsumerState<CachesPage> {
   int? _baseCacheSize;
   int? _imageryCacheSize;
   int? _vectorCacheSize;
+  int? _styleCacheSize;
 
   @override
   void initState() {
@@ -41,6 +43,8 @@ class _CachesPageState extends ConsumerState<CachesPage> {
         ? 0
         : entries.map((e) => e.size).reduce((a, b) => a + b);
 
+    _styleCacheSize = await StyleCache.instance.size();
+
     setState(() {});
   }
 
@@ -57,6 +61,7 @@ class _CachesPageState extends ConsumerState<CachesPage> {
     for (final entry in entries) {
       await vectorStorage.delete(entry.path);
     }
+    await StyleCache.instance.clear();
     await _fetchCacheSizes();
   }
 
@@ -75,7 +80,8 @@ class _CachesPageState extends ConsumerState<CachesPage> {
     final obsoleteDataLength = numFormat.format(osmData.obsoleteLength);
     final cacheLength = numFormat
         .format(((_baseCacheSize ?? 0) + (_imageryCacheSize ?? 0)) * 1000);
-    final vectorCacheLength = numFormat.format((_vectorCacheSize ?? 0));
+    final vectorCacheLength =
+        numFormat.format((_vectorCacheSize ?? 0) + (_styleCacheSize ?? 0));
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(

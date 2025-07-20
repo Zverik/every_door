@@ -333,6 +333,7 @@ class _EverythingKind extends ElementKindImpl {
               'elevator',
               'speed_display',
               'emergency_access_point',
+              'services',
             }),
             'railway': ValueMatcher(only: {
               'station',
