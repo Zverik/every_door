@@ -92,7 +92,9 @@ class _CachesPageState extends ConsumerState<CachesPage> {
         children: [
           ListTile(
             title: Text(
-                purgeAll ? loc.settingsPurgeAllData : loc.settingsPurgeData),
+              purgeAll ? loc.settingsPurgeAllData : loc.settingsPurgeData,
+              style: TextStyle(color: purgeAll ? Colors.red.shade900 : null),
+            ),
             trailing: Text(purgeAll ? dataLength : obsoleteDataLength),
             enabled: osmData.length > 0,
             onTap: () async {
