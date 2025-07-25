@@ -12,6 +12,7 @@ _Unreleased_
 * Plugin API is now versioned, this one is 1.1.
 * To undo a change, tap a button instead of swiping.
 * Tags for entrances are now remembered again.
+* Fixed phone numbers to use an international format.
 * Increased maximum zoom to 22.
 
 ## 6.0

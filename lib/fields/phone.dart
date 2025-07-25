@@ -7,7 +7,8 @@ import 'package:every_door/models/field.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class PhonePresetField extends PresetField {
   PhonePresetField({
@@ -68,9 +69,8 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
       lon: widget.element.location.longitude,
     );
 
-    phoneTag = ref.read(editorSettingsProvider).preferContact
-        ? 'contact:$_key'
-        : _key;
+    phoneTag =
+        ref.read(editorSettingsProvider).preferContact ? 'contact:$_key' : _key;
   }
 
   @override
@@ -87,18 +87,17 @@ class _PhoneInputFieldState extends ConsumerState<PhoneInputField> {
     try {
       if (value.startsWith('+') || digits.length >= 11) {
         final res = PhoneNumber.parse('+$digits');
-        return res.isValid()
-            ? '+${res.countryCode} ${res.formatNsn()}'
-            : null;
+        return res.isValid() ? '+${res.countryCode} ${res.formatNsn()}' : null;
       }
       final res = countryIso != null
-          ? PhoneNumber.parse(value, destinationCountry: isoCodeConversionMap[countryIso])
+          ? PhoneNumber.parse(value,
+              destinationCountry: isoCodeConversionMap[countryIso])
           : PhoneNumber.parse(value);
       if (!res.isValid()) return null;
       if (!value.contains('-')) {
-        value = res.formatNsn();
+        value = res.formatNsn(format: NsnFormat.international);
       }
-      return '+${res.countryCode} ${res.formatNsn()}';
+      return '+${res.countryCode} ${res.formatNsn(format: NsnFormat.international)}';
     } on PhoneNumberException {
       return null;
     }
