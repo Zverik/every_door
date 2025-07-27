@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:every_door/helpers/counter.dart';
 import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/helpers/geometry/circle_bounds.dart';
@@ -616,6 +618,33 @@ class OsmDataHelper extends ChangeNotifier {
     } finally {
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
+  }
+
+  Future<int> downloadInBounds(LatLngBounds bounds) async {
+    _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
+    final boxes = ListQueue<LatLngBounds>(1);
+    boxes.add(bounds);
+    int downloaded = 0;
+    try {
+      while (boxes.isNotEmpty) {
+        final box = boxes.removeFirst();
+        try {
+          downloaded += await _downloadMap(box);
+        } on Exception {
+          // Split the box in four and add to the queue.
+          final center = box.center;
+          boxes.addAll([
+            LatLngBounds(box.southEast, center),
+            LatLngBounds(box.southWest, center),
+            LatLngBounds(box.northEast, center),
+            LatLngBounds(box.northWest, center),
+          ]);
+        }
+      }
+    } finally {
+      _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
+    }
+    return downloaded;
   }
 
   Future updateElement(OsmElement element) async {

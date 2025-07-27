@@ -124,7 +124,11 @@ class NotesProvider extends ChangeNotifier {
 
   /// Downloads OSM notes and drawings from servers.
   Future<void> downloadNotes(LatLng center) async {
-    final bounds = boundsFromRadius(center, kBigRadius);
+    await downloadNotesInBounds(boundsFromRadius(center, kBigRadius));
+  }
+
+  /// Downloads OSM notes and drawings from servers, in a box.
+  Future<void> downloadNotesInBounds(LatLngBounds bounds) async {
     await Future.wait([
       _downloadOsmNotes(bounds),
       _downloadMapNotes(bounds),

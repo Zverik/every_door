@@ -1,5 +1,3 @@
-import 'dart:io' show HttpClient;
-
 import 'package:encrypt/encrypt.dart';
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery/tiles.dart';

@@ -5,6 +5,7 @@ import 'package:every_door/models/imagery/vector/style_cache.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_data.dart';
+import 'package:every_door/screens/settings/downloader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
@@ -143,7 +144,10 @@ class _CachesPageState extends ConsumerState<CachesPage> {
           ListTile(
             title: Text(loc.settingsCacheTiles),
             trailing: Icon(Icons.navigate_next),
-            enabled: false,
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => TileCacheDownloader()));
+            },
           ),
         ],
       ),
