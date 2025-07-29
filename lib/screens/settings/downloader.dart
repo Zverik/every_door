@@ -68,6 +68,12 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
   Iterable<DiscreteTileRange> _groupTiles() {
     // Very simple greedy algorithm.
     // Complexity: O(tiles * log(tiles)), quadratic worst case.
+
+    // Better algorithms (with complexity O(grid size * tiles)):
+    // 1. https://leetcode.com/problems/maximal-rectangle/solutions/5014890/faster-lesser-detailed-explaination-stack-height-step-by-step-explaination-python-java/
+    // 2. https://bravenewmethod.com/2015/01/18/finding-maximal-rectangles-in-a-grid/
+    // 3. https://discussions.unity.com/t/largest-rectangle-of-tiles/185528
+
     Set<Tile> tiles = Set.of(_selected);
     final ranges = <DiscreteTileRange>[];
     while (tiles.isNotEmpty) {

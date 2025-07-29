@@ -1,3 +1,4 @@
+import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tile_calculator.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/bing.dart';
@@ -95,12 +96,13 @@ class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
   }
 
   void start(Iterable<Tile> tiles) {
+    if (tiles.isEmpty) return;
     if (state.downloading) throw StateError('Data is already downloading');
 
     if (arg is TmsImagery || arg is WmsImagery || arg is BingImagery) {
-      _startRasterDownload();
+      _startRasterDownload(tiles);
     } else if (arg is VectorImagery) {
-      _startVectorDownload();
+      _startVectorDownload(tiles);
     } else {
       throw ArgumentError(
           'Unsupported imagery type for downloading: ${arg.runtimeType}');
@@ -109,7 +111,11 @@ class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
 
   void cancel() {}
 
-  void _startRasterDownload() {}
+  void _startRasterDownload(Iterable<Tile> tiles) {}
 
-  void _startVectorDownload() {}
+  void _startVectorDownload(Iterable<Tile> tiles) {
+    for (int zoom = tiles.first.zoom; zoom <= kMaxBulkDownloadZoom; zoom++) {
+      // TODO
+    }
+  }
 }

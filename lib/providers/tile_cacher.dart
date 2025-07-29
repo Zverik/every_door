@@ -31,7 +31,6 @@ class TileCacherState {
 
 class TileCacher extends StateNotifier<TileCacherState> {
   static final _logger = Logger('TileCacher');
-  static const kMinZoom = 15;
   static const kMaxDownloadTiles = 6000;
 
   final Ref _ref;
@@ -81,7 +80,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
       if (layerMaxZoom > kMaxBulkDownloadZoom)
         layerMaxZoom = kMaxBulkDownloadZoom;
       for (final area in areas) {
-        for (int zoom = kMinZoom; zoom <= layerMaxZoom; zoom++) {
+        for (int zoom = kMinBulkDownloadZoom; zoom <= layerMaxZoom; zoom++) {
           total += DiscreteTileRange.fromBounds(zoom, area).count;
         }
       }
@@ -104,7 +103,7 @@ class TileCacher extends StateNotifier<TileCacherState> {
       for (final area in areas) {
         _logger.info(
             'Downloading $img for area [${area.southWest}, ${area.northEast}]');
-        for (int zoom = kMinZoom; zoom <= layerMaxZoom; zoom++) {
+        for (int zoom = kMinBulkDownloadZoom; zoom <= layerMaxZoom; zoom++) {
           if (_needStop) break;
           try {
             downloaded += await cacheTiles(tileLayer, area, zoom);
