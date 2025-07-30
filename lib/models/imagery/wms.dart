@@ -1,7 +1,6 @@
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/providers/cur_imagery.dart';
-import 'package:flutter/material.dart' show Widget;
 import 'package:flutter_map/flutter_map.dart'
     show TileLayer, WMSTileLayerOptions, Epsg4326, Epsg3857;
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
@@ -96,7 +95,7 @@ class WmsImagery extends TileImagery {
   }
 
   @override
-  Widget buildLayer({bool reset = false}) {
+  TileLayer buildLayer({bool reset = false}) {
     return TileLayer(
       wmsOptions: _buildWMSOptions(url),
       tileProvider: _tileProvider,

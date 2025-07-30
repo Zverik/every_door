@@ -2,7 +2,6 @@ import 'package:encrypt/encrypt.dart';
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/providers/cur_imagery.dart';
-import 'package:flutter/material.dart' show Widget;
 import 'package:flutter_map/flutter_map.dart' show TileLayer, TileProvider;
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:http/io_client.dart';
@@ -29,7 +28,10 @@ class TmsImagery extends TileImagery {
     this.encrypted = false,
     String cachingStore = kTileCacheImagery,
   }) : _tileProvider = FMTCTileProvider(
-          stores: {cachingStore: BrowseStoreStrategy.readUpdateCreate},
+          stores: {
+            cachingStore: BrowseStoreStrategy.readUpdateCreate,
+            kTileCacheDownload: BrowseStoreStrategy.read,
+          },
           headers: headers,
           httpClient: IOClient(),
         );
@@ -100,7 +102,7 @@ class TmsImagery extends TileImagery {
   String prepareUrl() => url;
 
   @override
-  Widget buildLayer({bool reset = false}) {
+  TileLayer buildLayer({bool reset = false}) {
     String url = prepareUrl().replaceAll('{zoom}', '{z}');
 
     if (url.contains('MapServer')) {

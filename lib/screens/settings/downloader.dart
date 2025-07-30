@@ -154,8 +154,8 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
         );
       }
     } else {
-      final baseStatus = ref.read(imageryDownloadProvider(base));
-      final imageryStatus = ref.read(imageryDownloadProvider(imagery));
+      final baseStatus = ref.watch(imageryDownloadProvider(base));
+      final imageryStatus = ref.watch(imageryDownloadProvider(imagery));
 
       if (baseStatus.downloading) {
         baseButton = ElevatedButton(
@@ -181,7 +181,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
 
       // Now absolutely the same for satellite imagery.
       if (imageryStatus.downloading) {
-        baseButton = ElevatedButton(
+        imageryButton = ElevatedButton(
           child: Text('Cancel (${imageryStatus.percent}%)'),
           onPressed: () {
             ref.read(imageryDownloadProvider(imagery).notifier).cancel();

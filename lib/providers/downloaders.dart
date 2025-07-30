@@ -1,4 +1,5 @@
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/helpers/tile_calculator.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/bing.dart';
@@ -10,7 +11,9 @@ import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
 final osmDataDownloadProvider =
     NotifierProvider<OsmDataDownloadNotifier, DownloadingState>(
@@ -20,13 +23,28 @@ final imageryDownloadProvider =
     NotifierProvider.family<TileDownloadNotifier, DownloadingState, Imagery>(
         TileDownloadNotifier.new);
 
+/// State of the ongoing download, or an idle state.
 class DownloadingState {
+  /// Total number of tiles to download, or zero, if it's idle.
   final int total;
+
+  /// Number of tiles processed: skipped, failed, or downloaded.
   final int processed;
+
+  /// Number of tiles successfully downloaded from the server.
   final int downloaded;
+
+  /// Whether a downloading process is active.
   final bool downloading;
 
-  bool get idle => total == 0;
+  /// An error message, is there was an error.
+  final String? error;
+
+  /// Whether a downloading process is active. Accounts for both [downloading]
+  /// and [total] being zero.
+  bool get idle => total == 0 || !downloading;
+
+  /// An integer percent to display.
   int get percent => total == 0 ? 0 : (100 * processed / total).round();
 
   const DownloadingState({
@@ -34,13 +52,28 @@ class DownloadingState {
     this.processed = 0,
     this.downloaded = 0,
     this.downloading = true,
+    this.error,
   });
+
+  DownloadingState withError(String error) => DownloadingState(
+        total: total,
+        processed: processed,
+        downloaded: downloaded,
+        downloading: false,
+        error: error,
+      );
 
   const DownloadingState.idle()
       : total = 0,
         processed = 0,
         downloaded = 0,
-        downloading = false;
+        downloading = false,
+        error = null;
+
+  @override
+  String toString() => idle
+      ? 'DownloadingState(total: $total, downloading: $downloading, error: $error)'
+      : 'DownloadingState(total: $total, processed: $processed, downloaded: $downloaded)';
 }
 
 class OsmDataDownloadNotifier extends Notifier<DownloadingState> {
@@ -85,6 +118,8 @@ class OsmDataDownloadNotifier extends Notifier<DownloadingState> {
 }
 
 class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
+  static final _logger = Logger('TileDownloadNotifier');
+
   @override
   DownloadingState build(Imagery imagery) => DownloadingState.idle();
 
@@ -99,7 +134,7 @@ class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
     if (tiles.isEmpty) return;
     if (state.downloading) throw StateError('Data is already downloading');
 
-    if (arg is TmsImagery || arg is WmsImagery || arg is BingImagery) {
+    if (arg is TmsImagery || arg is WmsImagery) {
       _startRasterDownload(tiles);
     } else if (arg is VectorImagery) {
       _startVectorDownload(tiles);
@@ -109,9 +144,51 @@ class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
     }
   }
 
-  void cancel() {}
+  void cancel() {
+    FMTCStore(kTileCacheDownload).download.cancel();
+  }
 
-  void _startRasterDownload(Iterable<Tile> tiles) {}
+  void _startRasterDownload(Iterable<Tile> tiles) async {
+    final region = MultiRegion(
+        tiles.map((tile) => RectangleRegion(tile.tileBounds())).toList());
+    final downloadable = region.toDownloadable(
+        minZoom: kMinBulkDownloadZoom,
+        maxZoom: kMaxBulkDownloadZoom,
+        options: arg.buildLayer() as TileLayer);
+    // await FMTCStore(kTileCacheDownload).download.cancel();
+    final progress = FMTCStore(kTileCacheDownload)
+        .download
+        .startForeground(
+          region: downloadable,
+          parallelThreads: 1,
+          maxBufferLength: 10,
+          skipExistingTiles: true,
+          skipSeaTiles: false,
+          retryFailedRequestTiles: true,
+          disableRecovery: true,
+        )
+        .downloadProgress;
+
+    progress.listen(
+      (dp) {
+        state = DownloadingState(
+          total: dp.maxTilesCount,
+          downloaded: dp.flushedTilesCount,
+          processed: dp.attemptedTilesCount,
+          downloading: true,
+        );
+        _logger.info(state);
+      },
+      onError: (error) {
+        state = state.withError(error?.toString() ?? "unknown");
+        _logger.warning(state);
+      },
+      onDone: () {
+        state = DownloadingState.idle();
+      },
+      cancelOnError: true,
+    );
+  }
 
   void _startVectorDownload(Iterable<Tile> tiles) {
     for (int zoom = tiles.first.zoom; zoom <= kMaxBulkDownloadZoom; zoom++) {

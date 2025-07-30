@@ -24,6 +24,7 @@ class CachesPage extends ConsumerStatefulWidget {
 class _CachesPageState extends ConsumerState<CachesPage> {
   int? _baseCacheSize;
   int? _imageryCacheSize;
+  int? _downloadedCacheSize;
   int? _vectorCacheSize;
   int? _styleCacheSize;
 
@@ -36,6 +37,8 @@ class _CachesPageState extends ConsumerState<CachesPage> {
   Future<void> _fetchCacheSizes() async {
     _baseCacheSize = (await FMTCStore(kTileCacheBase).stats.size).toInt();
     _imageryCacheSize = (await FMTCStore(kTileCacheImagery).stats.size).toInt();
+    _downloadedCacheSize =
+        (await FMTCStore(kTileCacheDownload).stats.size).toInt();
     // _baseCacheSize = (await FMTCRoot.stats.realSize).toInt();
 
     final vectorStorage = createByteStorage(null);
@@ -53,6 +56,11 @@ class _CachesPageState extends ConsumerState<CachesPage> {
     for (final cache in [kTileCacheBase, kTileCacheImagery]) {
       await FMTCStore(cache).manage.reset();
     }
+    await _fetchCacheSizes();
+  }
+
+  Future<void> _clearDownloaded() async {
+    await FMTCStore(kTileCacheDownload).manage.reset();
     await _fetchCacheSizes();
   }
 
@@ -81,6 +89,8 @@ class _CachesPageState extends ConsumerState<CachesPage> {
     final obsoleteDataLength = numFormat.format(osmData.obsoleteLength);
     final cacheLength = numFormat
         .format(((_baseCacheSize ?? 0) + (_imageryCacheSize ?? 0)) * 1000);
+    final downloadedLength =
+        numFormat.format(((_downloadedCacheSize ?? 0)) * 1000);
     final vectorCacheLength =
         numFormat.format((_vectorCacheSize ?? 0) + (_styleCacheSize ?? 0));
     final loc = AppLocalizations.of(context)!;
@@ -134,6 +144,14 @@ class _CachesPageState extends ConsumerState<CachesPage> {
               _clearCaches();
             },
           ),
+          if ((_downloadedCacheSize ?? 0) > 0)
+            ListTile(
+              title: Text('Clear manually downloaded tiles'),
+              trailing: Text(downloadedLength),
+              onTap: () {
+                _clearDownloaded();
+              },
+            ),
           ListTile(
             title: Text('Clear vector tile caches'),
             trailing: _vectorCacheSize == null ? null : Text(vectorCacheLength),
@@ -144,9 +162,10 @@ class _CachesPageState extends ConsumerState<CachesPage> {
           ListTile(
             title: Text(loc.settingsCacheTiles),
             trailing: Icon(Icons.navigate_next),
-            onTap: () {
-              Navigator.push(context,
+            onTap: () async {
+              await Navigator.push(context,
                   MaterialPageRoute(builder: (_) => TileCacheDownloader()));
+              await _fetchCacheSizes();
             },
           ),
         ],

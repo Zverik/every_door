@@ -4,11 +4,15 @@ import 'package:http/io_client.dart';
 
 const kTileCacheBase = 'base';
 const kTileCacheImagery = 'satellite';
+const kTileCacheDownload = 'download';
 
 class CachedBingTileProvider extends FMTCTileProvider {
   CachedBingTileProvider()
       : super(
-          stores: {kTileCacheImagery: BrowseStoreStrategy.readUpdateCreate},
+          stores: {
+            kTileCacheImagery: BrowseStoreStrategy.readUpdateCreate,
+            kTileCacheDownload: BrowseStoreStrategy.read,
+          },
           httpClient: IOClient(),
         );
 

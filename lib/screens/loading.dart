@@ -53,6 +53,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     );
     await FMTCStore(kTileCacheBase).manage.create();
     await FMTCStore(kTileCacheImagery).manage.create();
+    await FMTCStore(kTileCacheDownload).manage.create();
 
     // Initialize Bing imagery.
     ref.read(imageryProvider);
