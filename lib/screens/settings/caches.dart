@@ -150,6 +150,7 @@ class _CachesPageState extends ConsumerState<CachesPage> {
               await _fetchCacheSizes();
             },
           ),
+          Divider(),
           ListTile(
             title: Text(loc.settingsCacheTiles),
             trailing: Icon(Icons.navigate_next),

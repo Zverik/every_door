@@ -47,7 +47,7 @@ class OsmApiHelper {
     try {
       var response = await client.send(request);
       if (response.statusCode != 200) {
-        throw Exception('Failed to query OSM API: ${response.statusCode} $url');
+        throw OsmApiError(response.statusCode, 'Failed to query OSM API: ${response.statusCode} $url');
       }
       final elements = await response.stream
           .transform(utf8.decoder)

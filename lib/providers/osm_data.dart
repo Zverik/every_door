@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:every_door/helpers/counter.dart';
@@ -613,7 +614,7 @@ class OsmDataHelper extends ChangeNotifier {
     _ref.read(apiStatusProvider.notifier).state = ApiStatus.downloading;
     try {
       return await _downloadMap(boundsFromRadius(location, kBigRadius));
-    } on Exception {
+    } on OsmApiError {
       return await _downloadMap(boundsFromRadius(location, kSmallRadius));
     } finally {
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
@@ -630,7 +631,7 @@ class OsmDataHelper extends ChangeNotifier {
         final box = boxes.removeFirst();
         try {
           downloaded += await _downloadMap(box);
-        } on Exception {
+        } on OsmApiError {
           // Split the box in four and add to the queue.
           final center = box.center;
           boxes.addAll([
@@ -641,6 +642,8 @@ class OsmDataHelper extends ChangeNotifier {
           ]);
         }
       }
+    } on Exception catch (e) {
+      _logger.severe('Error while bulk downloading OSM data: $e');
     } finally {
       _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }

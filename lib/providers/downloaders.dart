@@ -99,21 +99,27 @@ class OsmDataDownloadNotifier extends Notifier<DownloadingState> {
     final dataProvider = ref.read(osmDataProvider);
     final noteProvider = ref.read(notesProvider);
     int count = 0;
-    for (final bounds in boundsList) {
-      await dataProvider.downloadInBounds(bounds);
-      await noteProvider.downloadNotesInBounds(bounds);
-      count += 1;
+    try {
+      for (final bounds in boundsList) {
+        await dataProvider.downloadInBounds(bounds);
+        await noteProvider.downloadNotesInBounds(bounds);
+        count += 1;
+        state = DownloadingState(
+            total: boundsList.length, processed: count, downloaded: count);
+        if (_needStop) break;
+      }
+
       state = DownloadingState(
-          total: boundsList.length, processed: count, downloaded: count);
-      if (_needStop) break;
+          total: boundsList.length,
+          processed: count,
+          downloaded: count,
+          downloading: false);
+    } on Exception catch (e) {
+      state = state.withError(e.toString());
+    } finally {
+      ref.read(presetProvider).clearFieldCache();
+      ref.read(presetProvider).cacheComboOptions();
     }
-    ref.read(presetProvider).clearFieldCache();
-    ref.read(presetProvider).cacheComboOptions();
-    state = DownloadingState(
-        total: boundsList.length,
-        processed: count,
-        downloaded: count,
-        downloading: false);
   }
 }
 

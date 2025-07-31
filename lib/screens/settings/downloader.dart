@@ -80,7 +80,8 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
       // 1. Find the top left tile.
       Tile tile = tiles.first;
       for (final nextTile in tiles) {
-        if (nextTile.y < tile.y || (nextTile.y == tile.y && nextTile.x < tile.x)) tile = nextTile;
+        if (nextTile.y < tile.y ||
+            (nextTile.y == tile.y && nextTile.x < tile.x)) tile = nextTile;
       }
 
       // 2. Find the x for the rightmost tile extending from this one.
@@ -213,7 +214,6 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Select tiles to download.', style: kFieldTextStyle),
           Expanded(
             child: FlutterMap(
               options: MapOptions(
@@ -270,7 +270,9 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
             crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 10.0,
             children: [
-              if (osmButton != null) osmButton,
+              if (_selected.isEmpty)
+                TextButton(child: Text('Select tiles to download', style: kFieldTextStyle,), onPressed: null),
+              if (osmButton != null && _selected.isNotEmpty) osmButton,
               if (baseButton != null) baseButton,
               if (imageryButton != null) imageryButton,
             ],
@@ -293,6 +295,8 @@ extension BoundPoints on LatLngBounds {
     if (other.containsBounds(this)) return [];
     if (!isOverlapping(other)) return [this];
     final parts = <LatLngBounds>[];
+
+    // Tiles run left to right.
     double newWest = west;
     if (other.west > west && other.west < east) {
       parts.add(LatLngBounds(southWest, LatLng(north, other.west)));
@@ -303,18 +307,22 @@ extension BoundPoints on LatLngBounds {
       parts.add(LatLngBounds(LatLng(north, other.east), southEast));
       newEast = other.east;
     }
-    if (other.south > south && other.south < north) {
+
+    // Tiles run top to bottom.
+    if (other.north > north && other.north < south) {
       parts.add(LatLngBounds(
-        LatLng(south, newWest),
-        LatLng(other.south, newEast),
+        LatLng(north, newWest),
+        LatLng(other.north, newEast),
       ));
     }
-    if (other.north < north && other.north > south) {
+    if (other.south < south && other.south > north) {
       parts.add(LatLngBounds(
-        LatLng(other.north, newWest),
-        LatLng(north, newEast),
+        LatLng(other.south, newWest),
+        LatLng(south, newEast),
       ));
     }
-    return parts;
+
+    // If parts is empty, this means there's a miss.
+    return parts.isEmpty ? [this] : parts;
   }
 }
