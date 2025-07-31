@@ -1,7 +1,8 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart';
 import 'package:every_door/helpers/tile_caches.dart';
-import 'package:every_door/models/imagery/vector/style_cache.dart';
+import 'package:every_door/models/imagery/vector/cache_kinds.dart';
+import 'package:every_door/models/imagery/vector/tile_cacher.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/osm_data.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
-import 'package:vector_map_tiles/src/cache/byte_storage_factory_io.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' show NumberFormat;
 
@@ -26,7 +26,7 @@ class _CachesPageState extends ConsumerState<CachesPage> {
   int? _imageryCacheSize;
   int? _downloadedCacheSize;
   int? _vectorCacheSize;
-  int? _styleCacheSize;
+  int? _renderedVectorCacheSize;
 
   @override
   void initState() {
@@ -39,15 +39,10 @@ class _CachesPageState extends ConsumerState<CachesPage> {
     _imageryCacheSize = (await FMTCStore(kTileCacheImagery).stats.size).toInt();
     _downloadedCacheSize =
         (await FMTCStore(kTileCacheDownload).stats.size).toInt();
-    // _baseCacheSize = (await FMTCRoot.stats.realSize).toInt();
 
-    final vectorStorage = createByteStorage(null);
-    final entries = await vectorStorage.list();
-    _vectorCacheSize = entries.isEmpty
-        ? 0
-        : entries.map((e) => e.size).reduce((a, b) => a + b);
-
-    _styleCacheSize = await StyleCache.instance.size();
+    final vectorSizes = await measureVectorCache();
+    _vectorCacheSize = vectorSizes.values.fold<int>(0, (a, b) => a + b);
+    _renderedVectorCacheSize = vectorSizes[CachedFileKind.rendered] ?? 0;
 
     setState(() {});
   }
@@ -61,16 +56,6 @@ class _CachesPageState extends ConsumerState<CachesPage> {
 
   Future<void> _clearDownloaded() async {
     await FMTCStore(kTileCacheDownload).manage.reset();
-    await _fetchCacheSizes();
-  }
-
-  Future<void> _clearVectorCache() async {
-    final vectorStorage = createByteStorage(null);
-    final entries = await vectorStorage.list();
-    for (final entry in entries) {
-      await vectorStorage.delete(entry.path);
-    }
-    await StyleCache.instance.clear();
     await _fetchCacheSizes();
   }
 
@@ -91,8 +76,10 @@ class _CachesPageState extends ConsumerState<CachesPage> {
         .format(((_baseCacheSize ?? 0) + (_imageryCacheSize ?? 0)) * 1000);
     final downloadedLength =
         numFormat.format(((_downloadedCacheSize ?? 0)) * 1000);
-    final vectorCacheLength =
-        numFormat.format((_vectorCacheSize ?? 0) + (_styleCacheSize ?? 0));
+    final vectorCacheLength = numFormat.format(_vectorCacheSize ?? 0);
+    final renderedVectorCacheLength =
+        numFormat.format(_renderedVectorCacheSize ?? 0);
+    bool onlyRendered = (_renderedVectorCacheSize ?? 0) > 0;
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -139,7 +126,7 @@ class _CachesPageState extends ConsumerState<CachesPage> {
             title: Text('Clear raster tile caches'),
             trailing: _baseCacheSize == null && _imageryCacheSize == null
                 ? null
-                : Text(cacheLength),
+                : Text(cacheLength + 'B'),
             onTap: () {
               _clearCaches();
             },
@@ -147,16 +134,20 @@ class _CachesPageState extends ConsumerState<CachesPage> {
           if ((_downloadedCacheSize ?? 0) > 0)
             ListTile(
               title: Text('Clear manually downloaded tiles'),
-              trailing: Text(downloadedLength),
+              trailing: Text(downloadedLength + 'B'),
               onTap: () {
                 _clearDownloaded();
               },
             ),
           ListTile(
-            title: Text('Clear vector tile caches'),
-            trailing: _vectorCacheSize == null ? null : Text(vectorCacheLength),
-            onTap: () {
-              _clearVectorCache();
+            title: Text(onlyRendered
+                ? 'Clear rendered vector tiles'
+                : 'Clear vector tile caches'),
+            trailing:
+                Text((onlyRendered ? renderedVectorCacheLength : vectorCacheLength) + 'B'),
+            onTap: () async {
+              await clearVectorCache(!onlyRendered);
+              await _fetchCacheSizes();
             },
           ),
           ListTile(

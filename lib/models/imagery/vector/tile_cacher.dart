@@ -2,7 +2,11 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' show Image, instantiateImageCodec, ImageByteFormat;
 
+import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tile_calculator.dart';
+import 'package:every_door/models/imagery/vector/cache_kinds.dart';
+import 'package:flutter/services.dart'
+    show BackgroundIsolateBinaryMessenger, RootIsolateToken;
 import 'package:vector_map_tiles/vector_map_tiles.dart';
 import 'package:vector_map_tiles/src/grid/slippy_map_translator.dart';
 import 'package:vector_map_tiles/src/cache/storage_cache.dart';
@@ -15,8 +19,8 @@ class VectorTileCacher {
   VectorTileCacher(this.style) {
     final cacheStorage =
         createByteStorage(null); // We do not override the cache folder
-    _storageCache =
-        StorageCache(cacheStorage, Duration(days: 60), 50 * 1024 * 1024);
+    _storageCache = StorageCache(
+        cacheStorage, Duration(days: 60), kVectorCacheSizeMB * 1024 * 1024);
   }
 
   Future<void> cacheTile(Tile tile) async {
@@ -132,4 +136,93 @@ class VectorTileCacher {
       cloned.dispose();
     }
   }
+}
+
+Future<Map<CachedFileKind, int>> measureVectorCache() async {
+  final vectorStorage = createByteStorage(null);
+  final entries = await vectorStorage.list();
+  final result = <CachedFileKind, int>{};
+  for (final entry in entries) {
+    final kind = CachedFileKind.match(entry.path);
+    result[kind] = (result[kind] ?? 0) + entry.size;
+  }
+  return result;
+}
+
+Future<void> clearVectorCache(bool everything) async {
+  final vectorStorage = createByteStorage(null);
+  final entries = await vectorStorage.list();
+  for (final entry in entries) {
+    final kind = CachedFileKind.match(entry.path);
+    if (everything || kind == CachedFileKind.rendered) {
+      await vectorStorage.delete(entry.path);
+    }
+  }
+
+  // Let's not clear style cache, for it is not reloaded in this session.
+  // await StyleCache.instance.clear();
+}
+
+class CacheSizeWatchdogSettings {
+  final int sizeLimitMB;
+  final int targetSizeMB;
+  final Duration interval;
+  final RootIsolateToken rootIsolateToken;
+
+  const CacheSizeWatchdogSettings({
+    this.sizeLimitMB = kVectorCacheSizeMB - 5,
+    this.targetSizeMB = kVectorCacheSizeMB - 10,
+    this.interval = const Duration(minutes: 10),
+    required this.rootIsolateToken,
+  });
+}
+
+/// This function keeps the vector tile storage under the size limit.
+/// It runs indefinitely and is intended to be started in an isolate.
+/// Better keep the [sizeLimitMB] a bit under the default or specified
+/// limit, e.g. at 40.
+void persistentCacheSizeWatchdog(CacheSizeWatchdogSettings settings) async {
+  // Path Provider calls a native function.
+  BackgroundIsolateBinaryMessenger.ensureInitialized(settings.rootIsolateToken);
+
+  final storage = createByteStorage(null);
+  final sizeLimit = settings.sizeLimitMB * 1024 * 1024;
+  final targetSize = settings.targetSizeMB * 1024 * 1024;
+
+  while (true) {
+    final entries = await storage.list();
+    int size = entries.isEmpty
+        ? 0
+        : entries.map((e) => e.size).reduce((a, b) => a + b);
+
+    if (size > sizeLimit) {
+      final rankedEntries = entries.sorted((a, b) {
+        final kindA = CachedFileKind.match(a.path);
+        final kindB = CachedFileKind.match(b.path);
+        if (kindA != kindB) {
+          return kindB.compareTo(kindA);
+        }
+        return a.accessed.compareTo(b.accessed);
+      });
+
+      for (final entry in rankedEntries) {
+        try {
+          await storage.delete(entry.path);
+          size -= entry.size;
+          if (size <= targetSize) {
+            break;
+          }
+        } catch (e) {
+          // ignore, race condition file was deleted
+        }
+      }
+    }
+
+    await Future.delayed(settings.interval);
+  } // infinite loop
+}
+
+// A small bit of `iterable_extensions.dart` that we use here.
+extension SortingIterable<T> on Iterable<T> {
+  List<T> sorted([Comparator<T>? compare]) => [...this]..sort(compare);
 }

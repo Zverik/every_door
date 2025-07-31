@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:isolate';
 
 import 'package:every_door/helpers/tile_caches.dart';
+import 'package:every_door/models/imagery/vector/tile_cacher.dart';
 import 'package:every_door/providers/app_links_provider.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';
@@ -16,13 +18,15 @@ import 'package:every_door/screens/browser.dart';
 import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
 import 'package:every_door/constants.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:country_coder/country_coder.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoadingPage extends ConsumerStatefulWidget {
@@ -49,11 +53,15 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
 
     // Initialize imagery caches.
     await FMTCObjectBoxBackend().initialise(
-      maxDatabaseSize: 1000000, // 1 GB
+      maxDatabaseSize: kRasterCacheSizeMB * 1024,
     );
     await FMTCStore(kTileCacheBase).manage.create();
     await FMTCStore(kTileCacheImagery).manage.create();
     await FMTCStore(kTileCacheDownload).manage.create();
+    Isolate.spawn(
+      persistentCacheSizeWatchdog,
+      CacheSizeWatchdogSettings(rootIsolateToken: RootIsolateToken.instance!),
+    );
 
     // Initialize Bing imagery.
     ref.read(imageryProvider);

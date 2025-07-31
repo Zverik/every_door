@@ -1,3 +1,4 @@
+import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/vector/style_reader.dart';
@@ -66,6 +67,7 @@ class VectorImagery extends Imagery {
       tileProviders: style.providers,
       sprites: style.sprites,
       maximumZoom: 22.0,
+      fileCacheMaximumSizeInBytes: kVectorCacheSizeMB * 1024 * 1024,
       // Vector looks cooler, but super slow on far zooms.
       layerMode: fast ? VectorTileLayerMode.raster : VectorTileLayerMode.vector,
     );

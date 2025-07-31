@@ -154,7 +154,7 @@ class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
     final downloadable = region.toDownloadable(
         minZoom: kMinBulkDownloadZoom,
         maxZoom: kMaxBulkDownloadZoom,
-        options: arg.buildLayer() as TileLayer);
+        options: _unwrapFMTCTileProvider(arg.buildLayer() as TileLayer));
     // await FMTCStore(kTileCacheDownload).download.cancel();
     final progress = FMTCStore(kTileCacheDownload)
         .download
@@ -195,4 +195,27 @@ class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
       // TODO
     }
   }
+}
+
+// TODO: remove when https://github.com/JaffaKetchup/flutter_map_tile_caching/issues/193 is fixed
+TileLayer _unwrapFMTCTileProvider(TileLayer layer) {
+  final provider = layer.tileProvider;
+  if (provider is! FMTCTileProvider) return layer;
+  final rawProvider = NetworkTileProvider(
+    headers: provider.headers,
+    cachingProvider: DisabledMapCachingProvider(),
+  );
+  return TileLayer(
+    tileProvider: rawProvider,
+    wmsOptions: layer.wmsOptions,
+    urlTemplate: layer.urlTemplate,
+    minZoom: layer.minZoom,
+    maxZoom: layer.maxZoom,
+    maxNativeZoom: layer.maxNativeZoom,
+    tileDimension: layer.tileDimension,
+    subdomains: layer.subdomains,
+    zoomOffset: layer.zoomOffset,
+    tms: layer.tms,
+    tileBounds: layer.tileBounds,
+  );
 }

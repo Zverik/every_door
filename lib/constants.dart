@@ -50,6 +50,8 @@ const kMinElementsForWarning = 60000; // Alerting user when they have that many 
 const kChangesetSplitGap = 0.02; // Decimal degrees, min distance between groups of changes
 const kMinBulkDownloadZoom = 14; // Min zoom for bulk downloading tiles
 const kMaxBulkDownloadZoom = 18; // Max zoom for bulk downloading tiles
+const kRasterCacheSizeMB = 1024; // Passed to raster caches
+const kVectorCacheSizeMB = 256; // Passed to vector caches
 
 const kOsmEndpoint = 'api.openstreetmap.org';
 const kOsmAuth2Endpoint = 'www.openstreetmap.org';
