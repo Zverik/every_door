@@ -4,16 +4,22 @@
 
 _Unreleased_
 
+## Imagery Improvements
+
 * Vector tiles support!
-* Building contours for the entrances mode.
-* Displaying icons for presets.
 * New data management settings panel.
-* New imagery caching, thanks to @JaffaKetchup for the amazing FMTC package.
+* Bulk downloading data and tiles.
+* New predictable imagery caching, thanks to @JaffaKetchup for the amazing FMTC package.
+* Building contours for the entrances mode.
+* Increased maximum zoom to 22.
+
+## Other
+
+* Displaying icons for presets.
 * Plugin API is now versioned, this one is 1.1.
 * To undo a change, tap a button instead of swiping.
 * Tags for entrances are now remembered again.
 * Fixed phone numbers to use an international format.
-* Increased maximum zoom to 22.
 
 ## 6.0
 

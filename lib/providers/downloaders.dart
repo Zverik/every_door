@@ -5,6 +5,7 @@ import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/bing.dart';
 import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/models/imagery/vector.dart';
+import 'package:every_door/models/imagery/vector/tile_cacher.dart';
 import 'package:every_door/models/imagery/wms.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/notes.dart';
@@ -126,6 +127,8 @@ class OsmDataDownloadNotifier extends Notifier<DownloadingState> {
 class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
   static final _logger = Logger('TileDownloadNotifier');
 
+  bool _needStop = false;
+
   @override
   DownloadingState build(Imagery imagery) => DownloadingState.idle();
 
@@ -152,6 +155,7 @@ class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
 
   void cancel() {
     FMTCStore(kTileCacheDownload).download.cancel();
+    _needStop = true;
   }
 
   void _startRasterDownload(Iterable<Tile> tiles) async {
@@ -196,10 +200,35 @@ class TileDownloadNotifier extends FamilyNotifier<DownloadingState, Imagery> {
     );
   }
 
-  void _startVectorDownload(Iterable<Tile> tiles) {
-    for (int zoom = tiles.first.zoom; zoom <= kMaxBulkDownloadZoom; zoom++) {
-      // TODO
+  void _startVectorDownload(Iterable<Tile> tiles) async {
+    if (arg is! VectorImagery) return;
+    final style = (arg as VectorImagery).style;
+    if (style == null) return;
+
+    _needStop = false;
+    final total = tiles.fold(0, (t, tile) => t + tile.countTiles(kMinBulkDownloadZoom, kMaxBulkDownloadZoom));
+    state = DownloadingState(total: total, downloading: true);
+    final vd = VectorTileCacher(style);
+    int count = 0;
+    for (int zoom = kMinBulkDownloadZoom; zoom <= kMaxBulkDownloadZoom; zoom++) {
+      for (final tile in tiles) {
+        for (final subTile in tile.subTiles(zoom)) {
+          try {
+            await vd.cacheTile(subTile);
+          } on Exception catch (e) {
+            _logger.warning('Could not download vector tiles at $subTile', e);
+            // do nothing, don't care
+          }
+          count += 1;
+          state = DownloadingState(total: count, processed: count, downloaded: count, downloading: true);
+          if (_needStop) {
+            state = DownloadingState.idle();
+            return;
+          }
+        }
+      }
     }
+    state = DownloadingState.idle();
   }
 }
 

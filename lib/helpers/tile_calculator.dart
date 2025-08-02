@@ -36,6 +36,20 @@ class Tile extends m.Point<int> {
         .toList();
   }
 
+  /// Counts how many tiles we need to download between two zoom levels,
+  /// all bounded by this tile.
+  int countTiles(int startZoom, [int? endZoom]) {
+    int result = 0;
+    for (int z = startZoom; z < (endZoom ?? startZoom); z++) {
+      if (z <= zoom) {
+        result += 1;
+      } else {
+        result += 1 << ((z - zoom) * 2);
+      }
+    }
+    return result;
+  }
+
   LatLngBounds tileBounds() {
     return LatLngBounds(tileOrigin(), (this + m.Point(1, 1)).tileOrigin());
   }

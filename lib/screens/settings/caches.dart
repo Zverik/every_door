@@ -131,14 +131,6 @@ class _CachesPageState extends ConsumerState<CachesPage> {
               _clearCaches();
             },
           ),
-          if ((_downloadedCacheSize ?? 0) > 0)
-            ListTile(
-              title: Text('Clear manually downloaded tiles'),
-              trailing: Text(downloadedLength + 'B'),
-              onTap: () {
-                _clearDownloaded();
-              },
-            ),
           ListTile(
             title: Text(onlyRendered
                 ? 'Clear rendered vector tiles'
@@ -160,6 +152,14 @@ class _CachesPageState extends ConsumerState<CachesPage> {
               await _fetchCacheSizes();
             },
           ),
+          if ((_downloadedCacheSize ?? 0) > 0)
+            ListTile(
+              title: Text('Clear manually downloaded tiles'),
+              trailing: Text(downloadedLength + 'B'),
+              onTap: () {
+                _clearDownloaded();
+              },
+            ),
         ],
       ),
     );
