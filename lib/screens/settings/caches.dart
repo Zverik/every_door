@@ -59,6 +59,20 @@ class _CachesPageState extends ConsumerState<CachesPage> {
     await _fetchCacheSizes();
   }
 
+  String _formatBytes(int? amount, {int factor = 1}) {
+    double total = ((amount ?? 0) * factor).toDouble();
+    final suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    int suffix = 0;
+    while (true) {
+      if (total < 900) {
+        total = (total * 10).roundToDouble() / 10;
+        return '$total ${suffixes[suffix]}';
+      }
+      total /= 1024;
+      suffix += 1;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final osmData = ref.watch(osmDataProvider);
@@ -72,13 +86,11 @@ class _CachesPageState extends ConsumerState<CachesPage> {
     }
     final dataLength = numFormat.format(osmData.length);
     final obsoleteDataLength = numFormat.format(osmData.obsoleteLength);
-    final cacheLength = numFormat
-        .format(((_baseCacheSize ?? 0) + (_imageryCacheSize ?? 0)) * 1000);
-    final downloadedLength =
-        numFormat.format(((_downloadedCacheSize ?? 0)) * 1000);
-    final vectorCacheLength = numFormat.format(_vectorCacheSize ?? 0);
-    final renderedVectorCacheLength =
-        numFormat.format(_renderedVectorCacheSize ?? 0);
+
+    final cacheLength = _formatBytes(_baseCacheSize, factor: 1000);
+    final downloadedLength = _formatBytes(_downloadedCacheSize, factor: 1000);
+    final vectorCacheLength = _formatBytes(_vectorCacheSize);
+    final renderedVectorCacheLength = _formatBytes(_renderedVectorCacheSize);
     bool onlyRendered = (_renderedVectorCacheSize ?? 0) > 0;
     final loc = AppLocalizations.of(context)!;
 
@@ -123,20 +135,20 @@ class _CachesPageState extends ConsumerState<CachesPage> {
             },
           ),
           ListTile(
-            title: Text('Clear raster tile caches'),
+            title: Text(loc.settingsCachesClearRaster),
             trailing: _baseCacheSize == null && _imageryCacheSize == null
                 ? null
-                : Text(cacheLength + 'B'),
+                : Text(cacheLength),
             onTap: () {
               _clearCaches();
             },
           ),
           ListTile(
             title: Text(onlyRendered
-                ? 'Clear rendered vector tiles'
-                : 'Clear vector tile caches'),
-            trailing:
-                Text((onlyRendered ? renderedVectorCacheLength : vectorCacheLength) + 'B'),
+                ? loc.settingsCachesClearRenderedVector
+                : loc.settingsCachesClearVector),
+            trailing: Text(
+                onlyRendered ? renderedVectorCacheLength : vectorCacheLength),
             onTap: () async {
               await clearVectorCache(!onlyRendered);
               await _fetchCacheSizes();
@@ -154,8 +166,8 @@ class _CachesPageState extends ConsumerState<CachesPage> {
           ),
           if ((_downloadedCacheSize ?? 0) > 0)
             ListTile(
-              title: Text('Clear manually downloaded tiles'),
-              trailing: Text(downloadedLength + 'B'),
+              title: Text(loc.settingsCachesClearManual),
+              trailing: Text(downloadedLength),
               onTap: () {
                 _clearDownloaded();
               },

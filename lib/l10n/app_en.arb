@@ -453,6 +453,48 @@
       "count": {}
     }
   },
+  "settingsCachesClearRaster": "Clear raster tile caches",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "Clear rendered vector tiles",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Clear vector tile caches",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "Clear manually downloaded tiles",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Select tiles to download",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "Download Data",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "Download Map Tiles",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "Download Satellite",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Cancel ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  },
   "settingsUploads": "Pending uploads",
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."

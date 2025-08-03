@@ -136,7 +136,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
       if (osmDownloadStatus.downloading) {
         // When downloading, display a cancel button and the download progress.
         osmButton = ElevatedButton(
-          child: Text('Cancel (${osmDownloadStatus.percent}%)'),
+          child: Text(loc.settingsCachesCancel(osmDownloadStatus.percent)),
           onPressed: () {
             ref.read(osmDataDownloadProvider.notifier).cancel();
           },
@@ -144,7 +144,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
       } else {
         // Not started yet, and ready to download (or no tiles selected).
         osmButton = ElevatedButton(
-          child: Text('Download Data'),
+          child: Text(loc.settingsCachesDownloadData),
           onPressed: _selected.isEmpty
               ? null
               : () {
@@ -160,7 +160,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
 
       if (baseStatus.downloading) {
         baseButton = ElevatedButton(
-          child: Text('Cancel (${baseStatus.percent}%)'),
+          child: Text(loc.settingsCachesCancel(baseStatus.percent)),
           onPressed: () {
             ref.read(imageryDownloadProvider(base).notifier).cancel();
           },
@@ -169,7 +169,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
         bool canDownload =
             ref.read(imageryDownloadProvider(base).notifier).canDownload();
         baseButton = ElevatedButton(
-          child: Text('Download Map Tiles'),
+          child: Text(loc.settingsCachesDownloadMap),
           onPressed: !canDownload
               ? null
               : () {
@@ -183,7 +183,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
       // Now absolutely the same for satellite imagery.
       if (imageryStatus.downloading) {
         imageryButton = ElevatedButton(
-          child: Text('Cancel (${imageryStatus.percent}%)'),
+          child: Text(loc.settingsCachesCancel(imageryStatus.percent)),
           onPressed: () {
             ref.read(imageryDownloadProvider(imagery).notifier).cancel();
           },
@@ -192,7 +192,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
         bool canDownload =
             ref.read(imageryDownloadProvider(imagery).notifier).canDownload();
         imageryButton = ElevatedButton(
-          child: Text('Download Satellite'),
+          child: Text(loc.settingsCachesDownloadSatellite),
           onPressed: !canDownload
               ? null
               : () {
@@ -208,7 +208,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Download Tiles'),
+        title: Text(loc.settingsCacheTiles),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -271,7 +271,7 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
             spacing: 10.0,
             children: [
               if (_selected.isEmpty)
-                TextButton(child: Text('Select tiles to download', style: kFieldTextStyle,), onPressed: null),
+                TextButton(child: Text(loc.settingsCachesSelectTiles, style: kFieldTextStyle,), onPressed: null),
               if (osmButton != null && _selected.isNotEmpty) osmButton,
               if (baseButton != null) baseButton,
               if (imageryButton != null) imageryButton,
