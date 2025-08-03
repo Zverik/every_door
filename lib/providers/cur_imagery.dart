@@ -37,11 +37,11 @@ class BaseImageryNotifier extends Notifier<Imagery> {
   );
 
   static final _kBaseImagery = VectorAssetsImagery(
-    id: 'openfreemap-liberty',
-    name: 'OpenFreeMap Liberty',
-    attribution: '© OSM contributors, OpenFreeMap',
-    stylePath: 'assets/styles/liberty.json',
-    spritesBase: 'assets/styles/ofm',
+    id: 'osm-versatiles',
+    name: 'Versatiles Colorful',
+    attribution: '© OpenStreetMap contributors',
+    stylePath: 'assets/styles/versatiles.json',
+    spritesBase: 'assets/styles/sprites',
   );
 
   final Imagery _base = _kBaseImagery;
