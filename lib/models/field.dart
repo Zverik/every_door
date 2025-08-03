@@ -27,25 +27,33 @@ import 'package:every_door/models/amenity.dart';
 class FieldPrerequisite {
   final String? key;
   final String? keyNot;
-  final String? value;
-  final String? valueNot;
+  final List<String>? values;
+  final List<String>? valuesNot;
 
-  const FieldPrerequisite({this.key, this.value, this.keyNot, this.valueNot});
+  const FieldPrerequisite({this.key, this.values, this.keyNot, this.valuesNot});
 
   bool matches(Map<String, String> tags) {
     if (keyNot != null) return !tags.containsKey(keyNot);
     if (key == null || !tags.containsKey(key)) return false;
-    if (value != null) return tags[key] == value;
-    if (valueNot != null) return tags[key] != valueNot;
+    if (values != null) return values!.contains(tags[key]);
+    if (valuesNot != null) return !valuesNot!.contains(tags[key]);
     return false;
   }
 
   factory FieldPrerequisite.fromJson(Map<String, dynamic> data) {
+    final List<String> values = [];
+    if (data.containsKey('values')) values.addAll(data['values']);
+    else if (data.containsKey('value')) values.add(data['value']);
+
+    final List<String> valuesNot = [];
+    if (data.containsKey('valuesNot')) valuesNot.addAll(data['valuesNot']);
+    else if (data.containsKey('valueNot')) valuesNot.add(data['valueNot']);
+
     return FieldPrerequisite(
       key: data['key'],
       keyNot: data['keyNot'],
-      value: data['value'],
-      valueNot: data['valueNot'],
+      values: values.isNotEmpty ? values : null,
+      valuesNot: valuesNot.isNotEmpty ? valuesNot : null,
     );
   }
 }
@@ -310,6 +318,12 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         label: label,
         prerequisite: prerequisite,
       );
+    case 'schedule':
+        return HoursPresetField(
+          key: key,
+          label: label,
+          prerequisite: prerequisite,
+        );
     default:
       return TextPresetField(
         key: key,
