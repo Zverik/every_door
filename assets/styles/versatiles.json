@@ -4813,7 +4813,7 @@
         "text-font": ["noto_sans_regular"],
         "symbol-placement": "point",
         "text-anchor": "center",
-        "text-size": {"stops": [[17, 12], [19, 14]]}
+        "text-size": {"stops": [[17, 10], [19, 13]]}
       },
       "paint": {
         "text-halo-color": "rgba(221, 206, 199, 1)",

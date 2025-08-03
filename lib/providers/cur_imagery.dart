@@ -42,6 +42,7 @@ class BaseImageryNotifier extends Notifier<Imagery> {
     attribution: '© OpenStreetMap contributors',
     stylePath: 'assets/styles/versatiles.json',
     spritesBase: 'assets/styles/sprites',
+    fast: false,
   );
 
   final Imagery _base = _kBaseImagery;
