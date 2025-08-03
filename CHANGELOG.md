@@ -4,12 +4,13 @@
 
 _Unreleased_
 
-## Imagery Improvements
+## Imagery and Map Improvements
 
 * Vector tiles support!
 * New data management settings panel.
 * Bulk downloading data and tiles.
 * New predictable imagery caching, thanks to @JaffaKetchup for the amazing FMTC package.
+* Added a compass button to reset rotation.
 * Building contours for the entrances mode.
 * Increased maximum zoom to 22.
 

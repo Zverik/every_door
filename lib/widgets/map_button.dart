@@ -128,7 +128,10 @@ class MapButton extends StatelessWidget {
   final VoidCallback? onLongPressed;
 
   /// Icon to display.
-  final IconData icon;
+  final IconData? icon;
+
+  /// Widget to display when there's no icon.
+  final Widget? child;
 
   /// Set to false to hide the button.
   final bool enabled;
@@ -140,14 +143,15 @@ class MapButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.onLongPressed,
-    required this.icon,
+    this.icon,
+    this.child,
     this.enabled = true,
     this.tooltip,
-  });
+  }) : assert(icon != null || child != null);
 
   @override
   Widget build(BuildContext context) {
-    if (!enabled) return Container();
+    if (!enabled || (child == null && icon == null)) return Container();
 
     final button = GestureDetector(
       onTap: onPressed,
@@ -160,10 +164,10 @@ class MapButton extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Icon(
+          child: child ?? Icon(
             icon,
             size: 30.0,
-            color: Colors.black.withValues(alpha: 0.5),
+            color: Colors.black54,
           ),
         ),
       ),

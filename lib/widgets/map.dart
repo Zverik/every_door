@@ -19,7 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 import '../providers/cur_imagery.dart';
 
@@ -93,6 +94,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
   final MapController _controller = MapController();
   final _mapKey = GlobalKey();
   LatLng? _center;
+  int _rotation = 0;
   StreamSubscription<MapEvent>? mapSub;
 
   @override
@@ -144,8 +146,14 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         }
       }
       if (event.camera.center != _center) {
-        _center = _controller.camera.center;
-        setState(() {});
+        setState(() {
+          _center = _controller.camera.center;
+        });
+      }
+      if (event.camera.rotation != _rotation) {
+        setState(() {
+          _rotation = event.camera.rotation.round();
+        });
       }
     } else if (event is MapEventMoveEnd) {
       if (!fromController) {
@@ -334,15 +342,24 @@ class _CustomMapState extends ConsumerState<CustomMap> {
                       .read(geolocationProvider.notifier)
                       .enableTracking(context);
                 },
-                onLongPressed: () {
-                  if (ref.read(rotationProvider) != 0.0) {
-                    ref.read(rotationProvider.notifier).state = 0.0;
-                    _controller.rotate(0.0);
-                  } else {
-                    ref
-                        .read(geolocationProvider.notifier)
-                        .enableTracking(context);
-                  }
+              ),
+            if (widget.drawStandardButtons && _rotation != 0)
+              // Rotation button
+              MapButton(
+                enabled: !ref.watch(trackingProvider) && trackLocation != null,
+                child: Transform.rotate(
+                  angle: _rotation.toDouble() / 180 * 3.14159,
+                  child: Icon(
+                    Icons.navigation_outlined,
+                    size: 30,
+                    color: Colors.black54,
+                  ),
+                ),
+                tooltip: loc.mapStraight,
+                onPressed: () {
+                  ref.read(rotationProvider.notifier).state = 0.0;
+                  _controller.rotate(0.0);
+                  _rotation = 0;
                 },
               ),
           ],
@@ -351,7 +368,9 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         if (widget.drawZoomButtons)
           ZoomButtonsWidget(
             alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: widget.hasFloatingButton ? 100.0 : 20.0),
+            padding: EdgeInsets.symmetric(
+                horizontal: 0.0,
+                vertical: widget.hasFloatingButton ? 100.0 : 20.0),
           ),
       ],
     );

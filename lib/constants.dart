@@ -7,7 +7,7 @@ const kAppVersion = '7.0-alpha2'; // Also used for presets.db versioning
 const kOldAmenityDays = 60; // check_date expiration rate
 const kOldStructureDays = 360; // check_date expiration rate for churches and schools
 const kSlowDownGPS = true; // skip location changes that are too small to register
-const kRotationThreshold = 30.0; // degrees, for snapping to zero rotation
+const kRotationThreshold = 20.0; // degrees, for snapping to zero rotation
 
 // global
 const kDefaultLocation = <double>[59.42, 24.71];

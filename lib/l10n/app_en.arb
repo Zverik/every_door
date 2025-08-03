@@ -134,6 +134,10 @@
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
   },
+  "mapStraight": "Rotate back",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
   "mapZoomIn": "Zoom in",
   "@mapZoomIn": {
     "description": "Tooltip for the zoom in (+) button on a map."
