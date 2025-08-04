@@ -18,6 +18,12 @@ PODS:
   - listen_sharing_intent (1.9.2):
     - Flutter
   - MTBBarcodeScanner (5.0.11)
+  - ObjectBox (4.3.0)
+  - objectbox_flutter_libs (0.0.1):
+    - Flutter
+    - ObjectBox (= 4.3.0)
+  - package_info_plus (0.4.5):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -69,6 +75,8 @@ DEPENDENCIES:
   - flutter_web_auth_2 (from `.symlinks/plugins/flutter_web_auth_2/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/darwin`)
   - listen_sharing_intent (from `.symlinks/plugins/listen_sharing_intent/ios`)
+  - objectbox_flutter_libs (from `.symlinks/plugins/objectbox_flutter_libs/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - qr_code_scanner_plus (from `.symlinks/plugins/qr_code_scanner_plus/ios`)
   - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
@@ -81,6 +89,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - MTBBarcodeScanner
+    - ObjectBox
     - sqlite3
     - ZIPFoundation
 
@@ -101,6 +110,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/geolocator_apple/darwin"
   listen_sharing_intent:
     :path: ".symlinks/plugins/listen_sharing_intent/ios"
+  objectbox_flutter_libs:
+    :path: ".symlinks/plugins/objectbox_flutter_libs/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   qr_code_scanner_plus:
@@ -128,6 +141,9 @@ SPEC CHECKSUMS:
   geolocator_apple: ab36aa0e8b7d7a2d7639b3b4e48308394e8cef5e
   listen_sharing_intent: fe0b9a59913cc124dd6cbd55cd9f881de5f75759
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
+  ObjectBox: 7760fa9072adcffe102a6adf4646ca84ba70ab6b
+  objectbox_flutter_libs: 4014e38f57250b074b99893ae84579aba8f02876
+  package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
   qr_code_scanner_plus: 7e087021bc69873140e0754750eb87d867bed755
   sensors_plus: 6a11ed0c2e1d0bd0b20b4029d3bad27d96e0c65b
