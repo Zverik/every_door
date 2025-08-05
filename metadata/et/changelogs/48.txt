@@ -1,0 +1,3 @@
+* Lisasime rattabarjäärid ja jõuludega seotud teenused.
+* „geo:“ linkide tugi.
+* Uus suurusega kohanduv ikoo.
