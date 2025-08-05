@@ -1045,5 +1045,51 @@
         "example": "1.2"
       }
     }
+  },
+  "mapStraight": "Zurückdrehen",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "settingsCachesClearRaster": "Raster-Kachel-Caches leeren",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "Renderte Vektorkacheln leeren",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Vektorkachel-Caches leeren",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "Manuell heruntergeladene Kacheln leeren",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Kacheln zum Herunterladen auswählen",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "Daten herunterladen",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "Kartenkacheln runterladen",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "Satellitbilder herunterladen",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Abbrechen ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
   }
 }
