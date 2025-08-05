@@ -1355,5 +1355,51 @@
   "faqFloorsContent": "Όχι. Το πρώτο έχει την ετικέτα `addr:floor=3` γεμάτη. Αυτός είναι ο όροφος όπως αποτυπώνεται στην πλοήγηση και χρησιμοποιείται συχνά. Το δεύτερο δεν έχει αυτή την ετικέτα, αλλά την ετικέτα `level=3`. Αυτό το νούμερο είναι διαδοχική αρίθμηση ορόφου από το μηδέν στο `building:levels - 1`. Δηλαδή, σε ένα τριώροφο κτίριο η τιμή του `addr:floor` εξαρτάται την χώρα, αλλά το `level` θα είναι πάντα 0, 1, ή 2.\n\nΟρίστε πως σχετίζονται οι συμβολισμοί του επεξεργαστή με αυτές τις ετικέτες:\n\n* `2`: `addr:floor=2` και όχι κενό `level=*`.\n* `4/`: `addr:floor=4`, αλλά χωρίς την ετικέτα `level` .\n* `/1`: `level=1`, αλλά χωρίς την ετικέτα `addr:floor` .\n* `1/0`: `addr:floor=1` + `level=0` (και υπάρχει ένα αντικείμενο κοντά: με το ίδιο `addr:floor`, αλλά διαφορετικό `level`, ή το αντίστροφο).",
   "@faqFloorsContent": {},
   "faqTaggingContent": "Γιατί ένα αντικείμενο λείπει από τον επεξεργατή; Πότε εμφανίζονται οι λευκές κουκκίδες στην λειτουργία μικροχαρτογράφησης; Πώς ταξινομούνται τα αντικείμενα;\n\nΑπαντήσεις για όλες αυτές τις ερωτήσεις βρίσκονται στο [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) (στα Αγγλικά). Ορίστε τι μπορείτε να δείτε:\n\n* Την σειρά των κλειδιών για την κύρια ετικέτα — λίστα `kMainKeys` στο `main_key.dart`.\n* Ποιά αντικείμενα γίνονται λήψη — κλάση `_EverythingKind`.\n* Τι θεωρείται υποδομή — κλάση `_AmenityKind`.\n* Ποιά σημεία ενώνονται με ποιές γραμμές — κλάση `ElementKindImpl` λογική (δείτε τις σχετικές υποκλάσεις).\n* Πότε ένα αντικείμενο μικροχαρτογράφησης είναι ανολοκλήρωτο — κλάση `_NeedsMoreInfo`.",
-  "@faqTaggingContent": {}
+  "@faqTaggingContent": {},
+  "mapStraight": "Περιστροφή πίσω",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "settingsCachesClearRaster": "Εκκαθάριση κρυφής μνήμης raster πλακιδίων",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "Εκκαθάριση απεικονιζόμενων διανυσματικών πλακιδίων",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Εκκαθάριση κρυφής μνήμης διανυσματικών πλακιδίων",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "Χειροκίνητη εκκαθάριση ληφθέντων πλακιδίων",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Επιλογή πλακιδίων για λήψη",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "Λήψη δεδομένων",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "Λήψη πλακιδίων χάρτη",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "Λήψη δορυφόρου",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Ακύρωση ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  }
 }
