@@ -1,0 +1,4 @@
+* Lisamoodulite tugi!
+* Kinnitatud teenuste markerid muutuvad roheliseks.
+* Nädalapäevade järjekord parandatud USA ja Iisraeli jaoks.
+* Lisasime kompassi suuna.

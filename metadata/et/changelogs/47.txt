@@ -1,0 +1,4 @@
+* Uuendatud eelseadistused ja kaardikihid.
+* Kreeka ja indoneesia keelte tõlked.
+* Kaardivalija riba suuruse muutumine.
+* Mikrokaardistamise jaoks lisandusid veeteede objektid.
