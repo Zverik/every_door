@@ -2,6 +2,7 @@ import 'package:encrypt/encrypt.dart';
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/providers/cur_imagery.dart';
+import 'package:flutter/widgets.dart' hide Key;
 import 'package:flutter_map/flutter_map.dart' show TileLayer, TileProvider;
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:http/io_client.dart';
@@ -25,6 +26,7 @@ class TmsImagery extends TileImagery {
     super.overlay = false,
     super.best = false,
     super.tileSize = 256,
+    super.opacity = 1.0,
     this.encrypted = false,
     String cachingStore = kTileCacheImagery,
   }) : _tileProvider = FMTCTileProvider(
@@ -53,6 +55,7 @@ class TmsImagery extends TileImagery {
           minZoom: data.minZoom,
           maxZoom: data.maxZoom,
           tileSize: data.tileSize,
+          opacity: data.opacity,
           encrypted: encrypted,
           cachingStore: cachingStore,
         );
@@ -76,6 +79,7 @@ class TmsImagery extends TileImagery {
       maxZoom: maxZoom ?? this.maxZoom,
       best: best,
       tileSize: tileSize ?? this.tileSize,
+      opacity: opacity,
     );
   }
 
@@ -102,7 +106,7 @@ class TmsImagery extends TileImagery {
   String prepareUrl() => url;
 
   @override
-  TileLayer buildLayer({bool reset = false}) {
+  Widget buildLayer({bool reset = false}) {
     String url = prepareUrl().replaceAll('{zoom}', '{z}');
 
     if (url.contains('MapServer')) {
@@ -131,7 +135,7 @@ class TmsImagery extends TileImagery {
       url = url.substring(0, match.start) + '{s}' + url.substring(match.end);
     }
 
-    return TileLayer(
+    final layer = TileLayer(
       urlTemplate: url,
       tileProvider: getTileProvider(),
       minNativeZoom: minZoom,
@@ -143,5 +147,6 @@ class TmsImagery extends TileImagery {
       userAgentPackageName: kUserAgentPackageName,
       reset: reset ? tileResetController.stream : null,
     );
+    return isOpaque ? layer : Opacity(opacity: opacity, child: layer);
   }
 }

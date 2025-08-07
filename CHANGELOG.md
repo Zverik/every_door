@@ -12,6 +12,7 @@ _Unreleased_
 * New predictable imagery caching, thanks to @JaffaKetchup for the amazing FMTC package.
 * Added a compass button to reset rotation.
 * Building contours for the entrances mode.
+* Overlay layers can be semi-transparent.
 * Increased maximum zoom to 22.
 
 ## Other

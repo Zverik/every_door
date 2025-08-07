@@ -1,6 +1,6 @@
 import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/providers/cur_imagery.dart';
-import 'package:flutter/material.dart' show Widget;
+import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart' show TileLayer;
 import 'package:flutter_map_mbtiles/flutter_map_mbtiles.dart';
 import 'package:mbtiles/mbtiles.dart';
@@ -20,6 +20,7 @@ class MbTilesImagery extends TileImagery {
     super.overlay = false,
     super.best = false,
     super.tileSize = 256,
+    super.opacity = 1.0,
     required this.mbtiles,
   });
 
@@ -35,12 +36,14 @@ class MbTilesImagery extends TileImagery {
         url: data.url,
         minZoom: data.minZoom,
         maxZoom: data.maxZoom,
+        tileSize: data.tileSize,
+        opacity: data.opacity,
         mbtiles: mbtiles,
       );
 
   @override
   Widget buildLayer({bool reset = false}) {
-    return TileLayer(
+    final layer = TileLayer(
       urlTemplate: url,
       tileProvider: MbTilesTileProvider(
         mbtiles: mbtiles,
@@ -53,5 +56,6 @@ class MbTilesImagery extends TileImagery {
       userAgentPackageName: kUserAgentPackageName,
       reset: reset ? tileResetController.stream : null,
     );
+    return isOpaque ? layer : Opacity(opacity: opacity, child: layer);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:every_door/helpers/tile_caches.dart';
 import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/providers/cur_imagery.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart'
     show TileLayer, WMSTileLayerOptions, Epsg4326, Epsg3857;
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
@@ -22,6 +23,7 @@ class WmsImagery extends TileImagery {
     super.maxZoom,
     super.overlay = false,
     super.best = false,
+    super.opacity = 1.0,
     this.wms4326 = false,
   }) : _tileProvider = FMTCTileProvider(
           stores: {kTileCacheImagery: BrowseStoreStrategy.readUpdateCreate},
@@ -42,6 +44,7 @@ class WmsImagery extends TileImagery {
           headers: data.headers,
           minZoom: data.minZoom,
           maxZoom: data.maxZoom,
+          opacity: data.opacity,
           wms4326: wms4326,
         );
 
@@ -95,8 +98,8 @@ class WmsImagery extends TileImagery {
   }
 
   @override
-  TileLayer buildLayer({bool reset = false}) {
-    return TileLayer(
+  Widget buildLayer({bool reset = false}) {
+    final layer = TileLayer(
       wmsOptions: _buildWMSOptions(url),
       tileProvider: _tileProvider,
       minNativeZoom: minZoom,
@@ -107,5 +110,6 @@ class WmsImagery extends TileImagery {
       userAgentPackageName: kUserAgentPackageName,
       reset: reset ? tileResetController.stream : null,
     );
+    return isOpaque ? layer : Opacity(opacity: opacity, child: layer);
   }
 }
