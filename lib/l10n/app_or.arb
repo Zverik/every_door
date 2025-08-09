@@ -1197,5 +1197,9 @@
   "fieldHeightAny": "ଦୈର୍ଘ୍ୟ ଆଶା କରିବା, ଉଦାହରଣ ସ୍ୱରୂପ 5.4 କିମ୍ବା 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "tileDragDownload": "ଲୋଡ ବଟନକୁ ଟାପ୍ କରିବା ଚେଷ୍ଟା କରନ୍ତୁ।",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
   }
 }
