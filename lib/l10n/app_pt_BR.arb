@@ -162,7 +162,7 @@
   "@settingsApiServer": {
     "description": "Section title for API server settings."
   },
-  "settingsDataManagement": "Gestão de Dados",
+  "settingsDataManagement": "Gestão de dados",
   "@settingsDataManagement": {
     "description": "Section title for data settings."
   },
