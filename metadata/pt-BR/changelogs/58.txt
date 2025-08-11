@@ -1,0 +1,4 @@
+* Mosaicos de vetor por toda parte.
+* Baixe dados e imagens para trabalhar offline.
+* Adicionado um botão de bússola.
+* As predefinições agora têm ícones.
