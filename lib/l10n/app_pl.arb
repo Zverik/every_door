@@ -1353,5 +1353,51 @@
   "pluginsSeeLogs": "Zobacz dzienniki",
   "@pluginsSeeLogs": {
     "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "mapStraight": "Obróć z powrotem",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "settingsCachesClearRaster": "Wyczyść pamięć podręczną kafelków rastrowych",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "Wyczyść renderowane pliki wektorowe",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Wyczyść pamięci podręczne kafelków wektorowych",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "Wyczyść ręcznie pobrane kafelki",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Wybierz kafelki do pobrania",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "Pobierz dane",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "Pobierz kafelki mapy",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "Pobierz obrazy z satelity",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Anuluj ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
   }
 }
