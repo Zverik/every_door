@@ -489,7 +489,7 @@
   "@settingsUploads": {
     "description": "Settings entry for browsing changes to upload."
   },
-  "changesUploadedMessage": "Відправлено {changes} до API.",
+  "changesUploadedMessage": "Надіслано {changes} до OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -1268,6 +1268,136 @@
   "@faqFloorsContent": {},
   "faqChangeTypeContent": "Натисніть на поле у редакторі, де написаний тип.",
   "@faqChangeTypeContent": {},
-  "faqTaggingContent": "Чому об'єкт відсутній у редакторі? Коли ці білі крапки відображаються в режимі micromapping? Як сортуються обʼєкти?\n\nЦей код дає відповіді на всі ці питання: [good_tags.dart] (https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Зверніть увагу на:\n\n* Порядок ключів основного тегу — у списку `kMainKeys`.\n* Які об'єкти завантажуються — функція `isGoodTags`.\n* Теги типів точок — функція `isAmenityTags`.\n* Які точки підвʼязуються до яких шляхів — функція `detectSnap`.\n* Коли об'єкт micromapping неповний — функція `needsMoreInfo`.",
-  "@faqTaggingContent": {}
+  "faqTaggingContent": "Чому об'єкт відсутній у редакторі? Коли ці білі точки відображаються в режимі мікрокартографування? Як сортуються об'єкти?\n\nВідповіді на всі ці питання знаходяться у [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Ось що ви можете переглянути:\n\n* Порядок ключів для основного тегу — список `kMainKeys` у `main_key.dart`.\n* Які об'єкти завантажуються — клас `_EverythingKind`.\n* Що вважається зручністю — клас `_AmenityKind`.\n* Які точки закріплені до яких напрямків — клас `Логіка `ElementKindImpl` (див. відповідні підкласи).\n* Коли об'єкт мікрокартографування неповний — клас `_NeedsMoreInfo`.",
+  "@faqTaggingContent": {},
+  "tileDragDownload": "Спробуйте натиснути кнопку завантаження.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "mapStraight": "Повернути назад",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "warningFixmeNote": "Буде конвертовано в нотатку OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "settingsCachesClearRaster": "Очистити кеші растрових плиток",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "Очистити відрендерені векторні плитки",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Очистити кеш векторних плиток",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "Очистити завантажені вручну плитки",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Виберіть плитки для завантаження",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "Завантаження даних",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "Завантажити плитки карти",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "Завантажити супутник",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Скасувати ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  },
+  "settingsPlugins": "Плагіни",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "Увімкнути",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Вимкнути",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Вимкнено",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Репозиторій плагінів",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Пошук",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Оновлення",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "Встановити",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "URL-адреса плагіна",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "Більше...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Встановлення плагіна",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Встановити плагін \"{plugin}\" версії {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "невідомий",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Джерело: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsSeeLogs": "Переглянути журнали",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  }
 }
