@@ -1,0 +1,4 @@
+* Vektorkacheln überall.
+* Daten und Bilder zum Offline-Arbeiten runterladen.
+* Kompass-Button hinzugefügt.
+* Voreinstellungen haben jetzt Symbole.
