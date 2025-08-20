@@ -1058,7 +1058,7 @@
     },
     "faqLettersContent": "Калі вашу лічбавую клавіятуру нельга пераключыць на поўную клавіятуру з літарамі, праверце налады праграмы. Уключыце там \"Пашыраная лічбавая клавіятура\".",
     "@faqLettersContent": {},
-    "faqTaggingContent": "Чаму аб'ект адсутнічае ў рэдактары? Калі белыя кропкі адлюстроўваюцца ў рэжыме мікрпамапінга? Як сартуюцца аб'екты?\n\nАдказы на ўсе гэтыя пытанні знаходзяцца ў файле [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Вось на што трэба звярнуць увагу:\n\n* Парадак вызначэння галоўнага тэга — спіс `kMainKeys`.\n* Якія аб'екты спампоўваюцца — функцыя `isGoodTags`.\n* Што лічыцца ўстановай — функцыя `isAmenityTags`.\n* Якія кропкі прывязваюцца да ліній, і да якіх ліній — функцыя `detectSnap`.\n* Калі аб'ект мікрамапінга няпоўны — функцыя `needsMoreInfo`.",
+    "faqTaggingContent": "Чаму аб'ект адсутнічае ў рэдактары? Калі белыя кропкі адлюстроўваюцца ў рэжыме мікрпамапінга? Як сартуюцца аб'екты?\n\nАдказы на ўсе гэтыя пытанні знаходзяцца ў файле [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Вось на што трэба звярнуць увагу:\n\n* Парадак вызначэння галоўнага тэга — спіс `kMainKeys` у `main_key.dart`.\n* Якія аб'екты спампоўваюцца — клас `_EverythingKind`.\n* Што лічыцца ўстановай — клас `_AmenityKind`.\n* Якія кропкі прывязваюцца да ліній, і да якіх ліній — логіка класа `ElementKindImpl` (глядзі адпаведныя падкласы) .\n* Калі аб'ект мікрамапінга няпоўны — клас `_NeedsMoreInfo`.",
     "@faqTaggingContent": {},
     "faqEntranceContent": "Унізе экрана ёсць кнопкі для пераключэння рэжымаў: мікрамапінг, установы, уваходы і нататкі.\n\nУ рэжыме ўваходаў націсніце або перацягніце кнопку дзвярэй у ніжнім куце на мапу.",
     "@faqEntranceContent": {},
@@ -1241,5 +1241,55 @@
     "pluginsSeeLogs": "Праглядзець журнал",
     "@pluginsSeeLogs": {
         "description": "Button title to browse the system log when a plugin installation error has occurred."
+    },
+    "warningFixmeNote": "Будзе пераўтворана ў нататку OSM",
+    "@warningFixmeNote": {
+        "description": "Warning message for an amenity=fixme object with just a name."
+    },
+    "warningUnsupported": "Тып гэтага аб'екта не падтрымліваецца",
+    "@warningUnsupported": {
+        "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+    },
+    "warningWrongMode": "Няправільны рэжым, праверце наяўнасць дублікатаў",
+    "@warningWrongMode": {
+        "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+    },
+    "settingsCachesClearRaster": "Ачысціць кэш растравых тайлаў",
+    "@settingsCachesClearRaster": {
+        "description": "Settings data management entry for clearing all cached raster tiles."
+    },
+    "settingsCachesClearVector": "Ачысціць кэш вектарных тайлаў",
+    "@settingsCachesClearVector": {
+        "description": "Settings data management entry for clearing all cached vector tiles."
+    },
+    "settingsCachesSelectTiles": "Выберыце тайлы для спампоўкі",
+    "@settingsCachesSelectTiles": {
+        "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+    },
+    "settingsCachesDownloadData": "Спампаваць даныя",
+    "@settingsCachesDownloadData": {
+        "description": "Button label for pre-downloading OpenStreetMap data."
+    },
+    "settingsCachesDownloadMap": "Спампаваць тайлы карты",
+    "@settingsCachesDownloadMap": {
+        "description": "Button label for pre-downloading OSM map tiles."
+    },
+    "settingsCachesDownloadSatellite": "Спампаваць спадарожнікавыя здымкі",
+    "@settingsCachesDownloadSatellite": {
+        "description": "Button label for pre-downloading Satellite imagery tiles."
+    },
+    "settingsCachesCancel": "Скасаваць ({percent}%)",
+    "@settingsCachesCancel": {
+        "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+        "placeholders": {
+            "percent": {
+                "description": "Percent number between 0 and 100.",
+                "example": "50"
+            }
+        }
+    },
+    "settingsCachesClearManual": "Ачысціць спампаваныя ўручную даныя",
+    "@settingsCachesClearManual": {
+        "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
     }
 }
