@@ -1,1403 +1,1403 @@
 {
-  "loadingLocation": "Ustalanie położenia…",
-  "@loadingLocation": {
-    "description": "Loading screen message for firing up GPS and waiting for a location."
-  },
-  "loadingChangesFailed": "Nie udało się wczytać zmian",
-  "@loadingChangesFailed": {
-    "description": "Loading screen notification title for when loading changes has failed."
-  },
-  "tileNo": "brak",
-  "@tileNo": {
-    "description": "Prefix for a list of icons for attributes missing in amenity."
-  },
-  "legendOther": "Inne",
-  "@legendOther": {
-    "description": "Legend item for all other types."
-  },
-  "filterNoAddresses": "Brak adresów w pobliżu",
-  "@filterNoAddresses": {
-    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
-  },
-  "filterByAddress": "Według adresu",
-  "@filterByAddress": {
-    "description": "Filter pane, label for choosing an address to filter by."
-  },
-  "filterByFloor": "Według piętra",
-  "@filterByFloor": {
-    "description": "Filter pane, label for choosing a floor to filter by."
-  },
-  "filterEmpty": "brakujące",
-  "@filterEmpty": {
-    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
-  },
-  "filterNonConfirmed": "Tylko niepotwierdzone",
-  "@filterNonConfirmed": {
-    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
-  },
-  "chooseType": "Wybierz typ",
-  "@chooseType": {
-    "description": "Search field hint on the type choosing screen."
-  },
-  "chooseTypeClear": "Wyczyść",
-  "@chooseTypeClear": {
-    "description": "Tooltip for a button to clear search field contents."
-  },
-  "editorSave": "Zapisz",
-  "@editorSave": {
-    "description": "Save button title in the editor"
-  },
-  "editorCloseTitle": "Zamknąć edytor?",
-  "@editorCloseTitle": {
-    "description": "Title for the message on closing the editor without saving changes."
-  },
-  "editorMoreFields": "Więcej pól",
-  "@editorMoreFields": {
-    "description": "Title of a additional fields group in editor."
-  },
-  "editorMove": "Przesuń",
-  "@editorMove": {
-    "description": "Label for the map, a hint that you can move the object."
-  },
-  "editorMarkActive": "Oznacz jako aktywny",
-  "@editorMarkActive": {
-    "description": "Button title to mark an amenity active (non-defunct)."
-  },
-  "editorRestore": "Przywróć",
-  "@editorRestore": {
-    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
-  },
-  "editorDeleteTitle": "Usunąć {amenity}?",
-  "@editorDeleteTitle": {
-    "description": "Dialog title for deleting an amenity.",
-    "placeholders": {
-      "amenity": {
-        "description": "Amenity title"
-      }
+    "loadingLocation": "Ustalanie położenia…",
+    "@loadingLocation": {
+        "description": "Loading screen message for firing up GPS and waiting for a location."
+    },
+    "loadingChangesFailed": "Nie udało się wczytać zmian",
+    "@loadingChangesFailed": {
+        "description": "Loading screen notification title for when loading changes has failed."
+    },
+    "tileNo": "brak",
+    "@tileNo": {
+        "description": "Prefix for a list of icons for attributes missing in amenity."
+    },
+    "legendOther": "Inne",
+    "@legendOther": {
+        "description": "Legend item for all other types."
+    },
+    "filterNoAddresses": "Brak adresów w pobliżu",
+    "@filterNoAddresses": {
+        "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+    },
+    "filterByAddress": "Według adresu",
+    "@filterByAddress": {
+        "description": "Filter pane, label for choosing an address to filter by."
+    },
+    "filterByFloor": "Według piętra",
+    "@filterByFloor": {
+        "description": "Filter pane, label for choosing a floor to filter by."
+    },
+    "filterEmpty": "brakujące",
+    "@filterEmpty": {
+        "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+    },
+    "filterNonConfirmed": "Tylko niepotwierdzone",
+    "@filterNonConfirmed": {
+        "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+    },
+    "chooseType": "Wybierz typ",
+    "@chooseType": {
+        "description": "Search field hint on the type choosing screen."
+    },
+    "chooseTypeClear": "Wyczyść",
+    "@chooseTypeClear": {
+        "description": "Tooltip for a button to clear search field contents."
+    },
+    "editorSave": "Zapisz",
+    "@editorSave": {
+        "description": "Save button title in the editor"
+    },
+    "editorCloseTitle": "Zamknąć edytor?",
+    "@editorCloseTitle": {
+        "description": "Title for the message on closing the editor without saving changes."
+    },
+    "editorMoreFields": "Więcej pól",
+    "@editorMoreFields": {
+        "description": "Title of a additional fields group in editor."
+    },
+    "editorMove": "Przesuń",
+    "@editorMove": {
+        "description": "Label for the map, a hint that you can move the object."
+    },
+    "editorMarkActive": "Oznacz jako aktywny",
+    "@editorMarkActive": {
+        "description": "Button title to mark an amenity active (non-defunct)."
+    },
+    "editorRestore": "Przywróć",
+    "@editorRestore": {
+        "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+    },
+    "editorDeleteTitle": "Usunąć {amenity}?",
+    "@editorDeleteTitle": {
+        "description": "Dialog title for deleting an amenity.",
+        "placeholders": {
+            "amenity": {
+                "description": "Amenity title"
+            }
+        }
+    },
+    "editorDeleteButton": "Usuń",
+    "@editorDeleteButton": {
+        "description": "Delete"
+    },
+    "tagsUrlCopied": "Link został skopiowany do schowka",
+    "@tagsUrlCopied": {
+        "description": "Popup message when the link to the object was copied to the clipboard."
+    },
+    "tagsNewPoint": "Nowy punkt",
+    "@tagsNewPoint": {
+        "description": "Tag editor panel title for a new amenity."
+    },
+    "tagsAddTag": "Dodaj znacznik",
+    "@tagsAddTag": {
+        "description": "Tags panel button for adding a new tag."
+    },
+    "tagsValueLong": "Wartość jest zbyt długa",
+    "@tagsValueLong": {
+        "description": "Validation error for when the value length exceeds 255 characters."
+    },
+    "settingsTitle": "Konfiguracja",
+    "@settingsTitle": {
+        "description": "App bar title for the settings panel."
+    },
+    "loadingStart": "Inicjalizacja…",
+    "@loadingStart": {
+        "description": "Initial message for the loading screen, virtually unseen."
+    },
+    "loadingPresets": "Wczytywanie szablonów…",
+    "@loadingPresets": {
+        "description": "Loading screen message for loading presets."
+    },
+    "loadingChanges": "Wczytywanie zmian…",
+    "@loadingChanges": {
+        "description": "Loading screen message for loading stored changes."
+    },
+    "chooseLocation": "Wybierz lokalizację",
+    "@chooseLocation": {
+        "description": "Title for the screen for choosing a location on a map."
+    },
+    "editorCloseMessage": "Porzucić zmiany bez ich zapisywania?",
+    "@editorCloseMessage": {
+        "description": "Message on closing the editor without saving changes."
+    },
+    "editorMissing": "Nie istnieje",
+    "@editorMissing": {
+        "description": "Button title to delete an amenity (since it's missing)."
+    },
+    "settingsDataManagement": "Zarządzanie danymi",
+    "@settingsDataManagement": {
+        "description": "Section title for data settings."
+    },
+    "settingsApiServer": "Serwer API",
+    "@settingsApiServer": {
+        "description": "Section title for API server settings."
+    },
+    "fieldHoursButton": "Ustaw godziny otwarcia",
+    "@fieldHoursButton": {
+        "description": "Text on the hours button when there's no value."
+    },
+    "fieldHoursWeekdays": "Pn Wt Śr Cz Pt So Nd",
+    "@fieldHoursWeekdays": {
+        "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+    },
+    "fieldHoursBreak": "Przerwa",
+    "@fieldHoursBreak": {
+        "description": "Title for the break interval."
+    },
+    "fieldHoursFullDay": "Cały dzień",
+    "@fieldHoursFullDay": {
+        "description": "Switch for 24/7 opening hours."
+    },
+    "fieldHoursOpens": "Otwiera się",
+    "@fieldHoursOpens": {
+        "description": "Title for the interval start."
+    },
+    "fieldHoursAddBreak": "Dodaj przerwę",
+    "@fieldHoursAddBreak": {
+        "description": "Button in opening hours editor to add a break."
+    },
+    "changesPurgeMessage": "Usunąć wszystkie zarejestrowane zmiany i przywrócić oryginalne dane?",
+    "@changesPurgeMessage": {
+        "description": "Dialog message for confirming deletion of all changes."
+    },
+    "fieldHoursTitle": "Godziny otwarcia",
+    "@fieldHoursTitle": {
+        "description": "Title for the opening hours editor pane."
+    },
+    "fieldHoursCloses": "Zamyka się",
+    "@fieldHoursCloses": {
+        "description": "Title for the interval end."
+    },
+    "fieldHoursNext": "Dalej",
+    "@fieldHoursNext": {
+        "description": "Button in the interval editor to move to the closing time."
+    },
+    "fieldCardsAccepted": "akceptowane",
+    "@fieldCardsAccepted": {
+        "description": "Payment field label for cards accepted."
+    },
+    "enableLocationMessage": "Zezwól aplikacji na dostęp do lokalizacji w panelu ustawień, który zostanie wyświetlony.",
+    "@enableLocationMessage": {
+        "description": "Contents of the alert for allowing app access to location."
+    },
+    "buttonYes": "Tak",
+    "@buttonYes": {
+        "description": "Button for approval."
+    },
+    "buttonNo": "Nie",
+    "@buttonNo": {
+        "description": "Button for dismissal."
+    },
+    "buildingX": "Budynek {n}",
+    "@buildingX": {
+        "description": "Option displayed when there's multiple buildings under a tap.",
+        "placeholders": {
+            "n": {
+                "example": "12A"
+            }
+        }
+    },
+    "addressX": "Adres {n}",
+    "@addressX": {
+        "description": "Option displayed when there's multiple addresses under a tap.",
+        "placeholders": {
+            "n": {
+                "example": "12A"
+            }
+        }
+    },
+    "entranceX": "Wejście {n}",
+    "@entranceX": {
+        "description": "Option displayed when there's multiple entrances under a tap.",
+        "placeholders": {
+            "n": {
+                "example": "1-15"
+            }
+        }
+    },
+    "buildingLevels": "Piętra",
+    "@buildingLevels": {
+        "description": "Label for building:levels in the form. Keep it short."
+    },
+    "buildingRoofLevels": "Piętra w dachu",
+    "@buildingRoofLevels": {
+        "description": "Label for roof:levels in the form. Keep it short."
+    },
+    "buildingRoofShape": "Kształt dachu",
+    "@buildingRoofShape": {
+        "description": "Label for roof:shape in the form. Keep it short."
+    },
+    "buildingType": "Rodzaj",
+    "@buildingType": {
+        "description": "Label for building type (value of building=*) in the form. Keep it short."
+    },
+    "buildingMoreButton": "Pokaż więcej",
+    "@buildingMoreButton": {
+        "description": "Button label for opening the building object in a full editor."
+    },
+    "buildingTypeAddress": "adres",
+    "@buildingTypeAddress": {},
+    "buildingTypeCommercial": "komercyjny",
+    "@buildingTypeCommercial": {},
+    "buildingTypeShed": "szopa",
+    "@buildingTypeShed": {},
+    "buildingTypeIndustrial": "przemysłowy",
+    "@buildingTypeIndustrial": {},
+    "buildingTypeGarage": "garaż",
+    "@buildingTypeGarage": {},
+    "buildingTypeConstruction": "w budowie",
+    "@buildingTypeConstruction": {},
+    "entranceIsUnit": "Zapisz numer mieszkania w addr:unit",
+    "@entranceIsUnit": {
+        "description": "Label for a switch to use addr:unit instead of addr:flats."
+    },
+    "entranceAccess": "Dostęp",
+    "@entranceAccess": {
+        "description": "Label for entrance access in the form. Keep it short."
+    },
+    "fieldPhoneWrong": "Nieprawidłowy format numeru telefonu",
+    "@fieldPhoneWrong": {
+        "description": "Validation message for a non-standard phone number."
+    },
+    "fieldFloorFloorDesc": "Piętro jak w nawigacji i w windach",
+    "@fieldFloorFloorDesc": {
+        "descripton": "Description for the \"level\" tag."
+    },
+    "entranceFlats": "Mieszkania",
+    "@entranceFlats": {
+        "description": "Label for addr:flats in the form. Keep it short."
+    },
+    "fieldCheckboxYes": "tak",
+    "@fieldCheckboxYes": {
+        "description": "Checkbox name for yes."
+    },
+    "fieldCheckboxNo": "nie",
+    "@fieldCheckboxNo": {
+        "description": "Checkbox name for no."
+    },
+    "messageNoData": "Brak danych, dotknij tutaj, aby pobrać",
+    "@messageNoData": {
+        "description": "Message that appears on the main screen when there's no OSM data."
+    },
+    "fieldFloorLevelDesc": "Numer piętra zaczynający się od 0 dla parteru",
+    "@fieldFloorLevelDesc": {
+        "description": "Description for the \"addr:floor\" tag."
+    },
+    "messageDataObsolete": "Dane są przestarzałe, dotknij tutaj, aby odświeżyć",
+    "@messageDataObsolete": {
+        "description": "Message that appears on the main screen when OSM data is outdated."
+    },
+    "enableGPS": "Włącz GPS",
+    "@enableGPS": {
+        "description": "Title of the alert for enabling location services."
+    },
+    "enableGPSMessage": "Włącz usługi lokalizacyjne w panelu ustawień, który zostanie wyświetlony.",
+    "@enableGPSMessage": {
+        "description": "Contents of the alert for enabling location services."
+    },
+    "enableLocation": "Włącz lokalizację",
+    "@enableLocation": {
+        "description": "Title of the alert for allowing app access to location."
+    },
+    "entranceFlatsNumberList": "Powinna to być lista liczb",
+    "@entranceFlatsNumberList": {
+        "description": "Validation message for addr:flats."
+    },
+    "tileNothingAround": "W promieniu {distance} metrów nie odnaleziono żadnych użytecznych punktów.",
+    "@tileNothingAround": {
+        "description": "First part of the message displayed when there is nothing around.",
+        "placeholders": {
+            "distance": {
+                "type": "int",
+                "format": "decimalPattern",
+                "description": "Distance number in meters, at least 50.",
+                "example": "150"
+            }
+        }
+    },
+    "tileDragTheMap": "Zbliż się do czegokolwiek, przeciągnij mapę lub dodaj brakujące udogodnienie.",
+    "@tileDragTheMap": {
+        "description": "Message displayed when there is nothing around."
+    },
+    "tileDragOrUnfilter": "Poruszaj się wokół, dodaj udogodnienie lub wyczyść filtr.",
+    "@tileDragOrUnfilter": {
+        "description": "Message displayer when there's nothing around, and a filter is on."
+    },
+    "editorLoadingPreset": "Wczytywanie szablonu…",
+    "@editorLoadingPreset": {
+        "description": "Message shown when loading a preset in the editor."
+    },
+    "editorRestoreTitle": "Czy jest otwarty?",
+    "@editorRestoreTitle": {
+        "description": "Title for question on restoring an edited defunct amenity."
+    },
+    "editorRestoreMessage": "{amenity} jest nieaktywne. Czy chcesz oznaczyć je jako aktywne?",
+    "@editorRestoreMessage": {
+        "description": "Question on restoring an edited defunct amenity.",
+        "placeholders": {
+            "amenity": {
+                "description": "Amenity title"
+            }
+        }
+    },
+    "tagsKey": "Klucz",
+    "@tagsKey": {
+        "description": "Tags panel, add a new tag dialog: key label"
+    },
+    "tagsValue": "Wartość",
+    "@tagsValue": {
+        "description": "Tags panel, add a new tag dialog: value label"
+    },
+    "tagsKeyError": "Klucz jest zbyt rzadki",
+    "@tagsKeyError": {
+        "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+    },
+    "settingsPresentation": "Prezentacja",
+    "@settingsPresentation": {
+        "description": "Section title for presentation options."
+    },
+    "settingsLoginDetails": "Konto OSM",
+    "@settingsLoginDetails": {
+        "description": "Settings entry for logging in to OSM."
+    },
+    "settingsPurgeData": "Wyczyść przestarzałe dane z pamięci podręcznej",
+    "@settingsPurgeData": {
+        "description": "Settings entry for purging obsolete OSM data."
+    },
+    "settingsPurgeAllData": "Wyczyść wszystkie pobrane dane",
+    "@settingsPurgeAllData": {
+        "description": "Settings entry for purging all cached OSM data."
+    },
+    "settingsPurgeDataTitle": "Usunąć dane?",
+    "@settingsPurgeDataTitle": {
+        "description": "Confirmation dialog title for when purging all downloaded data."
+    },
+    "settingsPurgeDataMessage": "Będziesz musiał ponownie wszystko pobrać. Kontynuować?",
+    "@settingsPurgeDataMessage": {
+        "description": "Confirmation dialog message for when purging all downloaded data."
+    },
+    "settingsPurgedObsoleteTitle": "Przestarzałe dane",
+    "@settingsPurgedObsoleteTitle": {
+        "description": "Notification title for cleaning obsolete data from the cache."
+    },
+    "settingsPurgedAllTitle": "Usunięte dane",
+    "@settingsPurgedAllTitle": {
+        "description": "Notification title for cleaning all downloaded data from the cache."
+    },
+    "settingsBackground": "Obraz podkładu",
+    "@settingsBackground": {
+        "description": "Settings entry for choosing background satellite imagery."
+    },
+    "settingsUploads": "Oczekujące wysyłki",
+    "@settingsUploads": {
+        "description": "Settings entry for browsing changes to upload."
+    },
+    "settingsPurgedMessage": "{count,plural, =1{Wyczyszczony {count} element} few{Wyczyszczone {count} elementy} other{Wyczyszczonych {count} elementów}}",
+    "@settingsPurgedMessage": {
+        "description": "Notification message after some cached elements were deleted.",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "editorMarkDefunct": "Oznacz jako zamknięte",
+    "@editorMarkDefunct": {
+        "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+    },
+    "settingsDefaultPayment": "Domyślne karty płatnicze",
+    "@settingsDefaultPayment": {
+        "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+    },
+    "accountTitle": "Konto OpenStreetMap",
+    "@accountTitle": {
+        "description": "Title for the account page."
+    },
+    "accountLoginOAuth": "Logowanie poprzez OAuth",
+    "@accountLoginOAuth": {
+        "description": "Button label for logging in to OSM via OAuth."
+    },
+    "accountOAuthError": "Błąd OAuth",
+    "@accountOAuthError": {
+        "description": "Alert title for when OAuth login failed."
+    },
+    "accountLoginPassword": "Logowanie poprzez hasło",
+    "@accountLoginPassword": {
+        "description": "Button label for logging in to OSM with a password."
+    },
+    "changesDeletedUndo": "Wycofaj",
+    "@changesDeletedUndo": {
+        "description": "Button label for undoing a change deletion."
+    },
+    "changesPending": "Oczekujące",
+    "@changesPending": {
+        "description": "Subtitle for a change that has not yet been sent to OSM API."
+    },
+    "changesPurgeTitle": "Wyczyścić zmiany?",
+    "@changesPurgeTitle": {
+        "description": "Dialog title for confirming deletion of all changes."
+    },
+    "accountPasswordWarningMessage": "Twoje hasło zostanie zapisane na urządzeniu. Wybierz to tylko wtedy, gdy OAuth nie powiedzie się.",
+    "@accountPasswordWarningMessage": {
+        "description": "Message for the warning dialog about keeping passwords on the device."
+    },
+    "accountPasswordWarningButton": "Zrozumiano",
+    "@accountPasswordWarningButton": {
+        "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+    },
+    "accountPasswordTitle": "Dane OSM",
+    "@accountPasswordTitle": {
+        "description": "Title for the input dialog for login and password."
+    },
+    "changesCount": "{count,plural, =1{{count} zmiana} few{{count} zmiany} other{{count} zmian}}",
+    "@changesCount": {
+        "description": "Number of changed elements to display or to upload.",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "changesUploadedTitle": "Przesłano",
+    "@changesUploadedTitle": {
+        "description": "Title for the notification about a successful upload."
+    },
+    "changesUploadedMessage": "Przesłano {changes} do OpenStreetMap.",
+    "@changesUploadedMessage": {
+        "description": "Message for the notification about a successful upload.",
+        "placeholders": {
+            "changes": {
+                "description": "Number of changes",
+                "example": "5 changes"
+            }
+        }
+    },
+    "changesUploadFailedTitle": "Przesłanie zakończone niepowodzeniem",
+    "@changesUploadFailedTitle": {
+        "descripton": "Title for the notification about a failed changes upload."
+    },
+    "changesDeletedChange": "Usunięta {change}",
+    "@changesDeletedChange": {
+        "description": "Message for the snack bar after you swipe a change away.",
+        "placeholders": {
+            "change": {
+                "description": "Name of the deleted object",
+                "example": "shop"
+            }
+        }
+    },
+    "fieldHoursAddFragment": "Dodaj fragment",
+    "@fieldHoursAddFragment": {
+        "description": "Button in opening hours editor to add a fragment for days."
+    },
+    "fieldComboEmpty": "brakujące",
+    "@fieldComboEmpty": {
+        "description": "Option for a combo field that sets an empty value."
+    },
+    "fieldComboChoose": "wybierz",
+    "@fieldComboChoose": {
+        "description": "A placeholder value displayed in a single-value combo field when there is no value."
+    },
+    "fieldWifiNo": "nie",
+    "@fieldWifiNo": {
+        "description": "Wifi field label for no wifi."
+    },
+    "fieldHoursClosedPH": "Zamknięte podczas świąt",
+    "@fieldHoursClosedPH": {
+        "description": "Switch label for PH off."
+    },
+    "fieldWifiPublic": "publiczny",
+    "@fieldWifiPublic": {
+        "description": "Wifi field label for public unrestricted wifi."
+    },
+    "fieldWifiCustomers": "klienci",
+    "@fieldWifiCustomers": {
+        "description": "Wifi field label for wifi available to customers only."
+    },
+    "fieldWheelchairYes": "tak",
+    "@fieldWheelchairYes": {
+        "description": "Wheelchair field label for full accessibility."
+    },
+    "fieldWheelchairLimited": "ograniczony",
+    "@fieldWheelchairLimited": {
+        "description": "Wheelchair field label for limited accessibility."
+    },
+    "fieldWheelchairNo": "nie",
+    "@fieldWheelchairNo": {
+        "description": "Wheelchair field label for no accessibility."
+    },
+    "fieldCardsNo": "nie",
+    "@fieldCardsNo": {
+        "description": "Payment field label for cash only."
+    },
+    "fieldFloorEmpty": "Aby wybrać piętro, ustaw adres.",
+    "@fieldFloorEmpty": {
+        "description": "What is written on the floor chooser if there are no floors to choose."
+    },
+    "fieldFloorNew": "Nowe piętro",
+    "@fieldFloorNew": {
+        "description": "Title for the floor creation pane."
+    },
+    "fieldFloorShouldBeNumber": "Podaj numer",
+    "@fieldFloorShouldBeNumber": {
+        "description": "Validation message for a levels tag, also used in building levels form."
+    },
+    "fieldAddressTap": "Podaj adres",
+    "@fieldAddressTap": {
+        "description": "Title for the pane when a user can tap an address to choose it."
+    },
+    "buildingTypeHouse": "dom",
+    "@buildingTypeHouse": {},
+    "buildingTypeApartments": "mieszkalny",
+    "@buildingTypeApartments": {},
+    "buildingTypeRetail": "handlowy",
+    "@buildingTypeRetail": {},
+    "entranceRef": "Numer",
+    "@entranceRef": {
+        "description": "Label for entrance ref in the form. Keep it short."
+    },
+    "entranceAccessYes": "otwarte",
+    "@entranceAccessYes": {},
+    "entranceAccessPrivate": "prywatne",
+    "@entranceAccessPrivate": {},
+    "entranceAccessNo": "nie",
+    "@entranceAccessNo": {},
+    "entranceAccessDelivery": "dostawy",
+    "@entranceAccessDelivery": {},
+    "entranceTypeMain": "główne",
+    "@entranceTypeMain": {},
+    "entranceTypeStaircase": "klatka schodowa",
+    "@entranceTypeStaircase": {},
+    "entranceTypeHome": "dom",
+    "@entranceTypeHome": {},
+    "entranceTypeShop": "sklep",
+    "@entranceTypeShop": {},
+    "entranceTypeService": "usługowe",
+    "@entranceTypeService": {},
+    "entranceTypeGarage": "garaż",
+    "@entranceTypeGarage": {},
+    "entranceTypeEmergency": "ewakuacyjne",
+    "@entranceTypeEmergency": {},
+    "addressHouseNumber": "Dom",
+    "@addressHouseNumber": {
+        "description": "Label for addr:housenumber in the form. Keep it short."
+    },
+    "addressHouseNotEmpty": "Nie powinno być puste",
+    "@addressHouseNotEmpty": {
+        "description": "Validator message for addr:housenumber."
+    },
+    "addressUnit": "Jednostka",
+    "@addressUnit": {
+        "description": "Label for addr:unit in the form. Keep it short."
+    },
+    "addressUnitOptional": "opcjonalnie",
+    "@addressUnitOptional": {
+        "description": "Hint for addr:unit that it's optional."
+    },
+    "addressStreet": "Ulica",
+    "@addressStreet": {
+        "description": "Label for addr:street in the form. Keep it short."
+    },
+    "addressPlace": "Miejsce",
+    "@addressPlace": {
+        "description": "Label for addr:place or addr:city in the form. Keep it short."
+    },
+    "apiStatusDownloading": "Pobieranie danych…",
+    "@apiStatusDownloading": {
+        "description": "Text displayed when the app is downloading data from the API."
+    },
+    "apiStatusUpdatingDB": "Zapisywanie elementów do bazy danych aplikacji",
+    "@apiStatusUpdatingDB": {
+        "description": "Text displayed when the app is updating the database with downloaded objects."
+    },
+    "apiStatusUploading": "Przesyłanie zmian",
+    "@apiStatusUploading": {
+        "description": "Text displayed when the app is uploading data to the API."
+    },
+    "accountFieldLogin": "Nazwa użytkownika",
+    "@accountFieldLogin": {
+        "description": "Label for the OSM login."
+    },
+    "accountAuthErrorMessage": "Błędna nazwa użytkownika lub hasło.",
+    "@accountAuthErrorMessage": {
+        "descripton": "Message for the alert dialog about an incorrect password."
+    },
+    "accountChangesets": "Zestawy zmian",
+    "@accountChangesets": {
+        "description": "Label for the number of changesets a user has uploaded."
+    },
+    "settingsPreferContact": "Preferuj przedrostek \"contact:\"",
+    "@settingsPreferContact": {
+        "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+    },
+    "accountLogout": "Wyloguj",
+    "@accountLogout": {
+        "description": "Button title for logging out of OSM."
+    },
+    "settingsLeftHand": "Kontrola lewą ręką",
+    "@settingsLeftHand": {
+        "description": "Switch for enabling left hand controls, when most buttons move to the left."
+    },
+    "settingsEditor": "Edytor",
+    "@settingsEditor": {
+        "description": "Title for the settings section for editor presets."
+    },
+    "settingsNumericKeyboard": "Rozszerzona klawiatura numeryczna",
+    "@settingsNumericKeyboard": {
+        "description": "Settings switch for using the full keyboard for numeric fields."
+    },
+    "accountAuthErrorTitle": "Błąd autoryzacji",
+    "@accountAuthErrorTitle": {
+        "descripton": "Title for the alert dialog about an incorrect password."
+    },
+    "accountPasswordWarningTitle": "Ostrzeżenie",
+    "@accountPasswordWarningTitle": {
+        "description": "Title for the warning dialog about keeping passwords on the device."
+    },
+    "accountFieldPassword": "Hasło",
+    "@accountFieldPassword": {
+        "description": "Label for the OSM password."
+    },
+    "accountUnreadMail": "Nieodczytana wiadomość",
+    "@accountUnreadMail": {
+        "description": "Label for the number of unread private messages a user has."
+    },
+    "entranceWheelchair": "Wózki inwalidzkie",
+    "@entranceWheelchair": {
+        "description": "Label for entrance wheelchair access in the form. Keep it short."
+    },
+    "entranceType": "Rodzaj",
+    "@entranceType": {
+        "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+    },
+    "editorDuplicate": "Możliwy duplikat w odległości {distance} m",
+    "@editorDuplicate": {
+        "description": "Message about a possible duplicate",
+        "placeholders": {
+            "distance": {
+                "type": "int",
+                "format": "decimalPattern",
+                "description": "Distance in meters",
+                "example": "71"
+            }
+        }
+    },
+    "aboutViewLog": "Dzienniki systemowe",
+    "@aboutViewLog": {
+        "description": "Button title to open the log view page."
+    },
+    "aboutVersionHistory": "Historia wersji",
+    "@aboutVersionHistory": {
+        "description": "Button title to open GitHub releases page."
+    },
+    "aboutInstalledVersion": "Wersja zainstalowana",
+    "@aboutInstalledVersion": {
+        "description": "Button description for installed app version."
+    },
+    "aboutProjectWebsite": "Strona projektu",
+    "@aboutProjectWebsite": {
+        "description": "Button title to open the every-door.app website."
+    },
+    "aboutSourceCode": "Kod źródłowy",
+    "@aboutSourceCode": {
+        "description": "Button title to open the repository on GitHub."
+    },
+    "aboutOnGitHub": "na GitHub",
+    "@aboutOnGitHub": {
+        "description": "Button description to indicate a link to GitHub."
+    },
+    "aboutLicense": "Licencja",
+    "@aboutLicense": {
+        "description": "Button title to open the app's license on GitHub."
+    },
+    "aboutReportIssue": "Zgłoś problem",
+    "@aboutReportIssue": {
+        "description": "Button title to open the app's GitHub issue page."
+    },
+    "aboutOnWeblate": "na Weblate",
+    "@aboutOnWeblate": {
+        "description": "Button description to indicate a link to Weblate."
+    },
+    "aboutFAQ": "Najczęstsze pytania",
+    "@aboutFAQ": {
+        "description": "Title for the FAQ section on the About page."
+    },
+    "settingsAbout": "O programie",
+    "@settingsAbout": {
+        "description": "Title for the About section in settings."
+    },
+    "aboutHelpTranslate": "Pomóż przetłumaczyć",
+    "@aboutHelpTranslate": {
+        "description": "Button title to open the app's Weblate page."
+    },
+    "aboutHelpImprove": "Pomóż w rozwoju {appTitle}",
+    "@aboutHelpImprove": {
+        "description": "Title for the Help improve section on the About page.",
+        "placeholders": {
+            "appTitle": {
+                "type": "String",
+                "description": "Name of app.",
+                "example": "Every Door"
+            }
+        }
+    },
+    "aboutLinks": "Odnośniki",
+    "@aboutLinks": {
+        "description": "Title for the links section on the About page."
+    },
+    "loadingTooMuchDataTitle": "Za dużo danych",
+    "@loadingTooMuchDataTitle": {
+        "description": "Title for a warning alert when there's too much data downloaded."
+    },
+    "loadingTooMuchData": "Usuń pobrane dane z Ustawień, aby przyspieszyć działanie edytora.",
+    "@loadingTooMuchData": {
+        "description": "Message of a warning alert when there's too much data downloaded."
+    },
+    "dataDownloadFailed": "Błąd pobierania",
+    "@dataDownloadFailed": {
+        "description": "Alert title for the error happened during a data download."
+    },
+    "dataDownloadSuccessful": "Pobrano pomyślnie",
+    "@dataDownloadSuccessful": {
+        "description": "Alert title for when the data was successfully downloaded."
+    },
+    "dataDownloadedCount": "{count,plural, =1{Pobrano {count} element.} few{Pobrano {count} elementy.} other{Pobrano {count} elementów.}}",
+    "@dataDownloadedCount": {
+        "description": "Alert contents when we've successfully downloaded some data.",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "fieldHoursClosed": "Zamknięte",
+    "@fieldHoursClosed": {
+        "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+    },
+    "fieldHoursPublicHolidays": "Święta publiczne",
+    "@fieldHoursPublicHolidays": {
+        "description": "Card title for the PH (public holidays) selector."
+    },
+    "fieldHoursHour": "Godzina",
+    "@fieldHoursHour": {
+        "description": "Label for the hour chooser."
+    },
+    "fieldHoursMinute": "Minuty",
+    "@fieldHoursMinute": {
+        "description": "Label for the minute chooser."
+    },
+    "faqLetters": "Czy mogę wpisywać litery do numeru ref lub numeru mieszkania?",
+    "@faqLetters": {},
+    "faqLettersContent": "Jeśli nie można przełączyć klawiatury numerycznej na pełną, sprawdź ustawienia aplikacji. Znajdują się one za przyciskiem w lewym górnym rogu. Włącz tam \"rozszerzoną klawiaturę numeryczną\".",
+    "@faqLettersContent": {},
+    "faqTagging": "Wszystkie pytania dotyczące dodawania znaczników",
+    "@faqTagging": {},
+    "faqChangeType": "Jak zmienić rodzaj udogodnienia?",
+    "@faqChangeType": {},
+    "faqChangeTypeContent": "Stuknij w tytuł edytora, w którym jest napisany jego rodzaj.",
+    "@faqChangeTypeContent": {},
+    "fieldHoursAsText": "Jako tekst",
+    "@fieldHoursAsText": {
+        "description": "Button title to open the raw opening hours editor."
+    },
+    "fieldHoursNumberedWeekday": "\"Ostatni poniedziałek\"",
+    "@fieldHoursNumberedWeekday": {
+        "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+    },
+    "changesSwipeLeft": "Przesuń w lewo, aby cofnąć zmianę",
+    "@changesSwipeLeft": {
+        "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+    },
+    "fieldHoursSpecificDays": "Określona data",
+    "@fieldHoursSpecificDays": {
+        "description": "Button title for selectors like Dec 31."
+    },
+    "buildingPostCode": "Kod pocztowy",
+    "@buildingPostCode": {
+        "description": "Label for addr:postcode in the form. Keep it short."
+    },
+    "faqMapTiny": "Dlaczego mapa jest tak mała?",
+    "@faqMapTiny": {},
+    "faqMapTinyContent": "Bo nie o to chodzi. Sprawdzasz tylko swoją pozycję na mapie i przesuwasz ją, aby dostosować. Obejrzyj poniższą listę udogodnień, posortowaną według odległości od Ciebie.\n\nMapa powiększa się, gdy edytujesz udogodnienia z dala od Twojej lokalizacji. Aplikacja ta została stworzona do edycji rzeczy, które widzisz oczami.",
+    "@faqMapTinyContent": {},
+    "faqCheckmarks": "Do czego służą znaczniki wyboru?",
+    "@faqCheckmarks": {},
+    "faqEntrance": "Jak dodać wejście do budynku?",
+    "@faqEntrance": {},
+    "faqEntranceContent": "Na dole znajduje się rząd przycisków dla trybów: mikromapowanie, udogodnienia, wejścia i uwagi.\n\nW trybie wejść dotknij lub przeciągnij przycisk drzwi w dolnym rogu na mapę.",
+    "@faqEntranceContent": {},
+    "faqFloors": "Czy piętra „3” i „/3” są takie same?",
+    "@faqFloors": {},
+    "faqCheckmarksContent": "Są to znaki, które potwierdziły dane dotyczące udogodnień. Dodają znacznik `check_date` z bieżącą datą.\n\nIdeą znaczników wyboru jest to, że, powiedzmy, po raz pierwszy zbadałeś połowę miasta. Potem po miesiącu wróciłeś i ponownie podszedłeś do zwiedzania. Musisz jakoś zaznaczyć, że widzisz udogodnienie, ale nic się w nim nie zmieniło. To jest znacznik wyboru: dotknij go i kontynuuj.\n\nZnak sprawdzenia jest aktualny przez dwa miesiące. Następnie możesz ponownie sprawdzić udogodnienia.",
+    "@faqCheckmarksContent": {},
+    "faqTaggingContent": "Dlaczego w edytorze brakuje obiektu? Kiedy te białe kropki są wyświetlane w trybie mikromapowania? Jak sortowane są przedmioty?\n\nOdpowiedzi na wszystkie te pytania znajdują się w [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Oto, na co możesz spojrzeć:\n\n* Kolejność kluczy dla głównego znacznika — lista `kMainKeys` w `main_key.dart`.\n* Jakie obiekty są pobierane — klasa `_EverythingKind`.\n* Co jest uważane za udogodnienie — klasa `AmenityKind`.\n* Które punkty są przyciągane do których linii — klasa `ElementKindImpl` i jej logika (zobacz odpowiednie podklasy).\n* Gdy obiekt mikromapowania jest niekompletny — klasa `NeedsMoreInfo`.",
+    "@faqTaggingContent": {},
+    "faqFloorsContent": "Nie. Pierwszy z nich ma wypełniony znacznik `addr:floor=3`. To jest piętro, które jest nadrukowane w nawigacji i powszechnie używane. Drugi nie ma tego znacznika, ale ma `level=3`. Ten numer to kolejny numer piętra od zera do `building:levels - 1`. Oznacza to, że w trzypiętrowym budynku wartość parametru `addr:floor` zależy od kraju, ale `level` to zawsze 0, 1 lub 2.\n\nOto jak notacja w edytorze odnosi się do tych znaczników:\n\n* `2`: `addr:floor=2` i niepuste `level=*`.\n* `4/`: `addr:floor=4`, ale nie ma znacznika `level`.\n* `/1`: `level=1`, ale nie ma znacznika `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (a w pobliżu znajduje się obiekt z tym samym `addr:floor`, ale innym `level` lub odwrotnie).",
+    "@faqFloorsContent": {},
+    "buildingMaterial": "Fasada",
+    "@buildingMaterial": {},
+    "buildingMaterialBrick": "cegła",
+    "@buildingMaterialBrick": {},
+    "buildingMaterialWood": "drewno",
+    "@buildingMaterialWood": {},
+    "buildingMaterialConcrete": "beton",
+    "@buildingMaterialConcrete": {},
+    "buildingMaterialPanels": "panele",
+    "@buildingMaterialPanels": {},
+    "buildingMaterialCementBlock": "bloczki cementowe",
+    "@buildingMaterialCementBlock": {},
+    "buildingMaterialStone": "kamień",
+    "@buildingMaterialStone": {},
+    "buildingMaterialMetal": "metal",
+    "@buildingMaterialMetal": {},
+    "buildingMaterialGlass": "szkło",
+    "@buildingMaterialGlass": {},
+    "buildingMaterialPlaster": "tynk",
+    "@buildingMaterialPlaster": {},
+    "versionsTitle": "Historia {elementRef}",
+    "@versionsTitle": {
+        "description": "Title for the element versions page.",
+        "placeholders": {
+            "elementRef": {
+                "type": "String",
+                "description": "Type and ID of OSM element.",
+                "example": "node/1234567"
+            }
+        }
+    },
+    "versionsFetchError": "Błąd pobierania historii wersji",
+    "@versionsFetchError": {
+        "description": "Message for when fetching element history fails due to unknown error."
+    },
+    "versionsNoTagChanges": "Brak zmian znacznika",
+    "@versionsNoTagChanges": {
+        "description": "Card body for when no tag changes occurred in this version."
+    },
+    "versionsEnableInternet": "Połącz się z internetem, aby pobrać historię wersji",
+    "@versionsEnableInternet": {
+        "description": "Message for when fetching element history fails due to lack of network connection."
+    },
+    "versionsRetryFetch": "Ponów próbę",
+    "@versionsRetryFetch": {
+        "description": "Button label to retry fetching history."
+    },
+    "versionsLocalChanges": "Zmiany lokalne",
+    "@versionsLocalChanges": {
+        "description": "Card header for the local changes diff."
+    },
+    "versionsVersionNumber": "Wersja #{number}",
+    "@versionsVersionNumber": {
+        "description": "Card header for the diff for this element version.",
+        "placeholders": {
+            "number": {
+                "type": "int",
+                "description": "Element version number.",
+                "example": "node/1234567"
+            }
+        }
+    },
+    "versionsVersionMeta": "przez {user} {datetime}",
+    "@versionsVersionMeta": {
+        "description": "Card body to show metadata about the element version.",
+        "placeholders": {
+            "user": {
+                "type": "String",
+                "description": "OSM username of version creator.",
+                "example": "Zverik"
+            },
+            "datetime": {
+                "type": "String",
+                "description": "Datetime for when version was created.",
+                "example": "July 21, 2022 12:30"
+            }
+        }
+    },
+    "changesMapNotes": "Uwagi do mapy i rysunki",
+    "@changesMapNotes": {
+        "description": "Title for a grouped change tile for map notes and drawings."
+    },
+    "changesOsmNote": "Uwaga OSM",
+    "@changesOsmNote": {
+        "description": "Prefix for an OSM note in a changes tile."
+    },
+    "notesAnonymous": "Anonimowy",
+    "@notesAnonymous": {
+        "description": "Name for anonymous note submitters."
+    },
+    "notesClose": "Rozwiąż",
+    "@notesClose": {
+        "description": "Button title for closing a note."
+    },
+    "notesCloseMessage": "Oznaczyć problem z tej uwagi jako rozwiązany?",
+    "@notesCloseMessage": {
+        "description": "Confirmation message when pressed a close note button."
+    },
+    "navImagery": "Przełącz podkład",
+    "@navImagery": {
+        "description": "Tooltip for the map / imagery button on the nav panel."
+    },
+    "navPoiMode": "Tryb udogodnień",
+    "@navPoiMode": {
+        "description": "Tooltip for the POI / amenity mode button on the nav panel."
+    },
+    "navEntrancesMode": "Tryb wejść",
+    "@navEntrancesMode": {},
+    "navNotesMode": "Tryb uwag",
+    "@navNotesMode": {
+        "description": "Tooltip for the notes mode button on the nav panel."
+    },
+    "mapSettings": "Ustawienia",
+    "@mapSettings": {
+        "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+    },
+    "mapLocate": "Wróć do mnie",
+    "@mapLocate": {
+        "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+    },
+    "mapZoomIn": "Przybliż",
+    "@mapZoomIn": {
+        "description": "Tooltip for the zoom in (+) button on a map."
+    },
+    "mapZoomOut": "Oddal",
+    "@mapZoomOut": {
+        "description": "Tooltip for the zoom out (-) button on a map."
+    },
+    "editorMarkChecked": "Oznacz jako sprawdzone",
+    "@editorMarkChecked": {
+        "description": "Tooltip for a button to mark the amenity checked without changing properties."
+    },
+    "editorHistory": "Historia",
+    "@editorHistory": {
+        "description": "Tooltip for a button to open version history pane."
+    },
+    "editorTags": "Surowe znaczniki",
+    "@editorTags": {
+        "description": "Tooltip for a button to open tags pane."
+    },
+    "tagsShare": "Udostępnij",
+    "@tagsShare": {
+        "description": "Tooltip for the sharing button on the tags panel."
+    },
+    "tagsDelete": "Wyczyść",
+    "@tagsDelete": {
+        "description": "Tooltip for a button next to a tag value to delete the tag."
+    },
+    "settingsCacheTiles": "Pobierz kafelki",
+    "@settingsCacheTiles": {
+        "description": "Tooltip for a button to download and cache tiles for imageries."
+    },
+    "settingsLanguage": "Język",
+    "@settingsLanguage": {
+        "description": "Settings entry for changing the app language."
+    },
+    "settingsGoogle": "Użyj pozycjonowania wspomaganego przez Google",
+    "@settingsGoogle": {
+        "description": "Settings switch for disabling Google services for location."
+    },
+    "entrancesAddEntrance": "Dodaj wejście",
+    "@entrancesAddEntrance": {
+        "description": "Tooltip for the button to add an entrance node."
+    },
+    "navUpload": "Prześlij",
+    "@navUpload": {
+        "description": "Tooltip for the upload data button on the nav panel."
+    },
+    "navMicromappingMode": "Tryb mikromapowania",
+    "@navMicromappingMode": {
+        "description": "Tooltip for the micromapping mode button on the nav panel."
+    },
+    "navDownload": "Pobierz",
+    "@navDownload": {
+        "description": "Tooltip for the download data button on the nav panel."
+    },
+    "tagsRestore": "Przywróć",
+    "@tagsRestore": {
+        "description": "Tooltip for a button next to a tag value to restore the value to the original."
+    },
+    "mapFilter": "Filtry",
+    "@mapFilter": {
+        "description": "Tooltip for the amenity filter button on a map."
+    },
+    "settingsSystem": "System",
+    "@settingsSystem": {
+        "description": "Title for the settings section for system-related switches."
+    },
+    "fieldHoursSDAddOne": "Dodaj datę",
+    "@fieldHoursSDAddOne": {
+        "description": "Tooltip for button on the specific days interval to add one specific date."
+    },
+    "changesPurge": "Wyczyść zmiany",
+    "@changesPurge": {
+        "description": "Purge all changes"
+    },
+    "fieldHoursChooseTime": "Godziny i minuty",
+    "@fieldHoursChooseTime": {
+        "description": "Tooltip for a button to open hours and minutes chooser."
+    },
+    "fieldHoursClear": "Wyczyść",
+    "@fieldHoursClear": {
+        "description": "Tooltip for a button to clear the opening_hours value."
+    },
+    "fieldHoursSave": "Zapisz",
+    "@fieldHoursSave": {
+        "description": "Tooltip for a button to save opening_hours value."
+    },
+    "fieldHoursRemoveFragment": "Usuń fragment",
+    "@fieldHoursRemoveFragment": {
+        "description": "Tooltip for a button to remove a fragment in the hours editor."
+    },
+    "fieldHoursRemoveBreak": "Usuń przerwę",
+    "@fieldHoursRemoveBreak": {
+        "description": "Tooltip for a button to remove a break in an opening hours fragment."
+    },
+    "fieldHoursSDRemove": "Usuń",
+    "@fieldHoursSDRemove": {
+        "description": "Tooltip for button on the specific days interval to remove some days."
+    },
+    "fieldNameLanguages": "Inny język",
+    "@fieldNameLanguages": {
+        "description": "Tooltip for a button to add a name in another language."
+    },
+    "fieldHoursSDAddRange": "Dodaj zakres",
+    "@fieldHoursSDAddRange": {
+        "description": "Tooltip for button on the specific days interval to add a range of dates."
+    },
+    "fieldNameCopy": "Kopiuj wartość",
+    "@fieldNameCopy": {
+        "description": "Tooltip for a button to copy name value between languages."
+    },
+    "entrancesAddBuilding": "Dodaj budynek",
+    "@entrancesAddBuilding": {
+        "description": "Tooltip for the button to add a building node."
+    },
+    "notesAddNote": "Dodaj uwagę",
+    "@notesAddNote": {
+        "description": "Tooltip for the button to add a note."
+    },
+    "fieldCardsOnly": "tylko karty",
+    "@fieldCardsOnly": {
+        "description": "Payment field label for cards only."
+    },
+    "faqYellow": "Czemu niektóre numery budynków są żółte?",
+    "@faqYellow": {},
+    "faqYellowContent": "Nieżółte etykiety w trybie wejść i białe kropki w trybie mikromapowania oznaczają, że elementom brakuje jakichś ważnych atrybutów. Na przykład:\n\n* Od budynków oczekuje się, że będą miały podana liczbę poziomów.\n* Wejścia powinny mieć typ, a dla klatek schodowych powinien być podany zakres mieszkań.\n* Ławki powinny mieć podane materiał i oparcie.\n* Drzewa powinny mieć typ i cykl liści.",
+    "@faqYellowContent": {},
+    "warningFixme": "Napraw mnie: {value}",
+    "@warningFixme": {
+        "description": "Warning message for when an object has a non-empty fixme value.",
+        "placeholders": {
+            "value": {
+                "description": "Value of the fixme tag"
+            }
+        }
+    },
+    "warningWrongTag": "Zły znacznik: {tag}",
+    "@warningWrongTag": {
+        "description": "Warning message for tags like shop=yes and amenity=no.",
+        "placeholders": {
+            "tag": {
+                "description": "The tag with the issue",
+                "example": "shop=yes"
+            }
+        }
+    },
+    "warningTooOld": "Oznaczenie udogodnienia jest stare: {years} lata",
+    "@warningTooOld": {
+        "description": "Warning message for when an amenity is many years old.",
+        "placeholders": {
+            "years": {
+                "description": "How many years ago the amenity was edited.",
+                "example": "5 years"
+            }
+        }
+    },
+    "years": "{count,plural, =1{{count} rok} few{{count} lata} other{{count} lat}}",
+    "@years": {
+        "description": "Number of years. Used in the \"amenity is N years old\" message.",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "settingsHashtags": "Hasztagi zestawu zmian",
+    "@settingsHashtags": {
+        "description": "Settings entry for editing changeset hashtags."
+    },
+    "hashtagsConfirm": "Zatwierdź znaczniki przy przesyłaniu",
+    "@hashtagsConfirm": {
+        "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+    },
+    "notesCancelMessage": "Czy anulować Twoją uwagę OSM?",
+    "@notesCancelMessage": {
+        "description": "Message when cancelling an OSM note that has non-empty content."
+    },
+    "hashtagsLabel": "Słowa do hasztagów",
+    "@hashtagsLabel": {
+        "description": "Label for a text field with changeset hashtags."
+    },
+    "fieldDirectionSet": "Ustaw",
+    "@fieldDirectionSet": {
+        "description": "Button label for setting a direction (0-360°) value."
+    },
+    "notesComment": "Twój komentarz",
+    "@notesComment": {
+        "description": "Label for the note comment field."
+    },
+    "addressBlock": "Blok",
+    "@addressBlock": {
+        "description": "Label for addr:block_number or addr_block. Keep it short."
+    },
+    "fieldHeightMeters": "Oczekiwana długość w metrach, np. 5.4",
+    "@fieldHeightMeters": {
+        "description": "Validation message for when meters are expected."
+    },
+    "fieldHeightFeet": "Oczekiwana długość w stopach, np. 7'4\"",
+    "@fieldHeightFeet": {
+        "description": "Validation message for when feet are expected."
+    },
+    "fieldHeightAny": "Oczekiwana długość, mp. 5.4 lub 7'4\"",
+    "@fieldHeightAny": {
+        "description": "Validation message for when meters or feet are expected."
+    },
+    "fieldPaymentAround": "Zwyczajowe opcje wokół",
+    "@fieldPaymentAround": {
+        "description": "Tile name for payment options found on the map."
+    },
+    "warningWrongMode": "Zły tryb, sprawdź duplikaty",
+    "@warningWrongMode": {
+        "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+    },
+    "fieldPaymentLocal": "Opcje lokalne",
+    "@fieldPaymentLocal": {
+        "description": "Tile name for stored local payment options."
+    },
+    "fieldPaymentUseGlobal": "Moje ustawienia domyślne są lepsze",
+    "@fieldPaymentUseGlobal": {
+        "description": "Button to copy global default to local payment settings."
+    },
+    "fieldPaymentUseSame": "Użyj tych samych znaczników do mapowania",
+    "@fieldPaymentUseSame": {
+        "description": "Button title for copying payment options around to the local settings."
+    },
+    "fieldPaymentTitle": "Płatność kartami",
+    "@fieldPaymentTitle": {
+        "description": "Pane title for card payment options."
+    },
+    "warningUnsupported": "Ten typ obiektu nie jest obsługiwany",
+    "@warningUnsupported": {
+        "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+    },
+    "fieldPaymentChoose": "Wybierz inne znaczniki lokalne...",
+    "@fieldPaymentChoose": {
+        "description": "Button title for setting up different local payment options."
+    },
+    "fieldNameLangSearch": "Znajdź język",
+    "@fieldNameLangSearch": {
+        "description": "Hint for the text field for finding a language in a list."
+    },
+    "fieldPaymentGlobal": "Globalne opcje domyślne",
+    "@fieldPaymentGlobal": {
+        "description": "Tile name for global payment defaults."
+    },
+    "drawRoad": "Droga",
+    "@drawRoad": {
+        "description": "Tool description: paved road. Keep it short."
+    },
+    "drawChangeTool": "Zmień narzędzie",
+    "@drawChangeTool": {
+        "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+    },
+    "drawEraser": "Gumka",
+    "@drawEraser": {
+        "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+    },
+    "drawCycleway": "Ścieżka rowerowa",
+    "@drawCycleway": {
+        "description": "Tool description: segregated cycleway. Keep it short."
+    },
+    "drawTrack": "Droga leśna/rolna",
+    "@drawTrack": {
+        "description": "Tool description: unpaved forestry/farm road. Keep it short."
+    },
+    "drawWall": "Mur",
+    "@drawWall": {
+        "description": "Tool description: wall, non-see-through barrier. Keep it short."
+    },
+    "drawFence": "Ogrodzenie",
+    "@drawFence": {
+        "description": "Tool description: fence, see-through barrier. Keep it short."
+    },
+    "apiStatusUploadingNotes": "Przesyłanie uwag",
+    "@apiStatusUploadingNotes": {
+        "description": "Text displayed when the app is uploading notes to the API."
+    },
+    "drawUndo": "Cofnij",
+    "@drawUndo": {},
+    "drawScribble": "Bazgroły",
+    "@drawScribble": {
+        "description": "Tool description: scribble (type-less drawings). Keep it short."
+    },
+    "drawFootway": "Chodnik",
+    "@drawFootway": {
+        "description": "Tool description: paved/maintained footway. Keep it short."
+    },
+    "drawPath": "Ścieżka",
+    "@drawPath": {
+        "description": "Tool description: unpaved narrow footway. Keep it short."
+    },
+    "drawPower": "Linia elektryczna",
+    "@drawPower": {
+        "description": "Tool description: power line. Keep it short."
+    },
+    "drawStream": "Strumień",
+    "@drawStream": {
+        "description": "Tool description: stream or other narrow waterway. Keep it short."
+    },
+    "drawCyclewayShared": "Droga rowerowa",
+    "@drawCyclewayShared": {
+        "description": "Tool description: non-segregated cycleway. Keep it short."
+    },
+    "notesDelete": "Usuń",
+    "@notesDelete": {
+        "description": "Button title for deleting a new note."
+    },
+    "drawCulvert": "Przepust",
+    "@drawCulvert": {
+        "description": "Tool description: underground water pipe, culvert. Keep it short."
+    },
+    "editorDeleteBuilding": "Zburzony",
+    "@editorDeleteBuilding": {
+        "description": "Button title to mark a building demolished."
+    },
+    "fieldWebsiteQR": "Zeskanuj kod QR",
+    "@fieldWebsiteQR": {
+        "description": "Page title for the QR code scanner."
+    },
+    "editorDeleteKeepAddressButton": "Usuń, ale zachowaj adres",
+    "@editorDeleteKeepAddressButton": {
+        "description": "Button for keeping the address"
+    },
+    "tileDragDownload": "Spróbuj nacisnąć przycisk pobierania.",
+    "@tileDragDownload": {
+        "description": "Message displayed when there is nothing around, and a download button is present."
+    },
+    "warningFixmeNote": "Zostanie przekonwertowany na uwagę OSM",
+    "@warningFixmeNote": {
+        "description": "Warning message for an amenity=fixme object with just a name."
+    },
+    "settingsPlugins": "Wtyczki",
+    "@settingsPlugins": {
+        "description": "Title for the settings section and the page about managing plugins."
+    },
+    "pluginsEnable": "Włącz",
+    "@pluginsEnable": {
+        "description": "Button for enabling a deactivated plugin."
+    },
+    "pluginsDisable": "Wyłącz",
+    "@pluginsDisable": {
+        "description": "Button for deactivating a plugin."
+    },
+    "pluginsDisabledHeader": "Wyłączone",
+    "@pluginsDisabledHeader": {
+        "description": "Header for the section listing deactivated, disabled plugins."
+    },
+    "pluginsRepository": "Repozytorium wtyczek",
+    "@pluginsRepository": {
+        "description": "Page title for a list of plugins stored on a server, to choose from."
+    },
+    "pluginsSearch": "Wyszukaj",
+    "@pluginsSearch": {
+        "description": "Searching text field hint on the plugin repository page."
+    },
+    "pluginsUpdate": "Zaktualizuj",
+    "@pluginsUpdate": {
+        "description": "Button for updating an installed plugin to the latest version."
+    },
+    "pluginsInstall": "Zainstaluj",
+    "@pluginsInstall": {
+        "description": "Button to install a new plugin from a server."
+    },
+    "pluginsUrl": "Adres URL wtyczki",
+    "@pluginsUrl": {
+        "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+    },
+    "pluginsMore": "Więcej...",
+    "@pluginsMore": {
+        "description": "Button to see details about a specific plugin and manage it."
+    },
+    "pluginsInstallation": "Instalacja wtyczek",
+    "@pluginsInstallation": {
+        "description": "Page title for installing a single plugin from the web."
+    },
+    "pluginsInstallQuestion": "Zainstalować wtyczkę \"{plugin}\" w wersji {version}?",
+    "@pluginsInstallQuestion": {
+        "description": "Message that appears when installing a plugin from an unverified source.",
+        "placeholders": {
+            "plugin": {
+                "description": "Identifier of a plugin",
+                "example": "cycle_barriers"
+            },
+            "version": {
+                "description": "Plugin version, usually numbers",
+                "example": "1.2"
+            }
+        }
+    },
+    "pluginsUnknownVersion": "nieznane",
+    "@pluginsUnknownVersion": {
+        "description": "What is displayed instead of a version number, if the plugin version is unknown."
+    },
+    "pluginsInstallSource": "Źródło: {host}",
+    "@pluginsInstallSource": {
+        "description": "Message to display a host from which a plugin is installed.",
+        "placeholders": {
+            "host": {
+                "description": "Web host, no path or scheme",
+                "example": "plugins.every-door.app"
+            }
+        }
+    },
+    "pluginsSeeLogs": "Zobacz dzienniki",
+    "@pluginsSeeLogs": {
+        "description": "Button title to browse the system log when a plugin installation error has occurred."
+    },
+    "mapStraight": "Obróć z powrotem",
+    "@mapStraight": {
+        "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+    },
+    "settingsCachesClearRaster": "Wyczyść pamięć podręczną kafelków rastrowych",
+    "@settingsCachesClearRaster": {
+        "description": "Settings data management entry for clearing all cached raster tiles."
+    },
+    "settingsCachesClearRenderedVector": "Wyczyść renderowane pliki wektorowe",
+    "@settingsCachesClearRenderedVector": {
+        "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+    },
+    "settingsCachesClearVector": "Wyczyść pamięci podręczne kafelków wektorowych",
+    "@settingsCachesClearVector": {
+        "description": "Settings data management entry for clearing all cached vector tiles."
+    },
+    "settingsCachesClearManual": "Wyczyść ręcznie pobrane kafelki",
+    "@settingsCachesClearManual": {
+        "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+    },
+    "settingsCachesSelectTiles": "Wybierz kafelki do pobrania",
+    "@settingsCachesSelectTiles": {
+        "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+    },
+    "settingsCachesDownloadData": "Pobierz dane",
+    "@settingsCachesDownloadData": {
+        "description": "Button label for pre-downloading OpenStreetMap data."
+    },
+    "settingsCachesDownloadMap": "Pobierz kafelki mapy",
+    "@settingsCachesDownloadMap": {
+        "description": "Button label for pre-downloading OSM map tiles."
+    },
+    "settingsCachesDownloadSatellite": "Pobierz obrazy z satelity",
+    "@settingsCachesDownloadSatellite": {
+        "description": "Button label for pre-downloading Satellite imagery tiles."
+    },
+    "settingsCachesCancel": "Anuluj ({percent}%)",
+    "@settingsCachesCancel": {
+        "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+        "placeholders": {
+            "percent": {
+                "description": "Percent number between 0 and 100.",
+                "example": "50"
+            }
+        }
     }
-  },
-  "editorDeleteButton": "Usuń",
-  "@editorDeleteButton": {
-    "description": "Delete"
-  },
-  "tagsUrlCopied": "Link został skopiowany do schowka",
-  "@tagsUrlCopied": {
-    "description": "Popup message when the link to the object was copied to the clipboard."
-  },
-  "tagsNewPoint": "Nowy punkt",
-  "@tagsNewPoint": {
-    "description": "Tag editor panel title for a new amenity."
-  },
-  "tagsAddTag": "Dodaj znacznik",
-  "@tagsAddTag": {
-    "description": "Tags panel button for adding a new tag."
-  },
-  "tagsValueLong": "Wartość jest zbyt długa",
-  "@tagsValueLong": {
-    "description": "Validation error for when the value length exceeds 255 characters."
-  },
-  "settingsTitle": "Konfiguracja",
-  "@settingsTitle": {
-    "description": "App bar title for the settings panel."
-  },
-  "loadingStart": "Inicjalizacja…",
-  "@loadingStart": {
-    "description": "Initial message for the loading screen, virtually unseen."
-  },
-  "loadingPresets": "Wczytywanie szablonów…",
-  "@loadingPresets": {
-    "description": "Loading screen message for loading presets."
-  },
-  "loadingChanges": "Wczytywanie zmian…",
-  "@loadingChanges": {
-    "description": "Loading screen message for loading stored changes."
-  },
-  "chooseLocation": "Wybierz lokalizację",
-  "@chooseLocation": {
-    "description": "Title for the screen for choosing a location on a map."
-  },
-  "editorCloseMessage": "Porzucić zmiany bez ich zapisywania?",
-  "@editorCloseMessage": {
-    "description": "Message on closing the editor without saving changes."
-  },
-  "editorMissing": "Nie istnieje",
-  "@editorMissing": {
-    "description": "Button title to delete an amenity (since it's missing)."
-  },
-  "settingsDataManagement": "Zarządzanie danymi",
-  "@settingsDataManagement": {
-    "description": "Section title for data settings."
-  },
-  "settingsApiServer": "Serwer API",
-  "@settingsApiServer": {
-    "description": "Section title for API server settings."
-  },
-  "fieldHoursButton": "Ustaw godziny otwarcia",
-  "@fieldHoursButton": {
-    "description": "Text on the hours button when there's no value."
-  },
-  "fieldHoursWeekdays": "Pn Wt Śr Cz Pt So Nd",
-  "@fieldHoursWeekdays": {
-    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
-  },
-  "fieldHoursBreak": "Przerwa",
-  "@fieldHoursBreak": {
-    "description": "Title for the break interval."
-  },
-  "fieldHoursFullDay": "Cały dzień",
-  "@fieldHoursFullDay": {
-    "description": "Switch for 24/7 opening hours."
-  },
-  "fieldHoursOpens": "Otwiera się",
-  "@fieldHoursOpens": {
-    "description": "Title for the interval start."
-  },
-  "fieldHoursAddBreak": "Dodaj przerwę",
-  "@fieldHoursAddBreak": {
-    "description": "Button in opening hours editor to add a break."
-  },
-  "changesPurgeMessage": "Usunąć wszystkie zarejestrowane zmiany i przywrócić oryginalne dane?",
-  "@changesPurgeMessage": {
-    "description": "Dialog message for confirming deletion of all changes."
-  },
-  "fieldHoursTitle": "Godziny otwarcia",
-  "@fieldHoursTitle": {
-    "description": "Title for the opening hours editor pane."
-  },
-  "fieldHoursCloses": "Zamyka się",
-  "@fieldHoursCloses": {
-    "description": "Title for the interval end."
-  },
-  "fieldHoursNext": "Dalej",
-  "@fieldHoursNext": {
-    "description": "Button in the interval editor to move to the closing time."
-  },
-  "fieldCardsAccepted": "akceptowane",
-  "@fieldCardsAccepted": {
-    "description": "Payment field label for cards accepted."
-  },
-  "enableLocationMessage": "Zezwól aplikacji na dostęp do lokalizacji w panelu ustawień, który zostanie wyświetlony.",
-  "@enableLocationMessage": {
-    "description": "Contents of the alert for allowing app access to location."
-  },
-  "buttonYes": "Tak",
-  "@buttonYes": {
-    "description": "Button for approval."
-  },
-  "buttonNo": "Nie",
-  "@buttonNo": {
-    "description": "Button for dismissal."
-  },
-  "buildingX": "Budynek {n}",
-  "@buildingX": {
-    "description": "Option displayed when there's multiple buildings under a tap.",
-    "placeholders": {
-      "n": {
-        "example": "12A"
-      }
-    }
-  },
-  "addressX": "Adres {n}",
-  "@addressX": {
-    "description": "Option displayed when there's multiple addresses under a tap.",
-    "placeholders": {
-      "n": {
-        "example": "12A"
-      }
-    }
-  },
-  "entranceX": "Wejście {n}",
-  "@entranceX": {
-    "description": "Option displayed when there's multiple entrances under a tap.",
-    "placeholders": {
-      "n": {
-        "example": "1-15"
-      }
-    }
-  },
-  "buildingLevels": "Piętra",
-  "@buildingLevels": {
-    "description": "Label for building:levels in the form. Keep it short."
-  },
-  "buildingRoofLevels": "Piętra w dachu",
-  "@buildingRoofLevels": {
-    "description": "Label for roof:levels in the form. Keep it short."
-  },
-  "buildingRoofShape": "Kształt dachu",
-  "@buildingRoofShape": {
-    "description": "Label for roof:shape in the form. Keep it short."
-  },
-  "buildingType": "Rodzaj",
-  "@buildingType": {
-    "description": "Label for building type (value of building=*) in the form. Keep it short."
-  },
-  "buildingMoreButton": "Pokaż więcej",
-  "@buildingMoreButton": {
-    "description": "Button label for opening the building object in a full editor."
-  },
-  "buildingTypeAddress": "adres",
-  "@buildingTypeAddress": {},
-  "buildingTypeCommercial": "komercyjny",
-  "@buildingTypeCommercial": {},
-  "buildingTypeShed": "szopa",
-  "@buildingTypeShed": {},
-  "buildingTypeIndustrial": "przemysłowy",
-  "@buildingTypeIndustrial": {},
-  "buildingTypeGarage": "garaż",
-  "@buildingTypeGarage": {},
-  "buildingTypeConstruction": "w budowie",
-  "@buildingTypeConstruction": {},
-  "entranceIsUnit": "Zapisz numer mieszkania w addr:unit",
-  "@entranceIsUnit": {
-    "description": "Label for a switch to use addr:unit instead of addr:flats."
-  },
-  "entranceAccess": "Dostęp",
-  "@entranceAccess": {
-    "description": "Label for entrance access in the form. Keep it short."
-  },
-  "fieldPhoneWrong": "Nieprawidłowy format numeru telefonu",
-  "@fieldPhoneWrong": {
-    "description": "Validation message for a non-standard phone number."
-  },
-  "fieldFloorFloorDesc": "Piętro jak w nawigacji i w windach",
-  "@fieldFloorFloorDesc": {
-    "descripton": "Description for the \"level\" tag."
-  },
-  "entranceFlats": "Mieszkania",
-  "@entranceFlats": {
-    "description": "Label for addr:flats in the form. Keep it short."
-  },
-  "fieldCheckboxYes": "tak",
-  "@fieldCheckboxYes": {
-    "description": "Checkbox name for yes."
-  },
-  "fieldCheckboxNo": "nie",
-  "@fieldCheckboxNo": {
-    "description": "Checkbox name for no."
-  },
-  "messageNoData": "Brak danych, dotknij tutaj, aby pobrać",
-  "@messageNoData": {
-    "description": "Message that appears on the main screen when there's no OSM data."
-  },
-  "fieldFloorLevelDesc": "Numer piętra zaczynający się od 0 dla parteru",
-  "@fieldFloorLevelDesc": {
-    "description": "Description for the \"addr:floor\" tag."
-  },
-  "messageDataObsolete": "Dane są przestarzałe, dotknij tutaj, aby odświeżyć",
-  "@messageDataObsolete": {
-    "description": "Message that appears on the main screen when OSM data is outdated."
-  },
-  "enableGPS": "Włącz GPS",
-  "@enableGPS": {
-    "description": "Title of the alert for enabling location services."
-  },
-  "enableGPSMessage": "Włącz usługi lokalizacyjne w panelu ustawień, który zostanie wyświetlony.",
-  "@enableGPSMessage": {
-    "description": "Contents of the alert for enabling location services."
-  },
-  "enableLocation": "Włącz lokalizację",
-  "@enableLocation": {
-    "description": "Title of the alert for allowing app access to location."
-  },
-  "entranceFlatsNumberList": "Powinna to być lista liczb",
-  "@entranceFlatsNumberList": {
-    "description": "Validation message for addr:flats."
-  },
-  "tileNothingAround": "W promieniu {distance} metrów nie odnaleziono żadnych użytecznych punktów.",
-  "@tileNothingAround": {
-    "description": "First part of the message displayed when there is nothing around.",
-    "placeholders": {
-      "distance": {
-        "type": "int",
-        "format": "decimalPattern",
-        "description": "Distance number in meters, at least 50.",
-        "example": "150"
-      }
-    }
-  },
-  "tileDragTheMap": "Zbliż się do czegokolwiek, przeciągnij mapę lub dodaj brakujące udogodnienie.",
-  "@tileDragTheMap": {
-    "description": "Message displayed when there is nothing around."
-  },
-  "tileDragOrUnfilter": "Poruszaj się wokół, dodaj udogodnienie lub wyczyść filtr.",
-  "@tileDragOrUnfilter": {
-    "description": "Message displayer when there's nothing around, and a filter is on."
-  },
-  "editorLoadingPreset": "Wczytywanie szablonu…",
-  "@editorLoadingPreset": {
-    "description": "Message shown when loading a preset in the editor."
-  },
-  "editorRestoreTitle": "Czy jest otwarty?",
-  "@editorRestoreTitle": {
-    "description": "Title for question on restoring an edited defunct amenity."
-  },
-  "editorRestoreMessage": "{amenity} jest nieaktywne. Czy chcesz oznaczyć je jako aktywne?",
-  "@editorRestoreMessage": {
-    "description": "Question on restoring an edited defunct amenity.",
-    "placeholders": {
-      "amenity": {
-        "description": "Amenity title"
-      }
-    }
-  },
-  "tagsKey": "Klucz",
-  "@tagsKey": {
-    "description": "Tags panel, add a new tag dialog: key label"
-  },
-  "tagsValue": "Wartość",
-  "@tagsValue": {
-    "description": "Tags panel, add a new tag dialog: value label"
-  },
-  "tagsKeyError": "Klucz jest zbyt rzadki",
-  "@tagsKeyError": {
-    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
-  },
-  "settingsPresentation": "Prezentacja",
-  "@settingsPresentation": {
-    "description": "Section title for presentation options."
-  },
-  "settingsLoginDetails": "Konto OSM",
-  "@settingsLoginDetails": {
-    "description": "Settings entry for logging in to OSM."
-  },
-  "settingsPurgeData": "Wyczyść przestarzałe dane z pamięci podręcznej",
-  "@settingsPurgeData": {
-    "description": "Settings entry for purging obsolete OSM data."
-  },
-  "settingsPurgeAllData": "Wyczyść wszystkie pobrane dane",
-  "@settingsPurgeAllData": {
-    "description": "Settings entry for purging all cached OSM data."
-  },
-  "settingsPurgeDataTitle": "Usunąć dane?",
-  "@settingsPurgeDataTitle": {
-    "description": "Confirmation dialog title for when purging all downloaded data."
-  },
-  "settingsPurgeDataMessage": "Będziesz musiał ponownie wszystko pobrać. Kontynuować?",
-  "@settingsPurgeDataMessage": {
-    "description": "Confirmation dialog message for when purging all downloaded data."
-  },
-  "settingsPurgedObsoleteTitle": "Przestarzałe dane",
-  "@settingsPurgedObsoleteTitle": {
-    "description": "Notification title for cleaning obsolete data from the cache."
-  },
-  "settingsPurgedAllTitle": "Usunięte dane",
-  "@settingsPurgedAllTitle": {
-    "description": "Notification title for cleaning all downloaded data from the cache."
-  },
-  "settingsBackground": "Obraz podkładu",
-  "@settingsBackground": {
-    "description": "Settings entry for choosing background satellite imagery."
-  },
-  "settingsUploads": "Oczekujące wysyłki",
-  "@settingsUploads": {
-    "description": "Settings entry for browsing changes to upload."
-  },
-  "settingsPurgedMessage": "{count,plural, =1{Wyczyszczony {count} element} few{Wyczyszczone {count} elementy} other{Wyczyszczonych {count} elementów}}",
-  "@settingsPurgedMessage": {
-    "description": "Notification message after some cached elements were deleted.",
-    "placeholders": {
-      "count": {}
-    }
-  },
-  "editorMarkDefunct": "Oznacz jako zamknięte",
-  "@editorMarkDefunct": {
-    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
-  },
-  "settingsDefaultPayment": "Domyślne karty płatnicze",
-  "@settingsDefaultPayment": {
-    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
-  },
-  "accountTitle": "Konto OpenStreetMap",
-  "@accountTitle": {
-    "description": "Title for the account page."
-  },
-  "accountLoginOAuth": "Logowanie poprzez OAuth",
-  "@accountLoginOAuth": {
-    "description": "Button label for logging in to OSM via OAuth."
-  },
-  "accountOAuthError": "Błąd OAuth",
-  "@accountOAuthError": {
-    "description": "Alert title for when OAuth login failed."
-  },
-  "accountLoginPassword": "Logowanie poprzez hasło",
-  "@accountLoginPassword": {
-    "description": "Button label for logging in to OSM with a password."
-  },
-  "changesDeletedUndo": "Wycofaj",
-  "@changesDeletedUndo": {
-    "description": "Button label for undoing a change deletion."
-  },
-  "changesPending": "Oczekujące",
-  "@changesPending": {
-    "description": "Subtitle for a change that has not yet been sent to OSM API."
-  },
-  "changesPurgeTitle": "Wyczyścić zmiany?",
-  "@changesPurgeTitle": {
-    "description": "Dialog title for confirming deletion of all changes."
-  },
-  "accountPasswordWarningMessage": "Twoje hasło zostanie zapisane na urządzeniu. Wybierz to tylko wtedy, gdy OAuth nie powiedzie się.",
-  "@accountPasswordWarningMessage": {
-    "description": "Message for the warning dialog about keeping passwords on the device."
-  },
-  "accountPasswordWarningButton": "Zrozumiano",
-  "@accountPasswordWarningButton": {
-    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
-  },
-  "accountPasswordTitle": "Dane OSM",
-  "@accountPasswordTitle": {
-    "description": "Title for the input dialog for login and password."
-  },
-  "changesCount": "{count,plural, =1{{count} zmiana} few{{count} zmiany} other{{count} zmian}}",
-  "@changesCount": {
-    "description": "Number of changed elements to display or to upload.",
-    "placeholders": {
-      "count": {}
-    }
-  },
-  "changesUploadedTitle": "Przesłano",
-  "@changesUploadedTitle": {
-    "description": "Title for the notification about a successful upload."
-  },
-  "changesUploadedMessage": "Przesłano {changes} do OpenStreetMap.",
-  "@changesUploadedMessage": {
-    "description": "Message for the notification about a successful upload.",
-    "placeholders": {
-      "changes": {
-        "description": "Number of changes",
-        "example": "5 changes"
-      }
-    }
-  },
-  "changesUploadFailedTitle": "Przesłanie zakończone niepowodzeniem",
-  "@changesUploadFailedTitle": {
-    "descripton": "Title for the notification about a failed changes upload."
-  },
-  "changesDeletedChange": "Usunięta {change}",
-  "@changesDeletedChange": {
-    "description": "Message for the snack bar after you swipe a change away.",
-    "placeholders": {
-      "change": {
-        "description": "Name of the deleted object",
-        "example": "shop"
-      }
-    }
-  },
-  "fieldHoursAddFragment": "Dodaj fragment",
-  "@fieldHoursAddFragment": {
-    "description": "Button in opening hours editor to add a fragment for days."
-  },
-  "fieldComboEmpty": "brakujące",
-  "@fieldComboEmpty": {
-    "description": "Option for a combo field that sets an empty value."
-  },
-  "fieldComboChoose": "wybierz",
-  "@fieldComboChoose": {
-    "description": "A placeholder value displayed in a single-value combo field when there is no value."
-  },
-  "fieldWifiNo": "nie",
-  "@fieldWifiNo": {
-    "description": "Wifi field label for no wifi."
-  },
-  "fieldHoursClosedPH": "Zamknięte podczas świąt",
-  "@fieldHoursClosedPH": {
-    "description": "Switch label for PH off."
-  },
-  "fieldWifiPublic": "publiczny",
-  "@fieldWifiPublic": {
-    "description": "Wifi field label for public unrestricted wifi."
-  },
-  "fieldWifiCustomers": "klienci",
-  "@fieldWifiCustomers": {
-    "description": "Wifi field label for wifi available to customers only."
-  },
-  "fieldWheelchairYes": "tak",
-  "@fieldWheelchairYes": {
-    "description": "Wheelchair field label for full accessibility."
-  },
-  "fieldWheelchairLimited": "ograniczony",
-  "@fieldWheelchairLimited": {
-    "description": "Wheelchair field label for limited accessibility."
-  },
-  "fieldWheelchairNo": "nie",
-  "@fieldWheelchairNo": {
-    "description": "Wheelchair field label for no accessibility."
-  },
-  "fieldCardsNo": "nie",
-  "@fieldCardsNo": {
-    "description": "Payment field label for cash only."
-  },
-  "fieldFloorEmpty": "Aby wybrać piętro, ustaw adres.",
-  "@fieldFloorEmpty": {
-    "description": "What is written on the floor chooser if there are no floors to choose."
-  },
-  "fieldFloorNew": "Nowe piętro",
-  "@fieldFloorNew": {
-    "description": "Title for the floor creation pane."
-  },
-  "fieldFloorShouldBeNumber": "Podaj numer",
-  "@fieldFloorShouldBeNumber": {
-    "description": "Validation message for a levels tag, also used in building levels form."
-  },
-  "fieldAddressTap": "Podaj adres",
-  "@fieldAddressTap": {
-    "description": "Title for the pane when a user can tap an address to choose it."
-  },
-  "buildingTypeHouse": "dom",
-  "@buildingTypeHouse": {},
-  "buildingTypeApartments": "mieszkalny",
-  "@buildingTypeApartments": {},
-  "buildingTypeRetail": "handlowy",
-  "@buildingTypeRetail": {},
-  "entranceRef": "Numer",
-  "@entranceRef": {
-    "description": "Label for entrance ref in the form. Keep it short."
-  },
-  "entranceAccessYes": "otwarte",
-  "@entranceAccessYes": {},
-  "entranceAccessPrivate": "prywatne",
-  "@entranceAccessPrivate": {},
-  "entranceAccessNo": "nie",
-  "@entranceAccessNo": {},
-  "entranceAccessDelivery": "dostawy",
-  "@entranceAccessDelivery": {},
-  "entranceTypeMain": "główne",
-  "@entranceTypeMain": {},
-  "entranceTypeStaircase": "klatka schodowa",
-  "@entranceTypeStaircase": {},
-  "entranceTypeHome": "dom",
-  "@entranceTypeHome": {},
-  "entranceTypeShop": "sklep",
-  "@entranceTypeShop": {},
-  "entranceTypeService": "usługowe",
-  "@entranceTypeService": {},
-  "entranceTypeGarage": "garaż",
-  "@entranceTypeGarage": {},
-  "entranceTypeEmergency": "ewakuacyjne",
-  "@entranceTypeEmergency": {},
-  "addressHouseNumber": "Dom",
-  "@addressHouseNumber": {
-    "description": "Label for addr:housenumber in the form. Keep it short."
-  },
-  "addressHouseNotEmpty": "Nie powinno być puste",
-  "@addressHouseNotEmpty": {
-    "description": "Validator message for addr:housenumber."
-  },
-  "addressUnit": "Jednostka",
-  "@addressUnit": {
-    "description": "Label for addr:unit in the form. Keep it short."
-  },
-  "addressUnitOptional": "opcjonalnie",
-  "@addressUnitOptional": {
-    "description": "Hint for addr:unit that it's optional."
-  },
-  "addressStreet": "Ulica",
-  "@addressStreet": {
-    "description": "Label for addr:street in the form. Keep it short."
-  },
-  "addressPlace": "Miejsce",
-  "@addressPlace": {
-    "description": "Label for addr:place or addr:city in the form. Keep it short."
-  },
-  "apiStatusDownloading": "Pobieranie danych…",
-  "@apiStatusDownloading": {
-    "description": "Text displayed when the app is downloading data from the API."
-  },
-  "apiStatusUpdatingDB": "Zapisywanie elementów do bazy danych aplikacji",
-  "@apiStatusUpdatingDB": {
-    "description": "Text displayed when the app is updating the database with downloaded objects."
-  },
-  "apiStatusUploading": "Przesyłanie zmian",
-  "@apiStatusUploading": {
-    "description": "Text displayed when the app is uploading data to the API."
-  },
-  "accountFieldLogin": "Nazwa użytkownika",
-  "@accountFieldLogin": {
-    "description": "Label for the OSM login."
-  },
-  "accountAuthErrorMessage": "Błędna nazwa użytkownika lub hasło.",
-  "@accountAuthErrorMessage": {
-    "descripton": "Message for the alert dialog about an incorrect password."
-  },
-  "accountChangesets": "Zestawy zmian",
-  "@accountChangesets": {
-    "description": "Label for the number of changesets a user has uploaded."
-  },
-  "settingsPreferContact": "Preferuj przedrostek \"contact:\"",
-  "@settingsPreferContact": {
-    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
-  },
-  "accountLogout": "Wyloguj",
-  "@accountLogout": {
-    "description": "Button title for logging out of OSM."
-  },
-  "settingsLeftHand": "Kontrola lewą ręką",
-  "@settingsLeftHand": {
-    "description": "Switch for enabling left hand controls, when most buttons move to the left."
-  },
-  "settingsEditor": "Edytor",
-  "@settingsEditor": {
-    "description": "Title for the settings section for editor presets."
-  },
-  "settingsNumericKeyboard": "Rozszerzona klawiatura numeryczna",
-  "@settingsNumericKeyboard": {
-    "description": "Settings switch for using the full keyboard for numeric fields."
-  },
-  "accountAuthErrorTitle": "Błąd autoryzacji",
-  "@accountAuthErrorTitle": {
-    "descripton": "Title for the alert dialog about an incorrect password."
-  },
-  "accountPasswordWarningTitle": "Ostrzeżenie",
-  "@accountPasswordWarningTitle": {
-    "description": "Title for the warning dialog about keeping passwords on the device."
-  },
-  "accountFieldPassword": "Hasło",
-  "@accountFieldPassword": {
-    "description": "Label for the OSM password."
-  },
-  "accountUnreadMail": "Nieodczytana wiadomość",
-  "@accountUnreadMail": {
-    "description": "Label for the number of unread private messages a user has."
-  },
-  "entranceWheelchair": "Wózki inwalidzkie",
-  "@entranceWheelchair": {
-    "description": "Label for entrance wheelchair access in the form. Keep it short."
-  },
-  "entranceType": "Rodzaj",
-  "@entranceType": {
-    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
-  },
-  "editorDuplicate": "Możliwy duplikat w odległości {distance} m",
-  "@editorDuplicate": {
-    "description": "Message about a possible duplicate",
-    "placeholders": {
-      "distance": {
-        "type": "int",
-        "format": "decimalPattern",
-        "description": "Distance in meters",
-        "example": "71"
-      }
-    }
-  },
-  "aboutViewLog": "Dzienniki systemowe",
-  "@aboutViewLog": {
-    "description": "Button title to open the log view page."
-  },
-  "aboutVersionHistory": "Historia wersji",
-  "@aboutVersionHistory": {
-    "description": "Button title to open GitHub releases page."
-  },
-  "aboutInstalledVersion": "Wersja zainstalowana",
-  "@aboutInstalledVersion": {
-    "description": "Button description for installed app version."
-  },
-  "aboutProjectWebsite": "Strona projektu",
-  "@aboutProjectWebsite": {
-    "description": "Button title to open the every-door.app website."
-  },
-  "aboutSourceCode": "Kod źródłowy",
-  "@aboutSourceCode": {
-    "description": "Button title to open the repository on GitHub."
-  },
-  "aboutOnGitHub": "na GitHub",
-  "@aboutOnGitHub": {
-    "description": "Button description to indicate a link to GitHub."
-  },
-  "aboutLicense": "Licencja",
-  "@aboutLicense": {
-    "description": "Button title to open the app's license on GitHub."
-  },
-  "aboutReportIssue": "Zgłoś problem",
-  "@aboutReportIssue": {
-    "description": "Button title to open the app's GitHub issue page."
-  },
-  "aboutOnWeblate": "na Weblate",
-  "@aboutOnWeblate": {
-    "description": "Button description to indicate a link to Weblate."
-  },
-  "aboutFAQ": "Najczęstsze pytania",
-  "@aboutFAQ": {
-    "description": "Title for the FAQ section on the About page."
-  },
-  "settingsAbout": "O programie",
-  "@settingsAbout": {
-    "description": "Title for the About section in settings."
-  },
-  "aboutHelpTranslate": "Pomóż przetłumaczyć",
-  "@aboutHelpTranslate": {
-    "description": "Button title to open the app's Weblate page."
-  },
-  "aboutHelpImprove": "Pomóż w rozwoju {appTitle}",
-  "@aboutHelpImprove": {
-    "description": "Title for the Help improve section on the About page.",
-    "placeholders": {
-      "appTitle": {
-        "type": "String",
-        "description": "Name of app.",
-        "example": "Every Door"
-      }
-    }
-  },
-  "aboutLinks": "Odnośniki",
-  "@aboutLinks": {
-    "description": "Title for the links section on the About page."
-  },
-  "loadingTooMuchDataTitle": "Za dużo danych",
-  "@loadingTooMuchDataTitle": {
-    "description": "Title for a warning alert when there's too much data downloaded."
-  },
-  "loadingTooMuchData": "Usuń pobrane dane z Ustawień, aby przyspieszyć działanie edytora.",
-  "@loadingTooMuchData": {
-    "description": "Message of a warning alert when there's too much data downloaded."
-  },
-  "dataDownloadFailed": "Błąd pobierania",
-  "@dataDownloadFailed": {
-    "description": "Alert title for the error happened during a data download."
-  },
-  "dataDownloadSuccessful": "Pobrano pomyślnie",
-  "@dataDownloadSuccessful": {
-    "description": "Alert title for when the data was successfully downloaded."
-  },
-  "dataDownloadedCount": "{count,plural, =1{Pobrano {count} element.} few{Pobrano {count} elementy.} other{Pobrano {count} elementów.}}",
-  "@dataDownloadedCount": {
-    "description": "Alert contents when we've successfully downloaded some data.",
-    "placeholders": {
-      "count": {}
-    }
-  },
-  "fieldHoursClosed": "Zamknięte",
-  "@fieldHoursClosed": {
-    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
-  },
-  "fieldHoursPublicHolidays": "Święta publiczne",
-  "@fieldHoursPublicHolidays": {
-    "description": "Card title for the PH (public holidays) selector."
-  },
-  "fieldHoursHour": "Godzina",
-  "@fieldHoursHour": {
-    "description": "Label for the hour chooser."
-  },
-  "fieldHoursMinute": "Minuty",
-  "@fieldHoursMinute": {
-    "description": "Label for the minute chooser."
-  },
-  "faqLetters": "Czy mogę wpisywać litery do numeru ref lub numeru mieszkania?",
-  "@faqLetters": {},
-  "faqLettersContent": "Jeśli nie można przełączyć klawiatury numerycznej na pełną, sprawdź ustawienia aplikacji. Znajdują się one za przyciskiem w lewym górnym rogu. Włącz tam \"rozszerzoną klawiaturę numeryczną\".",
-  "@faqLettersContent": {},
-  "faqTagging": "Wszystkie pytania dotyczące dodawania znaczników",
-  "@faqTagging": {},
-  "faqChangeType": "Jak zmienić rodzaj udogodnienia?",
-  "@faqChangeType": {},
-  "faqChangeTypeContent": "Stuknij w tytuł edytora, w którym jest napisany jego rodzaj.",
-  "@faqChangeTypeContent": {},
-  "fieldHoursAsText": "Jako tekst",
-  "@fieldHoursAsText": {
-    "description": "Button title to open the raw opening hours editor."
-  },
-  "fieldHoursNumberedWeekday": "\"Ostatni poniedziałek\"",
-  "@fieldHoursNumberedWeekday": {
-    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
-  },
-  "changesSwipeLeft": "Przesuń w lewo, aby cofnąć zmianę",
-  "@changesSwipeLeft": {
-    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
-  },
-  "fieldHoursSpecificDays": "Określona data",
-  "@fieldHoursSpecificDays": {
-    "description": "Button title for selectors like Dec 31."
-  },
-  "buildingPostCode": "Kod pocztowy",
-  "@buildingPostCode": {
-    "description": "Label for addr:postcode in the form. Keep it short."
-  },
-  "faqMapTiny": "Dlaczego mapa jest tak mała?",
-  "@faqMapTiny": {},
-  "faqMapTinyContent": "Bo nie o to chodzi. Sprawdzasz tylko swoją pozycję na mapie i przesuwasz ją, aby dostosować. Obejrzyj poniższą listę udogodnień, posortowaną według odległości od Ciebie.\n\nMapa powiększa się, gdy edytujesz udogodnienia z dala od Twojej lokalizacji. Aplikacja ta została stworzona do edycji rzeczy, które widzisz oczami.",
-  "@faqMapTinyContent": {},
-  "faqCheckmarks": "Do czego służą znaczniki wyboru?",
-  "@faqCheckmarks": {},
-  "faqEntrance": "Jak dodać wejście do budynku?",
-  "@faqEntrance": {},
-  "faqEntranceContent": "Na dole znajduje się rząd przycisków dla trybów: mikromapowanie, udogodnienia, wejścia i uwagi.\n\nW trybie wejść dotknij lub przeciągnij przycisk drzwi w dolnym rogu na mapę.",
-  "@faqEntranceContent": {},
-  "faqFloors": "Czy piętra „3” i „/3” są takie same?",
-  "@faqFloors": {},
-  "faqCheckmarksContent": "Są to znaki, które potwierdziły dane dotyczące udogodnień. Dodają znacznik `check_date` z bieżącą datą.\n\nIdeą znaczników wyboru jest to, że, powiedzmy, po raz pierwszy zbadałeś połowę miasta. Potem po miesiącu wróciłeś i ponownie podszedłeś do zwiedzania. Musisz jakoś zaznaczyć, że widzisz udogodnienie, ale nic się w nim nie zmieniło. To jest znacznik wyboru: dotknij go i kontynuuj.\n\nZnak sprawdzenia jest aktualny przez dwa miesiące. Następnie możesz ponownie sprawdzić udogodnienia.",
-  "@faqCheckmarksContent": {},
-  "faqTaggingContent": "Dlaczego w edytorze brakuje obiektu? Kiedy te białe kropki są wyświetlane w trybie mikromapowania? Jak sortowane są przedmioty?\n\nOdpowiedzi na wszystkie te pytania znajdują się w [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Oto, na co możesz spojrzeć:\n\n* Kolejność kluczy dla głównego znacznika — lista `kMainKeys`.\n* Jakie obiekty są pobierane — funkcja `isGoodTags`.\n* Co jest uważane za udogodnienie — funkcja `isAmenityTags`.\n* Które punkty są przyciągane do których linii — funkcja `detectSnap`.\n* Gdy obiekt mikromapowania jest niekompletny — funkcja `needsMoreInfo`.",
-  "@faqTaggingContent": {},
-  "faqFloorsContent": "Nie. Pierwszy z nich ma wypełniony znacznik `addr:floor=3`. To jest piętro, które jest nadrukowane w nawigacji i powszechnie używane. Drugi nie ma tego znacznika, ale ma `level=3`. Ten numer to kolejny numer piętra od zera do `building:levels - 1`. Oznacza to, że w trzypiętrowym budynku wartość parametru `addr:floor` zależy od kraju, ale `level` to zawsze 0, 1 lub 2.\n\nOto jak notacja w edytorze odnosi się do tych znaczników:\n\n* `2`: `addr:floor=2` i niepuste `level=*`.\n* `4/`: `addr:floor=4`, ale nie ma znacznika `level`.\n* `/1`: `level=1`, ale nie ma znacznika `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (a w pobliżu znajduje się obiekt z tym samym `addr:floor`, ale innym `level` lub odwrotnie).",
-  "@faqFloorsContent": {},
-  "buildingMaterial": "Fasada",
-  "@buildingMaterial": {},
-  "buildingMaterialBrick": "cegła",
-  "@buildingMaterialBrick": {},
-  "buildingMaterialWood": "drewno",
-  "@buildingMaterialWood": {},
-  "buildingMaterialConcrete": "beton",
-  "@buildingMaterialConcrete": {},
-  "buildingMaterialPanels": "panele",
-  "@buildingMaterialPanels": {},
-  "buildingMaterialCementBlock": "bloczki cementowe",
-  "@buildingMaterialCementBlock": {},
-  "buildingMaterialStone": "kamień",
-  "@buildingMaterialStone": {},
-  "buildingMaterialMetal": "metal",
-  "@buildingMaterialMetal": {},
-  "buildingMaterialGlass": "szkło",
-  "@buildingMaterialGlass": {},
-  "buildingMaterialPlaster": "tynk",
-  "@buildingMaterialPlaster": {},
-  "versionsTitle": "Historia {elementRef}",
-  "@versionsTitle": {
-    "description": "Title for the element versions page.",
-    "placeholders": {
-      "elementRef": {
-        "type": "String",
-        "description": "Type and ID of OSM element.",
-        "example": "node/1234567"
-      }
-    }
-  },
-  "versionsFetchError": "Błąd pobierania historii wersji",
-  "@versionsFetchError": {
-    "description": "Message for when fetching element history fails due to unknown error."
-  },
-  "versionsNoTagChanges": "Brak zmian znacznika",
-  "@versionsNoTagChanges": {
-    "description": "Card body for when no tag changes occurred in this version."
-  },
-  "versionsEnableInternet": "Połącz się z internetem, aby pobrać historię wersji",
-  "@versionsEnableInternet": {
-    "description": "Message for when fetching element history fails due to lack of network connection."
-  },
-  "versionsRetryFetch": "Ponów próbę",
-  "@versionsRetryFetch": {
-    "description": "Button label to retry fetching history."
-  },
-  "versionsLocalChanges": "Zmiany lokalne",
-  "@versionsLocalChanges": {
-    "description": "Card header for the local changes diff."
-  },
-  "versionsVersionNumber": "Wersja #{number}",
-  "@versionsVersionNumber": {
-    "description": "Card header for the diff for this element version.",
-    "placeholders": {
-      "number": {
-        "type": "int",
-        "description": "Element version number.",
-        "example": "node/1234567"
-      }
-    }
-  },
-  "versionsVersionMeta": "przez {user} {datetime}",
-  "@versionsVersionMeta": {
-    "description": "Card body to show metadata about the element version.",
-    "placeholders": {
-      "user": {
-        "type": "String",
-        "description": "OSM username of version creator.",
-        "example": "Zverik"
-      },
-      "datetime": {
-        "type": "String",
-        "description": "Datetime for when version was created.",
-        "example": "July 21, 2022 12:30"
-      }
-    }
-  },
-  "changesMapNotes": "Uwagi do mapy i rysunki",
-  "@changesMapNotes": {
-    "description": "Title for a grouped change tile for map notes and drawings."
-  },
-  "changesOsmNote": "Uwaga OSM",
-  "@changesOsmNote": {
-    "description": "Prefix for an OSM note in a changes tile."
-  },
-  "notesAnonymous": "Anonimowy",
-  "@notesAnonymous": {
-    "description": "Name for anonymous note submitters."
-  },
-  "notesClose": "Rozwiąż",
-  "@notesClose": {
-    "description": "Button title for closing a note."
-  },
-  "notesCloseMessage": "Oznaczyć problem z tej uwagi jako rozwiązany?",
-  "@notesCloseMessage": {
-    "description": "Confirmation message when pressed a close note button."
-  },
-  "navImagery": "Przełącz podkład",
-  "@navImagery": {
-    "description": "Tooltip for the map / imagery button on the nav panel."
-  },
-  "navPoiMode": "Tryb udogodnień",
-  "@navPoiMode": {
-    "description": "Tooltip for the POI / amenity mode button on the nav panel."
-  },
-  "navEntrancesMode": "Tryb wejść",
-  "@navEntrancesMode": {},
-  "navNotesMode": "Tryb uwag",
-  "@navNotesMode": {
-    "description": "Tooltip for the notes mode button on the nav panel."
-  },
-  "mapSettings": "Ustawienia",
-  "@mapSettings": {
-    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
-  },
-  "mapLocate": "Wróć do mnie",
-  "@mapLocate": {
-    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
-  },
-  "mapZoomIn": "Przybliż",
-  "@mapZoomIn": {
-    "description": "Tooltip for the zoom in (+) button on a map."
-  },
-  "mapZoomOut": "Oddal",
-  "@mapZoomOut": {
-    "description": "Tooltip for the zoom out (-) button on a map."
-  },
-  "editorMarkChecked": "Oznacz jako sprawdzone",
-  "@editorMarkChecked": {
-    "description": "Tooltip for a button to mark the amenity checked without changing properties."
-  },
-  "editorHistory": "Historia",
-  "@editorHistory": {
-    "description": "Tooltip for a button to open version history pane."
-  },
-  "editorTags": "Surowe znaczniki",
-  "@editorTags": {
-    "description": "Tooltip for a button to open tags pane."
-  },
-  "tagsShare": "Udostępnij",
-  "@tagsShare": {
-    "description": "Tooltip for the sharing button on the tags panel."
-  },
-  "tagsDelete": "Wyczyść",
-  "@tagsDelete": {
-    "description": "Tooltip for a button next to a tag value to delete the tag."
-  },
-  "settingsCacheTiles": "Pobierz kafelki",
-  "@settingsCacheTiles": {
-    "description": "Tooltip for a button to download and cache tiles for imageries."
-  },
-  "settingsLanguage": "Język",
-  "@settingsLanguage": {
-    "description": "Settings entry for changing the app language."
-  },
-  "settingsGoogle": "Użyj pozycjonowania wspomaganego przez Google",
-  "@settingsGoogle": {
-    "description": "Settings switch for disabling Google services for location."
-  },
-  "entrancesAddEntrance": "Dodaj wejście",
-  "@entrancesAddEntrance": {
-    "description": "Tooltip for the button to add an entrance node."
-  },
-  "navUpload": "Prześlij",
-  "@navUpload": {
-    "description": "Tooltip for the upload data button on the nav panel."
-  },
-  "navMicromappingMode": "Tryb mikromapowania",
-  "@navMicromappingMode": {
-    "description": "Tooltip for the micromapping mode button on the nav panel."
-  },
-  "navDownload": "Pobierz",
-  "@navDownload": {
-    "description": "Tooltip for the download data button on the nav panel."
-  },
-  "tagsRestore": "Przywróć",
-  "@tagsRestore": {
-    "description": "Tooltip for a button next to a tag value to restore the value to the original."
-  },
-  "mapFilter": "Filtry",
-  "@mapFilter": {
-    "description": "Tooltip for the amenity filter button on a map."
-  },
-  "settingsSystem": "System",
-  "@settingsSystem": {
-    "description": "Title for the settings section for system-related switches."
-  },
-  "fieldHoursSDAddOne": "Dodaj datę",
-  "@fieldHoursSDAddOne": {
-    "description": "Tooltip for button on the specific days interval to add one specific date."
-  },
-  "changesPurge": "Wyczyść zmiany",
-  "@changesPurge": {
-    "description": "Purge all changes"
-  },
-  "fieldHoursChooseTime": "Godziny i minuty",
-  "@fieldHoursChooseTime": {
-    "description": "Tooltip for a button to open hours and minutes chooser."
-  },
-  "fieldHoursClear": "Wyczyść",
-  "@fieldHoursClear": {
-    "description": "Tooltip for a button to clear the opening_hours value."
-  },
-  "fieldHoursSave": "Zapisz",
-  "@fieldHoursSave": {
-    "description": "Tooltip for a button to save opening_hours value."
-  },
-  "fieldHoursRemoveFragment": "Usuń fragment",
-  "@fieldHoursRemoveFragment": {
-    "description": "Tooltip for a button to remove a fragment in the hours editor."
-  },
-  "fieldHoursRemoveBreak": "Usuń przerwę",
-  "@fieldHoursRemoveBreak": {
-    "description": "Tooltip for a button to remove a break in an opening hours fragment."
-  },
-  "fieldHoursSDRemove": "Usuń",
-  "@fieldHoursSDRemove": {
-    "description": "Tooltip for button on the specific days interval to remove some days."
-  },
-  "fieldNameLanguages": "Inny język",
-  "@fieldNameLanguages": {
-    "description": "Tooltip for a button to add a name in another language."
-  },
-  "fieldHoursSDAddRange": "Dodaj zakres",
-  "@fieldHoursSDAddRange": {
-    "description": "Tooltip for button on the specific days interval to add a range of dates."
-  },
-  "fieldNameCopy": "Kopiuj wartość",
-  "@fieldNameCopy": {
-    "description": "Tooltip for a button to copy name value between languages."
-  },
-  "entrancesAddBuilding": "Dodaj budynek",
-  "@entrancesAddBuilding": {
-    "description": "Tooltip for the button to add a building node."
-  },
-  "notesAddNote": "Dodaj uwagę",
-  "@notesAddNote": {
-    "description": "Tooltip for the button to add a note."
-  },
-  "fieldCardsOnly": "tylko karty",
-  "@fieldCardsOnly": {
-    "description": "Payment field label for cards only."
-  },
-  "faqYellow": "Czemu niektóre numery budynków są żółte?",
-  "@faqYellow": {},
-  "faqYellowContent": "Nieżółte etykiety w trybie wejść i białe kropki w trybie mikromapowania oznaczają, że elementom brakuje jakichś ważnych atrybutów. Na przykład:\n\n* Od budynków oczekuje się, że będą miały podana liczbę poziomów.\n* Wejścia powinny mieć typ, a dla klatek schodowych powinien być podany zakres mieszkań.\n* Ławki powinny mieć podane materiał i oparcie.\n* Drzewa powinny mieć typ i cykl liści.",
-  "@faqYellowContent": {},
-  "warningFixme": "Napraw mnie: {value}",
-  "@warningFixme": {
-    "description": "Warning message for when an object has a non-empty fixme value.",
-    "placeholders": {
-      "value": {
-        "description": "Value of the fixme tag"
-      }
-    }
-  },
-  "warningWrongTag": "Zły znacznik: {tag}",
-  "@warningWrongTag": {
-    "description": "Warning message for tags like shop=yes and amenity=no.",
-    "placeholders": {
-      "tag": {
-        "description": "The tag with the issue",
-        "example": "shop=yes"
-      }
-    }
-  },
-  "warningTooOld": "Oznaczenie udogodnienia jest stare: {years} lata",
-  "@warningTooOld": {
-    "description": "Warning message for when an amenity is many years old.",
-    "placeholders": {
-      "years": {
-        "description": "How many years ago the amenity was edited.",
-        "example": "5 years"
-      }
-    }
-  },
-  "years": "{count,plural, =1{{count} rok} few{{count} lata} other{{count} lat}}",
-  "@years": {
-    "description": "Number of years. Used in the \"amenity is N years old\" message.",
-    "placeholders": {
-      "count": {}
-    }
-  },
-  "settingsHashtags": "Hasztagi zestawu zmian",
-  "@settingsHashtags": {
-    "description": "Settings entry for editing changeset hashtags."
-  },
-  "hashtagsConfirm": "Zatwierdź znaczniki przy przesyłaniu",
-  "@hashtagsConfirm": {
-    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
-  },
-  "notesCancelMessage": "Czy anulować Twoją uwagę OSM?",
-  "@notesCancelMessage": {
-    "description": "Message when cancelling an OSM note that has non-empty content."
-  },
-  "hashtagsLabel": "Słowa do hasztagów",
-  "@hashtagsLabel": {
-    "description": "Label for a text field with changeset hashtags."
-  },
-  "fieldDirectionSet": "Ustaw",
-  "@fieldDirectionSet": {
-    "description": "Button label for setting a direction (0-360°) value."
-  },
-  "notesComment": "Twój komentarz",
-  "@notesComment": {
-    "description": "Label for the note comment field."
-  },
-  "addressBlock": "Blok",
-  "@addressBlock": {
-    "description": "Label for addr:block_number or addr_block. Keep it short."
-  },
-  "fieldHeightMeters": "Oczekiwana długość w metrach, np. 5.4",
-  "@fieldHeightMeters": {
-    "description": "Validation message for when meters are expected."
-  },
-  "fieldHeightFeet": "Oczekiwana długość w stopach, np. 7'4\"",
-  "@fieldHeightFeet": {
-    "description": "Validation message for when feet are expected."
-  },
-  "fieldHeightAny": "Oczekiwana długość, mp. 5.4 lub 7'4\"",
-  "@fieldHeightAny": {
-    "description": "Validation message for when meters or feet are expected."
-  },
-  "fieldPaymentAround": "Zwyczajowe opcje wokół",
-  "@fieldPaymentAround": {
-    "description": "Tile name for payment options found on the map."
-  },
-  "warningWrongMode": "Zły tryb, sprawdź duplikaty",
-  "@warningWrongMode": {
-    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
-  },
-  "fieldPaymentLocal": "Opcje lokalne",
-  "@fieldPaymentLocal": {
-    "description": "Tile name for stored local payment options."
-  },
-  "fieldPaymentUseGlobal": "Moje ustawienia domyślne są lepsze",
-  "@fieldPaymentUseGlobal": {
-    "description": "Button to copy global default to local payment settings."
-  },
-  "fieldPaymentUseSame": "Użyj tych samych znaczników do mapowania",
-  "@fieldPaymentUseSame": {
-    "description": "Button title for copying payment options around to the local settings."
-  },
-  "fieldPaymentTitle": "Płatność kartami",
-  "@fieldPaymentTitle": {
-    "description": "Pane title for card payment options."
-  },
-  "warningUnsupported": "Ten typ obiektu nie jest obsługiwany",
-  "@warningUnsupported": {
-    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
-  },
-  "fieldPaymentChoose": "Wybierz inne znaczniki lokalne...",
-  "@fieldPaymentChoose": {
-    "description": "Button title for setting up different local payment options."
-  },
-  "fieldNameLangSearch": "Znajdź język",
-  "@fieldNameLangSearch": {
-    "description": "Hint for the text field for finding a language in a list."
-  },
-  "fieldPaymentGlobal": "Globalne opcje domyślne",
-  "@fieldPaymentGlobal": {
-    "description": "Tile name for global payment defaults."
-  },
-  "drawRoad": "Droga",
-  "@drawRoad": {
-    "description": "Tool description: paved road. Keep it short."
-  },
-  "drawChangeTool": "Zmień narzędzie",
-  "@drawChangeTool": {
-    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
-  },
-  "drawEraser": "Gumka",
-  "@drawEraser": {
-    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
-  },
-  "drawCycleway": "Ścieżka rowerowa",
-  "@drawCycleway": {
-    "description": "Tool description: segregated cycleway. Keep it short."
-  },
-  "drawTrack": "Droga leśna/rolna",
-  "@drawTrack": {
-    "description": "Tool description: unpaved forestry/farm road. Keep it short."
-  },
-  "drawWall": "Mur",
-  "@drawWall": {
-    "description": "Tool description: wall, non-see-through barrier. Keep it short."
-  },
-  "drawFence": "Ogrodzenie",
-  "@drawFence": {
-    "description": "Tool description: fence, see-through barrier. Keep it short."
-  },
-  "apiStatusUploadingNotes": "Przesyłanie uwag",
-  "@apiStatusUploadingNotes": {
-    "description": "Text displayed when the app is uploading notes to the API."
-  },
-  "drawUndo": "Cofnij",
-  "@drawUndo": {},
-  "drawScribble": "Bazgroły",
-  "@drawScribble": {
-    "description": "Tool description: scribble (type-less drawings). Keep it short."
-  },
-  "drawFootway": "Chodnik",
-  "@drawFootway": {
-    "description": "Tool description: paved/maintained footway. Keep it short."
-  },
-  "drawPath": "Ścieżka",
-  "@drawPath": {
-    "description": "Tool description: unpaved narrow footway. Keep it short."
-  },
-  "drawPower": "Linia elektryczna",
-  "@drawPower": {
-    "description": "Tool description: power line. Keep it short."
-  },
-  "drawStream": "Strumień",
-  "@drawStream": {
-    "description": "Tool description: stream or other narrow waterway. Keep it short."
-  },
-  "drawCyclewayShared": "Droga rowerowa",
-  "@drawCyclewayShared": {
-    "description": "Tool description: non-segregated cycleway. Keep it short."
-  },
-  "notesDelete": "Usuń",
-  "@notesDelete": {
-    "description": "Button title for deleting a new note."
-  },
-  "drawCulvert": "Przepust",
-  "@drawCulvert": {
-    "description": "Tool description: underground water pipe, culvert. Keep it short."
-  },
-  "editorDeleteBuilding": "Zburzony",
-  "@editorDeleteBuilding": {
-    "description": "Button title to mark a building demolished."
-  },
-  "fieldWebsiteQR": "Zeskanuj kod QR",
-  "@fieldWebsiteQR": {
-    "description": "Page title for the QR code scanner."
-  },
-  "editorDeleteKeepAddressButton": "Usuń, ale zachowaj adres",
-  "@editorDeleteKeepAddressButton": {
-    "description": "Button for keeping the address"
-  },
-  "tileDragDownload": "Spróbuj nacisnąć przycisk pobierania.",
-  "@tileDragDownload": {
-    "description": "Message displayed when there is nothing around, and a download button is present."
-  },
-  "warningFixmeNote": "Zostanie przekonwertowany na uwagę OSM",
-  "@warningFixmeNote": {
-    "description": "Warning message for an amenity=fixme object with just a name."
-  },
-  "settingsPlugins": "Wtyczki",
-  "@settingsPlugins": {
-    "description": "Title for the settings section and the page about managing plugins."
-  },
-  "pluginsEnable": "Włącz",
-  "@pluginsEnable": {
-    "description": "Button for enabling a deactivated plugin."
-  },
-  "pluginsDisable": "Wyłącz",
-  "@pluginsDisable": {
-    "description": "Button for deactivating a plugin."
-  },
-  "pluginsDisabledHeader": "Wyłączone",
-  "@pluginsDisabledHeader": {
-    "description": "Header for the section listing deactivated, disabled plugins."
-  },
-  "pluginsRepository": "Repozytorium wtyczek",
-  "@pluginsRepository": {
-    "description": "Page title for a list of plugins stored on a server, to choose from."
-  },
-  "pluginsSearch": "Wyszukaj",
-  "@pluginsSearch": {
-    "description": "Searching text field hint on the plugin repository page."
-  },
-  "pluginsUpdate": "Zaktualizuj",
-  "@pluginsUpdate": {
-    "description": "Button for updating an installed plugin to the latest version."
-  },
-  "pluginsInstall": "Zainstaluj",
-  "@pluginsInstall": {
-    "description": "Button to install a new plugin from a server."
-  },
-  "pluginsUrl": "Adres URL wtyczki",
-  "@pluginsUrl": {
-    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
-  },
-  "pluginsMore": "Więcej...",
-  "@pluginsMore": {
-    "description": "Button to see details about a specific plugin and manage it."
-  },
-  "pluginsInstallation": "Instalacja wtyczek",
-  "@pluginsInstallation": {
-    "description": "Page title for installing a single plugin from the web."
-  },
-  "pluginsInstallQuestion": "Zainstalować wtyczkę \"{plugin}\" w wersji {version}?",
-  "@pluginsInstallQuestion": {
-    "description": "Message that appears when installing a plugin from an unverified source.",
-    "placeholders": {
-      "plugin": {
-        "description": "Identifier of a plugin",
-        "example": "cycle_barriers"
-      },
-      "version": {
-        "description": "Plugin version, usually numbers",
-        "example": "1.2"
-      }
-    }
-  },
-  "pluginsUnknownVersion": "nieznane",
-  "@pluginsUnknownVersion": {
-    "description": "What is displayed instead of a version number, if the plugin version is unknown."
-  },
-  "pluginsInstallSource": "Źródło: {host}",
-  "@pluginsInstallSource": {
-    "description": "Message to display a host from which a plugin is installed.",
-    "placeholders": {
-      "host": {
-        "description": "Web host, no path or scheme",
-        "example": "plugins.every-door.app"
-      }
-    }
-  },
-  "pluginsSeeLogs": "Zobacz dzienniki",
-  "@pluginsSeeLogs": {
-    "description": "Button title to browse the system log when a plugin installation error has occurred."
-  },
-  "mapStraight": "Obróć z powrotem",
-  "@mapStraight": {
-    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
-  },
-  "settingsCachesClearRaster": "Wyczyść pamięć podręczną kafelków rastrowych",
-  "@settingsCachesClearRaster": {
-    "description": "Settings data management entry for clearing all cached raster tiles."
-  },
-  "settingsCachesClearRenderedVector": "Wyczyść renderowane pliki wektorowe",
-  "@settingsCachesClearRenderedVector": {
-    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
-  },
-  "settingsCachesClearVector": "Wyczyść pamięci podręczne kafelków wektorowych",
-  "@settingsCachesClearVector": {
-    "description": "Settings data management entry for clearing all cached vector tiles."
-  },
-  "settingsCachesClearManual": "Wyczyść ręcznie pobrane kafelki",
-  "@settingsCachesClearManual": {
-    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
-  },
-  "settingsCachesSelectTiles": "Wybierz kafelki do pobrania",
-  "@settingsCachesSelectTiles": {
-    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
-  },
-  "settingsCachesDownloadData": "Pobierz dane",
-  "@settingsCachesDownloadData": {
-    "description": "Button label for pre-downloading OpenStreetMap data."
-  },
-  "settingsCachesDownloadMap": "Pobierz kafelki mapy",
-  "@settingsCachesDownloadMap": {
-    "description": "Button label for pre-downloading OSM map tiles."
-  },
-  "settingsCachesDownloadSatellite": "Pobierz obrazy z satelity",
-  "@settingsCachesDownloadSatellite": {
-    "description": "Button label for pre-downloading Satellite imagery tiles."
-  },
-  "settingsCachesCancel": "Anuluj ({percent}%)",
-  "@settingsCachesCancel": {
-    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
-    "placeholders": {
-      "percent": {
-        "description": "Percent number between 0 and 100.",
-        "example": "50"
-      }
-    }
-  }
 }
