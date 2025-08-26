@@ -1389,5 +1389,17 @@
     "settingsCachesSelectTiles": "Seleccioneu tessel·les per descarregar",
     "@settingsCachesSelectTiles": {
         "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+    },
+    "settingsCachesClearRaster": "Esborra la memòria cau de tessel·les ràster",
+    "@settingsCachesClearRaster": {
+        "description": "Settings data management entry for clearing all cached raster tiles."
+    },
+    "settingsCachesClearRenderedVector": "Neteja les tessel·les vectorials renderitzades",
+    "@settingsCachesClearRenderedVector": {
+        "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+    },
+    "settingsCachesClearVector": "Neteja la memòria cau de tessel·les vector",
+    "@settingsCachesClearVector": {
+        "description": "Settings data management entry for clearing all cached vector tiles."
     }
 }
