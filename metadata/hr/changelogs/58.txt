@@ -1,0 +1,4 @@
+* Vektorske pločice posvuda.
+* Preuzimanje podataka i slika za rad bez internetske veze.
+* Dodan je gumb za kompas.
+* Unaprijed definirane postavke sada imaju ikone.
