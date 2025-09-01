@@ -1,0 +1,4 @@
+* Način za beležke Scribble.
+* Dnevi v tednu v lokalnem jeziku.
+* Predlogi za oznake nadstropij.
+* Posodobitve prednastavitev in slik.

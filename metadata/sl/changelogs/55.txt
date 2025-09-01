@@ -1,0 +1,4 @@
+* Podpora za vtičnike!
+* Oznake na zemljevidu se ob potrjenih storitvah obarvajo zeleno.
+* Popravljen vrstni red dni v tednu za ZDA in Izrael.
+* Prikaz smeri kompasa.

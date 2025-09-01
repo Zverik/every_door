@@ -1,0 +1,4 @@
+* Upajmo, da so težave z GPS-om odpravljene.
+* Posodobljen ključ za slike Bing in odstranjen Maxar.
+* Nove nastavitve za plačevanje s kartico.
+* Pametnejše velike začetnice imen.

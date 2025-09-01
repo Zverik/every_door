@@ -1,0 +1,4 @@
+* Lahko povečaš do maksimuma.
+* Stopnje povečave se ohranijo med načini.
+* Urejevalnik smeri za klopi in kamere.
+* Stabilizirane barve v načinu mikromapiranja.

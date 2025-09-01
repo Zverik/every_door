@@ -1,0 +1,3 @@
+* Dodane so bile ovire za kolesa in božične funkcije.
+* Podpora za povezave »geo:«.
+* Nova prilagodljiva ikona.

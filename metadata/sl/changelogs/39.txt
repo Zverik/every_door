@@ -1,0 +1,3 @@
+* Popravljena velika začetnica za opise.
+* Popravljena rumena opozorila za amenity, ki se niso prikazovala.
+* Popravljeno označevanje trgovine na neuporabljani stavbi.
