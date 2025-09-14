@@ -330,7 +330,6 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         MapButtonColumn(
           alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
           buttons: [
-            ...widget.buttons,
             if (widget.drawStandardButtons)
               // Tracking button
               MapButton(
@@ -362,6 +361,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
                   _rotation = 0;
                 },
               ),
+            ...widget.buttons,
           ],
           safeRight: true,
         ),

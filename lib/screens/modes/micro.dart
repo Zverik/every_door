@@ -18,7 +18,8 @@ import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/editor.dart';
 import 'package:every_door/widgets/poi_pane.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
@@ -75,7 +76,8 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
     }
   }
 
-  Future<void> micromappingTap(LatLng position, double Function(LatLng) distance) async {
+  Future<void> micromappingTap(
+      LatLng position, double Function(LatLng) distance) async {
     List<OsmChange> amenitiesAtCenter = widget.def.nearestPOI
         .where((element) => distance(element.location) <= kTapRadius)
         .toList();

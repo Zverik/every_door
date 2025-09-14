@@ -22,6 +22,7 @@ _Unreleased_
 * To undo a change, tap a button instead of swiping.
 * Tags for entrances are now remembered again.
 * Fixed phone numbers to use an international format.
+* Fixed uploading more than 1000 changes on old phones.
 * Logging in issues seem to be fixed.
 
 ## 6.0

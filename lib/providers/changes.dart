@@ -154,7 +154,8 @@ class ChangesProvider extends ChangeNotifier {
     );
   }
 
-  Future<void> clearChanges({bool includeErrored = false, List<String>? ids}) async {
+  Future<void> clearChanges(
+      {bool includeErrored = false, List<String>? ids}) async {
     _ensureLoaded();
     if (includeErrored && ids == null) {
       _new.clear();
@@ -175,7 +176,7 @@ class ChangesProvider extends ChangeNotifier {
         _changes.keys.map((e) => e.toString()).followedBy(_new.keys).toList();
     if (keepIds.isEmpty) {
       await database.delete(OsmChange.kTableName);
-    } else {
+    } else if (keepIds.length < 999) {
       final placeholders =
           List.generate(keepIds.length, (index) => "?").join(",");
       await database.delete(
@@ -183,6 +184,11 @@ class ChangesProvider extends ChangeNotifier {
         where: 'osmid not in ($placeholders)',
         whereArgs: keepIds,
       );
+    } else {
+      // The list is too long, use CTE to delete.
+      final values = keepIds.map((i) => "('$i')").join(',');
+      await database.rawQuery(
+          "with t(i) as (values $values) delete from ${OsmChange.kTableName} where osmid not in (select i from t)");
     }
 
     notifyListeners();
