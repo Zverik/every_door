@@ -187,7 +187,8 @@ class PluginManager extends Notifier<List<Plugin>> {
       maxZoom: data['maxZoom'],
       tileSize: data['tileSize'] ?? 256,
       headers: data['headers'] is Map ? data['headers'] : null,
-      opacity: data['opacity'] is num ? data['opacity'].toDouble() : null,
+      opacity:
+          data['opacity'] is num ? (data['opacity'] as num).toDouble() : 1.0,
     );
 
     if (typ == 'vector') {

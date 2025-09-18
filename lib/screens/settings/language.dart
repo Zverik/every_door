@@ -42,6 +42,7 @@ class LanguagePage extends ConsumerWidget {
     Locale('pl'): 'Polski',
     Locale('pt'): 'Português',
     Locale('pt', 'BR'): 'Português do Brasil',
+    Locale('ro'): 'Limba română',
     Locale('ru'): 'Русский',
     Locale('sl'): 'Slovenščina',
     Locale('sv'): 'Svenska',

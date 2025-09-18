@@ -41,6 +41,9 @@ class MapDragCreateButton extends StatelessWidget {
             if (onDragStart != null) onDragStart!();
           },
           onDragEnd: (details) {
+            final camera = map.mapController?.camera;
+            if (camera == null || onDragEnd == null) return;
+
             const offset = Offset(-kArrowSize / 2, -2.0);
             final pos = Offset(details.offset.dx, details.offset.dy);
             // To adjust offset, we need to know the location of everything.
@@ -53,9 +56,8 @@ class MapDragCreateButton extends StatelessWidget {
                 : Offset(globalMapOriginTr.x, globalMapOriginTr.y);
             _logger.fine(
                 'global: $globalMapOrigin, drop offset: ${pos - offset}.');
-            final location = map.mapController?.camera
-                .offsetToCrs(pos - offset + globalMapOrigin);
-            if (onDragEnd != null && location != null) onDragEnd!(location);
+            final location = camera.offsetToCrs(pos - offset + globalMapOrigin);
+            if (camera.visibleBounds.contains(location)) onDragEnd!(location);
           },
           feedbackOffset: Offset(kArrowSize / 2, 70.0),
           dragAnchorStrategy: (draggable, context, position) =>
