@@ -11,7 +11,8 @@ import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/poi_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 const _kDefaultPoiPresets = [
   // Should be exactly 8 lines.
@@ -27,6 +28,7 @@ const _kDefaultPoiPresets = [
 
 abstract class AmenityModeDefinition extends BaseModeDefinition {
   static const _kAmenitiesInList = 12;
+  static const _kAmenitiesOnScreen = 40;
 
   List<OsmChange> nearestPOI = [];
   List<LatLng> otherPOI = [];
@@ -53,6 +55,8 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
   @override
   bool isOurKind(OsmChange element) =>
       _kinds.any((k) => k.matchesChange(element));
+
+  int get maxTileCount => _kAmenitiesInList;
 
   @override
   updateNearest({int? forceRadius}) async {
@@ -82,8 +86,8 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
         .compareTo(distance(location, b.location)));
 
     // Trim to 10-20 elements.
-    if (data.length > _kAmenitiesInList)
-      data = data.sublist(0, _kAmenitiesInList);
+    if (data.length > _kAmenitiesOnScreen)
+      data = data.sublist(0, _kAmenitiesOnScreen);
 
     // Update the map.
     nearestPOI = data;

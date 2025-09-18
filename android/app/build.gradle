@@ -37,7 +37,7 @@ android {
         }
     }
 
-    compileSdk 35
+    compileSdk 36
     namespace "info.zverev.ilya.every_door"
 
     compileOptions {
@@ -61,7 +61,7 @@ android {
         applicationId "info.zverev.ilya.every_door"
         resValue "string", "app_name", "Every Door"
         minSdk 23
-        targetSdk 35
+        targetSdk 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -80,7 +80,7 @@ flutter {
 }
 
 dependencies {
-    implementation 'com.google.errorprone:error_prone_annotations:2.27.1'
+    implementation 'com.google.errorprone:error_prone_annotations:2.30.0'
 }
 
 // Do this for an F-Droid release I guess

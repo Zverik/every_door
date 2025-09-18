@@ -18,7 +18,8 @@ import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/widgets/poi_pane.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
@@ -84,7 +85,9 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
 
     // Zoom automatically only when tracking location.
     if (mounted && ref.read(trackingProvider)) {
-      _controller.zoomToFit(widget.def.nearestPOI.map((e) => e.location));
+      _controller.zoomToFit(widget.def.nearestPOI
+          .take(widget.def.maxTileCount)
+          .map((e) => e.location));
     }
   }
 
@@ -127,7 +130,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
         right: false,
         top: isWide,
         child: PoiPane(
-          widget.def.nearestPOI,
+          widget.def.nearestPOI.take(widget.def.maxTileCount).toList(),
           isCountedOld: widget.def.isCountedOld,
         ),
       );
