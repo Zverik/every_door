@@ -13,6 +13,7 @@ _Unreleased_
 * Added a compass button to reset rotation.
 * Building contours for the entrances mode.
 * Overlay layers can be semi-transparent.
+* Fixed the navigation mode not forcing the OSM layer.
 * Increased maximum zoom to 22.
 
 ## Other

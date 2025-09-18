@@ -274,7 +274,8 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       _controller.move(next, _controller.camera.zoom);
     });
 
-    final imagery = ref.watch(selectedImageryProvider);
+    final imagery = ref
+        .watch(widget.onlyOSM ? baseImageryProvider : selectedImageryProvider);
     final isNavigating = ref.watch(navigationModeProvider);
     final leftHand = ref.watch(editorSettingsProvider).leftHand;
     final loc = AppLocalizations.of(context)!;
