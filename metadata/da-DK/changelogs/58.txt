@@ -1,0 +1,4 @@
+* Vektorfliser overalt.
+* Download data og luftfoto for at arbejde offline.
+* Tilføjet en kompasknap.
+* Forudindstillinger har nu ikoner.

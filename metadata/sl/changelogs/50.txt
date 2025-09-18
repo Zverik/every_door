@@ -1,0 +1,4 @@
+* Popravljeni so bili konflikti in stopnje povečave.
+* Popravljeno je bilo urejanje v ekstremnih zemljepisnih širinah.
+* Dodane so bile katastrske slikovne plasti.
+* Dodani so bili prevodi v hebrejščino in tamilščino.

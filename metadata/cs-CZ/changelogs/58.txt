@@ -1,0 +1,4 @@
+* Vektorové dlaždice všude.
+* Stáhnutí dat a snímků pro práci offline.
+* Přidáno tlačítko kompasu.
+* Předvolby mají nyní ikony.

@@ -1,0 +1,4 @@
+* Vektorske ploščice povsod.
+* Prenesi podatke in slike za delo brez povezave.
+* Dodan gumb za kompas.
+* Prednastavitve imajo zdaj ikone.

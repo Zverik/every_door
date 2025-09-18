@@ -1,1169 +1,1295 @@
 {
-  "loadingTooMuchData": "Ачысціце загружаныя даныя ў Наладах, каб паскорыць рэдактар.",
-  "@loadingTooMuchData": {
-    "description": "Message of a warning alert when there's too much data downloaded."
-  },
-  "dataDownloadFailed": "Памылка загрузкі",
-  "@dataDownloadFailed": {
-    "description": "Alert title for the error happened during a data download."
-  },
-  "tileNo": "не",
-  "@tileNo": {
-    "description": "Prefix for a list of icons for attributes missing in amenity."
-  },
-  "filterNoAddresses": "Адрасоў паблізу няма",
-  "@filterNoAddresses": {
-    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
-  },
-  "filterByAddress": "Па адрасе",
-  "@filterByAddress": {
-    "description": "Filter pane, label for choosing an address to filter by."
-  },
-  "filterByFloor": "Па паверсе",
-  "@filterByFloor": {
-    "description": "Filter pane, label for choosing a floor to filter by."
-  },
-  "chooseLocation": "Выберыце месца",
-  "@chooseLocation": {
-    "description": "Title for the screen for choosing a location on a map."
-  },
-  "chooseType": "Выберыце тып",
-  "@chooseType": {
-    "description": "Search field hint on the type choosing screen."
-  },
-  "chooseTypeClear": "Ачысціць",
-  "@chooseTypeClear": {
-    "description": "Tooltip for a button to clear search field contents."
-  },
-  "settingsApiServer": "Сервер API",
-  "@settingsApiServer": {
-    "description": "Section title for API server settings."
-  },
-  "settingsLoginDetails": "Уліковы запіс OSM",
-  "@settingsLoginDetails": {
-    "description": "Settings entry for logging in to OSM."
-  },
-  "accountTitle": "Уліковы запіс OSM",
-  "@accountTitle": {
-    "description": "Title for the account page."
-  },
-  "accountLogout": "Выйсці",
-  "@accountLogout": {
-    "description": "Button title for logging out of OSM."
-  },
-  "apiStatusDownloading": "Спампоўка даных…",
-  "@apiStatusDownloading": {
-    "description": "Text displayed when the app is downloading data from the API."
-  },
-  "dataDownloadedCount": "{count,plural, =1{Загружаны {count} аб'ект.} few{Загружана {count} аб'екта.} other{Загружана {count} аб'ектаў.}}",
-  "@dataDownloadedCount": {
-    "description": "Alert contents when we've successfully downloaded some data.",
-    "placeholders": {
-      "count": {}
+    "loadingTooMuchData": "Ачысціце загружаныя даныя ў Наладах, каб паскорыць рэдактар.",
+    "@loadingTooMuchData": {
+        "description": "Message of a warning alert when there's too much data downloaded."
+    },
+    "dataDownloadFailed": "Памылка загрузкі",
+    "@dataDownloadFailed": {
+        "description": "Alert title for the error happened during a data download."
+    },
+    "tileNo": "не",
+    "@tileNo": {
+        "description": "Prefix for a list of icons for attributes missing in amenity."
+    },
+    "filterNoAddresses": "Адрасоў паблізу няма",
+    "@filterNoAddresses": {
+        "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+    },
+    "filterByAddress": "Па адрасе",
+    "@filterByAddress": {
+        "description": "Filter pane, label for choosing an address to filter by."
+    },
+    "filterByFloor": "Па паверсе",
+    "@filterByFloor": {
+        "description": "Filter pane, label for choosing a floor to filter by."
+    },
+    "chooseLocation": "Выберыце месца",
+    "@chooseLocation": {
+        "description": "Title for the screen for choosing a location on a map."
+    },
+    "chooseType": "Выберыце тып",
+    "@chooseType": {
+        "description": "Search field hint on the type choosing screen."
+    },
+    "chooseTypeClear": "Ачысціць",
+    "@chooseTypeClear": {
+        "description": "Tooltip for a button to clear search field contents."
+    },
+    "settingsApiServer": "Сервер API",
+    "@settingsApiServer": {
+        "description": "Section title for API server settings."
+    },
+    "settingsLoginDetails": "Уліковы запіс OSM",
+    "@settingsLoginDetails": {
+        "description": "Settings entry for logging in to OSM."
+    },
+    "accountTitle": "Уліковы запіс OSM",
+    "@accountTitle": {
+        "description": "Title for the account page."
+    },
+    "accountLogout": "Выйсці",
+    "@accountLogout": {
+        "description": "Button title for logging out of OSM."
+    },
+    "apiStatusDownloading": "Спампоўка даных…",
+    "@apiStatusDownloading": {
+        "description": "Text displayed when the app is downloading data from the API."
+    },
+    "dataDownloadedCount": "{count,plural, =1{Загружаны {count} аб'ект.} few{Загружана {count} аб'екта.} other{Загружана {count} аб'ектаў.}}",
+    "@dataDownloadedCount": {
+        "description": "Alert contents when we've successfully downloaded some data.",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "loadingTooMuchDataTitle": "Занадта шмат даных",
+    "@loadingTooMuchDataTitle": {
+        "description": "Title for a warning alert when there's too much data downloaded."
+    },
+    "legendOther": "Іншае",
+    "@legendOther": {
+        "description": "Legend item for all other types."
+    },
+    "editorSave": "Захаваць",
+    "@editorSave": {
+        "description": "Save button title in the editor"
+    },
+    "settingsTitle": "Налады",
+    "@settingsTitle": {
+        "description": "App bar title for the settings panel."
+    },
+    "accountLoginOAuth": "Увайсці праз OAuth",
+    "@accountLoginOAuth": {
+        "description": "Button label for logging in to OSM via OAuth."
+    },
+    "accountLoginPassword": "Увайсці праз пароль",
+    "@accountLoginPassword": {
+        "description": "Button label for logging in to OSM with a password."
+    },
+    "accountFieldLogin": "Імя карыстальніка",
+    "@accountFieldLogin": {
+        "description": "Label for the OSM login."
+    },
+    "accountPasswordWarningButton": "Зразумела",
+    "@accountPasswordWarningButton": {
+        "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+    },
+    "accountPasswordWarningTitle": "Увага",
+    "@accountPasswordWarningTitle": {
+        "description": "Title for the warning dialog about keeping passwords on the device."
+    },
+    "accountPasswordTitle": "Уліковыя даныя OSM",
+    "@accountPasswordTitle": {
+        "description": "Title for the input dialog for login and password."
+    },
+    "accountFieldPassword": "Пароль",
+    "@accountFieldPassword": {
+        "description": "Label for the OSM password."
+    },
+    "accountAuthErrorMessage": "Няправільнае імя карыстальніка або пароль.",
+    "@accountAuthErrorMessage": {
+        "descripton": "Message for the alert dialog about an incorrect password."
+    },
+    "messageNoData": "Няма даных, націснеце тут, каб спампаваць",
+    "@messageNoData": {
+        "description": "Message that appears on the main screen when there's no OSM data."
+    },
+    "loadingStart": "Падрыхтоўка…",
+    "@loadingStart": {
+        "description": "Initial message for the loading screen, virtually unseen."
+    },
+    "buildingMaterialBrick": "цэгла",
+    "@buildingMaterialBrick": {},
+    "buildingMaterialConcrete": "бетон",
+    "@buildingMaterialConcrete": {},
+    "buildingMaterialPanels": "панэлі",
+    "@buildingMaterialPanels": {},
+    "buildingMaterialCementBlock": "цэментавыя блокі",
+    "@buildingMaterialCementBlock": {},
+    "buildingMaterialStone": "камень",
+    "@buildingMaterialStone": {},
+    "buildingMaterialMetal": "метал",
+    "@buildingMaterialMetal": {},
+    "buildingMaterialGlass": "шкло",
+    "@buildingMaterialGlass": {},
+    "buildingMaterialWood": "драўніна",
+    "@buildingMaterialWood": {},
+    "loadingLocation": "Вызначэнне месцазнаходжання…",
+    "@loadingLocation": {
+        "description": "Loading screen message for firing up GPS and waiting for a location."
+    },
+    "loadingChangesFailed": "Не удалося загрузіць праўкі",
+    "@loadingChangesFailed": {
+        "description": "Loading screen notification title for when loading changes has failed."
+    },
+    "loadingChanges": "Загрузка правак…",
+    "@loadingChanges": {
+        "description": "Loading screen message for loading stored changes."
+    },
+    "editorCloseTitle": "Зачыніць рэдактар?",
+    "@editorCloseTitle": {
+        "description": "Title for the message on closing the editor without saving changes."
+    },
+    "editorCloseMessage": "Адхіліць змены без захавання?",
+    "@editorCloseMessage": {
+        "description": "Message on closing the editor without saving changes."
+    },
+    "editorMoreFields": "Больш палёў",
+    "@editorMoreFields": {
+        "description": "Title of a additional fields group in editor."
+    },
+    "filterEmpty": "пуста",
+    "@filterEmpty": {
+        "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+    },
+    "aboutOnGitHub": "на GitHub",
+    "@aboutOnGitHub": {
+        "description": "Button description to indicate a link to GitHub."
+    },
+    "settingsAbout": "Аб праграме",
+    "@settingsAbout": {
+        "description": "Title for the About section in settings."
+    },
+    "aboutVersionHistory": "Гісторыя версій",
+    "@aboutVersionHistory": {
+        "description": "Button title to open GitHub releases page."
+    },
+    "aboutInstalledVersion": "Усталяваная версія",
+    "@aboutInstalledVersion": {
+        "description": "Button description for installed app version."
+    },
+    "aboutProjectWebsite": "Сайт праекта",
+    "@aboutProjectWebsite": {
+        "description": "Button title to open the every-door.app website."
+    },
+    "aboutSourceCode": "Зыходны код",
+    "@aboutSourceCode": {
+        "description": "Button title to open the repository on GitHub."
+    },
+    "aboutLicense": "Ліцэнзія",
+    "@aboutLicense": {
+        "description": "Button title to open the app's license on GitHub."
+    },
+    "aboutHelpImprove": "Дапамажыце палепшыць {appTitle}",
+    "@aboutHelpImprove": {
+        "description": "Title for the Help improve section on the About page.",
+        "placeholders": {
+            "appTitle": {
+                "type": "String",
+                "description": "Name of app.",
+                "example": "Every Door"
+            }
+        }
+    },
+    "aboutReportIssue": "Паведаміць аб праблеме",
+    "@aboutReportIssue": {
+        "description": "Button title to open the app's GitHub issue page."
+    },
+    "aboutHelpTranslate": "Дапамажыце перакласці",
+    "@aboutHelpTranslate": {
+        "description": "Button title to open the app's Weblate page."
+    },
+    "aboutOnWeblate": "на Weblate",
+    "@aboutOnWeblate": {
+        "description": "Button description to indicate a link to Weblate."
+    },
+    "aboutFAQ": "FAQ",
+    "@aboutFAQ": {
+        "description": "Title for the FAQ section on the About page."
+    },
+    "aboutLinks": "Спасылкі",
+    "@aboutLinks": {
+        "description": "Title for the links section on the About page."
+    },
+    "versionsFetchError": "Памылка атрымання гісторыі версій",
+    "@versionsFetchError": {
+        "description": "Message for when fetching element history fails due to unknown error."
+    },
+    "versionsEnableInternet": "Каб атрымаць гісторыю версій, падключыцеся да Інтэрнэту",
+    "@versionsEnableInternet": {
+        "description": "Message for when fetching element history fails due to lack of network connection."
+    },
+    "versionsTitle": "Гісторыя {elementRef}",
+    "@versionsTitle": {
+        "description": "Title for the element versions page.",
+        "placeholders": {
+            "elementRef": {
+                "type": "String",
+                "description": "Type and ID of OSM element.",
+                "example": "node/1234567"
+            }
+        }
+    },
+    "versionsVersionNumber": "Версія #{number}",
+    "@versionsVersionNumber": {
+        "description": "Card header for the diff for this element version.",
+        "placeholders": {
+            "number": {
+                "type": "int",
+                "description": "Element version number.",
+                "example": "node/1234567"
+            }
+        }
+    },
+    "versionsLocalChanges": "Лакальныя змены",
+    "@versionsLocalChanges": {
+        "description": "Card header for the local changes diff."
+    },
+    "versionsRetryFetch": "Паўтарыць",
+    "@versionsRetryFetch": {
+        "description": "Button label to retry fetching history."
+    },
+    "versionsNoTagChanges": "Няма змен у тэгах",
+    "@versionsNoTagChanges": {
+        "description": "Card body for when no tag changes occurred in this version."
+    },
+    "settingsPresentation": "Адлюстраванне",
+    "@settingsPresentation": {
+        "description": "Section title for presentation options."
+    },
+    "buildingLevels": "Паверхаў",
+    "@buildingLevels": {
+        "description": "Label for building:levels in the form. Keep it short."
+    },
+    "entranceTypeEmergency": "запасны",
+    "@entranceTypeEmergency": {},
+    "changesOsmNote": "Нататкі OSM",
+    "@changesOsmNote": {
+        "description": "Prefix for an OSM note in a changes tile."
+    },
+    "buildingRoofLevels": "Паверхаў у даху",
+    "@buildingRoofLevels": {
+        "description": "Label for roof:levels in the form. Keep it short."
+    },
+    "entranceTypeGarage": "гараж",
+    "@entranceTypeGarage": {},
+    "notesClose": "Закрыць нататку",
+    "@notesClose": {
+        "description": "Button title for closing a note."
+    },
+    "addressHouseNotEmpty": "Не павінен быць пустым",
+    "@addressHouseNotEmpty": {
+        "description": "Validator message for addr:housenumber."
+    },
+    "notesAnonymous": "Ананімны",
+    "@notesAnonymous": {
+        "description": "Name for anonymous note submitters."
+    },
+    "versionsVersionMeta": "ад {user} у {datetime}",
+    "@versionsVersionMeta": {
+        "description": "Card body to show metadata about the element version.",
+        "placeholders": {
+            "user": {
+                "type": "String",
+                "description": "OSM username of version creator.",
+                "example": "Zverik"
+            },
+            "datetime": {
+                "type": "String",
+                "description": "Datetime for when version was created.",
+                "example": "July 21, 2022 12:30"
+            }
+        }
+    },
+    "notesCloseMessage": "Пазначыць нататку вырашанай?",
+    "@notesCloseMessage": {
+        "description": "Confirmation message when pressed a close note button."
+    },
+    "buildingMaterialPlaster": "тынкоўка",
+    "@buildingMaterialPlaster": {},
+    "buildingMaterial": "Фасад",
+    "@buildingMaterial": {},
+    "buildingRoofShape": "Форма даху",
+    "@buildingRoofShape": {
+        "description": "Label for roof:shape in the form. Keep it short."
+    },
+    "loadingPresets": "Загрузка нарыхтовак…",
+    "@loadingPresets": {
+        "description": "Loading screen message for loading presets."
+    },
+    "dataDownloadSuccessful": "Паспяхова загружана",
+    "@dataDownloadSuccessful": {
+        "description": "Alert title for when the data was successfully downloaded."
+    },
+    "tileNothingAround": "Няма карысных кропак вакол вас у {distance} метрах.",
+    "@tileNothingAround": {
+        "description": "First part of the message displayed when there is nothing around.",
+        "placeholders": {
+            "distance": {
+                "type": "int",
+                "format": "decimalPattern",
+                "description": "Distance number in meters, at least 50.",
+                "example": "150"
+            }
+        }
+    },
+    "filterNonConfirmed": "Толькі непацверджаныя",
+    "@filterNonConfirmed": {
+        "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+    },
+    "editorLoadingPreset": "Загрузка нарыхтоўкі…",
+    "@editorLoadingPreset": {
+        "description": "Message shown when loading a preset in the editor."
+    },
+    "editorMove": "Зрушыць",
+    "@editorMove": {
+        "description": "Label for the map, a hint that you can move the object."
+    },
+    "editorDuplicate": "Магчымы дублікат у {distance} метрах",
+    "@editorDuplicate": {
+        "description": "Message about a possible duplicate",
+        "placeholders": {
+            "distance": {
+                "type": "int",
+                "format": "decimalPattern",
+                "description": "Distance in meters",
+                "example": "71"
+            }
+        }
+    },
+    "editorMarkActive": "Адзначыць актыўным",
+    "@editorMarkActive": {
+        "description": "Button title to mark an amenity active (non-defunct)."
+    },
+    "editorMarkDefunct": "Адзначыць неактыўным",
+    "@editorMarkDefunct": {
+        "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+    },
+    "tagsKeyError": "Занадта рэдкі ключ",
+    "@tagsKeyError": {
+        "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+    },
+    "tagsValueLong": "Занадта доўгае значэнне",
+    "@tagsValueLong": {
+        "description": "Validation error for when the value length exceeds 255 characters."
+    },
+    "editorRestore": "Аднавіць",
+    "@editorRestore": {
+        "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+    },
+    "editorMissing": "Не існуе",
+    "@editorMissing": {
+        "description": "Button title to delete an amenity (since it's missing)."
+    },
+    "editorRestoreMessage": "Установа {amenity} неактыўна. Адзначыць як працуючую?",
+    "@editorRestoreMessage": {
+        "description": "Question on restoring an edited defunct amenity.",
+        "placeholders": {
+            "amenity": {
+                "description": "Amenity title"
+            }
+        }
+    },
+    "editorDeleteTitle": "Выдаліць {amenity}?",
+    "@editorDeleteTitle": {
+        "description": "Dialog title for deleting an amenity.",
+        "placeholders": {
+            "amenity": {
+                "description": "Amenity title"
+            }
+        }
+    },
+    "editorDeleteButton": "Выдаліць",
+    "@editorDeleteButton": {
+        "description": "Delete"
+    },
+    "tagsUrlCopied": "Спасылка скапіравана ў буфер абмену",
+    "@tagsUrlCopied": {
+        "description": "Popup message when the link to the object was copied to the clipboard."
+    },
+    "tagsNewPoint": "Новая кропка",
+    "@tagsNewPoint": {
+        "description": "Tag editor panel title for a new amenity."
+    },
+    "tagsAddTag": "Дадаць тэг",
+    "@tagsAddTag": {
+        "description": "Tags panel button for adding a new tag."
+    },
+    "tagsKey": "Ключ",
+    "@tagsKey": {
+        "description": "Tags panel, add a new tag dialog: key label"
+    },
+    "tagsValue": "Значэнне",
+    "@tagsValue": {
+        "description": "Tags panel, add a new tag dialog: value label"
+    },
+    "settingsDataManagement": "Кіраванне данымі",
+    "@settingsDataManagement": {
+        "description": "Section title for data settings."
+    },
+    "buildingType": "Тып",
+    "@buildingType": {
+        "description": "Label for building type (value of building=*) in the form. Keep it short."
+    },
+    "buildingTypeAddress": "адрас",
+    "@buildingTypeAddress": {},
+    "buildingTypeHouse": "прыватны дом",
+    "@buildingTypeHouse": {},
+    "buildingTypeApartments": "шматкватэрны дом",
+    "@buildingTypeApartments": {},
+    "entranceTypeStaircase": "пад'езд",
+    "@entranceTypeStaircase": {},
+    "entranceTypeHome": "прыватны дом",
+    "@entranceTypeHome": {},
+    "entranceTypeShop": "крама",
+    "@entranceTypeShop": {},
+    "entranceTypeService": "службовы",
+    "@entranceTypeService": {},
+    "entranceType": "Тып",
+    "@entranceType": {
+        "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+    },
+    "entranceTypeMain": "галоўны",
+    "@entranceTypeMain": {},
+    "settingsPurgeAllData": "Ачысціць усе загружаныя даныя",
+    "@settingsPurgeAllData": {
+        "description": "Settings entry for purging all cached OSM data."
+    },
+    "settingsPurgeDataTitle": "Выдаліць даныя?",
+    "@settingsPurgeDataTitle": {
+        "description": "Confirmation dialog title for when purging all downloaded data."
+    },
+    "settingsPurgeDataMessage": "Вам прыйдзецца нанава ўсё загрузіць. Працягнуць?",
+    "@settingsPurgeDataMessage": {
+        "description": "Confirmation dialog message for when purging all downloaded data."
+    },
+    "settingsPurgedAllTitle": "Выдалілі даныя",
+    "@settingsPurgedAllTitle": {
+        "description": "Notification title for cleaning all downloaded data from the cache."
+    },
+    "settingsLeftHand": "Кіраванне левай рукой",
+    "@settingsLeftHand": {
+        "description": "Switch for enabling left hand controls, when most buttons move to the left."
+    },
+    "settingsPreferContact": "Аддаваць перавагу прэфіксу \"contact:\"",
+    "@settingsPreferContact": {
+        "description": "Settings switch for using e.g. contact:phone=* over phone=*."
+    },
+    "editorRestoreTitle": "Адкрылася?",
+    "@editorRestoreTitle": {
+        "description": "Title for question on restoring an edited defunct amenity."
+    },
+    "settingsDefaultPayment": "Плацежныя карткі па змаўчанні",
+    "@settingsDefaultPayment": {
+        "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
+    },
+    "accountOAuthError": "Памылка OAuth",
+    "@accountOAuthError": {
+        "description": "Alert title for when OAuth login failed."
+    },
+    "settingsPurgedObsoleteTitle": "Састарэлыя даныя",
+    "@settingsPurgedObsoleteTitle": {
+        "description": "Notification title for cleaning obsolete data from the cache."
+    },
+    "settingsPurgeData": "Ачысціць састарэлыя кэшаваныя даныя",
+    "@settingsPurgeData": {
+        "description": "Settings entry for purging obsolete OSM data."
+    },
+    "settingsBackground": "Спадарожнікавыя здымкі",
+    "@settingsBackground": {
+        "description": "Settings entry for choosing background satellite imagery."
+    },
+    "settingsEditor": "Рэдактар",
+    "@settingsEditor": {
+        "description": "Title for the settings section for editor presets."
+    },
+    "accountAuthErrorTitle": "Памылка аўтарызацыі",
+    "@accountAuthErrorTitle": {
+        "descripton": "Title for the alert dialog about an incorrect password."
+    },
+    "navMicromappingMode": "Рэжым мікрамапінга",
+    "@navMicromappingMode": {
+        "description": "Tooltip for the micromapping mode button on the nav panel."
+    },
+    "navImagery": "Пераключыць здымкі падкладкі",
+    "@navImagery": {
+        "description": "Tooltip for the map / imagery button on the nav panel."
+    },
+    "navDownload": "Загрузіць",
+    "@navDownload": {
+        "description": "Tooltip for the download data button on the nav panel."
+    },
+    "navUpload": "Выгрузіць",
+    "@navUpload": {
+        "description": "Tooltip for the upload data button on the nav panel."
+    },
+    "tagsDelete": "Ачысціць",
+    "@tagsDelete": {
+        "description": "Tooltip for a button next to a tag value to delete the tag."
+    },
+    "tagsShare": "Падзяліцца",
+    "@tagsShare": {
+        "description": "Tooltip for the sharing button on the tags panel."
+    },
+    "editorTags": "Тэгі",
+    "@editorTags": {
+        "description": "Tooltip for a button to open tags pane."
+    },
+    "settingsLanguage": "Мова",
+    "@settingsLanguage": {
+        "description": "Settings entry for changing the app language."
+    },
+    "settingsCacheTiles": "Загрузіць тайлы",
+    "@settingsCacheTiles": {
+        "description": "Tooltip for a button to download and cache tiles for imageries."
+    },
+    "settingsGoogle": "Выкарыстоўваць пазіцыянаванне Google",
+    "@settingsGoogle": {
+        "description": "Settings switch for disabling Google services for location."
+    },
+    "settingsSystem": "Сістэма",
+    "@settingsSystem": {
+        "description": "Title for the settings section for system-related switches."
+    },
+    "changesPurge": "Ачысціць змены",
+    "@changesPurge": {
+        "description": "Purge all changes"
+    },
+    "fieldNameLanguages": "Іншая мова",
+    "@fieldNameLanguages": {
+        "description": "Tooltip for a button to add a name in another language."
+    },
+    "fieldHoursSDRemove": "Выдаліць",
+    "@fieldHoursSDRemove": {
+        "description": "Tooltip for button on the specific days interval to remove some days."
+    },
+    "notesAddNote": "Дадаць нататку",
+    "@notesAddNote": {
+        "description": "Tooltip for the button to add a note."
+    },
+    "fieldHoursSDAddRange": "Дадаць дыяпазон",
+    "@fieldHoursSDAddRange": {
+        "description": "Tooltip for button on the specific days interval to add a range of dates."
+    },
+    "navPoiMode": "Рэжым устаноў / карысных кропак",
+    "@navPoiMode": {
+        "description": "Tooltip for the POI / amenity mode button on the nav panel."
+    },
+    "entrancesAddBuilding": "Дадаць будынак",
+    "@entrancesAddBuilding": {
+        "description": "Tooltip for the button to add a building node."
+    },
+    "fieldHoursSave": "Захаваць",
+    "@fieldHoursSave": {
+        "description": "Tooltip for a button to save opening_hours value."
+    },
+    "entrancesAddEntrance": "Дадаць уваход",
+    "@entrancesAddEntrance": {
+        "description": "Tooltip for the button to add an entrance node."
+    },
+    "fieldNameCopy": "Скапіяваць значэнне",
+    "@fieldNameCopy": {
+        "description": "Tooltip for a button to copy name value between languages."
+    },
+    "fieldHoursSDAddOne": "Дадаць дату",
+    "@fieldHoursSDAddOne": {
+        "description": "Tooltip for button on the specific days interval to add one specific date."
+    },
+    "fieldHoursRemoveFragment": "Выдаліць расклад",
+    "@fieldHoursRemoveFragment": {
+        "description": "Tooltip for a button to remove a fragment in the hours editor."
+    },
+    "fieldHoursRemoveBreak": "Выдаліць перапынак",
+    "@fieldHoursRemoveBreak": {
+        "description": "Tooltip for a button to remove a break in an opening hours fragment."
+    },
+    "fieldHoursClear": "Ачысціць",
+    "@fieldHoursClear": {
+        "description": "Tooltip for a button to clear the opening_hours value."
+    },
+    "fieldHoursChooseTime": "Гадзіны і хвіліны",
+    "@fieldHoursChooseTime": {
+        "description": "Tooltip for a button to open hours and minutes chooser."
+    },
+    "tagsRestore": "Аднавіць",
+    "@tagsRestore": {
+        "description": "Tooltip for a button next to a tag value to restore the value to the original."
+    },
+    "navNotesMode": "Рэжым нататак",
+    "@navNotesMode": {
+        "description": "Tooltip for the notes mode button on the nav panel."
+    },
+    "mapLocate": "Вярнуцца да мяне",
+    "@mapLocate": {
+        "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+    },
+    "mapZoomIn": "Наблізіць",
+    "@mapZoomIn": {
+        "description": "Tooltip for the zoom in (+) button on a map."
+    },
+    "mapSettings": "Налады",
+    "@mapSettings": {
+        "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+    },
+    "editorHistory": "Гісторыя",
+    "@editorHistory": {
+        "description": "Tooltip for a button to open version history pane."
+    },
+    "editorMarkChecked": "Адзначыць правераным",
+    "@editorMarkChecked": {
+        "description": "Tooltip for a button to mark the amenity checked without changing properties."
+    },
+    "mapZoomOut": "Аддаліць",
+    "@mapZoomOut": {
+        "description": "Tooltip for the zoom out (-) button on a map."
+    },
+    "mapFilter": "Фільтр",
+    "@mapFilter": {
+        "description": "Tooltip for the amenity filter button on a map."
+    },
+    "navEntrancesMode": "Рэжым уваходаў",
+    "@navEntrancesMode": {},
+    "changesDeletedUndo": "Адмяніць",
+    "@changesDeletedUndo": {
+        "description": "Button label for undoing a change deletion."
+    },
+    "fieldHoursFullDay": "Цэлы дзень",
+    "@fieldHoursFullDay": {
+        "description": "Switch for 24/7 opening hours."
+    },
+    "fieldHoursButton": "Усталяваць гадзіны працы",
+    "@fieldHoursButton": {
+        "description": "Text on the hours button when there's no value."
+    },
+    "tileDragTheMap": "Калі ласка, падыдзіце да чаго-небудзь бліжэй, перацягніце мапу або дадайце адсутную карысную кропку.",
+    "@tileDragTheMap": {
+        "description": "Message displayed when there is nothing around."
+    },
+    "accountChangesets": "Набораў змен",
+    "@accountChangesets": {
+        "description": "Label for the number of changesets a user has uploaded."
+    },
+    "accountUnreadMail": "Непрачытаных паведамленняў",
+    "@accountUnreadMail": {
+        "description": "Label for the number of unread private messages a user has."
+    },
+    "changesUploadFailedTitle": "Памылка адпраўкі правак",
+    "@changesUploadFailedTitle": {
+        "description": "Title for the notification about a failed changes upload."
+    },
+    "changesUploadedTitle": "Праўкі адпраўлены",
+    "@changesUploadedTitle": {
+        "description": "Title for the notification about a successful upload."
+    },
+    "settingsUploads": "Змены для адпраўкі",
+    "@settingsUploads": {
+        "description": "Settings entry for browsing changes to upload."
+    },
+    "settingsNumericKeyboard": "Пашыраная лічбавая клавіятура",
+    "@settingsNumericKeyboard": {
+        "description": "Settings switch for using the full keyboard for numeric fields."
+    },
+    "aboutViewLog": "Сістэмны журнал",
+    "@aboutViewLog": {
+        "description": "Button title to open the log view page."
+    },
+    "changesDeletedChange": "Выдалена {change}",
+    "@changesDeletedChange": {
+        "description": "Message for the snack bar after you swipe a change away.",
+        "placeholders": {
+            "change": {
+                "description": "Name of the deleted object",
+                "example": "shop"
+            }
+        }
+    },
+    "changesPending": "У чаканні",
+    "@changesPending": {
+        "description": "Subtitle for a change that has not yet been sent to OSM API."
+    },
+    "changesPurgeTitle": "Ачысціць змены?",
+    "@changesPurgeTitle": {
+        "description": "Dialog title for confirming deletion of all changes."
+    },
+    "changesSwipeLeft": "Правядзіце ўлева для адмены змены",
+    "@changesSwipeLeft": {
+        "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
+    },
+    "fieldHoursAsText": "Тэкстам",
+    "@fieldHoursAsText": {
+        "description": "Button title to open the raw opening hours editor."
+    },
+    "fieldHoursSpecificDays": "Канкрэтная дата",
+    "@fieldHoursSpecificDays": {
+        "description": "Button title for selectors like Dec 31."
+    },
+    "changesUploadedMessage": "Адпраўлена {changes} у OpenStreetMap.",
+    "@changesUploadedMessage": {
+        "description": "Message for the notification about a successful upload.",
+        "placeholders": {
+            "changes": {
+                "description": "Number of changes",
+                "example": "5 changes"
+            }
+        }
+    },
+    "changesPurgeMessage": "Выдаліць усе запісаныя змены і аднавіць зыходныя даныя?",
+    "@changesPurgeMessage": {
+        "description": "Dialog message for confirming deletion of all changes."
+    },
+    "fieldHoursTitle": "Гадзіны працы",
+    "@fieldHoursTitle": {
+        "description": "Title for the opening hours editor pane."
+    },
+    "accountPasswordWarningMessage": "Ваш пароль будзе захаваны на прыладзе. Выбірайце гэта толькі ў выпадку збою OAuth.",
+    "@accountPasswordWarningMessage": {
+        "description": "Message for the warning dialog about keeping passwords on the device."
+    },
+    "fieldHoursAddBreak": "Дадаць перапынак",
+    "@fieldHoursAddBreak": {
+        "description": "Button in opening hours editor to add a break."
+    },
+    "fieldHoursClosedPH": "Зачынена ў дзяржаныя святы",
+    "@fieldHoursClosedPH": {
+        "description": "Switch label for PH off."
+    },
+    "fieldWifiNo": "адсутнічае",
+    "@fieldWifiNo": {
+        "description": "Wifi field label for no wifi."
+    },
+    "fieldWifiPublic": "агульны",
+    "@fieldWifiPublic": {
+        "description": "Wifi field label for public unrestricted wifi."
+    },
+    "buildingX": "Будынак {n}",
+    "@buildingX": {
+        "description": "Option displayed when there's multiple buildings under a tap.",
+        "placeholders": {
+            "n": {
+                "example": "12A"
+            }
+        }
+    },
+    "buildingTypeGarage": "гараж",
+    "@buildingTypeGarage": {},
+    "buildingTypeConstruction": "будуецца",
+    "@buildingTypeConstruction": {},
+    "fieldHoursHour": "Гадзіны",
+    "@fieldHoursHour": {
+        "description": "Label for the hour chooser."
+    },
+    "fieldAddressTap": "Націсніце на адрас",
+    "@fieldAddressTap": {
+        "description": "Title for the pane when a user can tap an address to choose it."
+    },
+    "buttonYes": "Так",
+    "@buttonYes": {
+        "description": "Button for approval."
+    },
+    "buttonNo": "Не",
+    "@buttonNo": {
+        "description": "Button for dismissal."
+    },
+    "buildingTypeShed": "хлеў",
+    "@buildingTypeShed": {},
+    "buildingTypeIndustrial": "прамысловы",
+    "@buildingTypeIndustrial": {},
+    "entranceFlats": "Квартэры",
+    "@entranceFlats": {
+        "description": "Label for addr:flats in the form. Keep it short."
+    },
+    "entranceWheelchair": "♿",
+    "@entranceWheelchair": {
+        "description": "Label for entrance wheelchair access in the form. Keep it short."
+    },
+    "addressPlace": "Горад",
+    "@addressPlace": {
+        "description": "Label for addr:place or addr:city in the form. Keep it short."
+    },
+    "fieldCheckboxYes": "ёсць",
+    "@fieldCheckboxYes": {
+        "description": "Checkbox name for yes."
+    },
+    "fieldCheckboxNo": "адсутнічае",
+    "@fieldCheckboxNo": {
+        "description": "Checkbox name for no."
+    },
+    "fieldFloorEmpty": "Каб выбраць паверх, задайце адрас.",
+    "@fieldFloorEmpty": {
+        "description": "What is written on the floor chooser if there are no floors to choose."
+    },
+    "fieldFloorShouldBeNumber": "Калі ласка, увядзіце лічбу",
+    "@fieldFloorShouldBeNumber": {
+        "description": "Validation message for a levels tag, also used in building levels form."
+    },
+    "buildingMoreButton": "Болей",
+    "@buildingMoreButton": {
+        "description": "Button label for opening the building object in a full editor."
+    },
+    "buildingTypeRetail": "рознічны гандаль",
+    "@buildingTypeRetail": {},
+    "buildingTypeCommercial": "камерцыйны",
+    "@buildingTypeCommercial": {},
+    "entranceRef": "Нумар",
+    "@entranceRef": {
+        "description": "Label for entrance ref in the form. Keep it short."
+    },
+    "entranceAccess": "Доступ",
+    "@entranceAccess": {
+        "description": "Label for entrance access in the form. Keep it short."
+    },
+    "entranceAccessYes": "агульны",
+    "@entranceAccessYes": {},
+    "entranceAccessPrivate": "прыватны",
+    "@entranceAccessPrivate": {},
+    "entranceAccessNo": "няма",
+    "@entranceAccessNo": {},
+    "apiStatusUploading": "Запампоўка змяненняў",
+    "@apiStatusUploading": {
+        "description": "Text displayed when the app is uploading data to the API."
+    },
+    "fieldHoursClosed": "Зачынена",
+    "@fieldHoursClosed": {
+        "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+    },
+    "fieldHoursPublicHolidays": "Дзяржаўныя святы",
+    "@fieldHoursPublicHolidays": {
+        "description": "Card title for the PH (public holidays) selector."
+    },
+    "fieldHoursOpens": "Адчыняецца",
+    "@fieldHoursOpens": {
+        "description": "Title for the interval start."
+    },
+    "fieldHoursCloses": "Зачыняецца",
+    "@fieldHoursCloses": {
+        "description": "Title for the interval end."
+    },
+    "fieldHoursBreak": "Перапынак",
+    "@fieldHoursBreak": {
+        "description": "Title for the break interval."
+    },
+    "fieldHoursNext": "Далей",
+    "@fieldHoursNext": {
+        "description": "Button in the interval editor to move to the closing time."
+    },
+    "fieldHoursMinute": "Хвіліны",
+    "@fieldHoursMinute": {
+        "description": "Label for the minute chooser."
+    },
+    "fieldHoursWeekdays": "Пн Аў Ср Чц Пт Сб Нд",
+    "@fieldHoursWeekdays": {
+        "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+    },
+    "fieldWifiCustomers": "для кліентаў",
+    "@fieldWifiCustomers": {
+        "description": "Wifi field label for wifi available to customers only."
+    },
+    "fieldWheelchairYes": "так",
+    "@fieldWheelchairYes": {
+        "description": "Wheelchair field label for full accessibility."
+    },
+    "fieldWheelchairLimited": "абмежавана",
+    "@fieldWheelchairLimited": {
+        "description": "Wheelchair field label for limited accessibility."
+    },
+    "fieldWheelchairNo": "не",
+    "@fieldWheelchairNo": {
+        "description": "Wheelchair field label for no accessibility."
+    },
+    "fieldCardsAccepted": "прымаюць",
+    "@fieldCardsAccepted": {
+        "description": "Payment field label for cards accepted."
+    },
+    "fieldCardsNo": "не",
+    "@fieldCardsNo": {
+        "description": "Payment field label for cash only."
+    },
+    "fieldFloorNew": "Новы паверх",
+    "@fieldFloorNew": {
+        "description": "Title for the floor creation pane."
+    },
+    "fieldFloorLevelDesc": "Нумар паверха, пачынаючы з 0 для ўзроўню зямлі",
+    "@fieldFloorLevelDesc": {
+        "description": "Description for the \"addr:floor\" tag."
+    },
+    "fieldPhoneWrong": "Няправільны фармат нумара",
+    "@fieldPhoneWrong": {
+        "description": "Validation message for a non-standard phone number."
+    },
+    "enableGPS": "Уключыце GPS",
+    "@enableGPS": {
+        "description": "Title of the alert for enabling location services."
+    },
+    "enableGPSMessage": "Калі ласка, уключыце службы вызначэння месцазнаходжання ў панэлі налад, якая будзе паказаная.",
+    "@enableGPSMessage": {
+        "description": "Contents of the alert for enabling location services."
+    },
+    "enableLocation": "Дазвольце GPS",
+    "@enableLocation": {
+        "description": "Title of the alert for allowing app access to location."
+    },
+    "addressX": "Адрас {n}",
+    "@addressX": {
+        "description": "Option displayed when there's multiple addresses under a tap.",
+        "placeholders": {
+            "n": {
+                "example": "12A"
+            }
+        }
+    },
+    "entranceX": "Уваход {n}",
+    "@entranceX": {
+        "description": "Option displayed when there's multiple entrances under a tap.",
+        "placeholders": {
+            "n": {
+                "example": "1-15"
+            }
+        }
+    },
+    "entranceFlatsNumberList": "Павінен быць спіс лічбаў",
+    "@entranceFlatsNumberList": {
+        "description": "Validation message for addr:flats."
+    },
+    "entranceIsUnit": "Захоўвайць нумар кватэры ў addr:unit",
+    "@entranceIsUnit": {
+        "description": "Label for a switch to use addr:unit instead of addr:flats."
+    },
+    "entranceAccessDelivery": "дастаўка",
+    "@entranceAccessDelivery": {},
+    "addressHouseNumber": "Нумар",
+    "@addressHouseNumber": {
+        "description": "Label for addr:housenumber in the form. Keep it short."
+    },
+    "addressUnitOptional": "неабавязкова",
+    "@addressUnitOptional": {
+        "description": "Hint for addr:unit that it's optional."
+    },
+    "addressStreet": "Вуліца",
+    "@addressStreet": {
+        "description": "Label for addr:street in the form. Keep it short."
+    },
+    "apiStatusUpdatingDB": "Захаванне аб'ектаў у базе даных",
+    "@apiStatusUpdatingDB": {
+        "description": "Text displayed when the app is updating the database with downloaded objects."
+    },
+    "faqMapTiny": "Чаму мапа такая маленькая?",
+    "@faqMapTiny": {},
+    "messageDataObsolete": "Даныя састарэлі, націсніце тут, каб абнавіць",
+    "@messageDataObsolete": {
+        "description": "Message that appears on the main screen when OSM data is outdated."
+    },
+    "enableLocationMessage": "Калі ласка, дазвольце праграме доступ да месцазнаходжання ў панэлі налад, якая будзе паказаная.",
+    "@enableLocationMessage": {
+        "description": "Contents of the alert for allowing app access to location."
+    },
+    "buildingPostCode": "Паштовы індэкс",
+    "@buildingPostCode": {
+        "description": "Label for addr:postcode in the form. Keep it short."
+    },
+    "faqCheckmarks": "Навошта патрэбна птушка?",
+    "@faqCheckmarks": {},
+    "fieldHoursAddFragment": "Дадаць расклад",
+    "@fieldHoursAddFragment": {
+        "description": "Button in opening hours editor to add a fragment for days."
+    },
+    "tileDragOrUnfilter": "Калі ласка перасуньцеся, дадайце карысную кропку, або ачысціце фільтр.",
+    "@tileDragOrUnfilter": {
+        "description": "Message displayer when there's nothing around, and a filter is on."
+    },
+    "changesCount": "{count,plural, =1{{count} змена} few{{count} змены} other{{count} змен}}",
+    "@changesCount": {
+        "description": "Number of changed elements to display or to upload.",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "faqFloors": "Паверхі \"3\" і \"/3\" — адно і тое ж?",
+    "@faqFloors": {},
+    "faqLetters": "Ці магу я ўвесці літары ў нумар кватэры або ўваходу?",
+    "@faqLetters": {},
+    "faqChangeType": "Як змяніць тып установы?",
+    "@faqChangeType": {},
+    "faqTagging": "Усе пытанні па тэгах",
+    "@faqTagging": {},
+    "faqChangeTypeContent": "Націсніце на загаловак рэдактара, дзе напісаны гэты тып.",
+    "@faqChangeTypeContent": {},
+    "faqEntrance": "Як дадаць уваход у будынак?",
+    "@faqEntrance": {},
+    "fieldHoursNumberedWeekday": "\"Апошні панядзелак\"",
+    "@fieldHoursNumberedWeekday": {
+        "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+    },
+    "fieldComboEmpty": "няма",
+    "@fieldComboEmpty": {
+        "description": "Option for a combo field that sets an empty value."
+    },
+    "fieldFloorFloorDesc": "Паверх як пазначана на навігацыі і ў ліфтах",
+    "@fieldFloorFloorDesc": {
+        "descripton": "Description for the \"level\" tag."
+    },
+    "settingsPurgedMessage": "{count,plural, =1{Ачышчаны {count} аб'ект} few{Ачышчана {count} аб'екта} other{Ачышчана {count} аб'ектаў}}",
+    "@settingsPurgedMessage": {
+        "description": "Notification message after some cached elements were deleted.",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "fieldComboChoose": "выбраць",
+    "@fieldComboChoose": {
+        "description": "A placeholder value displayed in a single-value combo field when there is no value."
+    },
+    "addressUnit": "Блок",
+    "@addressUnit": {
+        "description": "Label for addr:unit in the form. Keep it short."
+    },
+    "changesMapNotes": "Нататкі і малюнкі",
+    "@changesMapNotes": {
+        "description": "Title for a grouped change tile for map notes and drawings."
+    },
+    "faqLettersContent": "Калі вашу лічбавую клавіятуру нельга пераключыць на поўную клавіятуру з літарамі, праверце налады праграмы. Уключыце там \"Пашыраная лічбавая клавіятура\".",
+    "@faqLettersContent": {},
+    "faqTaggingContent": "Чаму аб'ект адсутнічае ў рэдактары? Калі белыя кропкі адлюстроўваюцца ў рэжыме мікрпамапінга? Як сартуюцца аб'екты?\n\nАдказы на ўсе гэтыя пытанні знаходзяцца ў файле [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Вось на што трэба звярнуць увагу:\n\n* Парадак вызначэння галоўнага тэга — спіс `kMainKeys` у `main_key.dart`.\n* Якія аб'екты спампоўваюцца — клас `_EverythingKind`.\n* Што лічыцца ўстановай — клас `_AmenityKind`.\n* Якія кропкі прывязваюцца да ліній, і да якіх ліній — логіка класа `ElementKindImpl` (глядзі адпаведныя падкласы) .\n* Калі аб'ект мікрамапінга няпоўны — клас `_NeedsMoreInfo`.",
+    "@faqTaggingContent": {},
+    "faqEntranceContent": "Унізе экрана ёсць кнопкі для пераключэння рэжымаў: мікрамапінг, установы, уваходы і нататкі.\n\nУ рэжыме ўваходаў націсніце або перацягніце кнопку дзвярэй у ніжнім куце на мапу.",
+    "@faqEntranceContent": {},
+    "faqMapTinyContent": "Бо не яна галоўная. Вы толькі правяраеце сваё месцазнаходжанне на мапе. Глядзіце спіс ўстаноў ніжэй, які адсартаваны па адлегласці ад вас.\n\nМапа павялічваецца, калі вы рэдагуеце ўстановы, размешчаныя далёка ад вашага месцазнаходжання. Хаця праграма створана для рэдагавання аб'ектаў, якія вы бачыце сваімі вачыма.",
+    "@faqMapTinyContent": {},
+    "faqFloorsContent": "Не. У першым выпадку запоўнены тэг `addr:floor=3. Гэта паверх, як ён надрукаваны ў навігацыі і звычайна выкарыстоўваецца. У другім выпадку гэты тэг пусты, але запоўнены тэг `level=3`. Гэтая лічба — нумар паверха ў паслядоўнай нумарацыі ад нуля да `building:levels - 1`. Гэта значыць, што ў трохпавярховым будынку `addr:floor` залежыць ад краіны, а `level`заўсёды 0, 1 ці 2.\n\nВось як умоўнае абазначэнне ў рэдактары залежыць ад гэтых тэгаў:\n\n* `2`: `addr:floor=2` і непусты `level=*`.\n* `4/`: `addr:floor=4`, тэг `level` адсутнічае.\n* `/1`: `level=1`, тэг `addr:floor` адсутнічае.\n* `1/0`: `addr:floor=1` + `level=0` (і побач ёсць аб'ект з тым жа `addr:floor`, але іншым `level`, ці наадварот).",
+    "@faqFloorsContent": {},
+    "faqCheckmarksContent": "Гэта адзнака кажа аб тым, што ўстанова праверана. Дадае да аб'екту тэг `check_date` з бягучай датай.\n\nІдэя птушкі заключаецца ў тым, што, скажам, вы абследавалі палову горада з першага разу. Потым, праз месяц, вы вярнуліся і зноў пайшлі абследаваць. І вам трэба неяк адзначыць, што вы праверылі, што ўстанова на месцы, але нічога не змянілася. Гэта і ёсць птушка: націснуў і пайшоў далей.\n\nАдзнака трымаецца два месяцы пасля праверкі. Потым можна будзе агледзець установу зноў.",
+    "@faqCheckmarksContent": {},
+    "fieldCardsOnly": "толькі карткай",
+    "@fieldCardsOnly": {
+        "description": "Payment field label for cards only."
+    },
+    "faqYellow": "Чаму некаторыя нумары дамоў жоўтыя?",
+    "@faqYellow": {},
+    "warningTooOld": "Установе / кропке карыснасці {years}",
+    "@warningTooOld": {
+        "description": "Warning message for when an amenity is many years old.",
+        "placeholders": {
+            "years": {
+                "description": "How many years ago the amenity was edited.",
+                "example": "5 years"
+            }
+        }
+    },
+    "warningFixme": "Значэнне fixme: {value}",
+    "@warningFixme": {
+        "description": "Warning message for when an object has a non-empty fixme value.",
+        "placeholders": {
+            "value": {
+                "description": "Value of the fixme tag"
+            }
+        }
+    },
+    "warningWrongTag": "Памылковы тэг: {tag}",
+    "@warningWrongTag": {
+        "description": "Warning message for tags like shop=yes and amenity=no.",
+        "placeholders": {
+            "tag": {
+                "description": "The tag with the issue",
+                "example": "shop=yes"
+            }
+        }
+    },
+    "faqYellowContent": "Белыя пазнакі ў рэжыме ўваходаў і белыя кропкі ў рэжыме мікрамапінгу азначаюць, што ў элементаў адсутнічаюць некаторыя важныя атрыбуты. Напрыклад:\n\n* будынкам трэба прапісаць колькасць паверхаў;\n* уваходам трэба пазначыць тып і нумары кватэр (для пад'ездаў);\n* лаўкі павінны мець матэрыял і спінку;\n* дрэвы павінны мець тып лісця і цыкл лістапада.",
+    "@faqYellowContent": {},
+    "years": "{count,plural, =1{{count} год} few{{count} гады} other{{count} гадоў}}",
+    "@years": {
+        "description": "Number of years. Used in the \"amenity is N years old\" message.",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "settingsHashtags": "Хэштэгі набораў змен",
+    "@settingsHashtags": {
+        "description": "Settings entry for editing changeset hashtags."
+    },
+    "hashtagsLabel": "Словы для хэштэгаў",
+    "@hashtagsLabel": {
+        "description": "Label for a text field with changeset hashtags."
+    },
+    "notesCancelMessage": "Скасаваць нататку OSM?",
+    "@notesCancelMessage": {
+        "description": "Message when cancelling an OSM note that has non-empty content."
+    },
+    "hashtagsConfirm": "Пацвярджаць тэгі пры адпраўцы правак",
+    "@hashtagsConfirm": {
+        "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
+    },
+    "fieldDirectionSet": "Адзначыць",
+    "@fieldDirectionSet": {
+        "description": "Button label for setting a direction (0-360°) value."
+    },
+    "fieldNameLangSearch": "Знайсці мову",
+    "@fieldNameLangSearch": {
+        "description": "Hint for the text field for finding a language in a list."
+    },
+    "notesDelete": "Выдаліць",
+    "@notesDelete": {
+        "description": "Button title for deleting a new note."
+    },
+    "fieldWebsiteQR": "Адскануйце QR-код",
+    "@fieldWebsiteQR": {
+        "description": "Page title for the QR code scanner."
+    },
+    "drawUndo": "Скасаваць",
+    "@drawUndo": {},
+    "drawChangeTool": "Змяніць інструмент",
+    "@drawChangeTool": {
+        "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+    },
+    "editorDeleteBuilding": "Знесены",
+    "@editorDeleteBuilding": {
+        "description": "Button title to mark a building demolished."
+    },
+    "editorDeleteKeepAddressButton": "Выдаліць, але захаваць адрас",
+    "@editorDeleteKeepAddressButton": {
+        "description": "Button for keeping the address"
+    },
+    "drawRoad": "Дарога",
+    "@drawRoad": {
+        "description": "Tool description: paved road. Keep it short."
+    },
+    "notesComment": "Ваш каментар",
+    "@notesComment": {
+        "description": "Label for the note comment field."
+    },
+    "tileDragDownload": "Паспрабуйце націснуць кнопку спампоўкі.",
+    "@tileDragDownload": {
+        "description": "Message displayed when there is nothing around, and a download button is present."
+    },
+    "settingsPlugins": "Убудовы",
+    "@settingsPlugins": {
+        "description": "Title for the settings section and the page about managing plugins."
+    },
+    "pluginsEnable": "Уключыць",
+    "@pluginsEnable": {
+        "description": "Button for enabling a deactivated plugin."
+    },
+    "pluginsDisable": "Адключыць",
+    "@pluginsDisable": {
+        "description": "Button for deactivating a plugin."
+    },
+    "pluginsDisabledHeader": "Адключаныя",
+    "@pluginsDisabledHeader": {
+        "description": "Header for the section listing deactivated, disabled plugins."
+    },
+    "pluginsRepository": "Сховішча ўбудоў",
+    "@pluginsRepository": {
+        "description": "Page title for a list of plugins stored on a server, to choose from."
+    },
+    "pluginsSearch": "Пошук",
+    "@pluginsSearch": {
+        "description": "Searching text field hint on the plugin repository page."
+    },
+    "pluginsUpdate": "Абнавіць",
+    "@pluginsUpdate": {
+        "description": "Button for updating an installed plugin to the latest version."
+    },
+    "pluginsInstall": "Усталяваць",
+    "@pluginsInstall": {
+        "description": "Button to install a new plugin from a server."
+    },
+    "pluginsUrl": "URL убудовы",
+    "@pluginsUrl": {
+        "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+    },
+    "pluginsMore": "Болей...",
+    "@pluginsMore": {
+        "description": "Button to see details about a specific plugin and manage it."
+    },
+    "pluginsInstallation": "Усталёўванне ўбудовы",
+    "@pluginsInstallation": {
+        "description": "Page title for installing a single plugin from the web."
+    },
+    "pluginsInstallQuestion": "Усталяваць убудову \"{plugin}\" версіі {version}?",
+    "@pluginsInstallQuestion": {
+        "description": "Message that appears when installing a plugin from an unverified source.",
+        "placeholders": {
+            "plugin": {
+                "description": "Identifier of a plugin",
+                "example": "cycle_barriers"
+            },
+            "version": {
+                "description": "Plugin version, usually numbers",
+                "example": "1.2"
+            }
+        }
+    },
+    "pluginsInstallSource": "Крыніца: {host}",
+    "@pluginsInstallSource": {
+        "description": "Message to display a host from which a plugin is installed.",
+        "placeholders": {
+            "host": {
+                "description": "Web host, no path or scheme",
+                "example": "plugins.every-door.app"
+            }
+        }
+    },
+    "pluginsSeeLogs": "Праглядзець журнал",
+    "@pluginsSeeLogs": {
+        "description": "Button title to browse the system log when a plugin installation error has occurred."
+    },
+    "warningFixmeNote": "Будзе пераўтворана ў нататку OSM",
+    "@warningFixmeNote": {
+        "description": "Warning message for an amenity=fixme object with just a name."
+    },
+    "warningUnsupported": "Тып гэтага аб'екта не падтрымліваецца",
+    "@warningUnsupported": {
+        "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+    },
+    "warningWrongMode": "Няправільны рэжым, праверце наяўнасць дублікатаў",
+    "@warningWrongMode": {
+        "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+    },
+    "settingsCachesClearRaster": "Ачысціць кэш растравых тайлаў",
+    "@settingsCachesClearRaster": {
+        "description": "Settings data management entry for clearing all cached raster tiles."
+    },
+    "settingsCachesClearVector": "Ачысціць кэш вектарных тайлаў",
+    "@settingsCachesClearVector": {
+        "description": "Settings data management entry for clearing all cached vector tiles."
+    },
+    "settingsCachesSelectTiles": "Выберыце тайлы для спампоўкі",
+    "@settingsCachesSelectTiles": {
+        "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+    },
+    "settingsCachesDownloadData": "Спампаваць даныя",
+    "@settingsCachesDownloadData": {
+        "description": "Button label for pre-downloading OpenStreetMap data."
+    },
+    "settingsCachesDownloadMap": "Спампаваць тайлы карты",
+    "@settingsCachesDownloadMap": {
+        "description": "Button label for pre-downloading OSM map tiles."
+    },
+    "settingsCachesDownloadSatellite": "Спампаваць спадарожнікавыя здымкі",
+    "@settingsCachesDownloadSatellite": {
+        "description": "Button label for pre-downloading Satellite imagery tiles."
+    },
+    "settingsCachesCancel": "Скасаваць ({percent}%)",
+    "@settingsCachesCancel": {
+        "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+        "placeholders": {
+            "percent": {
+                "description": "Percent number between 0 and 100.",
+                "example": "50"
+            }
+        }
+    },
+    "settingsCachesClearManual": "Ачысціць спампаваныя ўручную даныя",
+    "@settingsCachesClearManual": {
+        "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
     }
-  },
-  "loadingTooMuchDataTitle": "Занадта шмат даных",
-  "@loadingTooMuchDataTitle": {
-    "description": "Title for a warning alert when there's too much data downloaded."
-  },
-  "legendOther": "Іншае",
-  "@legendOther": {
-    "description": "Legend item for all other types."
-  },
-  "editorSave": "Захаваць",
-  "@editorSave": {
-    "description": "Save button title in the editor"
-  },
-  "settingsTitle": "Налады",
-  "@settingsTitle": {
-    "description": "App bar title for the settings panel."
-  },
-  "accountLoginOAuth": "Увайсці праз OAuth",
-  "@accountLoginOAuth": {
-    "description": "Button label for logging in to OSM via OAuth."
-  },
-  "accountLoginPassword": "Увайсці праз пароль",
-  "@accountLoginPassword": {
-    "description": "Button label for logging in to OSM with a password."
-  },
-  "accountFieldLogin": "Імя карыстальніка",
-  "@accountFieldLogin": {
-    "description": "Label for the OSM login."
-  },
-  "accountPasswordWarningButton": "Зразумела",
-  "@accountPasswordWarningButton": {
-    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
-  },
-  "accountPasswordWarningTitle": "Увага",
-  "@accountPasswordWarningTitle": {
-    "description": "Title for the warning dialog about keeping passwords on the device."
-  },
-  "accountPasswordTitle": "Уліковыя даныя OSM",
-  "@accountPasswordTitle": {
-    "description": "Title for the input dialog for login and password."
-  },
-  "accountFieldPassword": "Пароль",
-  "@accountFieldPassword": {
-    "description": "Label for the OSM password."
-  },
-  "accountAuthErrorMessage": "Няправільнае імя карыстальніка або пароль.",
-  "@accountAuthErrorMessage": {
-    "descripton": "Message for the alert dialog about an incorrect password."
-  },
-  "messageNoData": "Няма даных, націснеце тут, каб спампаваць",
-  "@messageNoData": {
-    "description": "Message that appears on the main screen when there's no OSM data."
-  },
-  "loadingStart": "Падрыхтоўка…",
-  "@loadingStart": {
-    "description": "Initial message for the loading screen, virtually unseen."
-  },
-  "buildingMaterialBrick": "цэгла",
-  "@buildingMaterialBrick": {},
-  "buildingMaterialConcrete": "бетон",
-  "@buildingMaterialConcrete": {},
-  "buildingMaterialPanels": "панэлі",
-  "@buildingMaterialPanels": {},
-  "buildingMaterialCementBlock": "цэментавыя блокі",
-  "@buildingMaterialCementBlock": {},
-  "buildingMaterialStone": "камень",
-  "@buildingMaterialStone": {},
-  "buildingMaterialMetal": "метал",
-  "@buildingMaterialMetal": {},
-  "buildingMaterialGlass": "шкло",
-  "@buildingMaterialGlass": {},
-  "buildingMaterialWood": "драўніна",
-  "@buildingMaterialWood": {},
-  "loadingLocation": "Вызначэнне месцазнаходжання…",
-  "@loadingLocation": {
-    "description": "Loading screen message for firing up GPS and waiting for a location."
-  },
-  "loadingChangesFailed": "Не удалося загрузіць праўкі",
-  "@loadingChangesFailed": {
-    "description": "Loading screen notification title for when loading changes has failed."
-  },
-  "loadingChanges": "Загрузка правак…",
-  "@loadingChanges": {
-    "description": "Loading screen message for loading stored changes."
-  },
-  "editorCloseTitle": "Зачыніць рэдактар?",
-  "@editorCloseTitle": {
-    "description": "Title for the message on closing the editor without saving changes."
-  },
-  "editorCloseMessage": "Адхіліць змены без захавання?",
-  "@editorCloseMessage": {
-    "description": "Message on closing the editor without saving changes."
-  },
-  "editorMoreFields": "Больш палёў",
-  "@editorMoreFields": {
-    "description": "Title of a additional fields group in editor."
-  },
-  "filterEmpty": "пуста",
-  "@filterEmpty": {
-    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
-  },
-  "aboutOnGitHub": "на GitHub",
-  "@aboutOnGitHub": {
-    "description": "Button description to indicate a link to GitHub."
-  },
-  "settingsAbout": "Аб праграме",
-  "@settingsAbout": {
-    "description": "Title for the About section in settings."
-  },
-  "aboutVersionHistory": "Гісторыя версій",
-  "@aboutVersionHistory": {
-    "description": "Button title to open GitHub releases page."
-  },
-  "aboutInstalledVersion": "Усталяваная версія",
-  "@aboutInstalledVersion": {
-    "description": "Button description for installed app version."
-  },
-  "aboutProjectWebsite": "Сайт праекта",
-  "@aboutProjectWebsite": {
-    "description": "Button title to open the every-door.app website."
-  },
-  "aboutSourceCode": "Зыходны код",
-  "@aboutSourceCode": {
-    "description": "Button title to open the repository on GitHub."
-  },
-  "aboutLicense": "Ліцэнзія",
-  "@aboutLicense": {
-    "description": "Button title to open the app's license on GitHub."
-  },
-  "aboutHelpImprove": "Дапамажыце палепшыць {appTitle}",
-  "@aboutHelpImprove": {
-    "description": "Title for the Help improve section on the About page.",
-    "placeholders": {
-      "appTitle": {
-        "type": "String",
-        "description": "Name of app.",
-        "example": "Every Door"
-      }
-    }
-  },
-  "aboutReportIssue": "Паведаміць аб праблеме",
-  "@aboutReportIssue": {
-    "description": "Button title to open the app's GitHub issue page."
-  },
-  "aboutHelpTranslate": "Дапамажыце перакласці",
-  "@aboutHelpTranslate": {
-    "description": "Button title to open the app's Weblate page."
-  },
-  "aboutOnWeblate": "на Weblate",
-  "@aboutOnWeblate": {
-    "description": "Button description to indicate a link to Weblate."
-  },
-  "aboutFAQ": "FAQ",
-  "@aboutFAQ": {
-    "description": "Title for the FAQ section on the About page."
-  },
-  "aboutLinks": "Спасылкі",
-  "@aboutLinks": {
-    "description": "Title for the links section on the About page."
-  },
-  "versionsFetchError": "Памылка атрымання гісторыі версій",
-  "@versionsFetchError": {
-    "description": "Message for when fetching element history fails due to unknown error."
-  },
-  "versionsEnableInternet": "Каб атрымаць гісторыю версій, падключыцеся да Інтэрнэту",
-  "@versionsEnableInternet": {
-    "description": "Message for when fetching element history fails due to lack of network connection."
-  },
-  "versionsTitle": "Гісторыя {elementRef}",
-  "@versionsTitle": {
-    "description": "Title for the element versions page.",
-    "placeholders": {
-      "elementRef": {
-        "type": "String",
-        "description": "Type and ID of OSM element.",
-        "example": "node/1234567"
-      }
-    }
-  },
-  "versionsVersionNumber": "Версія #{number}",
-  "@versionsVersionNumber": {
-    "description": "Card header for the diff for this element version.",
-    "placeholders": {
-      "number": {
-        "type": "int",
-        "description": "Element version number.",
-        "example": "node/1234567"
-      }
-    }
-  },
-  "versionsLocalChanges": "Лакальныя змены",
-  "@versionsLocalChanges": {
-    "description": "Card header for the local changes diff."
-  },
-  "versionsRetryFetch": "Паўтарыць",
-  "@versionsRetryFetch": {
-    "description": "Button label to retry fetching history."
-  },
-  "versionsNoTagChanges": "Няма змен у тэгах",
-  "@versionsNoTagChanges": {
-    "description": "Card body for when no tag changes occurred in this version."
-  },
-  "settingsPresentation": "Адлюстраванне",
-  "@settingsPresentation": {
-    "description": "Section title for presentation options."
-  },
-  "buildingLevels": "Паверхаў",
-  "@buildingLevels": {
-    "description": "Label for building:levels in the form. Keep it short."
-  },
-  "entranceTypeEmergency": "запасны",
-  "@entranceTypeEmergency": {},
-  "changesOsmNote": "Нататкі OSM",
-  "@changesOsmNote": {
-    "description": "Prefix for an OSM note in a changes tile."
-  },
-  "buildingRoofLevels": "Паверхаў у даху",
-  "@buildingRoofLevels": {
-    "description": "Label for roof:levels in the form. Keep it short."
-  },
-  "entranceTypeGarage": "гараж",
-  "@entranceTypeGarage": {},
-  "notesClose": "Закрыць нататку",
-  "@notesClose": {
-    "description": "Button title for closing a note."
-  },
-  "addressHouseNotEmpty": "Не павінен быць пустым",
-  "@addressHouseNotEmpty": {
-    "description": "Validator message for addr:housenumber."
-  },
-  "notesAnonymous": "Ананімны",
-  "@notesAnonymous": {
-    "description": "Name for anonymous note submitters."
-  },
-  "versionsVersionMeta": "ад {user} у {datetime}",
-  "@versionsVersionMeta": {
-    "description": "Card body to show metadata about the element version.",
-    "placeholders": {
-      "user": {
-        "type": "String",
-        "description": "OSM username of version creator.",
-        "example": "Zverik"
-      },
-      "datetime": {
-        "type": "String",
-        "description": "Datetime for when version was created.",
-        "example": "July 21, 2022 12:30"
-      }
-    }
-  },
-  "notesCloseMessage": "Пазначыць нататку вырашанай?",
-  "@notesCloseMessage": {
-    "description": "Confirmation message when pressed a close note button."
-  },
-  "buildingMaterialPlaster": "тынкоўка",
-  "@buildingMaterialPlaster": {},
-  "buildingMaterial": "Фасад",
-  "@buildingMaterial": {},
-  "buildingRoofShape": "Форма даху",
-  "@buildingRoofShape": {
-    "description": "Label for roof:shape in the form. Keep it short."
-  },
-  "loadingPresets": "Загрузка нарыхтовак…",
-  "@loadingPresets": {
-    "description": "Loading screen message for loading presets."
-  },
-  "dataDownloadSuccessful": "Паспяхова загружана",
-  "@dataDownloadSuccessful": {
-    "description": "Alert title for when the data was successfully downloaded."
-  },
-  "tileNothingAround": "Няма карысных кропак вакол вас у {distance} метрах.",
-  "@tileNothingAround": {
-    "description": "First part of the message displayed when there is nothing around.",
-    "placeholders": {
-      "distance": {
-        "type": "int",
-        "format": "decimalPattern",
-        "description": "Distance number in meters, at least 50.",
-        "example": "150"
-      }
-    }
-  },
-  "filterNonConfirmed": "Толькі непацверджаныя",
-  "@filterNonConfirmed": {
-    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
-  },
-  "editorLoadingPreset": "Загрузка нарыхтоўкі…",
-  "@editorLoadingPreset": {
-    "description": "Message shown when loading a preset in the editor."
-  },
-  "editorMove": "Зрушыць",
-  "@editorMove": {
-    "description": "Label for the map, a hint that you can move the object."
-  },
-  "editorDuplicate": "Магчымы дублікат у {distance} метрах",
-  "@editorDuplicate": {
-    "description": "Message about a possible duplicate",
-    "placeholders": {
-      "distance": {
-        "type": "int",
-        "format": "decimalPattern",
-        "description": "Distance in meters",
-        "example": "71"
-      }
-    }
-  },
-  "editorMarkActive": "Адзначыць актыўным",
-  "@editorMarkActive": {
-    "description": "Button title to mark an amenity active (non-defunct)."
-  },
-  "editorMarkDefunct": "Адзначыць неактыўным",
-  "@editorMarkDefunct": {
-    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
-  },
-  "tagsKeyError": "Занадта рэдкі ключ",
-  "@tagsKeyError": {
-    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
-  },
-  "tagsValueLong": "Занадта доўгае значэнне",
-  "@tagsValueLong": {
-    "description": "Validation error for when the value length exceeds 255 characters."
-  },
-  "editorRestore": "Аднавіць",
-  "@editorRestore": {
-    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
-  },
-  "editorMissing": "Не існуе",
-  "@editorMissing": {
-    "description": "Button title to delete an amenity (since it's missing)."
-  },
-  "editorRestoreMessage": "Установа {amenity} неактыўна. Адзначыць як працуючую?",
-  "@editorRestoreMessage": {
-    "description": "Question on restoring an edited defunct amenity.",
-    "placeholders": {
-      "amenity": {
-        "description": "Amenity title"
-      }
-    }
-  },
-  "editorDeleteTitle": "Выдаліць {amenity}?",
-  "@editorDeleteTitle": {
-    "description": "Dialog title for deleting an amenity.",
-    "placeholders": {
-      "amenity": {
-        "description": "Amenity title"
-      }
-    }
-  },
-  "editorDeleteButton": "Выдаліць",
-  "@editorDeleteButton": {
-    "description": "Delete"
-  },
-  "tagsUrlCopied": "Спасылка скапіравана ў буфер абмену",
-  "@tagsUrlCopied": {
-    "description": "Popup message when the link to the object was copied to the clipboard."
-  },
-  "tagsNewPoint": "Новая кропка",
-  "@tagsNewPoint": {
-    "description": "Tag editor panel title for a new amenity."
-  },
-  "tagsAddTag": "Дадаць тэг",
-  "@tagsAddTag": {
-    "description": "Tags panel button for adding a new tag."
-  },
-  "tagsKey": "Ключ",
-  "@tagsKey": {
-    "description": "Tags panel, add a new tag dialog: key label"
-  },
-  "tagsValue": "Значэнне",
-  "@tagsValue": {
-    "description": "Tags panel, add a new tag dialog: value label"
-  },
-  "settingsDataManagement": "Кіраванне данымі",
-  "@settingsDataManagement": {
-    "description": "Section title for data settings."
-  },
-  "buildingType": "Тып",
-  "@buildingType": {
-    "description": "Label for building type (value of building=*) in the form. Keep it short."
-  },
-  "buildingTypeAddress": "адрас",
-  "@buildingTypeAddress": {},
-  "buildingTypeHouse": "прыватны дом",
-  "@buildingTypeHouse": {},
-  "buildingTypeApartments": "шматкватэрны дом",
-  "@buildingTypeApartments": {},
-  "entranceTypeStaircase": "пад'езд",
-  "@entranceTypeStaircase": {},
-  "entranceTypeHome": "прыватны дом",
-  "@entranceTypeHome": {},
-  "entranceTypeShop": "крама",
-  "@entranceTypeShop": {},
-  "entranceTypeService": "службовы",
-  "@entranceTypeService": {},
-  "entranceType": "Тып",
-  "@entranceType": {
-    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
-  },
-  "entranceTypeMain": "галоўны",
-  "@entranceTypeMain": {},
-  "settingsPurgeAllData": "Ачысціць усе загружаныя даныя",
-  "@settingsPurgeAllData": {
-    "description": "Settings entry for purging all cached OSM data."
-  },
-  "settingsPurgeDataTitle": "Выдаліць даныя?",
-  "@settingsPurgeDataTitle": {
-    "description": "Confirmation dialog title for when purging all downloaded data."
-  },
-  "settingsPurgeDataMessage": "Вам прыйдзецца нанава ўсё загрузіць. Працягнуць?",
-  "@settingsPurgeDataMessage": {
-    "description": "Confirmation dialog message for when purging all downloaded data."
-  },
-  "settingsPurgedAllTitle": "Выдалілі даныя",
-  "@settingsPurgedAllTitle": {
-    "description": "Notification title for cleaning all downloaded data from the cache."
-  },
-  "settingsLeftHand": "Кіраванне левай рукой",
-  "@settingsLeftHand": {
-    "description": "Switch for enabling left hand controls, when most buttons move to the left."
-  },
-  "settingsPreferContact": "Аддаваць перавагу прэфіксу \"contact:\"",
-  "@settingsPreferContact": {
-    "description": "Settings switch for using e.g. contact:phone=* over phone=*."
-  },
-  "editorRestoreTitle": "Адкрылася?",
-  "@editorRestoreTitle": {
-    "description": "Title for question on restoring an edited defunct amenity."
-  },
-  "settingsDefaultPayment": "Плацежныя карткі па змаўчанні",
-  "@settingsDefaultPayment": {
-    "description": "Settings switch for choosing default payment types, e.g. visa and mastercard."
-  },
-  "accountOAuthError": "Памылка OAuth",
-  "@accountOAuthError": {
-    "description": "Alert title for when OAuth login failed."
-  },
-  "settingsPurgedObsoleteTitle": "Састарэлыя даныя",
-  "@settingsPurgedObsoleteTitle": {
-    "description": "Notification title for cleaning obsolete data from the cache."
-  },
-  "settingsPurgeData": "Ачысціць састарэлыя кэшаваныя даныя",
-  "@settingsPurgeData": {
-    "description": "Settings entry for purging obsolete OSM data."
-  },
-  "settingsBackground": "Спадарожнікавыя здымкі",
-  "@settingsBackground": {
-    "description": "Settings entry for choosing background satellite imagery."
-  },
-  "settingsEditor": "Рэдактар",
-  "@settingsEditor": {
-    "description": "Title for the settings section for editor presets."
-  },
-  "accountAuthErrorTitle": "Памылка аўтарызацыі",
-  "@accountAuthErrorTitle": {
-    "descripton": "Title for the alert dialog about an incorrect password."
-  },
-  "navMicromappingMode": "Рэжым мікрамапінга",
-  "@navMicromappingMode": {
-    "description": "Tooltip for the micromapping mode button on the nav panel."
-  },
-  "navImagery": "Пераключыць здымкі падкладкі",
-  "@navImagery": {
-    "description": "Tooltip for the map / imagery button on the nav panel."
-  },
-  "navDownload": "Загрузіць",
-  "@navDownload": {
-    "description": "Tooltip for the download data button on the nav panel."
-  },
-  "navUpload": "Выгрузіць",
-  "@navUpload": {
-    "description": "Tooltip for the upload data button on the nav panel."
-  },
-  "tagsDelete": "Ачысціць",
-  "@tagsDelete": {
-    "description": "Tooltip for a button next to a tag value to delete the tag."
-  },
-  "tagsShare": "Падзяліцца",
-  "@tagsShare": {
-    "description": "Tooltip for the sharing button on the tags panel."
-  },
-  "editorTags": "Тэгі",
-  "@editorTags": {
-    "description": "Tooltip for a button to open tags pane."
-  },
-  "settingsLanguage": "Мова",
-  "@settingsLanguage": {
-    "description": "Settings entry for changing the app language."
-  },
-  "settingsCacheTiles": "Загрузіць тайлы",
-  "@settingsCacheTiles": {
-    "description": "Tooltip for a button to download and cache tiles for imageries."
-  },
-  "settingsGoogle": "Выкарыстоўваць пазіцыянаванне Google",
-  "@settingsGoogle": {
-    "description": "Settings switch for disabling Google services for location."
-  },
-  "settingsSystem": "Сістэма",
-  "@settingsSystem": {
-    "description": "Title for the settings section for system-related switches."
-  },
-  "changesPurge": "Ачысціць змены",
-  "@changesPurge": {
-    "description": "Purge all changes"
-  },
-  "fieldNameLanguages": "Іншая мова",
-  "@fieldNameLanguages": {
-    "description": "Tooltip for a button to add a name in another language."
-  },
-  "fieldHoursSDRemove": "Выдаліць",
-  "@fieldHoursSDRemove": {
-    "description": "Tooltip for button on the specific days interval to remove some days."
-  },
-  "notesAddNote": "Дадаць нататку",
-  "@notesAddNote": {
-    "description": "Tooltip for the button to add a note."
-  },
-  "fieldHoursSDAddRange": "Дадаць дыяпазон",
-  "@fieldHoursSDAddRange": {
-    "description": "Tooltip for button on the specific days interval to add a range of dates."
-  },
-  "navPoiMode": "Рэжым устаноў / карысных кропак",
-  "@navPoiMode": {
-    "description": "Tooltip for the POI / amenity mode button on the nav panel."
-  },
-  "entrancesAddBuilding": "Дадаць будынак",
-  "@entrancesAddBuilding": {
-    "description": "Tooltip for the button to add a building node."
-  },
-  "fieldHoursSave": "Захаваць",
-  "@fieldHoursSave": {
-    "description": "Tooltip for a button to save opening_hours value."
-  },
-  "entrancesAddEntrance": "Дадаць уваход",
-  "@entrancesAddEntrance": {
-    "description": "Tooltip for the button to add an entrance node."
-  },
-  "fieldNameCopy": "Скапіяваць значэнне",
-  "@fieldNameCopy": {
-    "description": "Tooltip for a button to copy name value between languages."
-  },
-  "fieldHoursSDAddOne": "Дадаць дату",
-  "@fieldHoursSDAddOne": {
-    "description": "Tooltip for button on the specific days interval to add one specific date."
-  },
-  "fieldHoursRemoveFragment": "Выдаліць расклад",
-  "@fieldHoursRemoveFragment": {
-    "description": "Tooltip for a button to remove a fragment in the hours editor."
-  },
-  "fieldHoursRemoveBreak": "Выдаліць перапынак",
-  "@fieldHoursRemoveBreak": {
-    "description": "Tooltip for a button to remove a break in an opening hours fragment."
-  },
-  "fieldHoursClear": "Ачысціць",
-  "@fieldHoursClear": {
-    "description": "Tooltip for a button to clear the opening_hours value."
-  },
-  "fieldHoursChooseTime": "Гадзіны і хвіліны",
-  "@fieldHoursChooseTime": {
-    "description": "Tooltip for a button to open hours and minutes chooser."
-  },
-  "tagsRestore": "Аднавіць",
-  "@tagsRestore": {
-    "description": "Tooltip for a button next to a tag value to restore the value to the original."
-  },
-  "navNotesMode": "Рэжым нататак",
-  "@navNotesMode": {
-    "description": "Tooltip for the notes mode button on the nav panel."
-  },
-  "mapLocate": "Вярнуцца да мяне",
-  "@mapLocate": {
-    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
-  },
-  "mapZoomIn": "Наблізіць",
-  "@mapZoomIn": {
-    "description": "Tooltip for the zoom in (+) button on a map."
-  },
-  "mapSettings": "Налады",
-  "@mapSettings": {
-    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
-  },
-  "editorHistory": "Гісторыя",
-  "@editorHistory": {
-    "description": "Tooltip for a button to open version history pane."
-  },
-  "editorMarkChecked": "Адзначыць правераным",
-  "@editorMarkChecked": {
-    "description": "Tooltip for a button to mark the amenity checked without changing properties."
-  },
-  "mapZoomOut": "Аддаліць",
-  "@mapZoomOut": {
-    "description": "Tooltip for the zoom out (-) button on a map."
-  },
-  "mapFilter": "Фільтр",
-  "@mapFilter": {
-    "description": "Tooltip for the amenity filter button on a map."
-  },
-  "navEntrancesMode": "Рэжым уваходаў",
-  "@navEntrancesMode": {},
-  "changesDeletedUndo": "Адмяніць",
-  "@changesDeletedUndo": {
-    "description": "Button label for undoing a change deletion."
-  },
-  "fieldHoursFullDay": "Цэлы дзень",
-  "@fieldHoursFullDay": {
-    "description": "Switch for 24/7 opening hours."
-  },
-  "fieldHoursButton": "Усталяваць гадзіны працы",
-  "@fieldHoursButton": {
-    "description": "Text on the hours button when there's no value."
-  },
-  "tileDragTheMap": "Калі ласка, падыдзіце да чаго-небудзь бліжэй, перацягніце мапу або дадайце адсутную карысную кропку.",
-  "@tileDragTheMap": {
-    "description": "Message displayed when there is nothing around."
-  },
-  "accountChangesets": "Набораў змен",
-  "@accountChangesets": {
-    "description": "Label for the number of changesets a user has uploaded."
-  },
-  "accountUnreadMail": "Непрачытаных паведамленняў",
-  "@accountUnreadMail": {
-    "description": "Label for the number of unread private messages a user has."
-  },
-  "changesUploadFailedTitle": "Памылка адпраўкі правак",
-  "@changesUploadFailedTitle": {
-    "description": "Title for the notification about a failed changes upload."
-  },
-  "changesUploadedTitle": "Праўкі адпраўлены",
-  "@changesUploadedTitle": {
-    "description": "Title for the notification about a successful upload."
-  },
-  "settingsUploads": "Змены для адпраўкі",
-  "@settingsUploads": {
-    "description": "Settings entry for browsing changes to upload."
-  },
-  "settingsNumericKeyboard": "Пашыраная лічбавая клавіятура",
-  "@settingsNumericKeyboard": {
-    "description": "Settings switch for using the full keyboard for numeric fields."
-  },
-  "aboutViewLog": "Сістэмны лог",
-  "@aboutViewLog": {
-    "description": "Button title to open the log view page."
-  },
-  "changesDeletedChange": "Выдалена {change}",
-  "@changesDeletedChange": {
-    "description": "Message for the snack bar after you swipe a change away.",
-    "placeholders": {
-      "change": {
-        "description": "Name of the deleted object",
-        "example": "shop"
-      }
-    }
-  },
-  "changesPending": "У чаканні",
-  "@changesPending": {
-    "description": "Subtitle for a change that has not yet been sent to OSM API."
-  },
-  "changesPurgeTitle": "Ачысціць змены?",
-  "@changesPurgeTitle": {
-    "description": "Dialog title for confirming deletion of all changes."
-  },
-  "changesSwipeLeft": "Правядзіце ўлева для адмены змены",
-  "@changesSwipeLeft": {
-    "description": "Message at the bottom of the changes pane hinting at a way to undo changes."
-  },
-  "fieldHoursAsText": "Тэкстам",
-  "@fieldHoursAsText": {
-    "description": "Button title to open the raw opening hours editor."
-  },
-  "fieldHoursSpecificDays": "Канкрэтная дата",
-  "@fieldHoursSpecificDays": {
-    "description": "Button title for selectors like Dec 31."
-  },
-  "changesUploadedMessage": "Адпраўлена {changes} у API.",
-  "@changesUploadedMessage": {
-    "description": "Message for the notification about a successful upload.",
-    "placeholders": {
-      "changes": {
-        "description": "Number of changes",
-        "example": "5 changes"
-      }
-    }
-  },
-  "changesPurgeMessage": "Выдаліць усе запісаныя змены і аднавіць зыходныя даныя?",
-  "@changesPurgeMessage": {
-    "description": "Dialog message for confirming deletion of all changes."
-  },
-  "fieldHoursTitle": "Гадзіны працы",
-  "@fieldHoursTitle": {
-    "description": "Title for the opening hours editor pane."
-  },
-  "accountPasswordWarningMessage": "Ваш пароль будзе захаваны на прыладзе. Выбірайце гэта толькі ў выпадку збою OAuth.",
-  "@accountPasswordWarningMessage": {
-    "description": "Message for the warning dialog about keeping passwords on the device."
-  },
-  "fieldHoursAddBreak": "Дадаць перапынак",
-  "@fieldHoursAddBreak": {
-    "description": "Button in opening hours editor to add a break."
-  },
-  "fieldHoursClosedPH": "Зачынена ў дзяржаныя святы",
-  "@fieldHoursClosedPH": {
-    "description": "Switch label for PH off."
-  },
-  "fieldWifiNo": "адсутнічае",
-  "@fieldWifiNo": {
-    "description": "Wifi field label for no wifi."
-  },
-  "fieldWifiPublic": "агульны",
-  "@fieldWifiPublic": {
-    "description": "Wifi field label for public unrestricted wifi."
-  },
-  "buildingX": "Будынак {n}",
-  "@buildingX": {
-    "description": "Option displayed when there's multiple buildings under a tap.",
-    "placeholders": {
-      "n": {
-        "example": "12A"
-      }
-    }
-  },
-  "buildingTypeGarage": "гараж",
-  "@buildingTypeGarage": {},
-  "buildingTypeConstruction": "будуецца",
-  "@buildingTypeConstruction": {},
-  "fieldHoursHour": "Гадзіны",
-  "@fieldHoursHour": {
-    "description": "Label for the hour chooser."
-  },
-  "fieldAddressTap": "Націсніце на адрас",
-  "@fieldAddressTap": {
-    "description": "Title for the pane when a user can tap an address to choose it."
-  },
-  "buttonYes": "Так",
-  "@buttonYes": {
-    "description": "Button for approval."
-  },
-  "buttonNo": "Не",
-  "@buttonNo": {
-    "description": "Button for dismissal."
-  },
-  "buildingTypeShed": "хлеў",
-  "@buildingTypeShed": {},
-  "buildingTypeIndustrial": "прамысловы",
-  "@buildingTypeIndustrial": {},
-  "entranceFlats": "Квартэры",
-  "@entranceFlats": {
-    "description": "Label for addr:flats in the form. Keep it short."
-  },
-  "entranceWheelchair": "♿",
-  "@entranceWheelchair": {
-    "description": "Label for entrance wheelchair access in the form. Keep it short."
-  },
-  "addressPlace": "Горад",
-  "@addressPlace": {
-    "description": "Label for addr:place or addr:city in the form. Keep it short."
-  },
-  "fieldCheckboxYes": "ёсць",
-  "@fieldCheckboxYes": {
-    "description": "Checkbox name for yes."
-  },
-  "fieldCheckboxNo": "адсутнічае",
-  "@fieldCheckboxNo": {
-    "description": "Checkbox name for no."
-  },
-  "fieldFloorEmpty": "Каб выбраць паверх, задайце адрас.",
-  "@fieldFloorEmpty": {
-    "description": "What is written on the floor chooser if there are no floors to choose."
-  },
-  "fieldFloorShouldBeNumber": "Калі ласка, увядзіце лічбу",
-  "@fieldFloorShouldBeNumber": {
-    "description": "Validation message for a levels tag, also used in building levels form."
-  },
-  "buildingMoreButton": "Болей",
-  "@buildingMoreButton": {
-    "description": "Button label for opening the building object in a full editor."
-  },
-  "buildingTypeRetail": "рознічны гандаль",
-  "@buildingTypeRetail": {},
-  "buildingTypeCommercial": "камерцыйны",
-  "@buildingTypeCommercial": {},
-  "entranceRef": "Нумар",
-  "@entranceRef": {
-    "description": "Label for entrance ref in the form. Keep it short."
-  },
-  "entranceAccess": "Доступ",
-  "@entranceAccess": {
-    "description": "Label for entrance access in the form. Keep it short."
-  },
-  "entranceAccessYes": "агульны",
-  "@entranceAccessYes": {},
-  "entranceAccessPrivate": "прыватны",
-  "@entranceAccessPrivate": {},
-  "entranceAccessNo": "няма",
-  "@entranceAccessNo": {},
-  "apiStatusUploading": "Запампоўка змяненняў",
-  "@apiStatusUploading": {
-    "description": "Text displayed when the app is uploading data to the API."
-  },
-  "fieldHoursClosed": "Зачынена",
-  "@fieldHoursClosed": {
-    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
-  },
-  "fieldHoursPublicHolidays": "Дзяржаўныя святы",
-  "@fieldHoursPublicHolidays": {
-    "description": "Card title for the PH (public holidays) selector."
-  },
-  "fieldHoursOpens": "Адчыняецца",
-  "@fieldHoursOpens": {
-    "description": "Title for the interval start."
-  },
-  "fieldHoursCloses": "Зачыняецца",
-  "@fieldHoursCloses": {
-    "description": "Title for the interval end."
-  },
-  "fieldHoursBreak": "Перапынак",
-  "@fieldHoursBreak": {
-    "description": "Title for the break interval."
-  },
-  "fieldHoursNext": "Далей",
-  "@fieldHoursNext": {
-    "description": "Button in the interval editor to move to the closing time."
-  },
-  "fieldHoursMinute": "Хвіліны",
-  "@fieldHoursMinute": {
-    "description": "Label for the minute chooser."
-  },
-  "fieldHoursWeekdays": "Пн Аў Ср Чц Пт Сб Нд",
-  "@fieldHoursWeekdays": {
-    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
-  },
-  "fieldWifiCustomers": "для кліентаў",
-  "@fieldWifiCustomers": {
-    "description": "Wifi field label for wifi available to customers only."
-  },
-  "fieldWheelchairYes": "так",
-  "@fieldWheelchairYes": {
-    "description": "Wheelchair field label for full accessibility."
-  },
-  "fieldWheelchairLimited": "абмежавана",
-  "@fieldWheelchairLimited": {
-    "description": "Wheelchair field label for limited accessibility."
-  },
-  "fieldWheelchairNo": "не",
-  "@fieldWheelchairNo": {
-    "description": "Wheelchair field label for no accessibility."
-  },
-  "fieldCardsAccepted": "прымаюць",
-  "@fieldCardsAccepted": {
-    "description": "Payment field label for cards accepted."
-  },
-  "fieldCardsNo": "не",
-  "@fieldCardsNo": {
-    "description": "Payment field label for cash only."
-  },
-  "fieldFloorNew": "Новы паверх",
-  "@fieldFloorNew": {
-    "description": "Title for the floor creation pane."
-  },
-  "fieldFloorLevelDesc": "Нумар паверха, пачынаючы з 0 для ўзроўню зямлі",
-  "@fieldFloorLevelDesc": {
-    "description": "Description for the \"addr:floor\" tag."
-  },
-  "fieldPhoneWrong": "Няправільны фармат нумара",
-  "@fieldPhoneWrong": {
-    "description": "Validation message for a non-standard phone number."
-  },
-  "enableGPS": "Уключыце GPS",
-  "@enableGPS": {
-    "description": "Title of the alert for enabling location services."
-  },
-  "enableGPSMessage": "Калі ласка, уключыце службы вызначэння месцазнаходжання ў панэлі налад, якая будзе паказаная.",
-  "@enableGPSMessage": {
-    "description": "Contents of the alert for enabling location services."
-  },
-  "enableLocation": "Дазвольце GPS",
-  "@enableLocation": {
-    "description": "Title of the alert for allowing app access to location."
-  },
-  "addressX": "Адрас {n}",
-  "@addressX": {
-    "description": "Option displayed when there's multiple addresses under a tap.",
-    "placeholders": {
-      "n": {
-        "example": "12A"
-      }
-    }
-  },
-  "entranceX": "Уваход {n}",
-  "@entranceX": {
-    "description": "Option displayed when there's multiple entrances under a tap.",
-    "placeholders": {
-      "n": {
-        "example": "1-15"
-      }
-    }
-  },
-  "entranceFlatsNumberList": "Павінен быць спіс лічбаў",
-  "@entranceFlatsNumberList": {
-    "description": "Validation message for addr:flats."
-  },
-  "entranceIsUnit": "Захоўвайць нумар кватэры ў addr:unit",
-  "@entranceIsUnit": {
-    "description": "Label for a switch to use addr:unit instead of addr:flats."
-  },
-  "entranceAccessDelivery": "дастаўка",
-  "@entranceAccessDelivery": {},
-  "addressHouseNumber": "Нумар",
-  "@addressHouseNumber": {
-    "description": "Label for addr:housenumber in the form. Keep it short."
-  },
-  "addressUnitOptional": "неабавязкова",
-  "@addressUnitOptional": {
-    "description": "Hint for addr:unit that it's optional."
-  },
-  "addressStreet": "Вуліца",
-  "@addressStreet": {
-    "description": "Label for addr:street in the form. Keep it short."
-  },
-  "apiStatusUpdatingDB": "Захаванне аб'ектаў у базе даных",
-  "@apiStatusUpdatingDB": {
-    "description": "Text displayed when the app is updating the database with downloaded objects."
-  },
-  "faqMapTiny": "Чаму мапа такая маленькая?",
-  "@faqMapTiny": {},
-  "messageDataObsolete": "Даныя састарэлі, націсніце тут, каб абнавіць",
-  "@messageDataObsolete": {
-    "description": "Message that appears on the main screen when OSM data is outdated."
-  },
-  "enableLocationMessage": "Калі ласка, дазвольце праграме доступ да месцазнаходжання ў панэлі налад, якая будзе паказаная.",
-  "@enableLocationMessage": {
-    "description": "Contents of the alert for allowing app access to location."
-  },
-  "buildingPostCode": "Паштовы індэкс",
-  "@buildingPostCode": {
-    "description": "Label for addr:postcode in the form. Keep it short."
-  },
-  "faqCheckmarks": "Навошта патрэбна птушка?",
-  "@faqCheckmarks": {},
-  "fieldHoursAddFragment": "Дадаць расклад",
-  "@fieldHoursAddFragment": {
-    "description": "Button in opening hours editor to add a fragment for days."
-  },
-  "tileDragOrUnfilter": "Калі ласка перасуньцеся, дадайце карысную кропку, або ачысціце фільтр.",
-  "@tileDragOrUnfilter": {
-    "description": "Message displayer when there's nothing around, and a filter is on."
-  },
-  "changesCount": "{count,plural, =1{{count} змена} few{{count} змены} other{{count} змен}}",
-  "@changesCount": {
-    "description": "Number of changed elements to display or to upload.",
-    "placeholders": {
-      "count": {}
-    }
-  },
-  "faqFloors": "Паверхі \"3\" і \"/3\" — адно і тое ж?",
-  "@faqFloors": {},
-  "faqLetters": "Ці магу я ўвесці літары ў нумар кватэры або ўваходу?",
-  "@faqLetters": {},
-  "faqChangeType": "Як змяніць тып установы?",
-  "@faqChangeType": {},
-  "faqTagging": "Усе пытанні па тэгах",
-  "@faqTagging": {},
-  "faqChangeTypeContent": "Націсніце на загаловак рэдактара, дзе напісаны гэты тып.",
-  "@faqChangeTypeContent": {},
-  "faqEntrance": "Як дадаць уваход у будынак?",
-  "@faqEntrance": {},
-  "fieldHoursNumberedWeekday": "\"Апошні панядзелак\"",
-  "@fieldHoursNumberedWeekday": {
-    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
-  },
-  "fieldComboEmpty": "няма",
-  "@fieldComboEmpty": {
-    "description": "Option for a combo field that sets an empty value."
-  },
-  "fieldFloorFloorDesc": "Паверх як пазначана на навігацыі і ў ліфтах",
-  "@fieldFloorFloorDesc": {
-    "descripton": "Description for the \"level\" tag."
-  },
-  "settingsPurgedMessage": "{count,plural, =1{Ачышчаны {count} аб'ект} few{Ачышчана {count} аб'екта} other{Ачышчана {count} аб'ектаў}}",
-  "@settingsPurgedMessage": {
-    "description": "Notification message after some cached elements were deleted.",
-    "placeholders": {
-      "count": {}
-    }
-  },
-  "fieldComboChoose": "выбраць",
-  "@fieldComboChoose": {
-    "description": "A placeholder value displayed in a single-value combo field when there is no value."
-  },
-  "addressUnit": "Блок",
-  "@addressUnit": {
-    "description": "Label for addr:unit in the form. Keep it short."
-  },
-  "changesMapNotes": "Нататкі і малюнкі",
-  "@changesMapNotes": {
-    "description": "Title for a grouped change tile for map notes and drawings."
-  },
-  "faqLettersContent": "Калі вашу лічбавую клавіятуру нельга пераключыць на поўную клавіятуру з літарамі, праверце налады праграмы. Уключыце там \"Пашыраная лічбавая клавіятура\".",
-  "@faqLettersContent": {},
-  "faqTaggingContent": "Чаму аб'ект адсутнічае ў рэдактары? Калі белыя кропкі адлюстроўваюцца ў рэжыме мікрпамапінга? Як сартуюцца аб'екты?\n\nАдказы на ўсе гэтыя пытанні знаходзяцца ў файле [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Вось на што трэба звярнуць увагу:\n\n* Парадак вызначэння галоўнага тэга — спіс `kMainKeys`.\n* Якія аб'екты спампоўваюцца — функцыя `isGoodTags`.\n* Што лічыцца ўстановай — функцыя `isAmenityTags`.\n* Якія кропкі прывязваюцца да ліній, і да якіх ліній — функцыя `detectSnap`.\n* Калі аб'ект мікрамапінга няпоўны — функцыя `needsMoreInfo`.",
-  "@faqTaggingContent": {},
-  "faqEntranceContent": "Унізе экрана ёсць кнопкі для пераключэння рэжымаў: мікрамапінг, установы, уваходы і нататкі.\n\nУ рэжыме ўваходаў націсніце або перацягніце кнопку дзвярэй у ніжнім куце на мапу.",
-  "@faqEntranceContent": {},
-  "faqMapTinyContent": "Бо не яна галоўная. Вы толькі правяраеце сваё месцазнаходжанне на мапе. Глядзіце спіс ўстаноў ніжэй, які адсартаваны па адлегласці ад вас.\n\nМапа павялічваецца, калі вы рэдагуеце ўстановы, размешчаныя далёка ад вашага месцазнаходжання. Хаця праграма створана для рэдагавання аб'ектаў, якія вы бачыце сваімі вачыма.",
-  "@faqMapTinyContent": {},
-  "faqFloorsContent": "Не. У першым выпадку запоўнены тэг `addr:floor=3. Гэта паверх, як ён надрукаваны ў навігацыі і звычайна выкарыстоўваецца. У другім выпадку гэты тэг пусты, але запоўнены тэг `level=3`. Гэтая лічба — нумар паверха ў паслядоўнай нумарацыі ад нуля да `building:levels - 1`. Гэта значыць, што ў трохпавярховым будынку `addr:floor` залежыць ад краіны, а `level`заўсёды 0, 1 ці 2.\n\nВось як умоўнае абазначэнне ў рэдактары залежыць ад гэтых тэгаў:\n\n* `2`: `addr:floor=2` і непусты `level=*`.\n* `4/`: `addr:floor=4`, тэг `level` адсутнічае.\n* `/1`: `level=1`, тэг `addr:floor` адсутнічае.\n* `1/0`: `addr:floor=1` + `level=0` (і побач ёсць аб'ект з тым жа `addr:floor`, але іншым `level`, ці наадварот).",
-  "@faqFloorsContent": {},
-  "faqCheckmarksContent": "Гэта адзнака кажа аб тым, што ўстанова праверана. Дадае да аб'екту тэг `check_date` з бягучай датай.\n\nІдэя птушкі заключаецца ў тым, што, скажам, вы абследавалі палову горада з першага разу. Потым, праз месяц, вы вярнуліся і зноў пайшлі абследаваць. І вам трэба неяк адзначыць, што вы праверылі, што ўстанова на месцы, але нічога не змянілася. Гэта і ёсць птушка: націснуў і пайшоў далей.\n\nАдзнака трымаецца два месяцы пасля праверкі. Потым можна будзе агледзець установу зноў.",
-  "@faqCheckmarksContent": {},
-  "fieldCardsOnly": "толькі карткай",
-  "@fieldCardsOnly": {
-    "description": "Payment field label for cards only."
-  },
-  "faqYellow": "Чаму некаторыя нумары дамоў жоўтыя?",
-  "@faqYellow": {},
-  "warningTooOld": "Установе / кропке карыснасці {years}",
-  "@warningTooOld": {
-    "description": "Warning message for when an amenity is many years old.",
-    "placeholders": {
-      "years": {
-        "description": "How many years ago the amenity was edited.",
-        "example": "5 years"
-      }
-    }
-  },
-  "warningFixme": "Значэнне fixme: {value}",
-  "@warningFixme": {
-    "description": "Warning message for when an object has a non-empty fixme value.",
-    "placeholders": {
-      "value": {
-        "description": "Value of the fixme tag"
-      }
-    }
-  },
-  "warningWrongTag": "Памылковы тэг: {tag}",
-  "@warningWrongTag": {
-    "description": "Warning message for tags like shop=yes and amenity=no.",
-    "placeholders": {
-      "tag": {
-        "description": "The tag with the issue",
-        "example": "shop=yes"
-      }
-    }
-  },
-  "faqYellowContent": "Белыя пазнакі ў рэжыме ўваходаў і белыя кропкі ў рэжыме мікрамапінгу азначаюць, што ў элементаў адсутнічаюць некаторыя важныя атрыбуты. Напрыклад:\n\n* будынкам трэба прапісаць колькасць паверхаў;\n* уваходам трэба пазначыць тып і нумары кватэр (для пад'ездаў);\n* лаўкі павінны мець матэрыял і спінку;\n* дрэвы павінны мець тып лісця і цыкл лістапада.",
-  "@faqYellowContent": {},
-  "years": "{count,plural, =1{{count} год} few{{count} гады} other{{count} гадоў}}",
-  "@years": {
-    "description": "Number of years. Used in the \"amenity is N years old\" message.",
-    "placeholders": {
-      "count": {}
-    }
-  },
-  "settingsHashtags": "Хэштэгі набораў змен",
-  "@settingsHashtags": {
-    "description": "Settings entry for editing changeset hashtags."
-  },
-  "hashtagsLabel": "Словы для хэштэгаў",
-  "@hashtagsLabel": {
-    "description": "Label for a text field with changeset hashtags."
-  },
-  "notesCancelMessage": "Скасаваць нататку OSM?",
-  "@notesCancelMessage": {
-    "description": "Message when cancelling an OSM note that has non-empty content."
-  },
-  "hashtagsConfirm": "Пацвярджаць тэгі пры адпраўцы правак",
-  "@hashtagsConfirm": {
-    "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
-  },
-  "fieldDirectionSet": "Адзначыць",
-  "@fieldDirectionSet": {
-    "description": "Button label for setting a direction (0-360°) value."
-  },
-  "fieldNameLangSearch": "Знайсці мову",
-  "@fieldNameLangSearch": {
-    "description": "Hint for the text field for finding a language in a list."
-  },
-  "notesDelete": "Выдаліць",
-  "@notesDelete": {
-    "description": "Button title for deleting a new note."
-  },
-  "fieldWebsiteQR": "Адскануйце QR-код",
-  "@fieldWebsiteQR": {
-    "description": "Page title for the QR code scanner."
-  },
-  "drawUndo": "Скасаваць",
-  "@drawUndo": {},
-  "drawChangeTool": "Змяніць інструмент",
-  "@drawChangeTool": {
-    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
-  },
-  "editorDeleteBuilding": "Знесены",
-  "@editorDeleteBuilding": {
-    "description": "Button title to mark a building demolished."
-  },
-  "editorDeleteKeepAddressButton": "Выдаліць, але захаваць адрас",
-  "@editorDeleteKeepAddressButton": {
-    "description": "Button for keeping the address"
-  },
-  "drawRoad": "Дарога",
-  "@drawRoad": {
-    "description": "Tool description: paved road. Keep it short."
-  },
-  "notesComment": "Ваш каментар",
-  "@notesComment": {
-    "description": "Label for the note comment field."
-  }
 }

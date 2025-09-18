@@ -1,0 +1,5 @@
+Ta urejevalnik vas ne sili v razmišljanje. Preprosto pojdite v nakupovalno središče in zaženite Every Door. Prikazale se bodo trgovine v vaši bližini: tapnite na kljukico za tiste, ki so še vedno tam, in dodajte trgovine, ki niso na zemljevidu. To je celoten postopek: s tem preprostim urejevalnikom lahko poskrbite, da bo vaše mesto vedno posodobljeno.
+
+Na voljo je tudi način mikromapiranja za preverjanje in dodajanje klopi in uličnih svetilk. In način za dodajanje atributov stavb in vhodov, ki se samodejno združijo v obrise stavb.
+
+Every Door uporablja prednastavitve in druge podatke iz urejevalnika iD.

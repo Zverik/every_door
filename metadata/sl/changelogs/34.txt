@@ -1,0 +1,3 @@
+* Posodobljene prednastavitve in slike.
+* Popravljene težave z izgubljenimi opombami in podvojenimi amenities.
+* Dodane številke blokov za Japonsko.

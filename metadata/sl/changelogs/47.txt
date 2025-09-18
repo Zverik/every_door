@@ -1,0 +1,4 @@
+* Posodobljene prednastavitve in sloji slik.
+* Grški in indonezijski prevod.
+* Skala za izbirnik zemljevida.
+* Dodane funkcije vodnih poti za mikromapiranje.

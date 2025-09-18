@@ -1,0 +1,4 @@
+* Dodano prikazovanje zadnje prehojene poti.
+* GeoScribbles risanje je privzeto zaklenjeno.
+* Skener QR kode za polje spletne strani.
+* Lokacija se zdaj posodablja enkrat na sekundo.
