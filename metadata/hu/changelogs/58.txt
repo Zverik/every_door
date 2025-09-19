@@ -1,0 +1,4 @@
+* Vektorcsempék mindenhol.
+* Adatok és légi felvételek letöltése kapcsolat nélküli munkához.
+* Hozzáadva egy iránytű gomb.
+* A címkesablonok mostantól rendelkeznek ikonokkal.
