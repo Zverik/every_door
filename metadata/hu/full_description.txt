@@ -2,4 +2,4 @@ Ez a szerkesztő nem készteti Önt gondolkodásra. Csak menjen el egy bevásár
 
 Van egy mikrotérképezési mód is a padok és utcai lámpák ellenőrzéséhez és hozzáadásához. És egy bejáratok mód az épületek attribútumainak és bejáratainak hozzáadásához – amelyek automatikusan egyesítve lesznek az épületek körvonalaiba.
 
-Az Every Door alkalmazás az iD-szerkesztőből származó előbeállításokat és egyéb adatokat használja.
+Az Every Door alkalmazás az iD-szerkesztőből származó címkesablonokat és egyéb adatokat használja.
