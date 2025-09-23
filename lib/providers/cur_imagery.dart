@@ -45,7 +45,7 @@ class BaseImageryNotifier extends Notifier<Imagery> {
     fast: false,
   );
 
-  final Imagery _base = _kBaseImagery;
+  final Imagery _base = _kOSMImagery;
 
   @override
   Imagery build() {

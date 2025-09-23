@@ -6,7 +6,8 @@ _Unreleased_
 
 ## Imagery and Map Improvements
 
-* Vector tiles support!
+* Vector tiles support! Install "[Vector Base Map](https://plugins.every-door.app/vector_base)"
+  plugin for the official layer.
 * New data management settings panel.
 * Bulk downloading data and tiles.
 * New predictable imagery caching, thanks to @JaffaKetchup for the amazing FMTC package.
