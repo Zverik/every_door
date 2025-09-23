@@ -28,13 +28,13 @@ const _kDefaultPoiPresets = [
 
 abstract class AmenityModeDefinition extends BaseModeDefinition {
   static const _kAmenitiesInList = 12;
-  static const _kAmenitiesOnScreen = 40;
 
   List<OsmChange> nearestPOI = [];
   List<LatLng> otherPOI = [];
   List<String> _defaultPresets = _kDefaultPoiPresets;
   List<ElementKindImpl> _kinds = [ElementKind.amenity];
   List<ElementKindImpl> _otherKinds = [ElementKind.micro];
+  int _amenitiesOnScreen = 12;
   final Map<String, int> _checkIntervals = {
     'amenity': kOldAmenityDays,
     'structure': kOldStructureDays,
@@ -86,8 +86,8 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
         .compareTo(distance(location, b.location)));
 
     // Trim to 10-20 elements.
-    if (data.length > _kAmenitiesOnScreen)
-      data = data.sublist(0, _kAmenitiesOnScreen);
+    if (data.length > _amenitiesOnScreen)
+      data = data.sublist(0, _amenitiesOnScreen);
 
     // Update the map.
     nearestPOI = data;
@@ -142,6 +142,11 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
       intervals.forEach((kind, interval) {
         if (interval is int) _checkIntervals[kind] = interval;
       });
+    }
+
+    final amenitiesCount = data['amenitiesOnScreen'];
+    if (amenitiesCount != null && amenitiesCount is int) {
+      _amenitiesOnScreen = amenitiesCount;
     }
   }
 }

@@ -2,7 +2,7 @@
 
 ## 7.0
 
-_Unreleased_
+_Released on 2025-09-24_
 
 ## Imagery and Map Improvements
 
@@ -26,6 +26,7 @@ _Unreleased_
 * Fixed phone numbers to use an international format.
 * Fixed uploading more than 1000 changes on old phones.
 * Logging in issues seem to be fixed.
+* Translation into Romanian language (thanks @zvonul).
 
 ## 6.0
 

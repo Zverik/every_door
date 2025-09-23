@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Colors, TextStyle;
 
 const kAppTitle = 'Every Door';
-const kAppVersion = '7.0-beta2'; // Also used for presets.db versioning
+const kAppVersion = '7.0'; // Also used for presets.db versioning
 
 // we might want to redefine
 const kOldAmenityDays = 60; // check_date expiration rate
