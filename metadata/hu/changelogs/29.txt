@@ -1,4 +1,4 @@
-* Módosításcsomagok kettős keresztes címkéi.
+* Módosításcsomagok kettős keresztes (#) címkéi.
 * A megerősítési időszak megnövelve 2 hónapra.
 * A név mező fókuszba kerül egy új POI létrehozásakor.
 * Figyelmeztetések olyan létesítményeknél, amelyeknek „fixme” címkéjük van vagy túl öregek.

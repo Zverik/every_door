@@ -1,3 +1,3 @@
 * Nagybetűs írásmód javítva a leírásoknál.
 * Javítva a sárga létesítmény-figyelmeztetések meg nem jelenése.
-* Javítva a használaton kívüli épületeken lévő bolt jelölése.
+* Javítva az épületen lévő bolt nem használtként való jelölése.
