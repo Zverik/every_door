@@ -210,74 +210,75 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
       appBar: AppBar(
         title: Text(loc.settingsCacheTiles),
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: FlutterMap(
-              options: MapOptions(
-                initialCenter: ref.watch(effectiveLocationProvider),
-                initialZoom: 14.0,
-                minZoom: 10.0,
-                maxZoom: 16.0,
-                initialRotation: ref.watch(rotationProvider),
-                interactionOptions: InteractionOptions(
-                  flags: InteractiveFlag.all -
-                      InteractiveFlag.rotate -
-                      InteractiveFlag.flingAnimation,
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: FlutterMap(
+                options: MapOptions(
+                  initialCenter: ref.watch(effectiveLocationProvider),
+                  initialZoom: 14.0,
+                  minZoom: 10.0,
+                  maxZoom: 16.0,
+                  interactionOptions: InteractionOptions(
+                    flags: InteractiveFlag.all -
+                        InteractiveFlag.rotate -
+                        InteractiveFlag.flingAnimation,
+                  ),
                 ),
-              ),
-              children: [
-                base.buildLayer(reset: true),
-                ...ref.watch(overlayImageryProvider),
-                AttributionWidget(imagery),
-                PolygonLayer(
-                  polygons: [
-                    for (final area in _areas)
-                      Polygon(
-                        points: area.toPoints(),
-                        color: Colors.green.withValues(alpha: 0.1),
-                        borderColor: Colors.green.shade800,
-                        borderStrokeWidth: 3.0,
-                      ),
-                  ],
-                ),
-                TileBoundsGrid(
-                  tileZoom: kBaseZoom,
-                  fill: Map.fromEntries(_selected.map((tile) =>
-                      MapEntry(tile, Colors.blue.withValues(alpha: 0.7)))),
-                  onTap: (point, doSet) {
-                    if (doSet) {
-                      if (_selected.length >= kMaxTilesToDownload &&
-                          !_selected.contains(point)) {
-                        // Maximum tiles reached, display an error panel.
-                        // TODO
+                children: [
+                  base.buildLayer(reset: true),
+                  ...ref.watch(overlayImageryProvider),
+                  AttributionWidget(imagery),
+                  PolygonLayer(
+                    polygons: [
+                      for (final area in _areas)
+                        Polygon(
+                          points: area.toPoints(),
+                          color: Colors.green.withValues(alpha: 0.1),
+                          borderColor: Colors.green.shade800,
+                          borderStrokeWidth: 3.0,
+                        ),
+                    ],
+                  ),
+                  TileBoundsGrid(
+                    tileZoom: kBaseZoom,
+                    fill: Map.fromEntries(_selected.map((tile) =>
+                        MapEntry(tile, Colors.blue.withValues(alpha: 0.7)))),
+                    onTap: (point, doSet) {
+                      if (doSet) {
+                        if (_selected.length >= kMaxTilesToDownload &&
+                            !_selected.contains(point)) {
+                          // Maximum tiles reached, display an error panel.
+                          // TODO
+                        } else {
+                          if (_selected.add(point)) setState(() {});
+                        }
                       } else {
-                        if (_selected.add(point)) setState(() {});
+                        if (_selected.remove(point)) setState(() {});
                       }
-                    } else {
-                      if (_selected.remove(point)) setState(() {});
-                    }
-                  },
-                ),
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 10.0,
+              children: [
+                if (_selected.isEmpty)
+                  TextButton(child: Text(loc.settingsCachesSelectTiles, style: kFieldTextStyle,), onPressed: null),
+                if (osmButton != null && _selected.isNotEmpty) osmButton,
+                if (baseButton != null) baseButton,
+                if (imageryButton != null) imageryButton,
               ],
             ),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            spacing: 10.0,
-            children: [
-              if (_selected.isEmpty)
-                TextButton(child: Text(loc.settingsCachesSelectTiles, style: kFieldTextStyle,), onPressed: null),
-              if (osmButton != null && _selected.isNotEmpty) osmButton,
-              if (baseButton != null) baseButton,
-              if (imageryButton != null) imageryButton,
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
