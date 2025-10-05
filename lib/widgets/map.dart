@@ -331,7 +331,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         MapButtonColumn(
           alignment: leftHand ? Alignment.topLeft : Alignment.topRight,
           buttons: [
-            if (widget.drawStandardButtons)
+            if (widget.drawStandardButtons) ...[
               // Tracking button
               MapButton(
                 enabled: !ref.watch(trackingProvider) && trackLocation != null,
@@ -343,10 +343,9 @@ class _CustomMapState extends ConsumerState<CustomMap> {
                       .enableTracking(context);
                 },
               ),
-            if (widget.drawStandardButtons && _rotation != 0)
               // Rotation button
               MapButton(
-                enabled: !ref.watch(trackingProvider) && trackLocation != null,
+                enabled: _rotation != 0,
                 child: Transform.rotate(
                   angle: _rotation.toDouble() / 180 * 3.14159,
                   child: Icon(
@@ -362,6 +361,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
                   _rotation = 0;
                 },
               ),
+            ],
             ...widget.buttons,
           ],
           safeRight: true,

@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/models/note.dart';
+import 'package:every_door/providers/note_state.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateShortcutsList();
+      if (widget.note == null) isOsmNote = ref.read(noteIsOsmProvider);
     });
   }
 
@@ -273,6 +275,7 @@ class _NoteEditorPaneState extends ConsumerState<NoteEditorPane> {
                       : (value) {
                           setState(() {
                             isOsmNote = !isOsmNote;
+                            ref.read(noteIsOsmProvider.notifier).set(isOsmNote);
                           });
                         },
                 ),

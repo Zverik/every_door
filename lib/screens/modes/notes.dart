@@ -5,6 +5,7 @@ import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/location.dart';
+import 'package:every_door/providers/note_state.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
 import 'package:every_door/screens/editor/note.dart';
@@ -43,6 +44,8 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
       updateNotes();
       // Disable location tracking.
       ref.read(trackingProvider.notifier).state = false;
+      // Load the note state
+      ref.read(noteIsOsmProvider);
     });
   }
 

@@ -1,5 +1,13 @@
 # Every Door App Change Log
 
+## 7.1
+
+_Unreleased_
+
+* Fixed tile downloading screen rotation and obscured button.
+* Saving note state (geoscribble / OSM).
+* Compass was hidden when location tracking was enabled.
+
 ## 7.0
 
 _Released on 2025-09-24_
