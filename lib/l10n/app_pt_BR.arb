@@ -10,7 +10,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "Enviado {changes} ao OpenStreetMap.",
+  "changesUploadedMessage": "{changes} enviada(s) ao OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
