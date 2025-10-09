@@ -1,0 +1,4 @@
+* Vector tiles everywhere.
+* Download data and imagery to work offline.
+* Added a compass button.
+* Presets now have icons.
