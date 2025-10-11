@@ -829,6 +829,10 @@
   "@fieldHoursFullDay": {
     "description": "Switch for 24/7 opening hours."
   },
+  "fieldHoursByAppointment": "By appointment",
+  "@fieldHoursByAppointment": {
+    "description": "Button title for setting 'by appointment' value in opening hours."
+  },
   "fieldHoursAsText": "As Text",
   "@fieldHoursAsText": {
     "description": "Button title to open the raw opening hours editor."
