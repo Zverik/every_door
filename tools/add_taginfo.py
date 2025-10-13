@@ -72,9 +72,12 @@ def prepare_tag_lists(cur, tcur, wcur):
                 yield (word.lower(), k, v, count if i == 0 else count // 2)
 
     # Query all tags for POI keys with enough usage.
+    ph = ','.join('?' * len(POI_KEYS))
     tcur.execute(
-        """select key, value, count_all from tags where key in ({}) and count_all >= 100"""
-        .format(','.join('?' * len(POI_KEYS))), POI_KEYS)
+        "select key, value, count_all from tags "
+        f"where key in ({ph}) and count_nodes >= 100 "
+        "and value not in ('yes', 'no', 'fixme')",
+        POI_KEYS)
     # Under 1000 results, no point in memory management.
     usage = {f'{row[0]}={row[1]}': row[2] for row in tcur}
     tags = set(usage.keys())
@@ -83,8 +86,9 @@ def prepare_tag_lists(cur, tcur, wcur):
     if wcur:
         # Query pages and leave in tags only what we have found.
         wcur.execute(
-            """select key, value from wikipages_tags where key in ({})"""
-            .format(','.join('?' * len(POI_KEYS))), POI_KEYS)
+            f"select key, value from wikipages_tags where key in ({ph}) "
+            "and approval_status not in ('deprecated', 'imported', 'obsolete')",
+            POI_KEYS)
         # Again, around 1000 results as of 2025.
         wtags = set(f'{row[0]}={row[1]}' for row in wcur)
         tags = tags & wtags

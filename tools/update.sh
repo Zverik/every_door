@@ -28,11 +28,11 @@ PYTHON="$HERE/venv/bin/python"
 mkdir -p "$ASSETS"
 rm -f "$PRESETS_DB" "$PRESETS_ZIP"
 echo 'Processing presets and NSI'
-"$PYTHON" json_to_sqlite.py "$PRESETS_DB" "$GIT_PATH"
+"$PYTHON" "$HERE/json_to_sqlite.py" "$PRESETS_DB" "$GIT_PATH"
 echo 'Processing taginfo database'
-"$PYTHON" add_taginfo.py "$PRESETS_DB" "$TAGINFO_DB"
+"$PYTHON" "$HERE/add_taginfo.py" "$PRESETS_DB" "$TAGINFO_DB"
 echo 'Processing imagery index'
-"$PYTHON" add_imagery.py "$PRESETS_DB" "$GIT_PATH"
+"$PYTHON" "$HERE/add_imagery.py" "$PRESETS_DB" "$GIT_PATH"
 
 echo 'Preparing NSI features'
 if [ -n "$GIT_PATH" ]; then
