@@ -248,8 +248,20 @@ class _ChooserIntervalFieldState extends State<ChooserIntervalField> {
             );
           }
         } else {
+          // Determine a bracket for the break interval.
           final parentIntervalGood =
               widget.breakParent!.start < widget.breakParent!.end;
+          int parentStartHour = 0;
+          int parentEndHour = 24;
+          if (parentIntervalGood) {
+            parentStartHour = widget.breakParent!.start.hour;
+            if (widget.breakParent!.start.minute >= 30)
+              parentStartHour += 1;
+            parentEndHour = widget.breakParent!.end.hour;
+            if (widget.breakParent!.end.minute < 30)
+              parentEndHour -= 1;
+          }
+
           final isOpens = _state != _ChooserState.second;
           result = HoursMinutesChooser(
             key: ValueKey(_state),
@@ -257,9 +269,8 @@ class _ChooserIntervalFieldState extends State<ChooserIntervalField> {
                 ? loc.fieldHoursBreak
                 : '${loc.fieldHoursBreak} $start-',
             big: false,
-            startHour: start?.hour ??
-                (parentIntervalGood ? widget.breakParent!.start.hour + 1 : 0),
-            endHour: parentIntervalGood ? widget.breakParent!.end.hour - 1 : 24,
+            startHour: start?.hour ?? parentStartHour,
+            endHour: parentEndHour,
             onChoose: (value) {
               if (isOpens) {
                 setState(() {

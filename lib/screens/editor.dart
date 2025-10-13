@@ -187,6 +187,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   bool needsStandardFields() {
+    // TODO: use ElementKind.amenity?
     if (preset!.isFixme) return true;
     Set<String> allFields =
         (preset!.fields + preset!.moreFields).map((e) => e.key).toSet();

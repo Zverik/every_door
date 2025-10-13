@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e -u -o pipefail
-[ $# -lt 1 ] && echo "Usage: $0 <taginfo-db.db> [<path_to_git_repos>]" && exit 1
+[ $# -lt 1 ] && echo "Usage: $0 <path_to_taginfo_db> [<path_to_git_repos>]" && exit 1
 
 HERE="$(dirname "$0")"
 ASSETS="$HERE/../assets"
@@ -9,7 +9,7 @@ PRESETS_ZIP="$ASSETS/presets.gz"
 NSI_FEATURES="$HERE/../lib/helpers/nsi_features.dart"
 
 TAGINFO_DB="$1"
-[ ! -e "$TAGINFO_DB" ] && echo "Could not open $TAGINFO_DB" && exit 2
+[ ! -e "$TAGINFO_DB/taginfo-db.db" ] && echo "Could not open $TAGINFO_DB/taginfo-db.db" && exit 2
 
 GIT_PATH="${2-}"
 if [ -n "$GIT_PATH" ]; then

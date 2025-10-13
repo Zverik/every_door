@@ -137,9 +137,15 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         locale: locale,
         location: widget.location,
       );
+      final genPresets = await prov.getTagNamePresets(
+        substring,
+        filter: widget.kinds,
+      );
+
       final newPresets = nsiPresets
           .take(kMaxNSIPresets)
           .followedBy(dbPresets)
+          .followedBy(genPresets)
           .take(kMaxShownPresets)
           .toList();
 

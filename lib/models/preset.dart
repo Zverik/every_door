@@ -68,6 +68,20 @@ class Preset {
     );
   }
 
+  factory Preset.poi(Map<String, dynamic> row) {
+    final key = row['key'] as String;
+    final value = row['value'] as String;
+    return Preset(
+      id: 'taginfo $key=$value',
+      fields: const [],
+      onArea: true,
+      addTags: {key: value},
+      name: value.replaceAll('_', ' '),
+      icon: null,
+      isFixme: true,
+    );
+  }
+
   static Map<String, String?> decodeTags(Map<String, dynamic>? tags) {
     if (tags == null) return const {};
     return tags.map(
@@ -151,6 +165,8 @@ class Preset {
     if (key == null) return '';
     return '$key=${addTags[key]}';
   }
+
+  bool get isGeneric => addTags.isEmpty || addTags.entries.first.value == "*";
 
   Preset withFields(List<PresetField> fields, List<PresetField> moreFields) {
     return Preset(

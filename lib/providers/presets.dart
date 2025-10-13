@@ -228,6 +228,50 @@ class PresetProvider {
     return presets;
   }
 
+  Future<List<Preset>> getTagNamePresets(String query,
+      {ElementKindImpl? filter, int limit = kMaxShownPresets}) async {
+    filter ??= ElementKind.everything;
+    final terms = query
+        .split(' ')
+        .where((s) => s.length >= 2)
+        .take(3)
+        .map((s) => normalizeString(s));
+    if (terms.isEmpty) return [];
+
+    if (!ready) await _waitUntilReady();
+    final termsClause = terms.map((_) => 'term like ?').join(' or ');
+
+    final sql = '''
+    select key, value, max(usage) as usage, group_concat(term) as terms
+    from taglist where ($termsClause) group by 1, 2
+    ''';
+    final results = [
+      // We're creating a mutable list from a read-only one.
+      ...await _db!.rawQuery(sql, terms.map((t) => '$t%').toList())
+    ];
+
+    // Sort by usage, descending.
+    results.sort((a, b) => (b['usage'] as int).compareTo(a['usage'] as int));
+
+    final presets = <Preset>[];
+    for (final row in results) {
+      // Check that both terms are present.
+      final foundTerms = (row['terms'] as String).split(',');
+      if (!terms.every(
+          (term) => foundTerms.any((element) => element.startsWith(term))))
+        continue;
+
+      // Skip if we don't support this tag.
+      final k = row['key'] as String;
+      final v = row['value'] as String;
+      if (!filter.matchesTags({k: v})) continue;
+
+      presets.add(Preset.poi(row));
+      if (presets.length >= limit) break;
+    }
+    return presets;
+  }
+
   Future<Preset> getPresetForTags(Map<String, String> tags,
       {bool isArea = false, Locale? locale}) async {
     if (tags.isEmpty) {
@@ -278,10 +322,24 @@ class PresetProvider {
     order by lscore limit 1
     ''';
     final results = await _db!.rawQuery(sql);
-    if (results.isEmpty) {
-      return Preset.defaultPreset;
+    Preset preset =
+        results.isEmpty ? Preset.defaultPreset : Preset.fromJson(results.first);
+
+    if (preset.isGeneric) {
+      // If the first result is generic (amenity=*), look in the taglist table.
+      final tagSql = '''
+      with $tagCTE
+      select key, value
+      from taglist inner join tags on tkey = key and tvalue = value
+      order by usage desc limit 1
+      ''';
+      final results2 = await _db!.rawQuery(tagSql);
+      if (results2.isNotEmpty) {
+        preset = Preset.poi(results2.first);
+      }
     }
-    return Preset.fromJson(results.first);
+
+    return preset;
   }
 
   Future<List<Preset>> getPresetsById(List<String> ids,
@@ -459,9 +517,12 @@ class PresetProvider {
 
   Future<Preset> getFields(Preset preset,
       {Locale? locale, LatLng? location, bool plugins = true}) async {
-    if (preset.isFixme)
+    if (preset.isFixme) {
+      // "fixme:type" is in "more fields", because [isFixme] can be set
+      // for non-fixme presets, e.g. from the taginfo list.
       return preset.withFields(
-          [TextPresetField(key: 'fixme:type', label: 'Fixme type')], []);
+          [], [TextPresetField(key: 'fixme:type', label: 'Fixme type')]);
+    }
 
     if (!ready) await _waitUntilReady();
     if (plugins) {

@@ -23,6 +23,8 @@ class HoursFragmentEditor extends StatefulWidget {
 }
 
 class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
+  static const kMaxBreaks = 6;
+
   bool addingBreak = false;
 
   bool get isOff => widget.fragment.active && widget.fragment.interval == null;
@@ -112,7 +114,7 @@ class _HoursFragmentEditorState extends State<HoursFragmentEditor> {
                 ),
               ],
             ),
-          if (widget.fragment.breaks.length < 6 && gapEnoughForBreak) ...[
+          if (widget.fragment.breaks.length < kMaxBreaks && gapEnoughForBreak) ...[
             if (addingBreak)
               ChooserIntervalField(
                 interval: null,

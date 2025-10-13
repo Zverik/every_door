@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
 import sqlite3
 import sys
+import os.path
 from collections import defaultdict
+from typing import Generator
 
 
 KEEP_SEMICOLON = set(['voltage'])
 MORE_VALUES = set(['payment:', 'craft'])
 JOIN_CHAR = '\\'
+POI_KEYS = [
+    # See ../lib/helpers/tags/element_kind_std.dart
+    'shop', 'craft', 'office', 'healthcare', 'club',
+    'amenity', 'tourism',
+    # The rest is pre-filtered, so no unexpected values.
+]
 
 
-if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        print('Prefills combobox values from taginfo')
-        print('Usage: {} <presets.db> <taginfo-db.db>'.format(sys.argv[0]))
-        sys.exit(1)
-
-    conn = sqlite3.connect(sys.argv[1])
-    cur = conn.cursor()
-    taginfo = sqlite3.connect(sys.argv[2])
-    tcur = taginfo.cursor()
+def prepare_combos(cur, tcur):
     cur.execute("create table combos (key text primary key, options text)")
 
     # 1. Values for keys
@@ -59,7 +58,76 @@ if __name__ == '__main__':
         cur.execute(
             "insert into combos (key, options) values (?, ?)",
             (key, JOIN_CHAR.join(r[0][len(key):] for r in tcur)))
+    cur.execute("create index combox_key_idx on combos (key)")
 
+
+def prepare_tag_lists(cur, tcur, wcur):
+    def build_rows(tags: set[str], usage: dict[str, int]) -> Generator[tuple]:
+        # We duplicate rows for multi-word values.
+        for kv in tags:
+            count = usage[kv]
+            k, v = kv.split('=', 1)
+            words = v.split('_')
+            for i, word in enumerate(words):
+                yield (word.lower(), k, v, count if i == 0 else count // 2)
+
+    # Query all tags for POI keys with enough usage.
+    tcur.execute(
+        """select key, value, count_all from tags where key in ({}) and count_all >= 100"""
+        .format(','.join('?' * len(POI_KEYS))), POI_KEYS)
+    # Under 1000 results, no point in memory management.
+    usage = {f'{row[0]}={row[1]}': row[2] for row in tcur}
+    tags = set(usage.keys())
+
+    # We can skip the wikipedia step.
+    if wcur:
+        # Query pages and leave in tags only what we have found.
+        wcur.execute(
+            """select key, value from wikipages_tags where key in ({})"""
+            .format(','.join('?' * len(POI_KEYS))), POI_KEYS)
+        # Again, around 1000 results as of 2025.
+        wtags = set(f'{row[0]}={row[1]}' for row in wcur)
+        tags = tags & wtags
+
+    # Now fill the table.
+    cur.execute("create table taglist (term text, key text, value text, usage integer)")
+    cur.executemany(
+        "insert into taglist (term, key, value, usage) values (?, ?, ?, ?)",
+        build_rows(tags, usage))
+    cur.execute(
+        "delete from taglist where exists "
+        "(select 1 from preset_tags p where "
+        "p.key = taglist.key and p.value = taglist.value)")
+
+    cur.execute("create index taglist_term_idx on taglist (term)")
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        print('Prefills combobox values and a tag list from taginfo')
+        print('Usage: {} <presets.db> <path_to_taginfo_db>'.format(sys.argv[0]))
+        sys.exit(1)
+
+    conn = sqlite3.connect(sys.argv[1])
+    cur = conn.cursor()
+    taginfo = sqlite3.connect(os.path.join(sys.argv[2], 'taginfo-db.db'))
+    tcur = taginfo.cursor()
+
+    wiki_path = os.path.join(sys.argv[2], 'taginfo-wiki.db')
+    tagwiki: sqlite3.Connection | None = None
+    if os.path.exists(wiki_path):
+        tagwiki = sqlite3.connect(wiki_path)
+        wcur: sqlite3.Cursor | None = tagwiki.cursor()
+    else:
+        wcur = None
+
+    prepare_combos(cur, tcur)
+    prepare_tag_lists(cur, tcur, wcur)
+
+    if tagwiki:
+        tagwiki.close()
     taginfo.close()
+    conn.commit()
+    cur.execute('vacuum')
     conn.commit()
     conn.close()
