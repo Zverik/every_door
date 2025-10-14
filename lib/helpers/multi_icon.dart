@@ -1,5 +1,7 @@
-import 'package:flutter/foundation.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:every_door/helpers/cached_svg_source.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:jovial_svg/jovial_svg.dart';
 
 /// This class encapsulates monochrome icons.
@@ -7,7 +9,7 @@ import 'package:jovial_svg/jovial_svg.dart';
 /// and vector images. An image should be rectangular,
 /// recommended dimensions are 256×256.
 class MultiIcon {
-  static final _svgCache = ScalableImageCache(size: 200);
+  static final _svgCache = ScalableImageCache(size: 1000);
 
   final IconData? fontIcon;
   final String? emoji;
@@ -28,10 +30,10 @@ class MultiIcon {
   }) {
     if (imageData != null) {
       image = MemoryImage(imageData);
-    } else if (asset != null) {
+    } else if (asset != null && !asset.contains('.svg')) {
       image = AssetImage(asset);
     } else if (imageUrl != null && !imageUrl.contains('.svg')) {
-      image = NetworkImage(imageUrl);
+      image = CachedNetworkImageProvider(imageUrl);
     } else {
       image = null;
     }
@@ -42,9 +44,15 @@ class MultiIcon {
     } else if (siData != null) {
       svg = ScalableImage.fromSIBytes(siData);
       svgSource = null;
+    } else if (asset != null && asset.contains('.si')) {
+      svg = null;
+      svgSource = ScalableImageSource.fromSI(rootBundle, asset);
+    } else if (asset != null && asset.contains('.svg')) {
+      svg = null;
+      svgSource = ScalableImageSource.fromSvg(rootBundle, asset);
     } else if (imageUrl != null && imageUrl.contains('.svg')) {
       svg = null;
-      svgSource = ScalableImageSource.fromSvgHttpUrl(Uri.parse(imageUrl));
+      svgSource = CachedSvgSource(imageUrl);
     } else {
       svg = null;
       svgSource = null;

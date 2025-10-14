@@ -5,6 +5,7 @@
 _Unreleased_
 
 * The type chooser search also suggests popular documented keys without presets.
+* Caching icons in the type chooser for speed.
 * Fixed tile downloading screen rotation and obscured button.
 * Saving note state (geoscribble / OSM).
 * Compass was hidden when location tracking was enabled.

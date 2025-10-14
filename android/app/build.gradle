@@ -60,7 +60,7 @@ android {
     defaultConfig {
         applicationId "info.zverev.ilya.every_door"
         resValue "string", "app_name", "Every Door"
-        minSdk 23
+        minSdkVersion flutter.minSdkVersion
         targetSdk 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
