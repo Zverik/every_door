@@ -17,7 +17,7 @@ class NamePresetField extends PresetField {
     required super.key,
     required super.label,
     super.icon,
-    required String super.placeholder,
+    super.placeholder,
     super.prerequisite,
     this.capitalize = true,
   });

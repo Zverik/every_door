@@ -80,7 +80,7 @@ class PluginPresetsProvider {
       removeTags: removeTags ?? const {},
       onArea: onArea,
       icon: iconImg,
-      fromNSI: fromNSI,
+      type: fromNSI ? PresetType.nsi : PresetType.normal,
       fieldData: fieldsData,
       noStandard: noStandard,
       localizations: loc,
@@ -139,11 +139,12 @@ class PluginPresetsProvider {
     for (final term in terms) {
       presets.addAll(_terms.getDetailsWithPrefix(term));
     }
+    final type = nsi ? PresetType.nsi : PresetType.normal;
 
     return presets
         .map((id) => _presets[id])
         .whereType<PluginPreset>()
-        .where((p) => p.fromNSI == nsi)
+        .where((p) => p.type == type)
         .where((p) => !isArea || p.onArea)
         .map((p) => p.withLocale(locale))
         .toList();
@@ -293,8 +294,7 @@ class PluginPreset extends Preset {
     super.icon,
     super.locationSet,
     super.fieldData,
-    super.fromNSI = false,
-    super.isFixme = false,
+    super.type = PresetType.normal,
     super.noStandard = false,
     required this.localizations,
   });
@@ -311,7 +311,7 @@ class PluginPreset extends Preset {
       name: locale == null ? name : localizations.translate(locale, 'name'),
       subtitle: subtitle,
       icon: icon,
-      fromNSI: fromNSI,
+      type: type,
       noStandard: noStandard,
     );
   }

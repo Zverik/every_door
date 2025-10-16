@@ -13,7 +13,9 @@ POI_KEYS = [
     # See ../lib/helpers/tags/element_kind_std.dart
     'shop', 'craft', 'office', 'healthcare', 'club',
     'amenity', 'tourism',
-    # The rest is pre-filtered, so no unexpected values.
+    # Micromapping:
+    'man_made', 'emergency', 'hazard', 'historic', 'leisure',
+    'marker', 'natural', 'tourism',
 ]
 
 

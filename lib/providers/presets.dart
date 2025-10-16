@@ -1,6 +1,7 @@
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/combo.dart';
+import 'package:every_door/fields/name.dart';
 import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/room.dart';
 import 'package:every_door/fields/text.dart';
@@ -150,7 +151,7 @@ class PresetProvider {
       {Locale? locale}) async {
     final List<Preset> results = [];
     for (final nsi in suggested) {
-      if (nsi.fromNSI) {
+      if (nsi.type == PresetType.nsi) {
         final preset = await getPresetForTags(nsi.addTags, locale: locale);
         results.add(preset == Preset.defaultPreset
             ? nsi
@@ -517,11 +518,26 @@ class PresetProvider {
 
   Future<Preset> getFields(Preset preset,
       {Locale? locale, LatLng? location, bool plugins = true}) async {
-    if (preset.isFixme) {
+    if (preset.type == PresetType.fixme) {
       // "fixme:type" is in "more fields", because [isFixme] can be set
       // for non-fixme presets, e.g. from the taginfo list.
       return preset.withFields(
           [], [TextPresetField(key: 'fixme:type', label: 'Fixme type')]);
+    }
+
+    if (preset.type == PresetType.taginfo) {
+      final fields = <String>[];
+      if (ElementKind.amenity.matchesTags(preset.addTags)) {
+        fields.addAll(['name', 'operator', 'opening_hours', 'phone', 'website']);
+      } else {
+        fields.addAll(['name', 'operator', 'material', 'height', 'direction']);
+      }
+
+      final results = await getFieldsByName(fields, locale);
+      return preset.withFields(
+        fields.map((name) => results[name]).whereType<PresetField>().toList(),
+        [],
+      );
     }
 
     if (!ready) await _waitUntilReady();

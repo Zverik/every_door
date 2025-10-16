@@ -74,13 +74,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final locale = Localizations.localeOf(context);
-      if (widget.preset == null) {
-        updatePreset(locale, true);
-      } else {
-        // Preset and location should not be null
-        preset = widget.preset!;
-        updatePreset(locale, preset!.fromNSI);
-      }
+      preset = widget.preset;
+      updatePreset(locale, preset?.type);
     });
   }
 
@@ -103,10 +98,10 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     return kAmenityLoc.contains(tags['amenity']);
   }
 
-  Future<void> updatePreset(Locale locale, [bool detect = false]) async {
+  Future<void> updatePreset(Locale locale, [PresetType? presetType]) async {
     await Future.delayed(Duration.zero); // to disconnect from initState
     final presets = ref.read(presetProvider);
-    if (preset == null) detect = true;
+    bool detect = presetType == PresetType.nsi || preset == null;
     bool needRefresh = false;
     if (detect) {
       final newPreset = await presets.getPresetForTags(
@@ -187,8 +182,11 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   }
 
   bool needsStandardFields() {
-    // TODO: use ElementKind.amenity?
-    if (preset!.isFixme) return true;
+    if (preset!.type == PresetType.fixme) return true;
+    if (preset!.type == PresetType.taginfo) {
+      return ElementKind.amenity.matchesTags(preset!.addTags);
+    }
+
     Set<String> allFields =
         (preset!.fields + preset!.moreFields).map((e) => e.key).toSet();
     return allFields.contains('opening_hours') && allFields.contains('phone');
@@ -244,7 +242,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     oldPreset?.doRemoveTags(amenity);
     preset = newPreset;
     preset!.doAddTags(amenity);
-    updatePreset(locale, preset!.fromNSI);
+    updatePreset(locale, preset!.type);
   }
 
   void saveAndClose() {

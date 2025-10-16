@@ -6,6 +6,8 @@ import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 
+enum PresetType { normal, nsi, fixme, taginfo }
+
 class Preset {
   final List<PresetField> fields; // Always open
   final List<PresetField> moreFields; // Open when set or requested
@@ -18,8 +20,7 @@ class Preset {
   final String? _subtitle;
   final MultiIcon? icon;
   final LocationSet? locationSet;
-  final bool fromNSI;
-  final bool isFixme;
+  final PresetType type;
   final bool noStandard; // For plugins, do not extract standard fields
 
   // Hope we don't resort to using this
@@ -42,8 +43,7 @@ class Preset {
     this.icon,
     this.locationSet,
     this.fieldData,
-    this.fromNSI = false,
-    this.isFixme = false,
+    this.type = PresetType.normal,
     this.noStandard = false,
   }) : _subtitle = subtitle;
 
@@ -63,8 +63,7 @@ class Preset {
       subtitle: subtitle ?? 'fixme',
       icon: null,
       locationSet: null,
-      fromNSI: false,
-      isFixme: true,
+      type: PresetType.fixme,
     );
   }
 
@@ -78,7 +77,7 @@ class Preset {
       addTags: {key: value},
       name: value.replaceAll('_', ' '),
       icon: null,
-      isFixme: true,
+      type: PresetType.taginfo,
     );
   }
 
@@ -155,7 +154,7 @@ class Preset {
       locationSet: data['locations'] == null
           ? null
           : LocationSet.fromJson(jsonDecode(data['locations'])),
-      fromNSI: true,
+      type: PresetType.nsi,
     );
   }
 
@@ -180,7 +179,7 @@ class Preset {
       name: name,
       subtitle: _subtitle,
       icon: icon,
-      fromNSI: fromNSI,
+      type: type,
       noStandard: noStandard,
     );
   }
@@ -197,7 +196,7 @@ class Preset {
       name: name,
       subtitle: subtitle,
       icon: icon,
-      fromNSI: fromNSI,
+      type: type,
       noStandard: noStandard,
     );
   }
@@ -232,5 +231,5 @@ class Preset {
 
   @override
   String toString() =>
-      'Preset(id="$id", name="$name", can_area=$onArea, nsi=$fromNSI)';
+      'Preset(id="$id", name="$name", can_area=$onArea, type=$type)';
 }

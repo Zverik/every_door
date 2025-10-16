@@ -73,7 +73,7 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
     for (final element in data) {
       final preset = await presetProv.getPresetForTags(element.getFullTags(),
           locale: locale);
-      if (preset != Preset.defaultPreset && !preset.isFixme)
+      if (preset != Preset.defaultPreset && preset.type != PresetType.fixme)
         presetsCount.add(preset);
     }
 
@@ -156,7 +156,8 @@ class _TypeChooserPageState extends ConsumerState<TypeChooserPage> {
         setState(() {
           resultsUpdated = DateTime.now();
           presets = newPresets;
-          if (newPresets.any((p) => p.fromNSI)) updateNSISubtitles(context);
+          if (newPresets.any((p) => p.type == PresetType.nsi))
+            updateNSISubtitles(context);
         });
       }
     }
@@ -273,11 +274,13 @@ class PresetTile extends StatelessWidget {
           ),
         ],
       ),
-      color: !preset.isFixme
-          ? (preset.fromNSI
-              ? Colors.grey.withValues(alpha: 0.2)
-              : kFieldColor.withValues(alpha: 0.2))
-          : Colors.red.withValues(alpha: 0.2),
+      color: switch (preset.type) {
+        PresetType.fixme => Colors.red,
+        PresetType.taginfo => Colors.red,
+        PresetType.nsi => Colors.grey,
+        PresetType.normal => kFieldColor,
+      }
+          .withValues(alpha: 0.2),
       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
     );
   }
