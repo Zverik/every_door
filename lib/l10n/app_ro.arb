@@ -1,879 +1,879 @@
 {
-    "tileNothingAround": "Nicio facilitate în {distance} de metri în jurul tău.",
-    "@tileNothingAround": {
-        "description": "First part of the message displayed when there is nothing around.",
-        "placeholders": {
-            "distance": {
-                "type": "int",
-                "format": "decimalPattern",
-                "description": "Distance number in meters, at least 50.",
-                "example": "150"
-            }
-        }
-    },
-    "tileDragTheMap": "Vă rugăm să vă apropiați de ceva, să derulați harta sau să adăugați o facilitate care lipsește.",
-    "@tileDragTheMap": {
-        "description": "Message displayed when there is nothing around."
-    },
-    "tileDragOrUnfilter": "Vă rugăm să mișcați în jur, să adăugați o facilitate sau să dezactivați filtrul.",
-    "@tileDragOrUnfilter": {
-        "description": "Message displayed when there's nothing around, and a filter is on."
-    },
-    "tileDragDownload": "Încearcă să apeși butonul de descărcare.",
-    "@tileDragDownload": {
-        "description": "Message displayed when there is nothing around, and a download button is present."
-    },
-    "legendOther": "Altceva",
-    "@legendOther": {
-        "description": "Legend item for all other types."
-    },
-    "navUpload": "Încarcă",
-    "@navUpload": {
-        "description": "Tooltip for the upload data button on the nav panel."
-    },
-    "navDownload": "Descarcă",
-    "@navDownload": {
-        "description": "Tooltip for the download data button on the nav panel."
-    },
-    "navPoiMode": "Mod facilități",
-    "@navPoiMode": {
-        "description": "Tooltip for the POI / amenity mode button on the nav panel."
-    },
-    "navMicromappingMode": "Mod micromapping",
-    "@navMicromappingMode": {
-        "description": "Tooltip for the micromapping mode button on the nav panel."
-    },
-    "navNotesMode": "Mod note",
-    "@navNotesMode": {
-        "description": "Tooltip for the notes mode button on the nav panel."
-    },
-    "filterNoAddresses": "Nicio adresă în jur",
-    "@filterNoAddresses": {
-        "description": "An error message for no addresses nearby, used on filter pane and in address editor."
-    },
-    "filterByAddress": "După adresă",
-    "@filterByAddress": {
-        "description": "Filter pane, label for choosing an address to filter by."
-    },
-    "warningFixme": "Fixme: {value}",
-    "@warningFixme": {
-        "description": "Warning message for when an object has a non-empty fixme value.",
-        "placeholders": {
-            "value": {
-                "description": "Value of the fixme tag"
-            }
-        }
-    },
-    "warningWrongTag": "Tag greșit: {tag}",
-    "@warningWrongTag": {
-        "description": "Warning message for tags like shop=yes and amenity=no.",
-        "placeholders": {
-            "tag": {
-                "description": "The tag with the issue",
-                "example": "shop=yes"
-            }
-        }
-    },
-    "warningTooOld": "Facilitatea este veche de {years} ani",
-    "@warningTooOld": {
-        "description": "Warning message for when an amenity is many years old.",
-        "placeholders": {
-            "years": {
-                "description": "How many years ago the amenity was edited.",
-                "example": "5 years"
-            }
-        }
-    },
-    "warningWrongMode": "Mod greșit, verifică să nu fie dubluri",
-    "@warningWrongMode": {
-        "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
-    },
-    "years": "{count,plural, =1{{count} year} few{{count} years} other{{count} years}}",
-    "@years": {
-        "description": "Number of years. Used in the \"amenity is N years old\" message.",
-        "placeholders": {
-            "count": {}
-        }
-    },
-    "editorSave": "Salvează",
-    "@editorSave": {
-        "description": "Save button title in the editor"
-    },
-    "editorMarkChecked": "Marchează ca verificat",
-    "@editorMarkChecked": {
-        "description": "Tooltip for a button to mark the amenity checked without changing properties."
-    },
-    "editorHistory": "Istoric",
-    "@editorHistory": {
-        "description": "Tooltip for a button to open version history pane."
-    },
-    "editorTags": "Taguri sursă",
-    "@editorTags": {
-        "description": "Tooltip for a button to open tags pane."
-    },
-    "editorCloseTitle": "Închizi editorul?",
-    "@editorCloseTitle": {
-        "description": "Title for the message on closing the editor without saving changes."
-    },
-    "editorCloseMessage": "Renunți la schimbări fără să salvezi?",
-    "@editorCloseMessage": {
-        "description": "Message on closing the editor without saving changes."
-    },
-    "editorMoreFields": "Mai multe câmpuri",
-    "@editorMoreFields": {
-        "description": "Title of a additional fields group in editor."
-    },
-    "editorMove": "Mută",
-    "@editorMove": {
-        "description": "Label for the map, a hint that you can move the object."
-    },
-    "editorDuplicate": "Dublură posibilă în {distance} m",
-    "@editorDuplicate": {
-        "description": "Message about a possible duplicate",
-        "placeholders": {
-            "distance": {
-                "type": "int",
-                "format": "decimalPattern",
-                "description": "Distance in meters",
-                "example": "71"
-            }
-        }
-    },
-    "editorMarkActive": "Marchează ca activ",
-    "@editorMarkActive": {
-        "description": "Button title to mark an amenity active (non-defunct)."
-    },
-    "editorMarkDefunct": "Marchează Desființat",
-    "@editorMarkDefunct": {
-        "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
-    },
-    "editorRestore": "Restaurează",
-    "@editorRestore": {
-        "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
-    },
-    "editorMissing": "Nu Există",
-    "@editorMissing": {
-        "description": "Button title to delete an amenity (since it's missing)."
-    },
-    "editorDeleteBuilding": "Demolat",
-    "@editorDeleteBuilding": {
-        "description": "Button title to mark a building demolished."
-    },
-    "editorRestoreTitle": "Este deschis?",
-    "@editorRestoreTitle": {
-        "description": "Title for question on restoring an edited defunct amenity."
-    },
-    "editorRestoreMessage": "{amenity} este inactiv. Vrei să o marchezi ca fiind activ?",
-    "@editorRestoreMessage": {
-        "description": "Question on restoring an edited defunct amenity.",
-        "placeholders": {
-            "amenity": {
-                "description": "Amenity title"
-            }
-        }
-    },
-    "editorDeleteTitle": "Ștergi {amenity}?",
-    "@editorDeleteTitle": {
-        "description": "Dialog title for deleting an amenity.",
-        "placeholders": {
-            "amenity": {
-                "description": "Amenity title"
-            }
-        }
-    },
-    "editorDeleteButton": "Șterge",
-    "@editorDeleteButton": {
-        "description": "Delete"
-    },
-    "editorDeleteKeepAddressButton": "Șterge, dar lasă adresa",
-    "@editorDeleteKeepAddressButton": {
-        "description": "Button for keeping the address"
-    },
-    "tagsShare": "Trimite",
-    "@tagsShare": {
-        "description": "Tooltip for the sharing button on the tags panel."
-    },
-    "tagsUrlCopied": "URL copiat în clipboard",
-    "@tagsUrlCopied": {
-        "description": "Popup message when the link to the object was copied to the clipboard."
-    },
-    "tagsNewPoint": "Punct Nou",
-    "@tagsNewPoint": {
-        "description": "Tag editor panel title for a new amenity."
-    },
-    "tagsRestore": "Restaurează",
-    "@tagsRestore": {
-        "description": "Tooltip for a button next to a tag value to restore the value to the original."
-    },
-    "tagsDelete": "Golește",
-    "@tagsDelete": {
-        "description": "Tooltip for a button next to a tag value to delete the tag."
-    },
-    "tagsAddTag": "Adaugă un tag",
-    "@tagsAddTag": {
-        "description": "Tags panel button for adding a new tag."
-    },
-    "tagsKey": "Key",
-    "@tagsKey": {
-        "description": "Tags panel, add a new tag dialog: key label"
-    },
-    "tagsValue": "Valoare",
-    "@tagsValue": {
-        "description": "Tags panel, add a new tag dialog: value label"
-    },
-    "tagsKeyError": "Key e prea rară",
-    "@tagsKeyError": {
-        "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
-    },
-    "tagsValueLong": "Valoarea e prea lungă",
-    "@tagsValueLong": {
-        "description": "Validation error for when the value length exceeds 255 characters."
-    },
-    "versionsTitle": "istoric {elementRef}",
-    "@versionsTitle": {
-        "description": "Title for the element versions page.",
-        "placeholders": {
-            "elementRef": {
-                "type": "String",
-                "description": "Type and ID of OSM element.",
-                "example": "node/1234567"
-            }
-        }
-    },
-    "versionsEnableInternet": "Conectează-te la internet ca să descarci istoricul versiunilor",
-    "@versionsEnableInternet": {
-        "description": "Message for when fetching element history fails due to lack of network connection."
-    },
-    "versionsFetchError": "Eroare la descărcarea istoricului versiunilor",
-    "@versionsFetchError": {
-        "description": "Message for when fetching element history fails due to unknown error."
-    },
-    "versionsRetryFetch": "Încearcă din nou",
-    "@versionsRetryFetch": {
-        "description": "Button label to retry fetching history."
-    },
-    "versionsLocalChanges": "Schimbări locale",
-    "@versionsLocalChanges": {
-        "description": "Card header for the local changes diff."
-    },
-    "versionsVersionMeta": "de {user} pe {datetime}",
-    "@versionsVersionMeta": {
-        "description": "Card body to show metadata about the element version.",
-        "placeholders": {
-            "user": {
-                "type": "String",
-                "description": "OSM username of version creator.",
-                "example": "Zverik"
-            },
-            "datetime": {
-                "type": "String",
-                "description": "Datetime for when version was created.",
-                "example": "July 21, 2022 12:30"
-            }
-        }
-    },
-    "settingsTitle": "Configurații",
-    "@settingsTitle": {
-        "description": "App bar title for the settings panel."
-    },
-    "settingsApiServer": "Server API",
-    "@settingsApiServer": {
-        "description": "Section title for API server settings."
-    },
-    "settingsLoginDetails": "Cont OSM",
-    "@settingsLoginDetails": {
-        "description": "Settings entry for logging in to OSM."
-    },
-    "settingsPurgeDataMessage": "Va trebui să descarci totul din nou. Continui?",
-    "@settingsPurgeDataMessage": {
-        "description": "Confirmation dialog message for when purging all downloaded data."
-    },
-    "settingsPurgedObsoleteTitle": "Date învechite",
-    "@settingsPurgedObsoleteTitle": {
-        "description": "Notification title for cleaning obsolete data from the cache."
-    },
-    "settingsPurgedAllTitle": "Date șterse",
-    "@settingsPurgedAllTitle": {
-        "description": "Notification title for cleaning all downloaded data from the cache."
-    },
-    "accountLoginOAuth": "Loghează-te cu OAuth",
-    "@accountLoginOAuth": {
-        "description": "Button label for logging in to OSM via OAuth."
-    },
-    "accountOAuthError": "Eroare OAuth",
-    "@accountOAuthError": {
-        "description": "Alert title for when OAuth login failed."
-    },
-    "accountLoginPassword": "Loghează-te cu parola",
-    "@accountLoginPassword": {
-        "description": "Button label for logging in to OSM with a password."
-    },
-    "accountPasswordWarningTitle": "Atenție",
-    "@accountPasswordWarningTitle": {
-        "description": "Title for the warning dialog about keeping passwords on the device."
-    },
-    "accountPasswordWarningMessage": "Parola va fi stocată de dispozitiv. Folosește asta doar atunci când OAuth nu merge.",
-    "@accountPasswordWarningMessage": {
-        "description": "Message for the warning dialog about keeping passwords on the device."
-    },
-    "accountPasswordWarningButton": "Am înțeles",
-    "@accountPasswordWarningButton": {
-        "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
-    },
-    "accountFieldLogin": "Username",
-    "@accountFieldLogin": {
-        "description": "Label for the OSM login."
-    },
-    "accountFieldPassword": "Parolă",
-    "@accountFieldPassword": {
-        "description": "Label for the OSM password."
-    },
-    "accountAuthErrorMessage": "Username sau parolă greșite.",
-    "@accountAuthErrorMessage": {
-        "descripton": "Message for the alert dialog about an incorrect password."
-    },
-    "accountLogout": "Deconectează-te",
-    "@accountLogout": {
-        "description": "Button title for logging out of OSM."
-    },
-    "accountUnreadMail": "Mesaje necitite",
-    "@accountUnreadMail": {
-        "description": "Label for the number of unread private messages a user has."
-    },
-    "fieldHoursButton": "Setează programul",
-    "@fieldHoursButton": {
-        "description": "Text on the hours button when there's no value."
-    },
-    "fieldHoursTitle": "Program",
-    "@fieldHoursTitle": {
-        "description": "Title for the opening hours editor pane."
-    },
-    "fieldHoursFullDay": "Toată ziua",
-    "@fieldHoursFullDay": {
-        "description": "Switch for 24/7 opening hours."
-    },
-    "fieldHoursAsText": "Ca text",
-    "@fieldHoursAsText": {
-        "description": "Button title to open the raw opening hours editor."
-    },
-    "fieldHoursNumberedWeekday": "\"Ultima Luni\"",
-    "@fieldHoursNumberedWeekday": {
-        "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
-    },
-    "fieldHoursSpecificDays": "Dată specifică",
-    "@fieldHoursSpecificDays": {
-        "description": "Button title for selectors like Dec 31."
-    },
-    "fieldHoursClosed": "Închis",
-    "@fieldHoursClosed": {
-        "description": "Switch tile label for making a schedule closed, e.g. for PH off."
-    },
-    "fieldHoursPublicHolidays": "Sărbători de Stat",
-    "@fieldHoursPublicHolidays": {
-        "description": "Card title for the PH (public holidays) selector."
-    },
-    "fieldHoursOpens": "Deschide la",
-    "@fieldHoursOpens": {
-        "description": "Title for the interval start."
-    },
-    "fieldHoursCloses": "Închide la",
-    "@fieldHoursCloses": {
-        "description": "Title for the interval end."
-    },
-    "fieldHoursBreak": "Pauză",
-    "@fieldHoursBreak": {
-        "description": "Title for the break interval."
-    },
-    "fieldHoursNext": "Următorul",
-    "@fieldHoursNext": {
-        "description": "Button in the interval editor to move to the closing time."
-    },
-    "fieldHoursHour": "Ora",
-    "@fieldHoursHour": {
-        "description": "Label for the hour chooser."
-    },
-    "fieldHoursMinute": "Minut",
-    "@fieldHoursMinute": {
-        "description": "Label for the minute chooser."
-    },
-    "fieldHoursChooseTime": "Oră și minute",
-    "@fieldHoursChooseTime": {
-        "description": "Tooltip for a button to open hours and minutes chooser."
-    },
-    "fieldHoursSave": "Salvează",
-    "@fieldHoursSave": {
-        "description": "Tooltip for a button to save opening_hours value."
-    },
-    "fieldHoursAddBreak": "Adaugă o pauză",
-    "@fieldHoursAddBreak": {
-        "description": "Button in opening hours editor to add a break."
-    },
-    "fieldHoursRemoveBreak": "Șterge Pauza",
-    "@fieldHoursRemoveBreak": {
-        "description": "Tooltip for a button to remove a break in an opening hours fragment."
-    },
-    "fieldHoursWeekdays": "Lu Ma Mi Jo Vi Sâ Du",
-    "@fieldHoursWeekdays": {
-        "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
-    },
-    "fieldHoursClosedPH": "Închis în sărbători de stat",
-    "@fieldHoursClosedPH": {
-        "description": "Switch label for PH off."
-    },
-    "fieldHoursSDAddOne": "Adaugă data",
-    "@fieldHoursSDAddOne": {
-        "description": "Tooltip for button on the specific days interval to add one specific date."
-    },
-    "fieldHoursSDAddRange": "Adaugă un interval",
-    "@fieldHoursSDAddRange": {
-        "description": "Tooltip for button on the specific days interval to add a range of dates."
-    },
-    "entranceTypeEmergency": "urgență",
-    "@entranceTypeEmergency": {},
-    "addressHouseNumber": "Casă",
-    "@addressHouseNumber": {
-        "description": "Label for addr:housenumber in the form. Keep it short."
-    },
-    "addressHouseNotEmpty": "Nu ar trebui să fie gol",
-    "@addressHouseNotEmpty": {
-        "description": "Validator message for addr:housenumber."
-    },
-    "buildingRoofShape": "Forma acoperișului",
-    "@buildingRoofShape": {
-        "description": "Label for roof:shape in the form. Keep it short."
-    },
-    "buildingType": "Tip",
-    "@buildingType": {
-        "description": "Label for building type (value of building=*) in the form. Keep it short."
-    },
-    "buildingMoreButton": "Mai multe",
-    "@buildingMoreButton": {
-        "description": "Button label for opening the building object in a full editor."
-    },
-    "buildingMaterial": "Fațadă",
-    "@buildingMaterial": {},
-    "buildingMaterialBrick": "Cărămidă",
-    "@buildingMaterialBrick": {},
-    "buildingMaterialWood": "Lemn",
-    "@buildingMaterialWood": {},
-    "buildingMaterialConcrete": "Beton",
-    "@buildingMaterialConcrete": {},
-    "buildingMaterialStone": "Piatră",
-    "@buildingMaterialStone": {},
-    "buildingMaterialMetal": "metal",
-    "@buildingMaterialMetal": {},
-    "buildingMaterialGlass": "sticlă",
-    "@buildingMaterialGlass": {},
-    "buildingTypeAddress": "adresă",
-    "@buildingTypeAddress": {},
-    "buildingTypeHouse": "casă",
-    "@buildingTypeHouse": {},
-    "buildingTypeApartments": "apartamente",
-    "@buildingTypeApartments": {},
-    "buildingTypeRetail": "comerț",
-    "@buildingTypeRetail": {},
-    "buildingTypeCommercial": "comercială",
-    "@buildingTypeCommercial": {},
-    "buildingTypeShed": "adăpost",
-    "@buildingTypeShed": {},
-    "buildingTypeIndustrial": "industrială",
-    "@buildingTypeIndustrial": {},
-    "buildingTypeGarage": "garaj",
-    "@buildingTypeGarage": {},
-    "buildingTypeConstruction": "construcție",
-    "@buildingTypeConstruction": {},
-    "entranceFlats": "Apartamente",
-    "@entranceFlats": {
-        "description": "Label for addr:flats in the form. Keep it short."
-    },
-    "entranceAccess": "Acces",
-    "@entranceAccess": {
-        "description": "Label for entrance access in the form. Keep it short."
-    },
-    "entranceAccessYes": "deschisă",
-    "@entranceAccessYes": {},
-    "entranceAccessPrivate": "privat",
-    "@entranceAccessPrivate": {},
-    "entranceAccessNo": "nu",
-    "@entranceAccessNo": {},
-    "entranceWheelchair": "Scaun cu rotile",
-    "@entranceWheelchair": {
-        "description": "Label for entrance wheelchair access in the form. Keep it short."
-    },
-    "entranceType": "Tip",
-    "@entranceType": {
-        "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
-    },
-    "fieldHoursClear": "Șterge",
-    "@fieldHoursClear": {
-        "description": "Tooltip for a button to clear the opening_hours value."
-    },
-    "fieldHoursSDRemove": "Scoate",
-    "@fieldHoursSDRemove": {
-        "description": "Tooltip for button on the specific days interval to remove some days."
-    },
-    "fieldDirectionSet": "Setează",
-    "@fieldDirectionSet": {
-        "description": "Button label for setting a direction (0-360°) value."
-    },
-    "fieldNameLanguages": "Altă limbă",
-    "@fieldNameLanguages": {
-        "description": "Tooltip for a button to add a name in another language."
-    },
-    "fieldNameLangSearch": "Găsește limba",
-    "@fieldNameLangSearch": {
-        "description": "Hint for the text field for finding a language in a list."
-    },
-    "fieldNameCopy": "Copiază valoarea",
-    "@fieldNameCopy": {
-        "description": "Tooltip for a button to copy name value between languages."
-    },
-    "fieldComboEmpty": "gol",
-    "@fieldComboEmpty": {
-        "description": "Option for a combo field that sets an empty value."
-    },
-    "fieldComboChoose": "alege",
-    "@fieldComboChoose": {
-        "description": "A placeholder value displayed in a single-value combo field when there is no value."
-    },
-    "fieldWifiNo": "nu",
-    "@fieldWifiNo": {
-        "description": "Wifi field label for no wifi."
-    },
-    "fieldWifiPublic": "public",
-    "@fieldWifiPublic": {
-        "description": "Wifi field label for public unrestricted wifi."
-    },
-    "fieldWifiCustomers": "pentru clienți",
-    "@fieldWifiCustomers": {
-        "description": "Wifi field label for wifi available to customers only."
-    },
-    "fieldWheelchairYes": "da",
-    "@fieldWheelchairYes": {
-        "description": "Wheelchair field label for full accessibility."
-    },
-    "fieldWheelchairLimited": "limitat",
-    "@fieldWheelchairLimited": {
-        "description": "Wheelchair field label for limited accessibility."
-    },
-    "fieldWheelchairNo": "nu",
-    "@fieldWheelchairNo": {
-        "description": "Wheelchair field label for no accessibility."
-    },
-    "fieldCardsAccepted": "acceptat",
-    "@fieldCardsAccepted": {
-        "description": "Payment field label for cards accepted."
-    },
-    "fieldCardsNo": "nu",
-    "@fieldCardsNo": {
-        "description": "Payment field label for cash only."
-    },
-    "fieldCardsOnly": "doar card",
-    "@fieldCardsOnly": {
-        "description": "Payment field label for cards only."
-    },
-    "fieldPaymentTitle": "Plata cu Cardul",
-    "@fieldPaymentTitle": {
-        "description": "Pane title for card payment options."
-    },
-    "fieldCheckboxYes": "da",
-    "@fieldCheckboxYes": {
-        "description": "Checkbox name for yes."
-    },
-    "fieldCheckboxNo": "nu",
-    "@fieldCheckboxNo": {
-        "description": "Checkbox name for no."
-    },
-    "fieldFloorEmpty": "Ca să alegi un nivel setează adresa.",
-    "@fieldFloorEmpty": {
-        "description": "What is written on the floor chooser if there are no floors to choose."
-    },
-    "fieldFloorNew": "Nivel Nou",
-    "@fieldFloorNew": {
-        "description": "Title for the floor creation pane."
-    },
-    "fieldFloorFloorDesc": "Nivel - așa cum este notat în navigație și lifturi",
-    "@fieldFloorFloorDesc": {
-        "descripton": "Description for the \"level\" tag."
-    },
-    "fieldFloorLevelDesc": "Număr etaj, începând de la 0 pentru parter",
-    "@fieldFloorLevelDesc": {
-        "description": "Description for the \"addr:floor\" tag."
-    },
-    "fieldFloorShouldBeNumber": "Te rog introdu un nunăr",
-    "@fieldFloorShouldBeNumber": {
-        "description": "Validation message for a levels tag, also used in building levels form."
-    },
-    "fieldAddressTap": "Apasă pe o adresă",
-    "@fieldAddressTap": {
-        "description": "Title for the pane when a user can tap an address to choose it."
-    },
-    "fieldPhoneWrong": "Format greșit",
-    "@fieldPhoneWrong": {
-        "description": "Validation message for a non-standard phone number."
-    },
-    "fieldHeightMeters": "Lungime în metri, ex. 5.4",
-    "@fieldHeightMeters": {
-        "description": "Validation message for when meters are expected."
-    },
-    "fieldHeightFeet": "Lungime în picioare, ex. 7'4\"",
-    "@fieldHeightFeet": {
-        "description": "Validation message for when feet are expected."
-    },
-    "fieldWebsiteQR": "Scanează un cod QR",
-    "@fieldWebsiteQR": {
-        "description": "Page title for the QR code scanner."
-    },
-    "messageNoData": "Fără date, apasă ca să descari",
-    "@messageNoData": {
-        "description": "Message that appears on the main screen when there's no OSM data."
-    },
-    "messageDataObsolete": "Date învechite, apasă să descarci",
-    "@messageDataObsolete": {
-        "description": "Message that appears on the main screen when OSM data is outdated."
-    },
-    "enableGPS": "Activează GPS",
-    "@enableGPS": {
-        "description": "Title of the alert for enabling location services."
-    },
-    "enableLocation": "Activează locația",
-    "@enableLocation": {
-        "description": "Title of the alert for allowing app access to location."
-    },
-    "enableLocationMessage": "Te rog permite accesul la locație pentru EveryDoor în panoul setări care va urma.",
-    "@enableLocationMessage": {
-        "description": "Contents of the alert for allowing app access to location."
-    },
-    "buttonYes": "Da",
-    "@buttonYes": {
-        "description": "Button for approval."
-    },
-    "buttonNo": "Nu",
-    "@buttonNo": {
-        "description": "Button for dismissal."
-    },
-    "entrancesAddEntrance": "Adaugă o scară/intrare",
-    "@entrancesAddEntrance": {
-        "description": "Tooltip for the button to add an entrance node."
-    },
-    "entrancesAddBuilding": "Adaugă clădire",
-    "@entrancesAddBuilding": {
-        "description": "Tooltip for the button to add a building node."
-    },
-    "buildingX": "Clădire {n}",
-    "@buildingX": {
-        "description": "Option displayed when there's multiple buildings under a tap.",
-        "placeholders": {
-            "n": {
-                "example": "12A"
-            }
-        }
-    },
-    "addressX": "Adresă {n}",
-    "@addressX": {
-        "description": "Option displayed when there's multiple addresses under a tap.",
-        "placeholders": {
-            "n": {
-                "example": "12A"
-            }
-        }
-    },
-    "entranceX": "Scară/intrare {n}",
-    "@entranceX": {
-        "description": "Option displayed when there's multiple entrances under a tap.",
-        "placeholders": {
-            "n": {
-                "example": "1-15"
-            }
-        }
-    },
-    "buildingPostCode": "Cod poștal",
-    "@buildingPostCode": {
-        "description": "Label for addr:postcode in the form. Keep it short."
-    },
-    "buildingLevels": "Nivele",
-    "@buildingLevels": {
-        "description": "Label for building:levels in the form. Keep it short."
-    },
-    "entranceFlatsNumberList": "Trebuie o listă de numere",
-    "@entranceFlatsNumberList": {
-        "description": "Validation message for addr:flats."
-    },
-    "entranceTypeMain": "principală",
-    "@entranceTypeMain": {},
-    "entranceTypeStaircase": "scară",
-    "@entranceTypeStaircase": {},
-    "entranceTypeShop": "magazin",
-    "@entranceTypeShop": {},
-    "entranceTypeService": "serviciu",
-    "@entranceTypeService": {},
-    "entranceTypeGarage": "garaj",
-    "@entranceTypeGarage": {},
-    "addressBlock": "Bloc",
-    "@addressBlock": {
-        "description": "Label for addr:block_number or addr_block. Keep it short."
-    },
-    "addressStreet": "Stradă",
-    "@addressStreet": {
-        "description": "Label for addr:street in the form. Keep it short."
-    },
-    "notesAddNote": "Adaugă o notiță",
-    "@notesAddNote": {
-        "description": "Tooltip for the button to add a note."
-    },
-    "notesAnonymous": "Anonim",
-    "@notesAnonymous": {
-        "description": "Name for anonymous note submitters."
-    },
-    "notesClose": "Rezolvă",
-    "@notesClose": {
-        "description": "Button title for closing a note."
-    },
-    "notesCloseMessage": "Marchezi notița ca rezolvată?",
-    "@notesCloseMessage": {
-        "description": "Confirmation message when pressed a close note button."
-    },
-    "notesDelete": "Șterge",
-    "@notesDelete": {
-        "description": "Button title for deleting a new note."
-    },
-    "notesCancelMessage": "Anulezi notița OSM?",
-    "@notesCancelMessage": {
-        "description": "Message when cancelling an OSM note that has non-empty content."
-    },
-    "drawUndo": "Înapoi",
-    "@drawUndo": {},
-    "drawChangeTool": "Schimbă unealta",
-    "@drawChangeTool": {
-        "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
-    },
-    "drawEraser": "Radieră",
-    "@drawEraser": {
-        "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
-    },
-    "drawRoad": "Drum",
-    "@drawRoad": {
-        "description": "Tool description: paved road. Keep it short."
-    },
-    "drawFootway": "Trotuar",
-    "@drawFootway": {
-        "description": "Tool description: paved/maintained footway. Keep it short."
-    },
-    "drawPath": "Potecă",
-    "@drawPath": {
-        "description": "Tool description: unpaved narrow footway. Keep it short."
-    },
-    "drawCycleway": "Pistă de biciclete",
-    "@drawCycleway": {
-        "description": "Tool description: segregated cycleway. Keep it short."
-    },
-    "drawCyclewayShared": "Pistă de biciclete",
-    "@drawCyclewayShared": {
-        "description": "Tool description: non-segregated cycleway. Keep it short."
-    },
-    "drawWall": "Zid",
-    "@drawWall": {
-        "description": "Tool description: wall, non-see-through barrier. Keep it short."
-    },
-    "drawFence": "Gard",
-    "@drawFence": {
-        "description": "Tool description: fence, see-through barrier. Keep it short."
-    },
-    "drawPower": "Linie electrică",
-    "@drawPower": {
-        "description": "Tool description: power line. Keep it short."
-    },
-    "drawStream": "Pârâu",
-    "@drawStream": {
-        "description": "Tool description: stream or other narrow waterway. Keep it short."
-    },
-    "drawCulvert": "Canal",
-    "@drawCulvert": {
-        "description": "Tool description: underground water pipe, culvert. Keep it short."
-    },
-    "apiStatusDownloading": "Se descarcă..",
-    "@apiStatusDownloading": {
-        "description": "Text displayed when the app is downloading data from the API."
-    },
-    "apiStatusUploading": "Se încarcă modificările",
-    "@apiStatusUploading": {
-        "description": "Text displayed when the app is uploading data to the API."
-    },
-    "apiStatusUploadingNotes": "Se încarcă notițele",
-    "@apiStatusUploadingNotes": {
-        "description": "Text displayed when the app is uploading notes to the API."
-    },
-    "faqMapTiny": "De ce e harta așa de mică?",
-    "@faqMapTiny": {},
-    "tileNo": "fără",
-    "@tileNo": {
-        "description": "Prefix for a list of icons for attributes missing in amenity."
-    },
-    "navImagery": "Schimbă imaginile",
-    "@navImagery": {
-        "description": "Tooltip for the map / imagery button on the nav panel."
-    },
-    "filterByFloor": "După nivel",
-    "@filterByFloor": {
-        "description": "Filter pane, label for choosing a floor to filter by."
-    },
-    "filterEmpty": "goale",
-    "@filterEmpty": {
-        "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
-    },
-    "filterNonConfirmed": "Doar necomfirmate",
-    "@filterNonConfirmed": {
-        "description": "Filter pane, a switch for showing only amenities that were not confirmed."
-    },
-    "mapSettings": "Setări",
-    "@mapSettings": {
-        "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
-    },
-    "mapFilter": "Filtrează",
-    "@mapFilter": {
-        "description": "Tooltip for the amenity filter button on a map."
-    },
-    "mapLocate": "Înapoi la locație",
-    "@mapLocate": {
-        "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
-    },
-    "mapStraight": "Nordul în sus",
-    "@mapStraight": {
-        "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
-    },
-    "mapZoomIn": "Zoom +",
-    "@mapZoomIn": {
-        "description": "Tooltip for the zoom in (+) button on a map."
-    },
-    "mapZoomOut": "Zoom -",
-    "@mapZoomOut": {
-        "description": "Tooltip for the zoom out (-) button on a map."
-    },
-    "chooseLocation": "Alege o locație",
-    "@chooseLocation": {
-        "description": "Title for the screen for choosing a location on a map."
-    },
-    "chooseType": "Alege tipul",
-    "@chooseType": {
-        "description": "Search field hint on the type choosing screen."
-    },
-    "chooseTypeClear": "Golește",
-    "@chooseTypeClear": {
-        "description": "Tooltip for a button to clear search field contents."
-    },
-    "warningFixmeNote": "Va fi convertit într-o notiță OSM",
-    "@warningFixmeNote": {
-        "description": "Warning message for an amenity=fixme object with just a name."
-    },
-    "versionsVersionNumber": "Versiunea #{number}",
-    "@versionsVersionNumber": {
-        "description": "Card header for the diff for this element version.",
-        "placeholders": {
-            "number": {
-                "type": "int",
-                "description": "Element version number.",
-                "example": "node/1234567"
-            }
-        }
+  "tileNothingAround": "Nicio facilitate în {distance} de metri în jurul tău.",
+  "@tileNothingAround": {
+    "description": "First part of the message displayed when there is nothing around.",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance number in meters, at least 50.",
+        "example": "150"
+      }
     }
+  },
+  "tileDragTheMap": "Vă rugăm să vă apropiați de ceva, să derulați harta sau să adăugați o facilitate care lipsește.",
+  "@tileDragTheMap": {
+    "description": "Message displayed when there is nothing around."
+  },
+  "tileDragOrUnfilter": "Vă rugăm să mișcați în jur, să adăugați o facilitate sau să dezactivați filtrul.",
+  "@tileDragOrUnfilter": {
+    "description": "Message displayed when there's nothing around, and a filter is on."
+  },
+  "tileDragDownload": "Încearcă să apeși butonul de descărcare.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "legendOther": "Altceva",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "navUpload": "Încarcă",
+  "@navUpload": {
+    "description": "Tooltip for the upload data button on the nav panel."
+  },
+  "navDownload": "Descarcă",
+  "@navDownload": {
+    "description": "Tooltip for the download data button on the nav panel."
+  },
+  "navPoiMode": "Mod facilități",
+  "@navPoiMode": {
+    "description": "Tooltip for the POI / amenity mode button on the nav panel."
+  },
+  "navMicromappingMode": "Mod micromapping",
+  "@navMicromappingMode": {
+    "description": "Tooltip for the micromapping mode button on the nav panel."
+  },
+  "navNotesMode": "Mod note",
+  "@navNotesMode": {
+    "description": "Tooltip for the notes mode button on the nav panel."
+  },
+  "filterNoAddresses": "Nicio adresă în jur",
+  "@filterNoAddresses": {
+    "description": "An error message for no addresses nearby, used on filter pane and in address editor."
+  },
+  "filterByAddress": "După adresă",
+  "@filterByAddress": {
+    "description": "Filter pane, label for choosing an address to filter by."
+  },
+  "warningFixme": "Fixme: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
+  },
+  "warningWrongTag": "Tag greșit: {tag}",
+  "@warningWrongTag": {
+    "description": "Warning message for tags like shop=yes and amenity=no.",
+    "placeholders": {
+      "tag": {
+        "description": "The tag with the issue",
+        "example": "shop=yes"
+      }
+    }
+  },
+  "warningTooOld": "Facilitatea este veche de {years} ani",
+  "@warningTooOld": {
+    "description": "Warning message for when an amenity is many years old.",
+    "placeholders": {
+      "years": {
+        "description": "How many years ago the amenity was edited.",
+        "example": "5 years"
+      }
+    }
+  },
+  "warningWrongMode": "Mod greșit, verifică să nu fie dubluri",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "years": "{count,plural, =1{{count} year} few{{count} years} other{{count} years}}",
+  "@years": {
+    "description": "Number of years. Used in the \"amenity is N years old\" message.",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "editorSave": "Salvează",
+  "@editorSave": {
+    "description": "Save button title in the editor"
+  },
+  "editorMarkChecked": "Marchează ca verificat",
+  "@editorMarkChecked": {
+    "description": "Tooltip for a button to mark the amenity checked without changing properties."
+  },
+  "editorHistory": "Istoric",
+  "@editorHistory": {
+    "description": "Tooltip for a button to open version history pane."
+  },
+  "editorTags": "Taguri sursă",
+  "@editorTags": {
+    "description": "Tooltip for a button to open tags pane."
+  },
+  "editorCloseTitle": "Închizi editorul?",
+  "@editorCloseTitle": {
+    "description": "Title for the message on closing the editor without saving changes."
+  },
+  "editorCloseMessage": "Renunți la schimbări fără să salvezi?",
+  "@editorCloseMessage": {
+    "description": "Message on closing the editor without saving changes."
+  },
+  "editorMoreFields": "Mai multe câmpuri",
+  "@editorMoreFields": {
+    "description": "Title of a additional fields group in editor."
+  },
+  "editorMove": "Mută",
+  "@editorMove": {
+    "description": "Label for the map, a hint that you can move the object."
+  },
+  "editorDuplicate": "Dublură posibilă în {distance} m",
+  "@editorDuplicate": {
+    "description": "Message about a possible duplicate",
+    "placeholders": {
+      "distance": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Distance in meters",
+        "example": "71"
+      }
+    }
+  },
+  "editorMarkActive": "Marchează ca activ",
+  "@editorMarkActive": {
+    "description": "Button title to mark an amenity active (non-defunct)."
+  },
+  "editorMarkDefunct": "Marchează Desființat",
+  "@editorMarkDefunct": {
+    "description": "Button title to mark an amenity defunct (disused, closed, but still there)."
+  },
+  "editorRestore": "Restaurează",
+  "@editorRestore": {
+    "description": "Button title to restore a deleted amenity (before it's uploaded and final)."
+  },
+  "editorMissing": "Nu Există",
+  "@editorMissing": {
+    "description": "Button title to delete an amenity (since it's missing)."
+  },
+  "editorDeleteBuilding": "Demolat",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "editorRestoreTitle": "Este deschis?",
+  "@editorRestoreTitle": {
+    "description": "Title for question on restoring an edited defunct amenity."
+  },
+  "editorRestoreMessage": "{amenity} este inactiv. Vrei să o marchezi ca fiind activ?",
+  "@editorRestoreMessage": {
+    "description": "Question on restoring an edited defunct amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteTitle": "Ștergi {amenity}?",
+  "@editorDeleteTitle": {
+    "description": "Dialog title for deleting an amenity.",
+    "placeholders": {
+      "amenity": {
+        "description": "Amenity title"
+      }
+    }
+  },
+  "editorDeleteButton": "Șterge",
+  "@editorDeleteButton": {
+    "description": "Delete"
+  },
+  "editorDeleteKeepAddressButton": "Șterge, dar lasă adresa",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "tagsShare": "Trimite",
+  "@tagsShare": {
+    "description": "Tooltip for the sharing button on the tags panel."
+  },
+  "tagsUrlCopied": "URL copiat în clipboard",
+  "@tagsUrlCopied": {
+    "description": "Popup message when the link to the object was copied to the clipboard."
+  },
+  "tagsNewPoint": "Punct Nou",
+  "@tagsNewPoint": {
+    "description": "Tag editor panel title for a new amenity."
+  },
+  "tagsRestore": "Restaurează",
+  "@tagsRestore": {
+    "description": "Tooltip for a button next to a tag value to restore the value to the original."
+  },
+  "tagsDelete": "Golește",
+  "@tagsDelete": {
+    "description": "Tooltip for a button next to a tag value to delete the tag."
+  },
+  "tagsAddTag": "Adaugă un tag",
+  "@tagsAddTag": {
+    "description": "Tags panel button for adding a new tag."
+  },
+  "tagsKey": "Key",
+  "@tagsKey": {
+    "description": "Tags panel, add a new tag dialog: key label"
+  },
+  "tagsValue": "Valoare",
+  "@tagsValue": {
+    "description": "Tags panel, add a new tag dialog: value label"
+  },
+  "tagsKeyError": "Key e prea rară",
+  "@tagsKeyError": {
+    "description": "Validation error for when an entered key is not in the top 5000 keys from taginfo."
+  },
+  "tagsValueLong": "Valoarea e prea lungă",
+  "@tagsValueLong": {
+    "description": "Validation error for when the value length exceeds 255 characters."
+  },
+  "versionsTitle": "istoric {elementRef}",
+  "@versionsTitle": {
+    "description": "Title for the element versions page.",
+    "placeholders": {
+      "elementRef": {
+        "type": "String",
+        "description": "Type and ID of OSM element.",
+        "example": "node/1234567"
+      }
+    }
+  },
+  "versionsEnableInternet": "Conectează-te la internet ca să descarci istoricul versiunilor",
+  "@versionsEnableInternet": {
+    "description": "Message for when fetching element history fails due to lack of network connection."
+  },
+  "versionsFetchError": "Eroare la descărcarea istoricului versiunilor",
+  "@versionsFetchError": {
+    "description": "Message for when fetching element history fails due to unknown error."
+  },
+  "versionsRetryFetch": "Încearcă din nou",
+  "@versionsRetryFetch": {
+    "description": "Button label to retry fetching history."
+  },
+  "versionsLocalChanges": "Schimbări locale",
+  "@versionsLocalChanges": {
+    "description": "Card header for the local changes diff."
+  },
+  "versionsVersionMeta": "de {user} pe {datetime}",
+  "@versionsVersionMeta": {
+    "description": "Card body to show metadata about the element version.",
+    "placeholders": {
+      "user": {
+        "type": "String",
+        "description": "OSM username of version creator.",
+        "example": "Zverik"
+      },
+      "datetime": {
+        "type": "String",
+        "description": "Datetime for when version was created.",
+        "example": "July 21, 2022 12:30"
+      }
+    }
+  },
+  "settingsTitle": "Configurații",
+  "@settingsTitle": {
+    "description": "App bar title for the settings panel."
+  },
+  "settingsApiServer": "Server API",
+  "@settingsApiServer": {
+    "description": "Section title for API server settings."
+  },
+  "settingsLoginDetails": "Cont OSM",
+  "@settingsLoginDetails": {
+    "description": "Settings entry for logging in to OSM."
+  },
+  "settingsPurgeDataMessage": "Va trebui să descarci totul din nou. Continui?",
+  "@settingsPurgeDataMessage": {
+    "description": "Confirmation dialog message for when purging all downloaded data."
+  },
+  "settingsPurgedObsoleteTitle": "Date învechite",
+  "@settingsPurgedObsoleteTitle": {
+    "description": "Notification title for cleaning obsolete data from the cache."
+  },
+  "settingsPurgedAllTitle": "Date șterse",
+  "@settingsPurgedAllTitle": {
+    "description": "Notification title for cleaning all downloaded data from the cache."
+  },
+  "accountLoginOAuth": "Loghează-te cu OAuth",
+  "@accountLoginOAuth": {
+    "description": "Button label for logging in to OSM via OAuth."
+  },
+  "accountOAuthError": "Eroare OAuth",
+  "@accountOAuthError": {
+    "description": "Alert title for when OAuth login failed."
+  },
+  "accountLoginPassword": "Loghează-te cu parola",
+  "@accountLoginPassword": {
+    "description": "Button label for logging in to OSM with a password."
+  },
+  "accountPasswordWarningTitle": "Atenție",
+  "@accountPasswordWarningTitle": {
+    "description": "Title for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningMessage": "Parola va fi stocată de dispozitiv. Folosește asta doar atunci când OAuth nu merge.",
+  "@accountPasswordWarningMessage": {
+    "description": "Message for the warning dialog about keeping passwords on the device."
+  },
+  "accountPasswordWarningButton": "Am înțeles",
+  "@accountPasswordWarningButton": {
+    "description": "Confirmation button label for the warning dialog about keeping passwords on the device."
+  },
+  "accountFieldLogin": "Username",
+  "@accountFieldLogin": {
+    "description": "Label for the OSM login."
+  },
+  "accountFieldPassword": "Parolă",
+  "@accountFieldPassword": {
+    "description": "Label for the OSM password."
+  },
+  "accountAuthErrorMessage": "Username sau parolă greșite.",
+  "@accountAuthErrorMessage": {
+    "descripton": "Message for the alert dialog about an incorrect password."
+  },
+  "accountLogout": "Deconectează-te",
+  "@accountLogout": {
+    "description": "Button title for logging out of OSM."
+  },
+  "accountUnreadMail": "Mesaje necitite",
+  "@accountUnreadMail": {
+    "description": "Label for the number of unread private messages a user has."
+  },
+  "fieldHoursButton": "Setează programul",
+  "@fieldHoursButton": {
+    "description": "Text on the hours button when there's no value."
+  },
+  "fieldHoursTitle": "Program",
+  "@fieldHoursTitle": {
+    "description": "Title for the opening hours editor pane."
+  },
+  "fieldHoursFullDay": "Toată ziua",
+  "@fieldHoursFullDay": {
+    "description": "Switch for 24/7 opening hours."
+  },
+  "fieldHoursAsText": "Ca text",
+  "@fieldHoursAsText": {
+    "description": "Button title to open the raw opening hours editor."
+  },
+  "fieldHoursNumberedWeekday": "\"Ultima Luni\"",
+  "@fieldHoursNumberedWeekday": {
+    "description": "Button title for selectors like Mo[-1], keep it short - maybe with an example."
+  },
+  "fieldHoursSpecificDays": "Dată specifică",
+  "@fieldHoursSpecificDays": {
+    "description": "Button title for selectors like Dec 31."
+  },
+  "fieldHoursClosed": "Închis",
+  "@fieldHoursClosed": {
+    "description": "Switch tile label for making a schedule closed, e.g. for PH off."
+  },
+  "fieldHoursPublicHolidays": "Sărbători de Stat",
+  "@fieldHoursPublicHolidays": {
+    "description": "Card title for the PH (public holidays) selector."
+  },
+  "fieldHoursOpens": "Deschide la",
+  "@fieldHoursOpens": {
+    "description": "Title for the interval start."
+  },
+  "fieldHoursCloses": "Închide la",
+  "@fieldHoursCloses": {
+    "description": "Title for the interval end."
+  },
+  "fieldHoursBreak": "Pauză",
+  "@fieldHoursBreak": {
+    "description": "Title for the break interval."
+  },
+  "fieldHoursNext": "Următorul",
+  "@fieldHoursNext": {
+    "description": "Button in the interval editor to move to the closing time."
+  },
+  "fieldHoursHour": "Ora",
+  "@fieldHoursHour": {
+    "description": "Label for the hour chooser."
+  },
+  "fieldHoursMinute": "Minut",
+  "@fieldHoursMinute": {
+    "description": "Label for the minute chooser."
+  },
+  "fieldHoursChooseTime": "Oră și minute",
+  "@fieldHoursChooseTime": {
+    "description": "Tooltip for a button to open hours and minutes chooser."
+  },
+  "fieldHoursSave": "Salvează",
+  "@fieldHoursSave": {
+    "description": "Tooltip for a button to save opening_hours value."
+  },
+  "fieldHoursAddBreak": "Adaugă o pauză",
+  "@fieldHoursAddBreak": {
+    "description": "Button in opening hours editor to add a break."
+  },
+  "fieldHoursRemoveBreak": "Șterge Pauza",
+  "@fieldHoursRemoveBreak": {
+    "description": "Tooltip for a button to remove a break in an opening hours fragment."
+  },
+  "fieldHoursWeekdays": "Lu Ma Mi Jo Vi Sâ Du",
+  "@fieldHoursWeekdays": {
+    "description": "Space-separated list of 7 weekday abbreviations, from Monday to Sunday."
+  },
+  "fieldHoursClosedPH": "Închis în sărbători de stat",
+  "@fieldHoursClosedPH": {
+    "description": "Switch label for PH off."
+  },
+  "fieldHoursSDAddOne": "Adaugă data",
+  "@fieldHoursSDAddOne": {
+    "description": "Tooltip for button on the specific days interval to add one specific date."
+  },
+  "fieldHoursSDAddRange": "Adaugă un interval",
+  "@fieldHoursSDAddRange": {
+    "description": "Tooltip for button on the specific days interval to add a range of dates."
+  },
+  "entranceTypeEmergency": "urgență",
+  "@entranceTypeEmergency": {},
+  "addressHouseNumber": "Casă",
+  "@addressHouseNumber": {
+    "description": "Label for addr:housenumber in the form. Keep it short."
+  },
+  "addressHouseNotEmpty": "Nu ar trebui să fie gol",
+  "@addressHouseNotEmpty": {
+    "description": "Validator message for addr:housenumber."
+  },
+  "buildingRoofShape": "Forma acoperișului",
+  "@buildingRoofShape": {
+    "description": "Label for roof:shape in the form. Keep it short."
+  },
+  "buildingType": "Tip",
+  "@buildingType": {
+    "description": "Label for building type (value of building=*) in the form. Keep it short."
+  },
+  "buildingMoreButton": "Mai multe",
+  "@buildingMoreButton": {
+    "description": "Button label for opening the building object in a full editor."
+  },
+  "buildingMaterial": "Fațadă",
+  "@buildingMaterial": {},
+  "buildingMaterialBrick": "Cărămidă",
+  "@buildingMaterialBrick": {},
+  "buildingMaterialWood": "Lemn",
+  "@buildingMaterialWood": {},
+  "buildingMaterialConcrete": "Beton",
+  "@buildingMaterialConcrete": {},
+  "buildingMaterialStone": "Piatră",
+  "@buildingMaterialStone": {},
+  "buildingMaterialMetal": "metal",
+  "@buildingMaterialMetal": {},
+  "buildingMaterialGlass": "sticlă",
+  "@buildingMaterialGlass": {},
+  "buildingTypeAddress": "adresă",
+  "@buildingTypeAddress": {},
+  "buildingTypeHouse": "casă",
+  "@buildingTypeHouse": {},
+  "buildingTypeApartments": "apartamente",
+  "@buildingTypeApartments": {},
+  "buildingTypeRetail": "comerț",
+  "@buildingTypeRetail": {},
+  "buildingTypeCommercial": "comercială",
+  "@buildingTypeCommercial": {},
+  "buildingTypeShed": "adăpost",
+  "@buildingTypeShed": {},
+  "buildingTypeIndustrial": "industrială",
+  "@buildingTypeIndustrial": {},
+  "buildingTypeGarage": "garaj",
+  "@buildingTypeGarage": {},
+  "buildingTypeConstruction": "construcție",
+  "@buildingTypeConstruction": {},
+  "entranceFlats": "Apartamente",
+  "@entranceFlats": {
+    "description": "Label for addr:flats in the form. Keep it short."
+  },
+  "entranceAccess": "Acces",
+  "@entranceAccess": {
+    "description": "Label for entrance access in the form. Keep it short."
+  },
+  "entranceAccessYes": "deschisă",
+  "@entranceAccessYes": {},
+  "entranceAccessPrivate": "privat",
+  "@entranceAccessPrivate": {},
+  "entranceAccessNo": "nu",
+  "@entranceAccessNo": {},
+  "entranceWheelchair": "Scaun cu rotile",
+  "@entranceWheelchair": {
+    "description": "Label for entrance wheelchair access in the form. Keep it short."
+  },
+  "entranceType": "Tip",
+  "@entranceType": {
+    "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
+  },
+  "fieldHoursClear": "Șterge",
+  "@fieldHoursClear": {
+    "description": "Tooltip for a button to clear the opening_hours value."
+  },
+  "fieldHoursSDRemove": "Scoate",
+  "@fieldHoursSDRemove": {
+    "description": "Tooltip for button on the specific days interval to remove some days."
+  },
+  "fieldDirectionSet": "Setează",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "fieldNameLanguages": "Altă limbă",
+  "@fieldNameLanguages": {
+    "description": "Tooltip for a button to add a name in another language."
+  },
+  "fieldNameLangSearch": "Găsește limba",
+  "@fieldNameLangSearch": {
+    "description": "Hint for the text field for finding a language in a list."
+  },
+  "fieldNameCopy": "Copiază valoarea",
+  "@fieldNameCopy": {
+    "description": "Tooltip for a button to copy name value between languages."
+  },
+  "fieldComboEmpty": "gol",
+  "@fieldComboEmpty": {
+    "description": "Option for a combo field that sets an empty value."
+  },
+  "fieldComboChoose": "alege",
+  "@fieldComboChoose": {
+    "description": "A placeholder value displayed in a single-value combo field when there is no value."
+  },
+  "fieldWifiNo": "nu",
+  "@fieldWifiNo": {
+    "description": "Wifi field label for no wifi."
+  },
+  "fieldWifiPublic": "public",
+  "@fieldWifiPublic": {
+    "description": "Wifi field label for public unrestricted wifi."
+  },
+  "fieldWifiCustomers": "pentru clienți",
+  "@fieldWifiCustomers": {
+    "description": "Wifi field label for wifi available to customers only."
+  },
+  "fieldWheelchairYes": "da",
+  "@fieldWheelchairYes": {
+    "description": "Wheelchair field label for full accessibility."
+  },
+  "fieldWheelchairLimited": "limitat",
+  "@fieldWheelchairLimited": {
+    "description": "Wheelchair field label for limited accessibility."
+  },
+  "fieldWheelchairNo": "nu",
+  "@fieldWheelchairNo": {
+    "description": "Wheelchair field label for no accessibility."
+  },
+  "fieldCardsAccepted": "acceptat",
+  "@fieldCardsAccepted": {
+    "description": "Payment field label for cards accepted."
+  },
+  "fieldCardsNo": "nu",
+  "@fieldCardsNo": {
+    "description": "Payment field label for cash only."
+  },
+  "fieldCardsOnly": "doar card",
+  "@fieldCardsOnly": {
+    "description": "Payment field label for cards only."
+  },
+  "fieldPaymentTitle": "Plata cu Cardul",
+  "@fieldPaymentTitle": {
+    "description": "Pane title for card payment options."
+  },
+  "fieldCheckboxYes": "da",
+  "@fieldCheckboxYes": {
+    "description": "Checkbox name for yes."
+  },
+  "fieldCheckboxNo": "nu",
+  "@fieldCheckboxNo": {
+    "description": "Checkbox name for no."
+  },
+  "fieldFloorEmpty": "Ca să alegi un nivel setează adresa.",
+  "@fieldFloorEmpty": {
+    "description": "What is written on the floor chooser if there are no floors to choose."
+  },
+  "fieldFloorNew": "Nivel Nou",
+  "@fieldFloorNew": {
+    "description": "Title for the floor creation pane."
+  },
+  "fieldFloorFloorDesc": "Nivel - așa cum este notat în navigație și lifturi",
+  "@fieldFloorFloorDesc": {
+    "descripton": "Description for the \"level\" tag."
+  },
+  "fieldFloorLevelDesc": "Număr etaj, începând de la 0 pentru parter",
+  "@fieldFloorLevelDesc": {
+    "description": "Description for the \"addr:floor\" tag."
+  },
+  "fieldFloorShouldBeNumber": "Te rog introdu un nunăr",
+  "@fieldFloorShouldBeNumber": {
+    "description": "Validation message for a levels tag, also used in building levels form."
+  },
+  "fieldAddressTap": "Apasă pe o adresă",
+  "@fieldAddressTap": {
+    "description": "Title for the pane when a user can tap an address to choose it."
+  },
+  "fieldPhoneWrong": "Format greșit",
+  "@fieldPhoneWrong": {
+    "description": "Validation message for a non-standard phone number."
+  },
+  "fieldHeightMeters": "Lungime în metri, ex. 5.4",
+  "@fieldHeightMeters": {
+    "description": "Validation message for when meters are expected."
+  },
+  "fieldHeightFeet": "Lungime în picioare, ex. 7'4\"",
+  "@fieldHeightFeet": {
+    "description": "Validation message for when feet are expected."
+  },
+  "fieldWebsiteQR": "Scanează un cod QR",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "messageNoData": "Fără date, apasă ca să descari",
+  "@messageNoData": {
+    "description": "Message that appears on the main screen when there's no OSM data."
+  },
+  "messageDataObsolete": "Date învechite, apasă să descarci",
+  "@messageDataObsolete": {
+    "description": "Message that appears on the main screen when OSM data is outdated."
+  },
+  "enableGPS": "Activează GPS",
+  "@enableGPS": {
+    "description": "Title of the alert for enabling location services."
+  },
+  "enableLocation": "Activează locația",
+  "@enableLocation": {
+    "description": "Title of the alert for allowing app access to location."
+  },
+  "enableLocationMessage": "Te rog permite accesul la locație pentru EveryDoor în panoul setări care va urma.",
+  "@enableLocationMessage": {
+    "description": "Contents of the alert for allowing app access to location."
+  },
+  "buttonYes": "Da",
+  "@buttonYes": {
+    "description": "Button for approval."
+  },
+  "buttonNo": "Nu",
+  "@buttonNo": {
+    "description": "Button for dismissal."
+  },
+  "entrancesAddEntrance": "Adaugă o scară/intrare",
+  "@entrancesAddEntrance": {
+    "description": "Tooltip for the button to add an entrance node."
+  },
+  "entrancesAddBuilding": "Adaugă clădire",
+  "@entrancesAddBuilding": {
+    "description": "Tooltip for the button to add a building node."
+  },
+  "buildingX": "Clădire {n}",
+  "@buildingX": {
+    "description": "Option displayed when there's multiple buildings under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "addressX": "Adresă {n}",
+  "@addressX": {
+    "description": "Option displayed when there's multiple addresses under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "12A"
+      }
+    }
+  },
+  "entranceX": "Scară/intrare {n}",
+  "@entranceX": {
+    "description": "Option displayed when there's multiple entrances under a tap.",
+    "placeholders": {
+      "n": {
+        "example": "1-15"
+      }
+    }
+  },
+  "buildingPostCode": "Cod poștal",
+  "@buildingPostCode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "buildingLevels": "Nivele",
+  "@buildingLevels": {
+    "description": "Label for building:levels in the form. Keep it short."
+  },
+  "entranceFlatsNumberList": "Trebuie o listă de numere",
+  "@entranceFlatsNumberList": {
+    "description": "Validation message for addr:flats."
+  },
+  "entranceTypeMain": "principală",
+  "@entranceTypeMain": {},
+  "entranceTypeStaircase": "scară",
+  "@entranceTypeStaircase": {},
+  "entranceTypeShop": "magazin",
+  "@entranceTypeShop": {},
+  "entranceTypeService": "serviciu",
+  "@entranceTypeService": {},
+  "entranceTypeGarage": "garaj",
+  "@entranceTypeGarage": {},
+  "addressBlock": "Bloc",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "addressStreet": "Stradă",
+  "@addressStreet": {
+    "description": "Label for addr:street in the form. Keep it short."
+  },
+  "notesAddNote": "Adaugă o notiță",
+  "@notesAddNote": {
+    "description": "Tooltip for the button to add a note."
+  },
+  "notesAnonymous": "Anonim",
+  "@notesAnonymous": {
+    "description": "Name for anonymous note submitters."
+  },
+  "notesClose": "Rezolvă",
+  "@notesClose": {
+    "description": "Button title for closing a note."
+  },
+  "notesCloseMessage": "Marchezi notița ca rezolvată?",
+  "@notesCloseMessage": {
+    "description": "Confirmation message when pressed a close note button."
+  },
+  "notesDelete": "Șterge",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "notesCancelMessage": "Anulezi notița OSM?",
+  "@notesCancelMessage": {
+    "description": "Message when cancelling an OSM note that has non-empty content."
+  },
+  "drawUndo": "Înapoi",
+  "@drawUndo": {},
+  "drawChangeTool": "Schimbă unealta",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawEraser": "Radieră",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "Drum",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawFootway": "Trotuar",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawPath": "Potecă",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCycleway": "Pistă de biciclete",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "Pistă de biciclete",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawWall": "Zid",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawFence": "Gard",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawPower": "Linie electrică",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawStream": "Pârâu",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawCulvert": "Canal",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "apiStatusDownloading": "Se descarcă..",
+  "@apiStatusDownloading": {
+    "description": "Text displayed when the app is downloading data from the API."
+  },
+  "apiStatusUploading": "Se încarcă modificările",
+  "@apiStatusUploading": {
+    "description": "Text displayed when the app is uploading data to the API."
+  },
+  "apiStatusUploadingNotes": "Se încarcă notițele",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "faqMapTiny": "De ce e harta așa de mică?",
+  "@faqMapTiny": {},
+  "tileNo": "fără",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "navImagery": "Schimbă imaginile",
+  "@navImagery": {
+    "description": "Tooltip for the map / imagery button on the nav panel."
+  },
+  "filterByFloor": "După nivel",
+  "@filterByFloor": {
+    "description": "Filter pane, label for choosing a floor to filter by."
+  },
+  "filterEmpty": "goale",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  },
+  "filterNonConfirmed": "Doar necomfirmate",
+  "@filterNonConfirmed": {
+    "description": "Filter pane, a switch for showing only amenities that were not confirmed."
+  },
+  "mapSettings": "Setări",
+  "@mapSettings": {
+    "description": "Tooltip for the \"hamburger\" button on a map to open app settings."
+  },
+  "mapFilter": "Filtrează",
+  "@mapFilter": {
+    "description": "Tooltip for the amenity filter button on a map."
+  },
+  "mapLocate": "Înapoi la locație",
+  "@mapLocate": {
+    "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
+  },
+  "mapStraight": "Nordul în sus",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "mapZoomIn": "Zoom +",
+  "@mapZoomIn": {
+    "description": "Tooltip for the zoom in (+) button on a map."
+  },
+  "mapZoomOut": "Zoom -",
+  "@mapZoomOut": {
+    "description": "Tooltip for the zoom out (-) button on a map."
+  },
+  "chooseLocation": "Alege o locație",
+  "@chooseLocation": {
+    "description": "Title for the screen for choosing a location on a map."
+  },
+  "chooseType": "Alege tipul",
+  "@chooseType": {
+    "description": "Search field hint on the type choosing screen."
+  },
+  "chooseTypeClear": "Golește",
+  "@chooseTypeClear": {
+    "description": "Tooltip for a button to clear search field contents."
+  },
+  "warningFixmeNote": "Va fi convertit într-o notiță OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "versionsVersionNumber": "Versiunea #{number}",
+  "@versionsVersionNumber": {
+    "description": "Card header for the diff for this element version.",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "Element version number.",
+        "example": "node/1234567"
+      }
+    }
+  }
 }
