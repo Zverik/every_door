@@ -9,6 +9,7 @@ _Unreleased_
 * Fixed tile downloading screen rotation and obscured button.
 * Saving note state (geoscribble / OSM).
 * Compass was hidden when location tracking was enabled.
+* QR code scanner removes tracking parameters.
 
 ## 7.0
 
