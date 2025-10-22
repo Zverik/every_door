@@ -191,8 +191,8 @@ class InstagramProvider extends _ProviderHelper {
           label: 'Instagram',
           prefixes: ['i', 'insta', 'instagram', 'инстаграм'],
           key: 'contact:instagram',
-          regexp: RegExp(r'(?:instagram(?:\.com)?/)?([^/ ?]+)/?(\?[\w=]+)?$'),
-          regexpUrl: RegExp(r'instagram\.com/([^/ ?]+)/?(\?[\w=]+)?$'),
+          regexp: RegExp(r'(?:instagram(?:\.com)?/)?([^/ ?]+)/?(\?.*)?$'),
+          regexpUrl: RegExp(r'instagram\.com/([^/ ?]+)/?(\?.*)?$'),
           format: 'https://www.instagram.com/%s',
         );
 }
