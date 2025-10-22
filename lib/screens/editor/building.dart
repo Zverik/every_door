@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/helpers/geometry/equirectangular.dart';
+import 'package:every_door/helpers/in_countries.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/widgets/address_form.dart';
 import 'package:every_door/widgets/radio_field.dart';
@@ -40,11 +41,9 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     _levelsFocus = FocusNode();
     building = widget.building?.copy() ??
         OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
-    buildingsNeedAddresses = !CountryCoder.instance.isIn(
-      lat: widget.location.latitude,
-      lon: widget.location.longitude,
-      inside: 'Q55', // Netherlands
-    );
+    buildingsHaveAddresses(widget.location).then((value) {
+      buildingsNeedAddresses = value;
+    });
     saved = false;
     updateLevels();
   }

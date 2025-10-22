@@ -1,4 +1,5 @@
 import 'package:country_coder/country_coder.dart';
+import 'package:every_door/helpers/in_countries.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
@@ -128,17 +129,7 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
 
     nearest.sort((a, b) => indexKind(a).compareTo(indexKind(b)));
 
-    // Wait for country coder
-    if (!CountryCoder.instance.ready) {
-      await Future.doWhile(() => Future.delayed(Duration(milliseconds: 100))
-          .then((_) => !CountryCoder.instance.ready));
-    }
-
-    buildingsNeedAddresses = !CountryCoder.instance.isIn(
-      lat: location.latitude,
-      lon: location.longitude,
-      inside: 'Q55', // Netherlands
-    );
+    buildingsNeedAddresses = await buildingsHaveAddresses(location);
 
     this.nearest = nearest;
     notifyListeners();
