@@ -202,6 +202,7 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
     'toolid',
     'customid',
     'igshid',
+    'igsh',
     'si',
     'sms_source',
     'sms_click',
