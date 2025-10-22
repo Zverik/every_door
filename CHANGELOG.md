@@ -10,6 +10,7 @@ _Unreleased_
 * Saving note state (geoscribble / OSM).
 * Compass was hidden when location tracking was enabled.
 * QR code scanner removes tracking parameters.
+* Added a button to edit an address in the editor pane.
 
 ## 7.0
 

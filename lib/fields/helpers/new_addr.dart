@@ -6,8 +6,9 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 class NewAddressPane extends ConsumerStatefulWidget {
   final LatLng location;
+  final StreetAddress? initialAddress;
 
-  const NewAddressPane(this.location);
+  const NewAddressPane({required this.location, this.initialAddress});
 
   @override
   ConsumerState<NewAddressPane> createState() => _NewAddressPaneState();
@@ -22,6 +23,7 @@ class _NewAddressPaneState extends ConsumerState<NewAddressPane> {
       children: [
         AddressForm(
           location: widget.location,
+          initialAddress: widget.initialAddress,
           onChange: (addr) {
             setState(() {
               address = addr;

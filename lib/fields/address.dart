@@ -53,7 +53,8 @@ class _AddressInputState extends ConsumerState<AddressInput> {
     });
   }
 
-  Future<void> addAddress(BuildContext context) async {
+  Future<void> addAddress(BuildContext context,
+      [StreetAddress? initial]) async {
     final StreetAddress? addr = await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -66,7 +67,10 @@ class _AddressInputState extends ConsumerState<AddressInput> {
               right: 10.0,
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            child: NewAddressPane(widget.element.location),
+            child: NewAddressPane(
+              location: widget.element.location,
+              initialAddress: initial,
+            ),
           ),
         );
       },
@@ -101,17 +105,21 @@ class _AddressInputState extends ConsumerState<AddressInput> {
     if (current.isEmpty) {
       options.insert(0, kChooseOnMap);
       options.add(kManualOption);
+    } else {
+      options.insert(0, kManualOption);
     }
+
     return RadioField(
       options: options,
       value: current.isEmpty ? null : current.toString(),
+      keepFirst: true,
       onChange: (value) {
         if (value == null) {
           setState(() {
             StreetAddress.clearTags(widget.element, base: widget.field.key);
           });
         } else if (value == kManualOption) {
-          addAddress(context);
+          addAddress(context, current);
         } else if (value == kChooseOnMap) {
           chooseAddressOnMap();
         } else {

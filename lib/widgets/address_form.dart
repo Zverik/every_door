@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:every_door/models/address.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class AddressForm extends ConsumerStatefulWidget {
   final LatLng location;
@@ -147,7 +148,8 @@ class _AddressFormState extends ConsumerState<AddressForm> {
                   child: TextFormField(
                     controller: _houseController,
                     keyboardType: TextInputType.visiblePassword,
-                    autofocus: widget.autoFocus,
+                    autofocus:
+                        widget.autoFocus && widget.initialAddress?.unit == null,
                     style: kFieldTextStyle,
                     decoration:
                         const InputDecoration(hintText: '1, 89, 154A, ...'),
@@ -186,6 +188,8 @@ class _AddressFormState extends ConsumerState<AddressForm> {
             TextFormField(
               controller: _unitController,
               keyboardType: TextInputType.visiblePassword,
+              autofocus:
+                  widget.autoFocus && widget.initialAddress?.unit != null,
               style: kFieldTextStyle,
               decoration: InputDecoration(hintText: loc.addressUnitOptional),
               onChanged: (value) {
@@ -203,8 +207,8 @@ class _AddressFormState extends ConsumerState<AddressForm> {
                   loc.addressBlock,
                   style: kFieldTextStyle.copyWith(
                       color: _houseController.text.trim().isNotEmpty &&
-                          (street == null &&
-                              _blockController.text.trim().isEmpty)
+                              (street == null &&
+                                  _blockController.text.trim().isEmpty)
                           ? Colors.red
                           : null),
                 ),
