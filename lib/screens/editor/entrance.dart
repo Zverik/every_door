@@ -154,7 +154,6 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
       },
       child: SingleChildScrollView(
         child: SafeArea(
-          top: false,
           child: Padding(
             padding: EdgeInsets.only(
               top: 6.0,

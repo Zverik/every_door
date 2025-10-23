@@ -140,7 +140,6 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
       },
       child: SingleChildScrollView(
         child: SafeArea(
-          top: false,
           child: Padding(
             padding: EdgeInsets.only(
               top: 6.0,
