@@ -2,7 +2,7 @@
 
 ## 7.1
 
-_Unreleased_
+_Released on 2025-10-24_
 
 * The type chooser search also suggests popular documented keys without presets.
 * Caching icons in the type chooser for speed.
