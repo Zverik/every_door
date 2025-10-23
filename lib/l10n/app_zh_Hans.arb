@@ -1002,7 +1002,7 @@
   "@settingsLanguage": {
     "description": "Settings entry for changing the app language."
   },
-  "settingsCacheTiles": "下载地图瓦片",
+  "settingsCacheTiles": "下载瓦片",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
@@ -1355,5 +1355,27 @@
   "pluginsDisable": "禁用",
   "@pluginsDisable": {
     "description": "Button for deactivating a plugin."
+  },
+  "settingsCachesDownloadData": "下载地图数据",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadSatellite": "下载卫星影像",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "取消（{percent}%）",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  },
+  "settingsCachesDownloadMap": "下载地图瓦片",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
   }
 }
