@@ -1,5 +1,5 @@
 PODS:
-  - app_links (0.0.2):
+  - app_links (6.4.1):
     - Flutter
   - Flutter (1.0.0)
   - flutter_archive (0.0.1):
@@ -18,10 +18,10 @@ PODS:
   - listen_sharing_intent (1.9.2):
     - Flutter
   - MTBBarcodeScanner (5.0.11)
-  - ObjectBox (4.3.0)
+  - ObjectBox (4.4.1)
   - objectbox_flutter_libs (0.0.1):
     - Flutter
-    - ObjectBox (= 4.3.0)
+    - ObjectBox (= 4.4.1)
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -132,29 +132,29 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  app_links: 76b66b60cc809390ca1ad69bfd66b998d2387ac7
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_archive: ad8edfd7f7d1bb12058d05424ba93e27d9930efe
-  flutter_compass_v2: bdaac539c444ca34617debfa444b037c30be6e54
-  flutter_secure_storage_darwin: ce237a8775b39723566dc72571190a3769d70468
-  flutter_web_auth_2: c35a99b4799ad94b0dc140880f406cf59a4af866
-  geolocator_apple: ab36aa0e8b7d7a2d7639b3b4e48308394e8cef5e
-  listen_sharing_intent: fe0b9a59913cc124dd6cbd55cd9f881de5f75759
+  app_links: 585674be3c6661708e6cd794ab4f39fb9d8356f9
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_archive: cb3e0219e555897ba4b36f166baa1eca394890b9
+  flutter_compass_v2: f7704b078814b705e76ae2bd48fe48ae6cd067df
+  flutter_secure_storage_darwin: 12d2375c690785d97a4e586f15f11be5ae35d5b0
+  flutter_web_auth_2: 290b1d2e2e5759c81729e5f8644c48390a4ebc3c
+  geolocator_apple: 66b711889fd333205763b83c9dcf0a57a28c7afd
+  listen_sharing_intent: 74a842adcbcf7bedf7bbc938c749da9155141b9a
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
-  ObjectBox: 7760fa9072adcffe102a6adf4646ca84ba70ab6b
-  objectbox_flutter_libs: 4014e38f57250b074b99893ae84579aba8f02876
-  package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
-  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
-  qr_code_scanner_plus: 7e087021bc69873140e0754750eb87d867bed755
-  sensors_plus: 6a11ed0c2e1d0bd0b20b4029d3bad27d96e0c65b
-  share_plus: 50da8cb520a8f0f65671c6c6a99b3617ed10a58a
-  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
-  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
+  ObjectBox: 7da4aceb5013d041bfafdbc6d744a26918b09757
+  objectbox_flutter_libs: 7a6ea1d74b43f5d970e6571d1b79e4b181b33d81
+  package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  qr_code_scanner_plus: 3bfe4deb7f28996a63a2a580819d49dae80d5ed3
+  sensors_plus: 7229095999f30740798f0eeef5cd120357a8f4f2
+  share_plus: 8b6f8b3447e494cca5317c8c3073de39b3600d1f
+  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
+  sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
   sqlite3: 3c950dc86011117c307eb0b28c4a7bb449dce9f1
-  sqlite3_flutter_libs: 74334e3ef2dbdb7d37e50859bb45da43935779c4
-  url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
+  sqlite3_flutter_libs: e702a3214d49107c89b40bd2777c14057531d149
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   ZIPFoundation: b8c29ea7ae353b309bc810586181fd073cb3312c
 
-PODFILE CHECKSUM: e65a7a0b51cb7edd5ac2d79084d39bb19f4b7701
+PODFILE CHECKSUM: 58f3eec9248be2761573e056ff10923df2b407af
 
 COCOAPODS: 1.16.2
