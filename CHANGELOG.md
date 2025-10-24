@@ -12,6 +12,7 @@ _Released on 2025-10-24_
 * QR code scanner removes tracking parameters.
 * Added a button to edit an address in the editor pane.
 * Disabled editing addresses on buildings in Italy and France.
+* Following the Flutter framework, Every Door now requires at least Android 7.0 or iOS 13.
 
 ## 7.0
 
