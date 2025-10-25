@@ -751,7 +751,7 @@
   "@faqEntrance": {},
   "faqTaggingContent": "为什么编辑器中缺少一个对象？微地图绘制模式中何时显示这些白点？如何对对象进行排序？\n\n所有这些问题的答案都在 [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) 中。以下是您可以查看的内容：\n\n* 主标签的键顺序 —— `main_key.dart` 中的列表 `kMainKeys`。\n* 下载哪些对象 —— 类 `_EverythingKind`。\n* 什么被认为是设施 —— 类 `_AmenityKind`。\n* 哪些点会以何种方式捕捉 —— 类 `ElementKindImpl` 逻辑（请参阅相关子类）。\n* 当微地图绘制对象不完整时 —— 类 `_NeedsMoreInfo`。",
   "@faqTaggingContent": {},
-  "faqFloorsContent": "不。第一个是'addr:floor=3'的标签填充。即楼层数，因为它印在导航上并且常用。第二个没有这个标签，但有'level=3'。该数字是从零到'building:levels - 1'的连续楼层号。也就是说，在三层楼的建筑中，'addr:floor'值取决于哪个国家，但'level'始终都是0，1、2。\n\n以下是编辑器中的符号与这些标记的关系：\n\n* '2'： 'addr:floor=2' 和非空值 'level=*'。\n* '4/'： 'addr:floor=4'，但没有'level'标签。\n* '/1'： 'level=1'，但没有 'addr:floor' 标签。\n* '1/0'： 'addr:floor=1' + 'level=0' （附近有一个对象：具有相同的 'addr:floor'，但'level'不同，反之亦然）。",
+  "faqFloorsContent": "不是。前者填写了 `addr:floor=3` 标签，这表示的是在导航系统中显示、以及人们日常使用的楼层编号；而后者没有这个标签，而是使用了 `level=3`。这个数字是从零开始的顺序楼层编号，范围是从 0 到 `building:levels - 1`。也就是说，在一栋三层建筑中，`addr:floor` 的值可能因国家而异，但 `level` 总是 0、1 或 2。\n\n以下是在编辑器中标注方式与这些标签的对应关系：\n\n* `2`：表示有 `addr:floor=2` 且 `level=*` 也已填写。\n* `4/`：表示有 `addr:floor=4`，但没有 `level` 标签。\n* `/1`：表示有 `level=1`，但没有 `addr:floor` 标签。\n* `1/0`：表示 `addr:floor=1` 和 `level=0`（且附近还有其他对象：具有相同的 `addr:floor` 但不同的 `level`，或相反的情况）。",
   "@faqFloorsContent": {},
   "faqChangeType": "如何更改便利设施的类型？",
   "@faqChangeType": {},
