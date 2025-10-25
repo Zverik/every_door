@@ -1132,7 +1132,7 @@
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
   },
-  "faqYellowContent": "入口模式中的非黄色标签和微映射模式中的白点意味着这些元素缺乏一些重要的属性。比如：\n\n* 建筑物应该有层数。\n* 入口应该有类型，对于楼梯，应该有平面范围。\n* 长椅应该有材料和靠背。\n* 树木应该有叶子的类型和周期。",
+  "faqYellowContent": "入口模式中的非黄色标签和微地图模式中的白点意味着这些元素缺乏一些重要的属性。比如：\n\n* 建筑物应该有层数。\n* 入口应该有类型，对于楼梯，应该有平面范围。\n* 长椅应该有材料和靠背。\n* 树木应该有叶子的类型和落叶周期。",
   "@faqYellowContent": {},
   "addressBlock": "封锁",
   "@addressBlock": {
@@ -1377,5 +1377,29 @@
   "settingsCachesDownloadMap": "下载地图瓦片",
   "@settingsCachesDownloadMap": {
     "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "mapStraight": "转至北方朝上",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "settingsCachesClearRaster": "清除已下载的位图瓦片",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "清除已渲染的矢量瓦片",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "清除已下载的矢量瓦片",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "清除手动下载的瓦片",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "选择要下载的瓦片",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
   }
 }
