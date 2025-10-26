@@ -1,5 +1,5 @@
 {
-  "loadingPresets": "Načítání přednastavení…",
+  "loadingPresets": "Načítání předvoleb…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
   },
@@ -180,7 +180,7 @@
   "@editorMoreFields": {
     "description": "Title of a additional fields group in editor."
   },
-  "editorLoadingPreset": "Načítání přednastavení…",
+  "editorLoadingPreset": "Načítání předvolby…",
   "@editorLoadingPreset": {
     "description": "Message shown when loading a preset in the editor."
   },
@@ -246,7 +246,7 @@
   "@tagsShare": {
     "description": "Tooltip for the sharing button on the tags panel."
   },
-  "tagsUrlCopied": "URL adresa zkopírována do schránky",
+  "tagsUrlCopied": "Adresa URL zkopírována do schránky",
   "@tagsUrlCopied": {
     "description": "Popup message when the link to the object was copied to the clipboard."
   },
@@ -772,7 +772,7 @@
   "@faqLetters": {},
   "faqFloors": "Jsou podlaží ‚3‘ a ‚/3‘ stejná?",
   "@faqFloors": {},
-  "faqFloorsContent": "Ne. První z nich má vyplněný štítek `addr:floor=3`. To je podlaha, jak je vytištěna v navigaci a běžně se používá. Druhý tento štítek nemá, ale má `level=3`. Toto číslo je pořadové číslo patra od nuly do `building:levels - 1`. To znamená, že v třípatrové budově závisí hodnota `addr:floor` na zemi, ale `level` je vždy 0, 1 nebo 2.\n\nZde je uvedeno, jak se zápis v editoru vztahoval k těmto značkám:\n\n* `2`: `addr:floor=2` a neprázdné `level=*`.\n* `4/`: `addr:floor=4`, ale není zde značka `level`.\n* `/1`: `level=1`, ale není zde značka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (a v blízkosti je objekt: se stejným `addr:floor`, ale jiným `level`, nebo naopak).",
+  "faqFloorsContent": "Ne. První z nich má vyplněnou značku `addr:floor=3`. To je podlaží tak, jak je zobrazeno v navigaci a běžně se používá. Druhý tuto značku nemá, ale má `level=3`. Toto číslo je pořadové číslo patra od nuly do `building:levels - 1`. To znamená, že v třípatrové budově závisí hodnota `addr:floor` na zemi, ale `level` je vždy 0, 1 nebo 2.\n\nZde je uvedeno, jak se zápis v editoru vztahoval k těmto značkám:\n\n* `2`: `addr:floor=2` a neprázdné `level=*`.\n* `4/`: `addr:floor=4`, ale není zde značka `level`.\n* `/1`: `level=1`, ale není zde značka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (a v blízkosti je objekt: se stejným `addr:floor`, ale jiným `level`, nebo naopak).",
   "@faqFloorsContent": {},
   "faqChangeTypeContent": "Klepněte na název editoru, kde je napsán typ.",
   "@faqChangeTypeContent": {},
@@ -811,7 +811,7 @@
       }
     }
   },
-  "tagsAddTag": "Přidat štítek",
+  "tagsAddTag": "Přidat značku",
   "@tagsAddTag": {
     "description": "Tags panel button for adding a new tag."
   },
@@ -839,7 +839,7 @@
   "@versionsLocalChanges": {
     "description": "Card header for the local changes diff."
   },
-  "versionsNoTagChanges": "Žádné změny štítků",
+  "versionsNoTagChanges": "Žádné změny značek",
   "@versionsNoTagChanges": {
     "description": "Card body for when no tag changes occurred in this version."
   },
@@ -1076,7 +1076,7 @@
   "@faqYellowContent": {},
   "faqYellow": "Proč jsou některá čísla popisná žlutá?",
   "@faqYellow": {},
-  "warningWrongTag": "Nesprávný štítek: {tag}",
+  "warningWrongTag": "Nesprávná značka: {tag}",
   "@warningWrongTag": {
     "description": "Warning message for tags like shop=yes and amenity=no.",
     "placeholders": {
@@ -1107,7 +1107,7 @@
       }
     }
   },
-  "hashtagsConfirm": "Potvrzení štítků při nahrávání",
+  "hashtagsConfirm": "Potvrzení značek při nahrávání",
   "@hashtagsConfirm": {
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
