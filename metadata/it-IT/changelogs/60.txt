@@ -1,0 +1,3 @@
+* Suggerimento di tag popolari senza preset corrispondenti.
+* Caching icone dei preset.
+* Miglioramento nella modifica degli indirizzi.
