@@ -1,0 +1,4 @@
+* Lisandus viimati käidud tee vaade.
+* GeoScribbles'i joonistus on vakimisi lukus.
+* QR-koodi skanner veebisaidi välja jaoks.
+* Asukohta uuendatakse nüüd kord sekundis.
