@@ -1,5 +1,12 @@
 # Every Door App Change Log
 
+## 8.0
+
+_Unreleased_
+
+* Added wrapping for the type chooser.
+* When an address/floor filter is active, newly created amenities use its values.
+
 ## 7.1
 
 _Released on 2025-10-24_

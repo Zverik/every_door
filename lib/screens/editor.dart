@@ -6,10 +6,12 @@ import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/text.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
+import 'package:every_door/models/floor.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/overlays.dart';
+import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
@@ -73,6 +75,16 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     amenity.addListener(onAmenityChange);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (widget.amenity == null &&
+          ElementKind.amenity.matchesChange(amenity)) {
+        // For new amenities, add a floor and address from the filter.
+        final filter = ref.read(poiFilterProvider);
+        filter.address?.setTags(amenity);
+        if (filter.floor != null) {
+          MultiFloor([filter.floor!]).setTags(amenity);
+        }
+      }
+
       final locale = Localizations.localeOf(context);
       preset = widget.preset;
       updatePreset(locale, preset?.type);

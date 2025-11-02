@@ -70,12 +70,18 @@ class Preset {
   factory Preset.poi(Map<String, dynamic> row) {
     final key = row['key'] as String;
     final value = row['value'] as String;
+    final name = value
+        .split('_')
+        .map((word) =>
+            '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}')
+        .join(' ');
+
     return Preset(
       id: 'taginfo $key=$value',
       fields: const [],
       onArea: true,
       addTags: {key: value},
-      name: value.replaceAll('_', ' '),
+      name: name,
       icon: null,
       type: PresetType.taginfo,
     );

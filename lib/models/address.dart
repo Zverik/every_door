@@ -1,6 +1,10 @@
 import 'package:every_door/models/amenity.dart';
 import 'package:latlong2/latlong.dart';
 
+/// A model for a unique address. Contains most of the parts listed on
+/// https://wiki.openstreetmap.org/wiki/Key:addr:*#Commonly_used_subkeys
+/// It tries to deduplicate clashing tags, and also not to break
+/// address tags already on the object.
 class StreetAddress {
   /// Location is just informative, it doesn't participate in comparison.
   final LatLng? location;
@@ -12,6 +16,8 @@ class StreetAddress {
   final String? blockNumber;
   final String? place;
   final String? city;
+
+  /// The key part before the semicolon, "addr" by default.
   final String base;
 
   const StreetAddress({
@@ -27,8 +33,10 @@ class StreetAddress {
     this.base = "addr",
   });
 
+  /// An address without any information.
   static const empty = StreetAddress();
 
+  /// Allows changing the common key part without losing any of the values.
   StreetAddress withBase(String base) => StreetAddress(
         housenumber: housenumber,
         housename: housename,
@@ -42,6 +50,7 @@ class StreetAddress {
         base: base,
       );
 
+  /// Parses object tags into a [StreetAddress] instance.
   factory StreetAddress.fromTags(Map<String, String> tags,
       {LatLng? location, String base = "addr"}) {
     return StreetAddress(
@@ -59,6 +68,8 @@ class StreetAddress {
     );
   }
 
+  /// An empty address is the one that doesn't contain a house name or number,
+  /// and a street or any of the higher-level parts.
   bool get isEmpty =>
       (housenumber == null && housename == null) ||
       (street == null &&
@@ -68,6 +79,9 @@ class StreetAddress {
           blockNumber == null);
   bool get isNotEmpty => !isEmpty;
 
+  /// Applies address tags onto the [element]. Does not erase
+  /// any of the address tags though. An empty address would not clear
+  /// address tags.
   void setTags(OsmChange element) {
     if (isEmpty) return;
     if (housenumber != null)
@@ -85,6 +99,8 @@ class StreetAddress {
       element['$base:city'] = city;
   }
 
+  /// Applies address tags onto the [element], removing any tags
+  /// that this address does not have. Will keep the [city] though.
   void forceTags(OsmChange element) {
     element['$base:housenumber'] = housenumber;
     element['$base:housename'] = housename;
@@ -97,6 +113,7 @@ class StreetAddress {
     if (city != null) element['$base:city'] = city;
   }
 
+  /// Removes address tags from the [element].
   static void clearTags(OsmChange element, {String base = "addr"}) {
     for (final key in [
       'housenumber',

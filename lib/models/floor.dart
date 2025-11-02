@@ -1,5 +1,10 @@
 import 'amenity.dart';
 
+/// Depicts a floor on which an object is located. Built from two values:
+/// a numeric [level] (from level=* tag, starts from 0), and a textual
+/// [floor] (from addr:floor=*, a human-understandable value).
+///
+/// You might want to use [MultiFloor] to manage floor tags.
 class Floor implements Comparable<Floor> {
   final double? level;
   final String? floor;
@@ -89,6 +94,9 @@ class Floor implements Comparable<Floor> {
   }
 }
 
+/// A class to manage a list of floors as denoted by tags on an object.
+/// Use this class to parse and apply floor tags, instead of a single [Floor]
+/// instance.
 class MultiFloor {
   List<Floor> floors;
 

@@ -258,19 +258,23 @@ class PresetTile extends StatelessWidget {
               padding: const EdgeInsets.only(right: 8.0),
               child: preset.icon!.getWidget(icon: false, size: 24.0),
             ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                preset.name,
-                style: TextStyle(fontSize: 16.0),
-              ),
-              SizedBox(height: 4.0),
-              Text(
-                preset.subtitle,
-                style: TextStyle(fontSize: 14.0, color: Colors.grey.shade600),
-              ),
-            ],
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  preset.name,
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                SizedBox(height: 4.0),
+                Text(
+                  preset.subtitle,
+                  style: TextStyle(fontSize: 14.0, color: Colors.grey.shade600),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
           ),
         ],
       ),
