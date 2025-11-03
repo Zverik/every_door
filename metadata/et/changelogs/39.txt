@@ -1,0 +1,3 @@
+* Kirjelduste suur- ja väiketähtede vigade parandus.
+* Parandasime olukorra, kus kollased teenuste hoiatused polnud näha.
+* Parandasime poodide ja hoonete märkimise kasutuselt eemaldatuks (disused:).

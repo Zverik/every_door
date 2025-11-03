@@ -1,0 +1,3 @@
+* Uuendasime eelseadistusi ja ortofotosid.
+* Parandasime kadunud märkmetega ja topeltteenustega seotud vead.
+* Lisandusid kvartalite numbrid Jaapani jaoks.
