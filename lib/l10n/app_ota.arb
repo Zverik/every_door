@@ -1,1 +1,18 @@
-{}
+{
+  "loadingStart": "باشلادیلییور…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  },
+  "tileNo": "خایر",
+  "@tileNo": {
+    "description": "Prefix for a list of icons for attributes missing in amenity."
+  },
+  "legendOther": "باشقە",
+  "@legendOther": {
+    "description": "Legend item for all other types."
+  },
+  "filterEmpty": "بوش",
+  "@filterEmpty": {
+    "description": "Filter pane, an option in the lists to show only amenities with empty floor or address."
+  }
+}
