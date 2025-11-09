@@ -1,0 +1,3 @@
+* Corrette maiuscole per le descrizioni.
+* Corretti avvisi di amenity non mostrati.
+* Correzione segnalazione di un negozio su edificio come in disuso.
