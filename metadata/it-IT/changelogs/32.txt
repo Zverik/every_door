@@ -1,0 +1,4 @@
+* Puoi ridurre lo zoom al massimo.
+* I livelli di zoom sono conservati tra le modalità.
+* Editor di direzione per panchine e telecamere.
+* Colori stabilizzati nella modalità micromapping.

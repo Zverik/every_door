@@ -1,0 +1,4 @@
+* Loodetavasti õnnestus GPS-i vead parandada.
+* Uuenes Bingi ortofotode võti ja Maxar sai eemaldatud.
+* Uued seadistused kaardimaksete kirjeldamiseks.
+* Nutikam viis muutmisel suurtähtedeks.

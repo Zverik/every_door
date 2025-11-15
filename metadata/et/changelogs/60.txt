@@ -1,0 +1,3 @@
+* Populaarsete siltide soovitamine ilma vastavate eelseadistusteta.
+* Eelseadistatud ikoonide puhveradmine.
+* Senisest parem aadressi muutmisvaade.

@@ -1,0 +1,3 @@
+* Foreslår populære tags uden matchende forudindstillinger.
+* Caching af forudindstillede ikoner.
+* Forbedringer af adresseredigering.

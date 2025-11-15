@@ -1,0 +1,4 @@
+* Modalità note scribble.
+* Giorni di settimana in una lingua locale.
+* Suggerimenti per i tag dei piani.
+* Aggiornamento preset e immagini.

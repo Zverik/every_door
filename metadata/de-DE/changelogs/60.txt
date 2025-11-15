@@ -1,0 +1,3 @@
+* Vorschlagen beliebter Tags ohne passende Voreinstellungen.
+* Zwischenspeichern von Voreinstellungs-Symbolen.
+* Verbesserungen bei der Adressbearbeitung.

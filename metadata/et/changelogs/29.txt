@@ -1,0 +1,4 @@
+* Muudatuskomplekti teemaviited.
+* Kinnituse välp on nüüd pikenenud 2 kuuni.
+* Uue huvipunkti lisamisel on nime väli esimesena fookuses.
+* Hoiatused, kui teenustel on „Vajab parandamist“ silt või nad on liiga vanad.

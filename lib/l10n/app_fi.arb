@@ -422,7 +422,7 @@
   "@settingsBackground": {
     "description": "Settings entry for choosing background satellite imagery."
   },
-  "settingsCacheTiles": "Lataa karttatiilet",
+  "settingsCacheTiles": "Lataa karttatiiliä",
   "@settingsCacheTiles": {
     "description": "Tooltip for a button to download and cache tiles for imageries."
   },
@@ -617,7 +617,7 @@
   "@accountFieldPassword": {
     "description": "Label for the OSM password."
   },
-  "accountChangesets": "Muutoskokoelmat",
+  "accountChangesets": "Muutoskokoelmia",
   "@accountChangesets": {
     "description": "Label for the number of changesets a user has uploaded."
   },
@@ -1355,5 +1355,51 @@
   "pluginsSeeLogs": "Näytä lokit",
   "@pluginsSeeLogs": {
     "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "mapStraight": "Kierrä takaisin",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "settingsCachesClearRaster": "Tyhjennä rasteritiilien välimuistit",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "Tyhjennä piirretyt vektoritiilet",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Tyhjennä vektoritiilien välimuistit",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "Tyhjennä käsin ladatut tiedostot",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Valitse ladattavat tiilet",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "Lataa data",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "Lataa karttatiilet",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "Lataa satelliittikuvat",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Peru ({percent} %)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
   }
 }
