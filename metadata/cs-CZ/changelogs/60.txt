@@ -1,0 +1,3 @@
+* Navrhování populárních značek bez odpovídajících předvoleb
+* Ukládání ikon předvoleb do mezipaměti.
+* Vylepšení úpravy adres.

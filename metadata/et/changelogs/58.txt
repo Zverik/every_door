@@ -1,0 +1,4 @@
+* Vektorpaanid on kasutusel kõikjal.
+* Võimalus andmeid ja pilte laadida alla tööks valalsrežiimis.
+* Lisandus kompassi nupp.
+* Eelseadistustel on nüüd ikoonid.

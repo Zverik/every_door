@@ -1,0 +1,4 @@
+* Speriamo di aver risolto i problemi GPS.
+* Aggiornato chiave delle immagini Bing e rimosso Maxar.
+* Nuove impostazioni di pagamento con carta.
+* Maiuscole dei nomi più intelligenti.

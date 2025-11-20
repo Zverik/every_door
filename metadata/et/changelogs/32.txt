@@ -1,0 +1,4 @@
+* Nüüd saad kasutada maksimaalset suumi.
+* Suumid jäävade režiimide vahetamisel meelde.
+* Pinkide ja kaamerate suuna muutmise võimalus.
+* Stabiilsemad värvid mikrokaardistamise vaates.

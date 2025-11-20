@@ -1,0 +1,4 @@
+* Märkmete kritseldamise režiim.
+* Nädalapäevad kohalikus keeles.
+* Soovituse korruste siltide lisamiseks.
+* Eelseadistuste ja ortofotode uuendused.
