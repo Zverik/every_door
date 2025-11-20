@@ -34,6 +34,19 @@ class PluginPresetsProvider {
 
   void addPreset(String key, Map<String, dynamic> data, Plugin plugin,
       PluginLocalizationsBranch loc) {
+    MapEntry<String, String?> parseTagValue(String key, dynamic raw) {
+      String? value;
+      if (raw == null)
+        value = null;
+      else if (raw is String)
+        value = raw == '*' ? null : raw;
+      else if (raw is bool)
+        value = raw ? 'yes' : 'no';
+      else
+        value = raw.toString();
+      return MapEntry(key, value);
+    }
+
     final id =
         key; // '$key-${plugin.id}' does not work, since referenced in plugins
     if (!data.containsKey('name'))
@@ -42,17 +55,15 @@ class PluginPresetsProvider {
       throw Exception('Preset $key should have tags listed');
 
     final String name = data['name'];
-    final Map<String, String?> tags = (data['tags'] as Map<String, dynamic>)
-        .map((k, v) => MapEntry(k, v.toString()))
-        .map((k, v) => MapEntry(k, v == '*' ? null : v));
+    final Map<String, String?> tags =
+        (data['tags'] as Map<String, dynamic>).map(parseTagValue);
     final Map<String, String> addTags =
         ((data['addTags'] ?? data['tags']) as Map<String, dynamic>)
-            .map((k, v) => MapEntry(k, v.toString()));
+            .map(parseTagValue)
+            .cast();
     addTags.removeWhere((k, v) => v == '*');
     final Map<String, String?>? removeTags =
-        (data['removeTags'] as Map<String, dynamic>?)
-            ?.map((k, v) => MapEntry(k, v.toString()))
-            .map((k, v) => MapEntry(k, v == '*' ? null : v));
+        (data['removeTags'] as Map<String, dynamic>?)?.map(parseTagValue);
     final onArea = (data['area'] as bool?) ?? true;
     final noStandard = (data['standard'] as bool?) == false;
 
@@ -352,8 +363,7 @@ class FieldTemplate {
     final newOptions = List.of(options);
     if (locale != null) {
       for (final k in ['label', 'placeholder']) {
-        if (copy.containsKey(k))
-          copy[k] = localizations.translate(locale, k);
+        if (copy.containsKey(k)) copy[k] = localizations.translate(locale, k);
       }
       if (options.isNotEmpty) {
         final labels = localizations.translateList(locale, 'labels');

@@ -1,4 +1,3 @@
-import 'package:country_coder/country_coder.dart';
 import 'package:every_door/helpers/in_countries.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
