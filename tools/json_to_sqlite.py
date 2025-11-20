@@ -116,7 +116,8 @@ def open_or_download(git_path: Optional[str], filename: str, from_nsi: bool = Fa
         # Download file
         RAW_GITHUB = 'https://raw.githubusercontent.com/'
         if from_nsi:
-            BASE_URL = RAW_GITHUB + 'osmlab/name-suggestion-index/main/dist/'
+            # BASE_URL = RAW_GITHUB + 'osmlab/name-suggestion-index/main/dist/'
+            BASE_URL = 'https://cdn.jsdelivr.net/npm/name-suggestion-index@latest/dist/json/'
         else:
             BASE_URL = RAW_GITHUB + 'openstreetmap/id-tagging-schema/main/dist/'
         resp = requests.get(BASE_URL + filename)
