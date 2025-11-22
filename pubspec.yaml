@@ -80,6 +80,10 @@ dependency_overrides:
     git:
       url: https://github.com/Zverik/flutter_dropdown_alert.git
       ref: master
+  flutter_eval:
+    git:
+      url: https://github.com/Zverik/flutter_eval.git
+      ref: fix_build_yaml
 # Uncomment this for publishing on F-Droid
 #f  geolocator_android:
 #f    git:

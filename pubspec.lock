@@ -506,10 +506,11 @@ packages:
   flutter_eval:
     dependency: "direct main"
     description:
-      name: flutter_eval
-      sha256: "68f7a2a9bb9cf53c7f67684a6f693c0b4399ea6026722ff1f27c54e3da53b33b"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: fix_build_yaml
+      resolved-ref: "6cda9491f2d4006d30c7e781f83912af5fe9c8c8"
+      url: "https://github.com/Zverik/flutter_eval.git"
+    source: git
     version: "0.8.1"
   flutter_highlight:
     dependency: transitive
