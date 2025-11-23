@@ -1,0 +1,3 @@
+* Aggiunte barriere per biciclette e feature di Natale.
+* Supporto ai link "geo:".
+* Nuova icona adattativa.
