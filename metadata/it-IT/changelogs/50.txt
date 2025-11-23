@@ -1,0 +1,4 @@
+* Corretti conflitti e livelli di zoom.
+* Corretta modifica a latitudini estreme.
+* Aggiunti livelli immagini cadastre.
+* Traduzioni in lingua ebraica e tamil.
