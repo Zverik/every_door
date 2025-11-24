@@ -38,7 +38,7 @@ echo 'Preparing NSI features'
 if [ -n "$GIT_PATH" ]; then
   cp "$GIT_PATH/name-suggestion-index/dist/featureCollection.min.json" nsi_fc.json
 else
-  curl -s 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/featureCollection.min.json' > nsi_fc.json
+  curl -s 'https://cdn.jsdelivr.net/npm/name-suggestion-index@latest/dist/json/featureCollection.min.json' > nsi_fc.json
 fi
 echo "const String nsiFeaturesRaw = '''" > "$NSI_FEATURES"
 cat nsi_fc.json >> "$NSI_FEATURES"

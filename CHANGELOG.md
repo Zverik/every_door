@@ -4,7 +4,7 @@
 
 _Unreleased_
 
-* Added wrapping for the type chooser.
+* Added line wrapping for the type chooser.
 * When an address/floor filter is active, newly created amenities use its values.
 
 ## 7.1

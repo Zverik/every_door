@@ -241,6 +241,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         capitalize: kTextLowercase.contains(key)
             ? TextFieldCapitalize.no
             : TextFieldCapitalize.sentence,
+        showClearButton: typ == 'colour',
       );
     case 'number':
     case 'roadspeed':
@@ -251,6 +252,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         prerequisite: prerequisite,
         locationSet: locationSet,
         keyboardType: TextInputType.number,
+        showClearButton: true,
       );
     case 'tel':
       return PhonePresetField(
