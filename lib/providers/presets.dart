@@ -1,7 +1,6 @@
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/combo.dart';
-import 'package:every_door/fields/name.dart';
 import 'package:every_door/fields/payment.dart';
 import 'package:every_door/fields/room.dart';
 import 'package:every_door/fields/text.dart';
@@ -528,7 +527,8 @@ class PresetProvider {
     if (preset.type == PresetType.taginfo) {
       final fields = <String>[];
       if (ElementKind.amenity.matchesTags(preset.addTags)) {
-        fields.addAll(['name', 'operator', 'opening_hours', 'phone', 'website']);
+        fields
+            .addAll(['name', 'operator', 'opening_hours', 'phone', 'website']);
       } else {
         fields.addAll(['name', 'operator', 'material', 'height', 'direction']);
       }
@@ -604,6 +604,7 @@ class PresetProvider {
         moreFields.add(field);
       }
     }
+    sortFields(moreFields);
     return preset.withFields(fields, moreFields);
   }
 
@@ -721,6 +722,33 @@ class PresetProvider {
     final result = fields[fieldName];
     if (result == null) throw ArgumentError('Missing field $fieldName');
     return result;
+  }
+
+  static final _kPreferredFields = [
+    'website',
+    'description',
+    'fixme',
+    'note',
+    'start_date',
+    'short_name',
+    'loc_name',
+    'alt_name',
+    'reg_name',
+    'official_name',
+    'nat_name',
+    'name',
+    'wikimedia_commons',
+    'panoramax',
+    'mapillary',
+    'image',
+    'ele',
+    'ref:linz:place_id',
+  ].asMap().map((i, key) => MapEntry(key, i));
+
+  void sortFields(List<PresetField> fields) {
+    mergeSort(fields,
+        compare: (a, b) => (_kPreferredFields[a.key] ?? 100)
+            .compareTo(_kPreferredFields[b.key] ?? 100));
   }
 
   void clearFieldCache() {

@@ -6,6 +6,7 @@ _Unreleased_
 
 * Added line wrapping for the type chooser.
 * When an address/floor filter is active, newly created amenities use its values.
+* Additional fields are partly sorted for easier lookup (thanks @deevroman).
 
 ## 7.1
 
