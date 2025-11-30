@@ -98,7 +98,7 @@ class OsmDataDownloadNotifier extends Notifier<DownloadingState> {
     _needStop = false;
     state = DownloadingState(total: boundsList.length);
     final dataProvider = ref.read(osmDataProvider);
-    final noteProvider = ref.read(notesProvider);
+    final noteProvider = ref.read(notesProvider.notifier);
     int count = 0;
     try {
       for (final bounds in boundsList) {

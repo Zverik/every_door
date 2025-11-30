@@ -1,41 +1,50 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:shared_preferences/shared_preferences.dart';
 
 final effectiveLocationProvider =
-    StateNotifierProvider<EffectiveLocationController, LatLng>(
-        (ref) => EffectiveLocationController(ref));
-final zoomProvider = StateProvider<double>((ref) => kInitialZoom);
-final rotationProvider = StateProvider<double>((ref) => 0.0);
+    NotifierProvider<EffectiveLocationController, LatLng>(
+        EffectiveLocationController.new);
 
-class EffectiveLocationController extends StateNotifier<LatLng> {
+final zoomProvider = NotifierProvider<ZoomNotifier, double>(ZoomNotifier.new);
+
+final rotationProvider =
+    NotifierProvider<RotationNotifier, double>(RotationNotifier.new);
+
+class ZoomNotifier extends Notifier<double> {
+  @override
+  double build() => kInitialZoom;
+}
+
+class RotationNotifier extends Notifier<double> {
+  @override
+  double build() => 0.0;
+}
+
+class EffectiveLocationController extends Notifier<LatLng> {
   static const kSavedLocation = 'last_location';
 
-  final Ref _ref;
-
-  EffectiveLocationController(this._ref)
-      : super(LatLng(kDefaultLocation[0], kDefaultLocation[1])) {
-    _restore();
-  }
-
-  Future<void> _restore() async {
-    final geoPos = _ref.read(geolocationProvider);
+  @override
+  LatLng build() {
+    LatLng location = LatLng(kDefaultLocation[0], kDefaultLocation[1]);
+    final geoPos = ref.read(geolocationProvider);
     if (geoPos != null) {
-      state = geoPos;
+      location = geoPos;
     } else {
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = ref.read(sharedPrefsProvider).requireValue;
       final loc = prefs.getStringList(kSavedLocation);
       if (loc != null) {
-        state = LatLng(double.parse(loc[0]), double.parse(loc[1]));
+        location = LatLng(double.parse(loc[0]), double.parse(loc[1]));
       }
     }
+    return location;
   }
 
   Future<void> set(LatLng location) async {
     state = location;
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     await prefs.setStringList(kSavedLocation,
         [location.latitude.toString(), location.longitude.toString()]);
   }

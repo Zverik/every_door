@@ -16,7 +16,7 @@ import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PluginUnderConstruction extends EveryDoorPlugin {
-  static const kEnabled = false;
+  static const kEnabled = true;
   static const kEndpoint = 'panoramax.openstreetmap.fr';
   bool apiFound = false;
 
@@ -128,6 +128,22 @@ class PluginUnderConstruction extends EveryDoorPlugin {
     }
     log.info('Downloaded ${result.length} photos');
     return result;
+  }
+
+  @override
+  Widget buildSettingsPane(EveryDoorApp app, BuildContext context) {
+    return Column(
+      children: [
+        SwitchListTile(
+          title: Text('Better icon'),
+          value: app.preferences.getBool('better_icon') ?? false,
+          onChanged: (bool value) async {
+            await app.preferences.setBool('better_icon', value);
+            app.repaint();
+          },
+        ),
+      ],
+    );
   }
 }
 

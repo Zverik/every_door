@@ -18,14 +18,16 @@ import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/providers/plugin_repo.dart';
 import 'package:every_door/providers/shared_file.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
+import 'package:every_door/screens/modes/definitions/classic.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_map_geojson2/flutter_map_geojson2.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:mbtiles/mbtiles.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final pluginManagerProvider =
     NotifierProvider<PluginManager, Set<String>>(PluginManager.new);
@@ -57,7 +59,7 @@ class PluginManager extends Notifier<Set<String>> {
 
   Future<void> loadStateAndEnable() async {
     // Read enabled list.
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     final enabledList = prefs.getStringList(_kEnabledKey);
     if (enabledList == null) return;
 
@@ -76,13 +78,18 @@ class PluginManager extends Notifier<Set<String>> {
     ref.read(sharedFileProvider).checkInitialMedia();
   }
 
+  EveryDoorApp createContext(
+          Plugin plugin, BuildContext context, Function() onRepaint) =>
+      EveryDoorApp(
+          plugin: plugin, ref: ref, context: context, onRepaint: onRepaint);
+
   List<Plugin> _getActivePlugins() => ref
       .read(pluginRepositoryProvider)
       .where((p) => state.contains(p.id))
       .toList();
 
   Future<void> _saveEnabled() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     final enabledList = state.toList();
     enabledList.sort();
     _logger.info('Saving enabled plugins: $enabledList');
@@ -295,9 +302,7 @@ class PluginManager extends Notifier<Set<String>> {
 
     final overlayData = plugin.data['overlays'];
     if (overlayData != null) {
-      ref
-          .read(overlayImageryProvider.notifier)
-          .removePluginLayers(plugin.id);
+      ref.read(overlayImageryProvider.notifier).removePluginLayers(plugin.id);
     }
   }
 

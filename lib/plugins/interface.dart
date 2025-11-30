@@ -25,24 +25,24 @@ class EveryDoorApp {
   final Ref _ref;
   final BuildContext? context;
   final Plugin plugin;
+  final Function()? onRepaint;
 
   final PluginPreferences preferences;
   final PluginProviders providers;
   final PluginEvents events;
   final Logger logger;
 
-  EveryDoorApp({required this.plugin, required Ref ref, this.context})
+  EveryDoorApp(
+      {required this.plugin, required Ref ref, this.context, this.onRepaint})
       : _ref = ref,
-        preferences = PluginPreferences(plugin.id),
+        preferences = PluginPreferences(plugin.id, ref),
         providers = PluginProviders(ref),
         events = PluginEvents(plugin.id, ref),
         logger = Logger("Plugin/${plugin.id}");
 
   Future<Database> get database => _ref.read(pluginDatabaseProvider).database;
 
-  void repaint() {
-    // TODO: how?
-  }
+  void repaint() => onRepaint?.call();
 
   void addOverlay(Imagery imagery) {
     if (!imagery.overlay) {

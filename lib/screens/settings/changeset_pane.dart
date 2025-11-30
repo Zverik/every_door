@@ -20,12 +20,12 @@ class _ChangesetPaneState extends ConsumerState<ConsumerStatefulWidget> {
   void initState() {
     super.initState();
     _controller = TextEditingController(text: ref
-        .read(changesetTagsProvider)
+        .read(changesetTagsProvider.notifier)
         .getHashtags(clearHashes: true));
   }
 
   void _saveHashtags(String value) {
-    ref.read(changesetTagsProvider).saveHashtags(value);
+    ref.read(changesetTagsProvider.notifier).saveHashtags(value);
   }
 
   @override

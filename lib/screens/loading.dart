@@ -14,6 +14,7 @@ import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/plugin_manager.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/providers/shared_file.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:every_door/screens/browser.dart';
 import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoadingPage extends ConsumerStatefulWidget {
   @override
@@ -44,6 +44,10 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     // Start loading countries in a background thread.
     compute(CountryCoder.prepareData, null)
         .then((value) => CountryCoder.instance.load(value));
+
+    // Initialize the global shared preferences.
+    await migrateSharedPreferences();
+    await ref.read(sharedPrefsProvider.future);
 
     // Load login name.
     ref.read(authProvider);
@@ -116,7 +120,7 @@ class _LoadingPageState extends ConsumerState<LoadingPage> {
     final needSizeAlert =
         ref.read(osmDataProvider).length >= kMinElementsForWarning;
     if (needSizeAlert) {
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = ref.read(sharedPrefsProvider).requireValue;
       if (DateTime.now().day != prefs.getInt(kPrefLastSizeWarning)) {
         await prefs.setInt(kPrefLastSizeWarning, DateTime.now().day);
         AlertController.show(loc.loadingTooMuchDataTitle,

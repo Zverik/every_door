@@ -33,7 +33,7 @@ class UploaderProvider {
     final loc = AppLocalizations.of(context)!;
     try {
       int dataCount = await _ref.read(osmApiProvider).uploadChanges(true);
-      int noteCount = await _ref.read(notesProvider).uploadNotes();
+      int noteCount = await _ref.read(notesProvider.notifier).uploadNotes();
       await uploadPluginData();
       _ref.read(needMapUpdateProvider).trigger();
       // TODO: separate note count in the message?
@@ -83,7 +83,7 @@ class UploaderProvider {
     _ref.read(presetProvider).cacheComboOptions();
 
     try {
-      await _ref.read(notesProvider).downloadNotes(location);
+      await _ref.read(notesProvider.notifier).downloadNotes(location);
     } on Exception catch (e) {
       // TODO: message about notes
       AlertController.show(

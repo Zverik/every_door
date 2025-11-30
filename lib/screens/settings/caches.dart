@@ -124,7 +124,7 @@ class _CachesPageState extends ConsumerState<CachesPage> {
               if (purgeAll) {
                 // Also delete unmodified notes.
                 count +=
-                    await ref.read(notesProvider).purgeNotes(DateTime.now());
+                    await ref.read(notesProvider.notifier).purgeNotes(DateTime.now());
                 AlertController.show(loc.settingsPurgedAllTitle,
                     loc.settingsPurgedMessage(count), TypeAlert.success);
               } else {

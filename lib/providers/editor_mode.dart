@@ -1,4 +1,5 @@
 import 'package:every_door/providers/events.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:every_door/screens/modes/definitions/amenity.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
@@ -7,46 +8,45 @@ import 'package:every_door/screens/modes/definitions/notes.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final editorModeProvider =
-    StateNotifierProvider<EditorModeController, BaseModeDefinition>(
-        (ref) => EditorModeController(ref));
+    NotifierProvider<EditorModeController, BaseModeDefinition>(
+        EditorModeController.new);
 
 final microZoomedInProvider = StateProvider<LatLngBounds?>((_) => null);
 final navigationModeProvider = StateProvider<bool>((ref) => false);
 
-class EditorModeController extends StateNotifier<BaseModeDefinition> {
+class EditorModeController extends Notifier<BaseModeDefinition> {
   static const kModeKey = 'micromappingMode';
   static final _logger = Logger('EditorModeController');
 
-  final Ref _ref;
   final List<BaseModeDefinition> _modes = [];
   int _currentMode = 1;
 
-  EditorModeController(this._ref) : super(DefaultAmenityModeDefinition(_ref)) {
+  @override
+  BaseModeDefinition build() {
     reset();
-    loadState();
+    return DefaultAmenityModeDefinition(ref);
   }
 
   Future<void> reset() async {
     _modes.clear();
     _modes.addAll([
-      DefaultMicromappingModeDefinition(_ref),
-      DefaultAmenityModeDefinition(_ref),
-      DefaultEntrancesModeDefinition(_ref),
-      DefaultNotesModeDefinition(_ref),
+      DefaultMicromappingModeDefinition(ref),
+      DefaultAmenityModeDefinition(ref),
+      DefaultEntrancesModeDefinition(ref),
+      DefaultNotesModeDefinition(ref),
     ]);
     for (final mode in _modes) {
-      await _ref.read(eventsProvider.notifier).callModeCreated(mode);
+      await ref.read(eventsProvider.notifier).callModeCreated(mode);
     }
     _currentMode = 1;
-    state = _modes[_currentMode];
+    state = loadState() ?? _modes[_currentMode];
   }
 
   Future<void> initializeFromPlugin(String pluginId) async {
     for (final mode in _modes) {
-      await _ref.read(eventsProvider.notifier).callModeCreated(mode, pluginId);
+      await ref.read(eventsProvider.notifier).callModeCreated(mode, pluginId);
     }
     state = _modes[_currentMode];
   }
@@ -55,14 +55,15 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
     for (final mode in _modes) yield mode;
   }
 
-  Future<void> loadState() async {
-    final prefs = await SharedPreferences.getInstance();
+  BaseModeDefinition? loadState() {
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     final mode = prefs.getString(kModeKey);
     final idx = _modes.indexWhere((m) => m.name == mode);
     if (idx >= 0) {
       _currentMode = idx;
-      state = _modes[idx];
+      return _modes[idx];
     }
+    return null;
   }
 
   Future<void> set(String name) async {
@@ -70,7 +71,7 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
     if (i >= 0 && _currentMode != i && i < _modes.length) {
       _currentMode = i;
       state = _modes[i];
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = ref.read(sharedPrefsProvider).requireValue;
       await prefs.setString(kModeKey, state.name);
     }
   }
@@ -90,9 +91,9 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
 
     // TODO: priorities
     _modes.add(mode);
-    _ref.read(eventsProvider.notifier).callModeCreated(mode);
-    loadState();
-    state = _modes[_currentMode]; // TODO: proper notifying
+    ref.read(eventsProvider.notifier).callModeCreated(mode);
+    // TODO: proper notifying
+    state = loadState() ?? _modes[_currentMode];
   }
 
   void unregister(String name) {

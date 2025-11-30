@@ -2,21 +2,18 @@ import 'dart:io';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:flutter/foundation.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-final changesetTagsProvider =
-    ChangeNotifierProvider((ref) => ChangesetTagsProvider());
+final changesetTagsProvider = NotifierProvider<ChangesetTagsProvider, String>(ChangesetTagsProvider.new);
 
-class ChangesetTagsProvider extends ChangeNotifier {
+class ChangesetTagsProvider extends Notifier<String> {
   static const _kHashtagsKey = 'hashtags';
   static final _generator = CommentGenerator();
-  String? _hashtags;
 
-  ChangesetTagsProvider() {
-    loadHashtags();
-  }
+  @override
+  String build() =>
+      ref.read(sharedPrefsProvider).requireValue.getString(_kHashtagsKey) ?? '';
 
   Map<String, String> generateChangesetTags(Iterable<OsmChange> changes) {
     final hashtags = getHashtags();
@@ -45,14 +42,8 @@ class ChangesetTagsProvider extends ChangeNotifier {
     };
   }
 
-  Future<void> loadHashtags() async {
-    final prefs = await SharedPreferences.getInstance();
-    _hashtags = prefs.getString(_kHashtagsKey) ?? '';
-    notifyListeners();
-  }
-
   String getHashtags({bool clearHashes = false}) {
-    String hashtags = _hashtags ?? '';
+    String hashtags = state;
     if (clearHashes) {
       hashtags = hashtags.replaceAll('#', '');
     }
@@ -66,9 +57,8 @@ class ChangesetTagsProvider extends ChangeNotifier {
         .where((s) => s.length > 1)
         .map((s) => '#' + s)
         .join(' ');
-    _hashtags = tags;
-    notifyListeners();
-    final prefs = await SharedPreferences.getInstance();
+    state = tags;
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     await prefs.setString(_kHashtagsKey, tags);
   }
 }

@@ -88,7 +88,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
     }
     // Fetch OSM notes as well.
     final notes = await ref
-        .read(notesProvider)
+        .read(notesProvider.notifier)
         .fetchAllNotes(center: location, radius: kNotesVisibilityRadius);
     // Update the map.
     setState(() {

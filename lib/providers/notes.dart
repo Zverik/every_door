@@ -10,53 +10,49 @@ import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/auth.dart';
-import 'package:flutter/foundation.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:logging/logging.dart';
 import 'package:proximity_hash/proximity_hash.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:http/http.dart' as http;
 import 'package:sqflite/utils/utils.dart';
 import 'package:xml/xml.dart';
 import 'package:xml/xml_events.dart';
 
-final notesProvider = ChangeNotifierProvider((ref) => NotesProvider(ref));
+final notesProvider = NotifierProvider<NotesProvider, int>(NotesProvider.new);
 final ownScribblesProvider =
-    StateNotifierProvider<OwnScribblesController, bool>(
-        (_) => OwnScribblesController());
+    NotifierProvider<OwnScribblesController, bool>(
+        OwnScribblesController.new);
 final currentPaintToolProvider = StateProvider<String>((_) => kToolScribble);
 final drawingLockedProvider = StateProvider<bool>((_) => true);
 
-class NotesProvider extends ChangeNotifier {
+class NotesProvider extends Notifier<int> {
   static final _logger = Logger('NotesProvider');
 
-  final Ref _ref;
-  int length = 0;
   final List<(bool deleted, List<BaseNote> notes)> _undoStack = [];
   int _undoStackLast = 0;
 
-  bool get haveChanges => length > 0;
-
-  NotesProvider(this._ref) {
+  @override
+  int build() {
     _checkHaveChangesAndNotify();
+    return 0;
   }
 
   Future<void> _checkHaveChangesAndNotify() async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     final count = firstIntValue(await database.query(
       BaseNote.kTableName,
       columns: ['count(*)'],
       where: 'is_changed = 1',
     ));
-    length = count ?? 0;
-    notifyListeners();
+    state = count ?? 0;
   }
 
   Future<List<BaseNote>> fetchChanges() async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     final result = await database.query(
       BaseNote.kTableName,
       where: 'is_changed = 1',
@@ -70,7 +66,7 @@ class NotesProvider extends ChangeNotifier {
       LatLng? center,
       int radius = 1000,
       bool osmOnly = false}) async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     List<String> hashes;
     if (bounds != null) {
       // Expand bounding box a little to account for long lines.
@@ -109,7 +105,7 @@ class NotesProvider extends ChangeNotifier {
 
   /// Returns most popular scribble notes.
   Future<List<String>> getPopularNotes([int count = 10]) async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     final mapNoteData = await database.query(
       BaseNote.kTableName,
       where: 'type = ?',
@@ -139,7 +135,7 @@ class NotesProvider extends ChangeNotifier {
   /// Uploads modified OSM notes and drawings to servers.
   Future<int> uploadNotes() async {
     // Check whether we've authorized.
-    final auth = _ref.read(authProvider)['osm']!;
+    final auth = ref.read(authProvider)['osm']!;
     if (!auth.authorized) throw StateError('Log in first.');
 
     // Get changed notes from the database.
@@ -147,7 +143,7 @@ class NotesProvider extends ChangeNotifier {
     if (notes.isEmpty) return 0;
 
     // Upload all notes concurrently.
-    _ref.read(apiStatusProvider.notifier).state = ApiStatus.uploadingNotes;
+    ref.read(apiStatusProvider.notifier).state = ApiStatus.uploadingNotes;
     try {
       await Future.wait([
         _uploadOsmNotes(notes.whereType<OsmNote>()),
@@ -155,14 +151,14 @@ class NotesProvider extends ChangeNotifier {
       ]);
       _checkHaveChangesAndNotify();
     } finally {
-      _ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
+      ref.read(apiStatusProvider.notifier).state = ApiStatus.idle;
     }
     return notes.length;
   }
 
   Future _cleanAndInsertNotes(
       LatLngBounds bounds, List<BaseNote> notes, List<int> dbTypes) async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     bool hasOsmNotes = dbTypes.contains(OsmNote.dbType);
     await database.transaction((txn) async {
       // For OSM notes, first read the existing modified ones.
@@ -226,8 +222,8 @@ class NotesProvider extends ChangeNotifier {
   }
 
   Future<List<BaseNote>> _downloadMapNotes(LatLngBounds bounds) async {
-    final ownNotesOnly = _ref.read(ownScribblesProvider);
-    final author = _ref.read(authProvider.notifier).osmUser;
+    final ownNotesOnly = ref.read(ownScribblesProvider);
+    final author = ref.read(authProvider.notifier).osmUser;
     final url = Uri.https(kScribblesEndpoint, '/scribbles', {
       if (ownNotesOnly && author != null) 'user_id': author.id,
       'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
@@ -285,7 +281,7 @@ class NotesProvider extends ChangeNotifier {
 
   Future<void> _uploadMapNotes(Iterable<BaseNote> notes) async {
     if (notes.isEmpty) return;
-    final author = _ref.read(authProvider.notifier).osmUser;
+    final author = ref.read(authProvider.notifier).osmUser;
     if (author == null) throw StateError('Please login to upload scribbles.');
 
     final data = <Map<String, dynamic>>[];
@@ -361,7 +357,7 @@ class NotesProvider extends ChangeNotifier {
 
   Future<List<OsmNote>> _downloadOsmNotes(LatLngBounds bounds) async {
     final notes = <OsmNote>[];
-    final auth = _ref.read(authProvider)['osm']!;
+    final auth = ref.read(authProvider)['osm']!;
     final url = Uri.https(auth.endpoint, '/api/0.6/notes', {
       'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
     });
@@ -399,7 +395,7 @@ class NotesProvider extends ChangeNotifier {
 
   Future<void> _uploadOsmNotes(Iterable<OsmNote> notes) async {
     if (notes.isEmpty) return;
-    final auth = _ref.read(authProvider)['osm']!;
+    final auth = ref.read(authProvider)['osm']!;
     final headers = await auth.getAuthHeaders(null);
     for (final note in notes) {
       int? noteId = note.id;
@@ -456,7 +452,7 @@ class NotesProvider extends ChangeNotifier {
   Future<void> saveNote(BaseNote note,
       {bool notify = true, bool addUndo = true, int? newId}) async {
     _logger.info('Saving $note');
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     if (note.id != null && newId != null) {
       // Instead of creating, replace note id in the database.
       // This is used only internally after uploading new notes and getting their server ids.
@@ -491,7 +487,7 @@ class NotesProvider extends ChangeNotifier {
 
   Future<void> deleteNote(BaseNote note,
       {bool notify = true, bool addUndo = true, bool fromDB = false}) async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     if (!note.isNew && !fromDB) {
       // Do not delete, instead mark as deleted.
       note.deleting = true;
@@ -556,7 +552,7 @@ class NotesProvider extends ChangeNotifier {
 
   // Useful for undoing notes.
   Future<MapDrawing?> getLastNewDrawing() async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     final drawing = await database.query(
       BaseNote.kTableName,
       where: 'type == ? and id < 0',
@@ -568,7 +564,7 @@ class NotesProvider extends ChangeNotifier {
   }
 
   Future<int> purgeNotes(DateTime before) async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     int count = await database.delete(
       BaseNote.kTableName,
       where: 'is_changed = 0 and id >= 0',
@@ -581,7 +577,7 @@ class NotesProvider extends ChangeNotifier {
   Future<void> clearChanges({BaseNote? note, bool mapOnly = true}) async {
     final notes = [if (note != null) note];
     if (note == null) {
-      final database = await _ref.read(databaseProvider).database;
+      final database = await ref.read(databaseProvider).database;
       final stored = await database.query(
         BaseNote.kTableName,
         where: 'is_changed = 1',
@@ -608,7 +604,7 @@ class NotesProvider extends ChangeNotifier {
   }
 
   Future<int> getNewNoteId() async {
-    final database = await _ref.read(databaseProvider).database;
+    final database = await ref.read(databaseProvider).database;
     final minId = firstIntValue(await database.query(
       BaseNote.kTableName,
       columns: ['min(id)'],
@@ -617,23 +613,21 @@ class NotesProvider extends ChangeNotifier {
   }
 }
 
-class OwnScribblesController extends StateNotifier<bool> {
+class OwnScribblesController extends Notifier<bool> {
   static const kSettingKey = "own_scribbles";
 
-  OwnScribblesController() : super(false) {
-    loadState();
-  }
-
-  Future<void> loadState() async {
-    final prefs = await SharedPreferences.getInstance();
+  @override
+  bool build() {
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     final savedState = prefs.getBool(kSettingKey);
     if (savedState != null) state = savedState;
+    return savedState ?? false;
   }
 
   Future<void> set(bool newValue) async {
     if (state != newValue) {
       state = newValue;
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = ref.read(sharedPrefsProvider).requireValue;
       await prefs.setBool(kSettingKey, state);
     }
   }

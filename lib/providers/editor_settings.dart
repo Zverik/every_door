@@ -1,10 +1,10 @@
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final editorSettingsProvider =
-    StateNotifierProvider<EditorSettingsProvider, EditorSettings>(
-        (_) => EditorSettingsProvider());
+    NotifierProvider<EditorSettingsProvider, EditorSettings>(
+        EditorSettingsProvider.new);
 
 enum ChangesetReview { never, withTags, always }
 
@@ -50,7 +50,9 @@ class EditorSettings {
           ? kDefaultPayment
           : data[2].split(';').map((s) => s.trim()).toList(),
       leftHand: data.length >= 4 && data[3] == '1',
-      changesetReview: data.length < 5 ? ChangesetReview.never : ChangesetReview.values[int.parse(data[4])],
+      changesetReview: data.length < 5
+          ? ChangesetReview.never
+          : ChangesetReview.values[int.parse(data[4])],
     );
   }
 
@@ -69,20 +71,17 @@ class EditorSettings {
       : TextInputType.numberWithOptions(signed: true, decimal: true);
 }
 
-class EditorSettingsProvider extends StateNotifier<EditorSettings> {
+class EditorSettingsProvider extends Notifier<EditorSettings> {
   static const kSettingsKey = 'editor_settings';
 
-  EditorSettingsProvider() : super(EditorSettings()) {
-    load();
-  }
-
-  Future<void> load() async {
-    final prefs = await SharedPreferences.getInstance();
-    state = EditorSettings.fromStrings(prefs.getStringList(kSettingsKey));
+  @override
+  EditorSettings build() {
+    return EditorSettings.fromStrings(
+        ref.read(sharedPrefsProvider).requireValue.getStringList(kSettingsKey));
   }
 
   Future<void> store() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     await prefs.setStringList(kSettingsKey, state.toStrings());
   }
 

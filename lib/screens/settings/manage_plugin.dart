@@ -19,6 +19,15 @@ class _ManagePluginPageState extends ConsumerState<ManagePluginPage> {
   Widget build(BuildContext context) {
     final bool isActive =
         ref.watch(pluginManagerProvider).contains(widget.plugin.id);
+    final app = ref
+        .read(pluginManagerProvider.notifier)
+        .createContext(widget.plugin, context, () {
+          if (context.mounted) {
+            setState(() {});
+          }
+    });
+    final customSettings =
+        widget.plugin.instance?.buildSettingsPane(app, context);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,6 +44,7 @@ class _ManagePluginPageState extends ConsumerState<ManagePluginPage> {
                   .setStateAndSave(widget.plugin, newValue);
             },
           ),
+          if (customSettings != null) customSettings,
           ListTile(
             title: Text('Delete'),
             textColor: Colors.red,

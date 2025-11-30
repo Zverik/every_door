@@ -1,6 +1,5 @@
 import 'package:every_door/plugins/interface.dart';
-import 'package:every_door/screens/modes/definitions/base.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:flutter/material.dart';
 
 /// Parent class for every plugin. None of the methods need to be implemented,
 /// although it would be weird.
@@ -14,16 +13,10 @@ class EveryDoorPlugin {
   /// NOT called when the app is closed and unloaded.
   Future<void> uninstall(EveryDoorApp app) async {}
 
-  /// Configure an editor mode. Called when a user switches to the mode.
-  /// You can add buttons and layers here, and configure mode-specific things.
-  Future<void> configureMode(EveryDoorApp app, BaseModeDefinition mode) async {}
-
-  /// Download data. Called when a user taps the "download" button.
-  /// While the [location] can be found in the [app], it's moved to the
-  /// signature to signify its importance. The download radius is up to
-  /// the developer.
-  Future<void> downloadData(EveryDoorApp app, LatLng location) async {}
-
-  /// Upload data. Called when a user taps the "upload" button.
-  Future<void> uploadData(EveryDoorApp app) async {}
+  /// Returns a widget for the plugin settings. The best option would be
+  /// to return a [Column] with a list of [ListTile].
+  /// Use [EveryDoorApp.preferences] for storing those.
+  Widget? buildSettingsPane(EveryDoorApp app, BuildContext context) {
+    return null;
+  }
 }

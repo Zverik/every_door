@@ -5,33 +5,40 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/geometry/equirectangular.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 import 'package:logging/logging.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final geolocationProvider =
-    StateNotifierProvider<GeolocationController, LatLng?>(
-        (ref) => GeolocationController(ref));
-final forceLocationProvider =
-    StateNotifierProvider<ForceLocationController, bool>(
-        (ref) => ForceLocationController(ref));
-final trackingProvider = StateProvider<bool>((ref) => false);
+    NotifierProvider<GeolocationController, LatLng?>(GeolocationController.new);
 
-class GeolocationController extends StateNotifier<LatLng?> {
+final forceLocationProvider = NotifierProvider<ForceLocationController, bool>(
+    ForceLocationController.new);
+
+final trackingProvider =
+    NotifierProvider<TrackingNotifier, bool>(TrackingNotifier.new);
+
+class TrackingNotifier extends Notifier<bool> {
+  @override
+  bool build() => false;
+}
+
+class GeolocationController extends Notifier<LatLng?> {
   static final _distance = DistanceEquirectangular();
   static final _logger = Logger('GeoLocationController');
 
   StreamSubscription<Position>? _locSub;
   late final StreamSubscription<ServiceStatus> _statSub;
-  final Ref _ref;
   late DateTime _stateTime;
 
-  GeolocationController(this._ref) : super(null) {
+  @override
+  LatLng? build() {
     _stateTime = DateTime.now().subtract(Duration(hours: 1));
     _statSub = Geolocator.getServiceStatusStream().listen((status) {
       if (status == ServiceStatus.enabled) {
@@ -41,6 +48,11 @@ class GeolocationController extends StateNotifier<LatLng?> {
         state = null;
       }
     });
+
+    ref.onDispose(() => _locSub?.cancel());
+    ref.onDispose(_statSub.cancel);
+
+    return null;
   }
 
   LocationSettings _makeLocationSettings() {
@@ -48,7 +60,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
       return AndroidSettings(
         accuracy: LocationAccuracy.best,
         intervalDuration: Duration(seconds: 1),
-        forceLocationManager: _ref.read(forceLocationProvider),
+        forceLocationManager: ref.read(forceLocationProvider),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return AppleSettings(
@@ -93,7 +105,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
 
     final pos = await Geolocator.getLastKnownPosition(
-        forceAndroidLocationManager: _ref.read(forceLocationProvider));
+        forceAndroidLocationManager: ref.read(forceLocationProvider));
     if (pos != null) _updateLocation(_fromPosition(pos));
 
     _locSub = Geolocator.getPositionStream(
@@ -106,7 +118,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
   }
 
   Future<void> reloadTracking() async {
-    if (_ref.read(trackingProvider)) {
+    if (ref.read(trackingProvider)) {
       if (await Geolocator.isLocationServiceEnabled()) {
         disableTracking();
         await enableTracking();
@@ -115,22 +127,16 @@ class GeolocationController extends StateNotifier<LatLng?> {
   }
 
   void disableTracking() {
-    _ref.read(trackingProvider.notifier).state = false;
+    ref.read(trackingProvider.notifier).state = false;
   }
 
   Future<void> enableTracking([BuildContext? context]) async {
-    final bool tracking = _ref.read(trackingProvider);
+    final bool tracking = ref.read(trackingProvider);
     if (tracking) return;
 
     // If tracking is denied forever, do nothing.
     final permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.deniedForever) return;
-
-    // Wait until we get forceLocation value.
-    if (!_ref.read(forceLocationProvider.notifier).loaded) {
-      await Future.doWhile(() => Future.delayed(Duration(milliseconds: 50))
-          .then((_) => !_ref.read(forceLocationProvider.notifier).loaded));
-    }
 
     // Request for location service if needed.
     final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
@@ -153,7 +159,7 @@ class GeolocationController extends StateNotifier<LatLng?> {
     }
 
     if (_locSub != null) {
-      _ref.read(trackingProvider.notifier).state = true;
+      ref.read(trackingProvider.notifier).state = true;
     }
   }
 
@@ -190,37 +196,24 @@ class GeolocationController extends StateNotifier<LatLng?> {
     _locSub?.cancel();
     _locSub = null;
   }
-
-  @override
-  void dispose() {
-    _locSub?.cancel();
-    _statSub.cancel();
-    super.dispose();
-  }
 }
 
-class ForceLocationController extends StateNotifier<bool> {
+class ForceLocationController extends Notifier<bool> {
   static const _kForceLocationKey = 'force_location_android';
-  final Ref _ref;
-  bool loaded = false;
 
-  ForceLocationController(this._ref) : super(false) {
-    _read();
-  }
-
-  Future<void> _read() async {
-    final prefs = await SharedPreferences.getInstance();
-    state = prefs.getBool(_kForceLocationKey) ?? false;
-    loaded = true;
+  @override
+  bool build() {
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
+    return prefs.getBool(_kForceLocationKey) ?? false;
   }
 
   Future<void> set(bool force) async {
     if (state == force) return;
     state = force;
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     await prefs.setBool(_kForceLocationKey, state);
 
     // Restart tracking if possible
-    await _ref.read(geolocationProvider.notifier).reloadTracking();
+    await ref.read(geolocationProvider.notifier).reloadTracking();
   }
 }

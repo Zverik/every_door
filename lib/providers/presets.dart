@@ -12,6 +12,7 @@ import 'package:every_door/helpers/nsi_features.dart';
 import 'package:every_door/providers/add_presets.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/osm_data.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,6 @@ import 'dart:convert' show JsonDecoder, jsonDecode;
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:latlong2/latlong.dart';
 
 final presetProvider = Provider((ref) => PresetProvider(ref));
@@ -56,7 +56,7 @@ class PresetProvider {
   Future<void> initDatabase() async {
     final appDir = await getApplicationDocumentsDirectory();
     final dbFile = io.File(path.join(appDir.path, 'presets.db'));
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = _ref.read(sharedPrefsProvider).requireValue;
 
     var needCopy = true;
     if (!kOverwritePresets || !kDebugMode) {

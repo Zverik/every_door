@@ -271,7 +271,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           )
         ],
       );
-      ref.read(notesProvider).saveNote(note);
+      ref.read(notesProvider.notifier).saveNote(note);
       // 2. remove the amenity
       if (widget.amenity != null) {
         // It's new by [OsmChange.isFixmeNote] definition.

@@ -31,10 +31,10 @@ class BrowserNavigationBar extends ConsumerWidget {
     ref.watch(editorModeProvider); // to update the widget
     final apiStatus = ref.watch(apiStatusProvider);
     final hasChangesToUpload = ref.watch(changesProvider).haveNoErrorChanges();
-    final hasNotesToUpload = ref.watch(notesProvider).haveChanges;
+    final hasNotesToUpload = ref.watch(notesProvider) > 0;
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
     final bool haveHashtags =
-        ref.watch(changesetTagsProvider).getHashtags().isNotEmpty;
+        ref.watch(changesetTagsProvider.notifier).getHashtags().isNotEmpty;
     final loc = AppLocalizations.of(context)!;
 
     IconButton dataButton;

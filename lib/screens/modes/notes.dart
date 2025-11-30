@@ -252,7 +252,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       final crossing = widget.def.notes
                           .whereType<MapDrawing>()
                           .where((note) => line.intersects(note.path));
-                      ref.read(notesProvider).deleteDrawings(crossing);
+                      ref.read(notesProvider.notifier).deleteDrawings(crossing);
                     } else {
                       final note = MapDrawing(
                         path: LineString(coords),
@@ -261,7 +261,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       setState(() {
                         widget.def.notes.add(note);
                       });
-                      ref.read(notesProvider).saveNote(note);
+                      ref.read(notesProvider.notifier).saveNote(note);
                     }
                   },
                   onTap: (location) {
@@ -288,7 +288,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       } else if (note is MapNote &&
                           currentTool == kToolEraser) {
                         // Tapping on a note in eraser mode deletes it.
-                        ref.read(notesProvider).deleteNote(note);
+                        ref.read(notesProvider.notifier).deleteNote(note);
                         found = true;
                         break;
                       }
@@ -309,7 +309,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                         }
                       }
                       if (closest != null) {
-                        ref.read(notesProvider).deleteNote(closest);
+                        ref.read(notesProvider.notifier).deleteNote(closest);
                       }
                     }
                   },
@@ -334,12 +334,12 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     ref.read(drawingLockedProvider.notifier).state = true;
                   },
                 ),
-                if (!ref.watch(notesProvider).undoIsEmpty)
+                if (!ref.watch(notesProvider.notifier).undoIsEmpty)
                   UndoButton(
                     alignment:
                         leftHand ? Alignment.bottomRight : Alignment.bottomLeft,
                     onTap: () {
-                      ref.read(notesProvider).undoChange();
+                      ref.read(notesProvider.notifier).undoChange();
                     },
                   ),
               ],

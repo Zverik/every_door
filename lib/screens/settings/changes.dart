@@ -119,7 +119,7 @@ class _ChangeListPageState extends ConsumerState {
           title: c.typeAndName,
         ));
 
-    final notes = ref.read(notesProvider);
+    final notes = ref.read(notesProvider.notifier);
     final noteList = await notes.fetchChanges();
     final noteItems = <ChangeItem>[];
     if (noteList.whereType<MapNote>().isNotEmpty ||
@@ -144,7 +144,7 @@ class _ChangeListPageState extends ConsumerState {
     final loc = AppLocalizations.of(context)!;
     final change = _changeList[index];
     final chProvider = ref.read(changesProvider);
-    final nProvider = ref.read(notesProvider);
+    final nProvider = ref.read(notesProvider.notifier);
     if (change.change != null) {
       chProvider.deleteChange(change.change!);
       ref.read(needMapUpdateProvider).trigger();

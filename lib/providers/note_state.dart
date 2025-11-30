@@ -1,5 +1,5 @@
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final noteIsOsmProvider =
     NotifierProvider<NoteStateProvider, bool>(NoteStateProvider.new);
@@ -9,23 +9,14 @@ class NoteStateProvider extends Notifier<bool> {
 
   @override
   bool build() {
-    _loadValue();
-    return false;
-  }
-
-  Future<void> _loadValue() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     bool? newOSM = prefs.getBool(kPrefsKey);
-    if (newOSM != null && newOSM != state) state = newOSM;
+    return newOSM ?? false;
   }
 
-  Future<void> _storeValue() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(kPrefsKey, state);
-  }
-
-  void set(bool noteIsOsm) {
+  Future<void> set(bool noteIsOsm) async {
     state = noteIsOsm;
-    _storeValue();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
+    await prefs.setBool(kPrefsKey, state);
   }
 }

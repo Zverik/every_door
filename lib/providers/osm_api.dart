@@ -49,7 +49,8 @@ class OsmApiHelper {
     try {
       var response = await client.send(request);
       if (response.statusCode != 200) {
-        throw OsmApiError(response.statusCode, 'Failed to query OSM API: ${response.statusCode} $url');
+        throw OsmApiError(response.statusCode,
+            'Failed to query OSM API: ${response.statusCode} $url');
       }
       final elements = await response.stream
           .transform(utf8.decoder)
@@ -197,8 +198,9 @@ class OsmApiHelper {
   }
 
   String _buildChangeset(Iterable<OsmChange> changes) {
-    final tags =
-        _ref.read(changesetTagsProvider).generateChangesetTags(changes);
+    final tags = _ref
+        .read(changesetTagsProvider.notifier)
+        .generateChangesetTags(changes);
     final builder = XmlBuilder();
     builder.processing('xml', 'version="1.0"');
     builder.element('osm', nest: () {

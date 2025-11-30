@@ -1,26 +1,27 @@
 import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-final pathProvider = StateNotifierProvider<PathController, List<LatLng>>(
-    (ref) => PathController(ref));
+final pathProvider = NotifierProvider<PathController, List<LatLng>>(
+    PathController.new);
 
-class PathController extends StateNotifier<List<LatLng>> {
+class PathController extends Notifier<List<LatLng>> {
   static const kPathKey = 'path';
   static const kBreakInterval = Duration(minutes: 20);
   static const kBreakDistance = 200; // meters
   static const kMaxPoints = 1000;
 
-  final Ref _ref;
   DateTime? _lastUpdate;
   bool loaded = false;
 
-  PathController(this._ref) : super([]) {
-    _ref.listen(geolocationProvider, (_, pos) {
+  @override
+  List<LatLng> build() {
+    ref.listen(geolocationProvider, (_, pos) {
       if (pos != null) updateLocation(pos);
     });
+    return [];
   }
 
   Future<void> updateLocation(LatLng pos, [DateTime? dt]) async {
@@ -28,7 +29,7 @@ class PathController extends StateNotifier<List<LatLng>> {
     List<LatLng> newPath = List.of(state);
     DateTime? lu = _lastUpdate;
 
-    if (newPath.isEmpty && !loaded) (newPath, lu) = await _loadPath();
+    if (newPath.isEmpty && !loaded) (newPath, lu) = _loadPath();
     loaded = true;
 
     final distance = DistanceEquirectangular();
@@ -47,8 +48,8 @@ class PathController extends StateNotifier<List<LatLng>> {
     _storePath();
   }
 
-  Future<(List<LatLng>, DateTime?)> _loadPath() async {
-    final prefs = await SharedPreferences.getInstance();
+  (List<LatLng>, DateTime?) _loadPath() {
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     if (prefs.containsKey(kPathKey)) {
       final data = prefs.getStringList(kPathKey);
       if (data != null) {
@@ -67,7 +68,7 @@ class PathController extends StateNotifier<List<LatLng>> {
   }
 
   Future<void> _storePath() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     if (state.isEmpty) {
       await prefs.remove(kPathKey);
     } else {

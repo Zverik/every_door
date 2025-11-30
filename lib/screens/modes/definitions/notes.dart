@@ -26,7 +26,7 @@ abstract class NotesModeDefinition extends BaseModeDefinition {
   Future<void> updateNearest() async {
     final location = ref.read(effectiveLocationProvider);
     final notes = await ref
-        .read(notesProvider)
+        .read(notesProvider.notifier)
         .fetchAllNotes(center: location, radius: kNotesVisibilityRadius);
     // .fetchAllNotes(bounds: controller.camera.visibleBounds);
     this.notes = notes.where((n) => !n.deleting).toList();

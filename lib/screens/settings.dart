@@ -29,11 +29,11 @@ class SettingsPage extends ConsumerWidget {
     final login = ref.watch(authProvider)['osm']!.value?.displayName;
     final editorSettings = ref.watch(editorSettingsProvider);
     final forceLocation = ref.watch(forceLocationProvider);
-    final hashtags = ref.watch(changesetTagsProvider).getHashtags();
+    final hashtags = ref.watch(changesetTagsProvider.notifier).getHashtags();
     final loc = AppLocalizations.of(context)!;
 
     final haveChanges = ref.watch(changesProvider).length > 0;
-    final haveNotes = ref.watch(notesProvider).haveChanges;
+    final haveNotes = ref.watch(notesProvider) > 0;
 
     return Scaffold(
       appBar: AppBar(title: Text(loc.settingsTitle)),

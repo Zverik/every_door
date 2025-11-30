@@ -5,8 +5,8 @@ import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/models/imagery/vector_assets.dart';
 import 'package:every_door/providers/imagery.dart';
+import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final baseImageryProvider =
     NotifierProvider<BaseImageryNotifier, Imagery>(BaseImageryNotifier.new);
@@ -71,18 +71,13 @@ class ImageryIsBaseProvider extends Notifier<bool> {
 
   @override
   bool build() {
-    _loadValue();
-    return true;
-  }
-
-  Future<void> _loadValue() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     bool? newOSM = prefs.getBool(kPrefsKey);
-    if (newOSM != null && newOSM != state) state = newOSM;
+    return newOSM ?? true;
   }
 
   Future<void> _storeValue() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider).requireValue;
     await prefs.setBool(kPrefsKey, state);
   }
 

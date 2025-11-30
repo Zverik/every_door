@@ -9,8 +9,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:logging/logging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final tileCacheProvider = StateNotifierProvider<TileCacher, TileCacherState>(
-    (ref) => TileCacher(ref));
+final tileCacheProvider = NotifierProvider<TileCacher, TileCacherState>(
+    TileCacher.new);
 
 class TileCacherState {
   final int total;
@@ -29,14 +29,14 @@ class TileCacherState {
         downloaded = 0;
 }
 
-class TileCacher extends StateNotifier<TileCacherState> {
+class TileCacher extends Notifier<TileCacherState> {
   static final _logger = Logger('TileCacher');
   static const kMaxDownloadTiles = 6000;
 
-  final Ref _ref;
   bool _needStop = false;
 
-  TileCacher(this._ref) : super(TileCacherState.idle());
+  @override
+  TileCacherState build() => TileCacherState.idle();
 
   Future<int> cacheTiles(
       TileLayer options, LatLngBounds bounds, int zoom) async {
@@ -60,16 +60,16 @@ class TileCacher extends StateNotifier<TileCacherState> {
   }
 
   Future _waitUntilImageryLoaded() async {
-    _ref.read(imageryProvider);
+    ref.read(imageryProvider);
     await Future.doWhile(() => Future.delayed(Duration(milliseconds: 100))
-        .then((_) => !_ref.read(imageryProvider.notifier).loaded));
+        .then((_) => !ref.read(imageryProvider.notifier).loaded));
   }
 
   Future<bool> cacheForAll({int? maxZoom}) async {
     await _waitUntilImageryLoaded();
-    final imagery = _ref.read(imageryProvider);
-    final base = _ref.read(baseImageryProvider);
-    final areas = await _ref.read(downloadedAreaProvider).getAllAreas();
+    final imagery = ref.read(imageryProvider);
+    final base = ref.read(baseImageryProvider);
+    final areas = await ref.read(downloadedAreaProvider).getAllAreas();
     _needStop = false;
 
     // First count how many tiles we need to get.
