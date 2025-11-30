@@ -2,21 +2,24 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tags/common_keys.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/osm_element.dart';
+import 'package:every_door/providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
-class TagEditorPage extends StatefulWidget {
+class TagEditorPage extends ConsumerStatefulWidget {
   final OsmChange amenity;
 
   const TagEditorPage(this.amenity);
 
   @override
-  State<TagEditorPage> createState() => _TagEditorPageState();
+  ConsumerState<TagEditorPage> createState() => _TagEditorPageState();
 }
 
-class _TagEditorPageState extends State<TagEditorPage> {
+class _TagEditorPageState extends ConsumerState<TagEditorPage> {
   late final Set<String> keys;
   final Map<String, TextEditingController> controllers = {};
 
@@ -57,7 +60,10 @@ class _TagEditorPageState extends State<TagEditorPage> {
     return result;
   }
 
-  String _getUrl() => 'https://$kOsmAuth2Endpoint/${widget.amenity.id.fullRef}';
+  String _getUrl() {
+    final endpoint = ref.read(authProvider)['osm']!.endpoint;
+    return 'https://$endpoint/${widget.amenity.id.fullRef}';
+  }
 
   @override
   Widget build(BuildContext context) {

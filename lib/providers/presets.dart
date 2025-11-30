@@ -552,16 +552,16 @@ class PresetProvider {
     final sql = '''
     with $langCTE
     , pfields as (
-      select field, required, pos
+      select field, required, pos, 0 as universal
       from preset_fields where preset_name = ?
       union all
-      select name as field, 0, 100
+      select name as field, 0, 100, 1
       from fields where universal = 1
     )
     select f.*, t.label as loc_label,
       t.placeholder as loc_placeholder,
       t.options as loc_options,
-      pf.pos, pf.required,
+      pf.pos, pf.required, pf.universal,
       lscore
     from pfields pf
     inner join fields f on f.name = pf.field
@@ -573,6 +573,7 @@ class PresetProvider {
     if (results.isEmpty) return preset;
     List<PresetField> fields = [];
     List<PresetField> moreFields = [];
+    List<PresetField> universalFields = [];
     final seenFields = <String>{};
     for (final row in results) {
       final name = row['name'] as String;
@@ -600,12 +601,14 @@ class PresetProvider {
       // query options if needed
       if (row['required'] == 1) {
         fields.add(field);
+      } else if (row['universal'] == 1) {
+        universalFields.add(field);
       } else {
         moreFields.add(field);
       }
     }
-    sortFields(moreFields);
-    return preset.withFields(fields, moreFields);
+    sortFields(universalFields);
+    return preset.withFields(fields, moreFields + universalFields);
   }
 
   Future<String?> _getFieldLabel(String fieldName, Locale locale) async {

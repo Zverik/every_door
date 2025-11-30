@@ -3,15 +3,19 @@ import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/osm_data.dart';
+import 'package:every_door/widgets/map_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
 abstract class BaseModeDefinition extends ChangeNotifier {
   final Ref ref;
+  final _buttons = <MapButton>[];
+  final _overlays = <Imagery>[];
 
   BaseModeDefinition(this.ref);
 
@@ -20,6 +24,21 @@ abstract class BaseModeDefinition extends ChangeNotifier {
   MultiIcon getIcon(BuildContext context, bool outlined);
 
   bool isOurKind(OsmChange element) => false;
+
+  Iterable<Imagery> get overlays => _overlays;
+  Iterable<MapButton> get buttons => _buttons;
+
+  void addMapButton(MapButton button) {
+    _buttons.add(button);
+  }
+
+  void removeMapButton(String id) {
+    _buttons.removeWhere((b) => b.id == id);
+  }
+  
+  void addOverlay(Imagery imagery) {
+    _overlays.add(imagery);
+  }
 
   Future<List<OsmChange>> getNearestChanges(
       {LatLng? forceLocation, int? forceRadius, int maxCount = 200}) async {

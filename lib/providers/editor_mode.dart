@@ -1,3 +1,4 @@
+import 'package:every_door/providers/events.dart';
 import 'package:every_door/screens/modes/definitions/amenity.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
@@ -28,16 +29,25 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
     loadState();
   }
 
-  void reset() {
+  Future<void> reset() async {
     _modes.clear();
-    _logger.fine('Ref class: ${_ref.runtimeType}');
     _modes.addAll([
       DefaultMicromappingModeDefinition(_ref),
       DefaultAmenityModeDefinition(_ref),
       DefaultEntrancesModeDefinition(_ref),
       DefaultNotesModeDefinition(_ref),
     ]);
+    for (final mode in _modes) {
+      await _ref.read(eventsProvider.notifier).callModeCreated(mode);
+    }
     _currentMode = 1;
+    state = _modes[_currentMode];
+  }
+
+  Future<void> initializeFromPlugin(String pluginId) async {
+    for (final mode in _modes) {
+      await _ref.read(eventsProvider.notifier).callModeCreated(mode, pluginId);
+    }
     state = _modes[_currentMode];
   }
 
@@ -72,7 +82,7 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
   void register(BaseModeDefinition mode) {
     final oldMode = get(mode.name);
     if (oldMode == mode) {
-      state = _modes[_currentMode]; // TODO: proper notifying
+      return; // Option to update the mode?
     } else if (oldMode != null) {
       throw ArgumentError(
           'Mode with the name "${mode.name}" already registered.');
@@ -80,6 +90,7 @@ class EditorModeController extends StateNotifier<BaseModeDefinition> {
 
     // TODO: priorities
     _modes.add(mode);
+    _ref.read(eventsProvider.notifier).callModeCreated(mode);
     loadState();
     state = _modes[_currentMode]; // TODO: proper notifying
   }

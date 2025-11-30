@@ -1,8 +1,7 @@
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/geolocation.dart';
-import 'package:every_door/providers/location.dart';
 import 'package:every_door/widgets/map_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
@@ -17,18 +16,10 @@ class TrackButton extends ConsumerWidget {
 
     return MapButton(
       enabled: !ref.watch(trackingProvider) && trackLocation != null,
-      icon: Icons.my_location,
+      icon: MultiIcon(fontIcon: Icons.my_location),
       tooltip: loc.mapLocate,
-      onPressed: () {
+      onPressed: (_) {
         ref.read(geolocationProvider.notifier).enableTracking(context);
-      },
-      onLongPressed: () {
-        if (ref.read(rotationProvider) != 0.0) {
-          ref.read(rotationProvider.notifier).state = 0.0;
-          MapController.of(context).rotate(0.0);
-        } else {
-          ref.read(geolocationProvider.notifier).enableTracking(context);
-        }
       },
     );
   }

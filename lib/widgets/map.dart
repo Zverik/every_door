@@ -3,6 +3,7 @@ import 'dart:math' show min, max;
 
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/geometry/closest_points.dart';
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/providers/editor_settings.dart';
@@ -302,7 +303,9 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       ),
       children: [
         imagery.buildLayer(reset: true),
-        ...ref.watch(overlayImageryProvider),
+        ...ref
+            .watch(overlayImageryProvider)
+            .map((i) => i.buildLayer(reset: true)),
         LocationMarkerWidget(),
         WalkPathPolyline(faint: widget.faintWalkPath),
         AttributionWidget(imagery),
@@ -321,7 +324,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
             ),
             icon: Icons.menu,
             tooltip: loc.mapSettings,
-            onPressed: () {
+            onPressed: (_) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SettingsPage()),
@@ -335,9 +338,9 @@ class _CustomMapState extends ConsumerState<CustomMap> {
               // Tracking button
               MapButton(
                 enabled: !ref.watch(trackingProvider) && trackLocation != null,
-                icon: Icons.my_location,
+                icon: MultiIcon(fontIcon: Icons.my_location),
                 tooltip: loc.mapLocate,
-                onPressed: () {
+                onPressed: (_) {
                   ref
                       .read(geolocationProvider.notifier)
                       .enableTracking(context);
@@ -355,7 +358,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
                   ),
                 ),
                 tooltip: loc.mapStraight,
-                onPressed: () {
+                onPressed: (_) {
                   ref.read(rotationProvider.notifier).state = 0.0;
                   _controller.rotate(0.0);
                   _rotation = 0;

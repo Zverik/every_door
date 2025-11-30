@@ -8,7 +8,7 @@ import 'package:every_door/models/road_name.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/changeset_tags.dart';
-import 'package:every_door/providers/osm_auth.dart';
+import 'package:every_door/providers/auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:flutter_map/flutter_map.dart' show LatLngBounds;
 import 'package:http/http.dart' as http;
@@ -37,9 +37,11 @@ class OsmApiHelper {
 
   OsmApiHelper(this._ref);
 
+  String get endpoint => _ref.read(authProvider)['osm']!.endpoint;
+
   Future<List<OsmElement>> map(LatLngBounds bounds,
       {Set<RoadNameRecord>? roadNames}) async {
-    final url = Uri.https(kOsmEndpoint, '/api/0.6/map', {
+    final url = Uri.https(endpoint, '/api/0.6/map', {
       'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
     });
     var client = http.Client();
@@ -75,7 +77,7 @@ class OsmApiHelper {
     try {
       final typeName = kOsmElementTypeName[id.type]!;
       final full = id.type == OsmElementType.node ? '' : '/full';
-      final url = Uri.https(kOsmEndpoint, '/api/0.6/$typeName/${id.ref}$full');
+      final url = Uri.https(endpoint, '/api/0.6/$typeName/${id.ref}$full');
       var request = http.Request('GET', url);
       var response = await client.send(request);
       if (response.statusCode != 200) {
@@ -106,7 +108,7 @@ class OsmApiHelper {
         final typeIds = ids.where((id) => id.type == typ);
         for (int i = 0; i < (typeIds.length / kBatchSize).ceil(); i++) {
           final typesName = kOsmElementTypeName[typ]! + 's';
-          final url = Uri.https(kOsmEndpoint, '/api/0.6/$typesName', {
+          final url = Uri.https(endpoint, '/api/0.6/$typesName', {
             typesName: typeIds
                 .skip(kBatchSize * i)
                 .take(kBatchSize)
@@ -138,7 +140,7 @@ class OsmApiHelper {
   }
 
   Future<List<OsmElement>> snapWays(LatLngBounds bounds) async {
-    final url = Uri.https(kOsmEndpoint, '/api/0.6/map', {
+    final url = Uri.https(endpoint, '/api/0.6/map', {
       'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
     });
     var client = http.Client();
@@ -263,7 +265,7 @@ class OsmApiHelper {
       String changeset, Map<String, String> headers) async {
     final idMap = <OsmId, OsmElement>{};
     final resp = await http.post(
-      Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset/upload'),
+      Uri.https(endpoint, '/api/0.6/changeset/$changeset/upload'),
       headers: headers,
       body: buildOsmChange(changes, changeset, idMap),
     );
@@ -293,7 +295,7 @@ class OsmApiHelper {
     for (final change in allChanges) {
       if (change.isNew) {
         final resp = await http.put(
-          Uri.https(kOsmEndpoint, '/api/0.6/node/create'),
+          Uri.https(endpoint, '/api/0.6/node/create'),
           headers: headers,
           body: _buildSingleChange(change, changeset),
         );
@@ -319,7 +321,7 @@ class OsmApiHelper {
       } else if (change.hardDeleted) {
         String objRef = change.id.fullRef;
         final resp = await http.delete(
-          Uri.https(kOsmEndpoint, '/api/0.6/$objRef'),
+          Uri.https(endpoint, '/api/0.6/$objRef'),
           headers: headers,
           body: _buildSingleChange(change, changeset),
         );
@@ -341,7 +343,7 @@ class OsmApiHelper {
       } else if (change.isModified) {
         String objRef = change.id.fullRef;
         final resp = await http.put(
-          Uri.https(kOsmEndpoint, '/api/0.6/$objRef'),
+          Uri.https(endpoint, '/api/0.6/$objRef'),
           headers: headers,
           body: _buildSingleChange(change, changeset),
         );
@@ -457,7 +459,7 @@ class OsmApiHelper {
   Future<String> _openChangeset(
       List<OsmChange> changes, Map<String, String> headers) async {
     final resp = await http.put(
-      Uri.https(kOsmEndpoint, '/api/0.6/changeset/create'),
+      Uri.https(endpoint, '/api/0.6/changeset/create'),
       headers: headers,
       body: _buildChangeset(changes),
     );
@@ -488,8 +490,8 @@ class OsmApiHelper {
     changes.sort();
 
     // Prepare authentication headers.
-    final auth = _ref.read(authProvider.notifier);
-    final headers = await auth.getAuthHeaders();
+    final auth = _ref.read(authProvider)['osm']!;
+    final headers = await auth.getAuthHeaders(null);
 
     // Open a changeset and get its id.
     final changeset = await _openChangeset(changes, headers);
@@ -510,7 +512,7 @@ class OsmApiHelper {
           clearErrored = false;
           // Update changeset comment for changes actually uploaded.
           await http.put(
-            Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset'),
+            Uri.https(auth.endpoint, '/api/0.6/changeset/$changeset'),
             headers: headers,
             body: _buildChangeset(changes.where((c) => c.error == null)),
           );
@@ -526,7 +528,7 @@ class OsmApiHelper {
     } finally {
       // Close the changeset.
       await http.put(
-        Uri.https(kOsmEndpoint, '/api/0.6/changeset/$changeset/close'),
+        Uri.https(auth.endpoint, '/api/0.6/changeset/$changeset/close'),
         headers: headers,
       );
     }
@@ -537,8 +539,8 @@ class OsmApiHelper {
     if (changes.isEmpty) return 0;
 
     // Check whether we've authorized.
-    final auth = _ref.read(authProvider.notifier);
-    if (!auth.authorized) throw StateError('Log in first.');
+    final osmUser = _ref.read(authProvider.notifier).osmUser;
+    if (osmUser == null) throw StateError('Log in first.');
 
     // Set the mutex.
     if (_ref.read(apiStatusProvider) != ApiStatus.idle)

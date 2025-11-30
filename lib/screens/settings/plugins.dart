@@ -25,12 +25,8 @@ class _PluginSettingsPageState extends ConsumerState<PluginSettingsPage> {
     Iterable<Widget> cards =
         plugins.where((p) => p.active).map((p) => PluginCard(
               plugin: p,
+              short: true,
               actionText: loc.pluginsDisable.toUpperCase(),
-              onAction: () {
-                ref
-                    .read(pluginManagerProvider.notifier)
-                    .setStateAndSave(p, false);
-              },
               onMore: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => ManagePluginPage(p),
@@ -49,9 +45,7 @@ class _PluginSettingsPageState extends ConsumerState<PluginSettingsPage> {
       ]).followedBy(inactive.map((p) => PluginCard(
             plugin: p,
             actionText: loc.pluginsEnable.toUpperCase(),
-            onAction: () {
-              ref.read(pluginManagerProvider.notifier).setStateAndSave(p, true);
-            },
+            short: true,
             onMore: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (_) => ManagePluginPage(p),

@@ -2,11 +2,12 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:every_door/constants.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/providers/osm_api.dart';
+import 'package:every_door/providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -86,16 +87,17 @@ class Version {
 }
 
 class History {
+  String endpoint;
   String fullRef;
   late List<Version> versions;
 
-  History(this.fullRef);
+  History(this.endpoint, this.fullRef);
 
   /// load history for this element reference
   /// must be called before other methods of this class
   Future<void> loadHistory() async {
     final resp = await http.get(
-      Uri.https(kOsmEndpoint, '/api/0.6/$fullRef/history'),
+      Uri.https(endpoint, '/api/0.6/$fullRef/history'),
       headers: {"Accept": "application/json"},
     );
     if (resp.statusCode == 404) {
@@ -120,7 +122,7 @@ class History {
       // OSM API expects something like [...]/changesets?changesets=1,2,3
       // this sends the commas URL-encoded as %2C, but it still works
       Uri.https(
-        kOsmEndpoint,
+        endpoint,
         '/api/0.6/changesets',
         {'changesets': changesetIDs},
       ),
@@ -196,22 +198,23 @@ class History {
   }
 }
 
-class VersionsPage extends StatefulWidget {
+class VersionsPage extends ConsumerStatefulWidget {
   final OsmChange amenity;
 
   const VersionsPage(this.amenity);
 
   @override
-  State<VersionsPage> createState() => _VersionsPageState();
+  ConsumerState<VersionsPage> createState() => _VersionsPageState();
 }
 
-class _VersionsPageState extends State<VersionsPage> {
+class _VersionsPageState extends ConsumerState<VersionsPage> {
   History? history;
   Exception? error;
 
   Future<void> getHistory() async {
     try {
-      var newHistory = History(widget.amenity.id.fullRef);
+      final auth = ref.read(authProvider)['osm']!;
+      final newHistory = History(auth.endpoint, widget.amenity.id.fullRef);
       await newHistory.loadHistory();
       await newHistory.loadComments();
 

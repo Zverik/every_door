@@ -1,91 +1,25 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:every_door/providers/osm_auth.dart';
+import 'package:every_door/helpers/auth/osm.dart';
+import 'package:every_door/providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
-class OsmAccountPage extends ConsumerStatefulWidget {
-  const OsmAccountPage({super.key});
+class AccountPage extends ConsumerStatefulWidget {
+  final String provider;
+
+  const AccountPage(this.provider, {super.key});
 
   @override
-  ConsumerState<OsmAccountPage> createState() => _OsmAccountPageState();
+  ConsumerState<AccountPage> createState() => _AccountPageState();
 }
 
-class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
-  bool canUseOAuth = true;
-  OsmUserDetails? details;
-
-  @override
-  void initState() {
-    super.initState();
-    updateDetails();
-  }
-
-  Future updateDetails() async {
-    final auth = ref.read(authProvider.notifier);
-    final newDetails = auth.authorized ? await auth.loadUserDetails() : null;
-    setState(() {
-      details = newDetails;
-    });
-  }
-
-  Future<void> showLoginDialog(BuildContext context) async {
-    final loc = AppLocalizations.of(context)!;
-    final isOk = await showOkCancelAlertDialog(
-      context: context,
-      title: loc.accountPasswordWarningTitle,
-      message: loc.accountPasswordWarningMessage,
-      okLabel: loc.accountPasswordWarningButton,
-    );
-    if (isOk != OkCancelResult.ok) return;
-
-    bool done = false;
-    List<String>? result;
-    while (!done) {
-      if (!context.mounted) return;
-      result = await showTextInputDialog(
-        context: context,
-        title: loc.accountPasswordTitle,
-        textFields: [
-          DialogTextField(
-            hintText: loc.accountFieldLogin,
-            initialText:
-                result?[0] ?? ref.watch(authProvider)?.displayName ?? '',
-          ),
-          DialogTextField(
-            hintText: loc.accountFieldPassword,
-            keyboardType: TextInputType.visiblePassword,
-            obscureText: true,
-          ),
-        ],
-      );
-      if (result != null) {
-        final auth = ref.read(authProvider.notifier);
-        try {
-          // await auth.storeLoginPassword(result[0], result[1]);
-          done = true;
-          updateDetails();
-        } on ArgumentError {
-          // Wrong login
-          if (context.mounted) {
-            await showAlertDialog(
-              context: context,
-              title: loc.accountAuthErrorTitle,
-              message: loc.accountAuthErrorMessage,
-            );
-          }
-        }
-      } else {
-        done = true;
-      }
-    }
-  }
-
-  Future<void> loginWithOAuth() async {
+class _AccountPageState extends ConsumerState<AccountPage> {
+  Future<void> login() async {
     try {
-      await ref.read(authProvider.notifier).loginWithOAuth(context);
-      updateDetails();
+      await ref.read(authProvider)[widget.provider]!.login(context);
     } on Exception catch (e) {
       if (!mounted) return;
       final loc = AppLocalizations.of(context)!;
@@ -100,17 +34,17 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    final login = ref.watch(authProvider)?.displayName;
+    final details = ref.watch(authProvider)[widget.provider]!.value;
     final theme = Theme.of(context);
 
     Widget content;
-    if (login == null) {
+    if (details == null) {
       // not logged in - keep original UI
       content = Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           ElevatedButton(
-              onPressed: !canUseOAuth ? null : loginWithOAuth,
+              onPressed: login,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 30.0,
@@ -133,43 +67,45 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Conditional avatar: network image or icon
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.1),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: details?.avatar != null
-                      ? CircleAvatar(
-                          radius: 60,
-                          backgroundImage:
-                              CachedNetworkImageProvider(details!.avatar!),
-                        )
-                      : CircleAvatar(
-                          radius: 60,
-                          backgroundColor: theme.colorScheme.primaryContainer,
-                          child: Icon(
-                            Icons.person,
-                            size: 60,
-                            color: theme.colorScheme.onPrimaryContainer,
-                          ),
+                if (details is OsmUserDetails) ...[
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
                         ),
-                ),
-                const SizedBox(height: 20),
+                      ],
+                    ),
+                    child: details.avatar != null
+                        ? CircleAvatar(
+                            radius: 60,
+                            backgroundImage:
+                                CachedNetworkImageProvider(details.avatar!),
+                          )
+                        : CircleAvatar(
+                            radius: 60,
+                            backgroundColor: theme.colorScheme.primaryContainer,
+                            child: Icon(
+                              Icons.person,
+                              size: 60,
+                              color: theme.colorScheme.onPrimaryContainer,
+                            ),
+                          ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
                 Text(
-                  login,
+                  details.displayName,
                   style: theme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: theme.colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 20),
-                if (details != null) ...[
+                if (details is OsmUserDetails) ...[
                   Container(
                     constraints: BoxConstraints(maxWidth: 400.0),
                     child: Card(
@@ -183,13 +119,13 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
                           children: [
                             _buildStatRow(
                               loc.accountChangesets,
-                              details!.changesets.toString(),
+                              details.changesets.toString(),
                               theme,
                             ),
                             const SizedBox(height: 10),
                             _buildStatRow(
                               loc.accountUnreadMail,
-                              details!.unreadMessages.toString(),
+                              details.unreadMessages.toString(),
                               theme,
                             ),
                           ],
@@ -209,10 +145,7 @@ class _OsmAccountPageState extends ConsumerState<OsmAccountPage> {
                         ) ==
                         OkCancelResult.ok) {
                       // logout
-                      ref.read(authProvider.notifier).logout();
-                      setState(() {
-                        details = null;
-                      });
+                      await ref.read(authProvider)[widget.provider]!.logout();
                     }
                   },
                   style: ElevatedButton.styleFrom(

@@ -7,7 +7,6 @@ import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/downloaders.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
-import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/widgets/attribution.dart';
 import 'package:every_door/widgets/tile_bounds_grid.dart';
 import 'package:flutter/material.dart';
@@ -230,7 +229,6 @@ class _TileCacheDownloaderState extends ConsumerState<TileCacheDownloader> {
                 ),
                 children: [
                   base.buildLayer(reset: true),
-                  ...ref.watch(overlayImageryProvider),
                   AttributionWidget(imagery),
                   PolygonLayer(
                     polygons: [

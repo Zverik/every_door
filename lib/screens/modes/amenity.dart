@@ -81,6 +81,8 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
   Future<void> updateNearest() async {
     final int radius = farFromUser ? kFarVisibilityRadius : kVisibilityRadius;
 
+    final bounds = _controller.mapController?.camera.visibleBounds;
+    if (bounds == null) return;
     await widget.def.updateNearest(forceRadius: radius);
 
     // Zoom automatically only when tracking location.
@@ -160,6 +162,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
                 drawZoomButtons: farFromUser,
                 updateState: true,
                 layers: [
+                  ...widget.def.overlays.map((i) => i.buildLayer()),
                   ...widget.def.mapLayers(),
                   CircleLayer(
                     circles: [
@@ -188,11 +191,12 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
                 buttons: [
                   // Filter button
                   MapButton(
-                    icon: ref.watch(poiFilterProvider).isNotEmpty
-                        ? Icons.filter_alt
-                        : Icons.filter_alt_outlined,
+                    icon: MultiIcon(
+                        fontIcon: ref.watch(poiFilterProvider).isNotEmpty
+                            ? Icons.filter_alt
+                            : Icons.filter_alt_outlined),
                     tooltip: loc.mapFilter,
-                    onPressed: () {
+                    onPressed: (_) {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
@@ -206,6 +210,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
                       );
                     },
                   ),
+                  ...widget.def.buttons,
                 ],
               ),
             ),

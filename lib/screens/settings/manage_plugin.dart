@@ -18,7 +18,7 @@ class _ManagePluginPageState extends ConsumerState<ManagePluginPage> {
   @override
   Widget build(BuildContext context) {
     final bool isActive =
-        ref.watch(pluginManagerProvider).contains(widget.plugin);
+        ref.watch(pluginManagerProvider).contains(widget.plugin.id);
 
     return Scaffold(
       appBar: AppBar(

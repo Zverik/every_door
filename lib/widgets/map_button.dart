@@ -1,3 +1,4 @@
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:flutter/material.dart';
 
 class OverlayButtonWidget extends StatelessWidget {
@@ -8,10 +9,10 @@ class OverlayButtonWidget extends StatelessWidget {
   final Alignment alignment;
 
   /// Function to call when the button is pressed.
-  final VoidCallback onPressed;
+  final void Function(BuildContext) onPressed;
 
   /// Function to call on long tap.
-  final VoidCallback? onLongPressed;
+  final void Function(BuildContext)? onLongPressed;
 
   /// Icon to display.
   final IconData icon;
@@ -53,11 +54,9 @@ class OverlayButtonWidget extends StatelessWidget {
     return Align(
       alignment: alignment,
       child: Padding(
-        padding: (padding ?? EdgeInsets.zero) +
-            safePadding +
-            EdgeInsets.symmetric(horizontal: 10.0),
+        padding: (padding ?? EdgeInsets.zero) + safePadding,
         child: MapButton(
-          icon: icon,
+          icon: MultiIcon(fontIcon: icon),
           enabled: enabled,
           tooltip: tooltip,
           onPressed: onPressed,
@@ -108,7 +107,7 @@ class MapButtonColumn extends StatelessWidget {
       child: Padding(
         padding: (padding ?? EdgeInsets.zero) +
             safePadding +
-            EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,14 +120,17 @@ class MapButtonColumn extends StatelessWidget {
 }
 
 class MapButton extends StatelessWidget {
+  /// An optional identifier to refer this button later.
+  final String? id;
+
   /// Function to call when the button is pressed.
-  final VoidCallback onPressed;
+  final void Function(BuildContext) onPressed;
 
   /// Function to call on long tap.
-  final VoidCallback? onLongPressed;
+  final void Function(BuildContext)? onLongPressed;
 
   /// Icon to display.
-  final IconData? icon;
+  final MultiIcon? icon;
 
   /// Widget to display when there's no icon.
   final Widget? child;
@@ -141,6 +143,7 @@ class MapButton extends StatelessWidget {
 
   const MapButton({
     super.key,
+    this.id,
     required this.onPressed,
     this.onLongPressed,
     this.icon,
@@ -153,23 +156,20 @@ class MapButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (!enabled || (child == null && icon == null)) return Container();
 
-    final button = GestureDetector(
-      onTap: onPressed,
-      onLongPress: onLongPressed,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(25.0),
-          border: Border.all(color: Colors.grey.withValues(alpha: 0.5)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: child ?? Icon(
-            icon,
-            size: 30.0,
-            color: Colors.black54,
-          ),
-        ),
+    final button = OutlinedButton(
+      onPressed: () => onPressed(context),
+      onLongPress:
+          onLongPressed == null ? null : () => onLongPressed?.call(context),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: child ??
+            icon!
+                .getWidget(context: context, size: 30.0, color: Colors.black54),
+      ),
+      style: OutlinedButton.styleFrom(
+        backgroundColor: Colors.white.withValues(alpha: 0.5),
+        shape: CircleBorder(side: BorderSide()),
+        padding: EdgeInsets.zero,
       ),
     );
 

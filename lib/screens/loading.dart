@@ -9,7 +9,7 @@ import 'package:every_door/providers/changeset_tags.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:every_door/providers/location.dart';
-import 'package:every_door/providers/osm_auth.dart';
+import 'package:every_door/providers/auth.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/providers/plugin_manager.dart';
 import 'package:every_door/providers/presets.dart';

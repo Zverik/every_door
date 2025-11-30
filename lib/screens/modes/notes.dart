@@ -146,6 +146,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                 hasFloatingButton: true,
                 updateState: true,
                 layers: [
+                  ...widget.def.overlays.map((i) => i.buildLayer()),
                   ...widget.def.mapLayers(),
                   PolylineLayer(
                     polylines: [
@@ -226,6 +227,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                       ],
                     ),
                 ],
+                buttons: widget.def.buttons.toList(),
               ),
               if (locked)
                 OverlayButtonWidget(
@@ -236,7 +238,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
                     horizontal: 8.0,
                     vertical: 24.0,
                   ),
-                  onPressed: () {
+                  onPressed: (_) {
                     ref.read(drawingLockedProvider.notifier).state = false;
                   },
                   icon: kStyleIcons[currentTool] ?? Icons.lock_open,

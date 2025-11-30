@@ -9,7 +9,7 @@ import 'package:every_door/helpers/osm_api_converters.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/database.dart';
-import 'package:every_door/providers/osm_auth.dart';
+import 'package:every_door/providers/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:logging/logging.dart';
@@ -139,7 +139,7 @@ class NotesProvider extends ChangeNotifier {
   /// Uploads modified OSM notes and drawings to servers.
   Future<int> uploadNotes() async {
     // Check whether we've authorized.
-    final auth = _ref.read(authProvider.notifier);
+    final auth = _ref.read(authProvider)['osm']!;
     if (!auth.authorized) throw StateError('Log in first.');
 
     // Get changed notes from the database.
@@ -227,7 +227,7 @@ class NotesProvider extends ChangeNotifier {
 
   Future<List<BaseNote>> _downloadMapNotes(LatLngBounds bounds) async {
     final ownNotesOnly = _ref.read(ownScribblesProvider);
-    final author = _ref.read(authProvider);
+    final author = _ref.read(authProvider.notifier).osmUser;
     final url = Uri.https(kScribblesEndpoint, '/scribbles', {
       if (ownNotesOnly && author != null) 'user_id': author.id,
       'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
@@ -285,7 +285,7 @@ class NotesProvider extends ChangeNotifier {
 
   Future<void> _uploadMapNotes(Iterable<BaseNote> notes) async {
     if (notes.isEmpty) return;
-    final author = _ref.read(authProvider);
+    final author = _ref.read(authProvider.notifier).osmUser;
     if (author == null) throw StateError('Please login to upload scribbles.');
 
     final data = <Map<String, dynamic>>[];
@@ -361,7 +361,8 @@ class NotesProvider extends ChangeNotifier {
 
   Future<List<OsmNote>> _downloadOsmNotes(LatLngBounds bounds) async {
     final notes = <OsmNote>[];
-    final url = Uri.https(kOsmEndpoint, '/api/0.6/notes', {
+    final auth = _ref.read(authProvider)['osm']!;
+    final url = Uri.https(auth.endpoint, '/api/0.6/notes', {
       'bbox': '${bounds.west},${bounds.south},${bounds.east},${bounds.north}',
     });
     var client = http.Client();
@@ -398,15 +399,15 @@ class NotesProvider extends ChangeNotifier {
 
   Future<void> _uploadOsmNotes(Iterable<OsmNote> notes) async {
     if (notes.isEmpty) return;
-    final auth = _ref.read(authProvider.notifier);
-    final headers = await auth.getAuthHeaders();
+    final auth = _ref.read(authProvider)['osm']!;
+    final headers = await auth.getAuthHeaders(null);
     for (final note in notes) {
       int? noteId = note.id;
       if (noteId == null) continue;
       if (note.isNew && note.deleting) continue;
       if (note.isNew) {
         // Create a note and update its id.
-        final url = Uri.https(kOsmEndpoint, '/api/0.6/notes', {
+        final url = Uri.https(auth.endpoint, '/api/0.6/notes', {
           'lat': note.location.latitude.toString(),
           'lon': note.location.longitude.toString(),
           'text': (note.message ?? "") + "\n\n#EveryDoor",
@@ -424,7 +425,7 @@ class NotesProvider extends ChangeNotifier {
         for (final comment in note.comments) {
           if (comment.isNew) {
             // Add a comment.
-            final url = Uri.https(kOsmEndpoint,
+            final url = Uri.https(auth.endpoint,
                 '/api/0.6/notes/$noteId/comment', {'text': comment.message});
             final resp = await http.post(url, headers: headers);
             if (resp.statusCode != 200) {
@@ -440,7 +441,7 @@ class NotesProvider extends ChangeNotifier {
 
       if (note.deleting) {
         // Close the note.
-        final url = Uri.https(kOsmEndpoint, '/api/0.6/notes/$noteId/close');
+        final url = Uri.https(auth.endpoint, '/api/0.6/notes/$noteId/close');
         final resp = await http.post(url, headers: headers);
         if (resp.statusCode != 200) {
           _logger

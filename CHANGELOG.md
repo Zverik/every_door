@@ -4,9 +4,11 @@
 
 _Unreleased_
 
+* [Programmable plugins](https://every-door.app/plugins/code/)!
 * Added line wrapping for the type chooser.
 * When an address/floor filter is active, newly created amenities use its values.
 * Additional fields are partly sorted for easier lookup (thanks @deevroman).
+* Shorter tiles in the plugin list.
 
 ## 7.1
 

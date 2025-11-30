@@ -53,10 +53,6 @@ const kMaxBulkDownloadZoom = 18; // Max zoom for bulk downloading tiles
 const kRasterCacheSizeMB = 1024; // Passed to raster caches
 const kVectorCacheSizeMB = 256; // Passed to vector caches
 
-const kOsmEndpoint = 'api.openstreetmap.org';
-const kOsmAuth2Endpoint = 'www.openstreetmap.org';
-// const kOsmEndpoint = 'master.apis.dev.openstreetmap.org';
-// const kOsmAuth2Endpoint = 'master.apis.dev.openstreetmap.org';
 const kScribblesEndpoint = 'geoscribble.osmz.ru';
 const kEdprEndpoint = 'plugins.every-door.app';
 

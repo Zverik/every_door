@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:every_door/models/plugin.dart';
+import 'package:every_door/plugins/_construction.dart';
+import 'package:every_door/plugins/every_door_plugin.dart';
 import 'package:every_door/providers/plugin_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +13,8 @@ import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:yaml/yaml.dart';
 import 'package:every_door/helpers/yaml_map.dart';
+import 'package:dart_eval/dart_eval.dart';
+import 'package:flutter_eval/flutter_eval.dart';
 
 final pluginRepositoryProvider =
     NotifierProvider<PluginRepository, List<Plugin>>(PluginRepository.new);
@@ -38,16 +42,18 @@ class PluginRepository extends Notifier<List<Plugin>> {
       if (entry is Directory) {
         try {
           final metadata = await readPluginData(entry);
-          plugins.add(Plugin.fromData(metadata, entry));
+          plugins.add(Plugin.fromData(metadata, entry,
+              instanceBuilder: instantiatePlugin));
         } on PluginLoadException catch (e) {
           _logger.severe('Failed to load plugin metadata', e);
         }
       }
     }
 
-    _installFromAssets();
-
     state = plugins;
+
+    _installFromAssets();
+    _installConstruction();
   }
 
   Future<void> deletePlugin(String id) async {
@@ -86,6 +92,28 @@ class PluginRepository extends Notifier<List<Plugin>> {
         // it's fine if we leave it.
       }
     }
+  }
+
+  Future<void> _installConstruction() async {
+    if (!PluginUnderConstruction.kEnabled) return;
+    // So that the state is initialized.
+    await Future.delayed(Duration(milliseconds: 500));
+
+    final data = PluginUnderConstruction.getMetadata();
+    final pluginDir = _getPluginDirectory(data['id']);
+    final plugin = Plugin(
+      id: data['id'],
+      data: data,
+      directory: pluginDir,
+      instanceBuilder: (_) async => PluginUnderConstruction(),
+    );
+
+    await deletePlugin(data['id']);
+    state = state.followedBy([plugin]).toList();
+
+    await ref
+        .read(pluginManagerProvider.notifier)
+        .setStateAndSave(plugin, true);
   }
 
   Directory _getPluginDirectory(String id) {
@@ -201,5 +229,27 @@ class PluginRepository extends Notifier<List<Plugin>> {
   Future<void> install(File file) async {
     final tmpPluginDir = await unpackAndDelete(file);
     await installFromTmpDir(tmpPluginDir);
+  }
+
+  /// Reads the plugin bytecode, runs the main() function, and returns the
+  /// [EveryDoorPlugin] that it instantiates.
+  static Future<EveryDoorPlugin?> instantiatePlugin(Plugin plugin) async {
+    final main = plugin.resolvePath("plugin.evc");
+    if (!await main.exists()) return null;
+
+    final bytecode = (await main.readAsBytes()).buffer.asByteData();
+    final runtime = Runtime(bytecode);
+    runtime.addPlugin(flutterEvalPlugin);
+    // TODO: add two other plugins
+    try {
+      final result =
+          runtime.executeLib('package:${plugin.id}/main.dart', 'build');
+      if (result is EveryDoorPlugin) return result;
+      _logger.warning(
+          'build() function for plugin ${plugin.id} returned class ${result?.runtimeType}');
+    } catch (e) {
+      _logger.warning('Failed to execute build() for plugin ${plugin.id}: $e');
+    }
+    return null;
   }
 }

@@ -8,20 +8,25 @@ import 'dart:convert';
 
 import 'package:xml/xml.dart';
 
+/// An element type: node, way, or relation.
 enum OsmElementType { node, way, relation }
 
+/// Mapping from the enum value to strings.
 const kOsmElementTypeName = <OsmElementType, String>{
   OsmElementType.node: 'node',
   OsmElementType.way: 'way',
   OsmElementType.relation: 'relation',
 };
 
+/// OSM identifier: a type and a number.
 class OsmId {
   final OsmElementType type;
   final int ref;
 
   const OsmId(this.type, this.ref);
 
+  /// Parses a string like "n123" into [OsmId] with the type from the letter
+  /// (e.g. node for "n") and the number from the rest.
   factory OsmId.fromString(String s) {
     OsmElementType typ;
     final t = s.toLowerCase().substring(0, 1);
@@ -34,8 +39,12 @@ class OsmId {
     return OsmId(typ, int.parse(s.substring(1)));
   }
 
+  /// Returns a representation like "node/123", to use in building
+  /// website URLs.
   String get fullRef => '${kOsmElementTypeName[type]}/$ref';
 
+  /// Returns a string like "n123" for a node with id=123. Can be
+  /// parsed back into an [OsmId] with [OsmId.fromString].
   @override
   String toString() {
     String typ;
@@ -56,6 +65,7 @@ class OsmId {
   int get hashCode => type.hashCode + ref.hashCode;
 }
 
+/// An OSM relation member. Contains of an OSM id and an optional [role].
 class OsmMember {
   final OsmId id;
   final String? role;
@@ -78,8 +88,11 @@ class OsmMember {
   }
 }
 
+/// Whether this object is a member of a way or a relation. Way
+/// membership takes precedence.
 enum IsMember { no, way, relation }
 
+/// An OSM element downloaded from the server.
 class OsmElement {
   final OsmId id;
   final Map<String, String> tags;

@@ -123,6 +123,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
               updateState: true,
               hasFloatingButton: primaryButton != null,
               layers: [
+                ...widget.def.overlays.map((i) => i.buildLayer()),
                 ...widget.def.mapLayers(),
                 MultiHitMarkerLayer(
                   markers: [
@@ -149,6 +150,7 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
                     ],
                   ),
               ],
+              buttons: widget.def.buttons.toList(),
             ),
             if (primaryButton != null)
               DraggableEditButton(

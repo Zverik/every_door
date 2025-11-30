@@ -19,14 +19,16 @@ class LocationMarkerWidget extends ConsumerWidget {
 
     final CompassData? compass = ref.watch(compassProvider);
     return MobileLayerTransformer(
-      child: CustomPaint(
-        painter: _LocationMarkerPainter(
-          border: ref.watch(trackingProvider),
-          offset: MapCamera.of(context).getOffsetFromOrigin(trackLocation),
-          heading: compass?.heading,
+      child: IgnorePointer(
+        child: CustomPaint(
+          painter: _LocationMarkerPainter(
+            border: ref.watch(trackingProvider),
+            offset: MapCamera.of(context).getOffsetFromOrigin(trackLocation),
+            heading: compass?.heading,
+          ),
+          // TODO: check that it's still painted
+          // size: Size(constraints.maxWidth, constraints.maxHeight),
         ),
-        // TODO: check that it's still painted
-        // size: Size(constraints.maxWidth, constraints.maxHeight),
       ),
     );
   }

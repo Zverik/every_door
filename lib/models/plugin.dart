@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/plugin_i18n.dart';
 import 'package:every_door/models/version.dart';
+import 'package:every_door/plugins/every_door_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:markdown_widget/markdown_widget.dart';
@@ -46,6 +47,12 @@ class PluginData {
       data.containsKey('homepage') ? Uri.tryParse(data['homepage']) : null;
 
   MultiIcon? get icon => null;
+
+  @override
+  bool operator ==(Object other) => other is PluginData && other.id == id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 /// Plugin metadata for a record from an external plugin repository.
@@ -67,32 +74,48 @@ class RemotePlugin extends PluginData {
       data.containsKey('icon') ? MultiIcon(imageUrl: data['icon']) : null;
 }
 
+typedef InstanceBuilder = Future<EveryDoorPlugin?> Function(Plugin);
+
 /// Plugin metadata. Same as [PluginData], but with added service methods
-/// for retrieving localizations and assets.
+/// for retrieving localizations and assets. Data read from the plugin
+/// metadata is final, but the [active] flag can be changed in runtime.
+/// Same with [instance]: it is initialized when the plugin is made active,
+/// and reset when it is disabled.
 class Plugin extends PluginData {
   static final _logger = Logger('Plugin');
 
   bool active;
+  EveryDoorPlugin? instance;
   final Directory directory;
   final PluginLocalizations _localizations;
   final Map<String, MultiIcon> _iconCache = {};
+  final InstanceBuilder? _instanceBuilder;
 
-  Plugin(
-      {required String id,
-      required Map<String, dynamic> data,
-      required this.directory})
-      : _localizations = PluginLocalizations(directory, data),
+  Plugin({
+    required String id,
+    required Map<String, dynamic> data,
+    required this.directory,
+    InstanceBuilder? instanceBuilder,
+  })  : _localizations = PluginLocalizations(directory, data),
+        _instanceBuilder = instanceBuilder,
         active = false,
         super(id, data);
 
-  factory Plugin.fromData(PluginData pd, Directory directory) =>
-      Plugin(id: pd.id, data: pd.data, directory: directory);
+  factory Plugin.fromData(PluginData pd, Directory directory,
+          {InstanceBuilder? instanceBuilder}) =>
+      Plugin(
+          id: pd.id,
+          data: pd.data,
+          directory: directory,
+          instanceBuilder: instanceBuilder);
 
   String? get intro => data['intro'];
 
   @override
   MultiIcon? get icon =>
       data.containsKey('icon') ? loadIcon(data['icon']) : null;
+
+  Future<EveryDoorPlugin?> instantiate() async => _instanceBuilder?.call(this);
 
   PluginLocalizationsBranch getLocalizationsBranch(String prefix) =>
       PluginLocalizationsBranch(_localizations, prefix);

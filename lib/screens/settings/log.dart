@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/providers/osm_auth.dart';
+import 'package:every_door/providers/auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -99,12 +99,13 @@ class _LogDisplayPageState extends ConsumerState<LogDisplayPage> {
                 else
                   platform = 'unknown';
 
+                final osmUser = ref.read(authProvider.notifier).osmUser;
                 http.post(
                   Uri.https('textual.ru', '/everydoor_send.php'),
                   body: <String, String>{
                     'code': 'rfJ7gnvut4%uHY6',
                     'version': '$kAppTitle $platform $kAppVersion',
-                    'who': ref.read(authProvider)?.displayName ?? 'unknown',
+                    'who': osmUser?.displayName ?? 'unknown',
                     'message': message.first,
                     'log': logStore.last(kMaxLogLinesToSend).join('\n'),
                   },

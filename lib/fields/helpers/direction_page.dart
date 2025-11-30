@@ -8,7 +8,8 @@ import 'package:every_door/widgets/loc_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 import 'package:latlong2/latlong.dart' show LatLng;
 
 class DirectionValuePage extends ConsumerStatefulWidget {
@@ -150,7 +151,9 @@ class _DirectionValuePageState extends ConsumerState<DirectionValuePage> {
             ),
             children: [
               imagery.buildLayer(reset: true),
-              ...ref.watch(overlayImageryProvider),
+              ...ref
+                  .watch(overlayImageryProvider)
+                  .map((i) => i.buildLayer(reset: true)),
               AttributionWidget(imagery),
               LocationMarkerWidget(),
               if (direction == null)

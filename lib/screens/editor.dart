@@ -672,7 +672,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
               ),
               children: [
                 ref.watch(baseImageryProvider).buildLayer(),
-                ...ref.watch(overlayImageryProvider),
+                ...ref.watch(overlayImageryProvider).map((i) => i.buildLayer()),
                 MarkerLayer(
                   markers: [
                     if (amenity.canMove)
