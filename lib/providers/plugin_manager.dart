@@ -20,7 +20,6 @@ import 'package:every_door/providers/plugin_repo.dart';
 import 'package:every_door/providers/shared_file.dart';
 import 'package:every_door/providers/shared_preferences.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
-import 'package:every_door/screens/modes/definitions/classic.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +75,15 @@ class PluginManager extends Notifier<Set<String>> {
     // This is very deep, because we need everything set up before
     // we can process incoming files.
     ref.read(sharedFileProvider).checkInitialMedia();
+  }
+
+  /// Reloads a plugin. After plugin settings are changed, it needs
+  /// to be reloaded, because settings are most likely used in its
+  /// "install()" method.
+  Future<void> reloadPlugin(Plugin plugin) async {
+    // For now we just disable and enable it.
+    await _disable(plugin);
+    await _enable(plugin);
   }
 
   EveryDoorApp createContext(

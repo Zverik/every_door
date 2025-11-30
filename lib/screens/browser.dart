@@ -1,7 +1,9 @@
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/screens/modes/amenity.dart';
+import 'package:every_door/screens/modes/classic.dart';
 import 'package:every_door/screens/modes/definitions/amenity.dart';
+import 'package:every_door/screens/modes/definitions/classic.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
 import 'package:every_door/screens/modes/definitions/notes.dart';
@@ -30,7 +32,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     } else if (!ref.read(trackingProvider) &&
         ref.read(geolocationProvider) != null) {
       if (updateProviders) {
-        ref.read(trackingProvider.notifier).state = true;
+        ref.read(trackingProvider.notifier).set(true);
       }
       return false;
     } else {
@@ -66,6 +68,8 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
       editorPanel = EntrancesPane(editorMode);
     } else if (editorMode is NotesModeDefinition) {
       editorPanel = NotesPane(editorMode);
+    } else if (editorMode is ClassicModeDefinition) {
+      editorPanel = ClassicModePane(editorMode);
     } else {
       editorPanel = Center(child: Text('Broken mode definition'));
     }

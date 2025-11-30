@@ -253,8 +253,8 @@ class TelegramProvider extends _ProviderHelper {
           label: 'Telegram',
           prefixes: ['tg', 'telegram'],
           key: 'contact:telegram',
-          regexp: RegExp(r'(?://t.me/|^t.me/)?([^/? ]+)/?$'),
-          regexpUrl: RegExp(r'//t.me/([^/? ]+)/?$'),
+          regexp: RegExp(r'(?://t.me/|^t.me/)?([^/? ]+)/?\??$'),
+          regexpUrl: RegExp(r'//t.me/([^/? ]+)/?\??$'),
           format: 'https://t.me/%s',
         );
 }

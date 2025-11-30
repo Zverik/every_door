@@ -16,7 +16,7 @@ import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PluginUnderConstruction extends EveryDoorPlugin {
-  static const kEnabled = true;
+  static const kEnabled = false;
   static const kEndpoint = 'panoramax.openstreetmap.fr';
   bool apiFound = false;
 

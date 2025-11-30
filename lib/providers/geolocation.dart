@@ -27,6 +27,10 @@ final trackingProvider =
 class TrackingNotifier extends Notifier<bool> {
   @override
   bool build() => false;
+
+  void set(bool value) {
+    state = value;
+  }
 }
 
 class GeolocationController extends Notifier<LatLng?> {
@@ -159,7 +163,7 @@ class GeolocationController extends Notifier<LatLng?> {
     }
 
     if (_locSub != null) {
-      ref.read(trackingProvider.notifier).state = true;
+      ref.read(trackingProvider.notifier).set(true);
     }
   }
 
