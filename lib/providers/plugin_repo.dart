@@ -14,7 +14,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:yaml/yaml.dart';
 import 'package:every_door/helpers/yaml_map.dart';
 import 'package:dart_eval/dart_eval.dart';
-import 'package:flutter_eval/flutter_eval.dart';
 
 final pluginRepositoryProvider =
     NotifierProvider<PluginRepository, List<Plugin>>(PluginRepository.new);
@@ -239,7 +238,7 @@ class PluginRepository extends Notifier<List<Plugin>> {
 
     final bytecode = (await main.readAsBytes()).buffer.asByteData();
     final runtime = Runtime(bytecode);
-    runtime.addPlugin(flutterEvalPlugin);
+    // runtime.addPlugin(flutterEvalPlugin);
     // TODO: add two other plugins
     try {
       final result =
