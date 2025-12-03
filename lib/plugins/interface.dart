@@ -44,6 +44,8 @@ class EveryDoorApp {
 
   void repaint() => onRepaint?.call();
 
+  Ref get ref => _ref;
+
   void addOverlay(Imagery imagery) {
     if (!imagery.overlay) {
       throw ArgumentError("Imagery should be an overlay");
@@ -54,11 +56,11 @@ class EveryDoorApp {
         .addLayer(imagery.id, imagery, pluginId: plugin.id);
   }
 
-  void addMode(String name, BaseModeDefinition mode) {
+  void addMode(BaseModeDefinition mode) {
     try {
       _ref.read(editorModeProvider.notifier).register(mode);
     } on ArgumentError {
-      logger.severe("Failed to add mode $name");
+      logger.severe("Failed to add mode ${mode.name}");
     }
   }
 

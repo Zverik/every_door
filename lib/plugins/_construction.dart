@@ -7,7 +7,9 @@ import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/plugins/every_door_plugin.dart';
 import 'package:every_door/plugins/ext_overlay.dart';
 import 'package:every_door/plugins/interface.dart';
+import 'package:every_door/screens/modes/definitions/classic.dart';
 import 'package:every_door/widgets/map_button.dart';
+import 'package:every_door/models/amenity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
@@ -36,6 +38,7 @@ class PluginUnderConstruction extends EveryDoorPlugin {
       apiFound = true;
     }
 
+    app.addMode(TestMode(app.ref));
     app.addAuthProvider('panoramax', PanoramaxAuth());
 
     app.events.onDownload((location) async {
@@ -256,4 +259,17 @@ class PanoramaxAuth extends AuthProvider {
   Map<String, String> getHeaders(AuthToken token) => {
         'Authorization': 'Bearer ${(token as PanoramaxToken).jwt}',
       };
+}
+
+class TestMode extends ClassicModeDefinition {
+  TestMode(super.ref);
+
+  @override
+  MultiIcon getIcon(BuildContext context, bool outlined) => MultiIcon(fontIcon: Icons.ac_unit);
+
+  @override
+  String get name => 'test';
+
+  @override
+  bool isOurKind(OsmChange element) => true;
 }

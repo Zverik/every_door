@@ -15,6 +15,7 @@ import 'package:every_door/screens/editor/sheet.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/entrance_markers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show Ref;
 import 'package:latlong2/latlong.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
@@ -52,8 +53,8 @@ abstract class EntrancesModeDefinition extends BaseModeDefinition {
       getOurKind(element) != ElementKind.unknown;
 
   @override
-  Future<void> updateNearest() async {
-    nearest = await super.getNearestChanges();
+  Future<void> updateNearest(LatLngBounds bounds) async {
+    nearest = await super.getNearestChanges(bounds);
     notifyListeners();
   }
 
@@ -110,12 +111,8 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
   }
 
   @override
-  Future<void> updateNearest({LatLng? forceLocation, int? forceRadius}) async {
-    final LatLng location =
-        forceLocation ?? ref.read(effectiveLocationProvider);
-
-    final nearest = await super.getNearestChanges(
-        forceLocation: forceLocation, forceRadius: forceRadius);
+  Future<void> updateNearest(LatLngBounds bounds) async {
+    final nearest = await super.getNearestChanges(bounds);
 
     // Sort by buildings, addresses, entrances
     int indexKind(OsmChange change) {
@@ -128,7 +125,7 @@ class DefaultEntrancesModeDefinition extends EntrancesModeDefinition {
 
     nearest.sort((a, b) => indexKind(a).compareTo(indexKind(b)));
 
-    buildingsNeedAddresses = await buildingsHaveAddresses(location);
+    buildingsNeedAddresses = await buildingsHaveAddresses(bounds.center);
 
     this.nearest = nearest;
     notifyListeners();

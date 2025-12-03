@@ -6,7 +6,9 @@ import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:flutter/material.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
+import 'package:flutter_map/flutter_map.dart';
 
 abstract class NotesModeDefinition extends BaseModeDefinition {
   List<BaseNote> notes = [];
@@ -23,12 +25,9 @@ abstract class NotesModeDefinition extends BaseModeDefinition {
   }
 
   @override
-  Future<void> updateNearest() async {
-    final location = ref.read(effectiveLocationProvider);
-    final notes = await ref
-        .read(notesProvider.notifier)
-        .fetchAllNotes(center: location, radius: kNotesVisibilityRadius);
-    // .fetchAllNotes(bounds: controller.camera.visibleBounds);
+  Future<void> updateNearest(LatLngBounds bounds) async {
+    final notes =
+        await ref.read(notesProvider.notifier).fetchAllNotes(bounds: bounds);
     this.notes = notes.where((n) => !n.deleting).toList();
     notifyListeners();
   }

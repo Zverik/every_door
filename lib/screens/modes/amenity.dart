@@ -78,12 +78,11 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
     }
   }
 
-  Future<void> updateNearest() async {
-    final int radius = farFromUser ? kFarVisibilityRadius : kVisibilityRadius;
-
-    final bounds = _controller.mapController?.camera.visibleBounds;
+  Future<void> updateNearest([LatLngBounds? bounds]) async {
+    bounds ??= ref.read(visibleBoundsProvider);
+    print('POI: updating for bbox $bounds');
     if (bounds == null) return;
-    await widget.def.updateNearest(forceRadius: radius);
+    await widget.def.updateNearest(bounds);
 
     // Zoom automatically only when tracking location.
     if (mounted && ref.read(trackingProvider)) {
@@ -110,7 +109,9 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
     });
     ref.listen(effectiveLocationProvider, (_, LatLng next) {
       updateFarFromUser();
-      updateNearest();
+    });
+    ref.listen(visibleBoundsProvider, (_, next) {
+      updateNearest(next);
     });
 
     final screenSize = MediaQuery.of(context).size;

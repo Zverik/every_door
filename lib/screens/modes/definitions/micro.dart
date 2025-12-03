@@ -9,6 +9,7 @@ import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/poi_marker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show Ref;
 import 'package:latlong2/latlong.dart';
 import 'package:material_color_names/material_color_names.dart';
@@ -61,8 +62,8 @@ abstract class MicromappingModeDefinition extends BaseModeDefinition {
       _kinds.any((k) => k.matchesChange(element));
 
   @override
-  updateNearest() async {
-    List<OsmChange> data = await super.getNearestChanges();
+  updateNearest(LatLngBounds bounds) async {
+    List<OsmChange> data = await super.getNearestChanges(bounds);
 
     // Keep other mode objects to show.
     final otherData = data

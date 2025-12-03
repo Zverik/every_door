@@ -21,7 +21,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 class NotesPane extends ConsumerStatefulWidget {
   final NotesModeDefinition def;
@@ -43,7 +44,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       updateNotes();
       // Disable location tracking.
-      ref.read(trackingProvider.notifier).state = false;
+      ref.read(trackingProvider.notifier).disable();
       // Load the note state
       ref.read(noteIsOsmProvider);
     });
@@ -62,10 +63,13 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   void recordMapMove(MapCamera camera) {
     ref.read(effectiveLocationProvider.notifier).set(camera.center);
     ref.read(zoomProvider.notifier).state = camera.zoom;
+    ref.read(visibleBoundsProvider.notifier).update(camera.visibleBounds);
   }
 
-  void updateNotes() {
-    widget.def.updateNearest();
+  void updateNotes() async {
+    final bounds = ref.read(visibleBoundsProvider);
+    if (bounds == null) return;
+    await widget.def.updateNearest(bounds);
   }
 
   Future<void> _openNoteEditor(BaseNote? note, [LatLng? location]) async {
@@ -113,10 +117,10 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
     final locked = ref.watch(drawingLockedProvider);
     final loc = AppLocalizations.of(context)!;
 
-    ref.listen(effectiveLocationProvider, (_, LatLng next) {
+    ref.listen(notesProvider, (_, next) {
       updateNotes();
     });
-    ref.listen(notesProvider, (_, next) {
+    ref.listen(visibleBoundsProvider, (_, next) {
       updateNotes();
     });
 

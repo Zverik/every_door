@@ -32,7 +32,7 @@ class _BrowserPageState extends ConsumerState<BrowserPage> {
     } else if (!ref.read(trackingProvider) &&
         ref.read(geolocationProvider) != null) {
       if (updateProviders) {
-        ref.read(trackingProvider.notifier).set(true);
+        ref.read(trackingProvider.notifier).enable();
       }
       return false;
     } else {

@@ -163,6 +163,13 @@ class OsmDataHelper extends ChangeNotifier {
     return await _queryElements(hashes);
   }
 
+  /// Restores objects from the database.
+  Future<List<OsmChange>> getElementsInBox(LatLngBounds bounds) async {
+    final hashes = createGeohashesBoundingBox(bounds.south, bounds.west,
+        bounds.north, bounds.east, kGeohashPrecision);
+    return await _queryElements(hashes);
+  }
+
   /// Queries a single element from the downloaded objects
   /// and returns an [OsmChange] for it, even if it was deleted.
   Future<OsmChange?> getElement(OsmId id) async {

@@ -130,7 +130,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
 
     if (event is MapEventWithMove) {
       if (!fromController) {
-        ref.read(trackingProvider.notifier).state = false;
+        ref.read(trackingProvider.notifier).disable();
         ref.read(zoomProvider.notifier).state = event.camera.zoom;
         if (widget.switchToNavigate) {
           final bool isNavigating = ref.read(navigationModeProvider);
@@ -160,6 +160,9 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       if (!fromController) {
         ref.read(effectiveLocationProvider.notifier).set(event.camera.center);
       }
+      ref
+          .read(visibleBoundsProvider.notifier)
+          .update(event.camera.visibleBounds);
     } else if (event is MapEventRotateEnd) {
       if (event.source != MapEventSource.mapController) {
         double rotation = _controller.camera.rotation;

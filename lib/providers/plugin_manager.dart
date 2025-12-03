@@ -377,7 +377,8 @@ class PluginManager extends Notifier<Set<String>> {
 
   Future<void> _disableModes(Plugin plugin) async {
     final modeData = plugin.data['modes'];
-    if (modeData == null || modeData is! Map) return;
+    if (plugin.instance == null && (modeData == null || modeData is! Map))
+      return;
     await ref.read(editorModeProvider.notifier).reset();
     for (final otherPlugin in _getActivePlugins()) {
       if (plugin.id != otherPlugin.id) {

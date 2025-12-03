@@ -46,8 +46,10 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     if (mounted) setState(() {});
   }
 
-  Future<void> updateNearest() async {
-    await widget.def.updateNearest();
+  Future<void> updateNearest([LatLngBounds? bounds]) async {
+    bounds ??= ref.read(visibleBoundsProvider);
+    if (bounds == null) return;
+    await widget.def.updateNearest(bounds);
 
     // Prepare a map of global keys for [MultiHitMarkerLayer].
     for (final e in widget.def.nearest) {
@@ -108,8 +110,8 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
     ref.listen(needMapUpdateProvider, (_, next) {
       updateNearest();
     });
-    ref.listen(effectiveLocationProvider, (_, LatLng next) {
-      updateNearest();
+    ref.listen(visibleBoundsProvider, (_, next) {
+      updateNearest(next);
     });
 
     return Column(

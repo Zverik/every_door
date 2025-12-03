@@ -49,8 +49,10 @@ class _ClassicModePageState extends ConsumerState<ClassicModePane> {
     if (mounted) setState(() {});
   }
 
-  Future<void> updateNearest() async {
-    await widget.def.updateNearest();
+  Future<void> updateNearest([LatLngBounds? bounds]) async {
+    final bounds = ref.read(visibleBoundsProvider);
+    if (bounds == null) return;
+    await widget.def.updateNearest(bounds);
   }
 
   @override
@@ -65,8 +67,8 @@ class _ClassicModePageState extends ConsumerState<ClassicModePane> {
     ref.listen(needMapUpdateProvider, (_, next) {
       updateNearest();
     });
-    ref.listen(effectiveLocationProvider, (_, LatLng next) {
-      updateNearest();
+    ref.listen(visibleBoundsProvider, (_, next) {
+      updateNearest(next);
     });
 
     final screenSize = MediaQuery.of(context).size;
@@ -86,7 +88,7 @@ class _ClassicModePageState extends ConsumerState<ClassicModePane> {
                   CustomMap(
                     controller: _controller,
                     updateState: true,
-                    hasFloatingButton: widget.def.nearestPOI.isEmpty && !isWide,
+                    hasFloatingButton: true,
                     layers: [
                       ...widget.def.overlays.map((i) => i.buildLayer()),
                       ...widget.def.mapLayers(),

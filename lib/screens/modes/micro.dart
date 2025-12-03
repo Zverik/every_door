@@ -60,11 +60,13 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
     if (mounted) setState(() {});
   }
 
-  Future<void> updateNearest() async {
+  Future<void> updateNearest([LatLngBounds? bounds]) async {
     // Disabling updates in zoomed in mode.
     if (ref.read(microZoomedInProvider) != null) return;
 
-    await widget.def.updateNearest();
+    bounds ??= ref.read(visibleBoundsProvider);
+    if (bounds == null) return;
+    await widget.def.updateNearest(bounds);
 
     if (mounted) {
       widget.def.updateLegend(context);
@@ -108,7 +110,7 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
       ref.read(microZoomedInProvider.notifier).state = LatLngBounds.fromPoints(
           amenitiesAtCenter.map((a) => a.location).toList());
       // Disable tracking.
-      ref.read(trackingProvider.notifier).state = false;
+      ref.read(trackingProvider.notifier).disable();
       // updateNearest(forceLocation: area.center);
       setState(() {
         _microPOI = amenitiesAtCenter;
@@ -135,8 +137,8 @@ class _MicromappingPageState extends ConsumerState<MicromappingPane> {
     ref.listen(poiFilterProvider, (_, next) {
       updateNearest();
     });
-    ref.listen(effectiveLocationProvider, (_, LatLng next) {
-      updateNearest();
+    ref.listen(visibleBoundsProvider, (_, next) {
+      updateNearest(next);
     });
     ref.listen<LatLngBounds?>(microZoomedInProvider, (_, next) {
       // Only update when returning from the mode.

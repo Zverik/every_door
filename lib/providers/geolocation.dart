@@ -28,8 +28,12 @@ class TrackingNotifier extends Notifier<bool> {
   @override
   bool build() => false;
 
-  void set(bool value) {
-    state = value;
+  void enable() {
+    state = true;
+  }
+
+  void disable() {
+    state = false;
   }
 }
 
@@ -131,7 +135,7 @@ class GeolocationController extends Notifier<LatLng?> {
   }
 
   void disableTracking() {
-    ref.read(trackingProvider.notifier).state = false;
+    ref.read(trackingProvider.notifier).disable();
   }
 
   Future<void> enableTracking([BuildContext? context]) async {
@@ -163,7 +167,7 @@ class GeolocationController extends Notifier<LatLng?> {
     }
 
     if (_locSub != null) {
-      ref.read(trackingProvider.notifier).set(true);
+      ref.read(trackingProvider.notifier).enable();
     }
   }
 

@@ -6,6 +6,7 @@ import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/poi_marker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
 abstract class ClassicModeDefinition extends BaseModeDefinition {
@@ -17,10 +18,8 @@ abstract class ClassicModeDefinition extends BaseModeDefinition {
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) {}
 
   @override
-  updateNearest() async {
-    List<OsmChange> data = await super.getNearestChanges();
-    data = data.where((e) => isOurKind(e)).toList();
-    nearestPOI = data;
+  updateNearest(LatLngBounds bounds) async {
+    nearestPOI = await super.getNearestChanges(bounds);
     notifyListeners();
   }
 

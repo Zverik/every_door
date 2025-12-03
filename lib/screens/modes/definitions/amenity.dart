@@ -10,6 +10,7 @@ import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/poi_marker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
@@ -59,9 +60,9 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
   int get maxTileCount => _kAmenitiesInList;
 
   @override
-  updateNearest({int? forceRadius}) async {
+  updateNearest(LatLngBounds bounds) async {
     List<OsmChange> data =
-        await super.getNearestChanges(forceRadius: forceRadius);
+        await super.getNearestChanges(bounds, filter: false);
 
     // Keep other mode objects to show.
     final otherData = data
@@ -78,12 +79,6 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
     if (filter.isNotEmpty) {
       data = data.where((e) => filter.matches(e)).toList();
     }
-
-    // Sort by distance.
-    const distance = DistanceEquirectangular();
-    final LatLng location = ref.read(effectiveLocationProvider);
-    data.sort((a, b) => distance(location, a.location)
-        .compareTo(distance(location, b.location)));
 
     // Trim to 10-20 elements.
     if (data.length > _amenitiesOnScreen)
