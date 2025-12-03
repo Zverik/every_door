@@ -80,7 +80,6 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
 
   Future<void> updateNearest([LatLngBounds? bounds]) async {
     bounds ??= ref.read(visibleBoundsProvider);
-    print('POI: updating for bbox $bounds');
     if (bounds == null) return;
     await widget.def.updateNearest(bounds);
 

@@ -50,7 +50,6 @@ class EveryDoorApp {
     if (!imagery.overlay) {
       throw ArgumentError("Imagery should be an overlay");
     }
-    // TODO
     _ref
         .read(overlayImageryProvider.notifier)
         .addLayer(imagery.id, imagery, pluginId: plugin.id);

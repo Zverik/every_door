@@ -11,6 +11,7 @@ import 'package:every_door/models/plugin.dart';
 import 'package:every_door/plugins/every_door_plugin.dart';
 import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/providers/add_presets.dart';
+import 'package:every_door/providers/auth.dart';
 import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/events.dart';
@@ -81,9 +82,11 @@ class PluginManager extends Notifier<Set<String>> {
   /// to be reloaded, because settings are most likely used in its
   /// "install()" method.
   Future<void> reloadPlugin(Plugin plugin) async {
-    // For now we just disable and enable it.
-    await _disable(plugin);
-    await _enable(plugin);
+    if (plugin.active) {
+      // For now we just disable and enable it.
+      await _disable(plugin);
+      await _enable(plugin);
+    }
   }
 
   EveryDoorApp createContext(
@@ -148,6 +151,7 @@ class PluginManager extends Notifier<Set<String>> {
 
     if (plugin.instance != null) {
       try {
+        ref.read(authProvider.notifier).removePrefixed('${plugin.id}#');
         await plugin.instance
             ?.uninstall(EveryDoorApp(plugin: plugin, ref: ref));
       } catch (e) {

@@ -47,6 +47,16 @@ class AuthMapController extends Notifier<Map<String, AuthController>> {
     state = newState;
   }
 
+  void removePrefixed(String prefix) {
+    final newState = Map.of(state);
+    newState.forEach((k, v) {
+      if (k.startsWith(prefix)) v.removeListener(onValueChanged);
+    });
+    newState.removeWhere((k, v) => k.startsWith(prefix));
+    if (newState.length == state.length) return;
+    state = newState;
+  }
+
   void onValueChanged() {
     // Trigger the notify, given the comparison function is [identical].
     state = Map.of(state);
