@@ -38,7 +38,7 @@ class PluginUnderConstruction extends EveryDoorPlugin {
       apiFound = true;
     }
 
-    app.addMode(TestMode(app.ref));
+    app.addMode(TestMode(app));
     app.addAuthProvider('panoramax', PanoramaxAuth());
 
     app.events.onDownload((location) async {
@@ -262,7 +262,7 @@ class PanoramaxAuth extends AuthProvider {
 }
 
 class TestMode extends ClassicModeDefinition {
-  TestMode(super.ref);
+  TestMode(EveryDoorApp app): super.fromPlugin(app);
 
   @override
   MultiIcon getIcon(BuildContext context, bool outlined) => MultiIcon(fontIcon: Icons.ac_unit);

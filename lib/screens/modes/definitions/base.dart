@@ -4,6 +4,7 @@ import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/plugin.dart';
+import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/widgets/map_button.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ abstract class BaseModeDefinition extends ChangeNotifier {
   final _overlays = <Imagery>[];
 
   BaseModeDefinition(this.ref);
+
+  BaseModeDefinition.fromPlugin(EveryDoorApp plugin): this(plugin.ref);
 
   String get name;
 

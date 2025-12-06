@@ -23,7 +23,6 @@ import 'package:every_door/providers/shared_preferences.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/screens/modes/definitions/entrances.dart';
 import 'package:every_door/screens/modes/definitions/micro.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_map_geojson2/flutter_map_geojson2.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
@@ -89,10 +88,8 @@ class PluginManager extends Notifier<Set<String>> {
     }
   }
 
-  EveryDoorApp createContext(
-          Plugin plugin, BuildContext context, Function() onRepaint) =>
-      EveryDoorApp(
-          plugin: plugin, ref: ref, context: context, onRepaint: onRepaint);
+  EveryDoorApp createContext(Plugin plugin, Function() onRepaint) =>
+      EveryDoorApp(plugin: plugin, ref: ref, onRepaint: onRepaint);
 
   List<Plugin> _getActivePlugins() => ref
       .read(pluginRepositoryProvider)

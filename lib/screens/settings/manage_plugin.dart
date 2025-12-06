@@ -21,10 +21,10 @@ class _ManagePluginPageState extends ConsumerState<ManagePluginPage> {
         ref.watch(pluginManagerProvider).contains(widget.plugin.id);
     final app = ref
         .read(pluginManagerProvider.notifier)
-        .createContext(widget.plugin, context, () {
-          if (context.mounted) {
-            setState(() {});
-          }
+        .createContext(widget.plugin, () {
+      if (context.mounted) {
+        setState(() {});
+      }
     });
     final customSettings =
         widget.plugin.instance?.buildSettingsPane(app, context);
@@ -32,9 +32,7 @@ class _ManagePluginPageState extends ConsumerState<ManagePluginPage> {
     return PopScope(
       onPopInvokedWithResult: (didPop, _) {
         if (didPop && customSettings != null) {
-          ref
-              .read(pluginManagerProvider.notifier)
-              .reloadPlugin(widget.plugin);
+          ref.read(pluginManagerProvider.notifier).reloadPlugin(widget.plugin);
         }
       },
       child: Scaffold(

@@ -1,4 +1,5 @@
 import 'package:every_door/helpers/legend.dart';
+import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/screens/editor.dart';
@@ -13,6 +14,8 @@ abstract class ClassicModeDefinition extends BaseModeDefinition {
   List<OsmChange> nearestPOI = [];
 
   ClassicModeDefinition(super.ref);
+
+  ClassicModeDefinition.fromPlugin(EveryDoorApp plugin): this(plugin.ref);
 
   @override
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) {}

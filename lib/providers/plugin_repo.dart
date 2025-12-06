@@ -8,6 +8,7 @@ import 'package:every_door/providers/plugin_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_archive/flutter_archive.dart';
+import 'package:flutter_eval/flutter_eval.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
@@ -238,7 +239,7 @@ class PluginRepository extends Notifier<List<Plugin>> {
 
     final bytecode = (await main.readAsBytes()).buffer.asByteData();
     final runtime = Runtime(bytecode);
-    // runtime.addPlugin(flutterEvalPlugin);
+    runtime.addPlugin(flutterEvalPlugin);
     // TODO: add two other plugins
     try {
       final result =

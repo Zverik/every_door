@@ -84,7 +84,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app needs camera access to scan QR codes.</string>
+	<string>This app needs camera access to scan QR codes and add photos to notes.</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Photo gallery access is needed for adding photos to notes.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>The editor need to know where you are for mapping, but does not use location in the background.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

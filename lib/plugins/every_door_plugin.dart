@@ -15,7 +15,8 @@ class EveryDoorPlugin {
 
   /// Returns a widget for the plugin settings. The best option would be
   /// to return a [Column] with a list of [ListTile].
-  /// Use [EveryDoorApp.preferences] for storing those.
+  /// Use [EveryDoorApp.preferences] for storing those. Use
+  /// [EveryDoorApp.repaint] method when you usually would call setState().
   Widget? buildSettingsPane(EveryDoorApp app, BuildContext context) {
     return null;
   }

@@ -38,6 +38,7 @@ dependencies:
   flutter_secure_storage: ^10.0.0-beta.4
   geolocator: ^14.0.1
   http: ^1.1.0
+  image_picker: ^1.2.1
   intl: ^0.20.2
   jovial_svg: ^1.1.26
   latlong2: ^0.9.0
@@ -83,7 +84,7 @@ dependency_overrides:
   flutter_eval:
     git:
       url: https://github.com/Zverik/flutter_eval.git
-      ref: fix_build_yaml
+      ref: no_icons
 # Uncomment this for publishing on F-Droid
 #f  geolocator_android:
 #f    git:
