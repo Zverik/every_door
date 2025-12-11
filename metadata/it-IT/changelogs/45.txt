@@ -1,0 +1,4 @@
+* Aggiuntaa visualizzazione del percorso recente.
+* Il disegno GeoScribbles è bloccato per impostazione predefinita.
+* QR code scanner per il campo sito web.
+* La posizione è aggiornata una volta al secondo.
