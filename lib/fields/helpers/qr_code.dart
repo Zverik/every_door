@@ -6,6 +6,11 @@ import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 
+/// Shows a QR code scanner and returns an [Uri] or a [null] if
+/// it's cancelled. Note that it has a built-in tracking parameter
+/// filter, and it _always_ sets a non-null (often empty) [Uri.query].
+/// Meaning it won't be equal to an uri without a query.
+/// Use [Uri.toStringFix] to convert it to a string for comparisons.
 class QrCodeScanner extends StatefulWidget {
   static const kEnabled = true;
   final bool resolveRedirects;
@@ -90,6 +95,10 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
         url = url.replace(
             queryParameters: Map.fromEntries(url.queryParameters.entries
                 .where((e) => !kTrackingParams.contains(e.key))));
+        if (url.query.isEmpty) {
+          // Erase the lone "?" from the tail.
+          url = Uri.parse(url.toStringFix());
+        }
         if (mounted) nav.pop(url);
       }
     }
@@ -112,5 +121,13 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
         },
       ),
     );
+  }
+}
+
+extension ProperToString on Uri {
+  String toStringFix() {
+    final value = toString();
+    if (value.endsWith('?')) return value.substring(0, value.length - 1);
+    return value;
   }
 }
