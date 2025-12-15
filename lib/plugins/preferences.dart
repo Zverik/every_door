@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// using it directly, but this allows us to track preferences by plugin.
 /// Basically adds a prefix to every key, and accesses the app-wide
 /// [SharedPreferencesWithCache] instance.
+@Bind()
 class PluginPreferences {
   final String _pluginId;
   final Ref _ref;

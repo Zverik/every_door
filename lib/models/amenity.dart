@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
@@ -13,6 +14,7 @@ import 'package:every_door/helpers/tags/tag_emoji.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
+@Bind()
 class OsmChange extends ChangeNotifier implements Comparable {
   static final kDateFormat = DateFormat('yyyy-MM-dd');
   static const kCheckedKey = 'check_date';

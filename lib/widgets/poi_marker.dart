@@ -1,5 +1,7 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:flutter/material.dart';
 
+@Bind()
 class NumberedMarker extends StatelessWidget {
   final int? index;
   final Color color;
@@ -37,6 +39,7 @@ class NumberedMarker extends StatelessWidget {
   }
 }
 
+@Bind()
 class ColoredMarker extends StatelessWidget {
   final Color color;
   final bool isIncomplete;

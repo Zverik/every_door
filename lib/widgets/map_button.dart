@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -119,6 +120,7 @@ class MapButtonColumn extends StatelessWidget {
   }
 }
 
+@Bind()
 class MapButton extends StatelessWidget {
   /// An optional identifier to refer this button later.
   final String? id;

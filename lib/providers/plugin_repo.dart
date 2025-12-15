@@ -1,20 +1,18 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:every_door/helpers/plugin_code.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/plugins/_construction.dart';
-import 'package:every_door/plugins/every_door_plugin.dart';
 import 'package:every_door/providers/plugin_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_archive/flutter_archive.dart';
-import 'package:flutter_eval/flutter_eval.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:yaml/yaml.dart';
 import 'package:every_door/helpers/yaml_map.dart';
-import 'package:dart_eval/dart_eval.dart';
 
 final pluginRepositoryProvider =
     NotifierProvider<PluginRepository, List<Plugin>>(PluginRepository.new);
@@ -43,7 +41,7 @@ class PluginRepository extends Notifier<List<Plugin>> {
         try {
           final metadata = await readPluginData(entry);
           plugins.add(Plugin.fromData(metadata, entry,
-              instanceBuilder: instantiatePlugin));
+              instanceBuilder: PluginCode.instantiatePlugin));
         } on PluginLoadException catch (e) {
           _logger.severe('Failed to load plugin metadata', e);
         }
@@ -229,27 +227,5 @@ class PluginRepository extends Notifier<List<Plugin>> {
   Future<void> install(File file) async {
     final tmpPluginDir = await unpackAndDelete(file);
     await installFromTmpDir(tmpPluginDir);
-  }
-
-  /// Reads the plugin bytecode, runs the main() function, and returns the
-  /// [EveryDoorPlugin] that it instantiates.
-  static Future<EveryDoorPlugin?> instantiatePlugin(Plugin plugin) async {
-    final main = plugin.resolvePath("plugin.evc");
-    if (!await main.exists()) return null;
-
-    final bytecode = (await main.readAsBytes()).buffer.asByteData();
-    final runtime = Runtime(bytecode);
-    runtime.addPlugin(flutterEvalPlugin);
-    // TODO: add two other plugins
-    try {
-      final result =
-          runtime.executeLib('package:${plugin.id}/main.dart', 'build');
-      if (result is EveryDoorPlugin) return result;
-      _logger.warning(
-          'build() function for plugin ${plugin.id} returned class ${result?.runtimeType}');
-    } catch (e) {
-      _logger.warning('Failed to execute build() for plugin ${plugin.id}: $e');
-    }
-    return null;
   }
 }

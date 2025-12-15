@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/plugin_i18n.dart';
 import 'package:every_door/models/version.dart';
@@ -26,6 +27,7 @@ class PluginLoadException implements Exception {
 
 /// Plugin metadata. Basically an identifier and a dictionary
 /// from the bundled yaml file.
+@Bind()
 class PluginData {
   final String id;
   final Map<String, dynamic> data;
@@ -81,6 +83,7 @@ typedef InstanceBuilder = Future<EveryDoorPlugin?> Function(Plugin);
 /// metadata is final, but the [active] flag can be changed in runtime.
 /// Same with [instance]: it is initialized when the plugin is made active,
 /// and reset when it is disabled.
+@Bind()
 class Plugin extends PluginData {
   static final _logger = Logger('Plugin');
 
@@ -132,6 +135,14 @@ class Plugin extends PluginData {
       throw ArgumentError('File "$name" is not inside the plugin directory');
     }
     return file;
+  }
+
+  Directory resolveDirectory(String name) {
+    final dir = Directory('${directory.path}/$name');
+    if (!dir.absolute.path.startsWith(directory.absolute.path)) {
+      throw ArgumentError('Directory "$name" is not inside the plugin directory');
+    }
+    return dir;
   }
 
   MultiIcon loadIcon(String name, [String? tooltip]) {

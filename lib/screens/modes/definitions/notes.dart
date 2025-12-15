@@ -1,8 +1,7 @@
-import 'package:every_door/constants.dart';
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/models/plugin.dart';
-import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 import 'package:flutter_map/flutter_map.dart';
 
+@Bind(bridge: true, implicitSupers: true)
 abstract class NotesModeDefinition extends BaseModeDefinition {
   List<BaseNote> notes = [];
 

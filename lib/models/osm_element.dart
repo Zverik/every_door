@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/geometry/geometry.dart';
@@ -9,6 +10,7 @@ import 'dart:convert';
 import 'package:xml/xml.dart';
 
 /// An element type: node, way, or relation.
+@Bind()
 enum OsmElementType { node, way, relation }
 
 /// Mapping from the enum value to strings.
@@ -19,6 +21,7 @@ const kOsmElementTypeName = <OsmElementType, String>{
 };
 
 /// OSM identifier: a type and a number.
+@Bind()
 class OsmId {
   final OsmElementType type;
   final int ref;
@@ -66,6 +69,7 @@ class OsmId {
 }
 
 /// An OSM relation member. Contains of an OSM id and an optional [role].
+@Bind()
 class OsmMember {
   final OsmId id;
   final String? role;
@@ -90,9 +94,11 @@ class OsmMember {
 
 /// Whether this object is a member of a way or a relation. Way
 /// membership takes precedence.
+@Bind()
 enum IsMember { no, way, relation }
 
 /// An OSM element downloaded from the server.
+@Bind()
 class OsmElement {
   final OsmId id;
   final Map<String, String> tags;

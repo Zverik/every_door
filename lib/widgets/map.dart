@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' show min, max;
 
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/geometry/closest_points.dart';
 import 'package:every_door/helpers/multi_icon.dart';
@@ -25,6 +26,7 @@ import 'package:every_door/generated/l10n/app_localizations.dart'
 
 import '../providers/cur_imagery.dart';
 
+@Bind()
 class CustomMapController {
   Function(Iterable<LatLng>)? zoomListener;
   MapController? mapController;
@@ -46,6 +48,7 @@ class CustomMapController {
 
 /// General map widget for every map in Every Door. Encloses layer management,
 /// interaction, additional buttons etc etc.
+@Bind()
 class CustomMap extends ConsumerStatefulWidget {
   final void Function(LatLng, double Function(LatLng))? onTap;
   final CustomMapController? controller;

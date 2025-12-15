@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
@@ -149,7 +147,7 @@ class GeolocationController extends Notifier<LatLng?> {
     // Request for location service if needed.
     final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isLocationEnabled) {
-      if (context != null) {
+      if (context != null && context.mounted) {
         final loc = AppLocalizations.of(context);
         await showOkAlertDialog(
           title: loc?.enableGPS ?? 'Enable GPS',

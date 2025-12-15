@@ -1,5 +1,6 @@
 import 'dart:convert' show json;
 
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/auth/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:logging/logging.dart';
 
 /// This controller manages an [AuthProvider], saving a token to the
 /// local storage and keeping user details in [value] ready to display.
+@Bind()
 class AuthController extends ValueNotifier<UserDetails?> {
   static final _logger = Logger("AuthController");
 

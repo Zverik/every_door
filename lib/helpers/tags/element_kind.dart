@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/tags/element_kind_std.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/helpers/multi_icon.dart';
@@ -6,6 +7,7 @@ import 'package:every_door/models/amenity.dart';
 
 /// A static factory for [ElementKindImpl], which also contains some
 /// pre-defined kinds and supports merging kinds.
+@Bind()
 class ElementKind {
   /// Matches objects without meaningful tags.
   static ElementKindImpl get empty => _kinds["empty"]!;
@@ -93,6 +95,7 @@ class ElementKind {
   }
 }
 
+@Bind()
 class ElementKindImpl {
   final String name;
   final MultiIcon? icon;

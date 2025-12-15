@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/providers/location.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
+@Bind()
 class ExtOverlay extends Imagery {
   final Widget Function(BuildContext context, dynamic data) build;
   final int updateInMeters;

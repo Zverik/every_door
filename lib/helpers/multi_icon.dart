@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/cached_svg_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,77 +9,78 @@ import 'package:jovial_svg/jovial_svg.dart';
 /// It replaces IconData class, allowing for raster
 /// and vector images. An image should be rectangular,
 /// recommended dimensions are 256×256.
+@Bind()
 class MultiIcon {
   static final _svgCache = ScalableImageCache(size: 1000);
 
-  final IconData? fontIcon;
-  final String? emoji;
-  late final ImageProvider<Object>? image;
-  late final ScalableImage? svg;
-  late final ScalableImageSource? svgSource;
+  final IconData? _fontIcon;
+  final String? _emoji;
+  late final ImageProvider<Object>? _image;
+  late final ScalableImage? _svg;
+  late final ScalableImageSource? _svgSource;
   final String? tooltip;
 
   MultiIcon({
-    this.fontIcon,
-    this.emoji,
+    IconData? fontIcon,
+    String? emoji,
     Uint8List? imageData,
     Uint8List? svgData,
     Uint8List? siData,
     String? imageUrl,
     String? asset,
     this.tooltip,
-  }) {
+  }) : _fontIcon = fontIcon, _emoji = emoji {
     if (imageData != null) {
-      image = MemoryImage(imageData);
+      _image = MemoryImage(imageData);
     } else if (asset != null && !asset.contains('.svg')) {
-      image = AssetImage(asset);
+      _image = AssetImage(asset);
     } else if (imageUrl != null && !imageUrl.contains('.svg')) {
-      image = CachedNetworkImageProvider(imageUrl);
+      _image = CachedNetworkImageProvider(imageUrl);
     } else {
-      image = null;
+      _image = null;
     }
 
     if (svgData != null) {
-      svg = ScalableImage.fromSvgString(String.fromCharCodes(svgData));
-      svgSource = null;
+      _svg = ScalableImage.fromSvgString(String.fromCharCodes(svgData));
+      _svgSource = null;
     } else if (siData != null) {
-      svg = ScalableImage.fromSIBytes(siData);
-      svgSource = null;
+      _svg = ScalableImage.fromSIBytes(siData);
+      _svgSource = null;
     } else if (asset != null && asset.contains('.si')) {
-      svg = null;
-      svgSource = ScalableImageSource.fromSI(rootBundle, asset);
+      _svg = null;
+      _svgSource = ScalableImageSource.fromSI(rootBundle, asset);
     } else if (asset != null && asset.contains('.svg')) {
-      svg = null;
-      svgSource = ScalableImageSource.fromSvg(rootBundle, asset);
+      _svg = null;
+      _svgSource = ScalableImageSource.fromSvg(rootBundle, asset);
     } else if (imageUrl != null && imageUrl.contains('.svg')) {
-      svg = null;
-      svgSource = CachedSvgSource(imageUrl);
+      _svg = null;
+      _svgSource = CachedSvgSource(imageUrl);
     } else {
-      svg = null;
-      svgSource = null;
+      _svg = null;
+      _svgSource = null;
     }
 
-    if ((emoji?.runes.length ?? 0) > 1) {
-      throw ArgumentError('MultiIcon allows only one rune for emoji: $emoji');
+    if ((_emoji?.runes.length ?? 0) > 1) {
+      throw ArgumentError('MultiIcon allows only one rune for emoji: $_emoji');
     }
   }
 
   MultiIcon._({
-    this.fontIcon,
-    this.emoji,
-    this.image,
-    this.svg,
-    this.svgSource,
+    IconData? fontIcon,
+    String? emoji,
+    ImageProvider<Object>? image,
+    ScalableImage? svg,
+    ScalableImageSource? svgSource,
     this.tooltip,
-  });
+  }) : _fontIcon = fontIcon, _emoji = emoji, _svgSource = svgSource, _svg = svg, _image = image;
 
   MultiIcon withTooltip(String? tooltip) {
     return MultiIcon._(
-        fontIcon: fontIcon,
-        emoji: emoji,
-        image: image,
-        svg: svg,
-        svgSource: svgSource,
+        fontIcon: _fontIcon,
+        emoji: _emoji,
+        image: _image,
+        svg: _svg,
+        svgSource: _svgSource,
         tooltip: tooltip);
   }
 
@@ -106,39 +108,39 @@ class MultiIcon {
       }
     }
 
-    if (fontIcon != null)
+    if (_fontIcon != null)
       return Icon(
-        fontIcon,
+        _fontIcon,
         size: size,
         color: color,
         semanticLabel: semanticLabel,
       );
-    if (image != null) {
+    if (_image != null) {
       return icon
           ? ImageIcon(
-              image!,
+              _image,
               color: color,
               size: size,
               semanticLabel: semanticLabel,
             )
           : Image(
-              image: image!,
+              image: _image,
               semanticLabel: semanticLabel,
               width: size,
               height: size,
             );
     }
-    if (svg != null) {
+    if (_svg != null) {
       final modified =
-          color == null || !icon ? svg! : svg!.modifyCurrentColor(color);
+          color == null || !icon ? _svg : _svg.modifyCurrentColor(color);
       final widget = ScalableImageWidget(si: modified, fit: BoxFit.contain);
       return size == null
           ? widget
           : SizedBox(width: size, height: size, child: widget);
     }
-    if (svgSource != null) {
+    if (_svgSource != null) {
       final widget = ScalableImageWidget.fromSISource(
-        si: svgSource!,
+        si: _svgSource,
         cache: _svgCache,
         currentColor: icon ? color : null,
       );
@@ -146,9 +148,9 @@ class MultiIcon {
           ? widget
           : SizedBox(width: size, height: size, child: widget);
     }
-    if (emoji != null)
+    if (_emoji != null)
       return Text(
-        emoji!,
+        _emoji,
         overflow: TextOverflow.visible,
         style: TextStyle(
           color: color,
@@ -163,11 +165,11 @@ class MultiIcon {
 
   @override
   String toString() {
-    if (fontIcon != null) return 'MultiIcon(fontIcon=$fontIcon)';
-    if (image != null) return 'MultiIcon(image=$image)';
-    if (svg != null) return 'MultiIcon(svg=$svg)';
-    if (svgSource != null) return 'MultiIcon(svgSource=$svgSource)';
-    if (emoji != null) return 'MultiIcon(emoji=$emoji)';
+    if (_fontIcon != null) return 'MultiIcon(fontIcon=$_fontIcon)';
+    if (_image != null) return 'MultiIcon(image=$_image)';
+    if (_svg != null) return 'MultiIcon(svg=$_svg)';
+    if (_svgSource != null) return 'MultiIcon(svgSource=$_svgSource)';
+    if (_emoji != null) return 'MultiIcon(emoji=$_emoji)';
     return 'MultiIcon(empty)';
   }
 }

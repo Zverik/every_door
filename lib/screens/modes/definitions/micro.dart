@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
@@ -28,6 +29,7 @@ const _kDefaultMicroPresets = [
   'tourism/information/guidepost', 'tourism/information/board',
 ];
 
+@Bind(bridge: true, implicitSupers: true)
 abstract class MicromappingModeDefinition extends BaseModeDefinition {
   static const kMicroStuffInList = 24;
 

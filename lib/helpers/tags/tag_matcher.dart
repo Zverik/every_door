@@ -1,9 +1,11 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/amenity.dart';
 
 /// A class for matching tag lists against a set of rules.
 /// Contains rules for individual keys (see [ValueMatcher]),
 /// and lists of [good] and [missing] keys to validate.
+@Bind()
 class TagMatcher {
   /// Empty matcher that matches everything.
   static const empty = TagMatcher({});
@@ -114,6 +116,7 @@ class TagMatcher {
 }
 
 /// This class matches tag values to a set of rules.
+@Bind()
 class ValueMatcher {
   /// Those values are forbidden, the matcher will return "false".
   final Set<String> except;

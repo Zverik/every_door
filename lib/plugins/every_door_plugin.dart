@@ -1,8 +1,10 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/plugins/interface.dart';
 import 'package:flutter/material.dart';
 
 /// Parent class for every plugin. None of the methods need to be implemented,
 /// although it would be weird.
+@Bind(bridge: true)
 class EveryDoorPlugin {
   /// Set up listeners and stuff. This gets called when the plugin is enabled,
   /// either during the start-up, or after the installation.

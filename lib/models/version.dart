@@ -1,3 +1,6 @@
+import 'package:eval_annotation/eval_annotation.dart';
+
+@Bind()
 class PluginVersion {
   late final int? _major;
   late final int _minor;
@@ -69,6 +72,7 @@ class PluginVersion {
   int get hashCode => Object.hash(_major, _minor);
 }
 
+@Bind()
 class PluginVersionRange {
   late final PluginVersion min;
   late final PluginVersion max;

@@ -1,8 +1,10 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/imagery.dart';
 import 'package:flutter/widgets.dart' show Widget, protected;
 
 /// Imagery category, a subset of the Editor Layer Index categories.
+@Bind()
 enum ImageryCategory {
   photo,
   map,
@@ -13,6 +15,7 @@ enum ImageryCategory {
 /// layer index, and just the identifier and type are required. This is
 /// the super-class for the multitude of implementations, including TMS,
 /// WMS, and vector tiles.
+@Bind()
 abstract class Imagery {
   /// Package name to send to servers.
   @protected

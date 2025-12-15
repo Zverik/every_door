@@ -1,10 +1,9 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/plugin.dart';
-import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
@@ -27,6 +26,7 @@ const _kDefaultPoiPresets = [
   'amenity/fuel', 'amenity/car_wash',
 ];
 
+@Bind(bridge: true, implicitSupers: true)
 abstract class AmenityModeDefinition extends BaseModeDefinition {
   static const _kAmenitiesInList = 12;
 

@@ -1,9 +1,11 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/auth/provider.dart';
 import 'package:every_door/helpers/oauth2_client_debug.dart';
 import 'package:flutter/material.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
 
+@Bind()
 class OAuth2Token implements AuthToken {
   final AccessTokenResponse token;
 
@@ -24,6 +26,7 @@ class OAuth2Token implements AuthToken {
 
 /// Authentication provider for services with OAuth2. Which are
 /// basically the most of them, including OpenStreetMap.
+@Bind(bridge: true, implicitSupers: true)
 abstract class OAuth2AuthProvider extends AuthProvider {
   final OAuth2Client _client;
   final String _clientId;

@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/in_countries.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
@@ -21,6 +22,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 
+@Bind(bridge: true, implicitSupers: true)
 abstract class EntrancesModeDefinition extends BaseModeDefinition {
   List<OsmChange> nearest = [];
   LatLng? newLocation;

@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/preset.dart';
@@ -5,6 +6,7 @@ import 'package:every_door/providers/presets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+@Bind()
 class LegendItem {
   final Color? color;
   final MultiIcon? icon;
@@ -24,11 +26,13 @@ class LegendItem {
 const kLegendOtherColor = Colors.black;
 const kLegendNoColor = Colors.transparent;
 
+@Bind()
 class NamedColor extends Color {
   final String name;
   const NamedColor(this.name, super.value);
 }
 
+@Bind()
 class PresetLabel {
   final String id;
   final String label;
@@ -43,6 +47,7 @@ class PresetLabel {
   int get hashCode => Object.hash(id, label);
 }
 
+@Bind()
 class LegendController extends ChangeNotifier {
   final Ref _ref;
 

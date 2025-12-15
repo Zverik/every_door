@@ -1,3 +1,4 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/legend.dart';
 import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/models/amenity.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
+@Bind(bridge: true, implicitSupers: true)
 abstract class ClassicModeDefinition extends BaseModeDefinition {
   List<OsmChange> nearestPOI = [];
 
