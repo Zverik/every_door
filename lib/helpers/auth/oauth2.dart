@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_client.dart';
 
-@Bind()
 class OAuth2Token implements AuthToken {
   final AccessTokenResponse token;
 
@@ -34,19 +33,17 @@ abstract class OAuth2AuthProvider extends AuthProvider {
   final List<String> _scopes;
 
   OAuth2AuthProvider({
-    OAuth2Client? client,
     required String authorizeUrl,
     required String tokenUrl,
     required String clientId,
     required String clientSecret,
     required List<String> scopes,
-  })  : _client = client ??
-            OAuth2ClientDebug(
-              authorizeUrl: authorizeUrl,
-              tokenUrl: tokenUrl,
-              redirectUri: 'everydoor:/oauth',
-              customUriScheme: 'everydoor',
-            ),
+  })  : _client = OAuth2ClientDebug(
+          authorizeUrl: authorizeUrl,
+          tokenUrl: tokenUrl,
+          redirectUri: 'everydoor:/oauth',
+          customUriScheme: 'everydoor',
+        ),
         _clientId = clientId,
         _clientSecret = clientSecret,
         _scopes = scopes;

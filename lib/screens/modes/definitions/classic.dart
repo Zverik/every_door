@@ -17,7 +17,7 @@ abstract class ClassicModeDefinition extends BaseModeDefinition {
 
   ClassicModeDefinition(super.ref);
 
-  ClassicModeDefinition.fromPlugin(EveryDoorApp plugin): this(plugin.ref);
+  ClassicModeDefinition.fromPlugin(EveryDoorApp app): this(app.ref);
 
   @override
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) {}

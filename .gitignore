@@ -62,4 +62,5 @@ lib/commit_info.g.dart
 
 # I just keep them there
 /plugins/
-*.eval.dart
+/.dart_eval/
+/tools/svg/

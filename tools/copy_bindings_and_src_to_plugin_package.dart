@@ -1,16 +1,52 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
+const kPackageName = 'every_door_plugin';
+
+void makeDirectories(String path) {
+  final dir = Directory(p.dirname(path));
+  dir.createSync(recursive: true);
+}
+
+void processBindingFile(File file, Directory lib, Directory dest) {
+  String content = file.readAsStringSync();
+  final importRe = RegExp(r"import 'package:every_door/([^']+\.dart)'");
+  for (final match in importRe.allMatches(content)) {
+    final path = match.group(1)!;
+    if (!path.contains('/plugins/bindings/') && !path.contains('.eval.dart')) {
+      // Copy this file only if it is missing in the dest!
+      final source = File(p.join(lib.path, path));
+      final target = File(p.join(dest.path, path));
+      if (source.existsSync() && !target.existsSync()) {
+        makeDirectories(target.path);
+        source.copySync(target.path);
+        replacePackage(target);
+      }
+    }
+  }
+}
+
+void replacePackage(File target) {
+  String content = target.readAsStringSync();
+  content = content.replaceAll("import 'package:every_door/", "import 'package:$kPackageName/");
+  target.writeAsStringSync(content);
+}
+
 void main() {
   final root = File(Platform.script.toFilePath()).parent.parent;
   final lib = Directory(p.join(root.path, 'lib'));
   if (!lib.existsSync())
     throw PathNotFoundException(lib.path, OSError('Cannot find the lib path'));
 
+  final dest = Directory(p.join(root.parent.path, kPackageName, 'lib'));
+  if (!dest.existsSync())
+    throw PathNotFoundException(
+        dest.path, OSError("Cannot find the plugin path"));
+
   final files = lib
       .listSync(recursive: true)
       .whereType<File>()
-      .where((p) => p.path.contains('/plugins/bindings/'));
+      .where((p) => p.path.contains('lib/plugins/bindings/'));
 
   // Probably need to iterate over files in plugins/bindings
   // and copy both them and files they reference to the every_door_plugin/lib
@@ -18,6 +54,10 @@ void main() {
   // Also remove the @Bind and eval_annotation references.
 
   for (final file in files) {
-    // TODO
+    String target = p.join(dest.path, p.relative(file.path, from: lib.path));
+    makeDirectories(target);
+    file.copySync(target);
+    replacePackage(File(target));
+    if (file.path.endsWith(".eval.dart")) processBindingFile(file, lib, dest);
   }
 }

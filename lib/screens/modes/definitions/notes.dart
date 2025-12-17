@@ -2,6 +2,7 @@ import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/models/plugin.dart';
+import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ abstract class NotesModeDefinition extends BaseModeDefinition {
   List<BaseNote> notes = [];
 
   NotesModeDefinition(super.ref);
+
+  NotesModeDefinition.fromPlugin(EveryDoorApp app): this(app.ref);
 
   @override
   MultiIcon getIcon(BuildContext context, bool outlined) {

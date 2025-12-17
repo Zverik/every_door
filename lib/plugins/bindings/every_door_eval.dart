@@ -59,7 +59,6 @@ class EveryDoorPlugin implements EvalPlugin {
     registry.defineBridgeClass($UserDetails$bridge.$declaration);
     registry.defineBridgeClass($AuthException$bridge.$declaration);
     registry.defineBridgeClass($AuthProvider$bridge.$declaration);
-    registry.defineBridgeClass($OAuth2Token.$declaration);
     registry.defineBridgeClass($OAuth2AuthProvider$bridge.$declaration);
     registry.defineBridgeClass($AuthController.$declaration);
     registry.defineBridgeClass($Imagery.$declaration);
@@ -122,7 +121,6 @@ class EveryDoorPlugin implements EvalPlugin {
     $UserDetails$bridge.configureForRuntime(runtime);
     $AuthException$bridge.configureForRuntime(runtime);
     $AuthProvider$bridge.configureForRuntime(runtime);
-    $OAuth2Token.configureForRuntime(runtime);
     $OAuth2AuthProvider$bridge.configureForRuntime(runtime);
     $AuthController.configureForRuntime(runtime);
     $Imagery.configureForRuntime(runtime);

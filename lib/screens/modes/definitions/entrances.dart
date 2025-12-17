@@ -6,6 +6,7 @@ import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/imagery/vector_assets.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/models/preset.dart';
+import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/providers/cur_imagery.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/providers/presets.dart';
@@ -34,6 +35,8 @@ abstract class EntrancesModeDefinition extends BaseModeDefinition {
   ];
 
   EntrancesModeDefinition(super.ref);
+
+  EntrancesModeDefinition.fromPlugin(EveryDoorApp app): this(app.ref);
 
   @override
   String get name => "entrances";

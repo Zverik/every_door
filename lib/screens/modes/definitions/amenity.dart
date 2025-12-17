@@ -11,6 +11,7 @@ import 'package:every_door/widgets/poi_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 
@@ -42,6 +43,8 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
   };
 
   AmenityModeDefinition(super.ref);
+
+  AmenityModeDefinition.fromPlugin(EveryDoorApp app): this(app.ref);
 
   @override
   MultiIcon getIcon(BuildContext context, bool outlined) {

@@ -5,6 +5,7 @@ import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/helpers/legend.dart';
+import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
@@ -44,6 +45,8 @@ abstract class MicromappingModeDefinition extends BaseModeDefinition {
   MicromappingModeDefinition(super.ref) : legend = LegendController(ref) {
     legend.addListener(notifyListeners);
   }
+
+  MicromappingModeDefinition.fromPlugin(EveryDoorApp app): this(app.ref);
 
   @override
   MultiIcon getIcon(BuildContext context, bool outlined) {
