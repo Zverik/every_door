@@ -937,7 +937,7 @@
   "@pluginsDisable": {
     "description": "Button for deactivating a plugin."
   },
-  "pluginsDisabledHeader": "Отключить",
+  "pluginsDisabledHeader": "Отключены",
   "@pluginsDisabledHeader": {
     "description": "Header for the section listing deactivated, disabled plugins."
   },
