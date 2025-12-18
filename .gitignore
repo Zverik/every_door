@@ -53,6 +53,7 @@ venv/
 
 # Project files
 assets/presets.db
+assets/plugin.edp
 assets/*.db-journal
 coverage/
 lib/l10n/app_zh.arb

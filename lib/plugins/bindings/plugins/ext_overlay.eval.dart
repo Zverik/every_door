@@ -32,7 +32,6 @@ class $ExtOverlay implements $Instance {
   static const $declaration = BridgeClassDef(
     BridgeClassType(
       $type,
-
       $extends: BridgeTypeRef(
         BridgeTypeSpec('package:every_door/models/imagery.dart', 'Imagery'),
         [],
@@ -48,7 +47,6 @@ class $ExtOverlay implements $Instance {
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
               false,
             ),
-
             BridgeParameter(
               'attribution',
               BridgeTypeAnnotation(
@@ -57,13 +55,11 @@ class $ExtOverlay implements $Instance {
               ),
               true,
             ),
-
             BridgeParameter(
               'updateInMeters',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
               true,
             ),
-
             BridgeParameter(
               'build',
               BridgeTypeAnnotation(
@@ -92,7 +88,6 @@ class $ExtOverlay implements $Instance {
                         ),
                         false,
                       ),
-
                       BridgeParameter(
                         'data',
                         BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
@@ -105,7 +100,6 @@ class $ExtOverlay implements $Instance {
               ),
               false,
             ),
-
             BridgeParameter(
               'update',
               BridgeTypeAnnotation(
@@ -144,7 +138,6 @@ class $ExtOverlay implements $Instance {
         isFactory: false,
       ),
     },
-
     methods: {
       'buildLayer': BridgeMethodDef(
         BridgeFunctionDef(
@@ -198,7 +191,6 @@ class $ExtOverlay implements $Instance {
                   ),
                   false,
                 ),
-
                 BridgeParameter(
                   'data',
                   BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
@@ -211,12 +203,10 @@ class $ExtOverlay implements $Instance {
         ),
         isStatic: false,
       ),
-
       'updateInMeters': BridgeFieldDef(
         BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
         isStatic: false,
       ),
-
       'update': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef.genericFunction(
@@ -263,7 +253,11 @@ class $ExtOverlay implements $Instance {
         build: (BuildContext context, dynamic data) {
           return (args[3]! as EvalCallable)(runtime, null, [
             $BuildContext.wrap(context),
-            $Object(data),
+            data == null
+                ? $null()
+                : data is $Value
+                    ? data
+                    : $Object(data),
           ])?.$value;
         },
         update: (LatLngBounds arg0) {

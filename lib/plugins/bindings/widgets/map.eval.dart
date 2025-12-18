@@ -6,7 +6,6 @@ import 'package:dart_eval/stdlib/core.dart';
 import 'package:flutter_map_eval/flutter_map/flutter_map_eval.dart';
 import 'package:flutter_eval/widgets.dart';
 import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
-import 'package:every_door/plugins/bindings/widgets/map_button.eval.dart';
 
 /// dart_eval wrapper binding for [CustomMapController]
 class $CustomMapController implements $Instance {
@@ -41,7 +40,6 @@ class $CustomMapController implements $Instance {
         isFactory: false,
       ),
     },
-
     methods: {
       'setLocation': BridgeMethodDef(
         BridgeFunctionDef(
@@ -58,7 +56,6 @@ class $CustomMapController implements $Instance {
               ),
               true,
             ),
-
             BridgeParameter(
               'zoom',
               BridgeTypeAnnotation(
@@ -71,7 +68,6 @@ class $CustomMapController implements $Instance {
           params: [],
         ),
       ),
-
       'zoomToFit': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -129,7 +125,6 @@ class $CustomMapController implements $Instance {
         ),
         isStatic: false,
       ),
-
       'mapController': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(
@@ -246,14 +241,7 @@ class $CustomMap implements $Instance {
   static const $declaration = BridgeClassDef(
     BridgeClassType(
       $type,
-
-      $extends: BridgeTypeRef(
-        BridgeTypeSpec(
-          'package:flutter_riverpod/src/consumer.dart',
-          'ConsumerStatefulWidget',
-        ),
-        [],
-      ),
+      $extends: $StatefulWidget$bridge.$type,
     ),
     constructors: {
       '': BridgeConstructorDef(
@@ -274,7 +262,6 @@ class $CustomMap implements $Instance {
               ),
               true,
             ),
-
             BridgeParameter(
               'onTap',
               BridgeTypeAnnotation(
@@ -297,7 +284,6 @@ class $CustomMap implements $Instance {
                         ),
                         false,
                       ),
-
                       BridgeParameter(
                         '',
                         BridgeTypeAnnotation(
@@ -335,7 +321,6 @@ class $CustomMap implements $Instance {
               ),
               true,
             ),
-
             BridgeParameter(
               'controller',
               BridgeTypeAnnotation(
@@ -350,7 +335,6 @@ class $CustomMap implements $Instance {
               ),
               true,
             ),
-
             BridgeParameter(
               'layers',
               BridgeTypeAnnotation(
@@ -368,7 +352,6 @@ class $CustomMap implements $Instance {
               ),
               true,
             ),
-
             BridgeParameter(
               'buttons',
               BridgeTypeAnnotation(
@@ -386,67 +369,56 @@ class $CustomMap implements $Instance {
               ),
               true,
             ),
-
             BridgeParameter(
               'drawZoomButtons',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'hasFloatingButton',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'drawStandardButtons',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'drawPinMarker',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'faintWalkPath',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'interactive',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'track',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'onlyOSM',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'allowRotation',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'switchToNavigate',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
-
             BridgeParameter(
               'updateState',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
@@ -458,197 +430,7 @@ class $CustomMap implements $Instance {
         isFactory: false,
       ),
     },
-
-    methods: {
-      'createState': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(
-              BridgeTypeSpec(
-                'package:flutter_riverpod/src/consumer.dart',
-                'ConsumerState',
-              ),
-              [
-                BridgeTypeAnnotation(
-                  BridgeTypeRef(
-                    BridgeTypeSpec(
-                      'package:flutter_riverpod/src/consumer.dart',
-                      'ConsumerStatefulWidget',
-                    ),
-                    [],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-    },
-    getters: {},
-    setters: {},
-    fields: {
-      'onTap': BridgeFieldDef(
-        BridgeTypeAnnotation(
-          BridgeTypeRef.genericFunction(
-            BridgeFunctionDef(
-              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-              params: [
-                BridgeParameter(
-                  '',
-                  BridgeTypeAnnotation(
-                    BridgeTypeRef(
-                      BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
-                      [],
-                    ),
-                  ),
-                  false,
-                ),
-
-                BridgeParameter(
-                  '',
-                  BridgeTypeAnnotation(
-                    BridgeTypeRef.genericFunction(
-                      BridgeFunctionDef(
-                        returns: BridgeTypeAnnotation(
-                          BridgeTypeRef(CoreTypes.double, []),
-                        ),
-                        params: [
-                          BridgeParameter(
-                            '',
-                            BridgeTypeAnnotation(
-                              BridgeTypeRef(
-                                BridgeTypeSpec(
-                                  'package:latlong2/latlong.dart',
-                                  'LatLng',
-                                ),
-                                [],
-                              ),
-                            ),
-                            false,
-                          ),
-                        ],
-                        namedParams: [],
-                      ),
-                    ),
-                  ),
-                  false,
-                ),
-              ],
-              namedParams: [],
-            ),
-          ),
-          nullable: true,
-        ),
-        isStatic: false,
-      ),
-
-      'controller': BridgeFieldDef(
-        BridgeTypeAnnotation(
-          BridgeTypeRef(
-            BridgeTypeSpec(
-              'package:every_door/widgets/map.dart',
-              'CustomMapController',
-            ),
-            [],
-          ),
-          nullable: true,
-        ),
-        isStatic: false,
-      ),
-
-      'layers': BridgeFieldDef(
-        BridgeTypeAnnotation(
-          BridgeTypeRef(CoreTypes.list, [
-            BridgeTypeAnnotation(
-              BridgeTypeRef(
-                BridgeTypeSpec(
-                  'package:flutter/src/widgets/framework.dart',
-                  'Widget',
-                ),
-                [],
-              ),
-            ),
-          ]),
-        ),
-        isStatic: false,
-      ),
-
-      'buttons': BridgeFieldDef(
-        BridgeTypeAnnotation(
-          BridgeTypeRef(CoreTypes.list, [
-            BridgeTypeAnnotation(
-              BridgeTypeRef(
-                BridgeTypeSpec(
-                  'package:every_door/widgets/map_button.dart',
-                  'MapButton',
-                ),
-                [],
-              ),
-            ),
-          ]),
-        ),
-        isStatic: false,
-      ),
-
-      'drawZoomButtons': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'hasFloatingButton': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'drawStandardButtons': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'drawPinMarker': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'faintWalkPath': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'interactive': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'track': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'onlyOSM': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'allowRotation': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'updateState': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-
-      'switchToNavigate': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-        isStatic: false,
-      ),
-    },
     wrap: true,
-    bridge: false,
   );
 
   /// Wrapper for the [CustomMap.new] constructor
@@ -692,95 +474,14 @@ class $CustomMap implements $Instance {
   CustomMap get $reified => $value;
 
   /// Wrap a [CustomMap] in a [$CustomMap]
-  $CustomMap.wrap(this.$value) : _superclass = $Object($value);
+  $CustomMap.wrap(this.$value) : _superclass = $Widget.wrap($value);
 
   @override
   int $getRuntimeType(Runtime runtime) => runtime.lookupType($spec);
 
   @override
   $Value? $getProperty(Runtime runtime, String identifier) {
-    switch (identifier) {
-      case 'onTap':
-        final _onTap = $value.onTap;
-        return _onTap == null
-            ? const $null()
-            : $Function((runtime, target, args) {
-                _onTap(args[0]!.$value, args[1]!.$value);
-                return const $null();
-              });
-
-      case 'controller':
-        final _controller = $value.controller;
-        return _controller == null
-            ? const $null()
-            : $CustomMapController.wrap(_controller);
-
-      case 'layers':
-        final _layers = $value.layers;
-        return $List.view(_layers, (e) => $Widget.wrap(e));
-
-      case 'buttons':
-        final _buttons = $value.buttons;
-        return $List.view(_buttons, (e) => $MapButton.wrap(e));
-
-      case 'drawZoomButtons':
-        final _drawZoomButtons = $value.drawZoomButtons;
-        return $bool(_drawZoomButtons);
-
-      case 'hasFloatingButton':
-        final _hasFloatingButton = $value.hasFloatingButton;
-        return $bool(_hasFloatingButton);
-
-      case 'drawStandardButtons':
-        final _drawStandardButtons = $value.drawStandardButtons;
-        return $bool(_drawStandardButtons);
-
-      case 'drawPinMarker':
-        final _drawPinMarker = $value.drawPinMarker;
-        return $bool(_drawPinMarker);
-
-      case 'faintWalkPath':
-        final _faintWalkPath = $value.faintWalkPath;
-        return $bool(_faintWalkPath);
-
-      case 'interactive':
-        final _interactive = $value.interactive;
-        return $bool(_interactive);
-
-      case 'track':
-        final _track = $value.track;
-        return $bool(_track);
-
-      case 'onlyOSM':
-        final _onlyOSM = $value.onlyOSM;
-        return $bool(_onlyOSM);
-
-      case 'allowRotation':
-        final _allowRotation = $value.allowRotation;
-        return $bool(_allowRotation);
-
-      case 'updateState':
-        final _updateState = $value.updateState;
-        return $bool(_updateState);
-
-      case 'switchToNavigate':
-        final _switchToNavigate = $value.switchToNavigate;
-        return $bool(_switchToNavigate);
-      case 'createState':
-        return __createState;
-    }
     return _superclass.$getProperty(runtime, identifier);
-  }
-
-  static const $Function __createState = $Function(_createState);
-  static $Value? _createState(
-    Runtime runtime,
-    $Value? target,
-    List<$Value?> args,
-  ) {
-    final self = target! as $CustomMap;
-    final result = self.$value.createState();
-    return runtime.wrapAlways(result);
   }
 
   @override

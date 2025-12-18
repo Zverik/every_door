@@ -85,6 +85,10 @@ class PluginVersionRange {
       final List versions = data.toList();
       min = PluginVersion(versions[0], false);
       max = PluginVersion(versions[1], false);
+    } else {
+      // Allow all for 1.x.
+      min = PluginVersion.zero;
+      max = PluginVersion('2.0');
     }
   }
 

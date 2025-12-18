@@ -22,6 +22,8 @@ import 'package:flutter_eval/widgets.dart';
 import 'package:flutter_map_eval/flutter_map/flutter_map_eval.dart';
 import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
 
+import 'base.eval.dart';
+
 /// dart_eval bridge binding for [EntrancesModeDefinition]
 class $EntrancesModeDefinition$bridge extends EntrancesModeDefinition
     with $Bridge<EntrancesModeDefinition> {
@@ -42,7 +44,8 @@ class $EntrancesModeDefinition$bridge extends EntrancesModeDefinition
 
   /// Compile-time class declaration of [$EntrancesModeDefinition]
   static const $declaration = BridgeClassDef(
-    BridgeClassType($type, isAbstract: true),
+    BridgeClassType($type,
+        isAbstract: true, $extends: $BaseModeDefinition.$type),
     constructors: {
       'fromPlugin': BridgeConstructorDef(
         BridgeFunctionDef(

@@ -20,6 +20,8 @@ import 'package:flutter_eval/widgets.dart';
 import 'package:flutter_map_eval/flutter_map/flutter_map_eval.dart';
 import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
 
+import 'base.eval.dart';
+
 /// dart_eval bridge binding for [ClassicModeDefinition]
 class $ClassicModeDefinition$bridge extends ClassicModeDefinition
     with $Bridge<ClassicModeDefinition> {
@@ -27,7 +29,18 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
   $ClassicModeDefinition$bridge.fromPlugin(super.app): super.fromPlugin();
 
   /// Configure this class for use in a [Runtime]
-  static void configureForRuntime(Runtime runtime) {}
+  static void configureForRuntime(Runtime runtime) {
+    runtime.registerBridgeFunc(
+      'package:every_door/screens/modes/definitions/classic.dart',
+      'ClassicModeDefinition.fromPlugin',
+      $ClassicModeDefinition$bridge.$fromPlugin,
+      isBridge: true,
+    );
+  }
+
+  static $Value? $fromPlugin(Runtime runtime, $Value? target, List<$Value?> args) {
+    return $ClassicModeDefinition$bridge.fromPlugin(args[0]!.$reified);
+  }
 
   /// Compile-time type specification of [$ClassicModeDefinition$bridge]
   static const $spec = BridgeTypeSpec(
@@ -40,7 +53,8 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
 
   /// Compile-time class declaration of [$ClassicModeDefinition]
   static const $declaration = BridgeClassDef(
-    BridgeClassType($type, isAbstract: true),
+    BridgeClassType($type,
+        isAbstract: true, $extends: $BaseModeDefinition.$type),
     constructors: {
       'fromPlugin': BridgeConstructorDef(
         BridgeFunctionDef(

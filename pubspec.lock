@@ -541,7 +541,7 @@ packages:
     description:
       path: "."
       ref: no_icons
-      resolved-ref: c27e468cc1014c8cc2d3dad339c52f08a8309f28
+      resolved-ref: ace9759fb11d8ea7aff066ac86316bac03a2cca4
       url: "https://github.com/Zverik/flutter_eval.git"
     source: git
     version: "0.8.2"

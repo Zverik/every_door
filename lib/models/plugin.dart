@@ -10,7 +10,7 @@ import 'package:logging/logging.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final kApiVersion = PluginVersion('1.1');
+final kApiVersion = PluginVersion('1.2');
 
 /// Thrown only when loading a plugin. Prints the enclosed exception as well.
 class PluginLoadException implements Exception {

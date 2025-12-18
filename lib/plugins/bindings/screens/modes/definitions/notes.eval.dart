@@ -21,6 +21,8 @@ import 'package:every_door/plugins/bindings/widgets/map_button.eval.dart';
 import 'package:flutter_eval/widgets.dart';
 import 'package:flutter_map_eval/flutter_map/flutter_map_eval.dart';
 
+import 'base.eval.dart';
+
 /// dart_eval bridge binding for [NotesModeDefinition]
 class $NotesModeDefinition$bridge extends NotesModeDefinition
     with $Bridge<NotesModeDefinition> {
@@ -41,7 +43,8 @@ class $NotesModeDefinition$bridge extends NotesModeDefinition
 
   /// Compile-time class declaration of [$NotesModeDefinition]
   static const $declaration = BridgeClassDef(
-    BridgeClassType($type, isAbstract: true),
+    BridgeClassType($type,
+        isAbstract: true, $extends: $BaseModeDefinition.$type),
     constructors: {
       'fromPlugin': BridgeConstructorDef(
         BridgeFunctionDef(

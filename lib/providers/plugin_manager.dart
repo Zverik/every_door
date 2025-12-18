@@ -121,7 +121,9 @@ class PluginManager extends Notifier<Set<String>> {
       if (instance != null) {
         plugin.instance = instance;
         await instance.install(EveryDoorApp(plugin: plugin, ref: ref));
+        _logger.info('Installed');
         ref.read(editorModeProvider.notifier).initializeFromPlugin(plugin.id);
+        _logger.info('Modes initialized');
       }
     } catch (e) {
       // Installation failed, revert.

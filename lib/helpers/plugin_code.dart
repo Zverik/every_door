@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dart_eval/dart_eval.dart';
+import 'package:dart_eval/dart_eval_security.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/plugins/every_door_plugin.dart';
 import 'package:flutter_eval/flutter_eval.dart';
@@ -37,6 +38,7 @@ class PluginCode {
   static Future<Runtime?> compilePlugin(Plugin plugin) async {
     File main = plugin.resolvePath('src/main.dart');
     if (!await main.exists()) return null;
+    _logger.info('Compiling plugin ${plugin.id} from source.');
 
     final Map<String, String> data = {};
     final src = plugin.resolveDirectory('src');
@@ -81,10 +83,19 @@ class PluginCode {
     runtime.addPlugin(flutterEvalPlugin);
     for (final p in fme.plugins) runtime.addPlugin(p);
     runtime.addPlugin(ede.EveryDoorPlugin());
+    runtime.grant(FilesystemPermission.directory(plugin.directory.path));
+    final apis = plugin.data['accesses'];
+    if (apis != null) {
+      if (apis is String) {
+        runtime.grant(NetworkPermission.url(apis));
+      } else if (apis is List) {
+        for (final url in apis) runtime.grant(NetworkPermission.url(url));
+      }
+    }
 
     try {
       final result =
-          runtime.executeLib('package:${plugin.id}/main.dart', 'build');
+          runtime.executeLib('package:${plugin.id}/main.dart', 'main');
       if (result is EveryDoorPlugin) return result;
       _logger.warning(
           'build() function for plugin ${plugin.id} returned class ${result?.runtimeType}');

@@ -11,6 +11,7 @@ import 'package:every_door/plugins/bindings/helpers/tags/element_kind.eval.dart'
 import 'package:every_door/plugins/bindings/models/amenity.eval.dart';
 import 'package:every_door/plugins/bindings/models/imagery.eval.dart';
 import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
+import 'package:every_door/plugins/bindings/screens/modes/definitions/base.eval.dart';
 import 'package:every_door/plugins/bindings/widgets/map_button.eval.dart';
 import 'package:every_door/screens/modes/definitions/amenity.dart';
 import 'package:every_door/widgets/map_button.dart';
@@ -25,7 +26,7 @@ import 'package:latlong2/latlong.dart';
 class $AmenityModeDefinition$bridge extends AmenityModeDefinition
     with $Bridge<AmenityModeDefinition> {
   /// Forwarded constructor for [AmenityModeDefinition.new]
-  $AmenityModeDefinition$bridge.fromPlugin(super.app): super.fromPlugin();
+  $AmenityModeDefinition$bridge.fromPlugin(super.app) : super.fromPlugin();
 
   /// Configure this class for use in a [Runtime]
   static void configureForRuntime(Runtime runtime) {}
@@ -41,7 +42,8 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
 
   /// Compile-time class declaration of [$AmenityModeDefinition]
   static const $declaration = BridgeClassDef(
-    BridgeClassType($type, isAbstract: true),
+    BridgeClassType($type,
+        isAbstract: true, $extends: $BaseModeDefinition.$type),
     constructors: {
       'fromPlugin': BridgeConstructorDef(
         BridgeFunctionDef(
@@ -66,7 +68,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
         isFactory: false,
       ),
     },
-
     methods: {
       'getIcon': BridgeMethodDef(
         BridgeFunctionDef(
@@ -94,7 +95,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               ),
               false,
             ),
-
             BridgeParameter(
               'outlined',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
@@ -103,7 +103,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'isOurKind': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
@@ -125,7 +124,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'addMapButton': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -147,7 +145,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'removeMapButton': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -161,7 +158,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'addOverlay': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -183,7 +179,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'getNearestChanges': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -209,7 +204,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
               true,
             ),
-
             BridgeParameter(
               'filter',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
@@ -233,7 +227,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'updateNearest': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -259,7 +252,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'updateFromJson': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -275,7 +267,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               ),
               false,
             ),
-
             BridgeParameter(
               'plugin',
               BridgeTypeAnnotation(
@@ -292,7 +283,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'parseKinds': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -319,7 +309,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'mapLayers': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -339,7 +328,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           params: [],
         ),
       ),
-
       'addListener': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -363,7 +351,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'removeListener': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -387,7 +374,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'dispose': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -395,7 +381,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           params: [],
         ),
       ),
-
       'notifyListeners': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -403,7 +388,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           params: [],
         ),
       ),
-
       'openEditor': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -422,7 +406,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               ),
               false,
             ),
-
             BridgeParameter(
               'location',
               BridgeTypeAnnotation(
@@ -436,7 +419,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'buildMarker': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -455,7 +437,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
               false,
             ),
-
             BridgeParameter(
               'element',
               BridgeTypeAnnotation(
@@ -472,7 +453,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-
       'isCountedOld': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
@@ -491,7 +471,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               ),
               false,
             ),
-
             BridgeParameter(
               'age',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
@@ -509,7 +488,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           params: [],
         ),
       ),
-
       'overlays': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -529,7 +507,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           params: [],
         ),
       ),
-
       'buttons': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -549,7 +526,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           params: [],
         ),
       ),
-
       'hasListeners': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
@@ -557,7 +533,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           params: [],
         ),
       ),
-
       'maxTileCount': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
@@ -584,7 +559,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
         ),
         isStatic: false,
       ),
-
       'otherPOI': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(CoreTypes.list, [
@@ -776,11 +750,12 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
     LatLngBounds bounds, {
     int maxCount = 200,
     bool filter = true,
-  }) => $_invoke('getNearestChanges', [
-    $LatLngBounds.wrap(bounds),
-    $int(maxCount),
-    $bool(filter),
-  ]);
+  }) =>
+      $_invoke('getNearestChanges', [
+        $LatLngBounds.wrap(bounds),
+        $int(maxCount),
+        $bool(filter),
+      ]);
 
   @override
   Future<void> updateNearest(LatLngBounds bounds) =>
@@ -799,28 +774,28 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
 
   @override
   void addListener(void Function() listener) => $_invoke('addListener', [
-    $Function((runtime, target, args) {
-      listener();
-      return const $null();
-    }),
-  ]);
+        $Function((runtime, target, args) {
+          listener();
+          return const $null();
+        }),
+      ]);
 
   @override
   void removeListener(void Function() listener) => $_invoke('removeListener', [
-    $Function((runtime, target, args) {
-      listener();
-      return const $null();
-    }),
-  ]);
+        $Function((runtime, target, args) {
+          listener();
+          return const $null();
+        }),
+      ]);
 
   @override
   void notifyListeners() => $_invoke('notifyListeners', []);
 
   @override
   void openEditor(BuildContext context, LatLng location) => $_invoke(
-    'openEditor',
-    [$BuildContext.wrap(context), $LatLng.wrap(location)],
-  );
+        'openEditor',
+        [$BuildContext.wrap(context), $LatLng.wrap(location)],
+      );
 
   @override
   Widget buildMarker(int index, OsmChange element) =>

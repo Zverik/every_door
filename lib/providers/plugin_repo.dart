@@ -203,7 +203,8 @@ class PluginRepository extends Notifier<List<Plugin>> {
       await tmpPluginDir.rename(pluginDir.path);
 
       final data = await readPluginData(pluginDir);
-      final plugin = Plugin.fromData(data, pluginDir);
+      final plugin = Plugin.fromData(data, pluginDir,
+          instanceBuilder: PluginCode.instantiatePlugin);
 
       // Add the plugin record to the list.
       state = state.followedBy([plugin]).toList();
