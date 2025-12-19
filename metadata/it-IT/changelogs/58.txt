@@ -1,0 +1,4 @@
+* Tile vettoriali ovunque.
+* Scarica dati e immagini per lavorare offline.
+* Aggiunto pulsante bussola.
+* I preset hanno delle nuove icone.
