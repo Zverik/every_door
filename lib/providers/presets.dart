@@ -1,3 +1,6 @@
+// Copyright 2022-2025 Ilya Zverev
+// This file is a part of Every Door, distributed under GPL v3 or later version.
+// Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/combo.dart';
@@ -8,7 +11,7 @@ import 'package:every_door/fields/wifi.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/models/field.dart';
-import 'package:every_door/helpers/nsi_features.dart';
+import 'package:every_door/helpers/nsi_features.g.dart';
 import 'package:every_door/providers/add_presets.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/osm_data.dart';

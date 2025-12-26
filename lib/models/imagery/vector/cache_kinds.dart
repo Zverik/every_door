@@ -1,3 +1,6 @@
+// Copyright 2022-2025 Ilya Zverev
+// This file is a part of Every Door, distributed under GPL v3 or later version.
+// Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 // This is for sorting cached files into kinds. The position in this
 // list is more important than the access date. First is the most important,
 // last is the least. Unknown types have the most priority.

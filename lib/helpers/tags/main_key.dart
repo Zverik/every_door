@@ -1,3 +1,6 @@
+// Copyright 2022-2025 Ilya Zverev
+// This file is a part of Every Door, distributed under GPL v3 or later version.
+// Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 /// List of keys to consider when looking for a single main tag, in order of preference.
 const kMainKeys = <String>[
   'amenity', 'shop', 'craft', 'tourism', 'historic', 'club',

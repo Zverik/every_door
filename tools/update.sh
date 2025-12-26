@@ -6,7 +6,7 @@ HERE="$(dirname "$0")"
 ASSETS="$HERE/../assets"
 PRESETS_DB="$ASSETS/presets.db"
 PRESETS_ZIP="$ASSETS/presets.gz"
-NSI_FEATURES="$HERE/../lib/helpers/nsi_features.dart"
+NSI_FEATURES="$HERE/../lib/helpers/nsi_features.g.dart"
 
 TAGINFO_DB="$1"
 [ ! -e "$TAGINFO_DB/taginfo-db.db" ] && echo "Could not open $TAGINFO_DB/taginfo-db.db" && exit 2

@@ -4,7 +4,7 @@ description: Next generation OpenStreetMap amenity mapper
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # Also update version in constants.dart!
-version: 7.1.1+61
+version: 7.1.2+62
 
 environment:
   sdk: ">=3.6.0 <4.0.0"

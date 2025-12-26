@@ -1,3 +1,6 @@
+// Copyright 2022-2025 Ilya Zverev
+// This file is a part of Every Door, distributed under GPL v3 or later version.
+// Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:every_door/helpers/auth/osm.dart';

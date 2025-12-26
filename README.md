@@ -16,7 +16,8 @@ The roadmap is in [this project](https://github.com/users/Zverik/projects/1/view
 
 ## Author, License, and Sponsors
 
-The editor was written by Ilya Zverev © 2022-2025 and published under the ISC license.
+The editor was written by Ilya Zverev © 2022-2025 and published under the terms
+of the GNU General Public License version 3 or (at your option) any later version.
 
 The author is sponsored by many individual contributors through [GitHub](https://github.com/sponsors/Zverik)
 and [Liberapay](https://liberapay.com/zverik). Thank you everybody!
@@ -24,5 +25,5 @@ and [Liberapay](https://liberapay.com/zverik). Thank you everybody!
 The NLNet Foundation is [sponsoring](https://nlnet.nl/project/EveryDoor/) the development in 2025
 through the [NGI Commons Fund](https://nlnet.nl/commonsfund) with funds from the European Commission.
 
-Want to sponsor the development? [Contact Ilya](mailto:ilya@zverev.info) directly or through
+Want to support the development? [Contact Ilya](mailto:ilya@zverev.info) directly or through
 [his company](https://avatudkaart.ee/).
