@@ -9,7 +9,6 @@ import 'package:every_door/widgets/map_button.dart';
 import 'package:every_door/widgets/map_drag_create.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/geolocation.dart';
@@ -58,6 +57,14 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
 
   void onDefChange() {
     if (mounted) setState(() {});
+  }
+
+  @override
+  void didUpdateWidget(covariant AmenityPane oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Resubscribe, as per this method documentation.
+    oldWidget.def.removeListener(onDefChange);
+    widget.def.addListener(onDefChange);
   }
 
   void updateFarFromUser() {

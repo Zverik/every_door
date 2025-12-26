@@ -10,6 +10,7 @@ import 'package:every_door/fields/floor.dart';
 import 'package:every_door/fields/height.dart';
 import 'package:every_door/fields/hours.dart';
 import 'package:every_door/fields/inline_combo.dart';
+import 'package:every_door/fields/many_combo.dart';
 import 'package:every_door/fields/name.dart';
 import 'package:every_door/fields/phone.dart';
 import 'package:every_door/fields/radio.dart';
@@ -295,6 +296,14 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         customValues: data['custom_values'] == 1,
         snakeCase: data['snake_case'] == 1,
         type: kComboMapping[typ]!,
+        options: options,
+      );
+    case 'manyCombo':
+      return ManyComboPresetField(
+        keys: key.split('\\'),
+        label: label,
+        prerequisite: prerequisite,
+        locationSet: locationSet,
         options: options,
       );
     case 'radio':

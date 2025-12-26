@@ -51,6 +51,14 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
   }
 
   @override
+  void didUpdateWidget(covariant NotesPane oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Resubscribe, as per this method documentation.
+    oldWidget.def.removeListener(onDefChange);
+    widget.def.addListener(onDefChange);
+  }
+
+  @override
   void dispose() {
     widget.def.removeListener(onDefChange);
     super.dispose();

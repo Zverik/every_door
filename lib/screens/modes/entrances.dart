@@ -37,6 +37,14 @@ class _EntrancesPaneState extends ConsumerState<EntrancesPane> {
   }
 
   @override
+  void didUpdateWidget(covariant EntrancesPane oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Resubscribe, as per this method documentation.
+    oldWidget.def.removeListener(onDefChange);
+    widget.def.addListener(onDefChange);
+  }
+
+  @override
   void dispose() {
     widget.def.removeListener(onDefChange);
     super.dispose();
