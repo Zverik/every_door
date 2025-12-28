@@ -34,7 +34,7 @@ class OverlayImagery extends Notifier<List<Imagery>> {
       {Set<String>? modes, String? pluginId}) async {
     await imagery.initialize();
     if (pluginId != null) {
-      key = 'plugin_${pluginId}#$key';
+      key = 'plugin_$pluginId#$key';
     }
     _imagery[key] = imagery;
     _order.add(key);

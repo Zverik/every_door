@@ -18,7 +18,6 @@ import 'package:every_door/providers/need_update.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart' show LatLng;
 
 class ClassicModePane extends ConsumerStatefulWidget {
   final ClassicModeDefinition def;

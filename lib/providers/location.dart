@@ -24,11 +24,21 @@ final rotationProvider =
 class ZoomNotifier extends Notifier<double> {
   @override
   double build() => kInitialZoom;
+
+  void update(double value) {
+    state = value;
+  }
 }
 
 class RotationNotifier extends Notifier<double> {
   @override
   double build() => 0.0;
+
+  void reset() => update(0.0);
+
+  void update(double value) {
+    state = value;
+  }
 }
 
 class EffectiveLocationController extends Notifier<LatLng> {

@@ -29,7 +29,7 @@ class PluginProviders {
       _ref.read(effectiveLocationProvider.notifier).set(value);
 
   /// Changes the map zoom level.
-  set zoom(double value) => _ref.read(zoomProvider.notifier).state = value;
+  set zoom(double value) => _ref.read(zoomProvider.notifier).update(value);
 
   // TODO: do we need watching?
 }

@@ -1,4 +1,5 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
+import 'helpers/icons.eval.dart';
 import 'helpers/tags/element_kind.eval.dart';
 import 'helpers/tags/tag_matcher.eval.dart';
 import 'helpers/geometry/geometry.eval.dart';
@@ -93,6 +94,7 @@ class EveryDoorPlugin implements EvalPlugin {
     registry.defineBridgeClass($EveryDoorPlugin$bridge.$declaration);
     registry.defineBridgeClass($ExtOverlay.$declaration);
     registry.defineBridgeClass($PluginEvents.$declaration);
+    registry.defineBridgeClass($Icons.$declaration);
     registry.defineBridgeEnum($ImageryCategory.$declaration);
     registry.defineBridgeEnum($OsmElementType.$declaration);
     registry.defineBridgeEnum($IsMember.$declaration);
@@ -158,5 +160,6 @@ class EveryDoorPlugin implements EvalPlugin {
     $ImageryCategory.configureForRuntime(runtime);
     $OsmElementType.configureForRuntime(runtime);
     $IsMember.configureForRuntime(runtime);
+    $Icons.configureForRuntime(runtime);
   }
 }

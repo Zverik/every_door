@@ -73,7 +73,7 @@ class _NotesPaneState extends ConsumerState<NotesPane> {
 
   void recordMapMove(MapCamera camera) {
     ref.read(effectiveLocationProvider.notifier).set(camera.center);
-    ref.read(zoomProvider.notifier).state = camera.zoom;
+    ref.read(zoomProvider.notifier).update(camera.zoom);
     ref.read(visibleBoundsProvider.notifier).update(camera.visibleBounds);
   }
 

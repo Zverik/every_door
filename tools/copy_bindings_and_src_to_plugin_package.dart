@@ -17,6 +17,8 @@ void processBindingFile(File file, Directory lib, Directory dest) {
       // Copy this file only if it is missing in the dest!
       final source = File(p.join(lib.path, path));
       final target = File(p.join(dest.path, path));
+      // Probably would need to skip files that are not newer than target files.
+      // Also remove the @Bind and eval_annotation references.
       if (source.existsSync() && !target.existsSync()) {
         makeDirectories(target.path);
         source.copySync(target.path);
@@ -28,7 +30,8 @@ void processBindingFile(File file, Directory lib, Directory dest) {
 
 void replacePackage(File target) {
   String content = target.readAsStringSync();
-  content = content.replaceAll("import 'package:every_door/", "import 'package:$kPackageName/");
+  content = content.replaceAll(
+      "import 'package:every_door/", "import 'package:$kPackageName/");
   target.writeAsStringSync(content);
 }
 
@@ -43,21 +46,11 @@ void main() {
     throw PathNotFoundException(
         dest.path, OSError("Cannot find the plugin path"));
 
-  final files = lib
-      .listSync(recursive: true)
-      .whereType<File>()
-      .where((p) => p.path.contains('lib/plugins/bindings/'));
-
-  // Probably need to iterate over files in plugins/bindings
-  // and copy both them and files they reference to the every_door_plugin/lib
-  // Again, skipping files that are not newer than target files.
-  // Also remove the @Bind and eval_annotation references.
+  final files = lib.listSync(recursive: true).whereType<File>().where((p) =>
+      p.path.contains('lib/plugins/bindings/') &&
+      p.path.endsWith('.eval.dart'));
 
   for (final file in files) {
-    String target = p.join(dest.path, p.relative(file.path, from: lib.path));
-    makeDirectories(target);
-    file.copySync(target);
-    replacePackage(File(target));
-    if (file.path.endsWith(".eval.dart")) processBindingFile(file, lib, dest);
+    processBindingFile(file, lib, dest);
   }
 }

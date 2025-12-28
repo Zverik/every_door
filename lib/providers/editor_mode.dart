@@ -111,5 +111,5 @@ class EditorModeController extends Notifier<BaseModeDefinition> {
   // We're notifying even when the state is the same, because the mode list
   // could have been changed.
   @override
-  bool updateShouldNotify(old, current) => true;
+  bool updateShouldNotify(previous, next) => true;
 }

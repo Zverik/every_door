@@ -137,7 +137,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
     if (event is MapEventWithMove) {
       if (!fromController) {
         ref.read(trackingProvider.notifier).disable();
-        ref.read(zoomProvider.notifier).state = event.camera.zoom;
+        ref.read(zoomProvider.notifier).update(event.camera.zoom);
         if (widget.switchToNavigate) {
           final bool isNavigating = ref.read(navigationModeProvider);
           if (isNavigating) {
@@ -148,7 +148,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
           } else if (event.camera.zoom < kEditMinZoom) {
             // Switch navigation mode on
             ref.read(navigationModeProvider.notifier).state = true;
-            ref.read(rotationProvider.notifier).state = 0;
+            ref.read(rotationProvider.notifier).reset();
           }
         }
       }
@@ -175,10 +175,10 @@ class _CustomMapState extends ConsumerState<CustomMap> {
         while (rotation > 200) rotation -= 360;
         while (rotation < -200) rotation += 360;
         if (rotation.abs() < kRotationThreshold) {
-          ref.read(rotationProvider.notifier).state = 0.0;
+          ref.read(rotationProvider.notifier).reset();
           _controller.rotate(0.0);
         } else {
-          ref.read(rotationProvider.notifier).state = rotation;
+          ref.read(rotationProvider.notifier).update(rotation);
         }
       }
     }
@@ -230,7 +230,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
     else if (zoom > maxZoomHere) zoom = max(curZoom, maxZoomHere);
     if ((zoom - curZoom).abs() >= kZoomThreshold) {
       _controller.move(_controller.camera.center, zoom);
-      ref.read(zoomProvider.notifier).state = zoom;
+      ref.read(zoomProvider.notifier).update(zoom);
     }
   }
 
@@ -368,7 +368,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
                 ),
                 tooltip: loc.mapStraight,
                 onPressed: (_) {
-                  ref.read(rotationProvider.notifier).state = 0.0;
+                  ref.read(rotationProvider.notifier).reset();
                   _controller.rotate(0.0);
                   _rotation = 0;
                 },

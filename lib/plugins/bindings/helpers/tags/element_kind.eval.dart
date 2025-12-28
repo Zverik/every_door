@@ -508,8 +508,8 @@ class $ElementKind implements $Instance {
 
   /// Wrapper for the [ElementKind.reset] method
   static $Value? $reset(Runtime runtime, $Value? target, List<$Value?> args) {
-    final value = ElementKind.reset();
-    return null;
+    ElementKind.reset();
+    return $null();
   }
 
   /// Wrapper for the [ElementKind.register] method
@@ -518,8 +518,8 @@ class $ElementKind implements $Instance {
     $Value? target,
     List<$Value?> args,
   ) {
-    final value = ElementKind.register(args[0]!.$value);
-    return null;
+    ElementKind.register(args[0]!.$value);
+    return $null();
   }
 
   /// Wrapper for the [ElementKind.empty] getter

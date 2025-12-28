@@ -70,5 +70,6 @@ abstract class PasswordAuthProvider extends AuthProvider {
         done = true;
       }
     }
+    return null;
   }
 }
