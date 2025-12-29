@@ -4,6 +4,7 @@
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:collection/collection.dart';
 
 /// A class for matching tag lists against a set of rules.
 /// Contains rules for individual keys (see [ValueMatcher]),
@@ -20,6 +21,9 @@ class TagMatcher {
   /// Works only for the "onlyKey" parameter of [matches] and [matchesChange].
   final Set<String> good;
 
+  /// For updating, a list of keys to remove from the [good].
+  final Set<String> removeFromGood;
+
   /// List of keys that should be missing. If it's not empty and
   /// _any_ of the keys here are missing, and all the rules match
   /// or are skipped, then [matches] returns "true".
@@ -27,7 +31,16 @@ class TagMatcher {
   /// This is used for matching objects that lack some additional tags.
   final Set<String> missing;
 
-  const TagMatcher(this.rules, {this.good = const {}, this.missing = const {}});
+  /// When updating a matcher, replace the [good] or update it.
+  final bool replace;
+
+  const TagMatcher(
+    this.rules, {
+    this.good = const {},
+    this.missing = const {},
+    this.removeFromGood = const {},
+    this.replace = false,
+  });
 
   /// Returns "true" only if nothing has been initialized.
   bool get isEmpty => rules.isEmpty && good.isEmpty && missing.isEmpty;
@@ -95,8 +108,11 @@ class TagMatcher {
 
     return TagMatcher(
       newRules,
-      good: good.union(another.good),
+      good: another.replace
+          ? another.good
+          : good.union(another.good).difference(another.removeFromGood),
       missing: another.missing,
+      replace: replace || another.replace,
     );
   }
 
@@ -116,6 +132,118 @@ class TagMatcher {
       missing: Set.of(data['\$missing'] ?? const []),
     );
   }
+
+  /// Builds a class instance from a list of strings or maps. Things it expects:
+  /// - amenity=* includes all values for this key (like "good")
+  /// - amenity=school adds an "only" value matcher rule
+  /// - no amenity=parking adds an "except" value matcher rule
+  /// - amenity only: [school, court] to simplify listing "only" values
+  /// - amenity except: [parking] to simplify listing exceptions
+  /// - tourism=information: (tagmatcher) adds a "when" clause
+  /// When [update] is set, all value matchers are constructed with
+  /// replace=false.
+  factory TagMatcher.fromList(List<dynamic>? data, bool update) {
+    if (data == null || data.isEmpty) return empty;
+    final rules = <String, ValueMatcher>{};
+    final good = <String>{};
+    final noGood = <String>{};
+
+    ValueMatcher valueMatcher(String key) {
+      if (!rules.containsKey(key))
+        rules[key] =
+            ValueMatcher(only: {}, except: {}, when: {}, replace: !update);
+      return rules[key]!;
+    }
+
+    for (dynamic tag in data) {
+      if (tag is String) {
+        tag = tag.toLowerCase();
+
+        if (tag.contains(' ')) {
+          // only "no ..."
+          final parts = tag.split(' ').where((p) => p.isNotEmpty).toList();
+          final kv = parts[1].split('=').map((p) => p.trim()).toList();
+          if (parts[0] != 'no' || kv.length != 2) {
+            throw ArgumentError('Unsupported clause for a tag matcher: $tag');
+          }
+          if (kv[1] == '*') {
+            noGood.add(kv[0]);
+          } else {
+            valueMatcher(kv[0]).except.add(kv[1]);
+          }
+        } else if (tag.contains('=')) {
+          // amenity=* or amenity=school
+          final kv = tag.split('=').map((p) => p.trim()).toList();
+          if (kv[1] == '*') {
+            good.add(kv[0]);
+          } else {
+            valueMatcher(kv[0]).only.add(kv[1]);
+          }
+        } else {
+          throw ArgumentError('Unsupported clause for a tag matcher: $tag');
+        }
+      } else if (tag is Map) {
+        if (tag.length != 1) {
+          throw ArgumentError(
+              'A map for a tag matcher contains multiple keys: ${tag.keys.join(",")}');
+        }
+        final key = (tag.keys.first as String).toLowerCase();
+        final value = tag.values.first;
+
+        if (key.contains(' ')) {
+          // "amenity only" or except
+          final parts = key.split(' ').where((p) => p.isNotEmpty).toList();
+          final List<String> values =
+              value is String ? [value] : (value as List).cast();
+          switch (parts[1]) {
+            case 'only':
+              valueMatcher(parts[0]).only.addAll(values);
+            case 'except':
+              valueMatcher(parts[0]).except.addAll(values);
+            default:
+              throw ArgumentError('Unsupported clause for a tag matcher: $key');
+          }
+        } else if (key.contains('=')) {
+          // add a when clause for key=value
+          final kv = key.split('=').map((p) => p.trim()).toList();
+          if (kv[1] == '*') {
+            throw ArgumentError(
+                'Definition $key is not supported for conditions');
+          }
+          if (value is! List) {
+            throw ArgumentError('Expecting a list for condition $key');
+          }
+          // conditions always replace
+          final matcher = TagMatcher.fromList(value, false);
+          valueMatcher(kv[0]).when[kv[1]] = matcher;
+        } else {
+          throw ArgumentError(
+              'Expecting only/except/a tag for a tag matcher map key: $tag');
+        }
+      }
+    }
+
+    return TagMatcher(rules,
+        good: good, removeFromGood: noGood, replace: !update);
+  }
+
+  @override
+  String toString() =>
+      'TagMatcher(${replace ? "replace, " : ""}${good.isNotEmpty ? "good=$good, " : ""}${missing.isNotEmpty ? "missing=$missing, " : ""}$rules)';
+
+  @override
+  bool operator ==(Object other) =>
+      other is TagMatcher &&
+      MapEquality().equals(other.rules, rules) &&
+      SetEquality().equals(other.good, good) &&
+      SetEquality().equals(other.missing, missing);
+
+  @override
+  int get hashCode => Object.hash(
+        Object.hashAllUnordered(rules.keys),
+        Object.hashAllUnordered(good),
+        Object.hashAllUnordered(missing),
+      );
 }
 
 /// This class matches tag values to a set of rules.
@@ -176,14 +304,18 @@ class ValueMatcher {
   ValueMatcher mergeWith(ValueMatcher another) {
     if (another.replace) return another;
 
+    // We expect disparate [except] and [only], so when merging,
+    // instead remove the corresponding entries from other sets.
+
+    final newOnly = Set.of(only).difference(another.except).union(another.only);
+    final newExcept = Set.of(except)
+        .difference(another.only)
+        .difference(another.when.keys.toSet())
+        .union(another.except);
     final newWhen = Map.of(when);
     newWhen.addAll(another.when);
 
-    return ValueMatcher(
-      except: except.union(another.except),
-      only: only.union(another.only),
-      when: newWhen,
-    );
+    return ValueMatcher(except: newExcept, only: newOnly, when: newWhen);
   }
 
   /// Builds a class instance out of a structure. The structure
@@ -202,4 +334,23 @@ class ValueMatcher {
       replace: data['replace'] ?? true,
     );
   }
+
+  @override
+  String toString() =>
+      'ValueMatcher(${replace ? "replace, " : ""}only=$only, except=$except${when.isNotEmpty ? ", when=$when" : ""})';
+
+  @override
+  bool operator ==(Object other) =>
+      other is ValueMatcher &&
+      other.replace == replace &&
+      SetEquality().equals(other.except, except) &&
+      SetEquality().equals(other.only, only) &&
+      MapEquality().equals(other.when, when);
+
+  @override
+  int get hashCode => Object.hash(
+        Object.hashAllUnordered(except),
+        Object.hashAllUnordered(only),
+        Object.hashAllUnordered(when.keys),
+      );
 }

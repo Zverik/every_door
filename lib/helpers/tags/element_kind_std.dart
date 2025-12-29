@@ -425,12 +425,14 @@ class _EverythingKind extends ElementKindImpl {
 
   static const _kAnyKeys = {'addr:housenumber', 'addr:housename', 'building'};
 
+  /// Overridden to support any object with addresses or any building.
   @override
   bool matchesTags(Map<String, String> tags) {
     if (_kAnyKeys.any((k) => tags.containsKey(k))) return true;
     return super.matchesTags(tags);
   }
 
+  /// Overridden to support any object with addresses or any building.
   @override
   bool matchesChange(OsmChange change) {
     if (_kAnyKeys.any((k) => change[k] != null)) return true;

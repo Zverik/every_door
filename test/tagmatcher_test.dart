@@ -148,7 +148,7 @@ void main() {
         replace: false,
       );
       final m = v.mergeWith(v2);
-      expect(m.only, equals({'second'}));
+      expect(m.only, isEmpty);
       expect(m.except, equals({'second'}));
       expect(m.when, contains('first'));
       expect(m.when, contains('third'));

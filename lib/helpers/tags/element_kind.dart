@@ -67,9 +67,9 @@ class ElementKind {
 
   static ElementKindImpl match(Map<String, String> tags,
       [List<ElementKindImpl>? kinds]) {
-    for (final k in kinds ?? _kMatchedKinds) {
-      final ek = _kinds[k]!;
-      if (ek.matchesTags(tags)) return ek;
+    kinds ??= _kMatchedKinds.map((k) => _kinds[k]!).toList();
+    for (final k in kinds) {
+      if (k.matchesTags(tags)) return k;
     }
     return ElementKind.unknown;
   }
@@ -95,6 +95,19 @@ class ElementKind {
     } else {
       _kinds[name] = _kinds[name]!.mergeWith(kind);
     }
+  }
+
+  /// Given a string or a list of strings, returns a list of [ElementKindImpl]
+  /// that match those names. Or null if no matches found.
+  static List<ElementKindImpl>? parseNames(dynamic data) {
+    List<ElementKindImpl> result = [];
+    if (data is String) {
+      result = [get(data)];
+    } else if (data is List<dynamic>) {
+      result = data.whereType<String>().map((s) => get(s)).toList();
+    }
+    result.removeWhere((k) => k == unknown);
+    return result.isEmpty ? null : result;
   }
 }
 
@@ -154,4 +167,53 @@ class ElementKindImpl {
       replace: replace,
     );
   }
+
+  factory ElementKindImpl.fromList(String name, List<dynamic> data) {
+    // Making a copy to remove items.
+    final processed = data.where((el) => el is String || el is Map).toList();
+    final update = processed
+        .whereType<Map>()
+        .where((e) => e.keys.contains('update'))
+        .firstOrNull;
+    TagMatcher? toUpdate;
+    if (update != null) {
+      if (update.length != 1 || update.values.first is! List) {
+        throw ArgumentError(
+            'An update element for kind $name should have a list value');
+      }
+      processed.remove(update);
+      toUpdate = TagMatcher.fromList(update.values.first, true);
+      // TODO: do something
+    }
+    final onAllKeys = processed
+        .whereType<String>()
+        .where((e) => e.toLowerCase() == 'on all keys')
+        .firstOrNull;
+    if (onAllKeys != null) {
+      processed.remove(onAllKeys);
+    }
+    final matcher = TagMatcher.fromList(processed, false);
+    return ElementKindImpl(
+      name: name,
+      onMainKey: onAllKeys == null,
+      matcher: toUpdate == null ? matcher : matcher.mergeWith(toUpdate),
+      replace: update == null,
+    );
+  }
+
+  @override
+  String toString() =>
+      'ElementKindImpl("$name"${onMainKey ? ", onMainKey" : ""}${replace ? ", replace" : ""}, $matcher)';
+
+  @override
+  bool operator ==(Object other) =>
+      other is ElementKindImpl &&
+      other.name == name &&
+      other.onMainKey == onMainKey &&
+      other.icon == icon &&
+      other.replace == replace &&
+      other.matcher == matcher;
+
+  @override
+  int get hashCode => Object.hash(name, matcher);
 }

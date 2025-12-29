@@ -324,7 +324,15 @@ class PluginManager extends Notifier<Set<String>> {
     final kindsData = plugin.data['kinds'];
     if (kindsData == null || kindsData is! Map) return;
     for (final entry in kindsData.entries) {
-      final kind = ElementKindImpl.fromJson(entry.key, entry.value);
+      ElementKindImpl kind;
+      if (entry.value is Map) {
+        kind = ElementKindImpl.fromJson(entry.key, entry.value);
+      } else if (entry.value is List) {
+        kind = ElementKindImpl.fromList(entry.key, entry.value);
+      } else {
+        throw ArgumentError(
+            'An element kind definition for ${entry.key} should be either a map or a list.');
+      }
       ElementKind.register(kind);
     }
   }

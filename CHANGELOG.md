@@ -9,6 +9,7 @@ _Unreleased_
 * When an address/floor filter is active, newly created amenities use its values.
 * Additional fields are partly sorted for easier lookup (thanks @deevroman).
 * Support for `manyCombo` field type (e.g. gender for toilets).
+* A new simpler style for defining element kinds for plugins.
 * Shorter tiles in the plugin list.
 
 ## 7.1
