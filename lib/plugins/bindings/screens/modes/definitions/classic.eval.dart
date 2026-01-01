@@ -1,46 +1,28 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/helpers/multi_icon.dart';
-import 'package:every_door/helpers/tags/element_kind.dart';
-import 'package:every_door/models/imagery.dart';
-import 'package:every_door/models/amenity.dart';
-import 'package:every_door/models/plugin.dart';
+import 'package:every_door/plugins/bindings/screens/modes/definitions/base.eval.dart';
 import 'package:every_door/screens/modes/definitions/classic.dart';
-import 'package:every_door/widgets/map_button.dart';
+import 'package:every_door/models/located.dart';
+import 'package:every_door/models/plugin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eval/ui.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:dart_eval/stdlib/core.dart';
-import 'package:every_door/plugins/bindings/helpers/tags/element_kind.eval.dart';
-import 'package:every_door/plugins/bindings/models/amenity.eval.dart';
-import 'package:every_door/plugins/bindings/models/imagery.eval.dart';
-import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
-import 'package:every_door/plugins/bindings/widgets/map_button.eval.dart';
 import 'package:flutter_eval/widgets.dart';
 import 'package:flutter_map_eval/flutter_map/flutter_map_eval.dart';
+import 'package:every_door/plugins/bindings/models/located.eval.dart';
 import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
-
-import 'base.eval.dart';
+import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
 
 /// dart_eval bridge binding for [ClassicModeDefinition]
 class $ClassicModeDefinition$bridge extends ClassicModeDefinition
     with $Bridge<ClassicModeDefinition> {
   /// Forwarded constructor for [ClassicModeDefinition.new]
-  $ClassicModeDefinition$bridge.fromPlugin(super.app): super.fromPlugin();
+  $ClassicModeDefinition$bridge.fromPlugin(super.app) : super.fromPlugin();
 
   /// Configure this class for use in a [Runtime]
-  static void configureForRuntime(Runtime runtime) {
-    runtime.registerBridgeFunc(
-      'package:every_door/screens/modes/definitions/classic.dart',
-      'ClassicModeDefinition.fromPlugin',
-      $ClassicModeDefinition$bridge.$fromPlugin,
-      isBridge: true,
-    );
-  }
-
-  static $Value? $fromPlugin(Runtime runtime, $Value? target, List<$Value?> args) {
-    return $ClassicModeDefinition$bridge.fromPlugin(args[0]!.$reified);
-  }
+  static void configureForRuntime(Runtime runtime) {}
 
   /// Compile-time type specification of [$ClassicModeDefinition$bridge]
   static const $spec = BridgeTypeSpec(
@@ -107,29 +89,8 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
               false,
             ),
             BridgeParameter(
-              'outlined',
+              'active',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-              false,
-            ),
-          ],
-        ),
-      ),
-      'isOurKind': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'element',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
-                  ),
-                  [],
-                ),
-              ),
               false,
             ),
           ],
@@ -215,11 +176,6 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
               true,
             ),
-            BridgeParameter(
-              'filter',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-              true,
-            ),
           ],
           params: [
             BridgeParameter(
@@ -263,6 +219,56 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
           ],
         ),
       ),
+      'openEditor': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(CoreTypes.future, [
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+            ]),
+          ),
+          namedParams: [
+            BridgeParameter(
+              'context',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:flutter/src/widgets/framework.dart',
+                    'BuildContext',
+                  ),
+                  [],
+                ),
+              ),
+              false,
+            ),
+            BridgeParameter(
+              'element',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
+                  ),
+                  [],
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+            BridgeParameter(
+              'location',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
+                  [],
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+          ],
+          params: [],
+        ),
+      ),
       'updateFromJson': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -294,27 +300,24 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
           ],
         ),
       ),
-      'parseKinds': BridgeMethodDef(
+      'getOtherObjectColor': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.list, [
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/helpers/tags/element_kind.dart',
-                    'ElementKindImpl',
-                  ),
-                  [],
-                ),
-              ),
-            ]),
-            nullable: true,
+            BridgeTypeRef(BridgeTypeSpec('dart:ui', 'Color'), []),
           ),
           namedParams: [],
           params: [
             BridgeParameter(
-              'data',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
+              'object',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
+                  ),
+                  [],
+                ),
+              ),
               false,
             ),
           ],
@@ -339,112 +342,6 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
           params: [],
         ),
       ),
-      'addListener': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'listener',
-              BridgeTypeAnnotation(
-                BridgeTypeRef.genericFunction(
-                  BridgeFunctionDef(
-                    returns: BridgeTypeAnnotation(
-                      BridgeTypeRef(CoreTypes.voidType),
-                    ),
-                    params: [],
-                    namedParams: [],
-                  ),
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-      'removeListener': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'listener',
-              BridgeTypeAnnotation(
-                BridgeTypeRef.genericFunction(
-                  BridgeFunctionDef(
-                    returns: BridgeTypeAnnotation(
-                      BridgeTypeRef(CoreTypes.voidType),
-                    ),
-                    params: [],
-                    namedParams: [],
-                  ),
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-      'dispose': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-      'notifyListeners': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-      'openEditor': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [
-            BridgeParameter(
-              'context',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:flutter/src/widgets/framework.dart',
-                    'BuildContext',
-                  ),
-                  [],
-                ),
-              ),
-              false,
-            ),
-            BridgeParameter(
-              'element',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
-                  ),
-                  [],
-                ),
-                nullable: true,
-              ),
-              true,
-            ),
-            BridgeParameter(
-              'location',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
-                  [],
-                ),
-                nullable: true,
-              ),
-              true,
-            ),
-          ],
-          params: [],
-        ),
-      ),
       'buildMarker': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -463,8 +360,8 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
               BridgeTypeAnnotation(
                 BridgeTypeRef(
                   BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
+                    'package:every_door/models/located.dart',
+                    'Located',
                   ),
                   [],
                 ),
@@ -521,33 +418,9 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
           params: [],
         ),
       ),
-      'hasListeners': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [],
-        ),
-      ),
     },
     setters: {},
-    fields: {
-      'nearestPOI': BridgeFieldDef(
-        BridgeTypeAnnotation(
-          BridgeTypeRef(CoreTypes.list, [
-            BridgeTypeAnnotation(
-              BridgeTypeRef(
-                BridgeTypeSpec(
-                  'package:every_door/models/amenity.dart',
-                  'OsmChange',
-                ),
-                [],
-              ),
-            ),
-          ]),
-        ),
-        isStatic: false,
-      ),
-    },
+    fields: {},
     wrap: false,
     bridge: true,
   );
@@ -555,43 +428,18 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
   @override
   $Value? $bridgeGet(String identifier) {
     switch (identifier) {
-      case 'nearestPOI':
-        final _nearestPOI = super.nearestPOI;
-        return $List.view(_nearestPOI, (e) => $OsmChange.wrap(e));
-      case 'isOurKind':
-        return $Function((runtime, target, args) {
-          final result = super.isOurKind(args[1]!.$value);
-          return $bool(result);
-        });
-      case 'addMapButton':
-        return $Function((runtime, target, args) {
-          super.addMapButton(args[1]!.$value);
-          return null;
-        });
-      case 'removeMapButton':
-        return $Function((runtime, target, args) {
-          super.removeMapButton(args[1]!.$value);
-          return null;
-        });
-      case 'addOverlay':
-        return $Function((runtime, target, args) {
-          super.addOverlay(args[1]!.$value);
-          return null;
-        });
-      case 'getNearestChanges':
-        return $Function((runtime, target, args) {
-          final result = super.getNearestChanges(
-            args[1]!.$value,
-            maxCount: args[2]?.$value ?? 200,
-            filter: args[3]?.$value ?? true,
-          );
-          return $Future.wrap(
-            result.then((e) => $List.view(e, (e) => $OsmChange.wrap(e))),
-          );
-        });
       case 'updateNearest':
         return $Function((runtime, target, args) {
           final result = super.updateNearest(args[1]!.$value);
+          return $Future.wrap(result.then((e) => null));
+        });
+      case 'openEditor':
+        return $Function((runtime, target, args) {
+          final result = super.openEditor(
+            context: args[1]!.$value,
+            element: args[2]?.$value,
+            location: args[3]?.$value,
+          );
           return $Future.wrap(result.then((e) => null));
         });
       case 'updateFromJson':
@@ -602,50 +450,15 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
           );
           return null;
         });
-      case 'parseKinds':
+      case 'getOtherObjectColor':
         return $Function((runtime, target, args) {
-          final result = super.parseKinds(args[1]!.$value);
-          return result == null
-              ? const $null()
-              : $List.view(result, (e) => $ElementKindImpl.wrap(e));
+          final result = super.getOtherObjectColor(args[1]!.$value);
+          return $Color.wrap(result);
         });
       case 'mapLayers':
         return $Function((runtime, target, args) {
           final result = super.mapLayers();
           return $List.view(result, (e) => $Widget.wrap(e));
-        });
-      case 'addListener':
-        return $Function((runtime, target, args) {
-          super.addListener(() {
-            (args[1]! as EvalCallable)(runtime, null, []);
-          });
-          return null;
-        });
-      case 'removeListener':
-        return $Function((runtime, target, args) {
-          super.removeListener(() {
-            (args[1]! as EvalCallable)(runtime, null, []);
-          });
-          return null;
-        });
-      case 'dispose':
-        return $Function((runtime, target, args) {
-          super.dispose();
-          return null;
-        });
-      case 'notifyListeners':
-        return $Function((runtime, target, args) {
-          super.notifyListeners();
-          return null;
-        });
-      case 'openEditor':
-        return $Function((runtime, target, args) {
-          super.openEditor(
-            context: args[1]!.$value,
-            element: args[2]?.$value,
-            location: args[3]?.$value,
-          );
-          return null;
         });
       case 'buildMarker':
         return $Function((runtime, target, args) {
@@ -663,98 +476,37 @@ class $ClassicModeDefinition$bridge extends ClassicModeDefinition
   String get name => $_get('name');
 
   @override
-  Iterable<Imagery> get overlays => $_get('overlays');
-
-  @override
-  Iterable<MapButton> get buttons => $_get('buttons');
-
-  @override
-  bool get hasListeners => $_get('hasListeners');
-
-  @override
-  Type get runtimeType => $_get('runtimeType');
-
-  @override
-  List<OsmChange> get nearestPOI => $_get('nearestPOI');
-
-  @override
-  MultiIcon getIcon(BuildContext context, bool outlined) =>
-      $_invoke('getIcon', [$BuildContext.wrap(context), $bool(outlined)]);
-
-  @override
-  bool isOurKind(OsmChange element) =>
-      $_invoke('isOurKind', [$OsmChange.wrap(element)]);
-
-  @override
-  void addMapButton(MapButton button) =>
-      $_invoke('addMapButton', [$MapButton.wrap(button)]);
-
-  @override
-  void removeMapButton(String id) => $_invoke('removeMapButton', [$String(id)]);
-
-  @override
-  void addOverlay(Imagery imagery) =>
-      $_invoke('addOverlay', [$Imagery.wrap(imagery)]);
-
-  @override
-  Future<List<OsmChange>> getNearestChanges(
-    LatLngBounds bounds, {
-    int maxCount = 200,
-    bool filter = true,
-  }) =>
-      $_invoke('getNearestChanges', [
-        $LatLngBounds.wrap(bounds),
-        $int(maxCount),
-        $bool(filter),
-      ]);
+  MultiIcon getIcon(BuildContext context, bool active) =>
+      $_invoke('getIcon', [$BuildContext.wrap(context), $bool(active)]);
 
   @override
   Future<void> updateNearest(LatLngBounds bounds) =>
       $_invoke('updateNearest', [$LatLngBounds.wrap(bounds)]);
 
   @override
+  Future<void> openEditor({
+    required BuildContext context,
+    Located? element,
+    LatLng? location,
+  }) =>
+      $_invoke('openEditor', [
+        $BuildContext.wrap(context),
+        element == null ? const $null() : $Located.wrap(element),
+        location == null ? const $null() : $LatLng.wrap(location),
+      ]);
+
+  @override
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) =>
       $_invoke('updateFromJson', [$Map.wrap(data), $Plugin.wrap(plugin)]);
 
   @override
-  List<ElementKindImpl>? parseKinds(dynamic data) =>
-      ($_invoke('parseKinds', [$Object(data)]) as List?)?.cast();
+  Color getOtherObjectColor(Located object) =>
+      $_invoke('getOtherObjectColor', [$Located.wrap(object)]);
 
   @override
   List<Widget> mapLayers() => ($_invoke('mapLayers', []) as List).cast();
 
   @override
-  void addListener(void Function() listener) => $_invoke('addListener', [
-        $Function((runtime, target, args) {
-          listener();
-          return const $null();
-        }),
-      ]);
-
-  @override
-  void removeListener(void Function() listener) => $_invoke('removeListener', [
-        $Function((runtime, target, args) {
-          listener();
-          return const $null();
-        }),
-      ]);
-
-  @override
-  void notifyListeners() => $_invoke('notifyListeners', []);
-
-  @override
-  void openEditor({
-    required BuildContext context,
-    OsmChange? element,
-    LatLng? location,
-  }) =>
-      $_invoke('openEditor', [
-        $BuildContext.wrap(context),
-        element == null ? const $null() : $OsmChange.wrap(element),
-        location == null ? const $null() : $LatLng.wrap(location),
-      ]);
-
-  @override
-  Widget buildMarker(OsmChange element) =>
-      $_invoke('buildMarker', [$OsmChange.wrap(element)]);
+  Widget buildMarker(Located element) =>
+      $_invoke('buildMarker', [$Located.wrap(element)]);
 }

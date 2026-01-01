@@ -1,35 +1,30 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'package:dart_eval/dart_eval_bridge.dart';
+import 'package:every_door/plugins/bindings/screens/modes/definitions/base.eval.dart';
+import 'package:every_door/screens/modes/definitions/micro.dart';
 import 'package:every_door/helpers/multi_icon.dart';
-import 'package:every_door/helpers/tags/element_kind.dart';
-import 'package:every_door/models/amenity.dart';
-import 'package:every_door/models/imagery.dart';
+import 'package:every_door/helpers/poi_describer.dart';
+import 'package:every_door/models/located.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/helpers/legend.dart';
-import 'package:every_door/screens/modes/definitions/micro.dart';
-import 'package:every_door/widgets/map_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eval/ui.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:dart_eval/stdlib/core.dart';
 import 'package:every_door/plugins/bindings/helpers/legend.eval.dart';
+import 'package:every_door/plugins/bindings/helpers/poi_describer.eval.dart';
 import 'package:every_door/plugins/bindings/helpers/multi_icon.eval.dart';
-import 'package:every_door/plugins/bindings/helpers/tags/element_kind.eval.dart';
-import 'package:every_door/plugins/bindings/models/amenity.eval.dart';
-import 'package:every_door/plugins/bindings/models/imagery.eval.dart';
-import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
-import 'package:every_door/plugins/bindings/widgets/map_button.eval.dart';
 import 'package:flutter_eval/widgets.dart';
 import 'package:flutter_map_eval/flutter_map/flutter_map_eval.dart';
+import 'package:every_door/plugins/bindings/models/located.eval.dart';
 import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
-
-import 'base.eval.dart';
+import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
 
 /// dart_eval bridge binding for [MicromappingModeDefinition]
 class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
     with $Bridge<MicromappingModeDefinition> {
-  /// Forwarded constructor for [MicromappingModeDefinition.new]
-  $MicromappingModeDefinition$bridge.fromPlugin(super.app): super.fromPlugin();
+  /// Forwarded constructor for [MicromappingModeDefinition.fromPlugin]
+  $MicromappingModeDefinition$bridge.fromPlugin(super.app);
 
   /// Configure this class for use in a [Runtime]
   static void configureForRuntime(Runtime runtime) {
@@ -115,136 +110,6 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
         ),
       ),
 
-      'isOurKind': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'element',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
-                  ),
-                  [],
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-
-      'addMapButton': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'button',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/widgets/map_button.dart',
-                    'MapButton',
-                  ),
-                  [],
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-
-      'removeMapButton': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'id',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
-              false,
-            ),
-          ],
-        ),
-      ),
-
-      'addOverlay': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'imagery',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/models/imagery.dart',
-                    'Imagery',
-                  ),
-                  [],
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-
-      'getNearestChanges': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.future, [
-              BridgeTypeAnnotation(
-                BridgeTypeRef(CoreTypes.list, [
-                  BridgeTypeAnnotation(
-                    BridgeTypeRef(
-                      BridgeTypeSpec(
-                        'package:every_door/models/amenity.dart',
-                        'OsmChange',
-                      ),
-                      [],
-                    ),
-                  ),
-                ]),
-              ),
-            ]),
-          ),
-          namedParams: [
-            BridgeParameter(
-              'maxCount',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
-              true,
-            ),
-
-            BridgeParameter(
-              'filter',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-              true,
-            ),
-          ],
-          params: [
-            BridgeParameter(
-              'bounds',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:flutter_map/src/geo/latlng_bounds.dart',
-                    'LatLngBounds',
-                  ),
-                  [],
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-
       'updateNearest': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -268,6 +133,59 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
               false,
             ),
           ],
+        ),
+      ),
+
+      'openEditor': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(CoreTypes.future, [
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+            ]),
+          ),
+          namedParams: [
+            BridgeParameter(
+              'context',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:flutter/src/widgets/framework.dart',
+                    'BuildContext',
+                  ),
+                  [],
+                ),
+              ),
+              false,
+            ),
+
+            BridgeParameter(
+              'element',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
+                  ),
+                  [],
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+
+            BridgeParameter(
+              'location',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
+                  [],
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+          ],
+          params: [],
         ),
       ),
 
@@ -304,27 +222,24 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
         ),
       ),
 
-      'parseKinds': BridgeMethodDef(
+      'getOtherObjectColor': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.list, [
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/helpers/tags/element_kind.dart',
-                    'ElementKindImpl',
-                  ),
-                  [],
-                ),
-              ),
-            ]),
-            nullable: true,
+            BridgeTypeRef(BridgeTypeSpec('dart:ui', 'Color'), []),
           ),
           namedParams: [],
           params: [
             BridgeParameter(
-              'data',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
+              'object',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
+                  ),
+                  [],
+                ),
+              ),
               false,
             ),
           ],
@@ -351,67 +266,47 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
         ),
       ),
 
-      'addListener': BridgeMethodDef(
+      'getPreset': BridgeMethodDef(
         BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(CoreTypes.future, [
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/helpers/legend.dart',
+                    'PresetLabel',
+                  ),
+                  [],
+                ),
+                nullable: true,
+              ),
+            ]),
+          ),
           namedParams: [],
           params: [
             BridgeParameter(
-              'listener',
+              'change',
               BridgeTypeAnnotation(
-                BridgeTypeRef.genericFunction(
-                  BridgeFunctionDef(
-                    returns: BridgeTypeAnnotation(
-                      BridgeTypeRef(CoreTypes.voidType),
-                    ),
-                    params: [],
-                    namedParams: [],
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
                   ),
+                  [],
                 ),
               ),
               false,
             ),
-          ],
-        ),
-      ),
 
-      'removeListener': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
             BridgeParameter(
-              'listener',
+              'locale',
               BridgeTypeAnnotation(
-                BridgeTypeRef.genericFunction(
-                  BridgeFunctionDef(
-                    returns: BridgeTypeAnnotation(
-                      BridgeTypeRef(CoreTypes.voidType),
-                    ),
-                    params: [],
-                    namedParams: [],
-                  ),
-                ),
+                BridgeTypeRef(BridgeTypeSpec('dart:ui', 'Locale'), []),
+                nullable: true,
               ),
               false,
             ),
           ],
-        ),
-      ),
-
-      'dispose': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-
-      'notifyListeners': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [],
         ),
       ),
 
@@ -421,48 +316,9 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
           namedParams: [],
           params: [
             BridgeParameter(
-              'context',
+              'locale',
               BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:flutter/src/widgets/framework.dart',
-                    'BuildContext',
-                  ),
-                  [],
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-
-      'openEditor': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'context',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:flutter/src/widgets/framework.dart',
-                    'BuildContext',
-                  ),
-                  [],
-                ),
-              ),
-              false,
-            ),
-
-            BridgeParameter(
-              'location',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
-                  [],
-                ),
+                BridgeTypeRef(BridgeTypeSpec('dart:ui', 'Locale'), []),
               ),
               false,
             ),
@@ -494,8 +350,8 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
               BridgeTypeAnnotation(
                 BridgeTypeRef(
                   BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
+                    'package:every_door/models/located.dart',
+                    'Located',
                   ),
                   [],
                 ),
@@ -520,91 +376,12 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
           params: [],
         ),
       ),
-
-      'overlays': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.iterable, [
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/models/imagery.dart',
-                    'Imagery',
-                  ),
-                  [],
-                ),
-              ),
-            ]),
-          ),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-
-      'buttons': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.iterable, [
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/widgets/map_button.dart',
-                    'MapButton',
-                  ),
-                  [],
-                ),
-              ),
-            ]),
-          ),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-
-      'hasListeners': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [],
-        ),
-      ),
     },
     setters: {},
     fields: {
       'kMicroStuffInList': BridgeFieldDef(
         BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
         isStatic: true,
-      ),
-
-      'nearestPOI': BridgeFieldDef(
-        BridgeTypeAnnotation(
-          BridgeTypeRef(CoreTypes.list, [
-            BridgeTypeAnnotation(
-              BridgeTypeRef(
-                BridgeTypeSpec(
-                  'package:every_door/models/amenity.dart',
-                  'OsmChange',
-                ),
-                [],
-              ),
-            ),
-          ]),
-        ),
-        isStatic: false,
-      ),
-
-      'otherPOI': BridgeFieldDef(
-        BridgeTypeAnnotation(
-          BridgeTypeRef(CoreTypes.list, [
-            BridgeTypeAnnotation(
-              BridgeTypeRef(
-                BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
-                [],
-              ),
-            ),
-          ]),
-        ),
-        isStatic: false,
       ),
 
       'enableZoomingIn': BridgeFieldDef(
@@ -618,6 +395,19 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
             BridgeTypeSpec(
               'package:every_door/helpers/legend.dart',
               'LegendController',
+            ),
+            [],
+          ),
+        ),
+        isStatic: false,
+      ),
+
+      'describer': BridgeFieldDef(
+        BridgeTypeAnnotation(
+          BridgeTypeRef(
+            BridgeTypeSpec(
+              'package:every_door/helpers/poi_describer.dart',
+              'PoiDescriber',
             ),
             [],
           ),
@@ -642,60 +432,31 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
   @override
   $Value? $bridgeGet(String identifier) {
     switch (identifier) {
-      case 'nearestPOI':
-        final _nearestPOI = super.nearestPOI;
-        return $List.view(_nearestPOI, (e) => $OsmChange.wrap(e));
-
-      case 'otherPOI':
-        final _otherPOI = super.otherPOI;
-        return $List.view(_otherPOI, (e) => $LatLng.wrap(e));
-
       case 'enableZoomingIn':
-        final _enableZoomingIn = super.enableZoomingIn;
-        return $bool(_enableZoomingIn);
+        return $bool(super.enableZoomingIn);
 
       case 'legend':
-        final _legend = super.legend;
-        return $LegendController.wrap(_legend);
+        return $LegendController.wrap(super.legend);
+
+      case 'describer':
+        return $PoiDescriber.wrap(super.describer);
       case 'getIcon':
         return $Function((runtime, target, args) {
           final result = super.getIcon(args[1]!.$value, args[2]!.$value);
           return $MultiIcon.wrap(result);
         });
-      case 'isOurKind':
-        return $Function((runtime, target, args) {
-          final result = super.isOurKind(args[1]!.$value);
-          return $bool(result);
-        });
-      case 'addMapButton':
-        return $Function((runtime, target, args) {
-          super.addMapButton(args[1]!.$value);
-          return null;
-        });
-      case 'removeMapButton':
-        return $Function((runtime, target, args) {
-          super.removeMapButton(args[1]!.$value);
-          return null;
-        });
-      case 'addOverlay':
-        return $Function((runtime, target, args) {
-          super.addOverlay(args[1]!.$value);
-          return null;
-        });
-      case 'getNearestChanges':
-        return $Function((runtime, target, args) {
-          final result = super.getNearestChanges(
-            args[1]!.$value,
-            maxCount: args[2]?.$value ?? 200,
-            filter: args[3]?.$value ?? true,
-          );
-          return $Future.wrap(
-            result.then((e) => $List.view(e, (e) => $OsmChange.wrap(e))),
-          );
-        });
       case 'updateNearest':
         return $Function((runtime, target, args) {
           final result = super.updateNearest(args[1]!.$value);
+          return $Future.wrap(result.then((e) => null));
+        });
+      case 'openEditor':
+        return $Function((runtime, target, args) {
+          final result = super.openEditor(
+            context: args[1]!.$value,
+            element: args[2]?.$value,
+            location: args[3]?.$value,
+          );
           return $Future.wrap(result.then((e) => null));
         });
       case 'updateFromJson':
@@ -706,45 +467,28 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
           );
           return null;
         });
-      case 'parseKinds':
+      case 'getOtherObjectColor':
         return $Function((runtime, target, args) {
-          final result = super.parseKinds(args[1]!.$value);
-          return result == null
-              ? const $null()
-              : $List.view(result, (e) => $ElementKindImpl.wrap(e));
+          final result = super.getOtherObjectColor(args[1]!.$value);
+          return $Color.wrap(result);
         });
       case 'mapLayers':
         return $Function((runtime, target, args) {
           final result = super.mapLayers();
           return $List.view(result, (e) => $Widget.wrap(e));
         });
-      case 'addListener':
+      case 'getPreset':
         return $Function((runtime, target, args) {
-          super.addListener(() {
-            (args[1]! as EvalCallable)(runtime, null, []);
-          });
-          return null;
-        });
-      case 'removeListener':
-        return $Function((runtime, target, args) {
-          super.removeListener(() {
-            (args[1]! as EvalCallable)(runtime, null, []);
-          });
-          return null;
-        });
-      case 'notifyListeners':
-        return $Function((runtime, target, args) {
-          super.notifyListeners();
-          return null;
+          final result = super.getPreset(args[1]!.$value, args[2]!.$value);
+          return $Future.wrap(
+            result.then(
+              (e) => e == null ? const $null() : $PresetLabel.wrap(e),
+            ),
+          );
         });
       case 'updateLegend':
         return $Function((runtime, target, args) {
           super.updateLegend(args[1]!.$value);
-          return null;
-        });
-      case 'openEditor':
-        return $Function((runtime, target, args) {
-          super.openEditor(args[1]!.$value, args[2]!.$value);
           return null;
         });
       case 'buildMarker':
@@ -763,18 +507,12 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
   @override
   void $bridgeSet(String identifier, $Value value) {
     switch (identifier) {
-      case 'nearestPOI':
-        final list = (value as $List).$reified;
-        super.nearestPOI = list.cast();
-        return;
-
-      case 'otherPOI':
-        final list = (value as $List).$reified;
-        super.otherPOI = list.cast();
-        return;
-
       case 'enableZoomingIn':
-        super.enableZoomingIn = value.$reified;
+        super.enableZoomingIn = value.$value;
+        return;
+
+      case 'legend':
+        super.legend = value.$value;
         return;
     }
   }
@@ -783,106 +521,58 @@ class $MicromappingModeDefinition$bridge extends MicromappingModeDefinition
   String get name => $_get('name');
 
   @override
-  Iterable<Imagery> get overlays => $_get('overlays');
-
-  @override
-  Iterable<MapButton> get buttons => $_get('buttons');
-
-  @override
-  bool get hasListeners => $_get('hasListeners');
-
-  @override
-  Type get runtimeType => $_get('runtimeType');
-
-  @override
-  List<OsmChange> get nearestPOI => $_get('nearestPOI');
-
-  @override
-  List<LatLng> get otherPOI => $_get('otherPOI');
-
-  @override
   bool get enableZoomingIn => $_get('enableZoomingIn');
 
   @override
   LegendController get legend => $_get('legend');
 
   @override
+  PoiDescriber get describer => $_get('describer');
+
+  @override
   MultiIcon getIcon(BuildContext context, bool outlined) =>
       $_invoke('getIcon', [$BuildContext.wrap(context), $bool(outlined)]);
-
-  @override
-  bool isOurKind(OsmChange element) =>
-      $_invoke('isOurKind', [$OsmChange.wrap(element)]);
-
-  @override
-  void addMapButton(MapButton button) =>
-      $_invoke('addMapButton', [$MapButton.wrap(button)]);
-
-  @override
-  void removeMapButton(String id) => $_invoke('removeMapButton', [$String(id)]);
-
-  @override
-  void addOverlay(Imagery imagery) =>
-      $_invoke('addOverlay', [$Imagery.wrap(imagery)]);
-
-  @override
-  Future<List<OsmChange>> getNearestChanges(
-    LatLngBounds bounds, {
-    int maxCount = 200,
-    bool filter = true,
-  }) => $_invoke('getNearestChanges', [
-    $LatLngBounds.wrap(bounds),
-    $int(maxCount),
-    $bool(filter),
-  ]);
 
   @override
   Future<void> updateNearest(LatLngBounds bounds) =>
       $_invoke('updateNearest', [$LatLngBounds.wrap(bounds)]);
 
   @override
+  Future<void> openEditor({
+    required BuildContext context,
+    Located? element,
+    LatLng? location,
+  }) => $_invoke('openEditor', [
+    $BuildContext.wrap(context),
+    element == null ? const $null() : $Located.wrap(element),
+    location == null ? const $null() : $LatLng.wrap(location),
+  ]);
+
+  @override
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) =>
       $_invoke('updateFromJson', [$Map.wrap(data), $Plugin.wrap(plugin)]);
 
   @override
-  List<ElementKindImpl>? parseKinds(dynamic data) =>
-      ($_invoke('parseKinds', [$Object(data)]) as List?)?.cast();
+  Color getOtherObjectColor(Located object) =>
+      $_invoke('getOtherObjectColor', [$Located.wrap(object)]);
 
   @override
   List<Widget> mapLayers() => ($_invoke('mapLayers', []) as List).cast();
 
   @override
-  void addListener(void Function() listener) => $_invoke('addListener', [
-    $Function((runtime, target, args) {
-      listener();
-      return const $null();
-    }),
-  ]);
+  Future<PresetLabel?> getPreset(Located change, Locale? locale) =>
+      $_invoke('getPreset', [
+        $Located.wrap(change),
+        locale == null ? const $null() : $Locale.wrap(locale),
+      ]);
 
   @override
-  void removeListener(void Function() listener) => $_invoke('removeListener', [
-    $Function((runtime, target, args) {
-      listener();
-      return const $null();
-    }),
-  ]);
+  void updateLegend(Locale locale) =>
+      $_invoke('updateLegend', [$Locale.wrap(locale)]);
 
   @override
-  void notifyListeners() => $_invoke('notifyListeners', []);
-
-  @override
-  void updateLegend(BuildContext context) =>
-      $_invoke('updateLegend', [$BuildContext.wrap(context)]);
-
-  @override
-  void openEditor(BuildContext context, LatLng location) => $_invoke(
-    'openEditor',
-    [$BuildContext.wrap(context), $LatLng.wrap(location)],
-  );
-
-  @override
-  Widget buildMarker(int index, OsmChange element, bool isZoomedIn) => $_invoke(
+  Widget buildMarker(int index, Located element, bool isZoomedIn) => $_invoke(
     'buildMarker',
-    [$int(index), $OsmChange.wrap(element), $bool(isZoomedIn)],
+    [$int(index), $Located.wrap(element), $bool(isZoomedIn)],
   );
 }

@@ -1,11 +1,13 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'package:dart_eval/dart_eval_bridge.dart';
+import 'package:every_door/plugins/bindings/models/located.eval.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:flutter_eval/foundation.dart';
 import 'package:dart_eval/stdlib/core.dart';
 import 'package:every_door/plugins/bindings/helpers/multi_icon.eval.dart';
 import 'package:every_door/plugins/bindings/models/amenity.eval.dart';
 import 'package:every_door/plugins/bindings/helpers/tags/element_kind.eval.dart';
+import 'package:flutter_eval/ui.dart';
 import 'package:flutter_eval/widgets.dart';
 
 /// dart_eval wrapper binding for [BaseModeDefinition]
@@ -90,30 +92,8 @@ class $BaseModeDefinition implements $Instance {
             ),
 
             BridgeParameter(
-              'outlined',
+              'active',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-              false,
-            ),
-          ],
-        ),
-      ),
-
-      'isOurKind': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'element',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
-                  ),
-                  [],
-                ),
-              ),
               false,
             ),
           ],
@@ -203,12 +183,6 @@ class $BaseModeDefinition implements $Instance {
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
               true,
             ),
-
-            BridgeParameter(
-              'filter',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-              true,
-            ),
           ],
           params: [
             BridgeParameter(
@@ -254,6 +228,59 @@ class $BaseModeDefinition implements $Instance {
         ),
       ),
 
+      'openEditor': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(CoreTypes.future, [
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+            ]),
+          ),
+          namedParams: [
+            BridgeParameter(
+              'context',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:flutter/src/widgets/framework.dart',
+                    'BuildContext',
+                  ),
+                  [],
+                ),
+              ),
+              false,
+            ),
+
+            BridgeParameter(
+              'element',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
+                  ),
+                  [],
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+
+            BridgeParameter(
+              'location',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
+                  [],
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+          ],
+          params: [],
+        ),
+      ),
+
       'updateFromJson': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -287,30 +314,62 @@ class $BaseModeDefinition implements $Instance {
         ),
       ),
 
-      'parseKinds': BridgeMethodDef(
+      'readKindsFromJson': BridgeMethodDef(
         BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.list, [
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/helpers/tags/element_kind.dart',
-                    'ElementKindImpl',
-                  ),
-                  [],
-                ),
-              ),
-            ]),
-            nullable: true,
-          ),
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
           namedParams: [],
           params: [
             BridgeParameter(
               'data',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.map, [
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
+                ]),
+              ),
               false,
             ),
           ],
+        ),
+      ),
+
+      'getOtherObjectColor': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(BridgeTypeSpec('dart:ui', 'Color'), []),
+          ),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'object',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
+                  ),
+                  [],
+                ),
+              ),
+              false,
+            ),
+          ],
+        ),
+      ),
+
+      'otherObjectsLayer': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(
+              BridgeTypeSpec(
+                'package:flutter/src/widgets/framework.dart',
+                'Widget',
+              ),
+              [],
+            ),
+          ),
+          namedParams: [],
+          params: [],
         ),
       ),
 
@@ -385,6 +444,73 @@ class $BaseModeDefinition implements $Instance {
     },
     setters: {},
     fields: {
+      'nearest': BridgeFieldDef(
+        BridgeTypeAnnotation(
+          BridgeTypeRef(CoreTypes.list, [
+            BridgeTypeAnnotation(
+              BridgeTypeRef(
+                BridgeTypeSpec(
+                  'package:every_door/models/located.dart',
+                  'Located',
+                ),
+                [],
+              ),
+            ),
+          ]),
+        ),
+        isStatic: false,
+      ),
+
+      'other': BridgeFieldDef(
+        BridgeTypeAnnotation(
+          BridgeTypeRef(CoreTypes.list, [
+            BridgeTypeAnnotation(
+              BridgeTypeRef(
+                BridgeTypeSpec(
+                  'package:every_door/models/located.dart',
+                  'Located',
+                ),
+                [],
+              ),
+            ),
+          ]),
+        ),
+        isStatic: false,
+      ),
+
+      'ourKinds': BridgeFieldDef(
+        BridgeTypeAnnotation(
+          BridgeTypeRef(CoreTypes.list, [
+            BridgeTypeAnnotation(
+              BridgeTypeRef(
+                BridgeTypeSpec(
+                  'package:every_door/helpers/tags/element_kind.dart',
+                  'ElementKindImpl',
+                ),
+                [],
+              ),
+            ),
+          ]),
+        ),
+        isStatic: false,
+      ),
+
+      'otherKinds': BridgeFieldDef(
+        BridgeTypeAnnotation(
+          BridgeTypeRef(CoreTypes.list, [
+            BridgeTypeAnnotation(
+              BridgeTypeRef(
+                BridgeTypeSpec(
+                  'package:every_door/helpers/tags/element_kind.dart',
+                  'ElementKindImpl',
+                ),
+                [],
+              ),
+            ),
+          ]),
+        ),
+        isStatic: false,
+      ),
     },
     wrap: true,
     bridge: false,
@@ -408,6 +534,22 @@ class $BaseModeDefinition implements $Instance {
   @override
   $Value? $getProperty(Runtime runtime, String identifier) {
     switch (identifier) {
+      case 'nearest':
+        final _nearest = $value.nearest;
+        return $List.view(_nearest, (e) => $Located.wrap(e));
+
+      case 'other':
+        final _other = $value.other;
+        return $List.view(_other, (e) => $Located.wrap(e));
+
+      case 'ourKinds':
+        final _ourKinds = $value.ourKinds;
+        return $List.view(_ourKinds, (e) => $ElementKindImpl.wrap(e));
+
+      case 'otherKinds':
+        final _otherKinds = $value.otherKinds;
+        return $List.view(_otherKinds, (e) => $ElementKindImpl.wrap(e));
+
       case 'name':
         final _name = $value.name;
         return $String(_name);
@@ -421,9 +563,6 @@ class $BaseModeDefinition implements $Instance {
         return $Iterable.wrap(_buttons);
       case 'getIcon':
         return __getIcon;
-
-      case 'isOurKind':
-        return __isOurKind;
 
       case 'addMapButton':
         return __addMapButton;
@@ -440,11 +579,20 @@ class $BaseModeDefinition implements $Instance {
       case 'updateNearest':
         return __updateNearest;
 
+      case 'openEditor':
+        return __openEditor;
+
       case 'updateFromJson':
         return __updateFromJson;
 
-      case 'parseKinds':
-        return __parseKinds;
+      case 'readKindsFromJson':
+        return __readKindsFromJson;
+
+      case 'getOtherObjectColor':
+        return __getOtherObjectColor;
+
+      case 'otherObjectsLayer':
+        return __otherObjectsLayer;
 
       case 'mapLayers':
         return __mapLayers;
@@ -457,17 +605,6 @@ class $BaseModeDefinition implements $Instance {
     final self = target! as $BaseModeDefinition;
     final result = self.$value.getIcon(args[0]!.$value, args[1]!.$value);
     return $MultiIcon.wrap(result);
-  }
-
-  static const $Function __isOurKind = $Function(_isOurKind);
-  static $Value? _isOurKind(
-    Runtime runtime,
-    $Value? target,
-    List<$Value?> args,
-  ) {
-    final self = target! as $BaseModeDefinition;
-    final result = self.$value.isOurKind(args[0]!.$value);
-    return $bool(result);
   }
 
   static const $Function __addMapButton = $Function(_addMapButton);
@@ -513,7 +650,6 @@ class $BaseModeDefinition implements $Instance {
     final result = self.$value.getNearestChanges(
       args[0]!.$value,
       maxCount: args[1]?.$value ?? 200,
-      filter: args[2]?.$value ?? true,
     );
     return $Future.wrap(
       result.then((e) => $List.view(e, (e) => $OsmChange.wrap(e))),
@@ -531,6 +667,21 @@ class $BaseModeDefinition implements $Instance {
     return $Future.wrap(result.then((e) => null));
   }
 
+  static const $Function __openEditor = $Function(_openEditor);
+  static $Value? _openEditor(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $BaseModeDefinition;
+    final result = self.$value.openEditor(
+      context: args[0]!.$value,
+      element: args[1]?.$value,
+      location: args[2]?.$value,
+    );
+    return $Future.wrap(result.then((e) => null));
+  }
+
   static const $Function __updateFromJson = $Function(_updateFromJson);
   static $Value? _updateFromJson(
     Runtime runtime,
@@ -545,17 +696,39 @@ class $BaseModeDefinition implements $Instance {
     return null;
   }
 
-  static const $Function __parseKinds = $Function(_parseKinds);
-  static $Value? _parseKinds(
+  static const $Function __readKindsFromJson = $Function(_readKindsFromJson);
+  static $Value? _readKindsFromJson(
     Runtime runtime,
     $Value? target,
     List<$Value?> args,
   ) {
     final self = target! as $BaseModeDefinition;
-    final result = self.$value.parseKinds(args[0]!.$value);
-    return result == null
-        ? const $null()
-        : $List.view(result, (e) => $ElementKindImpl.wrap(e));
+    self.$value.readKindsFromJson((args[0]!.$reified as Map).cast());
+    return null;
+  }
+
+  static const $Function __getOtherObjectColor = $Function(
+    _getOtherObjectColor,
+  );
+  static $Value? _getOtherObjectColor(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $BaseModeDefinition;
+    final result = self.$value.getOtherObjectColor(args[0]!.$value);
+    return $Color.wrap(result);
+  }
+
+  static const $Function __otherObjectsLayer = $Function(_otherObjectsLayer);
+  static $Value? _otherObjectsLayer(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $BaseModeDefinition;
+    final result = self.$value.otherObjectsLayer();
+    return $Widget.wrap(result);
   }
 
   static const $Function __mapLayers = $Function(_mapLayers);
@@ -571,6 +744,23 @@ class $BaseModeDefinition implements $Instance {
 
   @override
   void $setProperty(Runtime runtime, String identifier, $Value value) {
+    switch (identifier) {
+      case 'nearest':
+        $value.nearest = value.$value;
+        return;
+
+      case 'other':
+        $value.other = value.$value;
+        return;
+
+      case 'ourKinds':
+        $value.ourKinds = value.$value;
+        return;
+
+      case 'otherKinds':
+        $value.otherKinds = value.$value;
+        return;
+    }
     return _superclass.$setProperty(runtime, identifier, value);
   }
 }

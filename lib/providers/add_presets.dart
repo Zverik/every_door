@@ -14,7 +14,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:trie_search/trie.dart';
 
+/// Manages plugin-installed field and preset definitions.
 final pluginPresetsProvider = Provider((ref) => PluginPresetsProvider(ref));
+
+typedef FieldBuilder = PresetField Function(Map<String, dynamic> data);
 
 class PluginPresetsProvider {
   static final _logger = Logger('PluginPresetsProvider');
@@ -25,6 +28,7 @@ class PluginPresetsProvider {
   final Map<String, PresetField> _fieldsCache = {};
   final Map<String, FieldTemplate> _fields = {};
   final Map<String, Map<String, String?>> _presetTags = {};
+  final Map<String, (Plugin, FieldBuilder)> _fieldBuilders = {};
 
   PluginPresetsProvider(this._ref);
 
@@ -129,9 +133,19 @@ class PluginPresetsProvider {
     _fieldsCache.remove(id);
   }
 
-  void removeField(String id) {
-    _fieldsCache.remove(id);
-    _fields.remove(id);
+  void registerFieldType(String typ, Plugin plugin, FieldBuilder build) {
+    _fieldBuilders[typ] = (plugin, build);
+  }
+
+  void removeFieldsForPlugin(String pluginId) {
+    final fieldIds = _fields.entries
+        .where((f) => f.value.pluginId == pluginId)
+        .map((e) => e.key);
+    _fieldBuilders.removeWhere((k, v) => v.$1.id == pluginId);
+    for (final id in fieldIds) {
+      _fieldsCache.remove(id);
+      _fields.remove(id);
+    }
   }
 
   PresetField? getField(String id, Locale? locale) {
@@ -335,8 +349,11 @@ class FieldTemplate {
   final Map<String, dynamic> data;
   late final List<ComboOption> options;
   final PluginLocalizationsBranch localizations;
+  final FieldBuilder? builder;
+  final String pluginId;
 
-  FieldTemplate(this.data, this.localizations, Plugin plugin) {
+  FieldTemplate(this.data, this.localizations, Plugin plugin, {this.builder})
+      : pluginId = plugin.id {
     options = _buildComboOptions(plugin);
   }
 
@@ -377,6 +394,7 @@ class FieldTemplate {
         }
       }
     }
-    return fieldFromPlugin(copy, options: newOptions);
+
+    return builder?.call(copy) ?? fieldFromJson(copy, options: newOptions);
   }
 }

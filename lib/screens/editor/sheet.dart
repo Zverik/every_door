@@ -117,7 +117,7 @@ class _BottomEditorPaneState extends ConsumerState<BottomEditorPane> {
       if (element.isNew) {
         changes.deleteChange(element);
       } else {
-        element.deleted = true;
+        element.isDeleted = true;
         changes.saveChange(element);
       }
       saved = true;

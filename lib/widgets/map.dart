@@ -331,7 +331,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
               horizontal: 0.0,
               vertical: 10.0,
             ),
-            icon: Icons.menu,
+            icon: MultiIcon.font(Icons.menu),
             tooltip: loc.mapSettings,
             onPressed: (_) {
               Navigator.push(
@@ -347,7 +347,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
               // Tracking button
               MapButton(
                 enabled: !ref.watch(trackingProvider) && trackLocation != null,
-                icon: MultiIcon(fontIcon: Icons.my_location),
+                icon: MultiIcon.font(Icons.my_location),
                 tooltip: loc.mapLocate,
                 onPressed: (_) {
                   ref

@@ -9,6 +9,7 @@ import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/helpers/tags/payment_tags.dart';
+import 'package:every_door/models/located.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
@@ -18,7 +19,7 @@ import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
 @Bind()
-class OsmChange extends ChangeNotifier implements Comparable {
+class OsmChange extends ChangeNotifier implements Comparable, Located {
   static final kDateFormat = DateFormat('yyyy-MM-dd');
   static const kCheckedKey = 'check_date';
 
@@ -93,7 +94,12 @@ class OsmChange extends ChangeNotifier implements Comparable {
   }
 
   // Location and modification
+  @override
   LatLng get location => newLocation ?? element!.center!;
+
+  @override
+  String get uniqueId => databaseId;
+
   set location(LatLng loc) {
     newLocation = loc;
     notifyListeners();
@@ -104,19 +110,23 @@ class OsmChange extends ChangeNotifier implements Comparable {
     return element!.id;
   }
 
-  bool get deleted =>
+  @override
+  bool get isDeleted =>
       _deleted ||
       (_mainKey?.startsWith(kDeleted) ?? false) ||
       (_mainKey?.startsWith(kBuildingDeleted) ?? false);
-  bool get hardDeleted => _deleted;
+
+  @override
   bool get isModified =>
       newTags.isNotEmpty ||
       newLocation != null ||
       newNodes != null ||
-      hardDeleted;
-  bool get isConfirmed =>
-      !deleted && (newTags.length == 1 && newTags.keys.first == kCheckedKey);
+      isHardDeleted;
+
+  @override
   bool get isNew => element == null;
+
+  bool get isHardDeleted => _deleted;
   bool get isArea => element?.isArea ?? false;
   bool get isPoint => element?.isPoint ?? true;
   bool get canDelete =>
@@ -124,6 +134,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
       (element == null || element?.isMember == IsMember.no);
   bool get canMove =>
       (element?.isPoint ?? true) && (element?.isMember != IsMember.way);
+  bool get isConfirmed =>
+      !isDeleted && (newTags.length == 1 && newTags.keys.first == kCheckedKey);
   String? get mainKey => _mainKey;
 
   void revert() {
@@ -219,8 +231,8 @@ class OsmChange extends ChangeNotifier implements Comparable {
       check();
   }
 
-  set deleted(bool value) {
-    if (value == deleted) return;
+  set isDeleted(bool value) {
+    if (value == isDeleted) return;
     if (isNew || !canDelete) {
       // We use this for new because if they are not deleted higher up,
       // they are meant to have this prefix.
@@ -566,13 +578,13 @@ class OsmChange extends ChangeNotifier implements Comparable {
     // Order for uploading: create (n), modify (nwr), delete(rwn).
     if (isNew) {
       return other.isNew ? 0 : -1;
-    } else if (isModified && !hardDeleted) {
+    } else if (isModified && !isHardDeleted) {
       if (other.isNew) return 1;
-      if (other.hardDeleted) return -1;
+      if (other.isHardDeleted) return -1;
       return kTypeOrder[id.type]!.compareTo(kTypeOrder[other.id.type]!);
     } else {
       // deleted
-      if (!other.hardDeleted) return 1;
+      if (!other.isHardDeleted) return 1;
       return kTypeOrder[other.id.type]!.compareTo(kTypeOrder[id.type]!);
     }
   }

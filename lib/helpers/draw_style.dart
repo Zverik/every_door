@@ -1,18 +1,25 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
+import 'package:eval_annotation/eval_annotation.dart';
+import 'package:every_door/helpers/multi_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
+@Bind()
 class DrawingStyle {
+  final String name;
   final Color color;
   final bool thin;
   final bool dashed;
+  final MultiIcon icon;
 
   static const kDefaultStroke = 8.0;
 
-  const DrawingStyle({
+  const DrawingStyle(
+    this.name, {
     required this.color,
+    required this.icon,
     this.thin = false,
     this.dashed = false,
   });
@@ -26,52 +33,67 @@ class DrawingStyle {
   @override
   bool operator ==(Object other) {
     if (other is! DrawingStyle) return false;
-    return color == other.color &&
+    return name == other.name &&
+        color == other.color &&
         stroke < kDefaultStroke == other.stroke < kDefaultStroke &&
         dashed == other.dashed;
   }
 
   @override
-  int get hashCode => Object.hash(color, stroke, dashed);
+  int get hashCode => name.hashCode;
 }
 
-const kTypeStyles = <String, DrawingStyle>{
-  "scribble": DrawingStyle(color: Colors.white, thin: true),
-  "eraser": DrawingStyle(color: Colors.black54),
-  "road": DrawingStyle(color: Colors.white70),
-  "track": DrawingStyle(color: Colors.white70, dashed: true),
-  "footway": DrawingStyle(color: Colors.red),
-  "path": DrawingStyle(color: Colors.red, dashed: true),
-  "cycleway": DrawingStyle(color: Colors.purpleAccent),
-  "cycleway_shared": DrawingStyle(color: Colors.purpleAccent, dashed: true),
-  "wall": DrawingStyle(color: Colors.yellow, thin: true),
-  "fence": DrawingStyle(color: Colors.yellow, dashed: true, thin: true),
-  "power": DrawingStyle(color: Colors.orangeAccent, thin: true),
-  "stream": DrawingStyle(color: Colors.lightBlue),
-  "culvert": DrawingStyle(color: Colors.lightBlue, dashed: true),
-};
+DrawingStyle styleByName(String? name) {
+  if (name == 'scribble') {
+    return kToolScribble;
+  } else {
+    final foundStyle = kDefaultTools.where((s) => s.name == name).firstOrNull;
+    if (foundStyle != null) return foundStyle;
+    // TODO: drawing style from plugins.
+  }
+  return kUnknownStyle;
+}
 
-final kTypeStylesReversed =
-    kTypeStyles.map((key, value) => MapEntry(value, key));
+final kToolEraser = DrawingStyle("eraser",
+    color: Colors.black54, icon: MultiIcon.font(LineIcons.eraser));
+final kToolScribble = DrawingStyle("scribble",
+    color: Colors.white, thin: true, icon: MultiIcon.font(Icons.draw));
 
-const kUnknownStyle = DrawingStyle(color: Colors.grey);
-const kToolEraser = "eraser";
-const kToolScribble = "scribble";
+final kUnknownStyleIcon = MultiIcon.font(Icons.line_axis);
+final kUnknownStyle =
+    DrawingStyle('', color: Colors.grey, icon: kUnknownStyleIcon);
 
-const kStyleIcons = <String, IconData>{
-  "eraser": LineIcons.eraser,
-  "scribble": Icons.draw,
-  "road": Icons.edit_road,
-  "track": Icons.forest,
-  "footway": Icons.directions_walk,
-  "path": Icons.directions_walk,
-  "cycleway": Icons.directions_bike,
-  "cycleway_shared": Icons.directions_bike,
-  "wall": Icons.fence,
-  "fence": Icons.fence,
-  "power": Icons.power_input,
-  "stream": Icons.water,
-  "culvert": Icons.water,
-};
+final kDefaultTools = [
+  // bottom to top, left to right, 2 columns
+  DrawingStyle("road",
+      color: Colors.white70, icon: MultiIcon.font(Icons.edit_road)),
+  DrawingStyle("track",
+      color: Colors.white70, dashed: true, icon: MultiIcon.font(Icons.forest)),
 
-const kUnknownStyleIcon = Icons.line_axis;
+  DrawingStyle("footway",
+      color: Colors.red, icon: MultiIcon.font(Icons.directions_walk)),
+  DrawingStyle("path",
+      color: Colors.red,
+      dashed: true,
+      icon: MultiIcon.font(Icons.directions_walk)),
+
+  DrawingStyle("cycleway",
+      color: Colors.purpleAccent, icon: MultiIcon.font(Icons.directions_bike)),
+  DrawingStyle("power",
+      color: Colors.orangeAccent,
+      thin: true,
+      icon: MultiIcon.font(Icons.power_input)),
+
+  DrawingStyle("wall",
+      color: Colors.yellow, thin: true, icon: MultiIcon.font(Icons.fence)),
+  DrawingStyle("fence",
+      color: Colors.yellow,
+      dashed: true,
+      thin: true,
+      icon: MultiIcon.font(Icons.fence)),
+
+  DrawingStyle("stream",
+      color: Colors.lightBlue, icon: MultiIcon.font(Icons.water)),
+  DrawingStyle("culvert",
+      color: Colors.lightBlue, dashed: true, icon: MultiIcon.font(Icons.water)),
+];

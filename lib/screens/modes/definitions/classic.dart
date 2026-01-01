@@ -3,6 +3,7 @@
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/legend.dart';
+import 'package:every_door/models/located.dart';
 import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/plugin.dart';
@@ -16,8 +17,6 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 @Bind(bridge: true, implicitSupers: true)
 abstract class ClassicModeDefinition extends BaseModeDefinition {
-  List<OsmChange> nearestPOI = [];
-
   ClassicModeDefinition(super.ref);
 
   ClassicModeDefinition.fromPlugin(EveryDoorApp app): this(app.ref);
@@ -26,14 +25,9 @@ abstract class ClassicModeDefinition extends BaseModeDefinition {
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) {}
 
   @override
-  updateNearest(LatLngBounds bounds) async {
-    nearestPOI = await super.getNearestChanges(bounds);
-    notifyListeners();
-  }
-
-  void openEditor({
+  Future<void> openEditor({
     required BuildContext context,
-    OsmChange? element,
+    Located? element,
     LatLng? location,
   }) async {
     if (element == null) {
@@ -44,7 +38,7 @@ abstract class ClassicModeDefinition extends BaseModeDefinition {
           fullscreenDialog: true,
         ),
       );
-    } else {
+    } else if (element is OsmChange) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -55,7 +49,7 @@ abstract class ClassicModeDefinition extends BaseModeDefinition {
     }
   }
 
-  Widget buildMarker(OsmChange element) {
+  Widget buildMarker(Located element) {
     return ColoredMarker(
       color: kLegendOtherColor,
     );

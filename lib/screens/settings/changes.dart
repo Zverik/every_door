@@ -137,7 +137,7 @@ class _ChangeListPageState extends ConsumerState {
     noteItems.addAll(noteList.whereType<OsmNote>().map((n) => ChangeItem(
         note: n,
         icon: MultiIcon(
-            fontIcon: n.deleting
+            fontIcon: n.isDeleted
                 ? Icons.speaker_notes_off_outlined
                 : Icons.speaker_notes_outlined),
         title: loc.changesOsmNote +

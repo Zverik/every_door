@@ -3,27 +3,37 @@
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/multi_icon.dart';
-import 'package:every_door/models/amenity.dart';
-import 'package:every_door/models/preset.dart';
-import 'package:every_door/providers/presets.dart';
+import 'package:every_door/models/located.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// A line in the legend widget. Denotes a type, not a specific object.
 @Bind()
 class LegendItem {
+  /// If set, displays a colored dot. Otherwise see [icon].
   final Color? color;
+
+  /// If set, displays an icon.
   final MultiIcon? icon;
+
+  /// The title displayed in the row. Replaced with "Other" when [isOther]
+  /// is true.
   final String label;
 
-  LegendItem({this.color, this.icon, required this.label});
+  /// When true, denotes all other types of objects on the map, titled
+  /// "Other" in the legend. The icon is still used from this item.
+  final bool isOther;
+
+  /// Creates an instance of a legend item.
+  LegendItem({this.color, this.icon, required this.label}) : isOther = false;
+
+  /// Creates a standard "other" item for multiple types.
   LegendItem.other(this.label)
       : color = kLegendOtherColor,
-        icon = null;
+        icon = null,
+        isOther = true;
 
   @override
   String toString() => 'LegendItem($color, $icon, "$label")';
-
-  bool get isOther => color == kLegendOtherColor;
 }
 
 const kLegendOtherColor = Colors.black;
@@ -35,9 +45,15 @@ class NamedColor extends Color {
   const NamedColor(this.name, super.value);
 }
 
+/// A tuple for preset id and preset label. The identifier is used
+/// for cross-referencing presets, while the label is displayed
+/// on the screen.
 @Bind()
 class PresetLabel {
+  /// Preset unique identifier.
   final String id;
+
+  /// Human-readable label.
   final String label;
 
   const PresetLabel(this.id, this.label);
@@ -52,14 +68,17 @@ class PresetLabel {
 
 @Bind()
 class LegendController extends ChangeNotifier {
-  final Ref _ref;
-
+  /// The legend items as they are shown in the widget.
   List<LegendItem> _legend = [];
 
-  /// This maps [OsmChange.databaseId] to a color and a label, for
+  /// This maps [Located.uniqueId] to a color and a label, for
   /// drawing on the map. Use [getLegendItem] to access, changes
   /// right before the [state] does.
   Map<String, LegendItem?> _legendMap = {};
+
+  /// A function to get a label for an element. This label is displayed
+  /// in the legend, so it should be translated to [Locale].
+  final Future<PresetLabel?> Function(Located, Locale?) _getPreset;
 
   /// Maps preset ids to colors. It collects
   /// all the colors that have been used in the legend, since the app
@@ -98,7 +117,7 @@ class LegendController extends ChangeNotifier {
     NamedColor('brown', 0xff9b7716),
   ];
 
-  LegendController(this._ref);
+  LegendController(this._getPreset);
 
   void fixPreset(String preset, {Color? color, MultiIcon? icon}) {
     if (icon != null) {
@@ -118,11 +137,11 @@ class LegendController extends ChangeNotifier {
   /// Updates legend colors for [amenities]. The list should be ordered
   /// closest to farthest. The function tries to reuse colors.
   /// The [locale] is needed to translate labels.
-  Future updateLegend(List<OsmChange> amenities,
+  Future updateLegend(Iterable<Located> amenities,
       {Locale? locale, int maxItems = 6}) async {
     // First get labels for each of the amenities.
     // TODO: run simultaneously to speed this up
-    final typesMap = <OsmChange, PresetLabel?>{
+    final typesMap = <Located, PresetLabel?>{
       for (final a in amenities) a: await _getPreset(a, locale)
     };
 
@@ -203,7 +222,7 @@ class LegendController extends ChangeNotifier {
 
     final labelToLegend = {for (final l in newLegend) l.label: l};
     _legendMap = typesMap.map((amenity, label) =>
-        MapEntry(amenity.databaseId, labelToLegend[label?.label]));
+        MapEntry(amenity.uniqueId, labelToLegend[label?.label]));
     _legend = iconsInLegend
         ? newLegend
         : newLegend.where((l) => l.color != null).toList();
@@ -229,23 +248,7 @@ class LegendController extends ChangeNotifier {
     return usedList.map((e) => e.key).followedBy(neverUsedColors).toList();
   }
 
-  /// Queries the preset database for the preset name, translated
-  /// into [locale].
-  Future<PresetLabel?> _getPreset(OsmChange change, Locale? locale) async {
-    final preset = await _ref
-        .read(presetProvider)
-        .getPresetForTags(change.getFullTags(true), locale: locale);
-    // TODO: we also need a preset id to override icons and colors.
-    if (preset != Preset.defaultPreset)
-      return PresetLabel(preset.id, preset.name);
-    final k = change.mainKey;
-    return k == null
-        ? null
-        : PresetLabel('$k/${change[k]}', '$k = ${change[k]}');
-  }
-
   List<LegendItem> get legend => _legend;
 
-  LegendItem? getLegendItem(OsmChange amenity) =>
-      _legendMap[amenity.databaseId];
+  LegendItem? getLegendItem(Located amenity) => _legendMap[amenity.uniqueId];
 }

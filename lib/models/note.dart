@@ -5,36 +5,51 @@ import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/geometry/geometry.dart';
+import 'package:every_door/models/located.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:proximity_hash/geohash.dart';
 import 'dart:convert' show json;
 
+import 'package:uuid/uuid.dart';
+
 @Bind()
-class BaseNote {
+class BaseNote extends Located {
   static const kNoteGeohashPrecision = 6;
 
+  // TODO: this id is used raw from OSM and GeoScribble, potentially leading to conflicts.
   int? id;
   final int? type;
-  final LatLng location;
   final DateTime created;
-  bool deleting;
+
+  @override
+  final String uniqueId;
+
+  @override
+  final LatLng location;
+
+  @override
+  bool isDeleted;
 
   BaseNote(
       {required this.location,
       this.id,
       required this.type,
       DateTime? created,
-      this.deleting = false})
-      : created = created ?? DateTime.now();
+      this.isDeleted = false})
+      : created = created ?? DateTime.now(),
+        uniqueId = id?.toString() ?? Uuid().v1();
 
-  bool get isChanged => isNew || deleting;
+  @override
+  bool get isModified => isNew || isDeleted;
+
+  @override
   bool get isNew => (id ?? -1) < 0;
 
   /// Reverts changes if possible (except isNew) and returns true if successful.
   bool revert() {
-    if (!isChanged || isNew) return false;
-    if (deleting) deleting = false;
-    if (isChanged)
+    if (!isModified || isNew) return false;
+    if (isDeleted) isDeleted = false;
+    if (isModified)
       throw UnimplementedError('A note has a state that cannot be reverted.');
     return true;
   }
@@ -80,8 +95,8 @@ class BaseNote {
       'lat': (location.latitude * kCoordinatePrecision).round(),
       'lon': (location.longitude * kCoordinatePrecision).round(),
       'created': created.millisecondsSinceEpoch,
-      'is_changed': isChanged ? 1 : 0,
-      'is_deleting': deleting ? 1 : 0,
+      'is_changed': isModified ? 1 : 0,
+      'is_deleting': isDeleted ? 1 : 0,
       'geohash': GeoHasher().encode(location.longitude, location.latitude,
           precision: kNoteGeohashPrecision),
     };
@@ -114,7 +129,7 @@ class MapNote extends BaseNote {
       required super.location,
       this.author,
       required this.message,
-      super.deleting,
+      super.isDeleted,
       super.created})
       : super(type: dbType);
 
@@ -125,7 +140,7 @@ class MapNote extends BaseNote {
       author: data['author'],
       message: data['message'],
       created: DateTime.fromMillisecondsSinceEpoch(data['created']),
-      deleting: data['is_deleting'] == 1,
+      isDeleted: data['is_deleting'] == 1,
     );
   }
 
@@ -186,7 +201,7 @@ class OsmNote extends BaseNote {
     required super.location,
     this.comments = const [],
     super.created,
-    super.deleting,
+    super.isDeleted,
   }) : super(type: dbType);
 
   String? get author => comments.isEmpty ? null : comments.first.author;
@@ -194,7 +209,7 @@ class OsmNote extends BaseNote {
   bool get hasNewComments => comments.any((c) => c.isNew);
 
   @override
-  bool get isChanged => super.isChanged || hasNewComments;
+  bool get isModified => super.isModified || hasNewComments;
 
   @override
   bool revert() {
@@ -219,7 +234,7 @@ class OsmNote extends BaseNote {
       id: data['id'],
       location: BaseNote._parseLocation(data),
       created: DateTime.fromMillisecondsSinceEpoch(data['created']),
-      deleting: data['is_deleting'] == 1,
+      isDeleted: data['is_deleting'] == 1,
       comments: comments,
     );
   }
@@ -235,25 +250,23 @@ class OsmNote extends BaseNote {
 
   @override
   String toString() =>
-      'OsmNote(${deleting ? "closing " : (isChanged ? "changed " : "")}$id, $location, $comments)';
+      'OsmNote(${isDeleted ? "closing " : (isModified ? "changed " : "")}$id, $location, $comments)';
 }
 
 class MapDrawing extends BaseNote {
   static const dbType = 3;
   final LineString path;
   final String? author;
-  final String pathType;
+  final DrawingStyle style;
 
   MapDrawing({
     super.id,
     required this.path,
-    required this.pathType,
+    required this.style,
     this.author,
     super.created,
-    super.deleting,
+    super.isDeleted,
   }) : super(type: dbType, location: path.nodes[path.nodes.length >> 1]);
-
-  DrawingStyle get style => kTypeStyles[pathType] ?? kUnknownStyle;
 
   factory MapDrawing.fromJson(Map<String, dynamic> data) {
     final coords = <LatLng>[];
@@ -262,13 +275,14 @@ class MapDrawing extends BaseNote {
           part.split(';').map((s) => double.parse(s.trim())).toList();
       if (latlon.length == 2) coords.add(LatLng(latlon[0], latlon[1]));
     }
+
     return MapDrawing(
       id: data['id'],
-      pathType: data['path_type'],
+      style: styleByName(data['path_type']),
       author: data['author'],
       path: LineString(coords),
       created: DateTime.fromMillisecondsSinceEpoch(data['created']),
-      deleting: data['is_deleting'] == 1,
+      isDeleted: data['is_deleting'] == 1,
     );
   }
 
@@ -276,12 +290,12 @@ class MapDrawing extends BaseNote {
   Map<String, dynamic> toJson() {
     return {
       ...super.toJson(),
-      'path_type': pathType,
+      'path_type': style.name,
       'author': author,
       'coords': path.nodes.map((c) => '${c.latitude};${c.longitude}').join('|'),
     };
   }
 
   @override
-  String toString() => 'MapDrawing($id, "$pathType", $location)';
+  String toString() => 'MapDrawing($id, "${style.name}", $location)';
 }

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 /// Authentication token class. Should be subclasses to contain actual
 /// token data. It's a good idea to add a factory constructor
 /// [AuthToken.fromJson] to keep serialization and deserialization in one place.
-@Bind(wrap: true)
+@Bind(wrap: true, bridge: true)
 abstract class AuthToken {
   const AuthToken();
 
@@ -25,7 +25,7 @@ abstract class AuthToken {
 }
 
 /// A base class for user details. Override to add more, e.g. an avatar.
-@Bind(bridge: true)
+@Bind(bridge: true, wrap: true)
 class UserDetails {
   final String displayName;
   const UserDetails({required this.displayName});
@@ -45,7 +45,7 @@ class AuthException implements Exception {
 
 /// Authentication provider base class. Should know how to login and
 /// to get user details. Also stores an [endpoint] for making calls.
-@Bind(bridge: true)
+@Bind(bridge: true, wrap: true)
 abstract class AuthProvider {
   /// A constant constructor doing nothing. A provider should not have a state.
   const AuthProvider();

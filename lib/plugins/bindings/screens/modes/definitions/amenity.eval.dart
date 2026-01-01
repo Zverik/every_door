@@ -1,26 +1,26 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'package:dart_eval/dart_eval_bridge.dart';
-import 'package:dart_eval/stdlib/core.dart';
-import 'package:every_door/helpers/multi_icon.dart';
-import 'package:every_door/helpers/tags/element_kind.dart';
-import 'package:every_door/models/amenity.dart';
-import 'package:every_door/models/imagery.dart';
-import 'package:every_door/models/plugin.dart';
-import 'package:every_door/plugins/bindings/helpers/multi_icon.eval.dart';
-import 'package:every_door/plugins/bindings/helpers/tags/element_kind.eval.dart';
-import 'package:every_door/plugins/bindings/models/amenity.eval.dart';
-import 'package:every_door/plugins/bindings/models/imagery.eval.dart';
-import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
 import 'package:every_door/plugins/bindings/screens/modes/definitions/base.eval.dart';
-import 'package:every_door/plugins/bindings/widgets/map_button.eval.dart';
 import 'package:every_door/screens/modes/definitions/amenity.dart';
-import 'package:every_door/widgets/map_button.dart';
+import 'package:every_door/helpers/amenity_age.dart';
+import 'package:every_door/helpers/multi_icon.dart';
+import 'package:every_door/helpers/poi_describer.dart';
+import 'package:every_door/models/located.dart';
+import 'package:every_door/models/plugin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_eval/widgets.dart';
+import 'package:flutter_eval/ui.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_eval/flutter_map/flutter_map_eval.dart';
-import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:every_door/plugins/bindings/helpers/poi_describer.eval.dart';
+import 'package:dart_eval/stdlib/core.dart';
+import 'package:every_door/plugins/bindings/helpers/multi_icon.eval.dart';
+import 'package:every_door/plugins/bindings/models/amenity.eval.dart';
+import 'package:flutter_eval/widgets.dart';
+import 'package:every_door/plugins/bindings/helpers/amenity_age.eval.dart';
+import 'package:flutter_map_eval/flutter_map/flutter_map_eval.dart';
+import 'package:every_door/plugins/bindings/models/located.eval.dart';
+import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
+import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
 
 /// dart_eval bridge binding for [AmenityModeDefinition]
 class $AmenityModeDefinition$bridge extends AmenityModeDefinition
@@ -98,27 +98,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
             BridgeParameter(
               'outlined',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-              false,
-            ),
-          ],
-        ),
-      ),
-      'isOurKind': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'element',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
-                  ),
-                  [],
-                ),
-              ),
               false,
             ),
           ],
@@ -204,11 +183,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
               true,
             ),
-            BridgeParameter(
-              'filter',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-              true,
-            ),
           ],
           params: [
             BridgeParameter(
@@ -252,6 +226,56 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
+      'openEditor': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(CoreTypes.future, [
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+            ]),
+          ),
+          namedParams: [
+            BridgeParameter(
+              'context',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:flutter/src/widgets/framework.dart',
+                    'BuildContext',
+                  ),
+                  [],
+                ),
+              ),
+              false,
+            ),
+            BridgeParameter(
+              'element',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
+                  ),
+                  [],
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+            BridgeParameter(
+              'location',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
+                  [],
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+          ],
+          params: [],
+        ),
+      ),
       'updateFromJson': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -283,27 +307,42 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-      'parseKinds': BridgeMethodDef(
+      'readKindsFromJson': BridgeMethodDef(
         BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.list, [
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:every_door/helpers/tags/element_kind.dart',
-                    'ElementKindImpl',
-                  ),
-                  [],
-                ),
-              ),
-            ]),
-            nullable: true,
-          ),
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
           namedParams: [],
           params: [
             BridgeParameter(
               'data',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.map, [
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
+                ]),
+              ),
+              false,
+            ),
+          ],
+        ),
+      ),
+      'getOtherObjectColor': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(BridgeTypeSpec('dart:ui', 'Color'), []),
+          ),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'object',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/located.dart',
+                    'Located',
+                  ),
+                  [],
+                ),
+              ),
               false,
             ),
           ],
@@ -326,97 +365,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ),
           namedParams: [],
           params: [],
-        ),
-      ),
-      'addListener': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'listener',
-              BridgeTypeAnnotation(
-                BridgeTypeRef.genericFunction(
-                  BridgeFunctionDef(
-                    returns: BridgeTypeAnnotation(
-                      BridgeTypeRef(CoreTypes.voidType),
-                    ),
-                    params: [],
-                    namedParams: [],
-                  ),
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-      'removeListener': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'listener',
-              BridgeTypeAnnotation(
-                BridgeTypeRef.genericFunction(
-                  BridgeFunctionDef(
-                    returns: BridgeTypeAnnotation(
-                      BridgeTypeRef(CoreTypes.voidType),
-                    ),
-                    params: [],
-                    namedParams: [],
-                  ),
-                ),
-              ),
-              false,
-            ),
-          ],
-        ),
-      ),
-      'dispose': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-      'notifyListeners': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-      'openEditor': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              'context',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec(
-                    'package:flutter/src/widgets/framework.dart',
-                    'BuildContext',
-                  ),
-                  [],
-                ),
-              ),
-              false,
-            ),
-            BridgeParameter(
-              'location',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
-                  [],
-                ),
-              ),
-              false,
-            ),
-          ],
         ),
       ),
       'buildMarker': BridgeMethodDef(
@@ -442,8 +390,8 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               BridgeTypeAnnotation(
                 BridgeTypeRef(
                   BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
+                    'package:every_door/models/located.dart',
+                    'Located',
                   ),
                   [],
                 ),
@@ -453,9 +401,18 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           ],
         ),
       ),
-      'isCountedOld': BridgeMethodDef(
+      'getAmenityData': BridgeMethodDef(
         BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(
+              BridgeTypeSpec(
+                'package:every_door/helpers/amenity_age.dart',
+                'AmenityAgeData',
+              ),
+              [],
+            ),
+            nullable: true,
+          ),
           namedParams: [],
           params: [
             BridgeParameter(
@@ -463,17 +420,12 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               BridgeTypeAnnotation(
                 BridgeTypeRef(
                   BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
+                    'package:every_door/models/located.dart',
+                    'Located',
                   ),
                   [],
                 ),
               ),
-              false,
-            ),
-            BridgeParameter(
-              'age',
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
               false,
             ),
           ],
@@ -526,13 +478,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           params: [],
         ),
       ),
-      'hasListeners': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [],
-        ),
-      ),
       'maxTileCount': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, [])),
@@ -543,32 +488,15 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
     },
     setters: {},
     fields: {
-      'nearestPOI': BridgeFieldDef(
+      'describer': BridgeFieldDef(
         BridgeTypeAnnotation(
-          BridgeTypeRef(CoreTypes.list, [
-            BridgeTypeAnnotation(
-              BridgeTypeRef(
-                BridgeTypeSpec(
-                  'package:every_door/models/amenity.dart',
-                  'OsmChange',
-                ),
-                [],
-              ),
+          BridgeTypeRef(
+            BridgeTypeSpec(
+              'package:every_door/helpers/poi_describer.dart',
+              'PoiDescriber',
             ),
-          ]),
-        ),
-        isStatic: false,
-      ),
-      'otherPOI': BridgeFieldDef(
-        BridgeTypeAnnotation(
-          BridgeTypeRef(CoreTypes.list, [
-            BridgeTypeAnnotation(
-              BridgeTypeRef(
-                BridgeTypeSpec('package:latlong2/latlong.dart', 'LatLng'),
-                [],
-              ),
-            ),
-          ]),
+            [],
+          ),
         ),
         isStatic: false,
       ),
@@ -580,13 +508,9 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
   @override
   $Value? $bridgeGet(String identifier) {
     switch (identifier) {
-      case 'nearestPOI':
-        final _nearestPOI = super.nearestPOI;
-        return $List.view(_nearestPOI, (e) => $OsmChange.wrap(e));
-
-      case 'otherPOI':
-        final _otherPOI = super.otherPOI;
-        return $List.view(_otherPOI, (e) => $LatLng.wrap(e));
+      case 'describer':
+        final _describer = super.describer;
+        return $PoiDescriber.wrap(_describer);
 
       case 'maxTileCount':
         final _maxTileCount = super.maxTileCount;
@@ -595,11 +519,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
         return $Function((runtime, target, args) {
           final result = super.getIcon(args[1]!.$value, args[2]!.$value);
           return $MultiIcon.wrap(result);
-        });
-      case 'isOurKind':
-        return $Function((runtime, target, args) {
-          final result = super.isOurKind(args[1]!.$value);
-          return $bool(result);
         });
       case 'addMapButton':
         return $Function((runtime, target, args) {
@@ -621,7 +540,6 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           final result = super.getNearestChanges(
             args[1]!.$value,
             maxCount: args[2]?.$value ?? 200,
-            filter: args[3]?.$value ?? true,
           );
           return $Future.wrap(
             result.then((e) => $List.view(e, (e) => $OsmChange.wrap(e))),
@@ -632,6 +550,15 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           final result = super.updateNearest(args[1]!.$value);
           return $Future.wrap(result.then((e) => null));
         });
+      case 'openEditor':
+        return $Function((runtime, target, args) {
+          final result = super.openEditor(
+            context: args[1]!.$value,
+            element: args[2]?.$value,
+            location: args[3]?.$value,
+          );
+          return $Future.wrap(result.then((e) => null));
+        });
       case 'updateFromJson':
         return $Function((runtime, target, args) {
           super.updateFromJson(
@@ -640,88 +567,48 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
           );
           return null;
         });
-      case 'parseKinds':
+      case 'readKindsFromJson':
         return $Function((runtime, target, args) {
-          final result = super.parseKinds(args[1]!.$value);
-          return result == null
-              ? const $null()
-              : $List.view(result, (e) => $ElementKindImpl.wrap(e));
+          super.readKindsFromJson((args[1]!.$reified as Map).cast());
+          return null;
+        });
+      case 'getOtherObjectColor':
+        return $Function((runtime, target, args) {
+          final result = super.getOtherObjectColor(args[1]!.$value);
+          return $Color.wrap(result);
+        });
+      case 'otherObjectsLayer':
+        return $Function((runtime, target, args) {
+          final result = super.otherObjectsLayer();
+          return $Widget.wrap(result);
         });
       case 'mapLayers':
         return $Function((runtime, target, args) {
           final result = super.mapLayers();
           return $List.view(result, (e) => $Widget.wrap(e));
         });
-      case 'addListener':
-        return $Function((runtime, target, args) {
-          super.addListener(() {
-            (args[1]! as EvalCallable)(runtime, null, []);
-          });
-          return null;
-        });
-      case 'removeListener':
-        return $Function((runtime, target, args) {
-          super.removeListener(() {
-            (args[1]! as EvalCallable)(runtime, null, []);
-          });
-          return null;
-        });
-      case 'notifyListeners':
-        return $Function((runtime, target, args) {
-          super.notifyListeners();
-          return null;
-        });
-      case 'openEditor':
-        return $Function((runtime, target, args) {
-          super.openEditor(args[1]!.$value, args[2]!.$value);
-          return null;
-        });
       case 'buildMarker':
         return $Function((runtime, target, args) {
           final result = super.buildMarker(args[1]!.$value, args[2]!.$value);
           return $Widget.wrap(result);
         });
-      case 'isCountedOld':
+      case 'getAmenityData':
         return $Function((runtime, target, args) {
-          final result = super.isCountedOld(args[1]!.$value, args[2]!.$value);
-          return $bool(result);
+          final result = super.getAmenityData(args[1]!.$value);
+          return result == null ? const $null() : $AmenityAgeData.wrap(result);
         });
     }
     return null;
   }
 
   @override
-  void $bridgeSet(String identifier, $Value value) {
-    switch (identifier) {
-      case 'nearestPOI':
-        final list = (value as $List).$reified;
-        super.nearestPOI = list.cast();
-        return;
-
-      case 'otherPOI':
-        final list = (value as $List).$reified;
-        super.otherPOI = list.cast();
-        return;
-    }
-  }
+  void $bridgeSet(String identifier, $Value value) {}
 
   @override
   String get name => $_get('name');
 
   @override
-  Iterable<Imagery> get overlays => $_get('overlays');
-
-  @override
-  Iterable<MapButton> get buttons => $_get('buttons');
-
-  @override
-  bool get hasListeners => $_get('hasListeners');
-
-  @override
-  List<OsmChange> get nearestPOI => $_get('nearestPOI');
-
-  @override
-  List<LatLng> get otherPOI => $_get('otherPOI');
+  PoiDescriber get describer => $_get('describer');
 
   @override
   int get maxTileCount => $_get('maxTileCount');
@@ -731,77 +618,37 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
       $_invoke('getIcon', [$BuildContext.wrap(context), $bool(outlined)]);
 
   @override
-  bool isOurKind(OsmChange element) =>
-      $_invoke('isOurKind', [$OsmChange.wrap(element)]);
-
-  @override
-  void addMapButton(MapButton button) =>
-      $_invoke('addMapButton', [$MapButton.wrap(button)]);
-
-  @override
-  void removeMapButton(String id) => $_invoke('removeMapButton', [$String(id)]);
-
-  @override
-  void addOverlay(Imagery imagery) =>
-      $_invoke('addOverlay', [$Imagery.wrap(imagery)]);
-
-  @override
-  Future<List<OsmChange>> getNearestChanges(
-    LatLngBounds bounds, {
-    int maxCount = 200,
-    bool filter = true,
-  }) =>
-      $_invoke('getNearestChanges', [
-        $LatLngBounds.wrap(bounds),
-        $int(maxCount),
-        $bool(filter),
-      ]);
-
-  @override
   Future<void> updateNearest(LatLngBounds bounds) =>
       $_invoke('updateNearest', [$LatLngBounds.wrap(bounds)]);
+
+  @override
+  Future<void> openEditor({
+    required BuildContext context,
+    Located? element,
+    LatLng? location,
+  }) =>
+      $_invoke('openEditor', [
+        $BuildContext.wrap(context),
+        element == null ? const $null() : $Located.wrap(element),
+        location == null ? const $null() : $LatLng.wrap(location),
+      ]);
 
   @override
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) =>
       $_invoke('updateFromJson', [$Map.wrap(data), $Plugin.wrap(plugin)]);
 
   @override
-  List<ElementKindImpl>? parseKinds(dynamic data) =>
-      ($_invoke('parseKinds', [$Object(data)]) as List?)?.cast();
+  Color getOtherObjectColor(Located object) =>
+      $_invoke('getOtherObjectColor', [$Located.wrap(object)]);
 
   @override
   List<Widget> mapLayers() => ($_invoke('mapLayers', []) as List).cast();
 
   @override
-  void addListener(void Function() listener) => $_invoke('addListener', [
-        $Function((runtime, target, args) {
-          listener();
-          return const $null();
-        }),
-      ]);
+  Widget buildMarker(int index, Located element) =>
+      $_invoke('buildMarker', [$int(index), $Located.wrap(element)]);
 
   @override
-  void removeListener(void Function() listener) => $_invoke('removeListener', [
-        $Function((runtime, target, args) {
-          listener();
-          return const $null();
-        }),
-      ]);
-
-  @override
-  void notifyListeners() => $_invoke('notifyListeners', []);
-
-  @override
-  void openEditor(BuildContext context, LatLng location) => $_invoke(
-        'openEditor',
-        [$BuildContext.wrap(context), $LatLng.wrap(location)],
-      );
-
-  @override
-  Widget buildMarker(int index, OsmChange element) =>
-      $_invoke('buildMarker', [$int(index), $OsmChange.wrap(element)]);
-
-  @override
-  bool isCountedOld(OsmChange element, int age) =>
-      $_invoke('isCountedOld', [$OsmChange.wrap(element), $int(age)]);
+  AmenityAgeData? getAmenityData(Located element) =>
+      $_invoke('getAmenityData', [$Located.wrap(element)]);
 }

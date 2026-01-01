@@ -1,24 +1,26 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'package:dart_eval/dart_eval_bridge.dart';
-import 'package:dart_eval/stdlib/core.dart';
 import 'package:every_door/helpers/auth/provider.dart';
 import 'package:every_door/helpers/multi_icon.dart';
-import 'package:every_door/plugins/bindings/helpers/multi_icon.eval.dart';
 import 'package:flutter/material.dart';
+import 'package:dart_eval/stdlib/core.dart';
+import 'package:every_door/plugins/bindings/helpers/multi_icon.eval.dart';
 import 'package:flutter_eval/widgets.dart';
 
-/// dart_eval wrapper binding for [AuthToken]
-class $AuthToken implements $Instance {
+/// dart_eval bridge binding for [AuthToken]
+class $AuthToken$bridge extends AuthToken with $Bridge<AuthToken> {
+  /// Forwarded constructor for [AuthToken.new]
+  $AuthToken$bridge();
+
   /// Configure this class for use in a [Runtime]
   static void configureForRuntime(Runtime runtime) {}
 
-  /// Compile-time type specification of [$AuthToken]
+  /// Compile-time type specification of [$AuthToken$bridge]
   static const $spec = BridgeTypeSpec(
     'package:every_door/helpers/auth/provider.dart',
     'AuthToken',
   );
 
-  /// Compile-time type declaration of [$AuthToken]
+  /// Compile-time type declaration of [$AuthToken$bridge]
   static const $type = BridgeTypeRef($spec);
 
   /// Compile-time class declaration of [$AuthToken]
@@ -34,7 +36,6 @@ class $AuthToken implements $Instance {
         isFactory: false,
       ),
     },
-
     methods: {
       'toJson': BridgeMethodDef(
         BridgeFunctionDef(
@@ -48,7 +49,6 @@ class $AuthToken implements $Instance {
           params: [],
         ),
       ),
-
       'isValid': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
@@ -56,7 +56,6 @@ class $AuthToken implements $Instance {
           params: [],
         ),
       ),
-
       'needsRefresh': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
@@ -68,8 +67,45 @@ class $AuthToken implements $Instance {
     getters: {},
     setters: {},
     fields: {},
-    wrap: true,
-    bridge: false,
+    wrap: false,
+    bridge: true,
+  );
+
+  @override
+  $Value? $bridgeGet(String identifier) {
+    switch (identifier) {
+      case 'isValid':
+        return $Function((runtime, target, args) {
+          final result = super.isValid();
+          return $bool(result);
+        });
+      case 'needsRefresh':
+        return $Function((runtime, target, args) {
+          final result = super.needsRefresh();
+          return $bool(result);
+        });
+    }
+    return null;
+  }
+
+  @override
+  void $bridgeSet(String identifier, $Value value) {}
+
+  @override
+  Map<String, dynamic> toJson() => ($_invoke('toJson', []) as Map).cast();
+
+  @override
+  bool isValid() => $_invoke('isValid', []);
+
+  @override
+  bool needsRefresh() => $_invoke('needsRefresh', []);
+}
+
+/// dart_eval wrapper binding for [AuthToken]
+class $AuthToken implements $Instance {
+  static const $spec = BridgeTypeSpec(
+    'package:every_door/helpers/auth/provider.dart',
+    'AuthToken',
   );
 
   final $Instance _superclass;
@@ -117,10 +153,10 @@ class $AuthToken implements $Instance {
 
   static const $Function __needsRefresh = $Function(_needsRefresh);
   static $Value? _needsRefresh(
-      Runtime runtime,
-      $Value? target,
-      List<$Value?> args,
-      ) {
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
     final self = target! as $AuthToken;
     final result = self.$value.needsRefresh();
     return $bool(result);
@@ -130,104 +166,6 @@ class $AuthToken implements $Instance {
   void $setProperty(Runtime runtime, String identifier, $Value value) {
     return _superclass.$setProperty(runtime, identifier, value);
   }
-}
-
-/// dart_eval bridge binding for [AuthToken]
-class $AuthToken$bridge extends AuthToken with $Bridge<AuthToken> {
-  /// Forwarded constructor for [AuthToken.new]
-  $AuthToken$bridge();
-
-  /// Configure this class for use in a [Runtime]
-  static void configureForRuntime(Runtime runtime) {}
-
-  /// Compile-time type specification of [$AuthToken$bridge]
-  static const $spec = BridgeTypeSpec(
-    'package:every_door/helpers/auth/provider.dart',
-    'AuthToken',
-  );
-
-  /// Compile-time type declaration of [$AuthToken$bridge]
-  static const $type = BridgeTypeRef($spec);
-
-  /// Compile-time class declaration of [$AuthToken]
-  static const $declaration = BridgeClassDef(
-    BridgeClassType($type, isAbstract: true),
-    constructors: {
-      '': BridgeConstructorDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation($type),
-          namedParams: [],
-          params: [],
-        ),
-        isFactory: false,
-      ),
-    },
-
-    methods: {
-      'toJson': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.map, [
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
-              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
-            ]),
-          ),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-
-      'isValid': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-
-      'needsRefresh': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-    },
-    getters: {},
-    setters: {},
-    fields: {},
-    wrap: false,
-    bridge: true,
-  );
-
-  @override
-  $Value? $bridgeGet(String identifier) {
-    switch (identifier) {
-      case 'isValid':
-        return $Function((runtime, target, args) {
-          final result = super.isValid();
-          return $bool(result);
-        });
-      case 'needsRefresh':
-        return $Function((runtime, target, args) {
-          final result = super.needsRefresh();
-          return $bool(result);
-        });
-    }
-    return null;
-  }
-
-  @override
-  void $bridgeSet(String identifier, $Value value) {}
-
-  @override
-  Map<String, dynamic> toJson() => ($_invoke('toJson', []) as Map).cast();
-
-  @override
-  bool isValid() => $_invoke('isValid', []);
-
-  @override
-  bool needsRefresh() => $_invoke('needsRefresh', []);
 }
 
 /// dart_eval bridge binding for [UserDetails]
@@ -273,7 +211,6 @@ class $UserDetails$bridge extends UserDetails with $Bridge<UserDetails> {
         isFactory: false,
       ),
     },
-
     methods: {},
     getters: {},
     setters: {},
@@ -309,6 +246,43 @@ class $UserDetails$bridge extends UserDetails with $Bridge<UserDetails> {
   String get displayName => $_get('displayName');
 }
 
+/// dart_eval wrapper binding for [UserDetails]
+class $UserDetails implements $Instance {
+  static const $spec = BridgeTypeSpec(
+    'package:every_door/helpers/auth/provider.dart',
+    'UserDetails',
+  );
+
+  final $Instance _superclass;
+
+  @override
+  final UserDetails $value;
+
+  @override
+  UserDetails get $reified => $value;
+
+  /// Wrap a [UserDetails] in a [$UserDetails]
+  $UserDetails.wrap(this.$value) : _superclass = $Object($value);
+
+  @override
+  int $getRuntimeType(Runtime runtime) => runtime.lookupType($spec);
+
+  @override
+  $Value? $getProperty(Runtime runtime, String identifier) {
+    switch (identifier) {
+      case 'displayName':
+        final _displayName = $value.displayName;
+        return $String(_displayName);
+    }
+    return _superclass.$getProperty(runtime, identifier);
+  }
+
+  @override
+  void $setProperty(Runtime runtime, String identifier, $Value value) {
+    return _superclass.$setProperty(runtime, identifier, value);
+  }
+}
+
 /// dart_eval bridge binding for [AuthException]
 class $AuthException$bridge extends AuthException with $Bridge<AuthException> {
   /// Forwarded constructor for [AuthException.new]
@@ -337,7 +311,6 @@ class $AuthException$bridge extends AuthException with $Bridge<AuthException> {
   static const $declaration = BridgeClassDef(
     BridgeClassType(
       $type,
-
       $implements: [BridgeTypeRef(CoreTypes.exception, [])],
     ),
     constructors: {
@@ -356,7 +329,6 @@ class $AuthException$bridge extends AuthException with $Bridge<AuthException> {
         isFactory: false,
       ),
     },
-
     methods: {},
     getters: {},
     setters: {},
@@ -422,7 +394,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
         isFactory: false,
       ),
     },
-
     methods: {
       'tokenFromJson': BridgeMethodDef(
         BridgeFunctionDef(
@@ -450,7 +421,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           ],
         ),
       ),
-
       'login': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -485,7 +455,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           ],
         ),
       ),
-
       'refreshToken': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -519,7 +488,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           ],
         ),
       ),
-
       'logout': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -545,7 +513,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           ],
         ),
       ),
-
       'getHeaders': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -572,7 +539,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           ],
         ),
       ),
-
       'getApiKey': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
@@ -594,7 +560,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           ],
         ),
       ),
-
       'loadUserDetails': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -628,7 +593,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           ],
         ),
       ),
-
       'testHeaders': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -649,7 +613,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
               ),
               false,
             ),
-
             BridgeParameter(
               'apiKey',
               BridgeTypeAnnotation(
@@ -670,7 +633,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           params: [],
         ),
       ),
-
       'title': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -681,7 +643,6 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
           params: [],
         ),
       ),
-
       'icon': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -785,4 +746,157 @@ class $AuthProvider$bridge extends AuthProvider with $Bridge<AuthProvider> {
         headers == null ? const $null() : $Map.wrap(headers),
         apiKey == null ? const $null() : $String(apiKey),
       ]);
+}
+
+/// dart_eval wrapper binding for [AuthProvider]
+class $AuthProvider implements $Instance {
+  static const $spec = BridgeTypeSpec(
+    'package:every_door/helpers/auth/provider.dart',
+    'AuthProvider',
+  );
+
+  final $Instance _superclass;
+
+  @override
+  final AuthProvider $value;
+
+  @override
+  AuthProvider get $reified => $value;
+
+  /// Wrap a [AuthProvider] in a [$AuthProvider]
+  $AuthProvider.wrap(this.$value) : _superclass = $Object($value);
+
+  @override
+  int $getRuntimeType(Runtime runtime) => runtime.lookupType($spec);
+
+  @override
+  $Value? $getProperty(Runtime runtime, String identifier) {
+    switch (identifier) {
+      case 'endpoint':
+        final _endpoint = $value.endpoint;
+        return $String(_endpoint);
+
+      case 'title':
+        final _title = $value.title;
+        return _title == null ? const $null() : $String(_title);
+
+      case 'icon':
+        final _icon = $value.icon;
+        return _icon == null ? const $null() : $MultiIcon.wrap(_icon);
+      case 'tokenFromJson':
+        return __tokenFromJson;
+
+      case 'login':
+        return __login;
+
+      case 'refreshToken':
+        return __refreshToken;
+
+      case 'logout':
+        return __logout;
+
+      case 'getHeaders':
+        return __getHeaders;
+
+      case 'getApiKey':
+        return __getApiKey;
+
+      case 'loadUserDetails':
+        return __loadUserDetails;
+
+      case 'testHeaders':
+        return __testHeaders;
+    }
+    return _superclass.$getProperty(runtime, identifier);
+  }
+
+  static const $Function __tokenFromJson = $Function(_tokenFromJson);
+  static $Value? _tokenFromJson(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $AuthProvider;
+    final result = self.$value.tokenFromJson((args[0]!.$reified as Map).cast());
+    return $AuthToken.wrap(result);
+  }
+
+  static const $Function __login = $Function(_login);
+  static $Value? _login(Runtime runtime, $Value? target, List<$Value?> args) {
+    final self = target! as $AuthProvider;
+    final result = self.$value.login(args[0]!.$value);
+    return $Future.wrap(
+      result.then((e) => e == null ? const $null() : $AuthToken.wrap(e)),
+    );
+  }
+
+  static const $Function __refreshToken = $Function(_refreshToken);
+  static $Value? _refreshToken(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $AuthProvider;
+    final result = self.$value.refreshToken(args[0]!.$value);
+    return $Future.wrap(result.then((e) => $AuthToken.wrap(e)));
+  }
+
+  static const $Function __logout = $Function(_logout);
+  static $Value? _logout(Runtime runtime, $Value? target, List<$Value?> args) {
+    final self = target! as $AuthProvider;
+    final result = self.$value.logout(args[0]!.$value);
+    return $Future.wrap(result.then((e) => null));
+  }
+
+  static const $Function __getHeaders = $Function(_getHeaders);
+  static $Value? _getHeaders(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $AuthProvider;
+    final result = self.$value.getHeaders(args[0]!.$value);
+    return $Map.wrap(result);
+  }
+
+  static const $Function __getApiKey = $Function(_getApiKey);
+  static $Value? _getApiKey(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $AuthProvider;
+    final result = self.$value.getApiKey(args[0]!.$value);
+    return $String(result);
+  }
+
+  static const $Function __loadUserDetails = $Function(_loadUserDetails);
+  static $Value? _loadUserDetails(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $AuthProvider;
+    final result = self.$value.loadUserDetails(args[0]!.$value);
+    return $Future.wrap(result.then((e) => $UserDetails.wrap(e)));
+  }
+
+  static const $Function __testHeaders = $Function(_testHeaders);
+  static $Value? _testHeaders(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $AuthProvider;
+    final result = self.$value.testHeaders(
+      (args[0]!.$reified as Map).cast(),
+      args[1]!.$value,
+    );
+    return $Future.wrap(result.then((e) => $bool(e)));
+  }
+
+  @override
+  void $setProperty(Runtime runtime, String identifier, $Value value) {
+    return _superclass.$setProperty(runtime, identifier, value);
+  }
 }

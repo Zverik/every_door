@@ -1,5 +1,5 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
-import 'helpers/icons.eval.dart';
+import 'helpers/draw_style.eval.dart';
 import 'helpers/tags/element_kind.eval.dart';
 import 'helpers/tags/tag_matcher.eval.dart';
 import 'helpers/geometry/geometry.eval.dart';
@@ -9,18 +9,27 @@ import 'helpers/multi_icon.eval.dart';
 import 'helpers/auth/provider.eval.dart';
 import 'helpers/auth/oauth2.eval.dart';
 import 'helpers/auth/controller.eval.dart';
+import 'helpers/amenity_describer.eval.dart';
+import 'helpers/poi_describer.eval.dart';
+import 'helpers/amenity_age.eval.dart';
 import 'models/imagery.eval.dart';
 import 'models/note.eval.dart';
 import 'models/osm_element.eval.dart';
 import 'models/amenity.eval.dart';
+import 'models/field.eval.dart';
 import 'models/plugin.eval.dart';
 import 'models/version.eval.dart';
+import 'models/preset.eval.dart';
+import 'models/located.eval.dart';
+import 'screens/editor/map_chooser.eval.dart';
+import 'screens/editor/types.eval.dart';
 import 'screens/modes/definitions/entrances.eval.dart';
 import 'screens/modes/definitions/base.eval.dart';
 import 'screens/modes/definitions/micro.eval.dart';
 import 'screens/modes/definitions/notes.eval.dart';
 import 'screens/modes/definitions/amenity.eval.dart';
 import 'screens/modes/definitions/classic.eval.dart';
+import 'screens/editor.eval.dart';
 import 'widgets/map_button.eval.dart';
 import 'widgets/poi_marker.eval.dart';
 import 'widgets/entrance_markers.eval.dart';
@@ -39,6 +48,7 @@ class EveryDoorPlugin implements EvalPlugin {
 
   @override
   void configureForCompile(BridgeDeclarationRegistry registry) {
+    registry.defineBridgeClass($DrawingStyle.$declaration);
     registry.defineBridgeClass($ElementKind.$declaration);
     registry.defineBridgeClass($ElementKindImpl.$declaration);
     registry.defineBridgeClass($TagMatcher.$declaration);
@@ -55,29 +65,41 @@ class EveryDoorPlugin implements EvalPlugin {
     registry.defineBridgeClass($PresetLabel.$declaration);
     registry.defineBridgeClass($LegendController.$declaration);
     registry.defineBridgeClass($MultiIcon.$declaration);
-    registry.defineBridgeClass($AuthToken.$declaration);
     registry.defineBridgeClass($AuthToken$bridge.$declaration);
     registry.defineBridgeClass($UserDetails$bridge.$declaration);
     registry.defineBridgeClass($AuthException$bridge.$declaration);
     registry.defineBridgeClass($AuthProvider$bridge.$declaration);
     registry.defineBridgeClass($OAuth2AuthProvider$bridge.$declaration);
     registry.defineBridgeClass($AuthController.$declaration);
+    registry.defineBridgeClass($AmenityIndicator$bridge.$declaration);
+    registry.defineBridgeClass($AmenityDescriber.$declaration);
+    registry.defineBridgeClass($PoiDescriber.$declaration);
+    registry.defineBridgeClass($SimpleDescriber.$declaration);
+    registry.defineBridgeClass($AmenityAgeData.$declaration);
     registry.defineBridgeClass($Imagery.$declaration);
     registry.defineBridgeClass($BaseNote.$declaration);
     registry.defineBridgeClass($OsmId.$declaration);
     registry.defineBridgeClass($OsmMember.$declaration);
     registry.defineBridgeClass($OsmElement.$declaration);
     registry.defineBridgeClass($OsmChange.$declaration);
+    registry.defineBridgeClass($FieldPrerequisite.$declaration);
+    registry.defineBridgeClass($PresetField$bridge.$declaration);
+    registry.defineBridgeClass($PresetFieldContext.$declaration);
     registry.defineBridgeClass($PluginData.$declaration);
     registry.defineBridgeClass($Plugin.$declaration);
     registry.defineBridgeClass($PluginVersion.$declaration);
     registry.defineBridgeClass($PluginVersionRange.$declaration);
+    registry.defineBridgeClass($Preset.$declaration);
+    registry.defineBridgeClass($Located$bridge.$declaration);
+    registry.defineBridgeClass($MapChooserPage.$declaration);
+    registry.defineBridgeClass($TypeChooserPage.$declaration);
     registry.defineBridgeClass($EntrancesModeDefinition$bridge.$declaration);
     registry.defineBridgeClass($BaseModeDefinition.$declaration);
     registry.defineBridgeClass($MicromappingModeDefinition$bridge.$declaration);
     registry.defineBridgeClass($NotesModeDefinition$bridge.$declaration);
     registry.defineBridgeClass($AmenityModeDefinition$bridge.$declaration);
     registry.defineBridgeClass($ClassicModeDefinition$bridge.$declaration);
+    registry.defineBridgeClass($PoiEditorPage.$declaration);
     registry.defineBridgeClass($MapButton.$declaration);
     registry.defineBridgeClass($NumberedMarker.$declaration);
     registry.defineBridgeClass($ColoredMarker.$declaration);
@@ -94,14 +116,15 @@ class EveryDoorPlugin implements EvalPlugin {
     registry.defineBridgeClass($EveryDoorPlugin$bridge.$declaration);
     registry.defineBridgeClass($ExtOverlay.$declaration);
     registry.defineBridgeClass($PluginEvents.$declaration);
-    registry.defineBridgeClass($Icons.$declaration);
     registry.defineBridgeEnum($ImageryCategory.$declaration);
     registry.defineBridgeEnum($OsmElementType.$declaration);
     registry.defineBridgeEnum($IsMember.$declaration);
+    registry.defineBridgeEnum($PresetType.$declaration);
   }
 
   @override
   void configureForRuntime(Runtime runtime) {
+    $DrawingStyle.configureForRuntime(runtime);
     $ElementKind.configureForRuntime(runtime);
     $ElementKindImpl.configureForRuntime(runtime);
     $TagMatcher.configureForRuntime(runtime);
@@ -118,29 +141,41 @@ class EveryDoorPlugin implements EvalPlugin {
     $PresetLabel.configureForRuntime(runtime);
     $LegendController.configureForRuntime(runtime);
     $MultiIcon.configureForRuntime(runtime);
-    $AuthToken.configureForRuntime(runtime);
     $AuthToken$bridge.configureForRuntime(runtime);
     $UserDetails$bridge.configureForRuntime(runtime);
     $AuthException$bridge.configureForRuntime(runtime);
     $AuthProvider$bridge.configureForRuntime(runtime);
     $OAuth2AuthProvider$bridge.configureForRuntime(runtime);
     $AuthController.configureForRuntime(runtime);
+    $AmenityIndicator$bridge.configureForRuntime(runtime);
+    $AmenityDescriber.configureForRuntime(runtime);
+    $PoiDescriber.configureForRuntime(runtime);
+    $SimpleDescriber.configureForRuntime(runtime);
+    $AmenityAgeData.configureForRuntime(runtime);
     $Imagery.configureForRuntime(runtime);
     $BaseNote.configureForRuntime(runtime);
     $OsmId.configureForRuntime(runtime);
     $OsmMember.configureForRuntime(runtime);
     $OsmElement.configureForRuntime(runtime);
     $OsmChange.configureForRuntime(runtime);
+    $FieldPrerequisite.configureForRuntime(runtime);
+    $PresetField$bridge.configureForRuntime(runtime);
+    $PresetFieldContext.configureForRuntime(runtime);
     $PluginData.configureForRuntime(runtime);
     $Plugin.configureForRuntime(runtime);
     $PluginVersion.configureForRuntime(runtime);
     $PluginVersionRange.configureForRuntime(runtime);
+    $Preset.configureForRuntime(runtime);
+    $Located$bridge.configureForRuntime(runtime);
+    $MapChooserPage.configureForRuntime(runtime);
+    $TypeChooserPage.configureForRuntime(runtime);
     $EntrancesModeDefinition$bridge.configureForRuntime(runtime);
     $BaseModeDefinition.configureForRuntime(runtime);
     $MicromappingModeDefinition$bridge.configureForRuntime(runtime);
     $NotesModeDefinition$bridge.configureForRuntime(runtime);
     $AmenityModeDefinition$bridge.configureForRuntime(runtime);
     $ClassicModeDefinition$bridge.configureForRuntime(runtime);
+    $PoiEditorPage.configureForRuntime(runtime);
     $MapButton.configureForRuntime(runtime);
     $NumberedMarker.configureForRuntime(runtime);
     $ColoredMarker.configureForRuntime(runtime);
@@ -160,6 +195,6 @@ class EveryDoorPlugin implements EvalPlugin {
     $ImageryCategory.configureForRuntime(runtime);
     $OsmElementType.configureForRuntime(runtime);
     $IsMember.configureForRuntime(runtime);
-    $Icons.configureForRuntime(runtime);
+    $PresetType.configureForRuntime(runtime);
   }
 }

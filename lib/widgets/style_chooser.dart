@@ -7,16 +7,18 @@ import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/widgets/round_button.dart';
 import 'package:flutter/material.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 class StyleChooserButton extends ConsumerStatefulWidget {
   final EdgeInsets padding;
-  final String style;
+  final DrawingStyle style;
   final Alignment alignment;
-  final Function(String) onChange;
+  final List<DrawingStyle> palette;
+  final Function(DrawingStyle) onChange;
   final Function()? onLock;
 
   const StyleChooserButton({
@@ -24,6 +26,7 @@ class StyleChooserButton extends ConsumerStatefulWidget {
     this.padding = EdgeInsets.zero,
     required this.style,
     required this.onChange,
+    required this.palette,
     this.onLock,
     this.alignment = Alignment.bottomLeft,
   });
@@ -36,16 +39,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
   bool isOpen = false;
   bool isDragging = false;
 
-  static const kDrawingTools = [
-    // bottom to top, left to right, 2 columns
-    'road', 'track',
-    'footway', 'path',
-    'cycleway', 'power',
-    'wall', 'fence',
-    'stream', 'culvert',
-  ];
-
-  void selectTool(String tool) {
+  void selectTool(DrawingStyle tool) {
     widget.onChange(tool);
     setState(() {
       isOpen = false;
@@ -102,7 +96,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                         maxItemsPerRow: 4,
                         minItemWidth: 150,
                         children: [
-                          for (final tool in kDrawingTools)
+                          for (final tool in widget.palette)
                             DragTarget(
                               builder: (BuildContext context,
                                   List<Object?> candidateData,
@@ -147,9 +141,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                                 List<Object?> candidateData,
                                 List<dynamic> rejectedData) {
                               return RoundButton(
-                                icon: MultiIcon(
-                                    fontIcon: kStyleIcons[kToolScribble] ??
-                                        kUnknownStyleIcon),
+                                icon: kToolScribble.icon,
                                 foreground: Colors.black,
                                 background: candidateData.isEmpty
                                     ? Colors.white
@@ -169,9 +161,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                                 List<Object?> candidateData,
                                 List<dynamic> rejectedData) {
                               return RoundButton(
-                                icon: MultiIcon(
-                                    fontIcon: kStyleIcons[kToolEraser] ??
-                                        kUnknownStyleIcon),
+                                icon: kToolEraser.icon,
                                 foreground: Colors.red,
                                 background: candidateData.isEmpty
                                     ? Colors.white
@@ -210,9 +200,7 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
                     });
                   },
                   child: RoundButton(
-                    icon: MultiIcon(
-                        fontIcon:
-                            kStyleIcons[widget.style] ?? kUnknownStyleIcon),
+                    icon: widget.style.icon,
                     tooltip: loc.drawChangeTool,
                     onPressed: () {
                       setState(() {
@@ -229,13 +217,13 @@ class _StyleChooserButtonState extends ConsumerState<StyleChooserButton> {
 }
 
 class StylePill extends StatelessWidget {
-  final String style;
+  final DrawingStyle style;
   final bool focused;
 
   const StylePill({super.key, required this.style, this.focused = false});
 
   String getLocalizedStyle(AppLocalizations loc) {
-    switch (style) {
+    switch (style.name) {
       case "scribble":
         return loc.drawScribble;
       case "eraser":
@@ -263,14 +251,13 @@ class StylePill extends StatelessWidget {
       case "culvert":
         return loc.drawCulvert;
       default:
-        return style;
+        return style.name;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    final drStyle = kTypeStyles[style] ?? kUnknownStyle;
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
@@ -283,13 +270,10 @@ class StylePill extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
-              color: drStyle.color,
+              color: style.color,
               borderRadius: BorderRadius.circular(45.0),
             ),
-            child: Icon(
-              kStyleIcons[style] ?? kUnknownStyleIcon,
-              color: drStyle.casing,
-            ),
+            child: style.icon.getWidget(context: context, color: style.casing),
           ),
           SizedBox(width: 8.0),
           Text(

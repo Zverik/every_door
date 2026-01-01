@@ -1,4 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
 import 'package:every_door/helpers/auth/controller.dart';
@@ -350,25 +349,20 @@ class $AuthController implements $Instance {
   $Value? $getProperty(Runtime runtime, String identifier) {
     switch (identifier) {
       case 'name':
-        final _name = $value.name;
-        return $String(_name);
+        return $String($value.name);
 
       case 'provider':
-        final _provider = $value.provider;
-        // return $AuthProvider.wrap(_provider);
-        return null;
+        return $AuthProvider.wrap($value.provider);
 
       case 'authorized':
-        final _authorized = $value.authorized;
-        return $bool(_authorized);
+        return $bool($value.authorized);
 
       case 'endpoint':
-        final _endpoint = $value.endpoint;
-        return $String(_endpoint);
+        return $String($value.endpoint);
 
       case 'tokenKey':
-        final _tokenKey = $value.tokenKey;
-        return $String(_tokenKey);
+        return $String($value.tokenKey);
+
       case 'loadData':
         return __loadData;
 

@@ -2,6 +2,7 @@
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'dart:convert';
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:country_coder/country_coder.dart';
 import 'package:every_door/fields/name.dart';
 import 'package:every_door/helpers/multi_icon.dart';
@@ -9,8 +10,10 @@ import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/models/field.dart';
 
+@Bind()
 enum PresetType { normal, nsi, fixme, taginfo }
 
+@Bind()
 class Preset {
   final List<PresetField> fields; // Always open
   final List<PresetField> moreFields; // Open when set or requested

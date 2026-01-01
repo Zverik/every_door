@@ -19,7 +19,7 @@ class OverlayButtonWidget extends StatelessWidget {
   final void Function(BuildContext)? onLongPressed;
 
   /// Icon to display.
-  final IconData icon;
+  final MultiIcon icon;
 
   /// Set to false to hide the button.
   final bool enabled;
@@ -60,7 +60,7 @@ class OverlayButtonWidget extends StatelessWidget {
       child: Padding(
         padding: (padding ?? EdgeInsets.zero) + safePadding,
         child: MapButton(
-          icon: MultiIcon(fontIcon: icon),
+          icon: icon,
           enabled: enabled,
           tooltip: tooltip,
           onPressed: onPressed,

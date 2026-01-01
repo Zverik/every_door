@@ -141,7 +141,7 @@ class OsmDataHelper extends ChangeNotifier {
     final changes = _ref.read(changesProvider);
     final result = elements
         .map((e) => changes.changeFor(e))
-        .where((change) => !change.deleted)
+        .where((change) => !change.isDeleted)
         .toList();
     if (addNew) result.addAll(changes.getNew());
     return result;

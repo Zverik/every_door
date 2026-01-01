@@ -32,7 +32,8 @@ class MultiIcon {
     String? imageUrl,
     String? asset,
     this.tooltip,
-  }) : _fontIcon = fontIcon, _emoji = emoji {
+  })  : _fontIcon = fontIcon,
+        _emoji = emoji {
     if (imageData != null) {
       _image = MemoryImage(imageData);
     } else if (asset != null && !asset.contains('.svg')) {
@@ -68,6 +69,15 @@ class MultiIcon {
     }
   }
 
+  MultiIcon.font(IconData fontIcon, {String? tooltip})
+      : this(fontIcon: fontIcon, tooltip: tooltip);
+
+  MultiIcon.emoji(String emoji, {String? tooltip})
+      : this(emoji: emoji, tooltip: tooltip);
+
+  MultiIcon.url(String url, {String? tooltip})
+      : this(imageUrl: url, tooltip: tooltip);
+
   MultiIcon._({
     IconData? fontIcon,
     String? emoji,
@@ -75,7 +85,11 @@ class MultiIcon {
     ScalableImage? svg,
     ScalableImageSource? svgSource,
     this.tooltip,
-  }) : _fontIcon = fontIcon, _emoji = emoji, _svgSource = svgSource, _svg = svg, _image = image;
+  })  : _fontIcon = fontIcon,
+        _emoji = emoji,
+        _svgSource = svgSource,
+        _svg = svg,
+        _image = image;
 
   MultiIcon withTooltip(String? tooltip) {
     return MultiIcon._(

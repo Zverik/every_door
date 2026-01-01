@@ -4,12 +4,14 @@
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/auth/controller.dart';
 import 'package:every_door/helpers/auth/provider.dart';
+import 'package:every_door/models/field.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/plugins/events.dart';
 import 'package:every_door/plugins/ext_overlay.dart';
 import 'package:every_door/plugins/preferences.dart';
 import 'package:every_door/plugins/providers.dart';
+import 'package:every_door/providers/add_presets.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/auth.dart';
 import 'package:every_door/providers/overlays.dart';
@@ -106,4 +108,11 @@ class EveryDoorApp {
   AuthController auth(String name) =>
       _ref.read(authProvider)['${plugin.id}#$name'] ??
       _ref.read(authProvider)[name]!;
+
+  /// Adds a handler for a new (or existing) field type.
+  /// Use [PresetFieldContext] constructor to get commonly used
+  /// values from the data.
+  void registerFieldType(String typ, FieldBuilder builder) {
+    _ref.read(pluginPresetsProvider).registerFieldType(typ, plugin, builder);
+  }
 }

@@ -2,6 +2,7 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/models/note.dart';
 import 'package:dart_eval/stdlib/core.dart';
+import 'package:every_door/plugins/bindings/models/located.eval.dart';
 import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
 
 /// dart_eval wrapper binding for [BaseNote]
@@ -32,7 +33,14 @@ class $BaseNote implements $Instance {
 
   /// Compile-time class declaration of [$BaseNote]
   static const $declaration = BridgeClassDef(
-    BridgeClassType($type),
+    BridgeClassType(
+      $type,
+
+      $extends: BridgeTypeRef(
+        BridgeTypeSpec('package:every_door/models/located.dart', 'Located'),
+        [],
+      ),
+    ),
     constructors: {
       '': BridgeConstructorDef(
         BridgeFunctionDef(
@@ -77,7 +85,7 @@ class $BaseNote implements $Instance {
             ),
 
             BridgeParameter(
-              'deleting',
+              'isDeleted',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               true,
             ),
@@ -131,7 +139,7 @@ class $BaseNote implements $Instance {
       ),
     },
     getters: {
-      'isChanged': BridgeMethodDef(
+      'isModified': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
           namedParams: [],
@@ -159,6 +167,16 @@ class $BaseNote implements $Instance {
         isStatic: false,
       ),
 
+      'created': BridgeFieldDef(
+        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dateTime, [])),
+        isStatic: false,
+      ),
+
+      'uniqueId': BridgeFieldDef(
+        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+        isStatic: false,
+      ),
+
       'location': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(
@@ -169,12 +187,7 @@ class $BaseNote implements $Instance {
         isStatic: false,
       ),
 
-      'created': BridgeFieldDef(
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dateTime, [])),
-        isStatic: false,
-      ),
-
-      'deleting': BridgeFieldDef(
+      'isDeleted': BridgeFieldDef(
         BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
         isStatic: false,
       ),
@@ -191,7 +204,7 @@ class $BaseNote implements $Instance {
         id: args[1]?.$value,
         type: args[2]!.$value,
         created: args[3]?.$value,
-        deleting: args[4]?.$value ?? false,
+        isDeleted: args[4]?.$value ?? false,
       ),
     );
   }
@@ -214,7 +227,7 @@ class $BaseNote implements $Instance {
   BaseNote get $reified => $value;
 
   /// Wrap a [BaseNote] in a [$BaseNote]
-  $BaseNote.wrap(this.$value) : _superclass = $Object($value);
+  $BaseNote.wrap(this.$value) : _superclass = $Located.wrap($value);
 
   @override
   int $getRuntimeType(Runtime runtime) => runtime.lookupType($spec);
@@ -230,21 +243,25 @@ class $BaseNote implements $Instance {
         final _type = $value.type;
         return _type == null ? const $null() : $int(_type);
 
-      case 'location':
-        final _location = $value.location;
-        return $LatLng.wrap(_location);
-
       case 'created':
         final _created = $value.created;
         return $DateTime.wrap(_created);
 
-      case 'deleting':
-        final _deleting = $value.deleting;
-        return $bool(_deleting);
+      case 'uniqueId':
+        final _uniqueId = $value.uniqueId;
+        return $String(_uniqueId);
 
-      case 'isChanged':
-        final _isChanged = $value.isChanged;
-        return $bool(_isChanged);
+      case 'location':
+        final _location = $value.location;
+        return $LatLng.wrap(_location);
+
+      case 'isDeleted':
+        final _isDeleted = $value.isDeleted;
+        return $bool(_isDeleted);
+
+      case 'isModified':
+        final _isModified = $value.isModified;
+        return $bool(_isModified);
 
       case 'isNew':
         final _isNew = $value.isNew;
@@ -279,8 +296,8 @@ class $BaseNote implements $Instance {
         $value.id = value.$value;
         return;
 
-      case 'deleting':
-        $value.deleting = value.$value;
+      case 'isDeleted':
+        $value.isDeleted = value.$value;
         return;
     }
     return _superclass.$setProperty(runtime, identifier, value);

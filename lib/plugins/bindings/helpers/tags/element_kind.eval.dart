@@ -1,18 +1,6 @@
-// ignore_for_file: unused_import, unnecessary_import
-// ignore_for_file: always_specify_types, avoid_redundant_argument_values
-// ignore_for_file: sort_constructors_first
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
-import 'package:dart_eval/dart_eval.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
-import 'package:every_door/helpers/tags/element_kind.dart';
-import 'package:every_door/helpers/tags/element_kind_std.dart';
-import 'package:every_door/helpers/tags/main_key.dart';
-import 'package:every_door/helpers/multi_icon.dart';
-import 'package:every_door/helpers/tags/tag_matcher.dart';
-import 'package:every_door/models/amenity.dart';
-import 'package:every_door/plugins/bindings/helpers/tags/element_kind.eval.dart';
 import 'package:dart_eval/stdlib/core.dart';
+import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/plugins/bindings/helpers/multi_icon.eval.dart';
 import 'package:every_door/plugins/bindings/helpers/tags/tag_matcher.eval.dart';
 
@@ -48,6 +36,12 @@ class $ElementKind implements $Instance {
       'package:every_door/helpers/tags/element_kind.dart',
       'ElementKind.register',
       $ElementKind.$register,
+    );
+
+    runtime.registerBridgeFunc(
+      'package:every_door/helpers/tags/element_kind.dart',
+      'ElementKind.parseNames',
+      $ElementKind.$parseNames,
     );
 
     runtime.registerBridgeFunc(
@@ -277,6 +271,34 @@ class $ElementKind implements $Instance {
                   [],
                 ),
               ),
+              false,
+            ),
+          ],
+        ),
+        isStatic: true,
+      ),
+
+      'parseNames': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(CoreTypes.list, [
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/helpers/tags/element_kind.dart',
+                    'ElementKindImpl',
+                  ),
+                  [],
+                ),
+              ),
+            ]),
+            nullable: true,
+          ),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'data',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
               false,
             ),
           ],
@@ -522,6 +544,18 @@ class $ElementKind implements $Instance {
     return $null();
   }
 
+  /// Wrapper for the [ElementKind.parseNames] method
+  static $Value? $parseNames(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final value = ElementKind.parseNames(args[0]!.$value);
+    return value == null
+        ? const $null()
+        : $List.view(value, (e) => $ElementKindImpl.wrap(e));
+  }
+
   /// Wrapper for the [ElementKind.empty] getter
   static $Value? $empty(Runtime runtime, $Value? target, List<$Value?> args) {
     final value = ElementKind.empty;
@@ -652,6 +686,12 @@ class $ElementKindImpl implements $Instance {
       'ElementKindImpl.fromJson',
       $ElementKindImpl.$fromJson,
     );
+
+    runtime.registerBridgeFunc(
+      'package:every_door/helpers/tags/element_kind.dart',
+      'ElementKindImpl.fromList',
+      $ElementKindImpl.$fromList,
+    );
   }
 
   /// Compile-time type specification of [$ElementKindImpl]
@@ -740,6 +780,31 @@ class $ElementKindImpl implements $Instance {
               BridgeTypeAnnotation(
                 BridgeTypeRef(CoreTypes.map, [
                   BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
+                ]),
+              ),
+              false,
+            ),
+          ],
+        ),
+        isFactory: true,
+      ),
+
+      'fromList': BridgeConstructorDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation($type),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'name',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+
+            BridgeParameter(
+              'data',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.list, [
                   BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
                 ]),
               ),
@@ -896,6 +961,20 @@ class $ElementKindImpl implements $Instance {
       ElementKindImpl.fromJson(
         args[0]!.$value,
         (args[1]!.$reified as Map).cast(),
+      ),
+    );
+  }
+
+  /// Wrapper for the [ElementKindImpl.fromList] constructor
+  static $Value? $fromList(
+    Runtime runtime,
+    $Value? thisValue,
+    List<$Value?> args,
+  ) {
+    return $ElementKindImpl.wrap(
+      ElementKindImpl.fromList(
+        args[0]!.$value,
+        (args[1]!.$reified as List).cast(),
       ),
     );
   }

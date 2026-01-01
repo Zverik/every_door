@@ -1,6 +1,7 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
+import 'package:every_door/helpers/amenity_describer.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
@@ -95,7 +96,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
 
     // Zoom automatically only when tracking location.
     if (mounted && ref.read(trackingProvider)) {
-      _controller.zoomToFit(widget.def.nearestPOI
+      _controller.zoomToFit(widget.def.nearest
           .take(widget.def.maxTileCount)
           .map((e) => e.location));
     }
@@ -142,8 +143,13 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
         right: false,
         top: isWide,
         child: PoiPane(
-          widget.def.nearestPOI.take(widget.def.maxTileCount).toList(),
-          isCountedOld: widget.def.isCountedOld,
+          amenities: widget.def.nearest.take(widget.def.maxTileCount).toList(),
+          describer: widget.def.describer,
+          getAmenityData: widget.def.getAmenityData,
+          onTap: (amenity) {
+            ref.read(microZoomedInProvider.notifier).state = null;
+            widget.def.openEditor(context: context, element: amenity);
+          },
         ),
       );
       final mediaHeight = MediaQuery.of(context).size.height;
@@ -174,26 +180,17 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
                 layers: [
                   ...widget.def.overlays.map((i) => i.buildLayer()),
                   ...widget.def.mapLayers(),
-                  CircleLayer(
-                    circles: [
-                      for (final objLocation in widget.def.otherPOI)
-                        CircleMarker(
-                          point: objLocation,
-                          color: Colors.black.withValues(alpha: 0.4),
-                          radius: 2.0,
-                        ),
-                    ],
-                  ),
+                  widget.def.otherObjectsLayer(),
                   MarkerLayer(
                     markers: [
-                      for (var i = widget.def.nearestPOI.length - 1;
+                      for (var i = widget.def.nearest.length - 1;
                           i >= 0;
                           i--)
                         Marker(
-                          point: widget.def.nearestPOI[i].location,
+                          point: widget.def.nearest[i].location,
                           rotate: true,
                           child: widget.def
-                              .buildMarker(i, widget.def.nearestPOI[i]),
+                              .buildMarker(i, widget.def.nearest[i]),
                         ),
                     ],
                   ),
@@ -238,7 +235,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
           ),
           alignment: leftHand ? Alignment.bottomLeft : Alignment.bottomRight,
           onDragEnd: (pos) {
-            widget.def.openEditor(context, pos);
+            widget.def.openEditor(context: context, location: pos);
           },
           onTap: () async {
             final location = await Navigator.push(
@@ -249,7 +246,7 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
               ),
             );
             if (context.mounted && location != null) {
-              widget.def.openEditor(context, location);
+              widget.def.openEditor(context: context, location: location);
             }
           },
         ),

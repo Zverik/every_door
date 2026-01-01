@@ -1,4 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:dart_eval/stdlib/core.dart';
@@ -12,6 +11,24 @@ class $MultiIcon implements $Instance {
       'package:every_door/helpers/multi_icon.dart',
       'MultiIcon.',
       $MultiIcon.$new,
+    );
+
+    runtime.registerBridgeFunc(
+      'package:every_door/helpers/multi_icon.dart',
+      'MultiIcon.font',
+      $MultiIcon.$font,
+    );
+
+    runtime.registerBridgeFunc(
+      'package:every_door/helpers/multi_icon.dart',
+      'MultiIcon.emoji',
+      $MultiIcon.$emoji,
+    );
+
+    runtime.registerBridgeFunc(
+      'package:every_door/helpers/multi_icon.dart',
+      'MultiIcon.url',
+      $MultiIcon.$url,
     );
   }
 
@@ -111,6 +128,86 @@ class $MultiIcon implements $Instance {
             ),
           ],
           params: [],
+        ),
+        isFactory: false,
+      ),
+
+      'font': BridgeConstructorDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation($type),
+          namedParams: [
+            BridgeParameter(
+              'tooltip',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.string, []),
+                nullable: true,
+              ),
+              true,
+            ),
+          ],
+          params: [
+            BridgeParameter(
+              'fontIcon',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:flutter/src/widgets/icon_data.dart',
+                    'IconData',
+                  ),
+                  [],
+                ),
+              ),
+              false,
+            ),
+          ],
+        ),
+        isFactory: false,
+      ),
+
+      'emoji': BridgeConstructorDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation($type),
+          namedParams: [
+            BridgeParameter(
+              'tooltip',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.string, []),
+                nullable: true,
+              ),
+              true,
+            ),
+          ],
+          params: [
+            BridgeParameter(
+              'emoji',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+          ],
+        ),
+        isFactory: false,
+      ),
+
+      'url': BridgeConstructorDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation($type),
+          namedParams: [
+            BridgeParameter(
+              'tooltip',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.string, []),
+                nullable: true,
+              ),
+              true,
+            ),
+          ],
+          params: [
+            BridgeParameter(
+              'url',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+          ],
         ),
         isFactory: false,
       ),
@@ -240,6 +337,31 @@ class $MultiIcon implements $Instance {
         asset: args[6]?.$value,
         tooltip: args[7]?.$value,
       ),
+    );
+  }
+
+  /// Wrapper for the [MultiIcon.font] constructor
+  static $Value? $font(Runtime runtime, $Value? thisValue, List<$Value?> args) {
+    return $MultiIcon.wrap(
+      MultiIcon.font(args[0]!.$value, tooltip: args[1]?.$value),
+    );
+  }
+
+  /// Wrapper for the [MultiIcon.emoji] constructor
+  static $Value? $emoji(
+    Runtime runtime,
+    $Value? thisValue,
+    List<$Value?> args,
+  ) {
+    return $MultiIcon.wrap(
+      MultiIcon.emoji(args[0]!.$value, tooltip: args[1]?.$value),
+    );
+  }
+
+  /// Wrapper for the [MultiIcon.url] constructor
+  static $Value? $url(Runtime runtime, $Value? thisValue, List<$Value?> args) {
+    return $MultiIcon.wrap(
+      MultiIcon.url(args[0]!.$value, tooltip: args[1]?.$value),
     );
   }
 

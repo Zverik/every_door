@@ -409,15 +409,10 @@ class PluginManager extends Notifier<Set<String>> {
       prov.addField(
           k, data, plugin, plugin.getLocalizationsBranch('fields.$k'));
     });
-    // TODO
   }
 
   void _disableFields(Plugin plugin) {
-    final fieldData = plugin.data['fields'];
-    if (fieldData == null || fieldData is! Map) return;
-    final prov = ref.read(pluginPresetsProvider);
-    for (final k in fieldData.keys) prov.removeField(k);
-    // TODO
+    ref.read(pluginPresetsProvider).removeFieldsForPlugin(plugin.id);
   }
 
   void _enablePresets(Plugin plugin) {

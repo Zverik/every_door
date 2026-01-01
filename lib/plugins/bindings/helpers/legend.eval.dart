@@ -92,15 +92,7 @@ class $LegendItem implements $Instance {
     },
 
     methods: {},
-    getters: {
-      'isOther': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-    },
+    getters: {},
     setters: {},
     fields: {
       'color': BridgeFieldDef(
@@ -127,6 +119,11 @@ class $LegendItem implements $Instance {
 
       'label': BridgeFieldDef(
         BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+        isStatic: false,
+      ),
+
+      'isOther': BridgeFieldDef(
+        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
         isStatic: false,
       ),
     },
@@ -507,12 +504,12 @@ class $LegendController implements $Instance {
             BridgeParameter(
               'amenities',
               BridgeTypeAnnotation(
-                BridgeTypeRef(CoreTypes.list, [
+                BridgeTypeRef(CoreTypes.iterable, [
                   BridgeTypeAnnotation(
                     BridgeTypeRef(
                       BridgeTypeSpec(
-                        'package:every_door/models/amenity.dart',
-                        'OsmChange',
+                        'package:every_door/models/located.dart',
+                        'Located',
                       ),
                       [],
                     ),
@@ -544,8 +541,8 @@ class $LegendController implements $Instance {
               BridgeTypeAnnotation(
                 BridgeTypeRef(
                   BridgeTypeSpec(
-                    'package:every_door/models/amenity.dart',
-                    'OsmChange',
+                    'package:every_door/models/located.dart',
+                    'Located',
                   ),
                   [],
                 ),

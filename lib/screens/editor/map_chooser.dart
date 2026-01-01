@@ -25,9 +25,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 
+@Bind()
 class MapChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;
   final bool creating;
@@ -80,7 +82,8 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
         await provider.getElements(location, kVisibilityRadius);
     // Filter for amenities (or not amenities).
     data = data.where((e) {
-      if (editorMode.isOurKind(e)) return true;
+      if (ElementKind.matchChange(e, editorMode.ourKinds) !=
+          ElementKind.unknown) return true;
       if (ElementKind.building.matchesChange(e)) return false;
       if (ElementKind.entrance.matchesChange(e)) return true;
       return e.isNew;
@@ -150,7 +153,7 @@ class _MapChooserPageState extends ConsumerState<MapChooserPage> {
             polylines: [
               for (final drawing in nearestNotes
                   .whereType<MapDrawing>()
-                  .where((d) => !d.deleting))
+                  .where((d) => !d.isDeleted))
                 Polyline(
                   points: drawing.path.nodes,
                   color: drawing.style.color,

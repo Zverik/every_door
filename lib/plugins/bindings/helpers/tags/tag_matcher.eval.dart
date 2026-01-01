@@ -1,14 +1,5 @@
-// ignore_for_file: unused_import, unnecessary_import
-// ignore_for_file: always_specify_types, avoid_redundant_argument_values
-// ignore_for_file: sort_constructors_first
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
-import 'package:dart_eval/dart_eval.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/helpers/tags/tag_matcher.dart';
-import 'package:every_door/helpers/tags/main_key.dart';
-import 'package:every_door/models/amenity.dart';
-import 'package:every_door/plugins/bindings/helpers/tags/tag_matcher.eval.dart';
 import 'package:dart_eval/stdlib/core.dart';
 
 /// dart_eval wrapper binding for [TagMatcher]
@@ -25,6 +16,12 @@ class $TagMatcher implements $Instance {
       'package:every_door/helpers/tags/tag_matcher.dart',
       'TagMatcher.fromJson',
       $TagMatcher.$fromJson,
+    );
+
+    runtime.registerBridgeFunc(
+      'package:every_door/helpers/tags/tag_matcher.dart',
+      'TagMatcher.fromList',
+      $TagMatcher.$fromList,
     );
 
     runtime.registerBridgeFunc(
@@ -70,6 +67,22 @@ class $TagMatcher implements $Instance {
               ),
               true,
             ),
+
+            BridgeParameter(
+              'removeFromGood',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.set, [
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+                ]),
+              ),
+              true,
+            ),
+
+            BridgeParameter(
+              'replace',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
+              true,
+            ),
           ],
           params: [
             BridgeParameter(
@@ -109,6 +122,32 @@ class $TagMatcher implements $Instance {
                 ]),
                 nullable: true,
               ),
+              false,
+            ),
+          ],
+        ),
+        isFactory: true,
+      ),
+
+      'fromList': BridgeConstructorDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation($type),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'data',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.list, [
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
+                ]),
+                nullable: true,
+              ),
+              false,
+            ),
+
+            BridgeParameter(
+              'update',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               false,
             ),
           ],
@@ -259,12 +298,26 @@ class $TagMatcher implements $Instance {
         isStatic: false,
       ),
 
+      'removeFromGood': BridgeFieldDef(
+        BridgeTypeAnnotation(
+          BridgeTypeRef(CoreTypes.set, [
+            BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+          ]),
+        ),
+        isStatic: false,
+      ),
+
       'missing': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(CoreTypes.set, [
             BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
           ]),
         ),
+        isStatic: false,
+      ),
+
+      'replace': BridgeFieldDef(
+        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
         isStatic: false,
       ),
     },
@@ -279,6 +332,8 @@ class $TagMatcher implements $Instance {
         (args[0]!.$reified as Map).cast(),
         good: (args[1]?.$reified ?? const {} as Set?)?.cast(),
         missing: (args[2]?.$reified ?? const {} as Set?)?.cast(),
+        removeFromGood: (args[3]?.$reified ?? const {} as Set?)?.cast(),
+        replace: args[4]?.$value ?? false,
       ),
     );
   }
@@ -291,6 +346,17 @@ class $TagMatcher implements $Instance {
   ) {
     return $TagMatcher.wrap(
       TagMatcher.fromJson((args[0]!.$reified as Map).cast()),
+    );
+  }
+
+  /// Wrapper for the [TagMatcher.fromList] constructor
+  static $Value? $fromList(
+    Runtime runtime,
+    $Value? thisValue,
+    List<$Value?> args,
+  ) {
+    return $TagMatcher.wrap(
+      TagMatcher.fromList((args[0]!.$reified as List).cast(), args[1]!.$value),
     );
   }
 
@@ -325,9 +391,17 @@ class $TagMatcher implements $Instance {
         final _good = $value.good;
         return $Set.wrap(_good);
 
+      case 'removeFromGood':
+        final _removeFromGood = $value.removeFromGood;
+        return $Set.wrap(_removeFromGood);
+
       case 'missing':
         final _missing = $value.missing;
         return $Set.wrap(_missing);
+
+      case 'replace':
+        final _replace = $value.replace;
+        return $bool(_replace);
 
       case 'isEmpty':
         final _isEmpty = $value.isEmpty;

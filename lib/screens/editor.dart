@@ -3,6 +3,7 @@
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'dart:async';
 
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/fields/payment.dart';
@@ -40,6 +41,7 @@ import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 import 'package:logging/logging.dart';
 
+@Bind()
 class PoiEditorPage extends ConsumerStatefulWidget {
   final OsmChange? amenity;
   final Preset? preset;
@@ -308,7 +310,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       if (amenity.isNew) {
         changes.deleteChange(amenity);
       } else {
-        amenity.deleted = true;
+        amenity.isDeleted = true;
         changes.saveChange(amenity);
       }
       ref.read(needMapUpdateProvider).trigger();
@@ -606,15 +608,15 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
           MaterialButton(
             color: Colors.red,
             textColor: Colors.white,
-            child: Text(amenity.deleted
+            child: Text(amenity.isDeleted
                 ? loc.editorRestore
                 : kind == ElementKind.building
                     ? loc.editorDeleteBuilding
                     : loc.editorMissing),
             onPressed: () async {
-              if (amenity.deleted) {
+              if (amenity.isDeleted) {
                 setState(() {
-                  amenity.deleted = false;
+                  amenity.isDeleted = false;
                 });
               } else {
                 if (kind != ElementKind.building)

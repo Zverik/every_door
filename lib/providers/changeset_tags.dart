@@ -86,7 +86,7 @@ class _TypeCount {
     String type = _getType(change);
     if (change.isNew)
       created[type] = (created[type] ?? 0) + 1;
-    else if (change.deleted)
+    else if (change.isDeleted)
       deleted[type] = (deleted[type] ?? 0) + 1;
     else if (change.isConfirmed)
       confirmed[type] = (confirmed[type] ?? 0) + 1;

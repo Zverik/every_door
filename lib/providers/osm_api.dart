@@ -181,7 +181,7 @@ class OsmApiHelper {
       int spareId = -1000;
       for (final change in changes) {
         if (!change.isModified) return;
-        final action = change.hardDeleted
+        final action = change.isHardDeleted
             ? 'delete'
             : change.isNew
                 ? 'create'
@@ -193,7 +193,7 @@ class OsmApiHelper {
         );
         if (idMap != null) idMap[el.id] = el;
         builder.element(action, nest: () {
-          el.toXML(builder, changeset: changeset, visible: !change.hardDeleted);
+          el.toXML(builder, changeset: changeset, visible: !change.isHardDeleted);
         });
       }
     });
@@ -288,7 +288,7 @@ class OsmApiHelper {
         newId: change.element?.id.ref,
         newVersion: change.element?.version,
       );
-      el.toXML(builder, changeset: changeset, visible: !change.hardDeleted);
+      el.toXML(builder, changeset: changeset, visible: !change.isHardDeleted);
     });
     return builder.buildDocument().toXmlString();
   }
@@ -323,7 +323,7 @@ class OsmApiHelper {
             newVersion: 1,
           ));
         }
-      } else if (change.hardDeleted) {
+      } else if (change.isHardDeleted) {
         String objRef = change.id.fullRef;
         final resp = await http.delete(
           Uri.https(endpoint, '/api/0.6/$objRef'),

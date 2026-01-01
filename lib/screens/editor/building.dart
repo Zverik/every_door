@@ -114,7 +114,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     if (building.isNew) {
       changes.deleteChange(building);
     } else {
-      building.deleted = true;
+      building.isDeleted = true;
       changes.saveChange(building);
     }
     saved = true;
@@ -383,7 +383,7 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
                       },
                       child: Text(loc.buildingMoreButton.toUpperCase() + '...'),
                     ),
-                    if (!building.deleted &&
+                    if (!building.isDeleted &&
                         widget.building != null &&
                         building.canDelete)
                       TextButton(

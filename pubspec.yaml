@@ -87,8 +87,8 @@ dependency_overrides:
       ref: master
   dart_eval:
     git:
-      url: https://github.com/Zverik/dart_eval.git
-      ref: operators
+      url: https://github.com/ethanblake4/dart_eval.git
+      ref: bind_bridge_and_wrap
   flutter_eval:
     git:
       url: https://github.com/Zverik/flutter_eval.git

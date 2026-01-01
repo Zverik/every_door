@@ -4,7 +4,8 @@
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
 const _kTagsWithoutYesValue = {
   'amenity',
@@ -38,9 +39,9 @@ const _kTagsWithoutYesValue = {
   'traffic_calming',
 };
 
-String? getWarningForAmenity(OsmChange amenity, AppLocalizations loc) {
+String? getWarningForAmenity(OsmChange amenity, [AppLocalizations? loc]) {
   if (amenity.isFixmeNote()) {
-    return loc.warningFixmeNote;
+    return loc?.warningFixmeNote ?? 'fixme note';
   }
 
   String? fixmeValue = amenity['fixme'];
@@ -48,25 +49,28 @@ String? getWarningForAmenity(OsmChange amenity, AppLocalizations loc) {
     if (fixmeValue.length > 50) {
       fixmeValue = fixmeValue.substring(0, 50) + '…';
     }
-    return loc.warningFixme(fixmeValue);
+    return loc?.warningFixme(fixmeValue) ?? 'fixme';
   }
 
   final mainKey = amenity.mainKey;
   if (mainKey != null &&
       _kTagsWithoutYesValue.contains(mainKey) &&
       amenity[mainKey] == 'yes') {
-    return loc.warningWrongTag('$mainKey=${amenity[mainKey]}');
+    return loc?.warningWrongTag('$mainKey=${amenity[mainKey]}') ?? 'yes value';
   }
 
   final int ageInDays = DateTime.now()
       .difference(amenity.element?.timestamp ?? DateTime.now())
       .inDays;
-  if (ElementKind.amenity.matchesChange(amenity) && ageInDays >= kOldAmenityWarning && amenity.isOld) {
-    return loc.warningTooOld(loc.years((ageInDays / 365).round()));
+  if (ElementKind.amenity.matchesChange(amenity) &&
+      ageInDays >= kOldAmenityWarning &&
+      amenity.isOld) {
+    return loc?.warningTooOld(loc.years((ageInDays / 365).round())) ??
+        'too old';
   }
 
   if (!ElementKind.everything.matchesChange(amenity)) {
-    return loc.warningUnsupported;
+    return loc?.warningUnsupported ?? 'unsupported';
   }
 
   return null;

@@ -3,11 +3,16 @@
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/helpers/amenity_age.dart';
+import 'package:every_door/helpers/amenity_describer.dart';
 import 'package:every_door/helpers/multi_icon.dart';
+import 'package:every_door/helpers/poi_describer.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/located.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/poi_filter.dart';
+import 'package:every_door/screens/editor.dart';
 import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/poi_marker.dart';
@@ -34,51 +39,44 @@ const _kDefaultPoiPresets = [
 abstract class AmenityModeDefinition extends BaseModeDefinition {
   static const _kAmenitiesInList = 12;
 
-  List<OsmChange> nearestPOI = [];
-  List<LatLng> otherPOI = [];
   List<String> _defaultPresets = _kDefaultPoiPresets;
-  List<ElementKindImpl> _kinds = [ElementKind.amenity];
-  List<ElementKindImpl> _otherKinds = [ElementKind.micro];
   int _amenitiesOnScreen = 12;
+  final PoiDescriber describer;
   final Map<String, int> _checkIntervals = {
     'amenity': kOldAmenityDays,
     'structure': kOldStructureDays,
   };
 
-  AmenityModeDefinition(super.ref);
+  AmenityModeDefinition(super.ref) : describer = AmenityDescriber(ref) {
+    ourKinds = [ElementKind.amenity];
+    otherKinds = [ElementKind.micro];
+  }
 
-  AmenityModeDefinition.fromPlugin(EveryDoorApp app): this(app.ref);
+  AmenityModeDefinition.fromPlugin(EveryDoorApp app) : this(app.ref);
 
   @override
-  MultiIcon getIcon(BuildContext context, bool outlined) {
+  MultiIcon getIcon(BuildContext context, bool active) {
     final loc = AppLocalizations.of(context)!;
     return MultiIcon(
       fontIcon:
-          !outlined ? Icons.free_breakfast : Icons.free_breakfast_outlined,
+          active ? Icons.free_breakfast : Icons.free_breakfast_outlined,
       tooltip: loc.navPoiMode,
     );
   }
-
-  @override
-  bool isOurKind(OsmChange element) =>
-      _kinds.any((k) => k.matchesChange(element));
 
   int get maxTileCount => _kAmenitiesInList;
 
   @override
   updateNearest(LatLngBounds bounds) async {
-    List<OsmChange> data =
-        await super.getNearestChanges(bounds, filter: false);
+    List<OsmChange> data = await super.getNearestChanges(bounds);
 
     // Keep other mode objects to show.
-    final otherData = data
-        .where((e) => _otherKinds.any((k) => k.matchesChange(e)))
-        .map((e) => e.location)
-        .toList();
+    final otherData =
+        data.where((e) => otherKinds.any((k) => k.matchesChange(e))).toList();
 
     // Filter for amenities (or not amenities).
     // TODO: e.isNew and not micro/building/address/entrance
-    data = data.where((e) => isOurKind(e)).toList();
+    data = data.where((e) => ourKinds.any((k) => k.matchesChange(e))).toList();
 
     // Apply the building filter.
     final filter = ref.read(poiFilterProvider);
@@ -91,52 +89,58 @@ abstract class AmenityModeDefinition extends BaseModeDefinition {
       data = data.sublist(0, _amenitiesOnScreen);
 
     // Update the map.
-    nearestPOI = data;
-    otherPOI = otherData;
+    nearest = data;
+    other = otherData;
     notifyListeners();
   }
 
-  void openEditor(BuildContext context, LatLng location) async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => TypeChooserPage(
-                location: location,
-                kinds: _kinds.first,
-                defaults: _defaultPresets,
-              )),
-    );
+  @override
+  Future<void> openEditor(
+      {required BuildContext context,
+      Located? element,
+      LatLng? location}) async {
+    if (element == null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => TypeChooserPage(
+                  location: location,
+                  kinds: ourKinds.first,
+                  defaults: _defaultPresets,
+                )),
+      );
+    } else if (element is OsmChange) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => PoiEditorPage(amenity: element),
+          fullscreenDialog: true,
+        ),
+      );
+    }
   }
 
-  Widget buildMarker(int index, OsmChange element) {
+  Widget buildMarker(int index, Located element) {
+    final age = getAmenityData(element);
     return NumberedMarker(
       index: index,
-      color: isCountedOld(element, element.age)
-          ? Colors.white
-          : Colors.lightGreenAccent,
+      color: (age?.isOld ?? true) ? Colors.white : Colors.lightGreenAccent,
     );
   }
 
-  bool isCountedOld(OsmChange element, int age) {
-    for (final entry in _checkIntervals.entries) {
-      if (entry.key != 'amenity' &&
-          ElementKind.get(entry.key).matchesChange(element))
-        return age >= entry.value;
-    }
-    return age >= _checkIntervals['amenity']!;
+  AmenityAgeData? getAmenityData(Located element) {
+    if (element is! OsmChange) return null;
+    return AmenityAgeData.from(element, _checkIntervals);
   }
 
   @override
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) {
+    readKindsFromJson(data);
+
     final presets = data['defaultPresets'];
     if (presets != null && presets is List<dynamic>) {
       _defaultPresets = presets.whereType<String>().toList();
     }
-
-    _kinds = parseKinds(data['kinds']) ?? parseKinds(data['kind']) ?? _kinds;
-    _otherKinds = parseKinds(data['otherKinds']) ??
-        parseKinds(data['otherKind']) ??
-        _otherKinds;
 
     final intervals = data['checkIntervals'];
     if (intervals != null && intervals is Map<String, dynamic>) {

@@ -1,20 +1,46 @@
+// ignore_for_file: unused_import, unnecessary_import
+// ignore_for_file: always_specify_types, avoid_redundant_argument_values
+// ignore_for_file: sort_constructors_first
 // ignore_for_file: no_leading_underscores_for_local_identifiers
+
+import 'package:dart_eval/dart_eval.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
+import 'package:every_door/plugins/interface.dart';
+import 'package:every_door/helpers/auth/controller.dart';
+import 'package:every_door/helpers/auth/provider.dart';
+import 'package:every_door/models/field.dart';
+import 'package:every_door/models/imagery.dart';
+import 'package:every_door/models/plugin.dart';
+import 'package:every_door/plugins/events.dart';
+import 'package:every_door/plugins/ext_overlay.dart';
+import 'package:every_door/plugins/preferences.dart';
+import 'package:every_door/plugins/providers.dart';
+import 'package:every_door/providers/add_presets.dart';
+import 'package:every_door/providers/editor_mode.dart';
+import 'package:every_door/providers/auth.dart';
+import 'package:every_door/providers/overlays.dart';
+import 'package:every_door/screens/modes/definitions/base.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:dart_eval/stdlib/core.dart';
-import 'package:every_door/plugins/bindings/helpers/auth/controller.eval.dart';
 import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
-import 'package:every_door/plugins/bindings/plugins/events.eval.dart';
 import 'package:every_door/plugins/bindings/plugins/preferences.eval.dart';
 import 'package:every_door/plugins/bindings/plugins/providers.eval.dart';
-import 'package:every_door/plugins/bindings/screens/modes/definitions/base.eval.dart';
-import 'package:every_door/screens/modes/definitions/base.dart';
-import 'package:every_door/plugins/interface.dart';
+import 'package:every_door/plugins/bindings/plugins/events.eval.dart';
 import 'package:flutter_map_eval/logging/logging_eval.dart';
+import 'package:every_door/plugins/bindings/screens/modes/definitions/base.eval.dart';
+import 'package:every_door/plugins/bindings/helpers/auth/controller.eval.dart';
 
 /// dart_eval wrapper binding for [EveryDoorApp]
 class $EveryDoorApp implements $Instance {
   /// Configure this class for use in a [Runtime]
-  static void configureForRuntime(Runtime runtime) {}
+  static void configureForRuntime(Runtime runtime) {
+    runtime.registerBridgeFunc(
+      'package:every_door/plugins/interface.dart',
+      'EveryDoorApp.',
+      $EveryDoorApp.$new,
+    );
+  }
 
   /// Compile-time type specification of [$EveryDoorApp]
   static const $spec = BridgeTypeSpec(
@@ -28,7 +54,64 @@ class $EveryDoorApp implements $Instance {
   /// Compile-time class declaration of [$EveryDoorApp]
   static const $declaration = BridgeClassDef(
     BridgeClassType($type),
-    constructors: {},
+    constructors: {
+      '': BridgeConstructorDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation($type),
+          namedParams: [
+            BridgeParameter(
+              'plugin',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/plugin.dart',
+                    'Plugin',
+                  ),
+                  [],
+                ),
+              ),
+              false,
+            ),
+
+            BridgeParameter(
+              'ref',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec('package:riverpod/src/framework.dart', 'Ref'),
+                  [
+                    BridgeTypeAnnotation(
+                      BridgeTypeRef(CoreTypes.object, []),
+                      nullable: true,
+                    ),
+                  ],
+                ),
+              ),
+              false,
+            ),
+
+            BridgeParameter(
+              'onRepaint',
+              BridgeTypeAnnotation(
+                BridgeTypeRef.genericFunction(
+                  BridgeFunctionDef(
+                    returns: BridgeTypeAnnotation(
+                      BridgeTypeRef(CoreTypes.dynamic),
+                    ),
+                    params: [],
+                    namedParams: [],
+                  ),
+                ),
+                nullable: true,
+              ),
+              true,
+            ),
+          ],
+          params: [],
+        ),
+        isFactory: false,
+      ),
+    },
+
     methods: {
       'repaint': BridgeMethodDef(
         BridgeFunctionDef(
@@ -37,6 +120,7 @@ class $EveryDoorApp implements $Instance {
           params: [],
         ),
       ),
+
       'addOverlay': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -58,6 +142,7 @@ class $EveryDoorApp implements $Instance {
           ],
         ),
       ),
+
       'addMode': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -79,6 +164,7 @@ class $EveryDoorApp implements $Instance {
           ],
         ),
       ),
+
       'removeMode': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -92,6 +178,7 @@ class $EveryDoorApp implements $Instance {
           ],
         ),
       ),
+
       'eachMode': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -129,6 +216,7 @@ class $EveryDoorApp implements $Instance {
           ],
         ),
       ),
+
       'addAuthProvider': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
@@ -139,6 +227,7 @@ class $EveryDoorApp implements $Instance {
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
               false,
             ),
+
             BridgeParameter(
               'provider',
               BridgeTypeAnnotation(
@@ -155,6 +244,7 @@ class $EveryDoorApp implements $Instance {
           ],
         ),
       ),
+
       'auth': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -176,8 +266,77 @@ class $EveryDoorApp implements $Instance {
           ],
         ),
       ),
+
+      'registerFieldType': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'typ',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+
+            BridgeParameter(
+              'builder',
+              BridgeTypeAnnotation(
+                BridgeTypeRef.genericFunction(
+                  BridgeFunctionDef(
+                    returns: BridgeTypeAnnotation(
+                      BridgeTypeRef(
+                        BridgeTypeSpec(
+                          'package:every_door/models/field.dart',
+                          'PresetField',
+                        ),
+                        [],
+                      ),
+                    ),
+                    params: [
+                      BridgeParameter(
+                        'data',
+                        BridgeTypeAnnotation(
+                          BridgeTypeRef(CoreTypes.map, [
+                            BridgeTypeAnnotation(
+                              BridgeTypeRef(CoreTypes.string, []),
+                            ),
+                            BridgeTypeAnnotation(
+                              BridgeTypeRef(CoreTypes.dynamic),
+                            ),
+                          ]),
+                        ),
+                        false,
+                      ),
+                    ],
+                    namedParams: [],
+                  ),
+                ),
+              ),
+              false,
+            ),
+          ],
+        ),
+      ),
     },
-    getters: {},
+    getters: {
+      'ref': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(
+              BridgeTypeSpec('package:riverpod/src/framework.dart', 'Ref'),
+              [
+                BridgeTypeAnnotation(
+                  BridgeTypeRef(CoreTypes.object, []),
+                  nullable: true,
+                ),
+              ],
+            ),
+          ),
+          namedParams: [],
+          params: [],
+        ),
+      ),
+    },
     setters: {},
     fields: {
       'plugin': BridgeFieldDef(
@@ -189,6 +348,7 @@ class $EveryDoorApp implements $Instance {
         ),
         isStatic: false,
       ),
+
       'onRepaint': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef.genericFunction(
@@ -202,6 +362,7 @@ class $EveryDoorApp implements $Instance {
         ),
         isStatic: false,
       ),
+
       'preferences': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(
@@ -214,6 +375,7 @@ class $EveryDoorApp implements $Instance {
         ),
         isStatic: false,
       ),
+
       'providers': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(
@@ -226,6 +388,7 @@ class $EveryDoorApp implements $Instance {
         ),
         isStatic: false,
       ),
+
       'events': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(
@@ -238,6 +401,7 @@ class $EveryDoorApp implements $Instance {
         ),
         isStatic: false,
       ),
+
       'logger': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(
@@ -251,6 +415,19 @@ class $EveryDoorApp implements $Instance {
     wrap: true,
     bridge: false,
   );
+
+  /// Wrapper for the [EveryDoorApp.new] constructor
+  static $Value? $new(Runtime runtime, $Value? thisValue, List<$Value?> args) {
+    return $EveryDoorApp.wrap(
+      EveryDoorApp(
+        plugin: args[0]!.$value,
+        ref: args[1]!.$value,
+        onRepaint: () {
+          return (args[2]! as EvalCallable?)?.call(runtime, null, [])?.$value;
+        },
+      ),
+    );
+  }
 
   final $Instance _superclass;
 
@@ -298,6 +475,9 @@ class $EveryDoorApp implements $Instance {
         final _logger = $value.logger;
         return $Logger.wrap(_logger);
 
+      case 'ref':
+        final _ref = $value.ref;
+        return runtime.wrapAlways(_ref);
       case 'repaint':
         return __repaint;
 
@@ -318,6 +498,9 @@ class $EveryDoorApp implements $Instance {
 
       case 'auth':
         return __auth;
+
+      case 'registerFieldType':
+        return __registerFieldType;
     }
     return _superclass.$getProperty(runtime, identifier);
   }
@@ -389,6 +572,21 @@ class $EveryDoorApp implements $Instance {
     final self = target! as $EveryDoorApp;
     final result = self.$value.auth(args[0]!.$value);
     return $AuthController.wrap(result);
+  }
+
+  static const $Function __registerFieldType = $Function(_registerFieldType);
+  static $Value? _registerFieldType(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $EveryDoorApp;
+    self.$value.registerFieldType(args[0]!.$value, (Map<String, dynamic> data) {
+      return (args[1]! as EvalCallable)(runtime, null, [
+        $Map.wrap(data),
+      ])?.$value;
+    });
+    return null;
   }
 
   @override

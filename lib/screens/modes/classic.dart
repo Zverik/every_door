@@ -96,19 +96,19 @@ class _ClassicModePageState extends ConsumerState<ClassicModePane> {
                       ...widget.def.mapLayers(),
                       MarkerLayer(
                         markers: [
-                          for (var i = widget.def.nearestPOI.length - 1;
+                          for (var i = widget.def.nearest.length - 1;
                               i >= 0;
                               i--)
                             Marker(
-                              point: widget.def.nearestPOI[i].location,
+                              point: widget.def.nearest[i].location,
                               rotate: true,
                               child: GestureDetector(
                                 child: widget.def
-                                    .buildMarker(widget.def.nearestPOI[i]),
+                                    .buildMarker(widget.def.nearest[i]),
                                 onTap: () {
                                   widget.def.openEditor(
                                       context: context,
-                                      element: widget.def.nearestPOI[i]);
+                                      element: widget.def.nearest[i]);
                                 },
                               ),
                             ),

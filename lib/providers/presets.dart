@@ -590,7 +590,8 @@ class PresetProvider {
         field = _fieldCache[name]!;
       } else {
         final options = await _getComboOptions(row);
-        field = fieldFromJson(row, options: options);
+        field =
+            fieldForKey(row, options) ?? fieldFromJson(row, options: options);
         _fieldCache[name] = field;
       }
 
@@ -679,7 +680,8 @@ class PresetProvider {
         field = _fieldCache[name]!;
       } else {
         final options = await _getComboOptions(row);
-        field = fieldFromJson(row, options: options);
+        field =
+            fieldForKey(row, options) ?? fieldFromJson(row, options: options);
         _fieldCache[name] = field;
       }
 

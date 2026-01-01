@@ -2,6 +2,7 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:dart_eval/stdlib/core.dart';
+import 'package:every_door/plugins/bindings/models/located.eval.dart';
 import 'package:flutter_eval/foundation.dart';
 import 'package:every_door/plugins/bindings/models/osm_element.eval.dart';
 import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
@@ -61,6 +62,7 @@ class $OsmChange implements $Instance {
         BridgeTypeRef(CoreTypes.comparable, [
           BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.dynamic)),
         ]),
+        $Located$bridge.$type,
       ],
     ),
     constructors: {
@@ -651,6 +653,14 @@ class $OsmChange implements $Instance {
         ),
       ),
 
+      'uniqueId': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+          namedParams: [],
+          params: [],
+        ),
+      ),
+
       'id': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -667,15 +677,7 @@ class $OsmChange implements $Instance {
         ),
       ),
 
-      'deleted': BridgeMethodDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
-          namedParams: [],
-          params: [],
-        ),
-      ),
-
-      'hardDeleted': BridgeMethodDef(
+      'isDeleted': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
           namedParams: [],
@@ -691,7 +693,7 @@ class $OsmChange implements $Instance {
         ),
       ),
 
-      'isConfirmed': BridgeMethodDef(
+      'isNew': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
           namedParams: [],
@@ -699,7 +701,7 @@ class $OsmChange implements $Instance {
         ),
       ),
 
-      'isNew': BridgeMethodDef(
+      'isHardDeleted': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
           namedParams: [],
@@ -732,6 +734,14 @@ class $OsmChange implements $Instance {
       ),
 
       'canMove': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
+          namedParams: [],
+          params: [],
+        ),
+      ),
+
+      'isConfirmed': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
           namedParams: [],
@@ -891,7 +901,7 @@ class $OsmChange implements $Instance {
         ),
       ),
 
-      'deleted': BridgeMethodDef(
+      'isDeleted': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
           namedParams: [],
@@ -1098,29 +1108,29 @@ class $OsmChange implements $Instance {
         final _location = $value.location;
         return $LatLng.wrap(_location);
 
+      case 'uniqueId':
+        final _uniqueId = $value.uniqueId;
+        return $String(_uniqueId);
+
       case 'id':
         final _id = $value.id;
         return $OsmId.wrap(_id);
 
-      case 'deleted':
-        final _deleted = $value.deleted;
-        return $bool(_deleted);
-
-      case 'hardDeleted':
-        final _hardDeleted = $value.hardDeleted;
-        return $bool(_hardDeleted);
+      case 'isDeleted':
+        final _isDeleted = $value.isDeleted;
+        return $bool(_isDeleted);
 
       case 'isModified':
         final _isModified = $value.isModified;
         return $bool(_isModified);
 
-      case 'isConfirmed':
-        final _isConfirmed = $value.isConfirmed;
-        return $bool(_isConfirmed);
-
       case 'isNew':
         final _isNew = $value.isNew;
         return $bool(_isNew);
+
+      case 'isHardDeleted':
+        final _isHardDeleted = $value.isHardDeleted;
+        return $bool(_isHardDeleted);
 
       case 'isArea':
         final _isArea = $value.isArea;
@@ -1137,6 +1147,10 @@ class $OsmChange implements $Instance {
       case 'canMove':
         final _canMove = $value.canMove;
         return $bool(_canMove);
+
+      case 'isConfirmed':
+        final _isConfirmed = $value.isConfirmed;
+        return $bool(_isConfirmed);
 
       case 'mainKey':
         final _mainKey = $value.mainKey;
@@ -1578,8 +1592,8 @@ class $OsmChange implements $Instance {
         $value.location = value.$value;
         return;
 
-      case 'deleted':
-        $value.deleted = value.$value;
+      case 'isDeleted':
+        $value.isDeleted = value.$value;
         return;
     }
     return _superclass.$setProperty(runtime, identifier, value);

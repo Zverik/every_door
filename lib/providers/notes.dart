@@ -29,7 +29,7 @@ final notesProvider = NotifierProvider<NotesProvider, int>(NotesProvider.new);
 final ownScribblesProvider =
     NotifierProvider<OwnScribblesController, bool>(
         OwnScribblesController.new);
-final currentPaintToolProvider = StateProvider<String>((_) => kToolScribble);
+final currentPaintToolProvider = StateProvider<DrawingStyle>((_) => kToolScribble);
 final drawingLockedProvider = StateProvider<bool>((_) => true);
 
 class NotesProvider extends Notifier<int> {
@@ -116,7 +116,7 @@ class NotesProvider extends Notifier<int> {
     );
     final notes = mapNoteData
         .map((data) => MapNote.fromJson(data))
-        .where((note) => !note.deleting)
+        .where((note) => !note.isDeleted)
         .map((note) => note.message);
     return Counter(notes).mostOccurentItems(count: count, cutoff: 2).toList();
   }
@@ -246,7 +246,7 @@ class NotesProvider extends Notifier<int> {
           id: noteData['id'],
           author: noteData['username'],
           path: LineString(points.map((ll) => LatLng(ll[1], ll[0]))),
-          pathType: noteData['style'],
+          style: styleByName(noteData['style']),
         ));
       } else if (noteData.containsKey('location')) {
         final pt = noteData['location'] as List<dynamic>;
@@ -294,14 +294,14 @@ class NotesProvider extends Notifier<int> {
       'editor': '$kAppTitle $kAppVersion',
     };
     for (final note in notes) {
-      if (note.deleting && note.id == null) continue;
+      if (note.isDeleted && note.id == null) continue;
       if (note is MapDrawing) {
-        if (note.deleting) {
+        if (note.isDeleted) {
           data.add({...ident, 'id': note.id, 'deleted': true});
         } else {
           data.add({
             ...ident,
-            'style': kTypeStylesReversed[note.style] ?? 'unknown',
+            'style': note.style.name,
             'color': _colorToHex(note.style.color),
             'dashed': note.style.dashed,
             'thin': note.style.stroke < DrawingStyle.kDefaultStroke,
@@ -311,7 +311,7 @@ class NotesProvider extends Notifier<int> {
           });
         }
       } else if (note is MapNote) {
-        if (note.deleting) {
+        if (note.isDeleted) {
           data.add({...ident, 'id': note.id, 'deleted': true});
         } else {
           data.add({
@@ -342,9 +342,9 @@ class NotesProvider extends Notifier<int> {
     // Skip new notes with "deleting", but delete old deleted notes.
     int i = 0;
     for (final note in notes) {
-      if (note.deleting && note.id == null) continue;
+      if (note.isDeleted && note.id == null) continue;
       if (i < ids.length) {
-        if (note.deleting) {
+        if (note.isDeleted) {
           await deleteNote(note, notify: false, fromDB: true);
         } else {
           await saveNote(note, notify: false, newId: ids[i]);
@@ -403,7 +403,7 @@ class NotesProvider extends Notifier<int> {
     for (final note in notes) {
       int? noteId = note.id;
       if (noteId == null) continue;
-      if (note.isNew && note.deleting) continue;
+      if (note.isNew && note.isDeleted) continue;
       if (note.isNew) {
         // Create a note and update its id.
         final url = Uri.https(auth.endpoint, '/api/0.6/notes', {
@@ -438,7 +438,7 @@ class NotesProvider extends Notifier<int> {
         }
       }
 
-      if (note.deleting) {
+      if (note.isDeleted) {
         // Close the note.
         final url = Uri.https(auth.endpoint, '/api/0.6/notes/$noteId/close');
         final resp = await http.post(url, headers: headers);
@@ -493,7 +493,7 @@ class NotesProvider extends Notifier<int> {
     final database = await ref.read(databaseProvider).database;
     if (!note.isNew && !fromDB) {
       // Do not delete, instead mark as deleted.
-      note.deleting = true;
+      note.isDeleted = true;
       // Also comment changes should be saved here.
       await saveNote(note, addUndo: false, notify: false);
     } else {
@@ -527,7 +527,7 @@ class NotesProvider extends Notifier<int> {
         note.id = null;
       } else {
         // just remove the flag
-        note.deleting = false;
+        note.isDeleted = false;
       }
       await saveNote(note, addUndo: false, notify: false);
     } else {

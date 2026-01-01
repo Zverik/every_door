@@ -136,7 +136,7 @@ class ModeIconButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isCurrent = ref.watch(editorModeProvider) == mode;
-    final icon = mode.getIcon(context, !isCurrent);
+    final icon = mode.getIcon(context, isCurrent);
 
     return IconButton(
       icon: icon.getWidget(color: isCurrent ? Colors.yellow : Colors.white70),

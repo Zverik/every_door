@@ -4,12 +4,17 @@
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/geometry/equirectangular.dart';
 import 'package:every_door/helpers/multi_icon.dart';
+import 'package:every_door/helpers/poi_describer.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/located.dart';
 import 'package:every_door/models/plugin.dart';
 import 'package:every_door/helpers/legend.dart';
+import 'package:every_door/models/preset.dart';
 import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/providers/location.dart';
+import 'package:every_door/providers/presets.dart';
+import 'package:every_door/screens/editor.dart';
 import 'package:every_door/screens/editor/types.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:every_door/widgets/poi_marker.dart';
@@ -37,51 +42,58 @@ const _kDefaultMicroPresets = [
 abstract class MicromappingModeDefinition extends BaseModeDefinition {
   static const kMicroStuffInList = 24;
 
-  List<OsmChange> nearestPOI = [];
-  List<LatLng> otherPOI = [];
   bool enableZoomingIn = true;
   List<String> _defaultPresets = _kDefaultMicroPresets;
-  List<ElementKindImpl> _kinds = [ElementKind.micro];
-  List<ElementKindImpl> _otherKinds = [ElementKind.amenity];
-  final LegendController legend;
+  late final LegendController legend;
+  final PoiDescriber describer;
 
-  MicromappingModeDefinition(super.ref) : legend = LegendController(ref) {
+  MicromappingModeDefinition(super.ref) : describer = SimpleDescriber() {
+    ourKinds = [ElementKind.micro];
+    otherKinds = [ElementKind.amenity];
+    legend = LegendController(getPreset);
     legend.addListener(notifyListeners);
   }
 
-  MicromappingModeDefinition.fromPlugin(EveryDoorApp app): this(app.ref);
+  MicromappingModeDefinition.fromPlugin(EveryDoorApp app) : this(app.ref);
 
   @override
-  MultiIcon getIcon(BuildContext context, bool outlined) {
+  MultiIcon getIcon(BuildContext context, bool active) {
     final loc = AppLocalizations.of(context)!;
     return MultiIcon(
-      fontIcon: !outlined ? Icons.park : Icons.park_outlined,
+      fontIcon: active ? Icons.park : Icons.park_outlined,
       tooltip: loc.navMicromappingMode,
     );
   }
 
-  void updateLegend(BuildContext context) {
-    final locale = Localizations.localeOf(context);
-    legend.updateLegend(nearestPOI, locale: locale);
+  Future<PresetLabel?> getPreset(Located change, Locale? locale) async {
+    if (change is! OsmChange) return null;
+    final preset = await ref
+        .read(presetProvider)
+        .getPresetForTags(change.getFullTags(true), locale: locale);
+    // TODO: we also need a preset id to override icons and colors.
+    if (preset != Preset.defaultPreset)
+      return PresetLabel(preset.id, preset.name);
+    final k = change.mainKey;
+    return k == null
+        ? null
+        : PresetLabel('$k/${change[k]}', '$k = ${change[k]}');
   }
 
-  @override
-  bool isOurKind(OsmChange element) =>
-      _kinds.any((k) => k.matchesChange(element));
+  void updateLegend(Locale locale) {
+    legend.updateLegend(nearest.whereType<OsmChange>(), locale: locale);
+  }
 
   @override
   updateNearest(LatLngBounds bounds) async {
     List<OsmChange> data = await super.getNearestChanges(bounds);
 
     // Keep other mode objects to show.
-    final otherData = data
-        .where((e) => _otherKinds.any((k) => k.matchesChange(e)))
-        .map((e) => e.location)
-        .toList();
+    final otherData =
+        data.where((e) => otherKinds.any((k) => k.matchesChange(e))).toList();
 
     // Filter for amenities (or not amenities).
     // TODO: e.isNew and not micro/building/address/entrance
-    data = data.where((e) => isOurKind(e)).toList();
+    data = data.where((e) => ourKinds.any((k) => k.matchesChange(e))).toList();
 
     // Sort by distance.
     const distance = DistanceEquirectangular();
@@ -94,34 +106,45 @@ abstract class MicromappingModeDefinition extends BaseModeDefinition {
       data = data.sublist(0, kMicroStuffInList);
 
     // Update the map.
-    nearestPOI = data;
-    otherPOI = otherData;
+    nearest = data;
+    other = otherData;
     notifyListeners();
   }
 
-  void openEditor(BuildContext context, LatLng location) async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => TypeChooserPage(
-                location: location,
-                kinds: _kinds.first,
-                defaults: _defaultPresets,
-              )),
-    );
+  Future<void> openEditor({
+    required BuildContext context,
+    Located? element,
+    LatLng? location,
+  }) async {
+    if (element == null) {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => TypeChooserPage(
+                  location: location,
+                  kinds: ourKinds.first,
+                  defaults: _defaultPresets,
+                )),
+      );
+    } else if (element is OsmChange) {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => PoiEditorPage(amenity: element),
+          fullscreenDialog: true,
+        ),
+      );
+    }
   }
 
   @override
   void updateFromJson(Map<String, dynamic> data, Plugin plugin) {
+    readKindsFromJson(data);
+
     final presets = data['defaultPresets'];
     if (presets != null && presets is List<dynamic>) {
       _defaultPresets = presets.whereType<String>().toList();
     }
-
-    _kinds = parseKinds(data['kinds']) ?? parseKinds(data['kind']) ?? _kinds;
-    _otherKinds = parseKinds(data['otherKinds']) ??
-        parseKinds(data['otherKind']) ??
-        _otherKinds;
 
     final markers = data['markers'];
     if (markers != null && markers is Map<String, dynamic>) {
@@ -149,7 +172,7 @@ abstract class MicromappingModeDefinition extends BaseModeDefinition {
     }
   }
 
-  Widget buildMarker(int index, OsmChange element, bool isZoomedIn) {
+  Widget buildMarker(int index, Located element, bool isZoomedIn) {
     final icon = legend.getLegendItem(element);
     if (isZoomedIn) {
       return NumberedMarker(
@@ -157,7 +180,8 @@ abstract class MicromappingModeDefinition extends BaseModeDefinition {
     } else {
       if (icon == null || icon.icon == null) {
         return ColoredMarker(
-          isIncomplete: ElementKind.needsInfo.matchesChange(element),
+          isIncomplete: element is OsmChange &&
+              ElementKind.needsInfo.matchesChange(element),
           color: icon?.color ?? kLegendOtherColor,
         );
       } else {
@@ -199,9 +223,9 @@ class MicromappingModeCustom extends MicromappingModeDefinition {
   }
 
   @override
-  MultiIcon getIcon(BuildContext context, bool outlined) {
-    return (outlined ? _icon ?? _iconActive : _iconActive ?? _icon) ??
-        super.getIcon(context, outlined);
+  MultiIcon getIcon(BuildContext context, bool active) {
+    return (active ? _iconActive ?? _icon : _icon ?? _iconActive) ??
+        super.getIcon(context, active);
   }
 
   @override

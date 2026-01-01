@@ -1,6 +1,7 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/counter.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
@@ -18,6 +19,7 @@ import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 
+@Bind()
 class TypeChooserPage extends ConsumerStatefulWidget {
   final LatLng? location;
   final bool launchEditor;
