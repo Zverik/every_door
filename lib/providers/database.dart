@@ -50,7 +50,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       _kDatabaseName,
-      version: 6,
+      version: 7,
       onCreate: initDatabase,
       onUpgrade: upgradeDatabase,
     );
@@ -98,6 +98,19 @@ class DatabaseHelper {
     }
     if (newVersion >= 6 && oldVersion < 6) {
       await createTablesV6(database);
+    }
+    if (newVersion >= 7 && oldVersion < 7) {
+      // Source for elements
+      try {
+        await database.execute(
+            "alter table ${OsmChange.kTableName} add column source text");
+        await database.execute(
+            "alter table ${OsmElement.kTableName} add column source text");
+        await database.execute(
+            "alter table ${OsmDownloadedArea.kTableName} add column source text");
+      } on DatabaseException catch (e) {
+        _logger.warning('Looks like columns "source" were already present.', e);
+      }
     }
   }
 

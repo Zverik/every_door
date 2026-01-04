@@ -35,6 +35,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
   Map<String, String>? _fullTagsCache;
   DateTime updated;
   int? newId; // Not stored: used only during uploading.
+  String source;
 
   OsmChange(OsmElement element,
       {Map<String, String?>? newTags,
@@ -45,6 +46,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
       this.newNodes,
       String? databaseId})
       : newTags = newTags ?? {},
+        source = element.source,
         _deleted = hardDeleted,
         updated = updated ?? DateTime.now(),
         // ignore: prefer_initializing_formals
@@ -56,6 +58,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
   OsmChange.create({
     required Map<String, String> tags,
     required LatLng location,
+    required this.source,
     DateTime? updated,
     String? databaseId,
     this.error,
@@ -74,6 +77,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
       return OsmChange.create(
         tags: Map.of(newTags.cast<String, String>()),
         location: newLocation!,
+        source: source,
         error: error,
         updated: updated,
         databaseId: databaseId,
@@ -256,6 +260,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
     'deleted integer',
     'error text',
     'updated integer',
+    'source text',
   ];
 
   factory OsmChange.fromJson(Map<String, dynamic> data) {
@@ -280,6 +285,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
         location: location,
         error: data['error'],
         updated: updated,
+        source: data['source'] ?? 'osm',
         databaseId: data['id'],
       );
     }
@@ -298,6 +304,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
   Map<String, dynamic> toJson() {
     LatLng? loc = newLocation;
     return {
+      'source': source,
       'id': databaseId,
       'osmid': element?.id.toString(),
       'new_tags': json.encode(newTags),
@@ -317,6 +324,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
     if (newId == null && this.newId == null)
       throw ArgumentError('Please specify an id for the new element');
     return OsmElement(
+      source: source,
       id: OsmId(element?.type ?? OsmElementType.node, newId ?? this.newId ?? 0),
       version: newVersion ?? 1,
       timestamp: DateTime.now(),
@@ -516,7 +524,6 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
     return {'amenity', 'check_date', 'fixme', 'fixme:type', 'name'}
         .containsAll(tags.keys);
   }
-
 
   // Helper methods
 

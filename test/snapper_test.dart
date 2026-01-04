@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 OsmElement wayFromPoints(List<LatLng> points) {
   return OsmElement(
+    source: 'osm',
     id: OsmId(OsmElementType.way, 0),
     version: 1,
     tags: {},

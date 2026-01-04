@@ -130,7 +130,13 @@ class OsmDataHelper extends ChangeNotifier {
       }
       await batch.commit(noResult: true);
     });
-    if (bounds != null) await _ref.read(downloadedAreaProvider).addArea(bounds);
+
+    if (bounds != null) {
+      await _ref
+          .read(downloadedAreaProvider)
+          .addArea(bounds, elements.first.source);
+    }
+
     await _updateLength();
     _updateCapitalizeNames();
     updateFloorNumbering();

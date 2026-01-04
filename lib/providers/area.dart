@@ -33,9 +33,10 @@ class AreaProvider extends ChangeNotifier {
 
   AreaProvider(this._ref);
 
-  Future addArea(LatLngBounds bounds) async {
+  Future addArea(LatLngBounds bounds, String source) async {
     final database = await _ref.read(databaseProvider).database;
-    final area = OsmDownloadedArea(bounds, DateTime.now());
+    final area = OsmDownloadedArea(
+        bounds: bounds, downloaded: DateTime.now(), source: source);
     await database.insert(OsmDownloadedArea.kTableName, area.toJson());
     notifyListeners();
   }

@@ -103,6 +103,7 @@ enum IsMember { no, way, relation }
 /// An OSM element downloaded from the server.
 @Bind()
 class OsmElement {
+  final String source;
   final OsmId id;
   final Map<String, String> tags;
   final int version;
@@ -118,6 +119,7 @@ class OsmElement {
   OsmElementType get type => id.type;
 
   OsmElement({
+    required this.source,
     required this.id,
     required this.version,
     required this.timestamp,
@@ -146,6 +148,7 @@ class OsmElement {
       bool currentTimestamp = false,
       bool clearMembers = false}) {
     return OsmElement(
+      source: source,
       id: id != null ? OsmId(this.id.type, id) : this.id,
       version: version ?? this.version,
       timestamp: currentTimestamp ? DateTime.now().toUtc() : timestamp,
@@ -167,6 +170,7 @@ class OsmElement {
   OsmElement updateMeta(OsmElement? old) {
     if (old == null) return this;
     return OsmElement(
+      source: source,
       id: id,
       version: version,
       timestamp: timestamp,
@@ -194,6 +198,7 @@ class OsmElement {
     'nodes text',
     'members text',
     'is_member integer',
+    'source text',
   ];
 
   factory OsmElement.fromJson(Map<String, dynamic> data) {
@@ -201,6 +206,7 @@ class OsmElement {
     String? nodes = data['nodes'];
     final int m = data['is_member'];
     return OsmElement(
+      source: data['source'] ?? 'osm',
       id: OsmId.fromString(data['osmid']),
       version: data['version'],
       timestamp: DateTime.fromMillisecondsSinceEpoch(data['timestamp']),
@@ -230,6 +236,7 @@ class OsmElement {
     final center = this.center;
     return {
       'osmid': id.toString(),
+      'source': source,
       'version': version,
       'timestamp': timestamp.millisecondsSinceEpoch,
       'downloaded': downloaded?.millisecondsSinceEpoch,

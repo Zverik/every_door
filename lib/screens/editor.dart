@@ -76,7 +76,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       final tags =
           ref.read(lastPresetsProvider).getTagsForPreset(widget.preset!) ??
               widget.preset!.addTags;
-      amenity = OsmChange.create(location: widget.location!, tags: tags);
+      // TODO: source should be configurable. Probably from the current main data provider.
+      amenity = OsmChange.create(
+          location: widget.location!, tags: tags, source: 'osm');
     }
     amenity.addListener(onAmenityChange);
 

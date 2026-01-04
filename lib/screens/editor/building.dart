@@ -42,7 +42,10 @@ class _BuildingEditorPaneState extends ConsumerState<BuildingEditorPane> {
     super.initState();
     _levelsFocus = FocusNode();
     building = widget.building?.copy() ??
-        OsmChange.create(tags: {'building': 'yes'}, location: widget.location);
+        OsmChange.create(
+            tags: {'building': 'yes'},
+            location: widget.location,
+            source: 'osm');
     buildingsHaveAddresses(widget.location).then((value) {
       buildingsNeedAddresses = value;
     });

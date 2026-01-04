@@ -54,7 +54,8 @@ class _EntranceEditorPaneState extends ConsumerState<EntranceEditorPane> {
       final tags =
           ref.read(lastPresetsProvider).getTagsForPreset(kEntrancePreset) ??
               kEntrancePreset.addTags;
-      entrance = OsmChange.create(tags: tags, location: widget.location);
+      entrance = OsmChange.create(
+          tags: tags, location: widget.location, source: 'osm');
     }
 
     if (entrance['building'] == 'entrance') {

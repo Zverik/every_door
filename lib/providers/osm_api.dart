@@ -37,6 +37,7 @@ class OsmApiError implements Exception {
 class OsmApiHelper {
   final Ref _ref;
   static final _logger = Logger('OsmApiHelper');
+  static const kSource = 'osm'; // TODO: make overridable
 
   OsmApiHelper(this._ref);
 
@@ -61,7 +62,7 @@ class OsmApiHelper {
           .selectSubtreeEvents(
               (event) => kOsmTypes.containsKey(event.localName))
           .toXmlNodes()
-          .transform(XmlToOsmConverter())
+          .transform(XmlToOsmConverter(kSource))
           .transform(MarkReferenced())
           .transform(CollectGeometry())
           .transform(ExtractRoadNames(roadNames))
@@ -93,7 +94,7 @@ class OsmApiHelper {
           .selectSubtreeEvents(
               (event) => kOsmTypes.containsKey(event.localName))
           .toXmlNodes()
-          .transform(XmlToOsmConverter())
+          .transform(XmlToOsmConverter(kSource))
           .transform(CollectGeometry())
           .flatten()
           .toList();
@@ -131,7 +132,7 @@ class OsmApiHelper {
               .selectSubtreeEvents(
                   (event) => kOsmTypes.containsKey(event.localName))
               .toXmlNodes()
-              .transform(XmlToOsmConverter())
+              .transform(XmlToOsmConverter(kSource))
               .flatten()
               .toList();
           elements.addAll(els);
@@ -160,7 +161,7 @@ class OsmApiHelper {
           .selectSubtreeEvents(
               (event) => kOsmTypes.containsKey(event.localName))
           .toXmlNodes()
-          .transform(XmlToOsmConverter())
+          .transform(XmlToOsmConverter(kSource))
           .transform(CollectGeometry())
           .transform(FilterSnapTargets())
           .flatten()

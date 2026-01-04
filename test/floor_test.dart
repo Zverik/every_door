@@ -61,17 +61,17 @@ void main() {
     final kDefault = LatLng(1.0, 1.0);
 
     final tags1 = {'level': '1;2', 'addr:floor': '2;3'};
-    final el1 = OsmChange.create(tags: {}, location: kDefault);
+    final el1 = OsmChange.create(tags: {}, location: kDefault, source: 'osm');
     MultiFloor.fromTags(tags1).setTags(el1);
     expect(el1.getFullTags(), equals(tags1));
 
     final tags2 = {'level': '1;2'};
-    final el2 = OsmChange.create(tags: {}, location: kDefault);
+    final el2 = OsmChange.create(tags: {}, location: kDefault, source: 'osm');
     MultiFloor.fromTags(tags2).setTags(el2);
     expect(el2.getFullTags(), equals(tags2));
 
     final tags3 = {'addr:floor': 'G;1'};
-    final el3 = OsmChange.create(tags: {}, location: kDefault);
+    final el3 = OsmChange.create(tags: {}, location: kDefault, source: 'osm');
     MultiFloor.fromTags(tags3).setTags(el3);
     // Sorting breaks this order.
     expect(el3.getFullTags(), equals({'addr:floor': '1;G'}));

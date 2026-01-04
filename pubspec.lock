@@ -324,12 +324,11 @@ packages:
   dart_eval:
     dependency: "direct main"
     description:
-      path: "."
-      ref: bind_bridge_and_wrap
-      resolved-ref: "8fffd36140b046142997c31360667c776d1ad14f"
-      url: "https://github.com/ethanblake4/dart_eval.git"
-    source: git
-    version: "0.8.2"
+      name: dart_eval
+      sha256: c541adaa17530870b93fc853b5481382163ad44a246df3582c59afd899bc8214
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.3"
   dart_polylabel2:
     dependency: transitive
     description:

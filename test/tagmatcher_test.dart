@@ -15,8 +15,8 @@ void vmatch(
 
   expect(vm.matches(value, tags), matcher, reason: '[tags] $reason');
   expect(
-    vm.matchesChange(
-        value, OsmChange.create(tags: tags, location: LatLng(0, 0))),
+    vm.matchesChange(value,
+        OsmChange.create(tags: tags, location: LatLng(0, 0), source: 'osm')),
     matcher,
     reason: '[change] $reason',
   );
@@ -28,7 +28,8 @@ void tmatch(
   expect(tm.matches(tags, mainKey), matcher, reason: '[tags] $reason');
   expect(
     tm.matchesChange(
-        OsmChange.create(tags: tags, location: LatLng(0, 0)), mainKey),
+        OsmChange.create(tags: tags, location: LatLng(0, 0), source: 'osm'),
+        mainKey),
     matcher,
     reason: '[change] $reason',
   );
@@ -226,7 +227,8 @@ void main() {
       tmatch(t, {'first': 'nope', 'second': 'value2'}, null, isTrue);
       tmatch(t, {'first': 'nope', 'second': 'value2'}, 'first', isFalse);
       tmatch(t, {'first': 'nope', 'second': 'value2'}, 'second', isTrue);
-      tmatch(t, {'was:first': 'value', 'second': 'value2'}, 'was:first', isTrue);
+      tmatch(
+          t, {'was:first': 'value', 'second': 'value2'}, 'was:first', isTrue);
     });
   });
 }

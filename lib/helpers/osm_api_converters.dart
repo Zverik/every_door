@@ -77,7 +77,9 @@ class UploadedElement {
 /// Converts an XML stream from the `map` call of OSM API and returns
 /// a list of raw `OsmElement` objects.
 class XmlToOsmConverter extends Converter<List<XmlNode>, List<OsmElement>> {
-  const XmlToOsmConverter();
+  final String source;
+
+  const XmlToOsmConverter(this.source);
 
   @override
   List<OsmElement> convert(List<XmlNode> input) {
@@ -128,6 +130,7 @@ class XmlToOsmConverter extends Converter<List<XmlNode>, List<OsmElement>> {
           }
         }
         result.add(OsmElement(
+          source: source,
           id: OsmId(type, int.parse(node.getAttribute("id")!)),
           version: int.parse(node.getAttribute("version")!),
           timestamp: DateTime.parse(node.getAttribute("timestamp")!),
@@ -144,15 +147,17 @@ class XmlToOsmConverter extends Converter<List<XmlNode>, List<OsmElement>> {
 
   @override
   Sink<List<XmlNode>> startChunkedConversion(Sink<List<OsmElement>> sink) {
-    return XmlToOsmSink(sink);
+    return XmlToOsmSink(sink, source);
   }
 }
 
 class XmlToOsmSink implements ChunkedConversionSink<List<XmlNode>> {
   final XmlToOsmConverter _converter;
   final Sink<List<OsmElement>> _sink;
+  final String source;
 
-  XmlToOsmSink(this._sink) : _converter = const XmlToOsmConverter();
+  XmlToOsmSink(this._sink, this.source)
+      : _converter = XmlToOsmConverter(source);
 
   @override
   void add(List<XmlNode> chunk) {
@@ -489,8 +494,16 @@ class CollectGeometrySink implements ChunkedConversionSink<List<OsmElement>> {
 class ExtractRoadNames extends Converter<List<OsmElement>, List<OsmElement>> {
   /// List of highway=* values that can denote a named road.
   static const kHighwayRoadValues = <String>{
-    'service', 'residential', 'pedestrian', 'unclassified', 'tertiary',
-    'secondary', 'primary', 'trunk', 'motorway', 'living_street',
+    'service',
+    'residential',
+    'pedestrian',
+    'unclassified',
+    'tertiary',
+    'secondary',
+    'primary',
+    'trunk',
+    'motorway',
+    'living_street',
   };
 
   final Set<RoadNameRecord>? _names;

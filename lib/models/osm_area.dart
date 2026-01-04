@@ -8,8 +8,10 @@ import 'package:latlong2/latlong.dart' show LatLng;
 class OsmDownloadedArea {
   final LatLngBounds bounds;
   final DateTime downloaded;
+  final String source;
 
-  const OsmDownloadedArea(this.bounds, this.downloaded);
+  const OsmDownloadedArea(
+      {required this.bounds, required this.downloaded, required this.source});
 
   bool get isObsolete => DateTime.now().difference(downloaded) > kObsoleteData;
 
@@ -20,15 +22,17 @@ class OsmDownloadedArea {
     'max_lat real',
     'max_lon real',
     'downloaded integer',
+    'source text',
   ];
 
   factory OsmDownloadedArea.fromJson(Map<String, dynamic> data) {
     return OsmDownloadedArea(
-      LatLngBounds(
+      bounds: LatLngBounds(
         LatLng(data['min_lat'], data['min_lon']),
         LatLng(data['max_lat'], data['max_lon']),
       ),
-      DateTime.fromMillisecondsSinceEpoch(data['downloaded']),
+      downloaded: DateTime.fromMillisecondsSinceEpoch(data['downloaded']),
+      source: data['source'] ?? 'osm',
     );
   }
 
@@ -39,6 +43,7 @@ class OsmDownloadedArea {
       'max_lat': bounds.north,
       'max_lon': bounds.east,
       'downloaded': downloaded.millisecondsSinceEpoch,
+      'source': source,
     };
   }
 }
