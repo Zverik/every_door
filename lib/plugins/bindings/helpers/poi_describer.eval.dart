@@ -1,20 +1,26 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/helpers/poi_describer.dart';
-import 'package:dart_eval/stdlib/core.dart';
+import 'package:every_door/models/located.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_eval/painting.dart';
+import 'package:every_door/plugins/bindings/models/located.eval.dart';
+import 'package:dart_eval/stdlib/core.dart';
 
-/// dart_eval wrapper binding for [PoiDescriber]
-class $PoiDescriber implements $Instance {
+/// dart_eval bridge binding for [PoiDescriber]
+class $PoiDescriber$bridge extends PoiDescriber with $Bridge<PoiDescriber> {
+  /// Forwarded constructor for [PoiDescriber.new]
+  $PoiDescriber$bridge();
+
   /// Configure this class for use in a [Runtime]
   static void configureForRuntime(Runtime runtime) {}
 
-  /// Compile-time type specification of [$PoiDescriber]
+  /// Compile-time type specification of [$PoiDescriber$bridge]
   static const $spec = BridgeTypeSpec(
     'package:every_door/helpers/poi_describer.dart',
     'PoiDescriber',
   );
 
-  /// Compile-time type declaration of [$PoiDescriber]
+  /// Compile-time type declaration of [$PoiDescriber$bridge]
   static const $type = BridgeTypeRef($spec);
 
   /// Compile-time class declaration of [$PoiDescriber]
@@ -65,8 +71,29 @@ class $PoiDescriber implements $Instance {
     getters: {},
     setters: {},
     fields: {},
-    wrap: true,
-    bridge: false,
+    wrap: false,
+    bridge: true,
+  );
+
+  @override
+  $Value? $bridgeGet(String identifier) {
+    return null;
+  }
+
+  @override
+  void $bridgeSet(String identifier, $Value value) {}
+
+  @override
+  TextSpan describe(Located element) =>
+      $_invoke('describe', [$Located.wrap(element)]);
+}
+
+/// dart_eval wrapper binding for [PoiDescriber]
+class $PoiDescriber implements $Instance {
+  /// Compile-time type specification of [$PoiDescriber]
+  static const $spec = BridgeTypeSpec(
+    'package:every_door/helpers/poi_describer.dart',
+    'PoiDescriber',
   );
 
   final $Instance _superclass;

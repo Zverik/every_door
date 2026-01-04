@@ -532,6 +532,12 @@ class $OsmElement implements $Instance {
           returns: BridgeTypeAnnotation($type),
           namedParams: [
             BridgeParameter(
+              'source',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+
+            BridgeParameter(
               'id',
               BridgeTypeAnnotation(
                 BridgeTypeRef(
@@ -991,6 +997,11 @@ class $OsmElement implements $Instance {
     },
     setters: {},
     fields: {
+      'source': BridgeFieldDef(
+        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+        isStatic: false,
+      ),
+
       'id': BridgeFieldDef(
         BridgeTypeAnnotation(
           BridgeTypeRef(
@@ -1122,17 +1133,18 @@ class $OsmElement implements $Instance {
   static $Value? $new(Runtime runtime, $Value? thisValue, List<$Value?> args) {
     return $OsmElement.wrap(
       OsmElement(
-        id: args[0]!.$value,
-        version: args[1]!.$value,
-        timestamp: args[2]!.$value,
-        downloaded: args[3]?.$value,
-        tags: (args[4]!.$reified as Map).cast(),
-        center: args[5]?.$value,
-        geometry: args[6]?.$value,
-        nodes: (args[7]?.$reified as List?)?.cast(),
-        nodeLocations: (args[8]?.$reified as Map?)?.cast(),
-        members: (args[9]?.$reified as List?)?.cast(),
-        isMember: args[10]?.$value ?? IsMember.no,
+        source: args[0]!.$value,
+        id: args[1]!.$value,
+        version: args[2]!.$value,
+        timestamp: args[3]!.$value,
+        downloaded: args[4]?.$value,
+        tags: (args[5]!.$reified as Map).cast(),
+        center: args[6]?.$value,
+        geometry: args[7]?.$value,
+        nodes: (args[8]?.$reified as List?)?.cast(),
+        nodeLocations: (args[9]?.$reified as Map?)?.cast(),
+        members: (args[10]?.$reified as List?)?.cast(),
+        isMember: args[11]?.$value ?? IsMember.no,
       ),
     );
   }
@@ -1175,6 +1187,10 @@ class $OsmElement implements $Instance {
   @override
   $Value? $getProperty(Runtime runtime, String identifier) {
     switch (identifier) {
+      case 'source':
+        final _source = $value.source;
+        return $String(_source);
+
       case 'id':
         final _id = $value.id;
         return $OsmId.wrap(_id);

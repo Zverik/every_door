@@ -94,7 +94,7 @@ class $NotesModeDefinition$bridge extends NotesModeDefinition
             ),
 
             BridgeParameter(
-              'outlined',
+              'active',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               false,
             ),
@@ -377,8 +377,8 @@ class $NotesModeDefinition$bridge extends NotesModeDefinition
   List<DrawingStyle> get palette => $_get('palette');
 
   @override
-  MultiIcon getIcon(BuildContext context, bool outlined) =>
-      $_invoke('getIcon', [$BuildContext.wrap(context), $bool(outlined)]);
+  MultiIcon getIcon(BuildContext context, bool active) =>
+      $_invoke('getIcon', [$BuildContext.wrap(context), $bool(active)]);
 
   @override
   Future<void> updateNearest(LatLngBounds bounds) =>

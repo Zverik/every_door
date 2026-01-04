@@ -151,6 +151,10 @@ class _CustomMapState extends ConsumerState<CustomMap> {
             ref.read(rotationProvider.notifier).reset();
           }
         }
+      } else {
+        ref
+            .read(visibleBoundsProvider.notifier)
+            .update(event.camera.visibleBounds);
       }
       if (event.camera.center != _center) {
         setState(() {

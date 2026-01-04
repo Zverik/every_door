@@ -95,7 +95,7 @@ class $EntrancesModeDefinition$bridge extends EntrancesModeDefinition
               false,
             ),
             BridgeParameter(
-              'outlined',
+              'active',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               false,
             ),
@@ -620,8 +620,8 @@ class $EntrancesModeDefinition$bridge extends EntrancesModeDefinition
   double get adjustZoomSecondary => $_get('adjustZoomSecondary');
 
   @override
-  MultiIcon getIcon(BuildContext context, bool outlined) =>
-      $_invoke('getIcon', [$BuildContext.wrap(context), $bool(outlined)]);
+  MultiIcon getIcon(BuildContext context, bool active) =>
+      $_invoke('getIcon', [$BuildContext.wrap(context), $bool(active)]);
 
   @override
   Future<void> updateNearest(LatLngBounds bounds) =>

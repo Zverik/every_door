@@ -1,7 +1,6 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
-import 'package:every_door/helpers/amenity_describer.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/screens/editor/map_chooser.dart';
@@ -183,14 +182,12 @@ class _AmenityPageState extends ConsumerState<AmenityPane> {
                   widget.def.otherObjectsLayer(),
                   MarkerLayer(
                     markers: [
-                      for (var i = widget.def.nearest.length - 1;
-                          i >= 0;
-                          i--)
+                      for (var i = widget.def.nearest.length - 1; i >= 0; i--)
                         Marker(
                           point: widget.def.nearest[i].location,
                           rotate: true,
-                          child: widget.def
-                              .buildMarker(i, widget.def.nearest[i]),
+                          child:
+                              widget.def.buildMarker(i, widget.def.nearest[i]),
                         ),
                     ],
                   ),

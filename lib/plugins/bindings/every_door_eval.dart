@@ -73,7 +73,7 @@ class EveryDoorPlugin implements EvalPlugin {
     registry.defineBridgeClass($AuthController.$declaration);
     registry.defineBridgeClass($AmenityIndicator$bridge.$declaration);
     registry.defineBridgeClass($AmenityDescriber.$declaration);
-    registry.defineBridgeClass($PoiDescriber.$declaration);
+    registry.defineBridgeClass($PoiDescriber$bridge.$declaration);
     registry.defineBridgeClass($SimpleDescriber.$declaration);
     registry.defineBridgeClass($AmenityAgeData.$declaration);
     registry.defineBridgeClass($Imagery.$declaration);
@@ -149,7 +149,7 @@ class EveryDoorPlugin implements EvalPlugin {
     $AuthController.configureForRuntime(runtime);
     $AmenityIndicator$bridge.configureForRuntime(runtime);
     $AmenityDescriber.configureForRuntime(runtime);
-    $PoiDescriber.configureForRuntime(runtime);
+    $PoiDescriber$bridge.configureForRuntime(runtime);
     $SimpleDescriber.configureForRuntime(runtime);
     $AmenityAgeData.configureForRuntime(runtime);
     $Imagery.configureForRuntime(runtime);

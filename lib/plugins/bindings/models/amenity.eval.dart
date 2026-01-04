@@ -187,6 +187,12 @@ class $OsmChange implements $Instance {
             ),
 
             BridgeParameter(
+              'source',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+
+            BridgeParameter(
               'updated',
               BridgeTypeAnnotation(
                 BridgeTypeRef(CoreTypes.dateTime, []),
@@ -991,6 +997,11 @@ class $OsmChange implements $Instance {
         BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int, []), nullable: true),
         isStatic: false,
       ),
+
+      'source': BridgeFieldDef(
+        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+        isStatic: false,
+      ),
     },
     wrap: true,
     bridge: false,
@@ -1022,10 +1033,11 @@ class $OsmChange implements $Instance {
       OsmChange.create(
         tags: (args[0]!.$reified as Map).cast(),
         location: args[1]!.$value,
-        updated: args[2]?.$value,
-        databaseId: args[3]?.$value,
-        error: args[4]?.$value,
-        newId: args[5]?.$value,
+        source: args[2]!.$value,
+        updated: args[3]?.$value,
+        databaseId: args[4]?.$value,
+        error: args[5]?.$value,
+        newId: args[6]?.$value,
       ),
     );
   }
@@ -1103,6 +1115,10 @@ class $OsmChange implements $Instance {
       case 'newId':
         final _newId = $value.newId;
         return _newId == null ? const $null() : $int(_newId);
+
+      case 'source':
+        final _source = $value.source;
+        return $String(_source);
 
       case 'location':
         final _location = $value.location;
@@ -1565,35 +1581,39 @@ class $OsmChange implements $Instance {
   void $setProperty(Runtime runtime, String identifier, $Value value) {
     switch (identifier) {
       case 'newTags':
-        $value.newTags = value.$value;
+        $value.newTags = value.$reified;
         return;
 
       case 'newLocation':
-        $value.newLocation = value.$value;
+        $value.newLocation = value.$reified;
         return;
 
       case 'newNodes':
-        $value.newNodes = value.$value;
+        $value.newNodes = value.$reified;
         return;
 
       case 'error':
-        $value.error = value.$value;
+        $value.error = value.$reified;
         return;
 
       case 'updated':
-        $value.updated = value.$value;
+        $value.updated = value.$reified;
         return;
 
       case 'newId':
-        $value.newId = value.$value;
+        $value.newId = value.$reified;
+        return;
+
+      case 'source':
+        $value.source = value.$reified;
         return;
 
       case 'location':
-        $value.location = value.$value;
+        $value.location = value.$reified;
         return;
 
       case 'isDeleted':
-        $value.isDeleted = value.$value;
+        $value.isDeleted = value.$reified;
         return;
     }
     return _superclass.$setProperty(runtime, identifier, value);

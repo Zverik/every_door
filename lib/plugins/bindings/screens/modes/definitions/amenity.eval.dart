@@ -96,7 +96,7 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
               false,
             ),
             BridgeParameter(
-              'outlined',
+              'active',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool, [])),
               false,
             ),
@@ -614,8 +614,8 @@ class $AmenityModeDefinition$bridge extends AmenityModeDefinition
   int get maxTileCount => $_get('maxTileCount');
 
   @override
-  MultiIcon getIcon(BuildContext context, bool outlined) =>
-      $_invoke('getIcon', [$BuildContext.wrap(context), $bool(outlined)]);
+  MultiIcon getIcon(BuildContext context, bool active) =>
+      $_invoke('getIcon', [$BuildContext.wrap(context), $bool(active)]);
 
   @override
   Future<void> updateNearest(LatLngBounds bounds) =>

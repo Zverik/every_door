@@ -6,20 +6,20 @@ import 'dart:async';
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/constants.dart';
-import 'package:every_door/fields/payment.dart';
-import 'package:every_door/fields/text.dart';
+import 'package:every_door/helpers/editor_builder.dart';
+import 'package:every_door/helpers/editor_fields.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/floor.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/cur_imagery.dart';
+import 'package:every_door/providers/language.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/providers/poi_filter.dart';
 import 'package:every_door/widgets/pin_marker.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:every_door/models/field.dart';
 import 'package:every_door/models/preset.dart';
 import 'package:every_door/providers/changes.dart';
 import 'package:every_door/providers/location.dart';
@@ -41,11 +41,28 @@ import 'package:every_door/generated/l10n/app_localizations.dart'
     show AppLocalizations;
 import 'package:logging/logging.dart';
 
+/// An object editor page. Expects an OSM-like sourced object, that is,
+/// an [OsmChange]. In particular, the object needs to have tags that
+/// behave in accordance with OSM model, e.g. for lifecycle prefixes.
+/// For editing [Located] you would need to create your own pages.
 @Bind()
 class PoiEditorPage extends ConsumerStatefulWidget {
+  /// The object to edit. Set to null and fill [preset] and [location]
+  /// if creating a new one.
   final OsmChange? amenity;
+
+  /// For new objects, a preset from which to fill the tags and get field list.
+  /// Should be specified (for new objects). Needs to have both [Preset.addTags]
+  /// and [Preset.fields] non-empty. When the preset type is [PresetType.nsi],
+  /// the actual preset is detected based on [Preset.addTags].
   final Preset? preset;
+
+  /// The location for a new object.
   final LatLng? location;
+
+  /// Set to true if the object has been modified externally without saving
+  /// to the internal database. For example, when the object has been edited
+  /// in a bottom sheet, but then this editor page has been called with it.
   final bool isModified;
 
   const PoiEditorPage({
@@ -63,9 +80,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
   static final _logger = Logger('PoiEditorPage');
   late OsmChange amenity;
   Preset? preset;
-  List<PresetField> fields = []; // actual fields
-  List<PresetField> moreFields = [];
-  List<PresetField> stdFields = [];
+  List<EditorFields> fieldGroups = [];
 
   @override
   void initState() {
@@ -109,17 +124,9 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     setState(() {});
   }
 
-  /// Whether we should display address and floor fields in the editor.
-  bool needsAddress(Map<String, String> tags) {
-    final kind = ElementKind.match(tags);
-    if ({ElementKind.amenity, ElementKind.building, ElementKind.address}
-        .contains(kind)) return true;
-    const kAmenityLoc = {'atm', 'vending_machine', 'parcel_locker'};
-    return kAmenityLoc.contains(tags['amenity']);
-  }
-
   Future<void> updatePreset(Locale locale, [PresetType? presetType]) async {
     await Future.delayed(Duration.zero); // to disconnect from initState
+
     final presets = ref.read(presetProvider);
     bool detect = presetType == PresetType.nsi || preset == null;
     bool needRefresh = false;
@@ -139,98 +146,23 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     if (preset!.fields.isEmpty) {
       preset = await presets.getFields(preset!,
           locale: locale, location: amenity.location);
-      if (!preset!.noStandard && needsAddress(amenity.getFullTags())) {
-        final bool needsStdFields =
-            preset!.fields.length <= 1 || needsStandardFields();
-        stdFields = await presets.getStandardFields(locale, needsStdFields);
-        // Remove the field for level if the object is a building.
-        if (amenity['building'] != null) {
-          stdFields.removeWhere((e) => e.key == 'level');
-        }
-
-        // Move some fields to stdFields if present.
-        if (!needsStdFields) {
-          final hasStdFields = stdFields.map((e) => e.key).toSet();
-          for (final f in preset!.fields) {
-            if (PresetProvider.kStandardPoiFields.contains(f.key) &&
-                !hasStdFields.contains(f.key)) {
-              stdFields.add(f);
-            }
-            // Also move payment_multi.
-            if (f.key == 'payment:' && !hasStdFields.contains('payment')) {
-              stdFields.add(PaymentPresetField(label: 'Accept cards'));
-            }
-          }
-        }
-
-        // Add postcode to fields for buildings, moreFields for others.
-        // The reason for this hack is that our addresses don't transfer postcodes.
-        // But the addresses in the presets are indivisible, so we can't choose.
-        final postcodeString =
-            mounted ? AppLocalizations.of(context)?.buildingPostCode : null;
-        final postcodeField = TextPresetField(
-          key: "addr:postcode",
-          label: postcodeString ?? "Postcode",
-          keyboardType: TextInputType.visiblePassword,
-          capitalize: TextFieldCapitalize.all,
-        );
-        final postcodeFirst = ElementKind.matchChange(
-                amenity, [ElementKind.building, ElementKind.address]) !=
-            ElementKind.unknown;
-        if (postcodeFirst)
-          preset!.fields.add(postcodeField);
-        else {
-          preset!.moreFields.insert(0, postcodeField);
-        }
-
-        // Add opening_hours to moreFields if it's not anywhere.
-        if (!preset!.fields.any((field) => field.key == 'opening_hours') &&
-            !preset!.moreFields.any((field) => field.key == 'opening_hours')) {
-          final hoursField = await presets.getField('opening_hours', locale);
-          preset!.moreFields.insert(0, hoursField);
-        }
-      } else {
-        stdFields = [];
-      }
       needRefresh = true;
     }
+
     if (needRefresh) {
-      setState(() {
-        extractFields();
-      });
+      await updateFieldGroups(locale);
+      setState(() {});
     }
   }
 
-  bool needsStandardFields() {
-    if (preset!.type == PresetType.fixme) return true;
-    if (preset!.type == PresetType.taginfo) {
-      return ElementKind.amenity.matchesTags(preset!.addTags);
-    }
-
-    Set<String> allFields =
-        (preset!.fields + preset!.moreFields).map((e) => e.key).toSet();
-    return allFields.contains('opening_hours') && allFields.contains('phone');
-  }
-
-  void extractFields() {
-    final hasStdFields = stdFields.map((e) => e.key).toSet();
-    hasStdFields.remove('internet_access');
-    try {
-      fields =
-          preset!.fields.where((f) => !hasStdFields.contains(f.key)).toList();
-    } on StateError {
-      fields = [];
-    }
-    final tags = amenity.getFullTags();
-    for (final f in preset!.moreFields) {
-      if (hasStdFields.contains(f.key)) continue;
-      final meetsPrerequisite = f.prerequisite?.matches(tags) ?? false;
-      if (f.hasRelevantKey(tags) || meetsPrerequisite) {
-        fields.add(f);
-      } else {
-        moreFields.add(f);
-      }
-    }
+  Future<void> updateFieldGroups(Locale locale) async {
+    final AppLocalizations loc =
+        (mounted ? AppLocalizations.of(context) : null) ??
+            ref.read(localizationsProvider);
+    // TODO: how to substitute one with a plugin?
+    fieldGroups =
+        await StandardEditorFieldsBuilder(ref.read(presetProvider), locale, loc)
+            .sortFields(amenity, preset!);
   }
 
   Future<void> changeType() async {
@@ -252,9 +184,7 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final oldPreset = preset;
     setState(() {
       preset = null;
-      fields = [];
-      moreFields = [];
-      stdFields = [];
+      fieldGroups = [];
     });
     // if disused, remove disused: prefix before removing tags
     // otherwise we may end up with disused:<old_mainKey>=* + <new_mainKey>=*
@@ -422,9 +352,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
         widget.isModified ||
         amenity != widget.amenity ||
         amenity.isFixmeNote();
-    final bool needsCheck = amenity.age >= kOldAmenityDaysEditor &&
-        ElementKind.needsCheck.matchesChange(amenity);
-    final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     final loc = AppLocalizations.of(context)!;
     return PopScope(
@@ -503,84 +430,50 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
                     child: SafeArea(
                       top: false,
                       bottom: false,
-                      child: ListView(
-                        children: [
-                          buildMap(context),
-                          DuplicateWarning(amenity: amenity),
-                          if (stdFields.isNotEmpty) ...[
-                            buildFields(stdFields, 50),
-                          ],
-                          if (fields.isNotEmpty) ...[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Divider(),
-                            ),
-                            buildFields(fields),
-                          ],
-                          SizedBox(height: 20.0),
-                          buildTopButtons(context),
-                          SizedBox(height: 10.0),
-                          if (moreFields.isNotEmpty) ...[
-                            ExpansionTile(
-                              title: Text(loc.editorMoreFields),
-                              initiallyExpanded: false,
-                              children: [
-                                buildFields(moreFields),
-                              ],
-                            ),
-                            SizedBox(height: 30.0),
-                          ],
-                        ],
-                      ),
+                      child: ListView(children: buildBlocks(context)),
                     ),
                   ),
-                  Container(
-                    // padding: EdgeInsets.only(bottom: bottomPadding),
-                    color: modified ? Colors.green : Colors.white,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: MaterialButton(
-                            color: Colors.green,
-                            textColor: Colors.white,
-                            disabledColor: Colors.white,
-                            disabledTextColor: Colors.grey,
-                            child: Padding(
-                              child: Text(
-                                loc.editorSave,
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                              padding: EdgeInsets.only(
-                                  top: 13.0, bottom: 13.0 + bottomPadding),
-                            ),
-                            onPressed: !modified
-                                ? null
-                                : () async {
-                                    await confirmDisused(context);
-                                    saveAndClose();
-                                  },
-                          ),
-                        ),
-                        if (!modified && needsCheck)
-                          Container(
-                            color: Colors.green,
-                            child: IconButton(
-                              icon: Icon(Icons.check),
-                              tooltip: loc.editorMarkChecked,
-                              color: Colors.white,
-                              iconSize: 30.0,
-                              onPressed: saveAndClose,
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
+                  buildSaveButtons(context, modified),
                 ],
               ),
       ),
     );
+  }
+
+  List<Widget> buildBlocks(BuildContext context) {
+    final blocks = <Widget>[
+      buildMap(context),
+      DuplicateWarning(amenity: amenity),
+    ];
+    bool hadButtons = false;
+    for (final group in fieldGroups) {
+      if (group.fields.isEmpty) continue;
+      if (group.title != null) {
+        if (group.collapsed && !hadButtons) {
+          blocks.addAll([
+            buildTopButtons(context),
+            SizedBox(height: 10.0),
+          ]);
+          hadButtons = true;
+        }
+        blocks.add(ExpansionTile(
+          title: Text(group.title!),
+          initiallyExpanded: !group.collapsed,
+          children: [buildFields(group)],
+        ));
+      } else {
+        blocks.addAll([
+          buildFields(group),
+          SizedBox(height: 20),
+        ]);
+      }
+    }
+    if (!hadButtons)
+      blocks.addAll([
+        buildTopButtons(context),
+        SizedBox(height: 20.0),
+      ]);
+    return blocks;
   }
 
   Widget buildTopButtons(BuildContext context) {
@@ -722,23 +615,15 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     );
   }
 
-  Widget buildFields(List<PresetField> fields, [double labelWidth = 150]) {
+  Widget buildFields(EditorFields fields) {
+    double labelWidth = fields.iconLabels ? 50 : 150;
     final List<Widget> rows = [];
     final tags = amenity.getFullTags();
-    const kMandatoryKeys = {
-      'opening_hours',
-      'level',
-      'addr',
-      'internet_access',
-      'wheelchair',
-      'phone',
-      'payment'
-    };
-    for (final field in fields) {
-      bool hasTags = field.hasRelevantKey(tags);
-      bool isMandatory = kMandatoryKeys.contains(field.key);
-      final color =
-          !isMandatory ? null : (hasTags ? Colors.green : Colors.red.shade800);
+    for (final field in fields.fields) {
+      bool isMandatory = fields.mandatoryKeys.contains(field.key);
+      final color = !isMandatory
+          ? null
+          : (field.hasRelevantKey(tags) ? Colors.green : Colors.red.shade800);
 
       rows.add(Row(
         mainAxisSize: MainAxisSize.max,
@@ -751,11 +636,8 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: labelWidth >= 100
-                  ? Text(field.label)
-                  : Icon(
-                      field.icon ?? Icons.sms,
-                      color: color,
-                    ),
+                  ? Text(field.label, style: TextStyle(color: color))
+                  : Icon(field.icon ?? Icons.sms, color: color),
             ),
           ),
           // SizedBox(width: 5.0),
@@ -768,5 +650,55 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     }
 
     return Column(children: rows);
+  }
+
+  Widget buildSaveButtons(BuildContext context, bool modified) {
+    final loc = AppLocalizations.of(context)!;
+    final bool needsCheck = amenity.age >= kOldAmenityDaysEditor &&
+        ElementKind.needsCheck.matchesChange(amenity);
+    final double bottomPadding = MediaQuery.of(context).padding.bottom;
+
+    return Container(
+      // padding: EdgeInsets.only(bottom: bottomPadding),
+      color: modified ? Colors.green : Colors.white,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: MaterialButton(
+              color: Colors.green,
+              textColor: Colors.white,
+              disabledColor: Colors.white,
+              disabledTextColor: Colors.grey,
+              child: Padding(
+                child: Text(
+                  loc.editorSave,
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                padding:
+                    EdgeInsets.only(top: 13.0, bottom: 13.0 + bottomPadding),
+              ),
+              onPressed: !modified
+                  ? null
+                  : () async {
+                      await confirmDisused(context);
+                      saveAndClose();
+                    },
+            ),
+          ),
+          if (!modified && needsCheck)
+            Container(
+              color: Colors.green,
+              child: IconButton(
+                icon: Icon(Icons.check),
+                tooltip: loc.editorMarkChecked,
+                color: Colors.white,
+                iconSize: 30.0,
+                onPressed: saveAndClose,
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }
