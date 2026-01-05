@@ -1,6 +1,8 @@
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/models/field.dart';
 
 /// A group of fields in the editor. Only the [fields] list is mandatory.
+@Bind()
 class EditorFields {
   /// Title of the group. If present, an expansion tile is used to mark it.
   final String? title;

@@ -33,4 +33,10 @@ class PluginEvents {
   void onDownload(Function(LatLng) callback) {
     _ref.read(eventsProvider.notifier).onDownload(_pluginId, callback);
   }
+
+  /// Invoked when the editor pane prepares its fields. Here you can
+  /// insert or replace some fields, even the entire page.
+  void onEditorFields(String? pluginId, EditorFieldsCallback callback) {
+    _ref.read(eventsProvider.notifier).onEditorFields(_pluginId, callback);
+  }
 }

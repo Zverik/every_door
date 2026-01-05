@@ -1,27 +1,7 @@
-// ignore_for_file: unused_import, unnecessary_import
-// ignore_for_file: always_specify_types, avoid_redundant_argument_values
-// ignore_for_file: sort_constructors_first
 // ignore_for_file: no_leading_underscores_for_local_identifiers
-
-import 'package:dart_eval/dart_eval.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/plugins/interface.dart';
-import 'package:every_door/helpers/auth/controller.dart';
-import 'package:every_door/helpers/auth/provider.dart';
-import 'package:every_door/models/field.dart';
-import 'package:every_door/models/imagery.dart';
-import 'package:every_door/models/plugin.dart';
-import 'package:every_door/plugins/events.dart';
-import 'package:every_door/plugins/ext_overlay.dart';
-import 'package:every_door/plugins/preferences.dart';
-import 'package:every_door/plugins/providers.dart';
-import 'package:every_door/providers/add_presets.dart';
-import 'package:every_door/providers/editor_mode.dart';
-import 'package:every_door/providers/auth.dart';
-import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
 import 'package:dart_eval/stdlib/core.dart';
 import 'package:every_door/plugins/bindings/models/plugin.eval.dart';
 import 'package:every_door/plugins/bindings/plugins/preferences.eval.dart';
@@ -317,6 +297,28 @@ class $EveryDoorApp implements $Instance {
           ],
         ),
       ),
+
+      'addEditorButton': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'button',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/providers/editor_buttons.dart',
+                    'EditorButton',
+                  ),
+                  [],
+                ),
+              ),
+              false,
+            ),
+          ],
+        ),
+      ),
     },
     getters: {
       'ref': BridgeMethodDef(
@@ -501,6 +503,9 @@ class $EveryDoorApp implements $Instance {
 
       case 'registerFieldType':
         return __registerFieldType;
+
+      case 'addEditorButton':
+        return __addEditorButton;
     }
     return _superclass.$getProperty(runtime, identifier);
   }
@@ -586,6 +591,17 @@ class $EveryDoorApp implements $Instance {
         $Map.wrap(data),
       ])?.$value;
     });
+    return null;
+  }
+
+  static const $Function __addEditorButton = $Function(_addEditorButton);
+  static $Value? _addEditorButton(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $EveryDoorApp;
+    self.$value.addEditorButton(args[0]!.$value);
     return null;
   }
 

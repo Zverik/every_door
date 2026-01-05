@@ -16,6 +16,7 @@ import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/providers/add_presets.dart';
 import 'package:every_door/providers/auth.dart';
 import 'package:every_door/providers/cur_imagery.dart';
+import 'package:every_door/providers/editor_buttons.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/events.dart';
 import 'package:every_door/providers/imagery.dart';
@@ -140,7 +141,8 @@ class PluginManager extends Notifier<Set<String>> {
   Future<void> _technicallyDisable(Plugin plugin) async {
     ref.read(eventsProvider.notifier).removePluginEvents(plugin.id);
     ref.read(overlayImageryProvider.notifier).removePluginLayers(plugin.id);
-    // TODO: buttons in modes.
+    ref.read(editorButtonsProvider.notifier).removeFor(plugin.id);
+    // TODO: restore modes and their states gracefully.
     try {
       _disableElementKinds(plugin);
       await _disableModes(plugin);
@@ -393,6 +395,7 @@ class PluginManager extends Notifier<Set<String>> {
     final modeData = plugin.data['modes'];
     if (plugin.instance == null && (modeData == null || modeData is! Map))
       return;
+    // TODO: this removes mode alterations made by another plugins with code.
     await ref.read(editorModeProvider.notifier).reset();
     for (final otherPlugin in _getActivePlugins()) {
       if (plugin.id != otherPlugin.id) {

@@ -1,7 +1,16 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
+import 'dart:ui' show Locale;
+
 import 'package:dart_eval/dart_eval_bridge.dart';
+import 'package:every_door/helpers/editor_fields.dart';
+import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/preset.dart';
+import 'package:every_door/plugins/bindings/helpers/editor_fields.eval.dart';
+import 'package:every_door/plugins/bindings/models/amenity.eval.dart';
+import 'package:every_door/plugins/bindings/models/preset.eval.dart';
 import 'package:every_door/plugins/events.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
+import 'package:flutter_eval/ui.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:dart_eval/stdlib/core.dart';
 import 'package:every_door/plugins/bindings/screens/modes/definitions/base.eval.dart';
@@ -128,6 +137,110 @@ class $PluginEvents implements $Instance {
           ],
         ),
       ),
+
+      'onEditorFields': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'pluginId',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.string, []),
+                nullable: true,
+              ),
+              false,
+            ),
+
+            BridgeParameter(
+              'callback',
+              BridgeTypeAnnotation(
+                BridgeTypeRef.genericFunction(
+                  BridgeFunctionDef(
+                    returns: BridgeTypeAnnotation(
+                      BridgeTypeRef(CoreTypes.future, [
+                        BridgeTypeAnnotation(
+                          BridgeTypeRef(CoreTypes.list, [
+                            BridgeTypeAnnotation(
+                              BridgeTypeRef(
+                                BridgeTypeSpec(
+                                  'package:every_door/helpers/editor_fields.dart',
+                                  'EditorFields',
+                                ),
+                                [],
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ]),
+                    ),
+                    params: [
+                      BridgeParameter(
+                        '',
+                        BridgeTypeAnnotation(
+                          BridgeTypeRef(CoreTypes.list, [
+                            BridgeTypeAnnotation(
+                              BridgeTypeRef(
+                                BridgeTypeSpec(
+                                  'package:every_door/helpers/editor_fields.dart',
+                                  'EditorFields',
+                                ),
+                                [],
+                              ),
+                            ),
+                          ]),
+                        ),
+                        false,
+                      ),
+
+                      BridgeParameter(
+                        '',
+                        BridgeTypeAnnotation(
+                          BridgeTypeRef(
+                            BridgeTypeSpec(
+                              'package:every_door/models/amenity.dart',
+                              'OsmChange',
+                            ),
+                            [],
+                          ),
+                        ),
+                        false,
+                      ),
+
+                      BridgeParameter(
+                        '',
+                        BridgeTypeAnnotation(
+                          BridgeTypeRef(
+                            BridgeTypeSpec(
+                              'package:every_door/models/preset.dart',
+                              'Preset',
+                            ),
+                            [],
+                          ),
+                        ),
+                        false,
+                      ),
+
+                      BridgeParameter(
+                        '',
+                        BridgeTypeAnnotation(
+                          BridgeTypeRef(
+                            BridgeTypeSpec('dart:ui', 'Locale'),
+                            [],
+                          ),
+                        ),
+                        false,
+                      ),
+                    ],
+                    namedParams: [],
+                  ),
+                ),
+              ),
+              false,
+            ),
+          ],
+        ),
+      ),
     },
     getters: {},
     setters: {},
@@ -161,6 +274,9 @@ class $PluginEvents implements $Instance {
 
       case 'onDownload':
         return __onDownload;
+
+      case 'onEditorFields':
+        return __onEditorFields;
     }
     return _superclass.$getProperty(runtime, identifier);
   }
@@ -203,6 +319,29 @@ class $PluginEvents implements $Instance {
     self.$value.onDownload((LatLng arg0) {
       return (args[0]! as EvalCallable)(runtime, null, [
         $LatLng.wrap(arg0),
+      ])?.$value;
+    });
+    return null;
+  }
+
+  static const $Function __onEditorFields = $Function(_onEditorFields);
+  static $Value? _onEditorFields(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $PluginEvents;
+    self.$value.onEditorFields(args[0]!.$value, (
+      List<EditorFields> arg0,
+      OsmChange arg1,
+      Preset arg2,
+      Locale arg3,
+    ) {
+      return (args[1]! as EvalCallable)(runtime, null, [
+        $List.view(arg0, (e) => $EditorFields.wrap(e)),
+        $OsmChange.wrap(arg1),
+        $Preset.wrap(arg2),
+        $Locale.wrap(arg3),
       ])?.$value;
     });
     return null;

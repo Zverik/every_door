@@ -12,6 +12,7 @@ import 'package:every_door/plugins/ext_overlay.dart';
 import 'package:every_door/plugins/preferences.dart';
 import 'package:every_door/plugins/providers.dart';
 import 'package:every_door/providers/add_presets.dart';
+import 'package:every_door/providers/editor_buttons.dart';
 import 'package:every_door/providers/editor_mode.dart';
 import 'package:every_door/providers/auth.dart';
 import 'package:every_door/providers/overlays.dart';
@@ -114,5 +115,11 @@ class EveryDoorApp {
   /// values from the data.
   void registerFieldType(String typ, FieldBuilder builder) {
     _ref.read(pluginPresetsProvider).registerFieldType(typ, plugin, builder);
+  }
+
+  /// Adds a button to the editor pane. Buttons modify some [OsmChange]
+  /// object property that is not intuitive to modify with a field.
+  void addEditorButton(EditorButton button) {
+    _ref.read(editorButtonsProvider.notifier).add(plugin.id, button);
   }
 }

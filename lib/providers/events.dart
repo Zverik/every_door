@@ -1,6 +1,11 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
+import 'dart:ui' show Locale;
+
+import 'package:every_door/helpers/editor_fields.dart';
+import 'package:every_door/models/amenity.dart';
+import 'package:every_door/models/preset.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -16,6 +21,7 @@ enum _EventType {
   uploading,
   preProcessUpload,
   modeCreated,
+  editorFields,
 }
 
 class _EventDataModeCreated implements _EventData {
@@ -27,6 +33,22 @@ class _EventDataDownload implements _EventData {
   final LatLng location;
   const _EventDataDownload(this.location);
 }
+
+class _EventDataEditorFields implements _EventData {
+  final List<EditorFields> fields;
+  final OsmChange amenity;
+  final Preset preset;
+  final Locale locale;
+
+  const _EventDataEditorFields(
+      {required this.fields,
+      required this.amenity,
+      required this.preset,
+      required this.locale});
+}
+
+typedef EditorFieldsCallback = Future<List<EditorFields>> Function(
+    List<EditorFields>, OsmChange, Preset, Locale);
 
 class _EventListener {
   final String? pluginId;
@@ -108,5 +130,35 @@ class EventsNotifier extends Notifier<List<_EventListener>> {
     if (tasks.isNotEmpty) {
       await Future.wait(tasks);
     }
+  }
+
+  void onEditorFields(String? pluginId, EditorFieldsCallback callback) {
+    state = state +
+        [
+          _EventListener(
+            pluginId: pluginId,
+            type: _EventType.editorFields,
+            callback: (data) {
+              data as _EventDataEditorFields;
+              return callback(
+                  data.fields, data.amenity, data.preset, data.locale);
+            },
+          )
+        ];
+  }
+
+  Future<List<EditorFields>> callEditorFields(List<EditorFields> fields,
+      OsmChange amenity, Preset preset, Locale locale) async {
+    for (final task in state) {
+      if (task.type == _EventType.editorFields) {
+        fields = await task.callback(_EventDataEditorFields(
+          fields: fields,
+          amenity: amenity,
+          preset: preset,
+          locale: locale,
+        ));
+      }
+    }
+    return fields;
   }
 }

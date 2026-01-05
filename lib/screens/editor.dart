@@ -13,6 +13,8 @@ import 'package:every_door/helpers/tags/main_key.dart';
 import 'package:every_door/models/floor.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/providers/cur_imagery.dart';
+import 'package:every_door/providers/editor_buttons.dart';
+import 'package:every_door/providers/events.dart';
 import 'package:every_door/providers/language.dart';
 import 'package:every_door/providers/notes.dart';
 import 'package:every_door/providers/overlays.dart';
@@ -151,7 +153,6 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
 
     if (needRefresh) {
       await updateFieldGroups(locale);
-      setState(() {});
     }
   }
 
@@ -159,10 +160,15 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
     final AppLocalizations loc =
         (mounted ? AppLocalizations.of(context) : null) ??
             ref.read(localizationsProvider);
-    // TODO: how to substitute one with a plugin?
-    fieldGroups =
+    List<EditorFields> fields =
         await StandardEditorFieldsBuilder(ref.read(presetProvider), locale, loc)
             .sortFields(amenity, preset!);
+    fields = await ref
+        .read(eventsProvider.notifier)
+        .callEditorFields(fields, amenity, preset!, locale);
+    setState(() {
+      fieldGroups = fields;
+    });
   }
 
   Future<void> changeType() async {
@@ -485,21 +491,11 @@ class _PoiEditorPageState extends ConsumerState<PoiEditorPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // Display "closed" button just for amenities.
-          if (kind == ElementKind.amenity)
-            MaterialButton(
-              color: amenity.isDisused ? Colors.brown : Colors.orange,
-              textColor: Colors.white,
-              child: Text(amenity.isDisused
-                  ? loc.editorMarkActive
-                  : loc.editorMarkDefunct),
-              onPressed: () {
-                setState(() {
-                  amenity.toggleDisused();
-                });
-              },
-            ),
-          SizedBox(width: 10.0),
+          for (final b in ref.watch(editorButtonsProvider).reversed)
+            if (b.shouldDisplay(amenity)) ...[
+              b.build(context, amenity),
+              SizedBox(width: 10.0),
+            ],
           MaterialButton(
             color: Colors.red,
             textColor: Colors.white,
