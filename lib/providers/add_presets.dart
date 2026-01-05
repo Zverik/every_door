@@ -4,6 +4,7 @@
 import 'package:every_door/fields/combo.dart';
 import 'package:every_door/helpers/multi_icon.dart';
 import 'package:every_door/helpers/normalizer.dart';
+import 'package:every_door/helpers/plugin_context_list.dart';
 import 'package:every_door/helpers/plugin_i18n.dart';
 import 'package:every_door/models/field.dart';
 import 'package:every_door/models/plugin.dart';
@@ -29,6 +30,8 @@ class PluginPresetsProvider {
   final Map<String, FieldTemplate> _fields = {};
   final Map<String, Map<String, String?>> _presetTags = {};
   final Map<String, (Plugin, FieldBuilder)> _fieldBuilders = {};
+  final PluginContextMap<String, PresetField> _presetFields =
+      PluginContextMap({});
 
   PluginPresetsProvider(this._ref);
 
@@ -37,6 +40,8 @@ class PluginPresetsProvider {
     _presets.clear();
     _fieldsCache.clear();
     _fields.clear();
+    _fieldBuilders.clear();
+    _presetFields.clear();
   }
 
   void addPreset(String key, Map<String, dynamic> data, Plugin plugin,
@@ -133,8 +138,12 @@ class PluginPresetsProvider {
     _fieldsCache.remove(id);
   }
 
-  void registerFieldType(String typ, Plugin plugin, FieldBuilder build) {
-    _fieldBuilders[typ] = (plugin, build);
+  void registerFieldType(String fieldType, Plugin plugin, FieldBuilder build) {
+    _fieldBuilders[fieldType] = (plugin, build);
+  }
+
+  void registerPresetField(String fieldId, Plugin plugin, PresetField field) {
+    _presetFields.set(plugin.id, fieldId, field);
   }
 
   void removeFieldsForPlugin(String pluginId) {
@@ -142,6 +151,7 @@ class PluginPresetsProvider {
         .where((f) => f.value.pluginId == pluginId)
         .map((e) => e.key);
     _fieldBuilders.removeWhere((k, v) => v.$1.id == pluginId);
+    _presetFields.removeFor(pluginId);
     for (final id in fieldIds) {
       _fieldsCache.remove(id);
       _fields.remove(id);
@@ -149,10 +159,15 @@ class PluginPresetsProvider {
   }
 
   PresetField? getField(String id, Locale? locale) {
+    if (_presetFields.containsKey(id)) return _presetFields[id];
     if (!_fieldsCache.containsKey(id)) {
       final field = _fields[id];
       if (field == null) return null;
-      _fieldsCache[id] = field.withLocale(locale);
+      // Since a builder is usually added after a field definition,
+      // we're fetching it here, when the field is being built.
+      final fieldType = field.data['type'] ?? field.data['typ'];
+      final builder = _fieldBuilders[fieldType]?.$2;
+      _fieldsCache[id] = field.build(locale, builder);
     }
     return _fieldsCache[id];
   }
@@ -349,10 +364,9 @@ class FieldTemplate {
   final Map<String, dynamic> data;
   late final List<ComboOption> options;
   final PluginLocalizationsBranch localizations;
-  final FieldBuilder? builder;
   final String pluginId;
 
-  FieldTemplate(this.data, this.localizations, Plugin plugin, {this.builder})
+  FieldTemplate(this.data, this.localizations, Plugin plugin)
       : pluginId = plugin.id {
     options = _buildComboOptions(plugin);
   }
@@ -378,7 +392,7 @@ class FieldTemplate {
     return options;
   }
 
-  PresetField withLocale(Locale? locale) {
+  PresetField build(Locale? locale, FieldBuilder? builder) {
     final copy = Map.of(data);
     final newOptions = List.of(options);
     if (locale != null) {

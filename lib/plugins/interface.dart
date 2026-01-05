@@ -113,8 +113,18 @@ class EveryDoorApp {
   /// Adds a handler for a new (or existing) field type.
   /// Use [PresetFieldContext] constructor to get commonly used
   /// values from the data.
-  void registerFieldType(String typ, FieldBuilder builder) {
-    _ref.read(pluginPresetsProvider).registerFieldType(typ, plugin, builder);
+  void registerFieldType(String fieldType, FieldBuilder builder) {
+    _ref
+        .read(pluginPresetsProvider)
+        .registerFieldType(fieldType, plugin, builder);
+  }
+
+  /// Adds a field for an identifier, that is not described as a structure.
+  /// That means, it has a key, a label, and everything else already baked-in.
+  void registerField(String fieldId, PresetField field) {
+    _ref
+        .read(pluginPresetsProvider)
+        .registerPresetField(fieldId, plugin, field);
   }
 
   /// Adds a button to the editor pane. Buttons modify some [OsmChange]

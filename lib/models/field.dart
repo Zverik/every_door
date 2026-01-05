@@ -267,7 +267,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
   }
 
   // List of types: https://github.com/ideditor/schema-builder#type
-  String typ = data['typ'] ?? 'text';
+  String typ = data['typ'] ?? data['type'] ?? 'text';
   if (data['name'] == 'ref') typ = 'number'; // Patch some refs to be numbers
   switch (typ) {
     case 'text':

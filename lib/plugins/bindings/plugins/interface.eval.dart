@@ -253,7 +253,7 @@ class $EveryDoorApp implements $Instance {
           namedParams: [],
           params: [
             BridgeParameter(
-              'typ',
+              'fieldType',
               BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
               false,
             ),
@@ -290,6 +290,34 @@ class $EveryDoorApp implements $Instance {
                     ],
                     namedParams: [],
                   ),
+                ),
+              ),
+              false,
+            ),
+          ],
+        ),
+      ),
+
+      'registerField': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'fieldId',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+
+            BridgeParameter(
+              'field',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec(
+                    'package:every_door/models/field.dart',
+                    'PresetField',
+                  ),
+                  [],
                 ),
               ),
               false,
@@ -504,6 +532,9 @@ class $EveryDoorApp implements $Instance {
       case 'registerFieldType':
         return __registerFieldType;
 
+      case 'registerField':
+        return __registerField;
+
       case 'addEditorButton':
         return __addEditorButton;
     }
@@ -591,6 +622,17 @@ class $EveryDoorApp implements $Instance {
         $Map.wrap(data),
       ])?.$value;
     });
+    return null;
+  }
+
+  static const $Function __registerField = $Function(_registerField);
+  static $Value? _registerField(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $EveryDoorApp;
+    self.$value.registerField(args[0]!.$value, args[1]!.$value);
     return null;
   }
 
