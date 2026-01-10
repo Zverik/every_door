@@ -7,10 +7,10 @@ import 'package:every_door/models/payment_local.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/osm_data.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:proximity_hash/proximity_hash.dart';
 import 'package:sqflite/utils/utils.dart';
 
 final paymentProvider = Provider((ref) => PaymentProvider(ref));
@@ -38,7 +38,7 @@ class PaymentProvider {
   Future<LocalPayment?> getPaymentForLocation(LatLng location) async {
     // Read the closest payment options from the database and sort by distance.
     final database = await _ref.read(databaseProvider).database;
-    final hashes = createGeohashes(location.latitude, location.longitude,
+    final hashes = geohash.forCircle(location.latitude, location.longitude,
         kLocalPaymentRadius.toDouble(), LocalPayment.kGeohashPrecision);
     final placeholders = List.generate(hashes.length, (index) => "?").join(",");
     final rows = await database.query(

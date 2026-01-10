@@ -6,8 +6,8 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/tags/element_kind.dart';
 import 'package:every_door/helpers/geometry/geometry.dart';
 import 'package:every_door/helpers/tags/snap_tags.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:proximity_hash/geohash.dart';
 import 'dart:convert';
 
 import 'package:xml/xml.dart';
@@ -248,8 +248,8 @@ class OsmElement {
           : (center.longitude * kCoordinatePrecision).round(),
       'geohash': center == null
           ? null
-          : GeoHasher().encode(center.longitude, center.latitude,
-              precision: kGeohashPrecision),
+          : geohash.encode(
+              center.latitude, center.longitude, kGeohashPrecision),
       // Not serializing bounds
       'tags': json.encode(tags),
       'nodes': nodes?.join(','),

@@ -2,8 +2,8 @@
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'package:every_door/constants.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:proximity_hash/geohash.dart';
 
 class LocalPayment {
   static const kGeohashPrecision = 5; // 2.4 km
@@ -47,8 +47,8 @@ class LocalPayment {
       'id': id,
       'lat': (center.latitude * kCoordinatePrecision).round(),
       'lon': (center.longitude * kCoordinatePrecision).round(),
-      'geohash': GeoHasher().encode(center.longitude, center.latitude,
-          precision: kGeohashPrecision),
+      'geohash':
+          geohash.encode(center.latitude, center.longitude, kGeohashPrecision),
       'options': options.join(';'),
     };
   }

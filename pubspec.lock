@@ -433,6 +433,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.3"
+  fast_geohash:
+    dependency: "direct main"
+    description:
+      name: fast_geohash
+      sha256: a1912ea4e970d8687c3a35b891a5c897f0ce0f388fb88c077e957f55c5327051
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   ffi:
     dependency: transitive
     description:
@@ -1376,14 +1384,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
-  proximity_hash:
-    dependency: "direct main"
-    description:
-      name: proximity_hash
-      sha256: "3abb10e8e196e306ee979fe7b6659eb473b61fa4590b0336dc7fb3cc016fc214"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   pub_semver:
     dependency: transitive
     description:

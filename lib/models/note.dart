@@ -6,8 +6,8 @@ import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/draw_style.dart';
 import 'package:every_door/helpers/geometry/geometry.dart';
 import 'package:every_door/models/located.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:proximity_hash/geohash.dart';
 import 'dart:convert' show json;
 
 import 'package:uuid/uuid.dart';
@@ -97,8 +97,8 @@ class BaseNote extends Located {
       'created': created.millisecondsSinceEpoch,
       'is_changed': isModified ? 1 : 0,
       'is_deleting': isDeleted ? 1 : 0,
-      'geohash': GeoHasher().encode(location.longitude, location.latitude,
-          precision: kNoteGeohashPrecision),
+      'geohash': geohash.encode(
+          location.latitude, location.longitude, kNoteGeohashPrecision),
     };
   }
 

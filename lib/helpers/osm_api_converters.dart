@@ -6,8 +6,8 @@ import 'package:every_door/helpers/geometry/geometry.dart';
 import 'package:every_door/models/note.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:logging/logging.dart';
-import 'package:proximity_hash/geohash.dart';
 import 'dart:convert';
 import 'package:xml/xml.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -528,8 +528,7 @@ class ExtractRoadNames extends Converter<List<OsmElement>, List<OsmElement>> {
         // Convert to hashes and store.
         final hashes = <String>{
           for (final c in coords)
-            GeoHasher().encode(c.longitude, c.latitude,
-                precision: kRoadNameGeohashPrecision)
+            geohash.encode(c.latitude, c.longitude, kRoadNameGeohashPrecision)
         };
         _names.addAll(
             hashes.map((h) => RoadNameRecord(element.tags['name']!, h)));

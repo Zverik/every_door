@@ -10,15 +10,15 @@ import 'package:every_door/models/imagery/tiles.dart';
 import 'package:every_door/models/imagery/tms.dart';
 import 'package:every_door/providers/presets.dart';
 import 'package:every_door/providers/shared_preferences.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:every_door/models/imagery.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:logging/logging.dart';
-import 'package:proximity_hash/proximity_hash.dart';
 import 'package:http/http.dart' as http;
 
-final imageryProvider = NotifierProvider<ImageryProvider, Imagery>(
-    ImageryProvider.new);
+final imageryProvider =
+    NotifierProvider<ImageryProvider, Imagery>(ImageryProvider.new);
 
 class ImageryProvider extends Notifier<Imagery> {
   static final _logger = Logger('ImageryProvider');
@@ -81,9 +81,8 @@ class ImageryProvider extends Notifier<Imagery> {
   }
 
   Future<List<Imagery>> getImageryListForLocation(LatLng location) async {
-    final geohash =
-        geoHasher.encode(location.longitude, location.latitude, precision: 4);
-    final rows = await ref.read(presetProvider).imageryQuery(geohash);
+    final hash = geohash.encode(location.latitude, location.longitude, 4);
+    final rows = await ref.read(presetProvider).imageryQuery(hash);
     List<Imagery> results = rows
         .map((row) => TileImagery.fromJson(row))
         .whereType<Imagery>()
@@ -110,7 +109,8 @@ class ImageryProvider extends Notifier<Imagery> {
       } else if (imageryId == mapboxImagery.id) {
         await _initializeAndSet(mapboxImagery);
       } else if (_additional.any((i) => i.id == imageryId)) {
-        await _initializeAndSet(_additional.firstWhere((i) => i.id == imageryId));
+        await _initializeAndSet(
+            _additional.firstWhere((i) => i.id == imageryId));
       } else {
         final imagery =
             await ref.read(presetProvider).singleImageryQuery(imageryId);

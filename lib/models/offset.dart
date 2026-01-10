@@ -2,8 +2,8 @@
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'package:every_door/constants.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:proximity_hash/geohash.dart';
 
 class ImageryOffset {
   static const kGeohashPrecision = 6;
@@ -47,8 +47,8 @@ class ImageryOffset {
       'imlat': (imageryPos.latitude * kCoordinatePrecision).round(),
       'imlon': (imageryPos.longitude * kCoordinatePrecision).round(),
       'url': url,
-      'geohash': GeoHasher().encode(originPos.longitude, originPos.latitude,
-          precision: kGeohashPrecision),
+      'geohash': geohash.encode(
+          originPos.latitude, originPos.longitude, kGeohashPrecision),
       'date': date.millisecondsSinceEpoch,
     };
   }

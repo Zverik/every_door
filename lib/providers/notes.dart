@@ -14,9 +14,9 @@ import 'package:every_door/providers/api_status.dart';
 import 'package:every_door/providers/database.dart';
 import 'package:every_door/providers/auth.dart';
 import 'package:every_door/providers/shared_preferences.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:logging/logging.dart';
-import 'package:proximity_hash/proximity_hash.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
@@ -27,9 +27,9 @@ import 'package:xml/xml_events.dart';
 
 final notesProvider = NotifierProvider<NotesProvider, int>(NotesProvider.new);
 final ownScribblesProvider =
-    NotifierProvider<OwnScribblesController, bool>(
-        OwnScribblesController.new);
-final currentPaintToolProvider = StateProvider<DrawingStyle>((_) => kToolScribble);
+    NotifierProvider<OwnScribblesController, bool>(OwnScribblesController.new);
+final currentPaintToolProvider =
+    StateProvider<DrawingStyle>((_) => kToolScribble);
 final drawingLockedProvider = StateProvider<bool>((_) => true);
 
 class NotesProvider extends Notifier<int> {
@@ -80,10 +80,10 @@ class NotesProvider extends Notifier<int> {
         LatLng(bounds.south - kExtendBounds, bounds.west - kExtendBounds),
         LatLng(bounds.north + kExtendBounds, bounds.east + kExtendBounds),
       ]);
-      hashes = createGeohashesBoundingBox(box.south, box.west, box.north,
-          box.east, BaseNote.kNoteGeohashPrecision);
+      hashes = geohash.forBounds(box.south, box.west, box.north, box.east,
+          BaseNote.kNoteGeohashPrecision);
     } else if (center != null) {
-      hashes = createGeohashes(center.latitude, center.longitude,
+      hashes = geohash.forCircle(center.latitude, center.longitude,
           radius.toDouble(), BaseNote.kNoteGeohashPrecision);
     } else {
       throw ArgumentError('Please specify either box or center');

@@ -2,6 +2,7 @@
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'dart:convert' show json, utf8;
+import 'dart:math' as math;
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/helpers/auth/provider.dart';
@@ -13,6 +14,7 @@ import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/screens/modes/definitions/classic.dart';
 import 'package:every_door/widgets/map_button.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
@@ -22,8 +24,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class PluginUnderConstruction extends EveryDoorPlugin {
   static const kEnabled = false;
-  static const kEndpoint = 'panoramax.openstreetmap.fr';
-  bool apiFound = false;
 
   static Map<String, dynamic> getMetadata() => {
         'id': 'pluginUnderConstruction',
@@ -32,124 +32,34 @@ class PluginUnderConstruction extends EveryDoorPlugin {
 
   @override
   Future<void> install(EveryDoorApp app) async {
-    app.logger.info("Installing plugin!");
-    final apiResponse =
-        await http.get(Uri.https(kEndpoint, '/api/configuration'));
-    if (apiResponse.statusCode == 200) {
-      final response = json.decode(utf8.decode(apiResponse.bodyBytes));
-      app.logger.info('API response ok, name: ${response["name"]["label"]}');
-      apiFound = true;
-    }
-
-    app.addMode(TestMode(app));
-    app.addAuthProvider('panoramax', PanoramaxAuth());
-
-    app.events.onDownload((location) async {
-      // TODO: download and put into the database.
-      final bounds = boundsFromRadius(location, 1000);
-    });
-
-    app.events.onModeCreated((mode) async {
-      app.logger.info("Mode created: ${mode.name}");
-
-      if (mode.name == 'micro') {
-        mode.addMapButton(MapButton(
-          icon: MultiIcon(emoji: 'P'),
-          onPressed: (context) {
-            app.providers.location = LatLng(59.409680, 24.631112);
-          },
-        ));
-      }
-    });
-
-    if (apiFound) {
-      app.addOverlay(ExtOverlay(
-        id: 'panoramax',
+    app.addOverlay(ExtOverlay(
+        id: 'geohashes',
         build: (context, data) {
-          final photos = data as List<PanoramaxPhoto>?;
-          if (photos == null) return Container();
-          return MarkerLayer(
-            markers: [
-              for (final photo in photos)
-                Marker(
-                  point: photo.location,
-                  rotate: true,
-                  child: GestureDetector(
-                    child: Container(
-                      color: Colors.yellow.withValues(alpha: 0.1),
-                      child: Text('📷', style: TextStyle(fontSize: 30.0)),
-                    ),
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () async {
-                      final url = photo
-                          .thumbnailUrl; // photo.imageUrl ?? photo.thumbnailUrl;
-                      app.logger
-                          .info('tapped on a photo ${photo.id} with url $url');
-                      if (url == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Photo ${photo.id} has no image url'),
-                        ));
-                      } else {
-                        await showModalBottomSheet(
-                          context: context,
-                          builder: (_) => SafeArea(child: Image.network(url)),
-                        );
-                      }
-                    },
-                  ),
-                  height: 30,
-                  width: 30,
-                )
-            ],
-          );
+          if (data == null || data is! List) return Container();
+          app.logger.info('Polygons: $data');
+          return PolygonLayer(polygons: [
+            for (final p in data.cast<LatLngBounds>())
+              Polygon(
+                points: [p.southEast, p.northEast, p.northWest, p.southWest],
+                color: Colors.yellow.withValues(alpha: 0.2),
+                borderColor: Colors.yellow.shade700,
+                borderStrokeWidth: 2.0,
+              ),
+          ]);
         },
         update: (bounds) async {
-          return await queryPhotos(app.logger, bounds);
-        },
-      ));
-    }
-  }
-
-  Future<List<PanoramaxPhoto>> queryPhotos(
-      Logger log, LatLngBounds bounds) async {
-    final response = await http.get(Uri.https(kEndpoint, '/api/search', {
-      'bbox': [bounds.west, bounds.south, bounds.east, bounds.north].join(','),
-      'limit': '40',
-    }));
-    if (response.statusCode != 200) {
-      log.warning('Got response ${response.statusCode} ${response.body}');
-      return [];
-    }
-    final data = json.decode(utf8.decode(response.bodyBytes));
-    if (data is! Map || !data.containsKey('features')) return [];
-    final result = <PanoramaxPhoto>[];
-    for (final feature in data['features'] as List) {
-      if (feature is Map) {
-        try {
-          result.add(PanoramaxPhoto.fromJson(feature));
-        } on Exception {
-          log.warning('Failed to decode json: $feature');
-        }
-      }
-    }
-    log.info('Downloaded ${result.length} photos');
-    return result;
-  }
-
-  @override
-  Widget buildSettingsPane(EveryDoorApp app, BuildContext context) {
-    return Column(
-      children: [
-        SwitchListTile(
-          title: Text('Better icon'),
-          value: app.preferences.getBool('better_icon') ?? false,
-          onChanged: (bool value) async {
-            await app.preferences.setBool('better_icon', value);
-            app.repaint();
-          },
-        ),
-      ],
-    );
+          final hashes = geohash.forBounds(
+              bounds.south, bounds.west, bounds.north, bounds.east, 7);
+          final polygons = <LatLngBounds>[];
+          for (final hash in hashes) {
+            final ll = geohash.decode(hash);
+            final latErr = 180.0 / math.pow(2, hash.length * 2.5 + 0.5);
+            final lonErr = 180.0 / math.pow(2, hash.length * 2.5 + 0.5);
+            polygons.add(LatLngBounds(LatLng(ll.lat - latErr, ll.lon - lonErr),
+                LatLng(ll.lat + latErr, ll.lon + lonErr)));
+          }
+          return polygons;
+        }));
   }
 }
 
@@ -265,10 +175,11 @@ class PanoramaxAuth extends AuthProvider {
 }
 
 class TestMode extends ClassicModeDefinition {
-  TestMode(EveryDoorApp app): super.fromPlugin(app);
+  TestMode(EveryDoorApp app) : super.fromPlugin(app);
 
   @override
-  MultiIcon getIcon(BuildContext context, bool outlined) => MultiIcon(fontIcon: Icons.ac_unit);
+  MultiIcon getIcon(BuildContext context, bool outlined) =>
+      MultiIcon(fontIcon: Icons.ac_unit);
 
   @override
   String get name => 'test';

@@ -24,6 +24,7 @@ dependencies:
   dart_eval: ^0.8.3
   diacritic: ^0.1.3
   encrypt: ^5.0.1
+  fast_geohash: ^1.0.0
   flutter_archive: ^6.0.3
   flutter_cache_manager: ^3.4.1
   flutter_compass_v2: ^1.0.3
@@ -57,7 +58,6 @@ dependencies:
   path_drawing: ^1.0.0
   path_provider: ^2.0.9
   phone_numbers_parser: ^9.0.3
-  proximity_hash: ^2.2.0
   qr_code_scanner_plus: ^2.0.10+1
   responsive_grid_list: ^1.2.3
   sensors_plus: ^6.1.0
