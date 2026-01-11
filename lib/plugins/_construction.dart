@@ -1,29 +1,23 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
-import 'dart:convert' show json, utf8;
-import 'dart:math' as math;
+import 'dart:convert' show json;
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:every_door/helpers/auth/provider.dart';
-import 'package:every_door/helpers/geometry/circle_bounds.dart';
+import 'package:every_door/helpers/editor_fields.dart';
 import 'package:every_door/helpers/multi_icon.dart';
+import 'package:every_door/models/field.dart';
 import 'package:every_door/plugins/every_door_plugin.dart';
-import 'package:every_door/plugins/ext_overlay.dart';
 import 'package:every_door/plugins/interface.dart';
 import 'package:every_door/screens/modes/definitions/classic.dart';
-import 'package:every_door/widgets/map_button.dart';
 import 'package:every_door/models/amenity.dart';
-import 'package:fast_geohash/fast_geohash_str.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
-import 'package:latlong2/latlong.dart' show LatLng;
-import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PluginUnderConstruction extends EveryDoorPlugin {
-  static const kEnabled = false;
+  static const kEnabled = true;
 
   static Map<String, dynamic> getMetadata() => {
         'id': 'pluginUnderConstruction',
@@ -32,62 +26,46 @@ class PluginUnderConstruction extends EveryDoorPlugin {
 
   @override
   Future<void> install(EveryDoorApp app) async {
-    app.addOverlay(ExtOverlay(
-        id: 'geohashes',
-        build: (context, data) {
-          if (data == null || data is! List) return Container();
-          app.logger.info('Polygons: $data');
-          return PolygonLayer(polygons: [
-            for (final p in data.cast<LatLngBounds>())
-              Polygon(
-                points: [p.southEast, p.northEast, p.northWest, p.southWest],
-                color: Colors.yellow.withValues(alpha: 0.2),
-                borderColor: Colors.yellow.shade700,
-                borderStrokeWidth: 2.0,
-              ),
-          ]);
-        },
-        update: (bounds) async {
-          final hashes = geohash.forBounds(
-              bounds.south, bounds.west, bounds.north, bounds.east, 7);
-          final polygons = <LatLngBounds>[];
-          for (final hash in hashes) {
-            final ll = geohash.decode(hash);
-            final latErr = 180.0 / math.pow(2, hash.length * 2.5 + 0.5);
-            final lonErr = 180.0 / math.pow(2, hash.length * 2.5 + 0.5);
-            polygons.add(LatLngBounds(LatLng(ll.lat - latErr, ll.lon - lonErr),
-                LatLng(ll.lat + latErr, ll.lon + lonErr)));
-          }
-          return polygons;
-        }));
+    app.events.onEditorFields((fields, amenity, preset, locale) async {
+      if (fields.isEmpty) return fields;
+      final wikiFields = EditorFields(fields: [
+        WikidataField(key: 'wikidata'),
+      ]);
+      fields.insert(1, wikiFields);
+      return fields;
+    });
   }
 }
 
-class PanoramaxPhoto {
-  final String id;
-  final String? thumbnailUrl;
-  final String? imageUrl;
-  final bool ready;
-  final LatLng location;
+class WikidataField extends PresetField {
+  WikidataField({required super.key}) : super(label: 'Wikidata');
 
-  PanoramaxPhoto(
-      {required this.id,
-      this.thumbnailUrl,
-      this.imageUrl,
-      required this.location,
-      required this.ready});
+  @override
+  Widget buildWidget(OsmChange element) => WikidataPresetField(element);
+}
 
-  factory PanoramaxPhoto.fromJson(Map data) {
-    final props = data['properties'] as Map;
-    final thumbnail = props['geovisio:thumbnail'];
-    final image = props['geovisio:image'];
-    final coords = data['geometry']['coordinates'] as List;
-    return PanoramaxPhoto(
-      id: data['id'],
-      ready: props['geovisio:status'] == 'ready',
-      thumbnailUrl: thumbnail is String ? thumbnail : null,
-      imageUrl: image is String ? image : null,
-      location: LatLng(coords[1], coords[0]),
+class WikidataPresetField extends StatefulWidget {
+  final OsmChange element;
+
+  const WikidataPresetField(this.element, {super.key});
+
+  @override
+  State<WikidataPresetField> createState() => _WikidataPresetFieldState();
+}
+
+class _WikidataPresetFieldState extends State<WikidataPresetField> {
+
+  // https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&formatversion=2&search=Mac+Modanero&type=item&language=en&uselang=en&limit=10&origin=*
+  // https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&formatversion=2&search=modane&type=item&language=en&uselang=en&limit=10&origin=*
+  // https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=10&srinfo=suggestion&format=json&origin=*&srsearch=Mac+Modanero
+  // https://en.wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&format=json&origin=*&search=mode
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      onChanged: (value) {
+        // TODO
+      },
     );
   }
 }

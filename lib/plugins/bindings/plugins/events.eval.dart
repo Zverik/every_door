@@ -331,13 +331,13 @@ class $PluginEvents implements $Instance {
     List<$Value?> args,
   ) {
     final self = target! as $PluginEvents;
-    self.$value.onEditorFields(args[0]!.$value, (
+    self.$value.onEditorFields((
       List<EditorFields> arg0,
       OsmChange arg1,
       Preset arg2,
       Locale arg3,
     ) {
-      return (args[1]! as EvalCallable)(runtime, null, [
+      return (args[0]! as EvalCallable)(runtime, null, [
         $List.view(arg0, (e) => $EditorFields.wrap(e)),
         $OsmChange.wrap(arg1),
         $Preset.wrap(arg2),

@@ -2,13 +2,15 @@
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
 import 'package:every_door/helpers/multi_icon.dart';
+import 'package:every_door/providers/geolocation.dart';
 import 'package:every_door/widgets/map.dart';
 import 'package:every_door/widgets/round_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 import 'package:logging/logging.dart';
 
-class MapDragCreateButton extends StatelessWidget {
+class MapDragCreateButton extends ConsumerWidget {
   final MultiIcon icon;
   final Function()? onDragStart;
   final Function(LatLng)? onDragEnd;
@@ -30,7 +32,7 @@ class MapDragCreateButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final safePadding =
         MediaQuery.of(context).padding.copyWith(top: 0, bottom: 0);
     const commonPadding =
@@ -41,6 +43,9 @@ class MapDragCreateButton extends StatelessWidget {
         padding: safePadding + commonPadding,
         child: Draggable(
           onDragStarted: () {
+            // Disable tracking when the dragging has started.
+            // Note we are not enabling it back.
+            ref.read(trackingProvider.notifier).disable();
             if (onDragStart != null) onDragStart!();
           },
           onDragEnd: (details) {

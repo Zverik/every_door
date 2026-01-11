@@ -27,16 +27,17 @@ import 'package:logging/logging.dart';
 @Bind()
 class EveryDoorApp {
   final Ref _ref;
-  final Plugin plugin;
-  final Function()? onRepaint;
+  final Function()? _onRepaint;
 
+  final Plugin plugin;
   final PluginPreferences preferences;
   final PluginProviders providers;
   final PluginEvents events;
   final Logger logger;
 
-  EveryDoorApp({required this.plugin, required Ref ref, this.onRepaint})
+  EveryDoorApp({required this.plugin, required Ref ref, Function()? onRepaint})
       : _ref = ref,
+        _onRepaint = onRepaint,
         preferences = PluginPreferences(plugin.id, ref),
         providers = PluginProviders(ref),
         events = PluginEvents(plugin.id, ref),
@@ -46,7 +47,7 @@ class EveryDoorApp {
 
   /// When available, initiates the screen repaint. Useful for updating the
   /// plugin settings screen.
-  void repaint() => onRepaint?.call();
+  void repaint() => _onRepaint?.call();
 
   /// Get the bundled in [Ref] object. Is not available to plugins, which we
   /// are trying to shield from Riverpod (which MAY be a bad idea though).

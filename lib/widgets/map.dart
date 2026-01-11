@@ -264,15 +264,15 @@ class _CustomMapState extends ConsumerState<CustomMap> {
           ref.read(effectiveLocationProvider.notifier).set(location);
         }
       });
-
-      // When turning the tracking on, move the map immediately.
-      ref.listen(trackingProvider, (_, bool newState) {
-        if (trackLocation != null && newState) {
-          _controller.move(trackLocation, _controller.camera.zoom);
-          ref.read(effectiveLocationProvider.notifier).set(trackLocation);
-        }
-      });
     }
+
+    // When turning the tracking on, move the map immediately.
+    ref.listen(trackingProvider, (_, bool newState) {
+      if (trackLocation != null && newState) {
+        _controller.move(trackLocation, _controller.camera.zoom);
+        ref.read(effectiveLocationProvider.notifier).set(trackLocation);
+      }
+    });
 
     ref.watch(geolocationProvider); // not using, but it triggers repaints
 

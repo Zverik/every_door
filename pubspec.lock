@@ -594,10 +594,10 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "5c0466ab8494a988f3f3385c906597699d92f3a1"
+      resolved-ref: "5b3f4342ffa5cdf25ade5a372b94b7d9c17dca42"
       url: "https://github.com/Zverik/flutter_map_eval.git"
     source: git
-    version: "0.0.1"
+    version: "0.1.0"
   flutter_map_geojson2:
     dependency: "direct main"
     description:
@@ -1508,10 +1508,10 @@ packages:
     dependency: "direct main"
     description:
       name: share_plus
-      sha256: d7dc0630a923883c6328ca31b89aa682bacbf2f8304162d29f7c6aaff03a27a1
+      sha256: "14c8860d4de93d3a7e53af51bff479598c4e999605290756bbbe45cf65b37840"
       url: "https://pub.dev"
     source: hosted
-    version: "11.1.0"
+    version: "12.0.1"
   share_plus_platform_interface:
     dependency: transitive
     description:

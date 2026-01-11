@@ -480,15 +480,6 @@ class $EveryDoorApp implements $Instance {
         final _plugin = $value.plugin;
         return $Plugin.wrap(_plugin);
 
-      case 'onRepaint':
-        final _onRepaint = $value.onRepaint;
-        return _onRepaint == null
-            ? const $null()
-            : $Function((runtime, target, args) {
-                final funcResult = _onRepaint();
-                return $Object(funcResult);
-              });
-
       case 'preferences':
         final _preferences = $value.preferences;
         return $PluginPreferences.wrap(_preferences);
