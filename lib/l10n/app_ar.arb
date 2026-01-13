@@ -1191,5 +1191,13 @@
   "fieldHeightAny": "توقع الطول، على سبيل المثال. 5.4 أو 7'4\"",
   "@fieldHeightAny": {
     "description": "Validation message for when meters or feet are expected."
+  },
+  "tileDragDownload": "جرّب النقر على زر التنزيل.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "mapStraight": "دوّر للخلف",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
   }
 }
