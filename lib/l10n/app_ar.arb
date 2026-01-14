@@ -27,7 +27,7 @@
   "@tileDragTheMap": {
     "description": "Message displayed when there is nothing around."
   },
-  "tileDragOrUnfilter": "يرجى التنقل وقم بإضافة منشأة أو قم بمسح التصفية المطبقة.",
+  "tileDragOrUnfilter": "يُرجى التنقل أو أضف منشأة أو امحُ التصفية.",
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
@@ -55,7 +55,7 @@
   "@chooseLocation": {
     "description": "Title for the screen for choosing a location on a map."
   },
-  "chooseTypeClear": "مسح",
+  "chooseTypeClear": "امحُ",
   "@chooseTypeClear": {
     "description": "Tooltip for a button to clear search field contents."
   },
@@ -276,7 +276,7 @@
   "@changesUploadedTitle": {
     "description": "Title for the notification about a successful upload."
   },
-  "changesUploadedMessage": "تم إرسال {changes} إلى واجهة التطبيقات البرمجة API.",
+  "changesUploadedMessage": "أُرسل {changes} إلى OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -704,7 +704,7 @@
   "@aboutVersionHistory": {
     "description": "Button title to open GitHub releases page."
   },
-  "aboutInstalledVersion": "النسخة المثبتة",
+  "aboutInstalledVersion": "النسخة المنصبة",
   "@aboutInstalledVersion": {
     "description": "Button description for installed app version."
   },
@@ -794,7 +794,7 @@
   "@editorMarkChecked": {
     "description": "Tooltip for a button to mark the amenity checked without changing properties."
   },
-  "tagsDelete": "مسح",
+  "tagsDelete": "امحُ",
   "@tagsDelete": {
     "description": "Tooltip for a button next to a tag value to delete the tag."
   },
@@ -838,7 +838,7 @@
   "@fieldHoursChooseTime": {
     "description": "Tooltip for a button to open hours and minutes chooser."
   },
-  "fieldHoursClear": "مسح",
+  "fieldHoursClear": "امحُ",
   "@fieldHoursClear": {
     "description": "Tooltip for a button to clear the opening_hours value."
   },
@@ -1054,7 +1054,7 @@
   "@faqChangeType": {},
   "faqFloorsContent": "لا ، تم ملء الوسم الأول بالوسم `addr:floor=3` ، وهذه هي الأرضية لأنها مطبوعة على نظام الملاحة وشائعة الاستخدام، والثاني لا يحتوي على هذا الوسم ، ولكن به `level=3`، وهذا الرقم هو رقم طابق تسلسلي من صفر إلى `building:levels - 1`، أي أنه في مبنى مكون من ثلاثة طوابق ، تعتمد قيمة `addr:floor` على البلد ، ولكن المستوى `level` دائمًا ما يكون 0 أو 1 أو 2.\n\nإليك كيفية ارتباط الترميز في المحرر بهذه الوسوم:\n\n* `2`: `addr:floor=2` وغير فارغ `level=*`.\n* `4/`: `addr:floor=4`, لكن لا يوجد وسم `level` .\n* `/1`: `level=1`, لكن لا يوجد وسم `addr:floor` .\n* `1/0`: `addr:floor=1` + `level=0` (وهناك كائن قريب: مع نفس الـ `addr:floor`, ولكن بمستوى مختلف`level`, أو العكس).",
   "@faqFloorsContent": {},
-  "faqTaggingContent": "لماذا يوجد كائن مفقود في المحرر؟ عندما يتم عرض هذه النقاط البيضاء في وضع الرسم الدقيق؟ كيف يتم فرز الأشياء؟\n\nالإجابات على كل هذه الأسئلة موجودة في [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). إليك ما يمكنك إلقاء نظرة عليه:\n\n* ترتيب المفتاح للوسم الرئيسي - القائمة `kMainKeys`.\n* الأشياء التي يتم تنزيلها - وظيفة`isGoodTags`.\n* ما يعتبر من المنشآت - وظيفة `isAmenityTags`.\n*ما هي النقاط التي يتم الصاقها إلى أية طريق - وظيفة `detectSnap`.\n* عندما يكون كائن الخرائط الدقيقة غير مكتمل - الوظيفة `needsMoreInfo`.",
+  "faqTaggingContent": "لماذا يوجد عنصر مفقود في المحرر؟ متى تظهر هذه النقاط البيضاء في وضعية الرسم الدقيق؟ كيف يتم ترتيب العناصر؟\n\nإجابات كل هذه الأسئلة موجودة في [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). إليك ما يمكنك الاطلاع عليه:\n\n* ترتيب المفاتيح للوسم الرئيسي — القائمة `kMainKeys` في `main_key.dart`.\n* أي العناصر يتم تحميلها — الفئة `_EverythingKind`.\n* ما الذي يُعتبر مرفقًا — الفئة `_AmenityKind`.\n* أي النقاط تُلصق بأي طرق — منطق الفئة `ElementKindImpl` (انظر الفئات الفرعية ذات الصلة).\n* متى يكون عنصر الرسم الدقيق غير مكتمل — الفئة `_NeedsMoreInfo`.",
   "@faqTaggingContent": {},
   "editorDuplicate": "احتمال تكرار في {distance} م",
   "@editorDuplicate": {
@@ -1199,5 +1199,205 @@
   "mapStraight": "دوّر للخلف",
   "@mapStraight": {
     "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "warningFixmeNote": "سيتم تحويله إلى ملاحظة OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "editorDeleteBuilding": "مُهَدَّم",
+  "@editorDeleteBuilding": {
+    "description": "Button title to mark a building demolished."
+  },
+  "editorDeleteKeepAddressButton": "احذف، لكن احتفظ بالعنوان",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "settingsCachesClearRaster": "امحُ ذاكرة التخزين المؤقت للبلاط النقطي",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "امحُ البلاط المتجه المُصيَّر",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "امحُ ذاكرة التخزين المؤقت للبلاط المتجهي",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "امحُ البلاطات المُنزل يدويًا",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "حدّد البلاطات للتنزيل",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "نزّل البيانات",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "نزّل بلاطات الخريطة",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "نزّل القمر الصناعي",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "ألغِ ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  },
+  "settingsPlugins": "الملحقات",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "فعِّل",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "عطِّل",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "معطّل",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "مستودع الملحق",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "ابحث",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "حدِّث",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "نصِّب",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsInstallation": "تنصيب الملحق",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "نصِّب ملحق \"{plugin}\" إصدار {version}؟",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsInstallSource": "المصدر: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsUrl": "رابط الملحق",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "المزيد...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsUnknownVersion": "مجهول",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsSeeLogs": "أظهر السجلات",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "fieldWebsiteQR": "امسح رمز QR",
+  "@fieldWebsiteQR": {
+    "description": "Page title for the QR code scanner."
+  },
+  "notesDelete": "احذف",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "drawUndo": "تراجع",
+  "@drawUndo": {},
+  "drawChangeTool": "غيّر الأداة",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawScribble": "خربشة",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawEraser": "ممحاة",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawRoad": "طريق",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawTrack": "مَسلك",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawFootway": "مَمَرٌّ مشاة",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawPath": "مسار",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawCycleway": "مَمَرُّ دَراجات",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawCyclewayShared": "حارة دَراجات",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawWall": "حائط",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawFence": "سياج",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawPower": "خط طاقة",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawStream": "تَدَفُّق المياه",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawCulvert": "عبَّارة",
+  "@drawCulvert": {
+    "description": "Tool description: underground water pipe, culvert. Keep it short."
+  },
+  "apiStatusUploadingNotes": "رفع الملاحظات",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
   }
 }
