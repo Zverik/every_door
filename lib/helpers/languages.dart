@@ -191,6 +191,7 @@ const _kCountryData = {
   "NP": ["ne"],
   "NR": ["na"],
   "NU": ["en"],
+  "NZ": ["en", "mi"]
   "OM": ["ar"],
   "PA": ["es"],
   "PE": ["es"],
