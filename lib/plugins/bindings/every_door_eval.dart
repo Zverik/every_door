@@ -1,4 +1,5 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
+import 'package:every_door/plugins/bindings/every_door_plugin.dart';
 import 'fields/combo.eval.dart';
 import 'fields/text.eval.dart';
 import 'helpers/draw_style.eval.dart';
@@ -133,6 +134,9 @@ class EveryDoorPlugin implements EvalPlugin {
     registry.defineBridgeEnum($OsmElementType.$declaration);
     registry.defineBridgeEnum($IsMember.$declaration);
     registry.defineBridgeEnum($PresetType.$declaration);
+
+    registry.addSource(
+        DartSource('package:every_door/every_door_plugin.dart', pluginSource));
   }
 
   @override
