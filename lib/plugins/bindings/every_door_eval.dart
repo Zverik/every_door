@@ -1,4 +1,6 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
+import 'fields/combo.eval.dart';
+import 'fields/text.eval.dart';
 import 'helpers/draw_style.eval.dart';
 import 'helpers/tags/element_kind.eval.dart';
 import 'helpers/tags/tag_matcher.eval.dart';
@@ -51,6 +53,9 @@ class EveryDoorPlugin implements EvalPlugin {
 
   @override
   void configureForCompile(BridgeDeclarationRegistry registry) {
+    registry.defineBridgeClass($ComboOption.$declaration);
+    registry.defineBridgeClass($ComboPresetField.$declaration);
+    registry.defineBridgeClass($TextPresetField.$declaration);
     registry.defineBridgeClass($DrawingStyle.$declaration);
     registry.defineBridgeClass($ElementKind.$declaration);
     registry.defineBridgeClass($ElementKindImpl.$declaration);
@@ -122,6 +127,8 @@ class EveryDoorPlugin implements EvalPlugin {
     registry.defineBridgeClass($EveryDoorPlugin$bridge.$declaration);
     registry.defineBridgeClass($ExtOverlay.$declaration);
     registry.defineBridgeClass($PluginEvents.$declaration);
+    registry.defineBridgeEnum($ComboType.$declaration);
+    registry.defineBridgeEnum($TextFieldCapitalize.$declaration);
     registry.defineBridgeEnum($ImageryCategory.$declaration);
     registry.defineBridgeEnum($OsmElementType.$declaration);
     registry.defineBridgeEnum($IsMember.$declaration);
@@ -130,6 +137,9 @@ class EveryDoorPlugin implements EvalPlugin {
 
   @override
   void configureForRuntime(Runtime runtime) {
+    $ComboOption.configureForRuntime(runtime);
+    $ComboPresetField.configureForRuntime(runtime);
+    $TextPresetField.configureForRuntime(runtime);
     $DrawingStyle.configureForRuntime(runtime);
     $ElementKind.configureForRuntime(runtime);
     $ElementKindImpl.configureForRuntime(runtime);
@@ -201,6 +211,8 @@ class EveryDoorPlugin implements EvalPlugin {
     $EveryDoorPlugin$bridge.configureForRuntime(runtime);
     $ExtOverlay.configureForRuntime(runtime);
     $PluginEvents.configureForRuntime(runtime);
+    $ComboType.configureForRuntime(runtime);
+    $TextFieldCapitalize.configureForRuntime(runtime);
     $ImageryCategory.configureForRuntime(runtime);
     $OsmElementType.configureForRuntime(runtime);
     $IsMember.configureForRuntime(runtime);

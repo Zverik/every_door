@@ -7,6 +7,9 @@ import 'package:every_door/providers/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// Exposes the current app locale. Guaranteed to be the same as visible
+/// on the Settings page. For currently visible country locale,
+/// see [countryLocaleProvider].
 final languageProvider =
     NotifierProvider<LanguageController, Locale?>(LanguageController.new);
 

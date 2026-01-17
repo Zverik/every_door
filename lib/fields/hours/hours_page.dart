@@ -47,7 +47,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     _updateInactiveCard();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(countryLocaleProvider).update(widget.element?.location);
+      ref.read(countryLocaleProvider.notifier).update(widget.element?.location);
     });
   }
 

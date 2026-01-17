@@ -2,6 +2,7 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/plugins/providers.dart';
 import 'package:dart_eval/stdlib/core.dart';
+import 'package:flutter_eval/ui.dart';
 import 'package:flutter_map_eval/latlong2/latlong2_eval.dart';
 
 /// dart_eval wrapper binding for [PluginProviders]
@@ -54,6 +55,25 @@ class $PluginProviders implements $Instance {
             BridgeTypeRef(CoreTypes.double, []),
             nullable: true,
           ),
+          namedParams: [],
+          params: [],
+        ),
+      ),
+
+      'locale': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(BridgeTypeSpec('dart:ui', 'Locale'), []),
+            nullable: true,
+          ),
+          namedParams: [],
+          params: [],
+        ),
+      ),
+
+      'zoom': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.double, [])),
           namedParams: [],
           params: [],
         ),
@@ -126,21 +146,20 @@ class $PluginProviders implements $Instance {
       case 'compass':
         final _compass = $value.compass;
         return _compass == null ? const $null() : $double(_compass);
+
+      case 'locale':
+        final _locale = $value.locale;
+        return _locale == null ? const $null() : $Locale.wrap(_locale);
+
+      case 'zoom':
+        final _zoom = $value.zoom;
+        return $double(_zoom);
     }
     return _superclass.$getProperty(runtime, identifier);
   }
 
   @override
   void $setProperty(Runtime runtime, String identifier, $Value value) {
-    switch (identifier) {
-      case 'location':
-        $value.location = value.$value;
-        return;
-
-      case 'zoom':
-        $value.zoom = value.$value;
-        return;
-    }
-    return _superclass.$setProperty(runtime, identifier, value);
+    throw UnimplementedError();
   }
 }

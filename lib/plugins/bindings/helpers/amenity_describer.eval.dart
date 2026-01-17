@@ -36,7 +36,6 @@ class $AmenityIndicator$bridge extends AmenityIndicator
         isFactory: false,
       ),
     },
-
     methods: {
       'applies': BridgeMethodDef(
         BridgeFunctionDef(
@@ -59,7 +58,6 @@ class $AmenityIndicator$bridge extends AmenityIndicator
           ],
         ),
       ),
-
       'whenMissing': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -84,7 +82,6 @@ class $AmenityIndicator$bridge extends AmenityIndicator
           ],
         ),
       ),
-
       'whenPresent': BridgeMethodDef(
         BridgeFunctionDef(
           returns: BridgeTypeAnnotation(
@@ -230,11 +227,6 @@ class $AmenityIndicator implements $Instance {
 class $AmenityDescriber implements $Instance {
   /// Configure this class for use in a [Runtime]
   static void configureForRuntime(Runtime runtime) {
-    runtime.registerBridgeFunc(
-      'package:every_door/helpers/amenity_describer.dart',
-      'AmenityDescriber.',
-      $AmenityDescriber.$new,
-    );
   }
 
   /// Compile-time type specification of [$AmenityDescriber]
@@ -250,7 +242,6 @@ class $AmenityDescriber implements $Instance {
   static const $declaration = BridgeClassDef(
     BridgeClassType(
       $type,
-
       $implements: [
         BridgeTypeRef(
           BridgeTypeSpec(
@@ -261,53 +252,7 @@ class $AmenityDescriber implements $Instance {
         ),
       ],
     ),
-    constructors: {
-      '': BridgeConstructorDef(
-        BridgeFunctionDef(
-          returns: BridgeTypeAnnotation($type),
-          namedParams: [],
-          params: [
-            BridgeParameter(
-              '_ref',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(
-                  BridgeTypeSpec('package:riverpod/src/framework.dart', 'Ref'),
-                  [
-                    BridgeTypeAnnotation(
-                      BridgeTypeRef(CoreTypes.object, []),
-                      nullable: true,
-                    ),
-                  ],
-                ),
-              ),
-              false,
-            ),
-
-            BridgeParameter(
-              'indicators',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(CoreTypes.map, [
-                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
-                  BridgeTypeAnnotation(
-                    BridgeTypeRef(
-                      BridgeTypeSpec(
-                        'package:every_door/helpers/amenity_describer.dart',
-                        'AmenityIndicator',
-                      ),
-                      [],
-                    ),
-                  ),
-                ]),
-                nullable: true,
-              ),
-              true,
-            ),
-          ],
-        ),
-        isFactory: false,
-      ),
-    },
-
+    constructors: {},
     methods: {
       'describe': BridgeMethodDef(
         BridgeFunctionDef(
@@ -364,15 +309,6 @@ class $AmenityDescriber implements $Instance {
     bridge: false,
   );
 
-  /// Wrapper for the [AmenityDescriber.new] constructor
-  static $Value? $new(Runtime runtime, $Value? thisValue, List<$Value?> args) {
-    return $AmenityDescriber.wrap(
-      AmenityDescriber(args[0]!.$value, (args[1]?.$reified as Map?)?.cast()),
-    );
-  }
-
-  final $Instance _superclass;
-
   @override
   final AmenityDescriber $value;
 
@@ -380,7 +316,7 @@ class $AmenityDescriber implements $Instance {
   AmenityDescriber get $reified => $value;
 
   /// Wrap a [AmenityDescriber] in a [$AmenityDescriber]
-  $AmenityDescriber.wrap(this.$value) : _superclass = $Object($value);
+  $AmenityDescriber.wrap(this.$value);
 
   @override
   int $getRuntimeType(Runtime runtime) => runtime.lookupType($spec);
@@ -393,7 +329,7 @@ class $AmenityDescriber implements $Instance {
       case 'describe':
         return __describe;
     }
-    return _superclass.$getProperty(runtime, identifier);
+    throw UnimplementedError();
   }
 
   static const $Function __describe = $Function(_describe);
@@ -409,6 +345,6 @@ class $AmenityDescriber implements $Instance {
 
   @override
   void $setProperty(Runtime runtime, String identifier, $Value value) {
-    return _superclass.$setProperty(runtime, identifier, value);
+    throw UnimplementedError();
   }
 }

@@ -1,6 +1,7 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
+import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/models/amenity.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:every_door/models/field.dart';
 
 import 'helpers/combo_page.dart';
 
+@Bind()
 class ComboOption {
   final String value;
   final String? label;
@@ -23,6 +25,7 @@ class ComboOption {
   String toString() => '$value($label)';
 }
 
+@Bind()
 enum ComboType {
   /// surface=asphalt / dirt / ...
   regular,
@@ -44,6 +47,7 @@ const kComboMapping = <String, ComboType>{
   'semiCombo': ComboType.semi,
 };
 
+@Bind()
 class ComboPresetField extends PresetField {
   final ComboType type;
   final List<ComboOption> options;

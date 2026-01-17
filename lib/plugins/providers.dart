@@ -1,9 +1,12 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
+import 'dart:ui' show Locale;
+
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/providers/compass.dart';
 import 'package:every_door/providers/geolocation.dart';
+import 'package:every_door/providers/language.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
@@ -24,9 +27,14 @@ class PluginProviders {
   /// Get the compass direction.
   double? get compass => _ref.read(compassProvider)?.heading;
 
+  /// Returns the current app locale.
+  Locale? get locale => _ref.read(languageProvider);
+
   /// Teleports the map to the given location.
   set location(LatLng value) =>
       _ref.read(effectiveLocationProvider.notifier).set(value);
+
+  double get zoom => _ref.read(zoomProvider);
 
   /// Changes the map zoom level.
   set zoom(double value) => _ref.read(zoomProvider.notifier).update(value);

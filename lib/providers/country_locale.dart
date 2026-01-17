@@ -8,26 +8,60 @@ import 'package:every_door/providers/location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:every_door/generated/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:every_door/generated/l10n/app_localizations.dart'
+    show AppLocalizations;
 
+/// Provides a locale, weekend information, and other information
+/// about the country the mapper is editing in. It is not updated
+/// automatically: call [CountryLocaleController.update] when you need it.
 final countryLocaleProvider =
-    ChangeNotifierProvider((ref) => CountryLocaleController(ref));
+    NotifierProvider<CountryLocaleController, CountryLocaleData>(
+        CountryLocaleController.new);
 const _kDefaultWeekends = [5, 6];
 
-class CountryLocaleController extends ChangeNotifier {
+class CountryLocaleData {
+  final LatLng? location;
+  final Locale? locale;
+  final AppLocalizations? loc;
+  final bool multiple;
+  final int firstDayOfWeek;
+  final List<int> weekends;
+
+  CountryLocaleData({
+    this.location,
+    this.locale,
+    this.loc,
+    this.multiple = false,
+    this.firstDayOfWeek = 0,
+    this.weekends = _kDefaultWeekends,
+  });
+
+  CountryLocaleData update({
+    LatLng? location,
+    Locale? locale,
+    AppLocalizations? loc,
+    bool? multiple,
+    int? firstDayOfWeek,
+    List<int>? weekends,
+  }) =>
+      CountryLocaleData(
+        location: location,
+        locale: locale ?? this.locale,
+        loc: loc ?? this.loc,
+        multiple: multiple ?? this.multiple,
+        firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
+        weekends: weekends ?? this.weekends,
+      );
+}
+
+class CountryLocaleController extends Notifier<CountryLocaleData> {
   static final _langData = LanguageData();
-  final Ref _ref;
 
-  Locale? locale;
-  AppLocalizations? loc;
-  bool multiple = false;
-  int firstDayOfWeek = 0;
-  List<int> weekends = _kDefaultWeekends;
-
-  CountryLocaleController(this._ref);
+  @override
+  CountryLocaleData build() => CountryLocaleData();
 
   Future<void> update(LatLng? location) async {
-    location ??= _ref.read(effectiveLocationProvider);
+    location ??= ref.read(effectiveLocationProvider);
 
     Locale? newLocale;
     bool newMultiple = false;
@@ -47,19 +81,24 @@ class CountryLocaleController extends ChangeNotifier {
       }
     }
 
-    if (newLocale != locale) {
-      locale = newLocale;
-      multiple = newMultiple;
-      firstDayOfWeek = newWeekDay;
-      weekends = newWeekends;
-      loc = newLocale == null
-          ? null
-          : await AppLocalizations.delegate.load(newLocale);
-      notifyListeners();
-    } else if (firstDayOfWeek != newWeekDay || weekends != newWeekends) {
-      firstDayOfWeek = newWeekDay;
-      weekends = newWeekends;
-      notifyListeners();
+    if (newLocale != state.locale) {
+      state = CountryLocaleData(
+        location: location,
+        locale: newLocale,
+        multiple: newMultiple,
+        firstDayOfWeek: newWeekDay,
+        weekends: newWeekends,
+        loc: newLocale == null
+            ? null
+            : await AppLocalizations.delegate.load(newLocale),
+      );
+    } else if (state.firstDayOfWeek != newWeekDay ||
+        state.weekends != newWeekends) {
+      state = state.update(
+        location: location,
+        firstDayOfWeek: newWeekDay,
+        weekends: newWeekends,
+      );
     }
   }
 
