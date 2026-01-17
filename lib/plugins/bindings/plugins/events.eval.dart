@@ -144,15 +144,6 @@ class $PluginEvents implements $Instance {
           namedParams: [],
           params: [
             BridgeParameter(
-              'pluginId',
-              BridgeTypeAnnotation(
-                BridgeTypeRef(CoreTypes.string, []),
-                nullable: true,
-              ),
-              false,
-            ),
-
-            BridgeParameter(
               'callback',
               BridgeTypeAnnotation(
                 BridgeTypeRef.genericFunction(
