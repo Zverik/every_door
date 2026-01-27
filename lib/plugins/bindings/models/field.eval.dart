@@ -263,7 +263,14 @@ class $PresetField$bridge extends PresetField with $Bridge<PresetField> {
   });
 
   /// Configure this class for use in a [Runtime]
-  static void configureForRuntime(Runtime runtime) {}
+  static void configureForRuntime(Runtime runtime) {
+    runtime.registerBridgeFunc(
+      'package:every_door/models/field.dart',
+      'PresetField.',
+      $PresetField$bridge.$new,
+      isBridge: true,
+    );
+  }
 
   /// Compile-time type specification of [$PresetField$bridge]
   static const $spec = BridgeTypeSpec(
@@ -470,6 +477,18 @@ class $PresetField$bridge extends PresetField with $Bridge<PresetField> {
     wrap: false,
     bridge: true,
   );
+
+  /// Wrapper for the [PresetField.new] constructor
+  static $Value? $new(Runtime runtime, $Value? thisValue, List<$Value?> args) {
+    return $PresetField$bridge(
+      key: args[0]!.$value,
+      label: args[1]!.$value,
+      icon: args[2]?.$value,
+      placeholder: args[3]?.$value,
+      prerequisite: args[4]?.$value,
+      locationSet: args[5]?.$value,
+    );
+  }
 
   @override
   $Value? $bridgeGet(String identifier) {

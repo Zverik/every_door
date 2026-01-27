@@ -1,9 +1,10 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:every_door/helpers/editor_fields.dart';
 import 'package:dart_eval/stdlib/core.dart';
+import 'package:every_door/models/field.dart';
 
 /// dart_eval wrapper binding for [EditorFields]
-class $EditorFields implements $Instance {
+class $EditorFields implements EditorFields, $Instance {
   /// Configure this class for use in a [Runtime]
   static void configureForRuntime(Runtime runtime) {
     runtime.registerBridgeFunc(
@@ -141,11 +142,11 @@ class $EditorFields implements $Instance {
   static $Value? $new(Runtime runtime, $Value? thisValue, List<$Value?> args) {
     return $EditorFields.wrap(
       EditorFields(
-        fields: args[0]!.$value,
+        fields: (args[0]!.$reified as Iterable<dynamic>).cast(),
         title: args[1]?.$value,
         collapsed: args[2]?.$value ?? true,
         iconLabels: args[3]?.$value ?? false,
-        mandatoryKeys: (args[4]?.$reified ?? const {} as Set?)?.cast(),
+        mandatoryKeys: args[4]?.$reified?.cast() ?? <String>{},
       ),
     );
   }
@@ -190,4 +191,19 @@ class $EditorFields implements $Instance {
   void $setProperty(Runtime runtime, String identifier, $Value value) {
     return _superclass.$setProperty(runtime, identifier, value);
   }
+
+  @override
+  bool get collapsed => $value.collapsed;
+
+  @override
+  Iterable<PresetField> get fields => $value.fields;
+
+  @override
+  bool get iconLabels => $value.iconLabels;
+
+  @override
+  Set<String> get mandatoryKeys => $value.mandatoryKeys;
+
+  @override
+  String? get title => $value.title;
 }

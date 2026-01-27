@@ -24,8 +24,8 @@ class SharedFileController {
   void _initFileListener() {
     ReceiveSharingIntent.instance.getMediaStream().listen((value) {
       _mediaReceived(value);
-    }, onError: (err) {
-      _logger.warning('Error receiving file intent: $err');
+    }, onError: (err, st) {
+      _logger.warning('Error receiving file intent', err, st);
     });
   }
 

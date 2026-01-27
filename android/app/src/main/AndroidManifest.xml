@@ -60,12 +60,10 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data
-                    android:mimeType="application/zip"
-                    android:scheme="content" />
-                <data
-                    android:mimeType="application/octet-stream"
-                    android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/octet-stream" />
             </intent-filter>
         </activity>
        <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" android:exported="true">

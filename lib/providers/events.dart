@@ -9,6 +9,7 @@ import 'package:every_door/models/preset.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
+import 'package:logging/logging.dart';
 
 final eventsProvider =
     NotifierProvider<EventsNotifier, List<_EventListener>>(EventsNotifier.new);
@@ -60,6 +61,8 @@ class _EventListener {
 }
 
 class EventsNotifier extends Notifier<List<_EventListener>> {
+  static final _logger = Logger("EventsNotifier");
+
   @override
   List<_EventListener> build() => [];
 
@@ -87,7 +90,11 @@ class EventsNotifier extends Notifier<List<_EventListener>> {
     for (final e in state) {
       if (e.type == _EventType.modeCreated &&
           (pluginId == null || e.pluginId == pluginId)) {
-        await e.callback(_EventDataModeCreated(mode));
+        try {
+          await e.callback(_EventDataModeCreated(mode));
+        } on Exception catch (ex, st) {
+          _logger.severe("Failed to call ${e.pluginId}.onModeCreated", ex, st);
+        }
       }
     }
   }
@@ -108,7 +115,11 @@ class EventsNotifier extends Notifier<List<_EventListener>> {
         .where((e) => e.type == _EventType.uploading)
         .map((e) => e.callback(null));
     if (tasks.isNotEmpty) {
-      await Future.wait(tasks);
+      try {
+        await Future.wait(tasks);
+      } on Exception catch (e, st) {
+        _logger.warning("Some listeners to onUpload failed", e, st);
+      }
     }
   }
 
@@ -128,7 +139,11 @@ class EventsNotifier extends Notifier<List<_EventListener>> {
         .where((e) => e.type == _EventType.downloading)
         .map((e) => e.callback(_EventDataDownload(location)));
     if (tasks.isNotEmpty) {
-      await Future.wait(tasks);
+      try {
+        await Future.wait(tasks);
+      } on Exception catch (e, st) {
+        _logger.warning("Some listeners to onDownload failed", e, st);
+      }
     }
   }
 
@@ -151,12 +166,16 @@ class EventsNotifier extends Notifier<List<_EventListener>> {
       OsmChange amenity, Preset preset, Locale locale) async {
     for (final task in state) {
       if (task.type == _EventType.editorFields) {
-        fields = await task.callback(_EventDataEditorFields(
-          fields: fields,
-          amenity: amenity,
-          preset: preset,
-          locale: locale,
-        ));
+        try {
+          fields = await task.callback(_EventDataEditorFields(
+            fields: fields,
+            amenity: amenity,
+            preset: preset,
+            locale: locale,
+          ));
+        } on Exception catch (e, st) {
+          _logger.severe("Failed to call ${task.pluginId}.onEditorFields", e, st);
+        }
       }
     }
     return fields;

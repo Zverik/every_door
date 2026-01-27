@@ -327,13 +327,16 @@ class $PluginEvents implements $Instance {
       OsmChange arg1,
       Preset arg2,
       Locale arg3,
-    ) {
-      return (args[0]! as EvalCallable)(runtime, null, [
-        $List.view(arg0, (e) => $EditorFields.wrap(e)),
+    ) async {
+      final future = (args[0]! as EvalCallable)(runtime, null, [
+        // $List.view(arg0, (e) => $EditorFields.wrap(e)),
+        $List.wrap(arg0.map((ef) => $EditorFields.wrap(ef)).toList()),
         $OsmChange.wrap(arg1),
         $Preset.wrap(arg2),
         $Locale.wrap(arg3),
-      ])?.$value;
+      ]);
+      final value = await future!.$value;
+      return (value?.$reified as List<dynamic>).cast();
     });
     return null;
   }
