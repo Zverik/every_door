@@ -39,8 +39,9 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
   initState() {
     super.initState();
     final hoursStr = widget.hours?.trim() ?? '';
-    // Erase 24/7.
-    hours = HoursData(hoursStr == '24/7' ? '' : hoursStr);
+    // Erase 24/7 and "by appointment".
+    hours = HoursData(
+        hoursStr == '24/7' || hoursStr == '"by appointment"' ? '' : hoursStr);
     isRaw = hours.raw;
     _weekends = getWeekends(widget.element?.location);
     _findDefaultIntervals();
@@ -106,9 +107,12 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: TextFormField(
-        // The "24/7" value is removed in `initState()`, so we return it here.
-        // (Although it shouldn't be called logically).
-        initialValue: widget.hours?.trim() == '24/7' ? '24/7' : hours.hours,
+        // Return special values since they're removed in `initState()`.
+        initialValue: widget.hours?.trim() == '24/7'
+            ? '24/7'
+            : (widget.hours?.trim() == '"by appointment"'
+                ? '"by appointment"'
+                : hours.hours),
         textCapitalization: TextCapitalization.sentences,
         keyboardType: TextInputType.visiblePassword,
         autovalidateMode: AutovalidateMode.always,
@@ -274,6 +278,16 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
                   if (date != null) {
                     _addInactiveFragment(SpecificDays({date}));
                   }
+                },
+              ),
+              ElevatedButton(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(loc.fieldHoursByAppointment ?? 'By appointment',
+                      style: TextStyle(fontSize: 18.0)),
+                ),
+                onPressed: () {
+                  Navigator.pop(context, '"by appointment"');
                 },
               ),
             ],
