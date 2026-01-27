@@ -1,0 +1,4 @@
+* Aggiornati preset e livelli immagini.
+* Traduzione in greco e indonesiano.
+* Barra della scala nel selettore mappa.
+* Aggiunte le feature acquatiche nel micromapping.
