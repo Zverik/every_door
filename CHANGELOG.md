@@ -12,6 +12,7 @@ _Unreleased_
 * Support for `manyCombo` field type (e.g. gender for toilets).
 * A new simpler style for defining element kinds for plugins.
 * Shorter tiles in the plugin list.
+* Updated the local country language list (thanks @alnzrv).
 
 ## 7.1
 
