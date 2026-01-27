@@ -308,9 +308,10 @@ packages:
   dart_eval:
     dependency: "direct main"
     description:
-      path: "../dart_eval"
-      relative: true
-    source: path
+      name: dart_eval
+      sha256: "0a955d7b1a54bf9f3f7d0de64ba07992beb28e2938e9991892801c17a42c8e6e"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.8.4"
   dart_polylabel2:
     dependency: transitive
