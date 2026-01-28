@@ -82,7 +82,7 @@ class VisibleBoundsNotifier extends Notifier<LatLngBounds?> {
       // When new is bigger, it is not covered by old, that's okay.
       // When new is smaller (area < old.area), we hold until the difference is twofold.
       if (!old.expand(1e-5).containsBounds(bounds) ||
-          bounds.area() * 2 > old.area()) {
+          bounds.area() * 2 < old.area()) {
         state = bounds;
       }
     }

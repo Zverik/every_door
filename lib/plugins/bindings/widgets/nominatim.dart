@@ -25,6 +25,7 @@ class _NominatimNavigatorState extends ConsumerState<NominatimNavigator> {
   late final Debounceable<Iterable<NominatimResult>?, String> _debSearch;
 
   Future<List<NominatimResult>?> _queryNominatim(String search) async {
+    if (search.length < 2) return [];
     _currentSearch = search;
 
     // TODO: use Locale for the accept-language header, or parameter.
