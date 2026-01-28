@@ -1,6 +1,8 @@
 import 'dart:convert' show json;
 
+import 'package:every_door/constants.dart';
 import 'package:every_door/helpers/debouncable.dart';
+import 'package:every_door/models/plugin.dart';
 import 'package:every_door/providers/location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +33,9 @@ class _NominatimNavigatorState extends ConsumerState<NominatimNavigator> {
       'format': 'jsonv2',
       'email': 'everydoor@zverev.info',
     });
-    final result = await http.get(url);
+    final result = await http.get(url, headers: {
+      'User-Agent': '$kAppTitle $kAppVersion',
+    });
 
     if (_currentSearch != search) return null;
     _currentSearch = null;
