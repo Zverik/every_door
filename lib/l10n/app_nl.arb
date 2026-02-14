@@ -11,7 +11,7 @@
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
-  "tileDragOrUnfilter": "Beweeg alstublieft, voeg een POI toe, of wis de filter.",
+  "tileDragOrUnfilter": "Beweeg alstublieft, voeg een POI toe, of wis het filter.",
   "@tileDragOrUnfilter": {
     "description": "Message displayer when there's nothing around, and a filter is on."
   },
@@ -226,29 +226,19 @@
     "description": "Label for roof:shape in the form. Keep it short."
   },
   "buildingTypeHouse": "huis",
-  "@buildingTypeHouse": {},
   "buildingTypeShed": "schuur",
-  "@buildingTypeShed": {},
   "buildingTypeGarage": "garage",
-  "@buildingTypeGarage": {},
   "entranceFlats": "Huisnummers",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
   },
   "entranceAccessYes": "open",
-  "@entranceAccessYes": {},
   "entranceAccessPrivate": "privé",
-  "@entranceAccessPrivate": {},
   "entranceAccessNo": "neen",
-  "@entranceAccessNo": {},
   "entranceTypeMain": "hoofdingang",
-  "@entranceTypeMain": {},
   "entranceTypeStaircase": "trappenhal",
-  "@entranceTypeStaircase": {},
   "entranceTypeHome": "huisingang",
-  "@entranceTypeHome": {},
   "entranceTypeShop": "winkelingang",
-  "@entranceTypeShop": {},
   "addressHouseNumber": "Huisnummer",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
@@ -536,7 +526,6 @@
     "description": "Validation message for a non-standard phone number."
   },
   "entranceTypeGarage": "garage-ingang",
-  "@entranceTypeGarage": {},
   "fieldCheckboxNo": "neen",
   "@fieldCheckboxNo": {
     "description": "Checkbox name for no."
@@ -609,29 +598,23 @@
     "description": "Button for dismissal."
   },
   "buildingTypeCommercial": "commercieel",
-  "@buildingTypeCommercial": {},
   "buildingTypeConstruction": "in opbouw",
-  "@buildingTypeConstruction": {},
   "buildingMoreButton": "Meer",
   "@buildingMoreButton": {
     "description": "Button label for opening the building object in a full editor."
   },
   "buildingTypeIndustrial": "industrieel",
-  "@buildingTypeIndustrial": {},
   "entranceRef": "Verw",
   "@entranceRef": {
     "description": "Label for entrance ref in the form. Keep it short."
   },
   "buildingTypeAddress": "adres",
-  "@buildingTypeAddress": {},
   "entranceFlatsNumberList": "Zou een lijst getallen moeten zijn",
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
   },
   "buildingTypeApartments": "appartementen",
-  "@buildingTypeApartments": {},
   "buildingTypeRetail": "detailhandel",
-  "@buildingTypeRetail": {},
   "entranceWheelchair": "Rolstoel",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
@@ -645,7 +628,6 @@
     "description": "Label for entrance access in the form. Keep it short."
   },
   "entranceAccessDelivery": "levering",
-  "@entranceAccessDelivery": {},
   "entranceType": "Soort",
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
@@ -655,9 +637,7 @@
     "description": "Text displayed when the app is uploading data to the API."
   },
   "entranceTypeService": "dienstingang",
-  "@entranceTypeService": {},
   "entranceTypeEmergency": "nooduitgang",
-  "@entranceTypeEmergency": {},
   "addressStreet": "Straat",
   "@addressStreet": {
     "description": "Label for addr:street in the form. Keep it short."
@@ -703,19 +683,12 @@
     "description": "Label for addr:postcode in the form. Keep it short."
   },
   "buildingMaterialBrick": "baksteen",
-  "@buildingMaterialBrick": {},
   "buildingMaterialWood": "hout",
-  "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "beton",
-  "@buildingMaterialConcrete": {},
   "buildingMaterialStone": "steen",
-  "@buildingMaterialStone": {},
   "buildingMaterialMetal": "metaal",
-  "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "glas",
-  "@buildingMaterialGlass": {},
   "faqMapTiny": "Waarom is de kaart zo klein?",
-  "@faqMapTiny": {},
   "aboutInstalledVersion": "Geïnstalleerde versie",
   "@aboutInstalledVersion": {
     "description": "Button description for installed app version."
@@ -846,7 +819,6 @@
     "description": "Button title to open the raw opening hours editor."
   },
   "faqCheckmarksContent": "Dit zijn merktekens dat een voorziening is bevestigd. Ze voegen de `check_date`-tag toe met de huidige datum.\n\nHet idee achter de vinkjes is dat, stel, je hebt de helft van de stad voor de eerste keer hebt onderzocht. Na een maand kom je weer terug en ben je weer gaan onderzoeken. Je moet op een of andere manier bijhouden dat je de voorziening ziet, maar dat er niets aan is gewijzigd. Dat is het vinkje: je raakt hem aan en gaat door.\n\nHet vinkje blijft twee maanden aan staan. Daarna kan je de voorzieningen opnieuw onderzoeken.",
-  "@faqCheckmarksContent": {},
   "changesMapNotes": "Kaartnotities en tekeningen",
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
@@ -868,25 +840,15 @@
     "description": "Card title for the PH (public holidays) selector."
   },
   "buildingMaterial": "Voorgevel",
-  "@buildingMaterial": {},
   "buildingMaterialPlaster": "pleister",
-  "@buildingMaterialPlaster": {},
   "buildingMaterialPanels": "panelen",
-  "@buildingMaterialPanels": {},
   "buildingMaterialCementBlock": "cementblokken",
-  "@buildingMaterialCementBlock": {},
   "faqMapTinyContent": "Want dat is niet het punt. Je controleert alleen je positie op de kaart, en beweegt hem om aan te passen. Bekijk de lijst met voorzieningen eronder, op afstand van jou gesorteerd.\n\nDe kaart wordt groter als je voorzieningen bewerkt die ver van je af zijn. Echter is de app gemaakt om dingen te bewerken die je met je ogen kan zien.",
-  "@faqMapTinyContent": {},
   "faqTagging": "Alle tagging-vragen",
-  "@faqTagging": {},
   "faqTaggingContent": "Waarom mist er een object in de bewerker? Wanneer worden deze witte puntjes weergegeven in modus Micromapping? Hoe worden objecten gesorteerd?\n\nAntwoorden op al deze vragen staan in [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Hier is waar je naar kan kijken:\n\n* De sleutelvolgorde voor de hoofdtag — lijst `kMainKeys` in `main_key.dart`.\n* Welke objecten worden gedownload — klasse `_EverythingKind`.\n* Wat als een voorziening wordt beschouwd — klasse `_AmenityKind`.\n* Welke punten aan welke wegen worden gesnapt — klasse `ElementKindImpl` logica (bekijk de relevante subklassen).\n* Wanneer een object van micromapping incompleet is — klasse `needsMoreInfo`.",
-  "@faqTaggingContent": {},
   "faqCheckmarks": "Waar zijn de vinkjes voor?",
-  "@faqCheckmarks": {},
   "faqLettersContent": "Als je numerieke toetsenbord niet omgewisseld kan worden naar een volledig toetsenbord, kijk dan in de app-instellingen. Die zijn te vinden achter een knop in de linkerbovenhoek. Zet daar \"uitgebreide numerieke toetsenbord\" aan.",
-  "@faqLettersContent": {},
   "faqFloors": "Zijn verdiepingen '3' en '/3' hetzelfde?",
-  "@faqFloors": {},
   "navUpload": "Upload",
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
@@ -1055,17 +1017,11 @@
     "description": "Confirmation message when pressed a close note button."
   },
   "faqEntrance": "Hoe voeg ik een ingang van een gebouw toe?",
-  "@faqEntrance": {},
   "faqLetters": "Kan ik letters typen in een ref- of flatnummer?",
-  "@faqLetters": {},
   "faqFloorsContent": "Nee. De eerste heeft een `addr:floor=3`-tag. Dat is de verdieping zoals afgedrukt op navigatie en veelvuldig gebruikt. De tweede heeft niet deze tag, maar heeft `level=3`. Dat getal is een doorlopend verdiepingsnummer van nul tot `building:levels - 1`. Dat wil zeggen, in een gebouw van drie verdiepingen verschilt `addr:floor` per land, maar `level` is altijd 0, 1, of 2.\n\nHier is hoe de notatie in de bewerker aan deze tags relateert:\n\n* `2`: `addr:floor=2` en `level=*` die niet leeg is.\n* `4/`: `addr:floor=4`, maar er is geen `level` tag.\n* `/1`: `level=1`, maar er is geen `addr:floor` tag.\n* `1/0`: `addr:floor=1` + `level=0` (en er is een object in de buurt met dezelfde `addr:floor`, maar ander `level`, of vice versa).",
-  "@faqFloorsContent": {},
   "faqChangeType": "Hoe wijzig ik een voorzieningstype?",
-  "@faqChangeType": {},
   "faqChangeTypeContent": "Klik op de titel van de bewerker, waar het type geschreven staat.",
-  "@faqChangeTypeContent": {},
   "faqEntranceContent": "Aan de onderkant is een rij van modus-knoppen: micromapping, voorzieningen, toegangen, en notities.\n\nIn de toegangen-modus klik of sleep je de deur-knop in de onderste hoek de kaart op.",
-  "@faqEntranceContent": {},
   "navEntrancesMode": "Toegang-modus",
   "@navEntrancesMode": {
     "description": "Tooltip for the entrances mode button on the nav panel."
@@ -1109,9 +1065,7 @@
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
   "faqYellow": "Waarom zijn sommige huisnummers geel?",
-  "@faqYellow": {},
   "faqYellowContent": "Niet-gele labels in de toegangen-modus en witte punten in de micromapping modus betekenen dat de elementen een aantal belangrijke attributen missen. Bijvoorbeeld:\n\n* Van gebouwen wordt verwacht dat het een aantal verdiepingen heeft.\n* Ingangen zouden een type en, voor trappen, flatbereik moeten hebben.\n* Banken zouden een materiaal en een rugleuning moeten hebben.\n* Bomen zouden een bladsoort en cyclus moeten hebben.",
-  "@faqYellowContent": {},
   "warningTooOld": "Voorziening is {years} oud",
   "@warningTooOld": {
     "description": "Warning message for when an amenity is many years old.",
@@ -1203,7 +1157,6 @@
     "description": "Button title to mark a building demolished."
   },
   "drawUndo": "Ongedaan maken",
-  "@drawUndo": {},
   "notesDelete": "Verwijder",
   "@notesDelete": {
     "description": "Button title for deleting a new note."
