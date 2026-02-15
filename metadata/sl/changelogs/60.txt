@@ -1,0 +1,3 @@
+* Predlaganje pogosto uporabljenih oznak brez ujemajačih predlog.
+* Shranjevanje sličic predlog v predpomnilnik.
+* Izboljšave urejanja hišnih naslovov.
