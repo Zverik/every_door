@@ -218,8 +218,11 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
             : kOldAmenityDays);
   }
 
-  void check() {
-    this[kCheckedKey] = kDateFormat.format(DateTime.now());
+  void check([String? subKey]) {
+    final String finalKey = subKey == null || subKey.isEmpty 
+      ? kCheckedKey
+      : '$kCheckedKey:$subKey';
+    this[finalKey] = kDateFormat.format(DateTime.now());
   }
 
   void uncheck() {

@@ -96,6 +96,12 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
         tooltip: loc.fieldHoursSave,
         onPressed: () {
           final result = isRaw ? hours.hours : hours.buildHours();
+
+          // Set check_date:opening_hours to current date when changed.
+          if (result != widget.hours) {
+            widget.element?.check('opening_hours');
+          }
+
           Navigator.pop(context, result);
         },
       ),
@@ -201,6 +207,9 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
                   child: Text('24/7', style: TextStyle(fontSize: 20.0)),
                 ),
                 onPressed: () {
+                  if (widget.hours != '24/7') {
+                    widget.element?.check('opening_hours');
+                  }
                   Navigator.pop(context, '24/7');
                 },
               ),
