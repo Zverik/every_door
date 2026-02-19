@@ -79,6 +79,7 @@ class _OpeningHoursPageState extends ConsumerState<OpeningHoursPage> {
         actions: [
           IconButton(
             onPressed: () {
+              widget.element?.uncheck('opening_hours');
               Navigator.pop(context, '-');
             },
             icon: Icon(Icons.delete),

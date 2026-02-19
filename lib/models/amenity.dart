@@ -220,22 +220,31 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
 
   void check([String? subKey]) {
     final String finalKey = subKey == null || subKey.isEmpty 
-      ? kCheckedKey
-      : '$kCheckedKey:$subKey';
+        ? kCheckedKey
+        : '$kCheckedKey:$subKey';
     this[finalKey] = kDateFormat.format(DateTime.now());
   }
 
-  void uncheck() {
-    newTags.remove(kCheckedKey);
+  void uncheck([String? subKey]) {
+    final String keyToRemove = subKey == null || subKey.isEmpty 
+        ? kCheckedKey 
+        : '$kCheckedKey:$subKey';
+
+    newTags.remove(keyToRemove);
     _updateMainKey();
     notifyListeners();
   }
 
-  void toggleCheck() {
-    if (newTags.containsKey(kCheckedKey))
-      uncheck();
-    else
-      check();
+  void toggleCheck([String? subKey]) {
+    final String keyToToggle = subKey == null || subKey.isEmpty 
+        ? kCheckedKey 
+        : '$kCheckedKey:$subKey';
+    
+    if (newTags.containsKey(keyToToggle)) {
+      uncheck(subKey);
+    } else {
+      check(subKey);
+    }
   }
 
   set isDeleted(bool value) {
