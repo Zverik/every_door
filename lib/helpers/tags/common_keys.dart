@@ -1084,6 +1084,6 @@ const kCommonKeys = <String>{
   'parking:lane:left:perpendicular', 'note:2',
   'sanitary_dump_station:round_drain', 'lcd', 'area_lcd', 'entrance:steps',
   'roof:ridge:direction', 'building:name', 'whc:criteria', 'hut',
-  'animal_boarding', 'water_characteristic',
+  'animal_boarding', 'water_characteristic', 'airside',
   'destination:symbol:lanes:backward', 'ref:RS:kucni_broj', 'website:menu',
 };
