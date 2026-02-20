@@ -131,7 +131,12 @@ class _TextInputFieldState extends ConsumerState<TextInputField> {
         onChanged: (value) {
           // On every keypress, since the focus can change at any minute.
           setState(() {
-            widget.element[widget.field.key] = value.trim();
+            String v = value.trim();
+            if (widget.field.capitalize == TextFieldCapitalize.no) {
+              // Enforce lower case, because we set no caps for a reason.
+              v = v.toLowerCase();
+            }
+            widget.element[widget.field.key] = v;
           });
         },
       ),
