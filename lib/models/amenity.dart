@@ -219,16 +219,12 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
   }
 
   void check([String? subKey]) {
-    final String finalKey = subKey == null || subKey.isEmpty 
-        ? kCheckedKey
-        : '$kCheckedKey:$subKey';
-    this[finalKey] = kDateFormat.format(DateTime.now());
+    final String keyToCheck = _getCheckedKey(subKey);
+    this[keyToCheck] = kDateFormat.format(DateTime.now());
   }
 
   void uncheck([String? subKey]) {
-    final String keyToRemove = subKey == null || subKey.isEmpty 
-        ? kCheckedKey 
-        : '$kCheckedKey:$subKey';
+    final String keyToRemove = _getCheckedKey(subKey);
 
     newTags.remove(keyToRemove);
     _updateMainKey();
@@ -236,9 +232,7 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
   }
 
   void toggleCheck([String? subKey]) {
-    final String keyToToggle = subKey == null || subKey.isEmpty 
-        ? kCheckedKey 
-        : '$kCheckedKey:$subKey';
+    final String keyToToggle = _getCheckedKey(subKey);
     
     if (newTags.containsKey(keyToToggle)) {
       uncheck(subKey);
@@ -464,6 +458,11 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
     else
       this[key] = value;
   }
+
+  String _getCheckedKey([String? subKey]) => 
+    subKey == null || subKey.isEmpty 
+        ? kCheckedKey 
+        : '$kCheckedKey:$subKey';
 
   void removeOpeningHoursSigned() {
     const kSigned = 'opening_hours:signed';
