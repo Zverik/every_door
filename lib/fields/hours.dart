@@ -58,6 +58,20 @@ class _HoursInputFieldState extends ConsumerState<HoursInputField> {
     findMostCommonInterval();
   }
 
+  void _handleHoursResult(String hours) {
+    if (hours == '-') {
+      widget.element.uncheck(widget.field.key);
+      widget.element[widget.field.key] = null;
+      return;
+    }
+    
+    final oldHours = widget.element[widget.field.key];    
+    if (oldHours != hours) {
+      widget.element.check(widget.field.key);
+      widget.element[widget.field.key] = hours;
+    }
+  }
+
   String? _prettifyHours(String? hours) {
     if (hours == null) return null;
     return hours
@@ -117,8 +131,7 @@ class _HoursInputFieldState extends ConsumerState<HoursInputField> {
                             widget.element[widget.field.key],
                             element: widget.element)));
                 if (value != null) {
-                  widget.element[widget.field.key] =
-                      value == '-' ? null : value;
+                  _handleHoursResult(value);
                 }
               },
               child: Container(
