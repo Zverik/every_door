@@ -1,7 +1,10 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
+import 'dart:io' show File;
+
 import 'package:eval_annotation/eval_annotation.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:every_door/helpers/auth/controller.dart';
 import 'package:every_door/helpers/auth/provider.dart';
 import 'package:every_door/models/field.dart';
@@ -18,6 +21,7 @@ import 'package:every_door/providers/auth.dart';
 import 'package:every_door/providers/overlays.dart';
 import 'package:every_door/screens/modes/definitions/base.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 
 /// This class is used by plugins to interact with the app.
@@ -132,5 +136,73 @@ class EveryDoorApp {
   /// object property that is not intuitive to modify with a field.
   void addEditorButton(EditorButton button) {
     _ref.read(editorButtonsProvider.notifier).add(plugin.id, button);
+  }
+
+  /// Opens file picker on the host side and returns selected file path.
+  Future<String> pickFile(List<String> allowedExtensions) async {
+    const String fn = 'pickFile';
+
+    try {
+      logger.info('[$fn] opening file picker');
+      final FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: allowedExtensions.isEmpty ? FileType.any : FileType.custom,
+        allowedExtensions: allowedExtensions.isEmpty ? null : allowedExtensions,
+        allowMultiple: false,
+        withData: false,
+      );
+      if (result != null && result.files.isNotEmpty) {
+        final String? path = result.files.first.path;
+        if (path != null && path.isNotEmpty) {
+          logger.info('[$fn] file picker path: $path');
+          final f = File(path);
+          if (await f.exists()) {
+            logger.info('[$fn] file path exists');
+            return path;
+          }
+        }
+      } else {
+        logger.info('[$fn] file picker cancelled by user');
+        return "";
+      }
+    } catch (error) {
+      logger.warning('[$fn] file picker error: $error');
+    }
+
+    return "";
+  }
+
+  /// Sends a multipart request through host runtime to avoid dart_eval
+  /// limitations around binary multipart assembly.
+  Future<http.Response> uploadMultipartRequest(
+    String endpoint,
+    String filePath,
+    String uploadPath,
+    Map<String, String> headers,
+    Map<String, String> fields,
+  ) async {
+    try {
+      final List<String> pathParts = filePath.split('/');
+
+      final Uri uploadUri = Uri.https(endpoint, uploadPath);
+      logger.info('upload uri: $uploadUri');
+      final request = http.MultipartRequest('POST', uploadUri);
+      request.headers.addAll(headers);
+      request.fields.addAll(fields);
+      logger.info('upload headers: ${request.headers}');
+      logger.info('upload fields: ${request.fields}');
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'file',
+          filePath,
+          filename: pathParts.isEmpty ? filePath : pathParts.last,
+        ),
+      );
+
+      return await http.Response.fromStream(await request.send());
+    } catch (error, stackTrace) {
+      logger.warning('[uploadMultipartRequest] upload exception: $error');
+      logger.warning('[uploadMultipartRequest] $stackTrace');
+      return http.Response('', 0);
+    }
   }
 }

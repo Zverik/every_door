@@ -41,6 +41,7 @@ dependencies:
   flutter_portal: ^1.1.4
   flutter_riverpod: ^2.5.1
   flutter_secure_storage: ^10.0.0-beta.4
+  file_picker: ^10.3.2
   geolocator: ^14.0.1
   http: ^1.1.0
   image_picker: ^1.2.1

@@ -8,6 +8,7 @@ import 'package:every_door/plugins/bindings/plugins/preferences.eval.dart';
 import 'package:every_door/plugins/bindings/plugins/providers.eval.dart';
 import 'package:every_door/plugins/bindings/plugins/events.eval.dart';
 import 'package:flutter_map_eval/logging/logging_eval.dart';
+import 'package:flutter_map_eval/http/http_eval.dart';
 import 'package:every_door/plugins/bindings/screens/modes/definitions/base.eval.dart';
 import 'package:every_door/plugins/bindings/helpers/auth/controller.eval.dart';
 
@@ -347,6 +348,82 @@ class $EveryDoorApp implements $Instance {
           ],
         ),
       ),
+      'pickFile': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(CoreTypes.future, [
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.string),
+                nullable: true,
+              ),
+            ]),
+          ),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'allowedExtensions',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.list, [
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                ]),
+              ),
+              false,
+            ),
+          ],
+        ),
+      ),
+      'uploadMultipartRequest': BridgeMethodDef(
+        BridgeFunctionDef(
+          returns: BridgeTypeAnnotation(
+            BridgeTypeRef(CoreTypes.future, [
+              BridgeTypeAnnotation(
+                BridgeTypeRef(
+                  BridgeTypeSpec('package:http/src/response.dart', 'Response'),
+                  [],
+                ),
+              ),
+            ]),
+          ),
+          namedParams: [],
+          params: [
+            BridgeParameter(
+              'endpoint',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+            BridgeParameter(
+              'filePath',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+            BridgeParameter(
+              'uploadPath',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string, [])),
+              false,
+            ),
+            BridgeParameter(
+              'headers',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.map, [
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                ]),
+              ),
+              false,
+            ),
+            BridgeParameter(
+              'fields',
+              BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.map, [
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                ]),
+              ),
+              false,
+            ),
+          ],
+        ),
+      ),
     },
     getters: {
       'ref': BridgeMethodDef(
@@ -528,6 +605,12 @@ class $EveryDoorApp implements $Instance {
 
       case 'addEditorButton':
         return __addEditorButton;
+
+      case 'pickFile':
+        return __pickFile;
+
+      case 'uploadMultipartRequest':
+        return __uploadMultipartRequest;
     }
     return _superclass.$getProperty(runtime, identifier);
   }
@@ -636,6 +719,53 @@ class $EveryDoorApp implements $Instance {
     final self = target! as $EveryDoorApp;
     self.$value.addEditorButton(args[0]!.$value);
     return null;
+  }
+
+  static const $Function __pickFile = $Function(_pickFile);
+
+  static $Value? _pickFile(
+    Runtime runtime,
+    $Value? target,
+    List<$Value?> args,
+  ) {
+    final self = target! as $EveryDoorApp;
+    final List<String> allowedExtensions = <String>[];
+    for (final dynamic value in (runtime.args[1] as $Value).$value as List) {
+      allowedExtensions.add(value.$value as String);
+    }
+    return $Future.wrap(
+      self.$value.pickFile(allowedExtensions).then((value) => $String(value)),
+    );
+  }
+
+  static const $Function __uploadMultipartRequest =
+      $Function(_uploadMultipartRequest);
+
+  static Map<String, String> _unwrapStringMapArg(dynamic value) {
+    final Map<String, String> result = <String, String>{};
+    for (final entry in value.entries) {
+      result[entry.key!.$value] = entry.value!.$value;
+    }
+    return result;
+  }
+
+  static $Value? _uploadMultipartRequest(
+    Runtime runtime,
+    $Value? target,
+    List args,
+  ) {
+    final self = target! as $EveryDoorApp;
+    return $Future.wrap(
+      self.$value
+          .uploadMultipartRequest(
+            runtime.args[1] as String,
+            runtime.args[2] as String,
+            runtime.args[3] as String,
+            _unwrapStringMapArg(runtime.args[4]),
+            _unwrapStringMapArg(runtime.args[5]),
+          )
+          .then((value) => $Response.wrap(value)),
+    );
   }
 
   @override
