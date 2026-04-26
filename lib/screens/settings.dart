@@ -174,6 +174,15 @@ class SettingsPage extends ConsumerWidget {
                     },
                     initialValue: editorSettings.preferContact,
                   ),
+                SettingsTile.switchTile(
+                  title: Text(loc.settingsPreferBlockAddress),
+                  onToggle: (value) {
+                    ref
+                        .read(editorSettingsProvider.notifier)
+                        .setPreferBlockAddress(value);
+                  },
+                  initialValue: editorSettings.preferBlockAddress,
+                ),
               ],
             ),
             if (defaultTargetPlatform == TargetPlatform.android)

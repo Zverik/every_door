@@ -1268,6 +1268,42 @@
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
   },
+  "addressProvince": "Province",
+  "@addressProvince": {
+    "description": "Label for addr:province in the form. Keep it short."
+  },
+  "addressCity": "City/Ward",
+  "@addressCity": {
+    "description": "Label for addr:city in the form. Keep it short."
+  },
+  "addressCounty": "County",
+  "@addressCounty": {
+    "description": "Label for addr:county in the form. Keep it short."
+  },
+  "addressSuburb": "District",
+  "@addressSuburb": {
+    "description": "Label for addr:suburb in the form. Keep it short."
+  },
+  "addressNeighbourhood": "Neighbourhood",
+  "@addressNeighbourhood": {
+    "description": "Label for addr:neighbourhood in the form. Keep it short."
+  },
+  "addressQuarter": "Quarter",
+  "@addressQuarter": {
+    "description": "Label for addr:quarter in the form. Keep it short."
+  },
+  "addressPostcode": "Postcode",
+  "@addressPostcode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "addressPostcodeWrong": "Wrong postcode format (123-4567)",
+  "@addressPostcodeWrong": {
+    "description": "Validation message for a wrong postcode format."
+  },
+  "settingsPreferBlockAddress": "Use block-based addressing",
+  "@settingsPreferBlockAddress": {
+    "description": "Title for the setting to use block-based addressing (city, neighbourhood, block, house) instead of street-based."
+  },
   "notesAddNote": "Add note",
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."

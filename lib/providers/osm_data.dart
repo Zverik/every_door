@@ -12,6 +12,7 @@ import 'package:every_door/helpers/location_object.dart';
 import 'package:every_door/helpers/normalizer.dart';
 import 'package:every_door/helpers/tags/payment_tags.dart';
 import 'package:every_door/models/address.dart';
+import 'package:every_door/models/address_blockbased.dart';
 import 'package:every_door/models/floor.dart';
 import 'package:every_door/models/osm_element.dart';
 import 'package:every_door/models/road_name.dart';
@@ -249,6 +250,39 @@ class OsmDataHelper extends ChangeNotifier {
     }
 
     // Return N closest addresses.
+    final results = addresses.keys.toList();
+    results.sort((a, b) => addresses[a]!.compareTo(addresses[b]!));
+    if (results.length > limit) return results.sublist(0, limit);
+    return results;
+  }
+
+  /// Build block-based addresses directly from OSM elements' tags to 
+  /// preserve fields like province/county/city/neighbourhood when present. 
+  Future<List<BlockBasedAddress>> getBlockBasedAddressesAround(LatLng location,
+      {int limit = 4, bool includeAmenities = true}) async {
+    // 
+    final elements = await _getAddressedElementsAround(location);
+
+    // Optionally remove non-buildings/amenities to align with Street variant behavior.
+    if (!includeAmenities) {
+      elements.removeWhere((e) => !isBuildingOrAddressPoint(e.tags));
+    }
+
+    const distance = DistanceEquirectangular();
+    final Map<BlockBasedAddress, double> addresses = {};
+
+    for (final e in elements) {
+      final fromTags = BlockBasedAddress.fromTags(e.tags, location: e.center);
+
+      if (fromTags.isNotEmpty && e.center != null) {
+        final dist = distance(location, e.center!);
+        final old = addresses[fromTags];
+        if (old == null || old > dist) {
+          addresses[fromTags] = dist;
+        }
+      }
+    }
+
     final results = addresses.keys.toList();
     results.sort((a, b) => addresses[a]!.compareTo(addresses[b]!));
     if (results.length > limit) return results.sublist(0, limit);

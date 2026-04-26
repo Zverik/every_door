@@ -19,6 +19,7 @@ class StreetAddress {
   final String? blockNumber;
   final String? place;
   final String? city;
+  final String? province;
 
   /// The key part before the semicolon, "addr" by default.
   final String base;
@@ -32,6 +33,7 @@ class StreetAddress {
     this.blockNumber,
     this.place,
     this.city,
+    this.province,
     this.location,
     this.base = "addr",
   });
@@ -49,6 +51,7 @@ class StreetAddress {
         blockNumber: blockNumber,
         place: place,
         city: city,
+        province: province,
         location: location,
         base: base,
       );
@@ -67,6 +70,7 @@ class StreetAddress {
       city: (tags['$base:street'] == null && tags['$base:place'] == null)
           ? tags['$base:city']
           : null,
+      province: tags['$base:province'],
       location: location,
     );
   }
@@ -79,7 +83,8 @@ class StreetAddress {
           place == null &&
           city == null &&
           block == null &&
-          blockNumber == null);
+          blockNumber == null &&
+          province == null);
   bool get isNotEmpty => !isEmpty;
 
   /// Applies address tags onto the [element]. Does not erase
@@ -98,8 +103,9 @@ class StreetAddress {
       element['$base:street'] = street;
     else if (place != null)
       element['$base:place'] = place;
-    else
+    else if (city != null)
       element['$base:city'] = city;
+    if (province != null) element['$base:province'] = province;
   }
 
   /// Applies address tags onto the [element], removing any tags
@@ -112,6 +118,7 @@ class StreetAddress {
     element['$base:block_number'] = blockNumber;
     element['$base:street'] = street;
     element['$base:place'] = place;
+    element['$base:province'] = province;
     // TODO: decide something about the city
     if (city != null) element['$base:city'] = city;
   }
@@ -126,7 +133,8 @@ class StreetAddress {
       'block_number',
       'street',
       'place',
-      'city'
+      'city',
+      'province'
     ]) element.removeTag('$base:$key');
   }
 
@@ -141,7 +149,8 @@ class StreetAddress {
         blockNumber == other.blockNumber &&
         street == other.street &&
         place == other.place &&
-        city == other.city;
+        city == other.city &&
+        province == other.province;
   }
 
   @override
@@ -149,6 +158,7 @@ class StreetAddress {
       (housenumber ?? housename ?? '').hashCode +
       (block ?? blockNumber ?? '').hashCode +
       (street ?? place ?? city ?? '').hashCode +
+      (province ?? '').hashCode +
       unit.hashCode;
 
   @override
