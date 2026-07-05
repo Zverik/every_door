@@ -231,4 +231,34 @@ void main() {
           t, {'was:first': 'value', 'second': 'value2'}, 'was:first', isTrue);
     });
   });
+
+  group('\$missing nested under when', () {
+    TagMatcher build() => TagMatcher.fromJson(<String, dynamic>{
+          'amenity': <String, dynamic>{
+            'when': <String, dynamic>{
+              'bench': <String, dynamic>{
+                '\$missing': <dynamic>['armrest', 'backrest', 'material'],
+              },
+            },
+          },
+        });
+
+    test('nested matcher keeps its own \$missing list', () {
+      expect(build().rules['amenity']!.when['bench']!.missing,
+          equals({'armrest', 'backrest', 'material'}));
+    });
+
+    test('flags a bench missing those tags', () {
+      tmatch(build(), {'amenity': 'bench'}, 'amenity', isTrue);
+    });
+
+    test('does not flag a fully tagged bench', () {
+      tmatch(build(), {
+        'amenity': 'bench',
+        'armrest': 'yes',
+        'backrest': 'yes',
+        'material': 'wood',
+      }, 'amenity', isFalse);
+    });
+  });
 }

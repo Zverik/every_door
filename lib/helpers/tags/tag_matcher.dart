@@ -123,13 +123,20 @@ class TagMatcher {
   factory TagMatcher.fromJson(Map<String, dynamic>? data) {
     if (data == null) return empty;
 
-    final rules = data.map((k, v) => MapEntry(k, ValueMatcher.fromJson(v)));
-    rules.removeWhere((k, v) => k.startsWith('\$'));
+    final rules = <String, ValueMatcher>{};
+    for (final entry in data.entries) {
+      if (entry.key.startsWith('\$')) continue;
+      rules[entry.key] = ValueMatcher.fromJson(entry.value);
+    }
 
     return TagMatcher(
       rules,
-      good: Set.of(data['\$good'] ?? const []),
-      missing: Set.of(data['\$missing'] ?? const []),
+      good: Set.of(
+          (data['\$good'] as Iterable<dynamic>?)?.whereType<String>() ??
+              const []),
+      missing: Set.of(
+          (data['\$missing'] as Iterable<dynamic>?)?.whereType<String>() ??
+              const []),
     );
   }
 
@@ -329,7 +336,7 @@ class ValueMatcher {
       only: Set.of((data['only'] as Iterable<dynamic>?)?.whereType<String>() ??
           const []),
       when: (data['when'] as Map<String, dynamic>?)
-              ?.map((k, v) => MapEntry(k, TagMatcher.fromJson(data['when']))) ??
+              ?.map((k, v) => MapEntry(k, TagMatcher.fromJson(v))) ??
           const {},
       replace: data['replace'] ?? true,
     );
