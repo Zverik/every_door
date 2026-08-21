@@ -1,0 +1,6 @@
+{
+  "loadingStart": "Wrthi'n dechrau…",
+  "@loadingStart": {
+    "description": "Initial message for the loading screen, virtually unseen."
+  }
+}

@@ -112,7 +112,6 @@
     "description": "What is written on the floor chooser if there are no floors to choose."
   },
   "entranceTypeEmergency": "அவசரநிலை",
-  "@entranceTypeEmergency": {},
   "addressHouseNumber": "வீடு",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
@@ -142,15 +141,10 @@
     "description": "Tool description: non-segregated cycleway. Keep it short."
   },
   "faqYellow": "சில அவுச்நம்பர்ச் மஞ்சள் ஏன்?",
-  "@faqYellow": {},
   "faqFloorsContent": "இல்லை. முதலாவது `ஏ.டி.டி.ஆர்: மாடி = 3` குறிச்சொல் நிரப்பப்பட்டது. இது வழிசெலுத்தலில் அச்சிடப்பட்டு பொதுவாகப் பயன்படுத்தப்படுவதால் அது தான். இரண்டாவதாக இந்த குறிச்சொல் இல்லை, ஆனால் `நிலை = 3` உள்ளது. அந்த எண் பூச்சியத்திலிருந்து கட்டிடம்: நிலைகள் - 1` வரையிலான தொடர்ச்சியான மாடி எண். அதாவது, மூன்று மாடி கட்டிடத்தில் `ஏ.டி.டி.ஆர்: மாடி` மதிப்பு ஒரு நாட்டைப் பொறுத்தது, ஆனால்` நிலை` எப்போதும் 0, 1, அல்லது 2 ஆகும்.\n\n இந்த குறிச்சொற்கள் தொடர்பான எடிட்டரில் உள்ள குறியீடு இங்கே:\n\n * `2`:` ஏ.டி.டி.ஆர்: மாடி = 2` மற்றும் காலியாக இல்லாத `நிலை =*`.\n * `4/`: `ஏ.டி.டி.ஆர்: மாடி = 4`, ஆனால்` நிலை` குறிச்சொல் இல்லை.\n * `/1`:` நிலை = 1`, ஆனால் `ஏடிஆர்: மாடி` குறிச்சொல் இல்லை.\n .",
-  "@faqFloorsContent": {},
   "faqChangeType": "ஒரு வசதி வகையை மாற்றுவது எப்படி?",
-  "@faqChangeType": {},
   "faqChangeTypeContent": "வகை எழுதப்பட்ட எடிட்டர் தலைப்பைத் தட்டவும்.",
-  "@faqChangeTypeContent": {},
   "faqTagging": "அனைத்து குறியீட்டு கேள்விகளும்",
-  "@faqTagging": {},
   "loadingTooMuchData": "எடிட்டரை விரைவாகச் செய்ய அமைப்புகளில் பதிவிறக்கம் செய்யப்பட்ட தரவை தூய்மைப்படுத்துங்கள்.",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
@@ -1063,43 +1057,24 @@
     "description": "Button label for opening the building object in a full editor."
   },
   "buildingMaterial": "முகப்பில்",
-  "@buildingMaterial": {},
   "buildingMaterialBrick": "செங்கல்",
-  "@buildingMaterialBrick": {},
   "buildingMaterialPlaster": "பிளாச்டர்",
-  "@buildingMaterialPlaster": {},
   "buildingMaterialWood": "மரம்",
-  "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "கான்கிரீட்",
-  "@buildingMaterialConcrete": {},
   "buildingMaterialPanels": "பேனல்கள்",
-  "@buildingMaterialPanels": {},
   "buildingMaterialCementBlock": "சிமென்ட் தொகுதிகள்",
-  "@buildingMaterialCementBlock": {},
   "buildingTypeRetail": "சில்லறை",
-  "@buildingTypeRetail": {},
   "buildingTypeCommercial": "வணிக",
-  "@buildingTypeCommercial": {},
   "buildingTypeShed": "கொட்டகை",
-  "@buildingTypeShed": {},
   "buildingMaterialStone": "கல்",
-  "@buildingMaterialStone": {},
   "buildingMaterialMetal": "மாழை",
-  "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "கண்ணாடி",
-  "@buildingMaterialGlass": {},
   "buildingTypeAddress": "முகவரி",
-  "@buildingTypeAddress": {},
   "buildingTypeHouse": "வீடு",
-  "@buildingTypeHouse": {},
   "buildingTypeApartments": "குடியிருப்புகள்",
-  "@buildingTypeApartments": {},
   "buildingTypeIndustrial": "தொழில்",
-  "@buildingTypeIndustrial": {},
   "buildingTypeGarage": "கேரேச்",
-  "@buildingTypeGarage": {},
   "buildingTypeConstruction": "கட்டுமானம்",
-  "@buildingTypeConstruction": {},
   "entranceFlats": "பிளாட்",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
@@ -1121,13 +1096,9 @@
     "description": "Label for entrance access in the form. Keep it short."
   },
   "entranceAccessYes": "திற",
-  "@entranceAccessYes": {},
   "entranceAccessPrivate": "தனிப்பட்ட",
-  "@entranceAccessPrivate": {},
   "entranceAccessNo": "இல்லை",
-  "@entranceAccessNo": {},
   "entranceAccessDelivery": "வழங்கு",
-  "@entranceAccessDelivery": {},
   "entranceWheelchair": "சக்கர நாற்காலி",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
@@ -1137,11 +1108,8 @@
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "entranceTypeMain": "முக்கிய",
-  "@entranceTypeMain": {},
   "entranceTypeStaircase": "படிக்கட்டு",
-  "@entranceTypeStaircase": {},
   "entranceTypeHome": "வீடு",
-  "@entranceTypeHome": {},
   "addressStreet": "தெரு",
   "@addressStreet": {
     "description": "Label for addr:street in the form. Keep it short."
@@ -1151,11 +1119,8 @@
     "description": "Label for addr:place or addr:city in the form. Keep it short."
   },
   "entranceTypeShop": "கடை",
-  "@entranceTypeShop": {},
   "entranceTypeService": "பணி",
-  "@entranceTypeService": {},
   "entranceTypeGarage": "கேரேச்",
-  "@entranceTypeGarage": {},
   "addressHouseNotEmpty": "காலியாக இருக்கக்கூடாது",
   "@addressHouseNotEmpty": {
     "description": "Validator message for addr:housenumber."
@@ -1201,7 +1166,6 @@
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
   "drawUndo": "செயல்தவிர்",
-  "@drawUndo": {},
   "drawWall": "சுவர்",
   "@drawWall": {
     "description": "Tool description: wall, non-see-through barrier. Keep it short."
@@ -1243,7 +1207,6 @@
     "description": "Text displayed when the app is uploading notes to the API."
   },
   "faqMapTiny": "வரைபடம் ஏன் சிறியது?",
-  "@faqMapTiny": {},
   "drawCulvert": "கல்வெர்ட்",
   "@drawCulvert": {
     "description": "Tool description: underground water pipe, culvert. Keep it short."
@@ -1253,25 +1216,15 @@
     "description": "Text displayed when the app is downloading data from the API."
   },
   "faqEntrance": "கட்டிட நுழைவாயிலை எவ்வாறு சேர்ப்பது?",
-  "@faqEntrance": {},
   "faqEntranceContent": "கீழே பயன்முறை பொத்தான்கள் உள்ளன: மைக்ரோமேப்பிங், வசதிகள், நுழைவாயில்கள் மற்றும் குறிப்புகள்.\n\n நுழைவாயில்கள் பயன்முறையில், கீழ் மூலையில் உள்ள கதவு பொத்தானை வரைபடத்தில் தட்டவும் அல்லது இழுக்கவும்.",
-  "@faqEntranceContent": {},
   "faqMapTinyContent": "ஏனெனில் அது புள்ளி அல்ல. நீங்கள் வரைபடத்தில் உங்கள் நிலைப்பாட்டை மட்டுமே சரிபார்த்து, அதை சரிசெய்ய பான். உங்களிடமிருந்து தூரத்தால் வரிசைப்படுத்தப்பட்ட கீழே உள்ள வசதி பட்டியலைப் பாருங்கள்.\n\n உங்கள் இருப்பிடத்திலிருந்து வெகு தொலைவில் உள்ள வசதிகளைத் திருத்தும்போது வரைபடம் பெரிதாகிறது. உங்கள் கண்களால் நீங்கள் காணும் விசயங்களைத் திருத்த பயன்பாடு செய்யப்பட்டிருந்தாலும்.",
-  "@faqMapTinyContent": {},
   "faqCheckmarks": "சோதனை என்ன?",
-  "@faqCheckmarks": {},
   "faqCheckmarksContent": "வசதி தரவு உறுதிப்படுத்தப்பட்ட மதிப்பெண்கள் இவை. அவை தற்போதைய தேதியுடன் `check_date` குறிச்சொல்லைச் சேர்க்கின்றன.\n\n செக்மார்க்சுக்குப் பின்னால் உள்ள சிந்தனை என்னவென்றால், நீங்கள் முதல் முறையாக நகரத்தை பாதி கணக்கெடுத்தீர்கள் என்று சொல்லுங்கள். ஒரு மாதத்திற்குப் பிறகு நீங்கள் திரும்பி வந்து மீண்டும் கணக்கெடுப்புக்குச் சென்றீர்கள். நீங்கள் வசதியைக் காண்கிறீர்கள் என்று நீங்கள் எப்படியாவது குறிக்க வேண்டும், ஆனால் அதைப் பற்றி எதுவும் மாறவில்லை. அதுதான் செக்மார்க்: நீங்கள் அதைத் தட்டவும் தொடரவும்.\n\n குறி இரண்டு மாதங்கள் சரிபார்க்கப்படுகிறது. அதன் பிறகு நீங்கள் மீண்டும் வசதிகளை ஆய்வு செய்யலாம்.",
-  "@faqCheckmarksContent": {},
   "faqYellowContent": "நுழைவாயில்கள் பயன்முறையில் மஞ்சள் அல்லாத லேபிள்கள் மற்றும் மைக்ரோமேப்பிங் பயன்முறையில் வெள்ளை புள்ளிகள் என்பது கூறுகளுக்கு சில முக்கியமான பண்புகளைக் கொண்டிருக்கவில்லை. உதாரணமாக:\n\n * கட்டிடங்களுக்கு எண்ணிக்கை இருக்கும் என்று எதிர்பார்க்கப்படுகிறது.\n * நுழைவாயில்கள் வகை மற்றும், படிக்கட்டுகளுக்கு, தட்டையான வரம்பு இருக்க வேண்டும்.\n * பெஞ்சுகளில் பொருள் மற்றும் பேக்ரெச்ட் இருக்க வேண்டும்.\n * மரங்களுக்கு இலை வகை மற்றும் சுழற்சி இருக்க வேண்டும்.",
-  "@faqYellowContent": {},
-  "faqLetters": "கடிதங்களை ஒரு REF அல்லது ஒரு தட்டையான எண்ணில் தட்டச்சு செய்யலாமா?",
-  "@faqLetters": {},
+  "faqLetters": "எழுத்துகளை ஒரு குறி அல்லது ஒரு தட்டையான எண்ணில் தட்டச்சு செய்யலாமா?",
   "faqLettersContent": "உங்கள் எண் விசைப்பலகையை முழுமையாக மாற்ற முடியாவிட்டால், பயன்பாட்டு அமைப்புகளை சரிபார்க்கவும். அவை மேல் இடது மூலையில் உள்ள பொத்தானின் பின்னால் உள்ளன. அங்கு \"நீட்டிக்கப்பட்ட எண் விசைப்பலகை\" ஐ மாற்றவும்.",
-  "@faqLettersContent": {},
   "faqFloors": "தளங்கள் '3' மற்றும் '/3' ஆகியவை ஒரே மாதிரியானதா?",
-  "@faqFloors": {},
   "faqTaggingContent": "எடிட்டரில் ஒரு பொருள் ஏன் காணவில்லை? மைக்ரோமேப்பிங் பயன்முறையில் இந்த வெள்ளை புள்ளிகள் எப்போது காட்டப்படுகின்றன? பொருள்கள் எவ்வாறு வரிசைப்படுத்தப்படுகின்றன? \n\nஇந்த எல்லா கேள்விகளுக்கும் பதில்கள் [element_kind_std.dart] (https://github.com/zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) இல் உள்ளன. நீங்கள் பார்க்கக்கூடியது இங்கே: \n\n* முக்கிய குறிச்சொல்லுக்கான முக்கிய ஆர்டர் - `main_key.dart` இல்` Kmainkeys` பட்டியல். \n* எந்த பொருள்கள் பதிவிறக்கம் செய்யப்படுகின்றன - வகுப்பு `_ everythingkind`. \n* ஒரு வசதி என்று கருதப்படுவது - வகுப்பு `_amenityKind`. \n. \n* மைக்ரோமேப்பிங் பொருள் முழுமையடையாதபோது - வகுப்பு `_needsmoreinfo`.",
-  "@faqTaggingContent": {},
   "tileDragDownload": "பதிவிறக்க பொத்தானைத் தட்ட முயற்சிக்கவும்.",
   "@tileDragDownload": {
     "description": "Message displayed when there is nothing around, and a download button is present."
@@ -1355,5 +1308,51 @@
   "pluginsSeeLogs": "பதிவுகள் பார்க்கவும்",
   "@pluginsSeeLogs": {
     "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "mapStraight": "மீண்டும் சுழற்று",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "settingsCachesClearRaster": "ராச்டர் டைல் கேச்களை அழிக்கவும்",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "தெளிவான வெக்டார் டைல்ச்",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "வெக்டர் டைல் கேச்களை அழிக்கவும்",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "கைமுறையாக பதிவிறக்கம் செய்யப்பட்ட ஓடுகளை அழிக்கவும்",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "பதிவிறக்கம் செய்ய ஓடுகளைத் தேர்ந்தெடுக்கவும்",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "தரவைப் பதிவிறக்கவும்",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "வரைபட ஓடுகளைப் பதிவிறக்கவும்",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "செயற்கைக்கோளைப் பதிவிறக்கவும்",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "ரத்து வெற்றி ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
   }
 }
