@@ -294,6 +294,7 @@ PresetField fieldFromJson(Map<String, dynamic> data,
         prerequisite: prerequisite,
         locationSet: locationSet,
         maxLines: typ == 'textarea' ? 4 : null,
+        keyboardType: typ == 'textarea' ? TextInputType.multiline : TextInputType.text,
         capitalize: capitalize,
         showClearButton: typ == 'colour' || parseBool(data['clearButton']),
       );
