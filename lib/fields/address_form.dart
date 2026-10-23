@@ -72,7 +72,8 @@ class _AddressFormFieldState extends ConsumerState<AddressFormField> {
     _streetFocus = FocusNode();
     street = address.street;
     place = address.place ?? address.city;
-    needBlockNumber = CountryCoder.instance.isIn(
+    final preferBlock = ref.read(editorSettingsProvider).preferBlockAddress;
+    needBlockNumber = preferBlock || CountryCoder.instance.isIn(
       lat: widget.element.location.latitude,
       lon: widget.element.location.longitude,
       inside: 'Q17', // Japan

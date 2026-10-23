@@ -635,13 +635,53 @@
   "@addressUnitOptional": {
     "description": "Hint for addr:unit that it's optional."
   },
-  "addressStreet": "街路",
+  "addressBlock": "番地",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "addressStreet": "道路",
   "@addressStreet": {
     "description": "Label for addr:street in the form. Keep it short."
   },
   "addressPlace": "市町村",
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
+  },
+  "addressProvince": "都道府県",
+  "@addressProvince": {
+    "description": "Label for addr:province in the form. Keep it short."
+  },
+  "addressCity": "市町村・23区",
+  "@addressCity": {
+    "description": "Label for addr:city in the form. Keep it short."
+  },
+  "addressCounty": "郡",
+  "@addressCounty": {
+    "description": "Label for addr:county in the form. Keep it short."
+  },
+  "addressSuburb": "区",
+  "@addressSuburb": {
+    "description": "Label for addr:suburb in the form. Keep it short."
+  },
+  "addressNeighbourhood": "町丁・字",
+  "@addressNeighbourhood": {
+    "description": "Label for addr:neighbourhood in the form. Keep it short."
+  },
+  "addressQuarter": "大字",
+  "@addressQuarter": {
+    "description": "Label for addr:quarter in the form. Keep it short."
+  },
+  "addressPostcode": "郵便番号",
+  "@addressPostcode": {
+    "description": "Label for addr:postcode in the form. Keep it short."
+  },
+  "addressPostcodeWrong": "郵便番号の形式が異なります (123-4567)",
+  "@addressPostcodeWrong": {
+    "description": "Validation message for a wrong postcode format."
+  },
+  "settingsPreferBlockAddress": "番地ベースの住所入力を使用",
+  "@settingsPreferBlockAddress": {
+    "description": "Title for the setting to use block-based addressing (city, neighbourhood, block, house) instead of street-based."
   },
   "apiStatusDownloading": "データダウンロード中…",
   "@apiStatusDownloading": {
@@ -1131,10 +1171,6 @@
   "fieldDirectionSet": "セット",
   "@fieldDirectionSet": {
     "description": "Button label for setting a direction (0-360°) value."
-  },
-  "addressBlock": "街区符号/番/番地/地番",
-  "@addressBlock": {
-    "description": "Label for addr:block_number or addr_block. Keep it short."
   },
   "notesComment": "あなたのコメント",
   "@notesComment": {

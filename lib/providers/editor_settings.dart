@@ -15,6 +15,7 @@ class EditorSettings {
   static const kDefaultPayment = ['debit_cards', 'credit_cards'];
 
   final bool preferContact;
+  final bool preferBlockAddress;
   final bool fixNumKeyboard;
   final bool leftHand;
   final List<String> defaultPayment;
@@ -22,6 +23,7 @@ class EditorSettings {
 
   const EditorSettings({
     this.preferContact = false,
+    this.preferBlockAddress = false,
     this.fixNumKeyboard = true,
     this.leftHand = false,
     this.defaultPayment = kDefaultPayment,
@@ -30,6 +32,7 @@ class EditorSettings {
 
   EditorSettings copyWith({
     bool? preferContact,
+    bool? preferBlockAddress,
     bool? fixNumKeyboard,
     bool? leftHand,
     List<String>? defaultPayment,
@@ -37,6 +40,7 @@ class EditorSettings {
   }) {
     return EditorSettings(
       preferContact: preferContact ?? this.preferContact,
+      preferBlockAddress: preferBlockAddress ?? this.preferBlockAddress,
       fixNumKeyboard: fixNumKeyboard ?? this.fixNumKeyboard,
       leftHand: leftHand ?? this.leftHand,
       defaultPayment: defaultPayment ?? this.defaultPayment,
@@ -53,9 +57,10 @@ class EditorSettings {
           ? kDefaultPayment
           : data[2].split(';').map((s) => s.trim()).toList(),
       leftHand: data.length >= 4 && data[3] == '1',
-      changesetReview: data.length < 5
-          ? ChangesetReview.never
+      changesetReview: data.length < 5 
+          ? ChangesetReview.never 
           : ChangesetReview.values[int.parse(data[4])],
+      preferBlockAddress: data.length >= 6 && data[5] == '1',
     );
   }
 
@@ -66,6 +71,7 @@ class EditorSettings {
       defaultPayment.join(';'),
       leftHand ? '1' : '0',
       ChangesetReview.values.indexOf(changesetReview).toString(),
+      preferBlockAddress ? '1' : '0',
     ];
   }
 
@@ -90,6 +96,11 @@ class EditorSettingsProvider extends Notifier<EditorSettings> {
 
   void setPreferContact(bool value) {
     state = state.copyWith(preferContact: value);
+    store();
+  }
+
+  void setPreferBlockAddress(bool value) {
+    state = state.copyWith(preferBlockAddress: value);
     store();
   }
 

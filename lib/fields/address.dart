@@ -1,11 +1,14 @@
 // Copyright 2022-2025 Ilya Zverev
 // This file is a part of Every Door, distributed under GPL v3 or later version.
 // Refer to LICENSE file and https://www.gnu.org/licenses/gpl-3.0.html for details.
+import 'package:country_coder/country_coder.dart';
 import 'package:every_door/constants.dart';
+import 'package:every_door/fields/address_blockbased.dart';
 import 'package:every_door/fields/helpers/new_addr.dart';
 import 'package:every_door/widgets/radio_field.dart';
 import 'package:every_door/models/address.dart';
 import 'package:every_door/models/amenity.dart';
+import 'package:every_door/providers/editor_settings.dart';
 import 'package:every_door/providers/osm_data.dart';
 import 'package:every_door/screens/editor/addr_chooser.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +22,23 @@ class AddressField extends PresetField {
         );
 
   @override
-  Widget buildWidget(OsmChange element) => AddressInput(this, element);
+  Widget buildWidget(OsmChange element) {
+    return Consumer(builder: (context, ref, child) {
+      final preferBlock = ref.watch(editorSettingsProvider).preferBlockAddress;
+      final isJapan = CountryCoder.instance.isIn(
+        lat: element.location.latitude,
+        lon: element.location.longitude,
+        inside: 'Q17',
+      );
+      if (preferBlock || isJapan) {
+        return AddressBlockBasedInput(
+          AddressBlockBasedField(label: label, key: key),
+          element,
+        );
+      }
+      return AddressInput(this, element);
+    });
+  }
 
   @override
   bool hasRelevantKey(Map<String, String> tags) {
