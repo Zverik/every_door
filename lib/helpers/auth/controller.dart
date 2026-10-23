@@ -5,10 +5,28 @@ import 'dart:convert' show json;
 
 import 'package:eval_annotation/eval_annotation.dart';
 import 'package:every_door/helpers/auth/provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logging/logging.dart';
+
+const _secureStorageRecoveryChannel =
+    MethodChannel('info.zverev.ilya.every_door/secure_storage_recovery');
+
+@visibleForTesting
+AuthToken? parseStoredAuthToken(String? data, AuthProvider provider) {
+  if (data == null) return null;
+  try {
+    final decoded = json.decode(data);
+    if (decoded is! Map<String, dynamic>) {
+      throw const FormatException('Stored token is not a JSON object');
+    }
+    return provider.tokenFromJson(decoded);
+  } on Object {
+    return null;
+  }
+}
 
 /// This controller manages an [AuthProvider], saving a token to the
 /// local storage and keeping user details in [value] ready to display.
@@ -117,10 +135,16 @@ class AuthController extends ValueNotifier<UserDetails?> {
     String? data;
     try {
       data = await secure.read(key: tokenKey);
-    } on PlatformException {
-      await secure.deleteAll();
+    } on PlatformException catch (e) {
+      _logger.warning('Failed to read token, resetting secure storage', e);
+      await _deleteAllSecure(secure);
     }
-    return data == null ? null : provider.tokenFromJson(json.decode(data));
+    final token = parseStoredAuthToken(data, provider);
+    if (data != null && token == null) {
+      _logger.warning('Stored token is corrupted, resetting secure storage');
+      await _deleteAllSecure(secure);
+    }
+    return token;
   }
 
   Future<void> saveToken(AuthToken? token) async {
@@ -133,9 +157,26 @@ class AuthController extends ValueNotifier<UserDetails?> {
     } on PlatformException catch (e) {
       _logger.warning(
           token == null ? 'Failed to delete token' : 'Failed to save token', e);
-      await secure.deleteAll();
+      await _deleteAllSecure(secure);
       if (token != null) {
         await secure.write(key: tokenKey, value: json.encode(token.toJson()));
+      }
+    }
+  }
+
+  Future<void> _deleteAllSecure(FlutterSecureStorage secure) async {
+    try {
+      await secure.deleteAll();
+    } on PlatformException catch (e) {
+      _logger.warning('Failed to reset secure storage', e);
+      try {
+        await _secureStorageRecoveryChannel.invokeMethod<bool>(
+            'clearLegacySecureStorage');
+      } on MissingPluginException {
+        // Non-Android platforms do not need the shared-preferences fallback.
+      } on PlatformException catch (fallbackError) {
+        _logger.warning(
+            'Failed to reset secure storage with native fallback', fallbackError);
       }
     }
   }

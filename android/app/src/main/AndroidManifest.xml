@@ -9,6 +9,7 @@
         android:name="${applicationName}"
         android:allowBackup="true"
         android:enableOnBackInvokedCallback="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules">
         <activity
             android:name=".MainActivity"
