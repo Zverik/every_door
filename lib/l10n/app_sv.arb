@@ -402,7 +402,6 @@
     "description": "Label for roof:shape in the form. Keep it short."
   },
   "buildingTypeApartments": "lägenheter",
-  "@buildingTypeApartments": {},
   "entranceX": "Entré {n}",
   "@entranceX": {
     "description": "Option displayed when there's multiple entrances under a tap.",
@@ -413,11 +412,8 @@
     }
   },
   "buildingTypeRetail": "butiksbyggnad",
-  "@buildingTypeRetail": {},
   "buildingTypeAddress": "adress",
-  "@buildingTypeAddress": {},
   "buildingTypeHouse": "villa",
-  "@buildingTypeHouse": {},
   "entranceFlatsNumberList": "Ska vara en lista av tal",
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
@@ -427,17 +423,11 @@
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "entranceTypeStaircase": "trappa",
-  "@entranceTypeStaircase": {},
   "entranceTypeMain": "huvudentré",
-  "@entranceTypeMain": {},
   "entranceAccessYes": "öppen",
-  "@entranceAccessYes": {},
   "entranceAccessPrivate": "privat",
-  "@entranceAccessPrivate": {},
   "entranceAccessNo": "nej",
-  "@entranceAccessNo": {},
   "entranceAccessDelivery": "leverans",
-  "@entranceAccessDelivery": {},
   "entranceWheelchair": "Rullstol",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
@@ -451,25 +441,17 @@
     "description": "Label for addr:flats in the form. Keep it short."
   },
   "buildingTypeGarage": "garage",
-  "@buildingTypeGarage": {},
   "buildingTypeConstruction": "under konstruktion",
-  "@buildingTypeConstruction": {},
   "buildingTypeIndustrial": "industribyggnad",
-  "@buildingTypeIndustrial": {},
   "buildingTypeShed": "skjul",
-  "@buildingTypeShed": {},
   "buildingTypeCommercial": "kommersiell byggnad",
-  "@buildingTypeCommercial": {},
   "entranceRef": "Ref",
   "@entranceRef": {
     "description": "Label for entrance ref in the form. Keep it short."
   },
   "entranceTypeGarage": "garage",
-  "@entranceTypeGarage": {},
   "entranceTypeService": "service",
-  "@entranceTypeService": {},
   "entranceTypeHome": "husdörr",
-  "@entranceTypeHome": {},
   "addressHouseNumber": "Husnummer",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
@@ -479,7 +461,6 @@
     "description": "Validator message for addr:housenumber."
   },
   "entranceTypeEmergency": "nödutgång",
-  "@entranceTypeEmergency": {},
   "addressUnit": "Enhet",
   "@addressUnit": {
     "description": "Label for addr:unit in the form. Keep it short."
@@ -665,7 +646,6 @@
     "description": "What is written on the floor chooser if there are no floors to choose."
   },
   "entranceTypeShop": "butik",
-  "@entranceTypeShop": {},
   "editorDuplicate": "Möjlig dublett inom {distance} m",
   "@editorDuplicate": {
     "description": "Message about a possible duplicate",
@@ -745,19 +725,12 @@
     "description": "Label for addr:postcode in the form. Keep it short."
   },
   "faqEntrance": "Hur lägger man till en entré?",
-  "@faqEntrance": {},
   "faqMapTiny": "Varför är kartan så liten?",
-  "@faqMapTiny": {},
   "faqFloors": "Är våning '3' och '/3' samma våning?",
-  "@faqFloors": {},
   "buildingMaterial": "Fasad",
-  "@buildingMaterial": {},
   "buildingMaterialBrick": "tegel",
-  "@buildingMaterialBrick": {},
   "buildingMaterialWood": "trä",
-  "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "betong",
-  "@buildingMaterialConcrete": {},
   "navImagery": "Byt bakgrundsbild",
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
@@ -803,7 +776,6 @@
     "description": "Button description to indicate a link to GitHub."
   },
   "navEntrancesMode": "Entréläge",
-  "@navEntrancesMode": {},
   "navNotesMode": "Anteckningsläge",
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."
@@ -900,13 +872,9 @@
     "description": "Prefix for an OSM note in a changes tile."
   },
   "buildingMaterialCementBlock": "cementblock",
-  "@buildingMaterialCementBlock": {},
   "buildingMaterialStone": "sten",
-  "@buildingMaterialStone": {},
   "buildingMaterialMetal": "metall",
-  "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "glas",
-  "@buildingMaterialGlass": {},
   "notesAddNote": "Lägg till anteckning",
   "@notesAddNote": {
     "description": "Tooltip for the button to add a note."
@@ -999,17 +967,11 @@
     "description": "Button title for selectors like Dec 31."
   },
   "faqEntranceContent": "Längst ned finns en rad med knappar för olika lägen: mikrokartläggning, ställen, entréer och anteckningar.\n\nI entréläget trycker du på eller drar dörrknappen i nedre hörnet till kartan.",
-  "@faqEntranceContent": {},
   "faqLetters": "Kan jag ange bokstäver i en ref eller i ett lägenhetsnummer?",
-  "@faqLetters": {},
   "faqChangeType": "Hur ändrar man typ för ett ställe?",
-  "@faqChangeType": {},
   "buildingMaterialPlaster": "puts",
-  "@buildingMaterialPlaster": {},
   "faqChangeTypeContent": "Klicka på titeln i editorn, där typen är angiven.",
-  "@faqChangeTypeContent": {},
   "faqTagging": "Alla frågor som rör etiketter",
-  "@faqTagging": {},
   "navMicromappingMode": "Mikrokartläggningsläge",
   "@navMicromappingMode": {
     "description": "Tooltip for the micromapping mode button on the nav panel."
@@ -1047,27 +1009,20 @@
     "description": "Tooltip for button on the specific days interval to add a range of dates."
   },
   "buildingMaterialPanels": "paneler",
-  "@buildingMaterialPanels": {},
   "faqCheckmarks": "Vad är bockarna till för?",
-  "@faqCheckmarks": {},
   "notesClose": "Lös",
   "@notesClose": {
     "description": "Button title for closing a note."
   },
   "faqMapTinyContent": "Eftersom det inte är poängen. Du använde kartan endast för att kontrollera din position och panorerar den för att justera. Håll ögonen på listan med ställen nedanför, sorterade efter avstånd från dig.\n\nKartan blir större när du redigerar ställen långt ifrån din position. Appen skapades dock för att redigera sådant du ser med dina ögon.",
-  "@faqMapTinyContent": {},
   "notesCloseMessage": "Markera anteckning som löst?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
   },
   "faqLettersContent": "Om det inte går att byta från det numeriska tangentbordet till det fullstora, gå till appinställningarna. De nås genom knappen i det övre vänstra hörnet. Slå på \"utökat numeriskt tangentbord\" där.",
-  "@faqLettersContent": {},
   "faqCheckmarksContent": "Dessa markerar att datan om stället bekräftades. De lägger till etiketten 'check_date' med dagens datum.\n\nIdén bakom bockarna är att du t.ex. först undersökte halva staden en gång och sedan kom tillbaka efter en månad för att undersöka igen. Du behöver något sätt att markera att du ser stället, men att inget om stället ändrats. Det är där bocken kommer in: du kryssar i den och fortsätter.\n\nBocken kommer att vara ikryssad i två månader. Efter det kan du undersöka ställena igen.",
-  "@faqCheckmarksContent": {},
   "faqFloorsContent": "Nej. Den förstnämnda resulterar i etiketten `addr:floor=3`. Det är den våning som anges i navigationen och som vanligen används. Den andra ger inte denna etikett, utan `level=3`. Det talet är ett våningsnummer i en sekvens från 0 till `bulding:levels - 1`. Med andra ord beror värdet på `addr:floor` i en trevåningsbyggnad på land, men `level` är alltid 0, 1 eller 2.\n\nSå här förhåller sig notationen i appen till dessa etiketter:\n\n* `2`: `addr:floor=2` och icke-tom `level=*`.\n* `4/`: `addr:floor=4` men det finns ingen `level`-etikett.\n* `/1`: `level=1` men det finns ingen `addr:floor`-etikett.\n* `1/0`: `addr:floor=1` + `level=0` (och det finns ett objekt i närheten: med samma `addr:floor`men annan `level`, eller tvärtom.",
-  "@faqFloorsContent": {},
   "faqTaggingContent": "Varför saknas ett objekt i editorn? När visas dessa vita punkter i mikrokartläggningsläget? Hur sorteras objekt?\n\nSvar på alla dessa frågor finns i [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Det här är vad du kan titta på:\n\n* Nyckelordningen för huvudetiketten — lista `kMainKeys` i `main_key.dart`.\n* Vilka objekt som laddas ned — klass `_EverythingKind`.\n* Vad som betraktas som ett ställe — klass `_AmenityKind`.\n* Vilka punkter som fästs till vilka vägar — klass `ElementKindImpl`logik (se relevanta underklasser)\n* När ett mikrokartläggningsobjekt är inkomplett — klass `needsMoreInfo`.",
-  "@faqTaggingContent": {},
   "settingsHashtags": "Hashtags för ändringsset",
   "@settingsHashtags": {
     "description": "Settings entry for editing changeset hashtags."
@@ -1121,9 +1076,7 @@
     "description": "Label for a text field with changeset hashtags."
   },
   "faqYellow": "Varför är vissa husnummer gula?",
-  "@faqYellow": {},
   "faqYellowContent": "Icke-gula etiketter i entréläget och vita prickar i mikromappningsläget betyder att elementen saknar vissa viktiga attribut. Till exempel:\n\n* Byggnader förväntas ha våningsplanantal.\n* Entréer skall ha typ och för trapphus även hur många våningar som omfattas.\n* Bänkar skall ha material och ryggstöd.\n* Träd skall ha lövtyp och cykel.",
-  "@faqYellowContent": {},
   "fieldCardsOnly": "endast kort",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
@@ -1221,7 +1174,6 @@
     "description": "Button title for deleting a new note."
   },
   "drawUndo": "Ångra",
-  "@drawUndo": {},
   "drawEraser": "Radergummi",
   "@drawEraser": {
     "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
@@ -1387,5 +1339,17 @@
   "settingsCachesClearManual": "Rensa manuellt nedladdade rutor",
   "@settingsCachesClearManual": {
     "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesClearRaster": "Rensa cache för rasterrutor",
+  "@settingsCachesClearRaster": {
+    "description": "Settings data management entry for clearing all cached raster tiles."
+  },
+  "settingsCachesClearRenderedVector": "Rensa renderade vektorrutor",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Rensa cache för vektorrutor",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
   }
 }

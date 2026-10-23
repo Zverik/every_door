@@ -294,23 +294,16 @@
     "description": "Button label for opening the building object in a full editor."
   },
   "buildingMaterialPanels": "painéis",
-  "@buildingMaterialPanels": {},
   "buildingMaterialStone": "pedra",
-  "@buildingMaterialStone": {},
   "buildingMaterialGlass": "vidro",
-  "@buildingMaterialGlass": {},
   "buildingTypeHouse": "casa",
-  "@buildingTypeHouse": {},
   "buildingTypeRetail": "retalho",
-  "@buildingTypeRetail": {},
   "entranceIsUnit": "Guardar o número do andar em \"addr:unit\"",
   "@entranceIsUnit": {
     "description": "Label for a switch to use addr:unit instead of addr:flats."
   },
   "entranceTypeShop": "loja",
-  "@entranceTypeShop": {},
   "entranceTypeEmergency": "emergência",
-  "@entranceTypeEmergency": {},
   "notesClose": "Resolver",
   "@notesClose": {
     "description": "Button title for closing a note."
@@ -324,9 +317,7 @@
     "description": "Name for anonymous note submitters."
   },
   "faqChangeType": "Como alterar um tipo de serviço?",
-  "@faqChangeType": {},
   "faqChangeTypeContent": "Toca no título do editor, onde o tipo aparece.",
-  "@faqChangeTypeContent": {},
   "loadingChanges": "A carregar alterações…",
   "@loadingChanges": {
     "description": "Loading screen message for loading stored changes."
@@ -355,7 +346,6 @@
     "description": "Legend item for all other types."
   },
   "navEntrancesMode": "Modo de entradas",
-  "@navEntrancesMode": {},
   "loadingPresets": "A carregar modelos de etiquetas…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
@@ -689,21 +679,13 @@
     "description": "Text displayed when the app is downloading data from the API."
   },
   "faqMapTiny": "Porque é que o mapa é tão pequeno?",
-  "@faqMapTiny": {},
   "entranceAccessYes": "aberto",
-  "@entranceAccessYes": {},
   "entranceAccessPrivate": "privado",
-  "@entranceAccessPrivate": {},
   "entranceTypeMain": "principal",
-  "@entranceTypeMain": {},
   "entranceTypeService": "serviço",
-  "@entranceTypeService": {},
   "entranceAccessNo": "não",
-  "@entranceAccessNo": {},
   "entranceAccessDelivery": "entregas",
-  "@entranceAccessDelivery": {},
   "entranceTypeGarage": "garagem",
-  "@entranceTypeGarage": {},
   "addressUnit": "Unidade",
   "@addressUnit": {
     "description": "Label for addr:unit in the form. Keep it short."
@@ -717,11 +699,8 @@
     "description": "Label for addr:housenumber in the form. Keep it short."
   },
   "entranceTypeStaircase": "escadaria",
-  "@entranceTypeStaircase": {},
   "entranceTypeHome": "nº porta",
-  "@entranceTypeHome": {},
   "faqEntrance": "Como adicionar uma entrada a um edifício?",
-  "@faqEntrance": {},
   "addressPlace": "Lugar",
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
@@ -731,7 +710,6 @@
     "description": "Text displayed when the app is uploading data to the API."
   },
   "faqEntranceContent": "Na parte inferior há uma fila de botões de modo: Micromapeamento, Serviços, Entradas e Notas.\n\nNo modo Entradas, toca ou arrasta o botão da porta, localizada no canto inferior, para o mapa.",
-  "@faqEntranceContent": {},
   "notesCloseMessage": "Marcar a nota como resolvida?",
   "@notesCloseMessage": {
     "description": "Confirmation message when pressed a close note button."
@@ -741,7 +719,6 @@
     "description": "Text displayed when the app is updating the database with downloaded objects."
   },
   "faqLetters": "Posso usar letras numa referência ou número de andar?",
-  "@faqLetters": {},
   "enableLocationMessage": "Concede o acesso à localização para a aplicação no painel de configurações que será mostrado.",
   "@enableLocationMessage": {
     "description": "Contents of the alert for allowing app access to location."
@@ -768,17 +745,11 @@
     "description": "Switch label for PH off."
   },
   "faqMapTinyContent": "Porque o objetivo não é esse. Só verificas o teu posicionamento e moves o mapa para ajustar. Vê a lista de serviços abaixo, ordenada pela distância a que ficam da tua localização.\n\nO mapa fica maior quando editas os serviços longe da tua localização, embora a aplicação tenha sido feita para editar as coisas que estás a ver.",
-  "@faqMapTinyContent": {},
   "faqTagging": "Todas as perguntas sobre etiquetagem",
-  "@faqTagging": {},
   "faqCheckmarks": "Para que servem as marcas de verificado?",
-  "@faqCheckmarks": {},
   "faqCheckmarksContent": "As marcas de verificado indicam que os dados do serviços foram confirmados. Estas adicionam a etiqueta `check_date` com a data atual.\n\nA ideia por trás da marca de verificado é que, digamos, mapeaste metade da cidade na primeira vez. Então, um mês depois, foste mapear novamente nos mesmos sítios. É preciso marcar de alguma forma que o serviço continua a existir no mesmo local e não houve nenhuma alteração. Isso é a marca de verificado: tocas nele e continuas.\n\nA marca de verificação fica ativa por dois meses. Depois disso, podes mapear os serviços novamente.",
-  "@faqCheckmarksContent": {},
   "faqLettersContent": "Se o teclado numérico não puder ser alterado para um teclado completo, verifica as configurações da aplicação. Eles estão localizados no botão do canto superior esquerdo. Ativa o \"Teclado numérico alargado\" lá.",
-  "@faqLettersContent": {},
   "faqFloors": "Os andares '3' e '/3' são iguais?",
-  "@faqFloors": {},
   "changesPending": "Pendente",
   "@changesPending": {
     "description": "Subtitle for a change that has not yet been sent to OSM API."
@@ -788,7 +759,6 @@
     "description": "Prefix for an OSM note in a changes tile."
   },
   "faqFloorsContent": "Não. O primeiro tem a etiqueta `addr:floor=3` preenchida. Esse é o andar que está impresso na navegação e é normalmente usado. O segundo não tem essa etiqueta, mas tem `level=3`. Esse número é um número de andar sequencial que vai de zero até `building:levels - 1`. Ou seja, em um edifício de três andares, o valor de `addr:floor` depende do país, mas `level` é sempre 0, 1 ou 2.\n\nVê como a notação no editor se relaciona com essas etiquetas:\n\n* `2`: `addr:floor=2` e `level=*` não vazio.\n* `4/`: `addr:floor=4`, mas não há etiqueta `level`.\n* `/1`: `level=1`, mas não há etiqueta `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (e existe um objeto próximo com o mesmo `addr:floor`, mas diferente `level`, ou vice-versa).",
-  "@faqFloorsContent": {},
   "changesDeletedChange": "{change} eliminada",
   "@changesDeletedChange": {
     "description": "Message for the snack bar after you swipe a change away.",
@@ -826,7 +796,7 @@
   "@accountAuthErrorMessage": {
     "descripton": "Message for the alert dialog about an incorrect password."
   },
-  "changesUploadedMessage": "Foram enviadas {changes} para a API.",
+  "changesUploadedMessage": "{changes} enviada(s) ao OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message for the notification about a successful upload.",
     "placeholders": {
@@ -909,7 +879,6 @@
     "description": "Button in the interval editor to move to the closing time."
   },
   "buildingMaterialBrick": "tijolo",
-  "@buildingMaterialBrick": {},
   "buildingPostCode": "Código postal",
   "@buildingPostCode": {
     "description": "Label for addr:postcode in the form. Keep it short."
@@ -923,19 +892,14 @@
     "description": "Validation message for a levels tag, also used in building levels form."
   },
   "faqTaggingContent": "Porque falta um objeto no editor? Quando estes pontos brancos são mostrados no modo de micromapeamento? Como é que os objetos são classificados?\n\nAs respostas para todas essas perguntas estão em [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Aqui está o que podes ver:\n\n* A ordem das chaves para a etiqueta principal — lista `kMainKeys`.\n* Quais objetos são descarregados — função `isGoodTags`.\n* O que é considerado um serviço — função `isAmenityTags`.\n* Quais pontos são colados a quais caminhos — função `detectSnap`.\n* Quando um objeto de micromapeamento está incompleto — função `needsMoreInfo`.",
-  "@faqTaggingContent": {},
   "buildingRoofLevels": "Andares do telhado",
   "@buildingRoofLevels": {
     "description": "Label for roof:levels in the form. Keep it short."
   },
   "buildingMaterial": "Fachada",
-  "@buildingMaterial": {},
   "buildingMaterialPlaster": "gesso",
-  "@buildingMaterialPlaster": {},
   "buildingMaterialWood": "madeira",
-  "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "betão",
-  "@buildingMaterialConcrete": {},
   "fieldCardsAccepted": "aceite",
   "@fieldCardsAccepted": {
     "description": "Payment field label for cards accepted."
@@ -1010,27 +974,18 @@
     }
   },
   "buildingMaterialMetal": "metal",
-  "@buildingMaterialMetal": {},
   "buildingTypeAddress": "morada",
-  "@buildingTypeAddress": {},
   "buildingMaterialCementBlock": "blocos de cimento",
-  "@buildingMaterialCementBlock": {},
   "buildingTypeShed": "barraco",
-  "@buildingTypeShed": {},
   "buildingTypeConstruction": "construção",
-  "@buildingTypeConstruction": {},
   "buildingTypeApartments": "apartamentos",
-  "@buildingTypeApartments": {},
   "buildingTypeCommercial": "comercial",
-  "@buildingTypeCommercial": {},
   "buildingTypeIndustrial": "industrial",
-  "@buildingTypeIndustrial": {},
   "entranceFlatsNumberList": "Devia ser uma lista numérica",
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
   },
   "buildingTypeGarage": "garagem",
-  "@buildingTypeGarage": {},
   "entranceFlats": "Andares",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
@@ -1113,9 +1068,7 @@
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
   "faqYellow": "Porque é que alguns números de porta estão a amarelo?",
-  "@faqYellow": {},
   "faqYellowContent": "Os rótulos não amarelos no modo de Entradas e pontos brancos no modo de Micromapeamento significam que faltam alguns atributos importantes. Por exemplo:\n\n* Os edifícios devem ter o número de pisos.\n* As entradas devem ter um tipo e, para escadas, intervalo dos andares.\n* Os bancos devem ter informação sobre o material e se têm encosto.\n* As árvores devem ter o tipo e ciclo de folhagem.",
-  "@faqYellowContent": {},
   "hashtagsLabel": "Palavras para hashtags",
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
@@ -1217,7 +1170,6 @@
     "description": "Tool description: stream or other narrow waterway. Keep it short."
   },
   "drawUndo": "Desfazer",
-  "@drawUndo": {},
   "drawChangeTool": "Alterar ferramenta",
   "@drawChangeTool": {
     "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
@@ -1269,5 +1221,115 @@
   "editorDeleteKeepAddressButton": "Eliminar, mas manter a morada",
   "@editorDeleteKeepAddressButton": {
     "description": "Button for keeping the address"
+  },
+  "tileDragDownload": "Tente tocar no botão de descarregar.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "mapStraight": "Girar de volta",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "warningFixmeNote": "Será convertido numa nota OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "settingsCachesClearRenderedVector": "Limpar mosaicos de vetor renderizados",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Limpar cache de mosaicos de vetor",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "Limpar mosaicos manualmente descarregados",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Selecione os mosaicos a descarregar",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "Descarregar dados",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "Descarregar mosaicos de mapa",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "Descarregar satélite",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Cancelar ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  },
+  "pluginsEnable": "Ativar",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Desativar",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Desativado",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsSearch": "Pesquisa",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Atualizar",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "Instalar",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsMore": "Mais...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallQuestion": "Instalar extensão \"{plugin}\" versão {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "desconhecido",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Fonte: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsSeeLogs": "Ver registos",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
   }
 }

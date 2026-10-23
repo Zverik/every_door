@@ -367,13 +367,9 @@
     "description": "Contents of the alert for allowing app access to location."
   },
   "entranceAccessYes": "Buka",
-  "@entranceAccessYes": {},
   "entranceAccessPrivate": "pribadi",
-  "@entranceAccessPrivate": {},
   "entranceAccessNo": "Tidak",
-  "@entranceAccessNo": {},
   "entranceAccessDelivery": "pengiriman",
-  "@entranceAccessDelivery": {},
   "entranceWheelchair": "Kursi roda",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
@@ -435,9 +431,7 @@
     "description": "Text displayed when the app is updating the database with downloaded objects."
   },
   "faqMapTiny": "Mengapa petanya sangat kecil?",
-  "@faqMapTiny": {},
   "faqCheckmarks": "Untuk apa tanda centang itu?",
-  "@faqCheckmarks": {},
   "loadingStart": "Menginisialisasi…",
   "@loadingStart": {
     "description": "Initial message for the loading screen, virtually unseen."
@@ -1028,9 +1022,7 @@
     "description": "Contents of the alert for enabling location services."
   },
   "buildingMaterialBrick": "bata",
-  "@buildingMaterialBrick": {},
   "buildingMaterialCementBlock": "blok semen",
-  "@buildingMaterialCementBlock": {},
   "buttonYes": "Ya",
   "@buttonYes": {
     "description": "Button for approval."
@@ -1070,9 +1062,7 @@
     "description": "Button label for opening the building object in a full editor."
   },
   "buildingMaterialConcrete": "konkret",
-  "@buildingMaterialConcrete": {},
   "buildingMaterialStone": "Batu 🗿",
-  "@buildingMaterialStone": {},
   "entrancesAddBuilding": "Tambahkan bangunan",
   "@entrancesAddBuilding": {
     "description": "Tooltip for the button to add a building node."
@@ -1103,43 +1093,28 @@
     "description": "Label for building type (value of building=*) in the form. Keep it short."
   },
   "buildingMaterial": "Tatapan",
-  "@buildingMaterial": {},
   "buildingMaterialPlaster": "plester",
-  "@buildingMaterialPlaster": {},
   "buildingMaterialWood": "Kayu",
-  "@buildingMaterialWood": {},
   "buildingMaterialPanels": "panel",
-  "@buildingMaterialPanels": {},
   "buildingMaterialMetal": "logam",
-  "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "Kaca",
-  "@buildingMaterialGlass": {},
   "buildingTypeAddress": "alamat",
-  "@buildingTypeAddress": {},
   "buildingTypeHouse": "Rumah",
-  "@buildingTypeHouse": {},
   "buildingTypeApartments": "Apartemen",
-  "@buildingTypeApartments": {},
   "buildingTypeRetail": "pengecer",
-  "@buildingTypeRetail": {},
   "buildingTypeShed": "gudang",
-  "@buildingTypeShed": {},
   "buildingTypeCommercial": "komersial",
-  "@buildingTypeCommercial": {},
   "entranceFlats": "Rumah susun",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
   },
   "buildingTypeIndustrial": "Industri",
-  "@buildingTypeIndustrial": {},
   "entranceFlatsNumberList": "Seharusnya berupa daftar angka",
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
   },
   "buildingTypeGarage": "Garasi",
-  "@buildingTypeGarage": {},
   "buildingTypeConstruction": "Konstruksi",
-  "@buildingTypeConstruction": {},
   "entranceIsUnit": "Simpan nomor tetap di alamat:unit",
   "@entranceIsUnit": {
     "description": "Label for a switch to use addr:unit instead of addr:flats."
@@ -1153,23 +1128,16 @@
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "entranceTypeService": "Servis",
-  "@entranceTypeService": {},
   "entranceAccess": "Akses",
   "@entranceAccess": {
     "description": "Label for entrance access in the form. Keep it short."
   },
   "entranceTypeStaircase": "tangga",
-  "@entranceTypeStaircase": {},
   "entranceTypeHome": "Rumah",
-  "@entranceTypeHome": {},
   "entranceTypeMain": "Utama",
-  "@entranceTypeMain": {},
   "entranceTypeShop": "Toko",
-  "@entranceTypeShop": {},
   "entranceTypeGarage": "Garasi",
-  "@entranceTypeGarage": {},
   "entranceTypeEmergency": "darurat",
-  "@entranceTypeEmergency": {},
   "addressHouseNumber": "Nomor Rumah",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
@@ -1227,7 +1195,6 @@
     "description": "Message when cancelling an OSM note that has non-empty content."
   },
   "drawUndo": "Batalkan",
-  "@drawUndo": {},
   "drawChangeTool": "Ganti alat",
   "@drawChangeTool": {
     "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
@@ -1245,31 +1212,93 @@
     "description": "Text displayed when the app is uploading data to the API."
   },
   "faqMapTinyContent": "Karena bukan itu intinya. Anda hanya memeriksa posisi Anda di peta, dan menggesernya untuk menyesuaikan. Perhatikan daftar fasilitas di bawah ini, diurutkan berdasarkan jarak dari Anda.\n\nPeta menjadi lebih besar ketika Anda mengedit fasilitas yang jauh dari lokasi Anda. Meskipun aplikasi ini dibuat untuk mengedit hal-hal yang Anda lihat dengan mata Anda.",
-  "@faqMapTinyContent": {},
   "faqCheckmarksContent": "Ini adalah tanda bahwa data fasilitas telah dikonfirmasi. Mereka menambahkan tag `check_date` dengan tanggal saat ini.\n\nGagasan di balik tanda centang ini adalah, katakanlah,Anda mensurvei separuh kota untuk pertama kalinya. Kemudian setelah sebulan Anda kembali dan melakukan survei lagi. Anda perlu menandai bahwa Anda melihat fasilitasnya, tetapi tidak ada yang berubah.\n\nTanda itu tetap diperiksa selama dua bulan. Setelah itu Anda boleh mensurvei fasilitasnya lagi.",
-  "@faqCheckmarksContent": {},
   "faqEntrance": "Bagaimana cara menambahkan pintu masuk gedung?",
-  "@faqEntrance": {},
   "faqYellow": "Mengapa beberapa nomor rumah berwarna kuning?",
-  "@faqYellow": {},
   "faqYellowContent": "Label non-kuning pada mode masuk dan titik putih pada mode pemetaan mikro berarti elemen tersebut tidak memiliki beberapa atribut penting. Misalnya:\n\n* Bangunan diharapkan memiliki sejumlah tingkat.\n* Pintu masuk harus memiliki tipe dan, untuk tangga, jarak datar.\n* Bangku harus memiliki bahan dan .\n* Pohon harus memiliki jenis dan siklus daun.",
-  "@faqYellowContent": {},
   "faqEntranceContent": "Di bagian bawah terdapat deretan tombol mode: micromapping, fasilitas, pintu masuk, dan catatan.\n\nDalam mode pintu masuk, ketuk atau seret tombol pintu di sudut bawah ke peta.",
-  "@faqEntranceContent": {},
   "faqLetters": "Bisakah saya mengetikkan huruf ke dalam ref atau angka tetap?",
-  "@faqLetters": {},
   "faqFloors": "Apakah lantai '3' dan '/3' sama?",
-  "@faqFloors": {},
   "faqLettersContent": "Jika keyboard numerik Anda tidak dapat dialihkan ke keyboard lengkap, periksa pengaturan aplikasi. Mereka berada di belakang tombol di pojok kiri atas. Aktifkan \"keyboard numerik tambahan\" di sana.",
-  "@faqLettersContent": {},
   "faqFloorsContent": "Tidak. Tag `addr:floor=3` yang pertama terisi. Itulah dasar yang tercetak pada navigasi dan umum digunakan. Yang kedua tidak memiliki tag ini, tetapi memiliki `level=3`. Angka tersebut merupakan nomor lantai berurutan dari nol hingga `gedung:tingkat - 1`. Artinya, di gedung tiga lantai, nilai `addr:floor` bergantung pada suatu negara,tetapi `level` selalu 0, 1, atau 2.\n\nBerikut adalah notasi di editor yang terkait dengan tag tersebut:\n\n* `2`: `addr:lantai=2`dan `level=*` yang tidak kosong.\n* `4/`: `addr:floor=4`, tetapi tidak ada tag `level`.\n* `/1`: `level=1`, tetapi tidak ada tag `addr:floor`.\n* `1/0`: `addr:lantai=1`+ `level=0` (dan ada objek di dekatnya: dengan `addr:floor` yang sama, tetapi `level` berbeda, atau sebaliknya).",
-  "@faqFloorsContent": {},
   "faqChangeTypeContent": "Ketuk judul editor, tempat penulisan jenisnya.",
-  "@faqChangeTypeContent": {},
   "faqChangeType": "Bagaimana cara mengubah jenis fasilitas?",
-  "@faqChangeType": {},
   "faqTagging": "Semua pertanyaan penandaan",
-  "@faqTagging": {},
   "faqTaggingContent": "Mengapa ada objek yang hilang di editor? Kapan titik putih ini ditampilkan dalam mode pemetaan mikro? Bagaimana objek diurutkan?\n\nJawaban atas semua pertanyaan ini ada di [good_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart). Inilah yang dapat Anda lihat:\n\n* Urutan kunci untuk tag utama — daftar `kMainKeys`.\n* Objek mana yang diunduh — fungsi `isGoodTags`.\n* Apa yang dianggap sebagai fasilitas — fungsi `isAmenityTags`.\n* Titik mana yang diambil dengan cara apa — fungsi `detectSnap`.\n* Ketika objek pemetaan mikro tidak lengkap — fungsi `needsMoreInfo`.",
-  "@faqTaggingContent": {}
+  "tileDragDownload": "Coba tekan tombol unduh.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "mapStraight": "Putar balik",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "warningFixmeNote": "Akan dikonversi ke catatan OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "settingsCachesDownloadData": "Unduh Data",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadSatellite": "Unduh Satelit",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Batal ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  },
+  "pluginsEnable": "Aktifkan",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Non aktif",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Dinonaktifkan",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsSearch": "Cari",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Pembaruan",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "Pasang",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUnknownVersion": "tidak diketahui",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Sumber: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "settingsCachesClearManual": "Bersihkan manual kotak yang sudah diunduh",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Pilih kotak untuk diunduh",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  }
 }

@@ -323,7 +323,7 @@
   "@changesUploadedTitle": {
     "description": "Titre de la notification d'un envoi réussi."
   },
-  "changesUploadedMessage": "{changes} ont été envoyés à l'API.",
+  "changesUploadedMessage": "{changes} ont été envoyés à OpenStreetMap.",
   "@changesUploadedMessage": {
     "description": "Message de la notification d'un envoi réussi.",
     "placeholders": {
@@ -554,21 +554,13 @@
     "description": "Libellé du bouton permettant d'ouvrir l'objet du bâtiment dans un éditeur complet."
   },
   "buildingTypeHouse": "maison",
-  "@buildingTypeHouse": {},
   "buildingTypeApartments": "appartements",
-  "@buildingTypeApartments": {},
   "buildingTypeRetail": "magasin",
-  "@buildingTypeRetail": {},
   "buildingTypeCommercial": "bureaux",
-  "@buildingTypeCommercial": {},
   "buildingTypeShed": "hangar",
-  "@buildingTypeShed": {},
   "buildingTypeIndustrial": "usine",
-  "@buildingTypeIndustrial": {},
   "buildingTypeGarage": "garage",
-  "@buildingTypeGarage": {},
   "buildingTypeConstruction": "en construction",
-  "@buildingTypeConstruction": {},
   "entranceFlats": "numéros de portes",
   "@entranceFlats": {
     "description": "Étiquette pour addr:flats dans le formulaire. Garder le plus court pssible."
@@ -590,13 +582,9 @@
     "description": "Etquette pour l'accès de l'entrée dans le formulaire. Garder le plus court pssible."
   },
   "entranceAccessYes": "oui",
-  "@entranceAccessYes": {},
   "entranceAccessPrivate": "privé",
-  "@entranceAccessPrivate": {},
   "entranceAccessNo": "non",
-  "@entranceAccessNo": {},
   "entranceAccessDelivery": "livraison",
-  "@entranceAccessDelivery": {},
   "entranceWheelchair": "Fauteuil roulant",
   "@entranceWheelchair": {
     "description": "Étiquette pour un entrée pour fauteuils roulants dans le formulaire. Garder le plus court pssible."
@@ -606,19 +594,12 @@
     "description": "Étiquette pour le type d'entrée (valeur de entrance=* ) dans le formulaire. Garder le plus court pssible."
   },
   "entranceTypeMain": "principale",
-  "@entranceTypeMain": {},
   "entranceTypeStaircase": "cage d'escaliers",
-  "@entranceTypeStaircase": {},
   "entranceTypeHome": "une maison",
-  "@entranceTypeHome": {},
   "entranceTypeShop": "une boutique",
-  "@entranceTypeShop": {},
   "entranceTypeService": "de service",
-  "@entranceTypeService": {},
   "entranceTypeGarage": "d'un garage",
-  "@entranceTypeGarage": {},
   "entranceTypeEmergency": "d'urgence",
-  "@entranceTypeEmergency": {},
   "addressHouseNumber": "Maison",
   "@addressHouseNumber": {
     "description": "Étiquette pour addr:housenumber dans le formulaire. Garder le plus court pssible."
@@ -665,7 +646,6 @@
     }
   },
   "buildingTypeAddress": "adresse",
-  "@buildingTypeAddress": {},
   "editorDuplicate": "Possible doublon à {distance} m",
   "@editorDuplicate": {
     "description": "Message about a possible duplicate",
@@ -679,29 +659,17 @@
     }
   },
   "faqMapTiny": "Pourquoi la carte est si petite ?",
-  "@faqMapTiny": {},
   "faqMapTinyContent": "Parce que ce n’est pas le but. La carte sert uniquement à vous positionner et afficher une liste des points d’intérêts à proximité triés en fonction de leur distance par rapport à votre position.\n\nLa carte est agrandie lors de l’édition de points d’intérêts éloignés de votre position, bien que l’application soit avant tout destinée à vous aider à modifier ce que vous voyez autour de vous.",
-  "@faqMapTinyContent": {},
   "faqCheckmarks": "À quoi servent les marqueurs de validation ?",
-  "@faqCheckmarks": {},
   "faqCheckmarksContent": "Ces marqueurs indiquent que les données ont été confirmées, ils ajoutent la clé `check_date` avec la date actuelle.\n\nL’idée de ces marqueurs est que, dans l’exemple où vous auriez répertorié la moitié de la ville sur un premier trajet, qu’il vous soit possible de revenir sur ces points quelques mois plus tard et d’indiquer que rien n’a changé. Un marqueur et c’est validé.\n\nLe marqueur restera affiché durant deux mois, après quoi il sera de nouveau possible de les repointer.",
-  "@faqCheckmarksContent": {},
   "faqEntrance": "Comment ajouter l’entrée d’un bâtiment ?",
-  "@faqEntrance": {},
   "faqEntranceContent": "En haut à droite, un bouton permet de basculer entre différent modes d’édition : points d’intérêts, micromapping, entrées, et notes.\n\nDans le mode « Entrées », appuyez ou faites glisser l’icône de porte, dans le coin inférieur droit, vers la carte.",
-  "@faqEntranceContent": {},
   "faqLetters": "Comment utiliser des lettres dans les numéros d’adresse ?",
-  "@faqLetters": {},
   "faqLettersContent": "Si votre clavier numérique ne peut pas basculer vers un clavier complet, vérifiez les paramètres de l’application. Appuyez sur le bouton du coin supérieur gauche où vous trouverez le « clavier numérique étendu ».",
-  "@faqLettersContent": {},
   "faqFloors": "Quelle est la différence entre les étages « 3 » et « /3 » ?",
-  "@faqFloors": {},
   "faqFloorsContent": "Le premier correspond à l’attribut `addr:floor=3`, c’est l’étage comme indiqué lors de la navigation et généralement utilisé mais dépend de la localité, tandis que le second correspond à `level=3` selon le schéma `building:level` où le rez-de-chaussée est l’étage 0.\n\nAinsi, les valeurs suivantes indiqueront :\n\n* `2` : `addr:floor=2` et `level=*` ;\n* `4/` : `addr:floor=4`, sans `level` ;\n* `/1` : `level=1`, sans `addr:floor` ;\n* `1/0` : `addr:floor=1` et `level=0` (et il y a un objet proche : avec le même `addr:floor`, mais un différent `level`, ou l'inverse).",
-  "@faqFloorsContent": {},
   "faqTagging": "Questions relatives aux attributs",
-  "@faqTagging": {},
-  "faqTaggingContent": "Pourquoi un élément est manquant dans l’éditeur ? Quand ces points blancs sont-ils affiché en mode Micromapping ? Comment sont triés les éléments ?\n\nLes réponses à toutes ces questions sont dans [good\\_tags.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/good_tags.dart) dont les thèmes principaux :\n\n* L’ordre des attributs : liste `kMainKeys` ;\n* Les éléments sont téléchargés : fonction `isGoodTags` ;\n* Ce qui est considéré comme un point d’intérêt : fonction `isAmenityTags` ;\n* Les points qui sont aimantés : fonction `detectSnap` ;\n* Quand un objet micro-cartographié est incomplet : fonction `needsMoreInfo`.",
-  "@faqTaggingContent": {},
+  "faqTaggingContent": "Pourquoi un élément est manquant dans l’éditeur ? Quand ces points blancs sont-ils affiché en mode Micromapping ? Comment sont triés les éléments ?\n\nLes réponses à toutes ces questions sont dans [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) dont les thèmes principaux :\n\n* L’ordre des attributs : liste `kMainKeys` dans `main_key.dart` ;\n* Les éléments sont téléchargés : classe `_EverythingKind` ;\n* Ce qui est considéré comme un point d’intérêt : classe `_AmenityKind` ;\n* Les points qui sont aimantés : classe `ElementKindImpl` logique (voir les sous-classes pertinentes) ;\n* Quand un objet micro-cartographié est incomplet : classe `_NeedsMoreInfo`.",
   "aboutReportIssue": "Signaler un problème",
   "@aboutReportIssue": {
     "description": "Button title to open the app's GitHub issue page."
@@ -818,29 +786,17 @@
     "description": "Label for addr:postcode in the form. Keep it short."
   },
   "faqChangeType": "Comment changer le type d'un objet ?",
-  "@faqChangeType": {},
   "buildingMaterial": "Façade",
-  "@buildingMaterial": {},
   "buildingMaterialBrick": "brique",
-  "@buildingMaterialBrick": {},
   "buildingMaterialWood": "bois",
-  "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "béton",
-  "@buildingMaterialConcrete": {},
   "buildingMaterialPlaster": "plâtre",
-  "@buildingMaterialPlaster": {},
   "buildingMaterialStone": "pierre",
-  "@buildingMaterialStone": {},
   "buildingMaterialMetal": "métal",
-  "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "verre",
-  "@buildingMaterialGlass": {},
   "buildingMaterialPanels": "panneaux",
-  "@buildingMaterialPanels": {},
   "buildingMaterialCementBlock": "blocs de béton",
-  "@buildingMaterialCementBlock": {},
   "faqChangeTypeContent": "Tapez sur le titre de l'éditeur, où le type est affiché.",
-  "@faqChangeTypeContent": {},
   "dataDownloadedCount": "{count,plural, =1{{count} élément téléchargé.} few{{count} éléments téléchargés.} other{{count} éléments téléchargés.}}",
   "@dataDownloadedCount": {
     "description": "Alert contents when we've successfully downloaded some data.",
@@ -943,7 +899,6 @@
     "description": "Tooltip for the amenity filter button on a map."
   },
   "navEntrancesMode": "Mode portes d'entrée",
-  "@navEntrancesMode": {},
   "navMicromappingMode": "Mode micromapping",
   "@navMicromappingMode": {
     "description": "Tooltip for the micromapping mode button on the nav panel."
@@ -1073,9 +1028,7 @@
     "description": "Payment field label for cards only."
   },
   "faqYellowContent": "Les marqueurs non jaunes dans le mode entrée, et les points blancs dans le mode micromapping, signifient que ces éléments manquent certains attributs importants. Par exemple :\n\n* Les bâtiments devraient avoir un nombre d'étages.\n* Les entrées devraient avoir un type et, pour les escaliers, une rampe.\n* Les bancs devraient avoir un matériau et une précision sur le dossier.\n* Les arbres devraient avoir un type de feuille et un cycle.",
-  "@faqYellowContent": {},
   "faqYellow": "Pourquoi certains numéros d'adresse sont jaunes ?",
-  "@faqYellow": {},
   "warningWrongTag": "Mauvaise étiquette : {tag}",
   "@warningWrongTag": {
     "description": "Warning message for tags like shop=yes and amenity=no.",
@@ -1197,7 +1150,6 @@
     "description": "Text displayed when the app is uploading notes to the API."
   },
   "drawUndo": "Retour",
-  "@drawUndo": {},
   "drawEraser": "Effacer",
   "@drawEraser": {
     "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
@@ -1269,5 +1221,131 @@
   "fieldWebsiteQR": "Scanner un QR Code",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
+  },
+  "tileDragDownload": "Essayez d'appuyer sur le bouton de téléchargement.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "warningFixmeNote": "Sera converti en note OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "settingsCachesClearRenderedVector": "Effacer les tuiles vectorielles rendues",
+  "@settingsCachesClearRenderedVector": {
+    "description": "Settings data management entry for clearing all vector tiles that have been rendered on the device, not downloaded."
+  },
+  "settingsCachesClearVector": "Effacer le cache des tuiles vectorielles",
+  "@settingsCachesClearVector": {
+    "description": "Settings data management entry for clearing all cached vector tiles."
+  },
+  "settingsCachesClearManual": "Effacer manuellement les tuiles téléchargées",
+  "@settingsCachesClearManual": {
+    "description": "Settings data management entry for removing all tiles downloaded through the pre-downloadin panel."
+  },
+  "settingsCachesSelectTiles": "Sélectionner les tuiles à télécharger",
+  "@settingsCachesSelectTiles": {
+    "description": "A line shown below the map for pre-downloading tiles when there are no tiles selected."
+  },
+  "settingsCachesDownloadData": "Télécharger les données",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsCachesDownloadMap": "Télécharger les tuiles de carte",
+  "@settingsCachesDownloadMap": {
+    "description": "Button label for pre-downloading OSM map tiles."
+  },
+  "settingsCachesDownloadSatellite": "Télécharger les images satellite",
+  "@settingsCachesDownloadSatellite": {
+    "description": "Button label for pre-downloading Satellite imagery tiles."
+  },
+  "settingsCachesCancel": "Annuler ({percent} %)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  },
+  "settingsPlugins": "Greffons",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "pluginsEnable": "Activer",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "Désactiver",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "Désactiver",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "Dépôt du greffon",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "Recherche",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "Mettre à jour",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "Installer",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "URL du greffon",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "Plus…",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "Installation du greffon",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "Installation du greffon \"{plugin}\" en version {version} ?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "inconnu",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "Source : {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsSeeLogs": "Voir les journaux",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "mapStraight": "Réorienter au nord",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
   }
 }

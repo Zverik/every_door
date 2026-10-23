@@ -554,21 +554,13 @@
     "description": "Button label for opening the building object in a full editor."
   },
   "buildingTypeHouse": "一軒家",
-  "@buildingTypeHouse": {},
   "buildingTypeApartments": "集合住宅",
-  "@buildingTypeApartments": {},
   "buildingTypeRetail": "小売店",
-  "@buildingTypeRetail": {},
   "buildingTypeCommercial": "商業空間",
-  "@buildingTypeCommercial": {},
   "buildingTypeShed": "小屋",
-  "@buildingTypeShed": {},
   "buildingTypeIndustrial": "工場",
-  "@buildingTypeIndustrial": {},
   "buildingTypeGarage": "車庫",
-  "@buildingTypeGarage": {},
   "buildingTypeConstruction": "建築中",
-  "@buildingTypeConstruction": {},
   "entranceFlats": "アパート",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
@@ -590,13 +582,9 @@
     "description": "Label for entrance access in the form. Keep it short."
   },
   "entranceAccessYes": "誰でも可",
-  "@entranceAccessYes": {},
   "entranceAccessPrivate": "私有",
-  "@entranceAccessPrivate": {},
   "entranceAccessNo": "アクセス不可",
-  "@entranceAccessNo": {},
   "entranceAccessDelivery": "配達用",
-  "@entranceAccessDelivery": {},
   "entranceWheelchair": "車椅子",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
@@ -606,19 +594,12 @@
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "entranceTypeMain": "正面玄関",
-  "@entranceTypeMain": {},
   "entranceTypeStaircase": "階段",
-  "@entranceTypeStaircase": {},
   "entranceTypeHome": "住居",
-  "@entranceTypeHome": {},
   "entranceTypeShop": "店舗",
-  "@entranceTypeShop": {},
   "entranceTypeService": "通用口",
-  "@entranceTypeService": {},
   "entranceTypeGarage": "車庫",
-  "@entranceTypeGarage": {},
   "entranceTypeEmergency": "非常口",
-  "@entranceTypeEmergency": {},
   "addressHouseNumber": "住居番号",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
@@ -665,7 +646,6 @@
     }
   },
   "buildingTypeAddress": "住所",
-  "@buildingTypeAddress": {},
   "editorDuplicate": "{distance} m内にある重複の可能性があるもの",
   "@editorDuplicate": {
     "description": "Message about a possible duplicate",
@@ -778,7 +758,6 @@
     "description": "Label for addr:postcode in the form. Keep it short."
   },
   "faqMapTiny": "マップが小さいのは？",
-  "@faqMapTiny": {},
   "loadingTooMuchData": "設定内のダウンロード済データを消去してエディタを高速化します。",
   "@loadingTooMuchData": {
     "description": "Message of a warning alert when there's too much data downloaded."
@@ -853,25 +832,17 @@
     }
   },
   "faqEntrance": "建物の出入口の追加方法は？",
-  "@faqEntrance": {},
   "faqChangeTypeContent": "その種別が記載されているエディタのタイトルをタップします。",
-  "@faqChangeTypeContent": {},
   "changesOsmNote": "OSMのメモ",
   "@changesOsmNote": {
     "description": "Prefix for an OSM note in a changes tile."
   },
   "buildingMaterialConcrete": "コンクリート",
-  "@buildingMaterialConcrete": {},
   "buildingMaterialPanels": "パネル",
-  "@buildingMaterialPanels": {},
   "buildingMaterialCementBlock": "セメントブロック",
-  "@buildingMaterialCementBlock": {},
   "faqTagging": "すべてのタグ付けの質問",
-  "@faqTagging": {},
   "faqLetters": "refや部屋番号には文字を入力できますか？",
-  "@faqLetters": {},
   "faqChangeType": "施設の種別を変える方法は？",
-  "@faqChangeType": {},
   "navImagery": "背景画像切替",
   "@navImagery": {
     "description": "Tooltip for the map / imagery button on the nav panel."
@@ -881,7 +852,6 @@
     "description": "Tooltip for the POI / amenity mode button on the nav panel."
   },
   "navEntrancesMode": "出入口モード",
-  "@navEntrancesMode": {},
   "navNotesMode": "メモモード",
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."
@@ -903,21 +873,15 @@
     "description": "Tooltip for button on the specific days interval to remove some days."
   },
   "buildingMaterialPlaster": "石膏",
-  "@buildingMaterialPlaster": {},
   "buildingMaterialWood": "木材",
-  "@buildingMaterialWood": {},
   "buildingMaterialStone": "石",
-  "@buildingMaterialStone": {},
   "buildingMaterialMetal": "金属",
-  "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "ガラス",
-  "@buildingMaterialGlass": {},
   "notesAnonymous": "匿名",
   "@notesAnonymous": {
     "description": "Name for anonymous note submitters."
   },
   "faqCheckmarks": "チェックマークの用途は？",
-  "@faqCheckmarks": {},
   "fieldNameLanguages": "別の言語",
   "@fieldNameLanguages": {
     "description": "Tooltip for a button to add a name in another language."
@@ -935,9 +899,7 @@
     "description": "Tooltip for the button to add a building node."
   },
   "buildingMaterial": "外壁",
-  "@buildingMaterial": {},
   "buildingMaterialBrick": "レンガ",
-  "@buildingMaterialBrick": {},
   "notesClose": "解決",
   "@notesClose": {
     "description": "Button title for closing a note."
@@ -1039,23 +1001,16 @@
     "description": "Card header for the local changes diff."
   },
   "faqMapTinyContent": "そこはあまり重要では無いからです。マップ上では自分の位置を確認するだけで、パンして調整します。現在地に近い順にソートされた施設の一覧を見てください。\n\n現在地から離れた施設を編集する際にはマップは大きくなります。アプリは自分の目で見たものを編集するように作られていますが。",
-  "@faqMapTinyContent": {},
   "faqEntranceContent": "画面最下部にはマイクロマッピング、施設、出入口、メモといったモードボタンが並んでいます。\n\n出入口モードでは、マップの下部隅にあるドアボタンをタップまたはドラッグします。",
-  "@faqEntranceContent": {},
   "settingsGoogle": "Google拡張ポジショニングを使用",
   "@settingsGoogle": {
     "description": "Settings switch for disabling Google services for location."
   },
   "faqLettersContent": "数字キーボードがフルキーボードに切り替わらない場合はアプリの設定を見直してください。画面左上隅のボタンで操作します。「数字キーボードを拡張」を切り替えてください。",
-  "@faqLettersContent": {},
   "faqFloors": "階数の '3' と '/3' は同じですか？",
-  "@faqFloors": {},
   "faqCheckmarksContent": "これらは施設のデータが確認済であることを示すマークです。当日の日付で `check_date` タグを追加します。\n\nチェックマークの背後にあるアイデアは、例えば、初回に街の半分をサーベイし、1ヶ月後に戻ってきて再度サーベイをして、その施設を見たことを何らかマークする必要があるが何も変更が無いような場合にチェックマークを使います。タップして続けます。\n\nマークは2ヶ月間チェックされたままとなります。その後、施設をサーベイし直すことができます。",
-  "@faqCheckmarksContent": {},
   "faqFloorsContent": "いいえ。前者には `addr:floor=3` タグが入力されています。これによりフロアがナビゲーションに表示され、広く使われています。（訳注：日本での事情は異なると思われる）後者にはこのタグが無く単に `level=3`タグだけです。数字はゼロから `building:levels - 1`までの連続したフロア番号です。つまり、3階建ての建物において、 `addr:floor` の値は国により異なりますが、 `level` は常に 0, 1, または 2です。\n\nこれらのタグに関連するエディタ内の記法は以下の通り:\n\n* `2`: `addr:floor=2` 及び空で無い `level=*`.\n* `4/`: `addr:floor=4`, しかし `level` タグは無し.\n* `/1`: `level=1`, しかし `addr:floor` タグは無し.\n* `1/0`: `addr:floor=1` + `level=0` (and there's an object nearby:w with the same `addr:floor`, but different `level`, or vice-versa).",
-  "@faqFloorsContent": {},
   "faqTaggingContent": "エディタ内になぜオブジェクトが無いのでしょうか？マイクロマッピングモードではこれらの白いドットはいつ表示されるのでしょうか？オーブジェクトのソート順は？\n\nこれらの質問への回答は全て[element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart) にあります。以下のような内容です:\n\n* メインタグのキー順 — list ` in `main_key.dart`内の`kMainKeys`.\n* どのオブジェクトがダウンロード対象か — class `_EverythingKind`.\n* どれが施設に該当するのか — function class `_AmenityKind`.\n* どのポイントがどのウェイにくっつくのか — class `ElementKindImpl` logic (see relevant subclasses).\n* マイクロマッピングのオブジェクトが不完全な時 — class `_NeedsMoreInfo`.",
-  "@faqTaggingContent": {},
   "mapLocate": "元に戻る",
   "@mapLocate": {
     "description": "Tooltip for the crosshair button on a map to navigate to the user's location."
@@ -1065,7 +1020,6 @@
     "description": "Label for a switch tile for confirmation of hashtags on pressing the upload button."
   },
   "faqYellowContent": "出入口モード時の黄色でないラベルやマイクロマッピングモード時の白いドットは、そのエレメントに重要な属性が欠けていることを示します。例えば以下のようなものです:\n\n* 建物には総階数の記入が期待されています。\n* 出入口には種別、階段には平らな範囲があるべきです。\n* ベンチには素材と背もたれのタグがあるべきです。\n* 樹木には leaf type と cycle があるべきです。",
-  "@faqYellowContent": {},
   "changesMapNotes": "マップのメモと編集",
   "@changesMapNotes": {
     "description": "Title for a grouped change tile for map notes and drawings."
@@ -1085,7 +1039,6 @@
     "description": "Settings entry for editing changeset hashtags."
   },
   "faqYellow": "住居番号が黄色いのはなぜ？",
-  "@faqYellow": {},
   "hashtagsLabel": "ハッシュタグ用の単語",
   "@hashtagsLabel": {
     "description": "Label for a text field with changeset hashtags."
@@ -1209,7 +1162,6 @@
     "description": "Button for keeping the address"
   },
   "drawUndo": "元に戻す",
-  "@drawUndo": {},
   "fieldWebsiteQR": "QRコードを読み取る",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
@@ -1353,5 +1305,9 @@
   "pluginsSeeLogs": "ログを見る",
   "@pluginsSeeLogs": {
     "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "mapStraight": "北向きに戻す",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
   }
 }

@@ -170,15 +170,10 @@
     "description": "Message that appears on the main screen when there's no OSM data."
   },
   "faqEntrance": "จะเพิ่มทางเข้าอาคารได้อย่างไร?",
-  "@faqEntrance": {},
   "faqEntranceContent": "ด้านล่างจะมีแถบสำหรับปุ่มโหมดต่าง ๆ: Micromapping, สถานที่ และทางเข้า\n\nในโหมดทางเข้า แตะหรือลากปุ่มประตูในมุมด้านล่างขึ้นไปบนแผนที่",
-  "@faqEntranceContent": {},
   "faqChangeType": "จะเปลี่ยนประเภทของสถานที่ได้อย่างไร?",
-  "@faqChangeType": {},
   "faqTagging": "คำถามเกี่ยวกับการแท็กทั้งหมด",
-  "@faqTagging": {},
   "faqChangeTypeContent": "แตะบนชื่อของ Editor ที่จะมีเขียนประเภทไว้อยู่",
-  "@faqChangeTypeContent": {},
   "navUpload": "อัปโหลด",
   "@navUpload": {
     "description": "Tooltip for the upload data button on the nav panel."
@@ -532,11 +527,8 @@
     "description": "Label for building type (value of building=*) in the form. Keep it short."
   },
   "buildingMaterialBrick": "อิฐ",
-  "@buildingMaterialBrick": {},
   "buildingMaterialWood": "ไม้",
-  "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "คอนกรีต",
-  "@buildingMaterialConcrete": {},
   "enableGPSMessage": "กรุณาเปิดใช้บริการระบุตำแหน่งในการตั้งค่าต่อไปนี้",
   "@enableGPSMessage": {
     "description": "Contents of the alert for enabling location services."
@@ -550,27 +542,16 @@
     "description": "Button label for opening the building object in a full editor."
   },
   "buildingMaterialPlaster": "พลาสเตอร์",
-  "@buildingMaterialPlaster": {},
   "buildingMaterial": "วัสดุภายนอกอาคาร",
-  "@buildingMaterial": {},
   "buildingMaterialCementBlock": "บล็อคปูนซีเมนต์",
-  "@buildingMaterialCementBlock": {},
   "buildingMaterialPanels": "แผ่น",
-  "@buildingMaterialPanels": {},
   "buildingTypeRetail": "ร้านค้าปลีก",
-  "@buildingTypeRetail": {},
   "buildingTypeCommercial": "พื้นที่ค้าขาย",
-  "@buildingTypeCommercial": {},
   "buildingTypeShed": "ห้องเก็บของ",
-  "@buildingTypeShed": {},
   "buildingTypeIndustrial": "อุตสาหกรรม",
-  "@buildingTypeIndustrial": {},
   "buildingTypeGarage": "โรงรถ",
-  "@buildingTypeGarage": {},
   "entranceAccessPrivate": "ส่วนบุคคล",
-  "@entranceAccessPrivate": {},
   "entranceAccessNo": "ไม่",
-  "@entranceAccessNo": {},
   "entranceFlatsNumberList": "ควรจะเป็นรายชื่อที่ประกอบด้วยตัวเลข",
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
@@ -588,15 +569,10 @@
     "description": "Label for entrance access in the form. Keep it short."
   },
   "entranceTypeHome": "บ้าน",
-  "@entranceTypeHome": {},
   "entranceTypeShop": "ร้านค้า",
-  "@entranceTypeShop": {},
   "entranceTypeStaircase": "บันได",
-  "@entranceTypeStaircase": {},
   "entranceTypeGarage": "โรงรถ",
-  "@entranceTypeGarage": {},
   "entranceTypeEmergency": "ฉุกเฉิน",
-  "@entranceTypeEmergency": {},
   "addressPlace": "สถานที่",
   "@addressPlace": {
     "description": "Label for addr:place or addr:city in the form. Keep it short."
@@ -610,7 +586,6 @@
     "description": "Text displayed when the app is downloading data from the API."
   },
   "entranceTypeService": "บริการ",
-  "@entranceTypeService": {},
   "addressUnit": "ยูนิต",
   "@addressUnit": {
     "description": "Label for addr:unit in the form. Keep it short."
@@ -624,11 +599,8 @@
     "description": "Text displayed when the app is updating the database with downloaded objects."
   },
   "faqCheckmarks": "เครื่องหมายถูกมีไว้ทำอะไร?",
-  "@faqCheckmarks": {},
   "faqLetters": "สามารถพิมพ์ตัวอักษรลงไปในช่องอ้างอิงหรือหมายเลขแฟลตได้หรือไม่?",
-  "@faqLetters": {},
   "faqLettersContent": "หากแป้นพิมพ์หมายเลขไม่สามารถเปลี่ยนเป็นแบบเต็มได้ ให้ตรวจสอบการตั้งค่าของแอป โดยจะอยู่หลังปุ่มที่มุมบนซ้าย เปิดแป้นพิมพ์เลขแบบขยายที่นั่น",
-  "@faqLettersContent": {},
   "loadingPresets": "กำลังโหลด Presets…",
   "@loadingPresets": {
     "description": "Loading screen message for loading presets."
@@ -642,7 +614,6 @@
     "description": "Legend item for all other types."
   },
   "navEntrancesMode": "โหมดทางเข้า",
-  "@navEntrancesMode": {},
   "filterByFloor": "จากชั้น",
   "@filterByFloor": {
     "description": "Filter pane, label for choosing a floor to filter by."
@@ -857,7 +828,6 @@
     "description": "Button label for undoing a change deletion."
   },
   "buildingMaterialMetal": "โลหะ",
-  "@buildingMaterialMetal": {},
   "entranceWheelchair": "วีลแชร์",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
@@ -905,11 +875,8 @@
     "description": "Button for approval."
   },
   "entranceTypeMain": "ทางหลัก",
-  "@entranceTypeMain": {},
   "faqMapTiny": "ทำไมแผนที่เล็กจัง?",
-  "@faqMapTiny": {},
   "faqFloors": "ชั้น '3' และ '/3' เหมือนกันหรือไม่?",
-  "@faqFloors": {},
   "changesUploadFailedTitle": "อัปโหลดล้มเหลว",
   "@changesUploadFailedTitle": {
     "description": "Title for the notification about a failed changes upload."
@@ -939,7 +906,6 @@
     "description": "Title for the floor creation pane."
   },
   "entranceAccessYes": "เปิด",
-  "@entranceAccessYes": {},
   "fieldHoursChooseTime": "ชั่วโมง และ นาที",
   "@fieldHoursChooseTime": {
     "description": "Tooltip for a button to open hours and minutes chooser."
@@ -966,17 +932,13 @@
     "description": "Label for addr:postcode in the form. Keep it short."
   },
   "buildingMaterialStone": "หิน",
-  "@buildingMaterialStone": {},
   "buildingTypeAddress": "ที่อยู่",
-  "@buildingTypeAddress": {},
   "buildingTypeHouse": "บ้าน",
-  "@buildingTypeHouse": {},
   "entranceFlats": "แฟลต",
   "@entranceFlats": {
     "description": "Label for addr:flats in the form. Keep it short."
   },
   "entranceAccessDelivery": "เดลิเวอรี",
-  "@entranceAccessDelivery": {},
   "addressHouseNumber": "บ้าน",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
@@ -1051,19 +1013,14 @@
     "description": "Title for the pane when a user can tap an address to choose it."
   },
   "buildingMaterialGlass": "กระจก",
-  "@buildingMaterialGlass": {},
   "buildingTypeApartments": "อพาร์ตเมนต์",
-  "@buildingTypeApartments": {},
   "buildingTypeConstruction": "พื้นที่ก่อสร้าง",
-  "@buildingTypeConstruction": {},
   "entranceType": "ประเภท",
   "@entranceType": {
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "faqMapTinyContent": "เพราะว่านั่นไม่ใช่สาระสำคัญ คุณตรวจสอบตำแหน่งของคุณบนแผนที่ ลากเพื่อปรับ ดูรายชื่อสถานที่ด้านล่างที่เรียงตามระยะห่างจากคุณ\n\nแผนที่จะขยายใหญ่ขึ้นเมื่อคุณแก้ไขสถานที่ที่อยู่ไกลจากคุณ ถึงแม้ว่าแอปนี้ถูกออกแบบมาสำหรับการแก้ไขสิ่งที่เห็นได้ด้วยตาเปล่าก็ตาม",
-  "@faqMapTinyContent": {},
   "faqCheckmarksContent": "เป็นเครื่องหมายว่าข้อมูลสถานที่ได้รับการยืนยันแล้ว มันจะเพิ่มแท็ก `check_date` ด้วยวันที่ในปัจจุบัน\n\nคอนเซปต์ของเครื่องหมายถูกนั้นคือ สมมุติว่าคุณสำรวจไปแล้วครึ่งเมืองในครั้งแรก และผ่านไปหนึ่งเดือนคุณกลับมาสำรวจอีกครั้ง คุณอาจจะต้องทำเครื่องหมายว่าคุณเห็นสถานที่แล้ว แต่ไม่มีอะไรเปลี่ยนแปลง นั่นคือเครื่องหมายถูกที่คุณจะแตะและดำเนินการต่อ\n\nเครื่องหมายถูกจะแสดงผลอยู่สองสัปดาห์ หลังจากนั้นคุณอาจจะกลับมาสำรวจสถานที่อีกครั้ง",
-  "@faqCheckmarksContent": {},
   "fieldHeightMeters": "ต้องการความยาวในหน่วยเมตร เช่น 5.4",
   "@fieldHeightMeters": {
     "description": "Validation message for when meters are expected."
@@ -1115,5 +1072,210 @@
   "fieldWebsiteQR": "สแกนคิวอาร์โคด",
   "@fieldWebsiteQR": {
     "description": "Page title for the QR code scanner."
+  },
+  "tileDragDownload": "ลองแตะที่ปุ่มดาวน์โหลด.",
+  "@tileDragDownload": {
+    "description": "Message displayed when there is nothing around, and a download button is present."
+  },
+  "mapStraight": "หมุนกลับ",
+  "@mapStraight": {
+    "description": "Tooltip for the button showing the rotation to rotate it back to 'north up'."
+  },
+  "warningUnsupported": "ไม่รองรับประเภทของสิ่งนี้",
+  "@warningUnsupported": {
+    "description": "Warning message after choosing a preset for an unsupported object type. Meaning these kinds of objects are not visible on the map."
+  },
+  "warningWrongMode": "โหมดไม่ถูกต้อง, โปรดตรวจสอบการทำซ้ำ",
+  "@warningWrongMode": {
+    "description": "Warning when adding an amenity from the micromapping mode and vice-versa."
+  },
+  "editorDeleteKeepAddressButton": "ลบ, แต่ยังเก็บที่อยู่",
+  "@editorDeleteKeepAddressButton": {
+    "description": "Button for keeping the address"
+  },
+  "settingsHashtags": "เปลี่ยนเซตของแฮชแท็ก",
+  "@settingsHashtags": {
+    "description": "Settings entry for editing changeset hashtags."
+  },
+  "settingsCachesDownloadData": "ดาวน์โหลดข้อมูล",
+  "@settingsCachesDownloadData": {
+    "description": "Button label for pre-downloading OpenStreetMap data."
+  },
+  "settingsPlugins": "ปลั๊กอิน",
+  "@settingsPlugins": {
+    "description": "Title for the settings section and the page about managing plugins."
+  },
+  "settingsCachesCancel": "ยกเลิก ({percent}%)",
+  "@settingsCachesCancel": {
+    "description": "Button label for when the pre-downloading has started, and you need to cancel it. Displays progress.",
+    "placeholders": {
+      "percent": {
+        "description": "Percent number between 0 and 100.",
+        "example": "50"
+      }
+    }
+  },
+  "hashtagsLabel": "คำสำหรับแฮชแท็ก",
+  "@hashtagsLabel": {
+    "description": "Label for a text field with changeset hashtags."
+  },
+  "pluginsEnable": "ใช้งาน",
+  "@pluginsEnable": {
+    "description": "Button for enabling a deactivated plugin."
+  },
+  "pluginsDisable": "เลิกใช้งาน",
+  "@pluginsDisable": {
+    "description": "Button for deactivating a plugin."
+  },
+  "pluginsDisabledHeader": "เลิกใช้งานแล้ว",
+  "@pluginsDisabledHeader": {
+    "description": "Header for the section listing deactivated, disabled plugins."
+  },
+  "pluginsRepository": "คลังปลั๊กอิน",
+  "@pluginsRepository": {
+    "description": "Page title for a list of plugins stored on a server, to choose from."
+  },
+  "pluginsSearch": "ค้นหา",
+  "@pluginsSearch": {
+    "description": "Searching text field hint on the plugin repository page."
+  },
+  "pluginsUpdate": "อัพเดต",
+  "@pluginsUpdate": {
+    "description": "Button for updating an installed plugin to the latest version."
+  },
+  "pluginsInstall": "ติดตั้ง",
+  "@pluginsInstall": {
+    "description": "Button to install a new plugin from a server."
+  },
+  "pluginsUrl": "URL ปลั๊กอิน",
+  "@pluginsUrl": {
+    "description": "Title for a dialog inviting to paste an URL to a plugin file. Shown when the QR reader is disabled."
+  },
+  "pluginsMore": "เพิ่มเติม...",
+  "@pluginsMore": {
+    "description": "Button to see details about a specific plugin and manage it."
+  },
+  "pluginsInstallation": "การติดตั้งปลั๊กอิน",
+  "@pluginsInstallation": {
+    "description": "Page title for installing a single plugin from the web."
+  },
+  "pluginsInstallQuestion": "ติดตั้งปลั๊กอิน \"{plugin}\" เวอร์ชั่น {version}?",
+  "@pluginsInstallQuestion": {
+    "description": "Message that appears when installing a plugin from an unverified source.",
+    "placeholders": {
+      "plugin": {
+        "description": "Identifier of a plugin",
+        "example": "cycle_barriers"
+      },
+      "version": {
+        "description": "Plugin version, usually numbers",
+        "example": "1.2"
+      }
+    }
+  },
+  "pluginsUnknownVersion": "ไม่ทราบ",
+  "@pluginsUnknownVersion": {
+    "description": "What is displayed instead of a version number, if the plugin version is unknown."
+  },
+  "pluginsInstallSource": "แหล่งที่มา: {host}",
+  "@pluginsInstallSource": {
+    "description": "Message to display a host from which a plugin is installed.",
+    "placeholders": {
+      "host": {
+        "description": "Web host, no path or scheme",
+        "example": "plugins.every-door.app"
+      }
+    }
+  },
+  "pluginsSeeLogs": "ดู logs",
+  "@pluginsSeeLogs": {
+    "description": "Button title to browse the system log when a plugin installation error has occurred."
+  },
+  "fieldDirectionSet": "เชต",
+  "@fieldDirectionSet": {
+    "description": "Button label for setting a direction (0-360°) value."
+  },
+  "addressBlock": "บล็อก",
+  "@addressBlock": {
+    "description": "Label for addr:block_number or addr_block. Keep it short."
+  },
+  "notesComment": "ความคิดเห็นของคุณ",
+  "@notesComment": {
+    "description": "Label for the note comment field."
+  },
+  "notesDelete": "ลบ",
+  "@notesDelete": {
+    "description": "Button title for deleting a new note."
+  },
+  "faqYellow": "ทำไมเลขที่บางบ้านถึงเป็นสีเหลือง?",
+  "apiStatusUploadingNotes": "กำลังอัพโหลดโน๊ต",
+  "@apiStatusUploadingNotes": {
+    "description": "Text displayed when the app is uploading notes to the API."
+  },
+  "drawStream": "ลำธาร",
+  "@drawStream": {
+    "description": "Tool description: stream or other narrow waterway. Keep it short."
+  },
+  "drawPower": "สายส่งไฟฟ้า",
+  "@drawPower": {
+    "description": "Tool description: power line. Keep it short."
+  },
+  "drawFence": "รั้ว",
+  "@drawFence": {
+    "description": "Tool description: fence, see-through barrier. Keep it short."
+  },
+  "drawWall": "กำแพง",
+  "@drawWall": {
+    "description": "Tool description: wall, non-see-through barrier. Keep it short."
+  },
+  "drawCyclewayShared": "เลนจักรยาน",
+  "@drawCyclewayShared": {
+    "description": "Tool description: non-segregated cycleway. Keep it short."
+  },
+  "drawCycleway": "ทางจักรยาน",
+  "@drawCycleway": {
+    "description": "Tool description: segregated cycleway. Keep it short."
+  },
+  "drawPath": "ทาง",
+  "@drawPath": {
+    "description": "Tool description: unpaved narrow footway. Keep it short."
+  },
+  "drawFootway": "ทางเท้า",
+  "@drawFootway": {
+    "description": "Tool description: paved/maintained footway. Keep it short."
+  },
+  "drawTrack": "ติดตาม",
+  "@drawTrack": {
+    "description": "Tool description: unpaved forestry/farm road. Keep it short."
+  },
+  "drawRoad": "ถนน",
+  "@drawRoad": {
+    "description": "Tool description: paved road. Keep it short."
+  },
+  "drawEraser": "ยางลบ",
+  "@drawEraser": {
+    "description": "Tool description: eraser (to remove lines and map notes). Keep it short."
+  },
+  "drawScribble": "ขีดเขียน",
+  "@drawScribble": {
+    "description": "Tool description: scribble (type-less drawings). Keep it short."
+  },
+  "drawChangeTool": "เปลี่ยนอุปกรณ์",
+  "@drawChangeTool": {
+    "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."
+  },
+  "drawUndo": "เลิกทำ",
+  "warningFixmeNote": "จะต้องแปลงเป็นบันทึกของ OSM",
+  "@warningFixmeNote": {
+    "description": "Warning message for an amenity=fixme object with just a name."
+  },
+  "warningFixme": "ซ่อมฉัน: {value}",
+  "@warningFixme": {
+    "description": "Warning message for when an object has a non-empty fixme value.",
+    "placeholders": {
+      "value": {
+        "description": "Value of the fixme tag"
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-* Hashtagi za spremembe.
-* Podaljšanje intervala za potrditev na 2 meseca.
+* Ključniki naborov sprememb.
+* Podaljšanje roka za potrditev na 2 meseca.
 * Pri ustvarjanju novega POI je izpostavljeno polje za ime.
 * Opozorila za objekte, ki imajo oznako »fixme« ali so preveč stari.

@@ -34,7 +34,7 @@
       "count": {}
     }
   },
-  "tileNo": "ne",
+  "tileNo": "bez",
   "@tileNo": {
     "description": "Prefix for a list of icons for attributes missing in amenity."
   },
@@ -83,7 +83,6 @@
     "description": "Tooltip for the micromapping mode button on the nav panel."
   },
   "navEntrancesMode": "Režim vstupů",
-  "@navEntrancesMode": {},
   "navNotesMode": "Režim poznámek",
   "@navNotesMode": {
     "description": "Tooltip for the notes mode button on the nav panel."
@@ -637,43 +636,24 @@
     "description": "Button label for opening the building object in a full editor."
   },
   "buildingMaterial": "Fasáda",
-  "@buildingMaterial": {},
   "buildingMaterialBrick": "cihly",
-  "@buildingMaterialBrick": {},
   "buildingMaterialPlaster": "omítka",
-  "@buildingMaterialPlaster": {},
   "buildingMaterialWood": "dřevo",
-  "@buildingMaterialWood": {},
   "buildingMaterialConcrete": "beton",
-  "@buildingMaterialConcrete": {},
   "buildingMaterialPanels": "panely",
-  "@buildingMaterialPanels": {},
   "buildingMaterialCementBlock": "bloky cementu",
-  "@buildingMaterialCementBlock": {},
   "buildingMaterialStone": "kámen",
-  "@buildingMaterialStone": {},
   "buildingMaterialMetal": "kov",
-  "@buildingMaterialMetal": {},
   "buildingMaterialGlass": "sklo",
-  "@buildingMaterialGlass": {},
   "buildingTypeAddress": "adresa",
-  "@buildingTypeAddress": {},
   "buildingTypeHouse": "dům",
-  "@buildingTypeHouse": {},
   "buildingTypeApartments": "byty",
-  "@buildingTypeApartments": {},
   "buildingTypeRetail": "maloobchod",
-  "@buildingTypeRetail": {},
   "buildingTypeCommercial": "komerční",
-  "@buildingTypeCommercial": {},
   "buildingTypeShed": "přístřešek",
-  "@buildingTypeShed": {},
   "buildingTypeIndustrial": "průmyslové",
-  "@buildingTypeIndustrial": {},
   "buildingTypeGarage": "garáž",
-  "@buildingTypeGarage": {},
   "buildingTypeConstruction": "stavba",
-  "@buildingTypeConstruction": {},
   "entranceFlatsNumberList": "Měl by být seznamem čísel",
   "@entranceFlatsNumberList": {
     "description": "Validation message for addr:flats."
@@ -687,13 +667,9 @@
     "description": "Label for entrance access in the form. Keep it short."
   },
   "entranceAccessYes": "otevřeno",
-  "@entranceAccessYes": {},
   "entranceAccessPrivate": "soukromé",
-  "@entranceAccessPrivate": {},
   "entranceAccessNo": "ne",
-  "@entranceAccessNo": {},
   "entranceAccessDelivery": "doručování",
-  "@entranceAccessDelivery": {},
   "entranceWheelchair": "Invalidní vozík",
   "@entranceWheelchair": {
     "description": "Label for entrance wheelchair access in the form. Keep it short."
@@ -703,17 +679,11 @@
     "description": "Label for entrance type (value of entrance=* tag) in the form. Keep it short."
   },
   "entranceTypeMain": "hlavní",
-  "@entranceTypeMain": {},
   "entranceTypeStaircase": "schody",
-  "@entranceTypeStaircase": {},
   "entranceTypeHome": "domov",
-  "@entranceTypeHome": {},
   "entranceTypeShop": "obchod",
-  "@entranceTypeShop": {},
   "entranceTypeService": "služba",
-  "@entranceTypeService": {},
   "entranceTypeGarage": "garáž",
-  "@entranceTypeGarage": {},
   "addressHouseNumber": "Dům",
   "@addressHouseNumber": {
     "description": "Label for addr:housenumber in the form. Keep it short."
@@ -763,23 +733,14 @@
     "description": "Text displayed when the app is uploading data to the API."
   },
   "faqMapTiny": "Proč je mapa tak malá?",
-  "@faqMapTiny": {},
   "faqMapTinyContent": "Protože to není hlavní část. Na mapě pouze kontrolujete svou polohu a posouváte ji, abyste se přizpůsobili. Níže sledujte seznam vybavení seřazený podle vzdálenosti od vás.\n\nMapa se zvětší, když upravujete vybavení vzdálené od vaší polohy, ačkoli aplikace byla vytvořena pro úpravu věcí, které vidíte očima.",
-  "@faqMapTinyContent": {},
   "faqEntrance": "Jak přidat vstup do budovy?",
-  "@faqEntrance": {},
   "faqLetters": "Mohu zadat písmena do ref. čísla nebo rovnou dané číslo?",
-  "@faqLetters": {},
   "faqFloors": "Jsou podlaží ‚3‘ a ‚/3‘ stejná?",
-  "@faqFloors": {},
   "faqFloorsContent": "Ne. První z nich má vyplněnou značku `addr:floor=3`. To je podlaží tak, jak je zobrazeno v navigaci a běžně se používá. Druhý tuto značku nemá, ale má `level=3`. Toto číslo je pořadové číslo patra od nuly do `building:levels - 1`. To znamená, že v třípatrové budově závisí hodnota `addr:floor` na zemi, ale `level` je vždy 0, 1 nebo 2.\n\nZde je uvedeno, jak se zápis v editoru vztahoval k těmto značkám:\n\n* `2`: `addr:floor=2` a neprázdné `level=*`.\n* `4/`: `addr:floor=4`, ale není zde značka `level`.\n* `/1`: `level=1`, ale není zde značka `addr:floor`.\n* `1/0`: `addr:floor=1` + `level=0` (a v blízkosti je objekt: se stejným `addr:floor`, ale jiným `level`, nebo naopak).",
-  "@faqFloorsContent": {},
   "faqChangeTypeContent": "Klepněte na název editoru, kde je napsán typ.",
-  "@faqChangeTypeContent": {},
   "faqTagging": "Všechny otázky o značkách",
-  "@faqTagging": {},
   "faqTaggingContent": "Proč v editoru chybí objekt? Kdy se tyto bílé tečky zobrazují v režimu mikromapování? Jak se objekty řadí?\n\nOdpovědi na všechny tyto otázky najdete v souboru [element_kind_std.dart](https://github.com/Zverik/every_door/blob/main/lib/helpers/tags/element_kind_std.dart). Tady se můžete podívat:\n\n* Pořadí klíčů pro hlavní značku – seznam `kMainKeys` v souboru `main_key.dart`.\n* Které objekty se stahují – třída `_EverythingKind`.\n* Co je považováno za vybavení – třída `_AmenityKind`.\n* Které body jsou přichyceny jakým způsobem – logika třídy `ElementKindImpl` (viz relevantní podtřídy).\n* Když je objekt mikromapování neúplný – funkce `_NeedsMoreInfo`.",
-  "@faqTaggingContent": {},
   "tagsKey": "Klíč",
   "@tagsKey": {
     "description": "Tags panel, add a new tag dialog: key label"
@@ -1053,29 +1014,21 @@
     "description": "Label for a switch to use addr:unit instead of addr:flats."
   },
   "entranceTypeEmergency": "nouzový",
-  "@entranceTypeEmergency": {},
   "entrancesAddEntrance": "Přidat vstup",
   "@entrancesAddEntrance": {
     "description": "Tooltip for the button to add an entrance node."
   },
   "faqCheckmarks": "K čemu jsou značky?",
-  "@faqCheckmarks": {},
   "faqLettersContent": "Pokud nelze numerickou klávesnici přepnout na plnohodnotnou, zkontrolujte nastavení aplikace. Nachází se za tlačítkem v levém horním rohu. Tam zapněte „rozšířenou numerickou klávesnici“.",
-  "@faqLettersContent": {},
   "faqCheckmarksContent": "Jedná se o značky, které potvrzují údaje o občanské vybavenosti. Přidávají značku `check_date` s aktuálním datem.\n\nMyšlenka kontrolních značek spočívá v tom, že jste, řekněme, poprvé zkoumali polovinu města. Pak jste se po měsíci vrátili a šli jste provést průzkum znovu. Potřebujete nějak označit, že danou vybavenost vidíte, ale nic se na ní nezměnilo. To je ta kontrolní značka: klepnete na ni a pokračujete.\n\nZnačka zůstane zaškrtnutá po dobu dvou měsíců. Poté můžete provést průzkum vybavenosti znovu.",
-  "@faqCheckmarksContent": {},
   "faqEntranceContent": "Ve spodní části je řada tlačítek režimů: mikromapování, vybavení, vchody a poznámky.\n\nV režimu vstupů klepněte na tlačítko dveří v dolním rohu nebo je přetáhněte na mapu.",
-  "@faqEntranceContent": {},
   "faqChangeType": "Jak změnit typ bodu?",
-  "@faqChangeType": {},
   "fieldCardsOnly": "pouze karta",
   "@fieldCardsOnly": {
     "description": "Payment field label for cards only."
   },
   "faqYellowContent": "Nežluté popisky v režimu vstupů a bílé tečky v režimu mikromapování znamenají, že prvky postrádají některé důležité atributy. Například:\n\n* Očekává se, že budovy budou mít počet úrovní.\n* Vchody by měly mít typ a u schodišť plošný rozsah.\n* Lavičky by měly mít materiál a opěradlo.\n* Stromy by měly mít typ a cyklus listů.",
-  "@faqYellowContent": {},
   "faqYellow": "Proč jsou některá čísla popisná žlutá?",
-  "@faqYellow": {},
   "warningWrongTag": "Nesprávná značka: {tag}",
   "@warningWrongTag": {
     "description": "Warning message for tags like shop=yes and amenity=no.",
@@ -1197,7 +1150,6 @@
     "description": "Text displayed when the app is uploading notes to the API."
   },
   "drawUndo": "Zrušit",
-  "@drawUndo": {},
   "drawChangeTool": "Změnit nástroj",
   "@drawChangeTool": {
     "description": "Tooltip for the button to change the drawing tool (e.g. to eraser or roads)."

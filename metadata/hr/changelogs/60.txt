@@ -1,0 +1,3 @@
+* Predlaganje popularnih oznaka bez odgovarajućih unaprijed postavljenih postavki. 
+* Predmemoriranje unaprijed postavljenih ikona. 
+* Poboljšanja uređivanja adresa.
