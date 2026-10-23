@@ -218,21 +218,27 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
             : kOldAmenityDays);
   }
 
-  void check() {
-    this[kCheckedKey] = kDateFormat.format(DateTime.now());
+  void check([String? subKey]) {
+    final String keyToCheck = _getCheckedKey(subKey);
+    this[keyToCheck] = kDateFormat.format(DateTime.now());
   }
 
-  void uncheck() {
-    newTags.remove(kCheckedKey);
+  void uncheck([String? subKey]) {
+    final String keyToRemove = _getCheckedKey(subKey);
+
+    newTags.remove(keyToRemove);
     _updateMainKey();
     notifyListeners();
   }
 
-  void toggleCheck() {
-    if (newTags.containsKey(kCheckedKey))
-      uncheck();
-    else
-      check();
+  void toggleCheck([String? subKey]) {
+    final String keyToToggle = _getCheckedKey(subKey);
+    
+    if (newTags.containsKey(keyToToggle)) {
+      uncheck(subKey);
+    } else {
+      check(subKey);
+    }
   }
 
   set isDeleted(bool value) {
@@ -452,6 +458,11 @@ class OsmChange extends ChangeNotifier implements Comparable, Located {
     else
       this[key] = value;
   }
+
+  String _getCheckedKey([String? subKey]) => 
+    subKey == null || subKey.isEmpty 
+        ? kCheckedKey 
+        : '$kCheckedKey:$subKey';
 
   void removeOpeningHoursSigned() {
     const kSigned = 'opening_hours:signed';
